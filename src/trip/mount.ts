@@ -168,11 +168,12 @@ export function mountTrip(
   id: string,
   shell: Shell,
 ): { dispose(): void } {
+  main.scrollTop = 0;
   let alive = true;
   const stopsUnsub = { fn: () => {} };
   const offLocale = shell.onLocale(() => {
     if (!alive || !current) return;
-    paint(current);
+    paint(current, main.scrollTop);
     repaintPlace(shell.locale());
   });
   const offQuery = shell.onQuery(() => applyQuery());
@@ -315,10 +316,9 @@ export function mountTrip(
     }
   }
 
-  function paint(trip: Trip) {
+  function paint(trip: Trip, restoreScroll: number | null = null) {
     current = trip;
     const locale = shell.locale();
-    const scroll = main.scrollTop;
     main.replaceChildren();
 
     const article = document.createElement('article');
@@ -523,7 +523,7 @@ export function mountTrip(
     }
 
     main.append(article);
-    main.scrollTop = scroll;
+    main.scrollTop = restoreScroll ?? 0;
     applyQuery();
     syncView(true);
     shell.setSource(trip.file);
@@ -541,18 +541,19 @@ export function mountTrip(
         main.replaceChildren(
           emptyNotice('Roteiro removido', 'O arquivo não está mais em content/trips.'),
         );
+        main.scrollTop = 0;
         shell.setExportEnabled(false);
         map.setPins('stop', []);
         return;
       }
       lastRaw = file.raw;
       const trip = parseTrip(file.id, file.file, file.raw);
-      paint(trip);
-      if (keepScroll) main.scrollTop = scroll;
+      paint(trip, scroll);
     } catch (error) {
       if (!alive) return;
       const message = error instanceof Error ? error.message : 'Falha ao ler o roteiro';
       main.replaceChildren(emptyNotice(message, undefined, true));
+      main.scrollTop = 0;
       shell.setExportEnabled(false);
     }
   }

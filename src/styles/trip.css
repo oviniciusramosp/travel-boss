@@ -44,6 +44,7 @@
 
 .tb-city-section {
   margin-top: 24px;
+  scroll-margin-top: calc(var(--h-lg) + var(--spacing-16));
 }
 
 .tb-city-section h2 {

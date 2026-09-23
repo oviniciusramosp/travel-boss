@@ -251,6 +251,7 @@ export function mountCity(
   slug: string,
   shell: Shell,
 ): { dispose(): void } {
+  main.scrollTop = 0;
   const city = getTravelCity(slug);
   main.replaceChildren();
   if (!city) {
@@ -823,6 +824,7 @@ export function mountCity(
     if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
     else if (next === 'itinerary') showItineraryMap({ fit: true });
     else showHotelPins();
+    main.scrollTop = 0;
   }
 
   paintChrome();

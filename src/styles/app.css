@@ -291,7 +291,7 @@ button {
   min-width: 0;
   min-height: 0;
   overflow: auto;
-  padding: 16px 20px 70vh;
+  padding: 16px 20px 30vh;
   background: var(--color-canvas);
 }
 
@@ -540,6 +540,10 @@ button {
   color: var(--color-mid-gray);
   font-size: var(--text-caption);
   line-height: var(--leading-caption);
+}
+
+p.tb-meta {
+  margin: 0;
 }
 
 .tb-empty {
