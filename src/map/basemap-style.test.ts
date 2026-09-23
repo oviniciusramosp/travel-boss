@@ -62,6 +62,7 @@ function fakeMap(layerIds: string[], filters: Record<string, FilterSpecification
 }
 
 const BRIGHT_LAYERS = [
+  'background',
   'water',
   'water-intermittent',
   'waterway-river',
@@ -99,6 +100,7 @@ describe('bright basemap', () => {
 
     applyBrightBasemap(map.api);
 
+    expect(map.paint.get('background')?.['background-color']).toBe('#f5f5f5');
     expect(map.paint.get('water')).toMatchObject({
       'fill-color': '#c5d9e8',
       'fill-antialias': true,

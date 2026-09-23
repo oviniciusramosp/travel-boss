@@ -4,9 +4,13 @@
   --color-surface-alt: #fafafa;
   --color-ink: #0a0a0a;
   --color-ink-soft: #171717;
-  --color-mid-gray: #737373;
+  --color-mid-gray: #666666;
   --color-hairline: #e5e5e5;
   --color-ember: #e7000b;
+  --color-ember-text: #c10007;
+  --color-on-ink: #fafafa;
+  --color-hover: rgba(10, 10, 10, 0.04);
+  --color-press: rgba(10, 10, 10, 0.08);
 
   --font-geist: 'Geist Sans', 'Geist', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -20,6 +24,8 @@
   --leading-body: 1.45;
   --text-reading: 14px;
   --leading-reading: 1.5;
+  --text-h3: 15px;
+  --text-h2: 18px;
   --text-title: 24px;
   --leading-title: 1.2;
   --tracking-title: -0.025em;
@@ -35,12 +41,25 @@
   --spacing-20: 20px;
   --spacing-24: 24px;
 
+  --h-sm: 24px;
+  --h-md: 28px;
+  --h-lg: 32px;
+
   --radius-cards: 24px;
   --radius-buttons: 18px;
   --radius-nested: 10px;
 
   --shadow-subtle: 0 0 0 1px rgba(23, 23, 23, 0.05),
     0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-float: 0 0 0 1px rgba(23, 23, 23, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  --z-map: 0;
+  --z-controls: 10;
+  --z-panel: 20;
+  --z-popover: 30;
+  --z-tooltip: 40;
+  --z-toast: 50;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
@@ -51,7 +70,6 @@
   --dur-slow: 320ms;
 
   --sidebar-width: 232px;
-  --map-width: 420px;
   --bar-height: 44px;
 
   color-scheme: light;

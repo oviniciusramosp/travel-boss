@@ -89,7 +89,7 @@
 
 .tb-hotels__range {
   width: 100%;
-  height: 32px;
+  height: var(--h-lg);
   margin: 0;
   accent-color: var(--color-ink);
 }
@@ -102,7 +102,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  height: 32px;
+  height: var(--h-lg);
   font-size: var(--text-body);
   color: var(--color-ink-soft);
 }
@@ -181,7 +181,7 @@
 
 .tb-hotels__price {
   flex: none;
-  font-size: 18px;
+  font-size: var(--text-h2);
   font-weight: var(--font-weight-semibold);
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -244,7 +244,7 @@
 }
 
 .tb-hotels__links a {
-  height: 26px;
+  height: var(--h-sm);
   padding: 0 10px;
   font-size: var(--text-caption);
   text-decoration: none;

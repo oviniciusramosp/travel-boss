@@ -26,6 +26,15 @@ const LANDUSE_INDUSTRIAL = 'hsla(40, 12%, 92%, 0.3)';
 const PLACE_LABEL = '#7a7e88';
 const PLACE_HALO = 'rgba(255, 255, 255, 0.92)';
 
+/** Same gray as `--color-canvas`, used when CSS variables are not available. */
+const MAP_CANVAS_FALLBACK = '#f5f5f5';
+
+function mapCanvasColor(): string {
+  if (typeof document === 'undefined') return MAP_CANVAS_FALLBACK;
+  const value = getComputedStyle(document.documentElement).getPropertyValue('--color-canvas').trim();
+  return value || MAP_CANVAS_FALLBACK;
+}
+
 /** Number badges (A6, I-95). The road lines stay. */
 const HIDDEN_HIGHWAY_INDICATOR_LAYERS = [
   'highway-shield-non-us',
@@ -203,6 +212,7 @@ function hideBasemapClutter(glMap: MaplibreMap) {
 export function applyBrightBasemap(glMap: MaplibreMap) {
   hideBasemapClutter(glMap);
 
+  setPaint(glMap, 'background', 'background-color', mapCanvasColor());
   setPaint(glMap, 'water', 'fill-color', WATER_FILL);
   setPaint(glMap, 'water', 'fill-antialias', true);
   setPaint(glMap, 'water-intermittent', 'fill-color', WATER_FILL);
