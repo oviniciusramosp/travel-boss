@@ -1,4 +1,7 @@
+import { pickLocale } from '../catalog';
+import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
+import { icon } from '../ui/icons';
 
 export type Locale = 'en' | 'pt-BR';
 
@@ -31,10 +34,12 @@ export function mountShell(root: HTMLElement): Shell {
   root.replaceChildren();
 
   const bar = el('header', 'tb-bar');
-  const sideToggle = el('button', 'tb-side-toggle');
-  sideToggle.type = 'button';
-  sideToggle.innerHTML =
-    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>';
+  const sideToggle = iconButton({
+    icon: 'left_panel_close',
+    label: 'Recolher menu',
+    size: 'md',
+  });
+  sideToggle.classList.add('tb-side-toggle');
   const mark = el('p', 'tb-mark');
   mark.append(document.createTextNode('Travel Boss'));
   const markMeta = el('span');
@@ -42,7 +47,6 @@ export function mountShell(root: HTMLElement): Shell {
   mark.append(markMeta);
 
   const search = el('label', 'tb-search');
-  search.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>`;
   const searchInput = el('input');
   searchInput.type = 'search';
   searchInput.placeholder = 'Buscar lugar ou roteiro';
@@ -50,8 +54,8 @@ export function mountShell(root: HTMLElement): Shell {
   searchInput.spellcheck = false;
   searchInput.setAttribute('aria-label', 'Buscar');
   const kbd = el('kbd');
-  kbd.textContent = '⌘K';
-  search.append(searchInput, kbd);
+  kbd.textContent = /Mac/.test(navigator.platform) ? '⌘K' : 'Ctrl K';
+  search.append(icon('search', { size: 16 }), searchInput, kbd);
 
   const spacer = el('div', 'tb-bar-spacer');
   const source = el('p', 'tb-source');
@@ -66,10 +70,12 @@ export function mountShell(root: HTMLElement): Shell {
   enBtn.type = 'button';
   localeWrap.append(ptBtn, enBtn);
 
-  const exportBtn = el('button', 'tb-btn', 'Exportar');
+  const exportBtn = el('button', 'tb-btn');
+  const exportLabel = el('span');
   exportBtn.type = 'button';
   exportBtn.disabled = true;
   exportBtn.title = 'Copiar Markdown para Notes ou Notion';
+  exportBtn.append(icon('ios_share', { size: 18 }), exportLabel);
 
   bar.append(sideToggle, mark, search, spacer, source, localeWrap, exportBtn);
 
@@ -109,16 +115,14 @@ export function mountShell(root: HTMLElement): Shell {
     workspace.classList.toggle('is-collapsed', !sideOpen);
     side.toggleAttribute('inert', !sideOpen);
     sideToggle.setAttribute('aria-expanded', sideOpen ? 'true' : 'false');
-    sideToggle.setAttribute(
-      'aria-label',
-      sideOpen
-        ? locale === 'pt-BR'
-          ? 'Recolher menu'
-          : 'Collapse menu'
-        : locale === 'pt-BR'
-          ? 'Mostrar menu'
-          : 'Show menu',
-    );
+    const sideLabel = pickLocale(locale, {
+      en: sideOpen ? 'Collapse menu' : 'Show menu',
+      'pt-BR': sideOpen ? 'Recolher menu' : 'Mostrar menu',
+    });
+    sideToggle.setAttribute('aria-label', sideLabel);
+    sideToggle.setAttribute('data-tip', sideLabel);
+    const glyph = sideToggle.querySelector('.material-symbols-rounded');
+    if (glyph) glyph.textContent = sideOpen ? 'left_panel_close' : 'left_panel_open';
   };
 
   let locale = readLocale();
@@ -132,7 +136,7 @@ export function mountShell(root: HTMLElement): Shell {
     document.documentElement.lang = locale === 'pt-BR' ? 'pt-BR' : 'en';
     searchInput.placeholder =
       locale === 'pt-BR' ? 'Buscar lugar ou roteiro' : 'Search a place or trip';
-    exportBtn.textContent = locale === 'pt-BR' ? 'Exportar' : 'Export';
+    exportLabel.textContent = pickLocale(locale, { en: 'Export', 'pt-BR': 'Exportar' });
     tripsLabel.textContent = locale === 'pt-BR' ? 'Roteiros' : 'Trips';
     citiesLabel.textContent = locale === 'pt-BR' ? 'Cidades' : 'Cities';
     markMeta.textContent = locale === 'pt-BR' ? 'roteiros' : 'trips';

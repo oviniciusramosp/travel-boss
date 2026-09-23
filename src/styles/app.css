@@ -95,7 +95,7 @@ button {
   outline-offset: 2px;
 }
 
-.tb-search svg {
+.tb-search .material-symbols-rounded {
   flex: none;
   color: var(--color-mid-gray);
 }

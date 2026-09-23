@@ -293,21 +293,14 @@
   box-shadow: var(--shadow-float);
 }
 
-.tb-place-panel__close {
+.tb-place-panel > .tb-place-panel__close {
   position: absolute;
   z-index: var(--z-controls);
   top: var(--inset-card);
   right: var(--inset-card);
-  width: var(--h-sm);
-  height: var(--h-sm);
-  padding: 0;
-  border: 0;
-  border-radius: var(--r-pill);
   background: var(--color-paper);
   color: var(--color-ink);
   box-shadow: var(--shadow-subtle);
-  font-size: var(--text-h2);
-  line-height: 1;
 }
 
 .tb-panel__body {

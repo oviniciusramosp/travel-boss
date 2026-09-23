@@ -9,6 +9,7 @@ import {
   visitFieldsForDisplay,
 } from '../catalog';
 import type { MapHandle } from '../map/types';
+import { iconButton } from '../ui/controls';
 
 type Panel = {
   open(place: TravelPlace, city: TravelCity, locale: Locale): void;
@@ -40,14 +41,12 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     root.hidden = false;
     root.replaceChildren();
 
-    const close = document.createElement('button');
-    close.type = 'button';
-    close.className = 'tb-place-panel__close';
-    close.textContent = '×';
-    close.setAttribute(
-      'aria-label',
-      pickLocale(locale, { en: 'Close', 'pt-BR': 'Fechar' }),
-    );
+    const close = iconButton({
+      icon: 'close',
+      label: pickLocale(locale, { en: 'Close', 'pt-BR': 'Fechar' }),
+      size: 'sm',
+    });
+    close.classList.add('tb-place-panel__close');
     close.addEventListener('click', () => {
       current = null;
       paint();
@@ -67,14 +66,16 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       if (photos.length > 1) {
         const nav = document.createElement('div');
         nav.className = 'tb-place-panel__photos';
-        const prev = document.createElement('button');
-        const next = document.createElement('button');
-        prev.type = 'button';
-        next.type = 'button';
-        prev.className = 'tb-btn-ghost';
-        next.className = 'tb-btn-ghost';
-        prev.textContent = '←';
-        next.textContent = '→';
+        const prev = iconButton({
+          icon: 'chevron_left',
+          label: pickLocale(locale, { en: 'Previous photo', 'pt-BR': 'Foto anterior' }),
+          size: 'sm',
+        });
+        const next = iconButton({
+          icon: 'chevron_right',
+          label: pickLocale(locale, { en: 'Next photo', 'pt-BR': 'Próxima foto' }),
+          size: 'sm',
+        });
         prev.addEventListener('click', () => {
           photoIndex = (photoIndex - 1 + photos.length) % photos.length;
           paint();
