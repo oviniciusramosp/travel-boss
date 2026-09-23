@@ -32,6 +32,7 @@ export type FocusMark =
   | { kind: 'category'; id: string }
   | { kind: 'city'; id: string }
   | { kind: 'span'; id: string }
+  | { kind: 'city-link'; city: string; action: string }
   | { kind: 'warn' }
   | { kind: 'warn-copy' }
   | { kind: 'day-action'; key: string; action: string };

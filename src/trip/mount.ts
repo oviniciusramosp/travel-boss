@@ -20,6 +20,7 @@ import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { inlineNodes } from './inline';
+import { cityHash } from './links';
 import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 import {
   activeSectionKey,
@@ -177,6 +178,24 @@ function appendCityBar(
     bar.append(connector);
   });
   article.append(bar);
+}
+
+function appLink(
+  href: string,
+  name: IconName,
+  label: string,
+  city: string,
+  action: string,
+): HTMLAnchorElement {
+  const link = document.createElement('a');
+  link.className = 'tb-icon-btn tb-icon-btn--ghost tb-icon-btn--sm';
+  link.href = href;
+  link.setAttribute('aria-label', label);
+  link.setAttribute('data-tip', label);
+  link.dataset.cityLink = city;
+  link.dataset.cityAction = action;
+  link.append(icon(name, { size: 16 }));
+  return link;
 }
 
 function clearStopCurrent(): void {
@@ -698,6 +717,15 @@ export function mountTrip(
       focusMark = { kind: 'category', id: category.dataset.category };
       return;
     }
+    const cityLink = active.closest<HTMLElement>('[data-city-link]');
+    if (cityLink?.dataset.cityLink && cityLink.dataset.cityAction) {
+      focusMark = {
+        kind: 'city-link',
+        city: cityLink.dataset.cityLink,
+        action: cityLink.dataset.cityAction,
+      };
+      return;
+    }
     const span = active.closest<HTMLElement>('[data-span-city]');
     if (span?.dataset.spanCity) {
       focusMark = { kind: 'span', id: span.dataset.spanCity };
@@ -736,6 +764,10 @@ export function mountTrip(
       target = main.querySelector(`[data-city-filter="${CSS.escape(mark.id)}"]`);
     } else if (mark.kind === 'span') {
       target = main.querySelector(`[data-span-city="${CSS.escape(mark.id)}"]`);
+    } else if (mark.kind === 'city-link') {
+      target = main.querySelector(
+        `[data-city-link="${CSS.escape(mark.city)}"][data-city-action="${CSS.escape(mark.action)}"]`,
+      );
     } else if (mark.kind === 'warn') {
       target = main.querySelector('[data-warnings] > button');
     } else {
@@ -993,9 +1025,37 @@ export function mountTrip(
       const section = document.createElement('section');
       section.className = 'tb-city-section';
       section.dataset.city = city.slug || city.name;
+      const cityHead = document.createElement('div');
+      cityHead.className = 'tb-city-head';
       const heading = document.createElement('h2');
       heading.textContent = city.name;
-      section.append(heading);
+      cityHead.append(heading);
+      if (city.slug) {
+        const actions = document.createElement('div');
+        actions.className = 'tb-city-actions';
+        const openCity = pickLocale(locale, { en: 'Open city', 'pt-BR': 'Abrir cidade' });
+        const openDays = pickLocale(locale, { en: 'City itinerary', 'pt-BR': 'Itinerário da cidade' });
+        const hotels = city.dates
+          ? pickLocale(locale, { en: 'Hotels on these dates', 'pt-BR': 'Hotéis nestas datas' })
+          : pickLocale(locale, { en: 'Hotels', 'pt-BR': 'Hotéis' });
+        actions.append(
+          appLink(cityHash(city.slug, 'places'), 'map', openCity, city.slug, 'places'),
+          appLink(cityHash(city.slug, 'itinerary'), 'route', openDays, city.slug, 'itinerary'),
+          appLink(
+            cityHash(
+              city.slug,
+              'hotels',
+              city.dates ? { in: city.dates.start, out: city.dates.end } : undefined,
+            ),
+            'bed',
+            hotels,
+            city.slug,
+            'hotels',
+          ),
+        );
+        cityHead.append(actions);
+      }
+      section.append(cityHead);
       if (city.dates) {
         const dates = document.createElement('p');
         dates.className = 'tb-meta';
@@ -1087,6 +1147,18 @@ export function mountTrip(
               ),
           );
         });
+        if (city.slug) {
+          const openDay = appLink(
+            cityHash(city.slug, 'itinerary', { day: dayIndex + 1 }),
+            'map',
+            pickLocale(locale, { en: 'Open this day', 'pt-BR': 'Abrir este dia' }),
+            city.slug,
+            `day-${dayIndex + 1}`,
+          );
+          openDay.dataset.dayAction = 'city';
+          openDay.addEventListener('click', (event) => event.stopPropagation());
+          dayActions.append(openDay);
+        }
         dayActions.append(fitDay, copyDay);
         dayActions.addEventListener('mousedown', (event) => event.stopPropagation());
         dayActions.addEventListener('click', (event) => event.stopPropagation());

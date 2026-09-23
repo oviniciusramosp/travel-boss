@@ -103,9 +103,39 @@
   background: var(--color-hover);
 }
 
-.tb-city-section.is-hot > h2 {
+.tb-city-section.is-hot > h2,
+.tb-city-section.is-hot > .tb-city-head h2 {
   border-radius: var(--r-min);
   background: var(--color-hover);
+}
+
+.tb-city-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.tb-city-head h2 {
+  min-width: 0;
+}
+
+.tb-city-actions {
+  display: flex;
+  flex: none;
+  gap: var(--inset-group);
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.tb-city-head:is(:hover, :focus-within) .tb-city-actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .tb-city-actions {
+    opacity: 1;
+  }
 }
 
 .tb-rail {
