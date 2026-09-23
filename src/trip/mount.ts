@@ -18,6 +18,7 @@ import { changedStopKeys } from './diff';
 import { directionsMode, googleDirectionsUrl } from './directions';
 import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
+import { inlineNodes } from './inline';
 import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconLink } from '../ui/controls';
@@ -420,7 +421,13 @@ export function mountTrip(
     if (!current) return;
     const locale = shell.locale();
     const markdown = tripToMarkdown(current, resolveHref);
-    const html = tripToHtml(markdown);
+    const html = tripToHtml(markdown, (placeId) => {
+      for (const city of current?.cities ?? []) {
+        const href = resolveHref(city.slug, placeId);
+        if (href) return href;
+      }
+      return null;
+    });
     try {
       await copyTrip(markdown, html);
       downloadTrip(`${current.id}.md`, markdown);
@@ -526,6 +533,16 @@ export function mountTrip(
     current = trip;
     const locale = shell.locale();
     main.replaceChildren();
+
+    const openLinkedPlace = (citySlug: string, placeId: string, origin: HTMLElement) => {
+      const cityRecord = getTravelCity(citySlug);
+      const found = cityRecord?.places.find((entry) => entry.id === placeId);
+      if (!cityRecord || !found) return;
+      clearStopCurrent();
+      const rowEl = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(placeId)}"]`);
+      rowEl?.setAttribute('aria-current', 'true');
+      openPlace(found, cityRecord, locale, origin);
+    };
 
     const article = document.createElement('article');
     article.className = 'tb-doc';
@@ -648,6 +665,42 @@ export function mountTrip(
         list.className = 'tb-list tb-list--stops tb-stops';
         let previousPoint: { lat: number; lng: number } | null = null;
         day.stops.forEach((stop, stopIndex) => {
+          const key = stopKey(
+            city.slug || city.name,
+            dayIndex,
+            day.title,
+            stopIndex,
+            stop.placeId,
+            stop.label,
+          );
+          const markChanged = (node: HTMLElement) => {
+            if (!changed.has(key) || prefersReducedMotion()) return;
+            node.classList.add('is-changed');
+            node.addEventListener('animationend', () => node.classList.remove('is-changed'), {
+              once: true,
+            });
+          };
+          if (stop.listNote) {
+            const noteItem = document.createElement('li');
+            noteItem.className = 'tb-list-note';
+            noteItem.dataset.stop = '';
+            noteItem.dataset.stopKey = key;
+            noteItem.dataset.hay = `${city.name} ${stop.label}`.toLowerCase();
+            if (stop.time) {
+              const time = document.createElement('span');
+              time.className = 'tb-list-note__time';
+              time.textContent = stop.time;
+              noteItem.append(time);
+            }
+            noteItem.append(
+              ...inlineNodes(stop.label, {
+                onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
+              }),
+            );
+            markChanged(noteItem);
+            list.append(noteItem);
+            return;
+          }
           const place = stop.placeId ? placeById(city.slug, stop.placeId) : undefined;
           const missingPlace = Boolean(stop.placeId && !place);
           const href = stop.href
@@ -688,14 +741,6 @@ export function mountTrip(
           }
           const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
           const placeId = stop.placeId;
-          const key = stopKey(
-            city.slug || city.name,
-            dayIndex,
-            day.title,
-            stopIndex,
-            stop.placeId,
-            stop.label,
-          );
           const item = row({
             time: stop.time,
             lead: place ? stopPin(place) : undefined,
@@ -724,19 +769,25 @@ export function mountTrip(
             item.classList.add('is-disabled');
             item.setAttribute('aria-disabled', 'true');
           }
-          if (changed.has(key) && !prefersReducedMotion()) {
-            item.classList.add('is-changed');
-            item.addEventListener('animationend', () => item.classList.remove('is-changed'), {
-              once: true,
-            });
+          if (stop.note && !missingPlace) {
+            item.querySelector('.tb-row__sub')?.replaceChildren(
+              ...inlineNodes(stop.note, {
+                onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
+              }),
+            );
           }
+          markChanged(item);
           list.append(item);
         });
         if (day.stops.length) details.append(list);
         for (const note of day.notes) {
           const paragraph = document.createElement('p');
           paragraph.className = 'tb-doc-note';
-          paragraph.textContent = note;
+          paragraph.append(
+            ...inlineNodes(note, {
+              onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
+            }),
+          );
           details.append(paragraph);
         }
         details.addEventListener('toggle', () => drawTripRoutes());

@@ -78,6 +78,32 @@
   line-height: var(--leading-reading);
 }
 
+.tb-list-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: var(--inset-row) var(--spacing-8);
+  color: var(--color-ink);
+  font-size: var(--text-reading);
+  line-height: var(--leading-reading);
+}
+
+.tb-list-note__time {
+  margin-right: var(--spacing-8);
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-place-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .tb-stops li.is-dim {
   opacity: 0.35;
 }
@@ -108,7 +134,8 @@
   to { background-color: transparent; }
 }
 
-.tb-row.is-changed {
+.tb-row.is-changed,
+.tb-list-note.is-changed {
   animation: tb-changed calc(var(--dur-slow) * 4) var(--ease-out);
 }
 
@@ -123,6 +150,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .tb-row.is-changed,
+  .tb-list-note.is-changed,
   .tb-source.is-updated {
     animation: none;
   }
