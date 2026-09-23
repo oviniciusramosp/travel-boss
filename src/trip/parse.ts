@@ -33,7 +33,30 @@ export type TripCity = {
   days: TripDay[];
 };
 
-export type TripError = { line: number; message: string };
+export type TripErrorCode =
+  | 'via-no-mode'
+  | 'via-no-duration'
+  | 'via-many-durations'
+  | 'stop-no-link'
+  | 'place-no-id'
+  | 'bad-link'
+  | 'place-missing'
+  | 'city-no-slug'
+  | 'city-unknown'
+  | 'day-outside-city'
+  | 'via-outside-day'
+  | 'via-no-stop'
+  | 'via-empty'
+  | 'via-duplicate'
+  | 'stop-outside-day'
+  | 'line-outside-day'
+  | 'no-title';
+
+export type TripError = { line: number; code: TripErrorCode; detail?: string };
+
+function reject(errors: TripError[], line: number, code: TripErrorCode, detail?: string) {
+  errors.push(detail === undefined ? { line, code } : { line, code, detail });
+}
 
 export type Trip = {
   id: string;
@@ -85,17 +108,14 @@ function legMode(detail: string): TripLegMode | undefined {
 
 function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   const mode = legMode(detail);
-  if (!mode) errors.push({ line, message: 'via sem modo' });
+  if (!mode) reject(errors, line, 'via-no-mode');
   const matches = [...detail.matchAll(new RegExp(DURATION_TOKEN.source, 'gi'))];
   let durationMin: number | undefined;
   if (matches.length === 1) {
     const amount = Number(matches[0]?.[1]);
     durationMin = (matches[0]?.[2] ?? '').toLowerCase() === 'h' ? amount * 60 : amount;
   } else {
-    errors.push({
-      line,
-      message: matches.length === 0 ? 'via sem duração' : 'via com mais de uma duração',
-    });
+    reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
   }
   return {
     detail,
@@ -115,7 +135,7 @@ function parseStop(text: string, line: number, errors: TripError[]): TripStop {
 
   const linked = rest.match(/^\[([^\]]+)\]\(([^)]+)\)(?:\s*(?:—|-)\s*(.*))?$/);
   if (!linked) {
-    errors.push({ line, message: 'item sem link' });
+    reject(errors, line, 'stop-no-link');
     return { time, label: rest };
   }
 
@@ -125,13 +145,13 @@ function parseStop(text: string, line: number, errors: TripError[]): TripStop {
 
   if (target.startsWith('place:')) {
     const placeId = target.slice('place:'.length).trim();
-    if (!placeId) errors.push({ line, message: 'link place: sem id' });
+    if (!placeId) reject(errors, line, 'place-no-id');
     return { time, label, placeId: placeId || undefined, note };
   }
 
   if (/^https?:\/\//.test(target)) return { time, label, href: target, note };
 
-  errors.push({ line, message: `link inválido: ${target}` });
+  reject(errors, line, 'bad-link', target);
   return { time, label, note };
 }
 
@@ -143,10 +163,7 @@ function checkPlaces(city: TripCity, errors: TripError[], lineOf: Map<TripStop, 
     for (const stop of day.stops) {
       if (!stop.placeId) continue;
       if (!known.places.some((place) => place.id === stop.placeId)) {
-        errors.push({
-          line: lineOf.get(stop) ?? 0,
-          message: `lugar não encontrado: ${stop.placeId}`,
-        });
+        reject(errors, lineOf.get(stop) ?? 0, 'place-missing', stop.placeId);
       }
     }
   }
@@ -166,9 +183,9 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
   const closeCity = () => {
     if (!city) return;
     if (!city.slug) {
-      errors.push({ line: 0, message: `cidade sem slug: ${city.name}` });
+      reject(errors, 0, 'city-no-slug', city.name);
     } else if (!travelCities.some((item) => item.slug === city!.slug)) {
-      errors.push({ line: 0, message: `cidade desconhecida: ${city.slug}` });
+      reject(errors, 0, 'city-unknown', city.slug);
     }
     checkPlaces(city, errors, lineOf);
   };
@@ -181,7 +198,7 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
 
     if (trimmed.startsWith('### ')) {
       if (!city) {
-        errors.push({ line: lineNo, message: 'dia fora de uma cidade' });
+        reject(errors, lineNo, 'day-outside-city');
         continue;
       }
       day = { title: trimmed.slice(4).trim(), stops: [], notes: [] };
@@ -218,21 +235,21 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     const via = VIA_BULLET.exec(line);
     if (via) {
       if (!day) {
-        errors.push({ line: lineNo, message: 'via fora de um dia' });
+        reject(errors, lineNo, 'via-outside-day');
         continue;
       }
       const stop = day.stops[day.stops.length - 1];
       const detail = (via[1] ?? '').trim();
       if (!stop) {
-        errors.push({ line: lineNo, message: 'via sem parada' });
+        reject(errors, lineNo, 'via-no-stop');
         continue;
       }
       if (!detail) {
-        errors.push({ line: lineNo, message: 'via vazio' });
+        reject(errors, lineNo, 'via-empty');
         continue;
       }
       if (stop.leg) {
-        errors.push({ line: lineNo, message: 'via duplicado' });
+        reject(errors, lineNo, 'via-duplicate');
         continue;
       }
       stop.leg = readLeg(detail, lineNo, errors);
@@ -241,7 +258,7 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
 
     if (trimmed.startsWith('- ')) {
       if (!day) {
-        errors.push({ line: lineNo, message: 'parada fora de um dia' });
+        reject(errors, lineNo, 'stop-outside-day');
         continue;
       }
       const stop = parseStop(trimmed.slice(2), lineNo, errors);
@@ -255,11 +272,11 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       continue;
     }
 
-    errors.push({ line: lineNo, message: 'linha fora de um dia' });
+    reject(errors, lineNo, 'line-outside-day');
   }
 
   closeCity();
-  if (!sawH1) errors.push({ line: 1, message: 'documento sem título' });
+  if (!sawH1) reject(errors, 1, 'no-title');
 
   return { id, file, title, cities, errors };
 }

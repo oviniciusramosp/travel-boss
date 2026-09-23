@@ -16,6 +16,7 @@ import {
   type PlaceCoord,
 } from '../map/itinerary-route';
 import { setDocumentTitle } from '../app/router';
+import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { iconLink } from '../ui/controls';
 import { row } from '../ui/row';
@@ -162,9 +163,39 @@ export function mountTrip(
 ): { dispose(): void } {
   main.scrollTop = 0;
   let alive = true;
+  let failure: 'missing' | 'read' | null = null;
   const stopsUnsub = { fn: () => {} };
+
+  const showFailure = (kind: 'missing' | 'read') => {
+    failure = kind;
+    const locale = shell.locale();
+    main.replaceChildren(
+      kind === 'missing'
+        ? emptyNotice(
+            pickLocale(locale, { en: 'Trip removed', 'pt-BR': 'Roteiro removido' }),
+            pickLocale(locale, {
+              en: 'The file is no longer in content/trips.',
+              'pt-BR': 'O arquivo não está mais em content/trips.',
+            }),
+          )
+        : emptyNotice(
+            pickLocale(locale, { en: 'Could not read the trip', 'pt-BR': 'Falha ao ler o roteiro' }),
+            undefined,
+            true,
+          ),
+    );
+    main.scrollTop = 0;
+    shell.setExportEnabled(false);
+    map.setPins('stop', []);
+  };
+
   const offLocale = shell.onLocale(() => {
-    if (!alive || !current) return;
+    if (!alive) return;
+    if (failure) {
+      showFailure(failure);
+      return;
+    }
+    if (!current) return;
     paint(current, main.scrollTop);
     repaintPlace(shell.locale());
   });
@@ -317,7 +348,12 @@ export function mountTrip(
           : 'Copied for Notes or Notion.',
       );
     } catch (error) {
-      showToast(error instanceof Error ? error.message : 'Falha ao copiar', true);
+      showToast(
+        error instanceof Error
+          ? error.message
+          : pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' }),
+        true,
+      );
     }
   }
 
@@ -339,8 +375,8 @@ export function mountTrip(
       const problems = document.createElement('p');
       problems.className = 'tb-meta';
       problems.textContent = trip.errors
-        .map((error) => error.message)
         .slice(0, 4)
+        .map((error) => tripErrorText(error, locale))
         .join(' · ');
       article.append(problems);
     }
@@ -538,25 +574,18 @@ export function mountTrip(
       const files = await loadTripFiles();
       if (!alive) return;
       const file = files.find((item) => item.id === id);
-      if (file && file.raw === lastRaw && current) return;
+      if (file && file.raw === lastRaw && current && !failure) return;
       if (!file) {
-        main.replaceChildren(
-          emptyNotice('Roteiro removido', 'O arquivo não está mais em content/trips.'),
-        );
-        main.scrollTop = 0;
-        shell.setExportEnabled(false);
-        map.setPins('stop', []);
+        showFailure('missing');
         return;
       }
+      failure = null;
       lastRaw = file.raw;
       const trip = parseTrip(file.id, file.file, file.raw);
       paint(trip, scroll);
-    } catch (error) {
+    } catch {
       if (!alive) return;
-      const message = error instanceof Error ? error.message : 'Falha ao ler o roteiro';
-      main.replaceChildren(emptyNotice(message, undefined, true));
-      main.scrollTop = 0;
-      shell.setExportEnabled(false);
+      showFailure('read');
     }
   }
 

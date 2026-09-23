@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { tripErrorText } from './errors';
 import { parseTrip } from './parse';
 
 const sample = `# Europa
@@ -64,9 +65,12 @@ describe('parseTrip', () => {
   });
 
   it('records a missing place and a broken link', () => {
-    const messages = trip.errors.map((error) => error.message);
-    expect(messages.some((message) => message.includes('rom-nao-existe'))).toBe(true);
-    expect(messages.some((message) => message.includes('link inválido'))).toBe(true);
+    expect(trip.errors).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ code: 'place-missing', detail: 'rom-nao-existe' }),
+        expect.objectContaining({ code: 'bad-link', detail: 'nota' }),
+      ]),
+    );
   });
 });
 
@@ -87,7 +91,7 @@ function firstLegs(body: string) {
   const stops = trip.cities[0]?.days[0]?.stops ?? [];
   return {
     stops,
-    errors: trip.errors.map((error) => error.message),
+    errors: trip.errors.map((error) => error.code),
   };
 }
 
@@ -155,15 +159,15 @@ describe('via legs', () => {
     const compound = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 3h10');
     expect(compound.stops[0]?.leg).toEqual({ detail: 'trem · 3h10', mode: 'transit' });
     expect(compound.stops[0]?.leg?.durationMin).toBeUndefined();
-    expect(compound.errors).toEqual(['via sem duração']);
+    expect(compound.errors).toEqual(['via-no-duration']);
 
     const words = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: walk · 35 minutos');
     expect(words.stops[0]?.leg?.durationMin).toBeUndefined();
-    expect(words.errors).toContain('via sem duração');
+    expect(words.errors).toContain('via-no-duration');
 
     const both = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1 h 30 min');
     expect(both.stops[0]?.leg?.durationMin).toBeUndefined();
-    expect(both.errors).toEqual(['via com mais de uma duração']);
+    expect(both.errors).toEqual(['via-many-durations']);
   });
 
   it('uses the earliest mode keyword', () => {
@@ -180,7 +184,7 @@ describe('via legs', () => {
   it('does not take a keyword that is only a prefix', () => {
     const cart = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: carrinho · 10 min');
     expect(cart.stops[0]?.leg?.mode).toBeUndefined();
-    expect(cart.errors).toContain('via sem modo');
+    expect(cart.errors).toContain('via-no-mode');
     const walking = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: walking · 10 min');
     expect(walking.stops[0]?.leg?.mode).toBeUndefined();
   });
@@ -200,28 +204,41 @@ describe('via legs', () => {
     const before = firstLegs(`  - via: walk · 10 min
 - 09:00 [Louvre](place:par-louvre)`);
     expect(before.stops[0]?.leg).toBeUndefined();
-    expect(before.errors).toContain('via sem parada');
+    expect(before.errors).toContain('via-no-stop');
 
     const topLevel = firstLegs('- via: walk · 10 min');
     expect(topLevel.stops).toHaveLength(1);
     expect(topLevel.stops[0]?.leg).toBeUndefined();
-    expect(topLevel.errors).toContain('item sem link');
+    expect(topLevel.errors).toContain('stop-no-link');
 
     const outside = parseTrip(
       'europa',
       'content/trips/europa.md',
       '# Europa\n\n## Paris\ncity: paris\n  - via: walk · 10 min\n',
     );
-    expect(outside.errors.map((error) => error.message)).toContain('via fora de um dia');
+    expect(outside.errors.map((error) => error.code)).toContain('via-outside-day');
 
     const duplicate = firstLegs(`- 09:00 [Louvre](place:par-louvre)
   - via: walk · 5 min
   - via: metro · 15 min`);
     expect(duplicate.stops[0]?.leg).toMatchObject({ mode: 'walk', durationMin: 5 });
-    expect(duplicate.errors).toEqual(['via duplicado']);
+    expect(duplicate.errors).toEqual(['via-duplicate']);
 
     const empty = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via:   ');
     expect(empty.stops[0]?.leg).toBeUndefined();
-    expect(empty.errors).toEqual(['via vazio']);
+    expect(empty.errors).toEqual(['via-empty']);
+  });
+});
+
+describe('tripErrorText', () => {
+  it('builds the sentence in the active language', () => {
+    expect(tripErrorText({ line: 1, code: 'via-no-mode' }, 'pt-BR')).toBe('via sem modo');
+    expect(tripErrorText({ line: 1, code: 'via-no-mode' }, 'en')).toBe('via without a mode');
+    expect(tripErrorText({ line: 4, code: 'bad-link', detail: 'nota' }, 'pt-BR')).toBe(
+      'link inválido: nota',
+    );
+    expect(
+      tripErrorText({ line: 4, code: 'place-missing', detail: 'rom-nao-existe' }, 'en'),
+    ).toBe('place not found: rom-nao-existe');
   });
 });
