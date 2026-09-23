@@ -17,6 +17,7 @@ import { icon, ICONS, type IconName } from '../ui/icons';
 import { priceLevel, priceLevelOf } from '../ui/price';
 import { ratingSummary, starRating } from '../ui/rating';
 import { openNowStatus, timeZoneForCity } from './open-now';
+import { createRouteButton, routePlannerOn } from './route-planner';
 
 function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
   const name = categoryMaterialName(category);
@@ -378,6 +379,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     address.append(icon('location_on', { size: 16 }));
     address.append(document.createTextNode(place.address || pickLocale(locale, travelUi.openInMaps)));
     body.append(address);
+    if (routePlannerOn()) body.append(createRouteButton(place.id, locale, true));
     root.append(body);
   };
 

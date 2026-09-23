@@ -66,6 +66,7 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from './place-panel';
+import { createRouteButton, mountRoutePlanner } from './route-planner';
 
 type Tab = 'places' | 'itinerary' | 'hotels';
 
@@ -508,6 +509,11 @@ export function mountCity(
   const blob = new Map(catalogPlaces.map((place) => [place.id, searchBlob(place)]));
   const itinerary = itineraryForCity(city.slug);
   const hotelPriority = priorityPlaceIds(city);
+  const planner = mountRoutePlanner({
+    slug: city.slug,
+    places: catalogPlaces,
+    locale: () => shell.locale(),
+  });
 
   const storedCategories = readCategoryFilter();
   const enabled = new Set<PlaceCategory>(
@@ -902,6 +908,7 @@ export function mountCity(
           href: googleMapsUrl(place, city),
         });
         maps.dataset.maps = 'true';
+        const routeBtn = createRouteButton(place.id, locale);
         const subs = (place.subcategories ?? []).map((id) => subcategoryLabel(id, locale)).join(' · ');
         const item = row({
           lead: placeThumb(place),
@@ -916,6 +923,7 @@ export function mountCity(
             focusPlace(place.id, item.querySelector<HTMLElement>('.tb-row__main'));
           },
         });
+        item.querySelector('.tb-row__actions')?.prepend(routeBtn);
         if (place.favorite) {
           const title = item.querySelector('.tb-row__title');
           if (title) {
@@ -1301,7 +1309,7 @@ export function mountCity(
       return;
     }
 
-    if (target.closest('[data-maps]')) return;
+    if (target.closest('[data-route], [data-maps]')) return;
     if (target.closest('.tb-row__main')) return;
     const row = target.closest<HTMLElement>('[data-place-id]');
     if (!row?.dataset.placeId) return;
@@ -1457,6 +1465,7 @@ export function mountCity(
         });
       }
       hotelsEpoch += 1;
+      planner.dispose();
       unsubLocale();
       unsubQuery();
       unsubHover();

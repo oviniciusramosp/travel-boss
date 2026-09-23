@@ -1174,3 +1174,12 @@ p.tb-budget {
     pointer-events: auto;
   }
 }
+
+.tb-route-add {
+  align-self: stretch;
+}
+
+.tb-route-add[aria-pressed='true'] {
+  background: var(--color-hover);
+  border-color: var(--color-ink);
+}
