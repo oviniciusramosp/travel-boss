@@ -287,3 +287,32 @@
 .tb-hotels [hidden] {
   display: none;
 }
+
+html[data-tb-hotels] .leaflet-marker-icon.is-context {
+  opacity: 0.38;
+}
+
+html[data-tb-hotels] .leaflet-marker-icon.is-context:has(:is(.is-hover, .is-active, :hover)) {
+  opacity: 1;
+}
+
+.tb-hotel-ring {
+  stroke: var(--color-ink);
+  fill: var(--color-ink);
+}
+
+.tb-hotels__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.tb-hotels__bone {
+  height: var(--h-md);
+  border-radius: var(--r-pill);
+  background: var(--color-hairline);
+}
+
+.tb-hotels__bone:nth-child(even) {
+  width: 72%;
+}

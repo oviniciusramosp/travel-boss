@@ -1,8 +1,9 @@
 import type { Shell } from '../app/shell';
-import { placeCategoryMeta } from '../catalog';
+import { getTravelCity, pickLocale, placeCategoryMeta } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
 import { prefersReducedMotion } from '../ui/motion';
+import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
 
 type Locale = 'en' | 'pt-BR';
 type Localized = { en: string; 'pt-BR': string };
@@ -342,6 +343,9 @@ export function mountHotels(
   let rankAbort: AbortController | null = null;
   const statusAbort = new AbortController();
   const mutedTypes = new Set<string>();
+  let contextObserver: MutationObserver | null = null;
+  let contextLabels = new Set<string>();
+  document.documentElement.dataset.tbHotels = '';
 
   const root = el('div', 'tb-hotels');
   const form = el('form', 'tb-hotels__form');
@@ -575,7 +579,56 @@ export function mountHotels(
   };
 
   const syncRing = () => {
-    map.setRadius({ lat: city.lat, lng: city.lng, km: currentKm() });
+    const spec = { lat: city.lat, lng: city.lng, km: currentKm() };
+    syncSearchRing(() => map.setRadius(spec), spec);
+  };
+
+  const remarkContext = () => {
+    const pane = document.querySelector('.leaflet-marker-pane');
+    if (pane) markContextMarkers(pane, contextLabels);
+  };
+
+  const showContextPins = () => {
+    const data = getTravelCity(city.slug);
+    const pins: MapPin[] = [];
+    const labels = new Set<string>();
+    for (const place of data?.places ?? []) {
+      if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
+      if (pins.some((pin) => pin.id === place.id)) continue;
+      const label = pickLocale(locale(), place.name);
+      labels.add(label);
+      pins.push({
+        id: place.id,
+        lat: place.lat,
+        lng: place.lng,
+        label,
+        color: placeCategoryMeta[place.category].color,
+        kind: 'place',
+      });
+    }
+    contextLabels = labels;
+    map.setPins('place', pins);
+    remarkContext();
+  };
+
+  const watchContextPins = () => {
+    const pane = document.querySelector('.leaflet-marker-pane');
+    if (!pane || contextObserver) return;
+    contextObserver = new MutationObserver(() => remarkContext());
+    contextObserver.observe(pane, { childList: true });
+  };
+
+  const showSkeleton = () => {
+    const skeleton = el('div', 'tb-hotels__skeleton');
+    skeleton.setAttribute('aria-hidden', 'true');
+    for (let index = 0; index < 4; index += 1) skeleton.append(el('div', 'tb-hotels__bone'));
+    list.setAttribute('aria-busy', 'true');
+    list.replaceChildren(skeleton);
+  };
+
+  const hideSkeleton = () => {
+    list.querySelector('.tb-hotels__skeleton')?.remove();
+    list.removeAttribute('aria-busy');
   };
 
   const paintRadius = () => {
@@ -619,6 +672,7 @@ export function mountHotels(
       card.hidden = !keep.has(card.dataset.placeId ?? '');
     });
     map.setPins('hotel', pinsFor(visible));
+    remarkContext();
     syncRing();
     paintRadius();
   };
@@ -1174,6 +1228,7 @@ export function mountHotels(
     note.textContent = '';
     rerankBtn.disabled = true;
     map.setPins('hotel', []);
+    showSkeleton();
     paintRadius();
   };
 
@@ -1251,7 +1306,7 @@ export function mountHotels(
     sources.disabled = true;
     rerankBtn.disabled = true;
     clearResults();
-    setStatus(t('Starting…', 'Iniciando…'), false);
+    setStatus(null);
     try {
       const response = await fetch(`${API}?${searchParams()}`, {
         signal,
@@ -1292,7 +1347,10 @@ export function mountHotels(
       if (disposed || signal.aborted || isAbort(error)) return;
       setStatus(error instanceof Error ? error.message : t('Search unavailable.', 'Busca indisponível.'), true);
     } finally {
-      if (!disposed && mine === job) unlock();
+      if (!disposed && mine === job) {
+        unlock();
+        if (!displayed) hideSkeleton();
+      }
     }
   };
 
@@ -1438,6 +1496,7 @@ export function mountHotels(
   const unsubLocale = shell.onLocale(() => {
     if (disposed) return;
     paint();
+    showContextPins();
     if (displayed) render(displayed);
   });
   const unsubSelect = map.onSelect((id) => {
@@ -1445,6 +1504,8 @@ export function mountHotels(
   });
 
   paint();
+  showContextPins();
+  watchContextPins();
   const stored = readStored();
   if (stored) {
     applyQuery(stored.query);
@@ -1493,8 +1554,12 @@ export function mountHotels(
       statusAbort.abort();
       unsubLocale();
       unsubSelect();
-      map.setRadius(null);
+      contextObserver?.disconnect();
+      contextObserver = null;
+      delete document.documentElement.dataset.tbHotels;
+      clearSearchRing(() => map.setRadius(null));
       map.setPins('hotel', []);
+      map.setPins('place', []);
       host.replaceChildren();
     },
   };
