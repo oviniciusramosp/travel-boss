@@ -412,6 +412,35 @@ p.tb-budget {
   transform: translateX(calc(var(--tl-rail) / 2 + var(--spacing-4)));
 }
 
+.tb-timeline > .tb-row.is-optional .tb-row__title {
+  color: var(--color-mid-gray);
+  font-weight: var(--font-weight-regular);
+}
+
+.tb-timeline > .tb-row.is-disabled {
+  color: var(--color-mid-gray);
+}
+
+.tb-timeline > .tb-row.is-disabled .tb-row__main {
+  cursor: default;
+}
+
+.tb-stop-costs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4);
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-stop-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
 .tb-stop {
   display: flex;
   align-items: center;

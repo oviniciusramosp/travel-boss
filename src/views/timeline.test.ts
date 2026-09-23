@@ -9,6 +9,7 @@ import {
   moneyTip,
   periodOf,
   primaryStopCount,
+  stopCost,
   routeActionLabel,
   routeForSlots,
   sectionEntries,
@@ -72,6 +73,16 @@ describe('day header helpers', () => {
     const places = new Map([['a', place('a', 12, 0)]]);
     expect(moneyTip(['a', 'gone'], places, 'en', 'food')).toContain('12');
     expect(moneyTip(['a'], places, 'en', 'ticket')).toBe('');
+  });
+
+  it('respects countFood and countTicket on a single stop', () => {
+    const eaten = place('cafe', 12, 9);
+    expect(stopCost({ placeId: 'cafe' }, eaten)).toEqual({ food: 12, ticket: 9 });
+    expect(stopCost({ placeId: 'cafe', countTicket: false, countFood: false }, eaten)).toEqual({
+      food: 0,
+      ticket: 0,
+    });
+    expect(stopCost({ placeId: 'missing' }, undefined)).toEqual({ food: 0, ticket: 0 });
   });
 
   it('formats whole euros without cents', () => {

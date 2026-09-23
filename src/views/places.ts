@@ -42,11 +42,13 @@ import { iconLink, segmented } from '../ui/controls';
 import {
   dayBudgetEl,
   dayDirectionsUrl,
+  formatEur,
   itineraryIntro,
   paintRouteButton,
   daySummary,
   renderPeriods,
   routeForSlots,
+  stopCost,
   type RoutePhase,
 } from './timeline';
 import { el } from '../ui/dom';
@@ -1073,9 +1075,41 @@ export function mountCity(
     syncRouteChrome();
   };
 
+  const costMeta = (stop: ItineraryStop, place: TravelPlace | undefined, locale: Locale) => {
+    const cost = stopCost(stop, place);
+    const meta = el('span', 'tb-stop-costs');
+    const add = (glyph: 'restaurant' | 'local_activity', amount: number, label: string) => {
+      if (amount <= 0) return;
+      const chip = el('span', 'tb-stop-cost');
+      chip.append(icon(glyph, { size: 16 }));
+      chip.append(document.createTextNode(formatEur(amount, locale)));
+      chip.setAttribute('data-tip', label);
+      meta.append(chip);
+    };
+    add('restaurant', cost.food, pickLocale(locale, travelUi.itineraryFood));
+    add('local_activity', cost.ticket, pickLocale(locale, travelUi.itineraryParks));
+    if (stop.optional) {
+      meta.prepend(el('span', 'tb-badge-soft', pickLocale(locale, travelUi.itineraryOptional)));
+    }
+    return meta.childElementCount ? meta : undefined;
+  };
+
   const stopRow = (stop: ItineraryStop, index: number, locale: Locale): HTMLElement | null => {
     const place = byId.get(stop.placeId);
-    if (!place) return null;
+    const meta = costMeta(stop, place, locale);
+    if (!place) {
+      const missing = row({
+        time: stop.time,
+        title: stop.placeId,
+        sub: pickLocale(locale, { en: 'Place unavailable', 'pt-BR': 'Lugar indisponível' }),
+        meta,
+        data: { placeId: stop.placeId },
+      });
+      missing.classList.add('is-disabled');
+      missing.setAttribute('aria-disabled', 'true');
+      if (stop.optional) missing.classList.add('is-optional');
+      return missing;
+    }
     const pin = el('span', 'tb-timeline__pin');
     pin.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
     pin.append(categoryGlyph(place.category, 16));
@@ -1091,6 +1125,7 @@ export function mountCity(
       lead: pin,
       title: pickLocale(locale, place.name),
       sub: note,
+      meta,
       actions: maps,
       current: index === selectedDayIndex && place.id === currentStopId,
       data: { placeId: place.id },

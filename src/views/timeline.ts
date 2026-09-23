@@ -106,6 +106,18 @@ export function budgetDay(day: ItineraryDay): ItineraryDay {
   return chosen ? { ...day, stops: chosen.stops } : day;
 }
 
+export function stopCost(
+  stop: ItineraryStop,
+  place: TravelPlace | undefined,
+): { food: number; ticket: number } {
+  const visit = resolveVisit(stop.placeId, place?.visit);
+  if (!visit) return { food: 0, ticket: 0 };
+  return {
+    food: stop.countFood === false ? 0 : typicalEur(visit.avgPricePerPerson),
+    ticket: stop.countTicket === false ? 0 : typicalEur(visit.ticket),
+  };
+}
+
 export function moneyTip(
   ids: readonly string[],
   places: Map<string, TravelPlace>,
