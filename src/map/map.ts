@@ -16,9 +16,17 @@ import {
 import { placeCategoryMeta } from '../catalog';
 import { cameraMotion, labelFadeDuration, prefersReducedMotion } from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
-import { diffPinIds, paddedCenterOffset, selectionEases, selectionZoom } from './camera';
+import {
+  diffPinIds,
+  fitMaxZoom,
+  paddedCenterOffset,
+  pointsForFit,
+  selectionEases,
+  selectionFrame,
+} from './camera';
+import { coveredInsets, mergeInsets, type Insets } from './chrome';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
-import { resolvedPlace } from './place-index';
+import { placeZoom, resolvedPlace } from './place-index';
 import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
 
 const KINDS: readonly MapPinKind[] = ['place', 'hotel', 'stop'];
@@ -181,13 +189,50 @@ export function mountMap(host: HTMLElement): MapHandle {
     return null;
   };
 
-  const fitPad = (gutter: number) => ({
-    paddingTopLeft: [gutter + padding.left, gutter + padding.top] as [number, number],
-    paddingBottomRight: [gutter + padding.right, gutter + padding.bottom] as [number, number],
-  });
+  const boxOf = (node: Element | null): { left: number; top: number; right: number; bottom: number } | null => {
+    if (!(node instanceof HTMLElement) || node.hidden) return null;
+    const box = node.getBoundingClientRect();
+    if (box.width < 1 || box.height < 1) return null;
+    return box;
+  };
+
+  const effectivePadding = (): Insets => {
+    const mapBox = frame.getBoundingClientRect();
+    let extra: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
+    const side = boxOf(document.querySelector('.tb-side'));
+    const panel = boxOf(document.querySelector('.tb-place-panel'));
+    if (side) extra = mergeInsets(extra, coveredInsets(mapBox, side));
+    if (panel) extra = mergeInsets(extra, coveredInsets(mapBox, panel));
+    return mergeInsets(padding, extra);
+  };
+
+  const fitPad = (gutter: number) => {
+    const pad = effectivePadding();
+    return {
+      paddingTopLeft: [gutter + pad.left, gutter + pad.top] as [number, number],
+      paddingBottomRight: [gutter + pad.right, gutter + pad.bottom] as [number, number],
+    };
+  };
+
+  const areaPoints = (id: string): [number, number][] | null => {
+    const area = resolvedPlace(id)?.area;
+    if (!area) return null;
+    const pts: [number, number][] = [];
+    const push = (path: readonly (readonly [number, number])[]) => {
+      for (const pair of path) {
+        if (Number.isFinite(pair[0]) && Number.isFinite(pair[1])) pts.push([pair[0], pair[1]]);
+      }
+    };
+    if (area.kind === 'multipolygon') {
+      for (const ring of area.paths) push(ring);
+    } else {
+      push(area.path);
+    }
+    return pts.length >= 2 ? pts : null;
+  };
 
   const moveCamera = (lat: number, lng: number, zoom: number) => {
-    const offset = paddedCenterOffset(padding);
+    const offset = paddedCenterOffset(effectivePadding());
     const projected = leafletMap.project([lat, lng], zoom);
     const center = leafletMap.unproject(projected.add([offset.x, offset.y]), zoom);
     const motion = cameraMotion();
@@ -328,16 +373,25 @@ export function mountMap(host: HTMLElement): MapHandle {
     },
 
     fit() {
-      const points: LatLng[] = [];
+      const samples: { id: string; lat: number; lng: number; category?: string }[] = [];
       for (const kind of KINDS) {
-        for (const marker of markers[kind].values()) points.push(marker.getLatLng());
+        for (const [id, dot] of markers[kind]) {
+          const ll = dot.getLatLng();
+          samples.push({ id, lat: ll.lat, lng: ll.lng, category: resolvedPlace(id)?.category });
+        }
       }
-      if (points.length === 0) return;
-      leafletMap.fitBounds(latLngBounds(points), {
-        ...fitPad(32),
-        maxZoom: 16,
-        ...cameraMotion(),
-      });
+      const kept = pointsForFit(samples);
+      if (kept.length === 0) return;
+      const maxZoom = fitMaxZoom(
+        kept.flatMap((pin) => {
+          const zoom = placeZoom(pin.id);
+          return zoom == null ? [] : [zoom];
+        }),
+      );
+      leafletMap.fitBounds(
+        latLngBounds(kept.map((pin) => [pin.lat, pin.lng] as [number, number])),
+        { ...fitPad(32), maxZoom, ...cameraMotion() },
+      );
     },
 
     inView(lat, lng) {
@@ -359,8 +413,23 @@ export function mountMap(host: HTMLElement): MapHandle {
       paintAll();
       const target = findMarker(id);
       if (!target) return;
+      const area = areaPoints(id);
+      const choice = selectionFrame(leafletMap.getZoom(), area != null);
+      if (choice.frame === 'area' && area) {
+        const motion = cameraMotion();
+        const opts = {
+          ...fitPad(24),
+          maxZoom: choice.zoom,
+          duration: motion.duration,
+          easeLinearity: 0.25,
+        };
+        leafletMap.stop();
+        if (motion.animate) leafletMap.flyToBounds(latLngBounds(area), opts);
+        else leafletMap.fitBounds(latLngBounds(area), { ...opts, animate: false });
+        return;
+      }
       const ll = target.getLatLng();
-      moveCamera(ll.lat, ll.lng, selectionZoom(leafletMap.getZoom()));
+      moveCamera(ll.lat, ll.lng, choice.zoom);
     },
 
     highlight(id) {
