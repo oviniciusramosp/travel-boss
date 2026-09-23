@@ -364,10 +364,11 @@ button {
   color: var(--color-ink-soft);
 }
 
-.tb-pin-wrap {
+.tb-map .leaflet-marker-icon.tb-pin-wrap {
   background: none;
   border: 0;
-  border-radius: var(--r-pill);
+  border-radius: var(--r-none);
+  overflow: visible;
 }
 
 .leaflet-tooltip.tb-pin-tip {
@@ -386,60 +387,179 @@ button {
   border-top-color: var(--color-ink);
 }
 
-.tb-pin {
-  --pin-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  position: relative;
-  display: block;
-  width: 32px;
-  height: 32px;
+/* Rest size is one variable on the map. 28px is the hover badge; zoom scales it. */
+.tb-map .leaflet-container {
+  --pin-scale: calc(12 / 28);
 }
 
-.tb-pin__core {
+.tb-map .leaflet-container.tb-zoom-mid {
+  --pin-scale: calc(6 / 28);
+}
+
+.tb-map .leaflet-container.tb-zoom-far {
+  --pin-scale: calc(3 / 28);
+}
+
+.tb-map .leaflet-container.tb-zoom-near .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)),
+.tb-map .leaflet-container:not(.tb-zoom-mid):not(.tb-zoom-far) .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)) {
+  --pin-scale: calc(16 / 28);
+}
+
+.tb-map .leaflet-container.tb-zoom-mid .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)) {
+  --pin-scale: calc(14 / 28);
+}
+
+.tb-map .leaflet-container.tb-zoom-far .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)) {
+  --pin-scale: calc(9 / 28);
+}
+
+.tb-map .tb-pin:is(:hover, .is-hover, .is-active) {
+  --pin-scale: 1;
+}
+
+.tb-map .tb-pin.is-featured:is(:hover, .is-hover, .is-active) {
+  --pin-scale: calc(32 / 28);
+}
+
+.tb-pin {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tb-pin__face {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 4px;
-  height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: var(--r-pill);
-  background: var(--pin-color, var(--color-ink));
-  border: 0.5px solid color-mix(in srgb, var(--color-paper) 10%, transparent);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-  transition:
-    width 180ms var(--pin-ease),
-    height 180ms var(--pin-ease),
-    margin 180ms var(--pin-ease),
-    border-color 180ms var(--pin-ease),
-    box-shadow 180ms var(--pin-ease);
-}
-
-.leaflet-container.tb-zoom-mid .tb-pin__core {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-}
-
-.leaflet-container.tb-zoom-near .tb-pin__core {
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
-}
-
-.leaflet-container .tb-pin:hover .tb-pin__core,
-.leaflet-container .tb-pin.is-hover .tb-pin__core,
-.leaflet-container .tb-pin.is-active .tb-pin__core {
   width: 28px;
   height: 28px;
-  margin: -14px 0 0 -14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  background: var(--pin-color, var(--color-ink));
+  border: 1px solid color-mix(in srgb, var(--color-paper) 10%, transparent);
+  border-radius: var(--r-pill);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--color-ink) 35%, transparent);
+  transform: translate(-50%, -50%) scale(var(--pin-scale));
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.tb-pin:not(.tb-pin--star) .tb-pin__face::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
   border: 2px solid var(--color-paper);
+  border-radius: var(--r-pill);
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--pin-color) 40%, transparent),
     0 4px 14px color-mix(in srgb, var(--pin-color) 45%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tb-pin__core {
-    transition: none;
+.tb-pin:not(.tb-pin--star):is(:hover, .is-hover, .is-active) .tb-pin__face::after {
+  opacity: 1;
+}
+
+.tb-pin.is-featured:not(.tb-pin--star) .tb-pin__face {
+  border-color: color-mix(in srgb, var(--color-paper) 55%, transparent);
+}
+
+.tb-pin.is-featured::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--pin-color) 55%, transparent);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: tb-pin-pulse calc(var(--dur-slow) * 5) var(--ease-out) infinite;
+}
+
+.tb-pin__glyph {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.tb-pin:is(:hover, .is-hover, .is-active) .tb-pin__glyph {
+  opacity: 1;
+}
+
+.tb-pin__glyph .material-symbols-rounded {
+  font-size: var(--icon-md);
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 500,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.tb-pin.is-featured .tb-pin__glyph .material-symbols-rounded {
+  font-size: var(--icon-lg);
+}
+
+.tb-pin--star .tb-pin__face {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.tb-pin__star {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  overflow: visible;
+  color: var(--pin-color, var(--color-ink));
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--color-ink) 35%, transparent));
+}
+
+.tb-pin__star path {
+  stroke: color-mix(in srgb, var(--color-paper) 10%, transparent);
+  stroke-width: 1;
+}
+
+.tb-pin--star:is(:hover, .is-hover, .is-active) .tb-pin__star path {
+  stroke: var(--color-paper);
+  stroke-width: 4;
+}
+
+.tb-pin--star.is-featured .tb-pin__star,
+.tb-pin--star:is(:hover, .is-hover, .is-active) .tb-pin__star {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--pin-color) 55%, transparent));
+}
+
+.tb-map .leaflet-container.is-zooming .tb-pin__face,
+.tb-map .leaflet-container.is-zooming .tb-pin__glyph,
+.tb-map .leaflet-container.is-zooming .tb-pin__face::after {
+  transition: none;
+}
+
+.tb-map .leaflet-container.is-zooming .tb-pin.is-featured::before {
+  animation-play-state: paused;
+}
+
+@keyframes tb-pin-pulse {
+  0% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.8);
   }
 }
 
@@ -592,5 +712,10 @@ p.tb-meta {
   * {
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+
+  .tb-pin.is-featured::before {
+    animation: none;
+    opacity: 0.4;
   }
 }
