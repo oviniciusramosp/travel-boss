@@ -10,6 +10,19 @@
   margin: 0;
 }
 
+.tb-hotels__lead {
+  color: var(--color-ink-soft);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.tb-hotels__stay {
+  flex: 1 1 auto;
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-body);
+}
+
 .tb-hotels__form,
 .tb-hotels__bar {
   display: flex;

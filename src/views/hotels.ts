@@ -5,6 +5,7 @@ import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
+import { cityStayFromTrips, defaultStayDates, hashStayDates } from './hotel-dates';
 import { distanceSection, walkStops } from './hotel-distance';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
 import { scoreCard, whyParts, type WhyPart } from './hotel-rank';
@@ -360,6 +361,7 @@ export function mountHotels(
   document.documentElement.dataset.tbHotels = '';
 
   const root = el('div', 'tb-hotels');
+  const lead = el('p', 'tb-hotels__lead');
   const form = el('form', 'tb-hotels__form');
   form.autocomplete = 'off';
   form.noValidate = false;
@@ -439,10 +441,13 @@ export function mountHotels(
   minScore.inputMode = 'decimal';
   minScore.required = true;
 
-  const today = new Date();
-  checkin.min = isoDate(today);
-  checkin.value = isoDate(addDays(today, 1));
-  checkout.value = isoDate(addDays(today, 3));
+  const todayIso = isoDate(new Date());
+  const urlDates = hashStayDates(location.hash);
+  let datesTouched = false;
+  const seeded = defaultStayDates(todayIso, null, urlDates);
+  checkin.min = todayIso;
+  checkin.value = seeded.checkin;
+  checkout.value = seeded.checkout;
   checkout.min = checkin.value;
 
   const submit = el('button', 'tb-btn');
@@ -502,6 +507,7 @@ export function mountHotels(
   status.hidden = true;
 
   const bar = el('div', 'tb-hotels__bar');
+  const stayLine = el('p', 'tb-hotels__stay');
   const sortLbl = el('span', 'tb-hotels__lbl');
   const sortSel = el('select', 'tb-select');
   const optPriority = el('option');
@@ -523,7 +529,7 @@ export function mountHotels(
   const excludedText = el('span');
   const excludedLabel = el('label', 'tb-hotels__check');
   excludedLabel.append(showExcluded, excludedText);
-  bar.append(sortField, rerankBtn, excludedLabel);
+  bar.append(stayLine, sortField, rerankBtn, excludedLabel);
 
   const note = el('p', 'tb-meta tb-hotels__note');
   note.hidden = true;
@@ -536,7 +542,7 @@ export function mountHotels(
   const skippedList = el('ul');
   skipped.append(summary, skippedList);
 
-  root.append(form, setup, status, bar, note, chips, list, skipped);
+  root.append(lead, form, setup, status, bar, note, chips, list, skipped);
   host.replaceChildren(root);
 
   const money = (value: number) =>
@@ -1239,6 +1245,24 @@ export function mountHotels(
       'Mostrar hotéis fora dos critérios',
     );
     list.setAttribute('aria-label', t('Hotels', 'Hotéis'));
+    lead.textContent = pickLocale(locale(), {
+      en: 'Hotels ranked for your trip: total stay price, Booking and Airbnb reviews, neighborhood guidance and walking routes to saved places. Your selected route and favorites have priority. The most central candidates are checked first.',
+      'pt-BR':
+        'Hotéis priorizados para o seu roteiro: preço total, avaliações do Booking e Airbnb, curadoria dos bairros e rotas a pé até os pontos salvos. Sua rota selecionada e favoritos têm prioridade. Os candidatos mais centrais são checados primeiro.',
+    });
+    const nights = nightsBetween(checkin.value, checkout.value);
+    const guests = Number(adults.value);
+    const guestCount = Number.isFinite(guests) && guests > 0 ? guests : 2;
+    stayLine.textContent =
+      nights == null
+        ? pickLocale(locale(), {
+            en: `${guestCount} guest(s)`,
+            'pt-BR': `${guestCount} ${guestCount === 1 ? 'hóspede' : 'hóspedes'}`,
+          })
+        : pickLocale(locale(), {
+            en: `${nights} night(s) · ${guestCount} guest(s)`,
+            'pt-BR': `${nights} ${nights === 1 ? 'noite' : 'noites'} · ${guestCount} ${guestCount === 1 ? 'hóspede' : 'hóspedes'}`,
+          });
     if (checkin.value && checkout.value && checkout.value <= checkin.value) {
       checkout.setCustomValidity(
         t('Check-out must be after check-in.', 'O check-out precisa ser depois do check-in.'),
@@ -1561,7 +1585,14 @@ export function mountHotels(
   listen(sources, 'change', () => {
     void runSearch();
   });
-  listen(checkin, 'change', relaxDates);
+  const onDates = () => {
+    datesTouched = true;
+    relaxDates();
+    paint();
+  };
+  listen(checkin, 'change', onDates);
+  listen(checkout, 'change', onDates);
+  listen(adults, 'input', () => paint());
   listen(sortSel, 'change', () => {
     if (displayed) render(displayed);
   });
@@ -1786,6 +1817,25 @@ export function mountHotels(
   } else {
     syncRing();
     paintRadius();
+  }
+  if (urlDates) {
+    checkin.value = urlDates.checkin;
+    checkout.value = urlDates.checkout;
+    relaxDates();
+    paint();
+  } else if (!stored) {
+    void fetch('/api/trips')
+      .then((response) => (response.ok ? response.json() : []))
+      .then((files: { id: string; raw: string }[]) => {
+        if (disposed || datesTouched || !Array.isArray(files)) return;
+        const next = defaultStayDates(isoDate(new Date()), cityStayFromTrips(city.slug, files), null);
+        if (next.checkin === checkin.value && next.checkout === checkout.value) return;
+        checkin.value = next.checkin;
+        checkout.value = next.checkout;
+        relaxDates();
+        paint();
+      })
+      .catch(() => undefined);
   }
 
   const lockSearch = (message: string) => {
