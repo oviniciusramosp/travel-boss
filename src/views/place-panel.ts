@@ -57,6 +57,17 @@ export function onPlaceClose(fn: () => void): () => void {
   };
 }
 
+export function slideIndex(index: number, count: number): number {
+  if (count < 1) return 0;
+  return ((index % count) + count) % count;
+}
+
+export function dropSlide<T>(slides: readonly T[], index: number): { slides: T[]; index: number } {
+  if (index < 0 || index >= slides.length) return { slides: [...slides], index: Math.max(0, index) };
+  const next = slides.filter((_, at) => at !== index);
+  return { slides: next, index: next.length === 0 ? 0 : Math.min(index, next.length - 1) };
+}
+
 function listedOrigin(node: HTMLElement | null | undefined): HTMLElement | null {
   if (!node || node === document.body || node === document.documentElement) return null;
   if (!node.closest('[data-place-id]')) return null;
