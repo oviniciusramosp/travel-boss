@@ -45,6 +45,8 @@ import {
   itineraryIntro,
   paintRouteButton,
   daySummary,
+  renderPeriods,
+  routeForSlots,
   type RoutePhase,
 } from './timeline';
 import { el } from '../ui/dom';
@@ -527,6 +529,8 @@ export function mountCity(
   let routeEpoch = 0;
   let routeWanted = true;
   let routePhase: RoutePhase = 'idle';
+  const slotsOff = new Map<string, Set<string>>();
+  const slotOpen = new Map<string, boolean>();
   let searchFitTimer = 0;
 
   const head = el('header', 'tb-city-head');
@@ -592,6 +596,44 @@ export function mountCity(
     const option = selectedArrival(day);
     if (!option) return { title: day.title, summary: day.summary };
     return { title: option.title, summary: option.summary };
+  };
+
+  const slotsOn = (dayId: string): Set<string> => {
+    const on = new Set(['morning', 'afternoon', 'evening']);
+    const off = slotsOff.get(dayId);
+    if (off) for (const slot of off) on.delete(slot);
+    return on;
+  };
+
+  const routedDay = (day: ItineraryDay) =>
+    routeForSlots(activeStops(day), legsForDay(day.id, selectedArrival(day)?.id), slotsOn(day.id));
+
+  const syncDayLink = (day: ItineraryDay) => {
+    const link = body.querySelector<HTMLAnchorElement>(
+      `[data-day-id="${CSS.escape(day.id)}"] [data-day-gmaps]`,
+    );
+    if (!link) return;
+    const url = dayDirectionsUrl(routedDay(day).ids, placeCoords());
+    if (url) {
+      link.href = url;
+      link.removeAttribute('aria-disabled');
+      link.tabIndex = 0;
+    } else {
+      link.removeAttribute('href');
+      link.setAttribute('aria-disabled', 'true');
+      link.tabIndex = -1;
+    }
+  };
+
+  const toggleSlot = (day: ItineraryDay, slot: string, on: boolean) => {
+    const off = slotsOff.get(day.id) ?? new Set<string>();
+    if (on) off.delete(slot);
+    else off.add(slot);
+    slotsOff.set(day.id, off);
+    if (selectedDayIndex === itinerary?.days.findIndex((item) => item.id === day.id) && routeWanted) {
+      drawDayRoute(selectedDayIndex, false);
+    }
+    syncDayLink(day);
   };
 
   const placeCoords = () => {
@@ -715,12 +757,10 @@ export function mountCity(
     }
     routePhase = 'drawing';
     syncRouteChrome();
-    const route = primaryDayRoute(day, activeStops(day), new Set(byId.keys()));
     const coords = placeCoords();
-    const arrival = selectedArrival(day)?.id;
-    let legs = legsForDay(day.id, arrival);
-    if (!legs.length) legs = route.fallback;
-    const ids = route.ids;
+    const routed = routedDay(day);
+    const legs = routed.legs;
+    const ids = routed.ids;
     const preview = buildItineraryRoutePreview(ids, legs, coords);
     map.setRoute(preview.segments, { fit });
     void buildItineraryRoute(ids, legs, coords)
@@ -978,14 +1018,13 @@ export function mountCity(
       });
 
       const stops = activeStops(day);
-      const ids = primaryDayRoute(day, stops, new Set(byId.keys())).ids;
       const phase: RoutePhase = routeWanted && index === selectedDayIndex ? routePhase : 'idle';
       section.append(
         daySummary({
           dayNumber: day.day,
           stops,
           phase,
-          mapsUrl: dayDirectionsUrl(ids, placeCoords()),
+          mapsUrl: dayDirectionsUrl(routedDay(day).ids, placeCoords()),
           locale,
           onRoute: () => toggleRoute(index),
         }),
@@ -1016,42 +1055,49 @@ export function mountCity(
       const budget = dayBudgetEl(day, stops, byId, locale);
       if (budget) section.append(budget);
 
-      section.append(stopList(day, index, locale));
+      section.append(
+        renderPeriods({
+          stops,
+          locale,
+          enabled: slotsOn(day.id),
+          coords: placeCoords(),
+          isOpen: (slot) => slotOpen.get(`${day.id}:${slot}`) ?? true,
+          onOpen: (slot, open) => slotOpen.set(`${day.id}:${slot}`, open),
+          onToggleSlot: (slot, on) => toggleSlot(day, slot, on),
+          renderStop: (stop) => stopRow(stop, index, locale),
+        }),
+      );
       body.append(section);
     });
     syncRouteChrome();
   };
 
-  const stopList = (day: ItineraryDay, index: number, locale: Locale) => {
-    const list = el('div', 'tb-stop-list');
-    for (const stop of activeStops(day)) {
-      const place = byId.get(stop.placeId);
-      if (!place) continue;
-      const row = el('div', stop.optional ? 'tb-stop is-optional' : 'tb-stop');
-      row.dataset.placeId = place.id;
-      if (index === selectedDayIndex && place.id === currentStopId) {
-        row.setAttribute('aria-current', 'true');
-      }
-      const open = el('button', 'tb-place-main');
-      open.type = 'button';
-      const time = el('time', 'tb-stop-time', stop.time ?? '');
-      if (stop.time) time.dateTime = stop.time;
-      open.append(time);
-      const info = el('span');
-      info.append(el('span', 'tb-stop-name', pickLocale(locale, place.name)));
-      if (stop.note) {
-        info.append(el('span', 'tb-stop-note', pickLocale(locale, stop.note)));
-      }
-      open.append(info);
-      const maps = el('a', 'tb-btn-outline tb-maps', locale === 'pt-BR' ? 'Mapa' : 'Map');
-      maps.href = googleMapsUrl(place, city);
-      maps.target = '_blank';
-      maps.rel = 'noopener';
-      maps.dataset.maps = 'true';
-      row.append(open, maps);
-      list.append(row);
+  const stopRow = (stop: ItineraryStop, index: number, locale: Locale): HTMLElement | null => {
+    const place = byId.get(stop.placeId);
+    if (!place) return null;
+    const row = el('div', stop.optional ? 'tb-stop is-optional' : 'tb-stop');
+    row.dataset.placeId = place.id;
+    if (index === selectedDayIndex && place.id === currentStopId) {
+      row.setAttribute('aria-current', 'true');
     }
-    return list;
+    const open = el('button', 'tb-place-main');
+    open.type = 'button';
+    const time = el('time', 'tb-stop-time', stop.time ?? '');
+    if (stop.time) time.dateTime = stop.time;
+    open.append(time);
+    const info = el('span');
+    info.append(el('span', 'tb-stop-name', pickLocale(locale, place.name)));
+    if (stop.note) {
+      info.append(el('span', 'tb-stop-note', pickLocale(locale, stop.note)));
+    }
+    open.append(info);
+    const maps = el('a', 'tb-btn-outline tb-maps', locale === 'pt-BR' ? 'Mapa' : 'Map');
+    maps.href = googleMapsUrl(place, city);
+    maps.target = '_blank';
+    maps.rel = 'noopener';
+    maps.dataset.maps = 'true';
+    row.append(open, maps);
+    return row;
   };
 
   const closeHotels = () => {
