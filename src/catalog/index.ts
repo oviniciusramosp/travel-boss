@@ -25,7 +25,12 @@ export {
   resolvePlacePhotos,
 } from '../data/travel';
 
-export { legsForDay } from '../data/travel-itinerary-legs';
+export {
+  legsForDay,
+  lineBrandColor,
+  milanDayLegsById,
+  parisDayLegsById,
+} from '../data/travel-itinerary-legs';
 export type { ItineraryLegDef } from '../data/travel-itinerary-legs';
 
 export { placeCategoriesOffByDefault } from '../data/travel-categories';
