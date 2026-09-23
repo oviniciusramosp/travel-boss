@@ -1064,6 +1064,7 @@ export function mountCity(
           isOpen: (slot) => slotOpen.get(`${day.id}:${slot}`) ?? true,
           onOpen: (slot, open) => slotOpen.set(`${day.id}:${slot}`, open),
           onToggleSlot: (slot, on) => toggleSlot(day, slot, on),
+          legs: legsForDay(day.id, selectedArrival(day)?.id),
           renderStop: (stop) => stopRow(stop, index, locale),
         }),
       );
@@ -1075,29 +1076,35 @@ export function mountCity(
   const stopRow = (stop: ItineraryStop, index: number, locale: Locale): HTMLElement | null => {
     const place = byId.get(stop.placeId);
     if (!place) return null;
-    const row = el('div', stop.optional ? 'tb-stop is-optional' : 'tb-stop');
-    row.dataset.placeId = place.id;
-    if (index === selectedDayIndex && place.id === currentStopId) {
-      row.setAttribute('aria-current', 'true');
-    }
-    const open = el('button', 'tb-place-main');
-    open.type = 'button';
-    const time = el('time', 'tb-stop-time', stop.time ?? '');
-    if (stop.time) time.dateTime = stop.time;
-    open.append(time);
-    const info = el('span');
-    info.append(el('span', 'tb-stop-name', pickLocale(locale, place.name)));
-    if (stop.note) {
-      info.append(el('span', 'tb-stop-note', pickLocale(locale, stop.note)));
-    }
-    open.append(info);
-    const maps = el('a', 'tb-btn-outline tb-maps', locale === 'pt-BR' ? 'Mapa' : 'Map');
-    maps.href = googleMapsUrl(place, city);
-    maps.target = '_blank';
-    maps.rel = 'noopener';
+    const pin = el('span', 'tb-timeline__pin');
+    pin.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
+    pin.append(categoryGlyph(place.category, 16));
+    const maps = iconLink({
+      icon: 'location_on',
+      label: pickLocale(locale, travelUi.openInMaps),
+      href: googleMapsUrl(place, city),
+    });
     maps.dataset.maps = 'true';
-    row.append(open, maps);
-    return row;
+    const note = stop.note ? pickLocale(locale, stop.note) : undefined;
+    const item = row({
+      time: stop.time,
+      lead: pin,
+      title: pickLocale(locale, place.name),
+      sub: note,
+      actions: maps,
+      current: index === selectedDayIndex && place.id === currentStopId,
+      data: { placeId: place.id },
+      onSelect: () => {
+        selectedDayIndex = index;
+        currentStopId = place.id;
+        markSelectedDay();
+        const origin = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        setRowCurrent(body, place.id, false);
+        focusPlace(place.id, origin);
+      },
+    });
+    if (stop.optional) item.classList.add('is-optional');
+    return item;
   };
 
   const closeHotels = () => {

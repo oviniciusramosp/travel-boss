@@ -7,6 +7,7 @@ import {
   computeDayBudget,
   computeTripBudget,
   dayPrimaryRoutePlaceIds,
+  expandTimelineTransferParts,
   pickLocale,
   resolveVisit,
   travelUi,
@@ -17,6 +18,7 @@ import type {
   ItineraryLegDef,
   ItineraryStop,
   Locale,
+  TimelineTransferPart,
   TravelItinerary,
   TravelPlace,
 } from '../catalog';
@@ -24,6 +26,7 @@ import { googleDirectionsUrl } from '../trip/directions';
 import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
+import { transferRow } from './transfer-row';
 
 export type RoutePhase = 'idle' | 'drawing' | 'on';
 
@@ -192,6 +195,113 @@ export function routeForSlots(
   return { ids, legs: kept };
 }
 
+export type RailKind = 'none' | 'walk' | 'transit';
+
+export type TimelineEntry =
+  | { kind: 'hop'; part: TimelineTransferPart }
+  | {
+      kind: 'stop';
+      stop: ResolvedStop;
+      railAbove: RailKind;
+      railBelow: RailKind;
+      aboveColor: string | null;
+      belowColor: string | null;
+    };
+
+function legBetween(
+  from: string,
+  to: string,
+  legs: readonly ItineraryLegDef[],
+): ItineraryLegDef {
+  return legs.find((leg) => leg.from === from && leg.to === to) ?? { from, to, mode: 'walk' };
+}
+
+function neighborPrimary(
+  stop: ResolvedStop,
+  allStops: readonly ItineraryStop[],
+  dir: -1 | 1,
+): ItineraryStop | null {
+  for (let index = stop.index + dir; index >= 0 && index < allStops.length; index += dir) {
+    const item = allStops[index];
+    if (item && !item.optional) return item;
+  }
+  return null;
+}
+
+/** One row per hop. An optional stop never owns a leg, so it stays off the rail. */
+export function sectionEntries(
+  sectionStops: readonly ResolvedStop[],
+  allStops: readonly ItineraryStop[],
+  legs: readonly ItineraryLegDef[],
+  coords: ReadonlyMap<string, { lat: number; lng: number }>,
+): TimelineEntry[] {
+  const entries: TimelineEntry[] = [];
+  let opened = false;
+  for (const stop of sectionStops) {
+    if (!opened && !stop.optional) {
+      const prev = neighborPrimary(stop, allStops, -1);
+      if (prev && periodOf(prev) !== periodOf(stop)) {
+        const leg = legBetween(prev.placeId, stop.placeId, legs);
+        for (const part of expandTimelineTransferParts(leg, coords.get(leg.from), coords.get(leg.to))) {
+          entries.push({ kind: 'hop', part });
+        }
+      }
+      opened = true;
+    }
+    const stopEntry: TimelineEntry = {
+      kind: 'stop',
+      stop,
+      railAbove: 'none',
+      railBelow: 'none',
+      aboveColor: null,
+      belowColor: null,
+    };
+    entries.push(stopEntry);
+    if (stop.optional) continue;
+    const next = neighborPrimary(stop, allStops, 1);
+    if (!next || periodOf(next) !== periodOf(stop)) continue;
+    const leg = legBetween(stop.placeId, next.placeId, legs);
+    for (const part of expandTimelineTransferParts(leg, coords.get(leg.from), coords.get(leg.to))) {
+      entries.push({ kind: 'hop', part });
+    }
+  }
+  for (let index = 0; index < entries.length; index += 1) {
+    const entry = entries[index];
+    if (!entry || entry.kind !== 'stop' || entry.stop.optional) continue;
+    const prev = entries[index - 1];
+    const next = entries[index + 1];
+    if (prev?.kind === 'hop') {
+      entry.railAbove = prev.part.mode === 'walk' ? 'walk' : 'transit';
+      entry.aboveColor = prev.part.mode === 'transit' ? prev.part.color : null;
+    }
+    if (next?.kind === 'hop') {
+      entry.railBelow = next.part.mode === 'walk' ? 'walk' : 'transit';
+      entry.belowColor = next.part.mode === 'transit' ? next.part.color : null;
+    }
+  }
+  return entries;
+}
+
+export function paintStopRail(row: HTMLElement, entry: Extract<TimelineEntry, { kind: 'stop' }>): void {
+  row.dataset.railAbove = entry.railAbove;
+  row.dataset.railBelow = entry.railBelow;
+  if (entry.aboveColor) row.style.setProperty('--rail-above', entry.aboveColor);
+  else row.style.removeProperty('--rail-above');
+  if (entry.belowColor) row.style.setProperty('--rail-below', entry.belowColor);
+  else row.style.removeProperty('--rail-below');
+  row.classList.toggle('is-off-rail', Boolean(entry.stop.optional));
+}
+
+function hopRow(part: TimelineTransferPart, locale: Locale): HTMLLIElement {
+  const item = transferRow(part, locale);
+  item.classList.add('tb-timeline__hop');
+  const rail = el('span', 'tb-timeline__rail');
+  rail.dataset.rail = part.mode === 'walk' ? 'walk' : 'transit';
+  if (part.mode === 'transit' && part.color) rail.style.setProperty('--line-color', part.color);
+  item.prepend(rail);
+  return item;
+}
+
 export function paintRouteButton(button: HTMLButtonElement, phase: RoutePhase, locale: Locale): void {
   const label = routeActionLabel(phase, locale);
   button.setAttribute('aria-label', label);
@@ -344,6 +454,7 @@ function slotSwitch(on: boolean, slot: string, locale: Locale, onToggle: (on: bo
 /** Collapsible morning / afternoon / evening. `other` has no header and stays on the map. */
 export function renderPeriods(opts: {
   stops: readonly ItineraryStop[];
+  legs: readonly ItineraryLegDef[];
   locale: Locale;
   enabled: ReadonlySet<string>;
   coords: ReadonlyMap<string, { lat: number; lng: number }>;
@@ -382,10 +493,16 @@ export function renderPeriods(opts: {
       );
       details.append(summary);
     }
-    const list = el('div', 'tb-stop-list');
-    for (const stop of section.stops) {
-      const row = opts.renderStop(stop, stop.index);
-      if (row) list.append(row);
+    const list = el('ol', 'tb-list tb-timeline');
+    for (const entry of sectionEntries(section.stops, opts.stops, opts.legs, opts.coords)) {
+      if (entry.kind === 'hop') {
+        list.append(hopRow(entry.part, opts.locale));
+        continue;
+      }
+      const row = opts.renderStop(entry.stop, entry.stop.index);
+      if (!row) continue;
+      paintStopRail(row, entry);
+      list.append(row);
     }
     details.append(list);
     wrap.append(details);

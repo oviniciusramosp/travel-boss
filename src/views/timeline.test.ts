@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeDayBudget, computeTripBudget, itineraryForCity, getTravelCity } from '../catalog';
+import { computeDayBudget, computeTripBudget, getTravelCity, itineraryForCity, legsForDay } from '../catalog';
 import type { ItineraryStop, TravelPlace } from '../catalog';
 import {
   budgetDay,
@@ -11,6 +11,7 @@ import {
   primaryStopCount,
   routeActionLabel,
   routeForSlots,
+  sectionEntries,
   sectionsOf,
   stopCountLabel,
   typicalEur,
@@ -104,6 +105,26 @@ describe('routeForSlots', () => {
     const route = routeForSlots(stops, legs, new Set(['morning', 'evening']));
     expect(route.ids).toEqual(['a', 'c']);
     expect(route.legs).toEqual([]);
+  });
+});
+
+describe('sectionEntries', () => {
+  it('paints one row per hop, each with its own line color, and leaves an optional stop off the rail', () => {
+    const stops: ItineraryStop[] = [
+      { placeId: 'par-casa-do-gui', slot: 'afternoon' },
+      { placeId: 'par-rue-cler', slot: 'afternoon', optional: true },
+      { placeId: 'par-trocadero', slot: 'afternoon' },
+    ];
+    const resolved = stops.map((stop, index) => ({ ...stop, index }));
+    const entries = sectionEntries(resolved, stops, legsForDay('paris-d1'), new Map());
+    const colors = entries.flatMap((entry) =>
+      entry.kind === 'hop' && entry.part.mode === 'transit' && entry.part.color ? [entry.part.color] : [],
+    );
+    expect(new Set(colors).size).toBeGreaterThan(1);
+    const optional = entries.find((entry) => entry.kind === 'stop' && entry.stop.optional);
+    expect(optional?.kind === 'stop' && optional.railAbove).toBe('none');
+    expect(optional?.kind === 'stop' && optional.railBelow).toBe('none');
+    expect(entries.some((entry) => entry.kind === 'hop' && entry.part.mode === 'walk')).toBe(true);
   });
 });
 
