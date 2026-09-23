@@ -533,9 +533,85 @@ p.tb-budget {
   margin-top: var(--spacing-4);
 }
 
+.tb-list--places .tb-row__time {
+  display: none;
+}
+
+.tb-list--places > .tb-row {
+  content-visibility: auto;
+  contain-intrinsic-size: auto calc(var(--h-lg) + var(--spacing-8));
+}
+
+.tb-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--h-lg);
+  height: var(--h-lg);
+  overflow: hidden;
+  border-radius: var(--r-row-inner);
+  background: var(--color-canvas);
+}
+
+.tb-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tb-list--places .tb-row__title:has(.tb-fav) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.tb-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tb-fav {
+  flex: none;
+  color: var(--color-ink);
+}
+
+.tb-list--places .tb-row__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tb-place-meta,
+.tb-score {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.tb-score .material-symbols-rounded {
+  color: var(--color-mid-gray);
+}
+
+.tb-score .is-fill {
+  color: var(--color-ink);
+}
+
+.tb-row__more {
+  display: none;
+}
+
 @media (hover: none) {
   .tb-chip__only {
     max-width: calc(var(--spacing-24) * 4);
     opacity: 1;
+  }
+
+  .tb-row__more {
+    display: -webkit-box;
   }
 }

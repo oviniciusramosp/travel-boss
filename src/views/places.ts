@@ -20,8 +20,11 @@ import {
   placeCategoriesOffByDefault,
   placeCategoryMeta,
   placeCategoryOrder,
+  subcategoryLabel,
   travelCities,
   travelUi,
+  visitFieldsForDisplay,
+  withResolvedArea,
 } from '../catalog';
 import type {
   ItineraryArrivalOption,
@@ -39,9 +42,10 @@ import {
   type PlaceCoord,
 } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
-import { segmented } from '../ui/controls';
+import { iconLink, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
+import { row } from '../ui/row';
 import {
   closePlace,
   onPlaceClose,
@@ -122,7 +126,54 @@ export function groupsToggleLabel(allOpen: boolean, locale: Locale): string {
   return pickLocale(locale, allOpen ? travelUi.collapseAll : travelUi.expandAll);
 }
 
-function categoryGlyph(category: PlaceCategory, size: 16 | 18 = 16): HTMLElement {
+function placeThumb(place: TravelPlace): HTMLElement {
+  const frame = el('span', 'tb-thumb');
+  const glyph = () => categoryGlyph(place.category, 18);
+  const cover = place.photos?.[0];
+  if (!cover?.url) {
+    frame.append(glyph());
+    return frame;
+  }
+  const img = el('img');
+  img.alt = '';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.src = cover.url;
+  img.addEventListener('error', () => {
+    img.replaceWith(glyph());
+  });
+  frame.append(img);
+  return frame;
+}
+
+function priceText(place: TravelPlace, locale: Locale): string {
+  if (!place.visit) return '';
+  const field = visitFieldsForDisplay(place.visit, locale).find(
+    (item) => item.key === 'avgPrice' || item.key === 'pricePerNight',
+  );
+  return field && field.value !== '—' ? field.value : '';
+}
+
+function scoreNode(place: TravelPlace): HTMLElement {
+  const node = el('span', 'tb-score');
+  const value = place.rating ?? place.googleRating;
+  if (value == null || !Number.isFinite(value)) {
+    node.append(icon('star', { size: 16 }), document.createTextNode('-.-'));
+    return node;
+  }
+  node.append(icon('star', { size: 16, fill: true }), document.createTextNode(formatScore(value)));
+  return node;
+}
+
+function placeMeta(place: TravelPlace, locale: Locale): HTMLElement {
+  const meta = el('span', 'tb-place-meta');
+  meta.append(scoreNode(place));
+  const price = priceText(place, locale);
+  if (price) meta.append(el('span', 'tb-price', price));
+  return meta;
+}
+
+function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLElement {
   const name = categoryMaterialName(category);
   if (!(ICONS as readonly string[]).includes(name)) {
     const dot = el('span', 'tb-cat-dot tb-cat-glyph');
@@ -188,17 +239,6 @@ function copy(locale: Locale) {
     budget: (amount: string) =>
       en ? `Typical total ${amount}` : `Total típico ${amount}`,
   };
-}
-
-function detailLine(place: TravelPlace, locale: Locale): string {
-  const parts = [pickLocale(locale, CATEGORY_LABEL[place.category])];
-  if (place.rating != null && Number.isFinite(place.rating)) {
-    parts.push(formatScore(place.rating));
-  }
-  if (place.googleRating != null && Number.isFinite(place.googleRating)) {
-    parts.push(`Google ${formatScore(place.googleRating)}`);
-  }
-  return parts.join(' · ');
 }
 
 function searchBlob(place: TravelPlace): string {
@@ -367,8 +407,9 @@ export function mountCity(
     };
   }
 
-  const byId = new Map(city.places.map((place) => [place.id, place]));
-  const blob = new Map(city.places.map((place) => [place.id, searchBlob(place)]));
+  const catalogPlaces = city.places.map((place) => withResolvedArea(place));
+  const byId = new Map(catalogPlaces.map((place) => [place.id, place]));
+  const blob = new Map(catalogPlaces.map((place) => [place.id, searchBlob(place)]));
   const itinerary = itineraryForCity(city.slug);
   const hotelPriority = priorityPlaceIds(city);
 
@@ -378,7 +419,7 @@ export function mountCity(
       ? storedCategories.filter(isCategory)
       : placeCategoryOrder.filter((category) => !placeCategoriesOffByDefault.has(category)),
   );
-  const present = categoriesPresent(placeCategoryOrder, city.places);
+  const present = categoriesPresent(placeCategoryOrder, catalogPlaces);
   let groupState = groupOpenState(present, readGroups(city.slug));
   let filterBadge: HTMLElement | null = null;
   let expandBtn: HTMLButtonElement | null = null;
@@ -437,7 +478,7 @@ export function mountCity(
 
   const visiblePlaces = (): TravelPlace[] => {
     const needle = fold(query.trim());
-    return city.places.filter((place) => {
+    return catalogPlaces.filter((place) => {
       if (!enabled.has(place.category)) return false;
       if (!needle) return true;
       return blob.get(place.id)?.includes(needle) ?? false;
@@ -659,24 +700,40 @@ export function mountCity(
         icon('expand_more', { size: 18 }),
       );
       summary.lastElementChild?.classList.add('tb-group__chevron');
-      const list = el('div', 'tb-place-list');
+      const list = el('ul', 'tb-list tb-list--places tb-place-list');
       for (const place of group) {
-        const row = el('div', 'tb-place');
-        row.dataset.placeId = place.id;
-        if (place.id === currentPlaceId) row.setAttribute('aria-current', 'true');
-        const mainBtn = el('button', 'tb-place-main');
-        mainBtn.type = 'button';
-        const name = el('span', 'tb-place-name');
-        if (place.favorite) name.append(el('span', 'tb-badge-soft', '★'));
-        name.append(document.createTextNode(pickLocale(locale, place.name)));
-        mainBtn.append(name, el('span', 'tb-place-line', detailLine(place, locale)));
-        const maps = el('a', 'tb-btn-outline tb-maps', locale === 'pt-BR' ? 'Mapa' : 'Map');
-        maps.href = googleMapsUrl(place, city);
-        maps.target = '_blank';
-        maps.rel = 'noopener';
+        const maps = iconLink({
+          icon: 'location_on',
+          label: pickLocale(locale, travelUi.openInMaps),
+          href: googleMapsUrl(place, city),
+        });
         maps.dataset.maps = 'true';
-        row.append(mainBtn, maps);
-        list.append(row);
+        const subs = (place.subcategories ?? []).map((id) => subcategoryLabel(id, locale)).join(' · ');
+        const item = row({
+          lead: placeThumb(place),
+          title: pickLocale(locale, place.name),
+          sub: subs || undefined,
+          meta: placeMeta(place, locale),
+          actions: maps,
+          current: place.id === currentPlaceId,
+          data: { placeId: place.id },
+          onSelect: () => {
+            setRowCurrent(body, place.id, false);
+            focusPlace(place.id, item.querySelector<HTMLElement>('.tb-row__main'));
+          },
+        });
+        if (place.favorite) {
+          const title = item.querySelector('.tb-row__title');
+          if (title) {
+            const name = el('span', 'tb-name', title.textContent ?? '');
+            const heart = icon('favorite', { fill: true, size: 16 });
+            heart.classList.add('tb-fav');
+            title.replaceChildren(name, heart);
+          }
+        }
+        const blurb = pickLocale(locale, place.description).trim();
+        if (blurb) item.querySelector('.tb-row__main')?.append(el('span', 'tb-row__more', blurb));
+        list.append(item);
       }
       section.append(summary, list);
       body.append(section);
@@ -992,6 +1049,7 @@ export function mountCity(
     }
 
     if (target.closest('[data-maps]')) return;
+    if (target.closest('.tb-row__main')) return;
     const row = target.closest<HTMLElement>('[data-place-id]');
     if (!row?.dataset.placeId) return;
     const id = row.dataset.placeId;
