@@ -1,0 +1,343 @@
+.tb-map-frame {
+  width: 100%;
+  height: 100%;
+}
+
+.tb-nav-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tb-nav.tb-city-nav small {
+  font-size: 12px;
+}
+
+.tb-city-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.tb-city-title {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-title);
+  line-height: var(--leading-title);
+}
+
+.tb-city-tabs {
+  margin-top: 8px;
+}
+
+.tb-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.tb-filters .tb-btn-outline {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.tb-filters .tb-btn-outline[aria-pressed='true'] {
+  background: var(--color-ink);
+  color: #fafafa;
+  border-color: var(--color-ink);
+}
+
+.tb-place-list,
+.tb-stop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tb-place,
+.tb-stop {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-buttons);
+  background: transparent;
+  text-align: left;
+}
+
+.tb-place {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  min-height: 44px;
+  padding: 6px 10px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
+}
+
+.tb-place:hover,
+.tb-stop:hover {
+  background: rgba(10, 10, 10, 0.04);
+}
+
+.tb-place[aria-current='true'],
+.tb-stop[aria-current='true'] {
+  background: var(--color-paper);
+  box-shadow: var(--shadow-subtle);
+}
+
+.tb-place[aria-current='true']:hover,
+.tb-stop[aria-current='true']:hover {
+  background: var(--color-paper);
+}
+
+.tb-place-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.tb-place-name .tb-badge-soft {
+  flex: none;
+}
+
+.tb-place-line {
+  font-size: 12px;
+  line-height: var(--leading-caption);
+  color: var(--color-mid-gray);
+}
+
+.tb-day {
+  margin: 0 0 8px;
+  padding: 12px 0 4px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.tb-day:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.tb-day[aria-current='true'] .tb-day-title button {
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.tb-day-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.tb-day-title button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+}
+
+.tb-day-summary,
+.tb-budget {
+  margin: 0 0 8px;
+}
+
+.tb-day-summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.tb-day .tb-locale {
+  margin: 0 0 8px;
+}
+
+.tb-stop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 4px 8px;
+}
+
+.tb-stop .tb-place-main {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 2px 8px;
+  align-items: start;
+  width: 100%;
+  padding: 4px 0;
+}
+
+.tb-stop-time {
+  font-size: 12px;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-mid-gray);
+}
+
+.tb-stop-name {
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.tb-stop.is-optional .tb-stop-name {
+  color: var(--color-mid-gray);
+  font-weight: var(--font-weight-regular);
+}
+
+.tb-stop-note {
+  display: block;
+  margin-top: 1px;
+  font-size: 12px;
+  line-height: var(--leading-caption);
+  color: var(--color-mid-gray);
+  overflow-wrap: break-word;
+}
+
+.tb-hotels-mount {
+  margin-top: 4px;
+}
+
+.tb-cat-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 4px;
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-caption);
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+}
+
+.tb-place {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.tb-place-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.tb-maps {
+  flex: none;
+  height: 26px;
+  padding: 0 8px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.tb-day > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.tb-day > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tb-place-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(320px, calc(100% - 24px));
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  padding: 12px 16px 16px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-cards);
+  box-shadow: var(--shadow-subtle);
+}
+
+.tb-place-panel[hidden] {
+  display: none;
+}
+
+.tb-place-panel h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+.tb-place-panel__bar,
+.tb-place-panel__photos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tb-place-panel__photo img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-nested);
+  background: var(--color-canvas);
+}
+
+.tb-place-panel__copy {
+  margin: 0;
+  font-size: var(--text-reading);
+  line-height: var(--leading-reading);
+}
+
+.tb-place-panel__facts {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 6px 8px;
+  margin: 0;
+}
+
+.tb-place-panel__facts dt {
+  margin: 0;
+  color: var(--color-mid-gray);
+  font-size: 12px;
+}
+
+.tb-place-panel__facts dd {
+  margin: 0;
+  font-size: 13px;
+}
+
+.tb-place-panel .tb-btn {
+  align-self: flex-start;
+  text-decoration: none;
+}

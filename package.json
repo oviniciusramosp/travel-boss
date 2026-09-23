@@ -1,0 +1,28 @@
+{
+  "name": "travel-boss",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "travel:airbnb:setup": "uv venv --allow-existing node_modules/.cache/airbnb-venv && uv pip install --python node_modules/.cache/airbnb-venv/bin/python -r scripts/airbnb-requirements.txt"
+  },
+  "dependencies": {
+    "@fontsource/geist-sans": "^5.2.5",
+    "@maplibre/maplibre-gl-leaflet": "^0.1.4",
+    "leaflet": "^1.9.4",
+    "maplibre-gl": "^5.24.0"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.21",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  }
+}

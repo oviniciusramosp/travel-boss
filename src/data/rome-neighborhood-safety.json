@@ -1,0 +1,598 @@
+{
+  "reviewedAt": "2026-09-20",
+  "method": "Qualitative editorial review; not crime statistics. Scores 80 (generally favorable guidance) and 70 (mixed context) are our interpretation. Incidents alone never determine a score. Null is excluded from ranking, never converted to zero. Indexed excerpts are identified; no claim of reading blocked full pages.",
+  "sources": {
+    "north": {
+      "title": "Questura: controles em Ponte Milvio e Delle Vittorie (trecho indexado)",
+      "url": "https://questure.poliziadistato.it/it/Roma/articolo/34536a3649e0198ec229437009",
+      "kind": "official",
+      "access": "indexed-excerpt"
+    },
+    "pietralata": {
+      "title": "Guia comercial: segurança em Pietralata",
+      "url": "https://www.all-luxury-apartments.com/blog-article-3892-find-out-more-about-pietralata-in-rome.html",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "pietralataPolice": {
+      "title": "Questura: operação localizada em Pietralata (trecho indexado)",
+      "url": "https://questure.poliziadistato.it/it/Roma/articolo/17336a1fca3575e15716171116",
+      "kind": "official",
+      "access": "indexed-excerpt"
+    },
+    "iv": {
+      "title": "Roma Capitale: bairros do Município IV",
+      "url": "https://www.comune.roma.it/web/it/i-quartieri-di-roma-mun4.page",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "tuscolano": {
+      "title": "Acolyte Living: Tuscolano, 23/05/2026",
+      "url": "https://acolyteliving.com/post/quartiere-viii-tuscolano-rome-s-largest-quartiere",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "latino": {
+      "title": "Idealista: segurança em Appio Latino, 24/10/2024",
+      "url": "https://www.idealista.it/en/news/lifestyle-in-italy/2024/10/24/183774-the-safest-areas-in-rome",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "ostiense": {
+      "title": "BeRoomie: segurança moderada em Ostiense",
+      "url": "https://beroomie.app/neighborhoods/rome/ostiense",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "portuense": {
+      "title": "HousingAnywhere: orientações por bairro, 25/05/2026",
+      "url": "https://housinganywhere.com/Rome--Italy/areas-to-avoid-in-rome",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "sanpaolo": {
+      "title": "San Paolo Charme: guia publicado por hospedagem local",
+      "url": "https://www.sanpaolocharmeapartment.com/en/where-to-stay-first-time-in-rome-for-us-travelers/",
+      "kind": "commercial-guide",
+      "access": "indexed-excerpt"
+    },
+    "navigatori": {
+      "title": "Comitê de bairro relata melhorias na praça",
+      "url": "https://www.ilmarforio.it/piazza-dei-navigatori-sicura-il-cdq-risolto-il-problema-delle-prostitute/",
+      "kind": "local-report",
+      "access": "full-text"
+    },
+    "navigatoriOld": {
+      "title": "Moradores pediram intervenções em 2024",
+      "url": "https://www.romatomorrow.it/2024/09/16/piazza-dei-navigatori-i-residenti-chiedono-interventi-contro-degrado-e-insicurezza/",
+      "kind": "local-report",
+      "access": "indexed-excerpt"
+    },
+    "tormarancia": {
+      "title": "Roma Capitale: transformação urbanística de Tor Marancia",
+      "url": "https://www.comune.roma.it/web/it/notizia.page?contentId=NWS1061501",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "appia": {
+      "title": "Parco Appia Antica: acessos e cuidados no percurso",
+      "url": "https://www.parcoappiaantica.it/faq-2/",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "marconi": {
+      "title": "Corriere: agressões localizadas em Marconi, 05/05/2026",
+      "url": "https://roma.corriere.it/notizie/cronaca/26_maggio_05/roma-marconi-il-picchiatore-del-quartiere-seguito-dai-residenti-tira-un-cacciavite-contro-i-poliziotti-denunciato-be813f34-6752-4935-9c2c-c3e349268xlk.shtml",
+      "kind": "local-report",
+      "access": "indexed-excerpt"
+    },
+    "parks": {
+      "title": "Roma Capitale: gestão dos acessos aos parques até 2027",
+      "url": "https://www.comune.roma.it/web/it/notizia/nuovi-orari-ville-parchi-fino-2027.page",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "vittoria": {
+      "title": "Atriums: guia comercial de Della Vittoria",
+      "url": "https://www.atriumsapartments.com/locations/roma-cola-di-rienzo-e-della-vittoria",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "colosseum": {
+      "title": "Parco del Colosseo: informações para visitantes",
+      "url": "https://colosseo.it/en/visitor-information/",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "foro": {
+      "title": "Turismo Roma: complexo do Foro Italico",
+      "url": "https://www.turismoroma.it/it/node/1717",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "sanlorenzo": {
+      "title": "Questura: controles na vida noturna, 03/09/2026 (trecho indexado)",
+      "url": "https://questure.poliziadistato.it/it/Roma/articolo/20006a9916c10768a463240057",
+      "kind": "official",
+      "access": "indexed-excerpt"
+    },
+    "romeGuide": {
+      "title": "HousingAnywhere: guia dos bairros de Roma",
+      "url": "https://housinganywhere.com/Rome--Italy/rome-neighbourhood-guide",
+      "kind": "commercial-guide",
+      "access": "full-text"
+    },
+    "campus": {
+      "title": "Sapienza: regulamento de acesso à Cidade Universitária",
+      "url": "https://www2.uniroma1.it/amm-cda/intranet/allegato4cda21_02_2023.pdf",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "verano": {
+      "title": "Cimiteri Capitolini: Cemitério Monumental Verano",
+      "url": "https://www.cimitericapitolini.it/cimiteri-di-roma/elenco-cimiteri/8-cimitero-monumentale-verano.html",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "valmelaina": {
+      "title": "Questura: controles em Val Melaina, 08/08/2026 (trecho indexado)",
+      "url": "https://questure.poliziadistato.it/it/Roma/articolo/34536a76df1c9b59d094210195",
+      "kind": "official",
+      "access": "indexed-excerpt"
+    },
+    "conca": {
+      "title": "Conca d’Oro: descrição residencial de incorporadora",
+      "url": "https://www.concadoroliving.com/la-zona/",
+      "kind": "commercial-context",
+      "access": "indexed-excerpt"
+    },
+    "concaTraffic": {
+      "title": "La Quarta: alterações de trânsito e preocupação de pedestres",
+      "url": "https://montesacronews.it/via-conca-doro-il-senso-unico-che-ha-imprigionato-il-quartiere-le-valli/",
+      "kind": "local-report",
+      "access": "indexed-excerpt"
+    },
+    "urbe": {
+      "title": "ENAC: regulamento do Aeroporto Roma Urbe, 2026",
+      "url": "https://www.enac.gov.it/app/uploads/2026/02/RegScalo-ed-2-rev-00.pdf",
+      "kind": "official-context",
+      "access": "indexed-excerpt"
+    },
+    "bertone": {
+      "title": "Gold TV: obras na praça de Casal Bertone, 07/06/2026",
+      "url": "https://goldtv.it/roma/al-via-i-lavori-di-riqualificazione-in-piazza-santa-maria-consolatrice/",
+      "kind": "local-report",
+      "access": "full-text"
+    },
+    "bruciato": {
+      "title": "Corriere: ocorrências localizadas em Casal Bruciato, 30/06/2026",
+      "url": "https://roma.corriere.it/notizie/cronaca/26_giugno_30/roma-paura-a-casal-bruciato-barista-ferito-a-una-gamba-dai-rapinatori-due-bombe-carta-in-un-palazzo-contro-un-pregiudicato-b3327431-a666-4440-8aa1-bf9da5ef3xlk.shtml",
+      "kind": "local-report",
+      "access": "indexed-excerpt"
+    },
+    "pazzi": {
+      "title": "Petição de moradores sobre a estação Ponte Mammolo",
+      "url": "https://www.change.org/p/istituzione-di-un-presidio-fisso-di-pubblica-sicurezza-nella-stazione-ponte-mammolo",
+      "kind": "resident-report",
+      "access": "full-text"
+    },
+    "torpignattara": {
+      "title": "Questura: operação em Torpignattara, 04/03/2026 (trecho indexado)",
+      "url": "https://questure.poliziadistato.it/Roma/articolo/199869a80e9f1a35e780697274",
+      "kind": "official",
+      "access": "indexed-excerpt"
+    },
+    "casilino": {
+      "title": "Casilino 6B: delimitação, não o distrito policial Casilino",
+      "url": "https://it.wikipedia.org/wiki/Casilino",
+      "kind": "geographic-context",
+      "access": "full-text"
+    },
+    "quadraro": {
+      "title": "Ecomuseo Casilino: Quadraro Vecchio",
+      "url": "https://www.ecomuseocasilino.it/site/loc/quadraro-vecchio/",
+      "kind": "local-context",
+      "access": "indexed-excerpt"
+    },
+    "gordiani": {
+      "title": "Repubblica: relato no parque, 16/09/2026",
+      "url": "https://roma.repubblica.it/cronaca/2026/09/16/news/roma_parco_borgata_gordiani_aggredite_calciatrici_uomini_urlavano_avrebbero_sparato-425588301/amp/",
+      "kind": "local-report",
+      "access": "indexed-excerpt"
+    }
+  },
+  "reviews": [
+    {
+      "code": "20A",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Fleming / Tor di Quinto: a polícia relata controles de vida noturna e trânsito no eixo Tor di Quinto–Ponte Milvio. Isso não permite classificar todas as ruas residenciais de Fleming. Conferir o trajeto noturno do hotel e as travessias de Corso Francia; sem nota conclusiva.",
+        "en": "Fleming / Tor di Quinto: police report nightlife and traffic checks along Tor di Quinto–Ponte Milvio, not a safety assessment of every residential street. Check the hotel’s night route and Corso Francia crossings; no conclusive score."
+      },
+      "sourceIds": [
+        "north"
+      ]
+    },
+    {
+      "code": "5C",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Tiburtino Nord: revisado separadamente de Pietralata e Tiburtino Sud. As fontes encontradas não isolam a segurança desta zona 5C; não transferimos ocorrências de bairros vizinhos. Conferir a rua do hotel e o caminho até a estação.",
+        "en": "Tiburtino Nord was reviewed separately from Pietralata and Tiburtino Sud. Sources do not isolate safety in zone 5C; incidents in neighboring areas are not transferred. Check the hotel street and station route."
+      },
+      "sourceIds": [
+        "iv"
+      ]
+    },
+    {
+      "code": "5G",
+      "safety": 70,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Pietralata: guia de hospedagem descreve segurança geralmente aceitável; a Questura registra operação localizada contra drogas em 2026. Interpretação editorial de contexto misto, com confiança limitada. Conferir acesso ao metrô e retorno noturno. Não usamos as alegações de taxa de crimes do guia.",
+        "en": "Pietralata: a lodging guide describes generally acceptable safety; police report a localized drug operation in 2026. Mixed-context editorial interpretation with limited confidence. Check metro access and the night return route. The guide’s crime-rate claims are excluded."
+      },
+      "sourceIds": [
+        "pietralata",
+        "pietralataPolice"
+      ]
+    },
+    {
+      "code": "9A",
+      "safety": 80,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Tuscolano Nord: guia de 2026 descreve Tuscolano como geralmente seguro para famílias, ressaltando variação entre ruas. Nota editorial aplicada à zona, sem estatística própria para esta subdivisão; conferir o trecho entre metrô e hospedagem.",
+        "en": "Tuscolano Nord: a 2026 guide describes Tuscolano as generally safe for families, with variation between streets. Editorial score applied to this zone without separate local statistics; check the metro-to-hotel route."
+      },
+      "sourceIds": [
+        "tuscolano"
+      ]
+    },
+    {
+      "code": "9B",
+      "safety": 80,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Tuscolano Sud: guia de 2026 descreve Tuscolano como geralmente seguro para famílias, ressaltando variação entre ruas. Nota editorial aplicada à zona, sem estatística própria para esta subdivisão; conferir o trecho entre metrô e hospedagem.",
+        "en": "Tuscolano Sud: a 2026 guide describes Tuscolano as generally safe for families, with variation between streets. Editorial score applied to this zone without separate local statistics; check the metro-to-hotel route."
+      },
+      "sourceIds": [
+        "tuscolano"
+      ]
+    },
+    {
+      "code": "9E",
+      "safety": 80,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Latino / Appio Latino: guia imobiliário descreve a área como segura para rotina residencial. Evidência qualitativa comercial, não medição de crimes. Preferir acesso por ruas movimentadas; conferir caminhos junto aos parques depois de escurecer.",
+        "en": "Latino / Appio Latino: a property guide describes a safe residential setting. Commercial qualitative evidence, not crime measurement. Prefer active streets and check routes beside parks after dark."
+      },
+      "sourceIds": [
+        "latino"
+      ]
+    },
+    {
+      "code": "11A",
+      "safety": 70,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Ostiense: guia de bairro classifica a segurança como moderada. Atenção ao entorno da estação e ao retorno após a vida noturna; não estender uma ocorrência a todo o bairro. Nota editorial de contexto misto, com confiança limitada.",
+        "en": "Ostiense: a neighborhood guide rates safety as moderate. Pay attention around the station and when returning from nightlife; do not generalize individual incidents to the entire area. Mixed-context editorial score with limited confidence."
+      },
+      "sourceIds": [
+        "ostiense",
+        "portuense"
+      ]
+    },
+    {
+      "code": "11B",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Valco San Paolo: a avaliação positiva encontrada é publicada por uma hospedagem e se refere ao entorno do metrô San Paolo, não a toda a zona Valco. Evidência insuficiente para uma nota uniforme; conferir iluminação e acesso do endereço específico.",
+        "en": "Valco San Paolo: the positive account is published by a lodging operator and refers to the San Paolo metro area, not all of Valco. Insufficient evidence for a uniform score; check lighting and access at the specific address."
+      },
+      "sourceIds": [
+        "sanpaolo"
+      ]
+    },
+    {
+      "code": "11D",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Navigatori: relatos de moradores de 2024 apontavam problemas na praça; relato posterior do comitê informa melhorias. Não há evidência atual suficiente para confirmar a situação de toda a zona. Conferir o entorno do hotel à noite, sem manter um alerta antigo como fato atual.",
+        "en": "Navigatori: residents reported problems in the square in 2024; a later committee account describes improvements. Current evidence is insufficient for the whole zone. Check the hotel surroundings at night rather than treating an old warning as current fact."
+      },
+      "sourceIds": [
+        "navigatoriOld",
+        "navigatori"
+      ]
+    },
+    {
+      "code": "11E",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Tor Marancia: há documentação de requalificação urbana, mas ela não mede segurança para hóspedes. As notícias da Piazza dei Navigatori não representam toda Tor Marancia. Confirmar a rua e o acesso noturno ao transporte; sem nota conclusiva.",
+        "en": "Tor Marancia: urban renewal is documented but does not measure guest safety. Reports about Piazza dei Navigatori do not represent all of Tor Marancia. Check the street and night access to transport; no conclusive score."
+      },
+      "sourceIds": [
+        "tormarancia",
+        "navigatori"
+      ]
+    },
+    {
+      "code": "11X",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Appia Antica Nord: área extensa de parques e sítios arqueológicos. A orientação oficial destaca acessos, horários e trechos com trânsito. Planejar passeios de dia e não presumir atalhos noturnos abertos. Hospedagem nas bordas exige análise do endereço; sem nota residencial uniforme.",
+        "en": "Appia Antica Nord: a large park and archaeological area. Official advice covers entrances, hours and traffic sections. Plan daylight visits and do not assume nighttime shortcuts are open. Edge accommodation needs address-level assessment; no uniform residential score."
+      },
+      "sourceIds": [
+        "appia"
+      ]
+    },
+    {
+      "code": "15A",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Marconi: a imprensa registrou agressões localizadas em 2026. Elas merecem atenção, mas não sustentam uma taxa de risco para todo Marconi. Conferir o percurso exato entre hotel, transporte e margem do Tibre; avaliação revisada sem nota conclusiva.",
+        "en": "Marconi: press reports describe localized assaults in 2026. These warrant attention but cannot establish an area-wide risk rate. Check the exact hotel, transport and riverfront route; reviewed without a conclusive score."
+      },
+      "sourceIds": [
+        "marconi"
+      ]
+    },
+    {
+      "code": "15B",
+      "safety": 80,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Portuense: guia de segurança sugere o trecho mais próximo do centro como alternativa mais tranquila. A nota é uma inferência editorial limitada à zona 15B; não inclui Corviale nem todo o eixo da Via Portuense. Conferir o caminho noturno da hospedagem.",
+        "en": "Portuense: a safety guide suggests the inner-city section as a calmer alternative. The score is a limited editorial inference for zone 15B, excluding Corviale and the wider Via Portuense corridor. Check the hotel’s night route."
+      },
+      "sourceIds": [
+        "portuense"
+      ]
+    },
+    {
+      "code": "16X",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Villa Pamphili: parque com acessos administrados e horários próprios. Não é comparável a um bairro residencial; conferir abertura dos portões e evitar depender de travessias pelo parque no retorno noturno. A área verde não comprova segurança das ruas do entorno.",
+        "en": "Villa Pamphili: a park with managed entrances and opening hours, not comparable to a residential district. Check gates and do not depend on crossing the park at night. Green space does not establish safety on adjacent streets."
+      },
+      "sourceIds": [
+        "parks"
+      ]
+    },
+    {
+      "code": "17B",
+      "safety": 80,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "Della Vittoria: guia de hospedagem descreve um contexto residencial seguro e tranquilo. Fonte comercial, confiança limitada; controles policiais no eixo Delle Vittorie–Ponte Milvio lembram que eventos e vida noturna mudam o movimento. Conferir a rua do hotel.",
+        "en": "Della Vittoria: a lodging guide describes a safe, quiet residential setting. Commercial source with limited confidence; police checks along Delle Vittorie–Ponte Milvio highlight changing event and nightlife conditions. Check the hotel street."
+      },
+      "sourceIds": [
+        "vittoria",
+        "north"
+      ]
+    },
+    {
+      "code": "1X",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Zona Archeologica: sítios com regras e acessos de visitação, não uma zona residencial homogênea. Conferir horários e saídas; manter cuidado com pertences nas concentrações turísticas. A segurança dentro dos monumentos não representa o trajeto ao hotel.",
+        "en": "Zona Archeologica: visitor sites with access rules, not a uniform residential area. Check hours and exits; take care of belongings in tourist crowds. Security inside monuments does not represent the hotel route."
+      },
+      "sourceIds": [
+        "colosseum"
+      ]
+    },
+    {
+      "code": "20X",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Foro Italico: complexo esportivo, com uso muito diferente em dias de eventos. Planejar entrada, saída e transporte de retorno; a descrição oficial não permite uma nota de segurança residencial para todo o polígono.",
+        "en": "Foro Italico: a sports complex whose use changes on event days. Plan entrances, exits and return transport; official context does not support a residential safety score across the polygon."
+      },
+      "sourceIds": [
+        "foro"
+      ]
+    },
+    {
+      "code": "2X",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Villa Borghese: parque com acessos e horários próprios. Planejar passeios diurnos e confirmar portões; não contar com a travessia interna como retorno noturno ao hotel. Revisado como área verde, sem inferir segurança dos imóveis nas bordas.",
+        "en": "Villa Borghese: a park with its own entrances and hours. Plan daylight visits and check gates; do not rely on crossing it to return to a hotel at night. Reviewed as parkland without inferring safety for properties on its edges."
+      },
+      "sourceIds": [
+        "parks"
+      ]
+    },
+    {
+      "code": "2Y",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Villa Ada: parque com acessos e horários próprios. Planejar passeios diurnos e confirmar portões; não contar com a travessia interna como retorno noturno ao hotel. Revisado como área verde, sem inferir segurança dos imóveis nas bordas.",
+        "en": "Villa Ada: a park with its own entrances and hours. Plan daylight visits and check gates; do not rely on crossing it to return to a hotel at night. Reviewed as parkland without inferring safety for properties on its edges."
+      },
+      "sourceIds": [
+        "parks"
+      ]
+    },
+    {
+      "code": "3B",
+      "safety": 70,
+      "status": "editorial",
+      "note": {
+        "pt-BR": "San Lorenzo: contexto de vida noturna, com controles policiais em setembro de 2026 no eixo via dei Marsi–Piazza dell’Immacolata. Nota editorial de atenção ao retorno noturno e aos pertences; ocorrências localizadas não tornam todo o bairro perigoso.",
+        "en": "San Lorenzo: a nightlife area with police checks in September 2026 around via dei Marsi–Piazza dell’Immacolata. Editorial caution for nighttime returns and belongings; localized incidents do not make the entire neighborhood dangerous."
+      },
+      "sourceIds": [
+        "sanlorenzo",
+        "romeGuide"
+      ]
+    },
+    {
+      "code": "3X",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Università: zona que inclui a Cidade Universitária da Sapienza. Acesso institucional e movimentação acadêmica não equivalem à segurança das ruas ao redor. Conferir portões, horários e trajeto externo até a hospedagem; sem nota residencial uniforme.",
+        "en": "Università includes Sapienza’s university campus. Institutional access and academic activity do not establish safety on surrounding streets. Check gates, hours and the external hotel route; no uniform residential score."
+      },
+      "sourceIds": [
+        "campus"
+      ]
+    },
+    {
+      "code": "3Y",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Verano: zona dominada pelo cemitério monumental, com visitação e acessos regulados. Não usar o interior como passagem noturna; hospedagens próximas precisam de avaliação da rua de entrada. Não há nota residencial comparável para o polígono.",
+        "en": "Verano is dominated by the monumental cemetery with regulated visiting access. Do not use the grounds as a nighttime through-route; nearby hotels need entry-street assessment. No comparable residential score for the polygon."
+      },
+      "sourceIds": [
+        "verano"
+      ]
+    },
+    {
+      "code": "4B",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Val Melaina: a Questura realizou controles direcionados em agosto de 2026. O comunicado documenta uma operação, não risco por hóspede nem todas as ruas da zona. Conferir acesso noturno à hospedagem; sem transformar presença policial em nota automática.",
+        "en": "Val Melaina: police conducted targeted checks in August 2026. The report documents an operation, not per-guest risk or conditions on every street. Check nighttime hotel access; police activity does not automatically determine a score."
+      },
+      "sourceIds": [
+        "valmelaina"
+      ]
+    },
+    {
+      "code": "4G",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Conca d’Oro: descrições comerciais apontam tranquilidade residencial, enquanto relatos locais discutem trânsito e travessias. Isso não constitui avaliação independente de criminalidade. Conferir o percurso até o metrô e iluminação; sem nota conclusiva.",
+        "en": "Conca d’Oro: commercial descriptions suggest residential calm, while local accounts discuss traffic and crossings. This is not an independent crime assessment. Check the metro route and lighting; no conclusive score."
+      },
+      "sourceIds": [
+        "conca",
+        "concaTraffic"
+      ]
+    },
+    {
+      "code": "4L",
+      "safety": null,
+      "status": "special-use",
+      "note": {
+        "pt-BR": "Aeroporto dell’Urbe: zona de infraestrutura aeroportuária com acessos regulados. Segurança operacional não é segurança de hospedagem. Confirmar endereço e acesso externo de qualquer resultado de hotel; sem atribuir nota de bairro ao aeroporto.",
+        "en": "Aeroporto dell’Urbe: airport infrastructure with regulated access. Operational security is not hotel-neighborhood safety. Verify the address and external access of any hotel result; no neighborhood score is assigned to the airport."
+      },
+      "sourceIds": [
+        "urbe"
+      ]
+    },
+    {
+      "code": "5A",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Casal Bertone: intervenções de 2026 na praça tratam de pavimentação e uso do espaço público. “Messa in sicurezza” dessas obras não comprova redução de criminalidade. Conferir acesso ao hotel e travessias; fontes insuficientes para nota do bairro.",
+        "en": "Casal Bertone: 2026 square works concern paving and public-space access. Construction safety improvements do not establish reduced crime. Check hotel access and crossings; insufficient evidence for a neighborhood score."
+      },
+      "sourceIds": [
+        "bertone"
+      ]
+    },
+    {
+      "code": "5B",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Casal Bruciato: imprensa relata roubo e outros episódios localizados em junho de 2026. Registrar atenção às ruas citadas e conferir o acesso noturno, sem generalizar eventos pontuais a todo o bairro. Não há série comparável que sustente uma nota.",
+        "en": "Casal Bruciato: press reports describe a robbery and other localized incidents in June 2026. Note the affected streets and check nighttime access without generalizing isolated events to the whole area. No comparable series supports a score."
+      },
+      "sourceIds": [
+        "bruciato"
+      ]
+    },
+    {
+      "code": "5H",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Casal de’ Pazzi: petição de moradores pede reforço de segurança na estação Ponte Mammolo. É percepção local sobre um nó de transporte, não taxa de crimes nem avaliação de toda a zona. Conferir se o trajeto do hotel passa pela estação; sem nota conclusiva.",
+        "en": "Casal de’ Pazzi: a residents’ petition requests stronger security at Ponte Mammolo station. This is local perception about a transport hub, not crime rates or an assessment of the entire zone. Check whether the hotel route uses the station; no conclusive score."
+      },
+      "sourceIds": [
+        "pazzi",
+        "iv"
+      ]
+    },
+    {
+      "code": "6A",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Torpignattara: há registro policial de operação contra drogas em março de 2026. Um episódio não mede a segurança de todo o bairro. Conferir rua e trajeto noturno da hospedagem; perfil social e diversidade dos moradores não são critérios de risco.",
+        "en": "Torpignattara: police report a drug operation in March 2026. One incident cannot measure safety across the neighborhood. Check the hotel street and night route; residents’ social background and diversity are not risk criteria."
+      },
+      "sourceIds": [
+        "torpignattara"
+      ]
+    },
+    {
+      "code": "6B",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Casilino 6B / Villa De Sanctis: não confundir esta zona com o distrito policial Casilino ou com Tor Bella Monaca. As fontes delimitam a área, mas não sustentam uma nota atual de segurança. Conferir rua, iluminação e retorno ao hotel.",
+        "en": "Casilino 6B / Villa De Sanctis must not be confused with the Casilino police district or Tor Bella Monaca. Sources establish its boundaries but not a current safety score. Check the street, lighting and hotel return route."
+      },
+      "sourceIds": [
+        "casilino"
+      ]
+    },
+    {
+      "code": "6C",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Quadraro: documentação local descreve o bairro e seu patrimônio; relatos pontuais de hóspedes não bastam para classificar toda a zona. Confirmar a microárea e o trajeto a pé até o metrô, especialmente à noite. Revisado, sem nota conclusiva.",
+        "en": "Quadraro: local documentation describes the neighborhood and its heritage; isolated guest accounts cannot classify the whole zone. Verify the microarea and walking route to the metro, especially at night. Reviewed without a conclusive score."
+      },
+      "sourceIds": [
+        "quadraro"
+      ]
+    },
+    {
+      "code": "6D",
+      "safety": null,
+      "status": "insufficient-evidence",
+      "note": {
+        "pt-BR": "Gordiani: reportagem de 16/09/2026 relata ameaças a uma equipe no parque de Borgata Gordiani. É alerta localizado e recente, não prova de risco uniforme na zona 6D. Confirmar qual parque e trajeto o hotel utiliza; não extrapolar a ocorrência para todas as ruas.",
+        "en": "Gordiani: a 16 September 2026 report describes threats to a team in Borgata Gordiani park. This is a recent localized warning, not evidence of uniform risk across zone 6D. Verify the specific park and hotel route; do not extrapolate to every street."
+      },
+      "sourceIds": [
+        "gordiani"
+      ]
+    }
+  ]
+}
