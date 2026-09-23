@@ -6,6 +6,7 @@ import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
 import { scoreCard } from './hotel-rank';
+import { hotelPhotoUrls, mountHotelSlider } from './hotel-slider';
 
 type Locale = 'en' | 'pt-BR';
 type Localized = { en: string; 'pt-BR': string };
@@ -841,6 +842,14 @@ export function mountHotels(
     article.dataset.placeId = hotel.id;
     article.tabIndex = 0;
     const isAirbnb = hotel.source === 'airbnb';
+    const media = el('div', 'tb-hotels__media tb-slider is-instant');
+    mountHotelSlider(
+      media,
+      hotelPhotoUrls(hotel.booking),
+      hotel.name,
+      locale(),
+      placeCategoryMeta.lodging.color,
+    );
     const head = el('div', 'tb-hotels__head');
     const title = el('div', 'tb-hotels__title');
     title.append(el('h3', 'tb-hotels__name', hotel.name), el('span', 'tb-badge', typeLabel(hotel)));
@@ -874,7 +883,7 @@ export function mountHotels(
     const body = el('div', 'tb-hotels__body');
     body.append(head, facts);
     if (hotel.booking.address) body.append(el('p', 'tb-meta', hotel.booking.address));
-    article.append(body);
+    article.append(media, body);
 
     const ranked = scoreCard(locale(), hotel);
     if (ranked) {

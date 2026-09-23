@@ -163,6 +163,28 @@
   outline-offset: -2px;
 }
 
+.tb-hotels__media {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: var(--r-card) var(--r-card) var(--r-none) var(--r-none);
+  background: var(--color-canvas);
+}
+
+.tb-hotels__media .tb-slider__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-canvas);
+}
+
+.tb-hotels__media.is-empty .tb-slider__img,
+.tb-hotels__media:not(.is-empty) .tb-slider__fallback {
+  display: none;
+}
+
 .tb-hotels__body {
   display: flex;
   flex-direction: column;
