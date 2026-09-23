@@ -62,8 +62,23 @@
   cursor: pointer;
 }
 
-.tb-span__city + .tb-span__city {
+.tb-span__city + .tb-span__city,
+.tb-span__via + .tb-span__city {
   border-left: 1px solid var(--color-hairline);
+}
+
+.tb-span__via {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--h-lg);
+  color: var(--color-mid-gray);
+  background: var(--color-canvas);
+}
+
+.tb-city-via {
+  margin: var(--spacing-8) 0 0;
 }
 
 .tb-span__name,

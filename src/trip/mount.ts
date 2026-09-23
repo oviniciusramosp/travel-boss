@@ -32,7 +32,7 @@ import {
 } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconButton, iconLink, segmented } from '../ui/controls';
-import { icon } from '../ui/icons';
+import { icon, type IconName } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
 import {
@@ -43,11 +43,18 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from '../views/place-panel';
-import { parseTrip, type Trip, type TripLeg } from './parse';
+import { parseTrip, type Trip, type TripLeg, type TripLegMode } from './parse';
 import { cityBands, formatTripSummary } from './summary';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
+
+const VIA_ICON: Record<TripLegMode, IconName> = {
+  walk: 'directions_walk',
+  transit: 'directions_transit',
+  taxi: 'local_taxi',
+  flight: 'flight',
+};
 
 const tripFileListeners = new Set<(event: TripPush) => void>();
 let tripHotBound = false;
@@ -135,7 +142,7 @@ function appendCityBar(
     'aria-label',
     pickLocale(locale, { en: 'Nights by city', 'pt-BR': 'Noites por cidade' }),
   );
-  for (const band of bands) {
+  bands.forEach((band, index) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'tb-span__city';
@@ -161,7 +168,14 @@ function appendCityBar(
     button.addEventListener('blur', () => hot(false));
     button.addEventListener('click', () => onPick(band.key));
     bar.append(button);
-  }
+    if (!band.via || index === bands.length - 1) return;
+    const connector = document.createElement('span');
+    connector.className = 'tb-span__via';
+    connector.setAttribute('aria-hidden', 'true');
+    connector.setAttribute('data-tip', band.via);
+    connector.append(icon(band.viaMode ? VIA_ICON[band.viaMode] : 'route', { size: 16 }));
+    bar.append(connector);
+  });
   article.append(bar);
 }
 
@@ -987,6 +1001,12 @@ export function mountTrip(
         dates.className = 'tb-meta';
         dates.textContent = `${city.dates.start} → ${city.dates.end}`;
         section.append(dates);
+      }
+      if (city.leg) {
+        const via = document.createElement('ul');
+        via.className = 'tb-list tb-list--stops tb-city-via';
+        via.append(transferRow(city.leg, locale));
+        section.append(via);
       }
       const record = getTravelCity(city.slug);
       city.days.forEach((day, dayIndex) => {

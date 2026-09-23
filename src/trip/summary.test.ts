@@ -82,5 +82,29 @@ describe('cityBands', () => {
     expect(bands.map((band) => band.grow)).toEqual([4, 1]);
     expect(bands[1]?.dates).toBeNull();
     expect(bands[1]?.tip).toBe('Roma');
+    expect(bands[0]?.via).toBeNull();
+  });
+
+  it('adds the departure via to the city you leave', () => {
+    const trip = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      `# Europa
+
+## Paris
+city: paris
+dates: 2026-04-02 → 2026-04-06
+via: trem Frecciarossa · 3h10
+
+## Milão
+city: milao
+dates: 2026-04-06 → 2026-04-09
+`,
+    );
+    const [paris, milan] = cityBands(trip, 'pt-BR');
+    expect(paris?.via).toBe('trem Frecciarossa · 3h10');
+    expect(paris?.viaMode).toBe('transit');
+    expect(paris?.tip).toBe('Paris · 2–6 abr · 4 noites · trem Frecciarossa · 3h10');
+    expect(milan?.via).toBeNull();
   });
 });
