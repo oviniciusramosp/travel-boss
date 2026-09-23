@@ -13,6 +13,7 @@ import {
   type Map as LeafletMap,
   type Marker,
 } from 'leaflet';
+import { cameraMotion, labelFadeDuration, prefersReducedMotion } from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
 import type { MapHandle, MapPinKind, MapRadius, MapRouteSegment } from './types';
 
@@ -45,22 +46,41 @@ export function mountMap(host: HTMLElement): MapHandle {
   frame.className = 'tb-map-frame';
   host.replaceChildren(frame);
 
+  const reducedAtStart = prefersReducedMotion();
   const leafletMap: LeafletMap = createMap(frame, {
     preferCanvas: true,
     zoomControl: true,
     scrollWheelZoom: true,
+    zoomAnimation: !reducedAtStart,
+    fadeAnimation: !reducedAtStart,
+    markerZoomAnimation: !reducedAtStart,
   });
 
   const basemap = maplibreGL({
     style: 'https://tiles.openfreemap.org/styles/bright',
     interactive: false,
     pane: 'tilePane',
+    fadeDuration: labelFadeDuration(reducedAtStart),
   } as Parameters<typeof maplibreGL>[0]).addTo(leafletMap);
 
   leafletMap.setView([50, 10], 4);
   // Leaflet runs the GL layer's onAdd on the first view, not on addTo.
   const glMap = basemap.getMaplibreMap();
-  if (glMap) bindBrightBasemap(glMap);
+  if (glMap) {
+    glMap._fadeDuration = labelFadeDuration(reducedAtStart);
+    bindBrightBasemap(glMap);
+  }
+
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncMotion = () => {
+    const reduced = motionQuery.matches;
+    leafletMap.options.zoomAnimation = !reduced;
+    leafletMap.options.fadeAnimation = !reduced;
+    leafletMap.options.markerZoomAnimation = !reduced;
+    const gl = basemap.getMaplibreMap();
+    if (gl) gl._fadeDuration = labelFadeDuration(reduced);
+  };
+  motionQuery.addEventListener('change', syncMotion);
 
   const resize = new ResizeObserver(() => {
     leafletMap.invalidateSize(false);
@@ -154,13 +174,17 @@ export function mountMap(host: HTMLElement): MapHandle {
       group.addTo(leafletMap);
       routeLayer = group;
       if (opts?.fit && points.length > 1) {
-        leafletMap.fitBounds(latLngBounds(points), { padding: [40, 40], maxZoom: 16 });
+        leafletMap.fitBounds(latLngBounds(points), {
+          padding: [40, 40],
+          maxZoom: 16,
+          ...cameraMotion(),
+        });
       }
     },
 
     flyTo(lat, lng, zoom = 16) {
       const target = Math.max(leafletMap.getZoom(), zoom);
-      leafletMap.setView([lat, lng], target, { animate: false });
+      leafletMap.setView([lat, lng], target, cameraMotion());
       applyZoom();
     },
 
@@ -189,6 +213,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       leafletMap.fitBounds(latLngBounds(points), {
         padding: [32, 32],
         maxZoom: 16,
+        ...cameraMotion(),
       });
     },
 
@@ -203,7 +228,7 @@ export function mountMap(host: HTMLElement): MapHandle {
         }
       }
       if (target) {
-        leafletMap.panTo(target.getLatLng(), { animate: true, duration: 0.25 });
+        leafletMap.panTo(target.getLatLng(), cameraMotion());
       }
     },
 

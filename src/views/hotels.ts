@@ -2,6 +2,7 @@ import type { Shell } from '../app/shell';
 import { placeCategoryMeta } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
+import { prefersReducedMotion } from '../ui/motion';
 
 type Locale = 'en' | 'pt-BR';
 type Localized = { en: string; 'pt-BR': string };
@@ -583,8 +584,10 @@ export function mountHotels(
     if (!scroll || !target) return;
     const card: HTMLElement = target;
     if (card.hidden) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    card.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    card.scrollIntoView({
+      block: 'nearest',
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+    });
   };
 
   const requirementOrder = (hotel: Hotel) => {
