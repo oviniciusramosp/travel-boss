@@ -1,6 +1,7 @@
 import type { Shell } from '../app/shell';
 import { readArrival, readCategoryFilter, writeArrival, writeCategoryFilter } from '../app/store';
 import {
+  categoryMaterialName,
   computeDayBudget,
   dayPrimaryRoutePlaceIds,
   favoritePlaces,
@@ -33,6 +34,7 @@ import {
 import type { MapHandle, MapPin } from '../map/types';
 import { segmented } from '../ui/controls';
 import { el } from '../ui/dom';
+import { icon, ICONS, type IconName } from '../ui/icons';
 import {
   closePlace,
   onPlaceClose,
@@ -63,6 +65,53 @@ function fold(value: string): string {
 
 function isCategory(value: string): value is PlaceCategory {
   return (placeCategoryOrder as readonly string[]).includes(value);
+}
+
+/** Categories that exist in this city, in catalog order. Empty ones stay hidden. */
+export function categoriesPresent(
+  order: readonly PlaceCategory[],
+  places: readonly { category: PlaceCategory }[],
+): PlaceCategory[] {
+  const present = new Set(places.map((place) => place.category));
+  return order.filter((category) => present.has(category));
+}
+
+/** True when the enabled set is still the catalog default (commons and markets off). */
+export function isDefaultCategoryFilter(
+  enabled: Iterable<string>,
+  order: readonly PlaceCategory[],
+  offByDefault: ReadonlySet<PlaceCategory>,
+): boolean {
+  const on = new Set(enabled);
+  const expected = order.filter((category) => !offByDefault.has(category));
+  if (on.size !== expected.length) return false;
+  return expected.every((category) => on.has(category));
+}
+
+/** Toggle one category, or replace the set with just that one (⌥ / "só esta"). */
+export function applyCategoryClick(
+  enabled: Iterable<PlaceCategory>,
+  category: PlaceCategory,
+  only: boolean,
+): PlaceCategory[] {
+  if (only) return [category];
+  const next = new Set(enabled);
+  if (next.has(category)) next.delete(category);
+  else next.add(category);
+  return [...next];
+}
+
+function categoryGlyph(category: PlaceCategory, size: 16 | 18 = 16): HTMLElement {
+  const name = categoryMaterialName(category);
+  if (!(ICONS as readonly string[]).includes(name)) {
+    const dot = el('span', 'tb-cat-dot tb-cat-glyph');
+    dot.style.background = placeCategoryMeta[category].color;
+    return dot;
+  }
+  const node = icon(name as IconName, { size });
+  node.classList.add('tb-cat-glyph');
+  node.style.color = placeCategoryMeta[category].color;
+  return node;
 }
 
 function formatScore(value: number): string {
@@ -308,6 +357,8 @@ export function mountCity(
       ? storedCategories.filter(isCategory)
       : placeCategoryOrder.filter((category) => !placeCategoriesOffByDefault.has(category)),
   );
+  const present = categoriesPresent(placeCategoryOrder, city.places);
+  let filterBadge: HTMLElement | null = null;
   const arrivalByDay = new Map<string, string>();
   if (itinerary) {
     for (const day of itinerary.days) {
@@ -510,12 +561,29 @@ export function mountCity(
     map.highlight(null);
   };
 
-  const syncCategoryPressed = () => {
-    body.querySelectorAll<HTMLButtonElement>('[data-category]').forEach((button) => {
+  const syncFilters = () => {
+    body.querySelectorAll<HTMLButtonElement>('button[data-category]').forEach((button) => {
       const category = button.dataset.category;
       if (!category || !isCategory(category)) return;
       button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
     });
+    if (!filterBadge) return;
+    const custom = !isDefaultCategoryFilter(enabled, placeCategoryOrder, placeCategoriesOffByDefault);
+    filterBadge.hidden = !custom;
+    if (!custom) {
+      filterBadge.textContent = '';
+      filterBadge.removeAttribute('aria-label');
+      return;
+    }
+    const count = enabled.size;
+    filterBadge.textContent = String(count);
+    filterBadge.setAttribute(
+      'aria-label',
+      pickLocale(shell.locale(), {
+        en: count === 1 ? '1 category on' : `${count} categories on`,
+        'pt-BR': count === 1 ? '1 categoria ativa' : `${count} categorias ativas`,
+      }),
+    );
   };
 
   const appendPlaceGroups = () => {
@@ -526,13 +594,14 @@ export function mountCity(
       body.append(emptyState(text.emptyPlacesTitle, text.emptyPlaces));
       return;
     }
-    for (const category of placeCategoryOrder) {
+    for (const category of present) {
       const group = places.filter((place) => place.category === category);
       if (!group.length) continue;
       const heading = el('h2', 'tb-cat-head');
-      const dot = el('span', 'tb-cat-dot');
-      dot.style.background = placeCategoryMeta[category].color;
-      heading.append(dot, document.createTextNode(pickLocale(locale, CATEGORY_LABEL[category])));
+      heading.append(
+        categoryGlyph(category),
+        document.createTextNode(pickLocale(locale, CATEGORY_LABEL[category])),
+      );
       body.append(heading);
       const list = el('div', 'tb-place-list');
       for (const place of group) {
@@ -558,7 +627,7 @@ export function mountCity(
   };
 
   const renderPlaceResults = () => {
-    body.querySelectorAll('.tb-cat-head, .tb-place-list, .tb-empty').forEach((node) => node.remove());
+    body.querySelectorAll('.tb-group, .tb-cat-head, .tb-place-list, .tb-empty').forEach((node) => node.remove());
     appendPlaceGroups();
     keepOrigin();
   };
@@ -567,20 +636,36 @@ export function mountCity(
     const locale = shell.locale();
     const text = copy(locale);
     body.replaceChildren();
-    const filters = el('div', 'tb-filters');
+    const tools = el('div', 'tb-place-tools');
+    const filters = el('div', 'tb-filters tb-place-filters');
     filters.setAttribute('role', 'group');
     filters.setAttribute('aria-label', text.categories);
-    for (const category of placeCategoryOrder) {
-      const button = el('button', 'tb-btn-outline');
+    for (const category of present) {
+      const button = el('button', 'tb-chip');
       button.type = 'button';
       button.dataset.category = category;
-      const dot = el('span', 'tb-cat-dot');
-      dot.style.background = placeCategoryMeta[category].color;
-      button.append(dot, document.createTextNode(pickLocale(locale, CATEGORY_LABEL[category])));
+      const only = el(
+        'span',
+        'tb-chip__only',
+        pickLocale(locale, { en: 'only this', 'pt-BR': 'só esta' }),
+      );
+      only.dataset.only = 'true';
+      only.setAttribute('aria-hidden', 'true');
+      button.append(
+        categoryGlyph(category),
+        el('span', 'tb-chip__label', pickLocale(locale, CATEGORY_LABEL[category])),
+        only,
+      );
       button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
       filters.append(button);
     }
-    body.append(filters);
+    const badge = el('span', 'tb-filter-badge');
+    badge.hidden = true;
+    filterBadge = badge;
+    filters.append(badge);
+    tools.append(filters);
+    body.append(tools);
+    syncFilters();
     appendPlaceGroups();
   };
 
@@ -800,16 +885,18 @@ export function mountCity(
     if (!(target instanceof Element)) return;
     if (target.closest('.tb-hotels-mount')) return;
 
-    const categoryBtn = target.closest<HTMLButtonElement>('[data-category]');
+    const categoryBtn = target.closest<HTMLButtonElement>('button[data-category]');
     if (categoryBtn?.dataset.category && isCategory(categoryBtn.dataset.category)) {
       const category = categoryBtn.dataset.category;
-      if (enabled.has(category)) enabled.delete(category);
-      else enabled.add(category);
+      const only = event.altKey || Boolean(target.closest('[data-only]'));
+      const next = applyCategoryClick(enabled, category, only);
+      enabled.clear();
+      for (const id of next) enabled.add(id);
       writeCategoryFilter([...enabled]);
       if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
         closePlace({ focus: false });
       }
-      syncCategoryPressed();
+      syncFilters();
       paintChrome();
       renderPlaceResults();
       showPlacePins({ fit: true, pan: false });
@@ -876,7 +963,7 @@ export function mountCity(
       closePlace({ focus: false });
     }
     paintChrome();
-    renderPlaces();
+    renderPlaceResults();
     showPlacePins({ fit: false, pan: false });
     window.clearTimeout(searchFitTimer);
     searchFitTimer = window.setTimeout(() => {

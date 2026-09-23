@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import type { ItineraryDay, ItineraryStop } from '../catalog';
-import { primaryDayRoute, searchLeavesView } from './places';
+import type { ItineraryDay, ItineraryStop, PlaceCategory } from '../catalog';
+import { placeCategoriesOffByDefault, placeCategoryOrder } from '../catalog';
+import {
+  applyCategoryClick,
+  categoriesPresent,
+  isDefaultCategoryFilter,
+  primaryDayRoute,
+  searchLeavesView,
+} from './places';
 
 const day: ItineraryDay = {
   id: 'd',
@@ -33,6 +40,30 @@ describe('searchLeavesView', () => {
       ),
     ).toBe(true);
   });
+});
+
+describe('category groups', () => {
+  const order = ['parks', 'cafes', 'commons'] as PlaceCategory[];
+
+  it('drops categories the city does not have, and keeps catalog order', () => {
+    expect(categoriesPresent(order, [{ category: 'commons' }, { category: 'parks' }])).toEqual([
+      'parks',
+      'commons',
+    ]);
+  });
+
+  it('treats the catalog default as no badge, and any other set as custom', () => {
+    const enabled = placeCategoryOrder.filter((category) => !placeCategoriesOffByDefault.has(category));
+    expect(isDefaultCategoryFilter(enabled, placeCategoryOrder, placeCategoriesOffByDefault)).toBe(true);
+    expect(isDefaultCategoryFilter(['parks'], placeCategoryOrder, placeCategoriesOffByDefault)).toBe(false);
+  });
+
+  it('toggles one category and isolates on only-this', () => {
+    expect(applyCategoryClick(['parks', 'cafes'], 'cafes', false)).toEqual(['parks']);
+    expect(applyCategoryClick(['parks'], 'cafes', false)).toEqual(['parks', 'cafes']);
+    expect(applyCategoryClick(['parks', 'cafes'], 'commons', true)).toEqual(['commons']);
+  });
+
 });
 
 describe('primaryDayRoute', () => {
