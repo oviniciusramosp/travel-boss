@@ -10,6 +10,9 @@ npm test                     # vitest run
 npx tsc --noEmit
 npm run build                # tsc --noEmit && vite build
 npm run travel:airbnb:setup  # venv em node_modules/.cache/airbnb-venv
+npm run travel:notion:push -- <placeId>   # ver seção Notion; precisa de .env
+npm run travel:areas             # Overpass → src/data/travel-polygons-raw.json
+npm run travel:photos:check
 ```
 
 `graphify-out/graph.json` existe. Consulte o grafo antes de ler arquivo:
@@ -69,14 +72,12 @@ Edite o `.md`. Com `npm run dev`, o save avisa o browser (`tb:trip`) e o roteiro
 
 ## Travel places ↔ Notion (obrigatório)
 
-Regras completas: [docs/travel-notion-sync.md](docs/travel-notion-sync.md).
-
-Os scripts `travel:notion:*` **não** estão no `package.json` deste repo. Entram na Fase 12, com esse doc. Até lá, o contrato é o do portfólio (`/Users/viniciusramos/Documents/Apps/side-projects/web/vinicius-ramos-portfolio`): rode os comandos lá. Não invente push a partir daqui. Este app não é Astro; `resolvePlacePhotos` chega pela UI via `src/catalog`, não por página.
+Regras completas: [docs/travel-notion-sync.md](docs/travel-notion-sync.md). Os scripts `travel:notion:*` estão neste repo. O token fica em `.env` (nomes em `.env.example`); não commite valor. Este app não é Astro; `resolvePlacePhotos` chega pela UI via `src/catalog`, não por página. O push lê `src/data/travel.ts` (`localTravelCities`), não o reexport do catálogo.
 
 **Sempre que adicionar ou atualizar lugares (texto, coords, capas, fotos, avaliações):**
 
-1. Edite as fontes locais (`src/data/travel.ts` / `localTravelCities`, `travel-photos.ts`, visit, subcategorias). Neste repo, `src/data/*` só se a tarefa pedir.
-2. **Empurre na hora para o Notion**, para o CMS e o app não divergirem. No portfólio, até a Fase 12:
+1. Edite as fontes locais (`src/data/travel.ts` / `localTravelCities`, `travel-photos.ts`, visit, subcategorias). `src/data/*` só se a tarefa pedir.
+2. **Empurre na hora para o Notion**, para o CMS e o app não divergirem:
 
 ```bash
 npm run travel:notion:push -- <placeId> [moreIds...]
@@ -91,5 +92,5 @@ npm run travel:notion:push -- <placeId> [moreIds...]
 - `seed-photos` faz merge; **não** substitui multi-capas do Notion por uma lista local mais curta.
 - Em runtime, `resolvePlacePhotos` também une registro + Notion, para as capas não sumirem na UI.
 
-**Comandos seguros** (portfólio agora; este repo na Fase 12): `pull`, `sync` (só pull), `push`, `seed-photos` em modo merge.
+**Comandos seguros:** `pull`, `sync` (só pull), `push`, `seed-photos` em modo merge.
 **Evitar:** seed de um dump **velho** que sobrescreva o editorial mais novo do Notion.
