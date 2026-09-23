@@ -1,3 +1,5 @@
+import { el } from '../ui/dom';
+
 export type Locale = 'en' | 'pt-BR';
 
 const LOCALE_KEY = 'tb-locale';
@@ -22,17 +24,6 @@ export type Shell = {
 function readLocale(): Locale {
   const stored = localStorage.getItem(LOCALE_KEY);
   return stored === 'en' ? 'en' : 'pt-BR';
-}
-
-function el<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  className?: string,
-  text?: string,
-): HTMLElementTagNameMap[K] {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text) node.textContent = text;
-  return node;
 }
 
 export function mountShell(root: HTMLElement): Shell {

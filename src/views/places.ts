@@ -30,22 +30,12 @@ import {
   type PlaceCoord,
 } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
+import { el } from '../ui/dom';
 import { closePlace, openPlace } from './place-panel';
 
 type Tab = 'places' | 'itinerary' | 'hotels';
 
 const CATEGORY_LABEL = travelUi.categories;
-
-function el<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  className?: string,
-  text?: string,
-): HTMLElementTagNameMap[K] {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text) node.textContent = text;
-  return node;
-}
 
 function fold(value: string): string {
   return value.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase();
