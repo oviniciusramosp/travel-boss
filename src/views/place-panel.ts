@@ -26,8 +26,25 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
 
   let photoIndex = 0;
   let current: { place: TravelPlace; city: TravelCity; locale: Locale } | null = null;
+  let photoImg: HTMLImageElement | null = null;
+  let photoCount: HTMLElement | null = null;
+
+  const showPhoto = () => {
+    if (!current || !photoImg) return;
+    const { place, locale } = current;
+    const photos = resolvePlacePhotos(place.id, place.photos) ?? [];
+    if (!photos.length) return;
+    photoIndex = (photoIndex % photos.length + photos.length) % photos.length;
+    const photo = photos[photoIndex];
+    photoImg.hidden = false;
+    photoImg.src = photo?.url ?? '';
+    photoImg.alt = photo?.alt ? pickLocale(locale, photo.alt) : pickLocale(locale, place.name);
+    if (photoCount) photoCount.textContent = `${photoIndex + 1}/${photos.length}`;
+  };
 
   const paint = () => {
+    photoImg = null;
+    photoCount = null;
     if (!current) {
       root.hidden = true;
       root.replaceChildren();
@@ -56,9 +73,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       const frame = document.createElement('div');
       frame.className = 'tb-place-panel__photo';
       const img = document.createElement('img');
-      const photo = photos[photoIndex];
-      img.src = photo?.url ?? '';
-      img.alt = photo?.alt ? pickLocale(locale, photo.alt) : pickLocale(locale, place.name);
+      photoImg = img;
       img.addEventListener('error', () => {
         img.hidden = true;
       });
@@ -77,19 +92,20 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
           size: 'sm',
         });
         prev.addEventListener('click', () => {
-          photoIndex = (photoIndex - 1 + photos.length) % photos.length;
-          paint();
+          photoIndex -= 1;
+          showPhoto();
         });
         next.addEventListener('click', () => {
-          photoIndex = (photoIndex + 1) % photos.length;
-          paint();
+          photoIndex += 1;
+          showPhoto();
         });
         const count = document.createElement('span');
         count.className = 'tb-meta';
-        count.textContent = `${photoIndex + 1}/${photos.length}`;
+        photoCount = count;
         nav.append(prev, count, next);
         frame.append(nav);
       }
+      showPhoto();
       root.append(frame);
     }
     root.append(close);
