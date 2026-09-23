@@ -37,6 +37,7 @@ import type {
   TravelPlace,
 } from '../catalog';
 import { buildItineraryRoute, buildItineraryRoutePreview } from '../map/itinerary-route';
+import { toMapRoute } from '../map/route-model';
 import type { MapHandle, MapPin } from '../map/types';
 import { iconLink, segmented } from '../ui/controls';
 import {
@@ -812,11 +813,11 @@ export function mountCity(
     const legs = routed.legs;
     const ids = routed.ids;
     const preview = buildItineraryRoutePreview(ids, legs, coords);
-    map.setRoute(preview.segments, { fit });
+    map.setRoute(toMapRoute(preview), { fit });
     void buildItineraryRoute(ids, legs, coords)
       .then((built) => {
         if (disposed || epoch !== routeEpoch || tab !== 'itinerary') return;
-        map.setRoute(built.segments);
+        map.setRoute(toMapRoute(built));
         routePhase = 'on';
         syncRouteChrome();
       })
@@ -1120,8 +1121,13 @@ export function mountCity(
           onToggleSlot: (slot, on) => toggleSlot(day, slot, on),
           legs: legsForDay(day.id, selectedArrival(day)?.id),
           onHoverHop: (hop) => {
-            markHot(hop?.to ?? null);
-            map.hover(hop?.to ?? null);
+            if (!hop) {
+              markHot(null);
+              map.hoverLeg(null, null);
+              return;
+            }
+            markHot(hop.to, hop.from);
+            map.hoverLeg(hop.from, hop.to);
           },
           renderStop: (stop) => stopRow(stop, index, locale),
         }),
@@ -1379,21 +1385,26 @@ export function mountCity(
     }, SEARCH_REFIT_MS);
   });
 
-  const markHot = (id: string | null) => {
+  const markHot = (id: string | null, from?: string | null) => {
     body.querySelectorAll('.tb-timeline .is-hot').forEach((node) => node.classList.remove('is-hot'));
     if (!id) return;
     const sel = CSS.escape(id);
-    body
-      .querySelectorAll<HTMLElement>(
-        `.tb-timeline [data-place-id="${sel}"], .tb-timeline [data-leg-from="${sel}"], .tb-timeline [data-leg-to="${sel}"]`,
-      )
-      .forEach((node) => node.classList.add('is-hot'));
+    const selector = from
+      ? `.tb-timeline [data-leg-from="${CSS.escape(from)}"][data-leg-to="${sel}"], .tb-timeline [data-place-id="${sel}"]`
+      : `.tb-timeline [data-place-id="${sel}"], .tb-timeline [data-leg-from="${sel}"], .tb-timeline [data-leg-to="${sel}"]`;
+    body.querySelectorAll<HTMLElement>(selector).forEach((node) => node.classList.add('is-hot'));
   };
 
   const unsubHover = map.onHover((id) => {
     if (disposed || tab !== 'itinerary') return;
     markHot(id);
     map.hover(id);
+  });
+
+  const unsubLeg = map.onHoverLeg((leg) => {
+    if (disposed || tab !== 'itinerary') return;
+    if (!leg) markHot(null);
+    else markHot(leg.to, leg.from);
   });
 
   const unsubSelect = map.onSelect((id) => {
@@ -1489,6 +1500,7 @@ export function mountCity(
       unsubLocale();
       unsubQuery();
       unsubHover();
+      unsubLeg();
       unsubSelect();
       offClose();
       const close = hotelsDispose;

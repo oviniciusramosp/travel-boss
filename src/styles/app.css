@@ -443,6 +443,91 @@ button {
   transform: scale(1.2);
 }
 
+.tb-map path.tb-route {
+  cursor: pointer;
+}
+
+.tb-map path.tb-route.is-dim {
+  stroke-opacity: 0.15 !important;
+}
+
+.tb-map path.tb-route.is-hot {
+  stroke-opacity: 1 !important;
+  stroke-width: 7px;
+}
+
+.tb-map path.tb-route-flow {
+  pointer-events: none;
+  animation: tb-route-flow 2.8s linear infinite;
+}
+
+.tb-map path.tb-route-flow.is-dim {
+  stroke-opacity: 0.05 !important;
+}
+
+.tb-map path.tb-route-flow.is-hot {
+  stroke-opacity: 0.7 !important;
+  animation-duration: 1.8s;
+}
+
+@keyframes tb-route-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.leaflet-marker-icon.tb-station-wrap,
+.leaflet-marker-icon.tb-transfer-wrap {
+  background: none;
+  border: 0;
+}
+
+.tb-station-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: 4px;
+  border: 1.5px solid var(--color-paper);
+  border-radius: var(--r-pill);
+  background: var(--station-color, #008fff);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+
+.tb-station-wrap.is-end .tb-station-dot {
+  width: 10px;
+  height: 10px;
+  margin: 3px;
+}
+
+.tb-transfer-dot {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  margin: 2px;
+  overflow: hidden;
+  border: 2px solid var(--color-paper);
+  border-radius: var(--r-pill);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
+}
+
+.tb-transfer-dot__half {
+  flex: 1 1 50%;
+  height: 100%;
+}
+
+.tb-station-wrap.is-dim .tb-station-dot,
+.tb-transfer-wrap.is-dim .tb-transfer-dot {
+  opacity: 0.25;
+}
+
+.tb-transfer-wrap {
+  cursor: pointer;
+}
+
+.tb-transfer-wrap.is-hot .tb-transfer-dot {
+  transform: scale(1.12);
+}
+
 .tb-map .leaflet-marker-icon.tb-pin-wrap {
   background: none;
   border: 0;
@@ -796,5 +881,9 @@ p.tb-meta {
   .tb-pin.is-featured::before {
     animation: none;
     opacity: 0.4;
+  }
+
+  .tb-map path.tb-route-flow {
+    animation: none;
   }
 }
