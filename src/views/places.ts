@@ -55,7 +55,7 @@ import {
 } from './timeline';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
-import { prefersReducedMotion } from '../ui/motion';
+import { prefersReducedMotion, runViewTransition } from '../ui/motion';
 import { priceLevel, priceLevelOf } from '../ui/price';
 import { formatRating, ratingSummary } from '../ui/rating';
 import { row } from '../ui/row';
@@ -1422,16 +1422,18 @@ export function mountCity(
     searchFitTimer = 0;
     const leavingHotels = tab === 'hotels';
     const hadPlace = currentPlaceId != null;
-    tab = next;
-    if (leavingHotels) closeHotels();
-    closePlace({ focus: false });
-    paintChrome();
-    renderBody();
-    if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
-    else if (next === 'itinerary') showItineraryMap({ fit: true });
-    else showHotelPins();
-    planner.sync();
-    main.scrollTop = 0;
+    runViewTransition(() => {
+      tab = next;
+      if (leavingHotels) closeHotels();
+      closePlace({ focus: false });
+      paintChrome();
+      renderBody();
+      if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
+      else if (next === 'itinerary') showItineraryMap({ fit: true });
+      else showHotelPins();
+      planner.sync();
+      main.scrollTop = 0;
+    });
     if (!hadPlace) publish();
   }
 

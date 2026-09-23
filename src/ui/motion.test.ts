@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { CAMERA_DURATION_S, LABEL_FADE_MS, cameraMotion, labelFadeDuration } from './motion';
+import {
+  CAMERA_DURATION_S,
+  LABEL_FADE_MS,
+  cameraMotion,
+  labelFadeDuration,
+  runViewTransition,
+} from './motion';
 
 describe('cameraMotion', () => {
   it('animates for 0.45s when motion is allowed', () => {
@@ -15,5 +21,23 @@ describe('labelFadeDuration', () => {
   it('keeps the MapLibre fade unless motion is reduced', () => {
     expect(labelFadeDuration(false)).toBe(LABEL_FADE_MS);
     expect(labelFadeDuration(true)).toBe(0);
+  });
+});
+
+describe('runViewTransition', () => {
+  it('updates immediately when motion is reduced', () => {
+    let ran = false;
+    runViewTransition(() => {
+      ran = true;
+    }, true);
+    expect(ran).toBe(true);
+  });
+
+  it('updates immediately when the API is missing', () => {
+    let ran = false;
+    runViewTransition(() => {
+      ran = true;
+    }, false);
+    expect(ran).toBe(true);
   });
 });

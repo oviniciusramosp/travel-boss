@@ -20,6 +20,7 @@ import {
   type Route,
 } from './app/router';
 import { getTravelCity, pickLocale, travelCities } from './catalog';
+import { runViewTransition } from './ui/motion';
 import { mountTooltip } from './ui/tooltip';
 import { mountMap } from './map/map';
 import { mountCity, mountCityNav, type CityRouteState } from './views/places';
@@ -147,59 +148,64 @@ function show(route: Route, mode: 'push' | 'replace' | 'none') {
     return;
   }
 
-  dispose();
-  syncCity = null;
-  applyChrome(route, true);
-
-  if (route.kind === 'home') {
-    clearMap();
-    shell.showEmpty();
-    const off = map.onSelect((id) => {
-      if (current?.kind !== 'home') return;
-      if (!travelCities.some((city) => city.slug === id)) return;
-      show({ kind: 'city', slug: id, tab: 'places' }, 'push');
-    });
-    paintCities(true);
-    dispose = () => {
-      off();
-      map.setCities([]);
-    };
-    return;
-  }
-
-  if (route.kind === 'trip') {
-    const view = mountTrip(shell.main, map, route.id, shell);
-    dispose = () => view.dispose();
-    return;
-  }
-
-  const slug = route.slug;
-  const view = mountCity(
-    shell.main,
-    map,
-    slug,
-    shell,
-    { tab: route.tab, place: route.place, day: route.day },
-    (state) => {
-      if (current?.kind !== 'city' || current.slug !== slug) return;
-      const next: Route = {
-        kind: 'city',
-        slug,
-        tab: state.tab,
-        ...(state.place ? { place: state.place } : {}),
-        ...(state.day != null ? { day: state.day } : {}),
-      };
-      const history = navigationMode(current, next);
-      if (sameRoute(current, next)) return;
-      current = next;
-      commitRoute(next, history);
-    },
-  );
-  syncCity = (state) => view.sync(state);
-  dispose = () => {
+  const swap = () => {
+    dispose();
     syncCity = null;
-    view.dispose();
+    applyChrome(route, true);
+
+    if (route.kind === 'home') {
+      clearMap();
+      shell.showEmpty();
+      const off = map.onSelect((id) => {
+        if (current?.kind !== 'home') return;
+        if (!travelCities.some((city) => city.slug === id)) return;
+        show({ kind: 'city', slug: id, tab: 'places' }, 'push');
+      });
+      paintCities(true);
+      dispose = () => {
+        off();
+        map.setCities([]);
+      };
+      return;
+    }
+
+    if (route.kind === 'trip') {
+      const view = mountTrip(shell.main, map, route.id, shell);
+      dispose = () => view.dispose();
+      return;
+    }
+
+    const slug = route.slug;
+    const view = mountCity(
+      shell.main,
+      map,
+      slug,
+      shell,
+      { tab: route.tab, place: route.place, day: route.day },
+      (state) => {
+        if (current?.kind !== 'city' || current.slug !== slug) return;
+        const next: Route = {
+          kind: 'city',
+          slug,
+          tab: state.tab,
+          ...(state.place ? { place: state.place } : {}),
+          ...(state.day != null ? { day: state.day } : {}),
+        };
+        const history = navigationMode(current, next);
+        if (sameRoute(current, next)) return;
+        current = next;
+        commitRoute(next, history);
+      },
+    );
+    syncCity = (state) => view.sync(state);
+    dispose = () => {
+      syncCity = null;
+      view.dispose();
+    };
   };
+
+  if (previous) runViewTransition(swap);
+  else swap();
 }
 
 const cityNav = mountCityNav(shell.navCities, shell, (slug) => {

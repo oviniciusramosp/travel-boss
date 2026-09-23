@@ -296,6 +296,36 @@ button {
   overflow: auto;
   padding: 16px 20px 30vh;
   background: var(--color-canvas);
+  view-transition-name: tb-main;
+}
+
+::view-transition-image-pair(root) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(tb-main) {
+  animation: tb-vt-out var(--dur-base) var(--ease-in-out) both;
+}
+
+::view-transition-new(tb-main) {
+  animation: tb-vt-in var(--dur-base) var(--ease-in-out) both;
+}
+
+@keyframes tb-vt-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes tb-vt-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .tb-map-col {
@@ -876,6 +906,12 @@ p.tb-meta {
   * {
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 
   .tb-pin.is-featured::before {

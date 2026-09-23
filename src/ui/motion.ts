@@ -25,3 +25,26 @@ export function cameraMotion(reduced = prefersReducedMotion()): CameraMotion {
 export function labelFadeDuration(reduced = prefersReducedMotion()): number {
   return reduced ? 0 : LABEL_FADE_MS;
 }
+
+/** Crossfade the main panel. Skips the API when motion is reduced or unsupported. */
+export function runViewTransition(update: () => void, reduced = prefersReducedMotion()): void {
+  const start =
+    typeof document !== 'undefined' && typeof document.startViewTransition === 'function'
+      ? document.startViewTransition.bind(document)
+      : null;
+  if (reduced || !start) {
+    update();
+    return;
+  }
+  let ran = false;
+  const once = () => {
+    if (ran) return;
+    ran = true;
+    update();
+  };
+  try {
+    start(once);
+  } catch {
+    once();
+  }
+}
