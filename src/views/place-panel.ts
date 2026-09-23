@@ -1,15 +1,40 @@
 import type { Locale, TravelCity, TravelPlace } from '../catalog';
 import {
+  categoryMaterialName,
   googleMapsUrl,
   pickLocale,
   placeCategoryMeta,
   resolvePlacePhotos,
   resolveVisit,
+  subcategoryLabel,
   travelUi,
   visitFieldsForDisplay,
 } from '../catalog';
 import type { MapHandle } from '../map/types';
 import { iconButton } from '../ui/controls';
+import { el } from '../ui/dom';
+import { icon, ICONS, type IconName } from '../ui/icons';
+import { priceLevel, priceLevelOf } from '../ui/price';
+import { ratingSummary, starRating } from '../ui/rating';
+
+function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
+  const name = categoryMaterialName(category);
+  if (!(ICONS as readonly string[]).includes(name)) return null;
+  const node = icon(name as IconName, { size: 16 });
+  node.style.color = placeCategoryMeta[category].color;
+  return node;
+}
+
+function ticketLink(href: string, locale: Locale): HTMLAnchorElement {
+  const link = el('a', 'tb-ticket', 'ⓘ');
+  link.href = href;
+  link.target = '_blank';
+  link.rel = 'noopener';
+  const label = pickLocale(locale, travelUi.visit.ticketLink);
+  link.setAttribute('aria-label', label);
+  link.setAttribute('data-tip', label);
+  return link;
+}
 
 type CloseOptions = { focus?: boolean };
 
@@ -92,18 +117,16 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       dismiss({ focus: true });
     });
 
+    const frame = el('div', 'tb-place-panel__photo');
     if (photos.length) {
-      const frame = document.createElement('div');
-      frame.className = 'tb-place-panel__photo';
-      const img = document.createElement('img');
+      const img = el('img');
       photoImg = img;
       img.addEventListener('error', () => {
         img.hidden = true;
       });
       frame.append(img);
       if (photos.length > 1) {
-        const nav = document.createElement('div');
-        nav.className = 'tb-place-panel__photos';
+        const nav = el('div', 'tb-place-panel__photos');
         const prev = iconButton({
           icon: 'chevron_left',
           label: pickLocale(locale, { en: 'Previous photo', 'pt-BR': 'Foto anterior' }),
@@ -122,75 +145,111 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
           photoIndex += 1;
           showPhoto();
         });
-        const count = document.createElement('span');
-        count.className = 'tb-meta';
+        const count = el('span', 'tb-meta');
         photoCount = count;
         nav.append(prev, count, next);
         frame.append(nav);
       }
       showPhoto();
-      root.append(frame);
+    } else {
+      const fallback = el('div', 'tb-slider__fallback');
+      const glyph = categoryGlyph(place.category);
+      if (glyph) fallback.append(glyph);
+      frame.append(fallback);
     }
-    root.append(close);
+    root.append(frame, close);
 
-    const body = document.createElement('div');
-    body.className = 'tb-panel__body';
-
-    const title = document.createElement('h2');
+    const body = el('div', 'tb-panel__body');
+    const head = el('header', 'tb-panel__head');
+    const title = el('h2', undefined, pickLocale(locale, place.name));
     title.id = 'tb-place-title';
     title.tabIndex = -1;
-    title.textContent = pickLocale(locale, place.name);
-    body.append(title);
+    head.append(title);
+    body.append(head);
 
-    const meta = document.createElement('p');
-    meta.className = 'tb-meta';
-    const bits = [pickLocale(locale, travelUi.categories[place.category])];
-    if (place.rating != null) bits.push(`${place.rating.toFixed(1)}`);
-    if (place.googleRating != null) {
-      bits.push(`Google ${place.googleRating.toFixed(1)}`);
+    const badges = el('div', 'tb-badges');
+    const cat = el('span', 'tb-badge-soft');
+    const catGlyph = categoryGlyph(place.category);
+    if (catGlyph) cat.append(catGlyph);
+    cat.append(document.createTextNode(pickLocale(locale, travelUi.categories[place.category])));
+    badges.append(cat);
+    if (place.favorite) {
+      const fav = el('span', 'tb-badge-soft');
+      fav.append(icon('favorite', { fill: true, size: 16 }));
+      fav.append(document.createTextNode(pickLocale(locale, travelUi.favorite)));
+      badges.append(fav);
     }
-    meta.textContent = bits.join(' · ');
-    const dot = document.createElement('span');
-    dot.className = 'tb-cat-dot';
-    dot.style.background = placeCategoryMeta[place.category].color;
-    meta.prepend(dot);
-    body.append(meta);
+    for (const id of place.subcategories ?? []) {
+      badges.append(el('span', 'tb-badge-soft', subcategoryLabel(id, locale)));
+    }
+    body.append(badges);
+
+    const ratings = el('div', 'tb-ratings');
+    ratings.setAttribute('data-tip', ratingSummary(place.rating, place.googleRating, locale));
+    ratings.append(
+      starRating({
+        rating: place.rating,
+        label: pickLocale(locale, travelUi.ratingMine),
+        locale,
+        icon: 'person',
+      }),
+      starRating({
+        rating: place.googleRating,
+        label: pickLocale(locale, travelUi.ratingGoogle),
+        locale,
+        icon: 'map',
+      }),
+    );
+    const nightly = !place.visit?.avgPricePerPerson && place.visit?.pricePerNight;
+    const money = place.visit?.avgPricePerPerson ?? place.visit?.pricePerNight;
+    const level = priceLevelOf(money);
+    if (level != null && money) {
+      ratings.append(
+        priceLevel(
+          level,
+          pickLocale(locale, nightly ? travelUi.visit.pricePerNight : travelUi.visit.avgPrice),
+          locale,
+        ),
+      );
+    }
+    body.append(ratings);
 
     if (place.description) {
-      const copy = document.createElement('p');
-      copy.className = 'tb-place-panel__copy';
-      copy.textContent = pickLocale(locale, place.description);
-      body.append(copy);
+      body.append(el('p', 'tb-place-panel__copy', pickLocale(locale, place.description)));
     }
 
     if (fields.length) {
-      const list = document.createElement('dl');
-      list.className = 'tb-place-panel__facts';
+      const list = el('dl', 'tb-place-panel__facts');
       for (const field of fields) {
         const label = travelUi.visit[field.key as keyof typeof travelUi.visit];
-        const dt = document.createElement('dt');
-        dt.textContent = label ? pickLocale(locale, label) : field.key;
-        const dd = document.createElement('dd');
-        dd.textContent = field.note ? `${field.value} — ${field.note}` : field.value;
+        const dt = el('dt', undefined, label ? pickLocale(locale, label) : field.key);
+        const dd = el('dd', field.key === 'tips' ? 'tb-tips' : undefined);
+        if (field.key === 'ticket' && visit) {
+          dd.textContent = field.value;
+          const note = visit.ticket?.note ? pickLocale(locale, visit.ticket.note) : '';
+          if (note) dd.append(el('span', 'tb-note', note));
+          if (visit.ticketUrl) dd.append(ticketLink(visit.ticketUrl, locale));
+          if (visit.ticketPromos?.length) {
+            const promos = el('ul', 'tb-promos');
+            for (const promo of visit.ticketPromos) promos.append(el('li', undefined, pickLocale(locale, promo.label)));
+            dd.append(promos);
+          }
+        } else {
+          dd.textContent = field.note ? `${field.value} — ${field.note}` : field.value;
+        }
         list.append(dt, dd);
       }
       body.append(list);
     }
 
-    if (place.address) {
-      const address = document.createElement('p');
-      address.className = 'tb-meta';
-      address.textContent = place.address;
-      body.append(address);
-    }
-
-    const maps = document.createElement('a');
-    maps.className = 'tb-btn';
-    maps.href = googleMapsUrl(place, city);
-    maps.target = '_blank';
-    maps.rel = 'noopener';
-    maps.textContent = 'Google Maps';
-    body.append(maps);
+    const address = el('a', 'tb-place-panel__address');
+    address.href = googleMapsUrl(place, city);
+    address.target = '_blank';
+    address.rel = 'noopener';
+    address.setAttribute('aria-label', pickLocale(locale, travelUi.openInMaps));
+    address.append(icon('location_on', { size: 16 }));
+    address.append(document.createTextNode(place.address || pickLocale(locale, travelUi.openInMaps)));
+    body.append(address);
     root.append(body);
   };
 
