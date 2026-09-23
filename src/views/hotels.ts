@@ -269,6 +269,55 @@ function asMsg(value: unknown): Msg | null {
   return null;
 }
 
+/** Airbnb listings are the approximate ones. The warning must not require a non-Airbnb source. */
+export function safetyLine(
+  hotel: { source?: string; locationApproximate?: boolean },
+  region: { name: string; safety: number | null } | null,
+  t: (en: string, pt: string) => string,
+): string | null {
+  if (hotel.locationApproximate) {
+    return t('Neighborhood safety not scored', 'Segurança do bairro sem nota');
+  }
+  if (hotel.source === 'airbnb' || !region) return null;
+  const safety =
+    region.safety == null ? t('safety not assessed', 'segurança não avaliada') : `${region.safety}/100`;
+  return region.name ? `${region.name} ${safety}` : safety;
+}
+
+/** `null` means the form can stay enabled. A string is the setup message and the form locks. */
+export function hotelSetupFailure(
+  outcome: 'unreachable' | 'http' | 'ok',
+  body: { ok?: boolean; error?: unknown } | null,
+  fallback: string,
+): string | null {
+  if (outcome === 'unreachable' || outcome === 'http') return fallback;
+  if (!body || body.ok !== false) return null;
+  return typeof body.error === 'string' && body.error.trim() ? body.error : fallback;
+}
+
+/** Missing content type stays on the ndjson reader. JSON must not be parsed line by line. */
+export function responseIsNdjson(contentType: string | null): boolean {
+  const type = (contentType ?? '').toLowerCase();
+  if (!type) return true;
+  return type.includes('ndjson');
+}
+
+export function interpretSearchBody(
+  body: unknown,
+  fallback: string,
+): { kind: 'done'; result: SearchResult } | { kind: 'status'; message: string; error: boolean } {
+  const message = asMsg(body);
+  if (message?.type === 'done') return { kind: 'done', result: message };
+  if (message?.type === 'error') return { kind: 'status', message: message.message, error: true };
+  if (message?.type === 'status') return { kind: 'status', message: message.message, error: false };
+  if (isRecord(body)) {
+    const text =
+      typeof body.error === 'string' ? body.error : typeof body.message === 'string' ? body.message : '';
+    return { kind: 'status', message: text || fallback, error: true };
+  }
+  return { kind: 'status', message: fallback, error: true };
+}
+
 export function mountHotels(
   host: HTMLElement,
   city: { slug: string; name: string; lat: number; lng: number },
@@ -346,6 +395,7 @@ export function mountHotels(
   maxTotal.inputMode = 'numeric';
 
   const radius = el('input', 'tb-hotels__range');
+  radius.id = 'tb-hotel-radius';
   radius.name = 'maxKm';
   radius.type = 'range';
   radius.min = '1';
@@ -392,7 +442,7 @@ export function mountHotels(
   const guestsLbl = el('span', 'tb-hotels__lbl');
   const scoreLbl = el('span', 'tb-hotels__lbl');
   const radiusOut = el('output');
-  radiusOut.setAttribute('aria-live', 'polite');
+  radiusOut.setAttribute('for', radius.id);
 
   const cityField = el('label', 'tb-hotels__field tb-hotels__field--city');
   cityField.append(cityLbl, cityInput);
@@ -406,9 +456,12 @@ export function mountHotels(
   minField.append(minLbl, minTotal);
   const maxField = el('label', 'tb-hotels__field tb-hotels__field--num');
   maxField.append(maxLbl, maxTotal);
+  const radiusName = el('label', 'tb-hotels__lbl');
+  radiusName.htmlFor = radius.id;
+  radiusName.append(radiusLbl);
   const radiusRow = el('span', 'tb-hotels__label-row');
-  radiusRow.append(radiusLbl, radiusOut);
-  const radiusField = el('label', 'tb-hotels__field tb-hotels__field--grow');
+  radiusRow.append(radiusName, radiusOut);
+  const radiusField = el('div', 'tb-hotels__field tb-hotels__field--grow');
   radiusField.append(radiusRow, radius);
   const guestsField = el('label', 'tb-hotels__field tb-hotels__field--num');
   guestsField.append(guestsLbl, adults);
@@ -431,7 +484,6 @@ export function mountHotels(
   setup.hidden = true;
   const status = el('p', 'tb-meta tb-hotels__status');
   status.hidden = true;
-  status.setAttribute('aria-live', 'polite');
 
   const bar = el('div', 'tb-hotels__bar');
   const sortLbl = el('span', 'tb-hotels__lbl');
@@ -666,25 +718,22 @@ export function mountHotels(
       if (ranking.beyond90) bits.push(`${ranking.beyond90} ${t('beyond 90 min', 'acima de 1h30')}`);
       if ((ranking.walkingCoverage ?? 1) < 1) bits.push(t('incomplete routes', 'rotas incompletas'));
     }
-    if (hotel.source !== 'airbnb') {
-      if (hotel.locationApproximate) {
-        bits.push(t('Neighborhood safety not scored', 'Segurança do bairro sem nota'));
-      } else if (ranking.region) {
-        const name = placeName(ranking.region.name);
-        const safety =
-          ranking.region.safety == null
-            ? t('safety not assessed', 'segurança não avaliada')
-            : `${ranking.region.safety}/100`;
-        bits.push(name ? `${name} ${safety}` : safety);
-      }
-      if (
-        ranking.eligibility.staffMinimum != null &&
-        !ranking.eligibility.failures?.includes('staff')
-      ) {
-        bits.push(
-          `${t('staff min.', 'funcionários mín.')} ${decimal(ranking.eligibility.staffMinimum)}`,
-        );
-      }
+    const safety = safetyLine(
+      hotel,
+      ranking.region
+        ? { name: placeName(ranking.region.name), safety: ranking.region.safety }
+        : null,
+      t,
+    );
+    if (safety) bits.push(safety);
+    if (
+      hotel.source !== 'airbnb' &&
+      ranking.eligibility.staffMinimum != null &&
+      !ranking.eligibility.failures?.includes('staff')
+    ) {
+      bits.push(
+        `${t('staff min.', 'funcionários mín.')} ${decimal(ranking.eligibility.staffMinimum)}`,
+      );
     }
     if (ranking.transit && Number.isFinite(ranking.transit.minutes)) {
       const name = placeName(ranking.transit.name);
@@ -734,6 +783,7 @@ export function mountHotels(
   const cardFor = (hotel: Hotel) => {
     const article = el('article', 'tb-card tb-hotels__card');
     article.dataset.placeId = hotel.id;
+    article.tabIndex = 0;
     const isAirbnb = hotel.source === 'airbnb';
     const head = el('div', 'tb-hotels__head');
     const title = el('div', 'tb-hotels__title');
@@ -963,10 +1013,12 @@ export function mountHotels(
     if (error) {
       message = `${t('Partial search', 'Busca parcial')}: ${unavailable.join(', ')} ${t('unavailable', 'indisponível')}. ${message}`;
     }
-    setStatus(message, error);
+    setStatus(message, error, true);
   };
 
-  function setStatus(message: string | null, error = false) {
+  function setStatus(message: string | null, error = false, live = error) {
+    if (live) status.setAttribute('aria-live', 'polite');
+    else status.removeAttribute('aria-live');
     status.hidden = !message;
     status.textContent = message ?? '';
     status.classList.toggle('tb-error', error);
@@ -1217,6 +1269,24 @@ export function mountHotels(
         setStatus(message, true);
         return;
       }
+      if (!responseIsNdjson(response.headers.get('content-type'))) {
+        const fallback = t('Search unavailable.', 'Busca indisponível.');
+        let data: unknown;
+        try {
+          data = await response.json();
+        } catch {
+          setStatus(fallback, true);
+          return;
+        }
+        const notice = interpretSearchBody(data, fallback);
+        if (notice.kind === 'done') {
+          render(notice.result);
+          persist(notice.result);
+          return;
+        }
+        setStatus(notice.message, notice.error);
+        return;
+      }
       await readStream(response, signal);
     } catch (error) {
       if (disposed || signal.aborted || isAbort(error)) return;
@@ -1335,6 +1405,10 @@ export function mountHotels(
     chip.classList.toggle('tb-badge-soft', !on);
     applyFilter();
   });
+  const selectHotel = (id: string) => {
+    map.select(id);
+    markCurrent(id, false);
+  };
   listen(list, 'click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
@@ -1343,8 +1417,19 @@ export function mountHotels(
     if (!card) return;
     const id = card.dataset.placeId;
     if (!id) return;
-    map.select(id);
-    markCurrent(id, false);
+    selectHotel(id);
+  });
+  listen(list, 'keydown', (event) => {
+    if (!(event instanceof KeyboardEvent) || (event.key !== 'Enter' && event.key !== ' ')) return;
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (target.closest('a, button, input, select, textarea, summary')) return;
+    const card = target.closest<HTMLElement>('[data-place-id]');
+    if (!card || target !== card) return;
+    const id = card.dataset.placeId;
+    if (!id) return;
+    event.preventDefault();
+    selectHotel(id);
   });
   listen(rerankBtn, 'click', () => {
     void rerank();
@@ -1369,18 +1454,33 @@ export function mountHotels(
     paintRadius();
   }
 
+  const lockSearch = (message: string) => {
+    setup.hidden = false;
+    setup.textContent = message;
+    form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLButtonElement>('input, select, button').forEach(
+      (control) => {
+        control.disabled = true;
+      },
+    );
+  };
+
   void fetch(`${API}/status`, { signal: statusAbort.signal })
     .then(async (response) => {
-      if (!response.ok) return null;
-      return (await response.json()) as { ok?: boolean; error?: unknown };
+      if (disposed) return;
+      const fallback = t('Hotel search is unavailable.', 'A busca de hotéis está indisponível.');
+      if (!response.ok) {
+        lockSearch(hotelSetupFailure('http', null, fallback) ?? fallback);
+        return;
+      }
+      const body = (await response.json()) as { ok?: boolean; error?: unknown };
+      const failure = hotelSetupFailure('ok', body, fallback);
+      if (failure) lockSearch(failure);
     })
-    .then((body) => {
-      if (disposed || !body || body.ok !== false) return;
-      const message = typeof body.error === 'string' ? body.error : '';
-      setup.hidden = message.length === 0;
-      setup.textContent = message;
-    })
-    .catch(() => {});
+    .catch(() => {
+      if (disposed) return;
+      const fallback = t('Hotel search is unreachable.', 'Não foi possível alcançar a busca de hotéis.');
+      lockSearch(hotelSetupFailure('unreachable', null, fallback) ?? fallback);
+    });
 
   return {
     dispose() {
