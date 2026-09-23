@@ -952,6 +952,26 @@ export function mountHotels(
       block.append(safety);
       if (ranked.coverage) block.append(el('p', 'tb-hotels__fine', ranked.coverage));
       block.append(el('p', undefined, ranked.walking));
+      if (ranked.compare) {
+        const compare = el('div', 'tb-hotels__compare');
+        compare.setAttribute('aria-label', t('Comparison', 'Comparação'));
+        for (const part of ranked.compare) {
+          const meter = el('div', 'tb-hotels__meter');
+          meter.append(el('span', undefined, part.label), el('strong', undefined, part.text));
+          const track = el('span', 'tb-hotels__track');
+          track.setAttribute('role', 'meter');
+          track.setAttribute('aria-valuemin', '0');
+          track.setAttribute('aria-valuemax', '100');
+          track.setAttribute('aria-valuenow', part.value == null ? '0' : String(part.value));
+          track.setAttribute('aria-label', `${part.label}: ${part.text}`);
+          const fill = el('span');
+          fill.style.width = `${part.value ?? 0}%`;
+          track.append(fill);
+          meter.append(track);
+          compare.append(meter);
+        }
+        block.append(compare);
+      }
       body.append(block);
     }
 

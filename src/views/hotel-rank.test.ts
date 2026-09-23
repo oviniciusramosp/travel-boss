@@ -98,4 +98,11 @@ describe('why this position', () => {
     expect(parts?.some((part) => part.kind === 'text' && part.text.includes('não é garantia de segurança'))).toBe(true);
     expect(whyParts('en', { booking: {} })).toBeNull();
   });
+
+  it('lines up quality, neighborhood, walking and transport for comparison', () => {
+    const hotel = ranked();
+    hotel.ranking!.components = { quality: 90.2, safety: 40, walking: null, transit: 10 };
+    expect(scoreCard('pt-BR', hotel)?.compare?.map((part) => part.text)).toEqual(['90', '40', '—', '10']);
+    expect(scoreCard('pt-BR', ranked())?.compare).toBeNull();
+  });
 });

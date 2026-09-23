@@ -266,10 +266,15 @@
   text-transform: uppercase;
 }
 
-.tb-hotels__meters {
+.tb-hotels__meters,
+.tb-hotels__compare {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-8);
+}
+
+.tb-hotels__compare {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .tb-hotels__meter {

@@ -32,6 +32,7 @@ export type RankInput = {
   totalPoints?: number;
   transit?: { name?: Copy; minutes?: number } | null;
   jev?: { weight?: number } | null;
+  components?: Partial<Record<'quality' | 'safety' | 'walking' | 'transit', number | null>>;
 };
 
 export type WhyPart =
@@ -68,6 +69,7 @@ export type ScoreCard = {
   safety: { text: string; caution: boolean };
   coverage: string | null;
   walking: string;
+  compare: ScoreBar[] | null;
 };
 
 const say = (locale: Locale, copy: Copy) => pickLocale(locale, copy);
@@ -106,6 +108,13 @@ const BARS: readonly { key: string; label: Copy }[] = [
   { key: 'cleanliness', label: { en: 'Cleanliness', 'pt-BR': 'Limpeza' } },
   { key: 'comfort', label: { en: 'Comfort', 'pt-BR': 'Conforto' } },
   { key: 'facilities', label: { en: 'Facilities', 'pt-BR': 'Comodidades' } },
+];
+
+const COMPARE: readonly { key: 'quality' | 'safety' | 'walking' | 'transit'; label: Copy }[] = [
+  { key: 'quality', label: { en: 'Quality', 'pt-BR': 'Qualidade' } },
+  { key: 'safety', label: { en: 'Neighborhood', 'pt-BR': 'Bairro' } },
+  { key: 'walking', label: { en: 'Walking', 'pt-BR': 'Caminhada' } },
+  { key: 'transit', label: { en: 'Transport', 'pt-BR': 'Transporte' } },
 ];
 
 function placeName(locale: Locale, name: Copy | undefined): string {
@@ -241,6 +250,14 @@ export function scoreCard(locale: Locale, hotel: ScoreHotel): ScoreCard | null {
     safety: { text: safetyText, caution: safetyIsCaution(region?.safety) },
     coverage,
     walking,
+    compare: (() => {
+      const parts = COMPARE.map((part) => {
+        const raw = ranking.components?.[part.key];
+        const value = raw != null && Number.isFinite(raw) ? Math.max(0, Math.min(100, Math.round(raw))) : null;
+        return { label: say(locale, part.label), value, text: value == null ? '—' : String(value) };
+      });
+      return parts.some((part) => part.value != null) ? parts : null;
+    })(),
   };
 }
 
