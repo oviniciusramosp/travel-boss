@@ -85,26 +85,117 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
 
   let photoIndex = 0;
   let current: { place: TravelPlace; city: TravelCity; locale: Locale } | null = null;
-  let photoImg: HTMLImageElement | null = null;
-  let photoCount: HTMLElement | null = null;
   let returnFocus: HTMLElement | null = null;
+  let slides: { url: string; alt: string }[] = [];
+  let front = 0;
+  let fadeToken = 0;
+  let imgs: HTMLImageElement[] = [];
+  let dotBar: HTMLElement | null = null;
+  let prevBtn: HTMLButtonElement | null = null;
+  let nextBtn: HTMLButtonElement | null = null;
+  let fallbackEl: HTMLElement | null = null;
 
-  const showPhoto = () => {
-    if (!current || !photoImg) return;
-    const { place, locale } = current;
-    const photos = resolvePlacePhotos(place.id, place.photos) ?? [];
-    if (!photos.length) return;
-    photoIndex = (photoIndex % photos.length + photos.length) % photos.length;
-    const photo = photos[photoIndex];
-    photoImg.hidden = false;
-    photoImg.src = photo?.url ?? '';
-    photoImg.alt = photo?.alt ? pickLocale(locale, photo.alt) : pickLocale(locale, place.name);
-    if (photoCount) photoCount.textContent = `${photoIndex + 1}/${photos.length}`;
+  const syncSlider = () => {
+    const many = slides.length > 1;
+    if (prevBtn) prevBtn.hidden = !many;
+    if (nextBtn) nextBtn.hidden = !many;
+    if (dotBar) dotBar.hidden = !many;
+    if (fallbackEl) fallbackEl.hidden = slides.length > 0;
+    for (const img of imgs) img.hidden = slides.length === 0;
+    dotBar?.querySelectorAll('button').forEach((dot, index) => {
+      if (index === photoIndex) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
   };
 
+  const showSlide = (index: number) => {
+    const incoming = imgs[1 - front];
+    const outgoing = imgs[front];
+    const photo = slides[slideIndex(index, slides.length)];
+    if (!incoming || !outgoing || !photo) {
+      syncSlider();
+      return;
+    }
+    photoIndex = slideIndex(index, slides.length);
+    const shown = outgoing.classList.contains('is-shown');
+    if (!shown || outgoing.getAttribute('src') === photo.url) {
+      if (!shown) {
+        outgoing.alt = photo.alt;
+        outgoing.src = photo.url;
+        outgoing.classList.add('is-shown');
+      }
+      syncSlider();
+      return;
+    }
+    const mine = ++fadeToken;
+    let revealed = false;
+    const reveal = () => {
+      if (revealed || mine !== fadeToken) return;
+      revealed = true;
+      incoming.classList.add('is-shown');
+      outgoing.classList.remove('is-shown');
+      front = 1 - front;
+      syncSlider();
+    };
+    incoming.alt = photo.alt;
+    incoming.addEventListener('load', () => {
+      if (incoming.getAttribute('src') === photo.url) reveal();
+    }, { once: true });
+    incoming.src = photo.url;
+    if (incoming.complete && incoming.naturalWidth > 0) reveal();
+  };
+
+  const dropBroken = (src: string) => {
+    const at = slides.findIndex((slide) => slide.url === src);
+    if (at < 0) return;
+    const next = dropSlide(slides, at);
+    slides = next.slides;
+    photoIndex = next.index;
+    buildDots();
+    imgs.forEach((img) => img.classList.remove('is-shown'));
+    front = 0;
+    if (!slides.length) {
+      imgs.forEach((img) => img.removeAttribute('src'));
+      syncSlider();
+      return;
+    }
+    showSlide(photoIndex);
+  };
+
+  const buildDots = () => {
+    if (!dotBar || !current) return;
+    const { locale } = current;
+    dotBar.replaceChildren();
+    slides.forEach((_, index) => {
+      const dot = el('button', 'tb-slider__dot');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', pickLocale(locale, { en: `Photo ${index + 1}`, 'pt-BR': `Foto ${index + 1}` }));
+      dot.addEventListener('click', (event) => {
+        event.stopPropagation();
+        showSlide(index);
+      });
+      dotBar?.append(dot);
+    });
+    syncSlider();
+  };
+
+  root.addEventListener('keydown', (event) => {
+    if (root.hidden || slides.length < 2) return;
+    if (event.altKey || event.metaKey || event.ctrlKey) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    const target = event.target;
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) return;
+    event.preventDefault();
+    showSlide(photoIndex + (event.key === 'ArrowRight' ? 1 : -1));
+  });
+
   const paint = () => {
-    photoImg = null;
-    photoCount = null;
+    imgs = [];
+    dotBar = null;
+    prevBtn = null;
+    nextBtn = null;
+    fallbackEl = null;
+    front = 0;
     if (!current) {
       root.hidden = true;
       root.replaceChildren();
@@ -128,47 +219,52 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       dismiss({ focus: true });
     });
 
-    const frame = el('div', 'tb-place-panel__photo');
-    if (photos.length) {
-      const img = el('img');
-      photoImg = img;
-      img.addEventListener('error', () => {
-        img.hidden = true;
+    slides = photos.map((photo) => ({
+      url: photo.url,
+      alt: photo.alt ? pickLocale(locale, photo.alt) : pickLocale(locale, place.name),
+    }));
+    photoIndex = slideIndex(photoIndex, slides.length);
+    const frame = el('div', 'tb-place-panel__photo tb-slider is-instant');
+    const onError = (event: Event) => {
+      const img = event.currentTarget;
+      if (!(img instanceof HTMLImageElement)) return;
+      const src = img.getAttribute('src');
+      if (src) dropBroken(src);
+    };
+    imgs = [0, 1].map(() => {
+      const img = el('img', 'tb-slider__img');
+      img.alt = '';
+      img.addEventListener('error', onError);
+      return img;
+    });
+    frame.append(...imgs);
+    const nav = (iconName: 'chevron_left' | 'chevron_right', delta: number, side: string) => {
+      const button = iconButton({
+        icon: iconName,
+        label: pickLocale(locale, {
+          en: delta < 0 ? 'Previous photo' : 'Next photo',
+          'pt-BR': delta < 0 ? 'Foto anterior' : 'Próxima foto',
+        }),
+        size: 'sm',
       });
-      frame.append(img);
-      if (photos.length > 1) {
-        const nav = el('div', 'tb-place-panel__photos');
-        const prev = iconButton({
-          icon: 'chevron_left',
-          label: pickLocale(locale, { en: 'Previous photo', 'pt-BR': 'Foto anterior' }),
-          size: 'sm',
-        });
-        const next = iconButton({
-          icon: 'chevron_right',
-          label: pickLocale(locale, { en: 'Next photo', 'pt-BR': 'Próxima foto' }),
-          size: 'sm',
-        });
-        prev.addEventListener('click', () => {
-          photoIndex -= 1;
-          showPhoto();
-        });
-        next.addEventListener('click', () => {
-          photoIndex += 1;
-          showPhoto();
-        });
-        const count = el('span', 'tb-meta');
-        photoCount = count;
-        nav.append(prev, count, next);
-        frame.append(nav);
-      }
-      showPhoto();
-    } else {
-      const fallback = el('div', 'tb-slider__fallback');
-      const glyph = categoryGlyph(place.category);
-      if (glyph) fallback.append(glyph);
-      frame.append(fallback);
-    }
+      button.classList.add('tb-slider__nav', side);
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        showSlide(photoIndex + delta);
+      });
+      return button;
+    };
+    prevBtn = nav('chevron_left', -1, 'tb-slider__nav--prev');
+    nextBtn = nav('chevron_right', 1, 'tb-slider__nav--next');
+    dotBar = el('div', 'tb-slider__dots');
+    fallbackEl = el('div', 'tb-slider__fallback');
+    const glyph = categoryGlyph(place.category);
+    if (glyph) fallbackEl.append(glyph);
+    frame.append(prevBtn, nextBtn, dotBar, fallbackEl);
+    buildDots();
+    showSlide(photoIndex);
     root.append(frame, close);
+    requestAnimationFrame(() => frame.classList.remove('is-instant'));
 
     const body = el('div', 'tb-panel__body');
     const head = el('header', 'tb-panel__head');
