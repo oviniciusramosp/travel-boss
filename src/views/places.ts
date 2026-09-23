@@ -9,7 +9,6 @@ import {
 } from '../app/store';
 import {
   categoryMaterialName,
-  computeDayBudget,
   dayPrimaryRoutePlaceIds,
   favoritePlaces,
   getTravelCity,
@@ -37,13 +36,17 @@ import type {
   TravelCity,
   TravelPlace,
 } from '../catalog';
-import {
-  buildItineraryRoute,
-  buildItineraryRoutePreview,
-  type PlaceCoord,
-} from '../map/itinerary-route';
+import { buildItineraryRoute, buildItineraryRoutePreview } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { iconLink, segmented } from '../ui/controls';
+import {
+  dayBudgetEl,
+  dayDirectionsUrl,
+  itineraryIntro,
+  paintRouteButton,
+  daySummary,
+  type RoutePhase,
+} from './timeline';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
@@ -262,17 +265,6 @@ function countLabel(count: number, locale: Locale): string {
   return count === 1 ? '1 lugar' : `${count} lugares`;
 }
 
-function formatEur(amount: number, locale: Locale): string {
-  const cents = Math.round(amount * 100);
-  const hasCents = cents % 100 !== 0;
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: 'EUR',
-    minimumFractionDigits: hasCents ? 2 : 0,
-    maximumFractionDigits: hasCents ? 2 : 0,
-  }).format(cents / 100);
-}
-
 function emptyState(title: string, body: string): HTMLDivElement {
   const wrap = el('div', 'tb-empty');
   wrap.append(el('strong', undefined, title), document.createTextNode(body));
@@ -302,8 +294,6 @@ function copy(locale: Locale) {
     hotelsFail: en
       ? 'The hotels view could not be loaded.'
       : 'Não foi possível carregar a vista de hotéis.',
-    budget: (amount: string) =>
-      en ? `Typical total ${amount}` : `Total típico ${amount}`,
   };
 }
 
@@ -535,6 +525,8 @@ export function mountCity(
   let hotelsEpoch = 0;
   let hotelsDispose: (() => void) | null = null;
   let routeEpoch = 0;
+  let routeWanted = true;
+  let routePhase: RoutePhase = 'idle';
   let searchFitTimer = 0;
 
   const head = el('header', 'tb-city-head');
@@ -602,15 +594,44 @@ export function mountCity(
     return { title: option.title, summary: option.summary };
   };
 
-  const budgetText = (day: ItineraryDay, locale: Locale): string | null => {
-    try {
-      const budget = computeDayBudget({ ...day, stops: activeStops(day) }, byId);
-      const total = budget.foodEur + budget.ticketsEur;
-      if (!Number.isFinite(total) || total <= 0) return null;
-      return copy(locale).budget(formatEur(total, locale));
-    } catch {
-      return null;
+  const placeCoords = () => {
+    const coords = new Map<string, { id: string; lat: number; lng: number }>();
+    for (const place of city.places) {
+      coords.set(place.id, { id: place.id, lat: place.lat, lng: place.lng });
     }
+    return coords;
+  };
+
+  const syncRouteChrome = () => {
+    body.querySelectorAll<HTMLButtonElement>('.tb-day__route').forEach((button) => {
+      const index = Number(button.closest<HTMLElement>('[data-day-index]')?.dataset.dayIndex);
+      const phase: RoutePhase =
+        routeWanted && index === selectedDayIndex ? routePhase : 'idle';
+      paintRouteButton(button, phase, shell.locale());
+    });
+  };
+
+  const toggleRoute = (index: number) => {
+    const section = body.querySelector<HTMLDetailsElement>(`[data-day-index="${index}"]`);
+    const showing = routeWanted && selectedDayIndex === index && routePhase !== 'idle';
+    if (showing) {
+      routeWanted = false;
+      routePhase = 'idle';
+      routeEpoch += 1;
+      map.setRoute([]);
+      syncRouteChrome();
+      return;
+    }
+    routeWanted = true;
+    const changed = selectedDayIndex !== index;
+    selectedDayIndex = index;
+    if (section && !section.open) {
+      section.open = true;
+      return;
+    }
+    markSelectedDay();
+    showItineraryMap({ fit: true });
+    if (changed) publish();
   };
 
   const paintChrome = () => {
@@ -686,15 +707,16 @@ export function mountCity(
   const drawDayRoute = (index: number, fit: boolean) => {
     const epoch = ++routeEpoch;
     const day = itinerary?.days[index];
-    if (!day) {
+    if (!day || !routeWanted) {
+      routePhase = 'idle';
       map.setRoute([]);
+      syncRouteChrome();
       return;
     }
+    routePhase = 'drawing';
+    syncRouteChrome();
     const route = primaryDayRoute(day, activeStops(day), new Set(byId.keys()));
-    const coords = new Map<string, PlaceCoord>();
-    for (const place of city.places) {
-      coords.set(place.id, { id: place.id, lat: place.lat, lng: place.lng });
-    }
+    const coords = placeCoords();
     const arrival = selectedArrival(day)?.id;
     let legs = legsForDay(day.id, arrival);
     if (!legs.length) legs = route.fallback;
@@ -705,8 +727,14 @@ export function mountCity(
       .then((built) => {
         if (disposed || epoch !== routeEpoch || tab !== 'itinerary') return;
         map.setRoute(built.segments);
+        routePhase = 'on';
+        syncRouteChrome();
       })
-      .catch(() => undefined);
+      .catch(() => {
+        if (disposed || epoch !== routeEpoch) return;
+        routePhase = 'on';
+        syncRouteChrome();
+      });
   };
 
   const showItineraryMap = (opts: { fit: boolean }) => {
@@ -922,19 +950,26 @@ export function mountCity(
       return;
     }
 
+    body.append(itineraryIntro(itinerary, byId, locale));
+
     itinerary.days.forEach((day, index) => {
       const section = el('details', 'tb-day');
       section.dataset.dayIndex = String(index);
+      section.dataset.dayId = day.id;
       section.open = index === selectedDayIndex;
       if (index === selectedDayIndex) section.setAttribute('aria-current', 'true');
       section.addEventListener('toggle', () => {
         if (!section.open) {
           if (selectedDayIndex === index) {
+            routeWanted = false;
+            routePhase = 'idle';
             routeEpoch += 1;
             map.setRoute([]);
+            syncRouteChrome();
           }
           return;
         }
+        routeWanted = true;
         const changed = selectedDayIndex !== index;
         selectedDayIndex = index;
         markSelectedDay();
@@ -942,11 +977,21 @@ export function mountCity(
         if (changed) publish();
       });
 
-      const heading = dayHeading(day);
-      const title = el('summary', 'tb-day-title');
-      title.textContent = pickLocale(locale, heading.title);
-      section.append(title);
+      const stops = activeStops(day);
+      const ids = primaryDayRoute(day, stops, new Set(byId.keys())).ids;
+      const phase: RoutePhase = routeWanted && index === selectedDayIndex ? routePhase : 'idle';
+      section.append(
+        daySummary({
+          dayNumber: day.day,
+          stops,
+          phase,
+          mapsUrl: dayDirectionsUrl(ids, placeCoords()),
+          locale,
+          onRoute: () => toggleRoute(index),
+        }),
+      );
 
+      const heading = dayHeading(day);
       if (heading.summary) {
         section.append(el('p', 'tb-meta tb-day-summary', pickLocale(locale, heading.summary)));
       }
@@ -955,31 +1000,26 @@ export function mountCity(
       if (day.arrivals?.length) {
         const control = el('div', 'tb-locale');
         control.setAttribute('role', 'group');
-        control.setAttribute(
-          'aria-label',
-          locale === 'en' ? 'Arrival' : 'Chegada',
-        );
+        control.setAttribute('aria-label', pickLocale(locale, travelUi.itineraryArrivalAirport));
         for (const item of day.arrivals) {
           const button = el('button', undefined, pickLocale(locale, item.label));
           button.type = 'button';
           button.dataset.arrivalDay = day.id;
           button.dataset.arrivalId = item.id;
-          button.setAttribute(
-            'aria-pressed',
-            option?.id === item.id ? 'true' : 'false',
-          );
+          button.setAttribute('aria-pressed', option?.id === item.id ? 'true' : 'false');
           control.append(button);
         }
         segmented(control);
         section.append(control);
       }
 
-      const budget = budgetText(day, locale);
-      if (budget) section.append(el('p', 'tb-meta tb-budget', budget));
+      const budget = dayBudgetEl(day, stops, byId, locale);
+      if (budget) section.append(budget);
 
       section.append(stopList(day, index, locale));
       body.append(section);
     });
+    syncRouteChrome();
   };
 
   const stopList = (day: ItineraryDay, index: number, locale: Locale) => {
@@ -1012,38 +1052,6 @@ export function mountCity(
       list.append(row);
     }
     return list;
-  };
-
-  const patchDay = (section: HTMLElement, day: ItineraryDay, index: number) => {
-    const locale = shell.locale();
-    const heading = dayHeading(day);
-    const title = section.querySelector('.tb-day-title');
-    if (title) title.textContent = pickLocale(locale, heading.title);
-    const summaryText = heading.summary ? pickLocale(locale, heading.summary) : '';
-    let summary = section.querySelector<HTMLElement>('.tb-day-summary');
-    if (summaryText) {
-      if (!summary) {
-        summary = el('p', 'tb-meta tb-day-summary', summaryText);
-        title?.after(summary);
-      } else summary.textContent = summaryText;
-    } else summary?.remove();
-    const chosen = selectedArrival(day)?.id;
-    section.querySelectorAll<HTMLButtonElement>('[data-arrival-id]').forEach((button) => {
-      button.setAttribute('aria-pressed', button.dataset.arrivalId === chosen ? 'true' : 'false');
-    });
-    const budget = budgetText(day, locale);
-    let budgetEl = section.querySelector<HTMLElement>('.tb-budget');
-    if (budget) {
-      if (!budgetEl) {
-        budgetEl = el('p', 'tb-meta tb-budget', budget);
-        const anchor = section.querySelector('.tb-locale') ?? summary ?? title;
-        anchor?.after(budgetEl);
-      } else budgetEl.textContent = budget;
-    } else budgetEl?.remove();
-    section.querySelector('.tb-stop-list')?.replaceWith(stopList(day, index, locale));
-    const control = section.querySelector<HTMLElement>('.tb-locale');
-    if (control) segmented(control);
-    keepOrigin();
   };
 
   const closeHotels = () => {
@@ -1154,11 +1162,15 @@ export function mountCity(
         Boolean(id) && stops.some((stop) => stop.placeId === id && byId.has(stop.placeId));
       if (!stillThere(currentStopId)) currentStopId = null;
       if (currentPlaceId && !stillThere(currentPlaceId)) closePlace({ focus: false });
-      const section = body.querySelector<HTMLElement>(`[data-day-index="${dayIndex}"]`);
-      if (section) {
-        markSelectedDay();
-        patchDay(section, day, dayIndex);
-      } else renderItinerary();
+      const top = main.scrollTop;
+      const arrivalId = arrivalBtn.dataset.arrivalId;
+      renderItinerary();
+      main.scrollTop = top;
+      body
+        .querySelector<HTMLButtonElement>(
+          `[data-arrival-day="${CSS.escape(day.id)}"][data-arrival-id="${CSS.escape(arrivalId)}"]`,
+        )
+        ?.focus();
       showItineraryMap({ fit: true });
       return;
     }

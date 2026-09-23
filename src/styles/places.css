@@ -140,12 +140,88 @@
   padding-top: 0;
 }
 
-.tb-day-title {
-  margin: 0 0 4px;
+.tb-itin-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-16);
+}
+
+.tb-itin-title {
+  margin: 0;
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-title);
+  line-height: var(--leading-title);
+}
+
+.tb-budgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.tb-budget-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  height: var(--h-lg);
+  padding: 0 var(--spacing-8);
+  border-radius: var(--r-pill);
+  background: var(--color-canvas);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-budget-chip:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.tb-budget-chip__unit {
+  color: var(--color-mid-gray);
+}
+
+.tb-day__count {
+  min-width: 0;
   font-size: var(--text-h3);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.02em;
   line-height: 1.3;
+}
+
+.tb-day__actions {
+  display: inline-flex;
+  flex: none;
+  gap: var(--spacing-4);
+  margin-left: auto;
+  opacity: 0;
+}
+
+.tb-day:is(:hover, :focus-within) .tb-day__actions {
+  opacity: 1;
+}
+
+.tb-day__route.is-drawing .material-symbols-rounded {
+  animation: tb-route-spin var(--dur-slow) linear infinite;
+}
+
+@keyframes tb-route-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (hover: none) {
+  .tb-day__actions {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tb-day__route.is-drawing .material-symbols-rounded {
+    animation: none;
+  }
 }
 
 p.tb-day-summary,
@@ -249,8 +325,8 @@ p.tb-budget {
 .tb-day > summary {
   display: flex;
   align-items: center;
-  gap: var(--spacing-4);
-  width: fit-content;
+  gap: var(--spacing-8);
+  width: 100%;
   max-width: 100%;
   padding: var(--inset-row) var(--spacing-8);
   border-radius: var(--r-pill);
