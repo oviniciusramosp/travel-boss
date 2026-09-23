@@ -17,7 +17,7 @@ import {
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { iconLink } from '../ui/controls';
 import { row } from '../ui/row';
-import { closePlace, onPlaceClose, openPlace } from '../views/place-panel';
+import { closePlace, onPlaceClose, openPlace, openPlaceId, repaintPlace } from '../views/place-panel';
 import { parseTrip, type Trip } from './parse';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -154,7 +154,9 @@ export function mountTrip(
   let alive = true;
   const stopsUnsub = { fn: () => {} };
   const offLocale = shell.onLocale(() => {
-    if (alive && current) paint(current);
+    if (!alive || !current) return;
+    paint(current);
+    repaintPlace(shell.locale());
   });
   const offQuery = shell.onQuery(() => applyQuery());
   const offExport = shell.onExport(() => {
@@ -237,6 +239,16 @@ export function mountTrip(
     map.setPins('hotel', []);
     if (fit && pins.length) map.fit();
     drawTripRoutes();
+    const openId = openPlaceId();
+    if (!openId || !trip) return;
+    const visible = trip.cities.some((city) => {
+      if (cityFilter && city.slug !== cityFilter) return false;
+      const record = getTravelCity(city.slug);
+      const place = record?.places.find((item) => item.id === openId);
+      if (!place || !enabledCategories.has(place.category)) return false;
+      return city.days.some((day) => day.stops.some((stop) => stop.placeId === openId));
+    });
+    if (!visible) closePlace({ focus: false });
   }
 
   const offFiles = onTripFiles(() => {

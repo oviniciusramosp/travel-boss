@@ -16,6 +16,8 @@ type CloseOptions = { focus?: boolean };
 type Panel = {
   open(place: TravelPlace, city: TravelCity, locale: Locale, origin: HTMLElement | null): void;
   close(opts?: CloseOptions): void;
+  id(): string | null;
+  relabel(locale: Locale): void;
 };
 
 let panel: Panel | null = null;
@@ -223,6 +225,15 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     close(opts) {
       dismiss(opts);
     },
+    id() {
+      return current?.place.id ?? null;
+    },
+    relabel(locale) {
+      if (!current) return;
+      current = { ...current, locale };
+      paint();
+      syncPad();
+    },
   };
 }
 
@@ -237,4 +248,13 @@ export function openPlace(
 
 export function closePlace(opts?: CloseOptions): void {
   panel?.close(opts);
+}
+
+export function openPlaceId(): string | null {
+  return panel?.id() ?? null;
+}
+
+/** New language only. Does not reset the photo or move the camera. */
+export function repaintPlace(locale: Locale): void {
+  panel?.relabel(locale);
 }

@@ -31,7 +31,7 @@ import {
 } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
-import { closePlace, onPlaceClose, openPlace } from './place-panel';
+import { closePlace, onPlaceClose, openPlace, repaintPlace } from './place-panel';
 
 type Tab = 'places' | 'itinerary' | 'hotels';
 
@@ -659,7 +659,7 @@ export function mountCity(
       if (enabled.has(category)) enabled.delete(category);
       else enabled.add(category);
       if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
-        currentPlaceId = null;
+        closePlace({ focus: false });
       }
       paintChrome();
       renderPlaces();
@@ -675,12 +675,10 @@ export function mountCity(
       arrivalByDay.set(day.id, arrivalBtn.dataset.arrivalId);
       selectedDayIndex = dayIndex;
       const stops = activeStops(day);
-      if (
-        currentStopId &&
-        !stops.some((stop) => stop.placeId === currentStopId && byId.has(stop.placeId))
-      ) {
-        currentStopId = null;
-      }
+      const stillThere = (id: string | null) =>
+        Boolean(id) && stops.some((stop) => stop.placeId === id && byId.has(stop.placeId));
+      if (!stillThere(currentStopId)) currentStopId = null;
+      if (currentPlaceId && !stillThere(currentPlaceId)) closePlace({ focus: false });
       renderItinerary();
       showItineraryMap({ fit: true });
       return;
@@ -704,6 +702,7 @@ export function mountCity(
 
   const unsubLocale = shell.onLocale(() => {
     paintChrome();
+    repaintPlace(shell.locale());
     if (tab === 'hotels') {
       const loading = body.querySelector<HTMLElement>('[data-hotels-loading]');
       if (loading) loading.textContent = copy(shell.locale()).loadingHotels;
@@ -720,7 +719,7 @@ export function mountCity(
     query = value;
     if (tab !== 'places') return;
     if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
-      currentPlaceId = null;
+      closePlace({ focus: false });
     }
     paintChrome();
     renderPlaces();
@@ -741,6 +740,7 @@ export function mountCity(
     const leavingHotels = tab === 'hotels';
     tab = next;
     if (leavingHotels) closeHotels();
+    closePlace({ focus: false });
     paintChrome();
     renderBody();
     if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
