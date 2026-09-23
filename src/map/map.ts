@@ -25,6 +25,7 @@ import {
   selectionFrame,
 } from './camera';
 import { coveredInsets, mergeInsets, type Insets } from './chrome';
+import { attachMapControls } from './controls';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
@@ -72,7 +73,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   const reducedAtStart = prefersReducedMotion();
   const leafletMap: LeafletMap = createMap(frame, {
     preferCanvas: true,
-    zoomControl: true,
+    zoomControl: false,
     scrollWheelZoom: true,
     zoomAnimation: !reducedAtStart,
     fadeAnimation: !reducedAtStart,
@@ -273,7 +274,7 @@ export function mountMap(host: HTMLElement): MapHandle {
     });
   };
 
-  return {
+  const handle: MapHandle = {
     setPins(kind, pins) {
       const index = markers[kind];
       const metas = pinMeta[kind];
@@ -481,4 +482,6 @@ export function mountMap(host: HTMLElement): MapHandle {
       };
     },
   };
+  attachMapControls(leafletMap, host, () => handle.fit());
+  return handle;
 }
