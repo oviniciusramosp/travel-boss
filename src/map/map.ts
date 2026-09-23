@@ -330,6 +330,15 @@ export function mountMap(host: HTMLElement): MapHandle {
       });
     },
 
+    inView(lat, lng) {
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) return true;
+      const size = leafletMap.getSize();
+      if (size.x < 1 || size.y < 1) return true;
+      const bounds = leafletMap.getBounds();
+      if (!bounds.isValid()) return true;
+      return bounds.contains([lat, lng]);
+    },
+
     hover(id) {
       hoveredId = id;
       paintAll();

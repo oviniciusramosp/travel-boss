@@ -36,6 +36,8 @@ export type MapHandle = {
   /** Walk dashes and transit spines. Pass [] to clear. */
   setRoute(segments: MapRouteSegment[], opts?: { fit?: boolean }): void;
   fit(): void;
+  /** Whether a coordinate is inside the current map view. */
+  inView(lat: number, lng: number): boolean;
   /** Center a coordinate. Zoom defaults to a block-level view. */
   flyTo(lat: number, lng: number, zoom?: number): void;
   /** Highlight a pin without moving the camera. `null` clears the hover. */

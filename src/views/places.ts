@@ -145,6 +145,18 @@ function toPins(places: TravelPlace[], kind: MapPin['kind'], locale: Locale): Ma
   return pins;
 }
 
+export const SEARCH_REFIT_MS = 400;
+
+/** Refit only when a result sits outside the current view. */
+export function searchLeavesView(
+  points: ReadonlyArray<{ lat: number; lng: number }>,
+  inView: (lat: number, lng: number) => boolean,
+): boolean {
+  return points.some(
+    (point) => Number.isFinite(point.lat) && Number.isFinite(point.lng) && !inView(point.lat, point.lng),
+  );
+}
+
 /** Required stops only. Fallback legs connect those ids, never an optional stop. */
 export function primaryDayRoute(
   day: ItineraryDay,
@@ -280,6 +292,7 @@ export function mountCity(
   let hotelsEpoch = 0;
   let hotelsDispose: (() => void) | null = null;
   let routeEpoch = 0;
+  let searchFitTimer = 0;
 
   const head = el('header', 'tb-city-head');
   const metaEl = el('p', 'tb-meta');
@@ -777,7 +790,15 @@ export function mountCity(
     }
     paintChrome();
     renderPlaces();
-    showPlacePins({ fit: true, pan: false });
+    showPlacePins({ fit: false, pan: false });
+    window.clearTimeout(searchFitTimer);
+    searchFitTimer = window.setTimeout(() => {
+      searchFitTimer = 0;
+      if (disposed || tab !== 'places') return;
+      const places = visiblePlaces();
+      if (!searchLeavesView(places, (lat, lng) => map.inView(lat, lng))) return;
+      map.fit();
+    }, SEARCH_REFIT_MS);
   });
 
   const unsubSelect = map.onSelect((id) => {
@@ -791,6 +812,8 @@ export function mountCity(
 
   function setTab(next: Tab) {
     if (next === tab) return;
+    window.clearTimeout(searchFitTimer);
+    searchFitTimer = 0;
     const leavingHotels = tab === 'hotels';
     tab = next;
     if (leavingHotels) closeHotels();
@@ -810,6 +833,7 @@ export function mountCity(
     dispose() {
       if (disposed) return;
       disposed = true;
+      window.clearTimeout(searchFitTimer);
       hotelsEpoch += 1;
       unsubLocale();
       unsubQuery();
