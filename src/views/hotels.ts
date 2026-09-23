@@ -2,8 +2,10 @@ import type { Shell } from '../app/shell';
 import { getTravelCity, pickLocale, placeCategoryMeta } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
+import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
+import { scoreCard } from './hotel-rank';
 
 type Locale = 'en' | 'pt-BR';
 type Localized = { en: string; 'pt-BR': string };
@@ -869,11 +871,68 @@ export function mountHotels(
     const kmLabel = distanceKm(hotel);
     if (kmLabel != null) facts.append(el('span', undefined, `${formatKm(kmLabel, 1)} km`));
 
-    article.append(head, facts);
-    if (hotel.booking.address) article.append(el('p', 'tb-meta', hotel.booking.address));
+    const body = el('div', 'tb-hotels__body');
+    body.append(head, facts);
+    if (hotel.booking.address) body.append(el('p', 'tb-meta', hotel.booking.address));
+    article.append(body);
+
+    const ranked = scoreCard(locale(), hotel);
+    if (ranked) {
+      const block = el('section', 'tb-hotels__score');
+      block.setAttribute('aria-label', ranked.eyebrow);
+      const ring = el('div', 'tb-hotels__ring');
+      ring.style.setProperty('--hotel-score', `${ranked.score ?? 0}%`);
+      ring.setAttribute('aria-label', ranked.aria);
+      const figure = el('span');
+      figure.append(el('strong', undefined, ranked.score == null ? '—' : String(ranked.score)));
+      ring.append(figure);
+      const copy = el('div', 'tb-hotels__score-copy');
+      copy.append(
+        el('span', 'tb-hotels__eyebrow', ranked.eyebrow),
+        el('strong', undefined, ranked.title),
+        el('small', undefined, ranked.detail),
+      );
+      const model = el('div', 'tb-hotels__model');
+      model.append(ring, copy);
+      block.append(model);
+      if (ranked.airbnbNote) block.append(el('p', 'tb-hotels__fine', ranked.airbnbNote));
+      if (ranked.bars.length) {
+        const meters = el('div', 'tb-hotels__meters');
+        for (const bar of ranked.bars) {
+          const meter = el('div', 'tb-hotels__meter');
+          meter.append(el('span', undefined, bar.label), el('strong', undefined, bar.text));
+          const track = el('span', 'tb-hotels__track');
+          track.setAttribute('role', 'meter');
+          track.setAttribute('aria-valuemin', '0');
+          track.setAttribute('aria-valuemax', '10');
+          track.setAttribute('aria-valuenow', bar.value == null ? '0' : String(bar.value));
+          track.setAttribute(
+            'aria-label',
+            `${bar.label}: ${bar.value == null ? t('unavailable', 'indisponível') : bar.text}`,
+          );
+          const fill = el('span');
+          fill.style.width = `${Math.max(0, Math.min(10, bar.value ?? 0)) * 10}%`;
+          track.append(fill);
+          meter.append(track);
+          meters.append(meter);
+        }
+        block.append(meters);
+      }
+      const requirements = el('div', 'tb-hotels__requirements');
+      requirements.append(el('span', undefined, ranked.wifi), el('span', undefined, ranked.staff));
+      block.append(requirements);
+      if (ranked.requirementNote) block.append(el('p', 'tb-hotels__fine', ranked.requirementNote));
+      const safety = el('p', ranked.safety.caution ? 'tb-hotels__caution' : undefined);
+      if (ranked.safety.caution) safety.append(icon('warning', { size: 16 }));
+      safety.append(document.createTextNode(ranked.safety.text));
+      block.append(safety);
+      if (ranked.coverage) block.append(el('p', 'tb-hotels__fine', ranked.coverage));
+      block.append(el('p', undefined, ranked.walking));
+      body.append(block);
+    }
 
     const ranking = hotel.ranking;
-    if (ranking && (ranking.eligibility || ranking.score != null || ranking.walkingMinutes != null)) {
+    if (!ranked && ranking && (ranking.eligibility || ranking.score != null || ranking.walkingMinutes != null)) {
       const line = el('p', 'tb-hotels__rank');
       const statusName = ranking.eligibility?.status;
       const mark =
@@ -899,15 +958,20 @@ export function mountHotels(
       } else {
         line.textContent = [mark, rest].filter(Boolean).join(' · ');
       }
-      if (line.textContent || line.childNodes.length) article.append(line);
+      if (line.textContent || line.childNodes.length) body.append(line);
     }
 
-    addMeta(article, categoryLine(hotel));
-    addMeta(article, wifiLine(hotel));
+    if (!ranked) {
+      addMeta(body, categoryLine(hotel));
+      addMeta(body, wifiLine(hotel));
+    }
     if (isAirbnb) {
       addMeta(
-        article,
-        t('Approximate location. Total as shown by Airbnb.', 'Localização aproximada. Total informado pelo Airbnb.'),
+        body,
+        t(
+          'Approximate location. Total as shown by Airbnb.',
+          'Localização aproximada. Total informado pelo Airbnb.',
+        ),
       );
     }
     const why = explain(hotel);
@@ -915,7 +979,7 @@ export function mountHotels(
       const box = el('details', 'tb-hotels__why');
       box.append(el('summary', 'tb-meta', t('Why this score', 'Por que esta nota')));
       box.append(el('p', 'tb-meta', why));
-      article.append(box);
+      body.append(box);
     }
 
     const links = el('div', 'tb-hotels__links');
@@ -935,7 +999,7 @@ export function mountHotels(
       anchor.rel = 'noopener';
       links.append(anchor);
     }
-    if (links.childNodes.length) article.append(links);
+    if (links.childNodes.length) body.append(links);
     return article;
   };
 
