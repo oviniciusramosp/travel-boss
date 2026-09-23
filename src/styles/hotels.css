@@ -84,7 +84,16 @@
 }
 
 .tb-hotels__field input[readonly] {
+  border-color: transparent;
+  background: transparent;
+  padding-left: 0;
   cursor: default;
+}
+
+.tb-hotels__field input[readonly]:hover,
+.tb-hotels__field input[readonly]:focus-visible {
+  border-color: transparent;
+  outline: none;
 }
 
 .tb-hotels__range {

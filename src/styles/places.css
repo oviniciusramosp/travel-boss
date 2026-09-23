@@ -270,12 +270,44 @@
 }
 
 .tb-day > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--inset-row) var(--spacing-8);
+  border-radius: var(--r-pill);
   cursor: pointer;
   list-style: none;
 }
 
 .tb-day > summary::-webkit-details-marker {
   display: none;
+}
+
+.tb-day > summary::marker {
+  content: '';
+}
+
+.tb-day > summary::before {
+  content: 'expand_more';
+  flex: none;
+  font-family: 'Material Symbols Rounded', sans-serif;
+  font-size: var(--icon-md);
+  font-weight: normal;
+  line-height: 1;
+  font-feature-settings: 'liga';
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+  transform: rotate(-90deg);
+  transition: transform var(--dur-base) var(--ease-in-out);
+}
+
+.tb-day[open] > summary::before {
+  transform: rotate(0deg);
 }
 
 .tb-place-panel {

@@ -305,6 +305,8 @@ export function mountHotels(
   cityInput.required = true;
   cityInput.maxLength = 80;
   cityInput.readOnly = true;
+  cityInput.tabIndex = -1;
+  cityInput.setAttribute('aria-readonly', 'true');
   cityInput.value = city.name;
   cityInput.spellcheck = false;
 

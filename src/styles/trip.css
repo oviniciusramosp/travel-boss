@@ -28,6 +28,10 @@
   border: 1px solid var(--color-hairline);
 }
 
+.tb-rail .tb-nav:hover:not([aria-pressed='true']) {
+  background: var(--color-hover);
+}
+
 .tb-rail .tb-nav[aria-pressed='true'] {
   background: var(--color-ink);
   color: var(--color-on-ink);

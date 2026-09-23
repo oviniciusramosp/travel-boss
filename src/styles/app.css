@@ -462,9 +462,14 @@ button {
   border: 0;
 }
 
-.tb-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
+.tb-btn:disabled,
+.tb-btn-ghost:disabled,
+.tb-btn-outline:disabled,
+.tb-icon-btn:disabled,
+.tb-input:disabled,
+.tb-select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .tb-btn-ghost {

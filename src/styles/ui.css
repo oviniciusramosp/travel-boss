@@ -68,3 +68,88 @@
     opacity var(--dur-fast) var(--ease-out),
     transform var(--dur-fast) var(--ease-out);
 }
+
+.tb-btn,
+.tb-btn-ghost,
+.tb-btn-outline,
+.tb-icon-btn,
+.tb-locale button,
+.tb-nav,
+.tb-place,
+.tb-stop,
+.tb-stops li,
+.tb-hotels__chip,
+.tb-day > summary,
+.tb-input,
+.tb-select {
+  transition:
+    background-color var(--dur-instant) var(--ease-out),
+    color var(--dur-instant) var(--ease-out),
+    border-color var(--dur-instant) var(--ease-out),
+    transform var(--dur-instant) var(--ease-out);
+}
+
+.tb-btn:hover:not(:disabled),
+.tb-icon-btn--solid:hover:not(:disabled) {
+  background: var(--color-ink-soft);
+}
+
+.tb-btn-ghost:hover:not(:disabled),
+.tb-btn-outline:hover:not(:disabled):not([aria-pressed='true']),
+.tb-icon-btn--ghost:hover:not(:disabled),
+.tb-icon-btn--outline:hover:not(:disabled),
+.tb-locale button:hover:not([aria-pressed='true']),
+.tb-nav:hover:not([aria-current='true']),
+.tb-place:hover:not([aria-current='true']),
+.tb-stop:hover:not([aria-current='true']),
+.tb-stops li:hover:not([aria-current='true']),
+.tb-day > summary:hover {
+  background: var(--color-hover);
+}
+
+.tb-hotels__chip.tb-badge:hover {
+  background: var(--color-ink-soft);
+}
+
+.tb-hotels__chip.tb-badge-soft:hover {
+  background: var(--color-hover);
+}
+
+.tb-btn:active:not(:disabled),
+.tb-btn-ghost:active:not(:disabled),
+.tb-btn-outline:active:not(:disabled),
+.tb-icon-btn:active:not(:disabled),
+.tb-locale button:active,
+.tb-nav:active,
+.tb-place:active,
+.tb-stop:active,
+.tb-stops li:active,
+.tb-hotels__chip:active,
+.tb-day > summary:active,
+.tb-input:active:not(:disabled):not([readonly]),
+.tb-select:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.tb-btn-ghost:active:not(:disabled),
+.tb-btn-outline:active:not(:disabled),
+.tb-icon-btn--ghost:active:not(:disabled),
+.tb-icon-btn--outline:active:not(:disabled),
+.tb-locale button:active:not([aria-pressed='true']),
+.tb-nav:active:not([aria-current='true']),
+.tb-place:active:not([aria-current='true']),
+.tb-stop:active:not([aria-current='true']),
+.tb-hotels__chip.tb-badge-soft:active,
+.tb-day > summary:active {
+  background: var(--color-press);
+}
+
+.tb-input:hover:not(:disabled):not([readonly]),
+.tb-select:hover:not(:disabled) {
+  border-color: var(--color-mid-gray);
+}
+
+.tb-icon-btn[aria-pressed='true'] {
+  background: var(--color-paper);
+  box-shadow: var(--shadow-subtle);
+}
