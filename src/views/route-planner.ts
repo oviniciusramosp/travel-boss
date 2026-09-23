@@ -1,13 +1,51 @@
 import { read, write } from '../app/store';
 import { pickLocale, travelUi, type Locale } from '../catalog';
+import { haversineKm } from '../map/camera';
 import { fetchWalkingRoute } from '../map/walk-route';
-import type { MapHandle } from '../map/types';
+import type { MapHandle, MapPin } from '../map/types';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 
 export const MAX_ROUTE_STOPS = 8;
 export const USER_LOCATION_ID = 'user-location';
+export const CITY_FAR_KM = 80;
+
+export type GeoPermission = 'granted' | 'denied' | 'prompt' | 'unknown';
+export type LocateFailure = 'unsupported' | 'denied' | 'unavailable' | 'timeout';
+
+export function locateFailure(error: { code?: number; message?: string } | null): LocateFailure {
+  const code = error?.code;
+  const message = error?.message;
+  if (message === 'unsupported') return 'unsupported';
+  if (code === 1 || message === 'denied') return 'denied';
+  if (code === 3 || message === 'timeout') return 'timeout';
+  return 'unavailable';
+}
+
+export function isFarFromCity(
+  user: { lat: number; lng: number },
+  city: { lat: number; lng: number },
+  km = CITY_FAR_KM,
+): boolean {
+  return haversineKm(user.lat, user.lng, city.lat, city.lng) > km;
+}
+
+export function withUserOrigin(stops: readonly RouteStop[], user: RouteStop): RouteStop[] {
+  const rest = stops.filter((stop) => stop.id !== USER_LOCATION_ID && !stop.user);
+  return [{ ...user, id: USER_LOCATION_ID, user: true }, ...rest].slice(0, MAX_ROUTE_STOPS);
+}
+
+export function locateFailureLabel(failure: LocateFailure, locale: Locale): string {
+  if (failure === 'denied') return pickLocale(locale, travelUi.locateDenied);
+  if (failure === 'timeout') {
+    return pickLocale(locale, {
+      en: 'Location request timed out',
+      'pt-BR': 'A localização demorou demais',
+    });
+  }
+  return pickLocale(locale, travelUi.locateUnavailable);
+}
 
 export type RouteMode = 'walk' | 'transit';
 
@@ -173,10 +211,13 @@ type Session = {
   slug: string;
   stops: RouteStop[];
   mode: RouteMode;
+  city: { lat: number; lng: number };
   byId: Map<string, RoutePlace>;
   locale: () => Locale;
   onChange?: () => void;
 };
+
+type UserFix = { lat: number; lng: number; accuracyM?: number };
 
 let session: Session | null = null;
 
@@ -214,6 +255,13 @@ let barActive: () => boolean = () => true;
 let note: { text: string; kind: RouteNoteKind } | null = null;
 let mapHandle: MapHandle | null = null;
 let drawSeq = 0;
+let locateSeq = 0;
+let userFix: UserFix | null = null;
+let originFar = false;
+let locating = false;
+let permission: GeoPermission = 'unknown';
+let locateButton: HTMLButtonElement | null = null;
+let locateToast: HTMLElement | null = null;
 
 function syncActions(): void {
   if (!session || typeof document === 'undefined') return;
@@ -233,6 +281,7 @@ function refresh(): void {
   const stops = session.stops;
   const user = (stop: RouteStop) => Boolean(stop.user) || stop.id === USER_LOCATION_ID;
   bar.root.hidden = stops.length === 0 || !barActive();
+  if (!bar.root.hidden && locateToast) locateToast.hidden = true;
   bar.title.textContent = pickLocale(locale, travelUi.routeTitle);
   bar.root.setAttribute('aria-label', bar.title.textContent);
   const clear = pickLocale(locale, travelUi.routeClear);
@@ -244,6 +293,7 @@ function refresh(): void {
   const fromText = bar.fromMe.querySelector('span:last-child');
   if (fromText) fromText.textContent = from;
   bar.fromMe.hidden = stops.length === 0 || stops.some(user);
+  bar.fromMe.disabled = locating;
   bar.stopsEl.replaceChildren();
   stops.forEach((stop, index) => {
     const li = el('li', user(stop) ? 'tb-route__stop is-user' : 'tb-route__stop');
@@ -293,6 +343,12 @@ function drawRoutePreview(fit: boolean): void {
     handle.setRoute([]);
     return;
   }
+  const userOrigin = stops.some((stop) => stop.user || stop.id === USER_LOCATION_ID);
+  if (originFar && userOrigin) {
+    handle.setRoute([]);
+    setRouteNote({ text: pickLocale(session.locale(), travelUi.locateFar), kind: 'hint' });
+    return;
+  }
   if (mode === 'transit') {
     handle.setRoute(
       [{ mode: 'transit', dash: true, latlngs: stops.map((stop) => [stop.lat, stop.lng]) }],
@@ -324,6 +380,7 @@ function apply(next: RouteStop[], mode: RouteMode): void {
   if (session.mode === mode && sameStops(session.stops, next)) return;
   session.stops = next;
   session.mode = mode;
+  if (!next.some((stop) => stop.user || stop.id === USER_LOCATION_ID)) originFar = false;
   note = null;
   persist(session);
   refresh();
@@ -342,8 +399,167 @@ export function setRouteNote(next: { text: string; kind: RouteNoteKind } | null)
   refresh();
 }
 
+function userPins(): MapPin[] {
+  if (!userFix || !session) return [];
+  return [{
+    id: USER_LOCATION_ID,
+    lat: userFix.lat,
+    lng: userFix.lng,
+    label: pickLocale(session.locale(), travelUi.myLocation),
+    kind: 'stop',
+    number: 0,
+  }];
+}
+
+function syncAccuracy(): void {
+  if (!mapHandle || !barActive()) return;
+  const fix = userFix;
+  if (!fix) return;
+  if (fix.accuracyM && fix.accuracyM > 0 && fix.accuracyM < 2000) {
+    mapHandle.setRadius({ lat: fix.lat, lng: fix.lng, km: fix.accuracyM / 1000 });
+    return;
+  }
+  mapHandle.setRadius(null);
+}
+
+function paintLocate(): void {
+  if (!locateButton || !session) return;
+  const locale = session.locale();
+  const label = locating
+    ? pickLocale(locale, travelUi.locating)
+    : permission === 'denied'
+      ? pickLocale(locale, travelUi.locateDenied)
+      : pickLocale(locale, travelUi.locateMe);
+  locateButton.setAttribute('aria-label', label);
+  locateButton.setAttribute('data-tip', label);
+  locateButton.dataset.permission = permission;
+  locateButton.setAttribute('aria-busy', locating ? 'true' : 'false');
+  locateButton.setAttribute('aria-pressed', userFix ? 'true' : 'false');
+  locateButton.disabled = locating;
+}
+
+function showStatus(text: string, kind: RouteNoteKind, asStop: boolean): void {
+  const routeOpen = Boolean(session && (session.stops.length > 0 || asStop) && bar && !bar.root.hidden);
+  if (routeOpen) {
+    setRouteNote({ text, kind });
+    if (locateToast) locateToast.hidden = true;
+    return;
+  }
+  if (!locateToast) return;
+  locateToast.hidden = false;
+  locateToast.dataset.kind = kind;
+  locateToast.textContent = text;
+}
+
+function readUserPosition(): Promise<UserFix> {
+  return new Promise((resolve, reject) => {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      reject(new Error('unsupported'));
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        resolve({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+          accuracyM:
+            Number.isFinite(pos.coords.accuracy) && pos.coords.accuracy > 0 ? pos.coords.accuracy : undefined,
+        });
+      },
+      (error) => reject(error),
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 },
+    );
+  });
+}
+
+async function watchPermission(): Promise<void> {
+  try {
+    const status = await navigator.permissions?.query({ name: 'geolocation' });
+    if (!status) return;
+    const applyState = () => {
+      const state = status.state;
+      permission = state === 'granted' || state === 'denied' || state === 'prompt' ? state : 'unknown';
+      paintLocate();
+    };
+    applyState();
+    status.onchange = applyState;
+  } catch {
+    permission = 'unknown';
+  }
+}
+
+function mountLocate(column: HTMLElement): void {
+  const controls = column.querySelector('.tb-map-controls');
+  if (controls && !locateButton) {
+    locateButton = iconButton({ icon: 'my_location', label: travelUi.locateMe.en });
+    locateButton.dataset.locate = 'true';
+    locateButton.addEventListener('click', () => {
+      void beginLocate(false);
+    });
+    controls.append(locateButton);
+  }
+  if (!locateToast) {
+    locateToast = el('p', 'tb-locate-toast');
+    locateToast.hidden = true;
+    locateToast.setAttribute('role', 'status');
+    locateToast.setAttribute('aria-live', 'polite');
+    column.append(locateToast);
+  }
+  paintLocate();
+  void watchPermission();
+}
+
 async function beginLocate(asStop: boolean): Promise<void> {
-  void asStop;
+  if (!session || locating) return;
+  const seq = ++locateSeq;
+  locating = true;
+  paintLocate();
+  refresh();
+  const locale = session.locale();
+  showStatus(pickLocale(locale, travelUi.locating), 'loading', asStop);
+  try {
+    const fix = await readUserPosition();
+    if (seq !== locateSeq || !session) return;
+    userFix = fix;
+    permission = 'granted';
+    originFar = isFarFromCity(fix, session.city);
+    const pin = userPins();
+    if (pin.length && mapHandle) {
+      mapHandle.setPins('stop', pin);
+      if (barActive()) syncAccuracy();
+      mapHandle.flyTo(fix.lat, fix.lng, 15);
+    }
+    if (asStop) {
+      apply(
+        withUserOrigin(session.stops, {
+          id: USER_LOCATION_ID,
+          lat: fix.lat,
+          lng: fix.lng,
+          label: travelUi.myLocation.en,
+          labelPt: travelUi.myLocation['pt-BR'],
+          user: true,
+        }),
+        session.mode,
+      );
+      if (originFar && session) {
+        setRouteNote({ text: pickLocale(session.locale(), travelUi.locateFar), kind: 'hint' });
+      }
+      return;
+    }
+    if (originFar) showStatus(pickLocale(locale, travelUi.locateFar), 'hint', false);
+    else if (locateToast) locateToast.hidden = true;
+  } catch (error) {
+    if (seq !== locateSeq || !session) return;
+    const failure = locateFailure(error as { code?: number; message?: string });
+    if (failure === 'denied') permission = 'denied';
+    showStatus(locateFailureLabel(failure, session.locale()), 'error', asStop);
+  } finally {
+    if (seq === locateSeq) {
+      locating = false;
+      paintLocate();
+      refresh();
+    }
+  }
 }
 
 export function routePlannerOn(): boolean {
@@ -439,12 +655,15 @@ export function mountRoutePlanner(opts: {
   locale: () => Locale;
   column?: HTMLElement | null;
   map?: MapHandle | null;
+  city?: { lat: number; lng: number };
   active?: () => boolean;
   onChange?: () => void;
 }): {
   ids(): string[];
   stopCount(): number;
   badges(): Map<string, number>;
+  userPins(): MapPin[];
+  syncAccuracy(): void;
   draw(fit: boolean): void;
   sync(): void;
   dispose(): void;
@@ -462,23 +681,35 @@ export function mountRoutePlanner(opts: {
   bar = null;
   note = null;
   drawSeq += 1;
+  locateSeq += 1;
+  userFix = null;
+  originFar = false;
+  locating = false;
   mapHandle = opts.map ?? null;
   barActive = opts.active ?? (() => true);
   session = {
     slug: opts.slug,
     stops,
     mode: stored.mode,
+    city: opts.city ?? { lat: 0, lng: 0 },
     byId,
     locale: opts.locale,
     onChange: opts.onChange,
   };
-  if (opts.column) mountBar(opts.column);
+  if (opts.column) {
+    mountBar(opts.column);
+    mountLocate(opts.column);
+  }
   refresh();
   const slug = opts.slug;
   return {
     ids: () => (session?.slug === slug ? placeStopIds(session.stops) : []),
     stopCount: () => (session?.slug === slug ? session.stops.length : 0),
     badges: () => routeStopBadges(session?.slug === slug ? session.stops : []),
+    userPins: () => (session?.slug === slug ? userPins() : []),
+    syncAccuracy() {
+      if (session?.slug === slug) syncAccuracy();
+    },
     draw(fit: boolean) {
       if (session?.slug === slug) drawRoutePreview(fit);
     },
@@ -488,11 +719,19 @@ export function mountRoutePlanner(opts: {
     dispose() {
       if (session?.slug !== slug) return;
       drawSeq += 1;
+      locateSeq += 1;
+      locating = false;
+      userFix = null;
+      originFar = false;
       mapHandle = null;
       session = null;
       note = null;
       bar?.root.remove();
       bar = null;
+      locateButton?.remove();
+      locateButton = null;
+      locateToast?.remove();
+      locateToast = null;
     },
   };
 }

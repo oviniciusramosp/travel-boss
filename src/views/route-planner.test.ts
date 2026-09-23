@@ -8,12 +8,15 @@ import {
   formatRouteDistance,
   formatRouteDuration,
   googleDirectionsUrl,
+  isFarFromCity,
+  locateFailure,
   routeBarHint,
   routeStopBadges,
   routeStorageKey,
   walkPreviewLabel,
   togglePlaceStop,
   USER_LOCATION_ID,
+  withUserOrigin,
   writeStoredRoute,
   type RouteStop,
 } from './route-planner';
@@ -93,6 +96,23 @@ describe('route stops', () => {
     expect(url).toContain('origin=1%2C2');
     expect(url).toContain('waypoints=3%2C4');
     expect(googleDirectionsUrl([{ lat: 1, lng: 2 }], 'walk')).toBeNull();
+  });
+
+  it('maps permission errors and treats 80 km as far', () => {
+    expect(locateFailure({ code: 1 })).toBe('denied');
+    expect(locateFailure({ code: 3 })).toBe('timeout');
+    expect(locateFailure({ message: 'unsupported' })).toBe('unsupported');
+    expect(locateFailure({ code: 2 })).toBe('unavailable');
+    const city = { lat: 48.86, lng: 2.35 };
+    expect(isFarFromCity(city, city)).toBe(false);
+    expect(isFarFromCity({ lat: 0, lng: 0 }, city)).toBe(true);
+    const capped = withUserOrigin(
+      Array.from({ length: 8 }, (_, index) => stop(String(index))),
+      stop(USER_LOCATION_ID, true),
+    );
+    expect(capped).toHaveLength(8);
+    expect(capped[0]?.id).toBe(USER_LOCATION_ID);
+    expect(capped.some((item) => item.id === '7')).toBe(false);
   });
 
   afterEach(() => {

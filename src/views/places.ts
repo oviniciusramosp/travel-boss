@@ -535,6 +535,7 @@ export function mountCity(
     locale: () => shell.locale(),
     column: shell.mapHost.parentElement,
     map,
+    city: { lat: city.lat, lng: city.lng },
     active: () => tab === 'places',
     onChange: () => {
       if (tab === 'places') showPlacePins({ fit: true, pan: false });
@@ -727,8 +728,8 @@ export function mountCity(
   const paintItineraryPins = () => {
     const day = itinerary?.days[selectedDayIndex];
     const numbers = day && routeWanted ? routeNumbers(routedDay(day).ids) : undefined;
-    map.setPins('stop', []);
     map.setPins('place', toPins(city.places, 'place', shell.locale(), numbers));
+    map.setPins('stop', planner.userPins());
     setDayLayer(Boolean(day) && routeWanted && tab === 'itinerary');
   };
 
@@ -744,7 +745,8 @@ export function mountCity(
     });
     setDayLayer(badges.size > 0);
     map.setRoute([]);
-    map.setPins('stop', []);
+    map.setPins('stop', planner.userPins());
+    planner.syncAccuracy();
     if (!currentPlaceId) map.highlight(null);
     map.setPins('place', toPins([...visible, ...extra], 'place', shell.locale(), badges));
     const framing = opts.fit && planner.stopCount() >= 2;
@@ -835,7 +837,7 @@ export function mountCity(
     setDayLayer(false);
     map.setRoute([]);
     map.setPins('place', []);
-    map.setPins('stop', []);
+    map.setPins('stop', planner.userPins());
     map.highlight(null);
   };
 
