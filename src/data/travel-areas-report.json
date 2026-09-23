@@ -1,0 +1,11 @@
+{
+  "ok": [],
+  "fail": [
+    {
+      "id": "lis-el-corte-ingles",
+      "error": "no_geometry_near_pin"
+    }
+  ],
+  "skip": [],
+  "preserved": []
+}

@@ -1,0 +1,675 @@
+{
+  "$schema_comment": "Catalog of places that need OSM map geometry. Used by fetch-travel-polygons.py. lat/lng = pin for validation (prefer Nominatim results near this point).",
+  "queries": [
+    {
+      "id": "par-ory",
+      "q": "Aéroport de Paris-Orly, France",
+      "lat": 48.7233,
+      "lng": 2.3794,
+      "prefer": "polygon",
+      "note": "Aeroway aerodrome polygon (Orly ORY)"
+    },
+    {
+      "id": "par-cdg",
+      "q": "Aéroport de Paris-Charles de Gaulle, France",
+      "lat": 49.0097,
+      "lng": 2.5479,
+      "prefer": "polygon",
+      "note": "Aeroway aerodrome polygon (CDG)"
+    },
+    {
+      "id": "par-champ-mars",
+      "q": "Champ de Mars, Paris, France",
+      "lat": 48.8556,
+      "lng": 2.2986,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-invalides",
+      "q": "Hôtel des Invalides, Paris, France",
+      "lat": 48.8565,
+      "lng": 2.3126,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: hull of R1463538 + W112452790 (Dôme); raw OSM multipolygon is U-shaped and excludes the dome"
+    },
+    {
+      "id": "par-tuileries",
+      "q": "Jardin des Tuileries, Paris, France",
+      "lat": 48.8634,
+      "lng": 2.3275,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: multipolygon Tuileries + Carrousel (Louvre–Concorde spine)"
+    },
+    {
+      "id": "par-louvre",
+      "q": "Musée du Louvre, Paris, France",
+      "lat": 48.8606,
+      "lng": 2.3376,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-luxembourg",
+      "q": "Jardin du Luxembourg, Paris, France",
+      "lat": 48.8462,
+      "lng": 2.3372,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-monceau",
+      "q": "Parc Monceau, Paris, France",
+      "lat": 48.8797,
+      "lng": 2.309,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-palais-royal",
+      "q": "Palais-Royal, Paris, France",
+      "lat": 48.8638,
+      "lng": 2.3371,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: hull of garden + palace/Buren courtyard (not garden-only)"
+    },
+    {
+      "id": "par-vincennes",
+      "q": "Bois de Vincennes, Paris, France",
+      "lat": 48.828,
+      "lng": 2.433,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-andre-citroen",
+      "q": "Parc André Citroën, Paris, France",
+      "lat": 48.841,
+      "lng": 2.274,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-buttes-chaumont",
+      "q": "Parc des Buttes-Chaumont, Paris, France",
+      "lat": 48.88,
+      "lng": 2.383,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-boulogne",
+      "q": "Bois de Boulogne, Paris, France",
+      "lat": 48.862,
+      "lng": 2.249,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-fondation-lv",
+      "q": "Fondation Louis Vuitton, Paris, France",
+      "lat": 48.8766,
+      "lng": 2.2634,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-serres-auteuil",
+      "q": "Jardin des Serres d'Auteuil, Paris, France",
+      "lat": 48.8468,
+      "lng": 2.2522,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-chateau-vincennes",
+      "q": "Château de Vincennes, France",
+      "lat": 48.8426,
+      "lng": 2.4355,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-vincennes-town",
+      "q": "Vincennes, Val-de-Marne, France",
+      "lat": 48.8475,
+      "lng": 2.4378,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-la-villette",
+      "q": "Parc de la Villette, Paris, France",
+      "lat": 48.89489,
+      "lng": 2.38844,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: full R7574623 multipolygon (2 rings); plain search often returns incomplete southern outline"
+    },
+    {
+      "id": "par-orsay",
+      "q": "Musée d'Orsay, Paris, France",
+      "lat": 48.86,
+      "lng": 2.3266,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-orangerie",
+      "q": "Musée de l'Orangerie, Paris, France",
+      "lat": 48.8638,
+      "lng": 2.3227,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-vosges",
+      "q": "Square Louis-XIII, Paris, France",
+      "lat": 48.8556,
+      "lng": 2.3655,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: Square Louis-XIII R571765 garden inside Place des Vosges"
+    },
+    {
+      "id": "par-trocadero",
+      "q": "Jardin du Trocadéro, Paris, France",
+      "lat": 48.862,
+      "lng": 2.288,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-vendome",
+      "q": "Place Vendôme, Paris, France",
+      "lat": 48.8675,
+      "lng": 2.3294,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-bastille",
+      "q": "Place de la Bastille, Paris, France",
+      "lat": 48.8532,
+      "lng": 2.3691,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-marais",
+      "q": "Le Marais, Paris, France",
+      "lat": 48.8566,
+      "lng": 2.3622,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-montmartre",
+      "q": "Montmartre, Paris, France",
+      "lat": 48.8864,
+      "lng": 2.3408,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL multipolygon: OSM tourist_zone alone excludes Sacré-Cœur + Square Louise Michel. Union R6438767 + W45189726 + W23762981 in travel-areas-osm.ts. Do not plain re-fetch."
+    },
+    {
+      "id": "par-madeleine",
+      "q": "Église de la Madeleine, Paris, France",
+      "lat": 48.87,
+      "lng": 2.3244,
+      "prefer": "polygon",
+      "note": "Must be the church building (amenity=place_of_worship), not Place de la Madeleine road (LineString)"
+    },
+    {
+      "id": "par-montorgueil",
+      "q": "Rue Montorgueil, Paris, France",
+      "lat": 48.864494,
+      "lng": 2.346697,
+      "prefer": "linestring",
+      "preserve_existing": true,
+      "note": "OSM splits 1er/2e; MANUAL merges full pedestrian spine south→north"
+    },
+    {
+      "id": "par-champs-elysees",
+      "q": "Avenue des Champs-Élysées, Paris, France",
+      "lat": 48.8698,
+      "lng": 2.3078,
+      "prefer": "linestring",
+      "preserve_existing": true,
+      "note": "Full dual-carriageway centerline is hand-curated in travel-areas-osm.ts"
+    },
+    {
+      "id": "par-cour-commerce",
+      "q": "Cour du Commerce Saint-André, Paris, France",
+      "lat": 48.85307,
+      "lng": 2.33909,
+      "prefer": "linestring"
+    },
+    {
+      "id": "par-sorbonne",
+      "q": "Rue de la Sorbonne, Paris, France",
+      "lat": 48.8493577,
+      "lng": 2.3432944,
+      "prefer": "linestring"
+    },
+    {
+      "id": "par-alexandre-iii",
+      "q": "Pont Alexandre III, Paris, France",
+      "lat": 48.8638,
+      "lng": 2.3135,
+      "prefer": "linestring",
+      "preserve_existing": true,
+      "note": "MANUAL: highway centerline (W17067006+W17066999); deck polygon alone is a thin footprint"
+    },
+    {
+      "id": "par-la-defense",
+      "q": "La Défense, Puteaux, France",
+      "lat": 48.891,
+      "lng": 2.241,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: full Bd Patrick Devedjian ring hull (SW/W arc was missing)"
+    },
+    {
+      "id": "par-disneyland",
+      "q": "Disneyland Paris, Chessy, France",
+      "lat": 48.871,
+      "lng": 2.7765,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "Multipolygon: Parc Disneyland (way/775180147) + Disney Adventure World (way/205734843); refresh via Nominatim lookup of both ways"
+    },
+    {
+      "id": "sp-ibirapuera",
+      "q": "Parque Ibirapuera, São Paulo, Brazil",
+      "lat": -23.5874,
+      "lng": -46.6576,
+      "prefer": "polygon"
+    },
+    {
+      "id": "sp-liberdade",
+      "q": "Liberdade, São Paulo, Brazil",
+      "lat": -23.5587,
+      "lng": -46.635,
+      "prefer": "polygon"
+    },
+    {
+      "id": "nyc-central-park",
+      "q": "Central Park, New York, USA",
+      "lat": 40.7829,
+      "lng": -73.9654,
+      "prefer": "polygon"
+    },
+    {
+      "id": "nyc-soho",
+      "q": "SoHo, Manhattan, New York, USA",
+      "lat": 40.7233,
+      "lng": -74.003,
+      "prefer": "polygon",
+      "note": "Often only a place node; MANUAL box in script if missing"
+    },
+    {
+      "id": "nyc-brooklyn-bridge",
+      "q": "Brooklyn Bridge, New York City",
+      "lat": 40.7061,
+      "lng": -73.9969,
+      "prefer": "linestring"
+    },
+    {
+      "id": "mia-south-beach",
+      "q": "Ocean Drive, Miami Beach",
+      "lat": 25.7826,
+      "lng": -80.1341,
+      "prefer": "linestring"
+    },
+    {
+      "id": "mia-wynwood",
+      "q": "Wynwood, Miami-Dade County, Florida",
+      "lat": 25.801,
+      "lng": -80.1994,
+      "prefer": "polygon"
+    },
+    {
+      "id": "floripa-lagoa",
+      "q": "Lagoa da Conceição, Florianópolis, Brazil",
+      "lat": -27.6035,
+      "lng": -48.463,
+      "prefer": "polygon"
+    },
+    {
+      "id": "floripa-joaquina",
+      "q": "Praia da Joaquina, Florianópolis, Brazil",
+      "lat": -27.6286,
+      "lng": -48.4486,
+      "prefer": "linestring"
+    },
+    {
+      "id": "lis-lis",
+      "q": "Aeroporto Humberto Delgado, Lisbon, Portugal",
+      "lat": 38.7756,
+      "lng": -9.1354,
+      "prefer": "polygon",
+      "note": "LIS aerodrome polygon"
+    },
+    {
+      "id": "lis-jardim-principe-real",
+      "q": "Jardim do Príncipe Real, Lisbon, Portugal",
+      "lat": 38.7163,
+      "lng": -9.148717,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-queluz-palace",
+      "q": "Palácio Nacional de Queluz, Portugal",
+      "lat": 38.75065,
+      "lng": -9.259252,
+      "prefer": "polygon",
+      "note": "Palace + gardens"
+    },
+    {
+      "id": "lis-jardim-julio-castilho",
+      "q": "Jardim Júlio de Castilho-Miradouro de Santa Luzia, Lisbon, Portugal",
+      "lat": 38.711745,
+      "lng": -9.130285,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-av-liberdade",
+      "q": "Avenida da Liberdade, Lisbon, Portugal",
+      "lat": 38.720537,
+      "lng": -9.145902,
+      "prefer": "linestring"
+    },
+    {
+      "id": "lis-parque-eduardo-vii",
+      "q": "Parque Eduardo VII, Lisbon, Portugal",
+      "lat": 38.7283,
+      "lng": -9.152683,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: park + Jardim Amália Rodrigues (north). Miradouro is a pin only."
+    },
+    {
+      "id": "lis-oriente",
+      "q": "Estação do Oriente, Lisbon, Portugal",
+      "lat": 38.767173,
+      "lng": -9.099085,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-rua-augusta",
+      "q": "Rua Augusta, Lisbon, Portugal",
+      "lat": 38.710656,
+      "lng": -9.137672,
+      "prefer": "linestring"
+    },
+    {
+      "id": "lis-jardim-imperio",
+      "q": "Praça do Império, Lisbon, Portugal",
+      "lat": 38.695995,
+      "lng": -9.205993,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-belem",
+      "q": "Belém, Lisbon, Portugal",
+      "lat": 38.6979,
+      "lng": -9.2065,
+      "prefer": "polygon",
+      "note": "Belém freguesia (covers the orla + Jerónimos/tower/MAAT)"
+    },
+    {
+      "id": "lis-alfama",
+      "q": "Alfama, Lisbon, Portugal",
+      "lat": 38.712,
+      "lng": -9.133,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-baixa-chiado",
+      "q": "Baixa, Lisbon, Portugal",
+      "lat": 38.7101237,
+      "lng": -9.1370238,
+      "prefer": "polygon",
+      "note": "OSM Baixa suburb; Chiado ring merged in MANUAL if needed"
+    },
+    {
+      "id": "lis-miradouro-santa-luzia",
+      "q": "Jardim Júlio de Castilho-Miradouro de Santa Luzia, Lisbon, Portugal",
+      "lat": 38.711696,
+      "lng": -9.130197,
+      "prefer": "polygon",
+      "note": "Same garden as Jardim Júlio de Castilho"
+    },
+    {
+      "id": "lis-praca-comercio",
+      "q": "Praça do Comércio, Lisbon, Portugal",
+      "lat": 38.707283,
+      "lng": -9.136361,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-marques-pombal",
+      "q": "Praça Marquês de Pombal, Lisbon, Portugal",
+      "lat": 38.725255,
+      "lng": -9.150029,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-el-corte-ingles",
+      "q": "El Corte Inglés, Avenida António Augusto de Aguiar, Lisbon, Portugal",
+      "lat": 38.733281,
+      "lng": -9.153778,
+      "prefer": "polygon",
+      "note": "Department store building (OSM W96719280)"
+    },
+    {
+      "id": "lis-restauradores",
+      "q": "Praça dos Restauradores, Lisbon, Portugal",
+      "lat": 38.715705,
+      "lng": -9.141662,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-castelo-sao-jorge",
+      "q": "Castelo de São Jorge, Lisbon, Portugal",
+      "lat": 38.7139,
+      "lng": -9.1335,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-jeronimos",
+      "q": "Mosteiro dos Jerónimos, Lisbon, Portugal",
+      "lat": 38.697891,
+      "lng": -9.206704,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-torre-belem",
+      "q": "Torre de Belém, Lisbon, Portugal",
+      "lat": 38.691584,
+      "lng": -9.215977,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-maat",
+      "q": "MAAT, Lisbon, Portugal",
+      "lat": 38.695856,
+      "lng": -9.193312,
+      "prefer": "polygon"
+    },
+    {
+      "id": "lis-estadio-benfica",
+      "q": "Estádio da Luz, Lisbon, Portugal",
+      "lat": 38.75269,
+      "lng": -9.184692,
+      "prefer": "polygon"
+    },
+    {
+      "id": "porto-ribeira",
+      "q": "Cais da Ribeira, Porto, Portugal",
+      "lat": 41.1407,
+      "lng": -8.613,
+      "prefer": "linestring"
+    },
+    {
+      "id": "rom-fco",
+      "q": "Aeroporto di Roma-Fiumicino, Italy",
+      "lat": 41.8153911,
+      "lng": 12.2264848,
+      "prefer": "polygon",
+      "note": "FCO aerodrome polygon"
+    },
+    {
+      "id": "rom-termini",
+      "q": "Roma Termini, Rome, Italy",
+      "lat": 41.901195,
+      "lng": 12.5016713,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-colosseum",
+      "q": "Colosseum, Rome, Italy",
+      "lat": 41.8909421,
+      "lng": 12.491903,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-forum",
+      "q": "Roman Forum, Rome, Italy",
+      "lat": 41.8916414,
+      "lng": 12.4867296,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-pantheon",
+      "q": "Pantheon, Rome, Italy",
+      "lat": 41.898616,
+      "lng": 12.4768334,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-trevi",
+      "q": "Trevi Fountain, Rome, Italy",
+      "lat": 41.9009778,
+      "lng": 12.4832848,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-vatican",
+      "q": "Vatican Museums, Vatican City",
+      "lat": 41.904961,
+      "lng": 12.4546617,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-st-peter",
+      "q": "St. Peter's Basilica, Vatican City",
+      "lat": 41.9021569,
+      "lng": 12.4537105,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-vittoriano",
+      "q": "Altare della Patria, Rome, Italy",
+      "lat": 41.8946867,
+      "lng": 12.4830664,
+      "prefer": "polygon"
+    },
+    {
+      "id": "rom-piazza-venezia",
+      "q": "Piazza Venezia, Rome, Italy",
+      "lat": 41.8962446,
+      "lng": 12.4823704,
+      "prefer": "polygon"
+    },
+    {
+      "id": "par-belleville",
+      "q": "Parc de Belleville, Paris, France",
+      "lat": 48.8715,
+      "lng": 2.3848,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM W154892778"
+    },
+    {
+      "id": "par-promenade-plantee",
+      "q": "Coulée Verte René-Dumont, Paris, France",
+      "lat": 48.847,
+      "lng": 2.375,
+      "prefer": "polyline",
+      "preserve_existing": true,
+      "note": "MANUAL spine; OSM is fragmented footways"
+    },
+    {
+      "id": "par-place-dauphine",
+      "q": "Place Dauphine, Paris, France",
+      "lat": 48.8565,
+      "lng": 2.3423,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM W53567907 garden"
+    },
+    {
+      "id": "par-galeries-lafayette",
+      "q": "Galeries Lafayette, Boulevard Haussmann, Paris, France",
+      "lat": 48.8738,
+      "lng": 2.332,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: multipolygon of both Haussmann buildings (W69224062 + W69224141)"
+    },
+    {
+      "id": "par-opera",
+      "q": "Opéra Garnier, Paris, France",
+      "lat": 48.8719,
+      "lng": 2.3317,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: building outline W54667456 (simplified)"
+    },
+    {
+      "id": "par-luxor-obelisk",
+      "q": "Obélisque de Louxor, Place de la Concorde, Paris, France",
+      "lat": 48.86548,
+      "lng": 2.32113,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: monument base W72937686"
+    },
+    {
+      "id": "par-hotel-ville",
+      "q": "Hôtel de Ville, Paris, France",
+      "lat": 48.8566,
+      "lng": 2.3522,
+      "prefer": "polygon",
+      "note": "City hall building + square (OSM relation)"
+    },
+    {
+      "id": "par-chatelet",
+      "q": "Place du Châtelet, Paris, France",
+      "lat": 48.8575,
+      "lng": 2.3472,
+      "prefer": "polygon",
+      "note": "Pedestrian square polygon"
+    },
+    {
+      "id": "par-horloge",
+      "q": "Tour de l'Horloge Conciergerie, Paris, France",
+      "lat": 48.856193,
+      "lng": 2.346233,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: Tour Carrée de l'Horloge W248434965 (not full Palais de Justice)"
+    },
+    {
+      "id": "par-notre-dame",
+      "q": "Cathédrale Notre-Dame de Paris, France",
+      "lat": 48.853,
+      "lng": 2.3499,
+      "prefer": "polygon",
+      "note": "Cathedral building outline"
+    },
+    {
+      "id": "par-sainte-chapelle",
+      "q": "Sainte-Chapelle, Paris, France",
+      "lat": 48.8554,
+      "lng": 2.345,
+      "prefer": "polygon",
+      "note": "Chapel building relation"
+    },
+    {
+      "id": "par-pantheon",
+      "q": "Panthéon, Place du Panthéon, Paris",
+      "lat": 48.8462,
+      "lng": 2.346,
+      "prefer": "polygon",
+      "note": "Building outline OSM W16407465 (not 5e arrondissement)"
+    }
+  ]
+}
