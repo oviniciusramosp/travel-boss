@@ -14,6 +14,7 @@ import {
   buildItineraryRoutePreview,
   type PlaceCoord,
 } from '../map/itinerary-route';
+import { setDocumentTitle } from '../app/router';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { iconLink } from '../ui/controls';
 import { row } from '../ui/row';
@@ -38,7 +39,7 @@ function onTripFiles(fn: () => void): () => void {
   };
 }
 
-async function loadFiles(): Promise<TripFile[]> {
+export async function loadTripFiles(): Promise<TripFile[]> {
   const response = await fetch('/api/trips');
   if (!response.ok) throw new Error(`trip api ${response.status}`);
   const data = (await response.json()) as TripFile[];
@@ -128,7 +129,7 @@ export function mountTripNav(
   };
 
   const refresh = () => {
-    loadFiles()
+    loadTripFiles()
       .then((files) => {
         if (alive) paint(files);
       })
@@ -140,16 +141,6 @@ export function mountTripNav(
 
   refresh();
   onTripFiles(refresh);
-
-  queueMicrotask(() => {
-    loadFiles()
-      .then((files) => {
-        if (!alive) return;
-        const preferred = files.find((file) => file.id === 'europa') ?? files[0];
-        if (preferred) onPick(preferred.id);
-      })
-      .catch(() => undefined);
-  });
 
   return {
     setActive(id) {
@@ -529,12 +520,13 @@ export function mountTrip(
     syncView(true);
     shell.setSource(trip.file);
     shell.setExportEnabled(true);
+    setDocumentTitle(trip.title);
   }
 
   async function render(keepScroll = false) {
     const scroll = keepScroll ? main.scrollTop : 0;
     try {
-      const files = await loadFiles();
+      const files = await loadTripFiles();
       if (!alive) return;
       const file = files.find((item) => item.id === id);
       if (file && file.raw === lastRaw && current) return;

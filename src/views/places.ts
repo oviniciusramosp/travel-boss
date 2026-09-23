@@ -31,9 +31,20 @@ import {
 } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
-import { closePlace, onPlaceClose, openPlace, repaintPlace } from './place-panel';
+import { closePlace, onPlaceClose, openPlace, openPlaceId, repaintPlace } from './place-panel';
 
 type Tab = 'places' | 'itinerary' | 'hotels';
+
+export type CityRouteState = {
+  tab: Tab;
+  place?: string;
+  day?: number;
+};
+
+function dayIndexFrom(day: number | undefined, count: number): number {
+  if (day == null || day < 1 || count < 1) return 0;
+  return Math.min(count - 1, day - 1);
+}
 
 const CATEGORY_LABEL = travelUi.categories;
 
@@ -250,7 +261,9 @@ export function mountCity(
   map: MapHandle,
   slug: string,
   shell: Shell,
-): { dispose(): void } {
+  initial?: CityRouteState,
+  onChange?: (state: CityRouteState) => void,
+): { dispose(): void; sync(state: CityRouteState): void } {
   main.scrollTop = 0;
   const city = getTravelCity(slug);
   main.replaceChildren();
@@ -262,6 +275,7 @@ export function mountCity(
       main.replaceChildren(emptyState(next.missingTitle, next.missing));
     });
     return {
+      sync() {},
       dispose() {
         unsub();
         map.highlight(null);
@@ -284,12 +298,13 @@ export function mountCity(
   );
   const arrivalByDay = new Map<string, string>();
 
-  let tab: Tab = 'places';
+  let tab: Tab = initial?.tab ?? 'places';
   let query = shell.query();
   let currentPlaceId: string | null = null;
   let currentStopId: string | null = null;
-  let selectedDayIndex = 0;
+  let selectedDayIndex = dayIndexFrom(initial?.day, itinerary?.days.length ?? 0);
   let disposed = false;
+  let silence = 0;
   let hotelsEpoch = 0;
   let hotelsDispose: (() => void) | null = null;
   let routeEpoch = 0;
@@ -380,21 +395,41 @@ export function mountCity(
     if (opts.pan && currentPlaceId) map.highlight(currentPlaceId);
   };
 
+  const snapshot = (): CityRouteState => ({
+    tab,
+    ...(currentPlaceId ? { place: currentPlaceId } : {}),
+    ...(selectedDayIndex > 0 ? { day: selectedDayIndex + 1 } : {}),
+  });
+
+  const publish = () => {
+    if (disposed || silence > 0) return;
+    onChange?.(snapshot());
+  };
+
+  const rowButton = (id: string): HTMLElement | null => {
+    const row = body.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(id)}"]`);
+    return row?.querySelector<HTMLElement>('.tb-place-main, .tb-row__main') ?? null;
+  };
+
   const focusPlace = (id: string, origin?: HTMLElement | null) => {
     const place = byId.get(id);
     if (!place) return;
+    const changed = currentPlaceId !== id;
     currentPlaceId = id;
     if (tab === 'itinerary') currentStopId = id;
     openPlace(place, city, shell.locale(), origin);
+    if (changed) publish();
   };
 
   const clearPlaceSelection = () => {
+    const hadPlace = currentPlaceId != null;
     currentPlaceId = null;
     currentStopId = null;
     main.querySelectorAll('[data-place-id][aria-current]').forEach((node) => {
       node.removeAttribute('aria-current');
     });
     map.highlight(null);
+    if (hadPlace) publish();
   };
 
   const offClose = onPlaceClose(clearPlaceSelection);
@@ -535,9 +570,11 @@ export function mountCity(
           }
           return;
         }
+        const changed = selectedDayIndex !== index;
         selectedDayIndex = index;
         markSelectedDay();
         showItineraryMap({ fit: true });
+        if (changed) publish();
       });
 
       const heading = dayHeading(day);
@@ -756,7 +793,7 @@ export function mountCity(
     const row = target.closest<HTMLElement>('[data-place-id]');
     if (!row?.dataset.placeId) return;
     const id = row.dataset.placeId;
-    const opener = target.closest<HTMLElement>('button');
+    const opener = row.querySelector<HTMLElement>('.tb-place-main, .tb-row__main');
     if (tab === 'itinerary') {
       const section = row.closest<HTMLElement>('[data-day-index]');
       const index = Number(section?.dataset.dayIndex);
@@ -808,7 +845,7 @@ export function mountCity(
     if (tab === 'places' && !visiblePlaces().some((place) => place.id === id)) return;
     if (tab === 'itinerary') currentStopId = id;
     setRowCurrent(body, id, true);
-    focusPlace(id);
+    focusPlace(id, rowButton(id));
   });
 
   function setTab(next: Tab) {
@@ -816,6 +853,7 @@ export function mountCity(
     window.clearTimeout(searchFitTimer);
     searchFitTimer = 0;
     const leavingHotels = tab === 'hotels';
+    const hadPlace = currentPlaceId != null;
     tab = next;
     if (leavingHotels) closeHotels();
     closePlace({ focus: false });
@@ -825,13 +863,56 @@ export function mountCity(
     else if (next === 'itinerary') showItineraryMap({ fit: true });
     else showHotelPins();
     main.scrollTop = 0;
+    if (!hadPlace) publish();
   }
 
+  function revealSelectedDay() {
+    for (const section of body.querySelectorAll<HTMLDetailsElement>('.tb-day')) {
+      if (Number(section.dataset.dayIndex) === selectedDayIndex) section.open = true;
+    }
+    markSelectedDay();
+  }
+
+  function sync(state: CityRouteState) {
+    if (disposed) return;
+    silence += 1;
+    try {
+      const nextDay = dayIndexFrom(state.day, itinerary?.days.length ?? 0);
+      const dayChanged = nextDay !== selectedDayIndex;
+      selectedDayIndex = nextDay;
+      if (state.tab !== tab) setTab(state.tab);
+      else if (dayChanged && tab === 'itinerary') {
+        revealSelectedDay();
+        showItineraryMap({ fit: true });
+      }
+      const place = state.place && byId.has(state.place) ? state.place : null;
+      if (place && place === currentPlaceId && openPlaceId() === place) return;
+      if (!place) {
+        if (currentPlaceId || openPlaceId()) closePlace({ focus: false });
+        return;
+      }
+      setRowCurrent(body, place, true);
+      focusPlace(place, rowButton(place));
+    } finally {
+      silence -= 1;
+    }
+  }
+
+  const initialPlace = initial?.place && byId.has(initial.place) ? initial.place : null;
   paintChrome();
   renderBody();
-  showPlacePins({ fit: true, pan: false });
+  if (tab === 'places') showPlacePins({ fit: !initialPlace, pan: false });
+  else if (tab === 'itinerary') showItineraryMap({ fit: !initialPlace });
+  else showHotelPins();
+  if (initialPlace) {
+    silence += 1;
+    setRowCurrent(body, initialPlace, true);
+    focusPlace(initialPlace, rowButton(initialPlace));
+    silence -= 1;
+  }
 
   return {
+    sync,
     dispose() {
       if (disposed) return;
       disposed = true;
