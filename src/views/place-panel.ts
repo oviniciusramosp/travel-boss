@@ -11,12 +11,29 @@ import {
 import type { MapHandle } from '../map/types';
 import { iconButton } from '../ui/controls';
 
+type CloseOptions = { focus?: boolean };
+
 type Panel = {
-  open(place: TravelPlace, city: TravelCity, locale: Locale): void;
-  close(): void;
+  open(place: TravelPlace, city: TravelCity, locale: Locale, origin: HTMLElement | null): void;
+  close(opts?: CloseOptions): void;
 };
 
 let panel: Panel | null = null;
+let closeHook: (() => void) | null = null;
+
+/** Views clear the list selection. The panel does not know which row opened it. */
+export function onPlaceClose(fn: () => void): () => void {
+  closeHook = fn;
+  return () => {
+    if (closeHook === fn) closeHook = null;
+  };
+}
+
+function listedOrigin(node: HTMLElement | null | undefined): HTMLElement | null {
+  if (!node || node === document.body || node === document.documentElement) return null;
+  if (!node.closest('[data-place-id]')) return null;
+  return node;
+}
 
 export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   const root = document.createElement('aside');
@@ -28,6 +45,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   let current: { place: TravelPlace; city: TravelCity; locale: Locale } | null = null;
   let photoImg: HTMLImageElement | null = null;
   let photoCount: HTMLElement | null = null;
+  let returnFocus: HTMLElement | null = null;
 
   const showPhoto = () => {
     if (!current || !photoImg) return;
@@ -65,8 +83,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     });
     close.classList.add('tb-place-panel__close');
     close.addEventListener('click', () => {
-      current = null;
-      paint();
+      dismiss({ focus: true });
     });
 
     if (photos.length) {
@@ -169,6 +186,19 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     root.append(body);
   };
 
+  function dismiss(opts?: CloseOptions) {
+    const origin = returnFocus;
+    returnFocus = null;
+    current = null;
+    paint();
+    syncPad();
+    // hover(null) only clears the hover ring; the selected pin stays put.
+    map.highlight(null);
+    closeHook?.();
+    if (opts?.focus === false || !origin?.isConnected || origin.closest('[hidden]')) return;
+    origin.focus();
+  }
+
   const syncPad = () => {
     if (root.hidden) {
       map.setPadding({ right: 0 });
@@ -182,25 +212,29 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   padObserver.observe(column);
 
   panel = {
-    open(place, city, locale) {
+    open(place, city, locale, origin) {
       photoIndex = 0;
+      returnFocus = origin;
       current = { place, city, locale };
       paint();
       syncPad();
       map.select(place.id);
     },
-    close() {
-      current = null;
-      paint();
-      syncPad();
+    close(opts) {
+      dismiss(opts);
     },
   };
 }
 
-export function openPlace(place: TravelPlace, city: TravelCity, locale: Locale): void {
-  panel?.open(place, city, locale);
+export function openPlace(
+  place: TravelPlace,
+  city: TravelCity,
+  locale: Locale,
+  origin?: HTMLElement | null,
+): void {
+  panel?.open(place, city, locale, listedOrigin(origin));
 }
 
-export function closePlace(): void {
-  panel?.close();
+export function closePlace(opts?: CloseOptions): void {
+  panel?.close(opts);
 }

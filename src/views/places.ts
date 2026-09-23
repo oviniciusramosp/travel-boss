@@ -31,7 +31,7 @@ import {
 } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
-import { closePlace, openPlace } from './place-panel';
+import { closePlace, onPlaceClose, openPlace } from './place-panel';
 
 type Tab = 'places' | 'itinerary' | 'hotels';
 
@@ -239,7 +239,7 @@ export function mountCity(
         map.setPins('place', []);
         map.setPins('stop', []);
         map.setRadius(null);
-        closePlace();
+        closePlace({ focus: false });
       },
     };
   }
@@ -349,13 +349,24 @@ export function mountCity(
     if (opts.pan && currentPlaceId) map.highlight(currentPlaceId);
   };
 
-  const focusPlace = (id: string) => {
+  const focusPlace = (id: string, origin?: HTMLElement | null) => {
     const place = byId.get(id);
     if (!place) return;
     currentPlaceId = id;
     if (tab === 'itinerary') currentStopId = id;
-    openPlace(place, city, shell.locale());
+    openPlace(place, city, shell.locale(), origin);
   };
+
+  const clearPlaceSelection = () => {
+    currentPlaceId = null;
+    currentStopId = null;
+    main.querySelectorAll('[data-place-id][aria-current]').forEach((node) => {
+      node.removeAttribute('aria-current');
+    });
+    map.highlight(null);
+  };
+
+  const offClose = onPlaceClose(clearPlaceSelection);
 
   const drawDayRoute = (index: number, fit: boolean) => {
     const epoch = ++routeEpoch;
@@ -680,6 +691,7 @@ export function mountCity(
     const row = target.closest<HTMLElement>('[data-place-id]');
     if (!row?.dataset.placeId) return;
     const id = row.dataset.placeId;
+    const opener = target.closest<HTMLElement>('button');
     if (tab === 'itinerary') {
       const section = row.closest<HTMLElement>('[data-day-index]');
       const index = Number(section?.dataset.dayIndex);
@@ -688,7 +700,7 @@ export function mountCity(
       markSelectedDay();
     }
     setRowCurrent(body, id, false);
-    focusPlace(id);
+    focusPlace(id, opener);
   });
 
   const unsubLocale = shell.onLocale(() => {
@@ -749,6 +761,7 @@ export function mountCity(
       unsubLocale();
       unsubQuery();
       unsubSelect();
+      offClose();
       const close = hotelsDispose;
       hotelsDispose = null;
       try {
@@ -760,7 +773,7 @@ export function mountCity(
         map.setPins('place', []);
         map.setPins('stop', []);
         map.setRadius(null);
-        closePlace();
+        closePlace({ focus: false });
       }
     },
   };

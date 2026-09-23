@@ -17,7 +17,7 @@ import {
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { iconLink } from '../ui/controls';
 import { row } from '../ui/row';
-import { closePlace, openPlace } from '../views/place-panel';
+import { closePlace, onPlaceClose, openPlace } from '../views/place-panel';
 import { parseTrip, type Trip } from './parse';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -245,6 +245,13 @@ export function mountTrip(
     if (alive) void render(true);
   });
 
+  const offClose = onPlaceClose(() => {
+    main.querySelectorAll('[data-stop][aria-current]').forEach((node) => {
+      node.removeAttribute('aria-current');
+    });
+    map.highlight(null);
+  });
+
   function applyQuery() {
     const query = shell.query();
     main.querySelectorAll<HTMLElement>('[data-stop]').forEach((node) => {
@@ -461,7 +468,9 @@ export function mountTrip(
                       node.removeAttribute('aria-current');
                     });
                     item.setAttribute('aria-current', 'true');
-                    openPlace(found, record, locale);
+                    const origin =
+                      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+                    openPlace(found, record, locale, origin);
                   }
                 : undefined,
           });
@@ -548,11 +557,12 @@ export function mountTrip(
       offQuery();
       offExport();
       offFiles();
+      offClose();
       stopsUnsub.fn();
       tripRouteEpoch += 1;
       map.setRoute([]);
       map.setPins('stop', []);
-      closePlace();
+      closePlace({ focus: false });
       shell.setExportEnabled(false);
     },
   };
