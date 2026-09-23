@@ -23,13 +23,43 @@ import { getTravelCity, pickLocale } from './catalog';
 import { mountTooltip } from './ui/tooltip';
 import { mountMap } from './map/map';
 import { mountCity, mountCityNav, type CityRouteState } from './views/places';
-import { mountPlacePanel } from './views/place-panel';
+import { closePlace, mountPlacePanel, openPlaceId } from './views/place-panel';
 import { loadTripFiles, mountTrip, mountTripNav } from './trip/mount';
 
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('missing #app');
 
 mountTooltip();
+
+function closeOpenPopover(): boolean {
+  try {
+    const open = document.querySelector<HTMLElement>(':popover-open');
+    if (open && typeof open.hidePopover === 'function') {
+      open.hidePopover();
+      return true;
+    }
+  } catch {
+    /* :popover-open is unsupported */
+  }
+  const manual = document.querySelector<HTMLElement>(
+    '.tb-popover:not([hidden]), [data-popover]:not([hidden])',
+  );
+  if (!manual) return false;
+  manual.hidden = true;
+  return true;
+}
+
+window.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape' || event.defaultPrevented) return;
+  if (closeOpenPopover()) {
+    event.preventDefault();
+    return;
+  }
+  if (!openPlaceId()) return;
+  event.preventDefault();
+  closePlace({ focus: true });
+});
+
 const shell = mountShell(root);
 const map = mountMap(shell.mapHost);
 mountPlacePanel(shell.mapHost.parentElement ?? shell.mapHost, map);

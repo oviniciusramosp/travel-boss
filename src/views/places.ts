@@ -31,8 +31,16 @@ import {
   type PlaceCoord,
 } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
+import { segmented } from '../ui/controls';
 import { el } from '../ui/dom';
-import { closePlace, onPlaceClose, openPlace, openPlaceId, repaintPlace } from './place-panel';
+import {
+  closePlace,
+  onPlaceClose,
+  openPlace,
+  openPlaceId,
+  repaintPlace,
+  setPlaceOrigin,
+} from './place-panel';
 
 type Tab = 'places' | 'itinerary' | 'hotels';
 
@@ -324,7 +332,15 @@ export function mountCity(
   const metaEl = el('p', 'tb-meta');
   const titleEl = el('h1', 'tb-city-title');
   const tabs = el('div', 'tb-locale tb-city-tabs');
-  tabs.setAttribute('role', 'group');
+  const tabPanelId = 'tb-city-panel';
+  const tabIds: Record<Tab, string> = {
+    places: 'tb-tab-places',
+    itinerary: 'tb-tab-itinerary',
+    hotels: 'tb-tab-hotels',
+  };
+  tabs.id = 'tb-city-tabs';
+  tabs.setAttribute('role', 'tablist');
+  tabs.setAttribute('aria-orientation', 'horizontal');
   const tabButtons: Record<Tab, HTMLButtonElement> = {
     places: el('button'),
     itinerary: el('button'),
@@ -332,12 +348,17 @@ export function mountCity(
   };
   for (const id of ['places', 'itinerary', 'hotels'] as const) {
     tabButtons[id].type = 'button';
+    tabButtons[id].id = tabIds[id];
+    tabButtons[id].setAttribute('role', 'tab');
+    tabButtons[id].setAttribute('aria-controls', tabPanelId);
     tabButtons[id].addEventListener('click', () => setTab(id));
     tabs.append(tabButtons[id]);
   }
   head.append(metaEl, titleEl, tabs);
 
   const body = el('div', 'tb-city-body');
+  body.id = tabPanelId;
+  body.setAttribute('role', 'tabpanel');
   main.append(head, body);
 
   const visiblePlaces = (): TravelPlace[] => {
@@ -390,9 +411,13 @@ export function mountCity(
     tabButtons.places.textContent = text.places;
     tabButtons.itinerary.textContent = text.itinerary;
     tabButtons.hotels.textContent = text.hotels;
+    body.setAttribute('aria-labelledby', tabIds[tab]);
     for (const id of ['places', 'itinerary', 'hotels'] as const) {
-      tabButtons[id].setAttribute('aria-pressed', tab === id ? 'true' : 'false');
+      const on = tab === id;
+      tabButtons[id].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabButtons[id].removeAttribute('aria-pressed');
     }
+    segmented(tabs);
   };
 
   const showPlacePins = (opts: { fit: boolean; pan: boolean }) => {
@@ -535,6 +560,7 @@ export function mountCity(
   const renderPlaceResults = () => {
     body.querySelectorAll('.tb-cat-head, .tb-place-list, .tb-empty').forEach((node) => node.remove());
     appendPlaceGroups();
+    keepOrigin();
   };
 
   const renderPlaces = () => {
@@ -556,6 +582,12 @@ export function mountCity(
     }
     body.append(filters);
     appendPlaceGroups();
+  };
+
+  const keepOrigin = () => {
+    if (!currentPlaceId) return;
+    const opener = rowButton(currentPlaceId);
+    if (opener) setPlaceOrigin(opener);
   };
 
   const renderItinerary = () => {
@@ -615,6 +647,7 @@ export function mountCity(
           );
           control.append(button);
         }
+        segmented(control);
         section.append(control);
       }
 
@@ -685,6 +718,9 @@ export function mountCity(
       } else budgetEl.textContent = budget;
     } else budgetEl?.remove();
     section.querySelector('.tb-stop-list')?.replaceWith(stopList(day, index, locale));
+    const control = section.querySelector<HTMLElement>('.tb-locale');
+    if (control) segmented(control);
+    keepOrigin();
   };
 
   const closeHotels = () => {
@@ -748,6 +784,7 @@ export function mountCity(
     if (tab === 'places') renderPlaces();
     else if (tab === 'itinerary') renderItinerary();
     else renderHotels();
+    keepOrigin();
   };
 
   const markSelectedDay = () => {

@@ -123,6 +123,9 @@ export function mountTooltip(): void {
   document.addEventListener('scroll', () => hide(), true);
   document.addEventListener('pointerdown', () => hide(), true);
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') hide();
+    if (event.key !== 'Escape') return;
+    if (!current && tip.hidden) return;
+    hide();
+    event.preventDefault();
   });
 }

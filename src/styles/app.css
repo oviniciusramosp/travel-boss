@@ -160,7 +160,8 @@ button {
   color: var(--color-mid-gray);
 }
 
-.tb-locale button[aria-pressed='true'] {
+.tb-locale button[aria-pressed='true'],
+.tb-locale button[aria-selected='true'] {
   background: var(--color-ink);
   color: var(--color-on-ink);
 }

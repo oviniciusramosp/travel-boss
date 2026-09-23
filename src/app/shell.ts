@@ -1,5 +1,5 @@
 import { pickLocale } from '../catalog';
-import { iconButton } from '../ui/controls';
+import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 
@@ -214,6 +214,7 @@ export function mountShell(root: HTMLElement): Shell {
       pickLocale(locale, { en: 'Document width', 'pt-BR': 'Largura do documento' }),
     );
     applySide();
+    segmented(localeWrap);
   };
   paintLocale();
 

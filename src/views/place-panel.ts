@@ -17,6 +17,7 @@ type Panel = {
   open(place: TravelPlace, city: TravelCity, locale: Locale, origin: HTMLElement | null): void;
   close(opts?: CloseOptions): void;
   id(): string | null;
+  retarget(origin: HTMLElement | null): void;
   relabel(locale: Locale): void;
 };
 
@@ -228,6 +229,11 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     id() {
       return current?.place.id ?? null;
     },
+    retarget(origin) {
+      if (!current) return;
+      const next = listedOrigin(origin);
+      if (next) returnFocus = next;
+    },
     relabel(locale) {
       if (!current) return;
       current = { ...current, locale };
@@ -257,4 +263,9 @@ export function openPlaceId(): string | null {
 /** New language only. Does not reset the photo or move the camera. */
 export function repaintPlace(locale: Locale): void {
   panel?.relabel(locale);
+}
+
+/** Point the close button at a row that was recreated after the panel opened. */
+export function setPlaceOrigin(origin: HTMLElement | null): void {
+  panel?.retarget(origin);
 }

@@ -20,7 +20,14 @@ import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { iconLink } from '../ui/controls';
 import { row } from '../ui/row';
-import { closePlace, onPlaceClose, openPlace, openPlaceId, repaintPlace } from '../views/place-panel';
+import {
+  closePlace,
+  onPlaceClose,
+  openPlace,
+  openPlaceId,
+  repaintPlace,
+  setPlaceOrigin,
+} from '../views/place-panel';
 import { parseTrip, type Trip } from './parse';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -528,8 +535,7 @@ export function mountTrip(
                     if (!found) return;
                     clearStopCurrent();
                     item.setAttribute('aria-current', 'true');
-                    const origin =
-                      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+                    const origin = item.querySelector<HTMLElement>('.tb-row__main');
                     openPlace(found, record, locale, origin);
                   }
                 : undefined,
@@ -566,6 +572,13 @@ export function mountTrip(
     shell.setSource(trip.file);
     shell.setExportEnabled(true);
     setDocumentTitle(trip.title);
+    const openId = openPlaceId();
+    if (openId) {
+      const opener = main.querySelector<HTMLElement>(
+        `[data-place-id="${CSS.escape(openId)}"] .tb-row__main`,
+      );
+      if (opener) setPlaceOrigin(opener);
+    }
   }
 
   async function render(keepScroll = false) {
