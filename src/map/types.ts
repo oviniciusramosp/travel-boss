@@ -27,6 +27,8 @@ export type MapRouteSegment = {
   mode: 'walk' | 'transit';
   latlngs: [number, number][];
   color?: string;
+  /** Neutral chord. Dashed, unlike a transit spine. */
+  dash?: boolean;
 };
 
 export type MapHandle = {

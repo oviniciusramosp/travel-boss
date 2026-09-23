@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { getTravelCity } from '../catalog';
 import type { TripLeg } from './parse';
-import { planHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
+import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 
 function place(city: string, id: string) {
   const found = getTravelCity(city)?.places.find((item) => item.id === id);
@@ -48,6 +48,14 @@ describe('planHop', () => {
         to: place('paris', 'par-auchan-noisy'),
       }).kind,
     ).toBe('straight');
+    const chord = previewHop(
+      {
+        from: place('paris', 'par-orly-m14'),
+        to: place('paris', 'par-auchan-noisy'),
+      },
+      '#666666',
+    );
+    expect(chord?.[0]).toMatchObject({ mode: 'transit', dash: true, color: '#666666' });
   });
 
   it('asks for a walk only when the decision is osrm or a catalog walk', () => {

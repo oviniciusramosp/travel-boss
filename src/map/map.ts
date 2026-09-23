@@ -349,12 +349,13 @@ export function mountMap(host: HTMLElement): MapHandle {
       for (const segment of segments) {
         if (segment.latlngs.length < 2) continue;
         const walk = segment.mode === 'walk';
+        const dashed = walk || segment.dash === true;
         const color = walk ? '#008fff' : segment.color || '#008fff';
         polyline(segment.latlngs, {
           color,
-          weight: walk ? 3 : 4,
+          weight: dashed ? 3 : 4,
           opacity: 0.9,
-          dashArray: walk ? '1 8' : undefined,
+          dashArray: dashed ? '1 8' : undefined,
           lineCap: 'round',
           lineJoin: 'round',
           interactive: false,

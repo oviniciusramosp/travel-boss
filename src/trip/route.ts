@@ -28,7 +28,7 @@ function geometrySegments(strokes: CatalogLegStroke[]): MapRouteSegment[] {
   }));
 }
 
-/** Neutral chord. Not a walk: the map paints `walk` as a blue dash. */
+/** Neutral chord: dashed, not the blue walk stroke. */
 export function neutralStraight(
   from: TripLegPoint,
   to: TripLegPoint,
@@ -36,6 +36,7 @@ export function neutralStraight(
 ): MapRouteSegment {
   return {
     mode: 'transit',
+    dash: true,
     latlngs: [
       [from.lat, from.lng],
       [to.lat, to.lng],
