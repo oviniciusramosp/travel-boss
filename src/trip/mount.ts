@@ -12,7 +12,7 @@ import {
 import type { Locale, PlaceCategory, TravelPlace } from '../catalog';
 import { buildItineraryRoute } from '../map/itinerary-route';
 import type { MapHandle, MapOverviewCity, MapPin } from '../map/types';
-import { fetchWalkingRoute } from '../map/walk-route';
+import { fetchWalkingRoute, peekWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
@@ -24,6 +24,7 @@ import { cityHash } from './links';
 import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 import {
   activeSectionKey,
+  cityInOsrmScope,
   dayKey,
   dayOpen,
   shouldRefit,
@@ -397,6 +398,7 @@ export function mountTrip(
   };
   main.addEventListener('scroll', onDocScroll, { passive: true });
   let tripRouteEpoch = 0;
+  let routeAbort: AbortController | null = null;
   let hasPainted = false;
   let openKeys = new Set<string>();
   let focusMark: FocusMark | null = null;
@@ -412,9 +414,30 @@ export function mountTrip(
       : placeCategoryOrder,
   );
 
+  function screenCities(): Set<string> {
+    const visible = new Set<string>();
+    const sections = [...main.querySelectorAll<HTMLElement>('.tb-city-section')];
+    const root = main.getBoundingClientRect();
+    const first = sections.find((section) => !section.hidden)?.dataset.city;
+    if (root.height < 1) {
+      if (first) visible.add(first);
+      return visible;
+    }
+    for (const section of sections) {
+      if (section.hidden) continue;
+      const box = section.getBoundingClientRect();
+      if (box.height < 1 || box.bottom <= root.top || box.top >= root.bottom) continue;
+      const city = section.dataset.city;
+      if (city) visible.add(city);
+    }
+    if (visible.size === 0 && first) visible.add(first);
+    return visible;
+  }
+
   function routeHops(): RouteHop[] {
     const trip = current;
     if (!trip) return [];
+    const scope = { activeCity, visible: screenCities() };
     const hops: RouteHop[] = [];
     for (const section of main.querySelectorAll<HTMLElement>('.tb-city-section')) {
       if (section.hidden) continue;
@@ -423,7 +446,7 @@ export function mountTrip(
       const record = getTravelCity(slug);
       if (!city || !record) continue;
       for (const dayEl of section.querySelectorAll<HTMLDetailsElement>('details.tb-day')) {
-        if (!dayEl.open) continue;
+        if (!cityInOsrmScope(slug, dayEl.open, scope)) continue;
         const day = city.days.find(
           (item, index) =>
             dayKey(city.slug || city.name, index, item.title) === dayEl.dataset.dayKey,
@@ -457,7 +480,20 @@ export function mountTrip(
 
   function drawTripRoutes() {
     const epoch = ++tripRouteEpoch;
+    routeAbort?.abort();
+    const controller = new AbortController();
+    routeAbort = controller;
+    const signal = controller.signal;
     const hops = routeHops();
+    for (const hop of hops) {
+      if (planHop(hop).kind !== 'walk') continue;
+      if (rememberedWalk(hop.from, hop.to)) continue;
+      const cached = peekWalkingRoute([
+        { lat: hop.from.lat, lng: hop.from.lng },
+        { lat: hop.to.lat, lng: hop.to.lng },
+      ]);
+      if (cached && cached.latlngs.length >= 2) rememberWalk(hop.from, hop.to, cached.latlngs);
+    }
     const color = neutralColor();
     const preview = hops.map((hop) => previewHop(hop, color));
     const known = preview.flatMap((part) => part ?? []);
@@ -471,10 +507,13 @@ export function mountTrip(
       walk: async (from, to) => {
         const cached = rememberedWalk(from, to);
         if (cached) return cached;
-        const route = await fetchWalkingRoute([
-          { lat: from.lat, lng: from.lng },
-          { lat: to.lat, lng: to.lng },
-        ]);
+        const route = await fetchWalkingRoute(
+          [
+            { lat: from.lat, lng: from.lng },
+            { lat: to.lat, lng: to.lng },
+          ],
+          signal,
+        );
         if (!route || route.latlngs.length < 2) return null;
         rememberWalk(from, to, route.latlngs);
         return route.latlngs;
@@ -486,7 +525,10 @@ export function mountTrip(
           [fromId, { id: fromId, lat: from.lat, lng: from.lng }],
           [toId, { id: toId, lat: to.lat, lng: to.lng }],
         ]);
-        const built = await buildItineraryRoute([fromId, toId], [leg], places);
+        const built = await buildItineraryRoute([fromId, toId], [leg], places, {
+          signal,
+          walkMode: 'osrm',
+        });
         return built.segments.map((segment) => ({
           mode: segment.mode,
           latlngs: segment.latlngs,
@@ -529,7 +571,7 @@ export function mountTrip(
     map.setOverview(cities, { fit, fade: true });
   }
 
-  function holdScrollSpy() {
+  function holdScrollSpy(then?: () => void) {
     releaseSpy();
     holdSpy = true;
     const release = () => {
@@ -537,6 +579,7 @@ export function mountTrip(
       window.clearTimeout(spyTimer);
       holdSpy = false;
       releaseSpy = () => {};
+      then?.();
     };
     releaseSpy = release;
     main.addEventListener('scrollend', release);
@@ -563,7 +606,7 @@ export function mountTrip(
       overviewMode = true;
       markActive(null);
       userScrolled = false;
-      holdScrollSpy();
+      holdScrollSpy(() => drawTripRoutes());
       main.scrollTo({ top: 0, behavior });
       showOverview(true);
       return;
@@ -578,6 +621,7 @@ export function mountTrip(
     });
     map.setOverview(overviewCities(trip), { fade: false });
     framePins(stopPins(trip, slug, enabledCategories));
+    drawTripRoutes();
   }
 
   function bindSpy() {
@@ -603,6 +647,7 @@ export function mountTrip(
         const next = activeSectionKey([...hits.values()]);
         if (!next || next === activeCity) return;
         markActive(next);
+        drawTripRoutes();
       },
       { root: main, threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
@@ -1481,6 +1526,8 @@ export function mountTrip(
       stopsUnsub.fn();
       offOverview();
       tripRouteEpoch += 1;
+      routeAbort?.abort();
+      routeAbort = null;
       map.setRoute([]);
       map.setOverview(null);
       map.hoverOverview(null);

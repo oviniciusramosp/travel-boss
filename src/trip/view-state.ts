@@ -4,6 +4,20 @@ export function dayKey(city: string, index: number, title: string): string {
   return `${city}:${index}:${title}`;
 }
 
+/**
+ * OSRM only for an open day in the focused city, or in a city currently on screen
+ * when nothing is focused.
+ */
+export function cityInOsrmScope(
+  city: string,
+  dayIsOpen: boolean,
+  scope: { activeCity: string | null; visible: ReadonlySet<string> },
+): boolean {
+  if (!dayIsOpen) return false;
+  if (scope.activeCity) return city === scope.activeCity;
+  return scope.visible.has(city);
+}
+
 /** First day of each city only on the first paint. Later paints use the snapshot. */
 export function dayOpen(
   firstPaint: boolean,

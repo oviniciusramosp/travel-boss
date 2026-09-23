@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { activeSectionKey, dayKey, dayOpen, shouldRefit, stopKey } from './view-state';
+import { activeSectionKey, cityInOsrmScope, dayKey, dayOpen, shouldRefit, stopKey } from './view-state';
 
 describe('dayOpen', () => {
   const key = dayKey('paris', 1, 'Dia 2 — Oeste');
@@ -12,6 +12,22 @@ describe('dayOpen', () => {
   it('restores the snapshot after the first paint', () => {
     expect(dayOpen(false, key, new Set([key]), 1)).toBe(true);
     expect(dayOpen(false, dayKey('paris', 0, 'Dia 1'), new Set([key]), 0)).toBe(false);
+  });
+});
+
+describe('cityInOsrmScope', () => {
+  const visible = new Set(['paris']);
+
+  it('asks only for open days of the focused city', () => {
+    expect(cityInOsrmScope('paris', true, { activeCity: 'paris', visible })).toBe(true);
+    expect(cityInOsrmScope('milao', true, { activeCity: 'paris', visible })).toBe(false);
+    expect(cityInOsrmScope('paris', false, { activeCity: 'paris', visible })).toBe(false);
+  });
+
+  it('uses the cities on screen when none is focused', () => {
+    expect(cityInOsrmScope('paris', true, { activeCity: null, visible })).toBe(true);
+    expect(cityInOsrmScope('roma', true, { activeCity: null, visible })).toBe(false);
+    expect(cityInOsrmScope('paris', false, { activeCity: null, visible })).toBe(false);
   });
 });
 
