@@ -8,6 +8,21 @@ export type Locale = 'en' | 'pt-BR';
 const LOCALE_KEY = 'tb-locale';
 const SIDE_KEY = 'tb-side';
 const MAIN_KEY = 'tb-main-width';
+export const PANE_MIN = 280;
+const PANE_SPLIT = 5;
+
+/** Width of the document pane. Without a measured workspace, only the minimum applies. */
+export function clampPaneWidth(px: number, total: number, sideWidth: number): number {
+  const rounded = Math.round(px);
+  if (!(total > PANE_MIN * 2)) return Math.max(PANE_MIN, rounded);
+  const max = Math.max(PANE_MIN, total - sideWidth - PANE_SPLIT - PANE_MIN);
+  return Math.min(max, Math.max(PANE_MIN, rounded));
+}
+
+function paneMax(total: number, sideWidth: number): number {
+  if (!(total > PANE_MIN * 2)) return PANE_MIN;
+  return Math.max(PANE_MIN, Math.round(total - sideWidth - PANE_SPLIT - PANE_MIN));
+}
 
 export type Shell = {
   root: HTMLElement;
@@ -95,6 +110,9 @@ export function mountShell(root: HTMLElement): Shell {
   const split = el('div', 'tb-split');
   split.setAttribute('role', 'separator');
   split.setAttribute('aria-orientation', 'vertical');
+  split.setAttribute('aria-valuemin', String(PANE_MIN));
+  split.setAttribute('aria-valuemax', String(PANE_MIN));
+  split.setAttribute('aria-valuenow', String(PANE_MIN));
   split.tabIndex = 0;
   const mapCol = el('section', 'tb-map-col');
   mapCol.setAttribute('aria-label', 'Mapa');
@@ -140,6 +158,10 @@ export function mountShell(root: HTMLElement): Shell {
     tripsLabel.textContent = locale === 'pt-BR' ? 'Roteiros' : 'Trips';
     citiesLabel.textContent = locale === 'pt-BR' ? 'Cidades' : 'Cities';
     markMeta.textContent = locale === 'pt-BR' ? 'roteiros' : 'trips';
+    split.setAttribute(
+      'aria-label',
+      pickLocale(locale, { en: 'Document width', 'pt-BR': 'Largura do documento' }),
+    );
     applySide();
   };
   paintLocale();
@@ -148,19 +170,37 @@ export function mountShell(root: HTMLElement): Shell {
     sideOpen = !sideOpen;
     localStorage.setItem(SIDE_KEY, sideOpen ? '1' : '0');
     applySide();
+    reclamp(true);
   });
 
-  const setMainWidth = (px: number) => {
+  const setMainWidth = (px: number, persist: boolean) => {
     const sideWidth = side.getBoundingClientRect().width;
     const total = workspace.getBoundingClientRect().width;
-    const max = Math.max(280, total - sideWidth - 5 - 280);
-    const next = Math.min(max, Math.max(280, Math.round(px)));
-    const value = `${next}px`;
-    workspace.style.setProperty('--pane-main', value);
+    const next = clampPaneWidth(px, total, sideWidth);
+    workspace.style.setProperty('--pane-main', `${next}px`);
     workspace.style.setProperty('--pane-map', '1fr');
-    localStorage.setItem(MAIN_KEY, value);
+    if (persist) localStorage.setItem(MAIN_KEY, `${next}px`);
+    split.setAttribute('aria-valuemin', String(PANE_MIN));
+    split.setAttribute('aria-valuemax', String(paneMax(total, sideWidth)));
     split.setAttribute('aria-valuenow', String(next));
   };
+
+  const reclamp = (persist: boolean) => {
+    const raw = workspace.style.getPropertyValue('--pane-main').trim();
+    if (!/^\d+px$/.test(raw)) {
+      const sideWidth = side.getBoundingClientRect().width;
+      const total = workspace.getBoundingClientRect().width;
+      const now = Math.round(main.getBoundingClientRect().width);
+      split.setAttribute('aria-valuemin', String(PANE_MIN));
+      split.setAttribute('aria-valuemax', String(paneMax(total, sideWidth)));
+      split.setAttribute('aria-valuenow', String(Math.max(PANE_MIN, now || PANE_MIN)));
+      return;
+    }
+    setMainWidth(Number.parseInt(raw, 10), persist);
+  };
+
+  requestAnimationFrame(() => reclamp(true));
+  window.addEventListener('resize', () => reclamp(true));
 
   split.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) return;
@@ -169,10 +209,27 @@ export function mountShell(root: HTMLElement): Shell {
     split.classList.add('is-dragging');
     const startX = event.clientX;
     const startW = main.getBoundingClientRect().width;
-    const move = (ev: PointerEvent) => setMainWidth(startW + ev.clientX - startX);
+    let frame = 0;
+    let pending = startW;
+    const move = (ev: PointerEvent) => {
+      pending = startW + ev.clientX - startX;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        setMainWidth(pending, false);
+      });
+    };
+    let done = false;
     const up = () => {
+      if (done) return;
+      done = true;
       split.classList.remove('is-dragging');
       split.removeEventListener('pointermove', move);
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
+      setMainWidth(pending, true);
     };
     split.addEventListener('pointermove', move);
     split.addEventListener('pointerup', up, { once: true });
@@ -181,12 +238,20 @@ export function mountShell(root: HTMLElement): Shell {
 
   split.addEventListener('keydown', (event) => {
     const current = main.getBoundingClientRect().width;
+    const total = workspace.getBoundingClientRect().width;
+    const sideWidth = side.getBoundingClientRect().width;
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
-      setMainWidth(current - 24);
+      setMainWidth(current - 24, true);
     } else if (event.key === 'ArrowRight') {
       event.preventDefault();
-      setMainWidth(current + 24);
+      setMainWidth(current + 24, true);
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      setMainWidth(PANE_MIN, true);
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      setMainWidth(paneMax(total, sideWidth), true);
     }
   });
 
