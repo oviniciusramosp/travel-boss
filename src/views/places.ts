@@ -20,9 +20,11 @@ import {
   placeCategoriesOffByDefault,
   placeCategoryMeta,
   placeCategoryOrder,
+  resolveVisit,
   subcategoryLabel,
   travelCities,
   travelUi,
+  visitFieldsForDisplay,
   withResolvedArea,
 } from '../catalog';
 import type {
@@ -305,7 +307,28 @@ function copy(locale: Locale) {
   };
 }
 
-function searchBlob(place: TravelPlace): string {
+export function citySearchPlaceholder(count: number, locale: Locale): string {
+  return pickLocale(locale, {
+    en: `Search among ${count} places…`,
+    'pt-BR': `Buscar entre ${count} lugares…`,
+  });
+}
+
+export function searchBlob(place: TravelPlace): string {
+  const visit = resolveVisit(place.id, place.visit);
+  const subs = (place.subcategories ?? []).flatMap((id) => [
+    subcategoryLabel(id, 'en'),
+    subcategoryLabel(id, 'pt-BR'),
+  ]);
+  const fields = visit
+    ? [...visitFieldsForDisplay(visit, 'en'), ...visitFieldsForDisplay(visit, 'pt-BR')].map(
+        (field) => field.value,
+      )
+    : [];
+  const notes = [place.rating, place.googleRating].flatMap((value) => {
+    if (value == null || !Number.isFinite(value)) return [];
+    return [`nota ${formatRating(value, 'en')}`, `nota ${formatRating(value, 'pt-BR')}`];
+  });
   return fold(
     [
       place.name.en,
@@ -316,6 +339,11 @@ function searchBlob(place: TravelPlace): string {
       CATEGORY_LABEL[place.category].en,
       CATEGORY_LABEL[place.category]['pt-BR'],
       place.address ?? '',
+      place.mapsQuery ?? '',
+      ...subs,
+      ...fields,
+      place.favorite ? 'favorite favorito' : '',
+      ...notes,
     ].join('\n'),
   );
 }
@@ -602,6 +630,8 @@ export function mountCity(
       tabButtons[id].removeAttribute('aria-pressed');
     }
     segmented(tabs);
+    const input = shell.root.querySelector<HTMLInputElement>('.tb-search input');
+    if (input) input.placeholder = citySearchPlaceholder(city.places.length, locale);
   };
 
   const showPlacePins = (opts: { fit: boolean; pan: boolean }) => {
@@ -1264,6 +1294,13 @@ export function mountCity(
       window.clearTimeout(searchFitTimer);
       main.removeEventListener('scroll', onListScroll);
       preview.dispose();
+      const input = shell.root.querySelector<HTMLInputElement>('.tb-search input');
+      if (input) {
+        input.placeholder = pickLocale(shell.locale(), {
+          en: 'Search a place or trip',
+          'pt-BR': 'Buscar lugar ou roteiro',
+        });
+      }
       hotelsEpoch += 1;
       unsubLocale();
       unsubQuery();

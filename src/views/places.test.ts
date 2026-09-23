@@ -1,13 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import type { ItineraryDay, ItineraryStop, PlaceCategory } from '../catalog';
+import type { ItineraryDay, ItineraryStop, PlaceCategory, TravelPlace } from '../catalog';
 import { placeCategoriesOffByDefault, placeCategoryOrder } from '../catalog';
 import {
   applyCategoryClick,
   categoriesPresent,
+  citySearchPlaceholder,
   groupOpenState,
   groupsToggleLabel,
   isDefaultCategoryFilter,
   primaryDayRoute,
+  searchBlob,
   searchLeavesView,
 } from './places';
 
@@ -71,6 +73,39 @@ describe('category groups', () => {
     expect(groupOpenState(['parks', 'cafes'], { parks: true })).toEqual({ parks: true, cafes: false });
     expect(groupsToggleLabel(false, 'pt-BR')).toBe('Expandir tudo');
     expect(groupsToggleLabel(true, 'en')).toBe('Collapse all');
+  });
+});
+
+describe('searchBlob', () => {
+  it('includes subcategories, price, tips, favorite and nota', () => {
+    const place = {
+      id: 'x',
+      name: { en: 'Cafe', 'pt-BR': 'Café' },
+      category: 'cafes',
+      description: { en: 'Quiet', 'pt-BR': 'Quieto' },
+      subcategories: ['coffee-shop'],
+      favorite: true,
+      rating: 4.6,
+      lat: 0,
+      lng: 0,
+      visit: {
+        avgPricePerPerson: { currency: 'EUR', min: 12, max: 20 },
+        bestTime: { en: 'Morning', 'pt-BR': 'Manhã' },
+        bestDay: { en: 'Tuesday', 'pt-BR': 'Terça' },
+        tips: { en: 'Book ahead', 'pt-BR': 'Reserve antes' },
+      },
+    } as TravelPlace;
+    const blob = searchBlob(place);
+    expect(blob).toContain('cafeteria');
+    expect(blob).toContain('coffee shop');
+    expect(blob).toContain('favorito');
+    expect(blob).toContain('nota 4.6');
+    expect(blob).toContain('nota 4,6');
+    expect(blob).toContain('manha');
+    expect(blob).toContain('terca');
+    expect(blob).toContain('reserve');
+    expect(blob).toContain('12');
+    expect(citySearchPlaceholder(12, 'pt-BR')).toBe('Buscar entre 12 lugares…');
   });
 });
 
