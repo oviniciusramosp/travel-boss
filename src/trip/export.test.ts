@@ -77,4 +77,23 @@ city: paris
     );
     expect(nested).not.toMatch(/<\/li>\s*<ul>\s*<li>via:/);
   });
+
+  it('round-trips a list note and resolves an inline place link', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+
+### Dia 1 — Museu
+
+- 09:00 [Louvre](place:par-louvre)
+- Lembrar [ingresso](place:par-orsay)
+`;
+    const parsed = parseTrip('europa', 'content/trips/europa.md', source);
+    const exported = tripToMarkdown(parsed, (_slug, placeId) => `https://maps.example/${placeId}`);
+    expect(exported).toContain('- Lembrar [ingresso](place:par-orsay)');
+    expect(exported).not.toContain('item sem link');
+    const html = tripToHtml(exported, (id) => `https://maps.example/${id}`);
+    expect(html).toContain('<a href="https://maps.example/par-orsay">ingresso</a>');
+  });
 });

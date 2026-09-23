@@ -16,6 +16,8 @@ export type TripStop = {
   placeId?: string;
   href?: string;
   note?: string;
+  /** Bullet without a link. Not a pin and not an error. */
+  listNote?: boolean;
   /** Leg from this departure stop to the next stop. */
   leg?: TripLeg;
 };
@@ -134,10 +136,7 @@ function parseStop(text: string, line: number, errors: TripError[]): TripStop {
   }
 
   const linked = rest.match(/^\[([^\]]+)\]\(([^)]+)\)(?:\s*(?:—|-)\s*(.*))?$/);
-  if (!linked) {
-    reject(errors, line, 'stop-no-link');
-    return { time, label: rest };
-  }
+  if (!linked) return { time, label: rest, listNote: true };
 
   const label = linked[1].trim();
   const target = linked[2].trim();

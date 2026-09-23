@@ -1,3 +1,4 @@
+import { inline, inlineWithLinks } from './inline';
 import type { Trip } from './parse';
 
 export function tripToMarkdown(
@@ -15,6 +16,11 @@ export function tripToMarkdown(
       lines.push(`### ${day.title}`, '');
       for (const stop of day.stops) {
         const time = stop.time ? `${stop.time} ` : '';
+        if (stop.listNote) {
+          lines.push(`- ${time}${stop.label}`);
+          if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
+          continue;
+        }
         let body: string;
         if (stop.href) body = `[${stop.label}](${stop.href})`;
         else if (stop.placeId) {
@@ -35,40 +41,15 @@ export function tripToMarkdown(
   return `${lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()}\n`;
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;');
-}
-
-function inline(value: string): string {
-  return escapeHtml(value)
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
-}
-
-function inlineWithLinks(value: string): string {
-  const pattern = /\[([^\]]+)\]\((https?:[^)\s]+)\)/g;
-  let html = '';
-  let last = 0;
-  for (const match of value.matchAll(pattern)) {
-    const index = match.index ?? 0;
-    html += inline(value.slice(last, index));
-    const href = (match[2] ?? '').replaceAll('"', '%22');
-    html += `<a href="${href}">${inline(match[1] ?? '')}</a>`;
-    last = index + match[0].length;
-  }
-  html += inline(value.slice(last));
-  return html;
-}
-
 /**
  * HTML subset Apple Notes keeps: headings, paragraphs, lists, links.
  * An indented bullet becomes a `<ul>` inside the parent `<li>`.
+ * `resolvePlace` turns an inline `place:` link into an https href.
  */
-export function tripToHtml(markdown: string): string {
+export function tripToHtml(
+  markdown: string,
+  resolvePlace?: (id: string) => string | null,
+): string {
   const out: string[] = [];
   const stack: { liOpen: boolean }[] = [];
 
@@ -105,7 +86,7 @@ export function tripToHtml(markdown: string): string {
     const bullet = /^(\s*)- (.*)$/.exec(line);
     if (bullet) {
       const indent = (bullet[1] ?? '').replaceAll('\t', '  ').length;
-      pushItem(Math.floor(indent / 2), inlineWithLinks(bullet[2] ?? ''));
+      pushItem(Math.floor(indent / 2), inlineWithLinks(bullet[2] ?? '', resolvePlace));
       continue;
     }
     if (!line.trim()) {
@@ -125,7 +106,7 @@ export function tripToHtml(markdown: string): string {
       out.push(`<h1>${inline(line.slice(2))}</h1>`);
       continue;
     }
-    out.push(`<p>${inlineWithLinks(line)}</p>`);
+    out.push(`<p>${inlineWithLinks(line, resolvePlace)}</p>`);
   }
   closeAll();
   return out.join('\n');

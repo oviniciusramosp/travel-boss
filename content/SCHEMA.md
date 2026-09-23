@@ -40,6 +40,7 @@ dates: 2026-04-06 → 2026-04-09
   - Catalog stop: `[Label](place:<placeId>)`. The id must already exist on that city.
   - External stop: `[Label](https://...)`.
   - Note, if any, after an em dash: ` — note`.
+- A bullet inside a day with no link is a list note. It stays in that position in the list, renders, and exports as a bullet. It is not a stop, not a pin, and not an error. `**bold**`, `*italic*`, `[label](https://...)` and `[label](place:<id>)` work in list notes, in the stop note after ` — `, and in paragraphs. A `place:` link selects that place in the app. It does not add a stop.
 - The departure stop may have one indented sub-bullet for the leg to the next stop. It is not a stop and it does not become a pin.
 
   ```markdown
@@ -47,14 +48,14 @@ dates: 2026-04-06 → 2026-04-09
     - via: metrô M14 + RER E · 35 min
   ```
 
-  - The line must be indented (`  - via: …`). A top-level `- via:` is not a leg. A second `via:` under the same stop is an error; the first leg is kept.
+  - The line must be indented (`  - via: …`). A top-level `- via:` is not a leg — it is a list note, not an error. A second `via:` under the same stop is an error; the first leg is kept.
   - Mode is the earliest PT/EN keyword on the line. Matching ignores case and accents:
     - walk: `a pé`, `walk`
     - transit: `metrô` / `metro`, `rer`, `trem` / `train`, `ônibus` / `onibus`, `bus`, `tram`, `ferry`
     - taxi: `táxi` / `taxi`, `uber`, `carro`, `car`
     - flight: `voo`, `flight`
   - Duration is exactly one token `(\d+)\s?(min|h)`: `35 min`, `35min`, `1 h`, `1h`. The unit is only `min` or `h` (`35 minutos` does not count). `N h` is N hours, stored as 60N minutes (`1 h` = 60, `3 h` = 180). `3h10` is not a token — `h` must not be followed by a letter or digit — so it is not 3 hours and not 3 hours 10 minutes; write `3 h` or `190 min`. Two tokens (`1 h 30 min`) are not added together.
-- Paragraphs under a day are narrative. They render and they export. They are not stops.
+- Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 
 ## Export

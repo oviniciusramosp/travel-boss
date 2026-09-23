@@ -208,8 +208,10 @@ describe('via legs', () => {
 
     const topLevel = firstLegs('- via: walk · 10 min');
     expect(topLevel.stops).toHaveLength(1);
+    expect(topLevel.stops[0]?.listNote).toBe(true);
+    expect(topLevel.stops[0]?.label).toBe('via: walk · 10 min');
     expect(topLevel.stops[0]?.leg).toBeUndefined();
-    expect(topLevel.errors).toContain('stop-no-link');
+    expect(topLevel.errors).not.toContain('stop-no-link');
 
     const outside = parseTrip(
       'europa',
@@ -227,6 +229,19 @@ describe('via legs', () => {
     const empty = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via:   ');
     expect(empty.stops[0]?.leg).toBeUndefined();
     expect(empty.errors).toEqual(['via-empty']);
+  });
+});
+
+describe('list notes', () => {
+  it('keeps a bullet without a link, in order, and does not report an error', () => {
+    const { stops, errors } = firstLegs(`- 09:00 [Louvre](place:par-louvre)
+- Lembrar **ingresso**
+- 11:00 [Orsay](place:par-orsay)`);
+    expect(errors).toEqual([]);
+    expect(stops.map((stop) => stop.listNote ?? false)).toEqual([false, true, false]);
+    expect(stops[1]).toMatchObject({ label: 'Lembrar **ingresso**', listNote: true });
+    expect(stops[0]?.placeId).toBe('par-louvre');
+    expect(stops[2]?.placeId).toBe('par-orsay');
   });
 });
 
