@@ -1305,3 +1305,12 @@ p.tb-budget {
 .tb-route__meta[data-kind='error'] {
   color: var(--color-ember-text);
 }
+
+a.tb-route__google {
+  text-decoration: none;
+  color: var(--color-on-ink);
+}
+
+a.tb-route__google[hidden] {
+  display: none;
+}

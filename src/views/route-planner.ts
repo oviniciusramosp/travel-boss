@@ -1,5 +1,7 @@
 import { read, write } from '../app/store';
 import { pickLocale, travelUi, type Locale } from '../catalog';
+import { fetchWalkingRoute } from '../map/walk-route';
+import type { MapHandle } from '../map/types';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
@@ -101,6 +103,55 @@ export function routeBarHint(
   return null;
 }
 
+export function routeStopBadges(stops: readonly RouteStop[]): Map<string, number> {
+  const numbers = new Map<string, number>();
+  stops.forEach((stop, index) => {
+    if (stop.user || stop.id === USER_LOCATION_ID) return;
+    numbers.set(stop.id, index + 1);
+  });
+  return numbers;
+}
+
+export function formatRouteDuration(seconds: number, locale: Locale): string {
+  const total = Math.max(1, Math.round(seconds / 60));
+  if (total < 60) return `${total} min`;
+  const hours = Math.floor(total / 60);
+  const minutes = total % 60;
+  const unit = locale === 'pt-BR' ? 'h' : 'h';
+  return minutes > 0 ? `${hours} ${unit} ${minutes} min` : `${hours} ${unit}`;
+}
+
+export function formatRouteDistance(meters: number, locale: Locale): string {
+  if (!Number.isFinite(meters) || meters < 1000) return `${Math.max(0, Math.round(meters || 0))} m`;
+  const km = meters / 1000;
+  const rounded = km >= 10 ? Math.round(km) : Math.round(km * 10) / 10;
+  const text = locale === 'pt-BR' ? String(rounded).replace('.', ',') : String(rounded);
+  return `${text} km`;
+}
+
+export function walkPreviewLabel(seconds: number, meters: number, locale: Locale): string {
+  return `${pickLocale(locale, travelUi.routePreviewLabel)} · ${formatRouteDuration(seconds, locale)} · ${formatRouteDistance(meters, locale)}`;
+}
+
+export function googleDirectionsUrl(
+  stops: readonly { lat: number; lng: number }[],
+  mode: RouteMode,
+): string | null {
+  if (stops.length < 2) return null;
+  const origin = stops[0];
+  const destination = stops[stops.length - 1];
+  if (!origin || !destination) return null;
+  const params = new URLSearchParams({
+    api: '1',
+    origin: `${origin.lat},${origin.lng}`,
+    destination: `${destination.lat},${destination.lng}`,
+    travelmode: mode === 'transit' ? 'transit' : 'walking',
+  });
+  const mid = stops.slice(1, -1).slice(0, 9);
+  if (mid.length) params.set('waypoints', mid.map((stop) => `${stop.lat},${stop.lng}`).join('|'));
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+}
+
 export function paintRouteAction(
   button: HTMLButtonElement,
   on: boolean,
@@ -154,12 +205,15 @@ type RouteBar = {
   fromMe: HTMLButtonElement;
   stopsEl: HTMLOListElement;
   meta: HTMLElement;
+  google: HTMLAnchorElement;
   modes: HTMLButtonElement[];
 };
 
 let bar: RouteBar | null = null;
 let barActive: () => boolean = () => true;
 let note: { text: string; kind: RouteNoteKind } | null = null;
+let mapHandle: MapHandle | null = null;
+let drawSeq = 0;
 
 function syncActions(): void {
   if (!session || typeof document === 'undefined') return;
@@ -215,6 +269,54 @@ function refresh(): void {
   bar.meta.textContent = hint?.text ?? '';
   if (hint) bar.meta.dataset.kind = hint.kind;
   else delete bar.meta.dataset.kind;
+  const href = googleDirectionsUrl(stops, session.mode);
+  const open = pickLocale(locale, travelUi.routeOpenGoogle);
+  bar.google.setAttribute('aria-label', open);
+  const googleText = bar.google.querySelector('span:last-child');
+  if (googleText) googleText.textContent = open;
+  if (href && !bar.root.hidden) {
+    bar.google.href = href;
+    bar.google.hidden = false;
+  } else {
+    bar.google.hidden = true;
+    bar.google.removeAttribute('href');
+  }
+}
+
+function drawRoutePreview(fit: boolean): void {
+  if (!session || !mapHandle || !barActive()) return;
+  const stops = session.stops.filter((stop) => Number.isFinite(stop.lat) && Number.isFinite(stop.lng));
+  const seq = ++drawSeq;
+  const handle = mapHandle;
+  const mode = session.mode;
+  if (stops.length < 2) {
+    handle.setRoute([]);
+    return;
+  }
+  if (mode === 'transit') {
+    handle.setRoute(
+      [{ mode: 'transit', dash: true, latlngs: stops.map((stop) => [stop.lat, stop.lng]) }],
+      { fit },
+    );
+    return;
+  }
+  setRouteNote({ text: pickLocale(session.locale(), travelUi.routeLoading), kind: 'loading' });
+  void fetchWalkingRoute(stops)
+    .then((result) => {
+      if (seq !== drawSeq || !session || !mapHandle || !barActive()) return;
+      if (!result) {
+        mapHandle.setRoute([]);
+        setRouteNote({ text: pickLocale(session.locale(), travelUi.routeError), kind: 'error' });
+        return;
+      }
+      mapHandle.setRoute([{ mode: 'walk', latlngs: result.latlngs }], { fit });
+      setRouteNote({ text: walkPreviewLabel(result.durationSec, result.distanceM, session.locale()), kind: 'ok' });
+    })
+    .catch(() => {
+      if (seq !== drawSeq || !session || !barActive()) return;
+      mapHandle?.setRoute([]);
+      setRouteNote({ text: pickLocale(session.locale(), travelUi.routeError), kind: 'error' });
+    });
 }
 
 function apply(next: RouteStop[], mode: RouteMode): void {
@@ -321,9 +423,14 @@ function mountBar(column: HTMLElement): void {
   const meta = el('p', 'tb-route__meta');
   meta.setAttribute('role', 'status');
   meta.setAttribute('aria-live', 'polite');
-  root.append(head, fromMe, stopsEl, modes, meta);
+  const google = el('a', 'tb-btn tb-route__google');
+  google.hidden = true;
+  google.target = '_blank';
+  google.rel = 'noopener noreferrer';
+  google.append(icon('map', { size: 18 }), el('span'));
+  root.append(head, fromMe, stopsEl, modes, meta, google);
   column.append(root);
-  bar = { root, title, clearBtn, fromMe, stopsEl, meta, modes: [walk, transit] };
+  bar = { root, title, clearBtn, fromMe, stopsEl, meta, google, modes: [walk, transit] };
 }
 
 export function mountRoutePlanner(opts: {
@@ -331,9 +438,17 @@ export function mountRoutePlanner(opts: {
   places: readonly RoutePlace[];
   locale: () => Locale;
   column?: HTMLElement | null;
+  map?: MapHandle | null;
   active?: () => boolean;
   onChange?: () => void;
-}): { ids(): string[]; sync(): void; dispose(): void } {
+}): {
+  ids(): string[];
+  stopCount(): number;
+  badges(): Map<string, number>;
+  draw(fit: boolean): void;
+  sync(): void;
+  dispose(): void;
+} {
   const byId = new Map<string, RoutePlace>();
   for (const place of opts.places) byId.set(place.id, place);
   const stored = readStoredRoute(opts.slug);
@@ -346,6 +461,8 @@ export function mountRoutePlanner(opts: {
   bar?.root.remove();
   bar = null;
   note = null;
+  drawSeq += 1;
+  mapHandle = opts.map ?? null;
   barActive = opts.active ?? (() => true);
   session = {
     slug: opts.slug,
@@ -360,11 +477,18 @@ export function mountRoutePlanner(opts: {
   const slug = opts.slug;
   return {
     ids: () => (session?.slug === slug ? placeStopIds(session.stops) : []),
+    stopCount: () => (session?.slug === slug ? session.stops.length : 0),
+    badges: () => routeStopBadges(session?.slug === slug ? session.stops : []),
+    draw(fit: boolean) {
+      if (session?.slug === slug) drawRoutePreview(fit);
+    },
     sync: () => {
       if (session?.slug === slug) refresh();
     },
     dispose() {
       if (session?.slug !== slug) return;
+      drawSeq += 1;
+      mapHandle = null;
       session = null;
       note = null;
       bar?.root.remove();

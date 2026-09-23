@@ -5,8 +5,13 @@ import {
   placeStopIds,
   readStoredRoute,
   removeRouteStop,
+  formatRouteDistance,
+  formatRouteDuration,
+  googleDirectionsUrl,
   routeBarHint,
+  routeStopBadges,
   routeStorageKey,
+  walkPreviewLabel,
   togglePlaceStop,
   USER_LOCATION_ID,
   writeStoredRoute,
@@ -66,6 +71,28 @@ describe('route stops', () => {
       kind: 'hint',
     });
     expect(routeBarHint(2, 'walk', 'pt-BR')).toBeNull();
+  });
+
+  it('numbers places, skipping a user origin, and formats the walk preview', () => {
+    const numbers = routeStopBadges([stop(USER_LOCATION_ID, true), stop('louvre'), stop('orsay')]);
+    expect(numbers.get('louvre')).toBe(2);
+    expect(numbers.has(USER_LOCATION_ID)).toBe(false);
+    expect(formatRouteDuration(25 * 60, 'pt-BR')).toBe('25 min');
+    expect(formatRouteDuration(90 * 60, 'en')).toBe('1 h 30 min');
+    expect(formatRouteDistance(1900, 'pt-BR')).toBe('1,9 km');
+    expect(walkPreviewLabel(25 * 60, 1900, 'pt-BR')).toBe('Prévia a pé · 25 min · 1,9 km');
+    const url = googleDirectionsUrl(
+      [
+        { lat: 1, lng: 2 },
+        { lat: 3, lng: 4 },
+        { lat: 5, lng: 6 },
+      ],
+      'transit',
+    );
+    expect(url).toContain('travelmode=transit');
+    expect(url).toContain('origin=1%2C2');
+    expect(url).toContain('waypoints=3%2C4');
+    expect(googleDirectionsUrl([{ lat: 1, lng: 2 }], 'walk')).toBeNull();
   });
 
   afterEach(() => {

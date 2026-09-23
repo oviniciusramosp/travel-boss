@@ -534,7 +534,11 @@ export function mountCity(
     places: catalogPlaces,
     locale: () => shell.locale(),
     column: shell.mapHost.parentElement,
+    map,
     active: () => tab === 'places',
+    onChange: () => {
+      if (tab === 'places') showPlacePins({ fit: true, pan: false });
+    },
   });
   let query = shell.query();
   let currentPlaceId: string | null = null;
@@ -730,13 +734,23 @@ export function mountCity(
 
   const showPlacePins = (opts: { fit: boolean; pan: boolean }) => {
     routeEpoch += 1;
-    setDayLayer(false);
+    const badges = planner.badges();
+    const visible = visiblePlaces();
+    const seen = new Set(visible.map((place) => place.id));
+    const extra = planner.ids().flatMap((id) => {
+      if (seen.has(id)) return [];
+      const place = byId.get(id);
+      return place ? [place] : [];
+    });
+    setDayLayer(badges.size > 0);
     map.setRoute([]);
     map.setPins('stop', []);
     if (!currentPlaceId) map.highlight(null);
-    map.setPins('place', toPins(visiblePlaces(), 'place', shell.locale()));
-    if (opts.fit) map.fit();
+    map.setPins('place', toPins([...visible, ...extra], 'place', shell.locale(), badges));
+    const framing = opts.fit && planner.stopCount() >= 2;
+    if (opts.fit && !framing) map.fit();
     if (opts.pan && currentPlaceId) map.highlight(currentPlaceId);
+    planner.draw(framing);
   };
 
   const snapshot = (): CityRouteState => ({
