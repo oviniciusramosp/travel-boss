@@ -7,8 +7,11 @@ import {
   directionPoints,
   formatEur,
   moneyTip,
+  periodOf,
   primaryStopCount,
   routeActionLabel,
+  routeForSlots,
+  sectionsOf,
   stopCountLabel,
   typicalEur,
 } from './timeline';
@@ -73,6 +76,34 @@ describe('day header helpers', () => {
   it('formats whole euros without cents', () => {
     expect(formatEur(12, 'en')).toContain('12');
     expect(formatEur(12, 'en')).not.toContain('12.00');
+  });
+});
+
+describe('routeForSlots', () => {
+  const stops: ItineraryStop[] = [
+    { placeId: 'a', slot: 'morning' },
+    { placeId: 'b', slot: 'afternoon' },
+    { placeId: 'opt', slot: 'afternoon', optional: true },
+    { placeId: 'c', slot: 'evening' },
+  ];
+  const legs = [
+    { from: 'a', to: 'b', mode: 'transit' as const, line: 'm1' },
+    { from: 'b', to: 'c', mode: 'walk' as const },
+  ];
+  const all = new Set(['morning', 'afternoon', 'evening']);
+
+  it('keeps authored legs and drops the optional stop', () => {
+    const route = routeForSlots(stops, legs, all);
+    expect(route.ids).toEqual(['a', 'b', 'c']);
+    expect(route.legs.map((leg) => leg.mode)).toEqual(['transit', 'walk']);
+    expect(periodOf(stops[1]!)).toBe('afternoon');
+    expect(sectionsOf(stops).map((section) => section.key)).toEqual(['morning', 'afternoon', 'evening']);
+  });
+
+  it('does not bridge a period that is off the map', () => {
+    const route = routeForSlots(stops, legs, new Set(['morning', 'evening']));
+    expect(route.ids).toEqual(['a', 'c']);
+    expect(route.legs).toEqual([]);
   });
 });
 

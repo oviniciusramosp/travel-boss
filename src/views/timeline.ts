@@ -14,6 +14,7 @@ import {
 import type {
   DayBudget,
   ItineraryDay,
+  ItineraryLegDef,
   ItineraryStop,
   Locale,
   TravelItinerary,
@@ -119,6 +120,76 @@ export function moneyTip(
     parts.push(`${pickLocale(locale, place.name)} ${formatEur(amount, locale)}`);
   }
   return parts.join(' · ');
+}
+
+const PERIODS = ['morning', 'afternoon', 'evening'] as const;
+export type Period = (typeof PERIODS)[number];
+
+export function periodOf(stop: ItineraryStop): Period | 'other' {
+  if (stop.slot === 'morning' || stop.slot === 'afternoon' || stop.slot === 'evening') return stop.slot;
+  return 'other';
+}
+
+export type ResolvedStop = ItineraryStop & { index: number };
+
+/** Morning, afternoon, evening, then anything without a slot. Order inside a period stays. */
+export function sectionsOf(
+  stops: readonly ItineraryStop[],
+): { key: Period | 'other'; stops: ResolvedStop[] }[] {
+  const buckets = new Map<Period | 'other', ResolvedStop[]>();
+  stops.forEach((stop, index) => {
+    const key = periodOf(stop);
+    const list = buckets.get(key) ?? [];
+    list.push({ ...stop, index });
+    buckets.set(key, list);
+  });
+  const sections: { key: Period | 'other'; stops: ResolvedStop[] }[] = [];
+  for (const key of PERIODS) {
+    const list = buckets.get(key);
+    if (list?.length) sections.push({ key, stops: list });
+  }
+  const other = buckets.get('other');
+  if (other?.length) sections.push({ key: 'other', stops: other });
+  return sections;
+}
+
+export function periodLabel(period: Period, locale: Locale): string {
+  const table = {
+    morning: travelUi.itineraryMorning,
+    afternoon: travelUi.itineraryAfternoon,
+    evening: travelUi.itineraryEvening,
+  } as const;
+  return pickLocale(locale, table[period]);
+}
+
+/**
+ * Primary stops whose period is on, and only the legs between two enabled
+ * neighbors. A hidden period leaves a gap — it does not bridge morning to evening.
+ */
+export function routeForSlots(
+  stops: readonly ItineraryStop[],
+  legs: readonly ItineraryLegDef[],
+  enabled: ReadonlySet<string>,
+): { ids: string[]; legs: ItineraryLegDef[] } {
+  const ids: string[] = [];
+  const kept: ItineraryLegDef[] = [];
+  let previous: ItineraryStop | null = null;
+  for (const stop of stops) {
+    if (stop.optional) continue;
+    const slot = periodOf(stop);
+    if (slot !== 'other' && !enabled.has(slot)) {
+      previous = null;
+      continue;
+    }
+    if (previous) {
+      const from = previous.placeId;
+      const to = stop.placeId;
+      kept.push(legs.find((leg) => leg.from === from && leg.to === to) ?? { from, to, mode: 'walk' });
+    }
+    ids.push(stop.placeId);
+    previous = stop;
+  }
+  return { ids, legs: kept };
 }
 
 export function paintRouteButton(button: HTMLButtonElement, phase: RoutePhase, locale: Locale): void {
@@ -241,9 +312,85 @@ function mapsLink(url: string | null, label: string): HTMLAnchorElement {
   }
   link.addEventListener('click', (event) => {
     event.stopPropagation();
-    if (!url) event.preventDefault();
+    if (!link.getAttribute('href')) event.preventDefault();
   });
   return link;
+}
+
+function slotSwitch(on: boolean, slot: string, locale: Locale, onToggle: (on: boolean) => void): HTMLButtonElement {
+  const button = el('button', 'tb-slot__switch');
+  button.type = 'button';
+  button.setAttribute('role', 'switch');
+  button.dataset.timelineAction = 'slot';
+  button.dataset.slot = slot;
+  const paint = (checked: boolean) => {
+    button.setAttribute('aria-checked', checked ? 'true' : 'false');
+    const label = pickLocale(locale, checked ? travelUi.itinerarySlotOnMap : travelUi.itinerarySlotOffMap);
+    button.setAttribute('aria-label', label);
+    button.setAttribute('data-tip', label);
+  };
+  paint(on);
+  button.append(el('span', 'tb-slot__switch-track'));
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const next = button.getAttribute('aria-checked') !== 'true';
+    paint(next);
+    onToggle(next);
+  });
+  return button;
+}
+
+/** Collapsible morning / afternoon / evening. `other` has no header and stays on the map. */
+export function renderPeriods(opts: {
+  stops: readonly ItineraryStop[];
+  locale: Locale;
+  enabled: ReadonlySet<string>;
+  coords: ReadonlyMap<string, { lat: number; lng: number }>;
+  isOpen: (slot: string) => boolean;
+  onOpen: (slot: string, open: boolean) => void;
+  onToggleSlot: (slot: string, on: boolean) => void;
+  renderStop: (stop: ItineraryStop, index: number) => HTMLElement | null;
+}): HTMLElement {
+  const wrap = el('div', 'tb-slots');
+  for (const section of sectionsOf(opts.stops)) {
+    const details = el('details', 'tb-slot');
+    details.dataset.slot = section.key;
+    details.open = opts.isOpen(section.key);
+    details.addEventListener('toggle', () => opts.onOpen(section.key, details.open));
+    if (section.key !== 'other') {
+      const onMap = opts.enabled.has(section.key);
+      details.classList.toggle('is-off-map', !onMap);
+      const summary = el('summary', 'tb-slot__summary');
+      const ids = section.stops.filter((stop) => !stop.optional).map((stop) => stop.placeId);
+      const link = mapsLink(
+        dayDirectionsUrl(ids, opts.coords),
+        pickLocale(opts.locale, travelUi.itineraryOpenGoogleMapsPeriod),
+      );
+      delete link.dataset.dayGmaps;
+      link.dataset.slotGmaps = section.key;
+      const count = el('span', 'tb-slot__count', String(section.stops.length));
+      summary.append(
+        link,
+        el('span', 'tb-slot__label', periodLabel(section.key, opts.locale)),
+        count,
+        slotSwitch(onMap, section.key, opts.locale, (on) => {
+          details.classList.toggle('is-off-map', !on);
+          opts.onToggleSlot(section.key, on);
+        }),
+        icon('expand_more', { size: 18 }),
+      );
+      details.append(summary);
+    }
+    const list = el('div', 'tb-stop-list');
+    for (const stop of section.stops) {
+      const row = opts.renderStop(stop, stop.index);
+      if (row) list.append(row);
+    }
+    details.append(list);
+    wrap.append(details);
+  }
+  return wrap;
 }
 
 /** Badge, stop count for the chosen arrival, and the hover actions. */
