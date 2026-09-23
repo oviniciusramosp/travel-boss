@@ -9,12 +9,28 @@
   gap: var(--spacing-12);
 }
 
+.tb-doc-heading {
+  min-width: 0;
+}
+
 .tb-doc-title {
-  margin: 0 0 4px;
+  margin: 0;
   font-size: var(--text-title);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-title);
   line-height: var(--leading-title);
+}
+
+.tb-doc-title:last-child {
+  margin-bottom: var(--spacing-4);
+}
+
+.tb-doc-summary {
+  margin: var(--spacing-4) 0 0;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-caption);
 }
 
 .tb-rail {

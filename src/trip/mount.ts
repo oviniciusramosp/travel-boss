@@ -36,6 +36,7 @@ import {
   setPlaceOrigin,
 } from '../views/place-panel';
 import { parseTrip, type Trip, type TripLeg } from './parse';
+import { formatTripSummary } from './summary';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -725,10 +726,20 @@ export function mountTrip(
 
     const head = document.createElement('header');
     head.className = 'tb-doc-head';
+    const heading = document.createElement('div');
+    heading.className = 'tb-doc-heading';
     const title = document.createElement('h1');
     title.className = 'tb-doc-title';
     title.textContent = trip.title;
-    head.append(title);
+    heading.append(title);
+    const summaryText = formatTripSummary(trip, locale);
+    if (summaryText) {
+      const summary = document.createElement('p');
+      summary.className = 'tb-doc-summary';
+      summary.textContent = summaryText;
+      heading.append(summary);
+    }
+    head.append(heading);
     unmountWarnings();
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
