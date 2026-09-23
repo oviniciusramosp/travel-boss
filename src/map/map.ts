@@ -14,7 +14,7 @@ import {
   type Marker,
 } from 'leaflet';
 import { placeCategoryMeta } from '../catalog';
-import { cameraMotion, labelFadeDuration, prefersReducedMotion } from '../ui/motion';
+import { cameraMotion, prefersReducedMotion } from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
 import {
   diffPinIds,
@@ -29,6 +29,7 @@ import { attachMapControls } from './controls';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
+import { MAPLIBRE_PERF, maplibreFade } from './maplibre-perf';
 import { attachTrackpadGestures } from './trackpad';
 import { transitLineForPlace } from './transit';
 import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
@@ -85,7 +86,8 @@ export function mountMap(host: HTMLElement): MapHandle {
     style: 'https://tiles.openfreemap.org/styles/bright',
     interactive: false,
     pane: 'tilePane',
-    fadeDuration: labelFadeDuration(reducedAtStart),
+    ...MAPLIBRE_PERF,
+    fadeDuration: maplibreFade(reducedAtStart),
   } as Parameters<typeof maplibreGL>[0]).addTo(leafletMap);
 
   leafletMap.setView([50, 10], 4);
@@ -93,7 +95,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   // Leaflet runs the GL layer's onAdd on the first view, not on addTo.
   const glMap = basemap.getMaplibreMap();
   if (glMap) {
-    glMap._fadeDuration = labelFadeDuration(reducedAtStart);
+    glMap._fadeDuration = maplibreFade(reducedAtStart);
     bindBrightBasemap(glMap);
   }
 
@@ -104,7 +106,7 @@ export function mountMap(host: HTMLElement): MapHandle {
     leafletMap.options.fadeAnimation = !reduced;
     leafletMap.options.markerZoomAnimation = !reduced;
     const gl = basemap.getMaplibreMap();
-    if (gl) gl._fadeDuration = labelFadeDuration(reduced);
+    if (gl) gl._fadeDuration = maplibreFade(reduced);
   };
   motionQuery.addEventListener('change', syncMotion);
 
