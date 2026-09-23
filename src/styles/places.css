@@ -3,6 +3,36 @@
   height: 100%;
 }
 
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]) {
+  opacity: 0.22;
+}
+
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]):hover,
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]):has(.is-hover, .is-active) {
+  opacity: 1;
+}
+
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-number]::after {
+  content: attr(data-pin-number);
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--h-sm);
+  height: var(--h-sm);
+  padding: 0 var(--spacing-4);
+  border-radius: var(--r-pill);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  font-family: var(--font-geist);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  pointer-events: none;
+}
+
 .tb-nav-label {
   min-width: 0;
   overflow: hidden;

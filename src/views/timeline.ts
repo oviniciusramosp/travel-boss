@@ -52,6 +52,18 @@ export function formatEur(amount: number, locale: Locale): string {
   }).format(cents / 100);
 }
 
+/** First visit wins when a place is on the route twice. */
+export function routeNumbers(ids: readonly string[]): Map<string, number> {
+  const numbers = new Map<string, number>();
+  let next = 1;
+  for (const id of ids) {
+    if (numbers.has(id)) continue;
+    numbers.set(id, next);
+    next += 1;
+  }
+  return numbers;
+}
+
 export function primaryStopCount(stops: readonly ItineraryStop[]): number {
   return dayPrimaryRoutePlaceIds({
     id: '',

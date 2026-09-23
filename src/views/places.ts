@@ -48,6 +48,7 @@ import {
   daySummary,
   renderPeriods,
   routeForSlots,
+  routeNumbers,
   stopCost,
   type RoutePhase,
 } from './timeline';
@@ -342,13 +343,19 @@ export function searchBlob(place: TravelPlace): string {
   );
 }
 
-function toPins(places: TravelPlace[], kind: MapPin['kind'], locale: Locale): MapPin[] {
+function toPins(
+  places: TravelPlace[],
+  kind: MapPin['kind'],
+  locale: Locale,
+  numbers?: ReadonlyMap<string, number>,
+): MapPin[] {
   const seen = new Set<string>();
   const pins: MapPin[] = [];
   for (const place of places) {
     if (seen.has(place.id)) continue;
     if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
     seen.add(place.id);
+    const number = numbers?.get(place.id);
     pins.push({
       id: place.id,
       lat: place.lat,
@@ -356,6 +363,7 @@ function toPins(places: TravelPlace[], kind: MapPin['kind'], locale: Locale): Ma
       label: pickLocale(locale, place.name),
       color: placeCategoryMeta[place.category].color,
       kind,
+      ...(number ? { number } : {}),
     });
   }
   return pins;
@@ -663,6 +671,7 @@ export function mountCity(
       routePhase = 'idle';
       routeEpoch += 1;
       map.setRoute([]);
+      paintItineraryPins();
       syncRouteChrome();
       return;
     }
@@ -699,8 +708,21 @@ export function mountCity(
     if (input) input.placeholder = citySearchPlaceholder(city.places.length, locale);
   };
 
+  const setDayLayer = (on: boolean) => {
+    document.querySelector('.tb-map')?.classList.toggle('is-day-layer', on);
+  };
+
+  const paintItineraryPins = () => {
+    const day = itinerary?.days[selectedDayIndex];
+    const numbers = day && routeWanted ? routeNumbers(routedDay(day).ids) : undefined;
+    map.setPins('stop', []);
+    map.setPins('place', toPins(city.places, 'place', shell.locale(), numbers));
+    setDayLayer(Boolean(day) && routeWanted && tab === 'itinerary');
+  };
+
   const showPlacePins = (opts: { fit: boolean; pan: boolean }) => {
     routeEpoch += 1;
+    setDayLayer(false);
     map.setRoute([]);
     map.setPins('stop', []);
     if (!currentPlaceId) map.highlight(null);
@@ -754,9 +776,11 @@ export function mountCity(
     if (!day || !routeWanted) {
       routePhase = 'idle';
       map.setRoute([]);
+      paintItineraryPins();
       syncRouteChrome();
       return;
     }
+    paintItineraryPins();
     routePhase = 'drawing';
     syncRouteChrome();
     const coords = placeCoords();
@@ -780,14 +804,13 @@ export function mountCity(
   };
 
   const showItineraryMap = (opts: { fit: boolean }) => {
-    map.setPins('stop', []);
-    map.setPins('place', toPins(city.places, 'place', shell.locale()));
     if (currentStopId) map.highlight(currentStopId);
     drawDayRoute(selectedDayIndex, opts.fit);
   };
 
   const showHotelPins = () => {
     routeEpoch += 1;
+    setDayLayer(false);
     map.setRoute([]);
     map.setPins('place', []);
     map.setPins('stop', []);
@@ -1007,6 +1030,7 @@ export function mountCity(
             routePhase = 'idle';
             routeEpoch += 1;
             map.setRoute([]);
+            paintItineraryPins();
             syncRouteChrome();
           }
           return;
@@ -1414,6 +1438,7 @@ export function mountCity(
         close?.();
       } finally {
         routeEpoch += 1;
+        setDayLayer(false);
         map.highlight(null);
         map.setRoute([]);
         map.setPins('place', []);

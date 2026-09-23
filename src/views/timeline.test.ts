@@ -12,6 +12,7 @@ import {
   stopCost,
   routeActionLabel,
   routeForSlots,
+  routeNumbers,
   sectionEntries,
   sectionsOf,
   stopCountLabel,
@@ -110,6 +111,13 @@ describe('routeForSlots', () => {
     expect(route.legs.map((leg) => leg.mode)).toEqual(['transit', 'walk']);
     expect(periodOf(stops[1]!)).toBe('afternoon');
     expect(sectionsOf(stops).map((section) => section.key)).toEqual(['morning', 'afternoon', 'evening']);
+  });
+
+  it('numbers the first visit of a repeated stop', () => {
+    expect([...routeNumbers(['a', 'b', 'a']).entries()]).toEqual([
+      ['a', 1],
+      ['b', 2],
+    ]);
   });
 
   it('does not bridge a period that is off the map', () => {
