@@ -43,6 +43,13 @@ function cityLabel(slug: string): string {
   return city ? pickLocale(shell.locale(), city.name) : slug;
 }
 
+function citySource(slug: string): string {
+  return pickLocale(shell.locale(), {
+    en: `city · ${slug}`,
+    'pt-BR': `cidade · ${slug}`,
+  });
+}
+
 function applyChrome(route: Route, title: boolean) {
   if (route.kind === 'trip') {
     cityNav.setActive(null);
@@ -53,7 +60,7 @@ function applyChrome(route: Route, title: boolean) {
   }
   tripNav.setActive(null);
   cityNav.setActive(route.slug);
-  shell.setSource(`cidade · ${route.slug}`);
+  shell.setSource(citySource(route.slug));
   setDocumentTitle(cityLabel(route.slug));
 }
 
@@ -154,7 +161,7 @@ window.addEventListener('popstate', onHistory);
 shell.onLocale(() => {
   if (current?.kind !== 'city') return;
   setDocumentTitle(cityLabel(current.slug));
-  shell.setSource(`cidade · ${current.slug}`);
+  shell.setSource(citySource(current.slug));
 });
 
 const initial = parseHash(location.hash);

@@ -39,9 +39,29 @@ export type Shell = {
   onExport(fn: () => void): () => void;
 };
 
+/** Saved value, then the browser language, then English. */
+export function resolveLocale(stored: string | null, languages: readonly string[]): Locale {
+  if (stored === 'en' || stored === 'pt-BR') return stored;
+  for (const language of languages) {
+    if (language.toLowerCase().startsWith('pt')) return 'pt-BR';
+  }
+  return 'en';
+}
+
+function browserLanguages(): readonly string[] {
+  if (typeof navigator === 'undefined') return [];
+  if (navigator.languages?.length) return navigator.languages;
+  return [navigator.language || 'en'];
+}
+
 function readLocale(): Locale {
-  const stored = localStorage.getItem(LOCALE_KEY);
-  return stored === 'en' ? 'en' : 'pt-BR';
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem(LOCALE_KEY);
+  } catch {
+    stored = null;
+  }
+  return resolveLocale(stored, browserLanguages());
 }
 
 export function mountShell(root: HTMLElement): Shell {
@@ -67,7 +87,7 @@ export function mountShell(root: HTMLElement): Shell {
   searchInput.placeholder = 'Buscar lugar ou roteiro';
   searchInput.autocomplete = 'off';
   searchInput.spellcheck = false;
-  searchInput.setAttribute('aria-label', 'Buscar');
+  searchInput.setAttribute('aria-label', 'Search');
   const kbd = el('kbd');
   kbd.textContent = /Mac/.test(navigator.platform) ? '⌘K' : 'Ctrl K';
   search.append(icon('search', { size: 16 }), searchInput, kbd);
@@ -78,7 +98,7 @@ export function mountShell(root: HTMLElement): Shell {
 
   const localeWrap = el('div', 'tb-locale');
   localeWrap.setAttribute('role', 'group');
-  localeWrap.setAttribute('aria-label', 'Idioma');
+  localeWrap.setAttribute('aria-label', 'Language');
   const ptBtn = el('button', undefined, 'PT');
   const enBtn = el('button', undefined, 'EN');
   ptBtn.type = 'button';
@@ -89,14 +109,14 @@ export function mountShell(root: HTMLElement): Shell {
   const exportLabel = el('span');
   exportBtn.type = 'button';
   exportBtn.disabled = true;
-  exportBtn.title = 'Copiar Markdown para Notes ou Notion';
+  exportBtn.title = 'Copy Markdown for Notes or Notion';
   exportBtn.append(icon('ios_share', { size: 18 }), exportLabel);
 
   bar.append(sideToggle, mark, search, spacer, source, localeWrap, exportBtn);
 
   const workspace = el('div', 'tb-workspace');
   const side = el('nav', 'tb-side');
-  side.setAttribute('aria-label', 'Roteiros e cidades');
+  side.setAttribute('aria-label', 'Trips and cities');
   const tripsLabel = el('p', 'tb-side-label', 'Roteiros');
   const navTrips = el('div');
   const citiesLabel = el('p', 'tb-side-label', 'Cidades');
@@ -104,8 +124,11 @@ export function mountShell(root: HTMLElement): Shell {
   side.append(tripsLabel, navTrips, citiesLabel, navCities);
 
   const main = el('main', 'tb-main');
-  main.innerHTML =
-    '<div class="tb-empty"><strong>Nenhum documento aberto</strong>Escolha um roteiro ou uma cidade. O roteiro é um arquivo Markdown: um LLM pode editá-lo com o app aberto.</div>';
+  const empty = el('div', 'tb-empty');
+  const emptyTitle = el('strong');
+  const emptyBody = document.createTextNode('');
+  empty.append(emptyTitle, emptyBody);
+  main.append(empty);
 
   const split = el('div', 'tb-split');
   split.setAttribute('role', 'separator');
@@ -115,7 +138,7 @@ export function mountShell(root: HTMLElement): Shell {
   split.setAttribute('aria-valuenow', String(PANE_MIN));
   split.tabIndex = 0;
   const mapCol = el('section', 'tb-map-col');
-  mapCol.setAttribute('aria-label', 'Mapa');
+  mapCol.setAttribute('aria-label', 'Map');
   const mapHost = el('div', 'tb-map');
   mapCol.append(mapHost);
   workspace.append(side, main, split, mapCol);
@@ -152,12 +175,40 @@ export function mountShell(root: HTMLElement): Shell {
     ptBtn.setAttribute('aria-pressed', locale === 'pt-BR' ? 'true' : 'false');
     enBtn.setAttribute('aria-pressed', locale === 'en' ? 'true' : 'false');
     document.documentElement.lang = locale === 'pt-BR' ? 'pt-BR' : 'en';
-    searchInput.placeholder =
-      locale === 'pt-BR' ? 'Buscar lugar ou roteiro' : 'Search a place or trip';
+    searchInput.placeholder = pickLocale(locale, {
+      en: 'Search a place or trip',
+      'pt-BR': 'Buscar lugar ou roteiro',
+    });
+    searchInput.setAttribute(
+      'aria-label',
+      pickLocale(locale, { en: 'Search', 'pt-BR': 'Buscar' }),
+    );
+    localeWrap.setAttribute(
+      'aria-label',
+      pickLocale(locale, { en: 'Language', 'pt-BR': 'Idioma' }),
+    );
+    exportBtn.title = pickLocale(locale, {
+      en: 'Copy Markdown for Notes or Notion',
+      'pt-BR': 'Copiar Markdown para Notes ou Notion',
+    });
     exportLabel.textContent = pickLocale(locale, { en: 'Export', 'pt-BR': 'Exportar' });
-    tripsLabel.textContent = locale === 'pt-BR' ? 'Roteiros' : 'Trips';
-    citiesLabel.textContent = locale === 'pt-BR' ? 'Cidades' : 'Cities';
-    markMeta.textContent = locale === 'pt-BR' ? 'roteiros' : 'trips';
+    side.setAttribute(
+      'aria-label',
+      pickLocale(locale, { en: 'Trips and cities', 'pt-BR': 'Roteiros e cidades' }),
+    );
+    tripsLabel.textContent = pickLocale(locale, { en: 'Trips', 'pt-BR': 'Roteiros' });
+    citiesLabel.textContent = pickLocale(locale, { en: 'Cities', 'pt-BR': 'Cidades' });
+    markMeta.textContent = pickLocale(locale, { en: 'trips', 'pt-BR': 'roteiros' });
+    emptyTitle.textContent = pickLocale(locale, {
+      en: 'No document open',
+      'pt-BR': 'Nenhum documento aberto',
+    });
+    emptyBody.textContent = pickLocale(locale, {
+      en: 'Choose a trip or a city. The trip is a Markdown file: an LLM can edit it with the app open.',
+      'pt-BR':
+        'Escolha um roteiro ou uma cidade. O roteiro é um arquivo Markdown: um LLM pode editá-lo com o app aberto.',
+    });
+    mapCol.setAttribute('aria-label', pickLocale(locale, { en: 'Map', 'pt-BR': 'Mapa' }));
     split.setAttribute(
       'aria-label',
       pickLocale(locale, { en: 'Document width', 'pt-BR': 'Largura do documento' }),
