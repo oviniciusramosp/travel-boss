@@ -618,18 +618,6 @@ p.tb-budget {
   border: 1px solid var(--color-hairline);
   border-radius: var(--r-card);
   box-shadow: var(--shadow-float);
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity var(--dur-base) var(--ease-out),
-    transform var(--dur-base) var(--ease-out);
-}
-
-@starting-style {
-  .tb-place-panel:not([hidden]) {
-    opacity: 0;
-    transform: translateY(var(--spacing-8));
-  }
 }
 
 .tb-place-panel > .tb-place-panel__close {
@@ -653,10 +641,6 @@ p.tb-budget {
 
 .tb-place-panel:not(:has(.tb-place-panel__photo)) .tb-panel__body {
   margin-top: calc(var(--h-sm) + var(--inset-card));
-}
-
-.tb-place-panel[hidden] {
-  display: none;
 }
 
 .tb-panel__head {

@@ -50,23 +50,31 @@
   line-height: var(--leading-caption);
   white-space: nowrap;
   pointer-events: none;
-  opacity: 0;
-  transform: translateY(calc(var(--spacing-4) / 2));
-  transition:
-    opacity calc(var(--dur-fast) * 0.7) var(--ease-in),
-    transform calc(var(--dur-fast) * 0.7) var(--ease-in);
 }
 
-.tb-tooltip[data-side='below'] {
-  transform: translateY(calc(var(--spacing-4) / -2));
-}
-
-.tb-tooltip.is-open {
+.tb-tooltip:not([hidden]) {
   opacity: 1;
   transform: translateY(0);
   transition:
     opacity var(--dur-fast) var(--ease-out),
-    transform var(--dur-fast) var(--ease-out);
+    transform var(--dur-fast) var(--ease-out),
+    display var(--dur-fast) allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+.tb-tooltip[hidden] {
+  display: none;
+  opacity: 0;
+  transform: translateY(calc(var(--spacing-4) / 2));
+  transition:
+    opacity calc(var(--dur-fast) * 0.7) var(--ease-in),
+    transform calc(var(--dur-fast) * 0.7) var(--ease-in),
+    display calc(var(--dur-fast) * 0.7) allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+.tb-tooltip[hidden][data-side='below'] {
+  transform: translateY(calc(var(--spacing-4) / -2));
 }
 
 .tb-btn,
@@ -261,5 +269,71 @@
 @media (hover: none) {
   .tb-row__actions {
     opacity: 1;
+  }
+}
+
+/* Entry is the full duration with ease-out. Exit is ~70% and ease-in.
+   display stays until the opacity transition ends (allow-discrete). */
+.tb-place-panel:not([hidden]),
+.tb-popover:not([hidden]),
+.tb-preview:not([hidden]),
+.tb-toast:not([hidden]),
+.tb-locate-toast:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    display var(--dur-base) allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+.tb-place-panel[hidden],
+.tb-popover[hidden],
+.tb-preview[hidden],
+.tb-toast[hidden],
+.tb-locate-toast[hidden] {
+  display: none;
+  opacity: 0;
+  transform: translateY(var(--spacing-8));
+  transition:
+    opacity calc(var(--dur-base) * 0.7) var(--ease-in),
+    transform calc(var(--dur-base) * 0.7) var(--ease-in),
+    display calc(var(--dur-base) * 0.7) allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+@starting-style {
+  .tb-place-panel:not([hidden]),
+  .tb-popover:not([hidden]),
+  .tb-preview:not([hidden]),
+  .tb-toast:not([hidden]),
+  .tb-locate-toast:not([hidden]) {
+    opacity: 0;
+    transform: translateY(var(--spacing-8));
+  }
+
+  .tb-tooltip:not([hidden]) {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-4) / 2));
+  }
+
+  .tb-tooltip[data-side='below']:not([hidden]) {
+    transform: translateY(calc(var(--spacing-4) / -2));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style {
+    .tb-place-panel:not([hidden]),
+    .tb-popover:not([hidden]),
+    .tb-preview:not([hidden]),
+    .tb-toast:not([hidden]),
+    .tb-locate-toast:not([hidden]),
+    .tb-tooltip:not([hidden]),
+    .tb-tooltip[data-side='below']:not([hidden]) {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

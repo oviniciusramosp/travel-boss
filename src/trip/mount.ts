@@ -376,13 +376,12 @@ export function mountTrip(
 
   const showToast = (message: string, error = false) => {
     window.clearTimeout(statusTimer);
-    toast.hidden = false;
     toast.textContent = message;
     toast.classList.toggle('tb-error', error);
+    toast.hidden = false;
     if (error) return;
     statusTimer = window.setTimeout(() => {
       toast.hidden = true;
-      toast.textContent = '';
     }, 2000);
   };
   let activeCity: string | null = null;

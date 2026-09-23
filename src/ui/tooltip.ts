@@ -1,9 +1,6 @@
-import { prefersReducedMotion } from './motion';
-
 export const TOOLTIP_SHOW_MS = 350;
 export const TOOLTIP_WARM_MS = 300;
 
-const EXIT_MS = 110;
 const GAP = 6;
 
 export function tooltipShowDelay(msSinceHide: number | null): number {
@@ -40,34 +37,24 @@ export function mountTooltip(): void {
   tip.hidden = true;
   document.body.append(tip);
 
-  let generation = 0;
   let current: HTMLElement | null = null;
   let hideAt: number | null = null;
   let showTimer = 0;
-  let hideTimer = 0;
 
   const hide = () => {
     window.clearTimeout(showTimer);
     if (!current && tip.hidden) return;
-    const gen = ++generation;
     if (!tip.hidden) hideAt = performance.now();
     current = null;
-    tip.classList.remove('is-open');
-    window.clearTimeout(hideTimer);
-    hideTimer = window.setTimeout(() => {
-      if (generation === gen) tip.hidden = true;
-    }, prefersReducedMotion() ? 0 : EXIT_MS);
+    tip.hidden = true;
   };
 
   const show = (target: HTMLElement) => {
     const text = target.getAttribute('data-tip');
     if (!text) return;
-    const gen = ++generation;
     current = target;
-    window.clearTimeout(hideTimer);
     tip.textContent = text;
     tip.hidden = false;
-    tip.classList.remove('is-open');
     const rect = target.getBoundingClientRect();
     const tipRect = tip.getBoundingClientRect();
     const place = tooltipPlacement(
@@ -78,9 +65,6 @@ export function mountTooltip(): void {
     tip.style.left = `${place.left}px`;
     tip.style.top = `${place.top}px`;
     tip.dataset.side = place.side;
-    requestAnimationFrame(() => {
-      if (generation === gen) tip.classList.add('is-open');
-    });
   };
 
   const schedule = (target: HTMLElement) => {
