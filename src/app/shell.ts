@@ -103,8 +103,39 @@ export function mountShell(root: HTMLElement): Shell {
   search.append(icon('search', { size: 16 }), searchInput, kbd);
 
   const spacer = el('div', 'tb-bar-spacer');
-  const source = el('p', 'tb-source');
+  const source = el('button', 'tb-source');
+  source.type = 'button';
+  const paintSource = (path: string) => {
+    source.dataset.path = path;
+    source.textContent = path;
+    const action = pickLocale(locale, { en: 'Copy path', 'pt-BR': 'Copiar caminho' });
+    source.setAttribute('aria-label', `${action}: ${path}`);
+    source.setAttribute('data-tip', path);
+  };
+  source.dataset.path = 'content/trips';
   source.textContent = 'content/trips';
+  source.addEventListener('click', () => {
+    const path = source.dataset.path ?? '';
+    const write = navigator.clipboard?.writeText;
+    if (!path || !write) return;
+    const ok = pickLocale(locale, { en: 'Copied', 'pt-BR': 'Copiado' });
+    const fail = pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' });
+    void write.call(navigator.clipboard, path).then(
+      () => {
+        source.setAttribute('data-tip', ok);
+        source.setAttribute('aria-label', ok);
+        window.setTimeout(() => {
+          if (source.dataset.path) paintSource(source.dataset.path);
+        }, 1200);
+      },
+      () => {
+        source.setAttribute('aria-label', fail);
+        window.setTimeout(() => {
+          if (source.dataset.path) paintSource(source.dataset.path);
+        }, 1200);
+      },
+    );
+  });
 
   const localeWrap = el('div', 'tb-locale');
   localeWrap.setAttribute('role', 'group');
@@ -275,6 +306,7 @@ export function mountShell(root: HTMLElement): Shell {
   const exportFns = new Set<() => void>();
 
   const paintLocale = () => {
+    if (source.dataset.path) paintSource(source.dataset.path);
     ptBtn.setAttribute('aria-pressed', locale === 'pt-BR' ? 'true' : 'false');
     enBtn.setAttribute('aria-pressed', locale === 'en' ? 'true' : 'false');
     document.documentElement.lang = locale === 'pt-BR' ? 'pt-BR' : 'en';
@@ -453,8 +485,7 @@ export function mountShell(root: HTMLElement): Shell {
       return () => queryFns.delete(fn);
     },
     setSource(path) {
-      source.textContent = path;
-      source.title = path;
+      paintSource(path);
     },
     setExportEnabled(on) {
       exportBtn.disabled = !on;

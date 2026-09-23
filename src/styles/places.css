@@ -226,6 +226,7 @@
   gap: var(--spacing-4);
   margin-left: auto;
   opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
 }
 
 .tb-day:is(:hover, :focus-within) .tb-day__actions {
@@ -779,7 +780,14 @@ p.tb-budget {
   right: var(--spacing-8);
 }
 
-.tb-slider:is(:hover, :focus-within) .tb-slider__nav:not([hidden]) {
+.tb-slider__dots:not([hidden]) {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.tb-slider:is(:hover, :focus-within) .tb-slider__nav:not([hidden]),
+.tb-slider:is(:hover, :focus-within) .tb-slider__dots:not([hidden]) {
   opacity: 1;
   pointer-events: auto;
 }
@@ -1153,7 +1161,8 @@ p.tb-budget {
     display: -webkit-box;
   }
 
-  .tb-slider__nav:not([hidden]) {
+  .tb-slider__nav:not([hidden]),
+  .tb-slider__dots:not([hidden]) {
     opacity: 1;
     pointer-events: auto;
   }

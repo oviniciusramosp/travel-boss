@@ -1135,6 +1135,22 @@ export function mountTrip(
         const hotels = city.dates
           ? pickLocale(locale, { en: 'Hotels on these dates', 'pt-BR': 'Hotéis nestas datas' })
           : pickLocale(locale, { en: 'Hotels', 'pt-BR': 'Hotéis' });
+        const fitCity = iconButton({
+          icon: 'fit_screen',
+          label: pickLocale(locale, { en: 'Frame on the map', 'pt-BR': 'Enquadrar no mapa' }),
+          size: 'sm',
+        });
+        fitCity.dataset.cityLink = city.slug;
+        fitCity.dataset.cityAction = 'fit';
+        fitCity.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const live = current;
+          if (!live) return;
+          overviewMode = false;
+          markActive(city.slug);
+          framePins(stopPins(live, city.slug, enabledCategories));
+        });
         actions.append(
           appLink(cityHash(city.slug, 'places'), 'map', openCity, city.slug, 'places'),
           appLink(cityHash(city.slug, 'itinerary'), 'route', openDays, city.slug, 'itinerary'),
@@ -1149,6 +1165,7 @@ export function mountTrip(
             city.slug,
             'hotels',
           ),
+          fitCity,
         );
         cityHead.append(actions);
       }

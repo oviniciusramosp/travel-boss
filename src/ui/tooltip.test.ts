@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { TOOLTIP_SHOW_MS, tooltipPlacement, tooltipShowDelay } from './tooltip';
+import { TOOLTIP_SHOW_MS, isTruncated, tooltipPlacement, tooltipShowDelay } from './tooltip';
 
 describe('tooltipShowDelay', () => {
   it('waits before the first tooltip and stays warm after a recent one', () => {
@@ -7,6 +7,20 @@ describe('tooltipShowDelay', () => {
     expect(tooltipShowDelay(0)).toBe(0);
     expect(tooltipShowDelay(299)).toBe(0);
     expect(tooltipShowDelay(300)).toBe(TOOLTIP_SHOW_MS);
+  });
+});
+
+describe('isTruncated', () => {
+  it('is true only when the text overflows the box', () => {
+    expect(isTruncated({ scrollWidth: 40, clientWidth: 40, scrollHeight: 16, clientHeight: 16 })).toBe(
+      false,
+    );
+    expect(isTruncated({ scrollWidth: 80, clientWidth: 40, scrollHeight: 16, clientHeight: 16 })).toBe(
+      true,
+    );
+    expect(isTruncated({ scrollWidth: 40, clientWidth: 40, scrollHeight: 48, clientHeight: 32 })).toBe(
+      true,
+    );
   });
 });
 

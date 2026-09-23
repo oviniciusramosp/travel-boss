@@ -3,6 +3,36 @@ export const TOOLTIP_WARM_MS = 300;
 
 const GAP = 6;
 
+export const TRUNCATED_SELECTOR = [
+  '.tb-row__title',
+  '.tb-name',
+  '.tb-row__sub',
+  '.tb-day-label',
+  '.tb-day-summary',
+  '.tb-route__name',
+  '.tb-transfer__label',
+  '.tb-span__name',
+  '.tb-nav-label',
+].join(', ');
+
+export function isTruncated(node: {
+  scrollWidth: number;
+  clientWidth: number;
+  scrollHeight: number;
+  clientHeight: number;
+}): boolean {
+  return node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1;
+}
+
+/** Explicit `[data-tip]` wins. Otherwise a clipped ancestor with a full text. */
+export function tooltipHost(node: Element): HTMLElement | null {
+  const explicit = node.closest('[data-tip]');
+  if (explicit instanceof HTMLElement) return explicit;
+  const clipped = node.closest(TRUNCATED_SELECTOR);
+  if (clipped instanceof HTMLElement && isTruncated(clipped)) return clipped;
+  return null;
+}
+
 export function tooltipShowDelay(msSinceHide: number | null): number {
   if (msSinceHide != null && msSinceHide < TOOLTIP_WARM_MS) return 0;
   return TOOLTIP_SHOW_MS;
@@ -50,7 +80,8 @@ export function mountTooltip(): void {
   };
 
   const show = (target: HTMLElement) => {
-    const text = target.getAttribute('data-tip');
+    const explicit = target.getAttribute('data-tip');
+    const text = explicit ?? target.textContent?.replace(/\s+/g, ' ').trim() ?? '';
     if (!text) return;
     current = target;
     tip.textContent = text;
@@ -79,8 +110,7 @@ export function mountTooltip(): void {
   const hostOf = (event: Event): HTMLElement | null => {
     const node = event.target;
     if (!(node instanceof Element)) return null;
-    const host = node.closest('[data-tip]');
-    return host instanceof HTMLElement ? host : null;
+    return tooltipHost(node);
   };
 
   const leaves = (event: Event, host: HTMLElement): boolean => {
