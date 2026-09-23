@@ -9,6 +9,7 @@ import { distanceSection, walkStops } from './hotel-distance';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
 import { scoreCard, whyParts, type WhyPart } from './hotel-rank';
 import { hotelPhotoUrls, mountHotelSlider } from './hotel-slider';
+import { cityHasStayHeat, mountStayHeat, type StayHeatHandle } from './stay-heatmap';
 import { closePlace, openPlaceId } from './place-panel';
 
 type Locale = 'en' | 'pt-BR';
@@ -354,6 +355,8 @@ export function mountHotels(
   let contextLabels = new Set<string>();
   let sheetId: string | null = null;
   let sheetOrigin: HTMLElement | null = null;
+  let heat: StayHeatHandle | null = null;
+  let heatButton: HTMLButtonElement | null = null;
   document.documentElement.dataset.tbHotels = '';
 
   const root = el('div', 'tb-hotels');
@@ -1737,6 +1740,7 @@ export function mountHotels(
     showContextPins();
     if (displayed) render(displayed);
     else if (sheetId) fillSheet(sheetId, false);
+    heat?.relabel();
   });
   const unsubSelect = map.onSelect((id) => {
     if (disposed) return;
@@ -1748,6 +1752,23 @@ export function mountHotels(
     }
     selectHotel(id, true);
   });
+
+  if (cityHasStayHeat(city.slug)) {
+    const bar = document.querySelector('.tb-map-controls');
+    if (bar) {
+      heatButton = iconButton({
+        icon: 'mode_heat',
+        label: pickLocale(locale(), { en: 'Show where to stay', 'pt-BR': 'Mostrar onde ficar' }),
+        pressed: false,
+      });
+      bar.append(heatButton);
+      const button = heatButton;
+      listen(button, 'click', () => {
+        heat ??= mountStayHeat({ slug: city.slug, button, locale });
+        heat.toggle();
+      });
+    }
+  }
 
   paint();
   showContextPins();
@@ -1803,6 +1824,8 @@ export function mountHotels(
       contextObserver?.disconnect();
       contextObserver = null;
       closeSheet(false);
+      heat?.dispose();
+      heatButton?.remove();
       delete document.documentElement.dataset.tbHotels;
       clearSearchRing(() => map.setRadius(null));
       map.setPins('hotel', []);
