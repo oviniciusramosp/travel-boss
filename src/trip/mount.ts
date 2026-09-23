@@ -18,12 +18,12 @@ import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
 import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
-import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
+import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { inlineNodes } from './inline';
 import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
-import { iconLink } from '../ui/controls';
+import { iconButton, iconLink } from '../ui/controls';
 import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
@@ -510,6 +510,18 @@ export function mountTrip(
     const active = document.activeElement;
     focusMark = null;
     if (!(active instanceof HTMLElement) || !main.contains(active)) return;
+    const dayAction = active.closest<HTMLElement>('[data-day-action]');
+    if (dayAction?.dataset.dayAction) {
+      const details = dayAction.closest<HTMLDetailsElement>('details.tb-day');
+      if (details?.dataset.dayKey) {
+        focusMark = {
+          kind: 'day-action',
+          key: details.dataset.dayKey,
+          action: dayAction.dataset.dayAction,
+        };
+        return;
+      }
+    }
     const stop = active.closest<HTMLElement>('[data-stop-key]');
     if (stop?.dataset.stopKey) {
       const action = active.closest<HTMLElement>('[data-action]')?.dataset.action;
@@ -546,6 +558,10 @@ export function mountTrip(
     let target: HTMLElement | null = null;
     if (mark.kind === 'day') {
       target = main.querySelector(`details[data-day-key="${CSS.escape(mark.key)}"] > summary`);
+    } else if (mark.kind === 'day-action') {
+      target = main.querySelector(
+        `details[data-day-key="${CSS.escape(mark.key)}"] [data-day-action="${CSS.escape(mark.action)}"]`,
+      );
     } else if (mark.kind === 'stop') {
       const row = main.querySelector<HTMLElement>(`[data-stop-key="${CSS.escape(mark.key)}"]`);
       target = mark.action
@@ -814,7 +830,81 @@ export function mountTrip(
         details.dataset.dayKey = openedKey;
         details.open = dayOpen(firstPaint, openedKey, openKeys, dayIndex);
         const dayTitle = document.createElement('summary');
-        dayTitle.textContent = day.title;
+        const dayLabel = document.createElement('span');
+        dayLabel.className = 'tb-day-label';
+        dayLabel.textContent = day.title;
+        const dayActions = document.createElement('span');
+        dayActions.className = 'tb-day-actions';
+        const dayPoints: MapPin[] = [];
+        for (const stop of day.stops) {
+          if (stop.listNote || !stop.placeId) continue;
+          const found = placeById(city.slug, stop.placeId);
+          if (!found) continue;
+          dayPoints.push({
+            id: found.id,
+            lat: found.lat,
+            lng: found.lng,
+            label: stop.time ? `${stop.time} ${stop.label}` : stop.label,
+            color: placeCategoryMeta[found.category].color,
+            kind: 'stop',
+          });
+        }
+        const mapsUrl = googleDirectionsUrl(dayPoints, 'transit');
+        if (mapsUrl) {
+          const link = iconLink({
+            icon: 'route',
+            label: pickLocale(locale, {
+              en: 'Day routes in Google Maps',
+              'pt-BR': 'Rotas do dia no Google Maps',
+            }),
+            href: mapsUrl,
+          });
+          link.dataset.dayAction = 'route';
+          link.addEventListener('click', (event) => event.stopPropagation());
+          dayActions.append(link);
+        }
+        const fitDay = iconButton({
+          icon: 'fit_screen',
+          label: pickLocale(locale, { en: 'Frame on the map', 'pt-BR': 'Enquadrar no mapa' }),
+          size: 'sm',
+        });
+        fitDay.dataset.dayAction = 'fit';
+        fitDay.disabled = dayPoints.length === 0;
+        fitDay.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (!current || !dayPoints.length) return;
+          const restore = stopPins(current, cityFilter, enabledCategories);
+          map.setPins('stop', dayPoints);
+          map.fit();
+          map.setPins('stop', restore);
+        });
+        const copyDay = iconButton({
+          icon: 'content_copy',
+          label: pickLocale(locale, { en: 'Copy day (Markdown)', 'pt-BR': 'Copiar dia (Markdown)' }),
+          size: 'sm',
+        });
+        copyDay.dataset.dayAction = 'copy';
+        copyDay.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const markdown = dayToMarkdown(day, (placeId) => resolveHref(city.slug, placeId));
+          void navigator.clipboard.writeText(markdown).then(
+            () =>
+              showToast(
+                pickLocale(locale, { en: 'Day copied', 'pt-BR': 'Dia copiado' }),
+              ),
+            () =>
+              showToast(
+                pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' }),
+                true,
+              ),
+          );
+        });
+        dayActions.append(fitDay, copyDay);
+        dayActions.addEventListener('mousedown', (event) => event.stopPropagation());
+        dayActions.addEventListener('click', (event) => event.stopPropagation());
+        dayTitle.append(dayLabel, dayActions);
         details.append(dayTitle);
         const list = document.createElement('ul');
         list.className = 'tb-list tb-list--stops tb-stops';

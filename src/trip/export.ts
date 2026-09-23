@@ -1,5 +1,40 @@
 import { inline, inlineWithLinks } from './inline';
-import type { Trip } from './parse';
+import type { Trip, TripDay, TripStop } from './parse';
+
+function pushStop(
+  lines: string[],
+  stop: TripStop,
+  resolvePlace: (placeId: string) => string | null,
+) {
+  const time = stop.time ? `${stop.time} ` : '';
+  if (stop.listNote) {
+    lines.push(`- ${time}${stop.label}`);
+  } else {
+    let body: string;
+    if (stop.href) body = `[${stop.label}](${stop.href})`;
+    else if (stop.placeId) {
+      const href = resolvePlace(stop.placeId);
+      body = href ? `[${stop.label}](${href})` : `${stop.label} (lugar não encontrado)`;
+    } else body = stop.label;
+    const note = stop.note ? ` — ${stop.note}` : '';
+    lines.push(`- ${time}${body}${note}`);
+  }
+  if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
+}
+
+function pushDay(lines: string[], day: TripDay, resolvePlace: (placeId: string) => string | null) {
+  lines.push(`### ${day.title}`, '');
+  for (const stop of day.stops) pushStop(lines, stop, resolvePlace);
+  if (day.stops.length) lines.push('');
+  for (const note of day.notes) lines.push(note, '');
+}
+
+/** One day, same Markdown the trip export uses for that section. */
+export function dayToMarkdown(day: TripDay, resolvePlace: (placeId: string) => string | null): string {
+  const lines: string[] = [];
+  pushDay(lines, day, resolvePlace);
+  return `${lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()}\n`;
+}
 
 export function tripToMarkdown(
   trip: Trip,
@@ -11,30 +46,8 @@ export function tripToMarkdown(
     lines.push(`## ${city.name}`);
     if (city.dates) lines.push(`${city.dates.start} → ${city.dates.end}`);
     lines.push('');
-
     for (const day of city.days) {
-      lines.push(`### ${day.title}`, '');
-      for (const stop of day.stops) {
-        const time = stop.time ? `${stop.time} ` : '';
-        if (stop.listNote) {
-          lines.push(`- ${time}${stop.label}`);
-          if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
-          continue;
-        }
-        let body: string;
-        if (stop.href) body = `[${stop.label}](${stop.href})`;
-        else if (stop.placeId) {
-          const href = resolveHref(city.slug, stop.placeId);
-          body = href
-            ? `[${stop.label}](${href})`
-            : `${stop.label} (lugar não encontrado)`;
-        } else body = stop.label;
-        const note = stop.note ? ` — ${stop.note}` : '';
-        lines.push(`- ${time}${body}${note}`);
-        if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
-      }
-      if (day.stops.length) lines.push('');
-      for (const note of day.notes) lines.push(note, '');
+      pushDay(lines, day, (placeId) => resolveHref(city.slug, placeId));
     }
   }
 

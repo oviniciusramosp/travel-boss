@@ -54,6 +54,37 @@
   scroll-margin-top: calc(var(--h-lg) + var(--spacing-16));
 }
 
+.tb-doc .tb-day > summary {
+  width: 100%;
+}
+
+.tb-day-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tb-day-actions {
+  display: flex;
+  flex: none;
+  gap: var(--inset-group);
+  margin-left: var(--spacing-8);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.tb-day:is(:hover, :focus-within) .tb-day-actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .tb-day-actions {
+    opacity: 1;
+  }
+}
+
 .tb-city-section h2 {
   margin: 0;
   font-size: var(--text-h2);

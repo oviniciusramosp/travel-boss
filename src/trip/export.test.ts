@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { tripToHtml, tripToMarkdown } from './export';
+import { dayToMarkdown, tripToHtml, tripToMarkdown } from './export';
 import { parseTrip } from './parse';
 
 const raw = `# Europa
@@ -95,5 +95,29 @@ city: paris
     expect(exported).not.toContain('item sem link');
     const html = tripToHtml(exported, (id) => `https://maps.example/${id}`);
     expect(html).toContain('<a href="https://maps.example/par-orsay">ingresso</a>');
+  });
+
+  it('copies one day as markdown, with the via nested under its stop', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+
+### Dia 1 — Museu
+
+- 09:00 [Louvre](place:par-louvre)
+  - via: metrô · 12 min
+- 10:00 [Orsay](place:par-orsay)
+
+Fila na entrada.
+`;
+    const day = parseTrip('europa', 'content/trips/europa.md', source).cities[0]?.days[0];
+    expect(day).toBeTruthy();
+    const markdown = dayToMarkdown(day!, (placeId) => `https://maps.example/${placeId}`);
+    expect(markdown.startsWith('### Dia 1 — Museu')).toBe(true);
+    expect(markdown).toContain('- 09:00 [Louvre](https://maps.example/par-louvre)\n  - via: metrô · 12 min');
+    expect(markdown).toContain('Fila na entrada.');
+    expect(markdown).not.toContain('# Europa');
+    expect(markdown).not.toContain('## Paris');
   });
 });
