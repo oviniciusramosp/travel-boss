@@ -5,7 +5,7 @@ import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
-import { scoreCard } from './hotel-rank';
+import { scoreCard, whyParts, type WhyPart } from './hotel-rank';
 import { hotelPhotoUrls, mountHotelSlider } from './hotel-slider';
 
 type Locale = 'en' | 'pt-BR';
@@ -983,12 +983,20 @@ export function mountHotels(
         ),
       );
     }
-    const why = explain(hotel);
-    if (why) {
+    const reasons = ranked ? whyParts(locale(), hotel) : null;
+    if (reasons) {
       const box = el('details', 'tb-hotels__why');
-      box.append(el('summary', 'tb-meta', t('Why this score', 'Por que esta nota')));
-      box.append(el('p', 'tb-meta', why));
+      box.append(el('summary', 'tb-meta', t('Why this position?', 'Por que essa posição?')));
+      for (const part of reasons) box.append(whyNode(part));
       body.append(box);
+    } else {
+      const why = explain(hotel);
+      if (why) {
+        const box = el('details', 'tb-hotels__why');
+        box.append(el('summary', 'tb-meta', t('Why this score', 'Por que esta nota')));
+        box.append(el('p', 'tb-meta', why));
+        body.append(box);
+      }
     }
 
     const links = el('div', 'tb-hotels__links');
@@ -1010,6 +1018,22 @@ export function mountHotels(
     }
     if (links.childNodes.length) body.append(links);
     return article;
+  };
+
+  const whyNode = (part: WhyPart) => {
+    if (part.kind === 'text') return el('p', 'tb-meta', part.text);
+    const line = el('p', 'tb-meta');
+    line.append(document.createTextNode(part.before));
+    part.links.forEach((link, index) => {
+      if (index > 0) line.append(document.createTextNode(' · '));
+      const anchor = el('a', undefined, link.title);
+      anchor.href = link.href;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener';
+      line.append(anchor);
+    });
+    line.append(document.createTextNode(part.after));
+    return line;
   };
 
   const renderTypes = (result: SearchResult) => {

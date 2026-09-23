@@ -18,15 +18,25 @@ export type RankInput = {
   };
   region?: {
     name: Copy;
+    note?: Copy;
     safety: number | null;
     coverage?: string;
+    period?: string;
+    sources?: { title?: string; url?: string }[];
   } | null;
   walkingMinutes: number | null;
   walkingCoverage?: number;
   reachableWithin30?: number;
   beyond90?: number;
   pointCount?: number;
+  totalPoints?: number;
+  transit?: { name?: Copy; minutes?: number } | null;
+  jev?: { weight?: number } | null;
 };
+
+export type WhyPart =
+  | { kind: 'text'; text: string }
+  | { kind: 'sources'; before: string; links: { title: string; href: string }[]; after: string };
 
 export type ScoreHotel = {
   source?: string;
@@ -232,4 +242,120 @@ export function scoreCard(locale: Locale, hotel: ScoreHotel): ScoreCard | null {
     coverage,
     walking,
   };
+}
+
+function httpsSources(sources: { title?: string; url?: string }[] | undefined): { title: string; href: string }[] {
+  return (sources ?? []).flatMap((source) => {
+    if (!source.title || !source.url || !/^https:\/\//.test(source.url)) return [];
+    return [{ title: source.title, href: source.url }];
+  });
+}
+
+/** Disclosure under the score: method, sources, weights, JEV and the nearest stop. */
+export function whyParts(locale: Locale, hotel: ScoreHotel): WhyPart[] | null {
+  const ranking = hotel.ranking;
+  if (!ranking?.eligibility || ranking.provisional == null) return null;
+  const airbnb = hotel.source === 'airbnb';
+  const region = ranking.region;
+  const links = httpsSources(region?.sources);
+  const period = region?.period ?? '';
+  const transitName = placeName(locale, ranking.transit?.name);
+  const transit =
+    ranking.transit && Number.isFinite(ranking.transit.minutes)
+      ? `${say(locale, { en: 'Closest saved transport stop', 'pt-BR': 'Ponto de transporte cadastrado mais próximo' })}: ${
+          transitName ? `${transitName} · ` : ''
+        }${ranking.transit.minutes} min ${say(locale, { en: 'on foot', 'pt-BR': 'a pé' })}`
+      : say(locale, {
+          en: 'No walking route to saved transport stops',
+          'pt-BR': 'Sem rota a pé para os pontos de transporte cadastrados',
+        });
+  const jevWeight = ranking.jev?.weight;
+  const parts: WhyPart[] = [
+    {
+      kind: 'text',
+      text: say(locale, {
+        en: 'Missing criteria are excluded and available weights are normalized. Provisional scores are not assigned a final position.',
+        'pt-BR':
+          'Critérios sem dados ficam fora do cálculo e os pesos disponíveis são normalizados. Notas provisórias não recebem posição definitiva.',
+      }),
+    },
+  ];
+  if (links.length) {
+    parts.push({
+      kind: 'sources',
+      before: `${say(locale, { en: 'Sources reviewed', 'pt-BR': 'Fontes consultadas' })}${period ? ` (${period})` : ''}: `,
+      links,
+      after: `. ${say(locale, {
+        en: 'Qualitative editorial interpretation, not crime statistics.',
+        'pt-BR': 'Interpretação editorial qualitativa, não estatística de criminalidade.',
+      })}`,
+    });
+  }
+  parts.push(
+    {
+      kind: 'text',
+      text: airbnb
+        ? say(locale, {
+            en: 'Available weights: Airbnb overall rating 50%, walking 20%, transport access 5%, normalized to the evidence available. Price does not affect the score. Walks up to 30 min score highest.',
+            'pt-BR':
+              'Pesos disponíveis: nota geral do Airbnb 50%, caminhada 20%, transporte 5%, normalizados conforme os dados disponíveis. Preço não afeta a nota. Caminhadas de até 30 min recebem nota máxima.',
+          })
+        : say(locale, {
+            en: 'Quality 50% (cleanliness, comfort and facilities equally weighted), neighborhood 25%, walking 20%, transport access 5%. Price does not affect the score. Walks score highest through 30 min, then decline to 25/100 at 90 min and zero at 120 min.',
+            'pt-BR':
+              'Qualidade 50% (limpeza, conforto e comodidades com pesos iguais), bairro 25%, caminhada 20%, acesso a transporte 5%. Preço não afeta a nota. Caminhadas têm nota máxima até 30 min, caindo até 25/100 em 1h30 e zero em 2h.',
+          }),
+    },
+    {
+      kind: 'text',
+      text: airbnb
+        ? say(locale, {
+            en: 'Wi-Fi is required. Quality comes from the Airbnb overall rating; staff does not apply.',
+            'pt-BR': 'Wi-Fi é obrigatório. A qualidade vem da nota geral do Airbnb; funcionários não se aplica.',
+          })
+        : say(locale, {
+            en: 'Wi-Fi and staff are minimum requirements, with no ranking bonus. Booking overall, location and value scores do not enter our rating.',
+            'pt-BR':
+              'Wi-Fi e funcionários são requisitos mínimos, sem bônus no ranking. A nota geral, localização e custo-benefício do Booking não entram na nossa nota.',
+          }),
+    },
+    {
+      kind: 'text',
+      text:
+        ranking.jev && Number.isFinite(jevWeight)
+          ? say(locale, {
+              en: `JEV contributed ${((jevWeight as number) * 100).toFixed(1)}% of the final score, scaled by its reported confidence.`,
+              'pt-BR': `JEV contribuiu com ${((jevWeight as number) * 100).toFixed(1)}% da nota final, conforme a confiança informada pelo modelo.`,
+            })
+          : say(locale, {
+              en: 'Ranked by available indicators; no JEV adjustment.',
+              'pt-BR': 'Classificado pelos indicadores disponíveis; sem ajuste do JEV.',
+            }),
+    },
+  );
+  if (region?.note) {
+    parts.push({
+      kind: 'text',
+      text: `${placeName(locale, region.note)} ${say(locale, { en: 'Editorial guidance', 'pt-BR': 'Curadoria editorial' })}${
+        period ? ` ${period}` : ''
+      }; ${say(locale, { en: 'not a safety guarantee.', 'pt-BR': 'não é garantia de segurança.' })}`,
+    });
+  }
+  parts.push(
+    {
+      kind: 'text',
+      text: `${transit}. ${say(locale, {
+        en: 'Transit schedules and transfers are checked in Maps.',
+        'pt-BR': 'Horários e baldeações são consultados no Maps.',
+      })}`,
+    },
+    {
+      kind: 'text',
+      text: say(locale, {
+        en: `${ranking.pointCount ?? 0} of ${ranking.totalPoints ?? ranking.pointCount ?? 0} saved places considered, prioritizing the selected route, itinerary, favorites and personal ratings. Walking estimates: OpenStreetMap / OSRM.`,
+        'pt-BR': `${ranking.pointCount ?? 0} de ${ranking.totalPoints ?? ranking.pointCount ?? 0} pontos salvos considerados, priorizando a rota selecionada, roteiro, favoritos e notas pessoais. Estimativas de caminhada: OpenStreetMap / OSRM.`,
+      }),
+    },
+  );
+  return parts;
 }

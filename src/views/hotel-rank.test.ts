@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clampScore, safetyIsCaution, scoreCard, type ScoreHotel } from './hotel-rank';
+import { clampScore, safetyIsCaution, scoreCard, whyParts, type ScoreHotel } from './hotel-rank';
 
 const ranked = (patch: Partial<ScoreHotel> = {}): ScoreHotel => ({
   booking: {
@@ -66,5 +66,36 @@ describe('score ring', () => {
     expect(card?.staff).toBe('Staff: not applicable');
     expect(card?.safety.caution).toBe(false);
     expect(card?.safety.text).toMatch(/not scored/);
+  });
+});
+
+describe('why this position', () => {
+  it('lists the method, dated sources, JEV share and the nearest stop', () => {
+    const hotel = ranked();
+    hotel.ranking!.region = {
+      name: { en: 'Monti', 'pt-BR': 'Monti' },
+      note: { en: 'Calm streets.', 'pt-BR': 'Ruas calmas.' },
+      safety: 88,
+      coverage: 'polygon',
+      period: '2025–2026',
+      sources: [
+        { title: 'Guide', url: 'https://example.com/guide' },
+        { title: 'skip', url: 'http://example.com/insecure' },
+      ],
+    };
+    hotel.ranking!.transit = { name: { en: 'Cavour', 'pt-BR': 'Cavour' }, minutes: 6 };
+    hotel.ranking!.jev = { weight: 0.125 };
+    hotel.ranking!.totalPoints = 40;
+    const parts = whyParts('pt-BR', hotel);
+    expect(parts?.map((part) => part.kind)).toContain('sources');
+    const sources = parts?.find((part) => part.kind === 'sources');
+    expect(sources && sources.kind === 'sources' ? sources.links : []).toEqual([
+      { title: 'Guide', href: 'https://example.com/guide' },
+    ]);
+    expect(sources && sources.kind === 'sources' ? sources.before : '').toContain('2025–2026');
+    expect(parts?.some((part) => part.kind === 'text' && part.text.includes('12.5%'))).toBe(true);
+    expect(parts?.some((part) => part.kind === 'text' && part.text.includes('Cavour'))).toBe(true);
+    expect(parts?.some((part) => part.kind === 'text' && part.text.includes('não é garantia de segurança'))).toBe(true);
+    expect(whyParts('en', { booking: {} })).toBeNull();
   });
 });

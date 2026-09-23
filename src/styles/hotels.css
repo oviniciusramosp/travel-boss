@@ -392,7 +392,11 @@
 }
 
 .tb-hotels__why p {
-  margin-top: 4px;
+  margin-top: var(--spacing-4);
+}
+
+.tb-hotels__why a {
+  color: var(--color-ink);
 }
 
 .tb-hotels__links {
