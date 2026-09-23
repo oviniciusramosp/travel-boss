@@ -12,6 +12,7 @@ import { scoreCard, whyParts, type WhyPart } from './hotel-rank';
 import { hotelPhotoUrls, mountHotelSlider } from './hotel-slider';
 import { cityHasStayHeat, mountStayHeat, type StayHeatHandle } from './stay-heatmap';
 import { closePlace, openPlaceId } from './place-panel';
+import { mergeRankingIds, plannerPlaceIds } from './route-planner';
 
 type Locale = 'en' | 'pt-BR';
 type Localized = { en: string; 'pt-BR': string };
@@ -1308,10 +1309,7 @@ export function mountHotels(
     checkout.setCustomValidity('');
   };
 
-  const selectedPriorities = () =>
-    priorityIds
-      .filter((id) => typeof id === 'string' && id.length > 0 && id.length <= 100 && id !== 'user-location')
-      .slice(0, 30);
+  const selectedPriorities = () => mergeRankingIds(plannerPlaceIds(city.slug), priorityIds);
 
   const searchParams = () => {
     const qs = new URLSearchParams();

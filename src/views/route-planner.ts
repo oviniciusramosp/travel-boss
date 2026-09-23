@@ -99,6 +99,22 @@ export function placeStopIds(stops: readonly RouteStop[]): string[] {
   return stops.filter((stop) => stop.id !== USER_LOCATION_ID && !stop.user).map((stop) => stop.id);
 }
 
+export function plannerPlaceIds(slug: string): string[] {
+  if (session?.slug === slug) return placeStopIds(session.stops);
+  return readStoredRoute(slug).ids;
+}
+
+/** Route stops first, then the city's other priorities. User origin is not a place. */
+export function mergeRankingIds(routeIds: readonly string[], base: readonly string[]): string[] {
+  const ids: string[] = [];
+  for (const id of [...routeIds, ...base]) {
+    if (typeof id !== 'string' || !id || id === USER_LOCATION_ID || id.length > 100 || ids.includes(id)) continue;
+    ids.push(id);
+    if (ids.length >= 30) break;
+  }
+  return ids;
+}
+
 /** Add, or remove when the place is already a stop. A full route does not grow. */
 export function togglePlaceStop(
   stops: readonly RouteStop[],

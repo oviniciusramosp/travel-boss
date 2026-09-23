@@ -4,6 +4,8 @@ import { haversineM } from './hotel-search-match.mjs';
 import { bookingEligibility, CORE_CATEGORIES, STAFF_MINIMUM } from './hotel-booking-details.mjs';
 
 export const RANKING_WEIGHTS = { quality: 0.50, safety: 0.25, walking: 0.20, transit: 0.05 };
+/** Selected route-planner stops, on top of the base weight of 1. */
+export const ROUTE_PLANNER_WEIGHT = 6;
 const clamp = (n) => Math.max(0, Math.min(100, n));
 const validPoint = (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng) && Math.abs(p.lat) <= 90 && Math.abs(p.lng) <= 180;
 const metres = (a, b) => haversineM(a.lat, a.lng, b.lat, b.lng);
@@ -23,7 +25,7 @@ export function rankingTargets(city, itinerary, selectedIds = []) {
   const places = city.places.filter(validPoint);
   const candidates = places.filter((p) => !['transport', 'airport', 'lodging'].includes(p.category)).map((p) => ({
     id: p.id, name: p.name, lat: p.lat, lng: p.lng,
-    weight: 1 + (selected.has(p.id) ? 6 : 0) + (planned.has(p.id) ? 3 : 0) + (p.favorite ? 2 : 0) + (p.rating ?? 0) / 5,
+    weight: 1 + (selected.has(p.id) ? ROUTE_PLANNER_WEIGHT : 0) + (planned.has(p.id) ? 3 : 0) + (p.favorite ? 2 : 0) + (p.rating ?? 0) / 5,
   })).sort((a, b) => b.weight - a.weight || a.id.localeCompare(b.id));
   return {
     points: candidates.slice(0, 24),

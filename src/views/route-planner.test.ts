@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
+import { rankingTargets } from '../../scripts/hotel-ranking.mjs';
 import {
   MAX_ROUTE_STOPS,
   normalizeStoredRoute,
@@ -10,6 +11,7 @@ import {
   googleDirectionsUrl,
   isFarFromCity,
   locateFailure,
+  mergeRankingIds,
   routeBarHint,
   routeStopBadges,
   routeStorageKey,
@@ -113,6 +115,22 @@ describe('route stops', () => {
     expect(capped).toHaveLength(8);
     expect(capped[0]?.id).toBe(USER_LOCATION_ID);
     expect(capped.some((item) => item.id === '7')).toBe(false);
+  });
+
+  it('puts planner stops ahead of other priorities and adds weight 6', () => {
+    expect(mergeRankingIds(['louvre', USER_LOCATION_ID, 'louvre'], ['orsay', 'louvre'])).toEqual([
+      'louvre',
+      'orsay',
+    ]);
+    const place = { name: 'A', lat: 1, lng: 1, category: 'parks' };
+    const result = rankingTargets(
+      { lat: 1, lng: 1, places: [{ ...place, id: 'on-route' }, { ...place, id: 'other' }] },
+      { days: [] },
+      ['on-route'],
+    );
+    const on = result.points.find((item: { id: string }) => item.id === 'on-route');
+    const other = result.points.find((item: { id: string }) => item.id === 'other');
+    expect(on.weight - other.weight).toBe(6);
   });
 
   afterEach(() => {
