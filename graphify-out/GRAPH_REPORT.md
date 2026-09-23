@@ -1,215 +1,232 @@
 # Graph Report - travel-boss  (2026-09-23)
 
 ## Corpus Check
-- 72 files · ~136,809 words
+- 104 files · ~260,938 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 5 file(s) not represented in the graph (top: .css 4, (none) 1)
 
 ## Summary
-- 706 nodes · 1705 edges · 29 communities (28 shown, 1 thin omitted)
-- Extraction: 93% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 110 edges (avg confidence: 0.91)
-- Token cost: 274,457 input · 0 output
+- 894 nodes · 1868 edges · 34 communities (33 shown, 1 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.68)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `7f0f0281`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- Hotel Search Server
-- Transit Legs and Routing
-- Trip Markdown Artifact
-- Place Catalog Core
-- Hotels View UI
-- Visit Info Formatting
-- Category Icons and Tooltips
-- Python Hotel Helpers
-- App Shell and Places View
-- Stay Heatmap Data
-- Area Geometry Validation
-- Catalog Facade
-- City Itineraries and Budgets
-- Hotel Ranking Engine
-- Basemap Styling
-- Notion Catalog Sync
-- Rome Neighborhood Safety
-- TypeScript Config
-- App Entry and Styles
-- Hotel Ranking Tests
-- Booking Details Parsing
-- Leaflet Map Module
-- Package Manifest
-- Ranking Context and Stay Zones
-- Milan Itinerary
-- Place Link Resolution
-- Runtime Dependencies
-- Dev Dependencies
-- Hotel Script Typings
+- hotel-search.mjs
+- travel-itinerary-legs.ts
+- parse.ts
+- travel.ts
+- hotels.ts
+- travel-visit.ts
+- travel-categories.ts
+- airbnb-search.py
+- places.ts
+- travel-stay-heatmap.ts
+- travel-areas.test.ts
+- LString
+- index.ts
+- hotel-ranking.mjs
+- basemap-style.ts
+- travel-notion.ts
+- rome-hotel-neighborhoods.ts
+- compilerOptions
+- sync-travel-notion.mjs
+- hotel-ranking.test.ts
+- hotel-booking-details.test.ts
+- Rules (agents + humans)
+- scripts
+- hotel-ranking-context.ts
+- fetch-travel-polygons.py
+- Travel Boss — plano de paridade com o portfólio + polimento de UI
+- travel-subcategories.ts
+- Hotel priorities
+- hotel-scripts.d.ts
+- Europa
+- travel-photos.test.ts
+- Travel Boss
+- Milão — 11–14 de outubro de 2026
 
 ## God Nodes (most connected - your core abstractions)
-1. `mountCity()` - 31 edges
-2. `searchAzulHotels()` - 22 edges
-3. `mountTrip()` - 22 edges
-4. `getTravelCity()` - 20 edges
-5. `paint()` - 19 edges
-6. `vitest` - 18 edges
-7. `mountHotels()` - 16 edges
+1. `mountCity()` - 27 edges
+2. `searchAzulHotels()` - 21 edges
+3. `scripts` - 20 edges
+4. `Travel Boss — plano de paridade com o portfólio + polimento de UI` - 20 edges
+5. `getTravelCity()` - 17 edges
+6. `seed()` - 16 edges
+7. `mountHotels()` - 14 edges
 8. `compilerOptions` - 14 edges
 9. `pickLocale()` - 13 edges
 10. `bookingDetails()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `via: transport annotation (stop legs 4.6a, inter-city 5.4)` --semantically_similar_to--> `ItineraryLegDef`  [INFERRED] [semantically similar]
-  docs/plano-paridade.md → src/data/travel-itinerary-legs.ts
-- `Trip leg precedence (src/trip/legs.ts)` --semantically_similar_to--> `buildItineraryRoute()`  [INFERRED] [semantically similar]
-  docs/plano-paridade.md → src/map/itinerary-route.ts
-- `Hotel search environment (airbnb-venv, Fase 0.4)` --references--> `airbnbReady()`  [INFERRED]
-  docs/plano-paridade.md → scripts/airbnb-search.mjs
-- `Fase 10 — Route planner and geolocation` --references--> `rankingTargets()`  [INFERRED]
-  docs/plano-paridade.md → scripts/hotel-ranking.mjs
-- `Fase 9 — Hotéis e onde ficar` --shares_data_with--> `hotelEvidence()`  [INFERRED]
-  docs/plano-paridade.md → scripts/hotel-ranking.mjs
+- `hotelRankingContext()` --calls--> `rankingTargets()`  [EXTRACTED]
+  src/data/hotel-ranking-context.ts → scripts/hotel-ranking.mjs
+- `resolvedPlaces()` --indirect_call--> `withResolvedArea()`  [INFERRED]
+  src/data/travel-areas.test.ts → src/data/travel.ts
+- `encode()` --calls--> `ring()`  [INFERRED]
+  scripts/build-stay-display.py → scripts/fetch-rome-hotel-boundaries.py
+- `accommodationEligibility()` --calls--> `bookingEligibility()`  [EXTRACTED]
+  scripts/hotel-ranking.mjs → scripts/hotel-booking-details.mjs
+- `metres()` --calls--> `haversineM()`  [EXTRACTED]
+  scripts/hotel-ranking.mjs → scripts/hotel-search-match.mjs
 
 ## Import Cycles
-- None detected.
+- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
+- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
+- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Hyperedges (group relationships)
-- **Trip artifact pipeline (SCHEMA format, parse, render, export, live feed)** — content_schema_trip_artifact_v1, content_trips_europa, vite_config_tripapi, src_trip_parse_parsetrip, src_trip_mount_mounttrip_paint, src_trip_export_triptomarkdown, src_trip_export_triptohtml [INFERRED 0.95]
-- **Three identical el() DOM helpers to consolidate in src/ui/dom.ts** — src_app_shell_el, src_views_places_el, src_views_hotels_el, docs_plano_paridade_dom_el_helper [EXTRACTED 1.00]
-- **airbnb-venv Python stack behind /api/hotel-search** — scripts_airbnb_requirements, package_scripts_travel_airbnb_setup, scripts_airbnb_search_py_scripts_airbnb_search, scripts_azul_search, scripts_hotel_search_searchazulhotels, scripts_airbnb_search_airbnbready, readme_api_hotel_search [INFERRED 0.95]
+## Communities (34 total, 1 thin omitted)
 
-## Communities (29 total, 1 thin omitted)
+### Community 0 - "hotel-search.mjs"
+Cohesion: 0.06
+Nodes (75): ref_node_child_process, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbSnapshot(), airbnbType(), extract() (+67 more)
 
-### Community 0 - "Hotel Search Server"
-Cohesion: 0.07
-Nodes (75): ref_node_child_process, ref_node_fs, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbSnapshot(), airbnbType() (+67 more)
-
-### Community 1 - "Transit Legs and Routing"
+### Community 1 - "travel-itinerary-legs.ts"
 Cohesion: 0.05
-Nodes (70): Fase 10 — Route planner and geolocation, Trip leg precedence (src/trip/legs.ts), transferRow(leg) transfer line (src/views/transfer-row.ts), day1, day1AfterBase, day1Cdg, day2, day3 (+62 more)
+Nodes (68): day1, day1AfterBase, day1Cdg, day2, day3, day4, day5, day6 (+60 more)
 
-### Community 2 - "Trip Markdown Artifact"
-Cohesion: 0.08
-Nodes (58): City section (## City + city: slug + dates:), Day section (### Dia N — Title), Trip export (Apple Notes HTML, Notion Markdown, .md download), Markdown as single source of truth (LLM edits, UI follows), Multi-city trip (several H2 sections = one trip), Narrative paragraphs under a day, Stop bullet (HH:mm + link + — note), Trip artifact format travel-boss/trip/v1 (+50 more)
+### Community 2 - "parse.ts"
+Cohesion: 0.12
+Nodes (25): copyTrip(), downloadTrip(), escapeHtml(), inline(), inlineWithLinks(), tripToHtml(), tripToMarkdown(), exportCurrent() (+17 more)
 
-### Community 3 - "Place Catalog Core"
-Cohesion: 0.09
-Nodes (24): areaForPlace(), OsmArea, osmTravelAreas, PlaceCategory, favoritePlaceIds(), favoritePlaces(), localTravelCities, LString (+16 more)
-
-### Community 4 - "Hotels View UI"
-Cohesion: 0.09
-Nodes (32): AccommodationType, addDays(), asMsg(), asResult(), Booking, CATEGORIES, CategoryKey, el() (+24 more)
-
-### Community 5 - "Visit Info Formatting"
-Cohesion: 0.09
-Nodes (32): cafeVisit(), CrowdProfile, formatDuration(), formatMoney(), formatMoneyTypical(), formatTicketPromo(), free, L() (+24 more)
-
-### Community 6 - "Category Icons and Tooltips"
-Cohesion: 0.11
-Nodes (28): Material Symbols Rounded icon system (src/ui/icons.ts: ICONS, icon()), Tooltip + iconButton/iconLink controls (src/ui/tooltip.ts, controls.ts), CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName (+20 more)
-
-### Community 7 - "Python Hotel Helpers"
-Cohesion: 0.08
-Nodes (25): concurrent_futures, contextlib, curl_cffi, Hotel search environment (airbnb-venv, Fase 0.4), json, scripts, build, dev (+17 more)
-
-### Community 8 - "App Shell and Places View"
+### Community 3 - "travel.ts"
 Cohesion: 0.14
-Nodes (26): Shared el() DOM helper (src/ui/dom.ts, task 1.1), Fase 2 — Confirmed audit bug fixes (2.1–2.16), Fase 3 — Navigation, state and locale (hash router, store, i18n, keyboard), el(), Locale, mountShell(), readLocale(), Shell (+18 more)
+Nodes (14): areaForPlace(), favoritePlaceIds(), favoritePlaces(), localTravelCities, resolvePlaceArea(), travelCountryKeys, TravelLandmark, TravelRouteStop (+6 more)
 
-### Community 9 - "Stay Heatmap Data"
+### Community 4 - "hotels.ts"
+Cohesion: 0.06
+Nodes (54): diffPinIds(), paddedCenterOffset(), selectionEases(), selectionZoom(), KINDS, mountMap(), zoomBucket(), MapHandle (+46 more)
+
+### Community 5 - "travel-visit.ts"
+Cohesion: 0.09
+Nodes (28): cafeVisit(), CrowdProfile, formatMoneyTypical(), free, L(), landmarkOutdoor(), Locale, lodgingVisit() (+20 more)
+
+### Community 6 - "travel-categories.ts"
+Cohesion: 0.13
+Nodes (20): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialIcon (+12 more)
+
+### Community 7 - "airbnb-search.py"
+Cohesion: 0.09
+Nodes (23): concurrent_futures, contextlib, curl_cffi, json, travel:airbnb:setup, pyairbnb, pyairbnb_details, pyairbnb pinned to git commit 1ee4151 (+15 more)
+
+### Community 8 - "places.ts"
+Cohesion: 0.06
+Nodes (75): Locale, mountShell(), readLocale(), Shell, PlaceCategoryMeta, getTravelCity(), googleMapsUrl(), computeDayBudget() (+67 more)
+
+### Community 9 - "travel-stay-heatmap.ts"
 Cohesion: 0.11
 Nodes (27): BY_CITY, CITY_SEARCH, citySearchName(), hasStayHeat(), LISBON, ROME, searchQuery(), STAY_HEAT_BEST_MIN (+19 more)
 
-### Community 10 - "Area Geometry Validation"
+### Community 10 - "travel-areas.test.ts"
 Cohesion: 0.15
 Nodes (22): AreaIssue, AreaIssueCode, AreaPolicy, DEFAULT_AREA_POLICY, distPointToPolygonM(), distPointToPolylineM(), distPointToSegmentM(), haversineM() (+14 more)
 
-### Community 11 - "Catalog Facade"
-Cohesion: 0.17
-Nodes (19): Fase 6 — Places list and panel v2, placeCategoriesOffByDefault, placeCategoryMeta, placeCategoryOrder, googleMapsUrl(), Locale, resolvePlacePhotos(), TravelCity (+11 more)
+### Community 11 - "LString"
+Cohesion: 0.40
+Nodes (5): LString, l(), milanCity, place(), TravelCity
 
-### Community 12 - "City Itineraries and Budgets"
-Cohesion: 0.15
-Nodes (20): Fase 8 — City itinerary timeline, computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug, ItineraryArrivalOption (+12 more)
-
-### Community 13 - "Hotel Ranking Engine"
-Cohesion: 0.16
-Nodes (19): ref_node_crypto, accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing() (+11 more)
-
-### Community 14 - "Basemap Styling"
+### Community 12 - "index.ts"
 Cohesion: 0.14
-Nodes (17): maplibre-gl, applyBrightBasemap(), bindBrightBasemap(), HIDDEN_HIGHWAY_INDICATOR_LAYERS, hideBasemapClutter(), PLACE_LABEL_LAYERS, PLACE_LABEL_MINZOOM, POI_LAYERS_EXCLUDE_BUS (+9 more)
+Nodes (19): placeCategoriesOffByDefault, computeTripBudget(), DayBudget, dayRoutePlaceIds(), itinerariesByCitySlug, ItineraryArrivalOption, ItineraryDay, ItinerarySlot (+11 more)
 
-### Community 15 - "Notion Catalog Sync"
+### Community 13 - "hotel-ranking.mjs"
+Cohesion: 0.20
+Nodes (17): ref_node_crypto, accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing() (+9 more)
+
+### Community 14 - "basemap-style.ts"
+Cohesion: 0.14
+Nodes (17): applyBrightBasemap(), bindBrightBasemap(), HIDDEN_HIGHWAY_INDICATOR_LAYERS, hideBasemapClutter(), mapCanvasColor(), PLACE_LABEL_LAYERS, PLACE_LABEL_MINZOOM, POI_LAYERS_EXCLUDE_BUS (+9 more)
+
+### Community 15 - "travel-notion.ts"
 Cohesion: 0.16
-Nodes (15): Fase 12 — Catalog pipeline port (Notion sync, OSM areas, photos, stay display), snapshot, LString, mergeNotionPlaces(), normalizeCategorySlug(), normalizeCitySlug(), NotionMergeCity, NotionPhoto (+7 more)
+Nodes (16): OsmArea, osmTravelAreas, snapshot, LString, mergeNotionPlaces(), normalizeCategorySlug(), normalizeCitySlug(), NotionMergeCity (+8 more)
 
-### Community 16 - "Rome Neighborhood Safety"
+### Community 16 - "rome-hotel-neighborhoods.ts"
 Cohesion: 0.15
 Nodes (15): src_data_rome_hotel_boundaries, Boundary, entries, geometry, legacyById, legacyUrbanIds, profiles, researchSources (+7 more)
 
-### Community 17 - "TypeScript Config"
-Cohesion: 0.12
-Nodes (15): compilerOptions, forceConsistentCasingInFileNames, isolatedModules, lib, module, moduleResolution, noEmit, noUnusedLocals (+7 more)
+### Community 17 - "compilerOptions"
+Cohesion: 0.10
+Nodes (20): DOM, DOM.Iterable, ES2023, src, vite/client, compilerOptions, forceConsistentCasingInFileNames, isolatedModules (+12 more)
 
-### Community 18 - "App Entry and Styles"
+### Community 18 - "sync-travel-notion.mjs"
+Cohesion: 0.09
+Nodes (54): ref_node_fs, CATEGORY_ALIASES, CATEGORY_BY_LABEL, CATEGORY_META, categoryLabel(), CITY_ALIASES, CITY_BY_LABEL, CITY_META (+46 more)
+
+### Community 19 - "hotel-ranking.test.ts"
 Cohesion: 0.18
-Nodes (13): cityNav, dispose(), map, root, shell, showCity(), showTrip(), tripNav (+5 more)
+Nodes (7): categoryScores, hotel, name, point, targets, walk, zone
 
-### Community 19 - "Hotel Ranking Tests"
-Cohesion: 0.15
-Nodes (8): vitest, categoryScores, hotel, name, point, targets, walk, zone
-
-### Community 20 - "Booking Details Parsing"
+### Community 20 - "hotel-booking-details.test.ts"
 Cohesion: 0.18
 Nodes (11): BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), STAFF_MINIMUM, validScore(), booking, categories (+3 more)
 
-### Community 21 - "Leaflet Map Module"
-Cohesion: 0.22
-Nodes (9): Fase 7 — Map (glyph pins, list↔map hover, camera policy, areas, transit, controls), Map API: hover(id) vs select(id), onHover, setPadding, diffed setPins, leaflet, @maplibre/maplibre-gl-leaflet, KINDS, mountMap(), zoomBucket(), MapPinKind (+1 more)
+### Community 21 - "Rules (agents + humans)"
+Cohesion: 0.07
+Nodes (24): Arquitetura, Comandos, Como um LLM edita um roteiro, Contrato, Travel Boss, Travel places ↔ Notion (obrigatório), Export, Multi-city (+16 more)
 
-### Community 22 - "Package Manifest"
-Cohesion: 0.18
-Nodes (10): engines, node, name, private, type, version, @fontsource/geist-sans, @types/leaflet (+2 more)
+### Community 22 - "scripts"
+Cohesion: 0.05
+Nodes (43): @fontsource/geist-sans, leaflet, maplibre-gl, @maplibre/maplibre-gl-leaflet, dependencies, @fontsource/geist-sans, leaflet, maplibre-gl (+35 more)
 
-### Community 23 - "Ranking Context and Stay Zones"
+### Community 23 - "hotel-ranking-context.ts"
 Cohesion: 0.54
 Nodes (6): rankingTargets(), hotelRankingContext(), src_data_travel_stay_display, stayZonePolygons(), stayZoneRings(), stayZonesForCity()
 
-### Community 24 - "Milan Itinerary"
+### Community 24 - "fetch-travel-polygons.py"
+Cohesion: 0.17
+Nodes (23): Any, dist_point_polygon_m(), dist_point_polyline_m(), dist_point_segment_m(), extract_geojson(), fetch_nominatim(), haversine_m(), load_queries() (+15 more)
+
+### Community 25 - "Travel Boss — plano de paridade com o portfólio + polimento de UI"
+Cohesion: 0.10
+Nodes (20): Contexto, Contrato para quem executa (Sonnet, Grok ou outro agente), Fase 0 — Preparação (bloqueante), Fase 10 — Planejador de rota e localização, Fase 11 — Passe de motion e hover, Fase 12 — Pipeline do catálogo (porte do portfólio), Fase 13 — Performance, Fase 14 — Tema escuro (por último, pedido do usuário) (+12 more)
+
+### Community 26 - "travel-subcategories.ts"
+Cohesion: 0.16
+Nodes (14): PlaceCategory, isPlaceSubcategory(), LString, normalizeSubcategories(), parisSubcategoriesByPlaceId, pinSubcategoryPriority, PlaceSubcategory, PlaceSubcategoryMeta (+6 more)
+
+### Community 27 - "Hotel priorities"
+Cohesion: 0.17
+Nodes (10): Airbnb gratuito (busca local), Cartographic boundaries, Evidence and scoring, Hotel priorities, Polígonos e transições visuais (versão 8), Recuperação da conexão com a Azul, Revisão de segurança por zona (20/09/2026), Rome coverage review — 2026-09-20 (+2 more)
+
+### Community 29 - "Europa"
+Cohesion: 0.20
+Nodes (9): Dia 1 — Centro antigo, Dia 1 — Chegada, Duomo e Galleria, Dia 1 — Chegada · Orly · Torre, Dia 2 — Bate-volta, Dia 2 — La Défense e eixo oeste, Europa, Milão, Paris (+1 more)
+
+### Community 30 - "travel-photos.test.ts"
+Cohesion: 0.28
+Nodes (5): photosByPlaceId, photosForPlaceId(), ALLOWED_HOSTS, TravelPhoto, travelCities
+
+### Community 31 - "Travel Boss"
 Cohesion: 0.40
-Nodes (5): ItineraryDay, TravelItinerary, excursion(), l(), milanItinerary
+Nodes (4): Artefato, Catálogo, Rodar, Travel Boss
 
-### Community 25 - "Place Link Resolution"
-Cohesion: 0.60
-Nodes (5): place:<placeId> catalog link, getTravelCity(), resolveHref(), stopPins(), checkPlaces()
-
-### Community 26 - "Runtime Dependencies"
-Cohesion: 0.40
-Nodes (5): dependencies, @fontsource/geist-sans, leaflet, maplibre-gl, @maplibre/maplibre-gl-leaflet
-
-### Community 27 - "Dev Dependencies"
-Cohesion: 0.40
-Nodes (5): devDependencies, @types/leaflet, typescript, vite, vitest
-
-## Ambiguous Edges - Review These
-- `travel-milan-itinerary.ts` → `Markdown as single source of truth (LLM edits, UI follows)`  [AMBIGUOUS]
-  content/SCHEMA.md · relation: conceptually_related_to
+### Community 32 - "Milão — 11–14 de outubro de 2026"
+Cohesion: 0.50
+Nodes (3): Fontes e limites, Milão — 11–14 de outubro de 2026, Rota
 
 ## Knowledge Gaps
-- **192 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+187 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 233 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **295 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+290 more)
+  These have ≤1 connection - possible missing edges or undocumented components.
 - **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What is the exact relationship between `travel-milan-itinerary.ts` and `Markdown as single source of truth (LLM edits, UI follows)`?**
-  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `vitest` connect `Hotel Ranking Tests` to `Hotel Search Server`, `Trip Markdown Artifact`, `Place Catalog Core`, `Category Icons and Tooltips`, `Stay Heatmap Data`, `Area Geometry Validation`, `City Itineraries and Budgets`, `Hotel Ranking Engine`, `Basemap Styling`, `Rome Neighborhood Safety`, `Booking Details Parsing`, `Package Manifest`, `Ranking Context and Stay Zones`?**
-  _High betweenness centrality (0.152) - this node is a cross-community bridge._
-- **Why does `Travel catalog (cities, places, city itineraries, search engine)` connect `Trip Markdown Artifact` to `Hotel Search Server`, `Place Catalog Core`, `Catalog Facade`?**
-  _High betweenness centrality (0.098) - this node is a cross-community bridge._
-- **Why does `Hotel search environment (airbnb-venv, Fase 0.4)` connect `Python Hotel Helpers` to `Hotel Search Server`, `Trip Markdown Artifact`?**
+- **Why does `getTravelCity()` connect `places.ts` to `parse.ts`, `travel.ts`, `index.ts`, `travel-notion.ts`, `hotel-ranking-context.ts`, `travel-photos.test.ts`?**
   _High betweenness centrality (0.064) - this node is a cross-community bridge._
-- **Are the 3 inferred relationships involving `mountCity()` (e.g. with `Fase 2 — Confirmed audit bug fixes (2.1–2.16)` and `Fase 3 — Navigation, state and locale (hash router, store, i18n, keyboard)`) actually correct?**
-  _`mountCity()` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 8 inferred relationships involving `paint()` (e.g. with `Fase 2 — Confirmed audit bug fixes (2.1–2.16)` and `Fase 5 — Multi-city trip UI (summary strip, overview map, rail navigation)`) actually correct?**
-  _`paint()` has 8 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `itineraryForCity()` connect `places.ts` to `travel.ts`, `index.ts`, `hotel-ranking-context.ts`?**
+  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+- **Why does `mountCity()` connect `places.ts` to `hotels.ts`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `type` to the rest of the system?**
-  _192 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _295 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `hotel-search.mjs` be split into smaller, more focused modules?**
+  _Cohesion score 0.05873340143003064 - nodes in this community are weakly interconnected._
+- **Should `travel-itinerary-legs.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.05052631578947368 - nodes in this community are weakly interconnected._
+- **Should `parse.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.11822660098522167 - nodes in this community are weakly interconnected._

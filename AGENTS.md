@@ -38,7 +38,7 @@ Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não ed
 - A UI importa o catálogo só por `src/catalog/index.ts`. Reexporte ali o que faltar.
 - Não edite `src/data/*` salvo tarefa explícita. Sem dependência npm nova sem a tarefa pedir.
 - Tokens de cor, espaço, tipo, raio, motion e z-index só em `src/styles/tokens.css`. Nada de ms, px de raio, cor ou z-index soltos.
-- Ícones só via `icon()` quando existir (`src/ui/icons.ts` ainda não existe; não antecipe o helper). Glifo novo entra em `ICONS`.
+- Ícones só via `icon()` de `src/ui/icons.ts`. Glifo novo entra em `ICONS` (ordenado, único). O teste falha se categoria ou subcategoria ficar de fora.
 - Idioma: `pickLocale(locale, { en, 'pt-BR' })`. A função está em `src/data/travel.ts`; a UI importa de `src/catalog`.
 - Re-render não recria o controle focado: atualize atributos no lugar (como `syncView` em `src/trip/mount.ts`).
 - Foco desktop (conferir em 1440×900). Itens mobile do portfólio ficam fora.
@@ -55,7 +55,9 @@ UI (vale a partir da Fase 1):
 - Hover não move a câmera do mapa. Só clique ou Enter movem.
 - O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos.
 
-Cada primitivo novo acrescenta a regra dele neste arquivo.
+Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`.
+
+Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--r-min`, canto reto `--r-none`. Os pares (`--r-card`/`--inset-card`/`--r-card-inner`, e o mesmo para row, popover e group) ficam em `src/styles/tokens.css`. Filho que encosta no canto usa o `*-inner`. Linha de uma linha é `--r-pill`; linha com `.tb-row__sub` é `--r-row`. Foco é `outline` + `outline-offset`, nunca `box-shadow`. Quem rola é `.tb-panel__body`, não o card arredondado. `grep border-radius src/styles` só pode mostrar `var(--r-*)`.
 
 ## Como um LLM edita um roteiro
 
