@@ -82,6 +82,27 @@
   opacity: 0.35;
 }
 
+.tb-stop-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-ink);
+}
+
+.tb-stop-pin .material-symbols-rounded {
+  font-size: var(--icon-sm);
+}
+
+.tb-row.is-disabled {
+  color: var(--color-mid-gray);
+}
+
+.tb-row.is-disabled .tb-row__title {
+  font-weight: var(--font-weight-regular);
+}
+
 .tb-city-section[hidden],
 .tb-stops[hidden],
 .tb-stops li[hidden] {

@@ -6,9 +6,10 @@ import {
   pickLocale,
   placeCategoryMeta,
   placeCategoryOrder,
+  placePinIconHtml,
   travelUi,
 } from '../catalog';
-import type { PlaceCategory } from '../catalog';
+import type { PlaceCategory, TravelPlace } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
 import {
   buildItineraryRoute,
@@ -16,6 +17,7 @@ import {
   type PlaceCoord,
 } from '../map/itinerary-route';
 import { setDocumentTitle } from '../app/router';
+import { directionsMode, googleDirectionsUrl } from './directions';
 import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { iconLink } from '../ui/controls';
@@ -61,6 +63,22 @@ function resolveHref(citySlug: string, placeId: string): string | null {
   const place = city?.places.find((item) => item.id === placeId);
   if (!city || !place) return null;
   return googleMapsUrl(place, city);
+}
+
+function placeById(citySlug: string, placeId: string): TravelPlace | undefined {
+  return getTravelCity(citySlug)?.places.find((item) => item.id === placeId);
+}
+
+/** Category glyph, in the category color. The catalog helper returns markup. */
+function stopPin(place: TravelPlace): HTMLSpanElement {
+  const lead = document.createElement('span');
+  lead.className = 'tb-stop-pin';
+  lead.style.color = placeCategoryMeta[place.category].color;
+  const markup = document.createElement('template');
+  markup.innerHTML = placePinIconHtml(place.category, place.subcategories);
+  lead.append(markup.content);
+  lead.querySelector('.material-symbols-rounded')?.classList.add('is-16');
+  return lead;
 }
 
 function emptyNotice(title: string, detail?: string, error = false): HTMLDivElement {
@@ -486,41 +504,54 @@ export function mountTrip(
         details.append(dayTitle);
         const list = document.createElement('ul');
         list.className = 'tb-list tb-list--stops tb-stops';
+        let previousPoint: { lat: number; lng: number } | null = null;
         for (const stop of day.stops) {
-          const place = stop.placeId
-            ? record?.places.find((item) => item.id === stop.placeId)
-            : undefined;
+          const place = stop.placeId ? placeById(city.slug, stop.placeId) : undefined;
+          const missingPlace = Boolean(stop.placeId && !place);
           const href = stop.href
             ? stop.href
-            : stop.placeId
-              ? resolveHref(city.slug, stop.placeId)
+            : place
+              ? resolveHref(city.slug, place.id)
               : null;
-          const missing =
-            !href && stop.placeId
-              ? pickLocale(locale, {
-                  en: `${stop.placeId} not found`,
-                  'pt-BR': `${stop.placeId} não encontrado`,
-                })
-              : '';
-          const sub = [stop.note, missing].filter(Boolean).join(' — ');
-          const lead = place ? document.createElement('span') : undefined;
-          if (lead && place) {
-            lead.className = 'tb-cat-dot';
-            lead.style.background = placeCategoryMeta[place.category].color;
+          const point = place ? { lat: place.lat, lng: place.lng } : null;
+          const directions =
+            previousPoint && point
+              ? googleDirectionsUrl(
+                  [previousPoint, point],
+                  directionsMode(previousPoint, point),
+                )
+              : null;
+          previousPoint = point;
+          const actions = document.createDocumentFragment();
+          if (directions) {
+            const link = iconLink({
+              icon: 'directions',
+              label: pickLocale(locale, {
+                en: 'Directions from the previous stop',
+                'pt-BR': 'Como chegar desde a parada anterior',
+              }),
+              href: directions,
+            });
+            link.dataset.action = 'directions';
+            actions.append(link);
           }
+          if (href) {
+            const link = iconLink({
+              icon: 'location_on',
+              label: pickLocale(locale, { en: 'Google Maps', 'pt-BR': 'Google Maps' }),
+              href,
+            });
+            link.dataset.action = 'maps';
+            actions.append(link);
+          }
+          const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
           const placeId = stop.placeId;
           const item = row({
             time: stop.time,
-            lead,
-            title: stop.label,
-            sub: sub || undefined,
-            actions: href
-              ? iconLink({
-                  icon: 'location_on',
-                  label: pickLocale(locale, { en: 'Google Maps', 'pt-BR': 'Google Maps' }),
-                  href,
-                })
-              : undefined,
+            lead: place ? stopPin(place) : undefined,
+            title: missingPlace ? (placeId ?? stop.label) : stop.label,
+            sub: missingPlace ? authored || undefined : stop.note,
+            actions: actions.childNodes.length ? actions : undefined,
             data: {
               stop: '',
               hay: `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase(),
@@ -529,17 +560,19 @@ export function mountTrip(
               ...(place ? { category: place.category } : {}),
             },
             onSelect:
-              placeId && record
+              place && record
                 ? () => {
-                    const found = record.places.find((entry) => entry.id === placeId);
-                    if (!found) return;
                     clearStopCurrent();
                     item.setAttribute('aria-current', 'true');
                     const origin = item.querySelector<HTMLElement>('.tb-row__main');
-                    openPlace(found, record, locale, origin);
+                    openPlace(place, record, locale, origin);
                   }
                 : undefined,
           });
+          if (missingPlace) {
+            item.classList.add('is-disabled');
+            item.setAttribute('aria-disabled', 'true');
+          }
           list.append(item);
         }
         if (day.stops.length) details.append(list);
