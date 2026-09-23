@@ -1,6 +1,12 @@
 /** Seconds. One duration for every programmatic camera move. */
 export const CAMERA_DURATION_S = 0.45;
 
+/** Exit transitions run at about 70% of the entrance. */
+export const EXIT_RATIO = 0.7;
+
+export const CHROME_MOTION_EVENT = 'tb-chrome-motion';
+export const CHROME_SETTLED_EVENT = 'tb-chrome-settled';
+
 /** MapLibre label-collision fade when motion is allowed. */
 export const LABEL_FADE_MS = 300;
 
@@ -24,6 +30,29 @@ export function cameraMotion(reduced = prefersReducedMotion()): CameraMotion {
 
 export function labelFadeDuration(reduced = prefersReducedMotion()): number {
   return reduced ? 0 : LABEL_FADE_MS;
+}
+
+export function markChromeMotion(): void {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new Event(CHROME_MOTION_EVENT));
+}
+
+export function markChromeSettled(): void {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new Event(CHROME_SETTLED_EVENT));
+}
+
+/** Computed time token in milliseconds (`320ms` → 320). */
+export function readCssTime(name: string, fallback = 0): number {
+  if (typeof document === 'undefined' || typeof getComputedStyle !== 'function') return fallback;
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const value = Number.parseFloat(raw);
+  return Number.isFinite(value) ? value : fallback;
+}
+
+/** Collapse fades, then the column closes. Expand opens the column, then fades in. */
+export function sidebarSteps(opening: boolean): readonly ('column' | 'fade')[] {
+  return opening ? ['column', 'fade'] : ['fade', 'column'];
 }
 
 /** Crossfade the main panel. Skips the API when motion is reduced or unsupported. */

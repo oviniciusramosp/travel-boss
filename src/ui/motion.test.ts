@@ -4,7 +4,9 @@ import {
   LABEL_FADE_MS,
   cameraMotion,
   labelFadeDuration,
+  readCssTime,
   runViewTransition,
+  sidebarSteps,
 } from './motion';
 
 describe('cameraMotion', () => {
@@ -21,6 +23,19 @@ describe('labelFadeDuration', () => {
   it('keeps the MapLibre fade unless motion is reduced', () => {
     expect(labelFadeDuration(false)).toBe(LABEL_FADE_MS);
     expect(labelFadeDuration(true)).toBe(0);
+  });
+});
+
+describe('sidebarSteps', () => {
+  it('fades out before the column closes, and opens the column before fading in', () => {
+    expect(sidebarSteps(false)).toEqual(['fade', 'column']);
+    expect(sidebarSteps(true)).toEqual(['column', 'fade']);
+  });
+});
+
+describe('readCssTime', () => {
+  it('uses the fallback when the document is not styled', () => {
+    expect(readCssTime('--dur-slow', 12)).toBe(12);
   });
 });
 

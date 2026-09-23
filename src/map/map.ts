@@ -14,7 +14,12 @@ import {
   type Marker,
 } from 'leaflet';
 import { placeCategoryMeta } from '../catalog';
-import { cameraMotion, prefersReducedMotion } from '../ui/motion';
+import {
+  CHROME_MOTION_EVENT,
+  CHROME_SETTLED_EVENT,
+  cameraMotion,
+  prefersReducedMotion,
+} from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
 import {
   diffPinIds,
@@ -123,8 +128,20 @@ export function mountMap(host: HTMLElement): MapHandle {
   };
   motionQuery.addEventListener('change', syncMotion);
 
-  const resize = new ResizeObserver(() => {
+  let chromeMoving = false;
+  const settleMap = () => {
     leafletMap.invalidateSize(false);
+  };
+  window.addEventListener(CHROME_MOTION_EVENT, () => {
+    chromeMoving = true;
+  });
+  window.addEventListener(CHROME_SETTLED_EVENT, () => {
+    chromeMoving = false;
+    settleMap();
+  });
+  const resize = new ResizeObserver(() => {
+    if (chromeMoving) return;
+    settleMap();
   });
   resize.observe(frame);
 

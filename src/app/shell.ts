@@ -2,6 +2,13 @@ import { pickLocale } from '../catalog';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
+import {
+  EXIT_RATIO,
+  markChromeMotion,
+  markChromeSettled,
+  readCssTime,
+  sidebarSteps,
+} from '../ui/motion';
 
 export type Locale = 'en' | 'pt-BR';
 
@@ -154,10 +161,80 @@ export function mountShell(root: HTMLElement): Shell {
   }
 
   let sideOpen = localStorage.getItem(SIDE_KEY) !== '0';
+  if (!sideOpen) workspace.classList.add('is-collapsed', 'is-side-closed');
 
-  const applySide = () => {
-    workspace.classList.toggle('is-collapsed', !sideOpen);
-    side.toggleAttribute('inert', !sideOpen);
+  let sideGen = 0;
+  let holding = false;
+  let stopSide = () => {};
+
+  const endHold = () => {
+    if (!holding) return;
+    holding = false;
+    markChromeSettled();
+  };
+
+  const cancelSide = () => {
+    sideGen += 1;
+    stopSide();
+    stopSide = () => {};
+  };
+
+  const columnClosed = (closed: boolean) => {
+    workspace.classList.toggle('is-side-closed', closed);
+    reclamp(true);
+  };
+
+  const fadeClosed = (closed: boolean) => {
+    workspace.classList.toggle('is-collapsed', closed);
+  };
+
+  const waitFade = (gen: number, ms: number, after: () => void) => {
+    let done = false;
+    const finish = () => {
+      if (done || gen !== sideGen) return;
+      done = true;
+      stopSide();
+      stopSide = () => {};
+      after();
+    };
+    const timer = window.setTimeout(finish, ms + 40);
+    const onEnd = (event: TransitionEvent) => {
+      if (event.target !== side || event.propertyName !== 'opacity') return;
+      finish();
+    };
+    side.addEventListener('transitionend', onEnd);
+    stopSide = () => {
+      window.clearTimeout(timer);
+      side.removeEventListener('transitionend', onEnd);
+    };
+  };
+
+  const playSide = (steps: readonly ('column' | 'fade')[], index: number, gen: number, ms: number) => {
+    if (gen !== sideGen) return;
+    const step = steps[index];
+    if (!step) {
+      window.requestAnimationFrame(() => {
+        if (gen !== sideGen) return;
+        if (sideOpen) side.toggleAttribute('inert', false);
+        endHold();
+      });
+      return;
+    }
+    if (step === 'column') {
+      columnClosed(!sideOpen);
+      playSide(steps, index + 1, gen, ms);
+      return;
+    }
+    const go = () => {
+      if (gen !== sideGen) return;
+      fadeClosed(!sideOpen);
+      waitFade(gen, sideOpen ? ms : ms * EXIT_RATIO, () => playSide(steps, index + 1, gen, ms));
+    };
+    if (sideOpen && index > 0) window.requestAnimationFrame(go);
+    else go();
+  };
+
+  const applySide = (animate: boolean) => {
     sideToggle.setAttribute('aria-expanded', sideOpen ? 'true' : 'false');
     const sideLabel = pickLocale(locale, {
       en: sideOpen ? 'Collapse menu' : 'Show menu',
@@ -167,6 +244,29 @@ export function mountShell(root: HTMLElement): Shell {
     sideToggle.setAttribute('data-tip', sideLabel);
     const glyph = sideToggle.querySelector('.material-symbols-rounded');
     if (glyph) glyph.textContent = sideOpen ? 'left_panel_close' : 'left_panel_open';
+
+    const closed = !sideOpen;
+    const atRest =
+      workspace.classList.contains('is-collapsed') === closed &&
+      workspace.classList.contains('is-side-closed') === closed &&
+      !holding;
+    if (!animate || atRest || readCssTime('--dur-slow') === 0) {
+      const resume = holding;
+      cancelSide();
+      const columnWas = workspace.classList.contains('is-side-closed');
+      fadeClosed(closed);
+      if (columnWas !== closed) columnClosed(closed);
+      side.toggleAttribute('inert', closed);
+      if (resume) endHold();
+      return;
+    }
+
+    cancelSide();
+    const gen = sideGen;
+    holding = true;
+    markChromeMotion();
+    side.toggleAttribute('inert', true);
+    playSide(sidebarSteps(sideOpen), 0, gen, readCssTime('--dur-slow'));
   };
 
   let locale = readLocale();
@@ -216,7 +316,7 @@ export function mountShell(root: HTMLElement): Shell {
       'aria-label',
       pickLocale(locale, { en: 'Document width', 'pt-BR': 'Largura do documento' }),
     );
-    applySide();
+    applySide(false);
     segmented(localeWrap);
   };
   paintLocale();
@@ -224,8 +324,7 @@ export function mountShell(root: HTMLElement): Shell {
   sideToggle.addEventListener('click', () => {
     sideOpen = !sideOpen;
     localStorage.setItem(SIDE_KEY, sideOpen ? '1' : '0');
-    applySide();
-    reclamp(true);
+    applySide(true);
   });
 
   const setMainWidth = (px: number, persist: boolean) => {

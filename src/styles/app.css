@@ -181,15 +181,8 @@ button {
   min-height: 0;
 }
 
-.tb-workspace.is-collapsed {
+.tb-workspace.is-side-closed {
   --side-width: 0px;
-}
-
-.tb-workspace.is-collapsed .tb-side {
-  visibility: hidden;
-  padding: 0;
-  border-right-width: 0;
-  overflow: hidden;
 }
 
 .tb-side-toggle {
@@ -244,6 +237,27 @@ button {
   border-right: 1px solid var(--color-hairline);
   overflow: auto;
   padding: 10px 8px 24px;
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    transform var(--dur-slow) var(--ease-out),
+    opacity var(--dur-slow) var(--ease-out);
+}
+
+.tb-workspace.is-collapsed .tb-side {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform calc(var(--dur-slow) * 0.7) var(--ease-in),
+    opacity calc(var(--dur-slow) * 0.7) var(--ease-in);
+}
+
+.tb-workspace.is-side-closed .tb-side {
+  visibility: hidden;
+  padding: 0;
+  border-right-width: 0;
+  overflow: hidden;
 }
 
 .tb-side-label {
