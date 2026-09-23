@@ -53,6 +53,12 @@ function resolveHref(citySlug: string, placeId: string): string | null {
   return googleMapsUrl(place, city);
 }
 
+function clearStopCurrent(): void {
+  document.querySelectorAll('[data-stop][aria-current]').forEach((node) => {
+    node.removeAttribute('aria-current');
+  });
+}
+
 function stopPins(
   trip: Trip,
   cityFilter: string | null,
@@ -256,9 +262,7 @@ export function mountTrip(
   });
 
   const offClose = onPlaceClose(() => {
-    main.querySelectorAll('[data-stop][aria-current]').forEach((node) => {
-      node.removeAttribute('aria-current');
-    });
+    clearStopCurrent();
     map.highlight(null);
   });
 
@@ -474,9 +478,7 @@ export function mountTrip(
                 ? () => {
                     const found = record.places.find((entry) => entry.id === placeId);
                     if (!found) return;
-                    list.querySelectorAll('[aria-current]').forEach((node) => {
-                      node.removeAttribute('aria-current');
-                    });
+                    clearStopCurrent();
                     item.setAttribute('aria-current', 'true');
                     const origin =
                       document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -547,9 +549,7 @@ export function mountTrip(
     const item = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(pinId)}"]`);
     if (!item) return;
     item.scrollIntoView({ block: 'center' });
-    main.querySelectorAll('[aria-current]').forEach((node) => {
-      node.removeAttribute('aria-current');
-    });
+    clearStopCurrent();
     item.setAttribute('aria-current', 'true');
   });
 
