@@ -14,6 +14,7 @@
     "travel:areas": "python3 scripts/fetch-travel-polygons.py",
     "travel:areas:force": "python3 scripts/fetch-travel-polygons.py --force",
     "travel:areas:check": "vitest run src/data/travel-areas.test.ts",
+    "travel:photos:check": "python3 scripts/check-travel-photos.py",
     "travel:notion:pull": "node scripts/sync-travel-notion.mjs pull",
     "travel:notion:push": "node scripts/sync-travel-notion.mjs push",
     "travel:notion:schema": "node scripts/sync-travel-notion.mjs schema",
