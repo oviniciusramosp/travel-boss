@@ -31,12 +31,32 @@ export type MapRouteSegment = {
   dash?: boolean;
 };
 
+/** Numbered stop on the trip overview. `via` is the departure toward the next city. */
+export type MapOverviewCity = {
+  id: string;
+  lat: number;
+  lng: number;
+  label: string;
+  number: number;
+  via?: string;
+};
+
 export type MapHandle = {
   /** Replace every pin of this kind. Other kinds stay. */
   setPins(kind: MapPinKind, pins: MapPin[]): void;
   setRadius(ring: MapRadius): void;
   /** Walk dashes and transit spines. Pass [] to clear. */
   setRoute(segments: MapRouteSegment[], opts?: { fit?: boolean }): void;
+  /**
+   * Trip overview: numbered cities and dashed great-circle connectors.
+   * `null` clears it. `fade` (default when there are cities) dims stop pins.
+   * `fit` frames the cities. Neither option moves the camera otherwise.
+   */
+  setOverview(cities: readonly MapOverviewCity[] | null, opts?: { fit?: boolean; fade?: boolean }): void;
+  /** Highlight one overview node. `null` clears it. Does not move the camera. */
+  hoverOverview(id: string | null): void;
+  /** Click on an overview node. Returns an unsubscribe. */
+  onOverview(fn: (id: string) => void): () => void;
   fit(): void;
   /** Whether a coordinate is inside the current map view. */
   inView(lat: number, lng: number): boolean;

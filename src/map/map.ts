@@ -7,6 +7,7 @@ import {
   map as createMap,
   marker,
   polyline,
+  svg,
   type Circle,
   type LatLng,
   type LayerGroup,
@@ -31,8 +32,17 @@ import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel }
 import { placeZoom, resolvedPlace } from './place-index';
 import { MAPLIBRE_PERF, maplibreFade } from './maplibre-perf';
 import { attachTrackpadGestures } from './trackpad';
+import { overviewArcs } from './overview';
 import { transitLineForPlace } from './transit';
-import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
+import type {
+  MapHandle,
+  MapOverviewCity,
+  MapPadding,
+  MapPin,
+  MapPinKind,
+  MapRadius,
+  MapRouteSegment,
+} from './types';
 
 const KINDS: readonly MapPinKind[] = ['place', 'hotel', 'stop'];
 
@@ -132,6 +142,30 @@ export function mountMap(host: HTMLElement): MapHandle {
   const padding = { top: 0, right: 0, bottom: 0, left: 0 };
   let radiusLayer: Circle | null = null;
   let routeLayer: LayerGroup | null = null;
+  let overviewLayer: LayerGroup | null = null;
+  let overviewHoverId: string | null = null;
+  const overviewMarkers = new Map<string, Marker>();
+  const overviewFns = new Set<(id: string) => void>();
+
+  const paintOverview = () => {
+    for (const [id, marker] of overviewMarkers) {
+      marker.getElement()?.classList.toggle('is-hover', id === overviewHoverId);
+      marker.setZIndexOffset(id === overviewHoverId ? 1600 : 1300);
+    }
+  };
+
+  const fitPoints = (points: [number, number][], maxZoom: number) => {
+    if (points.length === 0) return;
+    const run = () => {
+      const size = leafletMap.getSize();
+      if (size.x < 2 || size.y < 2) return false;
+      const bounds = latLngBounds(points);
+      if (!bounds.isValid()) return true;
+      leafletMap.fitBounds(bounds, { ...fitPad(48), maxZoom, ...cameraMotion() });
+      return true;
+    };
+    if (!run()) requestAnimationFrame(() => { run(); });
+  };
 
   const pinMeta: Record<MapPinKind, Map<string, PinModel>> = {
     place: new Map(),
@@ -258,6 +292,12 @@ export function mountMap(host: HTMLElement): MapHandle {
     applyZoom();
   };
 
+  // Canvas (`preferCanvas`) has no DOM stroke, so overview arcs use an SVG pane.
+  leafletMap.createPane('tb-route');
+  const routePane = leafletMap.getPane('tb-route');
+  if (routePane) routePane.style.zIndex = '460';
+  const routeRenderer = svg({ pane: 'tb-route' });
+
   const overlays = mountPlaceOverlays(leafletMap);
   const syncOverlays = () => {
     const ids: string[] = [];
@@ -371,6 +411,88 @@ export function mountMap(host: HTMLElement): MapHandle {
           ...cameraMotion(),
         });
       }
+    },
+
+    setOverview(cities: readonly MapOverviewCity[] | null, opts?: { fit?: boolean; fade?: boolean }) {
+      const list = (cities ?? []).filter(
+        (city) => city.id && Number.isFinite(city.lat) && Number.isFinite(city.lng),
+      );
+      const fade = list.length > 0 && opts?.fade !== false;
+      host.classList.toggle('is-overview', fade);
+      if (list.length) host.dataset.overview = String(list.length);
+      else delete host.dataset.overview;
+      overviewLayer?.remove();
+      overviewLayer = null;
+      overviewMarkers.clear();
+      if (!list.length) return;
+
+      const arcColor =
+        getComputedStyle(document.documentElement).getPropertyValue('--color-mid-gray').trim() ||
+        '#8a8a8a';
+      const group = layerGroup();
+      const fit: [number, number][] = [];
+      for (const arc of overviewArcs(list)) {
+        const line = polyline(arc.latlngs, {
+          renderer: routeRenderer,
+          color: arcColor,
+          weight: 2,
+          opacity: 0.85,
+          dashArray: '1 8',
+          lineCap: 'round',
+          interactive: true,
+          bubblingMouseEvents: false,
+          className: 'tb-overview-arc',
+        });
+        line.bindTooltip(arc.label, {
+          sticky: true,
+          opacity: 1,
+          className: 'tb-pin-tip',
+        });
+        line.addTo(group);
+        for (const pair of arc.latlngs) fit.push(pair);
+      }
+      for (const city of list) {
+        const number = Number.isFinite(city.number) && city.number > 0 ? Math.round(city.number) : 0;
+        const dot = marker([city.lat, city.lng], {
+          icon: divIcon({
+            className: 'tb-overview-wrap',
+            html: `<span class="tb-overview-node">${number || ''}</span>`,
+            iconSize: [28, 28],
+            iconAnchor: [14, 14],
+          }),
+          keyboard: false,
+          title: city.label,
+          zIndexOffset: city.id === overviewHoverId ? 1600 : 1300,
+          bubblingMouseEvents: false,
+        });
+        dot.bindTooltip(city.label, {
+          direction: 'top',
+          opacity: 1,
+          className: 'tb-pin-tip',
+        });
+        dot.on('click', () => {
+          for (const fn of overviewFns) fn(city.id);
+        });
+        dot.addTo(group);
+        overviewMarkers.set(city.id, dot);
+        fit.push([city.lat, city.lng]);
+      }
+      group.addTo(leafletMap);
+      overviewLayer = group;
+      paintOverview();
+      if (opts?.fit) fitPoints(fit, 7);
+    },
+
+    hoverOverview(id) {
+      overviewHoverId = id;
+      paintOverview();
+    },
+
+    onOverview(fn) {
+      overviewFns.add(fn);
+      return () => {
+        overviewFns.delete(fn);
+      };
     },
 
     flyTo(lat, lng, zoom = 16) {
