@@ -399,6 +399,52 @@
   color: var(--color-ink);
 }
 
+.tb-hotels__distances {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.tb-hotels__distances summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  cursor: pointer;
+  font-size: var(--text-body);
+}
+
+.tb-hotels__distances summary small {
+  margin-left: auto;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+}
+
+.tb-hotels__walks {
+  grid-template-columns: [time] 0 [lead] 0 [main] minmax(0, 1fr) [actions] auto;
+}
+
+.tb-hotels__walks .tb-row__actions,
+.tb-hotels__walks .tb-row__time,
+.tb-hotels__walks .tb-row__lead {
+  opacity: 1;
+}
+
+.tb-hotels__dir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  height: var(--h-sm);
+  padding: 0 var(--spacing-8);
+  border-radius: var(--r-pill);
+  color: var(--color-ink);
+  font-size: var(--text-caption);
+  text-decoration: none;
+}
+
+.tb-hotels__dir:hover {
+  background: var(--color-hover);
+}
+
 .tb-hotels__links {
   display: flex;
   flex-wrap: wrap;

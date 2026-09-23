@@ -4,6 +4,7 @@ import type { MapHandle, MapPin } from '../map/types';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
+import { distanceSection, walkStops } from './hotel-distance';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
 import { scoreCard, whyParts, type WhyPart } from './hotel-rank';
 import { hotelPhotoUrls, mountHotelSlider } from './hotel-slider';
@@ -54,6 +55,7 @@ type HotelRanking = {
   beyond90?: number;
   pointCount?: number;
   totalPoints?: number;
+  walks?: unknown;
   transit?: { name?: Localized; minutes?: number } | null;
   jev?: { weight?: number } | null;
 };
@@ -989,6 +991,23 @@ export function mountHotels(
       box.append(el('summary', 'tb-meta', t('Why this position?', 'Por que essa posição?')));
       for (const part of reasons) box.append(whyNode(part));
       body.append(box);
+      if (Number.isFinite(hotel.lat) && Number.isFinite(hotel.lng)) {
+        const origin = { lat: hotel.lat, lng: hotel.lng };
+        body.append(
+          distanceSection(
+            locale(),
+            origin,
+            walkStops(hotel.ranking?.walks),
+            hotel.ranking?.pointCount ?? 0,
+            'attractions',
+          ),
+        );
+        if (hotel.ranking?.transit) {
+          body.append(
+            distanceSection(locale(), origin, walkStops([hotel.ranking.transit]), 1, 'transport'),
+          );
+        }
+      }
     } else {
       const why = explain(hotel);
       if (why) {
