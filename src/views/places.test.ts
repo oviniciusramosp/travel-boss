@@ -4,6 +4,8 @@ import { placeCategoriesOffByDefault, placeCategoryOrder } from '../catalog';
 import {
   applyCategoryClick,
   categoriesPresent,
+  groupOpenState,
+  groupsToggleLabel,
   isDefaultCategoryFilter,
   primaryDayRoute,
   searchLeavesView,
@@ -64,6 +66,12 @@ describe('category groups', () => {
     expect(applyCategoryClick(['parks', 'cafes'], 'commons', true)).toEqual(['commons']);
   });
 
+  it('starts groups collapsed unless the city saved them open', () => {
+    expect(groupOpenState(['parks', 'cafes'], null)).toEqual({ parks: false, cafes: false });
+    expect(groupOpenState(['parks', 'cafes'], { parks: true })).toEqual({ parks: true, cafes: false });
+    expect(groupsToggleLabel(false, 'pt-BR')).toBe('Expandir tudo');
+    expect(groupsToggleLabel(true, 'en')).toBe('Collapse all');
+  });
 });
 
 describe('primaryDayRoute', () => {

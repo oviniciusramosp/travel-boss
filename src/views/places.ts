@@ -1,5 +1,12 @@
 import type { Shell } from '../app/shell';
-import { readArrival, readCategoryFilter, writeArrival, writeCategoryFilter } from '../app/store';
+import {
+  readArrival,
+  readCategoryFilter,
+  readGroups,
+  writeArrival,
+  writeCategoryFilter,
+  writeGroups,
+} from '../app/store';
 import {
   categoryMaterialName,
   computeDayBudget,
@@ -99,6 +106,20 @@ export function applyCategoryClick(
   if (next.has(category)) next.delete(category);
   else next.add(category);
   return [...next];
+}
+
+/** Missing storage starts collapsed, same as the portfolio's first visit. */
+export function groupOpenState(
+  categories: readonly string[],
+  saved: Readonly<Record<string, boolean>> | null,
+): Record<string, boolean> {
+  const state: Record<string, boolean> = {};
+  for (const category of categories) state[category] = saved?.[category] ?? false;
+  return state;
+}
+
+export function groupsToggleLabel(allOpen: boolean, locale: Locale): string {
+  return pickLocale(locale, allOpen ? travelUi.collapseAll : travelUi.expandAll);
 }
 
 function categoryGlyph(category: PlaceCategory, size: 16 | 18 = 16): HTMLElement {
@@ -358,7 +379,9 @@ export function mountCity(
       : placeCategoryOrder.filter((category) => !placeCategoriesOffByDefault.has(category)),
   );
   const present = categoriesPresent(placeCategoryOrder, city.places);
+  let groupState = groupOpenState(present, readGroups(city.slug));
   let filterBadge: HTMLElement | null = null;
+  let expandBtn: HTMLButtonElement | null = null;
   const arrivalByDay = new Map<string, string>();
   if (itinerary) {
     for (const day of itinerary.days) {
@@ -561,6 +584,17 @@ export function mountCity(
     map.highlight(null);
   };
 
+  const visibleGroupNodes = () =>
+    [...body.querySelectorAll<HTMLDetailsElement>('details.tb-group')].filter((section) => !section.hidden);
+
+  const syncExpand = () => {
+    if (!expandBtn) return;
+    const groups = visibleGroupNodes();
+    const allOpen = groups.length > 0 && groups.every((section) => section.open);
+    expandBtn.textContent = groupsToggleLabel(allOpen, shell.locale());
+    expandBtn.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
+  };
+
   const syncFilters = () => {
     body.querySelectorAll<HTMLButtonElement>('button[data-category]').forEach((button) => {
       const category = button.dataset.category;
@@ -586,23 +620,45 @@ export function mountCity(
     );
   };
 
+  const setEveryGroup = (open: boolean) => {
+    for (const category of present) groupState[category] = open;
+    writeGroups(city.slug, groupState);
+    for (const section of body.querySelectorAll<HTMLDetailsElement>('details.tb-group')) {
+      section.open = open;
+    }
+    syncExpand();
+  };
+
   const appendPlaceGroups = () => {
     const locale = shell.locale();
     const text = copy(locale);
     const places = visiblePlaces();
     if (places.length === 0) {
       body.append(emptyState(text.emptyPlacesTitle, text.emptyPlaces));
+      syncExpand();
       return;
     }
     for (const category of present) {
       const group = places.filter((place) => place.category === category);
       if (!group.length) continue;
-      const heading = el('h2', 'tb-cat-head');
-      heading.append(
+      const section = el('details', 'tb-group');
+      section.dataset.group = category;
+      section.addEventListener('toggle', () => {
+        groupState[category] = section.open;
+        writeGroups(city.slug, groupState);
+        syncExpand();
+      });
+      section.open = groupState[category] ?? false;
+      const summary = el('summary', 'tb-group__summary');
+      const count = el('span', 'tb-group__count', String(group.length));
+      count.dataset.groupCount = category;
+      summary.append(
         categoryGlyph(category),
-        document.createTextNode(pickLocale(locale, CATEGORY_LABEL[category])),
+        el('span', 'tb-group__label', pickLocale(locale, CATEGORY_LABEL[category])),
+        count,
+        icon('expand_more', { size: 18 }),
       );
-      body.append(heading);
+      summary.lastElementChild?.classList.add('tb-group__chevron');
       const list = el('div', 'tb-place-list');
       for (const place of group) {
         const row = el('div', 'tb-place');
@@ -622,8 +678,10 @@ export function mountCity(
         row.append(mainBtn, maps);
         list.append(row);
       }
-      body.append(list);
+      section.append(summary, list);
+      body.append(section);
     }
+    syncExpand();
   };
 
   const renderPlaceResults = () => {
@@ -663,7 +721,15 @@ export function mountCity(
     badge.hidden = true;
     filterBadge = badge;
     filters.append(badge);
-    tools.append(filters);
+    const expand = el('button', 'tb-expand');
+    expand.type = 'button';
+    expandBtn = expand;
+    expand.addEventListener('click', () => {
+      const groups = visibleGroupNodes();
+      const allOpen = groups.length > 0 && groups.every((section) => section.open);
+      setEveryGroup(!allOpen);
+    });
+    tools.append(filters, expand);
     body.append(tools);
     syncFilters();
     appendPlaceGroups();
