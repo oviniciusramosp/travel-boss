@@ -1,4 +1,5 @@
 import type { Shell } from '../app/shell';
+import { readCategoryFilter, writeCategoryFilter } from '../app/store';
 import {
   getTravelCity,
   googleMapsUrl,
@@ -194,7 +195,14 @@ export function mountTrip(
   };
   let cityFilter: string | null = null;
   let tripRouteEpoch = 0;
-  const enabledCategories = new Set<PlaceCategory>(placeCategoryOrder);
+  const storedCategories = readCategoryFilter();
+  const enabledCategories = new Set<PlaceCategory>(
+    storedCategories
+      ? storedCategories.filter((id): id is PlaceCategory =>
+          (placeCategoryOrder as readonly string[]).includes(id),
+        )
+      : placeCategoryOrder,
+  );
 
   function drawTripRoutes() {
     const epoch = ++tripRouteEpoch;
@@ -404,6 +412,7 @@ export function mountTrip(
         button.addEventListener('click', () => {
           if (enabledCategories.has(category)) enabledCategories.delete(category);
           else enabledCategories.add(category);
+          writeCategoryFilter([...enabledCategories]);
           syncView(true);
         });
         filters.append(button);

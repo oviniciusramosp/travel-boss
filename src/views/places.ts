@@ -1,4 +1,5 @@
 import type { Shell } from '../app/shell';
+import { readArrival, readCategoryFilter, writeArrival, writeCategoryFilter } from '../app/store';
 import {
   computeDayBudget,
   dayPrimaryRoutePlaceIds,
@@ -293,10 +294,19 @@ export function mountCity(
   const itinerary = itineraryForCity(city.slug);
   const hotelPriority = priorityPlaceIds(city);
 
+  const storedCategories = readCategoryFilter();
   const enabled = new Set<PlaceCategory>(
-    placeCategoryOrder.filter((category) => !placeCategoriesOffByDefault.has(category)),
+    storedCategories
+      ? storedCategories.filter(isCategory)
+      : placeCategoryOrder.filter((category) => !placeCategoriesOffByDefault.has(category)),
   );
   const arrivalByDay = new Map<string, string>();
+  if (itinerary) {
+    for (const day of itinerary.days) {
+      const saved = readArrival(city.slug, day.id);
+      if (saved && day.arrivals?.some((item) => item.id === saved)) arrivalByDay.set(day.id, saved);
+    }
+  }
 
   let tab: Tab = initial?.tab ?? 'places';
   let query = shell.query();
@@ -758,6 +768,7 @@ export function mountCity(
       const category = categoryBtn.dataset.category;
       if (enabled.has(category)) enabled.delete(category);
       else enabled.add(category);
+      writeCategoryFilter([...enabled]);
       if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
         closePlace({ focus: false });
       }
@@ -774,6 +785,7 @@ export function mountCity(
       const day = itinerary.days[dayIndex];
       if (!day) return;
       arrivalByDay.set(day.id, arrivalBtn.dataset.arrivalId);
+      writeArrival(city.slug, day.id, arrivalBtn.dataset.arrivalId);
       selectedDayIndex = dayIndex;
       const stops = activeStops(day);
       const stillThere = (id: string | null) =>
