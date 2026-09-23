@@ -25,6 +25,7 @@ import {
   selectionFrame,
 } from './camera';
 import { coveredInsets, mergeInsets, type Insets } from './chrome';
+import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
 import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
@@ -247,6 +248,14 @@ export function mountMap(host: HTMLElement): MapHandle {
     applyZoom();
   };
 
+  const overlays = mountPlaceOverlays(leafletMap);
+  const syncOverlays = () => {
+    const ids: string[] = [];
+    if (selectedId && findMarker(selectedId)) ids.push(selectedId);
+    if (hoveredId && hoveredId !== selectedId && findMarker(hoveredId)) ids.push(hoveredId);
+    overlays.sync(ids);
+  };
+
   const bindMarker = (dot: Marker, id: string) => {
     dot.on('click', () => {
       for (const fn of selectFns) fn(id);
@@ -315,6 +324,7 @@ export function mountMap(host: HTMLElement): MapHandle {
         index.set(id, dot);
         metas.set(id, next);
       }
+      syncOverlays();
     },
 
     setRoute(segments: MapRouteSegment[], opts?: { fit?: boolean }) {
@@ -406,11 +416,13 @@ export function mountMap(host: HTMLElement): MapHandle {
     hover(id) {
       hoveredId = id;
       paintAll();
+      syncOverlays();
     },
 
     select(id) {
       selectedId = id;
       paintAll();
+      syncOverlays();
       const target = findMarker(id);
       if (!target) return;
       const area = areaPoints(id);
@@ -437,6 +449,7 @@ export function mountMap(host: HTMLElement): MapHandle {
         selectedId = null;
         hoveredId = null;
         paintAll();
+        syncOverlays();
         return;
       }
       this.select(id);

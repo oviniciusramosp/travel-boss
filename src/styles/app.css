@@ -364,6 +364,20 @@ button {
   color: var(--color-ink-soft);
 }
 
+.tb-map path.tb-area {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.tb-map path.tb-area.is-visible {
+  opacity: 1;
+}
+
+.tb-map path.tb-area.tb-area--line.is-visible {
+  opacity: 0.92;
+}
+
 .tb-map .leaflet-marker-icon.tb-pin-wrap {
   background: none;
   border: 0;
