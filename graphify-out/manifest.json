@@ -1,0 +1,434 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1790169285.7001567,
+    "seen": 1790170707.6467688,
+    "ast_hash": "2d543badb79a91f79cc19833ee3b1f31",
+    "semantic_hash": "2d543badb79a91f79cc19833ee3b1f31"
+  },
+  "package.json": {
+    "mtime": 1790166318.8423228,
+    "seen": 1790170707.646773,
+    "ast_hash": "7236b5f8627ea6107670dd7635b58f9f",
+    "semantic_hash": "7236b5f8627ea6107670dd7635b58f9f"
+  },
+  "scripts/airbnb-search.mjs": {
+    "mtime": 1789945156.1916535,
+    "seen": 1790170707.646775,
+    "ast_hash": "bd7013c3c28ee913ab2bd12402be8080",
+    "semantic_hash": "bd7013c3c28ee913ab2bd12402be8080"
+  },
+  "scripts/airbnb-search.py": {
+    "mtime": 1789944941.4605207,
+    "seen": 1790170707.646775,
+    "ast_hash": "b69bbd4b7073b275f156b04fd64f7b65",
+    "semantic_hash": "b69bbd4b7073b275f156b04fd64f7b65"
+  },
+  "scripts/azul-search.py": {
+    "mtime": 1789947609.3402038,
+    "seen": 1790170707.646776,
+    "ast_hash": "bdeaf35424ee593ba0ea213c316e36ac",
+    "semantic_hash": "bdeaf35424ee593ba0ea213c316e36ac"
+  },
+  "scripts/hotel-booking-details.mjs": {
+    "mtime": 1789928603.0791695,
+    "seen": 1790170707.6467772,
+    "ast_hash": "b5609e828f4dc22a12709814760cf127",
+    "semantic_hash": "b5609e828f4dc22a12709814760cf127"
+  },
+  "scripts/hotel-ranking.mjs": {
+    "mtime": 1789945248.6790216,
+    "seen": 1790170707.6467772,
+    "ast_hash": "679e5a1a0d4f1f7adf988dd1b807a6bf",
+    "semantic_hash": "679e5a1a0d4f1f7adf988dd1b807a6bf"
+  },
+  "scripts/hotel-search-match.mjs": {
+    "mtime": 1789931480.6045446,
+    "seen": 1790170707.646778,
+    "ast_hash": "a09b3970dc78df941a56ac26a70e14cb",
+    "semantic_hash": "a09b3970dc78df941a56ac26a70e14cb"
+  },
+  "scripts/hotel-search.mjs": {
+    "mtime": 1790141643.7494924,
+    "seen": 1790170707.646778,
+    "ast_hash": "f3caa25befd6615ebc6dd6249502f14a",
+    "semantic_hash": "f3caa25befd6615ebc6dd6249502f14a"
+  },
+  "scripts/vite-hotel-plugin.mjs": {
+    "mtime": 1790141629.0988212,
+    "seen": 1790170707.6467788,
+    "ast_hash": "8f203e268c40e82a72962255e4936482",
+    "semantic_hash": "8f203e268c40e82a72962255e4936482"
+  },
+  "src/app/shell.ts": {
+    "mtime": 1790166704.5762587,
+    "seen": 1790170707.64678,
+    "ast_hash": "06288c62469804193f5303dd2380c32d",
+    "semantic_hash": "06288c62469804193f5303dd2380c32d"
+  },
+  "src/catalog/index.ts": {
+    "mtime": 1790167051.7495203,
+    "seen": 1790170707.64678,
+    "ast_hash": "53e84331d868e87822ebceb379af03b2",
+    "semantic_hash": "53e84331d868e87822ebceb379af03b2"
+  },
+  "src/data/airbnb-search.test.ts": {
+    "mtime": 1789945248.6797922,
+    "seen": 1790170707.646781,
+    "ast_hash": "0aed2c7c36b71d3853948f0c6255b709",
+    "semantic_hash": "0aed2c7c36b71d3853948f0c6255b709"
+  },
+  "src/data/hotel-booking-details.test.ts": {
+    "mtime": 1790141813.2971408,
+    "seen": 1790170707.646781,
+    "ast_hash": "a65196e3e54c3d4619ffbfd13c86a1ab",
+    "semantic_hash": "a65196e3e54c3d4619ffbfd13c86a1ab"
+  },
+  "src/data/hotel-ranking-context.ts": {
+    "mtime": 1789935719.704374,
+    "seen": 1790170707.646782,
+    "ast_hash": "3d338cb2ce16b7941f1e11aa27ad531f",
+    "semantic_hash": "3d338cb2ce16b7941f1e11aa27ad531f"
+  },
+  "src/data/hotel-ranking.test.ts": {
+    "mtime": 1789935118.0868986,
+    "seen": 1790170707.6467829,
+    "ast_hash": "a06127d8b1e7f768b62953e268222a1e",
+    "semantic_hash": "a06127d8b1e7f768b62953e268222a1e"
+  },
+  "src/data/hotel-scripts.d.ts": {
+    "mtime": 1790141770.8637831,
+    "seen": 1790170707.6467829,
+    "ast_hash": "517f1af899fe8e8c4e5e8a79963666e5",
+    "semantic_hash": "517f1af899fe8e8c4e5e8a79963666e5"
+  },
+  "src/data/hotel-search.test.ts": {
+    "mtime": 1789931480.605274,
+    "seen": 1790170707.646784,
+    "ast_hash": "47d25ca335318923df71f80e69563ccf",
+    "semantic_hash": "47d25ca335318923df71f80e69563ccf"
+  },
+  "src/data/rome-hotel-boundaries.json": {
+    "mtime": 1789936002.3239338,
+    "seen": 1790170707.646784,
+    "ast_hash": "74562cdabd5b4744364c1bb14c89ec66",
+    "semantic_hash": "74562cdabd5b4744364c1bb14c89ec66"
+  },
+  "src/data/rome-hotel-neighborhoods.ts": {
+    "mtime": 1789935051.2896357,
+    "seen": 1790170707.646785,
+    "ast_hash": "d58a0a633fbcbd3ff8c394c7a634c26d",
+    "semantic_hash": "d58a0a633fbcbd3ff8c394c7a634c26d"
+  },
+  "src/data/rome-neighborhood-safety.json": {
+    "mtime": 1789935017.0606627,
+    "seen": 1790170707.646786,
+    "ast_hash": "350f6a81d1e99ef8890dbfa16463a037",
+    "semantic_hash": "350f6a81d1e99ef8890dbfa16463a037"
+  },
+  "src/data/rome-neighborhood-safety.test.ts": {
+    "mtime": 1789935105.475735,
+    "seen": 1790170707.646802,
+    "ast_hash": "38367cf4215e55da495e4c8ea1c21d0e",
+    "semantic_hash": "38367cf4215e55da495e4c8ea1c21d0e"
+  },
+  "src/data/travel-area-geometry.ts": {
+    "mtime": 1785708887.1746128,
+    "seen": 1790170707.646806,
+    "ast_hash": "08714f499e6c605a2e78ecd59a38d792",
+    "semantic_hash": "08714f499e6c605a2e78ecd59a38d792"
+  },
+  "src/data/travel-areas-osm.ts": {
+    "mtime": 1787610032.9994657,
+    "seen": 1790170707.646807,
+    "ast_hash": "7630491d2e347015a76feecd9b9d997a",
+    "semantic_hash": "7630491d2e347015a76feecd9b9d997a"
+  },
+  "src/data/travel-areas-policy.ts": {
+    "mtime": 1785709214.8540587,
+    "seen": 1790170707.6468081,
+    "ast_hash": "b4e0b615f4f8139e99f8659cbd2b3abd",
+    "semantic_hash": "b4e0b615f4f8139e99f8659cbd2b3abd"
+  },
+  "src/data/travel-areas.test.ts": {
+    "mtime": 1785708917.2648582,
+    "seen": 1790170707.646809,
+    "ast_hash": "201cb5444f1df1f7fe63851bfbe4f8df",
+    "semantic_hash": "201cb5444f1df1f7fe63851bfbe4f8df"
+  },
+  "src/data/travel-categories.ts": {
+    "mtime": 1785899929.774923,
+    "seen": 1790170707.646809,
+    "ast_hash": "4d9fbf6dbb2dc841d56ec226e70ed181",
+    "semantic_hash": "4d9fbf6dbb2dc841d56ec226e70ed181"
+  },
+  "src/data/travel-itineraries.test.ts": {
+    "mtime": 1785902031.896942,
+    "seen": 1790170707.64681,
+    "ast_hash": "b682f4f7cdc3f46def921954252137e0",
+    "semantic_hash": "b682f4f7cdc3f46def921954252137e0"
+  },
+  "src/data/travel-itineraries.ts": {
+    "mtime": 1789958897.1571283,
+    "seen": 1790170707.6468108,
+    "ast_hash": "72fc83e0e8f59accedf23a2259f22de8",
+    "semantic_hash": "72fc83e0e8f59accedf23a2259f22de8"
+  },
+  "src/data/travel-itinerary-legs.ts": {
+    "mtime": 1789958793.540727,
+    "seen": 1790170707.646812,
+    "ast_hash": "b542a2b7cb5725f4e879b9fe5cfbf732",
+    "semantic_hash": "b542a2b7cb5725f4e879b9fe5cfbf732"
+  },
+  "src/data/travel-milan-itinerary.ts": {
+    "mtime": 1789958897.1574485,
+    "seen": 1790170707.646812,
+    "ast_hash": "4492db91a8471edc5dfd319d90ab0cc1",
+    "semantic_hash": "4492db91a8471edc5dfd319d90ab0cc1"
+  },
+  "src/data/travel-milan.test.ts": {
+    "mtime": 1789958813.075182,
+    "seen": 1790170707.646813,
+    "ast_hash": "562776c3a27c817f5f1ff2dde6a9a564",
+    "semantic_hash": "562776c3a27c817f5f1ff2dde6a9a564"
+  },
+  "src/data/travel-milan.ts": {
+    "mtime": 1789958599.2401087,
+    "seen": 1790170707.6468139,
+    "ast_hash": "9e59e8bf986c6ce806c8b829ec43c4c7",
+    "semantic_hash": "9e59e8bf986c6ce806c8b829ec43c4c7"
+  },
+  "src/data/travel-notion.generated.ts": {
+    "mtime": 1789958618.108657,
+    "seen": 1790170707.6468139,
+    "ast_hash": "b1a9f5e2028fa83e26fd4c46865dd4fb",
+    "semantic_hash": "b1a9f5e2028fa83e26fd4c46865dd4fb"
+  },
+  "src/data/travel-notion.test.ts": {
+    "mtime": 1785937603.6390579,
+    "seen": 1790170707.646815,
+    "ast_hash": "486b8075f365519eaacf96f23872be5a",
+    "semantic_hash": "486b8075f365519eaacf96f23872be5a"
+  },
+  "src/data/travel-notion.ts": {
+    "mtime": 1789958599.241492,
+    "seen": 1790170707.646816,
+    "ast_hash": "b602f38de70fc50f5798d8340c7d6467",
+    "semantic_hash": "b602f38de70fc50f5798d8340c7d6467"
+  },
+  "src/data/travel-photos.test.ts": {
+    "mtime": 1785937363.445249,
+    "seen": 1790170707.646816,
+    "ast_hash": "7dc192b8d03a54cd7afee6c6a75f44fc",
+    "semantic_hash": "7dc192b8d03a54cd7afee6c6a75f44fc"
+  },
+  "src/data/travel-photos.ts": {
+    "mtime": 1787608383.7417622,
+    "seen": 1790170707.646817,
+    "ast_hash": "39380584471dccfb95c51be84f0f3f7c",
+    "semantic_hash": "39380584471dccfb95c51be84f0f3f7c"
+  },
+  "src/data/travel-stay-display.json": {
+    "mtime": 1789936003.3175042,
+    "seen": 1790170707.646817,
+    "ast_hash": "99d68519ce0a120b5ab8b81c715ff5ab",
+    "semantic_hash": "99d68519ce0a120b5ab8b81c715ff5ab"
+  },
+  "src/data/travel-stay-display.test.ts": {
+    "mtime": 1789936050.9263391,
+    "seen": 1790170707.6468182,
+    "ast_hash": "9b87651ca318cc7b28f632a1277ef423",
+    "semantic_hash": "9b87651ca318cc7b28f632a1277ef423"
+  },
+  "src/data/travel-stay-heatmap.test.ts": {
+    "mtime": 1789936000.9034445,
+    "seen": 1790170707.646819,
+    "ast_hash": "acf5d61dc60ff6bc357dfe008896a6d5",
+    "semantic_hash": "acf5d61dc60ff6bc357dfe008896a6d5"
+  },
+  "src/data/travel-stay-heatmap.ts": {
+    "mtime": 1790141770.8637018,
+    "seen": 1790170707.646819,
+    "ast_hash": "6472871165ea9eee92d712be32d45e68",
+    "semantic_hash": "6472871165ea9eee92d712be32d45e68"
+  },
+  "src/data/travel-stay-polygons.json": {
+    "mtime": 1787613014.6517563,
+    "seen": 1790170707.64682,
+    "ast_hash": "77a60bf7e54e39a67f9cdc1d62b7ad7c",
+    "semantic_hash": "77a60bf7e54e39a67f9cdc1d62b7ad7c"
+  },
+  "src/data/travel-subcategories.test.ts": {
+    "mtime": 1785898403.959548,
+    "seen": 1790170707.646822,
+    "ast_hash": "dc425b03b58e179f4404c6dd65db8acf",
+    "semantic_hash": "dc425b03b58e179f4404c6dd65db8acf"
+  },
+  "src/data/travel-subcategories.ts": {
+    "mtime": 1785936501.874566,
+    "seen": 1790170707.646822,
+    "ast_hash": "cd20541436054f6c24a36bfbea3bee6b",
+    "semantic_hash": "cd20541436054f6c24a36bfbea3bee6b"
+  },
+  "src/data/travel-transit-lines.ts": {
+    "mtime": 1785717954.027962,
+    "seen": 1790170707.646823,
+    "ast_hash": "326b1d45056acd69e31ae78ea340410c",
+    "semantic_hash": "326b1d45056acd69e31ae78ea340410c"
+  },
+  "src/data/travel-visit.ts": {
+    "mtime": 1790141770.8636994,
+    "seen": 1790170707.646823,
+    "ast_hash": "c1fcd8c3ea4333342b6d77ef51d4c7e0",
+    "semantic_hash": "c1fcd8c3ea4333342b6d77ef51d4c7e0"
+  },
+  "src/data/travel.ts": {
+    "mtime": 1789958599.240777,
+    "seen": 1790170707.646824,
+    "ast_hash": "55e1b6ad229144d16f8db4ecd4d73300",
+    "semantic_hash": "55e1b6ad229144d16f8db4ecd4d73300"
+  },
+  "src/main.ts": {
+    "mtime": 1790167096.707755,
+    "seen": 1790170707.646825,
+    "ast_hash": "7919935f56ce65296cebafc76493da37",
+    "semantic_hash": "7919935f56ce65296cebafc76493da37"
+  },
+  "src/map/basemap-style.test.ts": {
+    "mtime": 1790167153.240149,
+    "seen": 1790170707.646825,
+    "ast_hash": "74f98ff1a3cc80a07d4d91d22e730d05",
+    "semantic_hash": "74f98ff1a3cc80a07d4d91d22e730d05"
+  },
+  "src/map/basemap-style.ts": {
+    "mtime": 1790167168.48713,
+    "seen": 1790170707.646826,
+    "ast_hash": "c0c0697ab5b76bba0d858b51c106c713",
+    "semantic_hash": "c0c0697ab5b76bba0d858b51c106c713"
+  },
+  "src/map/itinerary-route.ts": {
+    "mtime": 1790167044.294751,
+    "seen": 1790170707.646826,
+    "ast_hash": "2cbb1d9f8cf8c5ca91a501b570c902b6",
+    "semantic_hash": "2cbb1d9f8cf8c5ca91a501b570c902b6"
+  },
+  "src/map/map.ts": {
+    "mtime": 1790167413.3621514,
+    "seen": 1790170707.646827,
+    "ast_hash": "8c8ac759a992258ef3ccdf5e19c17b9b",
+    "semantic_hash": "8c8ac759a992258ef3ccdf5e19c17b9b"
+  },
+  "src/map/types.ts": {
+    "mtime": 1790167044.294751,
+    "seen": 1790170707.646828,
+    "ast_hash": "325bf66435ecefd0677518a03f01cc7a",
+    "semantic_hash": "325bf66435ecefd0677518a03f01cc7a"
+  },
+  "src/map/walk-route.ts": {
+    "mtime": 1790167274.3349414,
+    "seen": 1790170707.646828,
+    "ast_hash": "c50df51f4a759f8b46668964d5ef9d97",
+    "semantic_hash": "c50df51f4a759f8b46668964d5ef9d97"
+  },
+  "src/trip/export.test.ts": {
+    "mtime": 1790142663.127448,
+    "seen": 1790170707.6468291,
+    "ast_hash": "25ad7e3b8bdf110c7cef41e0056ac2da",
+    "semantic_hash": "25ad7e3b8bdf110c7cef41e0056ac2da"
+  },
+  "src/trip/export.ts": {
+    "mtime": 1790142663.1268444,
+    "seen": 1790170707.6468291,
+    "ast_hash": "1f0ca7ee4b0e53b2c4440b5807fbd1a3",
+    "semantic_hash": "1f0ca7ee4b0e53b2c4440b5807fbd1a3"
+  },
+  "src/trip/mount.ts": {
+    "mtime": 1790167278.7071683,
+    "seen": 1790170707.64683,
+    "ast_hash": "8d268b39c7c066c9b2e6c91515f30495",
+    "semantic_hash": "8d268b39c7c066c9b2e6c91515f30495"
+  },
+  "src/trip/parse.test.ts": {
+    "mtime": 1790142663.126723,
+    "seen": 1790170707.646831,
+    "ast_hash": "843ca35845562650cf33ab979c2213c1",
+    "semantic_hash": "843ca35845562650cf33ab979c2213c1"
+  },
+  "src/trip/parse.ts": {
+    "mtime": 1790142663.1268635,
+    "seen": 1790170707.646831,
+    "ast_hash": "3e86915781cc48ac4b068ceb5ca18abb",
+    "semantic_hash": "3e86915781cc48ac4b068ceb5ca18abb"
+  },
+  "src/views/hotels.ts": {
+    "mtime": 1790166374.9870303,
+    "seen": 1790170707.6468322,
+    "ast_hash": "3ba95e71cf2c61dbca38f1e6ac0e6ced",
+    "semantic_hash": "3ba95e71cf2c61dbca38f1e6ac0e6ced"
+  },
+  "src/views/place-panel.ts": {
+    "mtime": 1790167096.6987665,
+    "seen": 1790170707.6468322,
+    "ast_hash": "f7b69140f4716d2de8006724c3c35c7d",
+    "semantic_hash": "f7b69140f4716d2de8006724c3c35c7d"
+  },
+  "src/views/places.ts": {
+    "mtime": 1790167278.7072291,
+    "seen": 1790170707.646833,
+    "ast_hash": "291c33302f80b9c2ab754ea7be472344",
+    "semantic_hash": "291c33302f80b9c2ab754ea7be472344"
+  },
+  "tsconfig.json": {
+    "mtime": 1790141154.7349086,
+    "seen": 1790170707.646834,
+    "ast_hash": "92315deed664c512744c6db8fdf6c6f1",
+    "semantic_hash": "92315deed664c512744c6db8fdf6c6f1"
+  },
+  "vite.config.ts": {
+    "mtime": 1790143430.9131534,
+    "seen": 1790170707.646834,
+    "ast_hash": "de53c4255cfc2d01a1238d611812b656",
+    "semantic_hash": "de53c4255cfc2d01a1238d611812b656"
+  },
+  "vitest.config.ts": {
+    "mtime": 1790141154.7309659,
+    "seen": 1790170707.6468349,
+    "ast_hash": "993d0686793d619efae245bcfa20faea",
+    "semantic_hash": "993d0686793d619efae245bcfa20faea"
+  },
+  "README.md": {
+    "mtime": 1790141154.7441697,
+    "seen": 1790170707.646836,
+    "ast_hash": "e1f85b6f14878685182dae24788dbb64",
+    "semantic_hash": "e1f85b6f14878685182dae24788dbb64"
+  },
+  "content/SCHEMA.md": {
+    "mtime": 1790141154.7360742,
+    "seen": 1790170707.646836,
+    "ast_hash": "49f9b503390db6b816008a00143c9370",
+    "semantic_hash": "49f9b503390db6b816008a00143c9370"
+  },
+  "content/trips/europa.md": {
+    "mtime": 1790143484.5601587,
+    "seen": 1790170707.646837,
+    "ast_hash": "3bda9e8061d995084f284929e2296612",
+    "semantic_hash": "3bda9e8061d995084f284929e2296612"
+  },
+  "docs/plano-paridade.md": {
+    "mtime": 1790169293.7577286,
+    "seen": 1790170707.646838,
+    "ast_hash": "115e9b1b7598869d93fea36bbe2ee604",
+    "semantic_hash": "115e9b1b7598869d93fea36bbe2ee604"
+  },
+  "index.html": {
+    "mtime": 1790141154.7348926,
+    "seen": 1790170707.6468391,
+    "ast_hash": "590e1239397d96fe71ecb09b7420c23d",
+    "semantic_hash": "590e1239397d96fe71ecb09b7420c23d"
+  },
+  "scripts/airbnb-requirements.txt": {
+    "mtime": 1789944674.8747265,
+    "seen": 1790170707.6468391,
+    "ast_hash": "b17faf6b5581f9d2334cab57fa3affb2",
+    "semantic_hash": "b17faf6b5581f9d2334cab57fa3affb2"
+  }
+}

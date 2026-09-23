@@ -33,7 +33,7 @@ portfólio ficam fora).
 
 ---
 
-## Contrato para quem executa (Sonnet)
+## Contrato para quem executa (Sonnet, Grok ou outro agente)
 
 Caminhos: **B** = `/Users/viniciusramos/Documents/Apps/side-projects/web/travel-boss` · **P** = `/Users/viniciusramos/Documents/Apps/side-projects/web/vinicius-ramos-portfolio`.
 
@@ -74,6 +74,8 @@ Regras de arquitetura:
 
 ## Fase 0 — Preparação (bloqueante)
 
+> **Status (2026-09-23):** 0.1 e 0.2 **feitas** (commit `abdf175` = baseline; commit seguinte = `graphify-out/`). Comece pela **0.3**.
+
 **0.1 Git.** Em B: `git init`. Confira o `.gitignore`, que já cobre `node_modules`, `dist`, `.env*` e `graphify-out/cache`. Copie este plano para `B/docs/plano-paridade.md`, depois `git add -A` e commit `chore: baseline da migração`.
 
 **0.2 graphify.** Rode `/graphify .` em B e commite `graphify-out/` (sem `cache/`).
@@ -90,6 +92,7 @@ Cada primitivo criado depois acrescenta a regra dele aqui.
 1. Rode `npm run travel:airbnb:setup`. Ele cria `node_modules/.cache/airbnb-venv`, usado pela Azul e pelo Airbnb.
 2. Opcional: copie para `B/node_modules/.cache/` o cache aquecido `hotel-search-booking.json` (4,2 MB) e `airbnb-snapshots.json`, ambos em `P/node_modules/.cache/`.
 3. Documente no README que `rm -rf node_modules` apaga o venv.
+4. `scripts/azul-search.py:6` importa `curl_cffi`, que não está em `scripts/airbnb-requirements.txt`: só chega como dependência do `pyairbnb`. Declare `curl_cffi` explicitamente nesse arquivo.
 
 A chave `TYPESAFE_API_KEY` hoje vem do `.env` do portfólio (`hotel-search.mjs:621-627`). Se o usuário quiser um `B/.env`, ele mesmo copia o valor; quem executa não mexe em segredo.
 Pronto quando: `GET /api/hotel-search/status` responde `airbnb: true` e uma busca em Paris traz Azul/Booking + Airbnb (com o PinchTab rodando).
@@ -561,7 +564,7 @@ Semântica e comportamento:
 
 **9.4 Distâncias.**
 - Porte `P src/components/travel/travel-distance-list.ts`: minutos e metros até cada lugar salvo, e links a pé/transporte do Google Maps.
-- 🤔 Confira se `scripts/hotel-ranking.mjs` devolve `walks`; o tipo em `hotels.ts:28-53` não tem esse campo.
+- Verificado: `hotelEvidence()` em `scripts/hotel-ranking.mjs:177` já devolve `walks`. Falta só o campo no tipo `hotels.ts:28-53` e a UI.
 
 **9.5 Hotel no painel.** Clique no card ou no pino abre o hotel no mesmo painel dos lugares; hover no card destaca o pino (`P ohotels:665-684`).
 
