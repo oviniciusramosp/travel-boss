@@ -8,6 +8,17 @@ export type MapPin = {
   /** Dot color. Chrome stays achromatic; only map dots may use category color. */
   color?: string;
   kind?: MapPinKind;
+  /** Material ligature or pin markup. Drawn in a later phase. */
+  icon?: string;
+  featured?: boolean;
+  number?: number;
+};
+
+export type MapPadding = {
+  top?: number;
+  right?: number;
+  bottom?: number;
+  left?: number;
 };
 
 export type MapRadius = { lat: number; lng: number; km: number } | null;
@@ -27,7 +38,19 @@ export type MapHandle = {
   fit(): void;
   /** Center a coordinate. Zoom defaults to a block-level view. */
   flyTo(lat: number, lng: number, zoom?: number): void;
+  /** Highlight a pin without moving the camera. `null` clears the hover. */
+  hover(id: string | null): void;
+  /** Highlight and frame the pin in the padded view. */
+  select(id: string): void;
+  /**
+   * Visual selection. `null` clears it without moving the camera.
+   * An id selects, same as `select`.
+   */
   highlight(id: string | null): void;
+  /** Returns an unsubscribe. Pin hover, not list hover. */
+  onHover(fn: (id: string | null) => void): () => void;
   /** Returns an unsubscribe. */
   onSelect(fn: (id: string) => void): () => void;
+  /** Panel and other chrome. `fit` and `select` center in the free area. */
+  setPadding(padding: MapPadding): void;
 };

@@ -151,20 +151,32 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     maps.textContent = 'Google Maps';
     body.append(maps);
     root.append(body);
-
-    map.highlight(place.id);
-    map.flyTo(place.lat, place.lng, 16);
   };
+
+  const syncPad = () => {
+    if (root.hidden) {
+      map.setPadding({ right: 0 });
+      return;
+    }
+    const host = column.getBoundingClientRect();
+    const box = root.getBoundingClientRect();
+    map.setPadding({ right: Math.max(0, host.right - box.left) });
+  };
+  const padObserver = new ResizeObserver(() => syncPad());
+  padObserver.observe(column);
 
   panel = {
     open(place, city, locale) {
       photoIndex = 0;
       current = { place, city, locale };
       paint();
+      syncPad();
+      map.select(place.id);
     },
     close() {
       current = null;
       paint();
+      syncPad();
     },
   };
 }

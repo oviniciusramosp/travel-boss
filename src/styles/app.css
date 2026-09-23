@@ -425,6 +425,7 @@ button {
 }
 
 .leaflet-container .tb-pin:hover .tb-pin__core,
+.leaflet-container .tb-pin.is-hover .tb-pin__core,
 .leaflet-container .tb-pin.is-active .tb-pin__core {
   width: 28px;
   height: 28px;

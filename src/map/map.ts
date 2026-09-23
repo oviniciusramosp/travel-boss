@@ -15,7 +15,8 @@ import {
 } from 'leaflet';
 import { cameraMotion, labelFadeDuration, prefersReducedMotion } from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
-import type { MapHandle, MapPinKind, MapRadius, MapRouteSegment } from './types';
+import { diffPinIds, paddedCenterOffset, selectionEases, selectionZoom } from './camera';
+import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
 
 const KINDS: readonly MapPinKind[] = ['place', 'hotel', 'stop'];
 
@@ -98,9 +99,46 @@ export function mountMap(host: HTMLElement): MapHandle {
     stop: new Map(),
   };
   const selectFns = new Set<(id: string) => void>();
-  let highlightedId: string | null = null;
+  const hoverFns = new Set<(id: string | null) => void>();
+  let selectedId: string | null = null;
+  let hoveredId: string | null = null;
+  const padding = { top: 0, right: 0, bottom: 0, left: 0 };
   let radiusLayer: Circle | null = null;
   let routeLayer: LayerGroup | null = null;
+
+  type PinMeta = { color: string; label: string; icon: string; featured: boolean; number: string };
+  const pinMeta: Record<MapPinKind, Map<string, PinMeta>> = {
+    place: new Map(),
+    hotel: new Map(),
+    stop: new Map(),
+  };
+
+  const metaOf = (pin: MapPin): PinMeta => ({
+    color: pin.color || PIN_FALLBACK,
+    label: pin.label,
+    icon: pin.icon ?? '',
+    featured: Boolean(pin.featured),
+    number: pin.number == null ? '' : String(pin.number),
+  });
+
+  const sameMeta = (a: PinMeta | undefined, b: PinMeta) =>
+    a != null &&
+    a.color === b.color &&
+    a.label === b.label &&
+    a.icon === b.icon &&
+    a.featured === b.featured &&
+    a.number === b.number;
+
+  const rememberPin = (dot: Marker, meta: PinMeta) => {
+    const node = dot.getElement();
+    if (!node) return;
+    if (meta.icon) node.dataset.pinIcon = meta.icon;
+    else delete node.dataset.pinIcon;
+    if (meta.featured) node.dataset.featured = 'true';
+    else delete node.dataset.featured;
+    if (meta.number) node.dataset.pinNumber = meta.number;
+    else delete node.dataset.pinNumber;
+  };
 
   const applyZoom = () => {
     const bucket = zoomBucket(leafletMap.getZoom());
@@ -112,38 +150,115 @@ export function mountMap(host: HTMLElement): MapHandle {
   leafletMap.on('zoom zoomend', applyZoom);
   applyZoom();
 
-  const paintMarker = (pin: Marker, on: boolean) => {
-    pin.getElement()?.querySelector('.tb-pin')?.classList.toggle('is-active', on);
-    if (on) pin.setZIndexOffset(1000);
-    else pin.setZIndexOffset(0);
+  const paintMarker = (pin: Marker, selected: boolean, hovered: boolean) => {
+    const node = pin.getElement()?.querySelector('.tb-pin');
+    node?.classList.toggle('is-active', selected);
+    node?.classList.toggle('is-hover', hovered);
+    pin.setZIndexOffset(selected || hovered ? 1000 : 0);
+  };
+
+  const paintAll = () => {
+    for (const kind of KINDS) {
+      for (const [id, marker] of markers[kind]) {
+        paintMarker(marker, id === selectedId, id === hoveredId);
+      }
+    }
+  };
+
+  const findMarker = (id: string): Marker | null => {
+    for (const kind of KINDS) {
+      const found = markers[kind].get(id);
+      if (found) return found;
+    }
+    return null;
+  };
+
+  const fitPad = (gutter: number) => ({
+    paddingTopLeft: [gutter + padding.left, gutter + padding.top] as [number, number],
+    paddingBottomRight: [gutter + padding.right, gutter + padding.bottom] as [number, number],
+  });
+
+  const moveCamera = (lat: number, lng: number, zoom: number) => {
+    const offset = paddedCenterOffset(padding);
+    const projected = leafletMap.project([lat, lng], zoom);
+    const center = leafletMap.unproject(projected.add([offset.x, offset.y]), zoom);
+    const motion = cameraMotion();
+    leafletMap.stop();
+    if (!motion.animate) {
+      leafletMap.setView(center, zoom, { animate: false });
+    } else if (selectionEases(zoom - leafletMap.getZoom()) === 'pan') {
+      leafletMap.panTo(center, motion);
+    } else {
+      leafletMap.flyTo(center, zoom, { duration: motion.duration, easeLinearity: 0.25 });
+    }
+    applyZoom();
+  };
+
+  const bindMarker = (dot: Marker, id: string) => {
+    dot.on('click', () => {
+      for (const fn of selectFns) fn(id);
+    });
+    dot.on('mouseover', () => {
+      for (const fn of hoverFns) fn(id);
+    });
+    dot.on('mouseout', () => {
+      for (const fn of hoverFns) fn(null);
+    });
   };
 
   return {
     setPins(kind, pins) {
-      groups[kind].clearLayers();
-      const index = new Map<string, Marker>();
-      markers[kind] = index;
+      const index = markers[kind];
+      const metas = pinMeta[kind];
+      const incoming = new Map<string, MapPin>();
       for (const pin of pins) {
-        if (index.has(pin.id)) continue;
+        if (incoming.has(pin.id)) continue;
         if (!Number.isFinite(pin.lat) || !Number.isFinite(pin.lng)) continue;
-        const color = pin.color || PIN_FALLBACK;
-        const on = pin.id === highlightedId;
+        incoming.set(pin.id, pin);
+      }
+      const diff = diffPinIds([...index.keys()], [...incoming.keys()]);
+      for (const id of diff.remove) {
+        index.get(id)?.remove();
+        index.delete(id);
+        metas.delete(id);
+      }
+      for (const id of diff.keep) {
+        const pin = incoming.get(id);
+        const dot = index.get(id);
+        if (!pin || !dot) continue;
+        const next = metaOf(pin);
+        const ll = dot.getLatLng();
+        if (ll.lat !== pin.lat || ll.lng !== pin.lng) dot.setLatLng([pin.lat, pin.lng]);
+        if (!sameMeta(metas.get(id), next)) {
+          dot.setIcon(pinIcon(next.color, id === selectedId));
+          dot.setTooltipContent(pin.label);
+          metas.set(id, next);
+          rememberPin(dot, next);
+        }
+        paintMarker(dot, id === selectedId, id === hoveredId);
+      }
+      for (const id of diff.create) {
+        const pin = incoming.get(id);
+        if (!pin) continue;
+        const next = metaOf(pin);
+        const selected = id === selectedId;
         const dot = marker([pin.lat, pin.lng], {
-          icon: pinIcon(color, on),
+          icon: pinIcon(next.color, selected),
           keyboard: true,
           riseOnHover: true,
-          zIndexOffset: on ? 1000 : 0,
+          zIndexOffset: selected ? 1000 : 0,
         });
         dot.bindTooltip(pin.label, {
           direction: 'top',
           opacity: 1,
           className: 'tb-pin-tip',
         });
-        dot.on('click', () => {
-          for (const fn of selectFns) fn(pin.id);
-        });
+        bindMarker(dot, id);
         dot.addTo(groups[kind]);
-        index.set(pin.id, dot);
+        rememberPin(dot, next);
+        paintMarker(dot, selected, id === hoveredId);
+        index.set(id, dot);
+        metas.set(id, next);
       }
     },
 
@@ -175,7 +290,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       routeLayer = group;
       if (opts?.fit && points.length > 1) {
         leafletMap.fitBounds(latLngBounds(points), {
-          padding: [40, 40],
+          ...fitPad(40),
           maxZoom: 16,
           ...cameraMotion(),
         });
@@ -183,9 +298,7 @@ export function mountMap(host: HTMLElement): MapHandle {
     },
 
     flyTo(lat, lng, zoom = 16) {
-      const target = Math.max(leafletMap.getZoom(), zoom);
-      leafletMap.setView([lat, lng], target, cameraMotion());
-      applyZoom();
+      moveCamera(lat, lng, Math.max(leafletMap.getZoom(), zoom));
     },
 
     setRadius(ring: MapRadius) {
@@ -211,25 +324,48 @@ export function mountMap(host: HTMLElement): MapHandle {
       }
       if (points.length === 0) return;
       leafletMap.fitBounds(latLngBounds(points), {
-        padding: [32, 32],
+        ...fitPad(32),
         maxZoom: 16,
         ...cameraMotion(),
       });
     },
 
+    hover(id) {
+      hoveredId = id;
+      paintAll();
+    },
+
+    select(id) {
+      selectedId = id;
+      paintAll();
+      const target = findMarker(id);
+      if (!target) return;
+      const ll = target.getLatLng();
+      moveCamera(ll.lat, ll.lng, selectionZoom(leafletMap.getZoom()));
+    },
+
     highlight(id) {
-      highlightedId = id;
-      let target: Marker | null = null;
-      for (const kind of KINDS) {
-        for (const [pinId, marker] of markers[kind]) {
-          const on = id != null && pinId === id;
-          paintMarker(marker, on);
-          if (on && !target) target = marker;
-        }
+      if (id == null) {
+        selectedId = null;
+        hoveredId = null;
+        paintAll();
+        return;
       }
-      if (target) {
-        leafletMap.panTo(target.getLatLng(), cameraMotion());
-      }
+      this.select(id);
+    },
+
+    onHover(fn) {
+      hoverFns.add(fn);
+      return () => {
+        hoverFns.delete(fn);
+      };
+    },
+
+    setPadding(next: MapPadding) {
+      if (next.top != null) padding.top = next.top;
+      if (next.right != null) padding.right = next.right;
+      if (next.bottom != null) padding.bottom = next.bottom;
+      if (next.left != null) padding.left = next.left;
     },
 
     onSelect(fn) {

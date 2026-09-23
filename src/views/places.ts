@@ -354,7 +354,6 @@ export function mountCity(
     if (!place) return;
     currentPlaceId = id;
     if (tab === 'itinerary') currentStopId = id;
-    map.highlight(id);
     openPlace(place, city, shell.locale());
   };
 

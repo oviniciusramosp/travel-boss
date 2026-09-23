@@ -1343,7 +1343,7 @@ export function mountHotels(
     if (!card) return;
     const id = card.dataset.placeId;
     if (!id) return;
-    map.highlight(id);
+    map.select(id);
     markCurrent(id, false);
   });
   listen(rerankBtn, 'click', () => {
