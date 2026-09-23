@@ -6,7 +6,10 @@ export type TripLeg = {
   /** Author text after `via:`. Export writes it back unchanged. */
   detail: string;
   mode?: TripLegMode;
-  /** Minutes. `N h` is N×60. Absent unless the line has exactly one duration token. */
+  /**
+   * Minutes. `N h` is N×60. `3h10` and `1 h 30 min` are one span (190 and 90).
+   * Absent unless the line has exactly one duration.
+   */
   durationMin?: number;
 };
 
@@ -32,6 +35,8 @@ export type TripCity = {
   slug: string;
   name: string;
   dates?: { start: string; end: string };
+  /** Departure to the next city. The header line `via:`, not a stop leg. */
+  leg?: TripLeg;
   days: TripDay[];
 };
 
@@ -72,8 +77,10 @@ const CITY_LINE = /^city:\s*(\S+)\s*$/;
 const DATES_LINE = /^dates:\s*(\d{4}-\d{2}-\d{2})\s*→\s*(\d{4}-\d{2}-\d{2})\s*$/;
 const TIME_PREFIX = /^(\d{2}:\d{2})\s+/;
 const VIA_BULLET = /^[ \t]+-[ \t]+via:[ \t]*(.*)$/i;
-// `N h` → N×60 min. `3h10` does not match: `h` must not be followed by a letter or digit.
-const DURATION_TOKEN = /(?<![a-z0-9])(\d+)\s?(min|h)(?![a-z0-9])/gi;
+const CITY_VIA = /^via:[ \t]*(.*)$/i;
+// `3h10` is glued. `1 h 30 min` needs the `min`. `1 h 2 h` stays two spans.
+const DURATION_TOKEN =
+  /(?<![a-z0-9])(?:(\d+)\s*h\s*(\d{1,2})\s*min|(\d+)h(\d{1,2})|(\d+)\s?(min|h))(?![a-z0-9])/gi;
 
 const MODE_WORDS: { mode: TripLegMode; words: string[] }[] = [
   { mode: 'walk', words: ['a pe', 'walk'] },
@@ -108,17 +115,28 @@ function legMode(detail: string): TripLegMode | undefined {
   return best;
 }
 
+function durationList(detail: string): number[] {
+  const found: number[] = [];
+  for (const match of detail.matchAll(new RegExp(DURATION_TOKEN.source, 'gi'))) {
+    if (match[1] != null && match[2] != null) {
+      found.push(Number(match[1]) * 60 + Number(match[2]));
+    } else if (match[3] != null && match[4] != null) {
+      found.push(Number(match[3]) * 60 + Number(match[4]));
+    } else {
+      const amount = Number(match[5]);
+      found.push((match[6] ?? '').toLowerCase() === 'h' ? amount * 60 : amount);
+    }
+  }
+  return found;
+}
+
 function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   const mode = legMode(detail);
   if (!mode) reject(errors, line, 'via-no-mode');
-  const matches = [...detail.matchAll(new RegExp(DURATION_TOKEN.source, 'gi'))];
+  const matches = durationList(detail);
   let durationMin: number | undefined;
-  if (matches.length === 1) {
-    const amount = Number(matches[0]?.[1]);
-    durationMin = (matches[0]?.[2] ?? '').toLowerCase() === 'h' ? amount * 60 : amount;
-  } else {
-    reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
-  }
+  if (matches.length === 1) durationMin = matches[0];
+  else reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
   return {
     detail,
     ...(mode ? { mode } : {}),
@@ -228,6 +246,21 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     const datesMatch = trimmed.match(DATES_LINE);
     if (datesMatch && city && !day) {
       city.dates = { start: datesMatch[1] ?? '', end: datesMatch[2] ?? '' };
+      continue;
+    }
+
+    const headerVia = trimmed.match(CITY_VIA);
+    if (headerVia && city && !day) {
+      const detail = (headerVia[1] ?? '').trim();
+      if (!detail) {
+        reject(errors, lineNo, 'via-empty');
+        continue;
+      }
+      if (city.leg) {
+        reject(errors, lineNo, 'via-duplicate');
+        continue;
+      }
+      city.leg = readLeg(detail, lineNo, errors);
       continue;
     }
 

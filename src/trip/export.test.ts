@@ -97,6 +97,27 @@ city: paris
     expect(html).toContain('<a href="https://maps.example/par-orsay">ingresso</a>');
   });
 
+  it('keeps the city header via as written, including 3h10', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+dates: 2026-04-02 → 2026-04-06
+via: trem Frecciarossa · 3h10
+
+### Dia 1 — Saída
+
+- 09:00 [Louvre](place:par-louvre)
+`;
+    const parsed = parseTrip('europa', 'content/trips/europa.md', source);
+    const exported = tripToMarkdown(parsed, () => 'https://maps.example/par-louvre');
+    expect(exported).toContain('2026-04-02 → 2026-04-06\nvia: trem Frecciarossa · 3h10');
+    expect(exported).not.toContain('city:');
+    const again = parseTrip('europa', 'content/trips/europa.md', exported);
+    expect(again.cities[0]?.leg).toEqual(parsed.cities[0]?.leg);
+    expect(tripToHtml(exported)).toContain('<p>via: trem Frecciarossa · 3h10</p>');
+  });
+
   it('copies one day as markdown, with the via nested under its stop', () => {
     const source = `# Europa
 

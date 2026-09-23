@@ -146,7 +146,7 @@ describe('via legs', () => {
     expect(errors).toEqual([]);
   });
 
-  it('parses 1 h as 60 minutes and does not invent 3h10', () => {
+  it('reads NhMM and N h M min as one duration', () => {
     const hour = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1 h');
     expect(hour.stops[0]?.leg).toMatchObject({ mode: 'transit', durationMin: 60 });
     expect(hour.errors).toEqual([]);
@@ -157,17 +157,32 @@ describe('via legs', () => {
     expect(gluedHours.stops[0]?.leg?.durationMin).toBe(180);
 
     const compound = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 3h10');
-    expect(compound.stops[0]?.leg).toEqual({ detail: 'trem · 3h10', mode: 'transit' });
-    expect(compound.stops[0]?.leg?.durationMin).toBeUndefined();
-    expect(compound.errors).toEqual(['via-no-duration']);
+    expect(compound.stops[0]?.leg).toMatchObject({
+      detail: 'trem · 3h10',
+      mode: 'transit',
+      durationMin: 190,
+    });
+    expect(compound.errors).toEqual([]);
 
-    const words = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: walk · 35 minutos');
-    expect(words.stops[0]?.leg?.durationMin).toBeUndefined();
-    expect(words.errors).toContain('via-no-duration');
+    const clock = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1h30');
+    expect(clock.stops[0]?.leg?.durationMin).toBe(90);
+    const words = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1 h 30 min');
+    expect(words.stops[0]?.leg?.durationMin).toBe(90);
+    expect(words.errors).toEqual([]);
+    const spaced = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 3 h 10 min');
+    expect(spaced.stops[0]?.leg?.durationMin).toBe(190);
+    const gluedMin = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1h30min');
+    expect(gluedMin.stops[0]?.leg?.durationMin).toBe(90);
 
-    const both = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1 h 30 min');
+    const notAUnit = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: walk · 35 minutos');
+    expect(notAUnit.stops[0]?.leg?.durationMin).toBeUndefined();
+    expect(notAUnit.errors).toContain('via-no-duration');
+
+    const both = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 20 min e 40 min');
     expect(both.stops[0]?.leg?.durationMin).toBeUndefined();
     expect(both.errors).toEqual(['via-many-durations']);
+    const twoHours = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1 h 2 h');
+    expect(twoHours.errors).toEqual(['via-many-durations']);
   });
 
   it('uses the earliest mode keyword', () => {
@@ -229,6 +244,76 @@ describe('via legs', () => {
     const empty = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via:   ');
     expect(empty.stops[0]?.leg).toBeUndefined();
     expect(empty.errors).toEqual(['via-empty']);
+  });
+});
+
+describe('city via', () => {
+  const between = `# Europa
+
+## Paris
+city: paris
+dates: 2026-04-02 → 2026-04-06
+via: trem Frecciarossa · 3h10
+
+### Dia 1 — Saída
+
+- 09:00 [Louvre](place:par-louvre)
+
+## Milão
+city: milao
+dates: 2026-04-06 → 2026-04-09
+
+### Dia 1 — Centro
+
+- 17:00 [Duomo](place:mil-duomo)
+`;
+
+  it('keeps the departure via on the city you leave', () => {
+    const trip = parseTrip('europa', 'content/trips/europa.md', between);
+    expect(trip.errors).toEqual([]);
+    expect(trip.cities[0]?.leg).toEqual({
+      detail: 'trem Frecciarossa · 3h10',
+      mode: 'transit',
+      durationMin: 190,
+    });
+    expect(trip.cities[1]?.leg).toBeUndefined();
+    expect(trip.cities[0]?.days[0]?.stops[0]?.leg).toBeUndefined();
+  });
+
+  it('reports an empty or second header via and keeps the first', () => {
+    const trip = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      `# Europa
+
+## Paris
+city: paris
+via:
+via: trem · 3 h 10 min
+via: voo · 1 h
+`,
+    );
+    expect(trip.cities[0]?.leg).toMatchObject({ mode: 'transit', durationMin: 190 });
+    expect(trip.errors.map((error) => error.code)).toEqual(['via-empty', 'via-duplicate']);
+  });
+
+  it('does not treat a paragraph via inside a day as the city leg', () => {
+    const trip = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      `# Europa
+
+## Paris
+city: paris
+
+### Dia 1 — Notas
+
+via: trem · 3h10
+`,
+    );
+    expect(trip.cities[0]?.leg).toBeUndefined();
+    expect(trip.cities[0]?.days[0]?.notes).toEqual(['via: trem · 3h10']);
+    expect(trip.errors).toEqual([]);
   });
 });
 

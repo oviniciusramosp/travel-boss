@@ -35,6 +35,16 @@ dates: 2026-04-06 → 2026-04-09
 - One H1. It is the trip title.
 - One H2 per city, in travel order. The next non-empty line is `city: <slug>` using a slug from the catalog (`paris`, `milao`, `roma`, `lisboa`, `porto`, `sao-paulo`, `florianopolis`, `new-york`, `miami`).
 - Optional `dates: YYYY-MM-DD → YYYY-MM-DD` on the following line.
+- Optional `via:` in that same city header, before the first day. It says how you leave this city for the next one. It is not a stop and it does not become a pin.
+
+  ```markdown
+  via: trem Frecciarossa · 3h10
+  ```
+
+  - Same mode keywords and the same duration rules as a stop `via:`.
+  - One line per city. A second `via:` is an error; the first leg is kept. An empty `via:` is an error.
+  - The line is not a bullet. An indented `- via:` before any day is still outside a day.
+  - A paragraph that starts with `via:` under a day stays narrative. It is not this leg.
 - One H3 per day, in order, inside that city: `### Dia N — Title`.
 - A stop is a bullet that starts with optional `HH:mm`, then a link.
   - Catalog stop: `[Label](place:<placeId>)`. The id must already exist on that city.
@@ -54,7 +64,12 @@ dates: 2026-04-06 → 2026-04-09
     - transit: `metrô` / `metro`, `rer`, `trem` / `train`, `ônibus` / `onibus`, `bus`, `tram`, `ferry`
     - taxi: `táxi` / `taxi`, `uber`, `carro`, `car`
     - flight: `voo`, `flight`
-  - Duration is exactly one token `(\d+)\s?(min|h)`: `35 min`, `35min`, `1 h`, `1h`. The unit is only `min` or `h` (`35 minutos` does not count). `N h` is N hours, stored as 60N minutes (`1 h` = 60, `3 h` = 180). `3h10` is not a token — `h` must not be followed by a letter or digit — so it is not 3 hours and not 3 hours 10 minutes; write `3 h` or `190 min`. Two tokens (`1 h 30 min`) are not added together.
+  - Duration is exactly one span. The unit is only `min` or `h` (`35 minutos` does not count):
+    - `N min` or `Nmin`: `35 min`, `35min`.
+    - `N h` or `Nh`: `1 h` = 60, `3 h` = 180, `3h` = 180.
+    - `NhMM`: `3h10` = 190, `1h30` = 90. The minutes are one or two digits glued to `h`, not a second token.
+    - `N h M min`: `1 h 30 min` = 90, `3 h 10 min` = 190. `1h30min` is the same span.
+    - Two spans are an error (`20 min` and `40 min`, or `1 h` and `2 h`). `1 h 30 min` is one span, not two.
 - Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 
@@ -68,12 +83,13 @@ Export rewrites the same document for Apple Notes and Notion:
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.
 - `dates:` becomes a single line under the city heading.
+- A city-header `via:` stays on the next line, copied as written. `3h10` is not rewritten as minutes.
 - Clipboard writes `text/html` (Apple Notes uses this and keeps headings, lists and links) and `text/plain` Markdown (Notion pastes this).
 - A `.md` download uses the same Markdown.
 
 ## Multi-city
 
-Several H2 sections in one file are one trip. The UI shows a city rail and one scrolling document. The map fits every resolved stop.
+Several H2 sections in one file are one trip. The UI shows one scrolling document, a city rail, and the header `via:` on the city you leave. The map fits every resolved stop.
 
 ## What not to edit for a trip change
 
