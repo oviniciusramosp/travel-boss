@@ -13,28 +13,40 @@ import {
   type Map as LeafletMap,
   type Marker,
 } from 'leaflet';
+import { placeCategoryMeta } from '../catalog';
 import { cameraMotion, labelFadeDuration, prefersReducedMotion } from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
 import { diffPinIds, paddedCenterOffset, selectionEases, selectionZoom } from './camera';
+import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
+import { resolvedPlace } from './place-index';
 import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
 
 const KINDS: readonly MapPinKind[] = ['place', 'hotel', 'stop'];
 
 const PIN_FALLBACK = '#0a0a0a';
 
-function zoomBucket(zoom: number): 'far' | 'mid' | 'near' {
-  if (zoom < 11) return 'far';
-  if (zoom < 13) return 'mid';
-  return 'near';
+function modelFor(pin: MapPin): PinModel {
+  const place = resolvedPlace(pin.id);
+  const category = place?.category;
+  const fromCategory = category ? placeCategoryMeta[category]?.color : undefined;
+  return pinModel({
+    label: pin.label,
+    color: pin.color || fromCategory || PIN_FALLBACK,
+    featured: Boolean(pin.featured || place?.featured),
+    number: pin.number,
+    category,
+    subcategories: place?.subcategories,
+  });
 }
 
-function pinIcon(color: string, active: boolean) {
+function pinIcon(model: PinModel, state?: { active?: boolean; hover?: boolean }) {
+  const box = pinBox(model.featured);
   return divIcon({
     className: 'tb-pin-wrap',
-    html: `<span class="tb-pin${active ? ' is-active' : ''}" style="--pin-color:${color}"><span class="tb-pin__core"></span></span>`,
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
-    tooltipAnchor: [0, -12],
+    html: pinHtml(model, state),
+    iconSize: [box.size, box.size],
+    iconAnchor: [box.anchor, box.anchor],
+    tooltipAnchor: [0, model.featured ? -18 : -12],
   });
 }
 
@@ -106,33 +118,16 @@ export function mountMap(host: HTMLElement): MapHandle {
   let radiusLayer: Circle | null = null;
   let routeLayer: LayerGroup | null = null;
 
-  type PinMeta = { color: string; label: string; icon: string; featured: boolean; number: string };
-  const pinMeta: Record<MapPinKind, Map<string, PinMeta>> = {
+  const pinMeta: Record<MapPinKind, Map<string, PinModel>> = {
     place: new Map(),
     hotel: new Map(),
     stop: new Map(),
   };
 
-  const metaOf = (pin: MapPin): PinMeta => ({
-    color: pin.color || PIN_FALLBACK,
-    label: pin.label,
-    icon: pin.icon ?? '',
-    featured: Boolean(pin.featured),
-    number: pin.number == null ? '' : String(pin.number),
-  });
-
-  const sameMeta = (a: PinMeta | undefined, b: PinMeta) =>
-    a != null &&
-    a.color === b.color &&
-    a.label === b.label &&
-    a.icon === b.icon &&
-    a.featured === b.featured &&
-    a.number === b.number;
-
-  const rememberPin = (dot: Marker, meta: PinMeta) => {
+  const rememberPin = (dot: Marker, meta: PinModel) => {
     const node = dot.getElement();
     if (!node) return;
-    if (meta.icon) node.dataset.pinIcon = meta.icon;
+    if (meta.glyph) node.dataset.pinIcon = meta.glyph;
     else delete node.dataset.pinIcon;
     if (meta.featured) node.dataset.featured = 'true';
     else delete node.dataset.featured;
@@ -140,21 +135,34 @@ export function mountMap(host: HTMLElement): MapHandle {
     else delete node.dataset.pinNumber;
   };
 
+  const root = leafletMap.getContainer();
+  let zooming = false;
   const applyZoom = () => {
-    const bucket = zoomBucket(leafletMap.getZoom());
-    const root = leafletMap.getContainer();
+    if (zooming) return;
+    const bucket = zoomPinBucket(leafletMap.getZoom());
     root.classList.toggle('tb-zoom-far', bucket === 'far');
     root.classList.toggle('tb-zoom-mid', bucket === 'mid');
     root.classList.toggle('tb-zoom-near', bucket === 'near');
   };
-  leafletMap.on('zoom zoomend', applyZoom);
+  // Freeze `--pin-scale` while the zoom animates; apply the bucket at zoomend.
+  leafletMap.on('zoomstart', () => {
+    zooming = true;
+    root.classList.add('is-zooming');
+  });
+  leafletMap.on('zoomend', () => {
+    zooming = false;
+    root.classList.remove('is-zooming');
+    applyZoom();
+  });
   applyZoom();
 
   const paintMarker = (pin: Marker, selected: boolean, hovered: boolean) => {
-    const node = pin.getElement()?.querySelector('.tb-pin');
+    const icon = pin.getElement();
+    const node = icon?.querySelector('.tb-pin');
     node?.classList.toggle('is-active', selected);
     node?.classList.toggle('is-hover', hovered);
-    pin.setZIndexOffset(selected || hovered ? 1000 : 0);
+    const featured = icon?.dataset.featured === 'true';
+    pin.setZIndexOffset(selected || hovered ? 1000 : featured ? 200 : 0);
   };
 
   const paintAll = () => {
@@ -226,12 +234,12 @@ export function mountMap(host: HTMLElement): MapHandle {
         const pin = incoming.get(id);
         const dot = index.get(id);
         if (!pin || !dot) continue;
-        const next = metaOf(pin);
+        const next = modelFor(pin);
         const ll = dot.getLatLng();
         if (ll.lat !== pin.lat || ll.lng !== pin.lng) dot.setLatLng([pin.lat, pin.lng]);
-        if (!sameMeta(metas.get(id), next)) {
+        if (!samePinModel(metas.get(id), next)) {
           dot.options.title = pin.label;
-          dot.setIcon(pinIcon(next.color, id === selectedId));
+          dot.setIcon(pinIcon(next, { active: id === selectedId, hover: id === hoveredId }));
           dot.setTooltipContent(pin.label);
           metas.set(id, next);
           rememberPin(dot, next);
@@ -241,14 +249,14 @@ export function mountMap(host: HTMLElement): MapHandle {
       for (const id of diff.create) {
         const pin = incoming.get(id);
         if (!pin) continue;
-        const next = metaOf(pin);
+        const next = modelFor(pin);
         const selected = id === selectedId;
         const dot = marker([pin.lat, pin.lng], {
-          icon: pinIcon(next.color, selected),
+          icon: pinIcon(next, { active: selected, hover: id === hoveredId }),
           keyboard: false,
           title: pin.label,
           riseOnHover: true,
-          zIndexOffset: selected ? 1000 : 0,
+          zIndexOffset: selected || next.featured ? 1000 : 0,
         });
         dot.bindTooltip(pin.label, {
           direction: 'top',
