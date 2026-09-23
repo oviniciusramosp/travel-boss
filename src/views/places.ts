@@ -145,6 +145,23 @@ function toPins(places: TravelPlace[], kind: MapPin['kind'], locale: Locale): Ma
   return pins;
 }
 
+/** Required stops only. Fallback legs connect those ids, never an optional stop. */
+export function primaryDayRoute(
+  day: ItineraryDay,
+  stops: ItineraryStop[],
+  known: ReadonlySet<string>,
+): { ids: string[]; fallback: { from: string; to: string; mode: 'walk' }[] } {
+  const ids = dayPrimaryRoutePlaceIds({ ...day, stops }).filter((id) => known.has(id));
+  const fallback: { from: string; to: string; mode: 'walk' }[] = [];
+  for (let index = 1; index < ids.length; index += 1) {
+    const from = ids[index - 1];
+    const to = ids[index];
+    if (!from || !to) continue;
+    fallback.push({ from, to, mode: 'walk' });
+  }
+  return { ids, fallback };
+}
+
 function priorityPlaceIds(city: TravelCity): string[] {
   const ids: string[] = [];
   const seen = new Set<string>();
@@ -375,21 +392,15 @@ export function mountCity(
       map.setRoute([]);
       return;
     }
-    const stops = activeStops(day).filter((stop) => byId.has(stop.placeId));
+    const route = primaryDayRoute(day, activeStops(day), new Set(byId.keys()));
     const coords = new Map<string, PlaceCoord>();
     for (const place of city.places) {
       coords.set(place.id, { id: place.id, lat: place.lat, lng: place.lng });
     }
     const arrival = selectedArrival(day)?.id;
     let legs = legsForDay(day.id, arrival);
-    if (!legs.length && stops.length > 1) {
-      legs = stops.slice(1).map((stop, stopIndex) => ({
-        from: stops[stopIndex]?.placeId ?? '',
-        to: stop.placeId,
-        mode: 'walk' as const,
-      }));
-    }
-    const ids = stops.map((stop) => stop.placeId);
+    if (!legs.length) legs = route.fallback;
+    const ids = route.ids;
     const preview = buildItineraryRoutePreview(ids, legs, coords);
     map.setRoute(preview.segments, { fit });
     void buildItineraryRoute(ids, legs, coords)
