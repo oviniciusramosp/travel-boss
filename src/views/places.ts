@@ -23,7 +23,6 @@ import {
   subcategoryLabel,
   travelCities,
   travelUi,
-  visitFieldsForDisplay,
   withResolvedArea,
 } from '../catalog';
 import type {
@@ -46,6 +45,8 @@ import { iconLink, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
+import { priceLevel, priceLevelOf } from '../ui/price';
+import { formatRating, ratingSummary } from '../ui/rating';
 import { row } from '../ui/row';
 import {
   closePlace,
@@ -147,30 +148,26 @@ function placeThumb(place: TravelPlace): HTMLElement {
   return frame;
 }
 
-function priceText(place: TravelPlace, locale: Locale): string {
-  if (!place.visit) return '';
-  const field = visitFieldsForDisplay(place.visit, locale).find(
-    (item) => item.key === 'avgPrice' || item.key === 'pricePerNight',
-  );
-  return field && field.value !== '—' ? field.value : '';
-}
-
-function scoreNode(place: TravelPlace): HTMLElement {
+function scoreNode(place: TravelPlace, locale: Locale): HTMLElement {
   const node = el('span', 'tb-score');
   const value = place.rating ?? place.googleRating;
-  if (value == null || !Number.isFinite(value)) {
-    node.append(icon('star', { size: 16 }), document.createTextNode('-.-'));
-    return node;
-  }
-  node.append(icon('star', { size: 16, fill: true }), document.createTextNode(formatScore(value)));
+  const known = value != null && Number.isFinite(value);
+  node.append(icon('star', { size: 16, fill: known }));
+  node.append(document.createTextNode(formatRating(known ? value : null, locale)));
+  node.setAttribute('data-tip', ratingSummary(place.rating, place.googleRating, locale));
   return node;
 }
 
 function placeMeta(place: TravelPlace, locale: Locale): HTMLElement {
   const meta = el('span', 'tb-place-meta');
-  meta.append(scoreNode(place));
-  const price = priceText(place, locale);
-  if (price) meta.append(el('span', 'tb-price', price));
+  meta.append(scoreNode(place, locale));
+  const nightly = !place.visit?.avgPricePerPerson && place.visit?.pricePerNight;
+  const money = place.visit?.avgPricePerPerson ?? place.visit?.pricePerNight;
+  const level = priceLevelOf(money);
+  if (level != null && money) {
+    const label = pickLocale(locale, nightly ? travelUi.visit.pricePerNight : travelUi.visit.avgPrice);
+    meta.append(priceLevel(level, label, locale));
+  }
   return meta;
 }
 
@@ -256,11 +253,6 @@ function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLEl
   node.classList.add('tb-cat-glyph');
   node.style.color = placeCategoryMeta[category].color;
   return node;
-}
-
-function formatScore(value: number): string {
-  const rounded = Math.round(value * 10) / 10;
-  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
 }
 
 function countLabel(count: number, locale: Locale): string {
