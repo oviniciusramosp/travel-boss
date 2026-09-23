@@ -10,15 +10,17 @@ import {
   travelUi,
 } from '../catalog';
 import type { PlaceCategory, TravelPlace } from '../catalog';
-import type { MapHandle, MapPin, MapRouteSegment } from '../map/types';
+import { buildItineraryRoute } from '../map/itinerary-route';
+import type { MapHandle, MapPin } from '../map/types';
 import { fetchWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
-import { directionsMode, googleDirectionsUrl } from './directions';
+import { googleDirectionsUrl } from './directions';
 import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { inlineNodes } from './inline';
+import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconLink } from '../ui/controls';
@@ -32,7 +34,8 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from '../views/place-panel';
-import { parseTrip, type Trip } from './parse';
+import { parseTrip, type Trip, type TripLeg } from './parse';
+import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
 
@@ -285,67 +288,91 @@ export function mountTrip(
       : placeCategoryOrder,
   );
 
-  function drawTripRoutes() {
-    const epoch = ++tripRouteEpoch;
-    const coords = new Map<string, { lat: number; lng: number }>();
-    const pairs: { from: { lat: number; lng: number }; to: { lat: number; lng: number } }[] = [];
+  function routeHops(): RouteHop[] {
+    const trip = current;
+    if (!trip) return [];
+    const hops: RouteHop[] = [];
     for (const section of main.querySelectorAll<HTMLElement>('.tb-city-section')) {
       if (section.hidden) continue;
-      const record = getTravelCity(section.dataset.city ?? '');
-      if (!record) continue;
-      for (const place of record.places) {
-        coords.set(place.id, { lat: place.lat, lng: place.lng });
-      }
-      for (const day of section.querySelectorAll<HTMLDetailsElement>('details.tb-day')) {
-        if (!day.open) continue;
-        const stopIds = [...day.querySelectorAll<HTMLElement>('[data-place-id]')]
-          .map((node) => node.dataset.placeId)
-          .filter((value): value is string => Boolean(value));
-        for (let index = 1; index < stopIds.length; index += 1) {
-          const fromId = stopIds[index - 1];
-          const toId = stopIds[index];
-          const from = fromId ? coords.get(fromId) : undefined;
-          const to = toId ? coords.get(toId) : undefined;
-          if (from && to) pairs.push({ from, to });
+      const slug = section.dataset.city ?? '';
+      const city = trip.cities.find((item) => (item.slug || item.name) === slug);
+      const record = getTravelCity(slug);
+      if (!city || !record) continue;
+      for (const dayEl of section.querySelectorAll<HTMLDetailsElement>('details.tb-day')) {
+        if (!dayEl.open) continue;
+        const day = city.days.find(
+          (item, index) =>
+            dayKey(city.slug || city.name, index, item.title) === dayEl.dataset.dayKey,
+        );
+        if (!day) continue;
+        const stops = day.stops.filter((stop) => !stop.listNote);
+        for (let index = 1; index < stops.length; index += 1) {
+          const fromStop = stops[index - 1];
+          const toStop = stops[index];
+          if (!fromStop?.placeId || !toStop?.placeId) continue;
+          const from = record.places.find((place) => place.id === fromStop.placeId);
+          const to = record.places.find((place) => place.id === toStop.placeId);
+          if (!from || !to) continue;
+          hops.push({
+            from: { id: from.id, lat: from.lat, lng: from.lng },
+            to: { id: to.id, lat: to.lat, lng: to.lng },
+            ...(fromStop.leg ? { via: fromStop.leg } : {}),
+          });
         }
       }
     }
+    return hops;
+  }
 
-    const slots: (MapRouteSegment | null)[] = pairs.map((pair) => {
-      const cached = rememberedWalk(pair.from, pair.to);
-      return cached ? { mode: 'walk', latlngs: cached } : null;
-    });
-    const ready = () => slots.filter((slot): slot is MapRouteSegment => slot !== null);
-    if (ready().length === pairs.length) {
-      map.setRoute(ready());
+  function neutralColor(): string {
+    return (
+      getComputedStyle(document.documentElement).getPropertyValue('--color-mid-gray').trim() ||
+      '#666666'
+    );
+  }
+
+  function drawTripRoutes() {
+    const epoch = ++tripRouteEpoch;
+    const hops = routeHops();
+    const color = neutralColor();
+    const preview = hops.map((hop) => previewHop(hop, color));
+    const known = preview.flatMap((part) => part ?? []);
+    if (preview.every((part) => part !== null)) {
+      map.setRoute(known);
       return;
     }
-    if (ready().length) map.setRoute(ready());
-
-    void Promise.all(
-      pairs.map(async (pair, index) => {
-        if (slots[index]) return;
+    if (known.length) map.setRoute(known);
+    void resolveHopSegments(hops, {
+      neutralColor: color,
+      walk: async (from, to) => {
+        const cached = rememberedWalk(from, to);
+        if (cached) return cached;
         const route = await fetchWalkingRoute([
-          { lat: pair.from.lat, lng: pair.from.lng },
-          { lat: pair.to.lat, lng: pair.to.lng },
+          { lat: from.lat, lng: from.lng },
+          { lat: to.lat, lng: to.lng },
         ]);
-        if (route && route.latlngs.length >= 2) {
-          rememberWalk(pair.from, pair.to, route.latlngs);
-          slots[index] = { mode: 'walk', latlngs: route.latlngs };
-          return;
-        }
-        slots[index] = {
-          mode: 'walk',
-          latlngs: [
-            [pair.from.lat, pair.from.lng],
-            [pair.to.lat, pair.to.lng],
-          ],
-        };
-      }),
-    )
-      .then(() => {
+        if (!route || route.latlngs.length < 2) return null;
+        rememberWalk(from, to, route.latlngs);
+        return route.latlngs;
+      },
+      catalog: async (leg, from, to) => {
+        const fromId = from.id ?? leg.from;
+        const toId = to.id ?? leg.to;
+        const places = new Map([
+          [fromId, { id: fromId, lat: from.lat, lng: from.lng }],
+          [toId, { id: toId, lat: to.lat, lng: to.lng }],
+        ]);
+        const built = await buildItineraryRoute([fromId, toId], [leg], places);
+        return built.segments.map((segment) => ({
+          mode: segment.mode,
+          latlngs: segment.latlngs,
+          ...(segment.color ? { color: segment.color } : {}),
+        }));
+      },
+    })
+      .then((segments) => {
         if (!alive || epoch !== tripRouteEpoch) return;
-        map.setRoute(ready());
+        map.setRoute(segments);
       })
       .catch(() => undefined);
   }
@@ -374,8 +401,30 @@ export function mountTrip(
         item.hidden = Boolean(category) && !enabledCategories.has(category as PlaceCategory);
       });
       section.querySelectorAll<HTMLElement>('ul.tb-stops').forEach((list) => {
-        const any = [...list.querySelectorAll<HTMLElement>('li')].some((item) => !item.hidden);
-        list.hidden = !any;
+        const items = [...list.children].filter(
+          (node): node is HTMLElement => node instanceof HTMLElement,
+        );
+        const neighbor = (item: HTMLElement, step: 'prev' | 'next') => {
+          let cursor = step === 'prev' ? item.previousElementSibling : item.nextElementSibling;
+          while (cursor) {
+            if (
+              cursor instanceof HTMLElement &&
+              cursor.dataset.stop !== undefined &&
+              !cursor.classList.contains('tb-transfer')
+            ) {
+              return cursor;
+            }
+            cursor = step === 'prev' ? cursor.previousElementSibling : cursor.nextElementSibling;
+          }
+          return null;
+        };
+        for (const item of items) {
+          if (!item.classList.contains('tb-transfer')) continue;
+          const prev = neighbor(item, 'prev');
+          const next = neighbor(item, 'next');
+          item.hidden = !prev || !next || prev.hidden || next.hidden;
+        }
+        list.hidden = !items.some((item) => item.dataset.stop !== undefined && !item.hidden);
       });
     });
     if (!trip) return;
@@ -663,7 +712,7 @@ export function mountTrip(
         details.append(dayTitle);
         const list = document.createElement('ul');
         list.className = 'tb-list tb-list--stops tb-stops';
-        let previousPoint: { lat: number; lng: number } | null = null;
+        let previousEnd: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
         day.stops.forEach((stop, stopIndex) => {
           const key = stopKey(
             city.slug || city.name,
@@ -708,15 +757,21 @@ export function mountTrip(
             : place
               ? resolveHref(city.slug, place.id)
               : null;
-          const point = place ? { lat: place.lat, lng: place.lng } : null;
+          const point = place ? { id: place.id, lat: place.lat, lng: place.lng } : null;
           const directions =
-            previousPoint && point
+            previousEnd && point
               ? googleDirectionsUrl(
-                  [previousPoint, point],
-                  directionsMode(previousPoint, point),
+                  [previousEnd, point],
+                  planHop({
+                    from: previousEnd,
+                    to: point,
+                    ...(previousEnd.leg ? { via: previousEnd.leg } : {}),
+                  }).kind === 'walk'
+                    ? 'walk'
+                    : 'transit',
                 )
               : null;
-          previousPoint = point;
+          previousEnd = point ? { ...point, ...(stop.leg ? { leg: stop.leg } : {}) } : null;
           const actions = document.createDocumentFragment();
           if (directions) {
             const link = iconLink({
@@ -778,6 +833,23 @@ export function mountTrip(
           }
           markChanged(item);
           list.append(item);
+          const next = day.stops.slice(stopIndex + 1).find((item) => !item.listNote);
+          const nextPlace = next?.placeId ? placeById(city.slug, next.placeId) : undefined;
+          const legs =
+            place && nextPlace
+              ? transferLegs({
+                  from: { id: place.id, lat: place.lat, lng: place.lng },
+                  to: { id: nextPlace.id, lat: nextPlace.lat, lng: nextPlace.lng },
+                  ...(stop.leg ? { via: stop.leg } : {}),
+                })
+              : stop.leg
+                ? [stop.leg]
+                : [];
+          for (const leg of legs) {
+            const transfer = transferRow(leg, locale);
+            markChanged(transfer);
+            list.append(transfer);
+          }
         });
         if (day.stops.length) details.append(list);
         for (const note of day.notes) {

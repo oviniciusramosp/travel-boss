@@ -135,7 +135,8 @@
 }
 
 .tb-row.is-changed,
-.tb-list-note.is-changed {
+.tb-list-note.is-changed,
+.tb-transfer.is-changed {
   animation: tb-changed calc(var(--dur-slow) * 4) var(--ease-out);
 }
 
@@ -151,6 +152,7 @@
 @media (prefers-reduced-motion: reduce) {
   .tb-row.is-changed,
   .tb-list-note.is-changed,
+  .tb-transfer.is-changed,
   .tb-source.is-updated {
     animation: none;
   }
