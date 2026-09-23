@@ -42,6 +42,9 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   const root = document.createElement('aside');
   root.className = 'tb-place-panel';
   root.hidden = true;
+  root.setAttribute('role', 'dialog');
+  root.setAttribute('aria-modal', 'false');
+  root.setAttribute('aria-labelledby', 'tb-place-title');
   column.append(root);
 
   let photoIndex = 0;
@@ -134,6 +137,8 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     body.className = 'tb-panel__body';
 
     const title = document.createElement('h2');
+    title.id = 'tb-place-title';
+    title.tabIndex = -1;
     title.textContent = pickLocale(locale, place.name);
     body.append(title);
 
@@ -222,6 +227,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       paint();
       syncPad();
       map.select(place.id);
+      root.querySelector<HTMLElement>('#tb-place-title')?.focus();
     },
     close(opts) {
       dismiss(opts);
@@ -236,9 +242,11 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     },
     relabel(locale) {
       if (!current) return;
+      const inside = root.contains(document.activeElement);
       current = { ...current, locale };
       paint();
       syncPad();
+      if (inside) root.querySelector<HTMLElement>('#tb-place-title')?.focus();
     },
   };
 }

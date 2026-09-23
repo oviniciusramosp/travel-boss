@@ -300,6 +300,18 @@ p.tb-budget {
   border: 1px solid var(--color-hairline);
   border-radius: var(--r-card);
   box-shadow: var(--shadow-float);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+@starting-style {
+  .tb-place-panel:not([hidden]) {
+    opacity: 0;
+    transform: translateY(var(--spacing-8));
+  }
 }
 
 .tb-place-panel > .tb-place-panel__close {
@@ -330,7 +342,11 @@ p.tb-budget {
 }
 
 .tb-place-panel h2 {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-controls);
   margin: 0;
+  background: var(--color-paper);
   font-size: var(--text-h2);
   font-weight: var(--font-weight-semibold);
   letter-spacing: -0.02em;
