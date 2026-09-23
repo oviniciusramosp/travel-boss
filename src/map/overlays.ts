@@ -1,4 +1,5 @@
 import {
+  circleMarker,
   layerGroup,
   polygon,
   polyline,
@@ -12,6 +13,7 @@ import {
 import { placeCategoryMeta } from '../catalog';
 import { drawableRings } from './area-shape';
 import { resolvedPlace } from './place-index';
+import { transitLineForPlace } from './transit';
 
 function fadeMs(): number {
   if (typeof document === 'undefined') return 0;
@@ -52,6 +54,48 @@ export function mountPlaceOverlays(map: LeafletMap): { sync(ids: readonly string
   });
 
   const build = (id: string): Layer | null => {
+    const line = transitLineForPlace(id);
+    if (line && line.stations.length >= 2) {
+      const group = layerGroup();
+      group.addLayer(
+        polyline(
+          line.stations.map((station) => [station.lat, station.lng] as [number, number]),
+          {
+            renderer,
+            interactive: false,
+            bubblingMouseEvents: false,
+            className: 'tb-area tb-area--line',
+            color: line.color,
+            weight: 6,
+            opacity: 1,
+            lineCap: 'round',
+            lineJoin: 'round',
+          },
+        ),
+      );
+      for (const station of line.stations) {
+        const dot = circleMarker([station.lat, station.lng], {
+          renderer,
+          radius: 5,
+          weight: 2,
+          color: line.color,
+          fillColor: line.color,
+          fillOpacity: 1,
+          opacity: 1,
+          className: 'tb-area tb-station',
+          interactive: true,
+          bubblingMouseEvents: false,
+        });
+        dot.bindTooltip(station.name, {
+          direction: 'top',
+          opacity: 1,
+          offset: [0, -6],
+          className: 'tb-pin-tip',
+        });
+        group.addLayer(dot);
+      }
+      return group;
+    }
     const place = resolvedPlace(id);
     const area = place?.area;
     if (!area) return null;

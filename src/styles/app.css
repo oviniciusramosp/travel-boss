@@ -378,6 +378,10 @@ button {
   opacity: 0.92;
 }
 
+.tb-map path.tb-station {
+  stroke: var(--color-paper);
+}
+
 .tb-map .leaflet-marker-icon.tb-pin-wrap {
   background: none;
   border: 0;

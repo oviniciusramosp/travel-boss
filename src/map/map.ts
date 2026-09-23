@@ -28,6 +28,7 @@ import { coveredInsets, mergeInsets, type Insets } from './chrome';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
+import { transitLineForPlace } from './transit';
 import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
 
 const KINDS: readonly MapPinKind[] = ['place', 'hotel', 'stop'];
@@ -216,6 +217,10 @@ export function mountMap(host: HTMLElement): MapHandle {
   };
 
   const areaPoints = (id: string): [number, number][] | null => {
+    const line = transitLineForPlace(id);
+    if (line && line.stations.length >= 2) {
+      return line.stations.map((station) => [station.lat, station.lng]);
+    }
     const area = resolvedPlace(id)?.area;
     if (!area) return null;
     const pts: [number, number][] = [];

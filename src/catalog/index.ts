@@ -44,6 +44,8 @@ export {
   placePinIconHtml,
 } from '../data/travel-categories';
 export { subcategoryLabel } from '../data/travel-subcategories';
+export { getTransitLine } from '../data/travel-transit-lines';
+export type { TransitLine } from '../data/travel-transit-lines';
 
 export type {
   Locale,
