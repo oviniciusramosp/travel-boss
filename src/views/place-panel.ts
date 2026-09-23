@@ -16,6 +16,7 @@ import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
 import { priceLevel, priceLevelOf } from '../ui/price';
 import { ratingSummary, starRating } from '../ui/rating';
+import { openNowStatus, timeZoneForCity } from './open-now';
 
 function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
   const name = categoryMaterialName(category);
@@ -84,6 +85,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   column.append(root);
 
   let photoIndex = 0;
+  let liveEpoch = 0;
   let current: { place: TravelPlace; city: TravelCity; locale: Locale } | null = null;
   let returnFocus: HTMLElement | null = null;
   let slides: { url: string; alt: string }[] = [];
@@ -190,6 +192,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   });
 
   const paint = () => {
+    const epoch = ++liveEpoch;
     imgs = [];
     dotBar = null;
     prevBtn = null;
@@ -318,6 +321,24 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
           locale,
         ),
       );
+    }
+    const live = el('span', 'tb-live');
+    live.hidden = true;
+    ratings.append(live);
+    const osmRef = visit?.osmRef;
+    if (osmRef) {
+      const placeId = place.id;
+      void openNowStatus(osmRef, timeZoneForCity(city.slug)).then((state) => {
+        if (epoch !== liveEpoch || current?.place.id !== placeId || !live.isConnected) return;
+        if (state === 'unknown') return;
+        live.hidden = false;
+        live.classList.toggle('is-open', state === 'open');
+        live.classList.toggle('is-closed', state === 'closed');
+        live.textContent = pickLocale(
+          locale,
+          state === 'open' ? travelUi.visit.liveOpen : travelUi.visit.liveClosed,
+        );
+      });
     }
     body.append(ratings);
 

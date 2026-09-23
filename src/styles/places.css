@@ -367,6 +367,19 @@ p.tb-budget {
   gap: var(--spacing-8);
 }
 
+.tb-live {
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+}
+
+.tb-live.is-open {
+  color: var(--color-ink);
+}
+
+.tb-live[hidden] {
+  display: none;
+}
+
 .tb-tips {
   white-space: pre-line;
 }
