@@ -29,6 +29,7 @@ import { attachMapControls } from './controls';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
+import { attachTrackpadGestures } from './trackpad';
 import { transitLineForPlace } from './transit';
 import type { MapHandle, MapPadding, MapPin, MapPinKind, MapRadius, MapRouteSegment } from './types';
 
@@ -74,7 +75,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   const leafletMap: LeafletMap = createMap(frame, {
     preferCanvas: true,
     zoomControl: false,
-    scrollWheelZoom: true,
+    scrollWheelZoom: false,
     zoomAnimation: !reducedAtStart,
     fadeAnimation: !reducedAtStart,
     markerZoomAnimation: !reducedAtStart,
@@ -88,6 +89,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   } as Parameters<typeof maplibreGL>[0]).addTo(leafletMap);
 
   leafletMap.setView([50, 10], 4);
+  attachTrackpadGestures(leafletMap);
   // Leaflet runs the GL layer's onAdd on the first view, not on addTo.
   const glMap = basemap.getMaplibreMap();
   if (glMap) {
