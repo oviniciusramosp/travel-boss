@@ -53,6 +53,17 @@ function resolveHref(citySlug: string, placeId: string): string | null {
   return googleMapsUrl(place, city);
 }
 
+function emptyNotice(title: string, detail?: string, error = false): HTMLDivElement {
+  const wrap = document.createElement('div');
+  wrap.className = 'tb-empty';
+  const strong = document.createElement('strong');
+  if (error) strong.className = 'tb-error';
+  strong.textContent = title;
+  wrap.append(strong);
+  if (detail) wrap.append(document.createTextNode(detail));
+  return wrap;
+}
+
 function clearStopCurrent(): void {
   document.querySelectorAll('[data-stop][aria-current]').forEach((node) => {
     node.removeAttribute('aria-current');
@@ -527,8 +538,9 @@ export function mountTrip(
       const file = files.find((item) => item.id === id);
       if (file && file.raw === lastRaw && current) return;
       if (!file) {
-        main.innerHTML =
-          '<div class="tb-empty"><strong>Roteiro removido</strong>O arquivo não está mais em content/trips.</div>';
+        main.replaceChildren(
+          emptyNotice('Roteiro removido', 'O arquivo não está mais em content/trips.'),
+        );
         shell.setExportEnabled(false);
         map.setPins('stop', []);
         return;
@@ -540,7 +552,7 @@ export function mountTrip(
     } catch (error) {
       if (!alive) return;
       const message = error instanceof Error ? error.message : 'Falha ao ler o roteiro';
-      main.innerHTML = `<div class="tb-empty"><strong class="tb-error">${message}</strong></div>`;
+      main.replaceChildren(emptyNotice(message, undefined, true));
       shell.setExportEnabled(false);
     }
   }
