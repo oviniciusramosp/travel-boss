@@ -1,2 +1,4 @@
 # Pinned source: PyPI 2.2.0 lacks the bounded HTTP timeout support used here.
 pyairbnb @ git+https://github.com/johnbalvin/pyairbnb.git@1ee4151d7fcc2fc02dca1985753b67b0d45b2877
+# azul-search.py imports curl_cffi. pyairbnb Requires-Dist lists it with no version.
+curl_cffi

@@ -11,6 +11,8 @@ npm run dev
 
 Busca de hotel (Azul + Booking) e Airbnb só existe no dev server, em `/api/hotel-search`. Airbnb precisa de `npm run travel:airbnb:setup` uma vez. A chave de ranking, se existir, fica em `.env` (`TYPESAFE_API_KEY`) — o servidor também olha o `.env` do portfólio ao lado.
 
+`rm -rf node_modules` apaga o venv do Airbnb/Azul (`node_modules/.cache/airbnb-venv`). Depois disso, rode `npm run travel:airbnb:setup` de novo.
+
 ## Artefato
 
 O formato está em `content/SCHEMA.md`. Exportar copia HTML (Apple Notes) e Markdown (Notion) e também baixa o `.md`.
