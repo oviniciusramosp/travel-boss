@@ -154,7 +154,7 @@ export function mountTrip(
   let alive = true;
   const stopsUnsub = { fn: () => {} };
   const offLocale = shell.onLocale(() => {
-    if (alive) void render();
+    if (alive && current) paint(current);
   });
   const offQuery = shell.onQuery(() => applyQuery());
   const offExport = shell.onExport(() => {
