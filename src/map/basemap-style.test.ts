@@ -1,6 +1,6 @@
 import type { FilterSpecification, Map as MaplibreMap } from 'maplibre-gl';
 import { describe, expect, it, vi } from 'vitest';
-import { applyBrightBasemap, bindBrightBasemap } from './basemap-style';
+import { applyBrightBasemap, bindBrightBasemap, overlayAlpha } from './basemap-style';
 
 type Paint = Record<string, unknown>;
 
@@ -185,5 +185,94 @@ describe('bright basemap', () => {
     vi.spyOn(map.api, 'isStyleLoaded').mockReturnValue(true);
     bindBrightBasemap(map.api);
     expect(map.paint.get('park')?.['fill-color']).toBe('#d5e4d0');
+  });
+
+  it('paints the portfolio night tints and leaves bright roads to the dark sheet', () => {
+    const map = fakeMap([
+      'background',
+      'water',
+      'waterway',
+      'water_name',
+      'landuse_park',
+      'landcover_wood',
+      'park',
+      'highway-primary',
+    ]);
+    applyBrightBasemap(map.api, 'dark');
+    expect(overlayAlpha('dark')).toEqual({ area: 0.32, heat: 0.18 });
+    expect(overlayAlpha('light')).toEqual({ area: 0.52, heat: 0.22 });
+    expect(map.paint.get('background')?.['background-color']).toBe('#111111');
+    expect(map.paint.get('water')?.['fill-color']).toBe('#071824');
+    expect(map.paint.get('waterway')?.['line-color']).toBe('#0a2233');
+    expect(map.paint.get('water_name')).toMatchObject({
+      'text-color': 'rgba(110, 140, 165, 0.55)',
+      'text-halo-color': 'rgba(7, 24, 36, 0.8)',
+    });
+    expect(map.paint.get('landuse_park')).toMatchObject({
+      'fill-color': '#1f4a32',
+      'fill-opacity': 0.16,
+    });
+    expect(map.paint.get('landcover_wood')).toMatchObject({
+      'fill-color': '#1a3d2a',
+      'fill-opacity': 0.14,
+      'fill-pattern': null,
+    });
+    expect(map.paint.get('park')?.['fill-opacity']).toBe(0.16);
+    expect(map.paint.has('highway-primary')).toBe(false);
+  });
+
+  it('swaps the sheet on the same map and retints areas and heatmap', () => {
+    const map = fakeMap(['water', 'landuse_park']);
+    const urls: string[] = [];
+    const area = new Map<string, string>();
+    const heat = new Map<string, string>();
+    const listeners = new Map<string, Set<(event: Event) => void>>();
+    (map.api as unknown as { setStyle: (url: string) => void }).setStyle = (url) => {
+      urls.push(url);
+      map.listeners.get('style.load')?.forEach((fn) => fn());
+    };
+    vi.stubGlobal('window', {
+      addEventListener(type: string, fn: (event: Event) => void) {
+        const bag = listeners.get(type) ?? new Set();
+        bag.add(fn);
+        listeners.set(type, bag);
+      },
+      removeEventListener(type: string, fn: (event: Event) => void) {
+        listeners.get(type)?.delete(fn);
+      },
+      matchMedia: () => ({
+        matches: false,
+        addEventListener() {},
+        removeEventListener() {},
+      }),
+    });
+    vi.stubGlobal('document', {
+      documentElement: { getAttribute: () => null },
+      querySelectorAll(selector: string) {
+        const node = (bag: Map<string, string>) => ({
+          setAttribute: (name: string, value: string) => bag.set(name, value),
+        });
+        if (selector.includes('tb-area')) return [node(area)];
+        if (selector.includes('tbStayHeat')) return [node(heat)];
+        return [];
+      },
+    });
+    try {
+      const unbind = bindBrightBasemap(map.api);
+      const handlers = [...(listeners.get('tb:theme') ?? [])];
+      expect(handlers).toHaveLength(1);
+      const dark = new CustomEvent('tb:theme', { detail: { theme: 'dark' } });
+      handlers[0]?.(dark);
+      handlers[0]?.(dark);
+      expect(urls).toEqual(['https://tiles.openfreemap.org/styles/dark']);
+      expect(map.paint.get('water')?.['fill-color']).toBe('#071824');
+      expect(map.paint.get('landuse_park')?.['fill-opacity']).toBe(0.16);
+      expect(area.get('fill-opacity')).toBe('0.32');
+      expect(heat.get('fill-opacity')).toBe('0.18');
+      unbind();
+      expect(listeners.get('tb:theme')?.size ?? 0).toBe(0);
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

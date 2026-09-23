@@ -12,6 +12,9 @@
   --color-hover: rgba(10, 10, 10, 0.04);
   --color-press: rgba(10, 10, 10, 0.08);
   --color-walk: #008fff;
+  /* Place areas and the stay heatmap. Night is softer so the hues don't glare. */
+  --map-area-opacity: 0.52;
+  --map-heat-opacity: 0.22;
 
   --font-geist: 'Geist Sans', 'Geist', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -123,6 +126,8 @@
     0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
   --shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.08),
     0 12px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --map-area-opacity: 0.32;
+  --map-heat-opacity: 0.18;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -144,7 +149,17 @@
       0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
     --shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.08),
       0 12px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+    --map-area-opacity: 0.32;
+    --map-heat-opacity: 0.18;
   }
+}
+
+.tb-map path.tb-area--poly {
+  fill-opacity: var(--map-area-opacity);
+}
+
+.leaflet-tbStayHeat-pane path {
+  fill-opacity: var(--map-heat-opacity);
 }
 
 @media (prefers-reduced-motion: reduce) {
