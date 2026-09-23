@@ -1093,6 +1093,10 @@ export function mountCity(
           onOpen: (slot, open) => slotOpen.set(`${day.id}:${slot}`, open),
           onToggleSlot: (slot, on) => toggleSlot(day, slot, on),
           legs: legsForDay(day.id, selectedArrival(day)?.id),
+          onHoverHop: (hop) => {
+            markHot(hop?.to ?? null);
+            map.hover(hop?.to ?? null);
+          },
           renderStop: (stop) => stopRow(stop, index, locale),
         }),
       );
@@ -1165,6 +1169,14 @@ export function mountCity(
       },
     });
     if (stop.optional) item.classList.add('is-optional');
+    item.addEventListener('pointerenter', () => {
+      item.classList.add('is-hot');
+      map.hover(place.id);
+    });
+    item.addEventListener('pointerleave', () => {
+      item.classList.remove('is-hot');
+      map.hover(null);
+    });
     return item;
   };
 
@@ -1340,6 +1352,23 @@ export function mountCity(
     }, SEARCH_REFIT_MS);
   });
 
+  const markHot = (id: string | null) => {
+    body.querySelectorAll('.tb-timeline .is-hot').forEach((node) => node.classList.remove('is-hot'));
+    if (!id) return;
+    const sel = CSS.escape(id);
+    body
+      .querySelectorAll<HTMLElement>(
+        `.tb-timeline [data-place-id="${sel}"], .tb-timeline [data-leg-from="${sel}"], .tb-timeline [data-leg-to="${sel}"]`,
+      )
+      .forEach((node) => node.classList.add('is-hot'));
+  };
+
+  const unsubHover = map.onHover((id) => {
+    if (disposed || tab !== 'itinerary') return;
+    markHot(id);
+    map.hover(id);
+  });
+
   const unsubSelect = map.onSelect((id) => {
     if (disposed) return;
     if (!byId.has(id)) return;
@@ -1430,6 +1459,7 @@ export function mountCity(
       hotelsEpoch += 1;
       unsubLocale();
       unsubQuery();
+      unsubHover();
       unsubSelect();
       offClose();
       const close = hotelsDispose;

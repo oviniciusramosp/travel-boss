@@ -316,13 +316,25 @@ export function paintStopRail(row: HTMLElement, entry: Extract<TimelineEntry, { 
   row.classList.toggle('is-off-rail', Boolean(entry.stop.optional));
 }
 
-function hopRow(part: TimelineTransferPart, locale: Locale): HTMLLIElement {
+function hopRow(
+  part: TimelineTransferPart,
+  locale: Locale,
+  onHover: (on: boolean) => void,
+): HTMLLIElement {
   const item = transferRow(part, locale);
   item.classList.add('tb-timeline__hop');
   const rail = el('span', 'tb-timeline__rail');
   rail.dataset.rail = part.mode === 'walk' ? 'walk' : 'transit';
   if (part.mode === 'transit' && part.color) rail.style.setProperty('--line-color', part.color);
   item.prepend(rail);
+  item.addEventListener('pointerenter', () => {
+    item.classList.add('is-hot');
+    onHover(true);
+  });
+  item.addEventListener('pointerleave', () => {
+    item.classList.remove('is-hot');
+    onHover(false);
+  });
   return item;
 }
 
@@ -485,6 +497,7 @@ export function renderPeriods(opts: {
   isOpen: (slot: string) => boolean;
   onOpen: (slot: string, open: boolean) => void;
   onToggleSlot: (slot: string, on: boolean) => void;
+  onHoverHop?: (hop: { from: string; to: string } | null) => void;
   renderStop: (stop: ItineraryStop, index: number) => HTMLElement | null;
 }): HTMLElement {
   const wrap = el('div', 'tb-slots');
@@ -520,7 +533,11 @@ export function renderPeriods(opts: {
     const list = el('ol', 'tb-list tb-timeline');
     for (const entry of sectionEntries(section.stops, opts.stops, opts.legs, opts.coords)) {
       if (entry.kind === 'hop') {
-        list.append(hopRow(entry.part, opts.locale));
+        list.append(
+          hopRow(entry.part, opts.locale, (on) => {
+            opts.onHoverHop?.(on ? { from: entry.part.leg.from, to: entry.part.leg.to } : null);
+          }),
+        );
         continue;
       }
       const row = opts.renderStop(entry.stop, entry.stop.index);

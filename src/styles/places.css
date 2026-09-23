@@ -448,6 +448,11 @@ p.tb-budget {
   transform: translateX(calc(var(--tl-rail) / 2 + var(--spacing-4)));
 }
 
+.tb-timeline > .tb-row.is-hot,
+.tb-timeline > .tb-transfer.is-hot {
+  background: var(--color-hover);
+}
+
 .tb-timeline > .tb-row.is-optional .tb-row__title {
   color: var(--color-mid-gray);
   font-weight: var(--font-weight-regular);
