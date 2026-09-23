@@ -230,6 +230,7 @@ export function mountMap(host: HTMLElement): MapHandle {
         const ll = dot.getLatLng();
         if (ll.lat !== pin.lat || ll.lng !== pin.lng) dot.setLatLng([pin.lat, pin.lng]);
         if (!sameMeta(metas.get(id), next)) {
+          dot.options.title = pin.label;
           dot.setIcon(pinIcon(next.color, id === selectedId));
           dot.setTooltipContent(pin.label);
           metas.set(id, next);
@@ -244,7 +245,8 @@ export function mountMap(host: HTMLElement): MapHandle {
         const selected = id === selectedId;
         const dot = marker([pin.lat, pin.lng], {
           icon: pinIcon(next.color, selected),
-          keyboard: true,
+          keyboard: false,
+          title: pin.label,
           riseOnHover: true,
           zIndexOffset: selected ? 1000 : 0,
         });
