@@ -13,12 +13,14 @@ import type { PlaceCategory, TravelPlace } from '../catalog';
 import type { MapHandle, MapPin, MapRouteSegment } from '../map/types';
 import { fetchWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
+import { changedStopKeys } from './diff';
 import { directionsMode, googleDirectionsUrl } from './directions';
 import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconLink } from '../ui/controls';
+import { prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
 import {
   closePlace,
@@ -228,8 +230,10 @@ export function mountTrip(
   });
 
   let current: Trip | null = null;
+  let previousTrip: Trip | null = null;
   let lastRaw = '';
   let statusTimer = 0;
+  let sourceTimer = 0;
   const toast = document.createElement('p');
   toast.className = 'tb-toast';
   toast.setAttribute('role', 'status');
@@ -472,7 +476,34 @@ export function mountTrip(
     target?.focus({ preventScroll: true });
   }
 
-  function paint(trip: Trip) {
+  function flashMs(): number {
+    if (prefersReducedMotion()) return 0;
+    const raw = getComputedStyle(document.documentElement).getPropertyValue('--dur-slow').trim();
+    const parsed = Number.parseFloat(raw);
+    if (!Number.isFinite(parsed) || parsed <= 0) return 0;
+    return parsed * 4;
+  }
+
+  function flashSource(path: string) {
+    const source = document.querySelector('.tb-source');
+    if (!(source instanceof HTMLElement)) return;
+    const ms = flashMs();
+    if (ms === 0) return;
+    const word = pickLocale(shell.locale(), { en: 'updated', 'pt-BR': 'atualizado' });
+    const shown = `${path} · ${word}`;
+    source.textContent = shown;
+    source.classList.remove('is-updated');
+    void source.offsetWidth;
+    source.classList.add('is-updated');
+    window.clearTimeout(sourceTimer);
+    sourceTimer = window.setTimeout(() => {
+      source.classList.remove('is-updated');
+      if (source.textContent === shown) source.textContent = path;
+    }, ms);
+  }
+
+  function paint(trip: Trip, updated = false) {
+    const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
     if (!firstPaint) rememberView();
     current = trip;
@@ -640,6 +671,14 @@ export function mountTrip(
           }
           const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
           const placeId = stop.placeId;
+          const key = stopKey(
+            city.slug || city.name,
+            dayIndex,
+            day.title,
+            stopIndex,
+            stop.placeId,
+            stop.label,
+          );
           const item = row({
             time: stop.time,
             lead: place ? stopPin(place) : undefined,
@@ -648,14 +687,7 @@ export function mountTrip(
             actions: actions.childNodes.length ? actions : undefined,
             data: {
               stop: '',
-              stopKey: stopKey(
-                city.slug || city.name,
-                dayIndex,
-                day.title,
-                stopIndex,
-                stop.placeId,
-                stop.label,
-              ),
+              stopKey: key,
               hay: `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase(),
               ...(stop.placeId ? { placeId: stop.placeId } : {}),
               ...(stop.time ? { stopTime: stop.time } : {}),
@@ -674,6 +706,12 @@ export function mountTrip(
           if (missingPlace) {
             item.classList.add('is-disabled');
             item.setAttribute('aria-disabled', 'true');
+          }
+          if (changed.has(key) && !prefersReducedMotion()) {
+            item.classList.add('is-changed');
+            item.addEventListener('animationend', () => item.classList.remove('is-changed'), {
+              once: true,
+            });
           }
           list.append(item);
         });
@@ -716,6 +754,8 @@ export function mountTrip(
       ),
     );
     shell.setSource(trip.file);
+    if (updated) flashSource(trip.file);
+    previousTrip = trip;
     shell.setExportEnabled(true);
     setDocumentTitle(trip.title);
     const openId = openPlaceId();
@@ -738,9 +778,10 @@ export function mountTrip(
         return;
       }
       failure = null;
+      const updated = Boolean(current) && file.raw !== lastRaw;
       lastRaw = file.raw;
       const trip = parseTrip(file.id, file.file, file.raw);
-      paint(trip);
+      paint(trip, updated);
     } catch {
       if (!alive) return;
       showFailure('read');
@@ -765,6 +806,7 @@ export function mountTrip(
       alive = false;
       window.clearInterval(poll);
       window.clearTimeout(statusTimer);
+      window.clearTimeout(sourceTimer);
       toast.remove();
       offLocale();
       offQuery();

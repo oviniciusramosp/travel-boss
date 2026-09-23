@@ -103,6 +103,31 @@
   font-weight: var(--font-weight-regular);
 }
 
+@keyframes tb-changed {
+  from { background-color: var(--color-press); }
+  to { background-color: transparent; }
+}
+
+.tb-row.is-changed {
+  animation: tb-changed calc(var(--dur-slow) * 4) var(--ease-out);
+}
+
+@keyframes tb-updated {
+  from { color: var(--color-ink); }
+  to { color: var(--color-mid-gray); }
+}
+
+.tb-source.is-updated {
+  animation: tb-updated calc(var(--dur-slow) * 4) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tb-row.is-changed,
+  .tb-source.is-updated {
+    animation: none;
+  }
+}
+
 .tb-city-section[hidden],
 .tb-stops[hidden],
 .tb-stops li[hidden] {
