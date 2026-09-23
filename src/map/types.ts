@@ -88,6 +88,13 @@ export type MapHandle = {
   flyTo(lat: number, lng: number, zoom?: number): void;
   /** Highlight a pin without moving the camera. `null` clears the hover. */
   hover(id: string | null): void;
+  /**
+   * Highlight the place→place leg. `null` clears it.
+   * Does not move the camera. A stop hover still uses `hover`.
+   */
+  hoverLeg(from: string | null, to?: string | null): void;
+  /** Hover that started on a route line. Returns an unsubscribe. */
+  onHoverLeg(fn: (leg: { from: string; to: string } | null) => void): () => void;
   /** Highlight and frame the pin in the padded view. */
   select(id: string): void;
   /**

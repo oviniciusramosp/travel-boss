@@ -9,7 +9,6 @@ import {
   polyline,
   svg,
   type Circle,
-  type LatLng,
   type LayerGroup,
   type Map as LeafletMap,
   type Marker,
@@ -33,6 +32,8 @@ import { placeZoom, resolvedPlace } from './place-index';
 import { MAPLIBRE_PERF, maplibreFade } from './maplibre-perf';
 import { attachTrackpadGestures } from './trackpad';
 import { overviewArcs } from './overview';
+import { drawRouteSegments, paintRouteFocus, type RouteEntry } from './route-draw';
+import type { RouteFocus } from './route-model';
 import { transitLineForPlace } from './transit';
 import type {
   MapCityPin,
@@ -143,6 +144,11 @@ export function mountMap(host: HTMLElement): MapHandle {
   const padding = { top: 0, right: 0, bottom: 0, left: 0 };
   let radiusLayer: Circle | null = null;
   let routeLayer: LayerGroup | null = null;
+  let routeEntries: RouteEntry[] = [];
+  let routeFocus: RouteFocus = null;
+  let routeSource: 'map' | 'ui' | null = null;
+  let routeClearTimer = 0;
+  const legFns = new Set<(leg: { from: string; to: string } | null) => void>();
   let cityLayer: LayerGroup | null = null;
   let overviewLayer: LayerGroup | null = null;
   let overviewHoverId: string | null = null;
@@ -298,13 +304,14 @@ export function mountMap(host: HTMLElement): MapHandle {
     applyZoom();
   };
 
-  // Canvas (`preferCanvas`) has no DOM stroke, so overview arcs use an SVG pane.
+  // Canvas (`preferCanvas`) has no DOM stroke, so arcs and the transit flow use an SVG pane.
   leafletMap.createPane('tb-route');
   const routePane = leafletMap.getPane('tb-route');
   if (routePane) routePane.style.zIndex = '460';
   const routeRenderer = svg({ pane: 'tb-route' });
 
   const overlays = mountPlaceOverlays(leafletMap);
+  const applyRouteFocus = () => paintRouteFocus(routeEntries, routeFocus);
   const syncOverlays = () => {
     const ids: string[] = [];
     if (selectedId && findMarker(selectedId)) ids.push(selectedId);
@@ -384,34 +391,49 @@ export function mountMap(host: HTMLElement): MapHandle {
     },
 
     setRoute(segments: MapRouteSegment[], opts?: { fit?: boolean }) {
+      window.clearTimeout(routeClearTimer);
       if (routeLayer) {
         routeLayer.remove();
         routeLayer = null;
       }
+      routeEntries = [];
       leafletMap.getContainer().dataset.route = String(segments.length);
-      if (!segments.length) return;
-      const group = layerGroup();
-      const points: LatLng[] = [];
-      for (const segment of segments) {
-        if (segment.latlngs.length < 2) continue;
-        const walk = segment.mode === 'walk';
-        const dashed = walk || segment.dash === true;
-        const color = walk ? '#008fff' : segment.color || '#008fff';
-        polyline(segment.latlngs, {
-          color,
-          weight: dashed ? 3 : 4,
-          opacity: 0.9,
-          dashArray: dashed ? '1 8' : undefined,
-          lineCap: 'round',
-          lineJoin: 'round',
-          interactive: false,
-        }).addTo(group);
-        for (const pair of segment.latlngs) points.push(pair as unknown as LatLng);
+      if (!segments.length) {
+        routeFocus = null;
+        routeSource = null;
+        return;
       }
+      const group = layerGroup();
+      const drawn = drawRouteSegments(group, routeRenderer, segments, (leg) => {
+        if (!leg) {
+          window.clearTimeout(routeClearTimer);
+          routeClearTimer = window.setTimeout(() => {
+            if (routeSource !== 'map') return;
+            hoveredId = null;
+            routeFocus = null;
+            routeSource = null;
+            paintAll();
+            applyRouteFocus();
+            syncOverlays();
+            for (const fn of legFns) fn(null);
+          }, 40);
+          return;
+        }
+        window.clearTimeout(routeClearTimer);
+        hoveredId = leg.to;
+        routeFocus = { kind: 'leg', from: leg.from, to: leg.to };
+        routeSource = 'map';
+        paintAll();
+        applyRouteFocus();
+        syncOverlays();
+        for (const fn of legFns) fn(leg);
+      });
+      routeEntries = drawn.entries;
       group.addTo(leafletMap);
       routeLayer = group;
-      if (opts?.fit && points.length > 1) {
-        leafletMap.fitBounds(latLngBounds(points), {
+      applyRouteFocus();
+      if (opts?.fit && drawn.points.length > 1) {
+        leafletMap.fitBounds(latLngBounds(drawn.points), {
           ...fitPad(40),
           maxZoom: 16,
           ...cameraMotion(),
@@ -595,9 +617,36 @@ export function mountMap(host: HTMLElement): MapHandle {
     },
 
     hover(id) {
+      window.clearTimeout(routeClearTimer);
       hoveredId = id;
+      routeFocus = id ? { kind: 'place', id } : null;
+      routeSource = id ? 'ui' : null;
       paintAll();
+      applyRouteFocus();
       syncOverlays();
+    },
+
+    hoverLeg(from, to) {
+      window.clearTimeout(routeClearTimer);
+      if (!from || !to) {
+        hoveredId = null;
+        routeFocus = null;
+        routeSource = null;
+      } else {
+        hoveredId = to;
+        routeFocus = { kind: 'leg', from, to };
+        routeSource = 'ui';
+      }
+      paintAll();
+      applyRouteFocus();
+      syncOverlays();
+    },
+
+    onHoverLeg(fn) {
+      legFns.add(fn);
+      return () => {
+        legFns.delete(fn);
+      };
     },
 
     select(id) {
@@ -627,9 +676,13 @@ export function mountMap(host: HTMLElement): MapHandle {
 
     highlight(id) {
       if (id == null) {
+        window.clearTimeout(routeClearTimer);
         selectedId = null;
         hoveredId = null;
+        routeFocus = null;
+        routeSource = null;
         paintAll();
+        applyRouteFocus();
         syncOverlays();
         return;
       }
