@@ -23,12 +23,26 @@ export type MapPadding = {
 
 export type MapRadius = { lat: number; lng: number; km: number } | null;
 
+/** Junction where two transit colors meet. */
+export type MapRouteTransfer = {
+  lat: number;
+  lng: number;
+  fromColor: string;
+  toColor: string;
+  label?: string;
+};
+
 export type MapRouteSegment = {
   mode: 'walk' | 'transit';
   latlngs: [number, number][];
   color?: string;
-  /** Neutral chord. Dashed, unlike a transit spine. */
+  /** Neutral chord. Dashed, unlike a transit spine. No stations and no flow. */
   dash?: boolean;
+  fromId?: string;
+  toId?: string;
+  hopIndex?: number;
+  /** Two-color transfer dots that belong to this spine. */
+  transfers?: MapRouteTransfer[];
 };
 
 /** Catalog city shown when no trip and no city are open. */
