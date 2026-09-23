@@ -9,6 +9,7 @@
  * 3. Rely on session cache inside fetchWalkingRoute for repeat clicks
  */
 
+import { cssToken } from '../ui/motion';
 import { fetchWalkingRoute } from './walk-route';
 import {
   getTransitLine,
@@ -131,7 +132,7 @@ type ExpandResult = {
 };
 
 function hopColor(hop: ItineraryTransitHop): string {
-  return transitColor(hop.line) ?? '#008fff';
+  return transitColor(hop.line) ?? cssToken('--color-walk', '#008fff');
 }
 
 function hopLabel(hop: ItineraryTransitHop): string {

@@ -11,6 +11,7 @@
   --color-on-ink: #fafafa;
   --color-hover: rgba(10, 10, 10, 0.04);
   --color-press: rgba(10, 10, 10, 0.08);
+  --color-walk: #008fff;
 
   --font-geist: 'Geist Sans', 'Geist', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -77,6 +78,10 @@
   --z-popover: 30;
   --z-tooltip: 40;
   --z-toast: 50;
+  /* Inside .tb-map (isolation). Above Leaflet tiles (200) and overlay (400). */
+  --z-map-heat: 350;
+  --z-map-hit: 450;
+  --z-map-route: 460;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
@@ -85,6 +90,8 @@
   --dur-fast: 150ms;
   --dur-base: 220ms;
   --dur-slow: 320ms;
+  --dur-flow: 2800ms;
+  --dur-flow-hot: 1800ms;
 
   --sidebar-width: 232px;
   --bar-height: 44px;
@@ -103,5 +110,7 @@
     --dur-fast: 0ms;
     --dur-base: 0ms;
     --dur-slow: 0ms;
+    --dur-flow: 0ms;
+    --dur-flow-hot: 0ms;
   }
 }

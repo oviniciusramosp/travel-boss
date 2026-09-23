@@ -35,7 +35,7 @@ import {
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconButton, iconLink, segmented } from '../ui/controls';
 import { icon, type IconName } from '../ui/icons';
-import { prefersReducedMotion } from '../ui/motion';
+import { cssToken, prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
 import {
   closePlace,
@@ -471,10 +471,7 @@ export function mountTrip(
   }
 
   function neutralColor(): string {
-    return (
-      getComputedStyle(document.documentElement).getPropertyValue('--color-mid-gray').trim() ||
-      '#666666'
-    );
+    return cssToken('--color-mid-gray', '#666666');
   }
 
   function drawTripRoutes() {

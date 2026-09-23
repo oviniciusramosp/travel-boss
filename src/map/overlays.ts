@@ -11,6 +11,7 @@ import {
   type PathOptions,
 } from 'leaflet';
 import { placeCategoryMeta } from '../catalog';
+import { cssToken } from '../ui/motion';
 import { ensureOsmAreas, osmAreasReady, placeHasOsmArea } from './areas';
 import { drawableRings } from './area-shape';
 import { resolvedPlace } from './place-index';
@@ -102,7 +103,7 @@ export function mountPlaceOverlays(map: LeafletMap): { sync(ids: readonly string
     if (!area) return null;
     const drawn = drawableRings(area);
     if (!drawn.paths.length) return null;
-    const color = placeCategoryMeta[place.category]?.color ?? '#0a0a0a';
+    const color = placeCategoryMeta[place.category]?.color ?? cssToken('--color-ink', '#0a0a0a');
     if (drawn.line) {
       return polyline(drawn.paths[0]!, {
         renderer,

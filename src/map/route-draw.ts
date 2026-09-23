@@ -7,10 +7,15 @@ import {
   type Polyline,
   type Renderer,
 } from 'leaflet';
+import { cssToken } from '../ui/motion';
 import { routeEmphasis, routeLayerKind, stationsFor, type RouteFocus } from './route-model';
 import type { MapRouteSegment } from './types';
 
-const WALK = '#008fff';
+const WALK_FALLBACK = '#008fff';
+
+function walkColor(): string {
+  return cssToken('--color-walk', WALK_FALLBACK);
+}
 
 export type RouteEntry = {
   fromId?: string;
@@ -60,7 +65,7 @@ export function drawRouteSegments(
   for (const segment of segments) {
     if (segment.latlngs.length < 2) continue;
     const kind = routeLayerKind(segment);
-    const color = kind === 'walk' ? WALK : safeColor(segment.color, WALK);
+    const color = kind === 'walk' ? walkColor() : safeColor(segment.color, walkColor());
     const dashed = kind !== 'transit';
     const line = polyline(segment.latlngs, {
       renderer,
@@ -117,7 +122,7 @@ export function drawRouteSegments(
       for (const transfer of segment.transfers ?? []) {
         if (!Number.isFinite(transfer.lat) || !Number.isFinite(transfer.lng)) continue;
         const fromColor = safeColor(transfer.fromColor, color);
-        const toColor = safeColor(transfer.toColor, WALK);
+        const toColor = safeColor(transfer.toColor, walkColor());
         const dot = marker([transfer.lat, transfer.lng], {
           icon: divIcon({
             className: 'tb-transfer-wrap',

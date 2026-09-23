@@ -3,6 +3,7 @@ import {
   CAMERA_DURATION_S,
   LABEL_FADE_MS,
   cameraMotion,
+  cssToken,
   labelFadeDuration,
   readCssTime,
   runViewTransition,
@@ -36,6 +37,12 @@ describe('sidebarSteps', () => {
 describe('readCssTime', () => {
   it('uses the fallback when the document is not styled', () => {
     expect(readCssTime('--dur-slow', 12)).toBe(12);
+  });
+});
+
+describe('cssToken', () => {
+  it('uses the fallback when the custom property is missing', () => {
+    expect(cssToken('--color-walk', '#008fff')).toBe('#008fff');
   });
 });
 

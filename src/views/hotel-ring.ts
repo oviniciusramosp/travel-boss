@@ -1,4 +1,5 @@
 import type { Circle, Layer, Map as LeafletMap } from 'leaflet';
+import { cssToken } from '../ui/motion';
 
 export type SearchRing = { lat: number; lng: number; km: number };
 
@@ -16,8 +17,7 @@ function loadLeaflet(): Promise<LeafletNs> {
 }
 
 function ink(): string {
-  const value = getComputedStyle(document.documentElement).getPropertyValue('--color-ink').trim();
-  return value || '#0a0a0a';
+  return cssToken('--color-ink', '#0a0a0a');
 }
 
 function paint(layer: Circle, km: number): void {

@@ -18,6 +18,7 @@ import {
   CHROME_MOTION_EVENT,
   CHROME_SETTLED_EVENT,
   cameraMotion,
+  cssToken,
   prefersReducedMotion,
 } from '../ui/motion';
 import { bindBrightBasemap } from './basemap-style';
@@ -62,7 +63,7 @@ function modelFor(pin: MapPin): PinModel {
   const fromCategory = category ? placeCategoryMeta[category]?.color : undefined;
   return pinModel({
     label: pin.label,
-    color: pin.color || fromCategory || PIN_FALLBACK,
+    color: pin.color || fromCategory || cssToken('--color-ink', PIN_FALLBACK),
     featured: Boolean(pin.featured || place?.featured),
     number: pin.number,
     category,
@@ -325,7 +326,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   // Canvas (`preferCanvas`) has no DOM stroke, so arcs and the transit flow use an SVG pane.
   leafletMap.createPane('tb-route');
   const routePane = leafletMap.getPane('tb-route');
-  if (routePane) routePane.style.zIndex = '460';
+  if (routePane) routePane.style.zIndex = cssToken('--z-map-route', '460');
   const routeRenderer = svg({ pane: 'tb-route' });
 
   const overlays = mountPlaceOverlays(leafletMap);
@@ -472,9 +473,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       overviewMarkers.clear();
       if (!list.length) return;
 
-      const arcColor =
-        getComputedStyle(document.documentElement).getPropertyValue('--color-mid-gray').trim() ||
-        '#8a8a8a';
+      const arcColor = cssToken('--color-mid-gray', '#666666');
       const group = layerGroup();
       const fit: [number, number][] = [];
       for (const arc of overviewArcs(list)) {
@@ -593,11 +592,12 @@ export function mountMap(host: HTMLElement): MapHandle {
         radiusLayer = null;
       }
       if (!ring) return;
+      const ink = cssToken('--color-ink', PIN_FALLBACK);
       radiusLayer = circle([ring.lat, ring.lng], {
         radius: ring.km * 1000,
-        color: PIN_FALLBACK,
+        color: ink,
         weight: 1,
-        fillColor: PIN_FALLBACK,
+        fillColor: ink,
         fillOpacity: 0.04,
         interactive: false,
       }).addTo(leafletMap);

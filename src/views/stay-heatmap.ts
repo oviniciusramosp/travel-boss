@@ -3,6 +3,7 @@ import type { StayZone } from '../data/travel-stay-heatmap';
 import type { Map as LeafletMap } from 'leaflet';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
+import { cssToken } from '../ui/motion';
 import { leafletMap } from './hotel-ring';
 
 type Copy = { en: string; 'pt-BR': string };
@@ -85,8 +86,8 @@ type HeatApi = {
 };
 
 /**
- * Stay polygons on the live map. Leaflet panes stay inside the map's isolate,
- * so their z-index is the engine order (tiles 200, overlay 400), not an app token.
+ * Stay polygons on the live map. Pane z-index is the Leaflet stack
+ * (--z-map-heat / --z-map-hit), not the chrome scale.
  */
 export function mountStayHeat(opts: {
   slug: string;
@@ -227,12 +228,12 @@ export function mountStayHeat(opts: {
     const hitPane = 'tbStayHit';
     if (!map.getPane(heatPane)) {
       const pane = map.createPane(heatPane);
-      pane.style.zIndex = '350';
+      pane.style.zIndex = cssToken('--z-map-heat', '350');
       pane.style.pointerEvents = 'none';
     }
     if (!map.getPane(hitPane)) {
       const pane = map.createPane(hitPane);
-      pane.style.zIndex = '450';
+      pane.style.zIndex = cssToken('--z-map-hit', '450');
     }
     const heatRenderer = L.svg({ pane: heatPane });
     const hitRenderer = L.svg({ pane: hitPane });

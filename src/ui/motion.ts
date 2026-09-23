@@ -42,6 +42,13 @@ export function markChromeSettled(): void {
   window.dispatchEvent(new Event(CHROME_SETTLED_EVENT));
 }
 
+/** Computed custom property, or `fallback` when CSS has not been applied. */
+export function cssToken(name: string, fallback: string): string {
+  if (typeof document === 'undefined' || typeof getComputedStyle !== 'function') return fallback;
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return value || fallback;
+}
+
 /** Computed time token in milliseconds (`320ms` → 320). */
 export function readCssTime(name: string, fallback = 0): number {
   if (typeof document === 'undefined' || typeof getComputedStyle !== 'function') return fallback;
