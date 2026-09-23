@@ -82,15 +82,17 @@ button {
   align-items: center;
   gap: var(--spacing-8);
   height: var(--h-lg);
-  padding: 0 10px;
+  padding: 0 var(--inset-row);
   background: var(--color-canvas);
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   border: 1px solid transparent;
 }
 
 .tb-search:focus-within {
   border-color: var(--color-hairline);
   background: var(--color-paper);
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 
 .tb-search svg {
@@ -112,14 +114,17 @@ button {
 }
 
 .tb-search kbd {
+  display: inline-flex;
+  align-items: center;
+  height: calc(var(--h-lg) - 2 * var(--inset-row));
   font-family: var(--font-geist);
   font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
   line-height: 1;
   color: var(--color-mid-gray);
   border: 1px solid var(--color-hairline);
-  border-radius: 6px;
-  padding: 2px 5px;
+  border-radius: var(--r-pill);
+  padding: 0 var(--spacing-4);
   background: var(--color-paper);
 }
 
@@ -139,9 +144,9 @@ button {
 
 .tb-locale {
   display: flex;
-  padding: 2px;
+  padding: var(--inset-group);
   background: var(--color-canvas);
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
 }
 
 .tb-locale button {
@@ -149,7 +154,7 @@ button {
   background: transparent;
   height: var(--h-sm);
   padding: 0 10px;
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
   color: var(--color-mid-gray);
@@ -192,7 +197,7 @@ button {
   height: var(--h-lg);
   padding: 0;
   border: 0;
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   background: transparent;
   color: var(--color-ink);
 }
@@ -258,7 +263,7 @@ button {
   min-height: var(--h-lg);
   padding: 0 10px;
   border: 0;
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   background: transparent;
   text-align: left;
   font-size: var(--text-body);
@@ -311,15 +316,63 @@ button {
   font-family: var(--font-geist);
 }
 
+.tb-map .leaflet-top,
+.tb-map .leaflet-bottom {
+  z-index: var(--z-controls);
+}
+
+.tb-map .leaflet-bar {
+  border: 0;
+  border-radius: var(--r-group);
+  padding: var(--inset-group);
+  box-shadow: var(--shadow-float);
+}
+
+.tb-map .leaflet-bar a {
+  width: var(--h-md);
+  height: var(--h-md);
+  line-height: var(--h-md);
+  border: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.tb-map .leaflet-bar a:first-child {
+  border-radius: var(--r-group-inner) var(--r-group-inner) var(--r-none) var(--r-none);
+}
+
+.tb-map .leaflet-bar a:last-child {
+  border-radius: var(--r-none) var(--r-none) var(--r-group-inner) var(--r-group-inner);
+}
+
+.tb-map .leaflet-bar a:focus-visible {
+  outline-offset: -2px;
+}
+
+.tb-map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--color-paper) 88%, transparent);
+  color: var(--color-mid-gray);
+  border-radius: var(--r-tip);
+  font-family: var(--font-geist);
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+  box-shadow: none;
+}
+
+.tb-map .leaflet-control-attribution a {
+  color: var(--color-ink-soft);
+}
+
 .tb-pin-wrap {
   background: none;
   border: 0;
+  border-radius: var(--r-pill);
 }
 
 .leaflet-tooltip.tb-pin-tip {
   padding: 2px 8px;
   border: 0;
-  border-radius: 18px;
+  border-radius: var(--r-tip);
   background: var(--color-ink);
   color: var(--color-on-ink);
   font-family: var(--font-geist);
@@ -347,7 +400,7 @@ button {
   width: 4px;
   height: 4px;
   margin: -2px 0 0 -2px;
-  border-radius: 50%;
+  border-radius: var(--r-pill);
   background: var(--pin-color, var(--color-ink));
   border: 0.5px solid color-mix(in srgb, var(--color-paper) 10%, transparent);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
@@ -397,7 +450,7 @@ button {
   gap: 6px;
   height: var(--h-lg);
   padding: 0 var(--spacing-12);
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
@@ -430,7 +483,7 @@ button {
   flex: none;
   width: 8px;
   height: 8px;
-  border-radius: 99px;
+  border-radius: var(--r-pill);
 }
 
 .tb-input,
@@ -438,14 +491,14 @@ button {
   height: var(--h-lg);
   padding: 0 10px;
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   background: var(--color-paper);
-  outline: none;
 }
 
-.tb-input:focus,
-.tb-select:focus {
-  box-shadow: 0 0 0 1px var(--color-hairline);
+.tb-input:focus-visible,
+.tb-select:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 
 .tb-badge,
@@ -454,7 +507,7 @@ button {
   align-items: center;
   height: var(--h-sm);
   padding: 0 var(--spacing-8);
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
 }
@@ -472,7 +525,7 @@ button {
 .tb-card {
   background: var(--color-paper);
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-cards);
+  border-radius: var(--r-card);
   box-shadow: var(--shadow-subtle);
   padding: 16px;
 }

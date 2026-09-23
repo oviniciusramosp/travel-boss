@@ -64,9 +64,20 @@
 .tb-stop {
   width: 100%;
   border: 0;
-  border-radius: var(--radius-buttons);
+  border-radius: var(--r-pill);
   background: transparent;
   text-align: left;
+}
+
+.tb-place:has(.tb-place-line),
+.tb-stop:has(.tb-stop-note) {
+  border-radius: var(--r-row);
+}
+
+.tb-place:focus-visible,
+.tb-stop:focus-visible {
+  outline-offset: -2px;
+  content-visibility: visible;
 }
 
 .tb-place {
@@ -269,20 +280,47 @@
 
 .tb-place-panel {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: var(--inset-card);
+  right: var(--inset-card);
   z-index: var(--z-panel);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  width: min(320px, calc(100% - 24px));
-  max-height: calc(100% - 24px);
-  overflow: auto;
-  padding: 12px 16px 16px;
+  width: min(320px, calc(100% - 2 * var(--inset-card)));
+  max-height: calc(100% - 2 * var(--inset-card));
   background: var(--color-paper);
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-cards);
+  border-radius: var(--r-card);
   box-shadow: var(--shadow-float);
+}
+
+.tb-place-panel__close {
+  position: absolute;
+  z-index: var(--z-controls);
+  top: var(--inset-card);
+  right: var(--inset-card);
+  width: var(--h-sm);
+  height: var(--h-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-subtle);
+  font-size: var(--text-h2);
+  line-height: 1;
+}
+
+.tb-panel__body {
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  margin: 0 var(--inset-card) var(--inset-card);
+}
+
+.tb-place-panel:not(:has(.tb-place-panel__photo)) .tb-panel__body {
+  margin-top: calc(var(--h-sm) + var(--inset-card));
 }
 
 .tb-place-panel[hidden] {
@@ -309,7 +347,7 @@
   width: 100%;
   height: 160px;
   object-fit: cover;
-  border-radius: var(--radius-nested);
+  border-radius: var(--r-card) var(--r-card) var(--r-none) var(--r-none);
   background: var(--color-canvas);
 }
 
@@ -335,6 +373,11 @@
 .tb-place-panel__facts dd {
   margin: 0;
   font-size: var(--text-body);
+}
+
+.tb-place-panel .tb-btn,
+.tb-place-panel .tb-btn-ghost {
+  height: var(--h-sm);
 }
 
 .tb-place-panel .tb-btn {

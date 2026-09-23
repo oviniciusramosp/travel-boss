@@ -40,18 +40,18 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     root.hidden = false;
     root.replaceChildren();
 
-    const bar = document.createElement('div');
-    bar.className = 'tb-place-panel__bar';
     const close = document.createElement('button');
     close.type = 'button';
-    close.className = 'tb-btn-ghost';
-    close.textContent = locale === 'pt-BR' ? 'Fechar' : 'Close';
+    close.className = 'tb-place-panel__close';
+    close.textContent = '×';
+    close.setAttribute(
+      'aria-label',
+      pickLocale(locale, { en: 'Close', 'pt-BR': 'Fechar' }),
+    );
     close.addEventListener('click', () => {
       current = null;
       paint();
     });
-    bar.append(close);
-    root.append(bar);
 
     if (photos.length) {
       const frame = document.createElement('div');
@@ -91,10 +91,14 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       }
       root.append(frame);
     }
+    root.append(close);
+
+    const body = document.createElement('div');
+    body.className = 'tb-panel__body';
 
     const title = document.createElement('h2');
     title.textContent = pickLocale(locale, place.name);
-    root.append(title);
+    body.append(title);
 
     const meta = document.createElement('p');
     meta.className = 'tb-meta';
@@ -108,13 +112,13 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     dot.className = 'tb-cat-dot';
     dot.style.background = placeCategoryMeta[place.category].color;
     meta.prepend(dot);
-    root.append(meta);
+    body.append(meta);
 
     if (place.description) {
       const copy = document.createElement('p');
       copy.className = 'tb-place-panel__copy';
       copy.textContent = pickLocale(locale, place.description);
-      root.append(copy);
+      body.append(copy);
     }
 
     if (fields.length) {
@@ -128,14 +132,14 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         dd.textContent = field.note ? `${field.value} — ${field.note}` : field.value;
         list.append(dt, dd);
       }
-      root.append(list);
+      body.append(list);
     }
 
     if (place.address) {
       const address = document.createElement('p');
       address.className = 'tb-meta';
       address.textContent = place.address;
-      root.append(address);
+      body.append(address);
     }
 
     const maps = document.createElement('a');
@@ -144,7 +148,8 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     maps.target = '_blank';
     maps.rel = 'noopener';
     maps.textContent = 'Google Maps';
-    root.append(maps);
+    body.append(maps);
+    root.append(body);
 
     map.highlight(place.id);
     map.flyTo(place.lat, place.lng, 16);

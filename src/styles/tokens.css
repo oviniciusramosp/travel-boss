@@ -45,9 +45,22 @@
   --h-md: 28px;
   --h-lg: 32px;
 
-  --radius-cards: 24px;
-  --radius-buttons: 18px;
-  --radius-nested: 10px;
+  --r-none: 0px;
+  --r-min: 4px;
+  --r-pill: 999px;
+  --r-card: 24px;
+  --inset-card: 12px;
+  --r-card-inner: max(var(--r-min), calc(var(--r-card) - var(--inset-card)));
+  --r-row: 12px;
+  --inset-row: 6px;
+  --r-row-inner: max(var(--r-min), calc(var(--r-row) - var(--inset-row)));
+  --r-popover: 16px;
+  --inset-popover: 4px;
+  --r-popover-inner: max(var(--r-min), calc(var(--r-popover) - var(--inset-popover)));
+  --r-group: 16px;
+  --inset-group: 2px;
+  --r-group-inner: max(var(--r-min), calc(var(--r-group) - var(--inset-group)));
+  --r-tip: 8px;
 
   --shadow-subtle: 0 0 0 1px rgba(23, 23, 23, 0.05),
     0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);

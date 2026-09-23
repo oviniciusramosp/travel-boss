@@ -68,10 +68,14 @@
   flex-wrap: wrap;
   gap: 6px;
   align-items: baseline;
-  padding: 4px 8px;
-  border-radius: var(--radius-buttons);
+  padding: var(--inset-row) var(--spacing-8);
+  border-radius: var(--r-pill);
   line-height: 1.45;
   cursor: default;
+}
+
+.tb-stops li:has(.tb-row__sub) {
+  border-radius: var(--r-row);
 }
 
 .tb-stops li[aria-current='true'] {
