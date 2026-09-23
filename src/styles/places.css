@@ -307,6 +307,111 @@ p.tb-budget {
   color: var(--color-mid-gray);
 }
 
+.tb-timeline {
+  --tl-time: 52px;
+  --tl-rail: var(--h-md);
+  grid-template-columns:
+    [time] var(--tl-time)
+    [lead] var(--tl-rail)
+    [main] minmax(0, 1fr)
+    [meta] auto
+    [actions] auto;
+  row-gap: 0;
+}
+
+.tb-timeline > .tb-row,
+.tb-timeline > .tb-transfer {
+  position: relative;
+}
+
+.tb-timeline > .tb-row::before,
+.tb-timeline > .tb-row::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--inset-row) + var(--tl-time) + var(--spacing-8) + (var(--tl-rail) - 2px) / 2);
+  width: 2px;
+}
+
+.tb-timeline > .tb-row::before {
+  top: 0;
+  height: 50%;
+}
+
+.tb-timeline > .tb-row::after {
+  top: 50%;
+  bottom: 0;
+}
+
+.tb-timeline > .tb-row[data-rail-above='none']::before,
+.tb-timeline > .tb-row[data-rail-below='none']::after {
+  content: none;
+}
+
+.tb-timeline > .tb-row[data-rail-above='walk']::before,
+.tb-timeline > .tb-row[data-rail-below='walk']::after {
+  width: 0;
+  background: transparent;
+  border-left: 2px dotted var(--color-mid-gray);
+}
+
+.tb-timeline > .tb-row[data-rail-above='transit']::before {
+  background: var(--rail-above, var(--color-ink));
+}
+
+.tb-timeline > .tb-row[data-rail-below='transit']::after {
+  background: var(--rail-below, var(--color-ink));
+}
+
+.tb-timeline > .tb-transfer {
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+  min-height: var(--h-lg);
+  padding: var(--inset-row);
+}
+
+.tb-timeline > .tb-transfer > .tb-timeline__rail {
+  grid-column: lead;
+  grid-row: 1;
+  justify-self: center;
+  align-self: stretch;
+  width: 2px;
+}
+
+.tb-timeline > .tb-transfer > .tb-timeline__rail[data-rail='walk'] {
+  width: 0;
+  background: transparent;
+  border-left: 2px dotted var(--color-mid-gray);
+}
+
+.tb-timeline > .tb-transfer > .tb-timeline__rail[data-rail='transit'] {
+  background: var(--line-color, var(--color-ink));
+}
+
+.tb-timeline > .tb-transfer > .tb-transfer__lead {
+  grid-column: lead;
+  grid-row: 1;
+}
+
+.tb-timeline > .tb-transfer > .tb-transfer__main {
+  grid-column: main;
+}
+
+.tb-timeline__pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tl-rail);
+  height: var(--tl-rail);
+  border-radius: var(--r-pill);
+  background: var(--pin-color, var(--color-ink));
+  color: var(--color-ink);
+}
+
+.tb-timeline > .tb-row.is-off-rail .tb-row__lead {
+  transform: translateX(calc(var(--tl-rail) / 2 + var(--spacing-4)));
+}
+
 .tb-stop {
   display: flex;
   align-items: center;
