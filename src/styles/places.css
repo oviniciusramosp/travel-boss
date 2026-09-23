@@ -82,11 +82,11 @@
 
 .tb-place {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1px;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-8);
   min-height: 44px;
-  padding: 6px 10px;
+  padding: 0 var(--spacing-8);
   content-visibility: auto;
   contain-intrinsic-size: auto 44px;
 }
@@ -140,25 +140,12 @@
   padding-top: 0;
 }
 
-.tb-day[aria-current='true'] .tb-day-title button {
-  border-bottom: 1px solid var(--color-ink);
-}
-
 .tb-day-title {
   margin: 0 0 4px;
   font-size: var(--text-h3);
   font-weight: var(--font-weight-semibold);
   letter-spacing: -0.02em;
   line-height: 1.3;
-}
-
-.tb-day-title button {
-  border: 0;
-  padding: 0;
-  background: transparent;
-  font: inherit;
-  letter-spacing: inherit;
-  text-align: left;
 }
 
 .tb-day-summary,
@@ -195,6 +182,7 @@
 }
 
 .tb-stop-time {
+  min-width: 40px;
   font-size: var(--text-caption);
   line-height: 1.35;
   font-variant-numeric: tabular-nums;
@@ -236,17 +224,6 @@
   letter-spacing: var(--tracking-caption);
   text-transform: uppercase;
   color: var(--color-mid-gray);
-}
-
-.tb-place {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 0 8px;
-  border: 0;
-  background: transparent;
-  text-align: left;
 }
 
 .tb-place-main {

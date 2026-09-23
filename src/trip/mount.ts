@@ -228,8 +228,6 @@ export function mountTrip(
       section.querySelectorAll<HTMLElement>('ul.tb-stops').forEach((list) => {
         const any = [...list.querySelectorAll<HTMLElement>('li')].some((item) => !item.hidden);
         list.hidden = !any;
-        const heading = list.previousElementSibling;
-        if (heading instanceof HTMLElement && heading.tagName === 'H3') heading.hidden = !any;
       });
     });
     if (!trip) return;

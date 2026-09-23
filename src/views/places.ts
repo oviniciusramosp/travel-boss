@@ -686,18 +686,6 @@ export function mountCity(
       return;
     }
 
-    const dayBtn = target.closest<HTMLButtonElement>('[data-day-select]');
-    if (dayBtn?.dataset.daySelect) {
-      const index = Number(dayBtn.dataset.daySelect);
-      if (!Number.isInteger(index)) return;
-      selectedDayIndex = index;
-      currentStopId = null;
-      markSelectedDay();
-      setRowCurrent(body, null, false);
-      showItineraryMap({ fit: false });
-      return;
-    }
-
     if (target.closest('[data-maps]')) return;
     const row = target.closest<HTMLElement>('[data-place-id]');
     if (!row?.dataset.placeId) return;
