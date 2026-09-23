@@ -45,6 +45,7 @@ import type { MapHandle, MapPin } from '../map/types';
 import { iconLink, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
+import { prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
 import {
   closePlace,
@@ -173,6 +174,77 @@ function placeMeta(place: TravelPlace, locale: Locale): HTMLElement {
   return meta;
 }
 
+function mountPlacePreview(localeOf: () => Locale) {
+  const pop = el('div', 'tb-preview');
+  pop.hidden = true;
+  pop.setAttribute('aria-hidden', 'true');
+  const media = el('div', 'tb-preview__media');
+  const img = el('img');
+  img.alt = '';
+  const fallback = el('div', 'tb-preview__fallback');
+  fallback.hidden = true;
+  const copyEl = el('p', 'tb-preview__copy');
+  media.append(img, fallback);
+  pop.append(media, copyEl);
+  document.body.append(pop);
+  let timer = 0;
+
+  const hide = () => {
+    window.clearTimeout(timer);
+    timer = 0;
+    pop.hidden = true;
+  };
+
+  const show = (place: TravelPlace, anchor: HTMLElement) => {
+    const locale = localeOf();
+    const cover = place.photos?.[0];
+    fallback.replaceChildren(categoryGlyph(place.category, 20));
+    if (cover?.url) {
+      img.hidden = false;
+      fallback.hidden = true;
+      if (img.getAttribute('src') !== cover.url) img.src = cover.url;
+    } else {
+      img.hidden = true;
+      img.removeAttribute('src');
+      fallback.hidden = false;
+    }
+    copyEl.textContent = pickLocale(locale, place.description);
+    pop.hidden = false;
+    const gap = 8;
+    const rect = anchor.getBoundingClientRect();
+    const box = pop.getBoundingClientRect();
+    let left = rect.right + gap;
+    if (left + box.width > window.innerWidth - gap) left = Math.max(gap, rect.left);
+    let top = rect.top;
+    if (top + box.height > window.innerHeight - gap) {
+      top = Math.max(gap, window.innerHeight - box.height - gap);
+    }
+    pop.style.left = `${left}px`;
+    pop.style.top = `${top}px`;
+  };
+
+  img.addEventListener('error', () => {
+    img.hidden = true;
+    fallback.hidden = false;
+  });
+
+  return {
+    arm(place: TravelPlace, anchor: HTMLElement) {
+      window.clearTimeout(timer);
+      const wait = prefersReducedMotion() ? 0 : PLACE_PREVIEW_MS;
+      timer = window.setTimeout(() => {
+        timer = 0;
+        show(place, anchor);
+      }, wait);
+    },
+    hide,
+    dispose() {
+      hide();
+      pop.remove();
+    },
+  };
+}
+
 function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLElement {
   const name = categoryMaterialName(category);
   if (!(ICONS as readonly string[]).includes(name)) {
@@ -276,6 +348,8 @@ function toPins(places: TravelPlace[], kind: MapPin['kind'], locale: Locale): Ma
 }
 
 export const SEARCH_REFIT_MS = 400;
+/** Same wait as the tooltip: long enough to skip a passing pointer. */
+export const PLACE_PREVIEW_MS = 350;
 
 /** Refit only when a result sits outside the current view. */
 export function searchLeavesView(
@@ -475,6 +549,9 @@ export function mountCity(
   body.id = tabPanelId;
   body.setAttribute('role', 'tabpanel');
   main.append(head, body);
+  const preview = mountPlacePreview(() => shell.locale());
+  const onListScroll = () => preview.hide();
+  main.addEventListener('scroll', onListScroll, { passive: true });
 
   const visiblePlaces = (): TravelPlace[] => {
     const needle = fold(query.trim());
@@ -671,6 +748,8 @@ export function mountCity(
   };
 
   const appendPlaceGroups = () => {
+    preview.hide();
+    map.hover(null);
     const locale = shell.locale();
     const text = copy(locale);
     const places = visiblePlaces();
@@ -733,6 +812,20 @@ export function mountCity(
         }
         const blurb = pickLocale(locale, place.description).trim();
         if (blurb) item.querySelector('.tb-row__main')?.append(el('span', 'tb-row__more', blurb));
+        item.addEventListener('pointerenter', () => {
+          map.hover(place.id);
+          preview.arm(place, item);
+        });
+        item.addEventListener('pointerleave', () => {
+          map.hover(null);
+          preview.hide();
+        });
+        item.addEventListener('focusin', () => preview.arm(place, item));
+        item.addEventListener('focusout', (event) => {
+          const next = event.relatedTarget;
+          if (next instanceof Node && item.contains(next)) return;
+          preview.hide();
+        });
         list.append(item);
       }
       section.append(summary, list);
@@ -1177,6 +1270,8 @@ export function mountCity(
       if (disposed) return;
       disposed = true;
       window.clearTimeout(searchFitTimer);
+      main.removeEventListener('scroll', onListScroll);
+      preview.dispose();
       hotelsEpoch += 1;
       unsubLocale();
       unsubQuery();
