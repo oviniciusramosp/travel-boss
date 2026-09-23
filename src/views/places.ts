@@ -426,32 +426,22 @@ export function mountCity(
     map.highlight(null);
   };
 
-  const renderPlaces = () => {
+  const syncCategoryPressed = () => {
+    body.querySelectorAll<HTMLButtonElement>('[data-category]').forEach((button) => {
+      const category = button.dataset.category;
+      if (!category || !isCategory(category)) return;
+      button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
+    });
+  };
+
+  const appendPlaceGroups = () => {
     const locale = shell.locale();
     const text = copy(locale);
     const places = visiblePlaces();
-    body.replaceChildren();
-
-    const filters = el('div', 'tb-filters');
-    filters.setAttribute('role', 'group');
-    filters.setAttribute('aria-label', text.categories);
-    for (const category of placeCategoryOrder) {
-      const button = el('button', 'tb-btn-outline');
-      button.type = 'button';
-      button.dataset.category = category;
-      const dot = el('span', 'tb-cat-dot');
-      dot.style.background = placeCategoryMeta[category].color;
-      button.append(dot, document.createTextNode(pickLocale(locale, CATEGORY_LABEL[category])));
-      button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
-      filters.append(button);
-    }
-    body.append(filters);
-
     if (places.length === 0) {
       body.append(emptyState(text.emptyPlacesTitle, text.emptyPlaces));
       return;
     }
-
     for (const category of placeCategoryOrder) {
       const group = places.filter((place) => place.category === category);
       if (!group.length) continue;
@@ -481,6 +471,32 @@ export function mountCity(
       }
       body.append(list);
     }
+  };
+
+  const renderPlaceResults = () => {
+    body.querySelectorAll('.tb-cat-head, .tb-place-list, .tb-empty').forEach((node) => node.remove());
+    appendPlaceGroups();
+  };
+
+  const renderPlaces = () => {
+    const locale = shell.locale();
+    const text = copy(locale);
+    body.replaceChildren();
+    const filters = el('div', 'tb-filters');
+    filters.setAttribute('role', 'group');
+    filters.setAttribute('aria-label', text.categories);
+    for (const category of placeCategoryOrder) {
+      const button = el('button', 'tb-btn-outline');
+      button.type = 'button';
+      button.dataset.category = category;
+      const dot = el('span', 'tb-cat-dot');
+      dot.style.background = placeCategoryMeta[category].color;
+      button.append(dot, document.createTextNode(pickLocale(locale, CATEGORY_LABEL[category])));
+      button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
+      filters.append(button);
+    }
+    body.append(filters);
+    appendPlaceGroups();
   };
 
   const renderItinerary = () => {
@@ -544,37 +560,70 @@ export function mountCity(
       const budget = budgetText(day, locale);
       if (budget) section.append(el('p', 'tb-meta tb-budget', budget));
 
-      const list = el('div', 'tb-stop-list');
-      for (const stop of activeStops(day)) {
-        const place = byId.get(stop.placeId);
-        if (!place) continue;
-        const row = el('div', stop.optional ? 'tb-stop is-optional' : 'tb-stop');
-        row.dataset.placeId = place.id;
-        if (index === selectedDayIndex && place.id === currentStopId) {
-          row.setAttribute('aria-current', 'true');
-        }
-        const open = el('button', 'tb-place-main');
-        open.type = 'button';
-        const time = el('time', 'tb-stop-time', stop.time ?? '');
-        if (stop.time) time.dateTime = stop.time;
-        open.append(time);
-        const info = el('span');
-        info.append(el('span', 'tb-stop-name', pickLocale(locale, place.name)));
-        if (stop.note) {
-          info.append(el('span', 'tb-stop-note', pickLocale(locale, stop.note)));
-        }
-        open.append(info);
-        const maps = el('a', 'tb-btn-outline tb-maps', locale === 'pt-BR' ? 'Mapa' : 'Map');
-        maps.href = googleMapsUrl(place, city);
-        maps.target = '_blank';
-        maps.rel = 'noopener';
-        maps.dataset.maps = 'true';
-        row.append(open, maps);
-        list.append(row);
-      }
-      section.append(list);
+      section.append(stopList(day, index, locale));
       body.append(section);
     });
+  };
+
+  const stopList = (day: ItineraryDay, index: number, locale: Locale) => {
+    const list = el('div', 'tb-stop-list');
+    for (const stop of activeStops(day)) {
+      const place = byId.get(stop.placeId);
+      if (!place) continue;
+      const row = el('div', stop.optional ? 'tb-stop is-optional' : 'tb-stop');
+      row.dataset.placeId = place.id;
+      if (index === selectedDayIndex && place.id === currentStopId) {
+        row.setAttribute('aria-current', 'true');
+      }
+      const open = el('button', 'tb-place-main');
+      open.type = 'button';
+      const time = el('time', 'tb-stop-time', stop.time ?? '');
+      if (stop.time) time.dateTime = stop.time;
+      open.append(time);
+      const info = el('span');
+      info.append(el('span', 'tb-stop-name', pickLocale(locale, place.name)));
+      if (stop.note) {
+        info.append(el('span', 'tb-stop-note', pickLocale(locale, stop.note)));
+      }
+      open.append(info);
+      const maps = el('a', 'tb-btn-outline tb-maps', locale === 'pt-BR' ? 'Mapa' : 'Map');
+      maps.href = googleMapsUrl(place, city);
+      maps.target = '_blank';
+      maps.rel = 'noopener';
+      maps.dataset.maps = 'true';
+      row.append(open, maps);
+      list.append(row);
+    }
+    return list;
+  };
+
+  const patchDay = (section: HTMLElement, day: ItineraryDay, index: number) => {
+    const locale = shell.locale();
+    const heading = dayHeading(day);
+    const title = section.querySelector('.tb-day-title');
+    if (title) title.textContent = pickLocale(locale, heading.title);
+    const summaryText = heading.summary ? pickLocale(locale, heading.summary) : '';
+    let summary = section.querySelector<HTMLElement>('.tb-day-summary');
+    if (summaryText) {
+      if (!summary) {
+        summary = el('p', 'tb-meta tb-day-summary', summaryText);
+        title?.after(summary);
+      } else summary.textContent = summaryText;
+    } else summary?.remove();
+    const chosen = selectedArrival(day)?.id;
+    section.querySelectorAll<HTMLButtonElement>('[data-arrival-id]').forEach((button) => {
+      button.setAttribute('aria-pressed', button.dataset.arrivalId === chosen ? 'true' : 'false');
+    });
+    const budget = budgetText(day, locale);
+    let budgetEl = section.querySelector<HTMLElement>('.tb-budget');
+    if (budget) {
+      if (!budgetEl) {
+        budgetEl = el('p', 'tb-meta tb-budget', budget);
+        const anchor = section.querySelector('.tb-locale') ?? summary ?? title;
+        anchor?.after(budgetEl);
+      } else budgetEl.textContent = budget;
+    } else budgetEl?.remove();
+    section.querySelector('.tb-stop-list')?.replaceWith(stopList(day, index, locale));
   };
 
   const closeHotels = () => {
@@ -661,8 +710,9 @@ export function mountCity(
       if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
         closePlace({ focus: false });
       }
+      syncCategoryPressed();
       paintChrome();
-      renderPlaces();
+      renderPlaceResults();
       showPlacePins({ fit: true, pan: false });
       return;
     }
@@ -679,7 +729,11 @@ export function mountCity(
         Boolean(id) && stops.some((stop) => stop.placeId === id && byId.has(stop.placeId));
       if (!stillThere(currentStopId)) currentStopId = null;
       if (currentPlaceId && !stillThere(currentPlaceId)) closePlace({ focus: false });
-      renderItinerary();
+      const section = body.querySelector<HTMLElement>(`[data-day-index="${dayIndex}"]`);
+      if (section) {
+        markSelectedDay();
+        patchDay(section, day, dayIndex);
+      } else renderItinerary();
       showItineraryMap({ fit: true });
       return;
     }
