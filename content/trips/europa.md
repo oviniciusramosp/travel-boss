@@ -57,7 +57,7 @@ dates: 2026-04-09 → 2026-04-13
 - 11:30 [Fórum Romano](place:rom-forum) — Mesmo ingresso do Coliseu
 - 14:30 [Panteão](place:rom-pantheon) — Cúpula e óculo
 - 16:30 [Fontana di Trevi](place:rom-trevi) — Chegar cedo; a vista é gratuita
+- 18:00 [Piazza Venezia](place:rom-piazza-venezia) — Ponto de orientação do centro
 
 Um dia a pé no centro. Os outros lugares de Roma ficam no catálogo da cidade, não neste arquivo.
-- 18:00 [Piazza Venezia](place:rom-piazza-venezia) — Ponto de orientação do centro
 
