@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dayKey, dayOpen, shouldRefit, stopKey } from './view-state';
+import { activeSectionKey, dayKey, dayOpen, shouldRefit, stopKey } from './view-state';
 
 describe('dayOpen', () => {
   const key = dayKey('paris', 1, 'Dia 2 — Oeste');
@@ -21,6 +21,31 @@ describe('stopKey', () => {
       'paris:0:Dia 1:2:par-louvre',
     );
     expect(stopKey('paris', 0, 'Dia 1', 3, undefined, 'Nota')).toBe('paris:0:Dia 1:3:Nota');
+  });
+});
+
+describe('activeSectionKey', () => {
+  it('keeps the section that still covers the top edge', () => {
+    expect(
+      activeSectionKey([
+        { key: 'paris', top: -400, height: 800, ratio: 0.5 },
+        { key: 'milao', top: 400, height: 500, ratio: 0.2 },
+      ]),
+    ).toBe('paris');
+    expect(
+      activeSectionKey([
+        { key: 'paris', top: -20, height: 400, ratio: 0.4 },
+        { key: 'milao', top: -4, height: 500, ratio: 0.9 },
+      ]),
+    ).toBe('milao');
+    expect(
+      activeSectionKey([
+        { key: 'paris', top: -800, height: 400, ratio: 0 },
+        { key: 'milao', top: 80, height: 200, ratio: 1 },
+        { key: 'roma', top: 40, height: 200, ratio: 1 },
+      ]),
+    ).toBe('roma');
+    expect(activeSectionKey([])).toBeNull();
   });
 });
 

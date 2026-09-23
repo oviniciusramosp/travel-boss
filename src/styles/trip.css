@@ -83,7 +83,8 @@
 }
 
 .tb-span__city:hover,
-.tb-span__city:focus-visible {
+.tb-span__city:focus-visible,
+.tb-span__city[aria-current='true'] {
   background: var(--color-hover);
 }
 

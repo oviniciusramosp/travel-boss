@@ -21,9 +21,17 @@ import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { inlineNodes } from './inline';
 import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
-import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
+import {
+  activeSectionKey,
+  dayKey,
+  dayOpen,
+  shouldRefit,
+  stopKey,
+  type FocusMark,
+  type SectionHit,
+} from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
-import { iconButton, iconLink } from '../ui/controls';
+import { iconButton, iconLink, segmented } from '../ui/controls';
 import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
@@ -112,7 +120,12 @@ function emptyNotice(title: string, detail?: string, error = false): HTMLDivElem
   return wrap;
 }
 
-function appendCityBar(article: HTMLElement, trip: Trip, locale: Locale): void {
+function appendCityBar(
+  article: HTMLElement,
+  trip: Trip,
+  locale: Locale,
+  onPick: (key: string) => void,
+): void {
   const bands = cityBands(trip, locale);
   if (!bands.length) return;
   const bar = document.createElement('div');
@@ -146,12 +159,7 @@ function appendCityBar(article: HTMLElement, trip: Trip, locale: Locale): void {
     button.addEventListener('pointerleave', () => hot(false));
     button.addEventListener('focus', () => hot(true));
     button.addEventListener('blur', () => hot(false));
-    button.addEventListener('click', () => {
-      section()?.scrollIntoView({
-        block: 'start',
-        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-      });
-    });
+    button.addEventListener('click', () => onPick(band.key));
     bar.append(button);
   }
   article.append(bar);
@@ -319,7 +327,17 @@ export function mountTrip(
       toast.textContent = '';
     }, 2000);
   };
-  let cityFilter: string | null = null;
+  let activeCity: string | null = null;
+  let userScrolled = false;
+  let holdSpy = false;
+  let spyTimer = 0;
+  let releaseSpy = () => {};
+  let unmountSpy = () => {};
+  const onDocScroll = () => {
+    if (holdSpy) return;
+    userScrolled = true;
+  };
+  main.addEventListener('scroll', onDocScroll, { passive: true });
   let tripRouteEpoch = 0;
   let hasPainted = false;
   let openKeys = new Set<string>();
@@ -425,14 +443,98 @@ export function mountTrip(
       .catch(() => undefined);
   }
 
+  function markActive(slug: string | null) {
+    activeCity = slug;
+    main.querySelectorAll<HTMLButtonElement>('[data-city-filter]').forEach((button) => {
+      const on = slug === null ? button.dataset.cityFilter === 'overview' : button.dataset.cityFilter === slug;
+      button.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
+    main.querySelectorAll<HTMLButtonElement>('[data-span-city]').forEach((button) => {
+      if (slug && button.dataset.spanCity === slug) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
+    const rail = main.querySelector<HTMLElement>('.tb-rail');
+    if (rail) segmented(rail);
+  }
+
+  function holdScrollSpy() {
+    releaseSpy();
+    holdSpy = true;
+    const release = () => {
+      main.removeEventListener('scrollend', release);
+      window.clearTimeout(spyTimer);
+      holdSpy = false;
+      releaseSpy = () => {};
+    };
+    releaseSpy = release;
+    main.addEventListener('scrollend', release);
+    const raw = getComputedStyle(document.documentElement).getPropertyValue('--dur-slow').trim();
+    const parsed = Number.parseFloat(raw);
+    spyTimer = window.setTimeout(release, Number.isFinite(parsed) ? parsed * 4 : 0);
+  }
+
+  function framePins(pins: MapPin[]) {
+    const trip = current;
+    if (!trip || !pins.length) return;
+    const restore = stopPins(trip, null, enabledCategories);
+    map.setPins('stop', pins);
+    map.fit();
+    map.setPins('stop', restore);
+  }
+
+  function focusCity(slug: string | null) {
+    const trip = current;
+    if (!trip) return;
+    if (slug && !trip.cities.some((city) => (city.slug || city.name) === slug)) slug = null;
+    markActive(slug);
+    userScrolled = slug != null;
+    holdScrollSpy();
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+    if (!slug) main.scrollTo({ top: 0, behavior });
+    else {
+      main.querySelector<HTMLElement>(`[data-city="${CSS.escape(slug)}"]`)?.scrollIntoView({
+        block: 'start',
+        behavior,
+      });
+    }
+    framePins(stopPins(trip, slug, enabledCategories));
+  }
+
+  function bindSpy() {
+    unmountSpy();
+    const sections = [...main.querySelectorAll<HTMLElement>('.tb-city-section')];
+    if (sections.length < 2) return;
+    const hits = new Map<string, SectionHit>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!(entry.target instanceof HTMLElement)) continue;
+          const key = entry.target.dataset.city;
+          if (!key) continue;
+          const rootTop = entry.rootBounds?.top ?? 0;
+          hits.set(key, {
+            key,
+            top: entry.boundingClientRect.top - rootTop,
+            height: entry.boundingClientRect.height,
+            ratio: entry.isIntersecting ? entry.intersectionRatio : 0,
+          });
+        }
+        if (holdSpy || !userScrolled) return;
+        const next = activeSectionKey([...hits.values()]);
+        if (!next || next === activeCity) return;
+        markActive(next);
+      },
+      { root: main, threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    for (const section of sections) observer.observe(section);
+    unmountSpy = () => observer.disconnect();
+  }
+
   function syncView(fit: boolean) {
     const trip = current;
-    main.querySelectorAll<HTMLButtonElement>('[data-city-filter]').forEach((button) => {
-      button.setAttribute(
-        'aria-pressed',
-        button.dataset.cityFilter === cityFilter ? 'true' : 'false',
-      );
-    });
+    markActive(activeCity);
     main.querySelectorAll<HTMLButtonElement>('.tb-filters [data-category]').forEach((button) => {
       const category = button.dataset.category as PlaceCategory | undefined;
       button.setAttribute(
@@ -441,9 +543,6 @@ export function mountTrip(
       );
     });
     main.querySelectorAll<HTMLElement>('.tb-city-section').forEach((section) => {
-      const cityOn = !cityFilter || section.dataset.city === cityFilter;
-      section.hidden = !cityOn;
-      if (!cityOn) return;
       section.querySelectorAll<HTMLElement>('li[data-stop]').forEach((item) => {
         const category = item.dataset.category as PlaceCategory | undefined;
         item.hidden = Boolean(category) && !enabledCategories.has(category as PlaceCategory);
@@ -476,7 +575,7 @@ export function mountTrip(
       });
     });
     if (!trip) return;
-    const pins = stopPins(trip, cityFilter, enabledCategories);
+    const pins = stopPins(trip, null, enabledCategories);
     map.setPins('stop', pins);
     map.setPins('place', []);
     map.setPins('hotel', []);
@@ -486,7 +585,6 @@ export function mountTrip(
     const openId = openPlaceId();
     if (!openId || !trip) return;
     const visible = trip.cities.some((city) => {
-      if (cityFilter && city.slug !== cityFilter) return false;
       const record = getTravelCity(city.slug);
       const place = record?.places.find((item) => item.id === openId);
       if (!place || !enabledCategories.has(place.category)) return false;
@@ -759,6 +857,9 @@ export function mountTrip(
     const firstPaint = !hasPainted;
     if (!firstPaint) rememberView();
     current = trip;
+    if (activeCity && !trip.cities.some((city) => (city.slug || city.name) === activeCity)) {
+      activeCity = null;
+    }
     const locale = shell.locale();
     main.replaceChildren();
 
@@ -796,30 +897,31 @@ export function mountTrip(
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
     article.append(head);
-    appendCityBar(article, trip, locale);
+    appendCityBar(article, trip, locale, (key) => focusCity(key));
 
     if (trip.cities.length > 1) {
       const rail = document.createElement('div');
       rail.className = 'tb-rail';
+      rail.setAttribute('role', 'group');
       rail.setAttribute(
         'aria-label',
-        locale === 'pt-BR' ? 'Cidades do roteiro' : 'Trip cities',
+        pickLocale(locale, { en: 'Trip cities', 'pt-BR': 'Cidades do roteiro' }),
       );
+      const overview = document.createElement('button');
+      overview.type = 'button';
+      overview.className = 'tb-nav';
+      overview.dataset.cityFilter = 'overview';
+      overview.textContent = pickLocale(locale, { en: 'Overview', 'pt-BR': 'Visão geral' });
+      overview.addEventListener('click', () => focusCity(null));
+      rail.append(overview);
       for (const city of trip.cities) {
+        const key = city.slug || city.name;
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'tb-nav';
-        button.dataset.cityFilter = city.slug;
+        button.dataset.cityFilter = key;
         button.textContent = city.name;
-        button.setAttribute('aria-pressed', cityFilter === city.slug ? 'true' : 'false');
-        button.addEventListener('click', () => {
-          cityFilter = cityFilter === city.slug ? null : city.slug;
-          syncView(true);
-          if (!cityFilter) return;
-          article
-            .querySelector<HTMLElement>(`[data-city="${CSS.escape(city.slug || city.name)}"]`)
-            ?.scrollIntoView({ block: 'start' });
-        });
+        button.addEventListener('click', () => focusCity(key));
         rail.append(button);
       }
       article.append(rail);
@@ -938,7 +1040,7 @@ export function mountTrip(
           event.preventDefault();
           event.stopPropagation();
           if (!current || !dayPoints.length) return;
-          const restore = stopPins(current, cityFilter, enabledCategories);
+          const restore = stopPins(current, null, enabledCategories);
           map.setPins('stop', dayPoints);
           map.fit();
           map.setPins('stop', restore);
@@ -1145,14 +1247,19 @@ export function mountTrip(
         ?.setAttribute('aria-current', 'true');
     }
     restoreFocus();
+    holdSpy = true;
     main.scrollTop = firstPaint ? 0 : scrollTop;
+    window.requestAnimationFrame(() => {
+      holdSpy = false;
+    });
     applyQuery();
     hasPainted = true;
     syncView(
-      shouldRefit(firstPaint, stopPins(trip, cityFilter, enabledCategories), seenPinIds, (lat, lng) =>
+      shouldRefit(firstPaint, stopPins(trip, null, enabledCategories), seenPinIds, (lat, lng) =>
         map.inView(lat, lng),
       ),
     );
+    bindSpy();
     shell.setSource(trip.file);
     if (updated) flashSource(trip.file);
     previousTrip = trip;
@@ -1207,6 +1314,10 @@ export function mountTrip(
     dispose() {
       alive = false;
       unmountWarnings();
+      unmountSpy();
+      releaseSpy();
+      main.removeEventListener('scroll', onDocScroll);
+      window.clearTimeout(spyTimer);
       document.removeEventListener('visibilitychange', onVisible);
       window.removeEventListener('focus', onVisible);
       window.clearTimeout(statusTimer);

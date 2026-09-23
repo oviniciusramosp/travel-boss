@@ -38,6 +38,24 @@ export type FocusMark =
 
 export type SeenPin = { id: string; lat: number; lng: number };
 
+export type SectionHit = { key: string; top: number; height: number; ratio: number };
+
+/**
+ * The section that owns the top of the scrollport.
+ * A later section wins once its top crosses that edge. Nothing visible returns null.
+ */
+export function activeSectionKey(items: readonly SectionHit[]): string | null {
+  const visible = items.filter((item) => item.ratio > 0 && item.height > 0);
+  if (!visible.length) return null;
+  const covering = visible.filter((item) => item.top <= 0 && item.top + item.height > 0);
+  if (covering.length) {
+    covering.sort((a, b) => b.top - a.top);
+    return covering[0]?.key ?? null;
+  }
+  visible.sort((a, b) => a.top - b.top);
+  return visible[0]?.key ?? null;
+}
+
 /**
  * Live save does not fit. A new pin outside the current view does.
  * The first paint fits when there is something to frame.
