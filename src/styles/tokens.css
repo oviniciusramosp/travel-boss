@@ -104,6 +104,49 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Saved choice. System dark applies only while data-theme is absent. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-canvas: #111111;
+  --color-paper: #1c1c1c;
+  --color-surface-alt: #161616;
+  --color-ink: #f5f5f5;
+  --color-ink-soft: #e5e5e5;
+  --color-mid-gray: #a3a3a3;
+  --color-hairline: #2a2a2a;
+  --color-ember: #ff4d4d;
+  --color-ember-text: #ff8a80;
+  --color-on-ink: #111111;
+  --color-hover: rgba(245, 245, 245, 0.06);
+  --color-press: rgba(245, 245, 245, 0.1);
+  --shadow-subtle: 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 12px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-canvas: #111111;
+    --color-paper: #1c1c1c;
+    --color-surface-alt: #161616;
+    --color-ink: #f5f5f5;
+    --color-ink-soft: #e5e5e5;
+    --color-mid-gray: #a3a3a3;
+    --color-hairline: #2a2a2a;
+    --color-ember: #ff4d4d;
+    --color-ember-text: #ff8a80;
+    --color-on-ink: #111111;
+    --color-hover: rgba(245, 245, 245, 0.06);
+    --color-press: rgba(245, 245, 245, 0.1);
+    --shadow-subtle: 0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+    --shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 12px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur-instant: 0ms;
