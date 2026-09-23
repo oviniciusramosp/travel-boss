@@ -1,10 +1,28 @@
 /**
  * City itinerary tab (not the `#/trip/` document).
- * Counts, budget tips and the Google Maps link for one day.
+ * Day header, budgets and the route action. Later phases add periods,
+ * hops and editing on top of these helpers.
  */
-import { dayPrimaryRoutePlaceIds, pickLocale, resolveVisit, travelUi } from '../catalog';
-import type { ItineraryDay, ItineraryStop, Locale, TravelPlace } from '../catalog';
+import {
+  computeDayBudget,
+  computeTripBudget,
+  dayPrimaryRoutePlaceIds,
+  pickLocale,
+  resolveVisit,
+  travelUi,
+} from '../catalog';
+import type {
+  DayBudget,
+  ItineraryDay,
+  ItineraryStop,
+  Locale,
+  TravelItinerary,
+  TravelPlace,
+} from '../catalog';
 import { googleDirectionsUrl } from '../trip/directions';
+import { iconButton } from '../ui/controls';
+import { el } from '../ui/dom';
+import { icon } from '../ui/icons';
 
 export type RoutePhase = 'idle' | 'drawing' | 'on';
 
@@ -101,4 +119,163 @@ export function moneyTip(
     parts.push(`${pickLocale(locale, place.name)} ${formatEur(amount, locale)}`);
   }
   return parts.join(' · ');
+}
+
+export function paintRouteButton(button: HTMLButtonElement, phase: RoutePhase, locale: Locale): void {
+  const label = routeActionLabel(phase, locale);
+  button.setAttribute('aria-label', label);
+  button.setAttribute('data-tip', label);
+  button.setAttribute('aria-pressed', phase === 'on' ? 'true' : 'false');
+  button.disabled = phase === 'drawing';
+  button.classList.toggle('is-drawing', phase === 'drawing');
+}
+
+function budgetChip(
+  glyph: 'restaurant' | 'local_activity',
+  amount: number,
+  label: string,
+  unit: string,
+  tip: string,
+  locale: Locale,
+): HTMLElement {
+  const chip = el('span', 'tb-budget-chip');
+  chip.tabIndex = 0;
+  const figure = formatEur(amount, locale);
+  const detail = tip || label;
+  chip.setAttribute('aria-label', `${label} ${figure}. ${detail}`);
+  chip.setAttribute('data-tip', detail);
+  chip.append(icon(glyph, { size: 16 }));
+  chip.append(el('strong', undefined, figure));
+  chip.append(el('span', 'tb-budget-chip__unit', unit));
+  return chip;
+}
+
+function budgetGroup(
+  budget: Pick<DayBudget, 'foodEur' | 'ticketsEur' | 'foodPlaceIds' | 'ticketPlaceIds'>,
+  places: Map<string, TravelPlace>,
+  locale: Locale,
+  groupLabel: string,
+): HTMLElement | null {
+  if (budget.foodEur <= 0 && budget.ticketsEur <= 0) return null;
+  const group = el('div', 'tb-budgets');
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', groupLabel);
+  const unit = pickLocale(locale, travelUi.itineraryPerPerson);
+  group.append(
+    budgetChip(
+      'restaurant',
+      budget.foodEur,
+      pickLocale(locale, travelUi.itineraryFood),
+      unit,
+      moneyTip(budget.foodPlaceIds, places, locale, 'food'),
+      locale,
+    ),
+    budgetChip(
+      'local_activity',
+      budget.ticketsEur,
+      pickLocale(locale, travelUi.itineraryParks),
+      unit,
+      moneyTip(budget.ticketPlaceIds, places, locale, 'ticket'),
+      locale,
+    ),
+  );
+  return group;
+}
+
+function tripBudgetParts(
+  itinerary: TravelItinerary,
+  places: Map<string, TravelPlace>,
+): DayBudget {
+  const foodPlaceIds: string[] = [];
+  const ticketPlaceIds: string[] = [];
+  for (const day of itinerary.days) {
+    const budget = computeDayBudget(budgetDay(day), places);
+    foodPlaceIds.push(...budget.foodPlaceIds);
+    ticketPlaceIds.push(...budget.ticketPlaceIds);
+  }
+  const totals = computeTripBudget(itinerary, places);
+  return { ...totals, foodPlaceIds, ticketPlaceIds };
+}
+
+/** Title plus the catalog total. The figure is `computeTripBudget`. */
+export function itineraryIntro(
+  itinerary: TravelItinerary,
+  places: Map<string, TravelPlace>,
+  locale: Locale,
+): HTMLElement {
+  const head = el('header', 'tb-itin-head');
+  head.append(el('h2', 'tb-itin-title', pickLocale(locale, itinerary.title)));
+  const group = budgetGroup(
+    tripBudgetParts(itinerary, places),
+    places,
+    locale,
+    pickLocale(locale, travelUi.itineraryTripBudgetGroup),
+  );
+  if (group) head.append(group);
+  return head;
+}
+
+export function dayBudgetEl(
+  day: ItineraryDay,
+  stops: readonly ItineraryStop[],
+  places: Map<string, TravelPlace>,
+  locale: Locale,
+): HTMLElement | null {
+  const budget = computeDayBudget({ ...day, stops: [...stops] }, places);
+  return budgetGroup(budget, places, locale, pickLocale(locale, travelUi.itineraryBudgetGroup));
+}
+
+function mapsLink(url: string | null, label: string): HTMLAnchorElement {
+  const link = el('a', 'tb-icon-btn tb-icon-btn--ghost tb-icon-btn--md');
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.dataset.maps = 'true';
+  link.dataset.dayGmaps = 'true';
+  link.setAttribute('aria-label', label);
+  link.setAttribute('data-tip', label);
+  link.append(icon('map', { size: 18 }));
+  if (url) link.href = url;
+  else {
+    link.setAttribute('aria-disabled', 'true');
+    link.tabIndex = -1;
+  }
+  link.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (!url) event.preventDefault();
+  });
+  return link;
+}
+
+/** Badge, stop count for the chosen arrival, and the hover actions. */
+export function daySummary(opts: {
+  dayNumber: number;
+  stops: readonly ItineraryStop[];
+  phase: RoutePhase;
+  mapsUrl: string | null;
+  locale: Locale;
+  onRoute: () => void;
+}): HTMLElement {
+  const summary = el('summary', 'tb-day__summary');
+  const count = primaryStopCount(opts.stops);
+  summary.append(
+    el('span', 'tb-badge', `${pickLocale(opts.locale, travelUi.itineraryDay)} ${opts.dayNumber}`),
+    el('span', 'tb-day__count', stopCountLabel(count, opts.locale)),
+  );
+  const actions = el('span', 'tb-day__actions');
+  const mapsLabel = pickLocale(opts.locale, travelUi.itineraryOpenGoogleMaps);
+  const route = iconButton({
+    icon: 'route',
+    label: routeActionLabel(opts.phase, opts.locale),
+    pressed: opts.phase === 'on',
+  });
+  route.classList.add('tb-day__route');
+  paintRouteButton(route, opts.phase, opts.locale);
+  route.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    opts.onRoute();
+  });
+  actions.append(mapsLink(opts.mapsUrl, mapsLabel), route);
+  summary.append(actions);
+  return summary;
 }
