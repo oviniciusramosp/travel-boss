@@ -2,6 +2,7 @@
 
 - `el` — `src/ui/dom.ts`. Cria um elemento, aplica `className` e, se vier texto, `textContent`.
 - `prefersReducedMotion` — `src/ui/motion.ts`. Lê `prefers-reduced-motion`. A câmera usa `cameraMotion`: 0,45 s, ou corte instantâneo.
+- `icon` — `src/ui/icons.ts`. Único jeito de desenhar um glifo. O nome entra em `ICONS` (ordenado, sem repetir); o teste falha se uma categoria ou subcategoria ficar de fora.
 
 ## Raio concêntrico
 

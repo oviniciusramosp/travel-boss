@@ -4,6 +4,7 @@ import '@fontsource/geist-sans/600.css';
 import 'leaflet/dist/leaflet.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './styles/tokens.css';
+import './styles/icons.css';
 import './styles/app.css';
 import './styles/places.css';
 import './styles/trip.css';

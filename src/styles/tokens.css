@@ -45,6 +45,10 @@
   --h-md: 28px;
   --h-lg: 32px;
 
+  --icon-sm: 16px;
+  --icon-md: 18px;
+  --icon-lg: 20px;
+
   --r-none: 0px;
   --r-min: 4px;
   --r-pill: 999px;

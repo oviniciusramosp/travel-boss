@@ -29,6 +29,12 @@ export { legsForDay } from '../data/travel-itinerary-legs';
 export type { ItineraryLegDef } from '../data/travel-itinerary-legs';
 
 export { placeCategoriesOffByDefault } from '../data/travel-categories';
+export {
+  MAPS_MATERIAL_ICON,
+  categoryMaterialName,
+  placePinIconHtml,
+} from '../data/travel-categories';
+export { subcategoryLabel } from '../data/travel-subcategories';
 
 export type {
   Locale,
