@@ -13,6 +13,7 @@ import type { PlaceCategory, TravelPlace } from '../catalog';
 import type { MapHandle, MapPin, MapRouteSegment } from '../map/types';
 import { fetchWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
+import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
 import { directionsMode, googleDirectionsUrl } from './directions';
 import { tripErrorText } from './errors';
@@ -34,15 +35,17 @@ import { parseTrip, type Trip } from './parse';
 
 type TripFile = { id: string; file: string; raw: string };
 
-const tripFileListeners = new Set<() => void>();
+const tripFileListeners = new Set<(event: TripPush) => void>();
 let tripHotBound = false;
 
-function onTripFiles(fn: () => void): () => void {
+function onTripFiles(fn: (event: TripPush) => void): () => void {
   tripFileListeners.add(fn);
   if (!tripHotBound && import.meta.hot) {
     tripHotBound = true;
-    import.meta.hot.on('tb:trip', () => {
-      for (const listener of tripFileListeners) listener();
+    import.meta.hot.on('tb:trip', (data) => {
+      const event = data as TripPush;
+      if (!event?.id) return;
+      for (const listener of tripFileListeners) listener(event);
     });
   }
   return () => {
@@ -55,6 +58,17 @@ export async function loadTripFiles(): Promise<TripFile[]> {
   if (!response.ok) throw new Error(`trip api ${response.status}`);
   const data = (await response.json()) as TripFile[];
   if (!Array.isArray(data)) throw new Error('trip api');
+  return data;
+}
+
+export async function loadTripFile(id: string): Promise<TripFile | null> {
+  const response = await fetch(`/api/trips/${encodeURIComponent(id)}`);
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error(`trip api ${response.status}`);
+  const data = (await response.json()) as TripFile;
+  if (!data || typeof data.raw !== 'string' || typeof data.id !== 'string') {
+    throw new Error('trip api');
+  }
   return data;
 }
 
@@ -167,7 +181,9 @@ export function mountTripNav(
   };
 
   refresh();
-  onTripFiles(refresh);
+  onTripFiles((event) => {
+    if (event.reason === 'add' || event.reason === 'unlink') refresh();
+  });
 
   return {
     setActive(id) {
@@ -381,8 +397,9 @@ export function mountTrip(
     if (!visible) closePlace({ focus: false });
   }
 
-  const offFiles = onTripFiles(() => {
-    if (alive) void render();
+  const offFiles = onTripFiles((event) => {
+    if (!alive || event.id !== id) return;
+    void render();
   });
 
   const offClose = onPlaceClose(() => {
@@ -769,9 +786,8 @@ export function mountTrip(
 
   async function render() {
     try {
-      const files = await loadTripFiles();
+      const file = await loadTripFile(id);
       if (!alive) return;
-      const file = files.find((item) => item.id === id);
       if (file && file.raw === lastRaw && current && !failure) return;
       if (!file) {
         showFailure('missing');
@@ -797,14 +813,18 @@ export function mountTrip(
   });
 
   void render();
-  const poll = window.setInterval(() => {
-    if (alive) void render();
-  }, 800);
+  const onVisible = () => {
+    if (!alive || document.visibilityState === 'hidden') return;
+    void render();
+  };
+  document.addEventListener('visibilitychange', onVisible);
+  window.addEventListener('focus', onVisible);
 
   return {
     dispose() {
       alive = false;
-      window.clearInterval(poll);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', onVisible);
       window.clearTimeout(statusTimer);
       window.clearTimeout(sourceTimer);
       toast.remove();

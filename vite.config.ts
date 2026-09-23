@@ -1,7 +1,8 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import { hotelSearchVite } from './scripts/vite-hotel-plugin.mjs';
+import { parseTripRequest, tripIdFromPath, type TripPushReason } from './src/trip/api';
 import { ICON_FONT_HREF } from './src/ui/icons';
 
 const tripsDir = resolve(process.cwd(), 'content/trips');
@@ -16,20 +17,38 @@ function tripApi(): Plugin {
     name: 'trip-api',
     configureServer(server) {
       server.middlewares.use('/api/trips', (req, res, next) => {
-        const path = (req.url ?? '/').split('?')[0] ?? '/';
-        if (req.method !== 'GET' || (path !== '/' && path !== '')) return next();
+        if (req.method !== 'GET') return next();
+        const target = parseTripRequest(req.url);
+        if (target === null) return next();
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.setHeader('Cache-Control', 'no-store');
         try {
-          const files = readdirSync(tripsDir).filter(
-            (name) => name.endsWith('.md') && !name.startsWith('.'),
+          if (target === 'list') {
+            const files = readdirSync(tripsDir).filter(
+              (name) => name.endsWith('.md') && !name.startsWith('.'),
+            );
+            const trips = files.map((name) => ({
+              id: basename(name, '.md'),
+              file: `content/trips/${name}`,
+              raw: readFileSync(join(tripsDir, name), 'utf8'),
+            }));
+            res.end(JSON.stringify(trips));
+            return;
+          }
+          const filename = `${target}.md`;
+          const full = join(tripsDir, filename);
+          if (!existsSync(full)) {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: 'not found' }));
+            return;
+          }
+          res.end(
+            JSON.stringify({
+              id: target,
+              file: `content/trips/${filename}`,
+              raw: readFileSync(full, 'utf8'),
+            }),
           );
-          const trips = files.map((name) => ({
-            id: basename(name, '.md'),
-            file: `content/trips/${name}`,
-            raw: readFileSync(join(tripsDir, name), 'utf8'),
-          }));
-          res.end(JSON.stringify(trips));
         } catch (err) {
           res.statusCode = 500;
           res.end(
@@ -41,14 +60,14 @@ function tripApi(): Plugin {
       });
 
       server.watcher.add(tripsDir);
-      const notify = (file: string) => {
-        const normalized = file.replaceAll('\\', '/');
-        if (!normalized.includes('/content/trips/') || !normalized.endsWith('.md')) return;
-        server.ws.send({ type: 'custom', event: 'tb:trip' });
+      const notify = (file: string, reason: TripPushReason) => {
+        const id = tripIdFromPath(file);
+        if (!id) return;
+        server.ws.send({ type: 'custom', event: 'tb:trip', data: { id, reason } });
       };
-      server.watcher.on('add', notify);
-      server.watcher.on('change', notify);
-      server.watcher.on('unlink', notify);
+      server.watcher.on('add', (file) => notify(file, 'add'));
+      server.watcher.on('change', (file) => notify(file, 'change'));
+      server.watcher.on('unlink', (file) => notify(file, 'unlink'));
     },
   };
 }
