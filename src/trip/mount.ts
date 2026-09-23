@@ -184,6 +184,23 @@ export function mountTrip(
   let current: Trip | null = null;
   let lastRaw = '';
   let statusTimer = 0;
+  const toast = document.createElement('p');
+  toast.className = 'tb-toast';
+  toast.setAttribute('role', 'status');
+  toast.hidden = true;
+  document.body.append(toast);
+
+  const showToast = (message: string, error = false) => {
+    window.clearTimeout(statusTimer);
+    toast.hidden = false;
+    toast.textContent = message;
+    toast.classList.toggle('tb-error', error);
+    if (error) return;
+    statusTimer = window.setTimeout(() => {
+      toast.hidden = true;
+      toast.textContent = '';
+    }, 2000);
+  };
   let cityFilter: string | null = null;
   let tripRouteEpoch = 0;
   const enabledCategories = new Set<PlaceCategory>(placeCategoryOrder);
@@ -295,24 +312,13 @@ export function mountTrip(
     try {
       await copyTrip(markdown, html);
       downloadTrip(`${current.id}.md`, markdown);
-      const status = main.querySelector<HTMLElement>('[data-export-status]');
-      if (status) {
-        status.textContent =
-          locale === 'pt-BR'
-            ? 'Copiado para colar no Notes ou no Notion.'
-            : 'Copied for Notes or Notion.';
-        window.clearTimeout(statusTimer);
-        statusTimer = window.setTimeout(() => {
-          status.textContent = '';
-        }, 2000);
-      }
+      showToast(
+        locale === 'pt-BR'
+          ? 'Copiado para colar no Notes ou no Notion.'
+          : 'Copied for Notes or Notion.',
+      );
     } catch (error) {
-      const status = main.querySelector<HTMLElement>('[data-export-status]');
-      if (status) {
-        status.textContent =
-          error instanceof Error ? error.message : 'Falha ao copiar';
-        status.classList.add('tb-error');
-      }
+      showToast(error instanceof Error ? error.message : 'Falha ao copiar', true);
     }
   }
 
@@ -329,11 +335,6 @@ export function mountTrip(
     title.className = 'tb-doc-title';
     title.textContent = trip.title;
     article.append(title);
-
-    const status = document.createElement('p');
-    status.className = 'tb-meta';
-    status.dataset.exportStatus = '';
-    article.append(status);
 
     if (trip.errors.length) {
       const problems = document.createElement('p');
@@ -576,6 +577,7 @@ export function mountTrip(
       alive = false;
       window.clearInterval(poll);
       window.clearTimeout(statusTimer);
+      toast.remove();
       offLocale();
       offQuery();
       offExport();
