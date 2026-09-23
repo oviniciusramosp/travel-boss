@@ -337,3 +337,27 @@
     }
   }
 }
+
+/* Days, categories, periods. Without interpolate-size the toggle is instant. */
+.tb-day,
+.tb-group,
+.tb-slot {
+  interpolate-size: allow-keywords;
+}
+
+.tb-day::details-content,
+.tb-group::details-content,
+.tb-slot::details-content {
+  height: 0;
+  overflow: clip;
+  transition:
+    height var(--dur-base) var(--ease-in-out),
+    content-visibility var(--dur-base) allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+.tb-day[open]::details-content,
+.tb-group[open]::details-content,
+.tb-slot[open]::details-content {
+  height: auto;
+}
