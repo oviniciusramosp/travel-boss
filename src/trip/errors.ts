@@ -28,3 +28,15 @@ const TEXT: Record<TripErrorCode, { en: string; 'pt-BR': string }> = {
 export function tripErrorText(error: TripError, locale: Locale): string {
   return pickLocale(locale, TEXT[error.code]).replaceAll('{detail}', error.detail ?? '');
 }
+
+export function warningCountLabel(count: number, locale: Locale): string {
+  if (locale === 'pt-BR') return count === 1 ? '1 aviso' : `${count} avisos`;
+  return count === 1 ? '1 warning' : `${count} warnings`;
+}
+
+/** One line per warning, ready to paste back to the model that edits the file. */
+export function warningCopyText(file: string, errors: readonly TripError[], locale: Locale): string {
+  return errors
+    .map((error) => `${file}:${error.line} — ${tripErrorText(error, locale)}`)
+    .join('\n');
+}

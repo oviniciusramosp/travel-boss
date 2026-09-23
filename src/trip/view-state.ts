@@ -30,7 +30,9 @@ export type FocusMark =
   | { kind: 'day'; key: string }
   | { kind: 'stop'; key: string; action?: string }
   | { kind: 'category'; id: string }
-  | { kind: 'city'; id: string };
+  | { kind: 'city'; id: string }
+  | { kind: 'warn' }
+  | { kind: 'warn-copy' };
 
 export type SeenPin = { id: string; lat: number; lng: number };
 

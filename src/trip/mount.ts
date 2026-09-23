@@ -17,13 +17,14 @@ import { setDocumentTitle } from '../app/router';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
 import { googleDirectionsUrl } from './directions';
-import { tripErrorText } from './errors';
+import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { inlineNodes } from './inline';
 import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconLink } from '../ui/controls';
+import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
 import {
@@ -254,6 +255,7 @@ export function mountTrip(
   let lastRaw = '';
   let statusTimer = 0;
   let sourceTimer = 0;
+  let unmountWarnings = () => {};
   const toast = document.createElement('p');
   toast.className = 'tb-toast';
   toast.setAttribute('role', 'status');
@@ -527,7 +529,15 @@ export function mountTrip(
       return;
     }
     const city = active.closest<HTMLElement>('[data-city-filter]');
-    if (city?.dataset.cityFilter) focusMark = { kind: 'city', id: city.dataset.cityFilter };
+    if (city?.dataset.cityFilter) {
+      focusMark = { kind: 'city', id: city.dataset.cityFilter };
+      return;
+    }
+    if (active.closest('[data-warn-copy]')) {
+      focusMark = { kind: 'warn-copy' };
+      return;
+    }
+    if (active.closest('[data-warnings]')) focusMark = { kind: 'warn' };
   }
 
   function restoreFocus() {
@@ -543,8 +553,12 @@ export function mountTrip(
         : (row?.querySelector<HTMLElement>('.tb-row__main') ?? null);
     } else if (mark.kind === 'category') {
       target = main.querySelector(`[data-category="${CSS.escape(mark.id)}"]`);
-    } else {
+    } else if (mark.kind === 'city') {
       target = main.querySelector(`[data-city-filter="${CSS.escape(mark.id)}"]`);
+    } else if (mark.kind === 'warn') {
+      target = main.querySelector('[data-warnings] > button');
+    } else {
+      target = main.querySelector('[data-warn-copy]');
     }
     target?.focus({ preventScroll: true });
   }
@@ -575,6 +589,102 @@ export function mountTrip(
     }, ms);
   }
 
+  function warningBadge(trip: Trip, locale: ReturnType<Shell['locale']>): HTMLDivElement {
+    const wrap = document.createElement('div');
+    wrap.className = 'tb-warn';
+    wrap.dataset.warnings = '';
+    const badge = document.createElement('button');
+    badge.type = 'button';
+    badge.className = 'tb-warn__badge';
+    badge.append(
+      icon('warning', { size: 16 }),
+      document.createTextNode(warningCountLabel(trip.errors.length, locale)),
+    );
+    badge.setAttribute('aria-expanded', 'false');
+
+    const panel = document.createElement('div');
+    panel.className = 'tb-popover';
+    panel.dataset.popover = '';
+    panel.hidden = true;
+    const list = document.createElement('ul');
+    list.className = 'tb-warn-list';
+    for (const error of trip.errors) {
+      const item = document.createElement('li');
+      item.textContent = `${error.line}: ${tripErrorText(error, locale)}`;
+      list.append(item);
+    }
+    const copy = document.createElement('button');
+    copy.type = 'button';
+    copy.className = 'tb-btn-outline';
+    copy.dataset.warnCopy = '';
+    copy.append(
+      icon('content_copy', { size: 16 }),
+      document.createTextNode(
+        pickLocale(locale, { en: 'Copy for the LLM', 'pt-BR': 'Copiar para o LLM' }),
+      ),
+    );
+    copy.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const text = warningCopyText(trip.file, trip.errors, locale);
+      void navigator.clipboard.writeText(text).then(
+        () => showToast(pickLocale(locale, { en: 'Warnings copied', 'pt-BR': 'Avisos copiados' })),
+        () => showToast(pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' }), true),
+      );
+    });
+    panel.append(list, copy);
+    wrap.append(badge, panel);
+
+    let hold = false;
+    let timer = 0;
+    const place = () => {
+      const rect = badge.getBoundingClientRect();
+      panel.style.left = `${rect.left}px`;
+      panel.style.top = `${rect.bottom}px`;
+    };
+    const show = () => {
+      window.clearTimeout(timer);
+      panel.hidden = false;
+      badge.setAttribute('aria-expanded', 'true');
+      place();
+    };
+    const hide = () => {
+      hold = false;
+      panel.hidden = true;
+      badge.setAttribute('aria-expanded', 'false');
+    };
+    const hideSoon = () => {
+      window.clearTimeout(timer);
+      const raw = getComputedStyle(document.documentElement).getPropertyValue('--dur-fast').trim();
+      const delay = Number.parseFloat(raw);
+      timer = window.setTimeout(() => {
+        if (!hold) hide();
+      }, Number.isFinite(delay) ? delay : 0);
+    };
+    badge.addEventListener('click', () => {
+      if (panel.hidden) {
+        hold = true;
+        show();
+      } else hide();
+    });
+    wrap.addEventListener('pointerenter', show);
+    wrap.addEventListener('pointerleave', hideSoon);
+    const onDoc = (event: PointerEvent) => {
+      if (event.target instanceof Node && wrap.contains(event.target)) return;
+      hide();
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') hold = false;
+    };
+    document.addEventListener('pointerdown', onDoc);
+    window.addEventListener('keydown', onKey);
+    unmountWarnings = () => {
+      window.clearTimeout(timer);
+      document.removeEventListener('pointerdown', onDoc);
+      window.removeEventListener('keydown', onKey);
+    };
+    return wrap;
+  }
+
   function paint(trip: Trip, updated = false) {
     const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
@@ -597,20 +707,16 @@ export function mountTrip(
     article.className = 'tb-doc';
     article.dataset.tripId = trip.id;
 
+    const head = document.createElement('header');
+    head.className = 'tb-doc-head';
     const title = document.createElement('h1');
     title.className = 'tb-doc-title';
     title.textContent = trip.title;
-    article.append(title);
-
-    if (trip.errors.length) {
-      const problems = document.createElement('p');
-      problems.className = 'tb-meta';
-      problems.textContent = trip.errors
-        .slice(0, 4)
-        .map((error) => tripErrorText(error, locale))
-        .join(' · ');
-      article.append(problems);
-    }
+    head.append(title);
+    unmountWarnings();
+    unmountWarnings = () => {};
+    if (trip.errors.length) head.append(warningBadge(trip, locale));
+    article.append(head);
 
     if (trip.cities.length > 1) {
       const rail = document.createElement('div');
@@ -946,6 +1052,7 @@ export function mountTrip(
   return {
     dispose() {
       alive = false;
+      unmountWarnings();
       document.removeEventListener('visibilitychange', onVisible);
       window.removeEventListener('focus', onVisible);
       window.clearTimeout(statusTimer);

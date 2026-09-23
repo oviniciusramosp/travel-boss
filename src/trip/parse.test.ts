@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { tripErrorText } from './errors';
+import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { parseTrip } from './parse';
 
 const sample = `# Europa
@@ -255,5 +255,18 @@ describe('tripErrorText', () => {
     expect(
       tripErrorText({ line: 4, code: 'place-missing', detail: 'rom-nao-existe' }, 'en'),
     ).toBe('place not found: rom-nao-existe');
+  });
+
+  it('labels the badge and copies file, line and message for the LLM', () => {
+    expect(warningCountLabel(1, 'pt-BR')).toBe('1 aviso');
+    expect(warningCountLabel(2, 'pt-BR')).toBe('2 avisos');
+    expect(warningCountLabel(1, 'en')).toBe('1 warning');
+    expect(
+      warningCopyText(
+        'content/trips/europa.md',
+        [{ line: 12, code: 'via-no-mode' }],
+        'pt-BR',
+      ),
+    ).toBe('content/trips/europa.md:12 — via sem modo');
   });
 });
