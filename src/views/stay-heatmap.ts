@@ -1,5 +1,8 @@
 import { pickLocale, type Locale } from '../catalog';
+import type { StayZone } from '../data/travel-stay-heatmap';
 import type { Map as LeafletMap } from 'leaflet';
+import { el } from '../ui/dom';
+import { icon } from '../ui/icons';
 import { leafletMap } from './hotel-ring';
 
 type Copy = { en: string; 'pt-BR': string };
@@ -15,12 +18,34 @@ type Zone = {
   value: number;
 };
 
-type StudyZone = Zone & {
+type StudyZone = {
+  id: string;
+  citySlug: string;
+  name: Copy;
+  note: Copy;
+  lat: number;
+  lng: number;
+  radiusM: number;
   mapBand: Band;
   polygons: Polygons;
   safety: number | null;
   reviewedAt?: string;
   reviewStatus?: string;
+  sources?: { title?: string; url?: string }[];
+};
+
+type PopupZone = {
+  id: string;
+  citySlug?: string;
+  name: Copy;
+  note: Copy;
+  lat: number;
+  lng: number;
+  radiusM?: number;
+  safety: number | null;
+  value?: number | null;
+  polygons?: Polygons;
+  reviewedAt?: string;
   sources?: { title?: string; url?: string }[];
 };
 
@@ -34,6 +59,16 @@ const BANDS: readonly Band[] = ['best', 'mixed', 'caution', 'unknown'];
 /** Mirrors `stayZonesForCity`. The heavy geometry stays behind a dynamic import. */
 export function cityHasStayHeat(slug: string): boolean {
   return slug === 'lisboa' || slug === 'roma';
+}
+
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** Trip or form dates. An inverted range does not go into the OTA links. */
+export function usableStayDates(
+  dates: { checkin: string; checkout: string } | null | undefined,
+): { checkin: string; checkout: string } | null {
+  if (!dates || !ISO_DATE.test(dates.checkin) || !ISO_DATE.test(dates.checkout)) return null;
+  return dates.checkout > dates.checkin ? dates : null;
 }
 
 export type StayHeatHandle = {
@@ -57,15 +92,17 @@ export function mountStayHeat(opts: {
   slug: string;
   button: HTMLButtonElement;
   locale: () => Locale;
+  dates: () => { checkin: string; checkout: string } | null;
 }): StayHeatHandle {
   const say = (copy: Copy) => pickLocale(opts.locale(), copy);
   let on = false;
   let ready: Promise<void> | null = null;
   let map: LeafletMap | null = null;
-  let zones: Zone[] = [];
+  let zones: StayZone[] = [];
   let study: StudyZone[] = [];
   let display: DisplayFile | null = null;
   let api: HeatApi | null = null;
+  let heatMod: typeof import('../data/travel-stay-heatmap') | null = null;
   let L: typeof import('leaflet') | null = null;
   const enabled = new Set<Band>(['best', 'mixed', 'caution']);
   let legend: HTMLElement | null = null;
@@ -88,6 +125,100 @@ export function mountStayHeat(opts: {
 
   const polygonsOf = (id: string): Polygons => display?.zones[id]?.polygons ?? [];
 
+  const coverRadius = (zone: PopupZone): number => {
+    const polygons = zone.polygons ?? polygonsOf(zone.id);
+    let max = zone.radiusM && zone.radiusM > 0 ? zone.radiusM : 200;
+    for (const polygon of polygons) {
+      for (const ring of polygon) {
+        for (const [lat, lng] of ring) {
+          const dLat = (lat - zone.lat) * 111_320;
+          const dLng = (lng - zone.lng) * 111_320 * Math.max(Math.cos((zone.lat * Math.PI) / 180), 0.2);
+          max = Math.max(max, Math.hypot(dLat, dLng));
+        }
+      }
+    }
+    return max;
+  };
+
+  const zonePopup = (zone: PopupZone, editorial: boolean) => {
+    const root = el('div', 'tb-stay-popup__body');
+    const name = el('p', 'tb-stay-popup__name');
+    name.append(icon('holiday_village', { size: 16 }), el('span', undefined, say(zone.name)));
+    root.append(name);
+    const safety = el('p', zone.safety != null && zone.safety < 70 ? 'tb-hotels__caution' : undefined);
+    if (zone.safety != null && zone.safety < 70) safety.append(icon('warning', { size: 16 }));
+    safety.append(
+      document.createTextNode(
+        `${say({ en: 'Safety', 'pt-BR': 'Segurança' })} ${zone.safety == null ? '—' : `${zone.safety}/100`}`,
+      ),
+    );
+    root.append(safety);
+    if (!editorial) {
+      root.append(
+        el(
+          'p',
+          undefined,
+          `${say({ en: 'Value', 'pt-BR': 'Custo-benefício' })} ${zone.value == null ? '—' : `${zone.value}/100`}`,
+        ),
+      );
+    }
+    root.append(el('p', 'tb-stay-popup__note', say(zone.note)));
+    if (editorial) {
+      root.append(
+        el(
+          'p',
+          'tb-meta',
+          say({
+            en: 'Editorial areas on the mapped urban zones. Not a safety guarantee.',
+            'pt-BR': 'Áreas editoriais sobre as zonas urbanísticas. Não é garantia de segurança.',
+          }),
+        ),
+      );
+      if (zone.reviewedAt) root.append(el('p', 'tb-meta', zone.reviewedAt));
+      const sources = (zone.sources ?? []).filter(
+        (source): source is { title: string; url: string } =>
+          Boolean(source.title && source.url && source.url.startsWith('https://')),
+      );
+      if (sources.length) {
+        const line = el('p', 'tb-meta');
+        sources.forEach((source, index) => {
+          if (index) line.append(document.createTextNode(' · '));
+          const anchor = el('a', undefined, source.title);
+          anchor.href = source.url;
+          anchor.target = '_blank';
+          anchor.rel = 'noopener';
+          line.append(anchor);
+        });
+        root.append(line);
+      }
+    }
+    const links = el('div', 'tb-stay-popup__links');
+    const dates = usableStayDates(opts.dates());
+    const located = {
+      ...zone,
+      citySlug: zone.citySlug ?? opts.slug,
+      safety: zone.safety ?? 0,
+      value: zone.value ?? 0,
+      overall: 0,
+      radiusM: coverRadius(zone),
+    } as StayZone;
+    if (heatMod) {
+      const airbnb = el('a', 'tb-stay-popup__link', say({ en: 'Airbnb', 'pt-BR': 'Airbnb' }));
+      airbnb.href = heatMod.stayAirbnbUrl(located, opts.locale(), dates);
+      airbnb.target = '_blank';
+      airbnb.rel = 'noopener';
+      airbnb.prepend(icon('holiday_village', { size: 16 }));
+      const booking = el('a', 'tb-stay-popup__link', say({ en: 'Booking', 'pt-BR': 'Booking' }));
+      booking.href = heatMod.stayBookingUrl(located, opts.locale(), dates);
+      booking.target = '_blank';
+      booking.rel = 'noopener';
+      booking.prepend(icon('bed', { size: 16 }));
+      links.append(airbnb, booking);
+    }
+    root.append(links);
+    return root;
+  };
+
   const paint = () => {
     if (!on || !map || !L || !api || !display) return;
     clearLayers();
@@ -105,7 +236,13 @@ export function mountStayHeat(opts: {
     }
     const heatRenderer = L.svg({ pane: heatPane });
     const hitRenderer = L.svg({ pane: hitPane });
-    const addFill = (polygons: Polygons, band: Band, name: string, interactive: boolean) => {
+    const addFill = (
+      polygons: Polygons,
+      band: Band,
+      name: string,
+      interactive: boolean,
+      popup?: () => HTMLElement,
+    ) => {
       if (!polygons.length || !map || !L) return;
       const color = `rgb(${api!.STAY_HEAT_RGB[band].join(',')})`;
       const shape = L.polygon(polygons, {
@@ -126,6 +263,18 @@ export function mountStayHeat(opts: {
         });
         shape.on('mouseover', () => shape.setStyle({ fillOpacity: 0.12 }));
         shape.on('mouseout', () => shape.setStyle({ fillOpacity: 0 }));
+        if (popup) {
+          shape.on('click', (event) => {
+            if (!map || !L) return;
+            L.DomEvent.stop(event);
+            const at = (event as { latlng?: L.LatLng }).latlng;
+            if (!at) return;
+            L.popup({ className: 'tb-stay-popup', autoPan: false, closeButton: true, maxWidth: 320 })
+              .setLatLng(at)
+              .setContent(popup())
+              .openOn(map);
+          });
+        }
       }
       shape.addTo(map);
       layers.push(shape);
@@ -134,13 +283,15 @@ export function mountStayHeat(opts: {
       const band = api.stayHeatBand(zone);
       if (!enabled.has(band)) continue;
       const name = say(zone.name);
+      const card = () => zonePopup(zone, false);
       addFill(polygonsOf(zone.id), band, name, false);
-      addFill(polygonsOf(zone.id), band, name, true);
+      addFill(polygonsOf(zone.id), band, name, true, card);
     }
     for (const zone of study) {
       if (!enabled.has(zone.mapBand)) continue;
+      const card = () => zonePopup(zone, true);
       addFill(zone.polygons, zone.mapBand, say(zone.name), false);
-      addFill(zone.polygons, zone.mapBand, say(zone.name), true);
+      addFill(zone.polygons, zone.mapBand, say(zone.name), true, card);
     }
     const transitions = display.transitionAreas[opts.slug] ?? [];
     if (transitions.length) {
@@ -197,6 +348,7 @@ export function mountStayHeat(opts: {
         import('../data/travel-stay-display.json'),
       ]);
       L = leaflet;
+      heatMod = heat;
       api = heat as unknown as HeatApi;
       display = geometry.default as unknown as DisplayFile;
       zones = heat.stayZonesForCity(opts.slug);

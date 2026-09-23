@@ -528,6 +528,55 @@
   display: none;
 }
 
+.tb-stay-popup .leaflet-popup-content-wrapper,
+.tb-stay-popup .leaflet-popup-tip {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-float);
+}
+
+.tb-stay-popup .leaflet-popup-content-wrapper {
+  border-radius: var(--r-popover);
+}
+
+.tb-stay-popup .leaflet-popup-content {
+  margin: var(--spacing-12);
+}
+
+.tb-stay-popup__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.tb-stay-popup__name,
+.tb-stay-popup__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.tb-stay-popup__name {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.tb-stay-popup__note,
+.tb-stay-popup__body p {
+  margin: 0;
+}
+
+.tb-stay-popup__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.tb-stay-popup__link {
+  color: var(--color-ink);
+  font-size: var(--text-caption);
+}
+
 .tb-hotels__links {
   display: flex;
   flex-wrap: wrap;

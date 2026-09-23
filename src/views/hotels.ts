@@ -1764,7 +1764,13 @@ export function mountHotels(
       bar.append(heatButton);
       const button = heatButton;
       listen(button, 'click', () => {
-        heat ??= mountStayHeat({ slug: city.slug, button, locale });
+        heat ??= mountStayHeat({
+          slug: city.slug,
+          button,
+          locale,
+          dates: () =>
+            checkin.value && checkout.value ? { checkin: checkin.value, checkout: checkout.value } : null,
+        });
         heat.toggle();
       });
     }
