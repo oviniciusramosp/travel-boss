@@ -383,6 +383,43 @@ button {
   stroke: var(--color-paper);
 }
 
+.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap {
+  opacity: 0.22;
+}
+
+.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap:hover,
+.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap:has(.is-hover, .is-active) {
+  opacity: 1;
+}
+
+.leaflet-marker-icon.tb-overview-wrap {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.tb-overview-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-paper);
+  border-radius: var(--r-pill);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-ink) 35%, transparent);
+  font-family: var(--font-geist);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+}
+
+.tb-overview-wrap.is-hover .tb-overview-node {
+  outline: 3px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
+  transform: scale(1.08);
+}
+
 .tb-map .leaflet-marker-icon.tb-pin-wrap {
   background: none;
   border: 0;

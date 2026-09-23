@@ -11,7 +11,7 @@ import {
 } from '../catalog';
 import type { Locale, PlaceCategory, TravelPlace } from '../catalog';
 import { buildItineraryRoute } from '../map/itinerary-route';
-import type { MapHandle, MapPin } from '../map/types';
+import type { MapHandle, MapOverviewCity, MapPin } from '../map/types';
 import { fetchWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
 import type { TripPush } from './api';
@@ -133,6 +133,7 @@ function appendCityBar(
   trip: Trip,
   locale: Locale,
   onPick: (key: string) => void,
+  onHover?: (key: string | null) => void,
 ): void {
   const bands = cityBands(trip, locale);
   if (!bands.length) return;
@@ -163,10 +164,14 @@ function appendCityBar(
     const section = () =>
       article.querySelector<HTMLElement>(`[data-city="${CSS.escape(band.key)}"]`);
     const hot = (on: boolean) => section()?.classList.toggle('is-hot', on);
-    button.addEventListener('pointerenter', () => hot(true));
-    button.addEventListener('pointerleave', () => hot(false));
-    button.addEventListener('focus', () => hot(true));
-    button.addEventListener('blur', () => hot(false));
+    const hover = (on: boolean) => {
+      hot(on);
+      onHover?.(on ? band.key : null);
+    };
+    button.addEventListener('pointerenter', () => hover(true));
+    button.addEventListener('pointerleave', () => hover(false));
+    button.addEventListener('focus', () => hover(true));
+    button.addEventListener('blur', () => hover(false));
     button.addEventListener('click', () => onPick(band.key));
     bar.append(button);
     if (!band.via || index === bands.length - 1) return;
@@ -233,6 +238,24 @@ function stopPins(
     }
   }
   return pins;
+}
+
+/** Numbered cities in trip order. Coordinates come from the catalog, not the stops. */
+function overviewCities(trip: Trip): MapOverviewCity[] {
+  const cities: MapOverviewCity[] = [];
+  for (const city of trip.cities) {
+    const record = getTravelCity(city.slug);
+    if (!record || !Number.isFinite(record.lat) || !Number.isFinite(record.lng)) continue;
+    cities.push({
+      id: city.slug || city.name,
+      lat: record.lat,
+      lng: record.lng,
+      label: city.name,
+      number: cities.length + 1,
+      ...(city.leg?.detail ? { via: city.leg.detail } : {}),
+    });
+  }
+  return cities;
 }
 
 export function mountTripNav(
@@ -320,6 +343,7 @@ export function mountTrip(
     main.scrollTop = 0;
     shell.setExportEnabled(false);
     map.setPins('stop', []);
+    map.setOverview(null);
   };
 
   const offLocale = shell.onLocale(() => {
@@ -361,6 +385,7 @@ export function mountTrip(
     }, 2000);
   };
   let activeCity: string | null = null;
+  let overviewMode = true;
   let userScrolled = false;
   let holdSpy = false;
   let spyTimer = 0;
@@ -490,6 +515,18 @@ export function mountTrip(
     });
     const rail = main.querySelector<HTMLElement>('.tb-rail');
     if (rail) segmented(rail);
+    map.hoverOverview(slug);
+  }
+
+  function showOverview(fit: boolean) {
+    const trip = current;
+    if (!trip) return;
+    const cities = overviewCities(trip);
+    if (!cities.length) {
+      map.setOverview(null);
+      return;
+    }
+    map.setOverview(cities, { fit, fade: true });
   }
 
   function holdScrollSpy() {
@@ -521,17 +558,25 @@ export function mountTrip(
     const trip = current;
     if (!trip) return;
     if (slug && !trip.cities.some((city) => (city.slug || city.name) === slug)) slug = null;
-    markActive(slug);
-    userScrolled = slug != null;
-    holdScrollSpy();
     const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
-    if (!slug) main.scrollTo({ top: 0, behavior });
-    else {
-      main.querySelector<HTMLElement>(`[data-city="${CSS.escape(slug)}"]`)?.scrollIntoView({
-        block: 'start',
-        behavior,
-      });
+    if (!slug) {
+      overviewMode = true;
+      markActive(null);
+      userScrolled = false;
+      holdScrollSpy();
+      main.scrollTo({ top: 0, behavior });
+      showOverview(true);
+      return;
     }
+    overviewMode = false;
+    markActive(slug);
+    userScrolled = true;
+    holdScrollSpy();
+    main.querySelector<HTMLElement>(`[data-city="${CSS.escape(slug)}"]`)?.scrollIntoView({
+      block: 'start',
+      behavior,
+    });
+    map.setOverview(overviewCities(trip), { fade: false });
     framePins(stopPins(trip, slug, enabledCategories));
   }
 
@@ -612,7 +657,16 @@ export function mountTrip(
     map.setPins('stop', pins);
     map.setPins('place', []);
     map.setPins('hotel', []);
-    if (fit && pins.length) map.fit();
+    if (overviewMode) {
+      showOverview(fit && activeCity == null);
+      if (activeCity) map.hoverOverview(activeCity);
+    } else if (activeCity) {
+      map.setOverview(overviewCities(trip), { fade: false });
+      if (fit) framePins(stopPins(trip, activeCity, enabledCategories));
+    } else if (fit && pins.length) {
+      map.setOverview(null);
+      map.fit();
+    }
     seenPinIds = new Set(pins.map((pin) => pin.id));
     drawTripRoutes();
     const openId = openPlaceId();
@@ -943,7 +997,9 @@ export function mountTrip(
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
     article.append(head);
-    appendCityBar(article, trip, locale, (key) => focusCity(key));
+    appendCityBar(article, trip, locale, (key) => focusCity(key), (key) => {
+      map.hoverOverview(key ?? activeCity);
+    });
 
     if (trip.cities.length > 1) {
       const rail = document.createElement('div');
@@ -1386,6 +1442,8 @@ export function mountTrip(
     }
   }
 
+  const offOverview = map.onOverview((cityId) => focusCity(cityId));
+
   stopsUnsub.fn = map.onSelect((pinId) => {
     const item = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(pinId)}"]`);
     if (!item) return;
@@ -1421,8 +1479,11 @@ export function mountTrip(
       offFiles();
       offClose();
       stopsUnsub.fn();
+      offOverview();
       tripRouteEpoch += 1;
       map.setRoute([]);
+      map.setOverview(null);
+      map.hoverOverview(null);
       map.setPins('stop', []);
       closePlace({ focus: false });
       shell.setExportEnabled(false);
