@@ -1,5 +1,5 @@
 .tb-doc {
-  max-width: 100%;
+  max-width: 760px;
 }
 
 .tb-doc-title {
@@ -65,21 +65,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.tb-stops li {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: baseline;
-  padding: var(--inset-row) var(--spacing-8);
-  border-radius: var(--r-pill);
-  line-height: 1.45;
-  cursor: default;
-}
-
-.tb-stops li:has(.tb-row__sub) {
-  border-radius: var(--r-row);
 }
 
 .tb-stops li[aria-current='true'] {

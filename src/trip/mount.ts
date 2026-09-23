@@ -15,6 +15,8 @@ import {
   type PlaceCoord,
 } from '../map/itinerary-route';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
+import { iconLink } from '../ui/controls';
+import { row } from '../ui/row';
 import { closePlace, openPlace } from '../views/place-panel';
 import { parseTrip, type Trip } from './parse';
 
@@ -407,71 +409,62 @@ export function mountTrip(
         dayTitle.textContent = day.title;
         details.append(dayTitle);
         const list = document.createElement('ul');
-        list.className = 'tb-stops';
+        list.className = 'tb-list tb-list--stops tb-stops';
         for (const stop of day.stops) {
-          const item = document.createElement('li');
-          item.dataset.stop = '';
-          item.dataset.hay = `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase();
-          if (stop.placeId) item.dataset.placeId = stop.placeId;
-          if (stop.time) item.dataset.stopTime = stop.time;
-          if (stop.time) {
-            const time = document.createElement('span');
-            time.className = 'tb-meta tb-stop-time';
-            time.textContent = stop.time;
-            item.append(time);
-          }
           const place = stop.placeId
             ? record?.places.find((item) => item.id === stop.placeId)
             : undefined;
-          if (place) item.dataset.category = place.category;
-          if (place) {
-            const dot = document.createElement('span');
-            dot.className = 'tb-cat-dot';
-            dot.style.background = placeCategoryMeta[place.category].color;
-            item.append(dot);
-          }
           const href = stop.href
             ? stop.href
             : stop.placeId
               ? resolveHref(city.slug, stop.placeId)
               : null;
-          const name = document.createElement('span');
-          name.textContent = stop.label;
-          item.append(name);
-          if (href) {
-            const link = document.createElement('a');
-            link.href = href;
-            link.target = '_blank';
-            link.rel = 'noopener';
-            link.className = 'tb-btn-outline tb-maps';
-            link.dataset.maps = 'true';
-            link.textContent = locale === 'pt-BR' ? 'Mapa' : 'Map';
-            item.append(link);
-          } else if (stop.placeId) {
-            const missing = document.createElement('span');
-            missing.className = 'tb-meta';
-            missing.textContent =
-              locale === 'pt-BR'
-                ? `${stop.placeId} não encontrado`
-                : `${stop.placeId} not found`;
-            item.append(missing);
+          const missing =
+            !href && stop.placeId
+              ? pickLocale(locale, {
+                  en: `${stop.placeId} not found`,
+                  'pt-BR': `${stop.placeId} não encontrado`,
+                })
+              : '';
+          const sub = [stop.note, missing].filter(Boolean).join(' — ');
+          const lead = place ? document.createElement('span') : undefined;
+          if (lead && place) {
+            lead.className = 'tb-cat-dot';
+            lead.style.background = placeCategoryMeta[place.category].color;
           }
-          if (stop.note) {
-            item.append(document.createTextNode(` — ${stop.note}`));
-          }
-          if (stop.placeId && record) {
-            const placeId = stop.placeId;
-            item.addEventListener('click', (event) => {
-              if ((event.target as HTMLElement).closest('[data-maps]')) return;
-              const place = record.places.find((item) => item.id === placeId);
-              if (!place) return;
-              list.querySelectorAll('[aria-current]').forEach((node) => {
-                node.removeAttribute('aria-current');
-              });
-              item.setAttribute('aria-current', 'true');
-              openPlace(place, record, locale);
-            });
-          }
+          const placeId = stop.placeId;
+          const item = row({
+            time: stop.time,
+            lead,
+            title: stop.label,
+            sub: sub || undefined,
+            actions: href
+              ? iconLink({
+                  icon: 'location_on',
+                  label: pickLocale(locale, { en: 'Google Maps', 'pt-BR': 'Google Maps' }),
+                  href,
+                })
+              : undefined,
+            data: {
+              stop: '',
+              hay: `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase(),
+              ...(stop.placeId ? { placeId: stop.placeId } : {}),
+              ...(stop.time ? { stopTime: stop.time } : {}),
+              ...(place ? { category: place.category } : {}),
+            },
+            onSelect:
+              placeId && record
+                ? () => {
+                    const found = record.places.find((entry) => entry.id === placeId);
+                    if (!found) return;
+                    list.querySelectorAll('[aria-current]').forEach((node) => {
+                      node.removeAttribute('aria-current');
+                    });
+                    item.setAttribute('aria-current', 'true');
+                    openPlace(found, record, locale);
+                  }
+                : undefined,
+          });
           list.append(item);
         }
         if (day.stops.length) details.append(list);

@@ -153,3 +153,113 @@
   background: var(--color-paper);
   box-shadow: var(--shadow-subtle);
 }
+
+.tb-list {
+  display: grid;
+  column-gap: var(--spacing-8);
+  max-width: 760px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tb-list--stops {
+  grid-template-columns: [time] 40px [lead] 20px [main] minmax(0, 1fr) [actions] auto;
+}
+
+.tb-list--places {
+  grid-template-columns: [lead] 32px [main] minmax(0, 1fr) [meta] auto [actions] auto;
+}
+
+.tb-list > .tb-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+  padding: var(--inset-row);
+  border-radius: var(--r-row);
+}
+
+.tb-row:not(:has(.tb-row__sub)) {
+  border-radius: var(--r-pill);
+}
+
+.tb-row:focus-within {
+  outline: 2px solid var(--color-ink);
+  outline-offset: -2px;
+}
+
+.tb-row__time {
+  grid-column: time;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-row__lead {
+  grid-column: lead;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tb-row__main {
+  grid-column: main;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.tb-row__main:focus-visible {
+  outline: none;
+}
+
+.tb-row__title {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: var(--font-weight-medium);
+}
+
+.tb-row__sub {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-caption);
+}
+
+.tb-row__meta {
+  grid-column: meta;
+}
+
+.tb-row__actions {
+  grid-column: actions;
+  display: flex;
+  gap: var(--inset-group);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.tb-row:is(:hover, :focus-within, [aria-current='true']) .tb-row__actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .tb-row__actions {
+    opacity: 1;
+  }
+}
