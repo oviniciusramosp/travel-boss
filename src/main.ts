@@ -11,6 +11,7 @@ import './styles/trip.css';
 import './styles/hotels.css';
 import './styles/ui.css';
 import { mountShell } from './app/shell';
+import { bootTheme } from './app/theme';
 import {
   commitRoute,
   navigationMode,
@@ -26,6 +27,8 @@ import { mountMap } from './map/map';
 import { mountCity, mountCityNav, type CityRouteState } from './views/places';
 import { closePlace, mountPlacePanel, openPlaceId } from './views/place-panel';
 import { loadTripFiles, mountTrip, mountTripNav } from './trip/mount';
+
+bootTheme();
 
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('missing #app');

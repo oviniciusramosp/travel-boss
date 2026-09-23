@@ -1,4 +1,5 @@
 import { pickLocale } from '../catalog';
+import { activeTheme, THEME_EVENT, toggleTheme } from './theme';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
@@ -153,7 +154,12 @@ export function mountShell(root: HTMLElement): Shell {
   exportBtn.title = 'Copy Markdown for Notes or Notion';
   exportBtn.append(icon('ios_share', { size: 18 }), exportLabel);
 
-  bar.append(sideToggle, mark, search, spacer, source, localeWrap, exportBtn);
+  const themeBtn = iconButton({
+    icon: 'dark_mode',
+    label: 'Mudar para modo escuro',
+  });
+
+  bar.append(sideToggle, mark, search, spacer, source, themeBtn, localeWrap, exportBtn);
 
   const workspace = el('div', 'tb-workspace');
   const side = el('nav', 'tb-side');
@@ -301,6 +307,23 @@ export function mountShell(root: HTMLElement): Shell {
   };
 
   let locale = readLocale();
+  const paintTheme = () => {
+    const dark = activeTheme() === 'dark';
+    const label = pickLocale(
+      locale,
+      dark
+        ? { en: 'Switch to light mode', 'pt-BR': 'Mudar para modo claro' }
+        : { en: 'Switch to dark mode', 'pt-BR': 'Mudar para modo escuro' },
+    );
+    themeBtn.setAttribute('aria-label', label);
+    themeBtn.setAttribute('data-tip', label);
+    const glyph = themeBtn.querySelector('.material-symbols-rounded');
+    if (glyph) glyph.textContent = dark ? 'light_mode' : 'dark_mode';
+  };
+  themeBtn.addEventListener('click', () => {
+    toggleTheme();
+  });
+  window.addEventListener(THEME_EVENT, () => paintTheme());
   const localeFns = new Set<(value: Locale) => void>();
   const queryFns = new Set<(value: string) => void>();
   const exportFns = new Set<() => void>();
@@ -343,6 +366,7 @@ export function mountShell(root: HTMLElement): Shell {
       'pt-BR':
         'Escolha um roteiro ou uma cidade. O roteiro é um arquivo Markdown: um LLM pode editá-lo com o app aberto.',
     });
+    paintTheme();
     mapCol.setAttribute('aria-label', pickLocale(locale, { en: 'Map', 'pt-BR': 'Mapa' }));
     split.setAttribute(
       'aria-label',
