@@ -11,6 +11,16 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "travel:notion:pull": "node scripts/sync-travel-notion.mjs pull",
+    "travel:notion:push": "node scripts/sync-travel-notion.mjs push",
+    "travel:notion:schema": "node scripts/sync-travel-notion.mjs schema",
+    "travel:notion:sync": "node scripts/sync-travel-notion.mjs sync",
+    "travel:notion:seed": "node scripts/sync-travel-notion.mjs seed",
+    "travel:notion:seed:paris": "node scripts/sync-travel-notion.mjs seed src/data/paris-seed-dump.json",
+    "travel:notion:migrate": "node scripts/sync-travel-notion.mjs migrate",
+    "travel:notion:placeids": "node scripts/sync-travel-notion.mjs placeids",
+    "travel:notion:seed-subcategories": "node scripts/sync-travel-notion.mjs seed-subcategories",
+    "travel:notion:seed-photos": "node scripts/sync-travel-notion.mjs seed-photos",
     "travel:airbnb:setup": "uv venv --allow-existing node_modules/.cache/airbnb-venv && uv pip install --python node_modules/.cache/airbnb-venv/bin/python -r scripts/airbnb-requirements.txt"
   },
   "dependencies": {

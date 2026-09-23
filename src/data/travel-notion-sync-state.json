@@ -1,0 +1,416 @@
+{
+  "version": 1,
+  "places": {
+    "par-montmartre": {
+      "lastPushedAt": "2026-08-05T13:42:33.495Z",
+      "photoUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg/3840px-View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg"
+      ],
+      "photoCount": 1
+    },
+    "par-fric-frac": {
+      "lastPushedAt": "2026-08-05T16:09:53.725Z",
+      "photoUrls": [
+        "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmkqKIki4X_Tupd_EdtFlhAhtb7kY02aRD9vm7Nz9H8osxzdiT_dWvVx4Gr_cs8Yz2EnSIJGqVKn4JJxy3ocyEkbOZBWWxcnd5GAigMl0LGYDWiUwxvmnTXcDq4Y2ENEdBg6B15WJ68U79G=s680-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlD4ghyPj5w5SLgYvVsM5lqO9eNyehTnyop-yiROxQqZugcU_T2ReuhcR1bCmDkhIFQqaRSecrOy9b67_e4Qrdz-RBqO52s7Bb-j1UzM9742e9VWbknRevRJe2aaHt8zL7QFTWbDQ=w203-h253-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkk3eyHim9CynAO6lG7bgPJw5CThG1BHEiHj51pFtqTgqq0uAw-E3MRQORFe1I-8F5OQdUbPQ6hmQ8jXA_VYRX06Oy78RGzHQ5-NOJ-opNrKkEKW-nfcyF563i33Rf6LWd8z2wT7ej_RDFk=s736-k-no",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Canal_Saint-Martin_P1060441.JPG/3840px-Canal_Saint-Martin_P1060441.JPG"
+      ],
+      "photoCount": 4
+    },
+    "lis-lis": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-ginjinha-sem-rival": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-restauradores": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-rossio-fonte-sul": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-miradouro-recolhimento": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-amoreiras-360": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-chafariz-largo-mastro": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-miradouro-penha-franca": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-jardim-principe-real": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-miradouro-sao-pedro-alcantara": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-marrecreo": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-crush-doughnuts": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-queluz-palace": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-bread-friends": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-entrecote": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-colombo": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-portela-cafes": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-don-costini": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-time-out": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-hygge-kaffe": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-panteao-nacional": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-palacio-sao-vicente": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-castelo-sao-jorge": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-miradouro-santa-luzia": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-jardim-julio-castilho": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-baan-saraivas": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-simpli-coffee": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-vasco-da-gama": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-av-liberdade": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-marques-pombal": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-el-corte-ingles": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-eduardo-vii-deck": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-parque-eduardo-vii": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-oriente": {
+      "lastPushedAt": "2026-08-24T20:00:00.129Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-jeronimos": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-rua-augusta": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-padrao-descobrimentos": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-jardim-imperio": {
+      "lastPushedAt": "2026-08-24T20:00:00.129Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-pasteis-belem": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-torre-belem": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-maat": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-carmo": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-se": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-arco-rua-augusta": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-praca-comercio": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-belem": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-adega-gravatas": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-ze-da-mouraria": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-maria-catita": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-faz-frio": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-atira-te-ao-rio": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-ponto-final": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-embaixada": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-alfama": {
+      "lastPushedAt": "2026-08-24T20:02:49.488Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-miradouro-senhora-monte": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-pastel-bacalhau": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-laurentina": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-tasquinha-lagarto": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-as-colunas": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-adega-saraiva": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-imperial-campo-ourique": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-floresta-salitre": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-casa-bacalhau": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-velho-eurico": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-estadio-benfica": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-terraco-editorial": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-baixa-chiado": {
+      "lastPushedAt": "2026-08-24T22:21:12.085Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "lis-whome-bairro-alto": {
+      "lastPushedAt": "2026-08-24T21:53:27.609Z",
+      "photoUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Lisboa_-_Bairro_Alto_%285420829357%29.jpg/1280px-Lisboa_-_Bairro_Alto_%285420829357%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Lisbon_%2842931870092%29.jpg/1280px-Lisbon_%2842931870092%29.jpg"
+      ],
+      "photoCount": 2
+    },
+    "mil-centrale": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-joy124": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-sondrio": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-duomo": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-galleria": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-cesarino": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-caffe-napoli": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-san-giorgio": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-napule": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    },
+    "mil-antico-vinaio": {
+      "lastPushedAt": "2026-09-21T02:43:26.837Z",
+      "photoUrls": [],
+      "photoCount": 0
+    }
+  },
+  "lastPullAt": "2026-09-21T02:43:38.094Z"
+}

@@ -1,0 +1,43 @@
+{
+  "city": "paris",
+  "count": 1,
+  "places": [
+    {
+      "id": "par-montmartre",
+      "name": {
+        "en": "Montmartre",
+        "pt-BR": "Montmartre"
+      },
+      "category": "parks",
+      "description": {
+        "en": "Hill village vibe. Wander before the Sacré-Cœur crowds peak.",
+        "pt-BR": "Clima de vilarejo na colina. Vagueie antes do pico no Sacré-Cœur."
+      },
+      "lat": 48.8864,
+      "lng": 2.3408,
+      "address": "Place du Tertre, 75018 Paris",
+      "mapsQuery": "Place du Tertre Montmartre Paris",
+      "mapsUrl": null,
+      "placeId": null,
+      "rating": 5,
+      "googleRating": 4.7,
+      "favorite": true,
+      "featured": false,
+      "landmark": null,
+      "subcategories": [
+        "neighborhood",
+        "viewpoint"
+      ],
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg/3840px-View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg",
+      "photos": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg/3840px-View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg",
+          "alt": {
+            "en": "Montmartre",
+            "pt-BR": "Montmartre"
+          }
+        }
+      ]
+    }
+  ]
+}
