@@ -19,7 +19,7 @@ export {
   placePinMaterialName,
 } from './travel-categories';
 
-import { areaForPlace } from './travel-areas-osm';
+import { osmAreaFor } from './osm-area-bridge';
 import {
   resolveVisit,
   type VisitInfo,
@@ -4920,7 +4920,7 @@ export function getTravelCity(slug: string): TravelCity | undefined {
  * Resolve map geometry for a place.
  *
  * Priority:
- * 1. OpenStreetMap outlines in `travel-areas-osm.ts` (always win)
+ * 1. OpenStreetMap outlines in `travel-areas-osm.ts` (always win, once that module is loaded)
  * 2. Authored `place.area` in this file (fallback / metro waypoint spines)
  *
  * Policy (enforced by `travel-areas.test.ts` + `npm run travel:areas`):
@@ -4932,7 +4932,7 @@ export function getTravelCity(slug: string): TravelCity | undefined {
  * Regenerate OSM registry: `npm run travel:areas`
  */
 export function resolvePlaceArea(place: TravelPlace): TravelArea | undefined {
-  const osm = areaForPlace(place.id);
+  const osm = osmAreaFor(place.id);
   if (!osm) return place.area;
   // Normalize OSM multipolygon/polygon/polyline into TravelArea
   if (osm.kind === 'multipolygon') {

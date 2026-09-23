@@ -31,6 +31,11 @@ export function resolvedPlace(id: string): TravelPlace | undefined {
   return value;
 }
 
+/** Drop cached resolutions so a later read picks up OSM outlines. */
+export function invalidateResolvedPlaces(): void {
+  resolved.clear();
+}
+
 /** `TravelCity.zoom` for the city that owns this place. */
 export function placeZoom(id: string): number | undefined {
   return placeRecord(id)?.zoom;

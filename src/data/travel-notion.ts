@@ -11,7 +11,7 @@
  */
 
 import type { PlaceCategory } from './travel-categories';
-import { osmTravelAreas } from './travel-areas-osm';
+import { OSM_AREA_IDS } from './travel-area-ids';
 import notionSnapshot from './travel-notion.generated';
 
 /** Bilingual string (mirrors travel.ts LString without importing it). */
@@ -276,7 +276,7 @@ export function mergeNotionPlaces<
       // keep local lat/lng so a stale Notion pin cannot drift off the
       // geometry — e.g. Montmartre stacked on Sacré-Cœur (CI + click targets).
       const keepLocalPin =
-        Boolean(local.area) || Boolean(osmTravelAreas[local.id]);
+        Boolean(local.area) || OSM_AREA_IDS.has(local.id);
       return {
         ...local,
         ...fromNotion,

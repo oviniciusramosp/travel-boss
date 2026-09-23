@@ -26,6 +26,7 @@ import {
 } from './camera';
 import { coveredInsets, mergeInsets, type Insets } from './chrome';
 import { attachMapControls } from './controls';
+import { ensureOsmAreas, osmAreasReady, placeHasOsmArea } from './areas';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
@@ -652,26 +653,34 @@ export function mountMap(host: HTMLElement): MapHandle {
     select(id) {
       selectedId = id;
       paintAll();
-      syncOverlays();
-      const target = findMarker(id);
-      if (!target) return;
-      const area = areaPoints(id);
-      const choice = selectionFrame(leafletMap.getZoom(), area != null);
-      if (choice.frame === 'area' && area) {
-        const motion = cameraMotion();
-        const opts = {
-          ...fitPad(24),
-          maxZoom: choice.zoom,
-          duration: motion.duration,
-          easeLinearity: 0.25,
-        };
-        leafletMap.stop();
-        if (motion.animate) leafletMap.flyToBounds(latLngBounds(area), opts);
-        else leafletMap.fitBounds(latLngBounds(area), { ...opts, animate: false });
+      const frame = () => {
+        if (selectedId !== id) return;
+        syncOverlays();
+        const target = findMarker(id);
+        if (!target) return;
+        const area = areaPoints(id);
+        const choice = selectionFrame(leafletMap.getZoom(), area != null);
+        if (choice.frame === 'area' && area) {
+          const motion = cameraMotion();
+          const opts = {
+            ...fitPad(24),
+            maxZoom: choice.zoom,
+            duration: motion.duration,
+            easeLinearity: 0.25,
+          };
+          leafletMap.stop();
+          if (motion.animate) leafletMap.flyToBounds(latLngBounds(area), opts);
+          else leafletMap.fitBounds(latLngBounds(area), { ...opts, animate: false });
+          return;
+        }
+        const ll = target.getLatLng();
+        moveCamera(ll.lat, ll.lng, choice.zoom);
+      };
+      if (placeHasOsmArea(id) && !osmAreasReady()) {
+        void ensureOsmAreas().then(frame, frame);
         return;
       }
-      const ll = target.getLatLng();
-      moveCamera(ll.lat, ll.lng, choice.zoom);
+      frame();
     },
 
     highlight(id) {

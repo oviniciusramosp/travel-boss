@@ -14,6 +14,8 @@ import {
   validatePlaceGeometry,
   type AreaIssue,
 } from './travel-area-geometry';
+import { OSM_AREA_IDS } from './travel-area-ids';
+import { installOsmAreas } from './osm-area-bridge';
 import { areaForPlace, osmTravelAreas } from './travel-areas-osm';
 import {
   MIN_AUTHORED_POLYLINE_POINTS,
@@ -27,6 +29,8 @@ import {
   type TravelPlace,
 } from './travel';
 
+installOsmAreas(areaForPlace);
+
 function allPlaces(): TravelPlace[] {
   return travelCities.flatMap((c) => c.places);
 }
@@ -34,6 +38,12 @@ function allPlaces(): TravelPlace[] {
 function resolvedPlaces(): TravelPlace[] {
   return allPlaces().map(withResolvedArea);
 }
+
+describe('OSM area ids', () => {
+  it('lists every outline id and nothing else', () => {
+    expect([...OSM_AREA_IDS].sort()).toEqual(Object.keys(osmTravelAreas).sort());
+  });
+});
 
 describe('travel area geometry math', () => {
   it('haversine / pin-on-polyline is ~0 when pin is on the path', () => {

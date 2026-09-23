@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { getTravelCity, travelCities, withResolvedArea } from './travel';
-import { osmTravelAreas } from './travel-areas-osm';
+import { installOsmAreas } from './osm-area-bridge';
+import { areaForPlace, osmTravelAreas } from './travel-areas-osm';
 import {
   mergeNotionPlaces,
   notionRecordToPlace,
   travelNotionSnapshot,
 } from './travel-notion';
+
+installOsmAreas(areaForPlace);
 
 describe('travel-notion snapshot', () => {
   it('has places pulled from Notion', () => {

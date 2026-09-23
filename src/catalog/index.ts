@@ -60,3 +60,5 @@ export type {
 } from '../data/travel';
 
 export type { ItineraryArrivalOption } from '../data/travel-itineraries';
+
+export { loadOsmAreas, osmAreasReady, placeHasOsmArea } from '../data/osm-area-bridge';

@@ -11,6 +11,7 @@ import {
   type PathOptions,
 } from 'leaflet';
 import { placeCategoryMeta } from '../catalog';
+import { ensureOsmAreas, osmAreasReady, placeHasOsmArea } from './areas';
 import { drawableRings } from './area-shape';
 import { resolvedPlace } from './place-index';
 import { transitLineForPlace } from './transit';
@@ -161,25 +162,40 @@ export function mountPlaceOverlays(map: LeafletMap): { sync(ids: readonly string
     }, fadeMs());
   };
 
+  let syncGen = 0;
+  const apply = (ids: readonly string[]) => {
+    const next = new Set(ids);
+    for (const id of active.keys()) {
+      if (!next.has(id)) hide(id);
+    }
+    for (const id of next) {
+      const entry = active.get(id);
+      if (!entry || !map.hasLayer(entry.layer)) {
+        show(id);
+        continue;
+      }
+      if (!entry.on || entry.timer) {
+        window.clearTimeout(entry.timer);
+        entry.timer = 0;
+        entry.on = true;
+        paint(entry.layer, true);
+      }
+    }
+  };
+
   return {
     sync(ids) {
-      const next = new Set(ids);
-      for (const id of active.keys()) {
-        if (!next.has(id)) hide(id);
+      const generation = ++syncGen;
+      const run = () => {
+        if (generation !== syncGen) return;
+        apply(ids);
+      };
+      if (ids.some((id) => placeHasOsmArea(id)) && !osmAreasReady()) {
+        apply(ids.filter((id) => !placeHasOsmArea(id)));
+        void ensureOsmAreas().then(run, run);
+        return;
       }
-      for (const id of next) {
-        const entry = active.get(id);
-        if (!entry || !map.hasLayer(entry.layer)) {
-          show(id);
-          continue;
-        }
-        if (!entry.on || entry.timer) {
-          window.clearTimeout(entry.timer);
-          entry.timer = 0;
-          entry.on = true;
-          paint(entry.layer, true);
-        }
-      }
+      run();
     },
   };
 }
