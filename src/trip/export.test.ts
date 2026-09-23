@@ -45,4 +45,36 @@ describe('export', () => {
     expect(html).toContain('<strong>negrito</strong>');
     expect(html).not.toContain('<script>');
   });
+
+  it('round-trips a nested via leg and nests the html list', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+
+### Dia 1 — Museu
+
+- 09:00 [Louvre](place:par-louvre) — Entrada
+  - via: metrô M14 + RER E · 35 min
+- 10:00 [Notre-Dame](place:par-notre-dame)
+`;
+    const parsed = parseTrip('europa', 'content/trips/europa.md', source);
+    const exported = tripToMarkdown(parsed, (_slug, placeId) =>
+      `https://maps.example/${placeId}`,
+    );
+    expect(exported).toContain(
+      '- 09:00 [Louvre](https://maps.example/par-louvre) — Entrada\n  - via: metrô M14 + RER E · 35 min\n- 10:00 [Notre-Dame](https://maps.example/par-notre-dame)',
+    );
+
+    const again = parseTrip('europa', 'content/trips/europa.md', exported);
+    expect(again.cities[0]?.days[0]?.stops[0]?.leg).toEqual(
+      parsed.cities[0]?.days[0]?.stops[0]?.leg,
+    );
+
+    const nested = tripToHtml(exported);
+    expect(nested).toMatch(
+      /<li>09:00 <a href="https:\/\/maps\.example\/par-louvre">Louvre<\/a> — Entrada\s*<ul>\s*<li>via: metrô M14 \+ RER E · 35 min\s*<\/li>\s*<\/ul>\s*<\/li>/,
+    );
+    expect(nested).not.toMatch(/<\/li>\s*<ul>\s*<li>via:/);
+  });
 });

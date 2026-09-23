@@ -1,11 +1,23 @@
 import { getTravelCity, travelCities } from '../catalog';
 
+export type TripLegMode = 'walk' | 'transit' | 'taxi' | 'flight';
+
+export type TripLeg = {
+  /** Author text after `via:`. Export writes it back unchanged. */
+  detail: string;
+  mode?: TripLegMode;
+  /** Minutes. `N h` is N×60. Absent unless the line has exactly one duration token. */
+  durationMin?: number;
+};
+
 export type TripStop = {
   time?: string;
   label: string;
   placeId?: string;
   href?: string;
   note?: string;
+  /** Leg from this departure stop to the next stop. */
+  leg?: TripLeg;
 };
 
 export type TripDay = {
@@ -34,6 +46,63 @@ export type Trip = {
 const CITY_LINE = /^city:\s*(\S+)\s*$/;
 const DATES_LINE = /^dates:\s*(\d{4}-\d{2}-\d{2})\s*→\s*(\d{4}-\d{2}-\d{2})\s*$/;
 const TIME_PREFIX = /^(\d{2}:\d{2})\s+/;
+const VIA_BULLET = /^[ \t]+-[ \t]+via:[ \t]*(.*)$/i;
+// `N h` → N×60 min. `3h10` does not match: `h` must not be followed by a letter or digit.
+const DURATION_TOKEN = /(?<![a-z0-9])(\d+)\s?(min|h)(?![a-z0-9])/gi;
+
+const MODE_WORDS: { mode: TripLegMode; words: string[] }[] = [
+  { mode: 'walk', words: ['a pe', 'walk'] },
+  { mode: 'transit', words: ['metro', 'rer', 'trem', 'train', 'onibus', 'bus', 'tram', 'ferry'] },
+  { mode: 'taxi', words: ['taxi', 'uber', 'carro', 'car'] },
+  { mode: 'flight', words: ['voo', 'flight'] },
+];
+
+function fold(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Earliest keyword wins. Accents folded, so táxi/taxi and metrô/metro are the same. */
+function legMode(detail: string): TripLegMode | undefined {
+  const folded = fold(detail);
+  let bestAt = Number.POSITIVE_INFINITY;
+  let best: TripLegMode | undefined;
+  for (const entry of MODE_WORDS) {
+    for (const word of entry.words) {
+      const match = new RegExp(`(?<![a-z0-9])${word}(?![a-z0-9])`).exec(folded);
+      if (match && match.index < bestAt) {
+        bestAt = match.index;
+        best = entry.mode;
+      }
+    }
+  }
+  return best;
+}
+
+function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
+  const mode = legMode(detail);
+  if (!mode) errors.push({ line, message: 'via sem modo' });
+  const matches = [...detail.matchAll(new RegExp(DURATION_TOKEN.source, 'gi'))];
+  let durationMin: number | undefined;
+  if (matches.length === 1) {
+    const amount = Number(matches[0]?.[1]);
+    durationMin = (matches[0]?.[2] ?? '').toLowerCase() === 'h' ? amount * 60 : amount;
+  } else {
+    errors.push({
+      line,
+      message: matches.length === 0 ? 'via sem duração' : 'via com mais de uma duração',
+    });
+  }
+  return {
+    detail,
+    ...(mode ? { mode } : {}),
+    ...(durationMin !== undefined ? { durationMin } : {}),
+  };
+}
 
 function parseStop(text: string, line: number, errors: TripError[]): TripStop {
   let rest = text.trim();
@@ -143,6 +212,30 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     const datesMatch = trimmed.match(DATES_LINE);
     if (datesMatch && city && !day) {
       city.dates = { start: datesMatch[1] ?? '', end: datesMatch[2] ?? '' };
+      continue;
+    }
+
+    const via = VIA_BULLET.exec(line);
+    if (via) {
+      if (!day) {
+        errors.push({ line: lineNo, message: 'via fora de um dia' });
+        continue;
+      }
+      const stop = day.stops[day.stops.length - 1];
+      const detail = (via[1] ?? '').trim();
+      if (!stop) {
+        errors.push({ line: lineNo, message: 'via sem parada' });
+        continue;
+      }
+      if (!detail) {
+        errors.push({ line: lineNo, message: 'via vazio' });
+        continue;
+      }
+      if (stop.leg) {
+        errors.push({ line: lineNo, message: 'via duplicado' });
+        continue;
+      }
+      stop.leg = readLeg(detail, lineNo, errors);
       continue;
     }
 

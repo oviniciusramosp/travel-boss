@@ -16,6 +16,7 @@ dates: 2026-04-02 → 2026-04-06
 ### Dia 1 — Chegada
 
 - 14:45 [Trocadéro](place:par-trocadero) — Primeira vista da torre
+  - via: metrô · 20 min
 - 15:50 [Torre Eiffel](place:par-eiffel) — Só por fora
 
 Parágrafo livre, **negrito**, *itálico* e listas extras entram no documento e no export. Não viram pinos.
@@ -39,6 +40,20 @@ dates: 2026-04-06 → 2026-04-09
   - Catalog stop: `[Label](place:<placeId>)`. The id must already exist on that city.
   - External stop: `[Label](https://...)`.
   - Note, if any, after an em dash: ` — note`.
+- The departure stop may have one indented sub-bullet for the leg to the next stop. It is not a stop and it does not become a pin.
+
+  ```markdown
+  - 09:00 [Louvre](place:par-louvre)
+    - via: metrô M14 + RER E · 35 min
+  ```
+
+  - The line must be indented (`  - via: …`). A top-level `- via:` is not a leg. A second `via:` under the same stop is an error; the first leg is kept.
+  - Mode is the earliest PT/EN keyword on the line. Matching ignores case and accents:
+    - walk: `a pé`, `walk`
+    - transit: `metrô` / `metro`, `rer`, `trem` / `train`, `ônibus` / `onibus`, `bus`, `tram`, `ferry`
+    - taxi: `táxi` / `taxi`, `uber`, `carro`, `car`
+    - flight: `voo`, `flight`
+  - Duration is exactly one token `(\d+)\s?(min|h)`: `35 min`, `35min`, `1 h`, `1h`. The unit is only `min` or `h` (`35 minutos` does not count). `N h` is N hours, stored as 60N minutes (`1 h` = 60, `3 h` = 180). `3h10` is not a token — `h` must not be followed by a letter or digit — so it is not 3 hours and not 3 hours 10 minutes; write `3 h` or `190 min`. Two tokens (`1 h 30 min`) are not added together.
 - Paragraphs under a day are narrative. They render and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 
@@ -47,7 +62,7 @@ dates: 2026-04-06 → 2026-04-09
 Export rewrites the same document for Apple Notes and Notion:
 
 - H1, H2, H3 stay headings.
-- Bullets stay bullets.
+- Bullets stay bullets. An indented `via:` stays nested under its stop. HTML export puts a `<ul>` inside that stop's `<li>` so Apple Notes and Notion keep the nesting. The `via:` text is copied as written; it is not rewritten from the parsed mode or minutes.
 - `**bold**` and `*italic*` stay.
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.

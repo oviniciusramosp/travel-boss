@@ -25,6 +25,7 @@ export function tripToMarkdown(
         } else body = stop.label;
         const note = stop.note ? ` — ${stop.note}` : '';
         lines.push(`- ${time}${body}${note}`);
+        if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
       }
       if (day.stops.length) lines.push('');
       for (const note of day.notes) lines.push(note, '');
@@ -63,48 +64,70 @@ function inlineWithLinks(value: string): string {
   return html;
 }
 
-/** HTML subset Apple Notes keeps: headings, paragraphs, lists, links. */
+/**
+ * HTML subset Apple Notes keeps: headings, paragraphs, lists, links.
+ * An indented bullet becomes a `<ul>` inside the parent `<li>`.
+ */
 export function tripToHtml(markdown: string): string {
   const out: string[] = [];
-  let inList = false;
-  const closeList = () => {
-    if (!inList) return;
-    out.push('</ul>');
-    inList = false;
+  const stack: { liOpen: boolean }[] = [];
+
+  const closeAll = () => {
+    while (stack.length) {
+      const frame = stack.pop();
+      if (frame?.liOpen) out.push('</li>');
+      out.push('</ul>');
+    }
+  };
+
+  const pushItem = (depth: number, content: string) => {
+    while (stack.length > depth + 1) {
+      const frame = stack.pop();
+      if (frame?.liOpen) out.push('</li>');
+      out.push('</ul>');
+    }
+    if (stack.length === depth + 1) {
+      const frame = stack[depth];
+      if (frame?.liOpen) out.push('</li>');
+      if (frame) frame.liOpen = false;
+    } else {
+      while (stack.length < depth + 1) {
+        out.push('<ul>');
+        stack.push({ liOpen: false });
+      }
+    }
+    out.push(`<li>${content}`);
+    const frame = stack[depth];
+    if (frame) frame.liOpen = true;
   };
 
   for (const line of markdown.split('\n')) {
+    const bullet = /^(\s*)- (.*)$/.exec(line);
+    if (bullet) {
+      const indent = (bullet[1] ?? '').replaceAll('\t', '  ').length;
+      pushItem(Math.floor(indent / 2), inlineWithLinks(bullet[2] ?? ''));
+      continue;
+    }
+    if (!line.trim()) {
+      closeAll();
+      continue;
+    }
+    closeAll();
     if (line.startsWith('### ')) {
-      closeList();
       out.push(`<h3>${inline(line.slice(4))}</h3>`);
       continue;
     }
     if (line.startsWith('## ')) {
-      closeList();
       out.push(`<h2>${inline(line.slice(3))}</h2>`);
       continue;
     }
     if (line.startsWith('# ')) {
-      closeList();
       out.push(`<h1>${inline(line.slice(2))}</h1>`);
       continue;
     }
-    if (line.startsWith('- ')) {
-      if (!inList) {
-        out.push('<ul>');
-        inList = true;
-      }
-      out.push(`<li>${inlineWithLinks(line.slice(2))}</li>`);
-      continue;
-    }
-    if (!line.trim()) {
-      closeList();
-      continue;
-    }
-    closeList();
     out.push(`<p>${inlineWithLinks(line)}</p>`);
   }
-  closeList();
+  closeAll();
   return out.join('\n');
 }
 
