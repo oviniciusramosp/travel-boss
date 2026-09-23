@@ -509,11 +509,6 @@ export function mountCity(
   const blob = new Map(catalogPlaces.map((place) => [place.id, searchBlob(place)]));
   const itinerary = itineraryForCity(city.slug);
   const hotelPriority = priorityPlaceIds(city);
-  const planner = mountRoutePlanner({
-    slug: city.slug,
-    places: catalogPlaces,
-    locale: () => shell.locale(),
-  });
 
   const storedCategories = readCategoryFilter();
   const enabled = new Set<PlaceCategory>(
@@ -534,6 +529,13 @@ export function mountCity(
   }
 
   let tab: Tab = initial?.tab ?? 'places';
+  const planner = mountRoutePlanner({
+    slug: city.slug,
+    places: catalogPlaces,
+    locale: () => shell.locale(),
+    column: shell.mapHost.parentElement,
+    active: () => tab === 'places',
+  });
   let query = shell.query();
   let currentPlaceId: string | null = null;
   let currentStopId: string | null = null;
@@ -1339,6 +1341,7 @@ export function mountCity(
     main.scrollTop = top;
     if (tab === 'places') showPlacePins({ fit: false, pan: false });
     else showItineraryMap({ fit: false });
+    planner.sync();
   });
 
   const unsubQuery = shell.onQuery((value) => {
@@ -1400,6 +1403,7 @@ export function mountCity(
     if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
     else if (next === 'itinerary') showItineraryMap({ fit: true });
     else showHotelPins();
+    planner.sync();
     main.scrollTop = 0;
     if (!hadPlace) publish();
   }

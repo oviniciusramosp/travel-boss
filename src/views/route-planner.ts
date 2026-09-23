@@ -1,6 +1,6 @@
 import { read, write } from '../app/store';
 import { pickLocale, travelUi, type Locale } from '../catalog';
-import { iconButton } from '../ui/controls';
+import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 
@@ -87,6 +87,20 @@ export function routeFullLabel(locale: Locale): string {
   });
 }
 
+export type RouteNoteKind = 'idle' | 'loading' | 'ok' | 'error' | 'hint';
+
+/** Tip line before a walk preview replaces it: need two stops, or transit stays a hint. */
+export function routeBarHint(
+  count: number,
+  mode: RouteMode,
+  locale: Locale,
+): { text: string; kind: RouteNoteKind } | null {
+  if (count < 1) return null;
+  if (count < 2) return { text: pickLocale(locale, travelUi.routeNeedStops), kind: 'idle' };
+  if (mode === 'transit') return { text: pickLocale(locale, travelUi.routeTransitHint), kind: 'hint' };
+  return null;
+}
+
 export function paintRouteAction(
   button: HTMLButtonElement,
   on: boolean,
@@ -129,6 +143,24 @@ function persist(current: Session): void {
   writeStoredRoute(current.slug, { ids: placeStopIds(current.stops), mode: current.mode });
 }
 
+function sameStops(a: readonly RouteStop[], b: readonly RouteStop[]): boolean {
+  return a.length === b.length && a.every((stop, index) => stop.id === b[index]?.id && stop.lat === b[index]?.lat);
+}
+
+type RouteBar = {
+  root: HTMLElement;
+  title: HTMLElement;
+  clearBtn: HTMLButtonElement;
+  fromMe: HTMLButtonElement;
+  stopsEl: HTMLOListElement;
+  meta: HTMLElement;
+  modes: HTMLButtonElement[];
+};
+
+let bar: RouteBar | null = null;
+let barActive: () => boolean = () => true;
+let note: { text: string; kind: RouteNoteKind } | null = null;
+
 function syncActions(): void {
   if (!session || typeof document === 'undefined') return;
   const locale = session.locale();
@@ -140,14 +172,76 @@ function syncActions(): void {
   }
 }
 
-function toggle(id: string): void {
-  const current = session;
-  const place = current?.byId.get(id);
-  if (!current || !place || !Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return;
-  current.stops = togglePlaceStop(current.stops, toStop(place)).stops;
-  persist(current);
+function refresh(): void {
   syncActions();
-  current.onChange?.();
+  if (!bar || !session) return;
+  const locale = session.locale();
+  const stops = session.stops;
+  const user = (stop: RouteStop) => Boolean(stop.user) || stop.id === USER_LOCATION_ID;
+  bar.root.hidden = stops.length === 0 || !barActive();
+  bar.title.textContent = pickLocale(locale, travelUi.routeTitle);
+  bar.root.setAttribute('aria-label', bar.title.textContent);
+  const clear = pickLocale(locale, travelUi.routeClear);
+  bar.clearBtn.setAttribute('aria-label', clear);
+  bar.clearBtn.setAttribute('data-tip', clear);
+  const from = pickLocale(locale, travelUi.startFromMyLocation);
+  bar.fromMe.setAttribute('aria-label', from);
+  bar.fromMe.setAttribute('data-tip', from);
+  const fromText = bar.fromMe.querySelector('span:last-child');
+  if (fromText) fromText.textContent = from;
+  bar.fromMe.hidden = stops.length === 0 || stops.some(user);
+  bar.stopsEl.replaceChildren();
+  stops.forEach((stop, index) => {
+    const li = el('li', user(stop) ? 'tb-route__stop is-user' : 'tb-route__stop');
+    const n = el('span', 'tb-route__n', user(stop) ? '' : String(index + 1));
+    if (user(stop)) n.append(icon('my_location', { size: 16, fill: true }));
+    const rm = iconButton({ icon: 'close', label: routeActionLabel(true, locale), size: 'sm' });
+    rm.dataset.routeRm = stop.id;
+    li.append(n, el('span', 'tb-route__name', pickLocale(locale, { en: stop.label, 'pt-BR': stop.labelPt || stop.label })), rm);
+    bar?.stopsEl.append(li);
+  });
+  for (const button of bar.modes) {
+    const on = button.dataset.routeMode === session.mode;
+    button.setAttribute('aria-pressed', on ? 'true' : 'false');
+    const label = pickLocale(locale, button.dataset.routeMode === 'transit' ? travelUi.routeTransit : travelUi.routeWalk);
+    const text = button.querySelector('span:last-child');
+    if (text) text.textContent = label;
+    button.setAttribute('aria-label', label);
+  }
+  const group = bar.modes[0]?.parentElement;
+  if (group) segmented(group);
+  const hint = (stops.length >= 2 ? note : null) ?? routeBarHint(stops.length, session.mode, locale);
+  bar.meta.hidden = !hint?.text;
+  bar.meta.textContent = hint?.text ?? '';
+  if (hint) bar.meta.dataset.kind = hint.kind;
+  else delete bar.meta.dataset.kind;
+}
+
+function apply(next: RouteStop[], mode: RouteMode): void {
+  if (!session) return;
+  if (session.mode === mode && sameStops(session.stops, next)) return;
+  session.stops = next;
+  session.mode = mode;
+  note = null;
+  persist(session);
+  refresh();
+  session.onChange?.();
+}
+
+function toggle(id: string): void {
+  const place = session?.byId.get(id);
+  if (!session || !place || !Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return;
+  apply(togglePlaceStop(session.stops, toStop(place)).stops, session.mode);
+}
+
+/** Walk preview and locate fill this. Clearing the route drops it. */
+export function setRouteNote(next: { text: string; kind: RouteNoteKind } | null): void {
+  note = next;
+  refresh();
+}
+
+async function beginLocate(asStop: boolean): Promise<void> {
+  void asStop;
 }
 
 export function routePlannerOn(): boolean {
@@ -174,12 +268,72 @@ export function createRouteButton(placeId: string, locale: Locale, labeled = fal
   return button;
 }
 
+function modeButton(mode: RouteMode, glyph: 'directions_walk' | 'directions_transit'): HTMLButtonElement {
+  const button = el('button');
+  button.type = 'button';
+  button.dataset.routeMode = mode;
+  button.append(icon(glyph, { size: 18 }), el('span'));
+  button.addEventListener('click', () => {
+    if (!session) return;
+    apply(session.stops, mode);
+  });
+  return button;
+}
+
+function mountBar(column: HTMLElement): void {
+  const root = el('section', 'tb-route');
+  root.hidden = true;
+  const head = el('div', 'tb-route__head');
+  const title = el('span', 'tb-route__title');
+  const clearBtn = iconButton({ icon: 'close', label: 'Clear route', size: 'sm' });
+  clearBtn.addEventListener('click', () => {
+    if (!session) return;
+    apply([], session.mode);
+    clearBtn.focus();
+  });
+  head.append(title, clearBtn);
+  const fromMe = el('button', 'tb-btn-outline tb-route__from');
+  fromMe.type = 'button';
+  fromMe.hidden = true;
+  fromMe.append(icon('my_location', { size: 18, fill: true }), el('span'));
+  fromMe.addEventListener('click', () => {
+    void beginLocate(true);
+  });
+  const stopsEl = el('ol', 'tb-route__stops');
+  stopsEl.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const button = target.closest<HTMLButtonElement>('[data-route-rm]');
+    const id = button?.dataset.routeRm;
+    if (!id || !session) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const focused = document.activeElement === button;
+    apply(removeRouteStop(session.stops, id), session.mode);
+    if (focused) clearBtn.focus();
+  });
+  const modes = el('div', 'tb-route__modes');
+  modes.setAttribute('role', 'group');
+  const walk = modeButton('walk', 'directions_walk');
+  const transit = modeButton('transit', 'directions_transit');
+  modes.append(walk, transit);
+  segmented(modes);
+  const meta = el('p', 'tb-route__meta');
+  meta.setAttribute('role', 'status');
+  meta.setAttribute('aria-live', 'polite');
+  root.append(head, fromMe, stopsEl, modes, meta);
+  column.append(root);
+  bar = { root, title, clearBtn, fromMe, stopsEl, meta, modes: [walk, transit] };
+}
+
 export function mountRoutePlanner(opts: {
   slug: string;
   places: readonly RoutePlace[];
   locale: () => Locale;
+  column?: HTMLElement | null;
+  active?: () => boolean;
   onChange?: () => void;
-}): { ids(): string[]; dispose(): void } {
+}): { ids(): string[]; sync(): void; dispose(): void } {
   const byId = new Map<string, RoutePlace>();
   for (const place of opts.places) byId.set(place.id, place);
   const stored = readStoredRoute(opts.slug);
@@ -189,6 +343,10 @@ export function mountRoutePlanner(opts: {
     if (!place || !Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
     stops.push(toStop(place));
   }
+  bar?.root.remove();
+  bar = null;
+  note = null;
+  barActive = opts.active ?? (() => true);
   session = {
     slug: opts.slug,
     stops,
@@ -197,11 +355,20 @@ export function mountRoutePlanner(opts: {
     locale: opts.locale,
     onChange: opts.onChange,
   };
+  if (opts.column) mountBar(opts.column);
+  refresh();
   const slug = opts.slug;
   return {
     ids: () => (session?.slug === slug ? placeStopIds(session.stops) : []),
+    sync: () => {
+      if (session?.slug === slug) refresh();
+    },
     dispose() {
-      if (session?.slug === slug) session = null;
+      if (session?.slug !== slug) return;
+      session = null;
+      note = null;
+      bar?.root.remove();
+      bar = null;
     },
   };
 }

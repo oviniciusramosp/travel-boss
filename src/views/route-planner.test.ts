@@ -5,6 +5,7 @@ import {
   placeStopIds,
   readStoredRoute,
   removeRouteStop,
+  routeBarHint,
   routeStorageKey,
   togglePlaceStop,
   USER_LOCATION_ID,
@@ -55,6 +56,16 @@ describe('route stops', () => {
     expect(data.has(`tb:${routeStorageKey('paris')}`)).toBe(true);
     expect(readStoredRoute('paris')).toEqual({ ids: ['louvre'], mode: 'transit' });
     expect(readStoredRoute('roma')).toEqual({ ids: [], mode: 'walk' });
+  });
+
+  it('asks for two stops and keeps transit as a hint', () => {
+    expect(routeBarHint(0, 'walk', 'pt-BR')).toBeNull();
+    expect(routeBarHint(1, 'walk', 'pt-BR')?.text).toBe('Adicione pelo menos 2 lugares');
+    expect(routeBarHint(2, 'transit', 'en')).toEqual({
+      text: 'Transit times open in Google Maps',
+      kind: 'hint',
+    });
+    expect(routeBarHint(2, 'walk', 'pt-BR')).toBeNull();
   });
 
   afterEach(() => {
