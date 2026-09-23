@@ -99,3 +99,84 @@
 .tb-city-section h3[hidden] {
   display: none;
 }
+
+/* Transfer between stops. Line fill is the only non-token color. */
+.tb-transfer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-height: var(--h-md);
+  margin: 0;
+  padding: var(--inset-row);
+  list-style: none;
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+}
+
+.tb-list > .tb-transfer {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  column-gap: var(--spacing-8);
+  row-gap: 0;
+}
+
+.tb-transfer__lead {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-mid-gray);
+}
+
+.tb-list > .tb-transfer > .tb-transfer__lead {
+  grid-column: lead;
+}
+
+.tb-transfer__icon {
+  color: var(--color-mid-gray);
+}
+
+.tb-transfer__main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.tb-list > .tb-transfer > .tb-transfer__main {
+  grid-column: main;
+}
+
+.tb-transfer__label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-ink);
+  font-weight: var(--font-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tb-transfer__chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  height: var(--h-sm);
+  padding: 0 var(--spacing-8);
+  border-radius: var(--r-pill);
+  background: var(--line-color);
+  color: var(--color-on-ink);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.tb-transfer__chip.is-ink {
+  color: var(--color-ink);
+}
+
+.tb-transfer__duration {
+  flex: none;
+  color: var(--color-mid-gray);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
