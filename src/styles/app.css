@@ -379,6 +379,7 @@ button {
 }
 
 .tb-map path.tb-station {
+  pointer-events: auto;
   stroke: var(--color-paper);
 }
 
