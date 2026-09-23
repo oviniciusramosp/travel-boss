@@ -19,7 +19,7 @@ import {
   setDocumentTitle,
   type Route,
 } from './app/router';
-import { getTravelCity, pickLocale } from './catalog';
+import { getTravelCity, pickLocale, travelCities } from './catalog';
 import { mountTooltip } from './ui/tooltip';
 import { mountMap } from './map/map';
 import { mountCity, mountCityNav, type CityRouteState } from './views/places';
@@ -80,7 +80,39 @@ function citySource(slug: string): string {
   });
 }
 
+function paintCities(fit: boolean) {
+  const locale = shell.locale();
+  map.setCities(
+    travelCities.map((city) => ({
+      id: city.slug,
+      lat: city.lat,
+      lng: city.lng,
+      label: pickLocale(locale, city.name),
+    })),
+    { fit },
+  );
+}
+
+function clearMap() {
+  map.highlight(null);
+  map.setOverview(null);
+  map.setRoute([]);
+  map.setRadius(null);
+  map.setPins('place', []);
+  map.setPins('hotel', []);
+  map.setPins('stop', []);
+  map.setCities([]);
+}
+
 function applyChrome(route: Route, title: boolean) {
+  if (route.kind === 'home') {
+    cityNav.setActive(null);
+    tripNav.setActive(null);
+    shell.setExportEnabled(false);
+    shell.setSource('content/trips');
+    if (title) setDocumentTitle('');
+    return;
+  }
   if (route.kind === 'trip') {
     cityNav.setActive(null);
     tripNav.setActive(route.id);
@@ -118,6 +150,22 @@ function show(route: Route, mode: 'push' | 'replace' | 'none') {
   dispose();
   syncCity = null;
   applyChrome(route, true);
+
+  if (route.kind === 'home') {
+    clearMap();
+    shell.showEmpty();
+    const off = map.onSelect((id) => {
+      if (current?.kind !== 'home') return;
+      if (!travelCities.some((city) => city.slug === id)) return;
+      show({ kind: 'city', slug: id, tab: 'places' }, 'push');
+    });
+    paintCities(true);
+    dispose = () => {
+      off();
+      map.setCities([]);
+    };
+    return;
+  }
 
   if (route.kind === 'trip') {
     const view = mountTrip(shell.main, map, route.id, shell);
@@ -189,6 +237,10 @@ window.addEventListener('hashchange', onHistory);
 window.addEventListener('popstate', onHistory);
 
 shell.onLocale(() => {
+  if (current?.kind === 'home') {
+    paintCities(false);
+    return;
+  }
   if (current?.kind !== 'city') return;
   setDocumentTitle(cityLabel(current.slug));
   shell.setSource(citySource(current.slug));

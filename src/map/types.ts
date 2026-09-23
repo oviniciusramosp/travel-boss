@@ -31,6 +31,14 @@ export type MapRouteSegment = {
   dash?: boolean;
 };
 
+/** Catalog city shown when no trip and no city are open. */
+export type MapCityPin = {
+  id: string;
+  lat: number;
+  lng: number;
+  label: string;
+};
+
 /** Numbered stop on the trip overview. `via` is the departure toward the next city. */
 export type MapOverviewCity = {
   id: string;
@@ -57,6 +65,8 @@ export type MapHandle = {
   hoverOverview(id: string | null): void;
   /** Click on an overview node. Returns an unsubscribe. */
   onOverview(fn: (id: string) => void): () => void;
+  /** Catalog city pins. Pass [] to clear. Click reports the id through `onSelect`. */
+  setCities(pins: readonly MapCityPin[], opts?: { fit?: boolean }): void;
   fit(): void;
   /** Whether a coordinate is inside the current map view. */
   inView(lat: number, lng: number): boolean;

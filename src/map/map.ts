@@ -35,6 +35,7 @@ import { attachTrackpadGestures } from './trackpad';
 import { overviewArcs } from './overview';
 import { transitLineForPlace } from './transit';
 import type {
+  MapCityPin,
   MapHandle,
   MapOverviewCity,
   MapPadding,
@@ -142,6 +143,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   const padding = { top: 0, right: 0, bottom: 0, left: 0 };
   let radiusLayer: Circle | null = null;
   let routeLayer: LayerGroup | null = null;
+  let cityLayer: LayerGroup | null = null;
   let overviewLayer: LayerGroup | null = null;
   let overviewHoverId: string | null = null;
   const overviewMarkers = new Map<string, Marker>();
@@ -156,15 +158,19 @@ export function mountMap(host: HTMLElement): MapHandle {
 
   const fitPoints = (points: [number, number][], maxZoom: number) => {
     if (points.length === 0) return;
+    let tries = 0;
     const run = () => {
       const size = leafletMap.getSize();
-      if (size.x < 2 || size.y < 2) return false;
+      if (size.x < 2 || size.y < 2) {
+        tries += 1;
+        if (tries < 4) requestAnimationFrame(run);
+        return;
+      }
       const bounds = latLngBounds(points);
-      if (!bounds.isValid()) return true;
+      if (!bounds.isValid()) return;
       leafletMap.fitBounds(bounds, { ...fitPad(48), maxZoom, ...cameraMotion() });
-      return true;
     };
-    if (!run()) requestAnimationFrame(() => { run(); });
+    run();
   };
 
   const pinMeta: Record<MapPinKind, Map<string, PinModel>> = {
@@ -493,6 +499,48 @@ export function mountMap(host: HTMLElement): MapHandle {
       return () => {
         overviewFns.delete(fn);
       };
+    },
+
+    setCities(pins: readonly MapCityPin[], opts?: { fit?: boolean }) {
+      cityLayer?.remove();
+      cityLayer = null;
+      const list = pins.filter(
+        (pin) => pin.id && Number.isFinite(pin.lat) && Number.isFinite(pin.lng),
+      );
+      if (!list.length) {
+        delete host.dataset.cities;
+        return;
+      }
+      host.dataset.cities = String(list.length);
+      const group = layerGroup();
+      const fit: [number, number][] = [];
+      for (const pin of list) {
+        const dot = marker([pin.lat, pin.lng], {
+          icon: divIcon({
+            className: 'tb-city-pin-wrap',
+            html: '<span class="tb-city-pin"></span>',
+            iconSize: [28, 28],
+            iconAnchor: [14, 14],
+          }),
+          keyboard: false,
+          title: pin.label,
+          zIndexOffset: 800,
+          bubblingMouseEvents: false,
+        });
+        dot.bindTooltip(pin.label, {
+          direction: 'top',
+          opacity: 1,
+          className: 'tb-pin-tip',
+        });
+        dot.on('click', () => {
+          for (const fn of selectFns) fn(pin.id);
+        });
+        dot.addTo(group);
+        fit.push([pin.lat, pin.lng]);
+      }
+      group.addTo(leafletMap);
+      cityLayer = group;
+      if (opts?.fit) fitPoints(fit, 5);
     },
 
     flyTo(lat, lng, zoom = 16) {

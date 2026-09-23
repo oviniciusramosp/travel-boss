@@ -37,6 +37,8 @@ export type Shell = {
   setSource(path: string): void;
   setExportEnabled(on: boolean): void;
   onExport(fn: () => void): () => void;
+  /** The empty document already in the shell. No new screen. */
+  showEmpty(): void;
 };
 
 /** Saved value, then the browser language, then English. */
@@ -75,7 +77,8 @@ export function mountShell(root: HTMLElement): Shell {
     size: 'md',
   });
   sideToggle.classList.add('tb-side-toggle');
-  const mark = el('p', 'tb-mark');
+  const mark = el('a', 'tb-mark');
+  mark.href = '#/';
   mark.append(document.createTextNode('Travel Boss'));
   const markMeta = el('span');
   markMeta.textContent = 'roteiros';
@@ -360,6 +363,10 @@ export function mountShell(root: HTMLElement): Shell {
     onExport(fn) {
       exportFns.add(fn);
       return () => exportFns.delete(fn);
+    },
+    showEmpty() {
+      main.replaceChildren(empty);
+      paintLocale();
     },
   };
 }

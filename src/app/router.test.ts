@@ -30,7 +30,8 @@ describe('parseHash', () => {
     expect(parseHash('#/city/paris/places?day=foo')).toEqual(paris);
   });
 
-  it('rejects a hash that is not a trip or a city tab', () => {
+  it('treats an empty path as nothing open, and still rejects a blank hash', () => {
+    expect(parseHash('#/')).toEqual({ kind: 'home' });
     expect(parseHash('')).toBeNull();
     expect(parseHash('#/city/paris')).toBeNull();
     expect(parseHash('#/city/paris/map')).toBeNull();
@@ -53,11 +54,16 @@ describe('formatHash', () => {
       `#/city/${encodeURIComponent('são paulo')}/places?place=par-eiffel&day=3`,
     );
     expect(formatHash({ kind: 'trip', id: 'europa' })).toBe('#/trip/europa');
+    expect(formatHash({ kind: 'home' })).toBe('#/');
+    expect(parseHash(formatHash({ kind: 'home' }))).toEqual({ kind: 'home' });
   });
 });
 
 describe('navigationMode', () => {
   it('pushes a new view and replaces tab, place or day', () => {
+    expect(navigationMode(null, { kind: 'home' })).toBe('push');
+    expect(navigationMode({ kind: 'home' }, { kind: 'home' })).toBe('replace');
+    expect(navigationMode({ kind: 'trip', id: 'europa' }, { kind: 'home' })).toBe('push');
     expect(navigationMode(null, paris)).toBe('push');
     expect(navigationMode(paris, { kind: 'city', slug: 'roma', tab: 'places' })).toBe('push');
     expect(navigationMode(paris, { kind: 'trip', id: 'europa' })).toBe('push');

@@ -1,6 +1,7 @@
 export type CityTab = 'places' | 'itinerary' | 'hotels';
 
 export type Route =
+  | { kind: 'home' }
   | { kind: 'trip'; id: string }
   | { kind: 'city'; slug: string; tab: CityTab; place?: string; day?: number };
 
@@ -17,7 +18,7 @@ function parseDay(value: string | null): number | undefined {
   return day;
 }
 
-/** `#/trip/<id>` or `#/city/<slug>/<tab>?place=<id>&day=<n>` (day is 1-based). */
+/** `#/`, `#/trip/<id>`, or `#/city/<slug>/<tab>?place=<id>&day=<n>` (day is 1-based). */
 export function parseHash(hash: string): Route | null {
   const text = hash.startsWith('#') ? hash.slice(1) : hash;
   if (!text.startsWith('/')) return null;
@@ -25,6 +26,7 @@ export function parseHash(hash: string): Route | null {
   const path = queryAt === -1 ? text : text.slice(0, queryAt);
   const query = queryAt === -1 ? '' : text.slice(queryAt + 1);
   const parts = path.split('/').filter((part) => part.length > 0);
+  if (parts.length === 0) return { kind: 'home' };
 
   if (parts[0] === 'trip' && parts.length === 2) {
     const id = decodeURIComponent(parts[1] ?? '');
@@ -50,6 +52,7 @@ export function parseHash(hash: string): Route | null {
 }
 
 export function formatHash(route: Route): string {
+  if (route.kind === 'home') return '#/';
   if (route.kind === 'trip') return `#/trip/${encodeURIComponent(route.id)}`;
   const params = new URLSearchParams();
   if (route.place) params.set('place', route.place);
@@ -70,6 +73,7 @@ export function sameRoute(a: Route | null, b: Route | null): boolean {
  */
 export function navigationMode(from: Route | null, to: Route): 'push' | 'replace' {
   if (!from || from.kind !== to.kind) return 'push';
+  if (from.kind === 'home') return 'replace';
   if (from.kind === 'trip' && to.kind === 'trip') return from.id === to.id ? 'replace' : 'push';
   if (from.kind === 'city' && to.kind === 'city') {
     return from.slug === to.slug ? 'replace' : 'push';
