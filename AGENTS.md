@@ -1,0 +1,95 @@
+# Travel Boss
+
+Vite + TypeScript, DOM puro. O Markdown do roteiro é a fonte da verdade; a UI acompanha o save. O portfólio (Astro) é a origem do comportamento — porte é adaptar, não copiar.
+
+## Comandos
+
+```bash
+npm run dev                  # Vite; save em content/trips/*.md atualiza o roteiro aberto
+npm test                     # vitest run
+npx tsc --noEmit
+npm run build                # tsc --noEmit && vite build
+npm run travel:airbnb:setup  # venv em node_modules/.cache/airbnb-venv
+```
+
+`graphify-out/graph.json` existe. Consulte o grafo antes de ler arquivo:
+
+```bash
+graphify query "<tema>"
+```
+
+Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não edite `graph.json` na mão. Não commite `graphify-out/cache/`.
+
+## Arquitetura
+
+`src/main.ts` → `src/app/shell` · `src/map/*` · `src/views/*` · `src/trip/*` · `src/catalog` → `src/data`.
+
+- `src/main.ts` monta o shell (`src/app/shell`), o mapa (`src/map/map`, mais rota e basemap em `src/map/*`), as views e o roteiro (`src/trip/mount`).
+- `src/views/*`: `places.ts` e `place-panel.ts` sobem com a cidade; `hotels.ts` entra por import dinâmico a partir de `places.ts`.
+- `src/trip/*`: `parse.ts`, `mount.ts`, `export.ts`.
+- A UI importa o catálogo só por `src/catalog/index.ts`, que reexporta `src/data`.
+
+## Contrato
+
+- `content/trips/*.md` é a fonte da verdade dos roteiros. Mudou o formato? Atualize `content/SCHEMA.md`, o parser, o export e os testes na mesma tarefa.
+- A UI importa o catálogo só por `src/catalog/index.ts`. Reexporte ali o que faltar.
+- Não edite `src/data/*` salvo tarefa explícita. Sem dependência npm nova sem a tarefa pedir.
+- Tokens de cor, espaço, tipo, raio, motion e z-index só em `src/styles/tokens.css`. Nada de ms, px de raio, cor ou z-index soltos.
+- Ícones só via `icon()` quando existir (`src/ui/icons.ts` ainda não existe; não antecipe o helper). Glifo novo entra em `ICONS`.
+- Idioma: `pickLocale(locale, { en, 'pt-BR' })`. A função está em `src/data/travel.ts`; a UI importa de `src/catalog`.
+- Re-render não recria o controle focado: atualize atributos no lugar (como `syncView` em `src/trip/mount.ts`).
+- Foco desktop (conferir em 1440×900). Itens mobile do portfólio ficam fora.
+- Escopo só da tarefa. Se o diff passar de ~250 linhas, pare e divida.
+- Lógica não trivial (parser, heurística, cálculo) ganha teste no padrão de `src/trip/parse.test.ts`.
+- Antes: `graphify query`, depois os arquivos da tarefa. Depois: `npx tsc --noEmit && npm test`, olhar no browser (`npm run dev`, 1440×900), `graphify update .`, commit `feat(<fase>.<n>): …` ou `fix(…)`.
+- Marcações 🤔 no plano são suposição. Verifique antes de depender delas.
+
+UI (vale a partir da Fase 1):
+
+- Botão só-ícone só em ação repetida por linha, controle de mapa ou painel, ou convenção universal (fechar, anterior/próxima, tela cheia), sempre com `aria-label` e tooltip. A ação primária única da tela mantém o rótulo.
+- Listas usam o primitivo de linha em subgrid: colunas fixas, ações no mesmo X.
+- Informação secundária aparece no hover e em `:focus-within`; em `@media (hover: none)` fica sempre visível. Não esconda o essencial nem o único caminho de uma ação.
+- Hover não move a câmera do mapa. Só clique ou Enter movem.
+- O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos.
+
+Cada primitivo novo acrescenta a regra dele neste arquivo.
+
+## Como um LLM edita um roteiro
+
+Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `content/trips/<id>.md`.
+
+- H1: título da viagem.
+- H2: cidade, na ordem. A linha seguinte é `city: <slug>` do catálogo; `dates: YYYY-MM-DD → YYYY-MM-DD` é opcional.
+- H3: `### Dia N — Título`.
+- Parada: bullet com `HH:mm` opcional e link `[Rótulo](place:<id>)` (o id já existe naquela cidade) ou URL `https://…`. Nota depois de ` — `.
+- Parágrafo sob o dia é narrativa: entra no documento e no export, não vira pino.
+- Sem comentário HTML, front matter YAML ou HTML cru.
+
+Edite o `.md`. Com `npm run dev`, o save avisa o browser (`tb:trip`) e o roteiro aberto é relido de `/api/trips`. Não duplique o roteiro em TypeScript. Coordenadas, avaliações e ranking de hotel ficam em `src/data`; o arquivo da viagem só referencia ids.
+
+## Travel places ↔ Notion (obrigatório)
+
+Regras completas: [docs/travel-notion-sync.md](docs/travel-notion-sync.md).
+
+Os scripts `travel:notion:*` **não** estão no `package.json` deste repo. Entram na Fase 12, com esse doc. Até lá, o contrato é o do portfólio (`/Users/viniciusramos/Documents/Apps/side-projects/web/vinicius-ramos-portfolio`): rode os comandos lá. Não invente push a partir daqui. Este app não é Astro; `resolvePlacePhotos` chega pela UI via `src/catalog`, não por página.
+
+**Sempre que adicionar ou atualizar lugares (texto, coords, capas, fotos, avaliações):**
+
+1. Edite as fontes locais (`src/data/travel.ts` / `localTravelCities`, `travel-photos.ts`, visit, subcategorias). Neste repo, `src/data/*` só se a tarefa pedir.
+2. **Empurre na hora para o Notion**, para o CMS e o app não divergirem. No portfólio, até a Fase 12:
+
+```bash
+npm run travel:notion:push -- <placeId> [moreIds...]
+```
+
+3. Não deixe para um seed em massa de um dump antigo — isso já apagou capas.
+
+**Garantias de foto / recência (no script de sync):**
+
+- Galerias são **merge-union**: nunca grave menos Photo URLs do que `max(local, Notion)`.
+- Se `last_edited_time` do Notion for **mais novo** que `lastPushedAt` em `src/data/travel-notion-sync-state.json` e a galeria do Notion for mais longa, a ordem do Notion vence; URLs só locais ainda entram no fim.
+- `seed-photos` faz merge; **não** substitui multi-capas do Notion por uma lista local mais curta.
+- Em runtime, `resolvePlacePhotos` também une registro + Notion, para as capas não sumirem na UI.
+
+**Comandos seguros** (portfólio agora; este repo na Fase 12): `pull`, `sync` (só pull), `push`, `seed-photos` em modo merge.
+**Evitar:** seed de um dump **velho** que sobrescreva o editorial mais novo do Notion.
