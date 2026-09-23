@@ -1039,15 +1039,17 @@ export function mountCity(
 
       const option = selectedArrival(day);
       if (day.arrivals?.length) {
-        const control = el('div', 'tb-locale');
-        control.setAttribute('role', 'group');
+        const control = el('div', 'tb-locale tb-arrival');
+        control.setAttribute('role', 'tablist');
         control.setAttribute('aria-label', pickLocale(locale, travelUi.itineraryArrivalAirport));
         for (const item of day.arrivals) {
-          const button = el('button', undefined, pickLocale(locale, item.label));
+          const button = el('button');
           button.type = 'button';
+          button.setAttribute('role', 'tab');
           button.dataset.arrivalDay = day.id;
           button.dataset.arrivalId = item.id;
-          button.setAttribute('aria-pressed', option?.id === item.id ? 'true' : 'false');
+          button.setAttribute('aria-selected', option?.id === item.id ? 'true' : 'false');
+          button.append(icon('flight', { size: 16 }), el('span', undefined, pickLocale(locale, item.label)));
           control.append(button);
         }
         segmented(control);

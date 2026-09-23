@@ -240,6 +240,12 @@ p.tb-budget {
   margin: 0 0 8px;
 }
 
+.tb-arrival button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
 .tb-slot {
   margin: 0 0 var(--spacing-8);
 }
