@@ -354,6 +354,7 @@ export function mountHotels(
   const mutedTypes = new Set<string>();
   let contextObserver: MutationObserver | null = null;
   let contextLabels = new Set<string>();
+  let framed = false;
   let sheetId: string | null = null;
   let sheetOrigin: HTMLElement | null = null;
   let heat: StayHeatHandle | null = null;
@@ -627,6 +628,10 @@ export function mountHotels(
     contextLabels = labels;
     map.setPins('place', pins);
     remarkContext();
+    if (!framed && pins.length) {
+      framed = true;
+      map.fit();
+    }
   };
 
   const watchContextPins = () => {
