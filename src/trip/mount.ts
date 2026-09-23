@@ -10,16 +10,14 @@ import {
   travelUi,
 } from '../catalog';
 import type { PlaceCategory, TravelPlace } from '../catalog';
-import type { MapHandle, MapPin } from '../map/types';
-import {
-  buildItineraryRoute,
-  buildItineraryRoutePreview,
-  type PlaceCoord,
-} from '../map/itinerary-route';
+import type { MapHandle, MapPin, MapRouteSegment } from '../map/types';
+import { fetchWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
 import { directionsMode, googleDirectionsUrl } from './directions';
 import { tripErrorText } from './errors';
 import { copyTrip, downloadTrip, tripToHtml, tripToMarkdown } from './export';
+import { dayKey, dayOpen, shouldRefit, stopKey, type FocusMark } from './view-state';
+import { rememberWalk, rememberedWalk } from './walk-memory';
 import { iconLink } from '../ui/controls';
 import { row } from '../ui/row';
 import {
@@ -221,7 +219,7 @@ export function mountTrip(
       return;
     }
     if (!current) return;
-    paint(current, main.scrollTop);
+    paint(current);
     repaintPlace(shell.locale());
   });
   const offQuery = shell.onQuery(() => applyQuery());
@@ -251,6 +249,12 @@ export function mountTrip(
   };
   let cityFilter: string | null = null;
   let tripRouteEpoch = 0;
+  let hasPainted = false;
+  let openKeys = new Set<string>();
+  let focusMark: FocusMark | null = null;
+  let currentStopKey: string | null = null;
+  let scrollTop = 0;
+  let seenPinIds = new Set<string>();
   const storedCategories = readCategoryFilter();
   const enabledCategories = new Set<PlaceCategory>(
     storedCategories
@@ -262,34 +266,65 @@ export function mountTrip(
 
   function drawTripRoutes() {
     const epoch = ++tripRouteEpoch;
-    const coords = new Map<string, PlaceCoord>();
-    const ids: string[] = [];
-    const legs: { from: string; to: string; mode: 'walk' }[] = [];
+    const coords = new Map<string, { lat: number; lng: number }>();
+    const pairs: { from: { lat: number; lng: number }; to: { lat: number; lng: number } }[] = [];
     for (const section of main.querySelectorAll<HTMLElement>('.tb-city-section')) {
       if (section.hidden) continue;
       const record = getTravelCity(section.dataset.city ?? '');
       if (!record) continue;
       for (const place of record.places) {
-        coords.set(place.id, { id: place.id, lat: place.lat, lng: place.lng });
+        coords.set(place.id, { lat: place.lat, lng: place.lng });
       }
       for (const day of section.querySelectorAll<HTMLDetailsElement>('details.tb-day')) {
         if (!day.open) continue;
         const stopIds = [...day.querySelectorAll<HTMLElement>('[data-place-id]')]
           .map((node) => node.dataset.placeId)
           .filter((value): value is string => Boolean(value));
-        ids.push(...stopIds);
         for (let index = 1; index < stopIds.length; index += 1) {
-          const from = stopIds[index - 1];
-          const to = stopIds[index];
-          if (from && to) legs.push({ from, to, mode: 'walk' });
+          const fromId = stopIds[index - 1];
+          const toId = stopIds[index];
+          const from = fromId ? coords.get(fromId) : undefined;
+          const to = toId ? coords.get(toId) : undefined;
+          if (from && to) pairs.push({ from, to });
         }
       }
     }
-    map.setRoute(buildItineraryRoutePreview(ids, legs, coords).segments);
-    void buildItineraryRoute(ids, legs, coords)
-      .then((built) => {
+
+    const slots: (MapRouteSegment | null)[] = pairs.map((pair) => {
+      const cached = rememberedWalk(pair.from, pair.to);
+      return cached ? { mode: 'walk', latlngs: cached } : null;
+    });
+    const ready = () => slots.filter((slot): slot is MapRouteSegment => slot !== null);
+    if (ready().length === pairs.length) {
+      map.setRoute(ready());
+      return;
+    }
+    if (ready().length) map.setRoute(ready());
+
+    void Promise.all(
+      pairs.map(async (pair, index) => {
+        if (slots[index]) return;
+        const route = await fetchWalkingRoute([
+          { lat: pair.from.lat, lng: pair.from.lng },
+          { lat: pair.to.lat, lng: pair.to.lng },
+        ]);
+        if (route && route.latlngs.length >= 2) {
+          rememberWalk(pair.from, pair.to, route.latlngs);
+          slots[index] = { mode: 'walk', latlngs: route.latlngs };
+          return;
+        }
+        slots[index] = {
+          mode: 'walk',
+          latlngs: [
+            [pair.from.lat, pair.from.lng],
+            [pair.to.lat, pair.to.lng],
+          ],
+        };
+      }),
+    )
+      .then(() => {
         if (!alive || epoch !== tripRouteEpoch) return;
-        map.setRoute(built.segments);
+        map.setRoute(ready());
       })
       .catch(() => undefined);
   }
@@ -328,6 +363,7 @@ export function mountTrip(
     map.setPins('place', []);
     map.setPins('hotel', []);
     if (fit && pins.length) map.fit();
+    seenPinIds = new Set(pins.map((pin) => pin.id));
     drawTripRoutes();
     const openId = openPlaceId();
     if (!openId || !trip) return;
@@ -342,7 +378,7 @@ export function mountTrip(
   }
 
   const offFiles = onTripFiles(() => {
-    if (alive) void render(true);
+    if (alive) void render();
   });
 
   const offClose = onPlaceClose(() => {
@@ -382,7 +418,63 @@ export function mountTrip(
     }
   }
 
-  function paint(trip: Trip, restoreScroll: number | null = null) {
+  function rememberView() {
+    if (!main.querySelector('.tb-doc')) return;
+    const keys = new Set<string>();
+    main.querySelectorAll<HTMLDetailsElement>('details.tb-day').forEach((details) => {
+      if (details.open && details.dataset.dayKey) keys.add(details.dataset.dayKey);
+    });
+    openKeys = keys;
+    currentStopKey =
+      main.querySelector<HTMLElement>('[data-stop-key][aria-current]')?.dataset.stopKey ?? null;
+    scrollTop = main.scrollTop;
+    const active = document.activeElement;
+    focusMark = null;
+    if (!(active instanceof HTMLElement) || !main.contains(active)) return;
+    const stop = active.closest<HTMLElement>('[data-stop-key]');
+    if (stop?.dataset.stopKey) {
+      const action = active.closest<HTMLElement>('[data-action]')?.dataset.action;
+      focusMark = action
+        ? { kind: 'stop', key: stop.dataset.stopKey, action }
+        : { kind: 'stop', key: stop.dataset.stopKey };
+      return;
+    }
+    const day = active.closest<HTMLDetailsElement>('details.tb-day');
+    if (day?.dataset.dayKey && active.closest('summary')) {
+      focusMark = { kind: 'day', key: day.dataset.dayKey };
+      return;
+    }
+    const category = active.closest<HTMLElement>('[data-category]');
+    if (category?.dataset.category) {
+      focusMark = { kind: 'category', id: category.dataset.category };
+      return;
+    }
+    const city = active.closest<HTMLElement>('[data-city-filter]');
+    if (city?.dataset.cityFilter) focusMark = { kind: 'city', id: city.dataset.cityFilter };
+  }
+
+  function restoreFocus() {
+    const mark = focusMark;
+    if (!mark) return;
+    let target: HTMLElement | null = null;
+    if (mark.kind === 'day') {
+      target = main.querySelector(`details[data-day-key="${CSS.escape(mark.key)}"] > summary`);
+    } else if (mark.kind === 'stop') {
+      const row = main.querySelector<HTMLElement>(`[data-stop-key="${CSS.escape(mark.key)}"]`);
+      target = mark.action
+        ? (row?.querySelector<HTMLElement>(`[data-action="${CSS.escape(mark.action)}"]`) ?? null)
+        : (row?.querySelector<HTMLElement>('.tb-row__main') ?? null);
+    } else if (mark.kind === 'category') {
+      target = main.querySelector(`[data-category="${CSS.escape(mark.id)}"]`);
+    } else {
+      target = main.querySelector(`[data-city-filter="${CSS.escape(mark.id)}"]`);
+    }
+    target?.focus({ preventScroll: true });
+  }
+
+  function paint(trip: Trip) {
+    const firstPaint = !hasPainted;
+    if (!firstPaint) rememberView();
     current = trip;
     const locale = shell.locale();
     main.replaceChildren();
@@ -498,14 +590,16 @@ export function mountTrip(
       city.days.forEach((day, dayIndex) => {
         const details = document.createElement('details');
         details.className = 'tb-day';
-        details.open = dayIndex === 0;
+        const openedKey = dayKey(city.slug || city.name, dayIndex, day.title);
+        details.dataset.dayKey = openedKey;
+        details.open = dayOpen(firstPaint, openedKey, openKeys, dayIndex);
         const dayTitle = document.createElement('summary');
         dayTitle.textContent = day.title;
         details.append(dayTitle);
         const list = document.createElement('ul');
         list.className = 'tb-list tb-list--stops tb-stops';
         let previousPoint: { lat: number; lng: number } | null = null;
-        for (const stop of day.stops) {
+        day.stops.forEach((stop, stopIndex) => {
           const place = stop.placeId ? placeById(city.slug, stop.placeId) : undefined;
           const missingPlace = Boolean(stop.placeId && !place);
           const href = stop.href
@@ -554,6 +648,14 @@ export function mountTrip(
             actions: actions.childNodes.length ? actions : undefined,
             data: {
               stop: '',
+              stopKey: stopKey(
+                city.slug || city.name,
+                dayIndex,
+                day.title,
+                stopIndex,
+                stop.placeId,
+                stop.label,
+              ),
               hay: `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase(),
               ...(stop.placeId ? { placeId: stop.placeId } : {}),
               ...(stop.time ? { stopTime: stop.time } : {}),
@@ -574,7 +676,7 @@ export function mountTrip(
             item.setAttribute('aria-disabled', 'true');
           }
           list.append(item);
-        }
+        });
         if (day.stops.length) details.append(list);
         for (const note of day.notes) {
           const paragraph = document.createElement('p');
@@ -599,9 +701,20 @@ export function mountTrip(
     }
 
     main.append(article);
-    main.scrollTop = restoreScroll ?? 0;
+    if (currentStopKey) {
+      main
+        .querySelector<HTMLElement>(`[data-stop-key="${CSS.escape(currentStopKey)}"]`)
+        ?.setAttribute('aria-current', 'true');
+    }
+    restoreFocus();
+    main.scrollTop = firstPaint ? 0 : scrollTop;
     applyQuery();
-    syncView(true);
+    hasPainted = true;
+    syncView(
+      shouldRefit(firstPaint, stopPins(trip, cityFilter, enabledCategories), seenPinIds, (lat, lng) =>
+        map.inView(lat, lng),
+      ),
+    );
     shell.setSource(trip.file);
     shell.setExportEnabled(true);
     setDocumentTitle(trip.title);
@@ -614,8 +727,7 @@ export function mountTrip(
     }
   }
 
-  async function render(keepScroll = false) {
-    const scroll = keepScroll ? main.scrollTop : 0;
+  async function render() {
     try {
       const files = await loadTripFiles();
       if (!alive) return;
@@ -628,7 +740,7 @@ export function mountTrip(
       failure = null;
       lastRaw = file.raw;
       const trip = parseTrip(file.id, file.file, file.raw);
-      paint(trip, scroll);
+      paint(trip);
     } catch {
       if (!alive) return;
       showFailure('read');
@@ -645,7 +757,7 @@ export function mountTrip(
 
   void render();
   const poll = window.setInterval(() => {
-    if (alive) void render(true);
+    if (alive) void render();
   }, 800);
 
   return {
