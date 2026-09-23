@@ -3,6 +3,8 @@
 - `el` — `src/ui/dom.ts`. Cria um elemento, aplica `className` e, se vier texto, `textContent`.
 - `prefersReducedMotion` — `src/ui/motion.ts`. Lê `prefers-reduced-motion`. A câmera usa `cameraMotion`: 0,45 s, ou corte instantâneo.
 - `icon` — `src/ui/icons.ts`. Único jeito de desenhar um glifo. O nome entra em `ICONS` (ordenado, sem repetir); o teste falha se uma categoria ou subcategoria ficar de fora.
+- `iconButton` / `iconLink` — `src/ui/controls.ts`. Botão ou link só de ícone, com `aria-label` e `data-tip`. Tamanho `sm` (24 px) ou `md` (28 px), círculo `--r-pill`.
+- tooltip — `mountTooltip` em `src/ui/tooltip.ts`. Um único balão `position: fixed` para `[data-tip]`. Espera 350 ms; se outro fechou há menos de 300 ms, abre na hora.
 
 ## Raio concêntrico
 
