@@ -9,7 +9,7 @@ import {
   placePinIconHtml,
   travelUi,
 } from '../catalog';
-import type { PlaceCategory, TravelPlace } from '../catalog';
+import type { Locale, PlaceCategory, TravelPlace } from '../catalog';
 import { buildItineraryRoute } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { fetchWalkingRoute } from '../map/walk-route';
@@ -36,7 +36,7 @@ import {
   setPlaceOrigin,
 } from '../views/place-panel';
 import { parseTrip, type Trip, type TripLeg } from './parse';
-import { formatTripSummary } from './summary';
+import { cityBands, formatTripSummary } from './summary';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -110,6 +110,51 @@ function emptyNotice(title: string, detail?: string, error = false): HTMLDivElem
   wrap.append(strong);
   if (detail) wrap.append(document.createTextNode(detail));
   return wrap;
+}
+
+function appendCityBar(article: HTMLElement, trip: Trip, locale: Locale): void {
+  const bands = cityBands(trip, locale);
+  if (!bands.length) return;
+  const bar = document.createElement('div');
+  bar.className = 'tb-span';
+  bar.setAttribute('role', 'group');
+  bar.setAttribute(
+    'aria-label',
+    pickLocale(locale, { en: 'Nights by city', 'pt-BR': 'Noites por cidade' }),
+  );
+  for (const band of bands) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'tb-span__city';
+    button.dataset.spanCity = band.key;
+    button.style.flexGrow = String(band.grow);
+    button.setAttribute('aria-label', band.tip);
+    button.setAttribute('data-tip', band.tip);
+    const name = document.createElement('span');
+    name.className = 'tb-span__name';
+    name.textContent = band.name;
+    button.append(name);
+    if (band.dates) {
+      const dates = document.createElement('small');
+      dates.textContent = band.dates;
+      button.append(dates);
+    }
+    const section = () =>
+      article.querySelector<HTMLElement>(`[data-city="${CSS.escape(band.key)}"]`);
+    const hot = (on: boolean) => section()?.classList.toggle('is-hot', on);
+    button.addEventListener('pointerenter', () => hot(true));
+    button.addEventListener('pointerleave', () => hot(false));
+    button.addEventListener('focus', () => hot(true));
+    button.addEventListener('blur', () => hot(false));
+    button.addEventListener('click', () => {
+      section()?.scrollIntoView({
+        block: 'start',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      });
+    });
+    bar.append(button);
+  }
+  article.append(bar);
 }
 
 function clearStopCurrent(): void {
@@ -541,6 +586,11 @@ export function mountTrip(
       focusMark = { kind: 'category', id: category.dataset.category };
       return;
     }
+    const span = active.closest<HTMLElement>('[data-span-city]');
+    if (span?.dataset.spanCity) {
+      focusMark = { kind: 'span', id: span.dataset.spanCity };
+      return;
+    }
     const city = active.closest<HTMLElement>('[data-city-filter]');
     if (city?.dataset.cityFilter) {
       focusMark = { kind: 'city', id: city.dataset.cityFilter };
@@ -572,6 +622,8 @@ export function mountTrip(
       target = main.querySelector(`[data-category="${CSS.escape(mark.id)}"]`);
     } else if (mark.kind === 'city') {
       target = main.querySelector(`[data-city-filter="${CSS.escape(mark.id)}"]`);
+    } else if (mark.kind === 'span') {
+      target = main.querySelector(`[data-span-city="${CSS.escape(mark.id)}"]`);
     } else if (mark.kind === 'warn') {
       target = main.querySelector('[data-warnings] > button');
     } else {
@@ -744,6 +796,7 @@ export function mountTrip(
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
     article.append(head);
+    appendCityBar(article, trip, locale);
 
     if (trip.cities.length > 1) {
       const rail = document.createElement('div');

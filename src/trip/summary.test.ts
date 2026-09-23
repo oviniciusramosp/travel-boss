@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatSpan, nightsBetween } from './dates';
 import { parseTrip } from './parse';
-import { formatTripSummary } from './summary';
+import { cityBands, formatTripSummary } from './summary';
 
 const europa = `# Europa
 
@@ -55,5 +55,32 @@ describe('formatTripSummary', () => {
     expect(formatSpan('2026-04-28', '2026-05-02', 'pt-BR')).toBe('28 abr–2 mai');
     expect(formatSpan('2026-12-30', '2027-01-02', 'en')).toBe('30 Dec 2026–2 Jan 2027');
     expect(nightsBetween('2026-02-31', '2026-03-02')).toBeNull();
+  });
+});
+
+describe('cityBands', () => {
+  const trip = parseTrip('europa', 'content/trips/europa.md', europa);
+
+  it('gives each city a share equal to its nights', () => {
+    const bands = cityBands(trip, 'pt-BR');
+    expect(bands.map((band) => [band.name, band.grow, band.dates])).toEqual([
+      ['Paris', 4, '2–6 abr'],
+      ['Milão', 3, '6–9 abr'],
+      ['Roma', 4, '9–13 abr'],
+    ]);
+    expect(bands[0]?.tip).toBe('Paris · 2–6 abr · 4 noites');
+    expect(cityBands(trip, 'en')[2]?.dates).toBe('9–13 Apr');
+  });
+
+  it('keeps an undated city visible with one share', () => {
+    const trip = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      '# Europa\n\n## Paris\ncity: paris\ndates: 2026-04-02 → 2026-04-06\n\n## Roma\ncity: roma\n',
+    );
+    const bands = cityBands(trip, 'en');
+    expect(bands.map((band) => band.grow)).toEqual([4, 1]);
+    expect(bands[1]?.dates).toBeNull();
+    expect(bands[1]?.tip).toBe('Roma');
   });
 });

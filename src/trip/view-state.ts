@@ -31,6 +31,7 @@ export type FocusMark =
   | { kind: 'stop'; key: string; action?: string }
   | { kind: 'category'; id: string }
   | { kind: 'city'; id: string }
+  | { kind: 'span'; id: string }
   | { kind: 'warn' }
   | { kind: 'warn-copy' }
   | { kind: 'day-action'; key: string; action: string };

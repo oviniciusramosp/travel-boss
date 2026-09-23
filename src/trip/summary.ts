@@ -1,6 +1,6 @@
 import { pickLocale, type Locale } from '../catalog';
 import { formatSpan, isoParts, nightsBetween } from './dates';
-import type { Trip } from './parse';
+import type { Trip, TripCity } from './parse';
 
 export function nightPhrase(nights: number, locale: Locale): string {
   return pickLocale(locale, {
@@ -39,4 +39,41 @@ export function formatTripSummary(trip: Trip, locale: Locale): string {
   if (nights != null) parts.push(nightPhrase(nights, locale));
   if (when) parts.push(when);
   return parts.join(' · ');
+}
+
+export type CityBand = {
+  key: string;
+  name: string;
+  /** Flex grow. One share when the city has no positive night count. */
+  grow: number;
+  dates: string | null;
+  tip: string;
+};
+
+function cityStay(city: TripCity): number | null {
+  if (!city.dates) return null;
+  const nights = nightsBetween(city.dates.start, city.dates.end);
+  if (nights == null || nights <= 0) return null;
+  return nights;
+}
+
+/** One segment per city. Width follows that city's nights, not the whole trip. */
+export function cityBands(trip: Trip, locale: Locale): CityBand[] {
+  return trip.cities.map((city) => {
+    const nights = cityStay(city);
+    const dates =
+      city.dates && nightsBetween(city.dates.start, city.dates.end) != null
+        ? formatSpan(city.dates.start, city.dates.end, locale)
+        : null;
+    const parts = [city.name, dates, nights != null ? nightPhrase(nights, locale) : null].filter(
+      (part): part is string => Boolean(part),
+    );
+    return {
+      key: city.slug || city.name,
+      name: city.name,
+      grow: nights ?? 1,
+      dates,
+      tip: parts.join(' · '),
+    };
+  });
 }
