@@ -1,6 +1,7 @@
 import type { Shell } from '../app/shell';
 import { getTravelCity, pickLocale, placeCategoryMeta } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
+import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { prefersReducedMotion } from '../ui/motion';
@@ -8,6 +9,7 @@ import { distanceSection, walkStops } from './hotel-distance';
 import { clearSearchRing, markContextMarkers, syncSearchRing } from './hotel-ring';
 import { scoreCard, whyParts, type WhyPart } from './hotel-rank';
 import { hotelPhotoUrls, mountHotelSlider } from './hotel-slider';
+import { closePlace, openPlaceId } from './place-panel';
 
 type Locale = 'en' | 'pt-BR';
 type Localized = { en: string; 'pt-BR': string };
@@ -350,6 +352,8 @@ export function mountHotels(
   const mutedTypes = new Set<string>();
   let contextObserver: MutationObserver | null = null;
   let contextLabels = new Set<string>();
+  let sheetId: string | null = null;
+  let sheetOrigin: HTMLElement | null = null;
   document.documentElement.dataset.tbHotels = '';
 
   const root = el('div', 'tb-hotels');
@@ -1204,6 +1208,7 @@ export function mountHotels(
     renderStatus(result);
     applyFilter();
     if (currentId) markCurrent(currentId, false);
+    if (sheetId) fillSheet(sheetId, false);
   };
 
   const paint = () => {
@@ -1334,6 +1339,7 @@ export function mountHotels(
   const clearResults = () => {
     displayed = null;
     currentId = null;
+    closeSheet(false);
     list.replaceChildren();
     chips.replaceChildren();
     chips.hidden = true;
@@ -1579,10 +1585,119 @@ export function mountHotels(
     chip.classList.toggle('tb-badge-soft', !on);
     applyFilter();
   });
-  const selectHotel = (id: string) => {
-    map.select(id);
-    markCurrent(id, false);
+  const hotelById = (id: string) => displayed?.hotels.find((hotel) => hotel.id === id) ?? null;
+
+  const sheetPad = () => {
+    const panel = document.querySelector<HTMLElement>('.tb-place-panel');
+    if (!panel || panel.hidden || panel.dataset.hotelSheet !== 'true') {
+      map.setPadding({ right: 0 });
+      return;
+    }
+    const host = panel.parentElement?.getBoundingClientRect();
+    const box = panel.getBoundingClientRect();
+    if (!host) return;
+    map.setPadding({ right: Math.max(0, host.right - box.left) });
   };
+
+  const closeSheet = (focus: boolean) => {
+    const panel = document.querySelector<HTMLElement>('.tb-place-panel');
+    const origin = sheetOrigin;
+    sheetId = null;
+    sheetOrigin = null;
+    if (panel?.dataset.hotelSheet === 'true') {
+      delete panel.dataset.hotelSheet;
+      panel.hidden = true;
+      panel.replaceChildren();
+    }
+    map.setPadding({ right: 0 });
+    if (focus && origin?.isConnected) origin.focus();
+  };
+
+  const fillSheet = (id: string, frame: boolean) => {
+    const hotel = hotelById(id);
+    const panel = document.querySelector<HTMLElement>('.tb-place-panel');
+    if (!hotel || !panel) {
+      closeSheet(false);
+      return;
+    }
+    if (openPlaceId()) closePlace({ focus: false });
+    const origin = list.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(id)}"]`);
+    sheetId = id;
+    sheetOrigin = origin;
+    const inside = panel.contains(document.activeElement);
+    panel.dataset.hotelSheet = 'true';
+    panel.replaceChildren();
+    const photo = el('div', 'tb-place-panel__photo tb-slider is-instant');
+    mountHotelSlider(photo, hotelPhotoUrls(hotel.booking), hotel.name, locale(), placeCategoryMeta.lodging.color);
+    const close = iconButton({
+      icon: 'close',
+      label: pickLocale(locale(), { en: 'Close', 'pt-BR': 'Fechar' }),
+      size: 'sm',
+    });
+    close.classList.add('tb-place-panel__close');
+    close.addEventListener('click', () => {
+      map.highlight(null);
+      markCurrent(null, false);
+      closeSheet(true);
+    });
+    const body = el('div', 'tb-panel__body');
+    const title = el('h2', undefined, hotel.name);
+    title.id = 'tb-place-title';
+    title.tabIndex = -1;
+    body.append(title);
+    const price = el('p', 'tb-hotels__price', money(hotel.priceTotal));
+    body.append(price);
+    if (hotel.booking.address) body.append(el('p', 'tb-meta', hotel.booking.address));
+    const ranked = scoreCard(locale(), hotel);
+    if (ranked) body.append(el('p', undefined, `${ranked.eyebrow} · ${ranked.title}`));
+    const links = el('div', 'tb-hotels__links');
+    const listing = safeUrl(hotel.booking.url);
+    if (listing) {
+      const anchor = el('a', 'tb-btn-ghost', hotel.source === 'airbnb' ? 'Airbnb' : 'Booking');
+      anchor.href = listing;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener';
+      links.append(anchor);
+    }
+    const azul = hotel.source === 'airbnb' ? null : safeUrl(hotel.azulUrl);
+    if (azul) {
+      const anchor = el('a', 'tb-btn-ghost', 'Azul');
+      anchor.href = azul;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener';
+      links.append(anchor);
+    }
+    if (links.childNodes.length) body.append(links);
+    panel.append(photo, close, body);
+    panel.hidden = false;
+    sheetPad();
+    if (frame) map.select(id);
+    if (!inside) title.focus();
+  };
+
+  const selectHotel = (id: string, scroll: boolean) => {
+    markCurrent(id, scroll);
+    fillSheet(id, true);
+  };
+  const hoveredHotel = (event: Event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return null;
+    return target.closest<HTMLElement>('[data-place-id]');
+  };
+  listen(list, 'pointerover', (event) => {
+    const id = hoveredHotel(event)?.dataset.placeId;
+    if (id) map.hover(id);
+  });
+  listen(list, 'pointerleave', () => map.hover(null));
+  listen(list, 'focusin', (event) => {
+    const id = hoveredHotel(event)?.dataset.placeId;
+    if (id) map.hover(id);
+  });
+  listen(list, 'focusout', (event) => {
+    const next = event instanceof FocusEvent ? event.relatedTarget : null;
+    if (next instanceof Node && list.contains(next)) return;
+    map.hover(null);
+  });
   listen(list, 'click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
@@ -1591,7 +1706,7 @@ export function mountHotels(
     if (!card) return;
     const id = card.dataset.placeId;
     if (!id) return;
-    selectHotel(id);
+    selectHotel(id, false);
   });
   listen(list, 'keydown', (event) => {
     if (!(event instanceof KeyboardEvent) || (event.key !== 'Enter' && event.key !== ' ')) return;
@@ -1603,7 +1718,14 @@ export function mountHotels(
     const id = card.dataset.placeId;
     if (!id) return;
     event.preventDefault();
-    selectHotel(id);
+    selectHotel(id, false);
+  });
+  listen(window, 'keydown', (event) => {
+    if (!(event instanceof KeyboardEvent) || event.key !== 'Escape' || !sheetId || event.defaultPrevented) return;
+    event.preventDefault();
+    map.highlight(null);
+    markCurrent(null, false);
+    closeSheet(true);
   });
   listen(rerankBtn, 'click', () => {
     void rerank();
@@ -1614,9 +1736,17 @@ export function mountHotels(
     paint();
     showContextPins();
     if (displayed) render(displayed);
+    else if (sheetId) fillSheet(sheetId, false);
   });
   const unsubSelect = map.onSelect((id) => {
-    if (!disposed) markCurrent(id, true);
+    if (disposed) return;
+    if (!hotelById(id)) {
+      sheetId = null;
+      sheetOrigin = null;
+      document.querySelector('.tb-place-panel')?.removeAttribute('data-hotel-sheet');
+      return;
+    }
+    selectHotel(id, true);
   });
 
   paint();
@@ -1672,6 +1802,7 @@ export function mountHotels(
       unsubSelect();
       contextObserver?.disconnect();
       contextObserver = null;
+      closeSheet(false);
       delete document.documentElement.dataset.tbHotels;
       clearSearchRing(() => map.setRadius(null));
       map.setPins('hotel', []);

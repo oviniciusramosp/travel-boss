@@ -181,7 +181,9 @@
 }
 
 .tb-hotels__media.is-empty .tb-slider__img,
-.tb-hotels__media:not(.is-empty) .tb-slider__fallback {
+.tb-hotels__media:not(.is-empty) .tb-slider__fallback,
+.tb-place-panel__photo.is-empty .tb-slider__img,
+.tb-place-panel__photo:not(.is-empty) .tb-slider__fallback {
   display: none;
 }
 
