@@ -82,10 +82,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-alain-miam': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkMAd6auG6O4KUWeuPpeXVLW8_l_lZzvf1YdAV0v2J8wA20ru7IzgGhMq6sX5ruThNNhEIWVJ1LSho8ANt_GEFbosLGS5k2YEYOEBZwnlZbYYUKt14y1U-dOxMFdF3VSQngxpYcJVDY6cKC=s608-k-no',
-      'Chez Alain Miam Miam at Marché des Enfants Rouges',
-      'Chez Alain Miam Miam no Marché des Enfants Rouges',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Grilled_Cheese_Sandwich_%2816938984390%29.jpg/1280px-Grilled_Cheese_Sandwich_%2816938984390%29.jpg',
+      'Grilled cheese sandwich (generic photo)',
+      'Sanduíche de queijo quente (foto ilustrativa)',
+      'Willis Lam · CC BY-SA 2.0 · Wikimedia Commons',
     ),
   ],
   'par-bourse-commerce': [
@@ -148,10 +148,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-auptitgrec': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Facade_de_magasin_Au_p%27tit_grec_%C3%A0_l%27angle_des_rues_Cujas_et_Mouffetard.jpg/1280px-Facade_de_magasin_Au_p%27tit_grec_%C3%A0_l%27angle_des_rues_Cujas_et_Mouffetard.jpg',
-      'Au P\'tit Grec',
-      'Au P\'tit Grec',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Paris-Rue_Mouffetard-160-nr_68-Au_p%27tit_Grec-2017-gje.jpg/1280px-Paris-Rue_Mouffetard-160-nr_68-Au_p%27tit_Grec-2017-gje.jpg',
+      "Au P'tit Grec at 68 Rue Mouffetard",
+      "Au P'tit Grec, 68 Rue Mouffetard",
+      'Gerd Eichmann · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-bake-blend': [
@@ -388,22 +388,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-chez-elo': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkIe7QSXGZAGi6gUhru8fh8NlNDUPU7Lb3h-rQSgup96I81raRIUFUhxCmGFUPSbj0M957oZR3YlbOGZ-3lS64hI6j86rDhVNJBy4qj5LSTNpiL6NGl8jZqNxcdYn4YRQlZ_TOdD3n2N3cf=s783-k-no',
-      'Chez Elo',
-      'Chez Elo',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Confit_de_canard_Licq-Atherey.jpg/1280px-Confit_de_canard_Licq-Atherey.jpg',
+      'Duck confit (generic photo)',
+      'Confit de pato (foto ilustrativa)',
+      'Tangopaso · CC BY-SA 3.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkKqoXNB6sLasst3S7FOsgHI4idBeBWUBiyWcvUDafrnf0lHbjmKR2C8Y6gOtoo7HD4_kqFBHdRWjIFGLmW0PZ1vnYmAKABW7M00uz6RTxLqCEZdUDOZRt0_Z2WL9vwTS6l957gI6ggM6VH=s696-k-no',
-      'Chez Elo',
-      'Chez Elo',
-      'Google',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWktsoY9DctS3p-b0UJQ2tXkQPE9E-76_25Y8lLr_xAT94aKRrfBwz73U4b1T9yCKghOUL7_N1cInhzGJuXq3pwpbVAnZsFePrGkS5ZkegHbSnFISvme0QdUuSohjVTC33GHfssrBoCSPmBv=s914-k-no',
-      'Chez Elo',
-      'Chez Elo',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Duck_Confit_%283375036024%29.jpg/1280px-Duck_Confit_%283375036024%29.jpg',
+      'Duck confit (generic photo)',
+      'Confit de pato (foto ilustrativa)',
+      'Mack Male · CC BY-SA 2.0 · Wikimedia Commons',
     ),
   ],
   'par-chez-janou': [
@@ -486,28 +480,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-entrecote': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlXwdN3JsZ0VmQ2oyQUTkHhGR6YB6Rjdj4F6kPjivHBnixSTgWeTGOPGvNqJ4h2HYxFWQLMqJ40nzWYr5UsGdSG8NoAsNr27vJOajmyi-3CXdJI6m4rx5ma3IFgaaSdDwAhCl4Y_SRdw5xK=s348-k-no',
-      "Le Relais de l'Entrecôte",
-      "Le Relais de l'Entrecôte",
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Steak-frites_%28steak-and-chips%29.jpg/1280px-Steak-frites_%28steak-and-chips%29.jpg',
+      'Steak frites (generic photo)',
+      'Steak frites (foto ilustrativa)',
+      'Dcollard · CC BY-SA 3.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm71U9_7fhHPjYvumKnKuOR3D3_qZ_F37yLg5Rjh2H3iFLpbaZDty9diVOoTXAo9oiYwgbZy5XfaMoUW-SiltSgRLbioXsFtUQdthYA8EZIUoiluiwZ2ZQXyFQulCIADYL-LGxD_f-eH-__=s457-k-no',
-      "Entrecôte and fries",
-      'Entrecôte com fritas',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm3iXlVotabP5wg_1Y_eQNIgkBenXPLXyZzamqbl9tAoMk_jvt9dX9S55NSYmZDyJ4QOVstbFhmLBfsvZ2eAJLB3adprgRmUXKVN-D5UDbMOURU-_JLtMbIPINCWMGIj2UCqnaOjDSZPFas=w203-h161-k-no',
-      "Le Relais de l'Entrecôte interior",
-      "Interior do Le Relais de l'Entrecôte",
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn3rLWNFxK0QeZeuyqspPy4yE4C2-kc8TG50feFN_JLZOdOP0fvidGputAj71KqUpwRXnhm1lHGzIfdNYWrlI1cxjITWVWlRmxfeLPtnyXgon8BMzI7geC7WMaoT5epkwAsjd0teVA_y0_I=s348-k-no',
-      "Le Relais de l'Entrecôte",
-      "Le Relais de l'Entrecôte",
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Steak_frites_-_yummy.jpg/1280px-Steak_frites_-_yummy.jpg',
+      'Steak frites (generic photo)',
+      'Steak frites (foto ilustrativa)',
+      'LuvsMG481 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-esplanade-de-gaulle': [
@@ -574,22 +556,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-fric-frac': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmkqKIki4X_Tupd_EdtFlhAhtb7kY02aRD9vm7Nz9H8osxzdiT_dWvVx4Gr_cs8Yz2EnSIJGqVKn4JJxy3ocyEkbOZBWWxcnd5GAigMl0LGYDWiUwxvmnTXcDq4Y2ENEdBg6B15WJ68U79G=s680-k-no',
-      'Fric-Frac croque',
-      'Croque do Fric-Frac',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Cambodian_Croque_Monsieur.jpg/1280px-Cambodian_Croque_Monsieur.jpg',
+      'Croque-monsieur and coffee (generic photo)',
+      'Croque-monsieur com café (foto ilustrativa)',
+      'Photogoddle · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlD4ghyPj5w5SLgYvVsM5lqO9eNyehTnyop-yiROxQqZugcU_T2ReuhcR1bCmDkhIFQqaRSecrOy9b67_e4Qrdz-RBqO52s7Bb-j1UzM9742e9VWbknRevRJe2aaHt8zL7QFTWbDQ=w203-h253-k-no',
-      'Fric-Frac dish',
-      'Prato do Fric-Frac',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkk3eyHim9CynAO6lG7bgPJw5CThG1BHEiHj51pFtqTgqq0uAw-E3MRQORFe1I-8F5OQdUbPQ6hmQ8jXA_VYRX06Oy78RGzHQ5-NOJ-opNrKkEKW-nfcyF563i33Rf6LWd8z2wT7ej_RDFk=s736-k-no',
-      'Fric-Frac interior',
-      'Interior do Fric-Frac',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Croque_Monsieur_and_Croque_Madame_-_Milfey_Patisserie_2026-01-03.jpg/1280px-Croque_Monsieur_and_Croque_Madame_-_Milfey_Patisserie_2026-01-03.jpg',
+      'Croque-monsieur and croque-madame (generic photo)',
+      'Croque-monsieur e croque-madame (foto ilustrativa)',
+      'Andy Li · CC0 · Wikimedia Commons',
     ),
   ],
   'par-galeries-lafayette': [
@@ -1054,28 +1030,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-paname-brewing': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlN6yqsU_F4tbdnk1G9FMc8f5N3_ravL1qDpTjW5bdA-DL9NQTfDKm4_hDQR_-oHRFRrUYFv4plzsfzUj6eGN8t6iX85kP4uTz2pmuXjeZV2HIUdZQAXkiYOwXPUBPMGOoXWJSQ=s464-k-no',
-      'Paname Brewing Company',
-      'Paname Brewing Company',
-      'Google',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkgf4SFQ8fwUAo2jFiVuDAOWxuN1uLrga4u123qL3-i2Bxx6MTN91Vabdg_LLuoNsVmX6WO35cPrfTvO1lqdZtYps_IMJHfAGnRWpiSKPUdGz5I0_bv-Q5ecuM9lhyzXoIOPGJNV3G0gyE=s464-k-no',
-      'Paname Brewing Company',
-      'Paname Brewing Company',
-      'Google',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk11UOT3_HEY3qKAwPeGynK9POJefynHk1NPKV9ydpZz0sihrBHRBrcnj6qOrZKqXCWKNKGwjDGfS_LlP2VATv5yvjDQWpsCfHYtAL3EyT-Mq9bDzyEllm3OCuUA_tq0uM23DeDTGedoTC6=s406-k-no',
-      'Paname Brewing Company',
-      'Paname Brewing Company',
-      'Google',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Paname_Tap_House_%28Quartier_Crim%C3%A9e%29_01.jpg/1280px-Paname_Tap_House_%28Quartier_Crim%C3%A9e%29_01.jpg',
-      'Paname Brewing Company',
-      'Paname Brewing Company',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Paname_Tap_House_%28Quartier_Crim%C3%A9e%29_01.jpg/1280px-Paname_Tap_House_%28Quartier_Crim%C3%A9e%29_01.jpg',
+      'Paname Brewing Company tap house',
+      'Bar da Paname Brewing Company',
+      'DarkVador79-UA · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-pantheon': [
@@ -1524,6 +1482,170 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Peristyle of the Grand Trianon',
       'Peristilo do Grand Trianon',
       'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-bella-notte': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Margherita_Originale.JPG/1280px-Margherita_Originale.JPG',
+      'Pizza margherita (generic photo)',
+      'Pizza margherita (foto ilustrativa)',
+      'Mario56 · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Pizza-napoletana.jpg/1280px-Pizza-napoletana.jpg',
+      'Neapolitan pizza (generic photo)',
+      'Pizza napolitana (foto ilustrativa)',
+      'Fabryx98 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-rosa-bonheur': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Rosa_Bonheur%2C_Paris_5_June_2015.jpg/1280px-Rosa_Bonheur%2C_Paris_5_June_2015.jpg',
+      'Rosa Bonheur in the Buttes-Chaumont',
+      'Rosa Bonheur no Buttes-Chaumont',
+      'Tom Hilton · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Guinguette_Rosa_Bonheur_-_Parc_des_Buttes-Chaumont.jpg/1280px-Guinguette_Rosa_Bonheur_-_Parc_des_Buttes-Chaumont.jpg',
+      'Rosa Bonheur guinguette',
+      'Guinguette Rosa Bonheur',
+      'W. of Landshire · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-baron-rouge': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Les_Hu%C3%AEtres_de_Trousse_Chemise_%2815%29.JPG/1280px-Les_Hu%C3%AEtres_de_Trousse_Chemise_%2815%29.JPG',
+      'Oysters (generic photo)',
+      'Ostras (foto ilustrativa)',
+      'Jean-Pierre Bazard · CC BY 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-as-du-fallafel': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/LAs_Du_Fallafel%2C_34_Rue_des_Rosiers%2C_75004_Paris_2008.jpg/1280px-LAs_Du_Fallafel%2C_34_Rue_des_Rosiers%2C_75004_Paris_2008.jpg',
+      "L'As du Fallafel on Rue des Rosiers",
+      "L'As du Fallafel na Rue des Rosiers",
+      'Jesús Gorriti · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Line_for_L%27As_Du_Fallafel.JPG/1280px-Line_for_L%27As_Du_Fallafel.JPG',
+      "Queue outside L'As du Fallafel",
+      "Fila na porta do L'As du Fallafel",
+      'Plot Spoiler · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-patate': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/c/cb/French_fries_with_mayonnaise_%283487440272%29.jpg',
+      'Fries with mayonnaise (generic photo)',
+      'Batata frita com maionese (foto ilustrativa)',
+      'Kham Tran · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/20220602_puntzak_friet_schaftlokaal_ulft.jpg/1280px-20220602_puntzak_friet_schaftlokaal_ulft.jpg',
+      'Fries in a paper cone (generic photo)',
+      'Batata frita no cone (foto ilustrativa)',
+      'Ziko van Dijk · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-bouillon-republique': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Paris_3e_Boulevard_du_Temple_Bouillon_R%C3%A9publique_679.jpg/1280px-Paris_3e_Boulevard_du_Temple_Bouillon_R%C3%A9publique_679.jpg',
+      'Bouillon République on Boulevard du Temple',
+      'Bouillon République no Boulevard du Temple',
+      'GFreihalter · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-le-nesle': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Chocolate_Cake_Slice_in_bin_%2832180558890%29.jpg/1280px-Chocolate_Cake_Slice_in_bin_%2832180558890%29.jpg',
+      'Chocolate cake slice (generic photo)',
+      'Fatia de bolo de chocolate (foto ilustrativa)',
+      'Willis Lam · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Slice_of_chocolate_cake.jpg/1280px-Slice_of_chocolate_cake.jpg',
+      'Chocolate cake slice (generic photo)',
+      'Fatia de bolo de chocolate (foto ilustrativa)',
+      'Ruth Hartnup · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-specimen-burger': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/1280px-Cheeseburger.jpg',
+      'Cheeseburger (generic photo)',
+      'Cheeseburger (foto ilustrativa)',
+      'Renee Comet · Public domain · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Cheeseburger_with_onions_at_Hatfield_Heath_Festival_2017.jpg/1280px-Cheeseburger_with_onions_at_Hatfield_Heath_Festival_2017.jpg',
+      'Cheeseburger (generic photo)',
+      'Cheeseburger (foto ilustrativa)',
+      'Acabashi · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-rocheman': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Sandwich_jambon-beurre.jpg/1280px-Sandwich_jambon-beurre.jpg',
+      'Jambon-beurre sandwich (generic photo)',
+      'Sanduíche jambon-beurre (foto ilustrativa)',
+      'Nat · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sandwichs_classiques.jpg/1280px-Sandwichs_classiques.jpg',
+      'French sandwiches (generic photo)',
+      'Sanduíches franceses (foto ilustrativa)',
+      'Nat · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-margaux': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cordon_Bleu_01.jpg/1280px-Cordon_Bleu_01.jpg',
+      'Cordon bleu (generic photo)',
+      'Cordon bleu (foto ilustrativa)',
+      'Marife.altabano · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/c/cd/Cordon-bleu-2.jpg',
+      'Cordon bleu (generic photo)',
+      'Cordon bleu (foto ilustrativa)',
+      'Rainer Zenz · GPL · Wikimedia Commons',
+    ),
+  ],
+  'par-arnaud-nicolas-caulaincourt': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bonjour%2C_Croque_Monsieur_-_Lunch_in_Paris%2C_27_June_2023.jpg/1280px-Bonjour%2C_Croque_Monsieur_-_Lunch_in_Paris%2C_27_June_2023.jpg',
+      'Croque-monsieur (generic photo)',
+      'Croque-monsieur (foto ilustrativa)',
+      'Sharon Hahn Darlin · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Croque_Monsieur_and_salad_at_Paris_Bakery.jpg/1280px-Croque_Monsieur_and_salad_at_Paris_Bakery.jpg',
+      'Croque-monsieur with salad (generic photo)',
+      'Croque-monsieur com salada (foto ilustrativa)',
+      'Ruth Hartnup · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-ore-ducasse': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Pavillon_Dufour_at_the_Ch%C3%A2teau_de_Versailles.jpg/1280px-Pavillon_Dufour_at_the_Ch%C3%A2teau_de_Versailles.jpg',
+      'Pavillon Dufour, home of Ore, at Versailles',
+      'Pavillon Dufour, onde fica o Ore, em Versalhes',
+      'DiscoA340 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Pavillon_Dufour%2C_Versailles..jpg/1280px-Pavillon_Dufour%2C_Versailles..jpg',
+      'Pavillon Dufour, Versailles',
+      'Pavillon Dufour, Versalhes',
+      'Miguel Hermoso Cuesta · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-la-flottille': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Grand_Canal_de_Versailles_near_Grand_Trianon%2C_24.07.13.jpg/1280px-Grand_Canal_de_Versailles_near_Grand_Trianon%2C_24.07.13.jpg',
+      'Grand Canal at Versailles, where La Flottille sits',
+      'Grand Canal de Versalhes, onde fica La Flottille',
+      'Liberaler Humanist · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'rom-fco': [

@@ -2109,12 +2109,6 @@ export const localTravelCities: TravelCity[] = [
         address: '99 Quai de Valmy, 75010 Paris',
         mapsQuery: 'Fric-Frac Paris',
         mapsUrl: 'https://www.google.fr/maps/place/Fric-Frac/@48.8838194,2.339073,17z',
-        photos: [
-          { url: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmkqKIki4X_Tupd_EdtFlhAhtb7kY02aRD9vm7Nz9H8osxzdiT_dWvVx4Gr_cs8Yz2EnSIJGqVKn4JJxy3ocyEkbOZBWWxcnd5GAigMl0LGYDWiUwxvmnTXcDq4Y2ENEdBg6B15WJ68U79G=s680-k-no', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
-          { url: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlD4ghyPj5w5SLgYvVsM5lqO9eNyehTnyop-yiROxQqZugcU_T2ReuhcR1bCmDkhIFQqaRSecrOy9b67_e4Qrdz-RBqO52s7Bb-j1UzM9742e9VWbknRevRJe2aaHt8zL7QFTWbDQ=w203-h253-k-no', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
-          { url: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkk3eyHim9CynAO6lG7bgPJw5CThG1BHEiHj51pFtqTgqq0uAw-E3MRQORFe1I-8F5OQdUbPQ6hmQ8jXA_VYRX06Oy78RGzHQ5-NOJ-opNrKkEKW-nfcyF563i33Rf6LWd8z2wT7ej_RDFk=s736-k-no', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
-          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Canal_Saint-Martin_P1060441.JPG/3840px-Canal_Saint-Martin_P1060441.JPG', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
-        ],
       },
       {
         id: 'par-montmartre',
