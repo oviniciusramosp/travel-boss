@@ -11,7 +11,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação
 - 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E. Almoço alternativo aqui: Brioche Dorée, nível 4 da estação. Para 5–11/out, compre a Navigo Semaine (€32,40; de segunda a domingo, cobre Disney, Versalhes e Créteil)
   - via: RER B até Gare du Nord e RER E em Magenta · 1h05
-- 14:50 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada
+- 14:50 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada, com o almoço já feito no aeroporto
   - via: a pé · 7 min
 - 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
   - via: a pé · 6 min
