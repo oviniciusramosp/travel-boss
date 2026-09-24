@@ -1230,13 +1230,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Serve para uma cerveja na Place Cambronne — gostoso, nada demais. Linha 6 na frente.',
     ),
   }),
-  'par-alain-miam': restaurantVisit(10, 18, {
+  'par-alain-miam': restaurantVisit(14, 17, {
     durationMin: 20,
     durationMax: 45,
-    bestDay: L('Tue–Sun lunch (market days)', 'Ter–dom almoço (dias de feira)'),
+    bestDay: L('Wed–Sun 9:00–17:00; closed Mon–Tue', 'Qua–dom 9h–17h; fecha segunda e terça'),
     tips: L(
-      'Famous sandwich at Enfants Rouges — expect a queue. Share one if unsure.',
-      'Lanche famoso nos Enfants Rouges — espere fila. Divida um se estiver em dúvida.',
+      'Now at 26 Rue Charlot, 20 m from the Enfants Rouges market. Sandwich €13.50–16.50 — expect a queue; share one if unsure.',
+      'Agora na 26 Rue Charlot, a 20 m do Marché des Enfants Rouges. Sanduíche €13,50–16,50 — espere fila; divida um se estiver em dúvida.',
     ),
   }),
   'par-paname-brewing': restaurantVisit(15, 30, {
@@ -1592,6 +1592,81 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Elevated park walk from Bastille — cooler alternative to the Tuileries crowds.',
       'Passeio elevado a partir da Bastille — alternativa mais fresca à multidão das Tuileries.',
     ),
+  }),
+
+  // —— Paris: Oct 2026 trip list (hours checked Sep 2026) ——
+  'par-poilane': cafeVisit(5, 13, {
+    bestDay: L(
+      'Wed–Sat 7:15–18:00; Tue and Sun 8:00–13:30 and 14:30–18:00; closed Mon',
+      'Qua–sáb 7h15–18h; ter e dom 8h–13h30 e 14h30–18h; fecha segunda',
+    ),
+    tips: L(
+      'Punitions butter biscuits: ~€5 a small box, €12.70 for 300 g.',
+      'Biscoitos punitions: ~€5 a caixinha, €12,70 os 300 g.',
+    ),
+  }),
+  'par-deux-magots': cafeVisit(10, 15, {
+    bestDay: L('Daily 7:30–01:00', 'Todo dia 7h30–1h'),
+    tips: L(
+      'Hot chocolate €10 a cup, €12 a pot, +€3 whipped cream. Café de Flore next door charges the same.',
+      'Chocolate quente €10 a xícara, €12 o bule, +€3 de chantilly. O Café de Flore ao lado cobra o mesmo.',
+    ),
+  }),
+  'par-as-du-fallafel': restaurantVisit(8, 10, {
+    bestDay: L(
+      'Sun–Thu 11:00–23:30; Fri until 17:00; closed Sat',
+      'Dom–qui 11h–23h30; sex até 17h; fecha sábado',
+    ),
+    tips: L(
+      'Takeaway pita ~€7–9. The queue is long but moves fast; cards accepted.',
+      'Pita para viagem ~€7–9. A fila é longa mas anda rápido; aceita cartão.',
+    ),
+  }),
+  'par-du-pain-idees': cafeVisit(5, 8, {
+    bestDay: L('Mon–Fri ~7:00–19:30; closed weekends', 'Seg–sex ~7h–19h30; fecha sábado e domingo'),
+    tips: L('Escargot pastry ~€5–6.', 'Escargot ~€5–6.'),
+  }),
+  'par-merveilleux-fred': cafeVisit(4, 6, {
+    bestDay: L('Daily 7:30–20:00', 'Todo dia 7h30–20h'),
+    tips: L(
+      'About €4–5 a merveilleux. It is a chain, with other shops across Paris.',
+      'Cerca de €4–5 o merveilleux. É uma rede, com outras lojas em Paris.',
+    ),
+  }),
+  'par-patate': restaurantVisit(4, 9, {
+    bestDay: L('Sun–Thu 11:30–22:30; Fri–Sat until 23:00', 'Dom–qui 11h30–22h30; sex–sáb até 23h'),
+    tips: L('Cone €4 / €5.50 / €7.50, sauce +€1. Standing only.', 'Cone €4 / €5,50 / €7,50, molho +€1. Só em pé.'),
+  }),
+  'par-bouillon-republique': restaurantVisit(20, 30, {
+    bestDay: L('Daily 11:30–00:00', 'Todo dia 11h30–0h'),
+    tips: L('Book online to skip the queue.', 'Reserve online para fugir da fila.'),
+  }),
+  'par-le-nesle': restaurantVisit(8, 15, {
+    avgPricePerPerson: money(
+      8,
+      15,
+      L('Matilda slice (~€21–30) split 2–5 ways', 'Fatia da Matilda (~€21–30) dividida entre 2 e 5'),
+    ),
+    bestDay: L('Daily 7:00–02:00', 'Todo dia 7h–2h'),
+    tips: L('Leftover cake goes home in a box.', 'O bolo que sobrar vai para viagem.'),
+  }),
+  'par-specimen-burger': restaurantVisit(13, 20, {
+    bestDay: L(
+      'Mon–Fri 12:00–15:00 and 18:30–22:30; weekends 12:00–22:30',
+      'Seg–sex 12h–15h e 18h30–22h30; fim de semana 12h–22h30',
+    ),
+    tips: L('Burger ~€13, fries €4.', 'Hambúrguer ~€13, fritas €4.'),
+  }),
+  'par-rocheman': restaurantVisit(12, 15, {
+    bestDay: L(
+      'Mon–Thu 11:30–21:30; Fri–Sat until 22:30; Sun 13:00–21:00',
+      'Seg–qui 11h30–21h30; sex–sáb até 22h30; dom 13h–21h',
+    ),
+    tips: L('Halal. Cards accepted.', 'Halal. Aceita cartão.'),
+  }),
+  'par-margaux': restaurantVisit(26, 40, {
+    bestDay: L('Daily 12:00–00:00', 'Todo dia 12h–0h'),
+    tips: L('Cordon bleu ~€26 with a side. Book ahead.', 'Cordon bleu ~€26 com acompanhamento. Reserve.'),
   }),
 
   // —— Rome ——
