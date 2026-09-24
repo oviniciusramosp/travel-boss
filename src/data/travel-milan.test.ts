@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { getTravelCity } from './travel';
 import { itineraryForCity, dayPrimaryRoutePlaceIds, computeDayBudget } from './travel-itineraries';
 import { legsForDay } from './travel-itinerary-legs';
-import snapshot from './travel-notion.generated';
 
 describe('Milan October 2026 trip', () => {
   it('has four days and preserves the confirmed arrival', () => {
@@ -29,10 +28,5 @@ describe('Milan October 2026 trip', () => {
     const budget = computeDayBudget(day, new Map(city.places.map(p => [p.id, p])));
     expect(budget.foodPlaceIds.sort()).toEqual(['mil-cesarino', 'mil-san-giorgio']);
     expect(day.summary!['pt-BR']).toContain('Orçamento parcial');
-  });
-  it('has all Milan places in the Notion snapshot', () => {
-    for (const p of getTravelCity('milao')!.places) {
-      expect(snapshot.places.some(n => n.id === p.id && n.city === 'milao')).toBe(true);
-    }
   });
 });

@@ -124,22 +124,22 @@ describe('travel-photos registry', () => {
     expect(photosForPlaceId('__no-such-place__')).toBeUndefined();
   });
 
-  it('resolvePlacePhotos prefers curated multi-photo registry over Notion cover-only', () => {
+  it('resolvePlacePhotos prefers curated multi-photo registry over an authored cover-only list', () => {
     const registry = photosForPlaceId('par-galeries-lafayette');
     expect(registry?.length).toBeGreaterThan(1);
 
-    // Simulate Notion shipping a cover not present in the local registry
-    const notionOnly = [
+    // An authored cover that is not in the local registry
+    const authoredOnly = [
       {
-        url: 'https://example.com/notion-only-galeries-cover.jpg',
-        alt: { en: 'Galeries Lafayette (Notion cover)', 'pt-BR': 'Galeries Lafayette (capa Notion)' },
+        url: 'https://example.com/authored-only-galeries-cover.jpg',
+        alt: { en: 'Galeries Lafayette (authored cover)', 'pt-BR': 'Galeries Lafayette (capa avulsa)' },
       },
     ];
-    const resolved = resolvePlacePhotos('par-galeries-lafayette', notionOnly);
-    // Registry order wins as base; Notion-only cover is appended, never dropped
+    const resolved = resolvePlacePhotos('par-galeries-lafayette', authoredOnly);
+    // Registry order wins as base; the authored-only cover is appended, never dropped
     expect(resolved?.length).toBe(registry!.length + 1);
     expect(resolved?.[0]?.url).toBe(registry![0]!.url);
-    expect(resolved?.some((p) => p.url === notionOnly[0]!.url)).toBe(true);
+    expect(resolved?.some((p) => p.url === authoredOnly[0]!.url)).toBe(true);
 
     // Live city merge + withResolvedArea must expose at least the full registry
     const paris = getTravelCity('paris');

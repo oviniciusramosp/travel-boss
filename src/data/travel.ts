@@ -32,7 +32,6 @@ import {
   resolvePlaceSubcategories,
   type PlaceSubcategory,
 } from './travel-subcategories';
-import { mergeNotionPlaces } from './travel-notion';
 import { milanCity } from './travel-milan';
 
 export type { TravelPhoto } from './travel-photos';
@@ -182,7 +181,7 @@ export interface TravelPlace {
    */
   favorite?: boolean;
   /**
-   * Already visited / known. Maps to Notion `Conhecido`.
+   * Already visited / known.
    * Omit or true = known; false = still to visit (Lisbon “Conhecer” list).
    */
   conhecido?: boolean;
@@ -604,11 +603,7 @@ export function cityCategoryKeys(city: TravelCity): PlaceCategory[] {
   return placeCategoryOrder.filter((k) => present.has(k));
 }
 
-/**
- * Local city shells + places authored in-repo (pre-Notion merge).
- * Use this when seeding Notion so dump text is not already overwritten by an old pull.
- * Editorial place content prefers Notion after merge (see mergeNotionPlaces).
- */
+/** City shells and places. This file is the catalog's source of truth. */
 export const localTravelCities: TravelCity[] = [
   milanCity,
   {
@@ -5689,8 +5684,7 @@ export const localTravelCities: TravelCity[] = [
   },
 ];
 
-/** Cities with Notion editorial places merged in (Notion wins on same `id`). */
-export const travelCities: TravelCity[] = mergeNotionPlaces(localTravelCities);
+export const travelCities: TravelCity[] = localTravelCities;
 
 export function getTravelCity(slug: string): TravelCity | undefined {
   return travelCities.find((c) => c.slug === slug);
@@ -5727,10 +5721,10 @@ export function resolvePlaceArea(place: TravelPlace): TravelArea | undefined {
 /**
  * Gallery for a place card / slider.
  *
- * Merge local registry (`travel-photos.ts`) with Notion/authored photos:
+ * Merge local registry (`travel-photos.ts`) with photos authored on the place:
  * - Prefer the longer list’s order as base (registry preferred on tie)
  * - Always append unique URLs from the other source (never drop covers)
- * - Notion-only covers survive even when the registry is shorter
+ * - Authored-only covers survive even when the registry is shorter
  */
 export function resolvePlacePhotos(
   placeId: string,

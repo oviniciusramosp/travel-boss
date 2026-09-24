@@ -10,7 +10,6 @@ npm test                     # vitest run
 npx tsc --noEmit
 npm run build                # tsc --noEmit && vite build
 npm run travel:airbnb:setup  # venv em node_modules/.cache/airbnb-venv
-npm run travel:notion:push -- <placeId>   # ver seção Notion; precisa de .env
 npm run travel:areas             # Overpass → src/data/travel-polygons-raw.json
 npm run travel:photos:check
 ```
@@ -72,27 +71,6 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 
 Edite o `.md`. Com `npm run dev`, o save avisa o browser (`tb:trip`) e o roteiro aberto é relido de `/api/trips`. Não duplique o roteiro em TypeScript. Coordenadas, avaliações e ranking de hotel ficam em `src/data`; o arquivo da viagem só referencia ids.
 
-## Travel places ↔ Notion (obrigatório)
+## Catálogo de lugares
 
-Regras completas: [docs/travel-notion-sync.md](docs/travel-notion-sync.md). Os scripts `travel:notion:*` estão neste repo. O token fica em `.env` (nomes em `.env.example`); não commite valor. Este app não é Astro; `resolvePlacePhotos` chega pela UI via `src/catalog`, não por página. O push lê `src/data/travel.ts` (`localTravelCities`), não o reexport do catálogo.
-
-**Sempre que adicionar ou atualizar lugares (texto, coords, capas, fotos, avaliações):**
-
-1. Edite as fontes locais (`src/data/travel.ts` / `localTravelCities`, `travel-photos.ts`, visit, subcategorias). `src/data/*` só se a tarefa pedir.
-2. **Empurre na hora para o Notion**, para o CMS e o app não divergirem:
-
-```bash
-npm run travel:notion:push -- <placeId> [moreIds...]
-```
-
-3. Não deixe para um seed em massa de um dump antigo — isso já apagou capas.
-
-**Garantias de foto / recência (no script de sync):**
-
-- Galerias são **merge-union**: nunca grave menos Photo URLs do que `max(local, Notion)`.
-- Se `last_edited_time` do Notion for **mais novo** que `lastPushedAt` em `src/data/travel-notion-sync-state.json` e a galeria do Notion for mais longa, a ordem do Notion vence; URLs só locais ainda entram no fim.
-- `seed-photos` faz merge; **não** substitui multi-capas do Notion por uma lista local mais curta.
-- Em runtime, `resolvePlacePhotos` também une registro + Notion, para as capas não sumirem na UI.
-
-**Comandos seguros:** `pull`, `sync` (só pull), `push`, `seed-photos` em modo merge.
-**Evitar:** seed de um dump **velho** que sobrescreva o editorial mais novo do Notion.
+A fonte da verdade é `src/data/travel.ts` (`travelCities`), com `travel-visit.ts`, `travel-photos.ts` e `travel-subcategories.ts`. Não há CMS nem sincronização: o Notion era do portfólio e não é usado aqui. Lugar novo ou correção vai direto nesses arquivos.
