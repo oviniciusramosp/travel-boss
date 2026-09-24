@@ -1254,10 +1254,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-bien-eleve': restaurantVisit(20, 40),
   'par-bohemia': restaurantVisit(18, 35, {
-    bestDay: L('Weekdays, brunch', 'Dias de semana, brunch'),
+    bestDay: L(
+      'Mon and Wed–Fri 8:30–16:00; Tue until 17:00; Sat–Sun 9:00–16:30',
+      'Seg e qua–sex 8h30–16h; ter até 17h; sáb–dom 9h–16h30',
+    ),
     tips: L(
-      'Order the club sandwich or Club Loco de Blueberries. Weekends fill up — weekday is easier for a table.',
-      'Peça o club sandwich ou o Club Loco de Blueberries. Fim de semana enche — dia de semana é mais fácil para mesa.',
+      'No reservations. Order the club sandwich or Club Loco de Blueberries. Weekends fill up — weekday is easier for a table.',
+      'Não aceita reserva. Peça o club sandwich ou o Club Loco de Blueberries. Fim de semana enche — dia de semana é mais fácil para mesa.',
     ),
   }),
   'par-arnaud-nicolas': restaurantVisit(25, 50, {
@@ -1281,8 +1284,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-pierre-herme': cafeVisit(8, 20, {
     tips: L(
-      'Macaron / pastry temple. Queue for bestsellers; boxes travel well.',
-      'Templo de macaron / pâtisserie. Fila nos hits; caixas viajam bem.',
+      'Macaron / pastry temple. The 86 Champs-Élysées shop appears to have closed for good — check before going.',
+      'Templo de macaron / pâtisserie. A loja da 86 Champs-Élysées parece ter fechado de vez — confira antes de ir.',
     ),
   }),
   'par-cedric-grolet': cafeVisit(18, 25, {
@@ -1878,13 +1881,6 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Ter–dom 10h–18h (abr–out); almoço até 15h30; fecha segunda',
     ),
     tips: L('Dishes €16–20; set menus ~€35. Terrace on the Grand Canal.', 'Pratos €16–20; menus ~€35. Terraço no Grand Canal.'),
-  }),
-  'par-baguetts-cafe': cafeVisit(20, 30, {
-    bestDay: L(
-      'Mon and Wed–Fri 8:30–16:00; Tue until 17:00; Sat–Sun 9:00–16:30',
-      'Seg e qua–sex 8h30–16h; ter até 17h; sáb–dom 9h–16h30',
-    ),
-    tips: L('No reservations. Hearty brunch plates, €20–30 per person.', 'Não aceita reserva. Brunch reforçado, €20–30 por pessoa.'),
   }),
   'par-trianon': {
     durationMin: 90,
