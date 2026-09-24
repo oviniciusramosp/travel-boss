@@ -1858,6 +1858,38 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     crowdProfile: 'transit',
     tips: L('Trains to Milan leave from here — arrive 30 min early.', 'Os trens para Milão saem daqui — chegue com 30 min de folga.'),
   },
+  'par-ore-ducasse': restaurantVisit(44, 58, {
+    avgPricePerPerson: money(
+      44,
+      58,
+      L('Main ~€30 + dessert ~€14; three-course menu €58', 'Prato ~€30 + sobremesa ~€14; menu de três tempos €58'),
+    ),
+    bestDay: L('Tue–Sun; lunch menu 12:00–15:00', 'Ter–dom; carta de almoço 12h–15h'),
+    tips: L(
+      'No château ticket needed. Mains €30–50, desserts €10–16 (Le Louis XIV is the house one); tap water free on request. Spring–summer 2026 menu. Book: 01 30 84 12 96.',
+      'Não precisa de ingresso do castelo. Pratos €30–50, sobremesas €10–16 (o Louis XIV é a da casa); água da casa grátis. Carta primavera–verão 2026. Reserve: 01 30 84 12 96.',
+    ),
+  }),
+  'par-la-flottille': restaurantVisit(20, 35, {
+    bestDay: L(
+      'Tue–Sun 10:00–18:00 (Apr–Oct); lunch until 15:30; closed Mon',
+      'Ter–dom 10h–18h (abr–out); almoço até 15h30; fecha segunda',
+    ),
+    tips: L('Dishes €16–20; set menus ~€35. Terrace on the Grand Canal.', 'Pratos €16–20; menus ~€35. Terraço no Grand Canal.'),
+  }),
+  'par-trianon': {
+    durationMin: 90,
+    durationMax: 150,
+    crowdProfile: 'museum',
+    bestDay: L(
+      'Apr–Oct 12:00–18:30, last entry 17:45; closed Mon',
+      'Abr–out 12h–18h30, última entrada 17h45; fecha segunda',
+    ),
+    tips: L(
+      'Included in the Passport. Versailles Rive Droite, the nearest station, is ~2 km on foot.',
+      'Incluso no Passport. A estação mais perto, Versailles Rive Droite, fica a ~2 km a pé.',
+    ),
+  },
 
   // —— Rome ——
   'rom-fco': {

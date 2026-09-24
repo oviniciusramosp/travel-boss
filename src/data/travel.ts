@@ -3781,6 +3781,50 @@ export const localTravelCities: TravelCity[] = [
         address: 'Place Louis-Armand, 75012 Paris',
         mapsQuery: 'Paris Gare de Lyon',
       },
+
+      // ── Oct 2026 trip list: Versailles ──
+      {
+        id: 'par-ore-ducasse',
+        name: { en: 'Ore — Ducasse (Versailles)', 'pt-BR': 'Ore — Ducasse (Versalhes)' },
+        category: 'restaurants',
+        subcategories: ['french'],
+        description: {
+          en: 'Alain Ducasse’s restaurant in the Pavillon Dufour, open to everyone without a château ticket (entrance from the Cour des Princes). French classics at lunch.',
+          'pt-BR': 'Restaurante do Alain Ducasse no Pavillon Dufour, aberto a quem não tem ingresso do castelo (entrada pela Cour des Princes). Clássicos franceses no almoço.',
+        },
+        lat: 48.804031,
+        lng: 2.121751,
+        address: "Pavillon Dufour, Château de Versailles, Place d'Armes, 78000 Versailles",
+        mapsQuery: 'Ore Ducasse au château de Versailles',
+      },
+      {
+        id: 'par-la-flottille',
+        name: { en: 'La Flottille', 'pt-BR': 'La Flottille' },
+        category: 'restaurants',
+        subcategories: ['brasserie', 'french'],
+        description: {
+          en: '1900-style brasserie on the Grand Canal in the Versailles park, with a terrace on the water.',
+          'pt-BR': 'Brasserie estilo 1900 à beira do Grand Canal, no parque de Versalhes, com terraço na água.',
+        },
+        lat: 48.811976,
+        lng: 2.103127,
+        address: 'Parc du Château de Versailles, 78000 Versailles',
+        mapsQuery: 'La Flottille Versailles',
+      },
+      {
+        id: 'par-trianon',
+        name: { en: 'Domaine de Trianon', 'pt-BR': 'Domaine de Trianon' },
+        category: 'tourist',
+        subcategories: ['palace', 'garden'],
+        description: {
+          en: 'Grand Trianon, Petit Trianon and the Queen’s Hamlet, deep in the Versailles park. Included in the Passport.',
+          'pt-BR': 'Grand Trianon, Petit Trianon e o Hameau da Rainha, no fundo do parque de Versalhes. Incluso no Passport.',
+        },
+        lat: 48.814914,
+        lng: 2.109952,
+        address: 'Domaine de Trianon, 78000 Versailles',
+        mapsQuery: 'Domaine de Trianon Versailles',
+      },
     ],
   },
   {
