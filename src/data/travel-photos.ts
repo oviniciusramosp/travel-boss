@@ -43,12 +43,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-cedric-grolet': [
     photo(
-      'https://cdn.sortiraparis.com/images/80/76511/340058-la-patisserie-de-cedric-grolet-au-meurice.jpg',
-      'Pâtisserie Cédric Grolet at Le Meurice',
-      'Pâtisserie Cédric Grolet no Le Meurice',
-      'Sortir à Paris',
-    ),
-    photo(
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUMAnnoa1qHK4CBkOUFhkT6bgEfPckQMSl9eauB91LSfFuLBNs-8_tq-m&s=10',
       'Cédric Grolet pastry',
       'Doce de Cédric Grolet',
@@ -156,22 +150,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-bake-blend': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWldBjMg13upIn99jRPyDfD4dh8tuB7AnKHDUd9No_zbcT2134mE43O_M6B6tzOIYeB9UCgTCHgEGek2iUPKLZB2hVjQbM1cxh0vmvbQKK2ha7r5XnvV-ydkGK_ZsIHejFQztzKN9siBV_4p=s392-k-no',
-      'Le café by Maison Bergeron',
-      'Le café by Maison Bergeron',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn4Maj78YqyPGePWag5UDplYQrvU8s5Z31S9h0PFhextMeMh7xBefhDv3AsgmSfjTYbsaUiEsu94ajLpKiKulG52d0FUt3guL3-VOOHs_OEU-smShuSqqjXGyDdVSLT6uN8CZtfwy0CPWT9=s457-k-no',
-      'Pastries at Le café by Maison Bergeron',
-      'Doces no Le café by Maison Bergeron',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnT7AKRGTQTbTRcUttUVpK1BLrF1d78tFoN08989bk5-OrAxljHvsmxa2BIdFKuj9shVgiNFQfCeUf1DUaI8-rFmnux0LqF_MUF4PHL0LZOEv32jQJ73GMCwCAGiKWLnXKkXD18=s609-k-no',
-      'Le café by Maison Bergeron interior',
-      'Interior do Le café by Maison Bergeron',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/%D9%83%D8%B1%D9%88%D8%A7%D8%B5%D9%86_%D8%A8%D9%8A%D8%B3%D8%AA%D8%A7%D8%B4_%D9%85%D8%B9_%D9%86%D8%B5-%D9%86%D8%B5.jpg/1280px-%D9%83%D8%B1%D9%88%D8%A7%D8%B5%D9%86_%D8%A8%D9%8A%D8%B3%D8%AA%D8%A7%D8%B4_%D9%85%D8%B9_%D9%86%D8%B5-%D9%86%D8%B5.jpg',
+      'Pistachio croissant and coffee (generic photo)',
+      'Croissant de pistache com café (foto ilustrativa)',
+      'إيان · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-bakery-gaite': [
@@ -198,16 +180,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-cafe-flore': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlfGFQJNkrIfykELlKzkUwUxZ-mepdxjRa1sd_Uou20bQHozTUgfCRWhsJWIDIC8ItvmefamDbqINS9_lBy-YF9wdUQgMaKuq_GZ_woM2sM87GZn_jM7aQOekyeRoq3vZHUvxr6KCtYATg=s348-k-no',
-      'Café de Flore',
-      'Café de Flore',
-      'Google',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmi4YtD6ALn5sDzxAIkBJSI9sJUoc6pbv1JVfz2nvH_BOZkyQjCnNqkcS0mvj3WeZEmDy6yl67-tg2q5Ii6PlYSI4bAeJG4K9LUu2B9bDZf6X--DsOt5r0JXXtnSZzCZVFmRfOK_73ZXMOy=s425-k-no',
-      'Café de Flore',
-      'Café de Flore',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Caf%C3%A9_de_Flore_007.jpg/1280px-Caf%C3%A9_de_Flore_007.jpg',
+      'Drink served on a Café de Flore saucer',
+      'Bebida servida no pires do Café de Flore',
+      'Arnaud 25 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-bateaux-mouches': [
@@ -276,22 +252,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-bohemia': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkUZDpMSZqgtkyRxREKF0vm26-EhpWQCNaCQN2AiBG1RQK7pwDeTSsrr5n57c_kOhiFIE9Pv7_Y7EvVz4IWHOa4r2_2Hi6NhuS4Srco3_uvD8eDpkiHIU6ftoXXgi-r1HosNpp93w=s1219-k-no',
-      "Baguett's Café Molière",
-      "Baguett's Café Molière",
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Blueberry_Pancakes_-_Nowhere_Man_2023-09-21.jpg/1280px-Blueberry_Pancakes_-_Nowhere_Man_2023-09-21.jpg',
+      'Blueberry pancakes (generic photo)',
+      'Panquecas de mirtilo (foto ilustrativa)',
+      'Andy Li · CC0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnTwGN1CH81ziHiPdcK-UxvVd-ZWiUn86C4inc2ccG4wXglUwpEgpuBeIseJCk33NXFpC4MFBbdZecym65zx2t-YsBtlw8IT9tFZPJrHhQFz_5XQDWrn3V5eGgX0XnC7bwosP2BmPNRJZlD=s927-k-no',
-      "Baguett's Café Molière — interior",
-      "Baguett's Café Molière — interior",
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkM8UGnc0zCL78U-xyIPGBhkSkccxzOteDVjBwD7emxAfP11Qskpt0AOgn1yfrGau8pnmOVh6aqotjgdEn6ewYN_soQmvhCi9XT85s_m9Kx9DCbW6iUxjI9lG4dHgzLBrHrL7eTIOl2c8iD=s914-k-no',
-      "Baguett's Café Molière — dishes",
-      "Baguett's Café Molière — pratos",
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/a/aa/Blueberry_pancakes_%281%29.jpg',
+      'Blueberry pancakes (generic photo)',
+      'Panquecas de mirtilo (foto ilustrativa)',
+      'jeffreyw · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-bon-marche': [
@@ -326,10 +296,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-burger-king-opera': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl25elIupAOZi6Ix80qTzI64wQeX4a9k5rqXuAR9tlRjlowJHGCX6xcUvGs5_ymGdp54IdP3LSu2eKa4MLW-4tNcH0koI25LIjdeal2KNXTDe-pE643Lyde20Bpi2aQ1bvcF2bOJg=s696-k-no',
-      'Burger King Opéra',
-      'Burger King Opéra',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/9/91/Burger_King_Whopper_Combo.jpg',
+      'Whopper meal (generic photo)',
+      'Combo Whopper (foto ilustrativa)',
+      'Siqbal · Public domain · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/BK_Whopper.JPG/1280px-BK_Whopper.JPG',
+      'Whopper (generic photo)',
+      'Whopper (foto ilustrativa)',
+      'BrokenSphere · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-buttes-chaumont': [
@@ -502,16 +478,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-five-guys-rivoli': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlZHut6hJ7Om0V81zIPFT3TZ7Xb_5QXRfbIyVphCKmC2U4O7TadlESSFsyvq_VIapZQRb21UcM2sEZvB9JP7bc4n_sDjV2q6buyBxHHLpxPZxW9C2BhkrbqyVCcTpM16EBt_Wg5KirBmAzO=s811-k-no',
-      'Five Guys Rivoli',
-      'Five Guys Rivoli',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Five_Guys%2C_Paris_%2820181003_211829%29.jpg/1280px-Five_Guys%2C_Paris_%2820181003_211829%29.jpg',
+      'Five Guys in Paris',
+      'Five Guys em Paris',
+      'Matti Blume · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlgE1IykNGZpQnc9Rp8mcUVzU5VuMd-FataC9FYCX1-nqdNh3Mk7vKrW9f7b5kxfKJ1VAeaVv0zS7QPc3vjfWe9AwIaxSux0pLnIN9WyI-qdKpITDxoIicaivZqQ97ifHjZTeqKsM9PAMpN=s696-k-no',
-      'Five Guys Rivoli',
-      'Five Guys Rivoli',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Int%C3%A9rieur_Restaurant_Five_Guys_Place_R%C3%A9publique_-_Paris_III_%28FR75%29_-_2024-12-08_-_2.jpg/1280px-Int%C3%A9rieur_Restaurant_Five_Guys_Place_R%C3%A9publique_-_Paris_III_%28FR75%29_-_2024-12-08_-_2.jpg',
+      'Five Guys République dining room (another branch)',
+      'Salão do Five Guys République (outra loja)',
+      'Chabe01 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-felicita': [
@@ -634,22 +610,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-jeffrey-cagnes': [
     photo(
-      'https://cdn.sortiraparis.com/images/80/95310/680422-la-patisserie-de-jeffrey-cagnes-les-photos.jpg',
-      'Pâtisserie Jeffrey Cagnes',
-      'Pâtisserie Jeffrey Cagnes',
-      'Sortir à Paris',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Paris-brest_1.jpg/1280px-Paris-brest_1.jpg',
+      'Paris-Brest (generic photo)',
+      'Paris-Brest (foto ilustrativa)',
+      'lazy fri13th · CC BY 2.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmIIAjo_lSaDowJ0Wj5kcqK7UmcBq2Ty8ABY58LpM6-LspvvbIF2MHLI0UNHwAhhxnA7DjqUy4JmE9_7vwNfz6CYw238S4dxboNJ8Jd3VhID638h7ZKcvamVlstKkH3FL1_2BSgAnhY3zE=s406-k-no',
-      'Jeffrey Cagnes pastries',
-      'Doces Jeffrey Cagnes',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWln4CTyblSguxcNY_GFhJyz6wzOKURhN-eFyPVRcFWRGIdFG97yuAtlxea-Z6OqqK44TylGzbgfSpMZPCWcv5cJq_cPq6tP62fyqGBK4HRebunN4jLKCqymjpWkw0A_UadyGbtz_mGAIMWo=s348-k-no',
-      'Jeffrey Cagnes shop',
-      'Loja Jeffrey Cagnes',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Paris_brest_-_Milfey_Patisserie_2025-12-08.jpg/1280px-Paris_brest_-_Milfey_Patisserie_2025-12-08.jpg',
+      'Paris-Brest (generic photo)',
+      'Paris-Brest (foto ilustrativa)',
+      'Andy Li · CC0 · Wikimedia Commons',
     ),
   ],
   'par-la-defense': [
@@ -722,12 +692,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-maison-isabelle': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk0gzwLpcH_UdtOadluoLz-GOpOPH3CA9DYt3dHWZUGsU9pqbUhfgKRWFl2UVKFizBRq1bqr17yM81ewmNKy36Oenp3cMYqw9CW60z0AqIxzByyP7op0p3x0_FNUQmYXeFsn1eCjfnxhZPN=s773-k-no',
-      'La Maison d\'Isabelle croissants',
-      'Croissants da La Maison d\'Isabelle',
-      'Google Maps',
-    ),
-    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Croissant%2C_whole.jpg/1280px-Croissant%2C_whole.jpg',
       'Butter croissant',
       'Croissant de manteiga',
@@ -768,10 +732,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-mcdonalds-champs': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn7b5zps0QDEwMsyLDpD9tMW2NFs39BvTaRgYil5dwc2jL38jTtM6X2GHg82SvTxwvExjxdApF7o8lJ_BGQsnhsgl7N9mcIDOf8KmludLUCkCjxyEkR1bh-3qyWG7Zt52441k9jIw=s348-k-no',
-      "McDonald's Champs-Élysées",
-      "McDonald's Champs-Élysées",
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Mc._Donald%27s_-_Champs_Elyses_%289658470570%29.jpg/1280px-Mc._Donald%27s_-_Champs_Elyses_%289658470570%29.jpg',
+      "McDonald's on the Champs-Élysées",
+      "McDonald's da Champs-Élysées",
+      'flightlog · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/McDonald%27s%2C_140_Avenue_des_Champs-%C3%89lys%C3%A9es%2C_Paris_15_July_2006.jpg/1280px-McDonald%27s%2C_140_Avenue_des_Champs-%C3%89lys%C3%A9es%2C_Paris_15_July_2006.jpg',
+      "McDonald's, 140 Avenue des Champs-Élysées",
+      "McDonald's, 140 Avenue des Champs-Élysées",
+      'Jon Kragh · CC BY-SA 2.0 · Wikimedia Commons',
     ),
   ],
   'par-metro-2': [
@@ -800,22 +770,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-michalak-etienne': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl_F5T32X9QyZREvawZVe0bOJ2aylxLUkh2inyD3ANQM5IkiiFHLAQFUaYpmYl8d5pHi_RCF7ALb3W0d8y60PiKLZZtI4BS_BFTYl0hBrkNcU-kxkcLAYMTu3Ve3GB-vtEmg2PbFg=w203-h360-k-no',
-      'Pâtisserie Michalak · Étienne Marcel',
-      'Pâtisserie Michalak · Étienne Marcel',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnKZrjDWPOFc35n60b2v1NHIlCFvobPPTMNw8XnDVe3CxYGTVn3Ync_GGMmoYJjbljCFZnkIUQUD5VqotgUNPWPT-MhJUUgTrhyZoKCJHbMwEq5zC0c1YuhDsibIawEprBwULjqlKHy0B9T=s609-k-no',
-      'Michalak pastries',
-      'Doces Michalak',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWle5pSQjLlqxWH4yh_cxEjs87ocuACipxxNIl8cR7mVT8avg_F12uEzB3cSfYTYcdjl5w0TAb4eHMuZQ3aLkX3s_ypX8ayvxxW2nSxkuJtsTxqSnbBTXEFgovE6DqmWxQ2iiaDMnF3ejm4=s406-k-no',
-      'Michalak shop',
-      'Loja Michalak',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Tarte_aux_fraises_%28Nice%29.jpg/1280px-Tarte_aux_fraises_%28Nice%29.jpg',
+      'Strawberry tart (generic photo)',
+      'Torta de morango (foto ilustrativa)',
+      'Tangopaso · Public domain · Wikimedia Commons',
     ),
   ],
   'par-artizans': [
@@ -934,10 +892,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-orly-paul': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkU4PmcTDXuC46zcsWSnJJ1SGYdjlg0cnm98pKosrcZu0dgXMSbQbaqXxhU4Du3UY5T-svxcrBe2KFVcRerynbAwaDLNlrynDFTkKXOvWZxYiskgRn6lnJRieX2VJjQ3IcCb-xT=s901-k-no',
-      'PAUL Orly — bakery counter',
-      'PAUL Orly — balcão da padaria',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/5/57/Pain_au_chocolat_from_French_Made_Baking.jpg',
+      'Pain au chocolat (generic photo)',
+      'Pain au chocolat (foto ilustrativa)',
+      'Christine Rondeau · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Pain_au_Chocolat.jpg/1280px-Pain_au_Chocolat.jpg',
+      'Pain au chocolat (generic photo)',
+      'Pain au chocolat (foto ilustrativa)',
+      'Andre lleo · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-cdg-paul': [
@@ -1046,10 +1010,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-paul-defense': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlIXnW00fy0Lc5DC9DmAB5cqZN9s3smQ5tdSvYGMp8fGNavpxIKCq8UZvVVVtrP-e5UhfD9YKGcYXYe83UFbHbdaNGetbAsmaubU2bmVW1kNh5g0Z79iz3UtPV1GiD9hEJtxrCrC0hiIV59=s928-k-no',
-      'PAUL La Défense',
-      'PAUL La Défense',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/d/dc/Croissants_au_beurre_%2818953292873%29.jpg',
+      'Butter croissants (generic photo)',
+      'Croissants na manteiga (foto ilustrativa)',
+      'Herry Wibisono · CC0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/9/91/Croissant_hk_jp.jpg',
+      'Croissant (generic photo)',
+      'Croissant (foto ilustrativa)',
+      'SUBARUsti2020hk · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-pierre-herme': [
@@ -1192,22 +1162,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-shakespeare': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnYJiEHyO5MHM2kAbH2cbi1w2LBAeYS_xuFSqotP3no10MQuYiU_R32a-643KZ1sg01A_8XjyDCM3BcfCm2LQQBvlkm-madcx7ywnHRtIuGa5QHAazhqJavA6Bd0X9xsVb45ACfoeb5bHB5=w408-h544-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Shakespeare_and_Company%2C_Paris.jpg/1280px-Shakespeare_and_Company%2C_Paris.jpg',
       'Shakespeare and Company bookshop',
       'Livraria Shakespeare and Company',
-      'Google Maps',
+      'Mike Peel · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk3CDv49kUl1PyWi8GAhIiMlga9dz2WwyRUt2om9v3q7EV_RLVP5w9gVGfthdxSMCvxOx6k46FS_lBngmkl3TSjiMzIJpH01iTtVBUFAc6CBJLZ_FUuZD1M8qPsi7kxtK2E04FLNB6Teaw=s696-k-no',
-      'Shakespeare and Company interior',
-      'Interior da Shakespeare and Company',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWletNv21VtmdV6MDwoYKjqJcq8L2XTs1maAYh-ou5Ih-eFfzNnpYLxBvCE8Evpy6OVrcyNpGiQ1uwt5DAEMt_3aLIeLdXFw7TD0O99UkekT3Bny9zwrwm8fv3q3MXO9AdrWu1L2hWXyDNo=s644-k-no',
-      'Shakespeare and Company shelves',
-      'Prateleiras da Shakespeare and Company',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Shakespeare_and_Company%2C_Paris%2C_2009.jpg/1280px-Shakespeare_and_Company%2C_Paris%2C_2009.jpg',
+      'Shakespeare and Company shopfront',
+      'Fachada da Shakespeare and Company',
+      'Mike Peel · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-sorbonne': [
@@ -1646,6 +1610,82 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Grand Canal at Versailles, where La Flottille sits',
       'Grand Canal de Versalhes, onde fica La Flottille',
       'Liberaler Humanist · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-mcdonalds-disney': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Big_Mac_hamburger.jpg/1280px-Big_Mac_hamburger.jpg',
+      'Big Mac (generic photo)',
+      'Big Mac (foto ilustrativa)',
+      'Evan-Amos · CC0 · Wikimedia Commons',
+    ),
+  ],
+  'par-starbucks-opera': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Starbucks_mug%2C_CDG_airport%2C_2025.png/1280px-Starbucks_mug%2C_CDG_airport%2C_2025.png',
+      'Starbucks mug (generic photo)',
+      'Caneca da Starbucks (foto ilustrativa)',
+      'Rosiestep · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-kfc-les-halles': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Fried-Chicken-Set.jpg/1280px-Fried-Chicken-Set.jpg',
+      'Fried chicken (generic photo)',
+      'Frango frito (foto ilustrativa)',
+      'Evan-Amos · CC0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Fried_chicken_%2825163375255%29.jpg/1280px-Fried_chicken_%2825163375255%29.jpg',
+      'Fried chicken (generic photo)',
+      'Frango frito (foto ilustrativa)',
+      'T.Tseng · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-poilane': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/4/4d/Pain_Po%C3%AElane-_Paris_15e.jpg',
+      'Poilâne sourdough loaf',
+      'Pão de fermentação natural da Poilâne',
+      'Gilbert Bochenek · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-deux-magots': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/080410_Les_Deux_Magots_01.JPG/1280px-080410_Les_Deux_Magots_01.JPG',
+      'Salads at Les Deux Magots',
+      'Saladas no Les Deux Magots',
+      'BKP · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-du-pain-idees': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Pain_aux_raisins_02.jpg/1280px-Pain_aux_raisins_02.jpg',
+      'Pain aux raisins (generic photo)',
+      'Pain aux raisins (foto ilustrativa)',
+      'Arnaud 25 · CC0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/a/a4/Pain_aux_raisins.jpg',
+      'Pain aux raisins (generic photo)',
+      'Pain aux raisins (foto ilustrativa)',
+      'Tepeyac · Public domain · Wikimedia Commons',
+    ),
+  ],
+  'par-merveilleux-fred': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Merveilleux.jpg/1280px-Merveilleux.jpg',
+      'Merveilleux meringue cakes (generic photo)',
+      'Merveilleux, doce de merengue (foto ilustrativa)',
+      'Eeicing · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-recrutement': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Paris_75007_Rue_Saint-Dominique_x_Boulevard_de_La_Tour-Maubourg_20150607.jpg/1280px-Paris_75007_Rue_Saint-Dominique_x_Boulevard_de_La_Tour-Maubourg_20150607.jpg',
+      "Eiffel Tower down Rue Saint-Dominique, at the café's corner",
+      'Torre Eiffel no fim da Rue Saint-Dominique, na esquina do café',
+      'Dancorona21 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'rom-fco': [
