@@ -149,8 +149,8 @@ describe('travel-photos registry', () => {
     expect(full.photos?.length).toBeGreaterThanOrEqual(registry!.length);
   });
 
-  it('resolvePlacePhotos keeps Notion multi-gallery when registry is shorter', () => {
-    const notionMulti = [
+  it('resolvePlacePhotos keeps an authored multi-gallery when the registry is shorter', () => {
+    const authoredMulti = [
       {
         url: 'https://example.com/a.jpg',
         alt: { en: 'A', 'pt-BR': 'A' },
@@ -164,9 +164,9 @@ describe('travel-photos registry', () => {
         alt: { en: 'C', 'pt-BR': 'C' },
       },
     ];
-    // Unknown place id → no registry; Notion gallery is used as-is
-    const onlyNotion = resolvePlacePhotos('__no-registry-place__', notionMulti);
-    expect(onlyNotion?.map((p) => p.url)).toEqual(notionMulti.map((p) => p.url));
+    // Unknown place id → no registry; the authored gallery is used as-is
+    const onlyAuthored = resolvePlacePhotos('__no-registry-place__', authoredMulti);
+    expect(onlyAuthored?.map((p) => p.url)).toEqual(authoredMulti.map((p) => p.url));
   });
 
   it('every place id with photos exists in travel data (no orphan keys)', () => {
