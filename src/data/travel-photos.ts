@@ -212,16 +212,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-bateaux-mouches': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlkamvAmLuu9HadRULncd6dlec-JkHS2mvKdAPumGuKgcmKw5mydCIyoZ8jouzdmaQyLpGnbwoOaGlb47dgnnoy_vArk_h9sSEXT3J9LPSha25mCb9HCKYhquZSBFO_doZjpmZfMqWR9bk=s348-k-no',
-      'Bateaux-Mouches on the Seine',
-      'Bateaux-Mouches no Sena',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Bateaux_Mouches_Paris_2011.jpg/1280px-Bateaux_Mouches_Paris_2011.jpg',
+      'Bateaux-Mouches boat on the Seine',
+      'Barco Bateaux-Mouches no Sena',
+      'Daniel Stockman · CC BY-SA 2.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlamPWEfHwgG-WxIJyciXZkNHIqWN1OUGuKzVr_pwYyn41CpGtEQL3kR5uwHa0Yr1T1KQuIbRHtL2MCzcO7IW9-cv2QmeyPhsHYjg7clzMXNkgqbanbMNgxvS56kOeh1UqVXw4lNMjbwNcI=s406-k-no',
-      'Bateaux-Mouches Seine cruise',
-      'Cruzeiro Bateaux-Mouches no Sena',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bateaux_Mouches%2C_Paris_%2815054976301%29.jpg/1280px-Bateaux_Mouches%2C_Paris_%2815054976301%29.jpg',
+      'Bateaux-Mouches in Paris',
+      'Bateaux-Mouches em Paris',
+      'Joe deSousa · CC0 · Wikimedia Commons',
     ),
   ],
   'par-bhv-marais': [
@@ -248,10 +248,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-bike': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/V%C3%A9lib%27_Paris.jpg/1280px-V%C3%A9lib%27_Paris.jpg',
-      'Bike around Paris',
-      'Bike around Paris',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Station_V%C3%A9lib_-_Universit%C3%A9_Paris_Dauphine.jpg/1280px-Station_V%C3%A9lib_-_Universit%C3%A9_Paris_Dauphine.jpg',
+      "Vélib' bike-share station",
+      "Estação de bicicletas Vélib'",
+      'Sukkoria · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-bnf': [
@@ -342,22 +342,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-canals': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlBugDTNivZP8Wem_yRewzLbdSRUGGLeEqkS0TGCUQD0omvkA26ZJMl95tJQR0rjZE3_xcqZsM0vb9Xp5FdZNO_xWG9BgXYwJZKAnUlS3oy5oyTkx5z7rhDm3gR7TC_JHlDmGeh=s348-k-no',
-      'Canals of Paris',
-      'Canais de Paris',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Canal_Saint-Martin_Passerelle_de_la_Grange-aux-Belles_001.JPG/1280px-Canal_Saint-Martin_Passerelle_de_la_Grange-aux-Belles_001.JPG',
+      'Grange-aux-Belles footbridge, Canal Saint-Martin',
+      'Passarela da Grange-aux-Belles, Canal Saint-Martin',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkk4R_BfIDVevAV-jdAf2j2hlJiVHA7llQcQJUfkRguGTE5GgBsmJvVhegPfpNFtfZF_5mdidpGn4ngdCGBMY9Eq255dgAgw0Hj9ytM9deTf5JMwbU7-yYXoSiFxCRY2q5K7wpD=s522-k-no',
-      'Canals of Paris',
-      'Canais de Paris',
-      'Google',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Canal_Saint-Martin_Paris_FRA_001.jpg/1280px-Canal_Saint-Martin_Paris_FRA_001.jpg',
-      'Canal Saint-Martin',
-      'Canal Saint-Martin',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/2022-04-14-Passerelle_de_la_Grange-aux-Belles-8590.jpg/1280px-2022-04-14-Passerelle_de_la_Grange-aux-Belles-8590.jpg',
+      'Canal Saint-Martin at the Grange-aux-Belles footbridge',
+      'Canal Saint-Martin na passarela da Grange-aux-Belles',
+      'Superbass · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-champ-mars': [
@@ -518,10 +512,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-esplanade-de-gaulle': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmLEK9QnMY98qZVpGsRj5nO0eWncgd-vKOPRLmpxv994Z8T6kalIa1YMqKr9Ib0trrWlWBW0ahvB9_DOv8JIRuhVr4qfH0PeXwjA79OXK_McyKSB33lz02N1cohcPXR7YCSyfRQ=s1219-k-no',
-      'Esplanade du Général de Gaulle',
-      'Esplanade du Général de Gaulle',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Esplanade_G%C3%A9n%C3%A9ral_Gaulle_-_Courbevoie_%28FR92%29_-_2023-09-16_-_6.jpg/1280px-Esplanade_G%C3%A9n%C3%A9ral_Gaulle_-_Courbevoie_%28FR92%29_-_2023-09-16_-_6.jpg',
+      'Esplanade du Général de Gaulle, La Défense',
+      'Esplanade du Général de Gaulle, La Défense',
+      'Chabe01 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-five-guys-rivoli': [
@@ -626,10 +620,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-grande-arche': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmahbvRwF1cvKduou9vRtXurYY3w9gIBNKAlCk0TA1UXpLv04fzMzPniM-ewJjT2K4fA7BvxwdRJbdvJu8LsnJR34B63YMk2pXYooIOWoG5zKcZdUIHNs2lxWfh2iIO2WLkC1bH-A=s1219-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Grande_Arche_de_La_D%C3%A9fense_et_fontaine_FOPed_grey.jpg/1280px-Grande_Arche_de_La_D%C3%A9fense_et_fontaine_FOPed_grey.jpg',
       'Grande Arche de la Défense',
-      'Grande Arche de la Défense',
-      'Google Maps',
+      'Grande Arche de La Défense',
+      'Atoma · CC BY 2.5 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/North_facade_of_the_Grande_Arche_de_la_D%C3%A9fense_-_20050906.jpg/1280px-North_facade_of_the_Grande_Arche_de_la_D%C3%A9fense_-_20050906.jpg',
+      'North face of the Grande Arche',
+      'Fachada norte do Grande Arche',
+      'Tognopop · CC0 · Wikimedia Commons',
     ),
   ],
   'par-horloge': [
@@ -876,16 +876,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-montorgueil': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmTANTGhyQyKBA0XK_LvDPsanTWcJTp8ugWIRwz8HhBogvZrM1O-Z-skoqOykpqEig7iV1T8tKXeiyMqPCsDa_DJ8SYDFeeDNQRvVIRKYZTILKa7tlL9cxLaeYUBSRKeUUAXiqf=s457-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Paris_-_Rue_Montorgueil.JPG/1280px-Paris_-_Rue_Montorgueil.JPG',
       'Rue Montorgueil',
       'Rue Montorgueil',
-      'Google Maps',
+      'Jean-Christophe BENOIST · CC BY-SA 3.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn64em6_9Zp6_Vz7GN6yII64mGDpsHSGo-YaYhUKkBGjE7NX3a0qGMZyoHUPmAuSFMvV30C3God4693dU3a4KArSkdsiVyXH4aBTaakYeEzaiswGcxyrG81vdSS1DEC40UzsNB7=s406-k-no',
-      'Montorgueil market street',
-      'Rua de mercado Montorgueil',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/P1010070_Paris_Ier_Rue_Montorgueil_n%C2%B012_reductwk.JPG/1280px-P1010070_Paris_Ier_Rue_Montorgueil_n%C2%B012_reductwk.JPG',
+      'Shopfront on Rue Montorgueil',
+      'Fachada na Rue Montorgueil',
+      'Mbzt · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-montparnasse': [
@@ -1110,12 +1110,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-pompidou': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Pompidou_Centre.jpg/1280px-Pompidou_Centre.jpg',
-      'Centre Pompidou — high-tech exterior',
-      'Centre Pompidou — exterior high-tech',
-      'Wikimedia Commons',
-    ),
-    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Apud_la_Centro_Georges-Pompidou_5.jpg/1280px-Apud_la_Centro_Georges-Pompidou_5.jpg',
       'Centre Pompidou façade and escalator tubes',
       'Fachada do Centre Pompidou e tubos das escadas',
@@ -1146,22 +1140,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-promenade-plantee': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlfkY0zLztqFv-OeWPjr25HkcqNMuXkRXH3OUrJUtL_vmqvLjDqKVE82TzTGVKpE9D2gdqkRMwhz_IH0UfHJHCC-ZrkydfGeSq0CtknZDrVyHKinoWs4JZLVebCpOMYOKbLvz0A=s391-k-no',
-      'Promenade Plantée (Coulée Verte)',
-      'Promenade Plantée (Coulée Verte)',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Promenade_plant%C3%A9e%2C_Paris_August_2009_%2810%29.jpg/1280px-Promenade_plant%C3%A9e%2C_Paris_August_2009_%2810%29.jpg',
+      'Promenade Plantée',
+      'Promenade Plantée',
+      'jean-louis Zimmermann · CC BY 2.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmbuIaftOyI4ips3fvQzyENQlRnD5RdmHJJzlkAMB4DOUUBw8AjOX6lv9JCEZ5H3TwZa8yNZ06oIWNFjTjLk-2UG9ywDa3a5Q1JOcE6-kwJP654rlVbVmRR92x9GI1CNk2pOOLZ=s391-k-no',
-      'Coulée Verte elevated walkway',
-      'Coulée Verte — passeio elevado',
-      'Google Maps',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm7PSUASISQxXiOzBBLZnlXv6dVWmaEfwwH6w1dm_udp7Z5G7GnM5w4NJfz-pabJr1LpcskSHelSu4Zqtq8BeYrow1tBJXKBhGsHX5lrMShIijYa1hELQW4ASgq93j6V26bNQvM=s609-k-no',
-      'Promenade Plantée greenery',
-      'Promenade Plantée — vegetação',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Promenade_plant%C3%A9e%2C_Paris_2_June_2015.jpg/1280px-Promenade_plant%C3%A9e%2C_Paris_2_June_2015.jpg',
+      'Promenade Plantée walkway',
+      'Caminho da Promenade Plantée',
+      'Francisco Anzola · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-royal-cambronne': [
@@ -1210,10 +1198,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-saint-michel': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkjWrOpg-Wiii47W4fvwH1Kn1dHCJwK9ipDVRjcKSHcxhBpaTXbl5oDxEtBtuWOhd9eZrTXbL3U7WWDmSAWIdyP-w9ks1ngTjvSlEkqrrI2qgiwM80p_B74XYFASFRQ0rBgh4dV=s365-k-no',
-      'Place Saint-Michel',
-      'Place Saint-Michel',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Photo_Place_Saint-Michel_Paris_France_2007-08-01.jpg/1280px-Photo_Place_Saint-Michel_Paris_France_2007-08-01.jpg',
+      'Place Saint-Michel and its fountain',
+      'Place Saint-Michel e a fonte',
+      'Coyau · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-sainte-chapelle': [
@@ -1290,10 +1278,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-tuileries': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkK49900OAdl00ZSQzk_G0mkEiXKn-gaTwy-4SQr-V3Q7ZTeQsolGuJ9XnFE5hLB-mQk1R93WcHmlMlJEMqD-an9jW4sIxK14PKsbvtvD0zaWRjSliEIhPOuklQ3K2M4Ko2768u=s783-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Grand_bassin_octogonal_Jardin_des_Tuileries_003.jpg/1280px-Grand_bassin_octogonal_Jardin_des_Tuileries_003.jpg',
+      'Octagonal pond in the Tuileries Garden',
+      'Lago octogonal do Jardim das Tulherias',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Tuileries_Garden%2C_Paris_%2836551467426%29.jpg/1280px-Tuileries_Garden%2C_Paris_%2836551467426%29.jpg',
       'Tuileries Garden',
-      'Tuileries Garden',
-      'Google Maps',
+      'Jardim das Tulherias',
+      'xiquinhosilva · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-vendome': [
@@ -1356,6 +1350,182 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
 
   // —— Rome ——
+  'par-place-dauphine': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Paris_Place_Dauphine.jpg/1280px-Paris_Place_Dauphine.jpg',
+      'Place Dauphine',
+      'Place Dauphine',
+      'Myrabella · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Paris_Place_Dauphine_r_P8040092.JPG/1280px-Paris_Place_Dauphine_r_P8040092.JPG',
+      'Place Dauphine, Île de la Cité',
+      'Place Dauphine, Île de la Cité',
+      'Mbzt · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-belleville': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Belv%C3%A9d%C3%A8re_de_Belleville_%40_Parc_de_Belleville_%40_Paris_20_%2825137120823%29.jpg/1280px-Belv%C3%A9d%C3%A8re_de_Belleville_%40_Parc_de_Belleville_%40_Paris_20_%2825137120823%29.jpg',
+      'Belleville lookout over Paris',
+      'Mirante de Belleville sobre Paris',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/1/16/Parc_de_Belleville_Paris_01.jpg',
+      'Parc de Belleville',
+      'Parc de Belleville',
+      'Pol · Public domain · Wikimedia Commons',
+    ),
+  ],
+  'par-villa-marquise': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/111_Rue_de_Vaugirard_Paris.jpg/1280px-111_Rue_de_Vaugirard_Paris.jpg',
+      '111 Rue de Vaugirard',
+      '111 Rue de Vaugirard',
+      'Benreis · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/111_Rue_de_Vaugirard_Paris_2.jpg/1280px-111_Rue_de_Vaugirard_Paris_2.jpg',
+      '111 Rue de Vaugirard',
+      '111 Rue de Vaugirard',
+      'Benreis · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-favorite-saint-paul': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/La_Favorite_Saint_Paul-2026-08-msu-23571-4139.jpg/1280px-La_Favorite_Saint_Paul-2026-08-msu-23571-4139.jpg',
+      'La Favorite Saint-Paul',
+      'La Favorite Saint-Paul',
+      'Matthias Süßen · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/La_Favorite_Saint_Paul-2026-08-msu-23571-4166.jpg/1280px-La_Favorite_Saint_Paul-2026-08-msu-23571-4166.jpg',
+      'La Favorite Saint-Paul, Marais',
+      'La Favorite Saint-Paul, Marais',
+      'Matthias Süßen · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-bon-pecheur': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Aux_Halles_-_Le_Bon_Pecheur%2C_Paris_2020.jpg/1280px-Aux_Halles_-_Le_Bon_Pecheur%2C_Paris_2020.jpg',
+      'Le Bon Pêcheur, Les Halles',
+      'Le Bon Pêcheur, Les Halles',
+      'Francois R THOMAS · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/4/4f/Le_Bon_P%C3%AAcheur.jpg',
+      'Le Bon Pêcheur',
+      'Le Bon Pêcheur',
+      'Thomon · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-archives-nationales': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Archives_nationales_%40_Le_Marais_%40_Paris_%2833693687914%29.jpg/1280px-Archives_nationales_%40_Le_Marais_%40_Paris_%2833693687914%29.jpg',
+      'Hôtel de Soubise, Archives nationales',
+      'Hôtel de Soubise, Archives nationales',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Garden_%40_Archives_nationales_%40_Le_Marais_%40_Paris_%2834494938086%29.jpg/1280px-Garden_%40_Archives_nationales_%40_Le_Marais_%40_Paris_%2834494938086%29.jpg',
+      'Archives nationales garden',
+      'Jardim dos Archives nationales',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-pont-neuf': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Pont_Neuf%2C_Paris_1er_001.JPG/1280px-Pont_Neuf%2C_Paris_1er_001.JPG',
+      'Pont Neuf',
+      'Pont Neuf',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Pont_Neuf_-_Paris_-_France.jpg/1280px-Pont_Neuf_-_Paris_-_France.jpg',
+      'Pont Neuf over the Seine',
+      'Pont Neuf sobre o Sena',
+      'Sumit Surai · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-avenue-camoens': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Avenue_de_Camoens.jpg/1280px-Avenue_de_Camoens.jpg',
+      'Avenue de Camoëns',
+      'Avenue de Camoëns',
+      'Siren-Com · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/4/4d/Avenue_de_Camo%C3%ABns_%284252650368%29.jpg',
+      'Avenue de Camoëns, 16th arrondissement',
+      'Avenue de Camoëns, 16º arrondissement',
+      'Metro Centric · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-rue-universite': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Rue_de_l%27Universit%C3%A9_and_Eiffel_Tower%2C_Paris_May_2012_-_panoramio.jpg/1280px-Rue_de_l%27Universit%C3%A9_and_Eiffel_Tower%2C_Paris_May_2012_-_panoramio.jpg',
+      "Eiffel Tower from Rue de l'Université",
+      "Torre Eiffel vista da Rue de l'Université",
+      'Vlad Shtelts · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-passerelle-debilly': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Passerelle_Debilly%2C_Paris_7e-16e.jpg/1280px-Passerelle_Debilly%2C_Paris_7e-16e.jpg',
+      'Passerelle Debilly',
+      'Passarela Debilly',
+      'AHert · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Passerelle_Debilly%2C_Paris_9_July_2016.jpg/1280px-Passerelle_Debilly%2C_Paris_9_July_2016.jpg',
+      'Passerelle Debilly over the Seine',
+      'Passarela Debilly sobre o Sena',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-pont-iena': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/View_of_Pont_d%27I%C3%A9na_from_Trocad%C3%A9ro%2C_Paris%2C_2008.jpg/1280px-View_of_Pont_d%27I%C3%A9na_from_Trocad%C3%A9ro%2C_Paris%2C_2008.jpg',
+      "Pont d'Iéna from the Trocadéro",
+      "Pont d'Iéna vista do Trocadéro",
+      'DimiTalen · CC0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Pont_d%27I%C3%A9na_2447x742.jpg/1280px-Pont_d%27I%C3%A9na_2447x742.jpg',
+      "Pont d'Iéna",
+      "Pont d'Iéna",
+      'wagner51 · CC BY-SA 2.0 fr · Wikimedia Commons',
+    ),
+  ],
+  'par-fontaines-trocadero': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Fountains_of_Trocadero_in_Paris_002.JPG/1280px-Fountains_of_Trocadero_in_Paris_002.JPG',
+      'Trocadéro fountains',
+      'Fontes do Trocadéro',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Fontaines_du_Trocad%C3%A9ro_6_October_2009.jpg/1280px-Fontaines_du_Trocad%C3%A9ro_6_October_2009.jpg',
+      'Trocadéro fountains',
+      'Fontes do Trocadéro',
+      'Mario Sánchez Prada · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-trianon': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/P%C3%A9ristyle_du_Grand_Trianon_001.JPG/1280px-P%C3%A9ristyle_du_Grand_Trianon_001.JPG',
+      'Peristyle of the Grand Trianon',
+      'Peristilo do Grand Trianon',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/P%C3%A9ristyle_du_Grand_Trianon_002.JPG/1280px-P%C3%A9ristyle_du_Grand_Trianon_002.JPG',
+      'Peristyle of the Grand Trianon',
+      'Peristilo do Grand Trianon',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
   'rom-fco': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Rom_Fiumicino_2011-by-RaBoe-02.jpg/1280px-Rom_Fiumicino_2011-by-RaBoe-02.jpg',
