@@ -1668,6 +1668,16 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Daily 12:00–00:00', 'Todo dia 12h–0h'),
     tips: L('Cordon bleu ~€26 with a side. Book ahead.', 'Cordon bleu ~€26 com acompanhamento. Reserve.'),
   }),
+  'par-arnaud-nicolas-caulaincourt': restaurantVisit(5, 17, {
+    bestDay: L(
+      'Tue–Sat 10:00–20:00; Sun 9:30–13:30; closed Mon',
+      'Ter–sáb 10h–20h; dom 9h30–13h30; fecha segunda',
+    ),
+    tips: L(
+      'Croque-monsieur (25 cm) ~€5; takeaway lunch €9–17. Ask whether this shop has the croque that day.',
+      'Croque-monsieur (25 cm) ~€5; almoço para viagem €9–17. Confirme se esta loja tem o croque no dia.',
+    ),
+  }),
   'par-recrutement': cafeVisit(5, 40, {
     avgPricePerPerson: money(5, 40, L('Coffee ~€5; a full meal €25–40', 'Café ~€5; refeição €25–40')),
     bestDay: L('Daily ~7:00–02:00', 'Todo dia ~7h–2h'),
@@ -1749,6 +1759,105 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Desça os jardins do Trocadéro até a Fontaine de Varsovie.',
     ),
   }),
+  'par-aeroville': {
+    avgPricePerPerson: money(10, 25, L('Lunch at the food court; groceries extra', 'Almoço na praça de alimentação; mercado à parte')),
+    durationMin: 60,
+    durationMax: 90,
+    crowdProfile: 'shop',
+    bestDay: L(
+      'Shops daily 10:00–20:00, Sundays too; Auchan Sun 10:00–20:30; restaurants until midnight',
+      'Lojas todo dia 10h–20h, inclusive domingo; Auchan dom 10h–20h30; restaurantes até meia-noite',
+    ),
+    tips: L(
+      'From CDG: CDGVAL to Roissypôle, then bus 2123, 2124 or EX100. With luggage, Uber is easier.',
+      'Do CDG: CDGVAL até Roissypôle e ônibus 2123, 2124 ou EX100. Com mala, Uber é mais fácil.',
+    ),
+  },
+  'par-uniqlo-opera': {
+    durationMin: 30,
+    durationMax: 60,
+    crowdProfile: 'shop',
+    bestDay: L('Open Sunday 11:00–20:00', 'Abre domingo 11h–20h'),
+    tips: L(
+      'The Uniqlo closest to Haussmann–Saint-Lazare (RER E). Créteil Soleil has none.',
+      'A Uniqlo mais perto de Haussmann–Saint-Lazare (RER E). O Créteil Soleil não tem.',
+    ),
+  },
+  'par-creteil-soleil': {
+    durationMin: 120,
+    durationMax: 180,
+    crowdProfile: 'shop',
+    bestDay: L('Mon–Sat 10:00–20:30; Sun 11:00–19:00', 'Seg–sáb 10h–20h30; dom 11h–19h'),
+    tips: L(
+      'Metro 8 to Créteil–Préfecture. Normal, H&M and Bershka are on level 2, Sephora on level 0.',
+      'Metrô 8 até Créteil–Préfecture. Normal, H&M e Bershka ficam no nível 2; Sephora no nível 0.',
+    ),
+  },
+  'par-citypharma': {
+    durationMin: 30,
+    durationMax: 60,
+    crowdProfile: 'shop',
+    bestDay: L(
+      'Mon–Fri 8:30–21:00; Sat 9:00–21:00; Sun 12:00–20:00',
+      'Seg–sex 8h30–21h; sáb 9h–21h; dom 12h–20h',
+    ),
+  },
+  'par-carre-opera': {
+    durationMin: 20,
+    durationMax: 45,
+    crowdProfile: 'shop',
+    bestDay: L('Mon–Fri 8:00–20:30; Sat 9:30–20:30', 'Seg–sex 8h–20h30; sáb 9h30–20h30'),
+    tips: L(
+      'Show the Conexão Paris voucher on your phone at the till: 10% off, not on medicines, promotions or baby formula. Tax refund from €100.',
+      'Mostre o voucher do Conexão Paris no celular, no caixa: 10% de desconto, fora remédios, promoções e leite infantil. Tax free a partir de €100.',
+    ),
+  },
+  'par-one-nation': {
+    durationMin: 90,
+    durationMax: 180,
+    crowdProfile: 'shop',
+    bestDay: L('Mon–Fri 11:00–20:00; Sat 10:00–20:00; Sun 11:00–20:00', 'Seg–sex 11h–20h; sáb 10h–20h; dom 11h–20h'),
+    tips: L(
+      'From the château: Uber ~16 min, or line N from Versailles-Chantiers to Villepreux–Les Clayes (12 min) and a 10-min walk. Back: line N to Montparnasse, ~30 min.',
+      'Do castelo: Uber ~16 min, ou linha N de Versailles-Chantiers até Villepreux–Les Clayes (12 min) e 10 min a pé. Volta: linha N até Montparnasse, ~30 min.',
+    ),
+  },
+  'par-vallee-village': {
+    durationMin: 120,
+    durationMax: 180,
+    crowdProfile: 'shop',
+    bestDay: L('Daily 10:00–20:00', 'Todo dia 10h–20h'),
+    tips: L(
+      'RER A to Val d’Europe, then walk through the mall. From Noisy-le-Sec: RER E to Val de Fontenay, then RER A.',
+      'RER A até Val d’Europe e atravesse o shopping a pé. De Noisy-le-Sec: RER E até Val de Fontenay e RER A.',
+    ),
+  },
+  'par-rue-rivoli': {
+    ticket: free,
+    durationMin: 60,
+    durationMax: 120,
+    crowdProfile: 'shop',
+    tips: L(
+      'Walk it east to west: Hôtel de Ville → Châtelet → Louvre.',
+      'Ande de leste para oeste: Hôtel de Ville → Châtelet → Louvre.',
+    ),
+  },
+  'par-naturalia-verrerie': {
+    durationMin: 10,
+    durationMax: 20,
+    crowdProfile: 'shop',
+    tips: L(
+      'MyLevain: 50 g of dehydrated starter ~€15, about 400 ml of active starter in 24 h. Kept chilled — call ahead to check stock. The Saint-Michel Naturalia is not a stockist.',
+      'MyLevain: 50 g de levain desidratado ~€15, rende ~400 ml de levain ativo em 24 h. Fica na geladeira — ligue antes para confirmar estoque. A Naturalia Saint-Michel não revende.',
+    ),
+  },
+  'par-gare-de-lyon': {
+    ticket: free,
+    durationMin: 20,
+    durationMax: 40,
+    crowdProfile: 'transit',
+    tips: L('Trains to Milan leave from here — arrive 30 min early.', 'Os trens para Milão saem daqui — chegue com 30 min de folga.'),
+  },
 
   // —— Rome ——
   'rom-fco': {
