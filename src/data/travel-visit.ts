@@ -1759,18 +1759,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Desça os jardins do Trocadéro até a Fontaine de Varsovie.',
     ),
   }),
-  'par-aeroville': {
-    avgPricePerPerson: money(10, 25, L('Lunch at the food court; groceries extra', 'Almoço na praça de alimentação; mercado à parte')),
-    durationMin: 60,
-    durationMax: 90,
+  'par-saint-georges-noisy': {
+    durationMin: 15,
+    durationMax: 30,
     crowdProfile: 'shop',
-    bestDay: L(
-      'Shops daily 10:00–20:00, Sundays too; Auchan Sun 10:00–20:30; restaurants until midnight',
-      'Lojas todo dia 10h–20h, inclusive domingo; Auchan dom 10h–20h30; restaurantes até meia-noite',
-    ),
+    bestDay: L('Daily 9:30–23:00, Sunday included', 'Todo dia 9h30–23h, inclusive domingo'),
     tips: L(
-      'From CDG: CDGVAL to Roissypôle, then bus 2123, 2124 or EX100. With luggage, Uber is easier.',
-      'Do CDG: CDGVAL até Roissypôle e ônibus 2123, 2124 ou EX100. Com mala, Uber é mais fácil.',
+      'For Sunday basics: the Auchan across the street closes at 12:30 on Sundays.',
+      'Para os básicos de domingo: o Auchan em frente fecha às 12h30 aos domingos.',
     ),
   },
   'par-uniqlo-opera': {

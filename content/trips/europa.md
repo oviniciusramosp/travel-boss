@@ -7,11 +7,15 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 1 — Dom 4/10 · Chegada, mercado e Torre Eiffel
 
-- 11:55 [CDG](place:par-cdg) — Pouso. Passaporte e malas: conte ~1h
-  - via: Uber · 10 min
-- 13:00 [Aéroville (Auchan)](place:par-aeroville) — Almoço na praça de alimentação e compras da semana no Auchan, aberto domingo até 20h30. Os mercados de Noisy fecham às 12h30–13h
-  - via: Uber · 25 min
-- 14:45 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso
+- 11:55 [CDG](place:par-cdg) — Pouso. Os voos do Brasil chegam no Terminal 2 (LATAM no 2A, Air France no 2E). Passaporte e malas: conte ~1h
+- 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação
+- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E
+  - via: RER B até Gare du Nord e RER E em Magenta · 1h05
+- 14:50 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada
+  - via: a pé · 7 min
+- 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
+  - via: a pé · 6 min
+- 15:30 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso
   - via: RER E + metrô 9 · 45 min
 - 17:30 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
 - 17:45 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
@@ -26,9 +30,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: metrô 9 + RER E · 45 min
 - 23:00 [Casa do Gui](place:par-casa-do-gui) — Volta
 
-**Transporte:** hoje, bilhete avulso (€2,55 por viagem de metrô ou RER, no app IDF Mobilités). Para 5–11/out, a **Navigo Semaine** (€32,40, de segunda a domingo, cobre Disney, Versalhes e Créteil), no app ou no guichê com o cartão Navigo Découverte (€5 + foto 2,5×3 cm). Compensa a partir de ~15 viagens na semana.
+**Transporte:** do CDG, bilhete aeroporto (€14 por pessoa). À noite, bilhete avulso (€2,55 por viagem de metrô ou RER, no app IDF Mobilités). Para 5–11/out, a **Navigo Semaine** (€32,40, de segunda a domingo, cobre Disney, Versalhes e Créteil), no app ou no guichê com o cartão Navigo Découverte (€5 + foto 2,5×3 cm). Compensa a partir de ~15 viagens na semana.
 
-**Casa do Gui:** a estação de Noisy-le-Sec (RER E) fica a ~10 min a pé. Os horários de saída abaixo já contam essa caminhada.
+**Casa do Gui:** a estação de Noisy-le-Sec (RER E) fica a ~10 min a pé. Os horários de saída abaixo já contam essa caminhada. Para uma compra maior, o Auchan da Rue Jean Jaurès abre de segunda a sábado, das 8h30 às 21h.
 
 **Greve:** a CGT-RATP tem aviso de greve por tempo indeterminado desde 28/09 (metrô, ônibus e trechos RATP dos RER A e B). RER E, RER C e trens Transilien são SNCF e ficam de fora. Confira o app de manhã. Plano B de hoje: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars; faça o passeio ao contrário e volte pelo RER C em Pont de l'Alma.
 
@@ -47,10 +51,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:45 [Bouillon Chartier](place:par-bouillon) — Almoço clássico (~€20). Sem reserva; a fila anda
   - via: metrô 8 · 40 min
 - 15:30 [Créteil Soleil (Primark, Normal)](place:par-creteil-soleil) — Primark, Normal, H&M, Sephora e Bershka, até 20h30
-  - via: Uber · 20 min
-- 18:50 [Casa do Gui](place:par-casa-do-gui) — Volta de Uber com as sacolas (~€25–35) e jantar em casa
+  - via: metrô 8 até République, metrô 5 até Gare du Nord e RER E em Magenta · 1h10
+- 19:40 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas e jantar em casa
 
-O Créteil Soleil não tem Uniqlo; por isso ela entrou na Opéra. Plano B (greve no metrô 8): Uber da Opéra até Créteil (~30 min).
+O Créteil Soleil não tem Uniqlo; por isso ela entrou na Opéra. Plano B (greve no metrô 8): troque o Créteil por outro dia; a Uniqlo Opéra já garante a roupa de frio.
 
 **Comida:** ~€38 (Starbucks €6, éclair €7, Chartier €20, jantar em casa €5).
 
@@ -99,7 +103,7 @@ Plano B (greve): de manhã, RER E até Neuilly–Porte Maillot e RER C até Sain
 - 23:05 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Opcional: [La Vallée Village](place:par-vallee-village) — outlet de marcas premium a uma estação (Val d'Europe), 10h–20h; o shopping Val d'Europe ao lado tem Uniqlo e Primark. Só se trocar a noite no parque pelas compras
 
-Ingresso com data, 1 dia/2 parques: €75–160 conforme o dia; compre online. Leve água e lanche de casa. Plano B (greve no RER A): Uber (~40 min).
+Ingresso com data, 1 dia/2 parques: €75–160 conforme o dia; compre online. Leve água e lanche de casa. Greve no RER A: confira o app IDF Mobilités antes de sair de casa.
 
 **Comida:** ~€33 (Bella Notte €15, McDonald's €12, lanche €6).
 
@@ -145,7 +149,7 @@ Plano B (greve): o dia é todo a pé a partir de Magenta (RER E); para voltar, a
   - via: trem L de Versailles Rive Droite, a pé desde o Trianon, e RER E · 1h50
 - 18:50 [Casa do Gui](place:par-casa-do-gui) — Volta e jantar em casa
 - Almoço mais em conta: [La Flottille](place:par-la-flottille) — brasserie de 1900 no Grand Canal, pratos €16–20, almoço até 15h30
-- Opcional: [One Nation Paris (outlet)](place:par-one-nation) — Uber de ~16 min a partir do Trianon (€25–40), aberto até 20h. Volta pela linha N até Montparnasse (~30 min; último trem 21h56)
+- Opcional, no lugar do Trianon: [One Nation Paris (outlet)](place:par-one-nation) — do castelo, 20 min a pé até Versailles-Chantiers, linha N até Villepreux–Les Clayes (12 min) e 10 min a pé; aberto até 20h. Volta: linha N até Montparnasse (~30 min; último trem 21h56), metrô 4 até Gare de l'Est e RER E em Magenta
 
 Tudo SNCF: a greve da RATP não afeta este dia.
 
@@ -170,7 +174,7 @@ Tudo SNCF: a greve da RATP não afeta este dia.
   - via: metrô 2 de Anvers até La Chapelle e RER E em Magenta · 45 min
 - 20:15 [Casa do Gui](place:par-casa-do-gui) — Volta; arrumar as malas
 
-Plano B (greve): de Haussmann–Saint-Lazare ao Louvre a pé (1,8 km); do Arco a Montmartre de Uber; na volta, desça a pé até a Gare du Nord (~15 min) e pegue o RER E em Magenta.
+Plano B (greve): de Haussmann–Saint-Lazare ao Louvre a pé (1,8 km); do Arco a Montmartre a pé, pelo [Parc Monceau](place:par-monceau) (~45 min); na volta, desça a pé até a Gare du Nord (~15 min) e pegue o RER E em Magenta.
 
 **Comida:** ~€25 (piquenique €8, croque €5–17, lanche €5).
 

@@ -3628,18 +3628,18 @@ export const localTravelCities: TravelCity[] = [
 
       // ── Oct 2026 trip list: shopping, pharmacies, levain, logistics ──
       {
-        id: 'par-aeroville',
-        name: { en: 'Aéroville (Auchan)', 'pt-BR': 'Aéroville (Auchan)' },
+        id: 'par-saint-georges-noisy',
+        name: { en: 'Saint Georges (supérette)', 'pt-BR': 'Saint Georges (supérette)' },
         category: 'markets',
         subcategories: ['market'],
         description: {
-          en: 'Mall next to CDG with an Auchan hypermarket and about 30 restaurants — open on Sunday afternoons, when the supermarkets near Noisy-le-Sec are closed.',
-          'pt-BR': 'Shopping ao lado do CDG com hipermercado Auchan e cerca de 30 restaurantes — abre domingo à tarde, quando os mercados perto de Noisy-le-Sec já fecharam.',
+          en: 'Neighborhood grocery on the walk from Noisy-le-Sec station to Casa do Gui, open every day, Sunday afternoon included.',
+          'pt-BR': 'Mercadinho no caminho da estação de Noisy-le-Sec para a Casa do Gui, aberto todo dia, inclusive domingo à tarde.',
         },
-        lat: 48.991418,
-        lng: 2.521987,
-        address: '30 Rue des Buissons, Tremblay-en-France',
-        mapsQuery: 'Aéroville Auchan Tremblay-en-France',
+        lat: 48.894975,
+        lng: 2.458939,
+        address: '97 Rue Jean Jaurès, 93130 Noisy-le-Sec',
+        mapsQuery: 'Saint Georges supérette 97 Rue Jean Jaurès Noisy-le-Sec',
       },
       {
         id: 'par-uniqlo-opera',
