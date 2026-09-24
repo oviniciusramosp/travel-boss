@@ -202,10 +202,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-bhv-marais': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnEY8D0ehGDCxCzy0LMqSo4b8RK894HTeV4gyaZiAkpiT0oG819zWmpZYBzLqZyP0TeADzZZ1NLwfFDz7m2X5HJ4A6Xl4eVhlwu8d4-oxypqYypndljnn3Qlk8lXMTmjYTL7v-fJg=s811-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/BHV_Le_Marais%2C_Paris_3_September_2016.jpg/1280px-BHV_Le_Marais%2C_Paris_3_September_2016.jpg',
       'BHV Marais',
       'BHV Marais',
-      'Google Maps',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BHV_-_Paris.jpg/1280px-BHV_-_Paris.jpg',
+      'BHV Marais department store',
+      'Loja de departamentos BHV Marais',
+      'Marianne Casamance · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-bien-eleve': [
@@ -508,10 +514,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-forum-halles': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkIc4UdAVBkz5wAbJ8WviLm915QyPqJLdAlrF3iV3NIDAD-5GOWnA-_WxJ-roqa8y4oCY4tYMRwVmb9607O7hTeq1W6v6rBRasHAx2FT3sN32u5qcK1f-aV-8tcSJ21uaKSvkhrXQGDkZZ8=s696-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Entree_Forum_des_Halles_et_Bourse_de_Commerce_P1060107.JPG/1280px-Entree_Forum_des_Halles_et_Bourse_de_Commerce_P1060107.JPG',
+      'Forum des Halles entrance and the Bourse de Commerce',
+      'Entrada do Forum des Halles e a Bourse de Commerce',
+      'Pline · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Forum_des_Halles_%28Paris%29_%282%29.jpg/1280px-Forum_des_Halles_%28Paris%29_%282%29.jpg',
       'Forum des Halles',
       'Forum des Halles',
-      'Google Maps',
+      'Gzen92 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-francette': [
@@ -546,22 +558,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-galeries-lafayette': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk2dTfnFwYmaCMI15pWCi6kWGlluB6psWrBDDRlD1aZEdYm74Y9uTQGYtn5VQc0A0LXB_arnw6kqZzojAw2Wwg5HiIm5HJQmIgabfmUmmtwSX-0G6HxFjaXr_Ky2qbobXWFRMTfQOnAbybS=s457-k-no',
-      'Galeries Lafayette',
-      'Galeries Lafayette',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Paris_-_Galeries_Lafayette_Haussmann_%E2%80%93_Cupola_%E2%80%93_20230425_PvE_%28Q113561459%29.jpg/1280px-Paris_-_Galeries_Lafayette_Haussmann_%E2%80%93_Cupola_%E2%80%93_20230425_PvE_%28Q113561459%29.jpg',
+      'Galeries Lafayette dome',
+      'Cúpula das Galeries Lafayette',
+      'Pveverdingen · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmFA0m_Tq9gL2HBn69LmCAycdFhiOtIHOaCDXvHKucCySEHOMv3IVZUP37dgPQjJngZzUjKKF8MNQ0kCNdH6H9QbquzUE3444w79wl9HZk8ZLJeD4zgWWnosybHg_L5Ns0NWHiglJ4-e_Pd=s368-k-no',
-      'Galeries Lafayette',
-      'Galeries Lafayette',
-      'Google',
-    ),
-    photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnpDnIfK5asZ6qWUlPU3m3c58amXonxkkcAcmuZbeeOH4uL5wJuZiVpsYRFFShqeUfx1Zgp2KAN0O2ZR_wgDX6g-ch7xd1UO18lkx0ojFmtIIx35rJxWfkgU7KIhBqcrVbOmcv32y8HLOyL=s365-k-no',
-      'Galeries Lafayette',
-      'Galeries Lafayette',
-      'Google',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Paris%2C_Galeries_Lafayette_Haussmann%2C_Coupole.jpg/1280px-Paris%2C_Galeries_Lafayette_Haussmann%2C_Coupole.jpg',
+      'Galeries Lafayette dome and balconies',
+      'Cúpula e balcões das Galeries Lafayette',
+      'Dr. Thomas Liptak · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/GaleriesLafayetteNuit.jpg/1280px-GaleriesLafayetteNuit.jpg',
@@ -708,26 +714,44 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-marche-aligre': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlLr2ZyOyW0DW2yWYYo4kVh58E1iOPA0jVK6G7txkkVOQJseB8F1ZChnkX6l4TN1KKHtAA4flY9Q6_dpEM9HCo16N9IoKVCMLD3DYJS7AN3SFMTaZQGj8oZyjLIvT8o8vrukLfk-jDltn80=s1219-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/March%C3%A9_d%27Aligre_2.jpg/1280px-March%C3%A9_d%27Aligre_2.jpg',
       "Marché d'Aligre",
       "Marché d'Aligre",
-      'Google Maps',
+      'Jesús Gorriti · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/March%C3%A9_dAligre_4.jpg/1280px-March%C3%A9_dAligre_4.jpg',
+      "Stalls at the Marché d'Aligre",
+      "Bancas do Marché d'Aligre",
+      'Jesús Gorriti · CC BY-SA 2.0 · Wikimedia Commons',
     ),
   ],
   'par-marche-bastille': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmkLsVvYlhMCeproeoRDB-ytYLFBXS9T4j665o1mhUUPwScsShMUJK2J0vysxQDR1a9TRrrZNEsv1M1vYSaqnatPThdAV9rif1arvcZ3TUuk_7t_t8nwm1pWjsdNNIRkUCtOdHKu19SdaI=s696-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/March%C3%A9_Bastille%2C_Paris_December_2006_007.jpg/1280px-March%C3%A9_Bastille%2C_Paris_December_2006_007.jpg',
       'Marché Bastille',
       'Marché Bastille',
-      'Google Maps',
+      'ayustety · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/March%C3%A9_Bastille%2C_Paris_18_October_2012_001.jpg/1280px-March%C3%A9_Bastille%2C_Paris_18_October_2012_001.jpg',
+      'Stalls at the Marché Bastille',
+      'Bancas do Marché Bastille',
+      'alans1948 · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-marche-enfants-rouges': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkMAd6auG6O4KUWeuPpeXVLW8_l_lZzvf1YdAV0v2J8wA20ru7IzgGhMq6sX5ruThNNhEIWVJ1LSho8ANt_GEFbosLGS5k2YEYOEBZwnlZbYYUKt14y1U-dOxMFdF3VSQngxpYcJVDY6cKC=s608-k-no',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Paris_III-March%C3%A9_des_Enfants-Rouges.jpg/1280px-Paris_III-March%C3%A9_des_Enfants-Rouges.jpg',
       'Marché des Enfants Rouges',
       'Marché des Enfants Rouges',
-      'Google Maps',
+      'Popolon · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Vegetables_at_the_March%C3%A9_des_Enfants_Rouges.jpg/1280px-Vegetables_at_the_March%C3%A9_des_Enfants_Rouges.jpg',
+      'Vegetables at the Marché des Enfants Rouges',
+      'Legumes no Marché des Enfants Rouges',
+      'Mx. Granger · CC0 · Wikimedia Commons',
     ),
   ],
   'par-mcdonalds-champs': [
@@ -794,10 +818,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-monoprix-rivoli': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnF1uhrNplnaayle-0aAhogQhyHeKRYWNa74nWrt9O-96-pgRgEK-xzYnQKZyd8brJJilHYUF6zVPuR9dmAUF5gacQBWiqkg6Rgr81ufZRfYtFRlxGl_L4HTWWSjg2aeECSOaa8=s811-k-no',
-      'Monoprix Opéra',
-      'Monoprix Opéra',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/MONOPRIX_-_%E3%83%A2%E3%83%8E%E3%83%97%E3%83%AA_-_panoramio.jpg/1280px-MONOPRIX_-_%E3%83%A2%E3%83%8E%E3%83%97%E3%83%AA_-_panoramio.jpg',
+      'A Monoprix store in Paris',
+      'Uma loja Monoprix em Paris',
+      'mayatomo · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-montmartre': [
@@ -1090,10 +1114,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-rue-cler': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkeiO7DDL5xXmFeahNjey_zHAtL_o11evVGW2uraioxRsfrTBaLC5A7yS_8KOKf-qwGrjIssjgWX6HmoZLcAB4AzhqTLLuL63BWO38QHOR0cdDYFB7bStui0mL_-tTGC5mdQfJ1eg=s696-k-no',
-      'Rue Cler market street',
-      'Rue Cler — rua de mercado',
-      'Google Maps',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/March%C3%A9%2C_Rue_Cler%2C_75007_Paris%2C_France_2014.jpg/1280px-March%C3%A9%2C_Rue_Cler%2C_75007_Paris%2C_France_2014.jpg',
+      'Market stalls on Rue Cler',
+      'Bancas na Rue Cler',
+      'besopha · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Rue_Cler_cobblestone%2C_Paris_24_May_2014.jpg/1280px-Rue_Cler_cobblestone%2C_Paris_24_May_2014.jpg',
+      'Rue Cler cobblestones',
+      'Paralelepípedos da Rue Cler',
+      'David McSpadden · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-sacre-coeur': [
@@ -1686,6 +1716,162 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       "Eiffel Tower down Rue Saint-Dominique, at the café's corner",
       'Torre Eiffel no fim da Rue Saint-Dominique, na esquina do café',
       'Dancorona21 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-cdg-rer': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/The_TGV_station_in_Terminal_2%2C_CDG_Airport%2C_1_May_2014.jpg/1280px-The_TGV_station_in_Terminal_2%2C_CDG_Airport%2C_1_May_2014.jpg',
+      'CDG 2 TGV station, Terminal 2',
+      'Estação CDG 2 TGV, Terminal 2',
+      'Connie Ma · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Hall_de_la_gare_de_l%27A%C3%A9roport_CDG_2.jpg/1280px-Hall_de_la_gare_de_l%27A%C3%A9roport_CDG_2.jpg',
+      'Station hall at CDG 2',
+      'Saguão da estação CDG 2',
+      'Remontees · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-orly-m14': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_3.jpg/1280px-Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_3.jpg',
+      'Line 14 station at Orly Airport',
+      'Estação da linha 14 no aeroporto de Orly',
+      'Manchesterunited1234 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_5.jpg/1280px-Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_5.jpg',
+      'Orly Airport line 14 station',
+      'Estação da linha 14 em Orly',
+      'Manchesterunited1234 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-noisy-le-sec-rer': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/5/5d/Noisy_le_Sec_Gare.jpg',
+      'Noisy-le-Sec station',
+      'Estação de Noisy-le-Sec',
+      'Maryanna · CC BY 2.5 · Wikimedia Commons',
+    ),
+  ],
+  'par-casa-do-gui': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Mairie_-_Noisy-le-Sec_%28FR93%29_-_2021-01-07_-_2.jpg/1280px-Mairie_-_Noisy-le-Sec_%28FR93%29_-_2021-01-07_-_2.jpg',
+      'Noisy-le-Sec town hall (the house itself is private)',
+      'Prefeitura de Noisy-le-Sec (a casa é particular)',
+      'Chabe01 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-auchan-noisy': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Auchan_Supermarch%C3%A9_%28Belley%29.jpg/1280px-Auchan_Supermarch%C3%A9_%28Belley%29.jpg',
+      'Auchan Supermarché storefront (another branch)',
+      'Fachada de um Auchan Supermarché (outra loja)',
+      'Benoît Prieur · CC0 · Wikimedia Commons',
+    ),
+  ],
+  'par-saint-georges-noisy': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Alimentation_g%C3%A9n%C3%A9rale%2C_53_boulevard_Arago%2C_75013_Paris%2C_2022.jpg/1280px-Alimentation_g%C3%A9n%C3%A9rale%2C_53_boulevard_Arago%2C_75013_Paris%2C_2022.jpg',
+      'Paris corner grocery (generic photo)',
+      'Mercadinho de bairro em Paris (foto ilustrativa)',
+      'Adrian Scottow · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-uniqlo-opera': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/UNIQLO_PARIS_OPERA_-_%E3%83%A6%E3%83%8B%E3%82%AF%E3%83%AD_%E3%80%8C%E3%83%91%E3%83%AA_%E3%82%AA%E3%83%9A%E3%83%A9%E5%BA%97%E3%80%8D_-_panoramio.jpg/1280px-UNIQLO_PARIS_OPERA_-_%E3%83%A6%E3%83%8B%E3%82%AF%E3%83%AD_%E3%80%8C%E3%83%91%E3%83%AA_%E3%82%AA%E3%83%9A%E3%83%A9%E5%BA%97%E3%80%8D_-_panoramio.jpg',
+      'Uniqlo Paris Opéra',
+      'Uniqlo Paris Opéra',
+      'mayatomo · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-creteil-soleil': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Centre_Commercial_Cr%C3%A9teil_Soleil_-_Cr%C3%A9teil_%28FR94%29_-_2022-01-02_-_2.jpg/1280px-Centre_Commercial_Cr%C3%A9teil_Soleil_-_Cr%C3%A9teil_%28FR94%29_-_2022-01-02_-_2.jpg',
+      'Créteil Soleil shopping centre',
+      'Shopping Créteil Soleil',
+      'Chabe01 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Centrecommercial_CreteilSoleil.jpg/1280px-Centrecommercial_CreteilSoleil.jpg',
+      'Créteil Soleil',
+      'Créteil Soleil',
+      'PARIS SUD · CC0 · Wikimedia Commons',
+    ),
+  ],
+  'par-citypharma': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Croix_verte_-_Pharmacie_-_Route_de_la_Reine_-_%28Boulogne-Billancourt%2C_FR92%29_-_27-12-2023.jpg/1280px-Croix_verte_-_Pharmacie_-_Route_de_la_Reine_-_%28Boulogne-Billancourt%2C_FR92%29_-_27-12-2023.jpg',
+      'Pharmacy green cross (generic photo)',
+      'Cruz verde de farmácia (foto ilustrativa)',
+      'Manchesterunited1234 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-carre-opera': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/0/01/Croix_lumineuse_d%27une_pharmacie.jpg',
+      'Lit pharmacy cross (generic photo)',
+      'Cruz de farmácia acesa (foto ilustrativa)',
+      'Rome2 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-one-nation': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/One_Nation_Paris.JPG/1280px-One_Nation_Paris.JPG',
+      'One Nation Paris outlet',
+      'Outlet One Nation Paris',
+      'PaulOneNationParis · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-vallee-village': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/La_Vall%C3%A9e_Village%2C_f%C3%A9vrier_2025_1.jpg/1280px-La_Vall%C3%A9e_Village%2C_f%C3%A9vrier_2025_1.jpg',
+      'La Vallée Village outlet',
+      'Outlet La Vallée Village',
+      'Artvill · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Vall%C3%A9e_Village_%28Serris%29_%281%29.jpg/1280px-Vall%C3%A9e_Village_%28Serris%29_%281%29.jpg',
+      'La Vallée Village, Serris',
+      'La Vallée Village, Serris',
+      'Gzen92 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-rue-rivoli': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/0/09/Rue_de_Rivoli_Arcades_and_Urban_Life_Paris_2026.jpg',
+      'Arcades on Rue de Rivoli',
+      'Arcadas da Rue de Rivoli',
+      'Tolga Bakı · CC BY 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Arcades%2C_Rue_de_Rivoli%2C_Paris_26_December_2016_001.jpg/1280px-Arcades%2C_Rue_de_Rivoli%2C_Paris_26_December_2016_001.jpg',
+      'Arcades on Rue de Rivoli',
+      'Arcadas da Rue de Rivoli',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-naturalia-verrerie': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sourdough_starter_in_a_plastic_tub.jpg/1280px-Sourdough_starter_in_a_plastic_tub.jpg',
+      'Sourdough starter (generic photo)',
+      'Levain, fermento natural (foto ilustrativa)',
+      'Anon423 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-gare-de-lyon': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/P1210896_Paris_XII_gare_de_Lyon_rwk.jpg/1280px-P1210896_Paris_XII_gare_de_Lyon_rwk.jpg',
+      'Paris Gare de Lyon',
+      'Paris Gare de Lyon',
+      'Mbzt · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Hall_de_la_gare_de_Lyon_%C3%A0_Paris_%28ao%C3%BBt_2019%29.JPG/1280px-Hall_de_la_gare_de_Lyon_%C3%A0_Paris_%28ao%C3%BBt_2019%29.JPG',
+      'Gare de Lyon concourse',
+      'Saguão da Gare de Lyon',
+      'Florian Pépellin · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'rom-fco': [
