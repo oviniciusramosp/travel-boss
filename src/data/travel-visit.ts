@@ -756,9 +756,9 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   // —— Major paid sights ——
   'par-eiffel': {
     ticket: money(
-      23,
-      35,
-      L('Stairs vs lift / floor level (approx.)', 'Escada vs elevador / andares (aprox.)'),
+      28,
+      36.7,
+      L('Summit: stairs to level 2 + lift €28; lift only €36.70', 'Topo: escada até o 2º andar + elevador €28; só elevador €36,70'),
     ),
     ticketUrl: 'https://www.toureiffel.paris/en/rates-opening-times',
     durationMin: 90,
@@ -768,8 +768,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     crowdProfile: 'tourist-heavy',
     osmRef: 'way/5013364',
     tips: L(
-      'Security lines are the time sink. Champ de Mars + Trocadéro photos can be enough.',
-      'Fila de segurança come o tempo. Fotos no Champ de Mars + Trocadéro já valem muito.',
+      'Summit slots go on sale 90 days ahead and sell out. Outside summer the last summit lift is at 22:45; allow 15–20 min for security.',
+      'O topo vende com horário até 90 dias antes e esgota. Fora do verão, a última subida ao topo é às 22h45; conte 15–20 min de segurança.',
     ),
   },
   'par-trocadero': landmarkOutdoor({
@@ -1197,16 +1197,18 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-brasserie-pres': restaurantVisit(30, 50),
   'par-chez-janou': restaurantVisit(35, 55, {
+    bestDay: L('Daily; lunch 12:00–15:00, dinner 19:00–00:00', 'Todo dia; almoço 12h–15h, jantar 19h–0h'),
     tips: L(
-      'Provençal vibes; chocolate mousse is the legend. Reserve.',
-      'Clima provençal; mousse de chocolate é a lenda. Reserve.',
+      'Provençal vibes; the chocolate mousse (€12) is the legend. Book on ZenChef or at 01 42 72 28 41.',
+      'Clima provençal; a mousse de chocolate (€12) é a lenda. Reserve pela ZenChef ou no 01 42 72 28 41.',
     ),
   }),
   'par-chez-elo': restaurantVisit(25, 45),
   'par-entrecote': restaurantVisit(30, 45, {
+    bestDay: L('Daily 12:00–15:00 and 18:30–23:00', 'Todo dia 12h–15h e 18h30–23h'),
     tips: L(
-      'Reserve ahead or arrive early to skip the queue — especially at dinner. Generous steak-frites + secret sauce.',
-      'Recomendado reservar ou chegar cedo para evitar fila, principalmente no jantar. Steak-frites generoso + molho secreto.',
+      'No reservations: join the queue ~30 min before opening. Steak-frites with the secret sauce, salad to start.',
+      'Não aceita reserva: entre na fila ~30 min antes de abrir. Entrecôte com fritas e o molho secreto, salada de entrada.',
     ),
   }),
   'par-train-bleu': restaurantVisit(55, 90, {
@@ -1283,10 +1285,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Templo de macaron / pâtisserie. Fila nos hits; caixas viajam bem.',
     ),
   }),
-  'par-cedric-grolet': cafeVisit(10, 25, {
+  'par-cedric-grolet': cafeVisit(18, 25, {
+    bestDay: L(
+      'Wed–Sun; boutique 9:00–19:00, tea room 9:00–16:00 by online booking only; closed Mon–Tue',
+      'Qua–dom; boutique 9h–19h, salão de chá 9h–16h só com reserva online; fecha seg e ter',
+    ),
     tips: L(
-      'Sculptural fruit pastries. Go early — sells out.',
-      'Doces esculturais de fruta. Vá cedo — esgota.',
+      'Sculptural fruit pastries (€18) sell out. Click & Collect skips the 1–2 h queue: orders before 15:00 are ready in 24 h, pickup 9:00–19:00. The tea room announced a renovation from 21 September.',
+      'Doces esculturais de fruta (€18) esgotam. O Click & Collect pula a fila de 1–2 h: pedido até 15h fica pronto em 24 h, retirada 9h–19h. O salão de chá anunciou reforma a partir de 21 de setembro.',
     ),
   }),
   'par-eclair-genie': cafeVisit(6, 15),
@@ -1872,6 +1878,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Ter–dom 10h–18h (abr–out); almoço até 15h30; fecha segunda',
     ),
     tips: L('Dishes €16–20; set menus ~€35. Terrace on the Grand Canal.', 'Pratos €16–20; menus ~€35. Terraço no Grand Canal.'),
+  }),
+  'par-baguetts-cafe': cafeVisit(20, 30, {
+    bestDay: L(
+      'Mon and Wed–Fri 8:30–16:00; Tue until 17:00; Sat–Sun 9:00–16:30',
+      'Seg e qua–sex 8h30–16h; ter até 17h; sáb–dom 9h–16h30',
+    ),
+    tips: L('No reservations. Hearty brunch plates, €20–30 per person.', 'Não aceita reserva. Brunch reforçado, €20–30 por pessoa.'),
   }),
   'par-trianon': {
     durationMin: 90,

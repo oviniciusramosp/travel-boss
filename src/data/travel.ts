@@ -3825,6 +3825,20 @@ export const localTravelCities: TravelCity[] = [
         address: 'Domaine de Trianon, 78000 Versailles',
         mapsQuery: 'Domaine de Trianon Versailles',
       },
+      {
+        id: 'par-baguetts-cafe',
+        name: { en: "Baguett's Café (Molière)", 'pt-BR': "Baguett's Café (Molière)" },
+        category: 'cafes',
+        subcategories: ['coffee-shop'],
+        description: {
+          en: 'Brunch café facing the Fontaine Molière, between the Louvre and Palais-Royal — pancakes, eggs Benedict, pain perdu, avocado toast.',
+          'pt-BR': 'Café de brunch em frente à Fontaine Molière, entre o Louvre e o Palais-Royal — pancakes, ovos Benedict, pain perdu, avocado toast.',
+        },
+        lat: 48.865289,
+        lng: 2.336585,
+        address: '33 Rue de Richelieu, 75001 Paris',
+        mapsQuery: "Baguett's Café 33 Rue de Richelieu Paris",
+      },
     ],
   },
   {
