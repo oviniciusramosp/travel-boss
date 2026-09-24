@@ -695,6 +695,188 @@ export const localTravelCities: TravelCity[] = [
         address: 'Praça da Liberdade - Liberdade, São Paulo - SP',
         mapsQuery: 'Bairro da Liberdade São Paulo',
       },
+
+      // ── From the former Notion catalog (migrated Sep 2026) ──
+      {
+        id: 'sp-aeroporto-congonhas',
+        name: { en: 'Aeroporto Congonhas', 'pt-BR': 'Aeroporto Congonhas' },
+        category: 'airport',
+        description: { en: 'Aeroporto Congonhas', 'pt-BR': 'Aeroporto Congonhas' },
+        lat: -23.61971,
+        lng: -46.66319,
+        address: 'Aeroporto Congonhas, Rua Baronesa de Bela Vista, 228, Campo Belo, Sao Paulo - SP, 04612-001, Brazil',
+      },
+      {
+        id: 'sp-airbnb-oscar-itaim',
+        name: { en: 'Airbnb: Oscar Itaim', 'pt-BR': 'Airbnb: Oscar Itaim' },
+        category: 'lodging',
+        description: { en: 'Airbnb: Oscar Itaim', 'pt-BR': 'Airbnb: Oscar Itaim' },
+        lat: -23.57867,
+        lng: -46.67282,
+        address: 'Rua Urimonduba, 144, Itaim Bibi, Sao Paulo - SP, 04530-080, Brazil',
+      },
+      {
+        id: 'sp-being-coffee',
+        name: { en: 'Being Coffee', 'pt-BR': 'Being Coffee' },
+        category: 'cafes',
+        description: { en: 'Being Coffee', 'pt-BR': 'Being Coffee' },
+        lat: -23.56813,
+        lng: -46.6651,
+        address: 'Rua Barão de Capanema, 220, Jardim Paulista, Sao Paulo - SP, 01411-010, Brazil',
+      },
+      {
+        id: 'sp-broca',
+        name: { en: 'Broca', 'pt-BR': 'Broca' },
+        category: 'restaurants',
+        description: { en: 'Broca', 'pt-BR': 'Broca' },
+        lat: -23.55757,
+        lng: -46.6893,
+        address: 'Rua Aspicuelta, 429, Pinheiros, Sao Paulo - SP, 05433-011, Brazil',
+      },
+      {
+        id: 'sp-cafe-zinn',
+        name: { en: 'Cafe Zinn', 'pt-BR': 'Cafe Zinn' },
+        category: 'cafes',
+        description: { en: 'Cafe Zinn', 'pt-BR': 'Cafe Zinn' },
+        lat: -23.56418,
+        lng: -46.66847,
+        address: 'Rua Haddock Lobo, 1574, Jardim Paulista, Sao Paulo - SP, 01414-002, Brazil',
+      },
+      {
+        id: 'sp-casa-cazetv',
+        name: { en: 'Casa CazéTV', 'pt-BR': 'Casa CazéTV' },
+        category: 'tourist',
+        description: { en: 'Casa CazéTV', 'pt-BR': 'Casa CazéTV' },
+        lat: -23.54439,
+        lng: -46.72004,
+        address: 'Avenida Professor Fonseca Rodrigues, 1983, Alto de Pinheiros, Sao Paulo - SP, 05461-010, Brazil',
+      },
+      {
+        id: 'sp-compras-no-bras',
+        name: { en: 'Compras no Brás', 'pt-BR': 'Compras no Brás' },
+        category: 'shopping',
+        description: { en: 'Compras no Brás', 'pt-BR': 'Compras no Brás' },
+        lat: -23.53783,
+        lng: -46.61836,
+        address: 'Rua Oriente, 391, Brás, Sao Paulo - SP, 03016-001, Brazil',
+      },
+      {
+        id: 'sp-futuro-refeitorio',
+        name: { en: 'Futuro Refeitório', 'pt-BR': 'Futuro Refeitório' },
+        category: 'cafes',
+        description: { en: 'Futuro Refeitório', 'pt-BR': 'Futuro Refeitório' },
+        lat: -23.56215,
+        lng: -46.68179,
+        address: 'Rua Cônego Eugênio Leite, 808, Pinheiros, Sao Paulo - SP, 05414-001, Brazil',
+      },
+      {
+        id: 'sp-hello-kitty-eat-asia',
+        name: { en: 'Hello Kitty Eat Asia', 'pt-BR': 'Hello Kitty Eat Asia' },
+        category: 'cafes',
+        description: { en: 'Hello Kitty Eat Asia', 'pt-BR': 'Hello Kitty Eat Asia' },
+        lat: -23.55723,
+        lng: -46.63478,
+        address: 'Rua Américo de Campos, 118, Liberdade, Sao Paulo - SP, 01506-010, Brazil',
+      },
+      {
+        id: 'sp-jardim-oriental-liberdade',
+        name: { en: 'Jardim Oriental Liberdade', 'pt-BR': 'Jardim Oriental Liberdade' },
+        category: 'tourist',
+        description: { en: 'Jardim Oriental Liberdade', 'pt-BR': 'Jardim Oriental Liberdade' },
+        lat: -23.55445,
+        lng: -46.63524,
+        address: 'Rua Galvão Bueno, 71, Sé, Sao Paulo - SP, 01506-000, Brazil',
+      },
+      {
+        id: 'sp-korea-mart',
+        name: { en: 'Korea Mart', 'pt-BR': 'Korea Mart' },
+        category: 'tourist',
+        description: { en: 'Korea Mart', 'pt-BR': 'Korea Mart' },
+        lat: -23.5554,
+        lng: -46.63476,
+        address: 'Rua dos Estudantes, 41, Sé, Sao Paulo - SP, 01505-000, Brazil',
+      },
+      {
+        id: 'sp-lamen-aska',
+        name: { en: 'Lamen ASKA', 'pt-BR': 'Lamen ASKA' },
+        category: 'restaurants',
+        description: { en: 'Lamen ASKA', 'pt-BR': 'Lamen ASKA' },
+        lat: -23.55837,
+        lng: -46.63448,
+        address: 'Rua Barão de Iguape, 260, Liberdade, Sao Paulo - SP, 01503-001, Brazil',
+      },
+      {
+        id: 'sp-modern-mamma-osteria',
+        name: { en: 'Modern Mamma Osteria', 'pt-BR': 'Modern Mamma Osteria' },
+        category: 'restaurants',
+        description: { en: 'Modern Mamma Osteria', 'pt-BR': 'Modern Mamma Osteria' },
+        lat: -23.5819,
+        lng: -46.67984,
+        address: 'Rua Manuel Guedes, 160, Itaim Bibi, Sao Paulo - SP, 04536-070, Brazil',
+      },
+      {
+        id: 'sp-mooi-mooi',
+        name: { en: 'Mooi Mooi', 'pt-BR': 'Mooi Mooi' },
+        category: 'cafes',
+        description: { en: 'Mooi Mooi', 'pt-BR': 'Mooi Mooi' },
+        lat: -23.58269,
+        lng: -46.67938,
+        address: 'Rua Manuel Guedes, 249, Itaim Bibi, Sao Paulo - SP, 04536-070, Brazil',
+      },
+      {
+        id: 'sp-paul-s-boutique-pizza-itaim-bibi',
+        name: { en: "Paul's Boutique Pizza - Itaim Bibi", 'pt-BR': "Paul's Boutique Pizza - Itaim Bibi" },
+        category: 'restaurants',
+        description: { en: "Paul's Boutique Pizza - Itaim Bibi", 'pt-BR': "Paul's Boutique Pizza - Itaim Bibi" },
+        lat: -23.58008,
+        lng: -46.6747,
+        address: 'Rua Doutor Renato Paes de Barros, 167, Itaim Bibi, Sao Paulo - SP, 04530-000, Brazil',
+      },
+      {
+        id: 'sp-rascal',
+        name: { en: 'Ráscal', 'pt-BR': 'Ráscal' },
+        category: 'restaurants',
+        description: { en: 'Ráscal', 'pt-BR': 'Ráscal' },
+        lat: -23.57659,
+        lng: -46.68761,
+        address: 'Shopping Iguatemi, Avenida Brigadeiro Faria Lima, 2232, Pinheiros, Sao Paulo - SP, 01452-001, Brazil',
+      },
+      {
+        id: 'sp-shopping-iguatemi-sp',
+        name: { en: 'Shopping Iguatemi SP', 'pt-BR': 'Shopping Iguatemi SP' },
+        category: 'tourist',
+        description: { en: 'Shopping Iguatemi SP', 'pt-BR': 'Shopping Iguatemi SP' },
+        lat: -23.57659,
+        lng: -46.68761,
+        address: 'Shopping Iguatemi, Avenida Brigadeiro Faria Lima, 2232, Pinheiros, Sao Paulo - SP, 01452-001, Brazil',
+      },
+      {
+        id: 'sp-sogo-plaza-shopping',
+        name: { en: 'Sogo Plaza Shopping', 'pt-BR': 'Sogo Plaza Shopping' },
+        category: 'tourist',
+        description: { en: 'Sogo Plaza Shopping', 'pt-BR': 'Sogo Plaza Shopping' },
+        lat: -23.556,
+        lng: -46.63565,
+        address: 'Avenida da Liberdade, 363, Sé, Sao Paulo - SP, 01502-000, Brazil',
+      },
+      {
+        id: 'sp-tour-nubank-park',
+        name: { en: 'Tour Nubank Park', 'pt-BR': 'Tour Nubank Park' },
+        category: 'tourist',
+        description: { en: 'Tour Nubank Park', 'pt-BR': 'Tour Nubank Park' },
+        lat: -23.52735,
+        lng: -46.67926,
+        address: 'Avenida Francisco Matarazzo, 1705, Barra Funda, Sao Paulo - SP, 05001-200, Brazil',
+      },
+      {
+        id: 'sp-we-coffee-faria-lima',
+        name: { en: 'We Coffee Faria Lima', 'pt-BR': 'We Coffee Faria Lima' },
+        category: 'cafes',
+        description: { en: 'We Coffee Faria Lima', 'pt-BR': 'We Coffee Faria Lima' },
+        lat: -23.57241,
+        lng: -46.69021,
+        address: 'Avenida Brigadeiro Faria Lima, 1690, Pinheiros, Sao Paulo - SP, 01451-001, Brazil',
+      },
     ],
   },
   {
@@ -1160,10 +1342,13 @@ export const localTravelCities: TravelCity[] = [
         rating: 5,
         googleRating: 4.7,
         favorite: true,
+        featured: true,
         lat: 48.8584,
         lng: 2.2945,
         address: 'Champ de Mars, 5 Av. Anatole France, 75007 Paris',
         mapsQuery: 'Tour Eiffel Paris',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tour%20Eiffel%20Paris&query_place_id=ChIJLU7jZClu5kcR4pc9BdEGZig',
+        placeId: 'ChIJLU7jZClu5kcR4pc9BdEGZig',
       },
       {
         id: 'par-trocadero',
@@ -1311,6 +1496,7 @@ export const localTravelCities: TravelCity[] = [
         rating: 5,
         googleRating: 4.7,
         favorite: true,
+        featured: true,
         lat: 48.8606,
         lng: 2.3376,
         // Cour carrée + Denon/Sully footprint (simplified)
@@ -1539,7 +1725,6 @@ export const localTravelCities: TravelCity[] = [
         },
         rating: 4.5,
         googleRating: 4.7,
-        favorite: true,
         lat: 48.8719,
         lng: 2.3317,
         // OSM building outline via travel-areas-osm.ts (par-opera)
@@ -1930,6 +2115,12 @@ export const localTravelCities: TravelCity[] = [
         address: '99 Quai de Valmy, 75010 Paris',
         mapsQuery: 'Fric-Frac Paris',
         mapsUrl: 'https://www.google.fr/maps/place/Fric-Frac/@48.8838194,2.339073,17z',
+        photos: [
+          { url: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmkqKIki4X_Tupd_EdtFlhAhtb7kY02aRD9vm7Nz9H8osxzdiT_dWvVx4Gr_cs8Yz2EnSIJGqVKn4JJxy3ocyEkbOZBWWxcnd5GAigMl0LGYDWiUwxvmnTXcDq4Y2ENEdBg6B15WJ68U79G=s680-k-no', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
+          { url: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlD4ghyPj5w5SLgYvVsM5lqO9eNyehTnyop-yiROxQqZugcU_T2ReuhcR1bCmDkhIFQqaRSecrOy9b67_e4Qrdz-RBqO52s7Bb-j1UzM9742e9VWbknRevRJe2aaHt8zL7QFTWbDQ=w203-h253-k-no', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
+          { url: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkk3eyHim9CynAO6lG7bgPJw5CThG1BHEiHj51pFtqTgqq0uAw-E3MRQORFe1I-8F5OQdUbPQ6hmQ8jXA_VYRX06Oy78RGzHQ5-NOJ-opNrKkEKW-nfcyF563i33Rf6LWd8z2wT7ej_RDFk=s736-k-no', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
+          { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Canal_Saint-Martin_P1060441.JPG/3840px-Canal_Saint-Martin_P1060441.JPG', alt: { en: 'Fric-Frac', 'pt-BR': 'Fric-Frac' } },
+        ],
       },
       {
         id: 'par-montmartre',
@@ -2809,7 +3000,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-orangerie',
         name: { en: "Musée de l'Orangerie", 'pt-BR': "Musée de l'Orangerie" },
-        category: 'photo',
+        category: 'tourist',
         description: {
           en: 'Smaller museum inside the Tuileries. Famous for Monet’s Water Lilies — intimate and beautiful.',
           'pt-BR': 'Museu menor, dentro do Jardin des Tuileries. Famoso pelas obras do Monet (Nenúfares) — íntimo e bonito.',
@@ -4233,6 +4424,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.71508,
         lng: -9.139624,
+        address: 'Ginjinha Sem Rival',
         mapsQuery: 'Ginjinha Sem Rival Lisboa',
       },
       {
@@ -4252,6 +4444,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.715705,
         lng: -9.141662,
+        address: 'Restauradores Monument',
         mapsQuery: 'Monumento dos Restauradores Lisboa',
       },
       {
@@ -4271,6 +4464,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.713377,
         lng: -9.13919,
+        address: 'Rossio south fountain',
         mapsQuery: 'Fonte do Rossio Lisboa',
       },
       {
@@ -4289,6 +4483,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.712826,
         lng: -9.131664,
+        address: 'Miradouro do Recolhimento',
         mapsQuery: 'Miradouro do Recolhimento Lisboa',
       },
       {
@@ -4308,6 +4503,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.723757,
         lng: -9.161325,
+        address: 'Amoreiras 360 Panoramic View',
         mapsQuery: 'Amoreiras 360 Panoramic View Lisboa',
       },
       {
@@ -4327,6 +4523,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 2.8,
         lat: 38.721383,
         lng: -9.138843,
+        address: 'Chafariz do Largo do Mastro',
         mapsQuery: 'Chafariz do Largo do Mastro Lisboa',
       },
       {
@@ -4346,6 +4543,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.73088,
         lng: -9.131626,
+        address: 'Miradouro da Penha de França',
         mapsQuery: 'Miradouro da Penha de França Lisboa',
       },
       {
@@ -4365,6 +4563,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.7163,
         lng: -9.148717,
+        address: 'Príncipe Real Garden',
         mapsQuery: 'Jardim do Príncipe Real Lisboa',
       },
       {
@@ -4384,6 +4583,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.715309,
         lng: -9.144176,
+        address: 'Miradouro de São Pedro de Alcântara',
         mapsQuery: 'Miradouro de São Pedro de Alcântara Lisboa',
       },
       {
@@ -4400,6 +4600,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.71397,
         lng: -9.144023,
+        address: "M'arrecreo Pizzeria",
         mapsQuery: "M'arrecreo Pizzeria Lisboa",
       },
       {
@@ -4415,6 +4616,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.734844,
         lng: -9.154097,
+        address: 'Crush Doughnuts',
         mapsQuery: 'Crush Doughnuts Lisboa',
       },
       {
@@ -4434,6 +4636,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.75065,
         lng: -9.259252,
+        address: 'Queluz National Palace',
         mapsQuery: 'Palácio Nacional de Queluz',
       },
       {
@@ -4450,6 +4653,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.3,
         lat: 38.727388,
         lng: -9.148447,
+        address: 'Bread & Friends Marquês',
         mapsQuery: 'Bread & Friends Marquês Lisboa',
       },
       {
@@ -4469,6 +4673,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.2,
         lat: 38.750019,
         lng: -9.180174,
+        address: "La Brasserie de L'Entrecôte",
         mapsQuery: "La Brasserie de L'Entrecôte Colombo Lisboa",
       },
       {
@@ -4485,6 +4690,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.753681,
         lng: -9.188254,
+        address: 'Colombo Shopping Centre',
         mapsQuery: 'Centro Colombo Lisboa',
       },
       {
@@ -4504,6 +4710,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.2,
         lat: 38.730705,
         lng: -9.150569,
+        address: 'Portela Cafés António A. Aguiar',
         mapsQuery: 'Portela Cafés António A. Aguiar Lisboa',
       },
       {
@@ -4523,6 +4730,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.1,
         lat: 38.707682,
         lng: -9.146581,
+        address: 'Don Costini',
         mapsQuery: 'Don Costini Restaurante Italiano Lisboa',
       },
       {
@@ -4557,6 +4765,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.8,
         lat: 38.731551,
         lng: -9.149079,
+        address: 'Hygge Kaffe',
         mapsQuery: 'Hygge Kaffe Lisboa',
       },
       {
@@ -4573,6 +4782,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.714994,
         lng: -9.124683,
+        address: 'National Pantheon',
         mapsQuery: 'Panteão Nacional Lisboa',
       },
       {
@@ -4592,6 +4802,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.71511,
         lng: -9.128721,
+        address: 'Palácio de São Vicente',
         mapsQuery: 'Palácio de São Vicente Lisboa',
       },
       {
@@ -4609,6 +4820,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.713909,
         lng: -9.133476,
+        address: 'São Jorge Castle',
         mapsQuery: 'Castelo de São Jorge Lisboa',
       },
       {
@@ -4627,6 +4839,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.711696,
         lng: -9.130197,
+        address: 'Miradouro de Santa Luzia',
         mapsQuery: 'Miradouro de Santa Luzia Lisboa',
       },
       {
@@ -4646,6 +4859,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.8,
         lat: 38.711745,
         lng: -9.130285,
+        address: 'Jardim Júlio de Castilho',
         mapsQuery: 'Jardim Júlio de Castilho Lisboa',
       },
       {
@@ -4660,6 +4874,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.731696,
         lng: -9.152464,
+        address: "Baan Saraiva's",
         mapsQuery: "Baan Saraiva's Lisboa",
       },
       {
@@ -4676,6 +4891,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.732199,
         lng: -9.146397,
+        address: 'Simpli Coffee',
         mapsQuery: 'Simpli Coffee Lisboa',
       },
       {
@@ -4692,6 +4908,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.768511,
         lng: -9.097127,
+        address: 'Centro Vasco da Gama',
         mapsQuery: 'Centro Vasco da Gama Lisboa',
       },
       {
@@ -4708,6 +4925,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.720537,
         lng: -9.145902,
+        address: 'Avenida da Liberdade',
         mapsQuery: 'Avenida da Liberdade Lisboa',
       },
       {
@@ -4724,6 +4942,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.725255,
         lng: -9.150029,
+        address: 'Marquês de Pombal',
         mapsQuery: 'Marquês de Pombal Lisboa',
       },
       {
@@ -4740,6 +4959,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.3,
         lat: 38.733281,
         lng: -9.153778,
+        address: 'El Corte Inglés Lisboa',
         mapsQuery: 'El Corte Inglés Lisboa',
       },
       {
@@ -4759,6 +4979,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.730299,
         lng: -9.15443,
+        address: 'Parque Eduardo VII observation deck',
         mapsQuery: 'Miradouro Parque Eduardo VII Lisboa',
       },
       {
@@ -4775,6 +4996,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.7283,
         lng: -9.152683,
+        address: 'Parque Eduardo VII',
         mapsQuery: 'Parque Eduardo VII Lisboa',
       },
       {
@@ -4790,6 +5012,7 @@ export const localTravelCities: TravelCity[] = [
         favorite: true,
         lat: 38.767173,
         lng: -9.099085,
+        address: 'Oriente Station',
         mapsQuery: 'Estação do Oriente Lisboa',
       },
       {
@@ -4810,6 +5033,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.697891,
         lng: -9.206704,
+        address: 'Jerónimos Monastery',
         mapsQuery: 'Mosteiro dos Jerónimos Lisboa',
       },
       {
@@ -4826,6 +5050,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.710656,
         lng: -9.137672,
+        address: 'Rua Augusta',
         mapsQuery: 'Rua Augusta Lisboa',
       },
       {
@@ -4845,6 +5070,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.693597,
         lng: -9.205711,
+        address: 'Monument to the Discoveries',
         mapsQuery: 'Padrão dos Descobrimentos Lisboa',
       },
       {
@@ -4860,6 +5086,7 @@ export const localTravelCities: TravelCity[] = [
         favorite: true,
         lat: 38.695995,
         lng: -9.205993,
+        address: 'Empire Square Garden',
         mapsQuery: 'Praça do Império Lisboa',
       },
       {
@@ -4877,6 +5104,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.69751,
         lng: -9.203228,
+        address: 'Pastéis de Belém',
         mapsQuery: 'Pastéis de Belém Lisboa',
       },
       {
@@ -4895,6 +5123,7 @@ export const localTravelCities: TravelCity[] = [
         featured: true,
         lat: 38.691584,
         lng: -9.215977,
+        address: 'Belém Tower',
         mapsQuery: 'Torre de Belém Lisboa',
       },
       {
@@ -4913,6 +5142,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.3,
         lat: 38.695856,
         lng: -9.193312,
+        address: 'MAAT',
         mapsQuery: 'MAAT Lisboa',
       },
       {
@@ -4932,6 +5162,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.712038,
         lng: -9.140613,
+        address: 'Carmo Archaeological Museum',
         mapsQuery: 'Museu Arqueológico do Carmo Lisboa',
       },
       {
@@ -4947,6 +5178,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.709834,
         lng: -9.132953,
+        address: 'Lisbon Cathedral',
         mapsQuery: 'Sé de Lisboa',
       },
       {
@@ -4964,6 +5196,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.708445,
         lng: -9.136824,
+        address: 'Rua Augusta Arch',
         mapsQuery: 'Arco da Rua Augusta Lisboa',
       },
       {
@@ -4981,6 +5214,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.707283,
         lng: -9.136361,
+        address: 'Praça do Comércio',
         mapsQuery: 'Praça do Comércio Lisboa',
       },
       {
@@ -5014,6 +5248,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.760493,
         lng: -9.18776,
+        address: 'Adega das Gravatas',
         mapsQuery: 'Adega das Gravatas Lisboa',
       },
       {
@@ -5029,6 +5264,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.716111,
         lng: -9.134966,
+        address: 'Zé da Mouraria',
         mapsQuery: 'Zé da Mouraria Lisboa',
       },
       {
@@ -5043,6 +5279,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.709283,
         lng: -9.134343,
+        address: 'Maria Catita',
         mapsQuery: 'Maria Catita Lisboa',
       },
       {
@@ -5057,6 +5294,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.3,
         lat: 38.716018,
         lng: -9.146924,
+        address: 'Faz Frio',
         mapsQuery: 'Faz Frio Lisboa',
       },
       {
@@ -5071,6 +5309,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.3,
         lat: 38.685062,
         lng: -9.157351,
+        address: 'Atira-te ao Rio',
         mapsQuery: 'Atira-te ao Rio Almada',
       },
       {
@@ -5085,6 +5324,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.3,
         lat: 38.685002,
         lng: -9.157564,
+        address: 'Ponto Final',
         mapsQuery: 'Ponto Final Almada',
       },
       {
@@ -5101,6 +5341,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.716873,
         lng: -9.148468,
+        address: 'EmbaiXada',
         mapsQuery: 'EmbaiXada Lisboa',
       },
       {
@@ -5135,6 +5376,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.8,
         lat: 38.719209,
         lng: -9.132777,
+        address: 'Miradouro da Senhora do Monte',
         mapsQuery: 'Miradouro da Senhora do Monte Lisboa',
       },
       {
@@ -5154,6 +5396,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.1,
         lat: 38.710248,
         lng: -9.137453,
+        address: 'Casa Portuguesa do Pastel de Bacalhau',
         mapsQuery: 'Casa Portuguesa do Pastel de Bacalhau Lisboa',
       },
       {
@@ -5169,6 +5412,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.737155,
         lng: -9.151343,
+        address: 'Laurentina',
         mapsQuery: 'Laurentina Lisboa',
       },
       {
@@ -5183,6 +5427,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.734505,
         lng: -9.16463,
+        address: 'Tasquinha do Lagarto',
         mapsQuery: 'Tasquinha do Lagarto Lisboa',
       },
       {
@@ -5197,6 +5442,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.756738,
         lng: -9.221972,
+        address: 'As Colunas',
         mapsQuery: 'As Colunas Lisboa',
       },
       {
@@ -5212,6 +5458,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.5,
         lat: 38.815104,
         lng: -9.42406,
+        address: 'Adega do Saraiva',
         mapsQuery: 'Adega do Saraiva',
       },
       {
@@ -5230,6 +5477,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.719144,
         lng: -9.16826,
+        address: 'Imperial de Campo de Ourique',
         mapsQuery: 'Imperial de Campo de Ourique Lisboa',
       },
       {
@@ -5244,6 +5492,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.719818,
         lng: -9.146519,
+        address: 'Floresta do Salitre',
         mapsQuery: 'Floresta do Salitre Lisboa',
       },
       {
@@ -5262,6 +5511,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 38.732208,
         lng: -9.106445,
+        address: 'A Casa do Bacalhau',
         mapsQuery: 'A Casa do Bacalhau Lisboa',
       },
       {
@@ -5276,6 +5526,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.712736,
         lng: -9.135378,
+        address: 'O Velho Eurico',
         mapsQuery: 'O Velho Eurico Lisboa',
       },
       {
@@ -5294,6 +5545,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
         lat: 38.75269,
         lng: -9.184692,
+        address: 'Estádio da Luz',
         mapsQuery: 'Estádio da Luz Benfica Lisboa',
       },
       {
@@ -5308,6 +5560,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.4,
         lat: 38.712754,
         lng: -9.136665,
+        address: 'Terraço Editorial',
         mapsQuery: 'Terraço Editorial Lisboa',
       },
       {
@@ -5324,6 +5577,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.2,
         lat: 38.710539,
         lng: -9.142084,
+        address: 'Baixa-Chiado',
         mapsQuery: 'Baixa-Chiado Lisboa',
       },
       // —— Stay ——
