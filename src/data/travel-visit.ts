@@ -1668,6 +1668,87 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Daily 12:00–00:00', 'Todo dia 12h–0h'),
     tips: L('Cordon bleu ~€26 with a side. Book ahead.', 'Cordon bleu ~€26 com acompanhamento. Reserve.'),
   }),
+  'par-recrutement': cafeVisit(5, 40, {
+    avgPricePerPerson: money(5, 40, L('Coffee ~€5; a full meal €25–40', 'Café ~€5; refeição €25–40')),
+    bestDay: L('Daily ~7:00–02:00', 'Todo dia ~7h–2h'),
+  }),
+  'par-villa-marquise': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    crowdProfile: 'local',
+    bestDay: L(
+      'Sun–Wed 8:00–01:00; Thu–Sat until 02:00; brunch Sat–Sun 11:00–16:00',
+      'Dom–qua 8h–1h; qui–sáb até 2h; brunch sáb–dom 11h–16h',
+    ),
+    tips: L('The façade is free; a meal runs €25–40 (book).', 'A fachada é de graça; comer lá sai €25–40 (reserve).'),
+  }),
+  'par-favorite-saint-paul': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    crowdProfile: 'local',
+    bestDay: L('Daily 8:00–02:00', 'Todo dia 8h–2h'),
+    tips: L('Façade photo; a meal inside is ~€25.', 'Foto da fachada; comer lá dentro sai ~€25.'),
+  }),
+  'par-bon-pecheur': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    crowdProfile: 'local',
+    bestDay: L('Daily 8:00–00:00', 'Todo dia 8h–0h'),
+    tips: L('Façade photo; a meal inside is €20–35.', 'Foto da fachada; comer lá dentro sai €20–35.'),
+  }),
+  'par-archives-nationales': museumVisit(
+    { free: true },
+    {
+      durationMin: 45,
+      durationMax: 90,
+      bestDay: L(
+        'Mon and Wed–Fri 10:00–17:30; Sat–Sun 14:00–17:30; closed Tue',
+        'Seg e qua–sex 10h–17h30; sáb–dom 14h–17h30; fecha terça',
+      ),
+      tips: L(
+        'Free. A short walk from Carnavalet and Place des Vosges.',
+        'Grátis. Perto do Carnavalet e da Place des Vosges.',
+      ),
+      ticketUrl: 'https://www.archives-nationales.culture.gouv.fr/',
+    },
+  ),
+  'par-pont-neuf': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 25,
+    bestTime: L('Late afternoon', 'Fim de tarde'),
+    tips: L('Cross it, then step into Place Dauphine.', 'Atravesse e entre na Place Dauphine.'),
+  }),
+  'par-avenue-camoens': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    bestTime: L('Golden hour', 'Golden hour'),
+    tips: L('Short detour from Trocadéro.', 'Desvio curto a partir do Trocadéro.'),
+  }),
+  'par-rue-universite': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    bestTime: L('Blue hour, just after sunset', 'Hora azul, logo depois do pôr do sol'),
+    tips: L('Stand at the Avenue Rapp corner and shoot west.', 'Fique na esquina com a Avenue Rapp e fotografe para oeste.'),
+  }),
+  'par-passerelle-debilly': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    bestTime: L('After dark — the tower sparkles 5 min on the hour', 'Depois que escurece — a Torre brilha 5 min em cada hora cheia'),
+    tips: L('Footbridge: no cars in the frame.', 'Passarela: sem carro no enquadramento.'),
+  }),
+  'par-pont-iena': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    tips: L('Links Trocadéro to the foot of the tower.', 'Liga o Trocadéro ao pé da Torre.'),
+  }),
+  'par-fontaines-trocadero': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    tips: L(
+      'Walk down the Trocadéro gardens to the Fontaine de Varsovie.',
+      'Desça os jardins do Trocadéro até a Fontaine de Varsovie.',
+    ),
+  }),
 
   // —— Rome ——
   'rom-fco': {
