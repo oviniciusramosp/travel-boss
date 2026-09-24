@@ -2,32 +2,167 @@
 
 ## Paris
 city: paris
-dates: 2026-04-02 → 2026-04-06
+dates: 2026-10-04 → 2026-10-11
+via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
-### Dia 1 — Chegada · Orly · Torre
+### Dia 1 — Dom 4/10 · Chegada, mercado e Torre Eiffel
 
-- 09:00 [Orly](place:par-ory) — Desembarque e saída para o Metrô 14
-- 09:45 [Metrô 14 — Orly](place:par-orly-m14) — Navigo Easy para todos
-- 12:25 [Auchan Noisy](place:par-auchan-noisy) — Compras de base, cerca de 45 min
-- 13:20 [Casa do Gui](place:par-casa-do-gui) — Deixar as compras e reset curto
-- 14:45 [Trocadéro](place:par-trocadero) — Primeira vista da torre
-- 15:50 [Torre Eiffel](place:par-eiffel) — Só por fora, sem ingresso do topo
-- 19:30 [Royal Cambronne](place:par-royal-cambronne) — Jantar e volta para a base
+- 11:55 [CDG](place:par-cdg) — Pouso. Passaporte e malas: conte ~1h
+  - via: Uber · 10 min
+- 13:00 [Aéroville (Auchan)](place:par-aeroville) — Almoço na praça de alimentação e compras da semana no Auchan, aberto domingo até 20h30. Os mercados de Noisy fecham às 12h30–13h
+  - via: Uber · 25 min
+- 14:45 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso
+  - via: RER E + metrô 9 · 45 min
+- 17:30 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
+- 17:45 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
+- 18:05 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
+- 18:25 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
+- 18:35 [Torre Eiffel](place:par-eiffel) — Por fora
+- 18:50 [Champ de Mars](place:par-champ-mars) — Pôr do sol às 19h26
+- 19:45 [Rue de l'Université](place:par-rue-universite) — Foto na hora azul, da esquina com a Av. Rapp
+- 20:00 [Le Recrutement Café](place:par-recrutement) — Café com vista; a Torre brilha às 20h
+- 20:45 [Margaux](place:par-margaux) — Jantar: cordon bleu premiado (~€26). Reserve
+- 21:55 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h, se ainda houver energia
+  - via: metrô 9 + RER E · 45 min
+- 23:00 [Casa do Gui](place:par-casa-do-gui) — Volta
 
-Chegada com tarde leve na região da torre. O dia inteiro de Orly ou CDG continua no catálogo da cidade.
+**Transporte:** hoje, bilhete avulso (€2,55 por viagem de metrô ou RER, no app IDF Mobilités). Para 5–11/out, a **Navigo Semaine** (€32,40, de segunda a domingo, cobre Disney, Versalhes e Créteil), no app ou no guichê com o cartão Navigo Découverte (€5 + foto 2,5×3 cm). Compensa a partir de ~15 viagens na semana.
 
-### Dia 2 — La Défense e eixo oeste
+**Greve:** a CGT-RATP tem aviso de greve por tempo indeterminado desde 28/09 (metrô, ônibus e trechos RATP dos RER A e B). RER E, RER C e trens Transilien são SNCF e ficam de fora. Confira o app de manhã. Plano B de hoje: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars; faça o passeio ao contrário e volte pelo RER C em Pont de l'Alma.
 
-- 09:00 [PAUL La Défense](place:par-paul-defense) — Café da manhã
-- 09:45 [Grande Arche](place:par-grande-arche) — Foto no parvis
-- 10:15 [Esplanade de Gaulle](place:par-esplanade-de-gaulle) — Caminhada no eixo
-- 12:30 [Tuileries](place:par-tuileries) — Piquenique
-- 14:00 [Louvre](place:par-louvre) — Exterior e pátio
-- 16:00 [Champs-Élysées](place:par-champs-elysees) — Descida até o arco
+**Comida:** média de ~€38/pessoa/dia de 4 a 10/out (meta €50), fora o mercado da casa (~€15–25/pessoa na semana). Hoje ~€47 (almoço €12, café €5, Margaux €30).
+
+### Dia 2 — Seg 5/10 · Roupa de frio: Opéra, Uniqlo e Créteil
+
+- 09:15 Saída: RER E até Haussmann–Saint-Lazare (17 min)
+- 09:40 [Starbucks Opéra](place:par-starbucks-opera) — Café da manhã no Starbucks mais bonito de Paris (~€6)
+- 10:15 [Ópera Garnier](place:par-opera) — Por fora é grátis; por dentro €25, só com ingresso online (entradas 10h–16h; às vezes fecha para ensaio)
+- 11:15 [Galeries Lafayette](place:par-galeries-lafayette) — Cúpula e terraço grátis no 8º andar (fecha com chuva ou vento)
+- 12:15 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
+- 12:30 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma
+- 13:15 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100
+- 13:45 [Bouillon Chartier](place:par-bouillon) — Almoço clássico (~€20). Sem reserva; a fila anda
+  - via: metrô 8 · 40 min
+- 15:30 [Créteil Soleil (Primark, Normal)](place:par-creteil-soleil) — Primark, Normal, H&M, Sephora e Bershka, até 20h30
+- 18:30 Uber para casa com as sacolas (~20 min, €25–35) e jantar em casa
+
+O Créteil Soleil não tem Uniqlo; por isso ela entrou na Opéra. Plano B (greve no metrô 8): Uber da Opéra até Créteil (~30 min).
+
+**Comida:** ~€38 (Starbucks €6, éclair €7, Chartier €20, jantar em casa €5).
+
+### Dia 3 — Ter 6/10 · Cité, Quartier Latin, Saint-Germain e piquenique na Torre
+
+- 08:00 Saída: RER E até Magenta e RER B até Saint-Michel Notre-Dame (~40 min)
+- 08:45 [La Maison d'Isabelle](place:par-maison-isabelle) — Croissant premiado (~€1,40); fecha segunda
+- 09:05 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
+- 10:05 [Shakespeare and Company](place:par-shakespeare) — Livraria à beira do Sena
+- 10:40 [Panteão](place:par-pantheon) — ~€13, 1h
+- 11:50 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
+- 12:15 [Au P'tit Grec](place:par-auptitgrec) — Almoço: crepe enorme (€7–10), só dinheiro. Unidade da 68 Rue Mouffetard
+- 13:15 [Jardim de Luxemburgo](place:par-luxembourg) — Cadeiras em volta do lago; fecha às 18h45
+- 14:30 [La Marquise (Villa Marquise)](place:par-villa-marquise) — Fachada
+- 15:00 [CityPharma](place:par-citypharma) — Dermocosméticos
+- 15:45 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10)
+- 16:45 [Brasserie Le Nesle](place:par-le-nesle) — Fatia do bolo da Matilda (~€21–30) para viagem: é a sobremesa do piquenique
+- 17:15 [Patate](place:par-patate) — Batata no cone, se bater fome (€4–7,50)
+- 17:30 [Pont Neuf](place:par-pont-neuf) — Fim de tarde no Sena
+- 17:45 [Place Dauphine](place:par-place-dauphine) — Praça calma ao lado da ponte
+  - via: RER C · 15 min
+- 18:30 [Rua Cler (mercado)](place:par-rue-cler) — Queijo, baguete e vinho para o piquenique
+- 19:10 [Champ de Mars](place:par-champ-mars) — Piquenique no gramado: pôr do sol às 19h22 e brilho às 20h
+- 20:10 Volta: RER C até Neuilly–Porte Maillot e RER E (~50 min, só SNCF)
+- Almoço alternativo em Saint-Germain: [Spécimen Burger](place:par-specimen-burger) — hambúrguer ~€13, seg–sex até 15h
+
+Plano B (greve): de manhã, RER E até Neuilly–Porte Maillot e RER C até Saint-Michel (~50 min, só SNCF).
+
+**Comida:** ~€41 (croissant €2, crepe €9, chocolate €10, Matilda dividida por dois ~€10–15, piquenique ~€10).
+
+### Dia 4 — Qua 7/10 · Disneyland Paris
+
+- 08:10 Saída: RER E até Val de Fontenay e RER A até Marne-la-Vallée–Chessy (~55 min)
+- 09:10 [Disneyland Paris](place:par-disneyland) — Parques das 9h30 às 22h (confirme no app). Halloween Festival até 1/11
+- 12:30 [Pizzeria Bella Notte](place:par-bella-notte) — Almoço (~€11–18)
+- 19:00 [McDonald's Disney Village](place:par-mcdonalds-disney) — Jantar fora dos portões (~€8–16) e volta para o show de encerramento
+- 22:15 Volta: RER A e RER E (~55 min)
+- Opcional: [La Vallée Village](place:par-vallee-village) — outlet de marcas premium a uma estação (Val d'Europe), 10h–20h; o shopping Val d'Europe ao lado tem Uniqlo e Primark. Só se trocar a noite no parque pelas compras
+
+Ingresso com data, 1 dia/2 parques: €75–160 conforme o dia; compre online. Leve água e lanche de casa. Plano B (greve no RER A): Uber (~40 min).
+
+**Comida:** ~€33 (Bella Notte €15, McDonald's €12, lanche €6).
+
+### Dia 5 — Qui 8/10 · Canal Saint-Martin e Marais
+
+- 08:15 Saída: RER E até Magenta e 15 min a pé
+- 08:45 [Du Pain et des Idées](place:par-du-pain-idees) — Escargot (~€5–6); só abre de segunda a sexta
+- 09:15 [Canais de Paris](place:par-canals) — Beira do Canal Saint-Martin, a caminho da République
+- 10:00 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615
+- 10:20 [Poilâne (Marais)](place:par-poilane) — Punitions (~€5) e pão para o café da manhã
+- 10:40 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
+- 11:30 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
+- 12:45 [L'As du Fallafel](place:par-as-du-fallafel) — Almoço para viagem (~€7–9); fecha sábado
+- 13:15 [Place des Vosges](place:par-vosges) — Almoço no gramado
+- 14:00 [Chez Janou](place:par-chez-janou) — Mousse de chocolate (€12) no fim do almoço. Reserve e pergunte se servem só a sobremesa
+- 14:45 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
+- 15:00 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux (~€4–5)
+- 15:20 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque
+- 15:40 [Hôtel de Ville](place:par-hotel-ville) — Praça da prefeitura
+- 15:50 [Rue de Rivoli (lojas)](place:par-rue-rivoli) — Zara, H&M e Uniqlo, sentido Louvre
+- 17:15 [Le Bon Pêcheur](place:par-bon-pecheur) — Fachada
+  - via: metrô 11 · 10 min
+- 18:30 [Bouillon République](place:par-bouillon-republique) — Jantar (~€20–30). Reserve online
+- 20:00 Volta: metrô 5 até Gare du Nord e RER E em Magenta (~35 min)
+- Almoço alternativo: [Chez Alain Miam Miam](place:par-alain-miam) — 26 Rue Charlot, qua–dom 9h–17h, sanduíche €13,50–16,50. Jantar mais barato: [Rocheman](place:par-rocheman) (~€12–15)
+
+Levain Madame Ferment: só vende online ([madameferment.com](https://madameferment.com/produit/levain-traditionnel/), €18 os 10 g, frete €3,90). Preparo ~3 dias úteis e entrega ~3 dias úteis: pedindo até 29/09 com entrega na casa do Gui, chega antes do dia 8.
+
+Plano B (greve): o dia é todo a pé a partir de Magenta (RER E); para voltar, ande até a Gare de l'Est (~15 min).
+
+**Comida:** ~€58 (escargot €6, Poilâne €5, falafel €8, mousse €12, merveilleux €5, Bouillon €22). Com o Rocheman no jantar, ~€49.
+
+### Dia 6 — Sex 9/10 · Versalhes
+
+- 07:30 Saída: RER E até Haussmann–Saint-Lazare e trem L até Versailles Rive Droite (~1h15, só SNCF)
+- 08:45 [Point Alph (feira de Versalhes)](place:par-point-alph) — Monte o piquenique no Marché Notre-Dame
+- 09:30 [Château de Versailles](place:par-versailles) — Passport €35 com horário: palácio 9h–18h30, Trianon a partir das 12h, última entrada 17h45. Sexta é dia de Jardins Musicais (€15, incluso no Passport)
+- 12:30 Piquenique no parque, perto do Grand Canal
+- 13:30 Trianon e Hameau da Rainha
+- 17:00 Volta (~1h15) e jantar em casa
+- Opcional: [One Nation Paris (outlet)](place:par-one-nation) — Uber de ~16 min a partir do castelo (€25–40), aberto até 20h. Volta pela linha N até Montparnasse (~30 min; último trem 21h56)
+
+**Comida:** ~€22 (feira €12, café €5, jantar em casa €5).
+
+### Dia 7 — Sáb 10/10 · Louvre, Champs-Élysées e Montmartre
+
+- 08:15 Saída: RER E até Haussmann–Saint-Lazare e metrô 14 até Pyramides (~40 min)
+- 09:00 [Louvre](place:par-louvre) — Ingresso com horário (€32). Rota de 3h: Vitória de Samotrácia, Galerie d'Apollon, Mona Lisa, Grande Galerie, salas Daru e Mollien, Vênus de Milo, Esfinge e Louvre medieval
+- 12:10 [Palais-Royal](place:par-palais-royal) — Colunas de Buren e jardim
+- 12:40 [Monoprix Opéra (piquenique)](place:par-monoprix-rivoli) — Sanduíche, fruta e bebida (~€6–8)
+- 13:10 [Jardim das Tulherias](place:par-tuileries) — Piquenique
+- 14:10 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
+- 14:25 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km)
+- 15:30 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, grátis; use a passagem subterrânea
+  - via: metrô 2 · 15 min
+- 16:10 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora
+- 16:45 [Charcuterie Arnaud Nicolas (Caulaincourt)](place:par-arnaud-nicolas-caulaincourt) — Croque-monsieur (~€5); aberto até 20h
+- 17:30 [Montmartre](place:par-montmartre) — Fête des Vendanges (7–11/out): mais gente e programação na rua
+- 18:40 [Sacré-Cœur](place:par-sacre-coeur) — Escadaria no pôr do sol (19h13); basílica grátis
+- 19:45 Volta: metrô 2 de Anvers até La Chapelle e RER E em Magenta (~35 min). Arrumar as malas
+
+Plano B (greve): de Haussmann–Saint-Lazare ao Louvre a pé (1,8 km); do Arco a Montmartre de Uber; na volta, desça a pé até a Gare du Nord (~15 min) e pegue o RER E em Magenta.
+
+**Comida:** ~€25 (piquenique €8, croque €5–17, lanche €5).
+
+### Dia 8 — Dom 11/10 · Partida para Milão
+
+- 06:20 [Casa do Gui](place:par-casa-do-gui) — Uber agendado na véspera (~€20)
+  - via: Uber · 25 min
+- 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07
+
+A linha França–Itália ficou fechada para obras de 12/09 a 09/10/2026; os trens voltam no dia 10. Confira o trem 2–3 dias antes. Café da manhã de casa.
 
 ## Milão
 city: milao
-dates: 2026-04-06 → 2026-04-09
+dates: 2026-10-06 → 2026-10-09
 
 ### Dia 1 — Chegada, Duomo e Galleria
 
@@ -49,7 +184,7 @@ O roteiro do destino (Verona ou Veneza) entra como outro bloco de cidade neste a
 
 ## Roma
 city: roma
-dates: 2026-04-09 → 2026-04-13
+dates: 2026-10-09 → 2026-10-13
 
 ### Dia 1 — Centro antigo
 
