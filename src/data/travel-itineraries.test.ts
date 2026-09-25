@@ -45,14 +45,14 @@ describe('paris itinerary', () => {
     );
     expect(fireworks?.countTicket).toBe(false);
 
-    // 2-park ticket (~€81) is in the day total once
+    // The ticket the trip paid (€221 for 3) is in the day total once
     const city = getTravelCity('paris')!;
     const placesById = new Map(
       city.places.map((p) => [p.id, withResolvedArea(p)]),
     );
     const budget = computeDayBudget(d7, placesById);
     expect(budget.ticketPlaceIds).toContain('par-disneyland');
-    expect(budget.ticketsEur).toBeGreaterThanOrEqual(81);
+    expect(budget.ticketsEur).toBeCloseTo(221 / 3, 1);
     expect(budget.foodPlaceIds).toContain('par-bella-notte');
     expect(budget.foodPlaceIds).toContain('par-mcdonalds-disney');
   });
@@ -288,9 +288,9 @@ describe('paris itinerary', () => {
     const d4 = computeDayBudget(parisItinerary.days[3]!, placesById);
     expect(d4.ticketsEur).toBeGreaterThan(30);
 
-    // Disney day (day 7): 2-park ticket + food, starts/ends at home (no lodging cost)
+    // Disney day (day 7): the ticket paid (€221 for 3) + food, starts/ends at home (no lodging cost)
     const d7 = computeDayBudget(parisItinerary.days[6]!, placesById);
-    expect(d7.ticketsEur).toBeGreaterThanOrEqual(81);
+    expect(d7.ticketsEur).toBeCloseTo(221 / 3, 1);
     expect(d7.ticketPlaceIds).toEqual(['par-disneyland']);
     expect(d7.foodEur).toBeGreaterThan(0);
   });

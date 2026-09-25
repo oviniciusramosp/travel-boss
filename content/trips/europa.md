@@ -79,15 +79,14 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: a pé · 10 min
 - 08:15 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — RER E sentido Tournan, o contrário de Paris. Greve no RER A: confira o app IDF Mobilités antes de sair
   - via: RER E até Val de Fontenay e RER A até Marne-la-Vallée–Chessy · 45 min
-- 09:00 [Disneyland Paris](place:par-disneyland) — Parques das 9h30 às 22h (confirme no app). Ingresso com data, 1 dia/2 parques, €75–160 conforme o dia, só online. Halloween Festival até 1/11
+- 09:00 [Disneyland Paris](place:par-disneyland) — Parques das 9h30 às 22h (confirme no app). Ingressos: €221 para os 3 (€73,67 cada), mais baratos porque o Gui comprou como morador da região. Halloween Festival até 1/11
 - 12:30 [Pizzeria Bella Notte](place:par-bella-notte) — Almoço (~€11–18)
-- 19:00 [McDonald's Disney Village](place:par-mcdonalds-disney) — Jantar fora dos portões (~€8–16)
-- 20:00 [Disneyland Paris](place:par-disneyland) — De volta ao parque para o show de encerramento, antes das 22h
+- 19:00 [McDonald's Disney Village](place:par-mcdonalds-disney) — Jantar fora dos portões (~€8–16), a ~9 min a pé da entrada. Dá para sair e voltar no mesmo dia: cada um passa na catraca com o próprio ingresso. A fila passa de 30 min, então peça nos totens
+- 20:00 [Disneyland Paris](place:par-disneyland) — De volta ao parque para o show de encerramento (Disney Tales of Magic), antes das 22h: a entrada pode fechar antes do show. Confirme o horário no app
   - via: RER A até Val de Fontenay e RER E até Noisy-le-Sec · 45 min
 - 22:55 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada
   - via: a pé · 10 min
 - 23:05 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Opcional: [La Vallée Village](place:par-vallee-village) — outlet de marcas premium a uma estação (Val d'Europe), 10h–20h; o shopping Val d'Europe ao lado tem Uniqlo e Primark. Só se trocar a noite no parque pelas compras
 
 ### Dia 5 — Qui 8/10 · Marais, almoço no Chez Janou e pôr do sol em Montmartre
 

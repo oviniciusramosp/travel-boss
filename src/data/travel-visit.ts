@@ -1528,14 +1528,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     tips: L('Best free panoramic view of the city skyline.', 'Melhor vista panorâmica grátis do skyline.'),
   }),
   'par-disneyland': {
-    // Day budget uses min = typical 1-day 2-park (itinerary is both parks).
-    // Range still shows dynamic ceiling on the place card.
+    // What the trip paid, so the day budget is real: €221 for 3 people.
     ticket: money(
-      81,
-      120,
+      73.67,
+      undefined,
       L(
-        '1-day 2-park from ~€81+ (dynamic by date); 1-park from ~€56',
-        '1 dia / 2 parques a partir de ~€81+ (dinâmico por data); 1 parque a partir de ~€56',
+        'Our tickets: €221 for 3 (€73.67 each), cheaper because Gui bought them as a local resident. Public price: 1-day 2-park from ~€81',
+        'Nossos ingressos: €221 para 3 (€73,67 cada), mais baratos porque o Gui comprou como morador da região. Preço normal: 1 dia / 2 parques a partir de ~€81',
       ),
     ),
     ticketUrl: 'https://tickets.disneylandparis.com/',
