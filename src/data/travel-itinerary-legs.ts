@@ -921,6 +921,11 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  // 4/10: from the airport straight to the supérette by the station (slower corridor with suitcases)
+  trainLeg('par-cdg-rer', 'par-saint-georges-noisy', 75, [
+    ride(rerB, 'cdg-2', 'gare-nord'),
+    ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN + 2),
+  ]),
   // 4/10: down the middle of the Champ de Mars on Avenue Pierre Loti (OSM ways 688246686, 1285858200)
   {
     from: 'par-champ-mars',
