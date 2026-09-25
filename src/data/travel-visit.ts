@@ -1409,15 +1409,16 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Na Disney Village — fora dos portões pagos, na faixa RER / hotéis.\nNão precisa de ingresso do parque. Abre mais tarde que a maioria dos restaurantes de dentro.\nOpções perto no Village: Five Guys, Starbucks. Dá para reentrar no parque para os fogos.',
     ),
   },
+  // Official menu, 09/2026
   'par-bella-notte': {
-    avgPricePerPerson: money(11, 18),
+    avgPricePerPerson: money(12, 17.5),
     durationMin: 30,
     durationMax: 60,
-    bestTime: L('Lunch 12:00–14:00', 'Almoço 12h–14h'),
+    bestTime: L('After 14:00, past the lunch peak', 'Depois das 14h, passado o pico do almoço'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'Inside Disneyland Park (Fantasyland) — Mickey-shaped individual pizza ~€11.\nCounter service; queues peak at lunch. Park ticket required.',
-      'Dentro do Disneyland Park (Fantasyland) — pizza individual em formato do Mickey ~€11.\nSelf-service; fila no horário de almoço. Precisa de ingresso do parque.',
+      'Inside Disneyland Park (Fantasyland). Mickey pizza €12; meal €17.50 with garlic bread or side salad and a 50 cl drink. Free drinking water.\nCounter service without mobile order; queues peak 12:00–14:00.',
+      'Dentro do Disneyland Park (Fantasyland). Pizza do Mickey €12; menu €17,50 com baguete de alho ou salada e refrigerante de 50 cl. Água grátis.\nSelf-service sem pedido pelo app; a fila é maior entre 12h e 14h.',
     ),
   },
   // Official September 2026 menus (media.disneylandparis.com PDFs)

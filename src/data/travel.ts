@@ -3138,14 +3138,14 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'restaurants',
         description: {
-          en: 'Counter-service pizzeria in Disneyland Park Fantasyland — known for the Mickey-shaped individual pizza (~€11).',
+          en: 'Counter-service pizzeria in Disneyland Park Fantasyland — known for the Mickey-shaped individual pizza (€12).',
           'pt-BR':
-            'Pizzaria self-service no Fantasyland do Disneyland Park — famosa pela pizza individual em formato do Mickey (~€11).',
+            'Pizzaria self-service no Fantasyland do Disneyland Park — famosa pela pizza individual em formato do Mickey (€12).',
         },
         googleRating: 3.9,
-        // Fantasyland, Disneyland Park (Chessy)
-        lat: 48.8738,
-        lng: 2.7755,
+        // OSM way/1359852385, Fantasyland
+        lat: 48.874214,
+        lng: 2.77626,
         address: 'Disneyland Park, Fantasyland, 77700 Chessy',
         mapsQuery: 'Pizzeria Bella Notte Disneyland Paris',
       },
