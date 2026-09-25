@@ -1563,8 +1563,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       73.67,
       undefined,
       L(
-        'Our tickets: €221 for 3 (€73.67 each), cheaper because Gui bought them as a local resident. Public price on 7 Oct 2026: €120 for 1 day / 2 parks',
-        'Nossos ingressos: €221 para 3 (€73,67 cada), mais baratos porque o Gui comprou como morador da região. Preço normal em 7/10/2026: €120 por 1 dia / 2 parques',
+        'Our tickets: €221 for 3 (2 at €55 with the resident promo, 1 at ~€111; €73.67 on average). Public price on 7 Oct 2026: €120 for 1 day / 2 parks',
+        'Nossos ingressos: €221 para 3 (2 a €55 com a promo de morador, 1 a ~€111; €73,67 em média). Preço normal em 7/10/2026: €120 por 1 dia / 2 parques',
       ),
     ),
     ticketUrl: 'https://tickets.disneylandparis.com/',

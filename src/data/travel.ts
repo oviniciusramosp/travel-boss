@@ -3230,6 +3230,21 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Ratatouille The Adventure Disneyland Paris',
       },
       {
+        id: 'par-daw-frozen',
+        name: { en: 'Frozen Ever After', 'pt-BR': 'Frozen Ever After' },
+        category: 'tourist',
+        description: {
+          en: 'World of Frozen, Disney Adventure World (new in 2026): boat ride through Arendelle, about 5 min. Low capacity, so one of the longest queues in the resort; single rider is available.',
+          'pt-BR':
+            'World of Frozen, Disney Adventure World (nova em 2026): passeio de barco por Arendelle, com ~5 min. A capacidade é baixa, por isso tem uma das maiores filas da Disney; há single rider.',
+        },
+        // OSM node/14211776384
+        lat: 48.864075,
+        lng: 2.77343,
+        address: 'World of Frozen, Disney Adventure World, 77700 Chessy',
+        mapsQuery: 'Frozen Ever After Disneyland Paris',
+      },
+      {
         id: 'par-daw-stark-factory',
         name: { en: 'Stark Factory', 'pt-BR': 'Stark Factory' },
         category: 'restaurants',
