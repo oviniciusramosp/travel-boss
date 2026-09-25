@@ -3186,6 +3186,20 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Gare de Marne-la-Vallée Chessy',
       },
       {
+        id: 'par-val-de-fontenay-rer',
+        name: { en: 'Val de Fontenay station', 'pt-BR': 'Estação Val de Fontenay' },
+        category: 'transport',
+        description: {
+          en: 'RER A and RER E interchange. After 22:30 on 5–14 Oct there is no RER E; buses 145 and 301 go on to Noisy-le-Sec.',
+          'pt-BR':
+            'Baldeação entre o RER A e o RER E. De 5 a 14/10, depois das 22h30, não há RER E; os ônibus 145 e 301 seguem para Noisy-le-Sec.',
+        },
+        // RER A stop position in travel-transit-lines.ts
+        lat: 48.854526,
+        lng: 2.489373,
+        mapsQuery: 'Gare de Val de Fontenay RER',
+      },
+      {
         id: 'par-daw-spider-man',
         name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' },
         category: 'tourist',

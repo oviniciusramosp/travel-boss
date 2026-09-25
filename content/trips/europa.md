@@ -76,20 +76,35 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 21:15 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Almoço alternativo em Saint-Germain: [Spécimen Burger](place:par-specimen-burger) — hambúrguer ~€13, seg–sex até 15h
 
-### Dia 4 — Qua 7/10 · Disneyland Paris
+### Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos
 
-- 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída com água e lanche de casa
+- 07:35 [Casa do Gui](place:par-casa-do-gui) — Saída com garrafa de água (há bebedouros nos parques) e lanche de casa, que é permitido. A Navigo Semaine cobre o RER até a Disney
   - via: a pé · 10 min
-- 08:15 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — RER E sentido Tournan, o contrário de Paris. Greve no RER A: confira o app IDF Mobilités antes de sair
-  - via: RER E até Val de Fontenay e RER A até Marne-la-Vallée–Chessy · 45 min
-- 09:00 [Disneyland Paris](place:par-disneyland) — Parques das 9h30 às 22h (confirme no app). Ingressos: €221 para os 3 (€73,67 cada), mais baratos porque o Gui comprou como morador da região. Halloween Festival até 1/11
-- 12:30 [Pizzeria Bella Notte](place:par-bella-notte) — Almoço (~€11–18)
-- 19:00 [McDonald's Disney Village](place:par-mcdonalds-disney) — Jantar fora dos portões (~€8–16), a ~9 min a pé da entrada. Dá para sair e voltar no mesmo dia: cada um passa na catraca com o próprio ingresso. A fila passa de 30 min, então peça nos totens
-- 20:00 [Disneyland Paris](place:par-disneyland) — De volta ao parque para o show de encerramento (Disney Tales of Magic), antes das 22h: a entrada pode fechar antes do show. Confirme o horário no app
-  - via: RER A até Val de Fontenay e RER E até Noisy-le-Sec · 45 min
-- 22:55 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada
-  - via: a pé · 10 min
-- 23:05 [Casa do Gui](place:par-casa-do-gui) — Volta
+- 07:45 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — RER E das 07:51 sentido Tournan (o contrário de Paris) e, em Val de Fontenay, RER A das 08:02; chega às 08:30. Se perder: 08:00 e 08:09, chegando às 08:35. Greve no RER A: confira o app IDF Mobilités antes de sair
+  - via: RER E até Val de Fontenay e RER A até Marne-la-Vallée–Chessy · 40 min
+- 08:30 [Marne-la-Vallée–Chessy](place:par-chessy-rer) — Revista de bolsas (10–20 min em dia de semana), que vale para os dois parques. Depois, fila na catraca do Disney Adventure World, à esquerda. Os dois parques abrem às 9h30 e fecham às 22h; a hora das 8h30 é só para hóspedes dos hotéis Disney
+- 09:30 [Spider-Man W.E.B. Adventure](place:par-daw-spider-man) — **Primeira atração**: simulador interativo em 3D, você lança teias com as mãos. ~25 min de fila na primeira hora; depois das 11h passa de 50. Às 9h25, olhe o app: se passar de 35 min ou estiver parado, comece pelo Ratatouille
+- Opcional, ao lado: **Avengers Assemble: Flight Force**, a montanha-russa da Marvel, com lançamento e looping. Antes das 10h a fila fica em ~6–10 min
+- 10:15 [Ratatouille](place:par-daw-ratatouille) — Simulador 3D sem trilho, no tamanho do Rémy. ~35–50 min de fila de manhã. O single rider (~16 min) separa vocês, mas serve para repetir
+- 11:15 [Stark Factory](place:par-daw-stark-factory) — **Almoço cedo**, antes do pico (abre às 11h): uma pizza de €14 dá para duas pessoas; massa €13, bowl €8,50 e água da torneira grátis
+- 12:00 Volta pela Adventure Way e pela World of Frozen, as áreas novas de 2026. O Frozen Ever After (barco) tem 60–80 min de fila: só vale com Premier Access One (~€16 por pessoa) ou se o app mostrar menos de 45 min
+- 12:30 Opcional: fila para o **Mickey and the Magician** das 13h, o show de mágica do parque (30 min; chegue 30 min antes)
+- 13:40 [Disneyland Park](place:par-disneyland) — Troca de parque: 2–3 min a pé, sem nova revista. Ingressos já pagos: €221 para os 3 (€73,67 cada), comprados pelo Gui como morador da região; confirme que valem para os 2 parques. Dá para sair e voltar no mesmo dia, cada um com o próprio ingresso. **Halloween Festival** (26/9–1/11, incluso no ingresso): Main Street decorada, vitrais dos vilões na estação, Stitch de vampiro no coreto do Casey's Corner e vilões no pé do castelo
+- 14:00 [Star Tours](place:par-dlp-star-tours) — Simulador de Star Wars, com até ~15 min de fila o dia todo. Ao lado, Les Mystères du Nautilus, a pé, com ~5 min de fila. O **Buzz Lightyear está fechado para reforma de 5 a 16/10**
+- 15:05 Lugar na Main Street para o cortejo de Halloween **Mickey's Halloween Celebration** das 15h25 (~25 min, com parada no castelo). Repete às 17h. O horário ainda não é oficial: confira no app
+- 16:00 [Piratas do Caribe](place:par-dlp-pirates) — ~20–27 min de fila à tarde. Depois das 19h cai para até ~9 min: vale repetir
+- 16:45 [Phantom Manor](place:par-dlp-phantom-manor) — ~15–22 min de fila à tarde e até ~9 min à noite. Ao lado, o **Unlucky Nugget Saloon**, só no Halloween: o saloon vira a festa do casamento que nunca aconteceu, com cardápio temático (~€30 em 2025)
+- 17:30 Halloween em Frontierland e Adventureland: Dr. Facilier em Frontierland, o Día de los Muertos em volta da Casa de Coco e a foto na Skull Rock
+- 18:30 [Casa de Coco](place:par-dlp-casa-de-coco) — **Jantar**: burrito €12 e churros €4,30, com água da torneira grátis. Peça pelo app
+- 19:15 Piratas e Phantom Manor de novo, com fila curta. Opcional: **Star Wars Hyperspace Mountain**, montanha-russa com looping, com 16–21 min de fila depois das 20h
+- 20:45 [Disney Tales of Magic](place:par-dlp-tales-of-magic) — **Lugar para os fogos** no eixo da Main Street com o castelo, junto ao quiosque técnico do Casey's Corner: o melhor ponto para foto e vídeo, e o mais rápido para sair. Ali costuma encher 30–45 min antes; chegando 1h15 antes, sobra margem. A Central Plaza, mais perto do castelo, pede 1h–1h30 (chegue às 20h30). Lanche para a espera: hot dog do Casey's Corner (€10,50, pelo app, até 21h30). O show começa às 22h (~20 min), com projeções, fogos e lasers; confirme o horário no app no dia
+  - via: a pé pela Main Street até a estação · 20 min
+- 22:41 [Marne-la-Vallée–Chessy](place:par-chessy-rer) — RER A das 22:41 ou 22:56 sentido Paris. De Uber direto para casa: ~35 min e ~€50–75 (estimativa)
+  - via: RER A até Val de Fontenay · 26 min
+- 23:22 [Val de Fontenay](place:par-val-de-fontenay-rer) — De 5 a 14/10 não há RER E depois das 22h30 (obras). Ônibus 145 das 23:40, na Gare de Val de Fontenay, ou 301 das 23:44, na Place du Général de Gaulle, até a parada Jeanne d'Arc
+  - via: ônibus 145 até Jeanne d'Arc e caminhada · 30 min
+- 00:10 [Casa do Gui](place:par-casa-do-gui) — Volta
+- Outras opções baratas lá dentro: Toad Hall (fish & chips €12, até 17h), Au Chalet de la Marionnette (meio frango €12) e a pizza do Mickey no [Pizzeria Bella Notte](place:par-bella-notte) (€11–12). O Colonel Hathi's está fechado até 15/10. Fora dos portões: [McDonald's Disney Village](place:par-mcdonalds-disney) (fila de mais de 30 min: peça nos totens) e Earl of Sandwich
 
 ### Dia 5 — Qui 8/10 · Marais, almoço no Chez Janou e pôr do sol em Montmartre
 

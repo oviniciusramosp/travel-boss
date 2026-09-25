@@ -915,15 +915,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
     rerCToPorteMaillot,
     ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),
   ]),
-  // 7/10
-  trainLeg('par-noisy-le-sec-rer', 'par-disneyland', 45, [
+  // 7/10: no RER E after 22:30 (works 5–14 Oct), so the way back ends at Val de Fontenay
+  trainLeg('par-noisy-le-sec-rer', 'par-chessy-rer', 40, [
     ride(rerE, 'noisy-le-sec', 'val-de-fontenay'),
     ride(rerA, 'val-de-fontenay', 'chessy'),
   ]),
-  trainLeg('par-disneyland', 'par-noisy-le-sec-rer', 45, [
-    ride(rerA, 'chessy', 'val-de-fontenay'),
-    ride(rerE, 'val-de-fontenay', 'noisy-le-sec'),
-  ]),
+  trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
   // 8/10
   trainLeg('par-casa-do-gui', 'par-du-pain-idees', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
   trainLeg('par-naturalia-verrerie', 'par-moulin-rouge', 30, [
