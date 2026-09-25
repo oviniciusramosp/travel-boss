@@ -12,6 +12,12 @@ function filled(text: { en: string; 'pt-BR': string }): boolean {
 }
 
 describe('city guides', () => {
+  it('Paris has a market and a food list', () => {
+    const paris = cityGuide('paris');
+    expect(paris?.market.length).toBeGreaterThan(0);
+    expect(paris?.food.length).toBeGreaterThan(0);
+  });
+
   it('points only at places of the same city, one to three per item', () => {
     const fails: string[] = [];
     for (const { city, guide } of guided) {

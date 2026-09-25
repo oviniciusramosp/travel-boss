@@ -6,6 +6,7 @@
 
 import type { LString } from './travel';
 import type { TravelPhoto } from './travel-photos';
+import { parisGuide } from './travel-guide-paris';
 
 /** Shelves of the market tab, in display order. */
 export const marketShelves = {
@@ -42,7 +43,9 @@ export type CityGuide = {
   food: GuideItem<FoodMeal>[];
 };
 
-const guides: Record<string, CityGuide> = {};
+const guides: Record<string, CityGuide> = {
+  paris: parisGuide,
+};
 
 export function cityGuide(slug: string): CityGuide | undefined {
   return guides[slug];
