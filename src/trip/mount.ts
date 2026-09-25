@@ -506,6 +506,15 @@ export function mountTrip(
     return cssToken('--color-mid-gray', '#666666');
   }
 
+  /** Stop, the points a catalog walk must pass, stop. */
+  function walkPoints(
+    from: { lat: number; lng: number },
+    to: { lat: number; lng: number },
+    through: readonly [number, number][] = [],
+  ): { lat: number; lng: number }[] {
+    return [{ lat: from.lat, lng: from.lng }, ...through.map(([lat, lng]) => ({ lat, lng })), { lat: to.lat, lng: to.lng }];
+  }
+
   function drawTripRoutes() {
     const epoch = ++tripRouteEpoch;
     routeAbort?.abort();
@@ -514,12 +523,10 @@ export function mountTrip(
     const signal = controller.signal;
     const hops = routeHops();
     for (const hop of hops) {
-      if (planHop(hop).kind !== 'walk') continue;
+      const plan = planHop(hop);
+      if (plan.kind !== 'walk') continue;
       if (rememberedWalk(hop.from, hop.to)) continue;
-      const cached = peekWalkingRoute([
-        { lat: hop.from.lat, lng: hop.from.lng },
-        { lat: hop.to.lat, lng: hop.to.lng },
-      ]);
+      const cached = peekWalkingRoute(walkPoints(hop.from, hop.to, plan.through));
       if (cached && cached.latlngs.length >= 2) rememberWalk(hop.from, hop.to, cached.latlngs);
     }
     const color = neutralColor();
@@ -535,16 +542,10 @@ export function mountTrip(
         if (!alive || epoch !== tripRouteEpoch) return;
         map.setRoute([...segments]);
       },
-      walk: async (from, to) => {
+      walk: async (from, to, through) => {
         const cached = rememberedWalk(from, to);
         if (cached) return cached;
-        const route = await fetchWalkingRoute(
-          [
-            { lat: from.lat, lng: from.lng },
-            { lat: to.lat, lng: to.lng },
-          ],
-          signal,
-        );
+        const route = await fetchWalkingRoute(walkPoints(from, to, through), signal);
         if (!route || route.latlngs.length < 2) return null;
         rememberWalk(from, to, route.latlngs);
         return route.latlngs;

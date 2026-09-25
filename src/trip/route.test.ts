@@ -86,6 +86,17 @@ describe('planHop', () => {
   });
 });
 
+describe('planHop through', () => {
+  it('hands the walk fetch the points a catalog walk must pass', async () => {
+    const hop = { from: place('paris', 'par-champ-mars'), to: place('paris', 'par-chapelle-saint-louis') };
+    const plan = planHop(hop);
+    expect(plan).toMatchObject({ kind: 'walk', through: expect.arrayContaining([[48.85361, 2.301304]]) });
+    const calls = deps();
+    await resolveHopSegments([hop], calls);
+    expect(calls.walk).toHaveBeenCalledWith(hop.from, hop.to, plan.kind === 'walk' ? plan.through : undefined);
+  });
+});
+
 describe('resolveHopSegments', () => {
   it('asks the catalog drawer for a transit spine and the road router for a taxi', async () => {
     const calls = deps();

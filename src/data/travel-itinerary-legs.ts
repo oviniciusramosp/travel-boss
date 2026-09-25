@@ -63,6 +63,8 @@ export type ItineraryLegDef = {
    * When set, overrides single `path` / `line` for map expansion.
    */
   hops?: ItineraryTransitHop[];
+  /** Walk only: points the walk must pass, such as the central avenue of a park. */
+  through?: LatLng[];
   /** Short label for UI (e.g. "M1", "RER E + M13") */
   label?: string;
   /** Optional override for expected duration (minutes) */
@@ -164,7 +166,10 @@ export function estimateLegDurationMin(
   }
 
   if (leg.mode === 'walk') {
-    return walkMinutes(haversineM(from, to));
+    const points = [from, ...(leg.through ?? []).map(([lat, lng]) => ({ lat, lng })), to];
+    let meters = 0;
+    for (let i = 1; i < points.length; i++) meters += haversineM(points[i - 1]!, points[i]!);
+    return walkMinutes(meters);
   }
 
   const spinePath =
@@ -916,7 +921,16 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
-  // 4/10
+  // 4/10: down the middle of the Champ de Mars on Avenue Pierre Loti (OSM ways 688246686, 1285858200)
+  {
+    from: 'par-champ-mars',
+    to: 'par-chapelle-saint-louis',
+    mode: 'walk',
+    through: [
+      [48.854475, 2.29998],
+      [48.85361, 2.301304],
+    ],
+  },
   trainLeg('par-passerelle-debilly', 'par-casa-do-gui', 45, [
     ride(metro9, 'alma-marceau', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),

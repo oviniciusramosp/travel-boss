@@ -78,14 +78,17 @@ export function transferLegs(hop: RouteHop): TransferLeg[] {
 
 export type HopDraw =
   | { kind: 'catalog'; leg: ItineraryLegDef }
-  | { kind: 'walk' }
+  /** `through`: points the catalog walk must pass. */
+  | { kind: 'walk'; through?: [number, number][] }
   | { kind: 'drive' }
   | { kind: 'none' };
 
 /** Switches on `resolveTripLeg` and does not reapply its precedence. */
 export function planHop(hop: RouteHop): HopDraw {
   const decision = resolveTripLeg(hop.from, hop.to, hop.via);
-  if (decision.kind === 'catalog' && decision.leg.mode === 'walk') return { kind: 'walk' };
+  if (decision.kind === 'catalog' && decision.leg.mode === 'walk') {
+    return decision.leg.through?.length ? { kind: 'walk', through: decision.leg.through } : { kind: 'walk' };
+  }
   if (decision.kind === 'catalog') return { kind: 'catalog', leg: decision.leg };
   if (decision.kind === 'drive') return { kind: 'drive' };
   if (decision.kind === 'osrm') return { kind: 'walk' };
@@ -108,7 +111,7 @@ export function previewHop(hop: RouteHop, _neutralColor: string): MapRouteSegmen
 
 export type RouteDeps = {
   neutralColor: string;
-  walk: (from: TripLegPoint, to: TripLegPoint) => Promise<[number, number][] | null>;
+  walk: (from: TripLegPoint, to: TripLegPoint, through?: [number, number][]) => Promise<[number, number][] | null>;
   drive: (from: TripLegPoint, to: TripLegPoint) => Promise<[number, number][] | null>;
   catalog: (
     leg: ItineraryLegDef,
@@ -130,7 +133,8 @@ export async function resolveHopSegments(
       const plan = planHop(hop);
       if (plan.kind === 'none') continue;
       if (plan.kind === 'walk' || plan.kind === 'drive') {
-        const path = plan.kind === 'walk' ? await deps.walk(hop.from, hop.to) : await deps.drive(hop.from, hop.to);
+        const path =
+          plan.kind === 'walk' ? await deps.walk(hop.from, hop.to, plan.through) : await deps.drive(hop.from, hop.to);
         if (!path || path.length < 2) continue;
         segments.push(
           plan.kind === 'walk'
