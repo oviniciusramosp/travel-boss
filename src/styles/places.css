@@ -1091,7 +1091,8 @@ button.tb-icon-btn.tb-place-panel__collapse:active:not(:disabled) {
 }
 
 .tb-panel__meta dt,
-.tb-panel__kicker {
+.tb-panel__kicker,
+.tb-guide-card__kicker {
   margin: 0;
   font-family: var(--font-mono);
   font-size: 10px;
@@ -1274,6 +1275,13 @@ button.tb-icon-btn.tb-place-panel__collapse:active:not(:disabled) {
 
 .tb-group {
   margin: 0 0 var(--spacing-8);
+}
+
+/* The open/close animation clips (overflow: clip in ui.css). A wider clip box
+   keeps the cards' shadow ring at the sides; the cards stay where they were. */
+.tb-group::details-content {
+  margin-inline: calc(var(--spacing-8) * -1);
+  padding-inline: var(--spacing-8);
 }
 
 .tb-group__summary {
@@ -1533,30 +1541,33 @@ button.tb-icon-btn.tb-place-panel__collapse:active:not(:disabled) {
   line-height: var(--leading-body);
 }
 
-/* Kicker in its own column, so a wrapped chip lines up with the first one. */
+/* Label on top, chips below on one line. A long name truncates; .tb-name shows it whole in the tooltip. */
 .tb-guide-card__where {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: baseline;
-  gap: var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
   margin-top: var(--spacing-4);
 }
 
-.tb-guide-card__kicker {
-  color: var(--color-mid-gray);
-  font-size: var(--text-caption);
-  white-space: nowrap;
-}
-
+/* Grid, not flex: space is shared equally and a short name keeps its width, so only long names truncate. */
 .tb-guide-card__spots {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-columns: minmax(0, max-content);
+  grid-auto-flow: column;
+  justify-content: start;
   gap: var(--spacing-4);
+  min-width: 0;
 }
 
 .tb-guide-spot {
+  min-width: 0;
   background: var(--color-canvas);
   color: var(--color-ink);
+}
+
+.tb-guide-spot > .material-symbols-rounded {
+  flex: none;
 }
 
 .tb-guide-spot:hover {

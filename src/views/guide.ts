@@ -52,7 +52,7 @@ function spotChip(place: TravelPlace, view: GuideView): HTMLButtonElement {
   if (place.id === view.current) chip.setAttribute('aria-current', 'true');
   const glyph = categoryGlyph(place.category);
   if (glyph) chip.append(glyph);
-  chip.append(el('span', undefined, pickLocale(view.locale, place.name)));
+  chip.append(el('span', 'tb-name', pickLocale(view.locale, place.name)));
   chip.addEventListener('click', () => view.onSpot(place.id, chip));
   chip.addEventListener('pointerenter', () => view.onHover(place.id));
   chip.addEventListener('pointerleave', () => view.onHover(null));
