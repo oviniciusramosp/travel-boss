@@ -181,6 +181,11 @@ export interface TravelPlace {
    */
   favorite?: boolean;
   /**
+   * Added by an AI as a city-guide suggestion (market or food), not picked by
+   * hand. Cards show a sparkle whose tip names the guide items behind it.
+   */
+  aiSuggested?: boolean;
+  /**
    * Already visited / known.
    * Omit or true = known; false = still to visit (Lisbon “Conhecer” list).
    */
@@ -4201,6 +4206,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-grande-epicerie-rive-gauche',
         name: { en: 'La Grande Épicerie (Rive Gauche)', 'pt-BR': 'La Grande Épicerie (Rive Gauche)' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: "Le Bon Marché's big food hall, in its own building at the corner of Rue du Bac next to the department store, with a basement wine cellar, a cheese and butter counter and the famous French pantry brands; open daily, Sundays 10:00–20:00.",
@@ -4214,6 +4220,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-lafayette-gourmet-haussmann',
         name: { en: 'Lafayette Gourmet', 'pt-BR': 'Lafayette Gourmet' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: 'The Galeries Lafayette food hall in the Maison & Gourmet building, across the boulevard from the main store, with a 1st-floor wine cellar and pastry, chocolate and deli counters; open daily, Sundays 11:00–20:00.',
@@ -4227,6 +4234,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-laduree-royale',
         name: { en: 'Ladurée Royale', 'pt-BR': 'Ladurée Royale' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4241,6 +4249,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-patrick-roger-madeleine',
         name: { en: 'Patrick Roger (Madeleine)', 'pt-BR': 'Patrick Roger (Madeleine)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4255,6 +4264,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-mere-de-famille-faubourg-montmartre',
         name: { en: 'À la Mère de Famille', 'pt-BR': 'À la Mère de Famille' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4269,6 +4279,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-jacques-genin-marais',
         name: { en: 'Jacques Genin (Marais)', 'pt-BR': 'Jacques Genin (Marais)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4283,6 +4294,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-le-roux-saint-germain',
         name: { en: 'Maison Le Roux (Saint-Germain)', 'pt-BR': 'Maison Le Roux (Saint-Germain)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4297,6 +4309,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-poilane-cherche-midi',
         name: { en: 'Poilâne (Cherche-Midi)', 'pt-BR': 'Poilâne (Cherche-Midi)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery'],
         description: {
@@ -4311,6 +4324,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-maille-madeleine',
         name: { en: 'Maille (Madeleine)', 'pt-BR': 'Maille (Madeleine)' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: "Maille's Paris boutique, where fresh mustard is pumped to order into stoneware pots and you can taste mustards, vinegars and cornichons; open Monday–Saturday 10:00–19:00.",
@@ -4324,6 +4338,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-marie-anne-cantin-champ-de-mars',
         name: { en: 'Fromagerie Marie-Anne Cantin', 'pt-BR': 'Fromagerie Marie-Anne Cantin' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: 'Cheesemonger and affineur a few steps from Rue Cler who ripens cheeses in her own cellars; open Tuesday–Saturday 8:30–19:30 and Sunday 10:00–13:00.',
@@ -4337,6 +4352,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-laurent-dubois-maubert',
         name: { en: 'Fromagerie Laurent Dubois', 'pt-BR': 'Fromagerie Laurent Dubois' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: 'Shop of Meilleur Ouvrier de France cheesemonger Laurent Dubois at Maubert, for aged Comté, Brie and a deep range of AOP cheeses; open Tuesday–Saturday 8:00–20:00 and Sunday 8:00–13:00.',
@@ -4350,6 +4366,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-la-chambre-marais',
         name: { en: 'La Chambre (Marais)', 'pt-BR': 'La Chambre (Marais)' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: 'Marais shop of the Paris jam house formerly called La Chambre aux Confitures, with more than a hundred jams, chutneys and spreads; open daily.',
@@ -4363,6 +4380,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-mariage-freres-marais',
         name: { en: 'Mariage Frères (Marais)', 'pt-BR': 'Mariage Frères (Marais)' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: 'The original Mariage Frères tea emporium, in the building where the family had its offices, with a counter of more than 1,000 teas and a tea room; open daily.',
@@ -4376,6 +4394,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-dammann-freres-vosges',
         name: { en: 'Dammann Frères (Vosges)', 'pt-BR': 'Dammann Frères (Vosges)' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: "Dammann Frères' tea boutique under the arcades of Place des Vosges, for loose-leaf teas and gift tins; open daily 10:00–19:30.",
@@ -4389,6 +4408,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-angelina-rivoli',
         name: { en: 'Angelina (Rivoli)', 'pt-BR': 'Angelina (Rivoli)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4403,6 +4423,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-legrand-galerie-vivienne',
         name: { en: 'Legrand Filles et Fils', 'pt-BR': 'Legrand Filles et Fils' },
+        aiSuggested: true,
         category: 'markets',
         description: {
           en: 'Historic wine merchant founded in 1880, with its shop and wine bar in the Galerie Vivienne near Palais-Royal; open Monday–Saturday 10:00–19:30.',
@@ -4416,6 +4437,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-boulangerie-du-sentier',
         name: { en: 'Boulangerie du Sentier', 'pt-BR': 'Boulangerie du Sentier' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery'],
         description: {
@@ -4430,6 +4452,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-maison-thevenin-buci',
         name: { en: 'Maison Thevenin', 'pt-BR': 'Maison Thevenin' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery', 'pastry'],
         description: {
@@ -4444,6 +4467,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-fournil-didot',
         name: { en: 'Fournil Didot', 'pt-BR': 'Fournil Didot' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery'],
         description: {
@@ -4458,6 +4482,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-la-parisienne-poissonniere',
         name: { en: 'La Parisienne (Poissonnière)', 'pt-BR': 'La Parisienne (Poissonnière)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery', 'pastry'],
         description: {
@@ -4472,6 +4497,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-carl-marletti-censier',
         name: { en: 'Carl Marletti', 'pt-BR': 'Carl Marletti' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {
@@ -4486,6 +4512,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-maison-delmontel-martyrs',
         name: { en: 'Maison Delmontel (Martyrs)', 'pt-BR': 'Maison Delmontel (Martyrs)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery', 'pastry'],
         description: {
@@ -4500,6 +4527,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-berthillon-ile-saint-louis',
         name: { en: 'Berthillon', 'pt-BR': 'Berthillon' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['ice-cream'],
         description: {
@@ -4514,6 +4542,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-petit-vendome-capucines',
         name: { en: 'Le Petit Vendôme', 'pt-BR': 'Le Petit Vendôme' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['french', 'bistro'],
         description: {
@@ -4528,6 +4557,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-caractere-de-cochon-charlot',
         name: { en: 'Caractère de Cochon', 'pt-BR': 'Caractère de Cochon' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['charcuterie'],
         description: {
@@ -4542,6 +4572,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-breizh-cafe-marais',
         name: { en: 'Breizh Café (Marais)', 'pt-BR': 'Breizh Café (Marais)' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['creperie', 'french'],
         description: {
@@ -4556,6 +4587,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-arnaud-nicolas-bourdonnais',
         name: { en: 'Arnaud Nicolas (Bourdonnais)', 'pt-BR': 'Arnaud Nicolas (Bourdonnais)' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['charcuterie', 'french'],
         description: {
@@ -4570,6 +4602,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-bistrot-paul-bert-faidherbe',
         name: { en: 'Le Bistrot Paul Bert', 'pt-BR': 'Le Bistrot Paul Bert' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['french', 'bistro'],
         description: {
@@ -4584,6 +4617,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-au-pied-de-cochon-halles',
         name: { en: 'Au Pied de Cochon', 'pt-BR': 'Au Pied de Cochon' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['brasserie', 'french'],
         description: {
@@ -4598,6 +4632,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-escargot-montorgueil',
         name: { en: "L'Escargot Montorgueil", 'pt-BR': "L'Escargot Montorgueil" },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['french'],
         description: {
@@ -4612,6 +4647,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-au-reve-caulaincourt',
         name: { en: 'Au Rêve', 'pt-BR': 'Au Rêve' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['coffee-shop'],
         description: {
@@ -4626,6 +4662,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-au-bourguignon-du-marais',
         name: { en: 'Au Bourguignon du Marais', 'pt-BR': 'Au Bourguignon du Marais' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['french', 'bistro'],
         description: {
@@ -4640,6 +4677,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-fontaine-de-mars-saint-dominique',
         name: { en: 'La Fontaine de Mars', 'pt-BR': 'La Fontaine de Mars' },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['french', 'bistro'],
         description: {
@@ -4654,6 +4692,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-avant-comptoir-odeon',
         name: { en: "L'Avant Comptoir de la Terre", 'pt-BR': "L'Avant Comptoir de la Terre" },
+        aiSuggested: true,
         category: 'restaurants',
         subcategories: ['french'],
         description: {
@@ -4668,6 +4707,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-equilibre-blomet',
         name: { en: 'Équilibre (Blomet)', 'pt-BR': 'Équilibre (Blomet)' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery', 'pastry'],
         description: {
@@ -4682,6 +4722,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-matthieu-pauline-cler',
         name: { en: 'Pâtisserie Matthieu Pauline', 'pt-BR': 'Pâtisserie Matthieu Pauline' },
+        aiSuggested: true,
         category: 'cafes',
         subcategories: ['pastry'],
         description: {

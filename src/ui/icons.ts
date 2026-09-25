@@ -7,6 +7,7 @@ export const ICONS = [
   'add',
   'apartment',
   'attach_money',
+  'auto_awesome',
   'bakery_dining',
   'bed',
   'bridge',

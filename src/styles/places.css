@@ -877,6 +877,13 @@ button.tb-icon-btn.tb-place-panel__collapse:active:not(:disabled) {
   color: var(--color-ember);
 }
 
+/* Place an AI added from the city guide. Gray like the chrome; the tip says why. */
+.tb-ai-badge {
+  flex: none;
+  color: var(--color-mid-gray);
+  cursor: help;
+}
+
 .tb-panel__subs {
   display: flex;
   gap: 6px;

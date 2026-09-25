@@ -11,6 +11,7 @@ import {
   visitFieldsForDisplay,
 } from '../catalog';
 import type { MapHandle } from '../map/types';
+import { aiBadge, aiSuggestionTip } from '../ui/ai-badge';
 import { iconButton } from '../ui/controls';
 import { prefersReducedMotion } from '../ui/motion';
 import { mapsMark } from '../ui/maps-icon';
@@ -345,6 +346,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       fav.append(icon('favorite', { fill: true, size: 16 }));
       tagsMain.append(fav);
     }
+    if (place.aiSuggested) tagsMain.append(aiBadge(aiSuggestionTip(city.slug, place.id, locale)));
     tags.append(tagsMain);
     const subs = place.subcategories ?? [];
     if (subs.length) {

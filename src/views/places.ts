@@ -22,6 +22,7 @@ import {
 } from '../catalog';
 import type { ItineraryDay, ItineraryStop, Locale, PlaceCategory, TravelCity, TravelPlace } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
+import { aiBadge, aiSuggestionTip } from '../ui/ai-badge';
 import { segmented } from '../ui/controls';
 import { mapsIconLink } from '../ui/maps-icon';
 import { el } from '../ui/dom';
@@ -166,6 +167,7 @@ function placeCard(
   const body = el('span', 'tb-place-card__body');
   const title = el('span', 'tb-place-card__title');
   title.append(el('span', 'tb-name', pickLocale(locale, place.name)));
+  if (place.aiSuggested) title.append(aiBadge(aiSuggestionTip(city.slug, place.id, locale)));
   body.append(title);
   const subs = (place.subcategories ?? []).map((id) => subcategoryLabel(id, locale)).join(' · ');
   if (subs) body.append(el('span', 'tb-place-card__sub', subs));

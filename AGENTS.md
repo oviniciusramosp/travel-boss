@@ -54,7 +54,7 @@ UI (vale a partir da Fase 1):
 - Hover não move a câmera do mapa. Só clique ou Enter movem.
 - O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos. Exceções pedidas pelo usuário: os ícones de orçamento do card do dia (comida `--color-food`, ingresso `--color-ticket`) e os de previsão do tempo (`--color-weather-*`, um tom por céu).
 
-Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`.
+Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`, `aiBadge`.
 
 Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--r-min`, canto reto `--r-none`. Os pares (`--r-card`/`--inset-card`/`--r-card-inner`, e o mesmo para row, popover e group) ficam em `src/styles/tokens.css`. Filho que encosta no canto usa o `*-inner`. Linha de uma linha é `--r-pill`; linha com `.tb-row__sub` é `--r-row`. Foco é `outline` + `outline-offset`, nunca `box-shadow`. Quem rola é `.tb-panel__body`, não o card arredondado. `grep border-radius src/styles` só pode mostrar `var(--r-*)`.
 
@@ -84,4 +84,5 @@ Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityG
 - Grupos e ordem: `marketShelves` (Mercado) e `foodMeals` (Comidas), no mesmo arquivo.
 - Item: `name` e `description` em en e pt-BR, `photo` do Commons (thumb `500px-…` em `upload.wikimedia.org`), `where` com 1 a 3 ids do catálogo da mesma cidade, o melhor primeiro.
 - Loja ou restaurante que ainda não existe entra antes em `travelCities` (foto em `travel-photos.ts`) e só depois no `where`. Assim vira pino, card e parada possível do roteiro.
+- Lugar que a IA adiciona leva `aiSuggested: true`. O card mostra as faíscas de IA com o motivo no tooltip, e o teste exige que algum item do guia aponte para ele.
 - `src/data/travel-guide.test.ts` falha com id desconhecido, texto vazio ou foto fora do padrão.
