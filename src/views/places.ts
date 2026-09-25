@@ -1,7 +1,9 @@
+import { TABS, type CityTab } from '../app/router';
 import type { Shell } from '../app/shell';
 import { readCategoryFilter, readGroups, writeCategoryFilter, writeGroups } from '../app/store';
 import {
   categoryMaterialName,
+  cityGuide,
   dayPrimaryRoutePlaceIds,
   favoritePlaces,
   getTravelCity,
@@ -35,9 +37,10 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from './place-panel';
+import { guidePlaceIds, renderGuide, type GuideTab } from './guide';
 import { createRouteButton, mountRoutePlanner } from './route-planner';
 
-type Tab = 'places' | 'hotels';
+type Tab = CityTab;
 
 export type CityRouteState = {
   tab: Tab;
@@ -213,6 +216,8 @@ function copy(locale: Locale) {
   const en = locale === 'en';
   return {
     places: en ? 'Places' : 'Lugares',
+    market: en ? 'Market' : 'Mercado',
+    food: en ? 'Food' : 'Comidas',
     hotels: en ? 'Hotels' : 'Hotéis',
     sections: en ? 'City sections' : 'Seções da cidade',
     categories: en ? 'Categories' : 'Categorias',
@@ -220,6 +225,10 @@ function copy(locale: Locale) {
     emptyPlaces: en
       ? 'Nothing matches this search and these categories.'
       : 'Nada combina com esta busca e estas categorias.',
+    emptyGuideTitle: en ? 'Nothing here yet' : 'Ainda sem itens',
+    emptyGuide: en
+      ? 'This city has no market or food guide yet.'
+      : 'Esta cidade ainda não tem guia de mercado e comidas.',
     missingTitle: en ? 'City not found' : 'Cidade não encontrada',
     missing: en ? 'This slug is not in the catalog.' : 'Este slug não está no catálogo.',
     loadingHotels: en ? 'Loading hotels…' : 'Carregando hotéis…',
@@ -350,12 +359,9 @@ function setRowCurrent(scope: ParentNode, id: string | null, scroll: boolean) {
     row.removeAttribute('aria-current');
   }
   if (!id) return;
-  const row = scope.querySelector<HTMLElement>(
-    `[data-place-id="${CSS.escape(id)}"]`,
-  );
-  if (!row) return;
-  row.setAttribute('aria-current', 'true');
-  if (scroll) row.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  const rows = scope.querySelectorAll<HTMLElement>(`[data-place-id="${CSS.escape(id)}"]`);
+  for (const row of rows) row.setAttribute('aria-current', 'true');
+  if (scroll) rows[0]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 }
 
 export function mountCityNav(
@@ -434,6 +440,7 @@ export function mountCity(
   const byId = new Map(catalogPlaces.map((place) => [place.id, place]));
   const blob = new Map(catalogPlaces.map((place) => [place.id, searchBlob(place)]));
   const hotelPriority = priorityPlaceIds(city);
+  const guide = cityGuide(city.slug);
 
   const storedCategories = readCategoryFilter();
   const enabled = new Set<PlaceCategory>(
@@ -471,24 +478,19 @@ export function mountCity(
   const titleEl = el('h1', 'tb-city-title');
   const tabs = el('div', 'tb-locale tb-city-tabs');
   const tabPanelId = 'tb-city-panel';
-  const tabIds: Record<Tab, string> = {
-    places: 'tb-tab-places',
-    hotels: 'tb-tab-hotels',
-  };
   tabs.id = 'tb-city-tabs';
   tabs.setAttribute('role', 'tablist');
   tabs.setAttribute('aria-orientation', 'horizontal');
-  const tabButtons: Record<Tab, HTMLButtonElement> = {
-    places: el('button'),
-    hotels: el('button'),
-  };
-  for (const id of ['places', 'hotels'] as const) {
-    tabButtons[id].type = 'button';
-    tabButtons[id].id = tabIds[id];
-    tabButtons[id].setAttribute('role', 'tab');
-    tabButtons[id].setAttribute('aria-controls', tabPanelId);
-    tabButtons[id].addEventListener('click', () => setTab(id));
-    tabs.append(tabButtons[id]);
+  const tabButtons = {} as Record<Tab, HTMLButtonElement>;
+  for (const id of TABS) {
+    const button = el('button');
+    button.type = 'button';
+    button.id = `tb-tab-${id}`;
+    button.setAttribute('role', 'tab');
+    button.setAttribute('aria-controls', tabPanelId);
+    button.addEventListener('click', () => setTab(id));
+    tabButtons[id] = button;
+    tabs.append(button);
   }
   head.append(metaEl, titleEl, tabs);
 
@@ -512,10 +514,9 @@ export function mountCity(
     metaEl.textContent = `${pickLocale(locale, city.country)} · ${countLabel(count, locale)}`;
     titleEl.textContent = pickLocale(locale, city.name);
     tabs.setAttribute('aria-label', text.sections);
-    tabButtons.places.textContent = text.places;
-    tabButtons.hotels.textContent = text.hotels;
-    body.setAttribute('aria-labelledby', tabIds[tab]);
-    for (const id of ['places', 'hotels'] as const) {
+    body.setAttribute('aria-labelledby', `tb-tab-${tab}`);
+    for (const id of TABS) {
+      tabButtons[id].textContent = text[id];
       const on = tab === id;
       tabButtons[id].setAttribute('aria-selected', on ? 'true' : 'false');
       tabButtons[id].removeAttribute('aria-pressed');
@@ -557,6 +558,7 @@ export function mountCity(
 
   const rowButton = (id: string): HTMLElement | null => {
     const row = body.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(id)}"]`);
+    if (row instanceof HTMLButtonElement) return row;
     return row?.querySelector<HTMLElement>('.tb-place-card__open, .tb-place-main, .tb-row__main') ?? null;
   };
 
@@ -588,6 +590,19 @@ export function mountCity(
     map.setPins('place', []);
     map.setPins('stop', planner.userPins());
     map.highlight(null);
+  };
+
+  const guideItems = (which: GuideTab) => guide?.[which] ?? [];
+
+  /** The shops or restaurants the tab suggests, and nothing else. */
+  const showGuidePins = (which: GuideTab, fit: boolean) => {
+    setDayLayer(false);
+    map.setRoute([]);
+    map.setPins('stop', planner.userPins());
+    const spots = guidePlaceIds(guideItems(which)).flatMap((id) => byId.get(id) ?? []);
+    map.setPins('place', toPins(spots, 'place', shell.locale()));
+    if (!currentPlaceId) map.highlight(null);
+    if (fit && spots.length) map.fit();
   };
 
   const visibleGroupNodes = () =>
@@ -781,16 +796,39 @@ export function mountCity(
       });
   };
 
+  const renderGuideTab = (which: GuideTab) => {
+    body.replaceChildren();
+    const items = guideItems(which);
+    if (!items.length) {
+      const text = copy(shell.locale());
+      body.append(emptyState(text.emptyGuideTitle, text.emptyGuide));
+      return;
+    }
+    renderGuide(body, {
+      tab: which,
+      items,
+      places: byId,
+      locale: shell.locale(),
+      current: currentPlaceId,
+      onSpot: (id, origin) => {
+        setRowCurrent(body, id, false);
+        focusPlace(id, origin);
+      },
+      onHover: (id) => map.hover(id),
+    });
+  };
+
   const renderBody = () => {
     if (tab === 'places') renderPlaces();
-    else renderHotels();
+    else if (tab === 'hotels') renderHotels();
+    else renderGuideTab(tab);
     keepOrigin();
   };
 
   body.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
-    if (target.closest('.tb-hotels-mount')) return;
+    if (target.closest('.tb-hotels-mount, .tb-guide')) return;
 
     if (target.closest('.tb-switch')) return;
     if (target.closest('[data-route], [data-maps]')) return;
@@ -815,6 +853,7 @@ export function mountCity(
     renderBody();
     main.scrollTop = top;
     if (tab === 'places') showPlacePins({ fit: false, pan: false });
+    else showGuidePins(tab, false);
     planner.sync();
   });
 
@@ -859,7 +898,8 @@ export function mountCity(
       paintChrome();
       renderBody();
       if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
-      else showHotelPins();
+      else if (next === 'hotels') showHotelPins();
+      else showGuidePins(next, true);
       planner.sync();
       main.scrollTop = 0;
       // The transition runs this later. Publishing outside it wrote the old tab to the URL.
@@ -889,7 +929,8 @@ export function mountCity(
   paintChrome();
   renderBody();
   if (tab === 'places') showPlacePins({ fit: !initialPlace, pan: false });
-  else showHotelPins();
+  else if (tab === 'hotels') showHotelPins();
+  else showGuidePins(tab, !initialPlace);
   if (initialPlace) {
     silence += 1;
     setRowCurrent(body, initialPlace, true);

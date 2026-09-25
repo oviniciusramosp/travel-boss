@@ -1,11 +1,12 @@
-export type CityTab = 'places' | 'hotels';
+export type CityTab = 'places' | 'market' | 'food' | 'hotels';
 
 export type Route =
   | { kind: 'home' }
   | { kind: 'trip'; id: string }
   | { kind: 'city'; slug: string; tab: CityTab; place?: string; day?: number };
 
-const TABS: readonly CityTab[] = ['places', 'hotels'];
+/** Tab order in the city header. */
+export const TABS: readonly CityTab[] = ['places', 'market', 'food', 'hotels'];
 
 function isTab(value: string | undefined): value is CityTab {
   if (value === 'itinerary') return false;

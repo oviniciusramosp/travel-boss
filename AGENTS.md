@@ -27,7 +27,7 @@ Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não ed
 `src/main.ts` → `src/app/shell` · `src/map/*` · `src/views/*` · `src/trip/*` · `src/catalog` → `src/data`.
 
 - `src/main.ts` monta o shell (`src/app/shell`), o mapa (`src/map/map`, mais rota e basemap em `src/map/*`), as views e o roteiro (`src/trip/mount`).
-- `src/views/*`: `places.ts` e `place-panel.ts` sobem com a cidade; `hotels.ts` entra por import dinâmico a partir de `places.ts`.
+- `src/views/*`: `places.ts` e `place-panel.ts` sobem com a cidade; `guide.ts` desenha as abas Mercado e Comidas; `hotels.ts` entra por import dinâmico a partir de `places.ts`.
 - `src/trip/*`: `parse.ts`, `mount.ts`, `export.ts`.
 - A UI importa o catálogo só por `src/catalog/index.ts`, que reexporta `src/data`.
 
@@ -76,3 +76,12 @@ Trecho de trem ou metrô entre dois lugares só aparece no mapa se `src/data/tra
 ## Catálogo de lugares
 
 A fonte da verdade é `src/data/travel.ts` (`travelCities`), com `travel-visit.ts`, `travel-photos.ts` e `travel-subcategories.ts`. Não há CMS nem sincronização: o Notion era do portfólio e não é usado aqui. Lugar novo ou correção vai direto nesses arquivos.
+
+## Guia da cidade (Mercado e Comidas)
+
+Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityGuide` (`src/data/travel-guide.ts`). Cidade sem guia mostra as abas vazias.
+
+- Grupos e ordem: `marketShelves` (Mercado) e `foodMeals` (Comidas), no mesmo arquivo.
+- Item: `name` e `description` em en e pt-BR, `photo` do Commons (thumb `500px-…` em `upload.wikimedia.org`), `where` com 1 a 3 ids do catálogo da mesma cidade, o melhor primeiro.
+- Loja ou restaurante que ainda não existe entra antes em `travelCities` (foto em `travel-photos.ts`) e só depois no `where`. Assim vira pino, card e parada possível do roteiro.
+- `src/data/travel-guide.test.ts` falha com id desconhecido, texto vazio ou foto fora do padrão.

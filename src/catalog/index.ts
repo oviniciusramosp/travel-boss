@@ -45,6 +45,8 @@ export {
   placePinIconHtml,
 } from '../data/travel-categories';
 export { subcategoryLabel } from '../data/travel-subcategories';
+export { cityGuide, foodMeals, marketShelves } from '../data/travel-guide';
+export type { CityGuide, FoodMeal, GuideItem, MarketShelf } from '../data/travel-guide';
 export { getTransitLine } from '../data/travel-transit-lines';
 export type { TransitLine } from '../data/travel-transit-lines';
 

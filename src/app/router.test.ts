@@ -30,6 +30,15 @@ describe('parseHash', () => {
     expect(parseHash('#/city/paris/places?day=foo')).toEqual(paris);
   });
 
+  it('reads the market and food tabs', () => {
+    expect(parseHash('#/city/paris/market')).toEqual({ ...paris, tab: 'market' });
+    expect(parseHash('#/city/paris/food?place=par-entrecote')).toEqual({
+      ...paris,
+      tab: 'food',
+      place: 'par-entrecote',
+    });
+  });
+
   it('treats an empty path as nothing open, and still rejects a blank hash', () => {
     expect(parseHash('#/')).toEqual({ kind: 'home' });
     expect(parseHash('')).toBeNull();

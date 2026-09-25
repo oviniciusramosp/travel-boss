@@ -21,7 +21,7 @@ import { starRating } from '../ui/rating';
 import { openNowStatus, timeZoneForCity } from './open-now';
 import { createRouteButton, routePlannerOn } from './route-planner';
 
-function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
+export function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
   const name = categoryMaterialName(category);
   if (!(ICONS as readonly string[]).includes(name)) return null;
   const node = icon(name as IconName, { size: 16, fill: true });
