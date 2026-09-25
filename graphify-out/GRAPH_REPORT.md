@@ -1,7 +1,7 @@
 # Graph Report - disney-paris-itinerary-c67dae  (2026-09-25)
 
 ## Corpus Check
-- 174 files · ~254,243 words
+- 174 files · ~254,388 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `220d4ed7`
+- Built from commit: `6913f358`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -114,7 +114,7 @@ Nodes (26): parseCategoryScores(), AzulConnectionError, azulFetch(), azulHotels(
 
 ### Community 1 - "expandTimelineTransferParts"
 Cohesion: 0.43
-Nodes (7): estimateLegDurationMin(), expandTimelineTransferParts(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin()
+Nodes (8): estimateLegDurationMin(), expandTimelineTransferParts(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin(), haversineM()
 
 ### Community 2 - "travel-area-geometry.ts"
 Cohesion: 0.21
@@ -170,7 +170,7 @@ Nodes (42): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), par
 
 ### Community 15 - "itinerary-route.ts"
 Cohesion: 0.16
-Nodes (28): ItineraryTransitHop, lineBrandColor(), getTransitLine(), haversineM(), LatLng, nearestStation(), stationById(), asCoord() (+20 more)
+Nodes (27): ItineraryTransitHop, lineBrandColor(), getTransitLine(), LatLng, nearestStation(), stationById(), asCoord(), BuildItineraryOptions (+19 more)
 
 ### Community 16 - "route-planner.ts"
 Cohesion: 0.07
