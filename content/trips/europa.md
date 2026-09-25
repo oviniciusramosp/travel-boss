@@ -96,11 +96,11 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 19:15 Piratas e Phantom Manor de novo, com fila curta. Opcional: **Star Wars Hyperspace Mountain**, montanha-russa com looping, com 16–21 min de fila depois das 20h
 - 20:45 [Disney Tales of Magic](place:par-dlp-tales-of-magic) — **Lugar para os fogos** no eixo da Main Street com o castelo, junto ao quiosque técnico do Casey's Corner: o melhor ponto para foto e vídeo, e o mais rápido para sair. Ali costuma encher 30–45 min antes; chegando 1h15 antes, sobra margem. A Central Plaza, mais perto do castelo, pede 1h–1h30 (chegue às 20h30). Lanche para a espera: hot dog do Casey's Corner (€10,50, pelo app, até 21h30). O show começa às 22h (~20 min), com projeções, fogos e lasers; confirme o horário no app no dia
   - via: a pé pela Main Street até a estação · 20 min
-- 22:41 [Marne-la-Vallée–Chessy](place:par-chessy-rer) — RER A das 22:41 sentido Paris, com a Navigo Semaine. É a volta mais rápida, com uma baldeação só. Se perder, o próximo sai às 22:56
+- 22:56 [Marne-la-Vallée–Chessy](place:par-chessy-rer) — RER A das 22:56 sentido Paris, com a Navigo Semaine: sobra ~35 min depois do show para sair sem correria
   - via: RER A até Val de Fontenay · 26 min
-- 23:07 [Val de Fontenay](place:par-val-de-fontenay-rer) — Sem RER E depois das 22h30 (obras de modernização). Ônibus 145 das 23:20, na Gare de Val de Fontenay, até a parada Jeanne d'Arc. Com o trem das 22:56: 145 das 23:40 ou 301 das 23:44, na Place du Général de Gaulle
+- 23:22 [Val de Fontenay](place:par-val-de-fontenay-rer) — Sem RER E depois das 22h30 (obras de modernização). Ônibus 145 das 23:40, na Gare de Val de Fontenay, até a parada Jeanne d'Arc; o próximo sai às 00:00
   - via: ônibus 145 até Jeanne d'Arc e caminhada · 32 min
-- 23:52 [Casa do Gui](place:par-casa-do-gui) — Volta; com o trem das 22:56, chegada às 00:12
+- 00:12 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Outras opções baratas lá dentro: Toad Hall (fish & chips €12, até 17h), Au Chalet de la Marionnette (meio frango €12) e, no Adventure World, o [Stark Factory](place:par-daw-stark-factory) (pizza de €14 que dá para duas pessoas). O Colonel Hathi's está fechado até 15/10. Fora dos portões: [McDonald's Disney Village](place:par-mcdonalds-disney) (fila de mais de 30 min: peça nos totens) e Earl of Sandwich
 
 ### Dia 5 — Qui 8/10 · Marais, almoço no Chez Janou e pôr do sol em Montmartre
