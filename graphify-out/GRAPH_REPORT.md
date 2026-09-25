@@ -1,7 +1,7 @@
-# Graph Report - travel-boss  (2026-09-25)
+# Graph Report - friendly-booth-4d53c1  (2026-09-25)
 
 ## Corpus Check
-- 190 files · ~279,411 words
+- 189 files · ~279,647 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `44d1d17f`
+- Built from commit: `8305635f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
