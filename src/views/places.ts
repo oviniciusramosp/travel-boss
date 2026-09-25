@@ -862,8 +862,9 @@ export function mountCity(
       else showHotelPins();
       planner.sync();
       main.scrollTop = 0;
+      // The transition runs this later. Publishing outside it wrote the old tab to the URL.
+      if (!hadPlace) publish();
     });
-    if (!hadPlace) publish();
   }
 
   function sync(state: CityRouteState) {
