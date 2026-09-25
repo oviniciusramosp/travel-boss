@@ -3166,6 +3166,152 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: "McDonald's Disney Village Chessy",
       },
 
+      // ── Disneyland Paris day (7 Oct 2026): pins from OSM, Sep 2026 ──
+      {
+        id: 'par-chessy-rer',
+        name: {
+          en: 'Marne-la-Vallée–Chessy station',
+          'pt-BR': 'Estação Marne-la-Vallée–Chessy',
+        },
+        category: 'transport',
+        description: {
+          en: 'RER A and TGV station at the Disney gates — 2 min walk to the bag check, which covers both parks.',
+          'pt-BR':
+            'Estação do RER A e do TGV na porta da Disney — 2 min a pé até a revista de bolsas, que vale para os dois parques.',
+        },
+        // OSM node/241926523
+        lat: 48.869913,
+        lng: 2.782173,
+        address: 'Place des Passagers du Vent, 77700 Chessy',
+        mapsQuery: 'Gare de Marne-la-Vallée Chessy',
+      },
+      {
+        id: 'par-daw-spider-man',
+        name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' },
+        category: 'tourist',
+        description: {
+          en: 'Avengers Campus, Disney Adventure World: interactive 3D ride where you sling webs with your hands and score points.',
+          'pt-BR':
+            'Avengers Campus, Disney Adventure World: atração interativa em 3D em que você lança teias com as mãos e marca pontos.',
+        },
+        // OSM way/1271516013
+        lat: 48.865951,
+        lng: 2.779093,
+        address: 'Avengers Campus, Disney Adventure World, 77700 Chessy',
+        mapsQuery: 'Spider-Man W.E.B. Adventure Disneyland Paris',
+      },
+      {
+        id: 'par-daw-ratatouille',
+        name: { en: 'Ratatouille: The Adventure', 'pt-BR': 'Ratatouille: The Adventure' },
+        category: 'tourist',
+        description: {
+          en: 'Place de Rémy, Disney Adventure World: trackless 3D ride at rat size through Gusteau’s kitchen.',
+          'pt-BR':
+            'Place de Rémy, Disney Adventure World: simulador 3D sem trilho, no tamanho de um rato, pela cozinha do Gusteau.',
+        },
+        // OSM way/1269073076
+        lat: 48.867962,
+        lng: 2.775708,
+        address: 'Place de Rémy, Disney Adventure World, 77700 Chessy',
+        mapsQuery: 'Ratatouille The Adventure Disneyland Paris',
+      },
+      {
+        id: 'par-daw-stark-factory',
+        name: { en: 'Stark Factory', 'pt-BR': 'Stark Factory' },
+        category: 'restaurants',
+        description: {
+          en: 'Avengers Campus counter service: fresh-dough pizza (one feeds two), pasta and bowls, free tap water.',
+          'pt-BR':
+            'Self-service do Avengers Campus: pizza de massa fresca (uma dá para dois), massas e bowls, com água da torneira grátis.',
+        },
+        // OSM way/1271516006
+        lat: 48.865686,
+        lng: 2.780045,
+        address: 'Avengers Campus, Disney Adventure World, 77700 Chessy',
+        mapsQuery: 'Stark Factory Disney Adventure World',
+      },
+      {
+        id: 'par-dlp-star-tours',
+        name: {
+          en: 'Star Tours: The Adventures Continue',
+          'pt-BR': 'Star Tours: The Adventures Continue',
+        },
+        category: 'tourist',
+        description: {
+          en: 'Discoveryland, Disneyland Park: Star Wars motion simulator; the scenes change from ride to ride.',
+          'pt-BR':
+            'Discoveryland, Disneyland Park: simulador de Star Wars; as cenas mudam a cada viagem.',
+        },
+        // OSM node/11309964890
+        lat: 48.87491,
+        lng: 2.779051,
+        address: 'Discoveryland, Disneyland Park, 77700 Chessy',
+        mapsQuery: 'Star Tours Disneyland Paris',
+      },
+      {
+        id: 'par-dlp-pirates',
+        name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' },
+        category: 'tourist',
+        description: {
+          en: 'Adventureland, Disneyland Park: boat dark ride through the pirates’ story, with two small drops.',
+          'pt-BR':
+            'Adventureland, Disneyland Park: dark ride de barco pela história dos piratas, com duas quedinhas.',
+        },
+        // Boarding side of OSM way/1243661105
+        lat: 48.8735,
+        lng: 2.7728,
+        address: 'Adventureland, Disneyland Park, 77700 Chessy',
+        mapsQuery: 'Pirates of the Caribbean Disneyland Paris',
+      },
+      {
+        id: 'par-dlp-phantom-manor',
+        name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' },
+        category: 'tourist',
+        description: {
+          en: 'Frontierland, Disneyland Park: haunted-mansion dark ride, Melanie Ravenswood’s story. The most Halloween ride in the park.',
+          'pt-BR':
+            'Frontierland, Disneyland Park: dark ride da mansão assombrada, com a história da Melanie Ravenswood. A atração mais Halloween do parque.',
+        },
+        // Manor side of OSM way/1223755258
+        lat: 48.8706,
+        lng: 2.7768,
+        address: 'Frontierland, Disneyland Park, 77700 Chessy',
+        mapsQuery: 'Phantom Manor Disneyland Paris',
+      },
+      {
+        id: 'par-dlp-casa-de-coco',
+        name: {
+          en: 'Casa de Coco – Restaurante de Familia',
+          'pt-BR': 'Casa de Coco – Restaurante de Familia',
+        },
+        category: 'restaurants',
+        description: {
+          en: 'Frontierland counter service themed on Coco: burritos and churros. Día de los Muertos décor during Halloween.',
+          'pt-BR':
+            'Self-service de Frontierland com o tema de Viva – A Vida É uma Festa: burritos e churros. Decoração do Día de los Muertos no Halloween.',
+        },
+        // OSM way/1226302856
+        lat: 48.871759,
+        lng: 2.774672,
+        address: 'Frontierland, Disneyland Park, 77700 Chessy',
+        mapsQuery: 'Casa de Coco Restaurante de Familia Disneyland Paris',
+      },
+      {
+        id: 'par-dlp-tales-of-magic',
+        name: { en: 'Disney Tales of Magic', 'pt-BR': 'Disney Tales of Magic' },
+        category: 'tourist',
+        description: {
+          en: 'Night show at park close, ~20 min: projections on the castle and Main Street, fireworks and lasers; no drones since April 2026. The pin marks the viewing spot on the Main Street–castle axis by Casey’s Corner.',
+          'pt-BR':
+            'Show noturno no fechamento do parque, ~20 min: projeções no castelo e na Main Street, fogos e lasers; sem drones desde abril de 2026. O pino marca o lugar para assistir, no eixo Main Street–castelo, junto ao Casey’s Corner.',
+        },
+        // Main Street footway (OSM way/1196904442) at Casey's Corner
+        lat: 48.87225,
+        lng: 2.77723,
+        address: 'Main Street, U.S.A., Disneyland Park, 77700 Chessy',
+        mapsQuery: "Casey's Corner Disneyland Paris",
+      },
+
       // ── Chains (commons) ──
       {
         id: 'par-mcdonalds-champs',
