@@ -71,6 +71,8 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 
 Edite o `.md`. Com `npm run dev`, o save avisa o browser (`tb:trip`) e o roteiro aberto é relido de `/api/trips`. Não duplique o roteiro em TypeScript. Coordenadas, avaliações e ranking de hotel ficam em `src/data`; o arquivo da viagem só referencia ids.
 
+Trecho de trem ou metrô entre dois lugares só aparece no mapa se `src/data/travel-itinerary-legs.ts` tiver uma perna para esse par (a lista da viagem é `tripEuropa2026`). Monte a perna com `ride(linha, estação, estação)` sobre as estações de `src/data/travel-transit-lines.ts`, que vêm do OSM. Mudou uma parada que tem `via:` de trem? Atualize a perna junto.
+
 ## Catálogo de lugares
 
 A fonte da verdade é `src/data/travel.ts` (`travelCities`), com `travel-visit.ts`, `travel-photos.ts` e `travel-subcategories.ts`. Não há CMS nem sincronização: o Notion era do portfólio e não é usado aqui. Lugar novo ou correção vai direto nesses arquivos.
