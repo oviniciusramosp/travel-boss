@@ -36,8 +36,8 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   'par-bouillon': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/e/ef/Chez_Chartier_1.JPG',
-      'Bouillon',
-      'Bouillon',
+      'Bouillon Chartier',
+      'Bouillon Chartier',
       'Wikimedia Commons',
     ),
   ],

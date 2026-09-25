@@ -514,9 +514,9 @@ export const parisItinerary: TravelItinerary = {
           time: '20:30',
           slot: 'evening',
           note: {
-            en: 'Dinner — classic French, great ratings, ~€15–20/person. Book or takeaway.',
+            en: 'Dinner — classic French, great ratings, ~€15–20/person. No reservations: join the queue.',
             'pt-BR':
-              'Jantar — francês clássico, ótimas notas, ~€15–20/pessoa. Reserve ou leve.',
+              'Jantar — francês clássico, ótimas notas, ~€15–20/pessoa. Não aceita reserva: entre na fila.',
           },
         },
       ],
@@ -643,8 +643,8 @@ export const parisItinerary: TravelItinerary = {
           time: '18:00',
           slot: 'afternoon',
           note: {
-            en: 'Croque-lanche by the canal.',
-            'pt-BR': 'Croque-lanche no canal.',
+            en: 'Croque-lanche in Montmartre.',
+            'pt-BR': 'Croque-lanche em Montmartre.',
           },
         },
         {

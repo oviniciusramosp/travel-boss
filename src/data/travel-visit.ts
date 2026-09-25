@@ -1218,9 +1218,10 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'par-bouillon': restaurantVisit(15, 28, {
+    bestDay: L('Daily 11:30–00:00, non-stop', 'Todo dia 11h30–0h, sem intervalo'),
     tips: L(
-      'Classic French, fair prices. Book for dine-in or takeaway in ~5 min — eat at a park/canal.',
-      'Francês clássico, preço justo. Reserve para comer lá ou leve em ~5 min — coma em parque/canal.',
+      'No reservations: join the queue. Metro Grands Boulevards (8, 9) is 70 m away.',
+      'Não aceita reserva: entre na fila. O metrô Grands Boulevards (8, 9) fica a 70 m.',
     ),
   }),
   'par-royal-cambronne': restaurantVisit(18, 35, {
@@ -1306,7 +1307,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Costuma formar fila — vá cedo se puder. Croissants premiados.',
     ),
   }),
-  'par-jeffrey-cagnes': cafeVisit(6, 14),
+  'par-jeffrey-cagnes': cafeVisit(6, 14, {
+    bestDay: L('Mon–Fri 9:00–18:30; Sat 9:30–19:00; closed Sun', 'Seg–sex 9h–18h30; sáb 9h30–19h; fecha domingo'),
+    tips: L(
+      'Pre-order pastries online (Click & Collect; changes up to 24 h before). Drinks are made on site.',
+      'Encomende os doces online (Click & Collect; dá para mudar até 24 h antes). As bebidas são feitas na hora.',
+    ),
+  }),
   'par-michalak': cafeVisit(8, 20),
   'par-michalak-etienne': cafeVisit(6, 15, {
     tips: L(

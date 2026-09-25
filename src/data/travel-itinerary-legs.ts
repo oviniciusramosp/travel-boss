@@ -585,7 +585,7 @@ const day2: ItineraryLegDef[] = [
 ];
 
 /**
- * Day 3 — Left bank cluster walk, then north for canal / Montmartre.
+ * Day 3 — Left bank cluster walk, then north to Montmartre.
  */
 const day3: ItineraryLegDef[] = [
   { from: 'par-maison-isabelle', to: 'par-luxembourg', mode: 'walk' },
