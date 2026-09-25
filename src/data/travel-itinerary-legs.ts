@@ -24,6 +24,10 @@ export type ItineraryTransitHop = {
   path: LatLng[];
   /** Short label for this hop (e.g. "M14") */
   label?: string;
+  /** Station where this ride ends, shown on its chip ("RER E → Magenta"). */
+  exit?: string;
+  /** Walk from the previous ride, when the corridors run longer than the straight line. */
+  transferMin?: number;
 };
 
 export type ItineraryLegDef = {
@@ -80,9 +84,16 @@ export function legDisplayLabel(leg: ItineraryLegDef): LString {
   return { en: 'Transit', 'pt-BR': 'Transporte' };
 }
 
-/** Walk ≈ 4.8 km/h; urban transit effective ≈ 21 km/h */
+/** Walk ≈ 4.8 km/h; metro effective ≈ 21 km/h; RER and Transilien ≈ 42 km/h */
 const WALK_M_PER_MIN = 80;
 const TRANSIT_M_PER_MIN = 350;
+const RAIL_M_PER_MIN = 700;
+
+/** Suburban rail stops far less often than the metro. */
+export function transitMPerMin(line?: string): number {
+  return line?.startsWith('rer-') || line?.startsWith('transilien-') ? RAIL_M_PER_MIN : TRANSIT_M_PER_MIN;
+}
+
 /** Boarding / wait buffer for transit legs */
 const TRANSIT_BUFFER_MIN = 2;
 /**
@@ -151,11 +162,13 @@ export function estimateLegDurationMin(
         if (d >= INTER_HOP_WALK_MIN_M) interHopWalk += d;
       }
     }
-    const spine = pathLengthM(spinePath);
+    const rideMin = leg.hops?.length
+      ? leg.hops.reduce((sum, hop) => sum + pathLengthM(hop.path) / transitMPerMin(hop.line), 0)
+      : pathLengthM(spinePath) / transitMPerMin(leg.line);
     const hopBuffer = (leg.hops?.length ?? 1) * TRANSIT_BUFFER_MIN;
     const mins =
       walkIn / WALK_M_PER_MIN +
-      spine / TRANSIT_M_PER_MIN +
+      rideMin +
       interHopWalk / WALK_M_PER_MIN +
       walkOut / WALK_M_PER_MIN +
       hopBuffer;
@@ -236,12 +249,12 @@ function stationCountFromPath(path?: LatLng[]): number {
 }
 
 /** Transit spine duration for one hop/path (minutes). */
-function transitPathDurationMin(path: LatLng[]): number {
+function transitPathDurationMin(path: LatLng[], line?: string): number {
   if (path.length < 2) return TRANSIT_BUFFER_MIN;
   const spine = pathLengthM(path);
   return Math.max(
     1,
-    Math.round(spine / TRANSIT_M_PER_MIN) + TRANSIT_BUFFER_MIN,
+    Math.round(spine / transitMPerMin(line)) + TRANSIT_BUFFER_MIN,
   );
 }
 
@@ -279,12 +292,13 @@ export function expandTimelineTransferParts(
         hop.label ??
         getTransitLine(hop.line)?.name ??
         String(hop.line).toUpperCase();
+      const chip = hop.exit ? `${name} → ${hop.exit}` : name;
       parts.push({
         mode: 'transit',
         leg,
-        label: { en: name, 'pt-BR': name },
+        label: { en: chip, 'pt-BR': chip },
         color: lineBrandColor(hop.line) ?? '#008fff',
-        durationMin: transitPathDurationMin(hop.path),
+        durationMin: transitPathDurationMin(hop.path, hop.line),
         hopIndex: i,
         stationCount: stationCountFromPath(hop.path),
       });
@@ -293,7 +307,7 @@ export function expandTimelineTransferParts(
       const next = leg.hops[i + 1];
       if (!next) continue;
       const walkM = interHopWalkM(hop, next);
-      if (walkM < INTER_HOP_WALK_MIN_M) continue;
+      if (walkM < INTER_HOP_WALK_MIN_M && next.transferMin == null) continue;
       const nextName =
         next.label ??
         getTransitLine(next.line)?.name ??
@@ -306,7 +320,7 @@ export function expandTimelineTransferParts(
           'pt-BR': `A pé até ${nextName}`,
         },
         color: null,
-        durationMin: Math.max(1, Math.round(walkM / WALK_M_PER_MIN)),
+        durationMin: next.transferMin ?? Math.max(1, Math.round(walkM / WALK_M_PER_MIN)),
         stationCount: 0,
       });
     }
@@ -328,7 +342,7 @@ export function expandTimelineTransferParts(
 
   const durationMin =
     leg.path && leg.path.length >= 2
-      ? transitPathDurationMin(leg.path)
+      ? transitPathDurationMin(leg.path, leg.line)
       : from && to
         ? estimateLegDurationMin(leg, from, to)
         : Math.max(3, leg.durationMin ?? 8);

@@ -209,6 +209,43 @@ describe('paris itinerary', () => {
     }
   });
 
+  it('trip train chips: rail rides faster than metro, exit station, corridor walk', () => {
+    const rerE = getTransitLine('rer-e')!;
+    const metro8 = getTransitLine('m8')!;
+    const rail = sliceLinePath(rerE, 'noisy-le-sec', 'haussmann-saint-lazare');
+    const metro = sliceLinePath(metro8, 'opera', 'creteil-prefecture');
+    const [railChip] = expandTimelineTransferParts({
+      from: 'a',
+      to: 'b',
+      mode: 'transit',
+      hops: [{ line: 'rer-e', label: 'RER E', exit: 'Haussmann–Saint-Lazare', path: rail }],
+    });
+    const [metroChip] = expandTimelineTransferParts({
+      from: 'a',
+      to: 'b',
+      mode: 'transit',
+      hops: [{ line: 'm8', label: 'M8', path: metro }],
+    });
+    expect(railChip?.label.en).toBe('RER E → Haussmann–Saint-Lazare');
+    // ~11 km of RER in under 20 min; ~13 km of metro takes over 35
+    expect(railChip?.durationMin).toBeLessThan(20);
+    expect(metroChip?.durationMin).toBeGreaterThan(35);
+
+    // Stops 70 m apart, but the Gare du Nord → Magenta corridor takes minutes
+    const parts = expandTimelineTransferParts({
+      from: 'a',
+      to: 'b',
+      mode: 'transit',
+      hops: [
+        { line: 'm5', label: 'M5', path: sliceLinePath(getTransitLine('m5')!, 'republique', 'gare-nord') },
+        { line: 'rer-e', label: 'RER E', path: sliceLinePath(rerE, 'magenta', 'noisy-le-sec'), transferMin: 6 },
+      ],
+    });
+    expect(parts.map((part) => part.mode)).toEqual(['transit', 'walk', 'transit']);
+    expect(parts[1]?.label.en).toBe('Walk to RER E');
+    expect(parts[1]?.durationMin).toBe(6);
+  });
+
   it('transit line slices return geometry', () => {
     const m1 = getTransitLine('m1')!;
     const path = sliceLinePath(m1, 'la-defense', 'palais-royal');
