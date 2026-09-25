@@ -344,13 +344,6 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'RER B a partir de Aéroport Charles de Gaulle 1 / 2 TGV até Paris (~45–60 min). Deixe folga para segurança, CDGVAL entre terminais e longas caminhadas. Magenta / Gare du Nord são saídas comuns no centro.',
     ),
   },
-  'par-desgranges-passy': cafeVisit(3, 6, {
-    bestDay: L('Open daily 07:00–20:00 except Tuesday', 'Abre todo dia das 7h às 20h, menos terça'),
-    tips: L(
-      'Pain au chocolat ~€1.80; coffee + pastry formula ~€4.50 (delivery-app prices, the counter may be cheaper).',
-      'Pain au chocolat ~€1,80; fórmula café + doce ~€4,50 (preços do app de entrega, no balcão pode ser menos).',
-    ),
-  }),
   'par-cdg-paul': cafeVisit(6, 12, {
     tips: L(
       'Breakfast on the walk toward CDG 2 TGV — keep it light before the long RER ride east.',
@@ -1278,9 +1271,10 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   'par-bake-blend': cafeVisit(6, 14, {
     durationMin: 20,
     durationMax: 30,
+    bestDay: L('Sunday 08:00–19:00; busiest around 17:00', 'Domingo das 8h às 19h; mais cheio perto das 17h'),
     tips: L(
-      'Grab bakery + coffee to go — eat while walking to the Champ de Mars.',
-      'Pegue padaria + café para levar — coma andando até o Champ de Mars.',
+      'Maison Bergeron pastries (pain au chocolat) and barista coffee. Grab them to go and eat while walking to the Champ de Mars.',
+      'Doces da Maison Bergeron (pain au chocolat) e café de barista. Pegue para levar e coma andando até o Champ de Mars.',
     ),
   }),
   'par-bakery-gaite': cafeVisit(6, 14, {

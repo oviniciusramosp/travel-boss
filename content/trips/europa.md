@@ -14,14 +14,14 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
   - via: a pé · 6 min
 - 15:30 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso depois do almoço no aeroporto
-- 16:45 [Casa do Gui](place:par-casa-do-gui) — Saída, com bilhete avulso (€2,55 no app IDF Mobilités): a Navigo Semaine só começa amanhã. Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
+- 16:30 [Casa do Gui](place:par-casa-do-gui) — Saída, com bilhete avulso (€2,55 no app IDF Mobilités): a Navigo Semaine só começa amanhã. Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
   - via: RER E + metrô 9 · 45 min
-- 17:30 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
-- 17:40 [Desgranges (Passy)](place:par-desgranges-passy) — Café da tarde: pain au chocolat e café para levar (~€4,50). Sem desvio, mas mais caro (~€9): Carette, na própria Place du Trocadéro
-- 17:55 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
-- 18:05 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
-- 18:15 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
-- 18:25 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**, com ingresso das 18h30: compre já, porque vende até 90 dias antes e esgota (só elevador €36,70; escada até o 2º andar + elevador €28). O sol se põe às 19h26: você vê lá de cima. Última subida às 22h45, se o voo atrasar
+- 17:15 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
+- 17:25 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
+- 17:35 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
+- 17:45 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
+- 18:00 [Le café by Maison Bergeron](place:par-bake-blend) — Café da tarde: pain au chocolat e café (nota 4,5 no Google). Domingo abre até 19h e costuma ter fila no fim da tarde
+- 18:20 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**, com ingresso das 18h30: compre já, porque vende até 90 dias antes e esgota (só elevador €36,70; escada até o 2º andar + elevador €28). O sol se põe às 19h26: você vê lá de cima. Última subida às 22h45, se o voo atrasar
 - 20:15 [Champ de Mars](place:par-champ-mars) — Descida pelo gramado até a École Militaire, com a Torre acesa atrás
 - 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Só por fora: a capela fica na ala norte do prédio da cúpula, que é área militar. Volta pelo gramado com a Torre de frente
 - 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp

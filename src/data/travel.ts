@@ -1304,9 +1304,10 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'Café e padaria perto do Champ de Mars.',
         },
         googleRating: 4.5,
-        lat: 48.8584,
-        lng: 2.3008,
-        address: '1 Rue Amélie, 75007 Paris',
+        // OSM node 1191424012. The old address, 1 Rue Amélie, was wrong.
+        lat: 48.85837,
+        lng: 2.30068,
+        address: '39 Avenue Rapp, 75007 Paris',
         mapsQuery: 'Le café by Maison Bergeron Paris',
         mapsUrl: 'https://maps.app.goo.gl/ezkYGpjLCM1ZrFuC8',
       },
@@ -3997,23 +3998,6 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.29008,
         address: 'Jardins du Trocadéro, 75016 Paris',
         mapsQuery: 'Fontaine de Varsovie Trocadéro Paris',
-      },
-      {
-        id: 'par-desgranges-passy',
-        name: { en: 'Desgranges (Passy)', 'pt-BR': 'Desgranges (Passy)' },
-        category: 'cafes',
-        subcategories: ['bakery'],
-        description: {
-          en: 'Neighbourhood boulangerie on Rue de Passy, 6 min from Trocadéro. Pain au chocolat and coffee to go; open Sundays.',
-          'pt-BR':
-            'Boulangerie de bairro na Rue de Passy, a 6 min do Trocadéro. Pain au chocolat e café para levar; abre aos domingos.',
-        },
-        googleRating: 3.6,
-        // OSM node 5168750702.
-        lat: 48.858489,
-        lng: 2.283818,
-        address: '6 Rue de Passy, 75016 Paris',
-        mapsQuery: 'Desgranges 6 Rue de Passy Paris',
       },
 
       // ── Oct 2026 trip list: shopping, pharmacies, levain, logistics ──

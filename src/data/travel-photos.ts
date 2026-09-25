@@ -936,14 +936,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Andre lleo · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
-  'par-desgranges-passy': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Pain_au_Chocolat.jpg/1280px-Pain_au_Chocolat.jpg',
-      'Pain au chocolat (generic photo)',
-      'Pain au chocolat (foto ilustrativa)',
-      'Andre lleo · CC BY-SA 4.0 · Wikimedia Commons',
-    ),
-  ],
   'par-cdg-paul': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Pain_au_chocolat_Luc_Viatour.jpg/1280px-Pain_au_chocolat_Luc_Viatour.jpg',
