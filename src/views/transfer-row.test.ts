@@ -74,7 +74,7 @@ describe('transferRowModel', () => {
     expect(tower).toBeTruthy();
     const parts = expandTimelineTransferParts(tower!);
     const walk = parts.find((part) => part.mode === 'walk');
-    const m9 = parts.find((part) => part.label.en === 'M9');
+    const m9 = parts.find((part) => part.label.en === 'M9 → Trocadéro');
     expect(walk).toBeTruthy();
     expect(m9).toBeTruthy();
 
@@ -98,7 +98,7 @@ describe('transferRowModel', () => {
     expect(hop).toMatchObject({
       mode: 'transit',
       icon: 'directions_transit',
-      label: 'M9',
+      label: 'M9 → Trocadéro',
       duration: pickLocale('en', formatLegDuration(m9!.durationMin)),
       lineColor: m9!.color,
       hopIndex: 1,

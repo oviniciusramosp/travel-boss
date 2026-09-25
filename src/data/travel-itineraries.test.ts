@@ -123,15 +123,15 @@ describe('paris itinerary', () => {
     expect(homeLeg?.hops?.length).toBe(3);
   });
 
-  it('day 1 RER E → M9 inserts walk between St-Lazare and St-Augustin', () => {
+  it('day 1 RER E → M9 inserts walk between Haussmann–Saint-Lazare and Havre–Caumartin', () => {
     const legs = legsForDay('paris-d1');
     const towerLeg = legs.find((l) => l.label === 'RER E + M9');
     expect(towerLeg).toBeTruthy();
     const parts = expandTimelineTransferParts(towerLeg!);
     expect(parts.map((p) => p.mode)).toEqual(['transit', 'walk', 'transit']);
-    expect(parts[0]?.label.en).toBe('RER E');
+    expect(parts[0]?.label.en).toBe('RER E → Haussmann–Saint-Lazare');
     expect(parts[1]?.label.en).toMatch(/Walk to M9/i);
-    expect(parts[2]?.label.en).toBe('M9');
+    expect(parts[2]?.label.en).toBe('M9 → Trocadéro');
     // Same-station multi-hop (M14 + RER E) must not invent a walk
     const ory = legs.find((l) => l.label === 'M14 + RER E');
     const oryParts = expandTimelineTransferParts(ory!);

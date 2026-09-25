@@ -7,7 +7,20 @@ import type { LString } from './travel';
 import {
   getTransitLine,
   haversineM,
+  metro14,
+  metro2,
+  metro4,
+  metro5,
+  metro8,
+  metro9,
+  rerA,
+  rerB,
+  rerC,
+  rerE,
+  sliceLinePath,
+  transilienL,
   type LatLng,
+  type TransitLine,
   type TransitLineId,
 } from './travel-transit-lines';
 
@@ -371,33 +384,10 @@ const day1AfterBase: ItineraryLegDef[] = [
     from: 'par-casa-do-gui',
     to: 'par-trocadero',
     mode: 'transit',
-    // Walk house → Noisy RER (auto), RER E west → Saint-Lazare,
-    // walk corridor to M9 Saint-Augustin (~3–5 min), M9 to Trocadéro.
+    // Walk house → Noisy RER (auto), RER E west to Haussmann–Saint-Lazare,
+    // corridor to M9 Havre–Caumartin, M9 to Trocadéro.
     // Inter-hop walk is auto-inserted in timeline + map (coords differ).
-    hops: [
-      {
-        line: 'rer-e',
-        label: 'RER E',
-        path: [
-          [48.8907, 2.4608], // Noisy-le-Sec (board)
-          [48.8855, 2.385], // Pantin
-          [48.8785, 2.358], // Magenta
-          [48.8755, 2.3255], // Saint-Lazare (alight → walk to M9)
-        ],
-      },
-      {
-        line: 'm9',
-        label: 'M9',
-        path: [
-          [48.8745, 2.322], // Saint-Augustin (board after walk from St-Lazare)
-          [48.8735, 2.3145], // Miromesnil
-          [48.869, 2.31], // Franklin D. Roosevelt
-          [48.865, 2.3005], // Alma–Marceau
-          [48.8645, 2.2935], // Iéna
-          [48.863, 2.2875], // Trocadéro
-        ],
-      },
-    ],
+    hops: [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'), ride(metro9, 'havre-caumartin', 'trocadero')],
     label: 'RER E + M9',
     durationMin: 45,
   },
@@ -874,6 +864,107 @@ const day7: ItineraryLegDef[] = [
 ];
 
 /** day.id → ordered legs between primary stops (default arrival when day has variants) */
+/** One ride along a registry line, with where to get off. Throws on an unknown stretch. */
+function ride(line: TransitLine, from: string, to: string, transferMin?: number): ItineraryTransitHop {
+  const path = sliceLinePath(line, from, to);
+  const exit = line.stations.find((station) => station.id === to);
+  if (path.length < 2 || !exit) throw new Error(`${line.id}: no ride ${from} → ${to}`);
+  return {
+    line: line.id,
+    label: line.name.replace('Métro ', 'M'),
+    exit: exit.name,
+    path,
+    ...(transferMin ? { transferMin } : {}),
+  };
+}
+
+function trainLeg(from: string, to: string, durationMin: number, hops: ItineraryTransitHop[]): ItineraryLegDef {
+  return { from, to, mode: 'transit', hops, label: hops.map((hop) => hop.label).join(' + '), durationMin };
+}
+
+/**
+ * Gare du Nord ↔ Magenta: the stops sit 70 m apart, but the corridor is 150–200 m
+ * across levels; journey planners give 2–8 min.
+ */
+const GARE_DU_NORD_MAGENTA_MIN = 6;
+
+/** RER C branch Champ de Mars → Neuilly–Porte Maillot (OSM stop positions); the registry holds the Versailles spine. */
+const rerCToPorteMaillot: ItineraryTransitHop = {
+  line: 'rer-c',
+  label: 'RER C',
+  exit: 'Neuilly–Porte Maillot',
+  path: [
+    [48.856069, 2.289535], // Champ de Mars–Tour Eiffel
+    [48.853234, 2.280131], // Avenue du Président Kennedy
+    [48.856555, 2.275139], // Boulainvilliers
+    [48.865323, 2.272074], // Avenue Henri Martin
+    [48.869792, 2.274698], // Avenue Foch
+    [48.878781, 2.28557], // Neuilly–Porte Maillot
+  ],
+};
+
+/**
+ * Train hops of content/trips/europa.md that no portfolio day covers.
+ * Without a spine the trip view leaves a transit hop off the map.
+ */
+const tripEuropa2026: ItineraryLegDef[] = [
+  // 5/10
+  trainLeg('par-casa-do-gui', 'par-bohemia', 40, [
+    ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
+    ride(metro14, 'saint-lazare', 'pyramides'),
+  ]),
+  trainLeg('par-carre-opera', 'par-creteil-soleil', 45, [ride(metro8, 'opera', 'creteil-prefecture')]),
+  trainLeg('par-creteil-soleil', 'par-bouillon-republique', 35, [ride(metro8, 'creteil-prefecture', 'republique')]),
+  trainLeg('par-bouillon-republique', 'par-casa-do-gui', 40, [
+    ride(metro5, 'republique', 'gare-nord'),
+    ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN),
+  ]),
+  // 6/10
+  trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
+    ride(rerE, 'noisy-le-sec', 'magenta'),
+    ride(rerB, 'gare-nord', 'saint-michel', GARE_DU_NORD_MAGENTA_MIN),
+  ]),
+  trainLeg('par-place-dauphine', 'par-recrutement', 15, [ride(rerC, 'saint-michel', 'invalides')]),
+  trainLeg('par-champ-mars', 'par-casa-do-gui', 60, [
+    rerCToPorteMaillot,
+    ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),
+  ]),
+  // 7/10
+  trainLeg('par-noisy-le-sec-rer', 'par-disneyland', 45, [
+    ride(rerE, 'noisy-le-sec', 'val-de-fontenay'),
+    ride(rerA, 'val-de-fontenay', 'chessy'),
+  ]),
+  trainLeg('par-disneyland', 'par-noisy-le-sec-rer', 45, [
+    ride(rerA, 'chessy', 'val-de-fontenay'),
+    ride(rerE, 'val-de-fontenay', 'noisy-le-sec'),
+  ]),
+  // 8/10
+  trainLeg('par-casa-do-gui', 'par-du-pain-idees', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
+  trainLeg('par-naturalia-verrerie', 'par-moulin-rouge', 30, [
+    ride(metro4, 'chatelet', 'barbès'),
+    ride(metro2, 'barbès', 'blanche'),
+  ]),
+  trainLeg('par-sacre-coeur', 'par-casa-do-gui', 45, [
+    ride(metro2, 'anvers', 'la-chapelle'),
+    ride(rerE, 'magenta', 'noisy-le-sec'),
+  ]),
+  // 9/10
+  trainLeg('par-casa-do-gui', 'par-versailles', 95, [
+    ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
+    ride(transilienL, 'saint-lazare', 'versailles-rd'),
+  ]),
+  trainLeg('par-trianon', 'par-casa-do-gui', 110, [
+    ride(transilienL, 'versailles-rd', 'saint-lazare'),
+    ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
+  ]),
+  // 10/10
+  trainLeg('par-casa-do-gui', 'par-cedric-grolet', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
+  trainLeg('par-entrecote', 'par-casa-do-gui', 45, [
+    ride(metro9, 'fdr', 'chaussee-antin'),
+    ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
+  ]),
+];
+
 export const parisDayLegsById: Record<string, ItineraryLegDef[]> = {
   'paris-d1': day1,
   'paris-d1:cdg': day1Cdg,
@@ -883,6 +974,8 @@ export const parisDayLegsById: Record<string, ItineraryLegDef[]> = {
   'paris-d5': day5,
   'paris-d6': day6,
   'paris-d7': day7,
+  // Not a portfolio day: resolveTripLeg reads every list here by from → to pair.
+  'trip-europa-2026': tripEuropa2026,
 };
 
 /** Milan transit durations include waiting and station access; no surveyed track geometry. */

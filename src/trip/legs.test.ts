@@ -45,7 +45,7 @@ describe('resolveTripLeg', () => {
     ]);
     expect(transit.geometry?.[0]?.color).toBeTruthy();
     expect(transit.geometry?.[1]?.color).toBeTruthy();
-    expect(transit.geometry?.[0]?.path[0]).toEqual([48.8907, 2.4608]);
+    expect(transit.geometry?.[0]?.path[0]).toEqual([48.896765, 2.458672]);
   });
 
   it('draws via transit as a straight line when the pair is not in the catalog', () => {
