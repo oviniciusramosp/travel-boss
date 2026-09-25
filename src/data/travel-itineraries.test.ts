@@ -246,6 +246,25 @@ describe('paris itinerary', () => {
     expect(parts[1]?.durationMin).toBe(6);
   });
 
+  it('train leg rows: walk to the station, the rides, the walk between lines, the walk to the stop', () => {
+    const city = getTravelCity('paris')!;
+    const at = (id: string) => city.places.find((p) => p.id === id)!;
+    const tower = legsForDay('paris-d1').find((l) => l.label === 'RER E + M9')!;
+    const parts = expandTimelineTransferParts(tower, at('par-casa-do-gui'), at('par-trocadero'));
+    expect(parts.map((p) => [p.mode, p.hopIndex ?? null, p.walkIndex ?? null])).toEqual([
+      ['walk', null, 0],
+      ['transit', 0, null],
+      ['walk', null, 1],
+      ['transit', 1, null],
+      ['walk', null, 2],
+    ]);
+    expect(parts[0]?.label['pt-BR']).toBe('A pé até RER E');
+    expect(parts[4]?.label['pt-BR']).toBe('A pé');
+    // Casa do Gui → Noisy-le-Sec is ~540 m in a straight line, ~8 min on the streets
+    expect(parts[0]?.durationMin).toBeGreaterThanOrEqual(8);
+    expect(parts[0]?.durationMin).toBeLessThanOrEqual(10);
+  });
+
   it('transit line slices return geometry', () => {
     const m1 = getTransitLine('m1')!;
     const path = sliceLinePath(m1, 'la-defense', 'palais-royal');

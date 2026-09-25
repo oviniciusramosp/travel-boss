@@ -26,6 +26,7 @@ export {
 } from '../data/travel';
 
 export {
+  estimateLegDurationMin,
   expandTimelineTransferParts,
   formatLegDuration,
   legDisplayLabel,

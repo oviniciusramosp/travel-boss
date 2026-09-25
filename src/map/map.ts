@@ -167,7 +167,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   let routeSource: 'map' | 'ui' | null = null;
   let routeClearTimer = 0;
   const legFns = new Set<
-    (leg: { from: string; to: string; hop?: number; mode?: 'walk' | 'transit' } | null) => void
+    (leg: { from: string; to: string; hop?: number; walk?: number; mode?: 'walk' | 'transit' } | null) => void
   >();
   let cityLayer: LayerGroup | null = null;
   let overviewLayer: LayerGroup | null = null;
@@ -456,6 +456,7 @@ export function mountMap(host: HTMLElement): MapHandle {
           from: leg.from,
           to: leg.to,
           ...(leg.hop != null ? { hop: leg.hop } : {}),
+          ...(leg.walk != null ? { walk: leg.walk } : {}),
           ...(leg.mode ? { mode: leg.mode } : {}),
         };
         routeSource = 'map';
@@ -683,6 +684,7 @@ export function mountMap(host: HTMLElement): MapHandle {
         routeSource = null;
       } else {
         const hop = typeof opts === 'number' ? opts : opts?.hop;
+        const walk = typeof opts === 'number' ? undefined : opts?.walk;
         const mode = typeof opts === 'number' ? undefined : opts?.mode;
         hoveredId = to;
         pinnedLeg = {
@@ -690,6 +692,7 @@ export function mountMap(host: HTMLElement): MapHandle {
           from,
           to,
           ...(hop != null && Number.isFinite(hop) ? { hop } : {}),
+          ...(walk != null && Number.isFinite(walk) ? { walk } : {}),
           ...(mode ? { mode } : {}),
         };
         routeFocus = pinnedLeg;

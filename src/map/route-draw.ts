@@ -21,6 +21,7 @@ export type RouteEntry = {
   fromId?: string;
   toId?: string;
   hopIndex?: number;
+  walkIndex?: number;
   mode: 'walk' | 'transit';
   line: Polyline;
   flow?: Polyline;
@@ -31,6 +32,7 @@ export type RoutePointer = {
   from: string;
   to: string;
   hop?: number;
+  walk?: number;
   mode?: 'walk' | 'transit';
 } | null;
 
@@ -102,6 +104,7 @@ export function drawRouteSegments(
             to: segment.toId,
             mode,
             ...(segment.hopIndex != null ? { hop: segment.hopIndex } : {}),
+            ...(segment.walkIndex != null ? { walk: segment.walkIndex } : {}),
           }
         : null;
     if (leg) {
@@ -183,6 +186,7 @@ export function drawRouteSegments(
       fromId: segment.fromId,
       toId: segment.toId,
       ...(segment.hopIndex != null ? { hopIndex: segment.hopIndex } : {}),
+      ...(segment.walkIndex != null ? { walkIndex: segment.walkIndex } : {}),
       mode,
       line,
       flow,

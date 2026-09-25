@@ -1,5 +1,6 @@
 import type { Shell } from '../app/shell';
 import {
+  estimateLegDurationMin,
   getTravelCity,
   googleMapsUrl,
   pickLocale,
@@ -578,6 +579,7 @@ export function mountTrip(
           ...(segment.fromId ? { fromId: segment.fromId } : {}),
           ...(segment.toId ? { toId: segment.toId } : {}),
           ...(segment.hopIndex != null ? { hopIndex: segment.hopIndex } : {}),
+          ...(segment.walkIndex != null ? { walkIndex: segment.walkIndex } : {}),
         }));
       },
     })
@@ -928,9 +930,11 @@ export function mountTrip(
       return;
     }
     const hop = pressed.dataset.legHop;
+    const walk = pressed.dataset.legWalk;
     map.hoverLeg(from, to, {
       mode: pressed.dataset.legMode === 'walk' ? 'walk' : 'transit',
       ...(hop ? { hop: Number(hop) } : {}),
+      ...(walk ? { walk: Number(walk) } : {}),
     });
   }
 
@@ -940,6 +944,13 @@ export function mountTrip(
     transfer.dataset.legTo = toId;
     transfer.dataset.legMode = mode;
     if (hop != null) transfer.dataset.legHop = String(hop);
+    // One walk of a train leg lights on its own: to the station, between lines, or to the stop.
+    const walkRaw = transfer.dataset.legWalk;
+    const target: { mode: 'walk' | 'transit'; hop?: number; walk?: number } = {
+      mode,
+      ...(hop != null ? { hop } : {}),
+      ...(walkRaw ? { walk: Number(walkRaw) } : {}),
+    };
     transfer.role = 'button';
     transfer.tabIndex = 0;
     transfer.setAttribute('aria-pressed', 'false');
@@ -950,12 +961,12 @@ export function mountTrip(
       if (on) return;
       transfer.setAttribute('aria-pressed', 'true');
       transfer.classList.add('is-hot');
-      map.hoverLeg(fromId, toId, { mode, frame: true, ...(hop != null ? { hop } : {}) });
+      map.hoverLeg(fromId, toId, { ...target, frame: true });
     };
     // Hover lights the leg the way hovering the line on the map does. No camera move.
     const preview = (on: boolean) => {
       transfer.classList.toggle('is-hot', on || transfer.getAttribute('aria-pressed') === 'true');
-      if (on) map.hoverLeg(fromId, toId, { mode, ...(hop != null ? { hop } : {}) });
+      if (on) map.hoverLeg(fromId, toId, target);
       else restorePressedLeg();
     };
     transfer.addEventListener('pointerenter', () => preview(true));
@@ -1361,10 +1372,12 @@ export function mountTrip(
               }
             : null;
         const drawn = routeHop != null && planHop(routeHop).kind !== 'none';
+        // Arriving and leaving the same place (the rest at home) is no walk.
+        const samePlace = place != null && nextPlace != null && place.id === nextPlace.id;
         let legs = routeHop ? transferLegs(routeHop) : entry.depart ? [entry.depart] : [];
-        if (legs.length === 0 && drawn && place && nextPlace) {
+        if (legs.length === 0 && drawn && place && nextPlace && !samePlace) {
           const walk: ItineraryLegDef = { from: place.id, to: nextPlace.id, mode: 'walk' };
-          legs = [walk];
+          legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, place, nextPlace) }];
         }
         const rails = legs.map((leg) => {
           const mode = leg.mode === 'walk' ? 'walk' : 'transit';
@@ -1375,7 +1388,7 @@ export function mountTrip(
         const walk = { mode: 'walk' as const, color: walkColor() };
         const hopPlan =
           hopRails(rails, walk, legs[0]?.mode === 'taxi') ??
-          (nextPlace ? { depart: walk, parts: [], arrive: walk } : null);
+          (nextPlace && !samePlace ? { depart: walk, parts: [], arrive: walk } : null);
         // A hop into the next period opens that period's list, like the portfolio.
         // The rail still runs down to that period, so the two read as one line.
         const crosses = nextIndex >= 0 && lists[nextIndex] !== lists[rowIndex];
@@ -1512,6 +1525,10 @@ export function mountTrip(
       if (row.dataset.legFrom !== leg.from || row.dataset.legTo !== leg.to) continue;
       if (leg.hop != null) {
         if (row.dataset.legHop === String(leg.hop)) row.classList.add('is-hot');
+        continue;
+      }
+      if (leg.walk != null) {
+        if (row.dataset.legWalk === String(leg.walk)) row.classList.add('is-hot');
         continue;
       }
       if (leg.mode) {

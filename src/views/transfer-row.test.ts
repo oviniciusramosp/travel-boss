@@ -78,6 +78,17 @@ describe('transferRowModel', () => {
     expect(dark.duration).toBe(pickLocale('pt-BR', formatLegDuration(12)));
   });
 
+  it('counts the stations of a ride and tags each walk of a train leg', () => {
+    const tower = legsForDay('paris-d1').find((leg) => leg.label === 'RER E + M9')!;
+    const parts = expandTimelineTransferParts(tower);
+    // Noisy-le-Sec → Pantin, Rosa Parks, Magenta, Haussmann–Saint-Lazare
+    expect(transferRowModel(parts[0]!, 'pt-BR').stations).toBe('4 estações');
+    expect(transferRowModel(parts[0]!, 'en').stations).toBe('4 stops');
+    const walk = parts.find((part) => part.mode === 'walk')!;
+    expect(transferRowModel(walk).stations).toBeNull();
+    expect(transferRowModel(walk).walkIndex).toBe(1);
+  });
+
   it('reads a metro hop and the walk to the next line', () => {
     const tower = legsForDay('paris-d1').find((leg) => leg.label === 'RER E + M9');
     expect(tower).toBeTruthy();

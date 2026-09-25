@@ -3,7 +3,7 @@ import type { MapRouteSegment, MapRouteTransfer } from './types';
 export type RouteFocus =
   | null
   | { kind: 'place'; id: string }
-  | { kind: 'leg'; from: string; to: string; hop?: number; mode?: 'walk' | 'transit' };
+  | { kind: 'leg'; from: string; to: string; hop?: number; walk?: number; mode?: 'walk' | 'transit' };
 
 export type RouteStation = { lat: number; lng: number; end: boolean };
 
@@ -40,7 +40,7 @@ export function stationsFor(segment: MapRouteSegment): RouteStation[] {
 
 export function routeEmphasis(
   focus: RouteFocus,
-  segment: { fromId?: string; toId?: string; hopIndex?: number; mode?: 'walk' | 'transit' },
+  segment: { fromId?: string; toId?: string; hopIndex?: number; walkIndex?: number; mode?: 'walk' | 'transit' },
 ): 'normal' | 'hot' | 'dim' {
   if (!focus) return 'normal';
   const { fromId, toId } = segment;
@@ -48,6 +48,7 @@ export function routeEmphasis(
   if (focus.kind === 'place') return fromId === focus.id || toId === focus.id ? 'hot' : 'dim';
   if (fromId !== focus.from || toId !== focus.to) return 'dim';
   if (focus.hop != null) return segment.hopIndex === focus.hop ? 'hot' : 'dim';
+  if (focus.walk != null) return segment.mode === 'walk' && segment.walkIndex === focus.walk ? 'hot' : 'dim';
   if (focus.mode) return segment.mode === focus.mode ? 'hot' : 'dim';
   return 'hot';
 }
@@ -60,6 +61,7 @@ type RouteSource = {
     fromId?: string;
     toId?: string;
     hopIndex?: number;
+    walkIndex?: number;
   }[];
   transfers?: readonly {
     lat: number;
@@ -94,6 +96,7 @@ export function toMapRoute(route: RouteSource): MapRouteSegment[] {
       ...(segment.fromId ? { fromId: segment.fromId } : {}),
       ...(segment.toId ? { toId: segment.toId } : {}),
       ...(segment.hopIndex != null ? { hopIndex: segment.hopIndex } : {}),
+      ...(segment.walkIndex != null ? { walkIndex: segment.walkIndex } : {}),
       ...(mine.length
         ? {
             transfers: mine.map((point) => {

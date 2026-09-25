@@ -21,6 +21,7 @@ import {
 } from '../data/travel-transit-lines';
 import {
   lineBrandColor,
+  WALK_CONNECTOR_MIN_M,
   type ItineraryLegDef,
   type ItineraryTransitHop,
 } from '../data/travel-itinerary-legs';
@@ -46,6 +47,8 @@ export type ItinerarySegment = {
    * Lets map/timeline highlight a single line (RER E vs M13) separately.
    */
   hopIndex?: number;
+  /** Walk of a multi-line leg: 0 to the first station, i + 1 after hop i, the last to the stop. */
+  walkIndex?: number;
 };
 
 /** Station change between two transit hops (e.g. M14 → RER E). */
@@ -84,8 +87,8 @@ export type BuildItineraryOptions = {
   walkMode?: 'straight' | 'osrm';
 };
 
-/** Skip walk connectors shorter than this (already at the station). */
-const WALK_MIN_M = 25;
+/** Skip walk connectors shorter than this (already at the station). The timeline uses the same cut. */
+const WALK_MIN_M = WALK_CONNECTOR_MIN_M;
 
 function straight(a: PlaceCoord | LatLng, b: PlaceCoord | LatLng): LatLng[] {
   const al = Array.isArray(a) ? a : ([a.lat, a.lng] as LatLng);
@@ -168,7 +171,7 @@ async function expandMultiHop(
       : walkPath(endPt, to, opts),
   ]);
 
-  if (walkIn) segs.push({ mode: 'walk', latlngs: walkIn, ...ends });
+  if (walkIn) segs.push({ mode: 'walk', latlngs: walkIn, walkIndex: 0, ...ends });
 
   // Precompute inter-hop walks (different stations) in parallel
   const interWalkTasks: Array<Promise<LatLng[] | null>> = [];
@@ -216,10 +219,10 @@ async function expandMultiHop(
     });
     // Walk between stations when hops don't share a platform (e.g. St-Lazare → St-Augustin)
     const inter = interWalks[i];
-    if (inter) segs.push({ mode: 'walk', latlngs: inter, ...ends });
+    if (inter) segs.push({ mode: 'walk', latlngs: inter, walkIndex: i + 1, ...ends });
   }
 
-  if (walkOut) segs.push({ mode: 'walk', latlngs: walkOut, ...ends });
+  if (walkOut) segs.push({ mode: 'walk', latlngs: walkOut, walkIndex: valid.length, ...ends });
   return { segments: segs, transfers };
 }
 
@@ -252,7 +255,7 @@ function expandMultiHopSync(
   const start = first.path[0]!;
   const end = last.path[last.path.length - 1]!;
 
-  pushWalkSync(segs, from, { lat: start[0], lng: start[1] }, ends);
+  pushWalkSync(segs, from, { lat: start[0], lng: start[1] }, { ...ends, walkIndex: 0 });
 
   for (let i = 0; i < valid.length; i++) {
     const hop = valid[i]!;
@@ -285,11 +288,11 @@ function expandMultiHopSync(
       segs,
       { lat: junction[0], lng: junction[1] },
       { lat: startNext[0], lng: startNext[1] },
-      ends,
+      { ...ends, walkIndex: i + 1 },
     );
   }
 
-  pushWalkSync(segs, { lat: end[0], lng: end[1] }, to, ends);
+  pushWalkSync(segs, { lat: end[0], lng: end[1] }, to, { ...ends, walkIndex: valid.length });
   return { segments: segs, transfers };
 }
 
@@ -447,7 +450,7 @@ function pushWalkSync(
   segs: ItinerarySegment[],
   from: { lat: number; lng: number },
   to: { lat: number; lng: number },
-  ends: { fromId: string; toId: string },
+  ends: { fromId: string; toId: string; walkIndex?: number },
 ): void {
   if (haversineM(from, to) < WALK_MIN_M) return;
   segs.push({

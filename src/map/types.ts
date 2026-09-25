@@ -43,6 +43,8 @@ export type MapRouteSegment = {
   fromId?: string;
   toId?: string;
   hopIndex?: number;
+  /** Walk of a train leg: 0 to the first station, i + 1 after ride i. The last one reaches the stop. */
+  walkIndex?: number;
   /** Two-color transfer dots that belong to this spine. */
   transfers?: MapRouteTransfer[];
 };
@@ -94,17 +96,17 @@ export type MapHandle = {
   hover(id: string | null): void;
   /**
    * Highlight one drawn hop. `null` clears it.
-   * A hop index lights that spine only. A mode lights every segment of that mode.
-   * Does not move the camera. A stop hover still uses `hover`.
+   * A hop index lights that spine only, a walk index that walk only. A mode lights
+   * every segment of that mode. Does not move the camera. A stop hover still uses `hover`.
    */
   hoverLeg(
     from: string | null,
     to?: string | null,
-    opts?: number | { hop?: number; mode?: 'walk' | 'transit'; frame?: boolean } | null,
+    opts?: number | { hop?: number; walk?: number; mode?: 'walk' | 'transit'; frame?: boolean } | null,
   ): void;
   /** Hover that started on a route line. Returns an unsubscribe. */
   onHoverLeg(
-    fn: (leg: { from: string; to: string; hop?: number; mode?: 'walk' | 'transit' } | null) => void,
+    fn: (leg: { from: string; to: string; hop?: number; walk?: number; mode?: 'walk' | 'transit' } | null) => void,
   ): () => void;
   /** Highlight and frame the pin in the padded view. */
   select(id: string): void;

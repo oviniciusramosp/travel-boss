@@ -114,6 +114,14 @@ const TRANSIT_BUFFER_MIN = 2;
  * (same-station transfers use nearly identical coords and stay silent).
  */
 const INTER_HOP_WALK_MIN_M = 40;
+/** Walks to and from a station shorter than this are skipped: the stop is the station. The map uses the same cut. */
+export const WALK_CONNECTOR_MIN_M = 25;
+/** Streets are rarely a straight line. */
+const WALK_DETOUR = 1.25;
+
+function walkMinutes(meters: number): number {
+  return Math.max(1, Math.round((meters * WALK_DETOUR) / WALK_M_PER_MIN));
+}
 
 /** Walk distance between end of hop A and start of hop B (0 if same station). */
 export function interHopWalkM(
@@ -156,7 +164,7 @@ export function estimateLegDurationMin(
   }
 
   if (leg.mode === 'walk') {
-    return Math.max(1, Math.round(haversineM(from, to) / WALK_M_PER_MIN));
+    return walkMinutes(haversineM(from, to));
   }
 
   const spinePath =
@@ -249,11 +257,24 @@ export type TimelineTransferPart = {
    */
   hopIndex?: number;
   /**
+   * Walk of a multi-line leg: 0 to the first station, i + 1 after hop i, the last to
+   * the stop. Same numbers as `walkIndex` on the map, so one walk lights on its own.
+   */
+  walkIndex?: number;
+  /**
    * Station markers along this transit segment (from authored path points).
    * Walk has 0; transit uses hop/leg path length (min 2 when known).
    */
   stationCount: number;
 };
+
+function walkTo(name: string): LString {
+  return { en: `Walk to ${name}`, 'pt-BR': `A pé até ${name}` };
+}
+
+function hopName(hop: ItineraryTransitHop): string {
+  return hop.label ?? getTransitLine(hop.line)?.name ?? String(hop.line).toUpperCase();
+}
 
 /** Count station dots for a transit path (coordinates = stations on spine). */
 function stationCountFromPath(path?: LatLng[]): number {
@@ -298,13 +319,26 @@ export function expandTimelineTransferParts(
   }
 
   if (leg.hops && leg.hops.length > 0) {
+    const hops = leg.hops;
     const parts: TimelineTransferPart[] = [];
-    for (let i = 0; i < leg.hops.length; i++) {
-      const hop = leg.hops[i]!;
-      const name =
-        hop.label ??
-        getTransitLine(hop.line)?.name ??
-        String(hop.line).toUpperCase();
+    const walk = (label: LString, meters: number, walkIndex: number, minutes?: number): TimelineTransferPart => ({
+      mode: 'walk',
+      leg,
+      label,
+      color: null,
+      durationMin: minutes ?? walkMinutes(meters),
+      walkIndex,
+      stationCount: 0,
+    });
+    // From the stop to the first station, when the place is not the station itself.
+    const board = hops[0]!.path[0];
+    if (from && board) {
+      const meters = haversineM(from, { lat: board[0], lng: board[1] });
+      if (meters >= WALK_CONNECTOR_MIN_M) parts.push(walk(walkTo(hopName(hops[0]!)), meters, 0));
+    }
+    for (let i = 0; i < hops.length; i++) {
+      const hop = hops[i]!;
+      const name = hopName(hop);
       const chip = hop.exit ? `${name} → ${hop.exit}` : name;
       parts.push({
         mode: 'transit',
@@ -317,25 +351,18 @@ export function expandTimelineTransferParts(
       });
 
       // Different stations (e.g. RER E St-Lazare → M9 St-Augustin): show walk
-      const next = leg.hops[i + 1];
+      const next = hops[i + 1];
       if (!next) continue;
       const walkM = interHopWalkM(hop, next);
       if (walkM < INTER_HOP_WALK_MIN_M && next.transferMin == null) continue;
-      const nextName =
-        next.label ??
-        getTransitLine(next.line)?.name ??
-        String(next.line).toUpperCase();
-      parts.push({
-        mode: 'walk',
-        leg,
-        label: {
-          en: `Walk to ${nextName}`,
-          'pt-BR': `A pé até ${nextName}`,
-        },
-        color: null,
-        durationMin: next.transferMin ?? Math.max(1, Math.round(walkM / WALK_M_PER_MIN)),
-        stationCount: 0,
-      });
+      parts.push(walk(walkTo(hopName(next)), walkM, i + 1, next.transferMin));
+    }
+    // From the last station to the stop.
+    const lastPath = hops[hops.length - 1]!.path;
+    const alight = lastPath[lastPath.length - 1];
+    if (to && alight) {
+      const meters = haversineM({ lat: alight[0], lng: alight[1] }, to);
+      if (meters >= WALK_CONNECTOR_MIN_M) parts.push(walk(legDisplayLabel({ from: '', to: '', mode: 'walk' }), meters, hops.length));
     }
     return parts;
   }

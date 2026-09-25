@@ -789,7 +789,8 @@
   color: var(--color-ink);
 }
 
-.tb-transfer__duration {
+.tb-transfer__duration,
+.tb-transfer__stations {
   flex: none;
   color: var(--color-mid-gray);
   font-variant-numeric: tabular-nums;

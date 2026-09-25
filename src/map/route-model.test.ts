@@ -52,6 +52,15 @@ describe('route emphasis', () => {
     expect(routeEmphasis({ kind: 'place', id: 'b' }, spine)).toBe('hot');
     expect(routeEmphasis({ kind: 'place', id: 'z' }, { fromId: 'a', toId: 'b' })).toBe('dim');
   });
+
+  it('lights one walk of a train leg, not every walk of it', () => {
+    const toStation = { mode: 'walk' as const, fromId: 'a', toId: 'b', walkIndex: 0 };
+    const toStop = { mode: 'walk' as const, fromId: 'a', toId: 'b', walkIndex: 2 };
+    const focus = { kind: 'leg' as const, from: 'a', to: 'b', walk: 2 };
+    expect(routeEmphasis(focus, toStop)).toBe('hot');
+    expect(routeEmphasis(focus, toStation)).toBe('dim');
+    expect(routeEmphasis(focus, spine)).toBe('dim');
+  });
 });
 
 describe('toMapRoute', () => {
