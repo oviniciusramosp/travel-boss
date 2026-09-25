@@ -1426,6 +1426,29 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Dentro do Disneyland Park (Fantasyland) — pizza individual em formato do Mickey ~€11.\nSelf-service; fila no horário de almoço. Precisa de ingresso do parque.',
     ),
   },
+  // Official September 2026 menus (media.disneylandparis.com PDFs)
+  'par-daw-stark-factory': {
+    avgPricePerPerson: money(11, 14),
+    durationMin: 30,
+    durationMax: 45,
+    bestTime: L('11:00–11:30, before the lunch rush', '11h–11h30, antes do pico do almoço'),
+    crowdProfile: 'tourist-heavy',
+    tips: L(
+      'Pizza €14 (one feeds two), pasta €13, bowl €8.50. Free tap water.\nOpens 11:00; no mobile order. Big hall, usually has seats.',
+      'Pizza €14 (uma dá para dois), massa €13, bowl €8,50. Água da torneira grátis.\nAbre às 11h; sem pedido pelo app. Salão grande, costuma ter lugar.',
+    ),
+  },
+  'par-dlp-casa-de-coco': {
+    avgPricePerPerson: money(12, 16),
+    durationMin: 30,
+    durationMax: 45,
+    bestTime: L('Early dinner, 18:00–19:30', 'Jantar cedo, 18h–19h30'),
+    crowdProfile: 'tourist-heavy',
+    tips: L(
+      'Burrito €12 (beef, chicken or vegan), churros €4.30, Mariachi menu €22 with dessert. Free tap water.\nMobile order in the Disneyland Paris app and kiosks.',
+      'Burrito €12 (carne, frango ou vegano), churros €4,30, menu Mariachi €22 com sobremesa. Água da torneira grátis.\nPedido pelo app da Disneyland Paris e totens.',
+    ),
+  },
   'par-burger-king-opera': {
     avgPricePerPerson: money(8, 15),
     durationMin: 15,
@@ -1540,8 +1563,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       73.67,
       undefined,
       L(
-        'Our tickets: €221 for 3 (€73.67 each), cheaper because Gui bought them as a local resident. Public price: 1-day 2-park from ~€81',
-        'Nossos ingressos: €221 para 3 (€73,67 cada), mais baratos porque o Gui comprou como morador da região. Preço normal: 1 dia / 2 parques a partir de ~€81',
+        'Our tickets: €221 for 3, or €73.67 per person (2 at €55 with the resident promo and 1 at €111)',
+        'Nossos ingressos: €221 para os 3, ou €73,67 por pessoa (2 a €55 com a promo de morador e 1 a €111)',
       ),
     ),
     ticketUrl: 'https://tickets.disneylandparis.com/',
@@ -1552,8 +1575,21 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Weekday outside school holidays', 'Dia de semana fora de férias escolares'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'From Casa do Gui (Noisy-le-Sec): RER E → Magenta / Châtelet area, then RER A → Marne-la-Vallée–Chessy (~70–80 min door-to-gate) + ~2 min walk.\n~€5/person round trip (Metro-Train-RER flat fare × 2).\nBuy a dated 1-day 2-park ticket online (official Disney site or GetYourGuide) — not sold at the gate on most days.\nOpens 09:30 — leave home ~07:20, arrive ~30 min early. Start at Disney Adventure World (ex-Studios): Nemo + Ratatouille first, then Disneyland Park.\nFireworks ~22:30 (end ~23:30); leave ~10 min before the end for the RER. Last train toward Paris ~00:00; back at home base ~00:50–01:10.\nDisney Village (McDonald’s / Five Guys / Starbucks) is outside the gates — exit/re-entry OK.',
-      'Da Casa do Gui (Noisy-le-Sec): RER E → Magenta / área Châtelet, depois RER A → Marne-la-Vallée–Chessy (~70–80 min porta a porta) + ~2 min a pé.\n~€5/pessoa ida e volta (tarifa plana Metro-Train-RER × 2).\nCompre ingresso datado de 1 dia / 2 parques online (site oficial ou GetYourGuide) — na maioria dos dias não vende na porta.\nAbre 09h30 — saia de casa ~07h20, chegue ~30 min antes. Comece no Disney Adventure World (ex-Studios): Nemo + Ratatouille primeiro, depois Disneyland Park.\nFogos ~22h30 (terminam ~23h30); saia ~10 min antes do fim para o RER. Último trem para Paris ~00h; chegada em casa ~00h50–01h10.\nDisney Village (McDonald’s / Five Guys / Starbucks) fica fora dos portões — dá pra sair e voltar.',
+      'From Casa do Gui: RER E to Val de Fontenay + RER A to Marne-la-Vallée–Chessy (~40 min); the station is 2 min from the gates. Navigo Semaine covers it.\nOne bag check covers both parks.\nParks open 09:30; the 08:30 early hour is for Disney Hotel guests only.\nStart at Disney Adventure World (Spider-Man, Ratatouille), then Disneyland Park. Crush’s Coaster is closed until summer 2027.\nDisney Tales of Magic runs ~20 min at park close. From 5 to 14 Oct there is no RER E after 22:30: RER A to Val de Fontenay, then bus 145 or 301.\nDisney Village (McDonald’s, Five Guys, Earl of Sandwich) is outside the gates; re-entry works with each adult’s own ticket.',
+      'Da Casa do Gui: RER E até Val de Fontenay + RER A até Marne-la-Vallée–Chessy (~40 min); a estação fica a 2 min dos portões. A Navigo Semaine cobre.\nUma revista de bolsas vale para os dois parques.\nOs parques abrem às 9h30; a hora extra das 8h30 é só para hóspedes dos hotéis Disney.\nComece no Disney Adventure World (Spider-Man, Ratatouille) e depois vá ao Disneyland Park. O Crush’s Coaster está fechado até o verão de 2027.\nO Disney Tales of Magic dura ~20 min, no fechamento do parque. De 5 a 14/10 não há RER E depois das 22h30: RER A até Val de Fontenay e ônibus 145 ou 301.\nO Disney Village (McDonald’s, Five Guys, Earl of Sandwich) fica fora dos portões; dá para sair e voltar, cada adulto com o próprio ingresso.',
+    ),
+  },
+  'par-dlp-tales-of-magic': {
+    durationMin: 20,
+    durationMax: 25,
+    bestTime: L(
+      'At park close (22:00 on 7 Oct); claim the spot ~1h15 before',
+      'No fechamento do parque (22h em 7/10); garanta o lugar ~1h15 antes',
+    ),
+    crowdProfile: 'tourist-heavy',
+    tips: L(
+      'By Casey’s Corner it fills 30–45 min before; Central Plaza 1h–1h30; right in front of the castle 1h30–1h45.\nMain Street also gets Halloween projections several times a night.\nPaid reserved area (€24–29, in the app): arrive 10–30 min before, but you miss the Main Street projections.',
+      'Junto ao Casey’s Corner enche 30–45 min antes; a Central Plaza, 1h–1h30; em frente ao castelo, 1h30–1h45.\nA Main Street também recebe projeções de Halloween várias vezes por noite.\nÁrea reservada paga (€24–29, no app): chegue 10–30 min antes, mas sem as projeções da Main Street.',
     ),
   },
   'par-versailles': {
