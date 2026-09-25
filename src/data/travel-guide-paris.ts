@@ -371,7 +371,7 @@ export const parisGuide: CityGuide = {
         },
         credit: 'Luc Viatour / Wikimedia Commons (CC BY-SA 3.0)',
       },
-      where: ['par-michalak-etienne', 'par-cedric-grolet', 'par-desgranges-passy'],
+      where: ['par-michalak-etienne', 'par-cedric-grolet', 'par-bake-blend'],
     },
     {
       id: 'escargot-pistache-chocolat',
