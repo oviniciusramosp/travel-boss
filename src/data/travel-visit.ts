@@ -344,6 +344,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'RER B a partir de Aéroport Charles de Gaulle 1 / 2 TGV até Paris (~45–60 min). Deixe folga para segurança, CDGVAL entre terminais e longas caminhadas. Magenta / Gare du Nord são saídas comuns no centro.',
     ),
   },
+  'par-desgranges-passy': cafeVisit(3, 6, {
+    bestDay: L('Open daily 07:00–20:00 except Tuesday', 'Abre todo dia das 7h às 20h, menos terça'),
+    tips: L(
+      'Pain au chocolat ~€1.80; coffee + pastry formula ~€4.50 (delivery-app prices, the counter may be cheaper).',
+      'Pain au chocolat ~€1,80; fórmula café + doce ~€4,50 (preços do app de entrega, no balcão pode ser menos).',
+    ),
+  }),
   'par-cdg-paul': cafeVisit(6, 12, {
     tips: L(
       'Breakfast on the walk toward CDG 2 TGV — keep it light before the long RER ride east.',

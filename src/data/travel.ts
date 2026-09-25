@@ -1328,6 +1328,24 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Champ de Mars Paris',
       },
       {
+        id: 'par-chapelle-saint-louis',
+        name: {
+          en: 'Saint-Louis Chapel (École Militaire)',
+          'pt-BR': 'Capela Saint-Louis (École Militaire)',
+        },
+        category: 'tourist',
+        description: {
+          en: 'Chapel in the north wing of the domed École Militaire building, at the end of the Champ de Mars. Active military site: you see the façade; inside only for Sunday Mass (11:00) and Heritage Days.',
+          'pt-BR':
+            'Capela na ala norte do prédio da cúpula da École Militaire, no fim do Champ de Mars. É área militar: você vê a fachada; por dentro, só na missa de domingo (11h) e nas Jornadas do Patrimônio.',
+        },
+        // OSM node 3032793634 (Wikidata Q26203260).
+        lat: 48.852731,
+        lng: 2.303565,
+        address: '13 Place Joffre, 75007 Paris',
+        mapsQuery: 'Chapelle Saint-Louis École Militaire Paris',
+      },
+      {
         id: 'par-eiffel',
         name: { en: 'Eiffel Tower', 'pt-BR': 'Torre Eiffel' },
         category: 'tourist',
@@ -3804,6 +3822,23 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.29008,
         address: 'Jardins du Trocadéro, 75016 Paris',
         mapsQuery: 'Fontaine de Varsovie Trocadéro Paris',
+      },
+      {
+        id: 'par-desgranges-passy',
+        name: { en: 'Desgranges (Passy)', 'pt-BR': 'Desgranges (Passy)' },
+        category: 'cafes',
+        subcategories: ['bakery'],
+        description: {
+          en: 'Neighbourhood boulangerie on Rue de Passy, 6 min from Trocadéro. Pain au chocolat and coffee to go; open Sundays.',
+          'pt-BR':
+            'Boulangerie de bairro na Rue de Passy, a 6 min do Trocadéro. Pain au chocolat e café para levar; abre aos domingos.',
+        },
+        googleRating: 3.6,
+        // OSM node 5168750702.
+        lat: 48.858489,
+        lng: 2.283818,
+        address: '6 Rue de Passy, 75016 Paris',
+        mapsQuery: 'Desgranges 6 Rue de Passy Paris',
       },
 
       // ── Oct 2026 trip list: shopping, pharmacies, levain, logistics ──

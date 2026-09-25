@@ -344,6 +344,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-chapelle-saint-louis': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/%C3%89cole_Militaire_from_Champ-de-Mars%2C_May_2012.jpg/1280px-%C3%89cole_Militaire_from_Champ-de-Mars%2C_May_2012.jpg',
+      'École Militaire from the Champ de Mars; the chapel is in its north wing',
+      'École Militaire vista do Champ de Mars; a capela fica na ala norte',
+      'Alexander Baranov · CC BY 2.0 · Wikimedia Commons',
+    ),
+  ],
   'par-champs-elysees': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/6/6d/Avenue_des_Champs-%C3%89lys%C3%A9es_July_24%2C_2009_N1.jpg',
@@ -921,6 +929,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Pain au chocolat (foto ilustrativa)',
       'Christine Rondeau · CC BY 2.0 · Wikimedia Commons',
     ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Pain_au_Chocolat.jpg/1280px-Pain_au_Chocolat.jpg',
+      'Pain au chocolat (generic photo)',
+      'Pain au chocolat (foto ilustrativa)',
+      'Andre lleo · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-desgranges-passy': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Pain_au_Chocolat.jpg/1280px-Pain_au_Chocolat.jpg',
       'Pain au chocolat (generic photo)',

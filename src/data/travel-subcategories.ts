@@ -374,6 +374,7 @@ export const parisSubcategoriesByPlaceId: Record<string, PlaceSubcategory[]> = {
   'par-bateaux-mouches': ['boat'],
   'par-pompidou': ['museum', 'architecture'],
   'par-madeleine': ['church', 'monument'],
+  'par-chapelle-saint-louis': ['church', 'architecture'],
   'par-montparnasse': ['tower', 'viewpoint'],
   'par-fondation-lv': ['architecture', 'viewpoint'],
   'par-chateau-vincennes': ['castle', 'monument'],

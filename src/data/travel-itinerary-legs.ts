@@ -373,6 +373,12 @@ export function expandTimelineTransferParts(
 }
 
 /**
+ * Gare du Nord ↔ Magenta: the stops sit 70 m apart, but the corridor is 150–200 m
+ * across levels; journey planners give 2–8 min.
+ */
+const GARE_DU_NORD_MAGENTA_MIN = 6;
+
+/**
  * Shared Day 1 legs after first bags at Casa do Gui:
  * house → market → house → Tower loop → dinner → home.
  */
@@ -495,29 +501,10 @@ const day1Cdg: ItineraryLegDef[] = [
     from: 'par-cdg-rer',
     to: 'par-noisy-le-sec-rer',
     mode: 'transit',
-    // RER B south → Magenta, then RER E east to Noisy-le-Sec
+    // RER B to Gare du Nord, corridor to Magenta (slower with suitcases), RER E east to Noisy-le-Sec
     hops: [
-      {
-        line: 'rer-b',
-        label: 'RER B',
-        path: [
-          [49.0039, 2.5708], // CDG 2 TGV
-          [49.0099, 2.561], // CDG 1
-          [48.973, 2.515], // Parc des Expositions / Aulnay corridor
-          [48.936, 2.425], // Sevran / north suburbs
-          [48.8809, 2.3553], // Gare du Nord
-          [48.8785, 2.358], // Magenta (transfer → RER E)
-        ],
-      },
-      {
-        line: 'rer-e',
-        label: 'RER E',
-        path: [
-          [48.8785, 2.358], // Magenta
-          [48.8855, 2.385], // Pantin
-          [48.8907, 2.4608], // Noisy-le-Sec
-        ],
-      },
+      ride(rerB, 'cdg-2', 'gare-nord'),
+      ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN + 2),
     ],
     label: 'RER B + RER E',
     durationMin: 65,
@@ -882,12 +869,6 @@ function trainLeg(from: string, to: string, durationMin: number, hops: Itinerary
   return { from, to, mode: 'transit', hops, label: hops.map((hop) => hop.label).join(' + '), durationMin };
 }
 
-/**
- * Gare du Nord ↔ Magenta: the stops sit 70 m apart, but the corridor is 150–200 m
- * across levels; journey planners give 2–8 min.
- */
-const GARE_DU_NORD_MAGENTA_MIN = 6;
-
 /** RER C branch Champ de Mars → Neuilly–Porte Maillot (OSM stop positions); the registry holds the Versailles spine. */
 const rerCToPorteMaillot: ItineraryTransitHop = {
   line: 'rer-c',
@@ -908,6 +889,11 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  // 4/10
+  trainLeg('par-passerelle-debilly', 'par-casa-do-gui', 45, [
+    ride(metro9, 'alma-marceau', 'havre-caumartin'),
+    ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
+  ]),
   // 5/10
   trainLeg('par-casa-do-gui', 'par-bohemia', 40, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),

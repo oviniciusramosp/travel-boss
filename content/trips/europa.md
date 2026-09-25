@@ -11,20 +11,23 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação
 - 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E. Almoço alternativo aqui: Brioche Dorée, nível 4 da estação. Para 5–11/out, compre a Navigo Semaine (€32,40; de segunda a domingo, cobre Disney, Versalhes e Créteil)
   - via: RER B até Gare du Nord e RER E em Magenta · 1h05
-- 14:50 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada, com o almoço já feito no aeroporto
+- 14:50 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — Chegada
   - via: a pé · 7 min
 - 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
   - via: a pé · 6 min
-- 15:30 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso. Saída às 16h45, com bilhete avulso (€2,55 no app IDF Mobilités). Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
+- 15:30 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso depois do almoço no aeroporto
+- 16:45 [Casa do Gui](place:par-casa-do-gui) — Saída, com bilhete avulso (€2,55 no app IDF Mobilités): a Navigo Semaine só começa amanhã. Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
   - via: RER E + metrô 9 · 45 min
 - 17:30 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
-- 17:40 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
-- 17:55 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
-- 18:10 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
+- 17:40 [Desgranges (Passy)](place:par-desgranges-passy) — Café da tarde: pain au chocolat e café para levar (~€4,50). Sem desvio, mas mais caro (~€9): Carette, na própria Place du Trocadéro
+- 17:55 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
+- 18:05 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
+- 18:15 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
 - 18:25 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**, com ingresso das 18h30: compre já, porque vende até 90 dias antes e esgota (só elevador €36,70; escada até o 2º andar + elevador €28). O sol se põe às 19h26: você vê lá de cima. Última subida às 22h45, se o voo atrasar
-- 20:15 [Champ de Mars](place:par-champ-mars) — Descida pelo gramado, com a Torre acesa
-- 20:25 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
-- 20:50 [Margaux](place:par-margaux) — Jantar: cordon bleu premiado (~€26). Reserve para 20h45
+- 20:15 [Champ de Mars](place:par-champ-mars) — Descida pelo gramado até a École Militaire, com a Torre acesa atrás
+- 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Só por fora: a capela fica na ala norte do prédio da cúpula, que é área militar. Volta pelo gramado com a Torre de frente
+- 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
+- 21:05 [Margaux](place:par-margaux) — Jantar: cordon bleu premiado (~€26). Reserve para 21h
 - 22:00 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h, se ainda houver energia. Greve no metrô 9: RER C em Pont de l'Alma até Neuilly–Porte Maillot e RER E
   - via: metrô 9 + RER E · 45 min
 - 23:00 [Casa do Gui](place:par-casa-do-gui) — Volta
