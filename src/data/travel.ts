@@ -1271,9 +1271,10 @@ export const localTravelCities: TravelCity[] = [
             'Estação RER E da Casa do Gui — caminhada curta até a Rue des Bergeries.',
         },
         googleRating: 3.5,
-        lat: 48.8907,
-        lng: 2.4608,
-        address: 'Place Jean-Jaurès, 93130 Noisy-le-Sec',
+        // Station building (OSM). The old pin sat 620 m south, on Place Jean-Jaurès.
+        lat: 48.896356,
+        lng: 2.460278,
+        address: 'Place Jean Coquelin, 93130 Noisy-le-Sec',
         mapsQuery: 'Gare de Noisy-le-Sec RER E',
       },
       {
