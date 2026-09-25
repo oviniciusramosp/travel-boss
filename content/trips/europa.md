@@ -8,8 +8,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux
 
 - 11:55 [CDG](place:par-cdg) — Pouso. Os voos do Brasil chegam no Terminal 2 (LATAM no 2A, Air France no 2E). Passaporte e malas: conte ~1h. Até a estação CDG 2 TGV são ~5 min a pé do 2E e ~10 min do 2A
-- 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação
-- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E. Hoje é domingo, e a Navigo Semaine só vale de segunda a domingo. Almoço alternativo aqui: Brioche Dorée, nível 4 da estação. De 5 a 11/out, todos os trajetos são com a Navigo Semaine (€32,40 por pessoa; cobre Disney, Versalhes e Créteil)
+- 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação. Na própria estação CDG 2 TGV: Brioche Dorée, nível 4
+- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E
   - via: RER B até Gare du Nord, RER E em Magenta até Noisy-le-Sec e caminhada até o mercado · 1h15
 - 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
   - via: a pé · 6 min
