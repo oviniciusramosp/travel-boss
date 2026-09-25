@@ -2086,6 +2086,223 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  // Guia da cidade (Mercado e Comidas)
+  'par-grande-epicerie-rive-gauche': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/La_grande_%C3%A9picerie_Entr%C3%A9e.jpg/960px-La_grande_%C3%A9picerie_Entr%C3%A9e.jpg',
+      'Entrance of La Grande Épicerie at 38 Rue de Sèvres, corner of Rue du Bac',
+      'Entrada da Grande Épicerie no nº 38 da Rue de Sèvres, esquina com a Rue du Bac',
+      'VVVCFFrance / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-lafayette-gourmet-haussmann': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Galeries_Lafayette_Gourmet.jpg/960px-Galeries_Lafayette_Gourmet.jpg',
+      'Fruit displays inside Lafayette Gourmet',
+      'Pirâmides de frutas dentro da Lafayette Gourmet',
+      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-laduree-royale': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Macarons_from_Ladur%C3%A9e_on_display.jpg/960px-Macarons_from_Ladur%C3%A9e_on_display.jpg',
+      'Ladurée macarons and gift boxes on display',
+      'Macarons e caixas de presente da Ladurée na vitrine',
+      'Michal Osmenda / Wikimedia Commons (CC BY-SA 2.0)',
+    ),
+  ],
+  'par-patrick-roger-madeleine': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Life_is_like_a_box_of_chocolates_%2830010653303%29.jpg/960px-Life_is_like_a_box_of_chocolates_%2830010653303%29.jpg',
+      'A Patrick Roger box of chocolates',
+      'Caixa de bombons Patrick Roger',
+      'Sheila Sund from Salem, United States / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-poilane-cherche-midi': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Pain_Po%C3%AElane-_Paris_15e.jpg/960px-Pain_Po%C3%AElane-_Paris_15e.jpg',
+      "Poilâne sourdough loaves marked with a 'P' (photographed at the Grenelle shop)",
+      "Pães de fermentação natural da Poilâne marcados com um 'P' (foto da loja de Grenelle)",
+      'Gilbert Bochenek / Wikimedia Commons (CC BY-SA 3.0)',
+    ),
+  ],
+  'par-maille-madeleine': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Maille%2C_6_Place_de_la_Madeleine%2C_75008_Paris%2C_14_September_2019.jpg/960px-Maille%2C_6_Place_de_la_Madeleine%2C_75008_Paris%2C_14_September_2019.jpg',
+      'Shopfront of the Maille boutique at 6 Place de la Madeleine',
+      'Fachada da butique Maille no nº 6 da Place de la Madeleine',
+      'Ricardalovesmonuments / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-laurent-dubois-maubert': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Paris_-_Fromagerie_Laurent_Dubois.jpg/960px-Paris_-_Fromagerie_Laurent_Dubois.jpg',
+      'Cheese counter inside a Fromagerie Laurent Dubois shop',
+      'Balcão de queijos numa loja da Fromagerie Laurent Dubois',
+      'Radek Kucharski / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-mariage-freres-marais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Mariage_Fr%C3%A8res%2C_30_rue_du_Bourg-Tibourg%2C_Paris_19_June_2008.jpg/960px-Mariage_Fr%C3%A8res%2C_30_rue_du_Bourg-Tibourg%2C_Paris_19_June_2008.jpg',
+      'The Mariage Frères hanging sign at 30 Rue du Bourg-Tibourg (sepia photo)',
+      'A placa suspensa da Mariage Frères no nº 30 da Rue du Bourg-Tibourg (foto em sépia)',
+      'Tim Sackton from Somerville, MA / Wikimedia Commons (CC BY-SA 2.0)',
+    ),
+  ],
+  'par-dammann-freres-vosges': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Damman_paris.jpg/960px-Damman_paris.jpg',
+      'Shelves of tea tins inside the Dammann Frères shop on Place des Vosges',
+      'Prateleiras de latas de chá na loja da Dammann Frères na Place des Vosges',
+      'Léna / Wikimedia Commons (CC BY 4.0)',
+    ),
+  ],
+  'par-angelina-rivoli': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Angelina_cafe_Paris_4361.jpg/960px-Angelina_cafe_Paris_4361.jpg',
+      "Angelina's Mont-Blanc pastry on a branded plate",
+      'O Mont-Blanc do Angelina num prato com a marca da casa',
+      'Gryffindor / Wikimedia Commons (CC BY-SA 3.0)',
+    ),
+  ],
+  'par-legrand-galerie-vivienne': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Paris_Galerie_Vivienne_2012_35.jpg/960px-Paris_Galerie_Vivienne_2012_35.jpg',
+      'The Lucien Legrand shopfront inside the Galerie Vivienne',
+      'A fachada da Lucien Legrand dentro da Galerie Vivienne',
+      'Lionel Allorge / Wikimedia Commons (CC BY-SA 3.0)',
+    ),
+  ],
+  'par-boulangerie-du-sentier': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
+      'Butter croissants in a Paris bakery basket (illustrative photo)',
+      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
+      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-maison-thevenin-buci': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/00_Croissant._Yum.jpg/960px-00_Croissant._Yum.jpg',
+      'A butter croissant on a plate (illustrative photo)',
+      'Um croissant de manteiga num prato (foto ilustrativa)',
+      'Mark Mitchell / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-fournil-didot': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Baguettes_-_stonesoup.jpg/960px-Baguettes_-_stonesoup.jpg',
+      'Three rustic baguettes on a wooden board (illustrative photo)',
+      'Três baguetes rústicas numa tábua de madeira (foto ilustrativa)',
+      'jules / stonesoup / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-la-parisienne-poissonniere': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Baguettes%2C_Paris%2C_France_-_panoramio.jpg/960px-Baguettes%2C_Paris%2C_France_-_panoramio.jpg',
+      'Baguettes in a basket at a Paris shop (illustrative photo)',
+      'Baguetes numa cesta de uma loja em Paris (foto ilustrativa)',
+      'Nick Thweatt / Wikimedia Commons (CC BY-SA 3.0)',
+    ),
+  ],
+  'par-carl-marletti-censier': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Bon_mille-feuille.jpg/960px-Bon_mille-feuille.jpg',
+      'A classic glazed mille-feuille (illustrative photo)',
+      'Um mil-folhas clássico com cobertura (foto ilustrativa)',
+      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-maison-delmontel-martyrs': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
+      'A slice of flan pâtissier on its bakery box (illustrative photo)',
+      'Uma fatia de flan pâtissier sobre a caixa da padaria (foto ilustrativa)',
+      'Gouglov / Wikimedia Commons (CC0)',
+    ),
+  ],
+  'par-petit-vendome-capucines': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sandwichs_classiques.jpg/960px-Sandwichs_classiques.jpg',
+      'Classic baguette sandwiches: jambon-beurre, ham and cheese, saucisson (illustrative)',
+      'Sanduíches clássicos de baguete: jambon-beurre, presunto e queijo, salame (ilustrativa)',
+      'Boulanger: Nat / Photographer: Nat / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-caractere-de-cochon-charlot': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Jambon_beurre_classique.jpg/960px-Jambon_beurre_classique.jpg',
+      'Jambon-beurre with thick slices of ham on a board (illustrative)',
+      'Jambon-beurre com presunto em fatias grossas sobre tábua (ilustrativa)',
+      'Al4az / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-breizh-cafe-marais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Galette_de_sarrasin.jpg/960px-Galette_de_sarrasin.jpg',
+      'Buckwheat galette with a fried egg, cheese and creamy mushrooms (illustrative)',
+      'Galette de trigo-sarraceno com ovo frito, queijo e cogumelos (ilustrativa)',
+      'Melinda Legendre / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-arnaud-nicolas-bourdonnais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/P%C3%A2t%C3%A9_en_cro%C3%BBte_-_Le_Quai_%28Miribel%29_en_septembre_2021.jpg/960px-P%C3%A2t%C3%A9_en_cro%C3%BBte_-_Le_Quai_%28Miribel%29_en_septembre_2021.jpg',
+      'Slice of pâté en croûte with cherries and parsley (illustrative)',
+      'Fatia de pâté en croûte com cerejas e salsinha (ilustrativa)',
+      'Benoît Prieur / Wikimedia Commons (CC0)',
+    ),
+  ],
+  'par-bistrot-paul-bert-faidherbe': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Steak_au_poivre.jpg/960px-Steak_au_poivre.jpg',
+      'Steak au poivre with a peppercorn crust and potatoes (illustrative)',
+      'Steak au poivre com crosta de pimenta e batatas (ilustrativa)',
+      'Tim Pierce from Berlin, MA, USA / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-au-pied-de-cochon-halles': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mmm...onion_soup_%285344349906%29.jpg/960px-Mmm...onion_soup_%285344349906%29.jpg',
+      'Onion soup gratinée in a crock (illustrative)',
+      'Sopa de cebola gratinada na cumbuca (ilustrativa)',
+      'jeffreyw / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-escargot-montorgueil': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Escargot_%C3%A0_la_Bourguignonne_-_eatingeast.jpg/960px-Escargot_%C3%A0_la_Bourguignonne_-_eatingeast.jpg',
+      'Six escargots with parsley butter in a cast-iron dish (illustrative)',
+      'Seis escargots com manteiga de salsinha em travessa de ferro (ilustrativa)',
+      'eatingeast / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
+  'par-au-reve-caulaincourt': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Oeufsmayo.JPG/960px-Oeufsmayo.JPG',
+      'Halved eggs with mayonnaise on frisée and olives (illustrative)',
+      'Ovos com maionese sobre frisée e azeitonas (ilustrativa)',
+      'Eyone / Wikimedia Commons (Public domain)',
+    ),
+  ],
+  'par-au-bourguignon-du-marais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/B%C5%93uf_bourguignon.JPG/960px-B%C5%93uf_bourguignon.JPG',
+      'Bœuf bourguignon with potatoes in a cocotte (illustrative)',
+      'Bœuf bourguignon com batatas na cocotte (ilustrativa)',
+      'Arnaud 25 / Wikimedia Commons (CC BY-SA 3.0)',
+    ),
+  ],
+  'par-fontaine-de-mars-saint-dominique': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Confit_de_canard_sur_lit_de_salade_des_Hautes-Pyr%C3%A9n%C3%A9es.jpg/960px-Confit_de_canard_sur_lit_de_salade_des_Hautes-Pyr%C3%A9n%C3%A9es.jpg',
+      'Crispy duck confit leg on salad (illustrative)',
+      'Coxa de pato confitada sobre salada (ilustrativa)',
+      'Matt Ryall / Wikimedia Commons (CC BY 2.0)',
+    ),
+  ],
 };
 
 export function photosForPlaceId(id: string): TravelPhoto[] | undefined {
