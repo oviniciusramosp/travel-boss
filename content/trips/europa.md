@@ -7,14 +7,15 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux
 
-- 11:55 [CDG](place:par-cdg) — Pouso. Os voos do Brasil chegam no Terminal 2 (LATAM no 2A, Air France no 2E). Passaporte e malas: conte ~1h. Até a estação CDG 2 TGV são ~5 min a pé do 2E e ~10 min do 2A
-- 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação. Na própria estação CDG 2 TGV: Brioche Dorée, nível 4
-- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E
-  - via: RER B até Gare du Nord, RER E em Magenta até Noisy-le-Sec e caminhada até o mercado · 1h15
-- 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
+- 11:55 [CDG](place:par-cdg) — Pouso. Os voos do Brasil chegam no Terminal 2 (LATAM no 2A, Air France no 2E). Passaporte e malas: conte ~1h
+- 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D. Depois, peça o UberX: para os 2 com as malas, ~€28–40, o mesmo que 2 bilhetes aeroporto de trem. O app mostra o ponto de embarque (no 2E, porta 6 do desembarque; no 2A, porta 5). Se passar de ~€40, vá de RER: bilhete aeroporto de €14 por pessoa na estação CDG 2 TGV
+  - via: Uber · 35 min
+- 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas
   - via: a pé · 6 min
-- 15:30 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso depois do almoço no aeroporto
-- 16:30 [Casa do Gui](place:par-casa-do-gui) — Saída, com bilhete avulso (€2,55 no app IDF Mobilités): a Navigo Semaine só começa amanhã. Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
+- 14:45 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
+  - via: a pé · 6 min
+- 15:15 [Casa do Gui](place:par-casa-do-gui) — Banho e descanso depois do almoço no aeroporto
+- 16:30 [Casa do Gui](place:par-casa-do-gui) — Saída. Compre 2 tickets Métro-Train-RER por pessoa no app IDF Mobilités (€2,55 cada), um para ir e outro para voltar: cada um vale 2h, com as trocas de linha. A Navigo Semaine só começa amanhã. Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
   - via: RER E + metrô 9 · 45 min
 - 17:15 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
 - 17:25 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
