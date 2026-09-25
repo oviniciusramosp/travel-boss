@@ -1,40 +1,52 @@
 import type { Shell } from '../app/shell';
-import { readCategoryFilter, writeCategoryFilter } from '../app/store';
 import {
   getTravelCity,
   googleMapsUrl,
   pickLocale,
   placeCategoryMeta,
-  placeCategoryOrder,
   placePinIconHtml,
   travelUi,
 } from '../catalog';
-import type { Locale, PlaceCategory, TravelPlace } from '../catalog';
+import type { ItineraryLegDef, Locale, TravelPlace } from '../catalog';
 import { buildItineraryRoute } from '../map/itinerary-route';
-import type { MapHandle, MapOverviewCity, MapPin } from '../map/types';
-import { fetchWalkingRoute, peekWalkingRoute } from '../map/walk-route';
+import type { MapHandle, MapPin } from '../map/types';
+import { fetchDrivingRoute, fetchWalkingRoute, peekWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
+import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
-import { googleDirectionsUrl } from './directions';
+import { googleDirectionsUrl, MAPS_MAX_POINTS } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
-import { inlineNodes } from './inline';
-import { cityHash } from './links';
-import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
+import { daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
+import { formatDayTitle } from './dates';
 import {
-  activeSectionKey,
-  cityInOsrmScope,
-  dayKey,
-  dayOpen,
-  shouldRefit,
-  stopKey,
-  type FocusMark,
-  type SectionHit,
-} from './view-state';
+  dateBudget,
+  dayPeriods,
+  hopRails,
+  pastPeriods,
+  periodSections,
+  zonedStamp,
+  type Period,
+  type Rail,
+} from './day-plan';
+import { inlineNodes } from './inline';
+import {
+  dateStops,
+  planHop,
+  previewHop,
+  resolveHopSegments,
+  transferLegs,
+  type DateStop,
+  type RouteHop,
+} from './route';
+import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
-import { iconButton, iconLink, segmented } from '../ui/controls';
-import { icon, type IconName } from '../ui/icons';
+import { chipTone, circleInk } from '../ui/contrast';
+import { iconButton } from '../ui/controls';
+import { el } from '../ui/dom';
+import { mapsIconLink } from '../ui/maps-icon';
+import { icon } from '../ui/icons';
 import { cssToken, prefersReducedMotion } from '../ui/motion';
 import { row } from '../ui/row';
 import {
@@ -45,18 +57,14 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from '../views/place-panel';
-import { parseTrip, type Trip, type TripLeg, type TripLegMode } from './parse';
-import { cityBands, formatTripSummary } from './summary';
+import { parseTrip, type Trip, type TripCity, type TripLeg } from './parse';
+import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
+import { dateBudgetCards, periodLabel, slotSwitch, stopCountLabel } from '../views/timeline';
+import { timeZoneForCity } from '../views/open-now';
+import { loadForecast, mergeWeather, peekForecast, weatherBetween, weatherLook, type Weather } from './weather';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
-
-const VIA_ICON: Record<TripLegMode, IconName> = {
-  walk: 'directions_walk',
-  transit: 'directions_transit',
-  taxi: 'local_taxi',
-  flight: 'flight',
-};
 
 const tripFileListeners = new Set<(event: TripPush) => void>();
 let tripHotBound = false;
@@ -106,16 +114,90 @@ function placeById(citySlug: string, placeId: string): TravelPlace | undefined {
   return getTravelCity(citySlug)?.places.find((item) => item.id === placeId);
 }
 
-/** Category glyph, in the category color. The catalog helper returns markup. */
+/** Filled category dot. The glyph stays solid, same as a map pin. */
 function stopPin(place: TravelPlace): HTMLSpanElement {
   const lead = document.createElement('span');
   lead.className = 'tb-stop-pin';
-  lead.style.color = placeCategoryMeta[place.category].color;
+  lead.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
+  if (circleInk(placeCategoryMeta[place.category].color) === 'on-ink') lead.classList.add('is-on-ink');
   const markup = document.createElement('template');
   markup.innerHTML = placePinIconHtml(place.category, place.subcategories);
   lead.append(markup.content);
   lead.querySelector('.material-symbols-rounded')?.classList.add('is-16');
   return lead;
+}
+
+function walkColor(): string {
+  return cssToken('--color-walk', '#008fff');
+}
+
+/** Empty until a forecast reaches the date. */
+function weatherSlot(key: string): HTMLSpanElement {
+  const slot = el('span', 'tb-weather');
+  slot.dataset.weather = key;
+  slot.setAttribute('role', 'img');
+  slot.hidden = true;
+  return slot;
+}
+
+/** Glyph and temperature; rain when it is likely. The tip has the rest. */
+function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean, range: boolean, locale: Locale): void {
+  slot.hidden = !weather;
+  if (!weather) {
+    slot.replaceChildren();
+    return;
+  }
+  const look = weatherLook(weather.code, night);
+  slot.dataset.tone = look.tone;
+  const low = Math.round(weather.min);
+  const high = Math.round(weather.max);
+  const temp = range && low !== high ? `${low}–${high}°` : `${Math.round((weather.min + weather.max) / 2)}°`;
+  const rain = Math.round(weather.rain);
+  slot.replaceChildren(icon(look.icon, { size: 16, fill: true }), document.createTextNode(rain >= 30 ? `${temp} · ${rain}%` : temp));
+  const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
+  const tip = `${pickLocale(locale, look.label)} · ${low}–${high}° · ${words} ${rain}% · Open-Meteo`;
+  slot.setAttribute('data-tip', tip);
+  slot.setAttribute('aria-label', tip);
+}
+
+/** Half of a leg's rail: `is-above` runs into its icon, `is-below` leaves it. */
+function railHalf(side: 'is-above' | 'is-below', rail: Rail): HTMLSpanElement {
+  const half = el('span', `tb-timeline__rail ${side}`);
+  half.dataset.rail = rail.mode;
+  half.style.setProperty('--line-color', rail.color);
+  return half;
+}
+
+/** Period of each row. The lunch and dinner stops split the day; see `dayPeriods`. */
+function datePeriods(rows: readonly DateStop[]): (Period | null)[] {
+  return dayPeriods(
+    rows.map((row) => {
+      const stop = row.dated.day.stops[row.stopIndex];
+      return { time: stop?.time, text: `${stop?.label ?? ''} ${stop?.note ?? ''}`, listNote: stop?.listNote };
+    }),
+  );
+}
+
+/** Stops of the periods on the map. Past the Maps limit the label says how many go. */
+function paintDayMaps(link: HTMLAnchorElement, points: { lat: number; lng: number }[], locale: Locale): void {
+  const url = googleDirectionsUrl(points, 'transit');
+  const base = pickLocale(locale, { en: 'Open route in Google Maps', 'pt-BR': 'Abrir rota no Google Maps' });
+  const cut = pickLocale(locale, {
+    en: `${MAPS_MAX_POINTS} of ${points.length} stops`,
+    'pt-BR': `${MAPS_MAX_POINTS} de ${points.length} paradas`,
+  });
+  const label = points.length > MAPS_MAX_POINTS ? `${base} · ${cut}` : base;
+  link.setAttribute('aria-label', label);
+  link.setAttribute('data-tip', label);
+  if (url) {
+    link.href = url;
+    link.removeAttribute('aria-disabled');
+    link.removeAttribute('tabindex');
+  } else {
+    link.removeAttribute('href');
+    link.setAttribute('aria-disabled', 'true');
+    link.tabIndex = -1;
+  }
 }
 
 function emptyNotice(title: string, detail?: string, error = false): HTMLDivElement {
@@ -129,79 +211,9 @@ function emptyNotice(title: string, detail?: string, error = false): HTMLDivElem
   return wrap;
 }
 
-function appendCityBar(
-  article: HTMLElement,
-  trip: Trip,
-  locale: Locale,
-  onPick: (key: string) => void,
-  onHover?: (key: string | null) => void,
-): void {
-  const bands = cityBands(trip, locale);
-  if (!bands.length) return;
-  const bar = document.createElement('div');
-  bar.className = 'tb-span';
-  bar.setAttribute('role', 'group');
-  bar.setAttribute(
-    'aria-label',
-    pickLocale(locale, { en: 'Nights by city', 'pt-BR': 'Noites por cidade' }),
-  );
-  bands.forEach((band, index) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'tb-span__city';
-    button.dataset.spanCity = band.key;
-    button.style.flexGrow = String(band.grow);
-    button.setAttribute('aria-label', band.tip);
-    button.setAttribute('data-tip', band.tip);
-    const name = document.createElement('span');
-    name.className = 'tb-span__name';
-    name.textContent = band.name;
-    button.append(name);
-    if (band.dates) {
-      const dates = document.createElement('small');
-      dates.textContent = band.dates;
-      button.append(dates);
-    }
-    const section = () =>
-      article.querySelector<HTMLElement>(`[data-city="${CSS.escape(band.key)}"]`);
-    const hot = (on: boolean) => section()?.classList.toggle('is-hot', on);
-    const hover = (on: boolean) => {
-      hot(on);
-      onHover?.(on ? band.key : null);
-    };
-    button.addEventListener('pointerenter', () => hover(true));
-    button.addEventListener('pointerleave', () => hover(false));
-    button.addEventListener('focus', () => hover(true));
-    button.addEventListener('blur', () => hover(false));
-    button.addEventListener('click', () => onPick(band.key));
-    bar.append(button);
-    if (!band.via || index === bands.length - 1) return;
-    const connector = document.createElement('span');
-    connector.className = 'tb-span__via';
-    connector.setAttribute('aria-hidden', 'true');
-    connector.setAttribute('data-tip', band.via);
-    connector.append(icon(band.viaMode ? VIA_ICON[band.viaMode] : 'route', { size: 16 }));
-    bar.append(connector);
-  });
-  article.append(bar);
-}
-
-function appLink(
-  href: string,
-  name: IconName,
-  label: string,
-  city: string,
-  action: string,
-): HTMLAnchorElement {
-  const link = document.createElement('a');
-  link.className = 'tb-icon-btn tb-icon-btn--ghost tb-icon-btn--sm';
-  link.href = href;
-  link.setAttribute('aria-label', label);
-  link.setAttribute('data-tip', label);
-  link.dataset.cityLink = city;
-  link.dataset.cityAction = action;
-  link.append(icon(name, { size: 16 }));
-  return link;
+function cityDisplayName(city: TripCity, locale: Locale): string {
+  const record = getTravelCity(city.slug);
+  return record ? pickLocale(locale, record.name) : city.name;
 }
 
 function clearStopCurrent(): void {
@@ -210,65 +222,18 @@ function clearStopCurrent(): void {
   });
 }
 
-function stopPins(
-  trip: Trip,
-  cityFilter: string | null,
-  enabled: ReadonlySet<PlaceCategory>,
-): MapPin[] {
-  const pins: MapPin[] = [];
-  const seen = new Set<string>();
-  for (const city of trip.cities) {
-    if (cityFilter && city.slug !== cityFilter) continue;
-    const record = getTravelCity(city.slug);
-    if (!record) continue;
-    for (const day of city.days) {
-      for (const stop of day.stops) {
-        if (!stop.placeId || seen.has(stop.placeId)) continue;
-        const place = record.places.find((item) => item.id === stop.placeId);
-        if (!place || !enabled.has(place.category)) continue;
-        seen.add(stop.placeId);
-        pins.push({
-          id: place.id,
-          lat: place.lat,
-          lng: place.lng,
-          label: stop.time ? `${stop.time} ${stop.label}` : stop.label,
-          color: placeCategoryMeta[place.category].color,
-          kind: 'stop',
-        });
-      }
-    }
-  }
-  return pins;
-}
-
-/** Numbered cities in trip order. Coordinates come from the catalog, not the stops. */
-function overviewCities(trip: Trip): MapOverviewCity[] {
-  const cities: MapOverviewCity[] = [];
-  for (const city of trip.cities) {
-    const record = getTravelCity(city.slug);
-    if (!record || !Number.isFinite(record.lat) || !Number.isFinite(record.lng)) continue;
-    cities.push({
-      id: city.slug || city.name,
-      lat: record.lat,
-      lng: record.lng,
-      label: city.name,
-      number: cities.length + 1,
-      ...(city.leg?.detail ? { via: city.leg.detail } : {}),
-    });
-  }
-  return cities;
-}
-
 export function mountTripNav(
   el: HTMLElement,
-  _shell: Shell,
+  shell: Shell,
   onPick: (id: string) => void,
 ): { setActive(id: string | null): void } {
   let active: string | null = null;
   let alive = true;
+  let shown: TripFile[] = [];
   const buttons = new Map<string, HTMLButtonElement>();
 
   const paint = (files: TripFile[]) => {
+    shown = files;
     el.replaceChildren();
     buttons.clear();
     for (const file of files) {
@@ -276,7 +241,10 @@ export function mountTripNav(
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'tb-nav';
-      button.textContent = trip.title;
+      const label = document.createElement('span');
+      label.className = 'tb-nav-label';
+      label.textContent = formatTripNavLabel(trip, shell.locale());
+      button.append(icon('route', { fill: true, size: 16 }), label);
       button.dataset.tripId = file.id;
       if (file.id === active) button.setAttribute('aria-current', 'true');
       button.addEventListener('click', () => onPick(file.id));
@@ -300,6 +268,7 @@ export function mountTripNav(
   onTripFiles((event) => {
     if (event.reason === 'add' || event.reason === 'unlink') refresh();
   });
+  shell.onLocale(() => paint(shown));
 
   return {
     setActive(id) {
@@ -384,19 +353,9 @@ export function mountTrip(
       toast.hidden = true;
     }, 2000);
   };
-  let activeCity: string | null = null;
-  let overviewMode = true;
-  let userScrolled = false;
-  let holdSpy = false;
-  let spyTimer = 0;
-  let releaseSpy = () => {};
-  let unmountSpy = () => {};
-  const onDocScroll = () => {
-    if (holdSpy) return;
-    userScrolled = true;
-  };
-  main.addEventListener('scroll', onDocScroll, { passive: true });
   let tripRouteEpoch = 0;
+  let ignoreDateToggle = false;
+  let pinPick = false;
   let routeAbort: AbortController | null = null;
   let hasPainted = false;
   let openKeys = new Set<string>();
@@ -404,70 +363,142 @@ export function mountTrip(
   let currentStopKey: string | null = null;
   let scrollTop = 0;
   let seenPinIds = new Set<string>();
-  const storedCategories = readCategoryFilter();
-  const enabledCategories = new Set<PlaceCategory>(
-    storedCategories
-      ? storedCategories.filter((id): id is PlaceCategory =>
-          (placeCategoryOrder as readonly string[]).includes(id),
-        )
-      : placeCategoryOrder,
-  );
+  /** Dates whose card button hid the route. Opening the card shows it again. */
+  const routeHidden = new Set<string>();
+  /** Folded and switched periods, `date:period`. Only what the user touched; saved per trip. */
+  const periodPrefs = readPeriods(id);
 
-  function screenCities(): Set<string> {
-    const visible = new Set<string>();
-    const sections = [...main.querySelectorAll<HTMLElement>('.tb-city-section')];
-    const root = main.getBoundingClientRect();
-    const first = sections.find((section) => !section.hidden)?.dataset.city;
-    if (root.height < 1) {
-      if (first) visible.add(first);
-      return visible;
-    }
-    for (const section of sections) {
-      if (section.hidden) continue;
-      const box = section.getBoundingClientRect();
-      if (box.height < 1 || box.bottom <= root.top || box.top >= root.bottom) continue;
-      const city = section.dataset.city;
-      if (city) visible.add(city);
-    }
-    if (visible.size === 0 && first) visible.add(first);
-    return visible;
+  /** Rows of a date, their periods, and the periods already over on the city's clock. */
+  function datePlan(days: readonly DatedDay[], date: string) {
+    const rows = dateStops(days);
+    const periods = datePeriods(rows);
+    // ponytail: the clock of the date's first city. A date across time zones uses where it starts.
+    const now = zonedStamp(new Date(), timeZoneForCity(days[0]?.city.slug ?? ''));
+    const times = rows.map((row) => row.dated.day.stops[row.stopIndex]?.time);
+    return { rows, periods, past: pastPeriods(date, times, periods, now) };
   }
 
+  /** On the map unless switched off. A period already over starts off. */
+  function periodOn(date: string, period: Period, past: ReadonlySet<Period>): boolean {
+    return periodPrefs[`${date}:${period}`]?.on ?? !past.has(period);
+  }
+
+  function savePeriod(date: string, period: Period, change: { open?: boolean; on?: boolean }): void {
+    const key = `${date}:${period}`;
+    periodPrefs[key] = { ...periodPrefs[key], ...change };
+    writePeriods(id, periodPrefs);
+  }
+
+  function openDate(): string | null {
+    return main.querySelector<HTMLDetailsElement>('details.tb-date[open]')?.dataset.date ?? null;
+  }
+
+  /** The open date, unless its card hid the route. */
+  function routedDate(): string | null {
+    const date = openDate();
+    return date && !routeHidden.has(date) ? date : null;
+  }
+
+  /** Catalog stops of a date in order. `on` is false while their period is off the map. */
+  function datePlaces(trip: Trip, date: string): { row: DateStop; place: TravelPlace; on: boolean }[] {
+    const { rows, periods, past } = datePlan(daysOnDate(trip, date), date);
+    return rows.flatMap((row, index) => {
+      const stop = row.dated.day.stops[row.stopIndex];
+      if (!stop || stop.listNote || !stop.placeId) return [];
+      const place = placeById(row.dated.city.slug, stop.placeId);
+      const period = periods[index];
+      return place ? [{ row, place, on: !period || periodOn(date, period, past) }] : [];
+    });
+  }
+
+  /** Stops of the routed date, including the train that leaves one city for the next. */
   function routeHops(): RouteHop[] {
     const trip = current;
-    if (!trip) return [];
-    const scope = { activeCity, visible: screenCities() };
+    const date = routedDate();
+    if (!trip || !date) return [];
     const hops: RouteHop[] = [];
-    for (const section of main.querySelectorAll<HTMLElement>('.tb-city-section')) {
-      if (section.hidden) continue;
-      const slug = section.dataset.city ?? '';
-      const city = trip.cities.find((item) => (item.slug || item.name) === slug);
-      const record = getTravelCity(slug);
-      if (!city || !record) continue;
-      for (const dayEl of section.querySelectorAll<HTMLDetailsElement>('details.tb-day')) {
-        if (!cityInOsrmScope(slug, dayEl.open, scope)) continue;
-        const day = city.days.find(
-          (item, index) =>
-            dayKey(city.slug || city.name, index, item.title) === dayEl.dataset.dayKey,
-        );
-        if (!day) continue;
-        const stops = day.stops.filter((stop) => !stop.listNote);
-        for (let index = 1; index < stops.length; index += 1) {
-          const fromStop = stops[index - 1];
-          const toStop = stops[index];
-          if (!fromStop?.placeId || !toStop?.placeId) continue;
-          const from = record.places.find((place) => place.id === fromStop.placeId);
-          const to = record.places.find((place) => place.id === toStop.placeId);
-          if (!from || !to) continue;
-          hops.push({
-            from: { id: from.id, lat: from.lat, lng: from.lng },
-            to: { id: to.id, lat: to.lat, lng: to.lng },
-            ...(fromStop.leg ? { via: fromStop.leg } : {}),
-          });
-        }
+    let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
+    for (const { row, place, on } of datePlaces(trip, date)) {
+      // An off period breaks the chain, so the route never bridges it.
+      if (!on) {
+        previous = null;
+        continue;
       }
+      const point = { id: place.id, lat: place.lat, lng: place.lng };
+      if (previous) {
+        hops.push({
+          from: { id: previous.id, lat: previous.lat, lng: previous.lng },
+          to: point,
+          ...(previous.leg ? { via: previous.leg } : {}),
+        });
+      }
+      previous = { ...point, ...(row.depart ? { leg: row.depart } : {}) };
     }
     return hops;
+  }
+
+  /** Stops whose period is on the map. */
+  function datedPoints(trip: Trip, date: string): { lat: number; lng: number }[] {
+    return datePlaces(trip, date).flatMap(({ place, on }) => (on ? [{ lat: place.lat, lng: place.lng }] : []));
+  }
+
+  function catalogPins(trip: Trip): MapPin[] {
+    const locale = shell.locale();
+    const date = routedDate();
+    const numbers = new Map<string, number>();
+    if (date) {
+      for (const { place, on } of datePlaces(trip, date)) {
+        if (on && !numbers.has(place.id)) numbers.set(place.id, numbers.size + 1);
+      }
+    }
+    const pins: MapPin[] = [];
+    const seen = new Set<string>();
+    for (const city of trip.cities) {
+      const record = getTravelCity(city.slug);
+      if (!record) continue;
+      for (const place of record.places) {
+        if (seen.has(place.id)) continue;
+        if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
+        seen.add(place.id);
+        const number = numbers.get(place.id);
+        pins.push({
+          id: place.id,
+          lat: place.lat,
+          lng: place.lng,
+          label: pickLocale(locale, place.name),
+          color: placeCategoryMeta[place.category].color,
+          kind: 'place',
+          ...(number ? { number } : {}),
+        });
+      }
+    }
+    return pins;
+  }
+
+  function setDayLayer(on: boolean) {
+    const host = document.querySelector('.tb-map');
+    if (!(host instanceof HTMLElement)) return;
+    host.classList.toggle('is-day-layer', on);
+    host.classList.remove('is-trip');
+  }
+
+  function frameNearest(trip: Trip) {
+    const date = nearestTripDate(
+      tripDates(trip).map((section) => section.date),
+      todayIso(),
+    );
+    if (!date) return;
+    const points: { lat: number; lng: number }[] = [];
+    const seen = new Set<string>();
+    for (const dated of daysOnDate(trip, date)) {
+      const slug = dated.city.slug;
+      if (!slug || seen.has(slug)) continue;
+      seen.add(slug);
+      const record = getTravelCity(slug);
+      if (!record || !Number.isFinite(record.lat) || !Number.isFinite(record.lng)) continue;
+      points.push({ lat: record.lat, lng: record.lng });
+    }
+    if (points.length) map.frame(points, 12);
   }
 
   function neutralColor(): string {
@@ -497,9 +528,12 @@ export function mountTrip(
       map.setRoute(known);
       return;
     }
-    if (known.length) map.setRoute(known);
     void resolveHopSegments(hops, {
       neutralColor: color,
+      onUpdate: (segments) => {
+        if (!alive || epoch !== tripRouteEpoch) return;
+        map.setRoute([...segments]);
+      },
       walk: async (from, to) => {
         const cached = rememberedWalk(from, to);
         if (cached) return cached;
@@ -512,6 +546,17 @@ export function mountTrip(
         );
         if (!route || route.latlngs.length < 2) return null;
         rememberWalk(from, to, route.latlngs);
+        return route.latlngs;
+      },
+      drive: async (from, to) => {
+        const route = await fetchDrivingRoute(
+          [
+            { lat: from.lat, lng: from.lng },
+            { lat: to.lat, lng: to.lng },
+          ],
+          signal,
+        );
+        if (!route || route.latlngs.length < 2) return null;
         return route.latlngs;
       },
       catalog: async (leg, from, to) => {
@@ -529,6 +574,10 @@ export function mountTrip(
           mode: segment.mode,
           latlngs: segment.latlngs,
           ...(segment.color ? { color: segment.color } : {}),
+          ...(segment.lineId ? { lineId: segment.lineId } : {}),
+          ...(segment.fromId ? { fromId: segment.fromId } : {}),
+          ...(segment.toId ? { toId: segment.toId } : {}),
+          ...(segment.hopIndex != null ? { hopIndex: segment.hopIndex } : {}),
         }));
       },
     })
@@ -539,183 +588,51 @@ export function mountTrip(
       .catch(() => undefined);
   }
 
-  function markActive(slug: string | null) {
-    activeCity = slug;
-    main.querySelectorAll<HTMLButtonElement>('[data-city-filter]').forEach((button) => {
-      const on = slug === null ? button.dataset.cityFilter === 'overview' : button.dataset.cityFilter === slug;
-      button.setAttribute('aria-pressed', on ? 'true' : 'false');
-      if (on) button.setAttribute('aria-current', 'true');
-      else button.removeAttribute('aria-current');
+  /** Route toggle and day Maps link, updated in place. */
+  function syncDayChrome(trip: Trip) {
+    const locale = shell.locale();
+    const routed = routedDate();
+    main.querySelectorAll<HTMLDetailsElement>('details.tb-date').forEach((card) => {
+      const date = card.dataset.date;
+      if (!date) return;
+      card.querySelector('[data-day-action="route"]')?.setAttribute('aria-pressed', String(date === routed));
+      const link = card.querySelector<HTMLAnchorElement>('[data-day-action="maps"]');
+      if (link) paintDayMaps(link, datedPoints(trip, date), locale);
     });
-    main.querySelectorAll<HTMLButtonElement>('[data-span-city]').forEach((button) => {
-      if (slug && button.dataset.spanCity === slug) button.setAttribute('aria-current', 'true');
-      else button.removeAttribute('aria-current');
-    });
-    const rail = main.querySelector<HTMLElement>('.tb-rail');
-    if (rail) segmented(rail);
-    map.hoverOverview(slug);
-  }
-
-  function showOverview(fit: boolean) {
-    const trip = current;
-    if (!trip) return;
-    const cities = overviewCities(trip);
-    if (!cities.length) {
-      map.setOverview(null);
-      return;
-    }
-    map.setOverview(cities, { fit, fade: true });
-  }
-
-  function holdScrollSpy(then?: () => void) {
-    releaseSpy();
-    holdSpy = true;
-    const release = () => {
-      main.removeEventListener('scrollend', release);
-      window.clearTimeout(spyTimer);
-      holdSpy = false;
-      releaseSpy = () => {};
-      then?.();
-    };
-    releaseSpy = release;
-    main.addEventListener('scrollend', release);
-    const raw = getComputedStyle(document.documentElement).getPropertyValue('--dur-slow').trim();
-    const parsed = Number.parseFloat(raw);
-    spyTimer = window.setTimeout(release, Number.isFinite(parsed) ? parsed * 4 : 0);
-  }
-
-  function framePins(pins: MapPin[]) {
-    const trip = current;
-    if (!trip || !pins.length) return;
-    const restore = stopPins(trip, null, enabledCategories);
-    map.setPins('stop', pins);
-    map.fit();
-    map.setPins('stop', restore);
-  }
-
-  function focusCity(slug: string | null) {
-    const trip = current;
-    if (!trip) return;
-    if (slug && !trip.cities.some((city) => (city.slug || city.name) === slug)) slug = null;
-    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
-    if (!slug) {
-      overviewMode = true;
-      markActive(null);
-      userScrolled = false;
-      holdScrollSpy(() => drawTripRoutes());
-      main.scrollTo({ top: 0, behavior });
-      showOverview(true);
-      return;
-    }
-    overviewMode = false;
-    markActive(slug);
-    userScrolled = true;
-    holdScrollSpy();
-    main.querySelector<HTMLElement>(`[data-city="${CSS.escape(slug)}"]`)?.scrollIntoView({
-      block: 'start',
-      behavior,
-    });
-    map.setOverview(overviewCities(trip), { fade: false });
-    framePins(stopPins(trip, slug, enabledCategories));
-    drawTripRoutes();
-  }
-
-  function bindSpy() {
-    unmountSpy();
-    const sections = [...main.querySelectorAll<HTMLElement>('.tb-city-section')];
-    if (sections.length < 2) return;
-    const hits = new Map<string, SectionHit>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!(entry.target instanceof HTMLElement)) continue;
-          const key = entry.target.dataset.city;
-          if (!key) continue;
-          const rootTop = entry.rootBounds?.top ?? 0;
-          hits.set(key, {
-            key,
-            top: entry.boundingClientRect.top - rootTop,
-            height: entry.boundingClientRect.height,
-            ratio: entry.isIntersecting ? entry.intersectionRatio : 0,
-          });
-        }
-        if (holdSpy || !userScrolled) return;
-        const next = activeSectionKey([...hits.values()]);
-        if (!next || next === activeCity) return;
-        markActive(next);
-        drawTripRoutes();
-      },
-      { root: main, threshold: [0, 0.25, 0.5, 0.75, 1] },
-    );
-    for (const section of sections) observer.observe(section);
-    unmountSpy = () => observer.disconnect();
   }
 
   function syncView(fit: boolean) {
     const trip = current;
-    markActive(activeCity);
-    main.querySelectorAll<HTMLButtonElement>('.tb-filters [data-category]').forEach((button) => {
-      const category = button.dataset.category as PlaceCategory | undefined;
-      button.setAttribute(
-        'aria-pressed',
-        category && enabledCategories.has(category) ? 'true' : 'false',
-      );
-    });
-    main.querySelectorAll<HTMLElement>('.tb-city-section').forEach((section) => {
-      section.querySelectorAll<HTMLElement>('li[data-stop]').forEach((item) => {
-        const category = item.dataset.category as PlaceCategory | undefined;
-        item.hidden = Boolean(category) && !enabledCategories.has(category as PlaceCategory);
-      });
-      section.querySelectorAll<HTMLElement>('ul.tb-stops').forEach((list) => {
-        const items = [...list.children].filter(
-          (node): node is HTMLElement => node instanceof HTMLElement,
-        );
-        const neighbor = (item: HTMLElement, step: 'prev' | 'next') => {
-          let cursor = step === 'prev' ? item.previousElementSibling : item.nextElementSibling;
-          while (cursor) {
-            if (
-              cursor instanceof HTMLElement &&
-              cursor.dataset.stop !== undefined &&
-              !cursor.classList.contains('tb-transfer')
-            ) {
-              return cursor;
-            }
-            cursor = step === 'prev' ? cursor.previousElementSibling : cursor.nextElementSibling;
-          }
-          return null;
-        };
-        for (const item of items) {
-          if (!item.classList.contains('tb-transfer')) continue;
-          const prev = neighbor(item, 'prev');
-          const next = neighbor(item, 'next');
-          item.hidden = !prev || !next || prev.hidden || next.hidden;
-        }
-        list.hidden = !items.some((item) => item.dataset.stop !== undefined && !item.hidden);
-      });
-    });
     if (!trip) return;
-    const pins = stopPins(trip, null, enabledCategories);
-    map.setPins('stop', pins);
-    map.setPins('place', []);
+    const date = routedDate();
+    const pins = catalogPins(trip);
+    map.setCities([]);
+    map.setOverview(null);
+    map.hoverOverview(null);
+    map.setPins('place', pins);
+    map.setPins('stop', []);
     map.setPins('hotel', []);
-    if (overviewMode) {
-      showOverview(fit && activeCity == null);
-      if (activeCity) map.hoverOverview(activeCity);
-    } else if (activeCity) {
-      map.setOverview(overviewCities(trip), { fade: false });
-      if (fit) framePins(stopPins(trip, activeCity, enabledCategories));
-    } else if (fit && pins.length) {
-      map.setOverview(null);
-      map.fit();
-    }
+    setDayLayer(Boolean(date));
+    syncDayChrome(trip);
     seenPinIds = new Set(pins.map((pin) => pin.id));
-    drawTripRoutes();
+    if (date) {
+      drawTripRoutes();
+      if (fit) {
+        const points = datedPoints(trip, date);
+        if (points.length) map.frame(points, 13);
+      }
+    } else {
+      tripRouteEpoch += 1;
+      routeAbort?.abort();
+      map.setRoute([]);
+      if (fit) frameNearest(trip);
+    }
     const openId = openPlaceId();
     if (!openId || !trip) return;
     const visible = trip.cities.some((city) => {
       const record = getTravelCity(city.slug);
       const place = record?.places.find((item) => item.id === openId);
-      if (!place || !enabledCategories.has(place.category)) return false;
+      if (!place) return false;
       return city.days.some((day) => day.stops.some((stop) => stop.placeId === openId));
     });
     if (!visible) closePlace({ focus: false });
@@ -772,8 +689,8 @@ export function mountTrip(
   function rememberView() {
     if (!main.querySelector('.tb-doc')) return;
     const keys = new Set<string>();
-    main.querySelectorAll<HTMLDetailsElement>('details.tb-day').forEach((details) => {
-      if (details.open && details.dataset.dayKey) keys.add(details.dataset.dayKey);
+    main.querySelectorAll<HTMLDetailsElement>('details.tb-date').forEach((details) => {
+      if (details.open && details.dataset.date) keys.add(details.dataset.date);
     });
     openKeys = keys;
     currentStopKey =
@@ -784,11 +701,11 @@ export function mountTrip(
     if (!(active instanceof HTMLElement) || !main.contains(active)) return;
     const dayAction = active.closest<HTMLElement>('[data-day-action]');
     if (dayAction?.dataset.dayAction) {
-      const details = dayAction.closest<HTMLDetailsElement>('details.tb-day');
-      if (details?.dataset.dayKey) {
+      const host = dayAction.closest<HTMLElement>('[data-day-key]');
+      if (host?.dataset.dayKey) {
         focusMark = {
           kind: 'day-action',
-          key: details.dataset.dayKey,
+          key: host.dataset.dayKey,
           action: dayAction.dataset.dayAction,
         };
         return;
@@ -802,9 +719,9 @@ export function mountTrip(
         : { kind: 'stop', key: stop.dataset.stopKey };
       return;
     }
-    const day = active.closest<HTMLDetailsElement>('details.tb-day');
-    if (day?.dataset.dayKey && active.closest('summary')) {
-      focusMark = { kind: 'day', key: day.dataset.dayKey };
+    const day = active.closest<HTMLDetailsElement>('details.tb-date');
+    if (day?.dataset.date && active.closest('summary')) {
+      focusMark = { kind: 'day', key: day.dataset.date };
       return;
     }
     const category = active.closest<HTMLElement>('[data-category]');
@@ -843,10 +760,10 @@ export function mountTrip(
     if (!mark) return;
     let target: HTMLElement | null = null;
     if (mark.kind === 'day') {
-      target = main.querySelector(`details[data-day-key="${CSS.escape(mark.key)}"] > summary`);
+      target = main.querySelector(`details[data-date="${CSS.escape(mark.key)}"] > summary`);
     } else if (mark.kind === 'day-action') {
       target = main.querySelector(
-        `details[data-day-key="${CSS.escape(mark.key)}"] [data-day-action="${CSS.escape(mark.action)}"]`,
+        `[data-day-key="${CSS.escape(mark.key)}"] [data-day-action="${CSS.escape(mark.action)}"]`,
       );
     } else if (mark.kind === 'stop') {
       const row = main.querySelector<HTMLElement>(`[data-stop-key="${CSS.escape(mark.key)}"]`);
@@ -993,14 +910,170 @@ export function mountTrip(
     return wrap;
   }
 
+  function releaseLeg(): void {
+    main.querySelectorAll<HTMLElement>('.tb-transfer[aria-pressed="true"]').forEach((node) => {
+      node.setAttribute('aria-pressed', 'false');
+      node.classList.remove('is-hot');
+    });
+    map.hoverLeg(null);
+  }
+
+  /** After a hover, the map goes back to the pressed leg, or to none. */
+  function restorePressedLeg(): void {
+    const pressed = main.querySelector<HTMLElement>('.tb-transfer[aria-pressed="true"]');
+    const from = pressed?.dataset.legFrom;
+    const to = pressed?.dataset.legTo;
+    if (!pressed || !from || !to) {
+      map.hoverLeg(null);
+      return;
+    }
+    const hop = pressed.dataset.legHop;
+    map.hoverLeg(from, to, {
+      mode: pressed.dataset.legMode === 'walk' ? 'walk' : 'transit',
+      ...(hop ? { hop: Number(hop) } : {}),
+    });
+  }
+
+  function armTransfer(transfer: HTMLElement, fromId: string, toId: string, hop?: number): void {
+    const mode = transfer.dataset.legMode === 'walk' ? 'walk' : 'transit';
+    transfer.dataset.legFrom = fromId;
+    transfer.dataset.legTo = toId;
+    transfer.dataset.legMode = mode;
+    if (hop != null) transfer.dataset.legHop = String(hop);
+    transfer.role = 'button';
+    transfer.tabIndex = 0;
+    transfer.setAttribute('aria-pressed', 'false');
+    const activate = () => {
+      const on = transfer.getAttribute('aria-pressed') === 'true';
+      releaseLeg();
+      closePlace({ focus: false });
+      if (on) return;
+      transfer.setAttribute('aria-pressed', 'true');
+      transfer.classList.add('is-hot');
+      map.hoverLeg(fromId, toId, { mode, frame: true, ...(hop != null ? { hop } : {}) });
+    };
+    // Hover lights the leg the way hovering the line on the map does. No camera move.
+    const preview = (on: boolean) => {
+      transfer.classList.toggle('is-hot', on || transfer.getAttribute('aria-pressed') === 'true');
+      if (on) map.hoverLeg(fromId, toId, { mode, ...(hop != null ? { hop } : {}) });
+      else restorePressedLeg();
+    };
+    transfer.addEventListener('pointerenter', () => preview(true));
+    transfer.addEventListener('pointerleave', () => preview(false));
+    transfer.addEventListener('focus', () => preview(true));
+    transfer.addEventListener('blur', () => preview(false));
+    transfer.addEventListener('click', (event) => {
+      event.stopPropagation();
+      activate();
+    });
+    transfer.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      activate();
+    });
+  }
+
+  /** Forecast per period, on the hours of its stops, and the day as their sum. */
+  function paintWeather(trip: Trip) {
+    const locale = shell.locale();
+    for (const section of tripDates(trip)) {
+      const card = main.querySelector<HTMLElement>(`details.tb-date[data-date="${CSS.escape(section.date)}"]`);
+      if (!card) continue;
+      const { rows, periods } = datePlan(section.cities.flatMap((group) => group.days), section.date);
+      const parts = periodSections(periods).map(({ period, rows: indexes }) => {
+        const first = rows[indexes[0] ?? -1];
+        const record = first ? getTravelCity(first.dated.city.slug) : undefined;
+        const hours = record ? peekForecast(record.lat, record.lng) : null;
+        const times = indexes.flatMap((index) => {
+          const row = rows[index];
+          const time = row?.dated.day.stops[row.stopIndex]?.time;
+          return time ? [time] : [];
+        });
+        // A day without times reads the daylight hours.
+        const weather = hours ? weatherBetween(hours, section.date, times[0] ?? '08:00', times.at(-1) ?? '20:00') : null;
+        return { period, weather };
+      });
+      for (const { period, weather } of parts) {
+        if (!period) continue;
+        const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
+        if (slot) fillWeather(slot, weather, period === 'evening', false, locale);
+      }
+      const slot = card.querySelector<HTMLElement>('[data-weather="day"]');
+      if (slot) fillWeather(slot, mergeWeather(parts.map((part) => part.weather)), false, true, locale);
+    }
+  }
+
+  /** One request per city; each answer repaints the forecast in place. */
+  function refreshWeather(trip: Trip) {
+    const seen = new Set<string>();
+    for (const city of trip.cities) {
+      const record = getTravelCity(city.slug);
+      if (!record || seen.has(city.slug)) continue;
+      seen.add(city.slug);
+      void loadForecast(record.lat, record.lng, timeZoneForCity(city.slug)).then(() => {
+        if (alive && current) paintWeather(current);
+      });
+    }
+  }
+
+  /**
+   * Morning, afternoon or evening: Maps link, label, count and map switch over its rows.
+   * Folded until the user opens it. What they fold or switch is saved.
+   */
+  function periodBlock(
+    date: string,
+    period: Period,
+    rows: DateStop[],
+    list: HTMLOListElement,
+    past: ReadonlySet<Period>,
+    locale: Locale,
+  ): HTMLDetailsElement {
+    const block = el('details', 'tb-period');
+    block.dataset.period = period;
+    block.open = periodPrefs[`${date}:${period}`]?.open ?? false;
+    block.addEventListener('toggle', () => savePeriod(date, period, { open: block.open }));
+    const on = periodOn(date, period, past);
+    block.classList.toggle('is-off-map', !on);
+    const stops = rows.flatMap((row) => {
+      const stop = row.dated.day.stops[row.stopIndex];
+      return stop && !stop.listNote ? [{ slug: row.dated.city.slug, stop }] : [];
+    });
+    const points = stops.flatMap(({ slug, stop }) => {
+      const place = stop.placeId ? placeById(slug, stop.placeId) : undefined;
+      return place ? [{ lat: place.lat, lng: place.lng }] : [];
+    });
+    const maps = mapsIconLink({
+      size: 'sm',
+      href: googleDirectionsUrl(points, 'transit'),
+      label: pickLocale(locale, travelUi.itineraryOpenGoogleMapsPeriod),
+    });
+    maps.dataset.dayAction = `maps-${period}`;
+    const toggle = slotSwitch(on, period, locale, (next) => {
+      savePeriod(date, period, { on: next });
+      block.classList.toggle('is-off-map', !next);
+      if (openDate() === date) syncView(false);
+    });
+    toggle.dataset.dayAction = `period-${period}`;
+    const chevron = icon('expand_more', { size: 18 });
+    chevron.classList.add('tb-period__chevron');
+    const head = el('summary', 'tb-period__head');
+    head.append(
+      maps,
+      el('span', 'tb-period__label', periodLabel(period, locale)),
+      el('span', 'tb-period__count', String(stops.length)),
+      weatherSlot(period),
+      toggle,
+      chevron,
+    );
+    block.append(head, list);
+    return block;
+  }
+
   function paint(trip: Trip, updated = false) {
     const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
     if (!firstPaint) rememberView();
     current = trip;
-    if (activeCity && !trip.cities.some((city) => (city.slug || city.name) === activeCity)) {
-      activeCity = null;
-    }
     const locale = shell.locale();
     main.replaceChildren();
 
@@ -1011,7 +1084,9 @@ export function mountTrip(
       clearStopCurrent();
       const rowEl = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(placeId)}"]`);
       rowEl?.setAttribute('aria-current', 'true');
-      openPlace(found, cityRecord, locale, origin);
+      openPlace(found, cityRecord, locale, origin, {
+        maps: googleMapsUrl(found, cityRecord),
+      });
     };
 
     const article = document.createElement('article');
@@ -1024,7 +1099,7 @@ export function mountTrip(
     heading.className = 'tb-doc-heading';
     const title = document.createElement('h1');
     title.className = 'tb-doc-title';
-    title.textContent = trip.title;
+    title.textContent = formatTripPanelTitle(trip, locale);
     heading.append(title);
     const summaryText = formatTripSummary(trip, locale);
     if (summaryText) {
@@ -1038,412 +1113,344 @@ export function mountTrip(
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
     article.append(head);
-    appendCityBar(article, trip, locale, (key) => focusCity(key), (key) => {
-      map.hoverOverview(key ?? activeCity);
-    });
 
-    if (trip.cities.length > 1) {
-      const rail = document.createElement('div');
-      rail.className = 'tb-rail';
-      rail.setAttribute('role', 'group');
-      rail.setAttribute(
-        'aria-label',
-        pickLocale(locale, { en: 'Trip cities', 'pt-BR': 'Cidades do roteiro' }),
-      );
-      const overview = document.createElement('button');
-      overview.type = 'button';
-      overview.className = 'tb-nav';
-      overview.dataset.cityFilter = 'overview';
-      overview.textContent = pickLocale(locale, { en: 'Overview', 'pt-BR': 'Visão geral' });
-      overview.addEventListener('click', () => focusCity(null));
-      rail.append(overview);
-      for (const city of trip.cities) {
-        const key = city.slug || city.name;
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'tb-nav';
-        button.dataset.cityFilter = key;
-        button.textContent = city.name;
-        button.addEventListener('click', () => focusCity(key));
-        rail.append(button);
+    for (const section of tripDates(trip)) {
+      const date = section.date;
+      const details = document.createElement('details');
+      details.className = 'tb-date';
+      details.dataset.date = date;
+      details.dataset.dayKey = date;
+      details.open = !firstPaint && openKeys.has(date);
+      const daysHere = section.cities.flatMap((group) => group.days);
+      const { rows, periods, past } = datePlan(daysHere, date);
+      const placesHere = datePlaces(trip, date).map(({ place }) => place);
+      const names: string[] = [];
+      for (const group of section.cities) {
+        const name = cityDisplayName(group.city, locale);
+        if (name && !names.includes(name)) names.push(name);
       }
-      article.append(rail);
-    }
-
-    const present = new Set<PlaceCategory>();
-    for (const city of trip.cities) {
-      const record = getTravelCity(city.slug);
-      if (!record) continue;
-      for (const day of city.days) {
-        for (const stop of day.stops) {
-          const place = stop.placeId
-            ? record.places.find((item) => item.id === stop.placeId)
-            : undefined;
-          if (place) present.add(place.category);
+      const stopCount = rows.filter((entry) => {
+        const stop = entry.dated.day.stops[entry.stopIndex];
+        return Boolean(stop && !stop.listNote);
+      }).length;
+      const summary = el('summary', 'tb-date__head');
+      const heading = el('span', 'tb-date__heading');
+      const meta = el(
+        'span',
+        'tb-date__meta',
+        [names.join(' → '), stopCountLabel(stopCount, locale)].filter(Boolean).join(' · '),
+      );
+      meta.append(weatherSlot('day'));
+      heading.append(el('span', 'tb-date__title', formatDayTitle(date, locale)), meta);
+      const routeToggle = iconButton({
+        icon: 'route',
+        label: pickLocale(locale, { en: 'Show route on map', 'pt-BR': 'Mostrar rota no mapa' }),
+        pressed: false,
+        size: 'sm',
+      });
+      routeToggle.dataset.dayAction = 'route';
+      routeToggle.disabled = placesHere.length === 0;
+      routeToggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        // A closed card opens with its route on. The toggle listener draws it.
+        if (!details.open) {
+          details.open = true;
+          return;
         }
-      }
-    }
-    const categories = placeCategoryOrder.filter((category) => present.has(category));
-    if (categories.length > 1) {
-      const filters = document.createElement('div');
-      filters.className = 'tb-filters';
-      filters.setAttribute(
-        'role', 'group',
-      );
-      filters.setAttribute(
-        'aria-label',
-        locale === 'pt-BR' ? 'Categorias' : 'Categories',
-      );
-      for (const category of categories) {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'tb-btn-outline';
-        button.dataset.category = category;
-        button.setAttribute('aria-pressed', enabledCategories.has(category) ? 'true' : 'false');
-        const dot = document.createElement('span');
-        dot.className = 'tb-cat-dot';
-        dot.style.background = placeCategoryMeta[category].color;
-        const label = document.createElement('span');
-        label.className = 'tb-cat-label';
-        label.textContent = pickLocale(locale, travelUi.categories[category]);
-        button.append(dot, label);
-        button.addEventListener('click', () => {
-          if (enabledCategories.has(category)) enabledCategories.delete(category);
-          else enabledCategories.add(category);
-          writeCategoryFilter([...enabledCategories]);
+        if (routeHidden.delete(date)) {
           syncView(true);
-        });
-        filters.append(button);
-      }
-      article.append(filters);
-    }
-
-    for (const city of trip.cities) {
-      const section = document.createElement('section');
-      section.className = 'tb-city-section';
-      section.dataset.city = city.slug || city.name;
-      const cityHead = document.createElement('div');
-      cityHead.className = 'tb-city-head';
-      const heading = document.createElement('h2');
-      heading.textContent = city.name;
-      cityHead.append(heading);
-      if (city.slug) {
-        const actions = document.createElement('div');
-        actions.className = 'tb-city-actions';
-        const openCity = pickLocale(locale, { en: 'Open city', 'pt-BR': 'Abrir cidade' });
-        const openDays = pickLocale(locale, { en: 'City itinerary', 'pt-BR': 'Itinerário da cidade' });
-        const hotels = city.dates
-          ? pickLocale(locale, { en: 'Hotels on these dates', 'pt-BR': 'Hotéis nestas datas' })
-          : pickLocale(locale, { en: 'Hotels', 'pt-BR': 'Hotéis' });
-        const fitCity = iconButton({
-          icon: 'fit_screen',
-          label: pickLocale(locale, { en: 'Frame on the map', 'pt-BR': 'Enquadrar no mapa' }),
-          size: 'sm',
-        });
-        fitCity.dataset.cityLink = city.slug;
-        fitCity.dataset.cityAction = 'fit';
-        fitCity.addEventListener('click', (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          const live = current;
-          if (!live) return;
-          overviewMode = false;
-          markActive(city.slug);
-          framePins(stopPins(live, city.slug, enabledCategories));
-        });
-        actions.append(
-          appLink(cityHash(city.slug, 'places'), 'map', openCity, city.slug, 'places'),
-          appLink(cityHash(city.slug, 'itinerary'), 'route', openDays, city.slug, 'itinerary'),
-          appLink(
-            cityHash(
-              city.slug,
-              'hotels',
-              city.dates ? { in: city.dates.start, out: city.dates.end } : undefined,
-            ),
-            'bed',
-            hotels,
-            city.slug,
-            'hotels',
-          ),
-          fitCity,
+          return;
+        }
+        routeHidden.add(date);
+        syncView(false);
+      });
+      const dayMaps = mapsIconLink({ badge: true, size: 'sm', label: '' });
+      dayMaps.dataset.dayAction = 'maps';
+      paintDayMaps(dayMaps, datedPoints(trip, date), locale);
+      const copyDay = iconButton({
+        icon: 'content_copy',
+        label: pickLocale(locale, { en: 'Copy day (Markdown)', 'pt-BR': 'Copiar dia (Markdown)' }),
+        size: 'sm',
+      });
+      copyDay.classList.add('tb-date__copy');
+      copyDay.dataset.dayAction = 'copy';
+      copyDay.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const markdown = daysHere
+          .map((dated) => dayToMarkdown(dated.day, (placeId) => resolveHref(dated.city.slug, placeId)))
+          .filter(Boolean)
+          .join('\n\n');
+        void navigator.clipboard.writeText(markdown).then(
+          () => showToast(pickLocale(locale, { en: 'Day copied', 'pt-BR': 'Dia copiado' })),
+          () => showToast(pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' }), true),
         );
-        cityHead.append(actions);
+      });
+      const actions = el('span', 'tb-date__actions');
+      actions.append(copyDay, routeToggle, dayMaps);
+      const chevron = icon('expand_more', { size: 18 });
+      chevron.classList.add('tb-date__chevron');
+      summary.append(heading, actions, chevron);
+      details.append(summary);
+      const body = el('div', 'tb-date__body');
+      const cards = dateBudgetCards(
+        dateBudget(placesHere),
+        (placeId) => {
+          const found = placesHere.find((place) => place.id === placeId);
+          return found ? pickLocale(locale, found.name) : placeId;
+        },
+        locale,
+      );
+      if (cards) body.append(cards);
+      // One list per period. A row's list is lists[rowIndex].
+      const lists: HTMLOListElement[] = [];
+      const timeline = el('div', 'tb-periods');
+      for (const part of periodSections(periods)) {
+        const list = el('ol', 'tb-list tb-timeline');
+        for (const index of part.rows) lists[index] = list;
+        timeline.append(
+          part.period
+            ? periodBlock(date, part.period, part.rows.map((index) => rows[index]!), list, past, locale)
+            : list,
+        );
       }
-      section.append(cityHead);
-      if (city.dates) {
-        const dates = document.createElement('p');
-        dates.className = 'tb-meta';
-        dates.textContent = `${city.dates.start} → ${city.dates.end}`;
-        section.append(dates);
-      }
-      if (city.leg) {
-        const via = document.createElement('ul');
-        via.className = 'tb-list tb-list--stops tb-city-via';
-        via.append(transferRow(city.leg, locale));
-        section.append(via);
-      }
-      const record = getTravelCity(city.slug);
-      city.days.forEach((day, dayIndex) => {
-        const details = document.createElement('details');
-        details.className = 'tb-day';
-        const openedKey = dayKey(city.slug || city.name, dayIndex, day.title);
-        details.dataset.dayKey = openedKey;
-        details.open = dayOpen(firstPaint, openedKey, openKeys, dayIndex);
-        const dayTitle = document.createElement('summary');
-        const dayLabel = document.createElement('span');
-        dayLabel.className = 'tb-day-label';
-        dayLabel.textContent = day.title;
-        const dayActions = document.createElement('span');
-        dayActions.className = 'tb-day-actions';
-        const dayPoints: MapPin[] = [];
-        for (const stop of day.stops) {
-          if (stop.listNote || !stop.placeId) continue;
-          const found = placeById(city.slug, stop.placeId);
-          if (!found) continue;
-          dayPoints.push({
-            id: found.id,
-            lat: found.lat,
-            lng: found.lng,
-            label: stop.time ? `${stop.time} ${stop.label}` : stop.label,
-            color: placeCategoryMeta[found.category].color,
-            kind: 'stop',
+      body.append(timeline);
+      let previousEnd: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
+      let railAbove: { mode: 'none' | 'walk' | 'transit'; color: string | null } = {
+        mode: 'none',
+        color: null,
+      };
+      rows.forEach((entry, rowIndex) => {
+        const city = entry.dated.city;
+        const day = entry.dated.day;
+        const dayIndex = entry.dated.dayIndex;
+        const stop = day.stops[entry.stopIndex];
+        if (!stop) return;
+        const stopIndex = entry.stopIndex;
+        const record = getTravelCity(city.slug);
+        const key = stopKey(
+          city.slug || city.name,
+          dayIndex,
+          day.title,
+          stopIndex,
+          stop.placeId,
+          stop.label,
+        );
+        const markChanged = (node: HTMLElement) => {
+          if (!changed.has(key) || prefersReducedMotion()) return;
+          node.classList.add('is-changed');
+          node.addEventListener('animationend', () => node.classList.remove('is-changed'), {
+            once: true,
           });
-        }
-        const mapsUrl = googleDirectionsUrl(dayPoints, 'transit');
-        if (mapsUrl) {
-          const link = iconLink({
-            icon: 'route',
-            label: pickLocale(locale, {
-              en: 'Day routes in Google Maps',
-              'pt-BR': 'Rotas do dia no Google Maps',
+        };
+        if (stop.listNote) {
+          const noteItem = document.createElement('li');
+          noteItem.className = 'tb-list-note';
+          noteItem.dataset.stop = '';
+          noteItem.dataset.stopKey = key;
+          noteItem.dataset.hay = `${city.name} ${stop.label}`.toLowerCase();
+          if (stop.time) {
+            const time = document.createElement('span');
+            time.className = 'tb-list-note__time';
+            time.textContent = stop.time;
+            noteItem.append(time);
+          }
+          noteItem.append(
+            ...inlineNodes(stop.label, {
+              onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
             }),
-            href: mapsUrl,
-          });
-          link.dataset.dayAction = 'route';
-          link.addEventListener('click', (event) => event.stopPropagation());
-          dayActions.append(link);
+          );
+          markChanged(noteItem);
+          lists[rowIndex]!.append(noteItem);
+          return;
         }
-        const fitDay = iconButton({
-          icon: 'fit_screen',
-          label: pickLocale(locale, { en: 'Frame on the map', 'pt-BR': 'Enquadrar no mapa' }),
-          size: 'sm',
+        const place = stop.placeId ? placeById(city.slug, stop.placeId) : undefined;
+        const missingPlace = Boolean(stop.placeId && !place);
+        const href = stop.href
+          ? stop.href
+          : place
+            ? resolveHref(city.slug, place.id)
+            : null;
+        const point = place ? { id: place.id, lat: place.lat, lng: place.lng } : null;
+        const hopKind =
+          previousEnd && point
+            ? planHop({
+                from: previousEnd,
+                to: point,
+                ...(previousEnd.leg ? { via: previousEnd.leg } : {}),
+              }).kind
+            : null;
+        const directions =
+          previousEnd && point
+            ? googleDirectionsUrl(
+                [previousEnd, point],
+                hopKind === 'walk' ? 'walk' : hopKind === 'drive' ? 'drive' : 'transit',
+              )
+            : null;
+        previousEnd = point ? { ...point, ...(entry.depart ? { leg: entry.depart } : {}) } : null;
+        const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
+        const placeId = stop.placeId;
+        const item = row({
+          time: stop.time,
+          lead: place ? stopPin(place) : undefined,
+          title: missingPlace ? (placeId ?? stop.label) : stop.label,
+          sub: missingPlace ? authored || undefined : stop.note,
+          tip: false,
+          data: {
+            stop: '',
+            stopKey: key,
+            hay: `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase(),
+            ...(stop.placeId ? { placeId: stop.placeId } : {}),
+            ...(stop.time ? { stopTime: stop.time } : {}),
+            ...(place ? { category: place.category } : {}),
+          },
+          onSelect:
+            place && record
+              ? () => {
+                  releaseLeg();
+                  clearStopCurrent();
+                  item.setAttribute('aria-current', 'true');
+                  const origin = item.querySelector<HTMLElement>('.tb-row__main');
+                  openPlace(place, record, locale, origin, {
+                    ...(href ? { maps: href } : {}),
+                    ...(directions ? { route: directions } : {}),
+                  });
+                }
+              : undefined,
         });
-        fitDay.dataset.dayAction = 'fit';
-        fitDay.disabled = dayPoints.length === 0;
-        fitDay.addEventListener('click', (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          if (!current || !dayPoints.length) return;
-          const restore = stopPins(current, null, enabledCategories);
-          map.setPins('stop', dayPoints);
-          map.fit();
-          map.setPins('stop', restore);
-        });
-        const copyDay = iconButton({
-          icon: 'content_copy',
-          label: pickLocale(locale, { en: 'Copy day (Markdown)', 'pt-BR': 'Copiar dia (Markdown)' }),
-          size: 'sm',
-        });
-        copyDay.dataset.dayAction = 'copy';
-        copyDay.addEventListener('click', (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          const markdown = dayToMarkdown(day, (placeId) => resolveHref(city.slug, placeId));
-          void navigator.clipboard.writeText(markdown).then(
-            () =>
-              showToast(
-                pickLocale(locale, { en: 'Day copied', 'pt-BR': 'Dia copiado' }),
-              ),
-            () =>
-              showToast(
-                pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' }),
-                true,
-              ),
-          );
-        });
-        if (city.slug) {
-          const openDay = appLink(
-            cityHash(city.slug, 'itinerary', { day: dayIndex + 1 }),
-            'map',
-            pickLocale(locale, { en: 'Open this day', 'pt-BR': 'Abrir este dia' }),
-            city.slug,
-            `day-${dayIndex + 1}`,
-          );
-          openDay.dataset.dayAction = 'city';
-          openDay.addEventListener('click', (event) => event.stopPropagation());
-          dayActions.append(openDay);
+        if (missingPlace) {
+          item.classList.add('is-disabled');
+          item.setAttribute('aria-disabled', 'true');
         }
-        dayActions.append(fitDay, copyDay);
-        dayActions.addEventListener('mousedown', (event) => event.stopPropagation());
-        dayActions.addEventListener('click', (event) => event.stopPropagation());
-        dayTitle.append(dayLabel, dayActions);
-        details.append(dayTitle);
-        const list = document.createElement('ul');
-        list.className = 'tb-list tb-list--stops tb-stops';
-        let previousEnd: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
-        day.stops.forEach((stop, stopIndex) => {
-          const key = stopKey(
-            city.slug || city.name,
-            dayIndex,
-            day.title,
-            stopIndex,
-            stop.placeId,
-            stop.label,
+        if (stop.note && !missingPlace) {
+          item.querySelector('.tb-row__sub')?.replaceChildren(
+            ...inlineNodes(stop.note, {
+              onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
+            }),
           );
-          const markChanged = (node: HTMLElement) => {
-            if (!changed.has(key) || prefersReducedMotion()) return;
-            node.classList.add('is-changed');
-            node.addEventListener('animationend', () => node.classList.remove('is-changed'), {
-              once: true,
-            });
+        }
+        markChanged(item);
+        if (place) {
+          // Row hover and focus light the pin the way hovering the dot does.
+          const hot = (on: boolean) => {
+            item.classList.toggle('is-hot', on);
+            map.hover(on ? place.id : null);
           };
-          if (stop.listNote) {
-            const noteItem = document.createElement('li');
-            noteItem.className = 'tb-list-note';
-            noteItem.dataset.stop = '';
-            noteItem.dataset.stopKey = key;
-            noteItem.dataset.hay = `${city.name} ${stop.label}`.toLowerCase();
-            if (stop.time) {
-              const time = document.createElement('span');
-              time.className = 'tb-list-note__time';
-              time.textContent = stop.time;
-              noteItem.append(time);
-            }
-            noteItem.append(
-              ...inlineNodes(stop.label, {
-                onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
-              }),
-            );
-            markChanged(noteItem);
-            list.append(noteItem);
-            return;
-          }
-          const place = stop.placeId ? placeById(city.slug, stop.placeId) : undefined;
-          const missingPlace = Boolean(stop.placeId && !place);
-          const href = stop.href
-            ? stop.href
-            : place
-              ? resolveHref(city.slug, place.id)
-              : null;
-          const point = place ? { id: place.id, lat: place.lat, lng: place.lng } : null;
-          const directions =
-            previousEnd && point
-              ? googleDirectionsUrl(
-                  [previousEnd, point],
-                  planHop({
-                    from: previousEnd,
-                    to: point,
-                    ...(previousEnd.leg ? { via: previousEnd.leg } : {}),
-                  }).kind === 'walk'
-                    ? 'walk'
-                    : 'transit',
-                )
-              : null;
-          previousEnd = point ? { ...point, ...(stop.leg ? { leg: stop.leg } : {}) } : null;
-          const actions = document.createDocumentFragment();
-          if (directions) {
-            const link = iconLink({
-              icon: 'directions',
-              label: pickLocale(locale, {
-                en: 'Directions from the previous stop',
-                'pt-BR': 'Como chegar desde a parada anterior',
-              }),
-              href: directions,
-            });
-            link.dataset.action = 'directions';
-            actions.append(link);
-          }
-          if (href) {
-            const link = iconLink({
-              icon: 'location_on',
-              label: pickLocale(locale, { en: 'Google Maps', 'pt-BR': 'Google Maps' }),
-              href,
-            });
-            link.dataset.action = 'maps';
-            actions.append(link);
-          }
-          const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
-          const placeId = stop.placeId;
-          const item = row({
-            time: stop.time,
-            lead: place ? stopPin(place) : undefined,
-            title: missingPlace ? (placeId ?? stop.label) : stop.label,
-            sub: missingPlace ? authored || undefined : stop.note,
-            actions: actions.childNodes.length ? actions : undefined,
-            data: {
-              stop: '',
-              stopKey: key,
-              hay: `${city.name} ${stop.label} ${stop.note ?? ''} ${stop.placeId ?? ''} ${stop.time ?? ''}`.toLowerCase(),
-              ...(stop.placeId ? { placeId: stop.placeId } : {}),
-              ...(stop.time ? { stopTime: stop.time } : {}),
-              ...(place ? { category: place.category } : {}),
-            },
-            onSelect:
-              place && record
-                ? () => {
-                    clearStopCurrent();
-                    item.setAttribute('aria-current', 'true');
-                    const origin = item.querySelector<HTMLElement>('.tb-row__main');
-                    openPlace(place, record, locale, origin);
-                  }
-                : undefined,
+          item.addEventListener('pointerenter', () => hot(true));
+          item.addEventListener('pointerleave', () => hot(false));
+          item.addEventListener('focusin', () => hot(true));
+          item.addEventListener('focusout', (event) => {
+            if (!(event.relatedTarget instanceof Node && item.contains(event.relatedTarget))) hot(false);
           });
-          if (missingPlace) {
-            item.classList.add('is-disabled');
-            item.setAttribute('aria-disabled', 'true');
-          }
-          if (stop.note && !missingPlace) {
-            item.querySelector('.tb-row__sub')?.replaceChildren(
-              ...inlineNodes(stop.note, {
-                onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
-              }),
-            );
-          }
-          markChanged(item);
-          list.append(item);
-          const next = day.stops.slice(stopIndex + 1).find((item) => !item.listNote);
-          const nextPlace = next?.placeId ? placeById(city.slug, next.placeId) : undefined;
-          const legs =
-            place && nextPlace
-              ? transferLegs({
-                  from: { id: place.id, lat: place.lat, lng: place.lng },
-                  to: { id: nextPlace.id, lat: nextPlace.lat, lng: nextPlace.lng },
-                  ...(stop.leg ? { via: stop.leg } : {}),
-                })
-              : stop.leg
-                ? [stop.leg]
-                : [];
-          for (const leg of legs) {
-            const transfer = transferRow(leg, locale);
-            markChanged(transfer);
-            list.append(transfer);
-          }
+        }
+        const nextIndex = rows.findIndex((candidate, index) => {
+          const next = candidate.dated.day.stops[candidate.stopIndex];
+          return index > rowIndex && Boolean(next && !next.listNote);
         });
-        if (day.stops.length) details.append(list);
-        for (const note of day.notes) {
+        const nextRow = nextIndex >= 0 ? rows[nextIndex] : undefined;
+        const nextStop = nextRow ? nextRow.dated.day.stops[nextRow.stopIndex] : undefined;
+        const nextPlace =
+          nextRow && nextStop?.placeId ? placeById(nextRow.dated.city.slug, nextStop.placeId) : undefined;
+        const routeHop =
+          place && nextPlace
+            ? {
+                from: { id: place.id, lat: place.lat, lng: place.lng },
+                to: { id: nextPlace.id, lat: nextPlace.lat, lng: nextPlace.lng },
+                ...(entry.depart ? { via: entry.depart } : {}),
+              }
+            : null;
+        const drawn = routeHop != null && planHop(routeHop).kind !== 'none';
+        let legs = routeHop ? transferLegs(routeHop) : entry.depart ? [entry.depart] : [];
+        if (legs.length === 0 && drawn && place && nextPlace) {
+          const walk: ItineraryLegDef = { from: place.id, to: nextPlace.id, mode: 'walk' };
+          legs = [walk];
+        }
+        const rails = legs.map((leg) => {
+          const mode = leg.mode === 'walk' ? 'walk' : 'transit';
+          const branded = 'color' in leg && typeof leg.color === 'string' ? leg.color : null;
+          const color = branded ?? (mode === 'walk' ? walkColor() : neutralColor());
+          return { mode, color } as const;
+        });
+        const walk = { mode: 'walk' as const, color: walkColor() };
+        const hopPlan =
+          hopRails(rails, walk, legs[0]?.mode === 'taxi') ??
+          (nextPlace ? { depart: walk, parts: [], arrive: walk } : null);
+        // A hop into the next period opens that period's list, like the portfolio.
+        // The rail still runs down to that period, so the two read as one line.
+        const crosses = nextIndex >= 0 && lists[nextIndex] !== lists[rowIndex];
+        const hopList = crosses ? lists[nextIndex]! : lists[rowIndex]!;
+        item.dataset.railAbove = railAbove.mode;
+        item.dataset.railBelow = hopPlan?.depart.mode ?? 'none';
+        item.classList.toggle('is-period-end', crosses && hopPlan != null);
+        if (railAbove.color) item.style.setProperty('--rail-above', railAbove.color);
+        if (hopPlan) item.style.setProperty('--rail-below', hopPlan.depart.color);
+        lists[rowIndex]!.append(item);
+        rails.forEach((rail, index) => {
+          const transfer = transferRow(legs[index]!, locale);
+          transfer.classList.add('tb-timeline__hop');
+          transfer.style.setProperty('--line-color', rail.color);
+          if (chipTone(rail.color) === 'ink') transfer.classList.add('is-ink');
+          const halves = hopPlan?.parts[index] ?? { above: rail, below: rail };
+          transfer.prepend(railHalf('is-above', halves.above), railHalf('is-below', halves.below));
+          if (drawn && place && nextPlace) {
+            const hopRaw = transfer.dataset.legHop;
+            const hop = hopRaw != null && hopRaw !== '' ? Number(hopRaw) : undefined;
+            armTransfer(transfer, place.id, nextPlace.id, hop);
+          }
+          markChanged(transfer);
+          hopList.append(transfer);
+        });
+        railAbove = hopPlan?.arrive ?? { mode: 'none', color: null };
+      });
+      const bridged = new Set(
+        rows.flatMap((row) => (row.depart && row.depart === row.dated.city.leg ? [row.dated.city] : [])),
+      );
+      for (const dated of daysHere) {
+        for (const note of dated.day.notes) {
           const paragraph = document.createElement('p');
           paragraph.className = 'tb-doc-note';
           paragraph.append(
             ...inlineNodes(note, {
-              onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
+              onPlace: (placeId, origin) => openLinkedPlace(dated.city.slug, placeId, origin),
             }),
           );
-          details.append(paragraph);
+          body.append(paragraph);
         }
-        details.addEventListener('toggle', () => drawTripRoutes());
-        section.append(details);
-      });
-      if (record) {
-        const count = document.createElement('p');
-        count.className = 'tb-meta';
-        const label = pickLocale(locale, record.name);
-        count.textContent =
-          locale === 'pt-BR'
-            ? `${label} · ${record.places.length} lugares no catálogo`
-            : `${label} · ${record.places.length} places in the catalog`;
-        section.append(count);
+        if (
+          dated.city.leg &&
+          dated.dayIndex === dated.city.days.length - 1 &&
+          !bridged.has(dated.city)
+        ) {
+          const via = document.createElement('ul');
+          via.className = 'tb-list tb-list--stops tb-city-via';
+          via.append(transferRow(dated.city.leg, locale));
+          body.append(via);
+        }
       }
-      article.append(section);
+      details.append(body);
+      // Reopening the card on a repaint fires `toggle` too, even detached. That is
+      // not the user: paint() syncs the map itself and keeps the camera still.
+      let restoring = details.open;
+      details.addEventListener('toggle', () => {
+        if (restoring) {
+          restoring = false;
+          return;
+        }
+        if (ignoreDateToggle) return;
+        if (details.open) {
+          routeHidden.delete(date);
+          ignoreDateToggle = true;
+          for (const other of main.querySelectorAll<HTMLDetailsElement>('details.tb-date')) {
+            if (other !== details) other.open = false;
+          }
+          ignoreDateToggle = false;
+        }
+        const fitDay = details.open && !pinPick;
+        pinPick = false;
+        syncView(fitDay);
+      });
+      article.append(details);
     }
 
     main.append(article);
@@ -1453,19 +1460,14 @@ export function mountTrip(
         ?.setAttribute('aria-current', 'true');
     }
     restoreFocus();
-    holdSpy = true;
     main.scrollTop = firstPaint ? 0 : scrollTop;
-    window.requestAnimationFrame(() => {
-      holdSpy = false;
-    });
     applyQuery();
     hasPainted = true;
     syncView(
-      shouldRefit(firstPaint, stopPins(trip, null, enabledCategories), seenPinIds, (lat, lng) =>
-        map.inView(lat, lng),
-      ),
+      shouldRefit(firstPaint, catalogPins(trip), seenPinIds, (lat, lng) => map.inView(lat, lng)),
     );
-    bindSpy();
+    paintWeather(trip);
+    refreshWeather(trip);
     shell.setSource(trip.file);
     if (updated) flashSource(trip.file);
     previousTrip = trip;
@@ -1500,14 +1502,54 @@ export function mountTrip(
     }
   }
 
-  const offOverview = map.onOverview((cityId) => focusCity(cityId));
+  const offLeg = map.onHoverLeg((leg) => {
+    if (!alive) return;
+    main.querySelectorAll<HTMLElement>('.tb-transfer.is-hot').forEach((node) => {
+      if (node.getAttribute('aria-pressed') !== 'true') node.classList.remove('is-hot');
+    });
+    if (!leg) return;
+    for (const row of main.querySelectorAll<HTMLElement>('.tb-transfer[data-leg-from]')) {
+      if (row.dataset.legFrom !== leg.from || row.dataset.legTo !== leg.to) continue;
+      if (leg.hop != null) {
+        if (row.dataset.legHop === String(leg.hop)) row.classList.add('is-hot');
+        continue;
+      }
+      if (leg.mode) {
+        const rowMode = row.dataset.legMode === 'walk' ? 'walk' : 'transit';
+        if (rowMode === leg.mode && row.dataset.legHop == null) row.classList.add('is-hot');
+        continue;
+      }
+      row.classList.add('is-hot');
+    }
+  });
 
   stopsUnsub.fn = map.onSelect((pinId) => {
-    const item = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(pinId)}"]`);
-    if (!item) return;
-    item.scrollIntoView({ block: 'center' });
-    clearStopCurrent();
-    item.setAttribute('aria-current', 'true');
+    if (!alive || !current) return;
+    const selector = `[data-place-id="${CSS.escape(pinId)}"]`;
+    // Home shows up on most dates. The open card's row wins.
+    const item =
+      main.querySelector<HTMLElement>(`details.tb-date[open] ${selector}`) ??
+      main.querySelector<HTMLElement>(selector);
+    if (item) {
+      const date = item.closest('details.tb-date');
+      if (date instanceof HTMLDetailsElement && !date.open) {
+        pinPick = true;
+        date.open = true;
+      }
+      const period = item.closest('details.tb-period');
+      if (period instanceof HTMLDetailsElement) period.open = true;
+      item.scrollIntoView({ block: 'center' });
+      clearStopCurrent();
+      item.setAttribute('aria-current', 'true');
+    }
+    for (const city of current.cities) {
+      const record = getTravelCity(city.slug);
+      const place = record?.places.find((entry) => entry.id === pinId);
+      if (!record || !place) continue;
+      const origin = item?.querySelector<HTMLElement>('.tb-row__main') ?? null;
+      openPlace(place, record, shell.locale(), origin);
+      return;
+    }
   });
 
   void render();
@@ -1522,10 +1564,6 @@ export function mountTrip(
     dispose() {
       alive = false;
       unmountWarnings();
-      unmountSpy();
-      releaseSpy();
-      main.removeEventListener('scroll', onDocScroll);
-      window.clearTimeout(spyTimer);
       document.removeEventListener('visibilitychange', onVisible);
       window.removeEventListener('focus', onVisible);
       window.clearTimeout(statusTimer);
@@ -1537,13 +1575,15 @@ export function mountTrip(
       offFiles();
       offClose();
       stopsUnsub.fn();
-      offOverview();
+      offLeg();
       tripRouteEpoch += 1;
       routeAbort?.abort();
       routeAbort = null;
+      setDayLayer(false);
       map.setRoute([]);
       map.setOverview(null);
       map.hoverOverview(null);
+      map.setPins('place', []);
       map.setPins('stop', []);
       closePlace({ focus: false });
       shell.setExportEnabled(false);

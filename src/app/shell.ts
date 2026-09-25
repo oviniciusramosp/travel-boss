@@ -49,19 +49,9 @@ export type Shell = {
   showEmpty(): void;
 };
 
-/** Saved value, then the browser language, then English. */
-export function resolveLocale(stored: string | null, languages: readonly string[]): Locale {
-  if (stored === 'en' || stored === 'pt-BR') return stored;
-  for (const language of languages) {
-    if (language.toLowerCase().startsWith('pt')) return 'pt-BR';
-  }
-  return 'en';
-}
-
-function browserLanguages(): readonly string[] {
-  if (typeof navigator === 'undefined') return [];
-  if (navigator.languages?.length) return navigator.languages;
-  return [navigator.language || 'en'];
+/** The saved choice, else Portuguese. The browser language does not decide. */
+export function resolveLocale(stored: string | null): Locale {
+  return stored === 'en' ? 'en' : 'pt-BR';
 }
 
 function readLocale(): Locale {
@@ -71,7 +61,7 @@ function readLocale(): Locale {
   } catch {
     stored = null;
   }
-  return resolveLocale(stored, browserLanguages());
+  return resolveLocale(stored);
 }
 
 export function mountShell(root: HTMLElement): Shell {

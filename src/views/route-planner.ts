@@ -6,6 +6,7 @@ import type { MapHandle, MapPin } from '../map/types';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
+import { mapsMark } from '../ui/maps-icon';
 
 export const MAX_ROUTE_STOPS = 8;
 export const USER_LOCATION_ID = 'user-location';
@@ -659,7 +660,7 @@ function mountBar(column: HTMLElement): void {
   google.hidden = true;
   google.target = '_blank';
   google.rel = 'noopener noreferrer';
-  google.append(icon('map', { size: 18 }), el('span'));
+  google.append(mapsMark({ badge: true }), el('span'));
   root.append(head, fromMe, stopsEl, modes, meta, google);
   column.append(root);
   bar = { root, title, clearBtn, fromMe, stopsEl, meta, google, modes: [walk, transit] };

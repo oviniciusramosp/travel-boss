@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatSpan, nightsBetween } from './dates';
 import { parseTrip } from './parse';
-import { cityBands, formatTripSummary } from './summary';
+import { cityBands, formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 
 const europa = `# Europa
 
@@ -36,6 +36,13 @@ describe('formatTripSummary', () => {
   it('joins the cities with the span of nights and the short dates', () => {
     expect(formatTripSummary(trip, 'pt-BR')).toBe('Paris → Milão → Roma · 11 noites · 2–13 abr');
     expect(formatTripSummary(trip, 'en')).toBe('Paris → Milão → Roma · 11 nights · 2–13 Apr');
+  });
+
+  it('labels the trip list with the title and the start month', () => {
+    expect(formatTripNavLabel(trip, 'en')).toBe('Europa Apr 2026');
+    expect(formatTripNavLabel(trip, 'pt-BR')).toBe('Europa Abr 2026');
+    expect(formatTripPanelTitle(trip, 'en')).toBe('Europe Apr 2026');
+    expect(formatTripPanelTitle(trip, 'pt-BR')).toBe('Europa Abr 2026');
   });
 
   it('drops nights and dates when no city has a range', () => {

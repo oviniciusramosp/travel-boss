@@ -1,4 +1,5 @@
 import { placePinIconHtml } from '../catalog';
+import { circleInk } from '../ui/contrast';
 
 const PIN_FALLBACK = '#0a0a0a';
 
@@ -91,9 +92,10 @@ export function pinHtml(model: PinModel, state?: { active?: boolean; hover?: boo
     .filter(Boolean)
     .join(' ');
   const glyph = `<span class="tb-pin__glyph">${model.glyph}</span>`;
+  const tone = circleInk(model.color) === 'on-ink' ? ' is-on-ink' : '';
   const face = model.star
-    ? `<span class="tb-pin__face">${starSvg()}${glyph}</span>`
-    : `<span class="tb-pin__face">${glyph}</span>`;
+    ? `<span class="tb-pin__face${tone}">${starSvg()}${glyph}</span>`
+    : `<span class="tb-pin__face${tone}">${glyph}</span>`;
   return `<span class="${classes}" style="--pin-color:${model.color}">${face}</span>`;
 }
 

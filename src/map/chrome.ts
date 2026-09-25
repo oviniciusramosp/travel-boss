@@ -2,7 +2,11 @@ export type Box = { left: number; top: number; right: number; bottom: number };
 
 export type Insets = { top: number; right: number; bottom: number; left: number };
 
-/** How many pixels of `map` are covered by `chrome` on each edge. */
+/**
+ * Pixels of `map` covered by `chrome` on one edge.
+ * A tall card that crosses the middle is only a right or left inset.
+ * A wide bar is only a top or bottom inset.
+ */
 export function coveredInsets(map: Box, chrome: Box, cap = 0.72): Insets {
   const out: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
   const width = map.right - map.left;
@@ -12,19 +16,29 @@ export function coveredInsets(map: Box, chrome: Box, cap = 0.72): Insets {
   const maxY = height * cap;
   const overlapY = chrome.bottom > map.top && chrome.top < map.bottom;
   const overlapX = chrome.right > map.left && chrome.left < map.right;
-  if (overlapY) {
-    const fromLeft = chrome.right - map.left;
-    if (fromLeft > 0 && chrome.left < map.left + width / 2) out.left = Math.min(maxX, fromLeft);
-    const fromRight = map.right - chrome.left;
-    if (fromRight > 0 && chrome.right > map.right - width / 2) out.right = Math.min(maxX, fromRight);
-  }
-  if (overlapX) {
-    const fromTop = chrome.bottom - map.top;
-    if (fromTop > 0 && chrome.top < map.top + height / 2) out.top = Math.min(maxY, fromTop);
-    const fromBottom = map.bottom - chrome.top;
-    if (fromBottom > 0 && chrome.bottom > map.bottom - height / 2) {
-      out.bottom = Math.min(maxY, fromBottom);
+  if (!overlapX || !overlapY) return out;
+
+  const chromeW = chrome.right - chrome.left;
+  const chromeH = chrome.bottom - chrome.top;
+  if (chromeH >= chromeW) {
+    const onRight = (chrome.left + chrome.right) / 2 >= map.left + width / 2;
+    if (onRight) {
+      const fromRight = map.right - chrome.left;
+      if (fromRight > 0) out.right = Math.min(maxX, fromRight);
+    } else {
+      const fromLeft = chrome.right - map.left;
+      if (fromLeft > 0) out.left = Math.min(maxX, fromLeft);
     }
+    return out;
+  }
+
+  const onBottom = (chrome.top + chrome.bottom) / 2 >= map.top + height / 2;
+  if (onBottom) {
+    const fromBottom = map.bottom - chrome.top;
+    if (fromBottom > 0) out.bottom = Math.min(maxY, fromBottom);
+  } else {
+    const fromTop = chrome.bottom - map.top;
+    if (fromTop > 0) out.top = Math.min(maxY, fromTop);
   }
   return out;
 }

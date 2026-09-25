@@ -1,5 +1,5 @@
 import { pickLocale, type Locale } from '../catalog';
-import { formatSpan, isoParts, nightsBetween } from './dates';
+import { formatMonthYear, formatSpan, isoParts, nightsBetween } from './dates';
 import type { Trip, TripCity, TripLegMode } from './parse';
 
 export function nightPhrase(nights: number, locale: Locale): string {
@@ -24,6 +24,21 @@ export function tripDateSpan(trip: Trip): { start: string; end: string } | null 
   }
   if (!start || !end) return null;
   return { start, end };
+}
+
+/** `Europa Out 2026` in Portuguese, `Europa Oct 2026` in English. The trip list label. */
+export function formatTripNavLabel(trip: Trip, locale: Locale): string {
+  const span = tripDateSpan(trip);
+  const when = span ? formatMonthYear(span.start, locale) : null;
+  return when ? `${trip.title} ${when}` : trip.title;
+}
+
+/** `Europa Out 2026`, or `Europe Oct 2026` in English. The document heading. */
+export function formatTripPanelTitle(trip: Trip, locale: Locale): string {
+  const span = tripDateSpan(trip);
+  const when = span ? formatMonthYear(span.start, locale) : null;
+  const name = locale === 'en' && trip.title === 'Europa' ? 'Europe' : trip.title;
+  return when ? `${name} ${when}` : name;
 }
 
 /** `Paris → Milão → Roma · 11 noites · 2–13 abr`. Empty when the trip has no cities. */

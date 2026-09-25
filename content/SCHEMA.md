@@ -91,6 +91,17 @@ Export rewrites the same document for Apple Notes and Notion:
 
 Several H2 sections in one file are one trip. The UI shows one scrolling document, a city rail, and the header `via:` on the city you leave. The map fits every resolved stop.
 
+## Day card
+
+The UI shows one card per date, not per `### Dia N`. Nothing here is a new syntax.
+
+- Lunch and dinner split the day. Morning runs from waking up through lunch, afternoon until dinner, evening from dinner on. Write the meal in the stop label or note:
+  - Lunch: the last stop before dinner that says `almoço` / `lunch`, or a picnic (`piquenique`) before 16:00.
+  - Dinner: the first stop that says `jantar` / `dinner`, or a picnic from 18:00.
+  - A list note never counts, so "Almoço alternativo: …" does not move the split.
+  - Without a lunch stop the morning ends at 12:00. Without a dinner stop the evening starts at 18:00 (and before 05:00). A stop without a time stays in the period above it. A date with no time and no meal has no periods.
+- Food and tickets per person come from the catalog, not from the notes: the middle of each range, one count per place per date. A `**Comida:**` line in a note is text for the reader; the card does not read it.
+
 ## What not to edit for a trip change
 
 Place coordinates, ratings and hotel ranking stay in `src/data`. Hotel and Airbnb search stays on `/api/hotel-search`. A trip file only references place ids.

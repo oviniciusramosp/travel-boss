@@ -41,7 +41,8 @@ export type TripLegDecision =
       geometry?: CatalogLegStroke[];
     }
   | { kind: 'osrm' }
-  | { kind: 'straight' };
+  | { kind: 'drive' }
+  | { kind: 'none' };
 
 function pairKey(from: string, to: string): string {
   return `${from}\0${to}`;
@@ -99,8 +100,9 @@ function catalogGeometry(leg: ItineraryLegDef): CatalogLegStroke[] | undefined {
 }
 
 /**
- * Precedence: catalog pair, then via mode (walk → OSRM, anything else →
- * straight), then haversine ≤ 1.5 km → OSRM, else straight.
+ * Precedence: catalog pair, then the authored mode.
+ * Walk and an unnamed hop follow streets. Taxi follows the road.
+ * Transit or flight without a catalog spine is not drawn as a chord.
  */
 export function resolveTripLeg(
   from: TripLegPoint,
@@ -115,7 +117,8 @@ export function resolveTripLeg(
     }
   }
 
-  if (via?.mode === 'walk') return { kind: 'osrm' };
-  if (via?.mode) return { kind: 'straight' };
-  return haversineM(from, to) <= WALK_FALLBACK_M ? { kind: 'osrm' } : { kind: 'straight' };
+  if (via?.mode === 'taxi') return { kind: 'drive' };
+  if (via?.mode === 'transit' || via?.mode === 'flight') return { kind: 'none' };
+  if (via?.mode === 'walk' || haversineM(from, to) <= WALK_FALLBACK_M) return { kind: 'osrm' };
+  return { kind: 'osrm' };
 }

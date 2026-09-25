@@ -48,13 +48,23 @@ describe('resolveTripLeg', () => {
     expect(transit.geometry?.[0]?.path[0]).toEqual([48.896765, 2.458672]);
   });
 
-  it('draws via transit as a straight line when the pair is not in the catalog', () => {
+  it('does not invent a chord for transit that is not in the catalog', () => {
     const decision = resolveTripLeg(paris('par-louvre'), paris('par-notre-dame'), {
       detail: 'metrô M14 + RER E · 35 min',
       mode: 'transit',
       durationMin: 35,
     });
-    expect(decision).toEqual({ kind: 'straight' });
+    expect(decision).toEqual({ kind: 'none' });
+  });
+
+  it('sends a taxi hop to the road router', () => {
+    expect(
+      resolveTripLeg(paris('par-cdg'), paris('par-aeroville'), {
+        detail: 'Uber · 25 min',
+        mode: 'taxi',
+        durationMin: 25,
+      }),
+    ).toEqual({ kind: 'drive' });
   });
 
   it('asks for OSRM when a via walk has no catalog leg', () => {
@@ -62,8 +72,8 @@ describe('resolveTripLeg', () => {
     expect(decision).toEqual({ kind: 'osrm' });
   });
 
-  it('uses OSRM at or under 1.5 km and a straight line beyond it', () => {
+  it('follows streets when the hop has no catalog leg and no vehicle mode', () => {
     expect(resolveTripLeg(paris('par-louvre'), paris('par-orsay'))).toEqual({ kind: 'osrm' });
-    expect(resolveTripLeg(paris('par-eiffel'), paris('par-orsay'))).toEqual({ kind: 'straight' });
+    expect(resolveTripLeg(paris('par-eiffel'), paris('par-orsay'))).toEqual({ kind: 'osrm' });
   });
 });

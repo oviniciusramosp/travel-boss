@@ -45,6 +45,9 @@ describe('route emphasis', () => {
   it('heats the place pair, or every leg that touches a stop', () => {
     expect(routeEmphasis(null, spine)).toBe('normal');
     expect(routeEmphasis({ kind: 'leg', from: 'a', to: 'b' }, spine)).toBe('hot');
+    expect(routeEmphasis({ kind: 'leg', from: 'a', to: 'b', hop: 0 }, spine)).toBe('hot');
+    expect(routeEmphasis({ kind: 'leg', from: 'a', to: 'b', hop: 1 }, spine)).toBe('dim');
+    expect(routeEmphasis({ kind: 'leg', from: 'a', to: 'b', mode: 'walk' }, spine)).toBe('dim');
     expect(routeEmphasis({ kind: 'leg', from: 'b', to: 'c' }, spine)).toBe('dim');
     expect(routeEmphasis({ kind: 'place', id: 'b' }, spine)).toBe('hot');
     expect(routeEmphasis({ kind: 'place', id: 'z' }, { fromId: 'a', toId: 'b' })).toBe('dim');

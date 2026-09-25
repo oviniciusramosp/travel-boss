@@ -1,7 +1,7 @@
 /** Google Maps multi-stop directions. Ported from the portfolio route helper. */
 export type DirectionsPoint = { lat: number; lng: number };
 
-export type DirectionsMode = 'walk' | 'transit';
+export type DirectionsMode = 'walk' | 'transit' | 'drive';
 
 /** Same hop the map treats as a walk when nothing else is known. */
 const WALK_LINK_M = 1500;
@@ -19,6 +19,9 @@ function haversineM(a: DirectionsPoint, b: DirectionsPoint): number {
   return 2 * earthM * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
+/** Origin, 9 waypoints and the destination. Google Maps drops the rest. */
+export const MAPS_MAX_POINTS = 11;
+
 /**
  * `https://www.google.com/maps/dir/?api=1&…`
  * At most 9 intermediate waypoints. `null` when there is no route.
@@ -31,7 +34,7 @@ export function googleDirectionsUrl(
 
   const origin = `${points[0]?.lat},${points[0]?.lng}`;
   const destination = `${points[points.length - 1]?.lat},${points[points.length - 1]?.lng}`;
-  const travelmode = mode === 'transit' ? 'transit' : 'walking';
+  const travelmode = mode === 'drive' ? 'driving' : mode === 'transit' ? 'transit' : 'walking';
   const params = new URLSearchParams({
     api: '1',
     origin,
@@ -44,7 +47,7 @@ export function googleDirectionsUrl(
     params.set(
       'waypoints',
       mid
-        .slice(0, 9)
+        .slice(0, MAPS_MAX_POINTS - 2)
         .map((point) => `${point.lat},${point.lng}`)
         .join('|'),
     );

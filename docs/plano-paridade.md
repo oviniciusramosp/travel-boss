@@ -689,6 +689,10 @@ Semântica e comportamento:
 
 ---
 
+## Para depois (anotado pelo usuário em 2026-09-24)
+
+- **Alternativas no card do dia.** Um botão abre um modal com cards das opções, e o clique troca a parada da timeline. Hoje a alternativa é uma nota solta no fim do dia ("Almoço alternativo: [Chez Alain](place:…)"), sem ligação com a parada que ela substitui. Antes do modal, o formato precisa dessa ligação (por exemplo, um sub-bullet `- ou:` sob a parada). O orçamento do dia passa a usar a mais cara.
+
 ## Fora do escopo (decidido; reabrir se o usuário pedir)
 
 - **Mobile/responsivo:** bottom-sheet, layout empilhado, slider de dias, breakpoints. O pedido original é desktop.

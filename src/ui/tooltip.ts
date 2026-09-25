@@ -7,7 +7,7 @@ export const TRUNCATED_SELECTOR = [
   '.tb-row__title',
   '.tb-name',
   '.tb-row__sub',
-  '.tb-day-label',
+  '.tb-date__meta',
   '.tb-day-summary',
   '.tb-route__name',
   '.tb-transfer__label',
@@ -26,6 +26,7 @@ export function isTruncated(node: {
 
 /** Explicit `[data-tip]` wins. Otherwise a clipped ancestor with a full text. */
 export function tooltipHost(node: Element): HTMLElement | null {
+  if (node.closest('.tb-timeline')) return null;
   const explicit = node.closest('[data-tip]');
   if (explicit instanceof HTMLElement) return explicit;
   const clipped = node.closest(TRUNCATED_SELECTOR);

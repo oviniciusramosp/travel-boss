@@ -91,7 +91,8 @@ export const placeCategoryOrder: PlaceCategory[] = [
  */
 export const categoryMaterialIcon: Record<PlaceCategoryIcon, string> = {
   plane: 'flight',
-  train: 'train',
+  // The station sign. A plain train front is the leg you ride, in the timeline.
+  train: 'subway',
   walk: 'directions_walk',
   nature: 'nature',
   coffee: 'local_cafe',

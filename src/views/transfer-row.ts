@@ -11,8 +11,11 @@ import {
 } from '../catalog';
 import type { ItineraryLegDef, Locale, TimelineTransferPart } from '../catalog';
 import type { TripLeg, TripLegMode } from '../trip/parse';
+import { chipTone } from '../ui/contrast';
 import { el } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';
+
+export { chipTone };
 
 const TRANSFER_ICON: Record<TripLegMode, IconName> = {
   walk: 'directions_walk',
@@ -54,6 +57,8 @@ function transferMode(leg: TransferLeg): TripLegMode {
 }
 
 function labelOf(leg: TransferLeg, locale: Locale): string {
+  // A walk reads the same as a catalog walk. Its minutes already sit in `duration`.
+  if (isTripLeg(leg) && leg.mode === 'walk') return pickLocale(locale, legDisplayLabel({ from: '', to: '', mode: 'walk' }));
   if (isTripLeg(leg)) return leg.detail;
   if (isTransferPart(leg)) return pickLocale(locale, leg.label);
   return pickLocale(locale, legDisplayLabel(leg));
@@ -78,20 +83,13 @@ function lineColorOf(leg: TransferLeg): string | null {
   return legLineColor(leg);
 }
 
-/** Light brand fills (yellow M3) use ink; dark fills use on-ink. */
-function chipTone(color: string): TransferChipTone {
-  const hex = color.trim().replace(/^#/, '');
-  const full = hex.length === 3 ? [...hex].map((channel) => channel + channel).join('') : hex;
-  if (!/^[0-9a-fA-F]{6}$/.test(full)) return 'on-ink';
-  const channel = (pair: string) => {
-    const value = Number.parseInt(pair, 16) / 255;
-    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
-  };
-  const luminance =
-    0.2126 * channel(full.slice(0, 2)) +
-    0.7152 * channel(full.slice(2, 4)) +
-    0.0722 * channel(full.slice(4, 6));
-  return luminance > 0.4 ? 'ink' : 'on-ink';
+/** A long-distance `trem` / `train` leg, not a metro or RER hop. */
+function isTrainRide(detail: string): boolean {
+  const folded = detail
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase();
+  return /(?<![a-z0-9])(trem|train)(?![a-z0-9])/.test(folded);
 }
 
 function identityOf(leg: TransferLeg): Pick<TransferRowModel, 'from' | 'to' | 'hopIndex'> {
@@ -111,9 +109,11 @@ export function transferRowModel(leg: TransferLeg, locale: Locale = 'pt-BR'): Tr
   const mode = transferMode(leg);
   const lineColor = lineColorOf(leg);
   const minutes = durationMinutes(leg);
+  const iconName =
+    mode === 'transit' && isTripLeg(leg) && isTrainRide(leg.detail) ? 'train' : TRANSFER_ICON[mode];
   return {
     mode,
-    icon: TRANSFER_ICON[mode],
+    icon: iconName,
     label: labelOf(leg, locale),
     duration: minutes == null ? null : pickLocale(locale, formatLegDuration(minutes)),
     lineColor,

@@ -11,11 +11,11 @@ import {
 import { coveredInsets, mergeInsets } from './chrome';
 
 describe('selection camera', () => {
-  it('keeps detail zoom and only raises a wide view to 14', () => {
+  it('raises a wide view to the neighborhood and stays when already closer', () => {
+    expect(selectionZoom(18)).toBe(18);
     expect(selectionZoom(16)).toBe(16);
-    expect(selectionZoom(13)).toBe(13);
-    expect(selectionZoom(12.9)).toBe(14);
-    expect(selectionZoom(4)).toBe(14);
+    expect(selectionZoom(13)).toBe(16);
+    expect(selectionZoom(4)).toBe(16);
   });
 
   it('pans when zoom barely changes and flies otherwise', () => {
@@ -36,9 +36,9 @@ describe('selection camera', () => {
 describe('selection frame', () => {
   it('pans a point when already close, and flies to an area from a wide view', () => {
     expect(selectionFrame(16, true)).toEqual({ zoom: 16, ease: 'pan', frame: 'point' });
-    expect(selectionFrame(14, false)).toEqual({ zoom: 14, ease: 'pan', frame: 'point' });
-    expect(selectionFrame(12, false)).toEqual({ zoom: 14, ease: 'fly', frame: 'point' });
-    expect(selectionFrame(12, true)).toEqual({ zoom: 14, ease: 'fly', frame: 'area' });
+    expect(selectionFrame(17, false)).toEqual({ zoom: 17, ease: 'pan', frame: 'point' });
+    expect(selectionFrame(12, false)).toEqual({ zoom: 16, ease: 'fly', frame: 'point' });
+    expect(selectionFrame(12, true)).toEqual({ zoom: 16, ease: 'fly', frame: 'area' });
   });
 });
 
@@ -84,6 +84,12 @@ describe('chrome insets', () => {
       bottom: 0,
       left: 0,
     });
+  });
+
+  it('keeps a tall card that crosses the middle as a right inset only', () => {
+    const narrow = { left: 1000, top: 44, right: 1536, bottom: 720 };
+    const card = { left: 1204, top: 56, right: 1524, bottom: 680 };
+    expect(coveredInsets(narrow, card)).toEqual({ top: 0, right: 332, bottom: 0, left: 0 });
   });
 
   it('keeps the larger inset when padding and measurement disagree', () => {

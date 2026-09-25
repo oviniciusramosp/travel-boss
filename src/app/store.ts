@@ -55,6 +55,32 @@ export function writeGroups(city: string, state: Readonly<Record<string, boolean
   write(groupsKey(city), { ...state });
 }
 
+export function periodsKey(trip: string): string {
+  return `periods:${trip}`;
+}
+
+/** Periods of a trip the user folded or switched, by `date:period`. Untouched ones keep the default. */
+export type PeriodPrefs = Record<string, { open?: boolean; on?: boolean }>;
+
+export function readPeriods(trip: string): PeriodPrefs {
+  const value = read<unknown>(periodsKey(trip), null);
+  const prefs: PeriodPrefs = {};
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return prefs;
+  for (const [key, entry] of Object.entries(value)) {
+    if (!entry || typeof entry !== 'object') continue;
+    const { open, on } = entry as { open?: unknown; on?: unknown };
+    prefs[key] = {
+      ...(typeof open === 'boolean' ? { open } : {}),
+      ...(typeof on === 'boolean' ? { on } : {}),
+    };
+  }
+  return prefs;
+}
+
+export function writePeriods(trip: string, prefs: Readonly<PeriodPrefs>): void {
+  write(periodsKey(trip), prefs);
+}
+
 export function readArrival(city: string, dayId: string): string | null {
   const value = read<unknown>(arrivalKey(city, dayId), null);
   return typeof value === 'string' && value ? value : null;

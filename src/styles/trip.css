@@ -98,9 +98,17 @@
 }
 
 .tb-span__city:hover,
-.tb-span__city:focus-visible,
-.tb-span__city[aria-current='true'] {
+.tb-span__city:focus-visible {
   background: var(--color-hover);
+}
+
+.tb-span__city[aria-current='true'] {
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+}
+
+.tb-span__city[aria-current='true'] small {
+  color: var(--color-on-ink);
 }
 
 .tb-city-section.is-hot > h2,
@@ -139,15 +147,11 @@
 }
 
 .tb-rail {
-  position: sticky;
-  top: 0;
-  z-index: var(--z-controls);
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   margin: 12px 0 8px;
-  padding: 4px 0 8px;
-  background: var(--color-canvas);
+  padding: 4px 0;
 }
 
 .tb-rail .tb-nav {
@@ -170,40 +174,357 @@
   margin: 0 0 8px;
 }
 
-.tb-city-section {
-  margin-top: 24px;
-  scroll-margin-top: calc(var(--h-lg) + var(--spacing-16));
+/* Day card: white, hairline border, soft shadow. The summary is the header.
+   Hover is a light gray wash. Radius follows --r-card; the card clips its rows. */
+.tb-date {
+  margin-top: var(--spacing-8);
+  overflow: clip;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-card);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: var(--spacing-16);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
 }
 
-.tb-doc .tb-day > summary {
-  width: 100%;
+/* Lifted, not tinted. Only a closed card: scaling a tall open card shifts its text. */
+.tb-date:not([open]):is(:hover, :has(> .tb-date__head:focus-visible)) {
+  transform: scale(1.01);
+  box-shadow: var(--shadow-card-lift);
 }
 
-.tb-day-label {
+.tb-date__head,
+.tb-period__head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  cursor: pointer;
+  list-style: none;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.tb-date__head::-webkit-details-marker,
+.tb-period__head::-webkit-details-marker {
+  display: none;
+}
+
+.tb-date__head::marker,
+.tb-period__head::marker {
+  content: '';
+}
+
+.tb-period__head:hover {
+  background: var(--color-hover);
+}
+
+.tb-date__head:focus-visible,
+.tb-period__head:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: -2px;
+}
+
+.tb-date__head {
+  padding: var(--inset-card) var(--inset-card) var(--inset-card) var(--spacing-16);
+  border-radius: var(--r-card);
+}
+
+.tb-date[open] > .tb-date__head {
+  border-end-start-radius: var(--r-none);
+  border-end-end-radius: var(--r-none);
+}
+
+.tb-date__heading {
+  display: flex;
   flex: 1;
+  flex-direction: column;
   min-width: 0;
+}
+
+/* Date first, the stop count under it. */
+.tb-date__title {
+  font-size: var(--text-h2);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.tb-date__meta {
   overflow: hidden;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-caption);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.tb-day-actions {
+.tb-date__actions {
   display: flex;
   flex: none;
+  align-items: center;
   gap: var(--inset-group);
-  margin-left: var(--spacing-8);
+}
+
+.tb-date__copy {
   opacity: 0;
   transition: opacity var(--dur-fast) var(--ease-out);
 }
 
-.tb-day:is(:hover, :focus-within) .tb-day-actions {
+.tb-date__head:is(:hover, :focus-within) .tb-date__copy {
   opacity: 1;
 }
 
 @media (hover: none) {
-  .tb-day-actions {
+  .tb-date__copy {
     opacity: 1;
   }
+}
+
+.tb-date__chevron,
+.tb-period__chevron {
+  flex: none;
+  color: var(--color-mid-gray);
+  transition: transform var(--dur-base) var(--ease-in-out);
+}
+
+.tb-date[open] > .tb-date__head .tb-date__chevron,
+.tb-period[open] > .tb-period__head .tb-period__chevron {
+  transform: rotate(180deg);
+}
+
+.tb-date__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding-bottom: var(--inset-card);
+}
+
+.tb-date__budgets {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: var(--spacing-4);
+  margin: 0 var(--inset-card);
+}
+
+.tb-date__budgets .tb-budget-chip {
+  justify-content: center;
+}
+
+/* Narrow card: the amount alone. The group label still says it is per person. */
+.tb-date__budgets {
+  container-type: inline-size;
+}
+
+@container (max-width: 420px) {
+  .tb-date__budgets .tb-budget-chip__unit {
+    display: none;
+  }
+}
+
+.tb-budget-chip.is-food .material-symbols-rounded {
+  color: var(--color-food);
+}
+
+.tb-budget-chip.is-ticket .material-symbols-rounded {
+  color: var(--color-ticket);
+}
+
+.tb-date__body > .tb-doc-note {
+  margin: 0;
+  padding: 0 var(--spacing-16);
+}
+
+.tb-date__body > .tb-city-via {
+  margin: 0;
+  padding: 0 var(--inset-card);
+}
+
+/* Morning, afternoon, evening. Full width rows split by hairlines. */
+.tb-periods {
+  border-top: 1px solid var(--color-hairline);
+}
+
+.tb-periods > * + * {
+  border-top: 1px solid var(--color-hairline);
+}
+
+.tb-period__head {
+  padding: var(--spacing-8) var(--inset-card);
+}
+
+.tb-period__label {
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-caption);
+  text-transform: uppercase;
+}
+
+.tb-period__count {
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Forecast: glyph and temperature, as quiet as the stop count. */
+.tb-weather {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--inset-group);
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tb-weather[hidden] {
+  display: none;
+}
+
+.tb-date__meta .tb-weather::before {
+  content: '·';
+  margin-inline: var(--spacing-4);
+}
+
+.tb-weather[data-tone='sun'] .material-symbols-rounded {
+  color: var(--color-weather-sun);
+}
+
+.tb-weather[data-tone='night'] .material-symbols-rounded {
+  color: var(--color-weather-night);
+}
+
+.tb-weather[data-tone='cloud'] .material-symbols-rounded {
+  color: var(--color-weather-cloud);
+}
+
+.tb-weather[data-tone='rain'] .material-symbols-rounded {
+  color: var(--color-weather-rain);
+}
+
+.tb-weather[data-tone='snow'] .material-symbols-rounded {
+  color: var(--color-weather-snow);
+}
+
+.tb-weather[data-tone='storm'] .material-symbols-rounded {
+  color: var(--color-weather-storm);
+}
+
+/* In a period header the forecast sits just left of the switch. Without it,
+   the switch keeps the right edge on its own. */
+.tb-period__head .tb-weather {
+  margin-left: auto;
+}
+
+.tb-period__head .tb-weather:not([hidden]) + .tb-slot__switch {
+  margin-left: 0;
+}
+
+.tb-periods .tb-list.tb-timeline {
+  padding: 0 var(--spacing-4) var(--spacing-8);
+}
+
+.tb-periods > .tb-list.tb-timeline {
+  padding-top: var(--spacing-8);
+}
+
+.tb-period.is-off-map > .tb-timeline {
+  opacity: 0.45;
+}
+
+.tb-periods .tb-list.tb-timeline > .tb-row.is-period-end::after {
+  bottom: calc(-1 * var(--spacing-8) - 1px);
+}
+
+/* The pin sits on the title's first line; the note grows under both. The two rails of
+   a stop meet at the pin, so a leg changes color at its icon. `--tl-dot-y` is the
+   pin center: padding, the time line, the row gap, half a title line. */
+.tb-list.tb-timeline > .tb-row {
+  --tl-time-lh: calc(11px * 1.2);
+  --tl-row-gap: 2px;
+  --tl-dot-y: calc(var(--tl-pad) + var(--tl-time-lh) + var(--tl-row-gap) + 0.5lh);
+  row-gap: var(--tl-row-gap);
+}
+
+.tb-list.tb-timeline > .tb-row:has(> .tb-row__time:empty) {
+  --tl-dot-y: calc(var(--tl-pad) + var(--tl-row-gap) + 0.5lh);
+}
+
+.tb-list.tb-timeline > .tb-row > .tb-row__time {
+  line-height: var(--tl-time-lh);
+}
+
+.tb-list.tb-timeline > .tb-row > .tb-row__lead {
+  align-self: start;
+  margin-top: calc((1lh - 22px) / 2);
+}
+
+.tb-list.tb-timeline > .tb-row::before {
+  bottom: auto;
+  height: calc(var(--tl-dot-y) + 1px);
+}
+
+.tb-list.tb-timeline > .tb-row::after {
+  top: var(--tl-dot-y);
+}
+
+/* A leg starts at its icon: above it the way in, below it the leg itself. */
+.tb-list.tb-timeline > .tb-transfer > .tb-timeline__rail.is-above {
+  bottom: 50%;
+}
+
+.tb-list.tb-timeline > .tb-transfer > .tb-timeline__rail.is-below {
+  top: 50%;
+}
+
+/* Hover and focus grow the pin and ring it, like the dot on the map. */
+.tb-timeline .tb-stop-pin,
+.tb-list.tb-timeline > .tb-transfer > .tb-transfer__lead {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.tb-timeline > .tb-row:is(.is-hot, [aria-current='true']) .tb-stop-pin {
+  transform: scale(1.18);
+  box-shadow:
+    0 0 0 2px var(--color-paper),
+    0 0 0 5px color-mix(in srgb, var(--pin-color) 35%, transparent);
+}
+
+.tb-list.tb-timeline > .tb-transfer:is(.is-hot, [aria-pressed='true']) > .tb-transfer__lead {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 2px var(--color-paper),
+    0 0 0 5px color-mix(in srgb, var(--line-color, var(--color-walk)) 30%, transparent);
+}
+
+.tb-periods .tb-list.tb-timeline > .tb-row:has(.tb-row__main:focus-visible),
+.tb-periods .tb-list.tb-timeline > .tb-transfer:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: -2px;
+}
+
+.tb-city-section {
+  margin-top: 24px;
+  scroll-margin-top: var(--spacing-16);
+}
+
+.tb-doc .tb-day[aria-current='true'] > summary {
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+}
+
+.tb-doc .tb-day[aria-current='true'] > summary .tb-day-actions {
+  opacity: 1;
+}
+
+.tb-doc .tb-day > summary {
+  width: 100%;
 }
 
 .tb-city-section h2 {
@@ -329,13 +650,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--icon-sm);
-  height: var(--icon-sm);
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-pill);
+  background: var(--pin-color, var(--color-ink));
   color: var(--color-ink);
+  box-shadow: 0 0 0 2px var(--color-paper);
+}
+
+.tb-stop-pin.is-on-ink {
+  color: var(--color-on-ink);
 }
 
 .tb-stop-pin .material-symbols-rounded {
   font-size: var(--icon-sm);
+  color: inherit;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 500,
+    'GRAD' 0,
+    'opsz' 20;
 }
 
 .tb-row.is-disabled {

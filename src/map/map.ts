@@ -28,11 +28,10 @@ import {
   paddedCenterOffset,
   pointsForFit,
   selectionEases,
-  selectionFrame,
+  selectionZoom,
 } from './camera';
 import { coveredInsets, mergeInsets, type Insets } from './chrome';
 import { attachMapControls } from './controls';
-import { ensureOsmAreas, osmAreasReady, placeHasOsmArea } from './areas';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
 import { placeZoom, resolvedPlace } from './place-index';
@@ -40,8 +39,7 @@ import { MAPLIBRE_PERF, maplibreFade } from './maplibre-perf';
 import { attachTrackpadGestures } from './trackpad';
 import { overviewArcs } from './overview';
 import { drawRouteSegments, paintRouteFocus, type RouteEntry } from './route-draw';
-import type { RouteFocus } from './route-model';
-import { transitLineForPlace } from './transit';
+import { routeEmphasis, type RouteFocus } from './route-model';
 import type {
   MapCityPin,
   MapHandle,
@@ -165,9 +163,12 @@ export function mountMap(host: HTMLElement): MapHandle {
   let routeLayer: LayerGroup | null = null;
   let routeEntries: RouteEntry[] = [];
   let routeFocus: RouteFocus = null;
+  let pinnedLeg: RouteFocus = null;
   let routeSource: 'map' | 'ui' | null = null;
   let routeClearTimer = 0;
-  const legFns = new Set<(leg: { from: string; to: string } | null) => void>();
+  const legFns = new Set<
+    (leg: { from: string; to: string; hop?: number; mode?: 'walk' | 'transit' } | null) => void
+  >();
   let cityLayer: LayerGroup | null = null;
   let overviewLayer: LayerGroup | null = null;
   let overviewHoverId: string | null = null;
@@ -188,7 +189,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       const size = leafletMap.getSize();
       if (size.x < 2 || size.y < 2) {
         tries += 1;
-        if (tries < 4) requestAnimationFrame(run);
+        if (tries < 45) requestAnimationFrame(run);
         return;
       }
       const bounds = latLngBounds(points);
@@ -286,27 +287,6 @@ export function mountMap(host: HTMLElement): MapHandle {
     };
   };
 
-  const areaPoints = (id: string): [number, number][] | null => {
-    const line = transitLineForPlace(id);
-    if (line && line.stations.length >= 2) {
-      return line.stations.map((station) => [station.lat, station.lng]);
-    }
-    const area = resolvedPlace(id)?.area;
-    if (!area) return null;
-    const pts: [number, number][] = [];
-    const push = (path: readonly (readonly [number, number])[]) => {
-      for (const pair of path) {
-        if (Number.isFinite(pair[0]) && Number.isFinite(pair[1])) pts.push([pair[0], pair[1]]);
-      }
-    };
-    if (area.kind === 'multipolygon') {
-      for (const ring of area.paths) push(ring);
-    } else {
-      push(area.path);
-    }
-    return pts.length >= 2 ? pts : null;
-  };
-
   const moveCamera = (lat: number, lng: number, zoom: number) => {
     const offset = paddedCenterOffset(effectivePadding());
     const projected = leafletMap.project([lat, lng], zoom);
@@ -330,7 +310,25 @@ export function mountMap(host: HTMLElement): MapHandle {
   const routeRenderer = svg({ pane: 'tb-route' });
 
   const overlays = mountPlaceOverlays(leafletMap);
-  const applyRouteFocus = () => paintRouteFocus(routeEntries, routeFocus);
+  const applyRouteFocus = () => paintRouteFocus(routeEntries, routeFocus, routeSource !== 'map');
+  const framePinnedLeg = () => {
+    if (pinnedLeg?.kind !== 'leg') return;
+    const points: [number, number][] = [];
+    for (const entry of routeEntries) {
+      if (routeEmphasis(pinnedLeg, entry) !== 'hot') continue;
+      const raw = entry.line.getLatLngs();
+      const list = Array.isArray(raw[0]) ? raw.flat(1) : raw;
+      for (const point of list) {
+        if (point && 'lat' in point) points.push([point.lat, point.lng]);
+      }
+    }
+    if (points.length < 2) return;
+    const motion = cameraMotion();
+    const opts = { ...fitPad(20), maxZoom: 15, duration: motion.duration, easeLinearity: 0.25 };
+    leafletMap.stop();
+    if (motion.animate) leafletMap.flyToBounds(latLngBounds(points), opts);
+    else leafletMap.fitBounds(latLngBounds(points), { ...opts, animate: false });
+  };
   const syncOverlays = () => {
     const ids: string[] = [];
     if (selectedId && findMarker(selectedId)) ids.push(selectedId);
@@ -343,9 +341,17 @@ export function mountMap(host: HTMLElement): MapHandle {
       for (const fn of selectFns) fn(id);
     });
     dot.on('mouseover', () => {
+      hoveredId = id;
+      paintAll();
+      syncOverlays();
       for (const fn of hoverFns) fn(id);
     });
     dot.on('mouseout', () => {
+      if (hoveredId === id) {
+        hoveredId = null;
+        paintAll();
+        syncOverlays();
+      }
       for (const fn of hoverFns) fn(null);
     });
   };
@@ -381,6 +387,8 @@ export function mountMap(host: HTMLElement): MapHandle {
           rememberPin(dot, next);
         }
         paintMarker(dot, id === selectedId, id === hoveredId);
+        const keptNode = dot.getElement();
+        if (keptNode) keptNode.dataset.pinKind = kind;
       }
       for (const id of diff.create) {
         const pin = incoming.get(id);
@@ -402,6 +410,8 @@ export function mountMap(host: HTMLElement): MapHandle {
         bindMarker(dot, id);
         dot.addTo(groups[kind]);
         rememberPin(dot, next);
+        const created = dot.getElement();
+        if (created) created.dataset.pinKind = kind;
         paintMarker(dot, selected, id === hoveredId);
         index.set(id, dot);
         metas.set(id, next);
@@ -419,6 +429,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       leafletMap.getContainer().dataset.route = String(segments.length);
       if (!segments.length) {
         routeFocus = null;
+        pinnedLeg = null;
         routeSource = null;
         return;
       }
@@ -428,19 +439,25 @@ export function mountMap(host: HTMLElement): MapHandle {
           window.clearTimeout(routeClearTimer);
           routeClearTimer = window.setTimeout(() => {
             if (routeSource !== 'map') return;
-            hoveredId = null;
-            routeFocus = null;
-            routeSource = null;
+            hoveredId = pinnedLeg?.kind === 'leg' ? pinnedLeg.to : null;
+            routeFocus = pinnedLeg;
+            routeSource = pinnedLeg ? 'ui' : null;
             paintAll();
             applyRouteFocus();
             syncOverlays();
-            for (const fn of legFns) fn(null);
+            for (const fn of legFns) fn(pinnedLeg?.kind === 'leg' ? pinnedLeg : null);
           }, 40);
           return;
         }
         window.clearTimeout(routeClearTimer);
         hoveredId = leg.to;
-        routeFocus = { kind: 'leg', from: leg.from, to: leg.to };
+        routeFocus = {
+          kind: 'leg',
+          from: leg.from,
+          to: leg.to,
+          ...(leg.hop != null ? { hop: leg.hop } : {}),
+          ...(leg.mode ? { mode: leg.mode } : {}),
+        };
         routeSource = 'map';
         paintAll();
         applyRouteFocus();
@@ -603,6 +620,19 @@ export function mountMap(host: HTMLElement): MapHandle {
       }).addTo(leafletMap);
     },
 
+    frame(points, maxZoom = 13) {
+      const coords = points
+        .filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lng))
+        .map((point) => [point.lat, point.lng] as [number, number]);
+      if (coords.length === 0) return;
+      if (coords.length === 1) {
+        const [lat, lng] = coords[0] ?? [0, 0];
+        moveCamera(lat, lng, maxZoom);
+        return;
+      }
+      fitPoints(coords, maxZoom);
+    },
+
     fit() {
       const samples: { id: string; lat: number; lng: number; category?: string }[] = [];
       for (const kind of KINDS) {
@@ -636,28 +666,39 @@ export function mountMap(host: HTMLElement): MapHandle {
 
     hover(id) {
       window.clearTimeout(routeClearTimer);
-      hoveredId = id;
-      routeFocus = id ? { kind: 'place', id } : null;
-      routeSource = id ? 'ui' : null;
+      hoveredId = id ?? (pinnedLeg?.kind === 'leg' ? pinnedLeg.to : null);
+      routeFocus = id ? { kind: 'place', id } : pinnedLeg;
+      routeSource = routeFocus ? 'ui' : null;
       paintAll();
       applyRouteFocus();
       syncOverlays();
     },
 
-    hoverLeg(from, to) {
+    hoverLeg(from, to, opts) {
       window.clearTimeout(routeClearTimer);
       if (!from || !to) {
+        pinnedLeg = null;
         hoveredId = null;
         routeFocus = null;
         routeSource = null;
       } else {
+        const hop = typeof opts === 'number' ? opts : opts?.hop;
+        const mode = typeof opts === 'number' ? undefined : opts?.mode;
         hoveredId = to;
-        routeFocus = { kind: 'leg', from, to };
+        pinnedLeg = {
+          kind: 'leg',
+          from,
+          to,
+          ...(hop != null && Number.isFinite(hop) ? { hop } : {}),
+          ...(mode ? { mode } : {}),
+        };
+        routeFocus = pinnedLeg;
         routeSource = 'ui';
       }
       paintAll();
       applyRouteFocus();
       syncOverlays();
+      if (typeof opts === 'object' && opts?.frame) framePinnedLeg();
     },
 
     onHoverLeg(fn) {
@@ -670,43 +711,20 @@ export function mountMap(host: HTMLElement): MapHandle {
     select(id) {
       selectedId = id;
       paintAll();
-      const frame = () => {
-        if (selectedId !== id) return;
-        syncOverlays();
-        const target = findMarker(id);
-        if (!target) return;
-        const area = areaPoints(id);
-        const choice = selectionFrame(leafletMap.getZoom(), area != null);
-        if (choice.frame === 'area' && area) {
-          const motion = cameraMotion();
-          const opts = {
-            ...fitPad(24),
-            maxZoom: choice.zoom,
-            duration: motion.duration,
-            easeLinearity: 0.25,
-          };
-          leafletMap.stop();
-          if (motion.animate) leafletMap.flyToBounds(latLngBounds(area), opts);
-          else leafletMap.fitBounds(latLngBounds(area), { ...opts, animate: false });
-          return;
-        }
-        const ll = target.getLatLng();
-        moveCamera(ll.lat, ll.lng, choice.zoom);
-      };
-      if (placeHasOsmArea(id) && !osmAreasReady()) {
-        void ensureOsmAreas().then(frame, frame);
-        return;
-      }
-      frame();
+      syncOverlays();
+      const target = findMarker(id);
+      if (!target) return;
+      const ll = target.getLatLng();
+      moveCamera(ll.lat, ll.lng, selectionZoom(leafletMap.getZoom()));
     },
 
     highlight(id) {
       if (id == null) {
         window.clearTimeout(routeClearTimer);
         selectedId = null;
-        hoveredId = null;
-        routeFocus = null;
-        routeSource = null;
+        hoveredId = pinnedLeg?.kind === 'leg' ? pinnedLeg.to : null;
+        routeFocus = pinnedLeg;
+        routeSource = pinnedLeg ? 'ui' : null;
         paintAll();
         applyRouteFocus();
         syncOverlays();

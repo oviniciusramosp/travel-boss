@@ -14,7 +14,16 @@ describe('transferRowModel', () => {
     const via = (leg: TripLeg) => transferRowModel(leg);
     expect(via({ detail: 'a pé', mode: 'walk' }).icon).toBe('directions_walk');
     expect(via({ detail: 'metrô', mode: 'transit' }).icon).toBe('directions_transit');
+    expect(
+      via({
+        detail: 'trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37',
+        mode: 'transit',
+        durationMin: 397,
+      }).icon,
+    ).toBe('train');
     expect(via({ detail: 'voo', mode: 'flight' }).icon).toBe('flight');
+    expect(via({ detail: 'a pé · 7 min', mode: 'walk', durationMin: 7 }).label).toBe('A pé');
+    expect(transferRowModel({ detail: 'a pé · 7 min', mode: 'walk', durationMin: 7 }, 'en').label).toBe('Walk');
     expect(via({ detail: 'sem palavra-chave' }).icon).toBe('directions_transit');
 
     const taxi = via({ detail: 'táxi até o hotel', mode: 'taxi', durationMin: 15 });

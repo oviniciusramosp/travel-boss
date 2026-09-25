@@ -1,5 +1,6 @@
-/** FOSSGIS public OSRM foot profile. No API key. At most two requests in flight. */
+/** FOSSGIS public OSRM. No API key. At most two requests in flight. */
 const OSRM_FOOT = 'https://routing.openstreetmap.de/routed-foot/route/v1/foot';
+const OSRM_CAR = 'https://routing.openstreetmap.de/routed-car/route/v1/driving';
 
 /** Five decimals, same rounding as the session walk memory (~1 m). */
 const COORD_DIGITS = 5;
@@ -257,6 +258,7 @@ async function execute(
   key: string,
   points: { lat: number; lng: number }[],
   job: Job,
+  endpoint: string,
 ): Promise<WalkingRoute | null> {
   let held = false;
   try {
@@ -265,7 +267,7 @@ async function execute(
     if (job.controller.signal.aborted) throw abortError();
     const coords = points.map((point) => `${point.lng},${point.lat}`).join(';');
     const res = await fetch(
-      `${OSRM_FOOT}/${coords}?overview=full&geometries=geojson&steps=false`,
+      `${endpoint}/${coords}?overview=full&geometries=geojson&steps=false`,
       { signal: job.controller.signal },
     );
     if (!res.ok) return null;
@@ -296,12 +298,27 @@ async function execute(
   }
 }
 
+export async function fetchDrivingRoute(
+  points: { lat: number; lng: number; id?: string; label?: string }[],
+  signal?: AbortSignal,
+): Promise<WalkingRoute | null> {
+  return fetchOsrm(points, signal, OSRM_CAR, `drive:${walkRouteKey(points)}`);
+}
+
 export async function fetchWalkingRoute(
   points: { lat: number; lng: number; id?: string; label?: string }[],
   signal?: AbortSignal,
 ): Promise<WalkingRoute | null> {
+  return fetchOsrm(points, signal, OSRM_FOOT, walkRouteKey(points));
+}
+
+async function fetchOsrm(
+  points: { lat: number; lng: number; id?: string; label?: string }[],
+  signal: AbortSignal | undefined,
+  endpoint: string,
+  key: string,
+): Promise<WalkingRoute | null> {
   if (points.length < 2) return null;
-  const key = walkRouteKey(points);
   const hit = cached(key);
   if (hit) return hit;
   if (signal?.aborted) throw abortError();
@@ -318,7 +335,7 @@ export async function fetchWalkingRoute(
     promise: Promise.resolve(null),
   };
   const unlisten = bindUser(job, signal);
-  job.promise = execute(key, points, job);
+  job.promise = execute(key, points, job, endpoint);
   inflight.set(key, job);
   try {
     return await watch(job.promise, signal);

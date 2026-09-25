@@ -3,14 +3,17 @@ import {
   arrivalKey,
   categoryFilterKey,
   groupsKey,
+  periodsKey,
   read,
   readArrival,
   readCategoryFilter,
   readGroups,
+  readPeriods,
   write,
   writeArrival,
   writeCategoryFilter,
   writeGroups,
+  writePeriods,
 } from './store';
 
 function installStorage() {
@@ -69,6 +72,20 @@ describe('store', () => {
     writeArrival('paris', 'paris-d1', 'cdg');
     expect(readArrival('paris', 'paris-d1')).toBe('cdg');
     expect(arrivalKey('paris', 'paris-d1')).toBe('arrival:paris:paris-d1');
+  });
+
+  it('keeps only the boolean choices of each period', () => {
+    const data = installStorage();
+    expect(readPeriods('europa')).toEqual({});
+    writePeriods('europa', { '2026-10-04:morning': { open: true }, '2026-10-04:evening': { on: false } });
+    expect(readPeriods('europa')).toEqual({
+      '2026-10-04:morning': { open: true },
+      '2026-10-04:evening': { on: false },
+    });
+    expect(periodsKey('europa')).toBe('periods:europa');
+
+    data.set('tb:periods:europa', '{"a":{"open":"yes","on":true},"b":3}');
+    expect(readPeriods('europa')).toEqual({ a: { on: true } });
   });
 });
 

@@ -20,19 +20,30 @@ function walkColor(): string {
 export type RouteEntry = {
   fromId?: string;
   toId?: string;
+  hopIndex?: number;
+  mode: 'walk' | 'transit';
   line: Polyline;
   flow?: Polyline;
   marks: Marker[];
 };
 
-export type RoutePointer = { from: string; to: string } | null;
+export type RoutePointer = {
+  from: string;
+  to: string;
+  hop?: number;
+  mode?: 'walk' | 'transit';
+} | null;
 
 function safeColor(value: string | undefined, fallback: string): string {
   const color = (value ?? '').trim();
   return /^#[0-9a-fA-F]{3,8}$/.test(color) ? color : fallback;
 }
 
-export function paintRouteFocus(entries: readonly RouteEntry[], focus: RouteFocus): void {
+/**
+ * `raise` brings the hot line to the front. Only for a hover from the list: moving the
+ * SVG path under the cursor makes Chrome drop its `mouseout`, and the hover sticks.
+ */
+export function paintRouteFocus(entries: readonly RouteEntry[], focus: RouteFocus, raise = true): void {
   for (const entry of entries) {
     const emphasis = routeEmphasis(focus, entry);
     const hot = emphasis === 'hot';
@@ -49,6 +60,10 @@ export function paintRouteFocus(entries: readonly RouteEntry[], focus: RouteFocu
       node.classList.toggle('is-hot', hot);
       node.classList.toggle('is-dim', dim);
       mark.setZIndexOffset(hot ? 900 : 600);
+    }
+    if (hot && raise) {
+      entry.line.bringToFront();
+      entry.flow?.bringToFront();
     }
   }
 }
@@ -67,20 +82,28 @@ export function drawRouteSegments(
     const kind = routeLayerKind(segment);
     const color = kind === 'walk' ? walkColor() : safeColor(segment.color, walkColor());
     const dashed = kind !== 'transit';
+    const mode: 'walk' | 'transit' = kind === 'walk' ? 'walk' : 'transit';
     const line = polyline(segment.latlngs, {
       renderer,
       color,
       weight: dashed ? 3 : 4,
       opacity: 0.9,
-      dashArray: dashed ? '1 8' : undefined,
+      dashArray: dashed ? '2 10' : undefined,
       lineCap: 'round',
       lineJoin: 'round',
       interactive: true,
       bubblingMouseEvents: false,
       className: `tb-route tb-route-${kind}`,
     });
-    const leg =
-      segment.fromId && segment.toId ? { from: segment.fromId, to: segment.toId } : null;
+    const leg: RoutePointer =
+      segment.fromId && segment.toId
+        ? {
+            from: segment.fromId,
+            to: segment.toId,
+            mode,
+            ...(segment.hopIndex != null ? { hop: segment.hopIndex } : {}),
+          }
+        : null;
     if (leg) {
       line.on('mouseover', () => onPointer(leg));
       line.on('mouseout', () => onPointer(null));
@@ -90,9 +113,9 @@ export function drawRouteSegments(
     if (kind === 'transit') {
       flow = polyline(segment.latlngs, {
         renderer,
-        color,
+        color: cssToken('--color-paper', '#ffffff'),
         weight: 2.5,
-        opacity: 0.45,
+        opacity: 1,
         dashArray: '6 22',
         lineCap: 'round',
         lineJoin: 'round',
@@ -156,7 +179,15 @@ export function drawRouteSegments(
         points.push([transfer.lat, transfer.lng]);
       }
     }
-    entries.push({ fromId: segment.fromId, toId: segment.toId, line, flow, marks });
+    entries.push({
+      fromId: segment.fromId,
+      toId: segment.toId,
+      ...(segment.hopIndex != null ? { hopIndex: segment.hopIndex } : {}),
+      mode,
+      line,
+      flow,
+      marks,
+    });
     for (const pair of segment.latlngs) points.push(pair);
   }
   return { entries, points };

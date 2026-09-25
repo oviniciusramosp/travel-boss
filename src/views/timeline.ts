@@ -1,7 +1,6 @@
 /**
- * City itinerary tab (not the `#/trip/` document).
- * Day header, budgets and the route action. Later phases add periods,
- * hops and editing on top of these helpers.
+ * Trip itinerary timeline: day header, budgets, periods and the rail
+ * between stops. The city page does not host this view.
  */
 import {
   computeDayBudget,
@@ -22,8 +21,10 @@ import type {
   TravelItinerary,
   TravelPlace,
 } from '../catalog';
+import type { DateBudget } from '../trip/day-plan';
 import { googleDirectionsUrl } from '../trip/directions';
 import { iconButton } from '../ui/controls';
+import { mapsMark } from '../ui/maps-icon';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { transferRow } from './transfer-row';
@@ -361,7 +362,8 @@ function budgetChip(
   const detail = tip || label;
   chip.setAttribute('aria-label', `${label} ${figure}. ${detail}`);
   chip.setAttribute('data-tip', detail);
-  chip.append(icon(glyph, { size: 16 }));
+  chip.classList.add(glyph === 'restaurant' ? 'is-food' : 'is-ticket');
+  chip.append(icon(glyph, { size: 16, fill: true }));
   chip.append(el('strong', undefined, figure));
   chip.append(el('span', 'tb-budget-chip__unit', unit));
   return chip;
@@ -442,6 +444,30 @@ export function dayBudgetEl(
   return budgetGroup(budget, places, locale, pickLocale(locale, travelUi.itineraryBudgetGroup));
 }
 
+/** Trip date card: one card per kind with an amount. The tip lists each place. */
+export function dateBudgetCards(
+  budget: DateBudget,
+  nameOf: (id: string) => string,
+  locale: Locale,
+): HTMLElement | null {
+  if (budget.food <= 0 && budget.ticket <= 0) return null;
+  const group = el('div', 'tb-date__budgets');
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', pickLocale(locale, travelUi.itineraryBudgetGroup));
+  // The group label already says per person; the chip only needs "each".
+  const unit = pickLocale(locale, { en: 'each', 'pt-BR': 'cada' });
+  const tip = (kind: 'food' | 'ticket') =>
+    budget.lines
+      .filter((line) => line[kind] > 0)
+      .map((line) => `${nameOf(line.id)} ${formatEur(line[kind], locale)}`)
+      .join(' · ');
+  const food = pickLocale(locale, travelUi.itineraryFood);
+  const ticket = pickLocale(locale, travelUi.itineraryParks);
+  if (budget.food > 0) group.append(budgetChip('restaurant', budget.food, food, unit, tip('food'), locale));
+  if (budget.ticket > 0) group.append(budgetChip('local_activity', budget.ticket, ticket, unit, tip('ticket'), locale));
+  return group;
+}
+
 function mapsLink(url: string | null, label: string): HTMLAnchorElement {
   const link = el('a', 'tb-icon-btn tb-icon-btn--ghost tb-icon-btn--md');
   link.target = '_blank';
@@ -450,7 +476,7 @@ function mapsLink(url: string | null, label: string): HTMLAnchorElement {
   link.dataset.dayGmaps = 'true';
   link.setAttribute('aria-label', label);
   link.setAttribute('data-tip', label);
-  link.append(icon('map', { size: 18 }));
+  link.append(mapsMark({ badge: true }));
   if (url) link.href = url;
   else {
     link.setAttribute('aria-disabled', 'true');
@@ -463,18 +489,17 @@ function mapsLink(url: string | null, label: string): HTMLAnchorElement {
   return link;
 }
 
-function slotSwitch(on: boolean, slot: string, locale: Locale, onToggle: (on: boolean) => void): HTMLButtonElement {
+export function slotSwitch(on: boolean, slot: string, locale: Locale, onToggle: (on: boolean) => void): HTMLButtonElement {
   const button = el('button', 'tb-slot__switch');
   button.type = 'button';
   button.setAttribute('role', 'switch');
   button.dataset.timelineAction = 'slot';
   button.dataset.slot = slot;
-  const paint = (checked: boolean) => {
-    button.setAttribute('aria-checked', checked ? 'true' : 'false');
-    const label = pickLocale(locale, checked ? travelUi.itinerarySlotOnMap : travelUi.itinerarySlotOffMap);
-    button.setAttribute('aria-label', label);
-    button.setAttribute('data-tip', label);
-  };
+  // One name for both states. `aria-checked` says which one it is.
+  const label = pickLocale(locale, travelUi.itinerarySlotOnMap);
+  button.setAttribute('aria-label', label);
+  button.setAttribute('data-tip', label);
+  const paint = (checked: boolean) => button.setAttribute('aria-checked', checked ? 'true' : 'false');
   paint(on);
   button.append(el('span', 'tb-slot__switch-track'));
   button.addEventListener('click', (event) => {

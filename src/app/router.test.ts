@@ -15,7 +15,7 @@ describe('parseHash', () => {
     expect(parseHash('#/city/paris/itinerary?place=par-eiffel&day=2')).toEqual({
       kind: 'city',
       slug: 'paris',
-      tab: 'itinerary',
+      tab: 'places',
       place: 'par-eiffel',
       day: 2,
     });

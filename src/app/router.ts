@@ -1,13 +1,14 @@
-export type CityTab = 'places' | 'itinerary' | 'hotels';
+export type CityTab = 'places' | 'hotels';
 
 export type Route =
   | { kind: 'home' }
   | { kind: 'trip'; id: string }
   | { kind: 'city'; slug: string; tab: CityTab; place?: string; day?: number };
 
-const TABS: readonly CityTab[] = ['places', 'itinerary', 'hotels'];
+const TABS: readonly CityTab[] = ['places', 'hotels'];
 
 function isTab(value: string | undefined): value is CityTab {
+  if (value === 'itinerary') return false;
   return TABS.includes(value as CityTab);
 }
 
@@ -33,7 +34,7 @@ export function parseHash(hash: string): Route | null {
     return id ? { kind: 'trip', id } : null;
   }
 
-  if (parts[0] === 'city' && parts.length === 3 && isTab(parts[2])) {
+  if (parts[0] === 'city' && parts.length === 3 && (parts[2] === 'itinerary' || isTab(parts[2]))) {
     const slug = decodeURIComponent(parts[1] ?? '');
     if (!slug) return null;
     const params = new URLSearchParams(query);
@@ -42,7 +43,7 @@ export function parseHash(hash: string): Route | null {
     return {
       kind: 'city',
       slug,
-      tab: parts[2],
+      tab: parts[2] === 'itinerary' ? 'places' : parts[2],
       ...(place ? { place } : {}),
       ...(day !== undefined ? { day } : {}),
     };

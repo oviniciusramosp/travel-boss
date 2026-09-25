@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { getTravelCity } from '../catalog';
-import type { TripLeg } from './parse';
-import { planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
+import { daysOnDate } from './calendar';
+import { parseTrip, type TripLeg } from './parse';
+import { dateStops, planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
 
 function place(city: string, id: string) {
   const found = getTravelCity(city)?.places.find((item) => item.id === id);
@@ -19,43 +20,53 @@ function deps() {
   return {
     neutralColor: '#666666',
     walk: vi.fn(async () => [[0, 0] as [number, number], [1, 1] as [number, number]]),
+    drive: vi.fn(async () => [[2, 2] as [number, number], [3, 3] as [number, number], [4, 4] as [number, number]]),
     catalog: vi.fn(async () => []),
   };
 }
 
 describe('planHop', () => {
-  it('draws catalog geometry instead of a walk, and a straight line for a via that is not a walk', () => {
+  it('sends a catalog transit hop to the leg drawer and does not chord an unknown hop', () => {
     const tower = planHop({
       from: place('paris', 'par-casa-do-gui'),
       to: place('paris', 'par-trocadero'),
       via: viaTransit,
     });
-    expect(tower.kind).toBe('geometry');
-    if (tower.kind !== 'geometry') return;
-    expect(tower.segments.every((segment) => segment.mode === 'transit')).toBe(true);
-    expect(tower.segments.some((segment) => segment.color)).toBe(true);
+    expect(tower.kind).toBe('catalog');
 
-    const straight = planHop({
-      from: place('paris', 'par-louvre'),
-      to: place('paris', 'par-notre-dame'),
-      via: viaTransit,
-    });
-    expect(straight.kind).toBe('straight');
+    expect(
+      planHop({
+        from: place('paris', 'par-louvre'),
+        to: place('paris', 'par-notre-dame'),
+        via: viaTransit,
+      }).kind,
+    ).toBe('none');
+    expect(
+      previewHop(
+        {
+          from: place('paris', 'par-louvre'),
+          to: place('paris', 'par-notre-dame'),
+          via: viaTransit,
+        },
+        '#666666',
+      ),
+    ).toEqual([]);
 
     expect(
       planHop({
         from: place('paris', 'par-orly-m14'),
         to: place('paris', 'par-auchan-noisy'),
       }).kind,
-    ).toBe('straight');
-    const chord = previewHop(
-      {
-        from: place('paris', 'par-orly-m14'),
-        to: place('paris', 'par-auchan-noisy'),
-      },
-      '#666666',
-    );
-    expect(chord?.[0]).toMatchObject({ mode: 'transit', dash: true, color: '#666666' });
+    ).toBe('walk');
+    expect(
+      previewHop(
+        {
+          from: place('paris', 'par-orly-m14'),
+          to: place('paris', 'par-auchan-noisy'),
+        },
+        '#666666',
+      ),
+    ).toBeNull();
   });
 
   it('asks for a walk only when the decision is osrm or a catalog walk', () => {
@@ -76,7 +87,7 @@ describe('planHop', () => {
 });
 
 describe('resolveHopSegments', () => {
-  it('does not call OSRM for catalog geometry or a straight hop', async () => {
+  it('asks the catalog drawer for a transit spine and the road router for a taxi', async () => {
     const calls = deps();
     const hops: RouteHop[] = [
       {
@@ -85,16 +96,16 @@ describe('resolveHopSegments', () => {
         via: viaTransit,
       },
       {
-        from: place('paris', 'par-orly-m14'),
-        to: place('paris', 'par-auchan-noisy'),
+        from: place('paris', 'par-louvre'),
+        to: place('paris', 'par-notre-dame'),
+        via: { detail: 'Uber · 12 min', mode: 'taxi', durationMin: 12 },
       },
     ];
     const segments = await resolveHopSegments(hops, calls);
+    expect(calls.catalog).toHaveBeenCalledOnce();
+    expect(calls.drive).toHaveBeenCalledOnce();
     expect(calls.walk).not.toHaveBeenCalled();
-    expect(calls.catalog).not.toHaveBeenCalled();
-    expect(segments.some((segment) => segment.mode === 'walk')).toBe(false);
-    expect(segments.at(-1)?.color).toBe('#666666');
-    expect(segments.at(-1)?.latlngs).toHaveLength(2);
+    expect(segments.at(-1)?.latlngs.length).toBeGreaterThan(2);
   });
 
   it('calls the catalog drawer for a transit leg without surveyed geometry', async () => {
@@ -121,7 +132,7 @@ describe('resolveHopSegments', () => {
     );
     expect(calls.walk).toHaveBeenCalledOnce();
     expect(calls.catalog).not.toHaveBeenCalled();
-    expect(segments[0]?.mode).toBe('walk');
+    expect(segments[0]).toMatchObject({ mode: 'walk', fromId: 'par-eiffel', toId: 'par-orsay' });
   });
 });
 
@@ -149,5 +160,56 @@ describe('transferLegs', () => {
         to: place('paris', 'par-orsay'),
       }),
     ).toEqual([]);
+  });
+});
+
+const sharedDay = `# Europa
+
+## Paris
+city: paris
+via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
+
+### Dia 7 — Sáb 10/10 · Véspera
+- 20:00 [Casa do Gui](place:par-casa-do-gui)
+
+### Dia 8 — Dom 11/10 · Partida para Milão
+- 06:20 [Casa do Gui](place:par-casa-do-gui)
+  - via: Uber · 25 min
+- 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon)
+
+## Milão
+city: milao
+
+### Dia 1 — Chegada, Duomo e Galleria
+- 14:10 [Milano Centrale](place:mil-centrale)
+  - via: a pé · 25 min
+- 14:45 [Joy 124](place:mil-joy124)
+`;
+
+describe('dateStops', () => {
+  const trip = parseTrip('europa', 'content/trips/europa.md', sharedDay);
+
+  it('keeps one date continuous and hangs the city train on the departure station', () => {
+    const rows = dateStops(daysOnDate(trip, '2026-10-11'));
+    expect(rows.map((row) => row.dated.day.stops[row.stopIndex]?.placeId)).toEqual([
+      'par-casa-do-gui',
+      'par-gare-de-lyon',
+      'mil-centrale',
+      'mil-joy124',
+    ]);
+    const casa = rows[0];
+    const gare = rows[1];
+    const centrale = rows[2];
+    expect(casa?.depart?.mode).toBe('taxi');
+    expect(gare?.depart?.detail).toContain('Frecciarossa');
+    expect(gare?.depart?.mode).toBe('transit');
+    expect(centrale?.depart?.mode).toBe('walk');
+    expect(rows.some((row) => row.dated.day.title.startsWith('Dia 7'))).toBe(false);
+  });
+
+  it('does not put the city train on an earlier day', () => {
+    const rows = dateStops(daysOnDate(trip, '2026-10-10'));
+    expect(rows).toHaveLength(1);
+    expect(rows[0]?.depart).toBeUndefined();
   });
 });

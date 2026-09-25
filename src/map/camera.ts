@@ -1,6 +1,6 @@
-/** Desktop selection zoom from the portfolio map: stay put at detail zoom, otherwise 14. */
+/** Neighborhood around one pin. Stay put when the view is already closer. */
 export function selectionZoom(current: number): number {
-  return current >= 13 ? current : Math.max(current, 14);
+  return current >= 16 ? current : 16;
 }
 
 /** Pan when zoom barely changes; fly when the level actually changes. */

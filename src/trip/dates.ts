@@ -3,6 +3,16 @@ import { pickLocale, type Locale } from '../catalog';
 const ISO_DAY = /^(\d{4})-(\d{2})-(\d{2})$/;
 const DAY_MS = 86400000;
 
+const WEEKDAYS: { en: string; 'pt-BR': string }[] = [
+  { en: 'Sun', 'pt-BR': 'dom' },
+  { en: 'Mon', 'pt-BR': 'seg' },
+  { en: 'Tue', 'pt-BR': 'ter' },
+  { en: 'Wed', 'pt-BR': 'qua' },
+  { en: 'Thu', 'pt-BR': 'qui' },
+  { en: 'Fri', 'pt-BR': 'sex' },
+  { en: 'Sat', 'pt-BR': 'sáb' },
+];
+
 const MONTHS: { en: string; 'pt-BR': string }[] = [
   { en: 'Jan', 'pt-BR': 'jan' },
   { en: 'Feb', 'pt-BR': 'fev' },
@@ -64,6 +74,31 @@ export function isoCompact(iso: string): string | null {
 function monthName(month: number, locale: Locale): string {
   const names = MONTHS[month - 1];
   return names ? pickLocale(locale, names) : '';
+}
+
+function capitalized(value: string, locale: Locale): string {
+  if (!value) return value;
+  return value.charAt(0).toLocaleUpperCase(locale) + value.slice(1);
+}
+
+/** `04 Out • Dom` / `04 Oct • Sun`. Headline of a trip date card. */
+export function formatDayTitle(iso: string, locale: Locale): string {
+  const parts = isoParts(iso);
+  if (!parts) return iso;
+  const day = String(parts.day).padStart(2, '0');
+  const month = capitalized(monthName(parts.month, locale), locale);
+  const names = WEEKDAYS[new Date(parts.time).getUTCDay()] ?? WEEKDAYS[0]!;
+  return `${day} ${month} • ${capitalized(pickLocale(locale, names), locale)}`;
+}
+
+/** `Oct 2026` / `Out 2026`. The short month is capitalized for a label. */
+export function formatMonthYear(iso: string, locale: Locale): string | null {
+  const parts = isoParts(iso);
+  if (!parts) return null;
+  const month = monthName(parts.month, locale);
+  if (!month) return null;
+  const label = month.charAt(0).toLocaleUpperCase(locale) + month.slice(1);
+  return `${label} ${parts.year}`;
 }
 
 /**

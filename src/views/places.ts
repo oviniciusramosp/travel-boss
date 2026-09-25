@@ -1,12 +1,5 @@
 import type { Shell } from '../app/shell';
-import {
-  readArrival,
-  readCategoryFilter,
-  readGroups,
-  writeArrival,
-  writeCategoryFilter,
-  writeGroups,
-} from '../app/store';
+import { readCategoryFilter, readGroups, writeCategoryFilter, writeGroups } from '../app/store';
 import {
   categoryMaterialName,
   dayPrimaryRoutePlaceIds,
@@ -14,7 +7,6 @@ import {
   getTravelCity,
   googleMapsUrl,
   itineraryForCity,
-  legsForDay,
   pickLocale,
   placeCategoriesOffByDefault,
   placeCategoryMeta,
@@ -26,39 +18,15 @@ import {
   visitFieldsForDisplay,
   withResolvedArea,
 } from '../catalog';
-import type {
-  ItineraryArrivalOption,
-  ItineraryDay,
-  ItineraryStop,
-  Locale,
-  LString,
-  PlaceCategory,
-  TravelCity,
-  TravelPlace,
-} from '../catalog';
-import { buildItineraryRoute, buildItineraryRoutePreview } from '../map/itinerary-route';
-import { toMapRoute } from '../map/route-model';
+import type { ItineraryDay, ItineraryStop, Locale, PlaceCategory, TravelCity, TravelPlace } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
-import { iconLink, segmented } from '../ui/controls';
-import {
-  dayBudgetEl,
-  dayDirectionsUrl,
-  formatEur,
-  itineraryIntro,
-  paintRouteButton,
-  daySummary,
-  renderPeriods,
-  routeForSlots,
-  routeNumbers,
-  stopCost,
-  type RoutePhase,
-} from './timeline';
+import { segmented } from '../ui/controls';
+import { mapsIconLink } from '../ui/maps-icon';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
-import { prefersReducedMotion, runViewTransition } from '../ui/motion';
+import { runViewTransition } from '../ui/motion';
 import { priceLevel, priceLevelOf } from '../ui/price';
 import { formatRating, ratingSummary } from '../ui/rating';
-import { row } from '../ui/row';
 import {
   closePlace,
   onPlaceClose,
@@ -69,18 +37,13 @@ import {
 } from './place-panel';
 import { createRouteButton, mountRoutePlanner } from './route-planner';
 
-type Tab = 'places' | 'itinerary' | 'hotels';
+type Tab = 'places' | 'hotels';
 
 export type CityRouteState = {
   tab: Tab;
   place?: string;
   day?: number;
 };
-
-function dayIndexFrom(day: number | undefined, count: number): number {
-  if (day == null || day < 1 || count < 1) return 0;
-  return Math.min(count - 1, day - 1);
-}
 
 const CATEGORY_LABEL = travelUi.categories;
 
@@ -183,75 +146,43 @@ function placeMeta(place: TravelPlace, locale: Locale): HTMLElement {
   return meta;
 }
 
-function mountPlacePreview(localeOf: () => Locale) {
-  const pop = el('div', 'tb-preview');
-  pop.hidden = true;
-  pop.setAttribute('aria-hidden', 'true');
-  const media = el('div', 'tb-preview__media');
-  const img = el('img');
-  img.alt = '';
-  const fallback = el('div', 'tb-preview__fallback');
-  fallback.hidden = true;
-  const copyEl = el('p', 'tb-preview__copy');
-  media.append(img, fallback);
-  pop.append(media, copyEl);
-  document.body.append(pop);
-  let timer = 0;
-
-  const hide = () => {
-    window.clearTimeout(timer);
-    timer = 0;
-    pop.hidden = true;
-  };
-
-  const show = (place: TravelPlace, anchor: HTMLElement) => {
-    const locale = localeOf();
-    const cover = place.photos?.[0];
-    fallback.replaceChildren(categoryGlyph(place.category, 20));
-    if (cover?.url) {
-      img.hidden = false;
-      fallback.hidden = true;
-      if (img.getAttribute('src') !== cover.url) img.src = cover.url;
-    } else {
-      img.hidden = true;
-      img.removeAttribute('src');
-      fallback.hidden = false;
-    }
-    copyEl.textContent = pickLocale(locale, place.description);
-    pop.hidden = false;
-    const gap = 8;
-    const rect = anchor.getBoundingClientRect();
-    const box = pop.getBoundingClientRect();
-    let left = rect.right + gap;
-    if (left + box.width > window.innerWidth - gap) left = Math.max(gap, rect.left);
-    let top = rect.top;
-    if (top + box.height > window.innerHeight - gap) {
-      top = Math.max(gap, window.innerHeight - box.height - gap);
-    }
-    pop.style.left = `${left}px`;
-    pop.style.top = `${top}px`;
-  };
-
-  img.addEventListener('error', () => {
-    img.hidden = true;
-    fallback.hidden = false;
+function placeCard(
+  place: TravelPlace,
+  city: TravelCity,
+  locale: Locale,
+  current: boolean,
+): HTMLLIElement {
+  const item = el('li', 'tb-place-card');
+  item.dataset.placeId = place.id;
+  if (current) item.setAttribute('aria-current', 'true');
+  const open = el('button', 'tb-place-card__open');
+  open.type = 'button';
+  const media = placeThumb(place);
+  media.classList.remove('tb-thumb');
+  media.classList.add('tb-place-card__media');
+  const body = el('span', 'tb-place-card__body');
+  const title = el('span', 'tb-place-card__title');
+  title.append(el('span', 'tb-name', pickLocale(locale, place.name)));
+  body.append(title);
+  const subs = (place.subcategories ?? []).map((id) => subcategoryLabel(id, locale)).join(' · ');
+  if (subs) body.append(el('span', 'tb-place-card__sub', subs));
+  body.append(placeMeta(place, locale));
+  open.append(media, body);
+  const actions = el('div', 'tb-place-card__actions');
+  const maps = mapsIconLink({
+    label: pickLocale(locale, travelUi.openInMaps),
+    href: googleMapsUrl(place, city),
   });
-
-  return {
-    arm(place: TravelPlace, anchor: HTMLElement) {
-      window.clearTimeout(timer);
-      const wait = prefersReducedMotion() ? 0 : PLACE_PREVIEW_MS;
-      timer = window.setTimeout(() => {
-        timer = 0;
-        show(place, anchor);
-      }, wait);
-    },
-    hide,
-    dispose() {
-      hide();
-      pop.remove();
-    },
-  };
+  maps.dataset.maps = 'true';
+  actions.append(createRouteButton(place.id, locale), maps);
+  item.append(open, actions);
+  if (place.favorite) {
+    const heart = icon('favorite', { fill: true, size: 16 });
+    heart.classList.add('tb-fav');
+    heart.setAttribute('aria-hidden', 'true');
+    item.append(heart);
+  }
+  return item;
 }
 
 function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLElement {
@@ -261,7 +192,7 @@ function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLEl
     dot.style.background = placeCategoryMeta[category].color;
     return dot;
   }
-  const node = icon(name as IconName, { size });
+  const node = icon(name as IconName, { size, fill: true });
   node.classList.add('tb-cat-glyph');
   node.style.color = placeCategoryMeta[category].color;
   return node;
@@ -282,7 +213,6 @@ function copy(locale: Locale) {
   const en = locale === 'en';
   return {
     places: en ? 'Places' : 'Lugares',
-    itinerary: en ? 'Itinerary' : 'Roteiro',
     hotels: en ? 'Hotels' : 'Hotéis',
     sections: en ? 'City sections' : 'Seções da cidade',
     categories: en ? 'Categories' : 'Categorias',
@@ -290,10 +220,6 @@ function copy(locale: Locale) {
     emptyPlaces: en
       ? 'Nothing matches this search and these categories.'
       : 'Nada combina com esta busca e estas categorias.',
-    emptyItineraryTitle: en ? 'No day-by-day yet' : 'Sem roteiro dia a dia',
-    emptyItinerary: en
-      ? 'There is no day-by-day for this city yet. Multi-city trips live in the sidebar.'
-      : 'Ainda não há um dia a dia para esta cidade. Viagens com várias cidades ficam na barra lateral.',
     missingTitle: en ? 'City not found' : 'Cidade não encontrada',
     missing: en ? 'This slug is not in the catalog.' : 'Este slug não está no catálogo.',
     loadingHotels: en ? 'Loading hotels…' : 'Carregando hotéis…',
@@ -372,8 +298,6 @@ function toPins(
 }
 
 export const SEARCH_REFIT_MS = 400;
-/** Same wait as the tooltip: long enough to skip a passing pointer. */
-export const PLACE_PREVIEW_MS = 350;
 
 /** Refit only when a result sits outside the current view. */
 export function searchLeavesView(
@@ -453,6 +377,7 @@ export function mountCityNav(
     const button = el('button', 'tb-nav tb-city-nav');
     button.type = 'button';
     button.append(
+      icon('location_on', { fill: true, size: 16 }),
       el('span', 'tb-nav-label', pickLocale(shell.locale(), city.name)),
       el('small', undefined, String(city.places.length)),
     );
@@ -508,7 +433,6 @@ export function mountCity(
   const catalogPlaces = city.places.map((place) => withResolvedArea(place));
   const byId = new Map(catalogPlaces.map((place) => [place.id, place]));
   const blob = new Map(catalogPlaces.map((place) => [place.id, searchBlob(place)]));
-  const itinerary = itineraryForCity(city.slug);
   const hotelPriority = priorityPlaceIds(city);
 
   const storedCategories = readCategoryFilter();
@@ -519,15 +443,7 @@ export function mountCity(
   );
   const present = categoriesPresent(placeCategoryOrder, catalogPlaces);
   let groupState = groupOpenState(present, readGroups(city.slug));
-  let filterBadge: HTMLElement | null = null;
   let expandBtn: HTMLButtonElement | null = null;
-  const arrivalByDay = new Map<string, string>();
-  if (itinerary) {
-    for (const day of itinerary.days) {
-      const saved = readArrival(city.slug, day.id);
-      if (saved && day.arrivals?.some((item) => item.id === saved)) arrivalByDay.set(day.id, saved);
-    }
-  }
 
   let tab: Tab = initial?.tab ?? 'places';
   const planner = mountRoutePlanner({
@@ -544,17 +460,10 @@ export function mountCity(
   });
   let query = shell.query();
   let currentPlaceId: string | null = null;
-  let currentStopId: string | null = null;
-  let selectedDayIndex = dayIndexFrom(initial?.day, itinerary?.days.length ?? 0);
   let disposed = false;
   let silence = 0;
   let hotelsEpoch = 0;
   let hotelsDispose: (() => void) | null = null;
-  let routeEpoch = 0;
-  let routeWanted = true;
-  let routePhase: RoutePhase = 'idle';
-  const slotsOff = new Map<string, Set<string>>();
-  const slotOpen = new Map<string, boolean>();
   let searchFitTimer = 0;
 
   const head = el('header', 'tb-city-head');
@@ -564,7 +473,6 @@ export function mountCity(
   const tabPanelId = 'tb-city-panel';
   const tabIds: Record<Tab, string> = {
     places: 'tb-tab-places',
-    itinerary: 'tb-tab-itinerary',
     hotels: 'tb-tab-hotels',
   };
   tabs.id = 'tb-city-tabs';
@@ -572,10 +480,9 @@ export function mountCity(
   tabs.setAttribute('aria-orientation', 'horizontal');
   const tabButtons: Record<Tab, HTMLButtonElement> = {
     places: el('button'),
-    itinerary: el('button'),
     hotels: el('button'),
   };
-  for (const id of ['places', 'itinerary', 'hotels'] as const) {
+  for (const id of ['places', 'hotels'] as const) {
     tabButtons[id].type = 'button';
     tabButtons[id].id = tabIds[id];
     tabButtons[id].setAttribute('role', 'tab');
@@ -589,116 +496,13 @@ export function mountCity(
   body.id = tabPanelId;
   body.setAttribute('role', 'tabpanel');
   main.append(head, body);
-  const preview = mountPlacePreview(() => shell.locale());
-  const onListScroll = () => preview.hide();
-  main.addEventListener('scroll', onListScroll, { passive: true });
 
   const visiblePlaces = (): TravelPlace[] => {
     const needle = fold(query.trim());
     return catalogPlaces.filter((place) => {
-      if (!enabled.has(place.category)) return false;
       if (!needle) return true;
       return blob.get(place.id)?.includes(needle) ?? false;
     });
-  };
-
-  const selectedArrival = (day: ItineraryDay): ItineraryArrivalOption | null => {
-    const options = day.arrivals;
-    if (!options?.length) return null;
-    const chosen = arrivalByDay.get(day.id);
-    if (chosen) {
-      const match = options.find((option) => option.id === chosen);
-      if (match) return match;
-    }
-    return options.find((option) => option.default) ?? options[0] ?? null;
-  };
-
-  const activeStops = (day: ItineraryDay): ItineraryStop[] =>
-    selectedArrival(day)?.stops ?? day.stops;
-
-  const dayHeading = (day: ItineraryDay): { title: LString; summary?: LString } => {
-    const option = selectedArrival(day);
-    if (!option) return { title: day.title, summary: day.summary };
-    return { title: option.title, summary: option.summary };
-  };
-
-  const slotsOn = (dayId: string): Set<string> => {
-    const on = new Set(['morning', 'afternoon', 'evening']);
-    const off = slotsOff.get(dayId);
-    if (off) for (const slot of off) on.delete(slot);
-    return on;
-  };
-
-  const routedDay = (day: ItineraryDay) =>
-    routeForSlots(activeStops(day), legsForDay(day.id, selectedArrival(day)?.id), slotsOn(day.id));
-
-  const syncDayLink = (day: ItineraryDay) => {
-    const link = body.querySelector<HTMLAnchorElement>(
-      `[data-day-id="${CSS.escape(day.id)}"] [data-day-gmaps]`,
-    );
-    if (!link) return;
-    const url = dayDirectionsUrl(routedDay(day).ids, placeCoords());
-    if (url) {
-      link.href = url;
-      link.removeAttribute('aria-disabled');
-      link.tabIndex = 0;
-    } else {
-      link.removeAttribute('href');
-      link.setAttribute('aria-disabled', 'true');
-      link.tabIndex = -1;
-    }
-  };
-
-  const toggleSlot = (day: ItineraryDay, slot: string, on: boolean) => {
-    const off = slotsOff.get(day.id) ?? new Set<string>();
-    if (on) off.delete(slot);
-    else off.add(slot);
-    slotsOff.set(day.id, off);
-    if (selectedDayIndex === itinerary?.days.findIndex((item) => item.id === day.id) && routeWanted) {
-      drawDayRoute(selectedDayIndex, false);
-    }
-    syncDayLink(day);
-  };
-
-  const placeCoords = () => {
-    const coords = new Map<string, { id: string; lat: number; lng: number }>();
-    for (const place of city.places) {
-      coords.set(place.id, { id: place.id, lat: place.lat, lng: place.lng });
-    }
-    return coords;
-  };
-
-  const syncRouteChrome = () => {
-    body.querySelectorAll<HTMLButtonElement>('.tb-day__route').forEach((button) => {
-      const index = Number(button.closest<HTMLElement>('[data-day-index]')?.dataset.dayIndex);
-      const phase: RoutePhase =
-        routeWanted && index === selectedDayIndex ? routePhase : 'idle';
-      paintRouteButton(button, phase, shell.locale());
-    });
-  };
-
-  const toggleRoute = (index: number) => {
-    const section = body.querySelector<HTMLDetailsElement>(`[data-day-index="${index}"]`);
-    const showing = routeWanted && selectedDayIndex === index && routePhase !== 'idle';
-    if (showing) {
-      routeWanted = false;
-      routePhase = 'idle';
-      routeEpoch += 1;
-      map.setRoute([]);
-      paintItineraryPins();
-      syncRouteChrome();
-      return;
-    }
-    routeWanted = true;
-    const changed = selectedDayIndex !== index;
-    selectedDayIndex = index;
-    if (section && !section.open) {
-      section.open = true;
-      return;
-    }
-    markSelectedDay();
-    showItineraryMap({ fit: true });
-    if (changed) publish();
   };
 
   const paintChrome = () => {
@@ -709,10 +513,9 @@ export function mountCity(
     titleEl.textContent = pickLocale(locale, city.name);
     tabs.setAttribute('aria-label', text.sections);
     tabButtons.places.textContent = text.places;
-    tabButtons.itinerary.textContent = text.itinerary;
     tabButtons.hotels.textContent = text.hotels;
     body.setAttribute('aria-labelledby', tabIds[tab]);
-    for (const id of ['places', 'itinerary', 'hotels'] as const) {
+    for (const id of ['places', 'hotels'] as const) {
       const on = tab === id;
       tabButtons[id].setAttribute('aria-selected', on ? 'true' : 'false');
       tabButtons[id].removeAttribute('aria-pressed');
@@ -726,30 +529,16 @@ export function mountCity(
     document.querySelector('.tb-map')?.classList.toggle('is-day-layer', on);
   };
 
-  const paintItineraryPins = () => {
-    const day = itinerary?.days[selectedDayIndex];
-    const numbers = day && routeWanted ? routeNumbers(routedDay(day).ids) : undefined;
-    map.setPins('place', toPins(city.places, 'place', shell.locale(), numbers));
-    map.setPins('stop', planner.userPins());
-    setDayLayer(Boolean(day) && routeWanted && tab === 'itinerary');
-  };
 
   const showPlacePins = (opts: { fit: boolean; pan: boolean }) => {
-    routeEpoch += 1;
     const badges = planner.badges();
-    const visible = visiblePlaces();
-    const seen = new Set(visible.map((place) => place.id));
-    const extra = planner.ids().flatMap((id) => {
-      if (seen.has(id)) return [];
-      const place = byId.get(id);
-      return place ? [place] : [];
-    });
     setDayLayer(badges.size > 0);
     map.setRoute([]);
     map.setPins('stop', planner.userPins());
     planner.syncAccuracy();
     if (!currentPlaceId) map.highlight(null);
-    map.setPins('place', toPins([...visible, ...extra], 'place', shell.locale(), badges));
+    const mapped = catalogPlaces.filter((place) => enabled.has(place.category));
+    map.setPins('place', toPins(mapped, 'place', shell.locale(), badges));
     const framing = opts.fit && planner.stopCount() >= 2;
     if (opts.fit && !framing) map.fit();
     if (opts.pan && currentPlaceId) map.highlight(currentPlaceId);
@@ -759,7 +548,6 @@ export function mountCity(
   const snapshot = (): CityRouteState => ({
     tab,
     ...(currentPlaceId ? { place: currentPlaceId } : {}),
-    ...(selectedDayIndex > 0 ? { day: selectedDayIndex + 1 } : {}),
   });
 
   const publish = () => {
@@ -769,7 +557,7 @@ export function mountCity(
 
   const rowButton = (id: string): HTMLElement | null => {
     const row = body.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(id)}"]`);
-    return row?.querySelector<HTMLElement>('.tb-place-main, .tb-row__main') ?? null;
+    return row?.querySelector<HTMLElement>('.tb-place-card__open, .tb-place-main, .tb-row__main') ?? null;
   };
 
   const focusPlace = (id: string, origin?: HTMLElement | null) => {
@@ -777,7 +565,6 @@ export function mountCity(
     if (!place) return;
     const changed = currentPlaceId !== id;
     currentPlaceId = id;
-    if (tab === 'itinerary') currentStopId = id;
     openPlace(place, city, shell.locale(), origin);
     if (changed) publish();
   };
@@ -785,7 +572,6 @@ export function mountCity(
   const clearPlaceSelection = () => {
     const hadPlace = currentPlaceId != null;
     currentPlaceId = null;
-    currentStopId = null;
     main.querySelectorAll('[data-place-id][aria-current]').forEach((node) => {
       node.removeAttribute('aria-current');
     });
@@ -795,46 +581,8 @@ export function mountCity(
 
   const offClose = onPlaceClose(clearPlaceSelection);
 
-  const drawDayRoute = (index: number, fit: boolean) => {
-    const epoch = ++routeEpoch;
-    const day = itinerary?.days[index];
-    if (!day || !routeWanted) {
-      routePhase = 'idle';
-      map.setRoute([]);
-      paintItineraryPins();
-      syncRouteChrome();
-      return;
-    }
-    paintItineraryPins();
-    routePhase = 'drawing';
-    syncRouteChrome();
-    const coords = placeCoords();
-    const routed = routedDay(day);
-    const legs = routed.legs;
-    const ids = routed.ids;
-    const preview = buildItineraryRoutePreview(ids, legs, coords);
-    map.setRoute(toMapRoute(preview), { fit });
-    void buildItineraryRoute(ids, legs, coords)
-      .then((built) => {
-        if (disposed || epoch !== routeEpoch || tab !== 'itinerary') return;
-        map.setRoute(toMapRoute(built));
-        routePhase = 'on';
-        syncRouteChrome();
-      })
-      .catch(() => {
-        if (disposed || epoch !== routeEpoch) return;
-        routePhase = 'on';
-        syncRouteChrome();
-      });
-  };
-
-  const showItineraryMap = (opts: { fit: boolean }) => {
-    if (currentStopId) map.highlight(currentStopId);
-    drawDayRoute(selectedDayIndex, opts.fit);
-  };
 
   const showHotelPins = () => {
-    routeEpoch += 1;
     setDayLayer(false);
     map.setRoute([]);
     map.setPins('place', []);
@@ -853,29 +601,21 @@ export function mountCity(
     expandBtn.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
   };
 
-  const syncFilters = () => {
-    body.querySelectorAll<HTMLButtonElement>('button[data-category]').forEach((button) => {
+  const syncSwitches = () => {
+    body.querySelectorAll<HTMLButtonElement>('button.tb-switch[data-category]').forEach((button) => {
       const category = button.dataset.category;
       if (!category || !isCategory(category)) return;
-      button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
+      const on = enabled.has(category);
+      const name = button.dataset.switchLabel ?? category;
+      button.setAttribute('aria-checked', on ? 'true' : 'false');
+      button.setAttribute(
+        'aria-label',
+        pickLocale(shell.locale(), {
+          en: on ? `Hide ${name} on the map` : `Show ${name} on the map`,
+          'pt-BR': on ? `Esconder ${name} no mapa` : `Mostrar ${name} no mapa`,
+        }),
+      );
     });
-    if (!filterBadge) return;
-    const custom = !isDefaultCategoryFilter(enabled, placeCategoryOrder, placeCategoriesOffByDefault);
-    filterBadge.hidden = !custom;
-    if (!custom) {
-      filterBadge.textContent = '';
-      filterBadge.removeAttribute('aria-label');
-      return;
-    }
-    const count = enabled.size;
-    filterBadge.textContent = String(count);
-    filterBadge.setAttribute(
-      'aria-label',
-      pickLocale(shell.locale(), {
-        en: count === 1 ? '1 category on' : `${count} categories on`,
-        'pt-BR': count === 1 ? '1 categoria ativa' : `${count} categorias ativas`,
-      }),
-    );
   };
 
   const setEveryGroup = (open: boolean) => {
@@ -888,7 +628,6 @@ export function mountCity(
   };
 
   const appendPlaceGroups = () => {
-    preview.hide();
     map.hover(null);
     const locale = shell.locale();
     const text = copy(locale);
@@ -909,70 +648,50 @@ export function mountCity(
         syncExpand();
       });
       section.open = groupState[category] ?? false;
+      const categoryName = pickLocale(locale, CATEGORY_LABEL[category]);
       const summary = el('summary', 'tb-group__summary');
       const count = el('span', 'tb-group__count', String(group.length));
       count.dataset.groupCount = category;
+      const toggle = el('button', 'tb-switch');
+      toggle.type = 'button';
+      toggle.dataset.category = category;
+      toggle.dataset.switchLabel = categoryName;
+      toggle.setAttribute('role', 'switch');
+      toggle.append(el('span', 'tb-switch__thumb'));
+      const stopSummary = (event: Event) => {
+        event.stopPropagation();
+      };
+      toggle.addEventListener('pointerdown', stopSummary);
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        stopSummary(event);
+        if (enabled.has(category)) enabled.delete(category);
+        else enabled.add(category);
+        writeCategoryFilter([...enabled]);
+        syncSwitches();
+        showPlacePins({ fit: false, pan: false });
+      });
       summary.append(
         categoryGlyph(category),
-        el('span', 'tb-group__label', pickLocale(locale, CATEGORY_LABEL[category])),
+        el('span', 'tb-group__label', categoryName),
         count,
+        toggle,
         icon('expand_more', { size: 18 }),
       );
       summary.lastElementChild?.classList.add('tb-group__chevron');
-      const list = el('ul', 'tb-list tb-list--places tb-place-list');
+      const list = el('ul', 'tb-place-list');
       for (const place of group) {
-        const maps = iconLink({
-          icon: 'location_on',
-          label: pickLocale(locale, travelUi.openInMaps),
-          href: googleMapsUrl(place, city),
-        });
-        maps.dataset.maps = 'true';
-        const routeBtn = createRouteButton(place.id, locale);
-        const subs = (place.subcategories ?? []).map((id) => subcategoryLabel(id, locale)).join(' · ');
-        const item = row({
-          lead: placeThumb(place),
-          title: pickLocale(locale, place.name),
-          sub: subs || undefined,
-          meta: placeMeta(place, locale),
-          actions: maps,
-          current: place.id === currentPlaceId,
-          data: { placeId: place.id },
-          onSelect: () => {
-            setRowCurrent(body, place.id, false);
-            focusPlace(place.id, item.querySelector<HTMLElement>('.tb-row__main'));
-          },
-        });
-        item.querySelector('.tb-row__actions')?.prepend(routeBtn);
-        if (place.favorite) {
-          const title = item.querySelector('.tb-row__title');
-          if (title) {
-            const name = el('span', 'tb-name', title.textContent ?? '');
-            const heart = icon('favorite', { fill: true, size: 16 });
-            heart.classList.add('tb-fav');
-            title.replaceChildren(name, heart);
-          }
-        }
-        const blurb = pickLocale(locale, place.description).trim();
-        if (blurb) item.querySelector('.tb-row__main')?.append(el('span', 'tb-row__more', blurb));
-        item.addEventListener('pointerenter', () => {
-          map.hover(place.id);
-          preview.arm(place, item);
-        });
-        item.addEventListener('pointerleave', () => {
-          map.hover(null);
-          preview.hide();
-        });
-        item.addEventListener('focusin', () => preview.arm(place, item));
-        item.addEventListener('focusout', (event) => {
-          const next = event.relatedTarget;
-          if (next instanceof Node && item.contains(next)) return;
-          preview.hide();
+        const item = placeCard(place, city, locale, place.id === currentPlaceId);
+        item.querySelector('.tb-place-card__open')?.addEventListener('click', () => {
+          setRowCurrent(body, place.id, false);
+          focusPlace(place.id, item.querySelector<HTMLElement>('.tb-place-card__open'));
         });
         list.append(item);
       }
       section.append(summary, list);
       body.append(section);
     }
+    syncSwitches();
     syncExpand();
   };
 
@@ -983,36 +702,8 @@ export function mountCity(
   };
 
   const renderPlaces = () => {
-    const locale = shell.locale();
-    const text = copy(locale);
     body.replaceChildren();
     const tools = el('div', 'tb-place-tools');
-    const filters = el('div', 'tb-filters tb-place-filters');
-    filters.setAttribute('role', 'group');
-    filters.setAttribute('aria-label', text.categories);
-    for (const category of present) {
-      const button = el('button', 'tb-chip');
-      button.type = 'button';
-      button.dataset.category = category;
-      const only = el(
-        'span',
-        'tb-chip__only',
-        pickLocale(locale, { en: 'only this', 'pt-BR': 'só esta' }),
-      );
-      only.dataset.only = 'true';
-      only.setAttribute('aria-hidden', 'true');
-      button.append(
-        categoryGlyph(category),
-        el('span', 'tb-chip__label', pickLocale(locale, CATEGORY_LABEL[category])),
-        only,
-      );
-      button.setAttribute('aria-pressed', enabled.has(category) ? 'true' : 'false');
-      filters.append(button);
-    }
-    const badge = el('span', 'tb-filter-badge');
-    badge.hidden = true;
-    filterBadge = badge;
-    filters.append(badge);
     const expand = el('button', 'tb-expand');
     expand.type = 'button';
     expandBtn = expand;
@@ -1021,9 +712,8 @@ export function mountCity(
       const allOpen = groups.length > 0 && groups.every((section) => section.open);
       setEveryGroup(!allOpen);
     });
-    tools.append(filters, expand);
+    tools.append(expand);
     body.append(tools);
-    syncFilters();
     appendPlaceGroups();
   };
 
@@ -1033,184 +723,6 @@ export function mountCity(
     if (opener) setPlaceOrigin(opener);
   };
 
-  const renderItinerary = () => {
-    const locale = shell.locale();
-    const text = copy(locale);
-    body.replaceChildren();
-    if (!itinerary || itinerary.days.length === 0) {
-      body.append(emptyState(text.emptyItineraryTitle, text.emptyItinerary));
-      return;
-    }
-
-    body.append(itineraryIntro(itinerary, byId, locale));
-
-    itinerary.days.forEach((day, index) => {
-      const section = el('details', 'tb-day');
-      section.dataset.dayIndex = String(index);
-      section.dataset.dayId = day.id;
-      section.open = index === selectedDayIndex;
-      if (index === selectedDayIndex) section.setAttribute('aria-current', 'true');
-      section.addEventListener('toggle', () => {
-        if (!section.open) {
-          if (selectedDayIndex === index) {
-            routeWanted = false;
-            routePhase = 'idle';
-            routeEpoch += 1;
-            map.setRoute([]);
-            paintItineraryPins();
-            syncRouteChrome();
-          }
-          return;
-        }
-        routeWanted = true;
-        const changed = selectedDayIndex !== index;
-        selectedDayIndex = index;
-        markSelectedDay();
-        showItineraryMap({ fit: true });
-        if (changed) publish();
-      });
-
-      const stops = activeStops(day);
-      const phase: RoutePhase = routeWanted && index === selectedDayIndex ? routePhase : 'idle';
-      section.append(
-        daySummary({
-          dayNumber: day.day,
-          stops,
-          phase,
-          mapsUrl: dayDirectionsUrl(routedDay(day).ids, placeCoords()),
-          locale,
-          onRoute: () => toggleRoute(index),
-        }),
-      );
-
-      const heading = dayHeading(day);
-      if (heading.summary) {
-        section.append(el('p', 'tb-meta tb-day-summary', pickLocale(locale, heading.summary)));
-      }
-
-      const option = selectedArrival(day);
-      if (day.arrivals?.length) {
-        const control = el('div', 'tb-locale tb-arrival');
-        control.setAttribute('role', 'tablist');
-        control.setAttribute('aria-label', pickLocale(locale, travelUi.itineraryArrivalAirport));
-        for (const item of day.arrivals) {
-          const button = el('button');
-          button.type = 'button';
-          button.setAttribute('role', 'tab');
-          button.dataset.arrivalDay = day.id;
-          button.dataset.arrivalId = item.id;
-          button.setAttribute('aria-selected', option?.id === item.id ? 'true' : 'false');
-          button.append(icon('flight', { size: 16 }), el('span', undefined, pickLocale(locale, item.label)));
-          control.append(button);
-        }
-        segmented(control);
-        section.append(control);
-      }
-
-      const budget = dayBudgetEl(day, stops, byId, locale);
-      if (budget) section.append(budget);
-
-      section.append(
-        renderPeriods({
-          stops,
-          locale,
-          enabled: slotsOn(day.id),
-          coords: placeCoords(),
-          isOpen: (slot) => slotOpen.get(`${day.id}:${slot}`) ?? true,
-          onOpen: (slot, open) => slotOpen.set(`${day.id}:${slot}`, open),
-          onToggleSlot: (slot, on) => toggleSlot(day, slot, on),
-          legs: legsForDay(day.id, selectedArrival(day)?.id),
-          onHoverHop: (hop) => {
-            if (!hop) {
-              markHot(null);
-              map.hoverLeg(null, null);
-              return;
-            }
-            markHot(hop.to, hop.from);
-            map.hoverLeg(hop.from, hop.to);
-          },
-          renderStop: (stop) => stopRow(stop, index, locale),
-        }),
-      );
-      body.append(section);
-    });
-    syncRouteChrome();
-  };
-
-  const costMeta = (stop: ItineraryStop, place: TravelPlace | undefined, locale: Locale) => {
-    const cost = stopCost(stop, place);
-    const meta = el('span', 'tb-stop-costs');
-    const add = (glyph: 'restaurant' | 'local_activity', amount: number, label: string) => {
-      if (amount <= 0) return;
-      const chip = el('span', 'tb-stop-cost');
-      chip.append(icon(glyph, { size: 16 }));
-      chip.append(document.createTextNode(formatEur(amount, locale)));
-      chip.setAttribute('data-tip', label);
-      meta.append(chip);
-    };
-    add('restaurant', cost.food, pickLocale(locale, travelUi.itineraryFood));
-    add('local_activity', cost.ticket, pickLocale(locale, travelUi.itineraryParks));
-    if (stop.optional) {
-      meta.prepend(el('span', 'tb-badge-soft', pickLocale(locale, travelUi.itineraryOptional)));
-    }
-    return meta.childElementCount ? meta : undefined;
-  };
-
-  const stopRow = (stop: ItineraryStop, index: number, locale: Locale): HTMLElement | null => {
-    const place = byId.get(stop.placeId);
-    const meta = costMeta(stop, place, locale);
-    if (!place) {
-      const missing = row({
-        time: stop.time,
-        title: stop.placeId,
-        sub: pickLocale(locale, { en: 'Place unavailable', 'pt-BR': 'Lugar indisponível' }),
-        meta,
-        data: { placeId: stop.placeId },
-      });
-      missing.classList.add('is-disabled');
-      missing.setAttribute('aria-disabled', 'true');
-      if (stop.optional) missing.classList.add('is-optional');
-      return missing;
-    }
-    const pin = el('span', 'tb-timeline__pin');
-    pin.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
-    pin.append(categoryGlyph(place.category, 16));
-    const maps = iconLink({
-      icon: 'location_on',
-      label: pickLocale(locale, travelUi.openInMaps),
-      href: googleMapsUrl(place, city),
-    });
-    maps.dataset.maps = 'true';
-    const note = stop.note ? pickLocale(locale, stop.note) : undefined;
-    const item = row({
-      time: stop.time,
-      lead: pin,
-      title: pickLocale(locale, place.name),
-      sub: note,
-      meta,
-      actions: maps,
-      current: index === selectedDayIndex && place.id === currentStopId,
-      data: { placeId: place.id },
-      onSelect: () => {
-        selectedDayIndex = index;
-        currentStopId = place.id;
-        markSelectedDay();
-        const origin = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-        setRowCurrent(body, place.id, false);
-        focusPlace(place.id, origin);
-      },
-    });
-    if (stop.optional) item.classList.add('is-optional');
-    item.addEventListener('pointerenter', () => {
-      item.classList.add('is-hot');
-      map.hover(place.id);
-    });
-    item.addEventListener('pointerleave', () => {
-      item.classList.remove('is-hot');
-      map.hover(null);
-    });
-    return item;
-  };
 
   const closeHotels = () => {
     hotelsEpoch += 1;
@@ -1271,17 +783,8 @@ export function mountCity(
 
   const renderBody = () => {
     if (tab === 'places') renderPlaces();
-    else if (tab === 'itinerary') renderItinerary();
     else renderHotels();
     keepOrigin();
-  };
-
-  const markSelectedDay = () => {
-    for (const section of body.querySelectorAll<HTMLElement>('.tb-day')) {
-      if (Number(section.dataset.dayIndex) === selectedDayIndex) {
-        section.setAttribute('aria-current', 'true');
-      } else section.removeAttribute('aria-current');
-    }
   };
 
   body.addEventListener('click', (event) => {
@@ -1289,63 +792,13 @@ export function mountCity(
     if (!(target instanceof Element)) return;
     if (target.closest('.tb-hotels-mount')) return;
 
-    const categoryBtn = target.closest<HTMLButtonElement>('button[data-category]');
-    if (categoryBtn?.dataset.category && isCategory(categoryBtn.dataset.category)) {
-      const category = categoryBtn.dataset.category;
-      const only = event.altKey || Boolean(target.closest('[data-only]'));
-      const next = applyCategoryClick(enabled, category, only);
-      enabled.clear();
-      for (const id of next) enabled.add(id);
-      writeCategoryFilter([...enabled]);
-      if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
-        closePlace({ focus: false });
-      }
-      syncFilters();
-      paintChrome();
-      renderPlaceResults();
-      showPlacePins({ fit: true, pan: false });
-      return;
-    }
-
-    const arrivalBtn = target.closest<HTMLButtonElement>('[data-arrival-id]');
-    if (arrivalBtn?.dataset.arrivalDay && arrivalBtn.dataset.arrivalId && itinerary) {
-      const dayIndex = itinerary.days.findIndex((day) => day.id === arrivalBtn.dataset.arrivalDay);
-      const day = itinerary.days[dayIndex];
-      if (!day) return;
-      arrivalByDay.set(day.id, arrivalBtn.dataset.arrivalId);
-      writeArrival(city.slug, day.id, arrivalBtn.dataset.arrivalId);
-      selectedDayIndex = dayIndex;
-      const stops = activeStops(day);
-      const stillThere = (id: string | null) =>
-        Boolean(id) && stops.some((stop) => stop.placeId === id && byId.has(stop.placeId));
-      if (!stillThere(currentStopId)) currentStopId = null;
-      if (currentPlaceId && !stillThere(currentPlaceId)) closePlace({ focus: false });
-      const top = main.scrollTop;
-      const arrivalId = arrivalBtn.dataset.arrivalId;
-      renderItinerary();
-      main.scrollTop = top;
-      body
-        .querySelector<HTMLButtonElement>(
-          `[data-arrival-day="${CSS.escape(day.id)}"][data-arrival-id="${CSS.escape(arrivalId)}"]`,
-        )
-        ?.focus();
-      showItineraryMap({ fit: true });
-      return;
-    }
-
+    if (target.closest('.tb-switch')) return;
     if (target.closest('[data-route], [data-maps]')) return;
-    if (target.closest('.tb-row__main')) return;
+    if (target.closest('.tb-place-card__open, .tb-row__main')) return;
     const row = target.closest<HTMLElement>('[data-place-id]');
     if (!row?.dataset.placeId) return;
     const id = row.dataset.placeId;
-    const opener = row.querySelector<HTMLElement>('.tb-place-main, .tb-row__main');
-    if (tab === 'itinerary') {
-      const section = row.closest<HTMLElement>('[data-day-index]');
-      const index = Number(section?.dataset.dayIndex);
-      if (Number.isInteger(index)) selectedDayIndex = index;
-      currentStopId = id;
-      markSelectedDay();
-    }
+    const opener = row.querySelector<HTMLElement>('.tb-place-card__open, .tb-place-main, .tb-row__main');
     setRowCurrent(body, id, false);
     focusPlace(id, opener);
   });
@@ -1362,7 +815,6 @@ export function mountCity(
     renderBody();
     main.scrollTop = top;
     if (tab === 'places') showPlacePins({ fit: false, pan: false });
-    else showItineraryMap({ fit: false });
     planner.sync();
   });
 
@@ -1385,33 +837,11 @@ export function mountCity(
     }, SEARCH_REFIT_MS);
   });
 
-  const markHot = (id: string | null, from?: string | null) => {
-    body.querySelectorAll('.tb-timeline .is-hot').forEach((node) => node.classList.remove('is-hot'));
-    if (!id) return;
-    const sel = CSS.escape(id);
-    const selector = from
-      ? `.tb-timeline [data-leg-from="${CSS.escape(from)}"][data-leg-to="${sel}"], .tb-timeline [data-place-id="${sel}"]`
-      : `.tb-timeline [data-place-id="${sel}"], .tb-timeline [data-leg-from="${sel}"], .tb-timeline [data-leg-to="${sel}"]`;
-    body.querySelectorAll<HTMLElement>(selector).forEach((node) => node.classList.add('is-hot'));
-  };
-
-  const unsubHover = map.onHover((id) => {
-    if (disposed || tab !== 'itinerary') return;
-    markHot(id);
-    map.hover(id);
-  });
-
-  const unsubLeg = map.onHoverLeg((leg) => {
-    if (disposed || tab !== 'itinerary') return;
-    if (!leg) markHot(null);
-    else markHot(leg.to, leg.from);
-  });
 
   const unsubSelect = map.onSelect((id) => {
     if (disposed) return;
     if (!byId.has(id)) return;
     if (tab === 'places' && !visiblePlaces().some((place) => place.id === id)) return;
-    if (tab === 'itinerary') currentStopId = id;
     setRowCurrent(body, id, true);
     focusPlace(id, rowButton(id));
   });
@@ -1429,7 +859,6 @@ export function mountCity(
       paintChrome();
       renderBody();
       if (next === 'places') showPlacePins({ fit: true, pan: currentPlaceId != null });
-      else if (next === 'itinerary') showItineraryMap({ fit: true });
       else showHotelPins();
       planner.sync();
       main.scrollTop = 0;
@@ -1437,25 +866,11 @@ export function mountCity(
     if (!hadPlace) publish();
   }
 
-  function revealSelectedDay() {
-    for (const section of body.querySelectorAll<HTMLDetailsElement>('.tb-day')) {
-      if (Number(section.dataset.dayIndex) === selectedDayIndex) section.open = true;
-    }
-    markSelectedDay();
-  }
-
   function sync(state: CityRouteState) {
     if (disposed) return;
     silence += 1;
     try {
-      const nextDay = dayIndexFrom(state.day, itinerary?.days.length ?? 0);
-      const dayChanged = nextDay !== selectedDayIndex;
-      selectedDayIndex = nextDay;
       if (state.tab !== tab) setTab(state.tab);
-      else if (dayChanged && tab === 'itinerary') {
-        revealSelectedDay();
-        showItineraryMap({ fit: true });
-      }
       const place = state.place && byId.has(state.place) ? state.place : null;
       if (place && place === currentPlaceId && openPlaceId() === place) return;
       if (!place) {
@@ -1473,7 +888,6 @@ export function mountCity(
   paintChrome();
   renderBody();
   if (tab === 'places') showPlacePins({ fit: !initialPlace, pan: false });
-  else if (tab === 'itinerary') showItineraryMap({ fit: !initialPlace });
   else showHotelPins();
   if (initialPlace) {
     silence += 1;
@@ -1488,8 +902,6 @@ export function mountCity(
       if (disposed) return;
       disposed = true;
       window.clearTimeout(searchFitTimer);
-      main.removeEventListener('scroll', onListScroll);
-      preview.dispose();
       const input = shell.root.querySelector<HTMLInputElement>('.tb-search input');
       if (input) {
         input.placeholder = pickLocale(shell.locale(), {
@@ -1501,8 +913,6 @@ export function mountCity(
       planner.dispose();
       unsubLocale();
       unsubQuery();
-      unsubHover();
-      unsubLeg();
       unsubSelect();
       offClose();
       const close = hotelsDispose;
@@ -1510,7 +920,6 @@ export function mountCity(
       try {
         close?.();
       } finally {
-        routeEpoch += 1;
         setDayLayer(false);
         map.highlight(null);
         map.setRoute([]);

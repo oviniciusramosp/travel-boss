@@ -18,6 +18,7 @@
 
   --font-geist: 'Geist Sans', 'Geist', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Lekton', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Desktop tool density. Captions stay on the design scale (12px).
      Chrome body is 13px; reading text in the trip document is 14px. */
@@ -74,6 +75,19 @@
     0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --shadow-float: 0 0 0 1px rgba(23, 23, 23, 0.06),
     0 12px 32px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+  /* Day card. The hairline border is separate, so no ring here. */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card-lift: 0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.1);
+  /* Budget glyphs on the day card, the one colored chrome (portfolio values). */
+  --color-food: #c46a2a;
+  --color-ticket: #0077cc;
+  /* Forecast glyphs, one tone per sky. */
+  --color-weather-sun: #f59e0b;
+  --color-weather-night: #6366f1;
+  --color-weather-cloud: #94a3b8;
+  --color-weather-rain: #3b82f6;
+  --color-weather-snow: #38bdf8;
+  --color-weather-storm: #8b5cf6;
 
   --z-map: 0;
   --z-controls: 10;
@@ -126,6 +140,16 @@
     0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
   --shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.08),
     0 12px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-card-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.5);
+  --color-food: #f97316;
+  --color-ticket: #7dd3fc;
+  --color-weather-sun: #fbbf24;
+  --color-weather-night: #a5b4fc;
+  --color-weather-cloud: #cbd5e1;
+  --color-weather-rain: #60a5fa;
+  --color-weather-snow: #7dd3fc;
+  --color-weather-storm: #a78bfa;
   --map-area-opacity: 0.32;
   --map-heat-opacity: 0.18;
 }
@@ -149,6 +173,16 @@
       0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
     --shadow-float: 0 0 0 1px rgba(255, 255, 255, 0.08),
       0 12px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-card-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.5);
+    --color-food: #f97316;
+    --color-ticket: #7dd3fc;
+    --color-weather-sun: #fbbf24;
+    --color-weather-night: #a5b4fc;
+    --color-weather-cloud: #cbd5e1;
+    --color-weather-rain: #60a5fa;
+    --color-weather-snow: #7dd3fc;
+    --color-weather-storm: #a78bfa;
     --map-area-opacity: 0.32;
     --map-heat-opacity: 0.18;
   }

@@ -1,6 +1,8 @@
 import '@fontsource/geist-sans/400.css';
 import '@fontsource/geist-sans/500.css';
 import '@fontsource/geist-sans/600.css';
+import '@fontsource/lekton/400.css';
+import '@fontsource/lekton/700.css';
 import 'leaflet/dist/leaflet.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './styles/tokens.css';

@@ -15,12 +15,10 @@ describe('clampPaneWidth', () => {
 });
 
 describe('resolveLocale', () => {
-  it('prefers the saved language, then Portuguese, then English', () => {
-    expect(resolveLocale('pt-BR', ['en'])).toBe('pt-BR');
-    expect(resolveLocale('en', ['pt-BR'])).toBe('en');
-    expect(resolveLocale(null, ['pt-BR', 'en'])).toBe('pt-BR');
-    expect(resolveLocale(null, ['fr', 'en-US'])).toBe('en');
-    expect(resolveLocale('pt', ['en'])).toBe('en');
-    expect(resolveLocale(null, [])).toBe('en');
+  it('keeps the saved language and falls back to Portuguese', () => {
+    expect(resolveLocale('en')).toBe('en');
+    expect(resolveLocale('pt-BR')).toBe('pt-BR');
+    expect(resolveLocale(null)).toBe('pt-BR');
+    expect(resolveLocale('fr')).toBe('pt-BR');
   });
 });

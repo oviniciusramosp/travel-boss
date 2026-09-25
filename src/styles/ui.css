@@ -10,6 +10,52 @@
   text-decoration: none;
 }
 
+.tb-maps-ico {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.tb-icon-btn--sm .tb-maps-ico,
+.tb-btn-outline .tb-maps-ico {
+  width: 16px;
+  height: 16px;
+}
+
+.tb-maps-ico img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.tb-maps-badge {
+  position: absolute;
+  right: -4px;
+  bottom: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 11px;
+  height: 11px;
+  border-radius: var(--r-pill);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  box-shadow: 0 0 0 1.5px var(--color-paper);
+}
+
+.tb-maps-badge .material-symbols-rounded {
+  font-size: 8px;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 20;
+}
+
 .tb-icon-btn--sm {
   width: var(--h-sm);
   height: var(--h-sm);
@@ -341,13 +387,17 @@
 /* Days, categories, periods. Without interpolate-size the toggle is instant. */
 .tb-day,
 .tb-group,
-.tb-slot {
+.tb-slot,
+.tb-period,
+.tb-date {
   interpolate-size: allow-keywords;
 }
 
 .tb-day::details-content,
 .tb-group::details-content,
-.tb-slot::details-content {
+.tb-slot::details-content,
+.tb-period::details-content,
+.tb-date::details-content {
   height: 0;
   overflow: clip;
   transition:
@@ -358,6 +408,8 @@
 
 .tb-day[open]::details-content,
 .tb-group[open]::details-content,
-.tb-slot[open]::details-content {
+.tb-slot[open]::details-content,
+.tb-period[open]::details-content,
+.tb-date[open]::details-content {
   height: auto;
 }

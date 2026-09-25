@@ -57,6 +57,8 @@ export type {
   ItineraryStop,
   PlaceCategory,
   DayBudget,
+  MoneyInfo,
+  VisitInfo,
 } from '../data/travel';
 
 export type { ItineraryArrivalOption } from '../data/travel-itineraries';

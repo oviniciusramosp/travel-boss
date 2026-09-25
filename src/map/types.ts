@@ -36,6 +36,8 @@ export type MapRouteSegment = {
   mode: 'walk' | 'transit';
   latlngs: [number, number][];
   color?: string;
+  /** Transit line id. A long road route has none, so it draws no station dots. */
+  lineId?: string;
   /** Neutral chord. Dashed, unlike a transit spine. No stations and no flow. */
   dash?: boolean;
   fromId?: string;
@@ -82,6 +84,8 @@ export type MapHandle = {
   /** Catalog city pins. Pass [] to clear. Click reports the id through `onSelect`. */
   setCities(pins: readonly MapCityPin[], opts?: { fit?: boolean }): void;
   fit(): void;
+  /** Frame these coordinates. Does not change which pins exist. */
+  frame(points: readonly { lat: number; lng: number }[], maxZoom?: number): void;
   /** Whether a coordinate is inside the current map view. */
   inView(lat: number, lng: number): boolean;
   /** Center a coordinate. Zoom defaults to a block-level view. */
@@ -89,12 +93,19 @@ export type MapHandle = {
   /** Highlight a pin without moving the camera. `null` clears the hover. */
   hover(id: string | null): void;
   /**
-   * Highlight the place→place leg. `null` clears it.
+   * Highlight one drawn hop. `null` clears it.
+   * A hop index lights that spine only. A mode lights every segment of that mode.
    * Does not move the camera. A stop hover still uses `hover`.
    */
-  hoverLeg(from: string | null, to?: string | null): void;
+  hoverLeg(
+    from: string | null,
+    to?: string | null,
+    opts?: number | { hop?: number; mode?: 'walk' | 'transit'; frame?: boolean } | null,
+  ): void;
   /** Hover that started on a route line. Returns an unsubscribe. */
-  onHoverLeg(fn: (leg: { from: string; to: string } | null) => void): () => void;
+  onHoverLeg(
+    fn: (leg: { from: string; to: string; hop?: number; mode?: 'walk' | 'transit' } | null) => void,
+  ): () => void;
   /** Highlight and frame the pin in the padded view. */
   select(id: string): void;
   /**

@@ -12,6 +12,7 @@ describe('googleDirectionsUrl', () => {
       'https://www.google.com/maps/dir/?api=1&origin=48.8%2C2.3&destination=48.86%2C2.35&travelmode=walking',
     );
     expect(googleDirectionsUrl([a, b], 'transit')).toContain('travelmode=transit');
+    expect(googleDirectionsUrl([a, b], 'drive')).toContain('travelmode=driving');
   });
 
   it('keeps at most 9 waypoints between origin and destination', () => {

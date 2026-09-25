@@ -8,6 +8,8 @@ export type RowOptions = {
   meta?: Node | string;
   actions?: Node;
   current?: boolean;
+  /** Timeline rows stay quiet. Other lists keep the title tip. */
+  tip?: boolean;
   onSelect?: () => void;
   data?: Record<string, string>;
 };
@@ -30,7 +32,7 @@ export function row(opts: RowOptions): HTMLLIElement {
     main.addEventListener('click', () => opts.onSelect?.());
   }
   const title = el('span', 'tb-row__title', opts.title);
-  title.setAttribute('data-tip', opts.title);
+  if (opts.tip !== false) title.setAttribute('data-tip', opts.title);
   main.append(title);
   if (opts.sub) main.append(el('span', 'tb-row__sub', opts.sub));
 

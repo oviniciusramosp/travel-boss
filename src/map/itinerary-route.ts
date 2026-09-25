@@ -97,10 +97,8 @@ async function walkPath(
   a: { lat: number; lng: number },
   b: { lat: number; lng: number },
   opts: BuildItineraryOptions,
-): Promise<LatLng[]> {
-  if (opts.walkMode === 'straight') {
-    return straight(a as PlaceCoord, b as PlaceCoord);
-  }
+): Promise<LatLng[] | null> {
+  if (opts.walkMode === 'straight') return null;
   const result = await fetchWalkingRoute(
     [
       { lat: a.lat, lng: a.lng, id: 'a', label: '' },
@@ -108,10 +106,8 @@ async function walkPath(
     ],
     opts.signal,
   );
-  if (result?.latlngs?.length && result.latlngs.length >= 2) {
-    return result.latlngs;
-  }
-  return straight(a as PlaceCoord, b as PlaceCoord);
+  if (result?.latlngs?.length && result.latlngs.length >= 2) return result.latlngs;
+  return null;
 }
 
 function asCoord(p: { lat: number; lng: number }): {
@@ -154,19 +150,7 @@ async function expandMultiHop(
   const segs: ItinerarySegment[] = [];
   const transfers: ItineraryTransferPoint[] = [];
   const valid = hops.filter((h) => h.path && h.path.length >= 2);
-  if (valid.length === 0) {
-    return {
-      segments: [
-        {
-          mode: 'transit',
-          latlngs: straight(from, to),
-          label: leg.label ?? 'Transit',
-          ...ends,
-        },
-      ],
-      transfers,
-    };
-  }
+  if (valid.length === 0) return { segments: [], transfers };
 
   const first = valid[0]!;
   const last = valid[valid.length - 1]!;
@@ -323,6 +307,7 @@ async function expandLeg(
 
   if (leg.mode === 'walk') {
     const latlngs = await walkPath(from, to, opts);
+    if (!latlngs) return { segments: [], transfers: [] };
     return {
       segments: [{ mode: 'walk', latlngs, label: leg.label, ...ends }],
       transfers: [],
@@ -373,20 +358,7 @@ async function expandLeg(
   }
 
   const line = leg.line ? getTransitLine(leg.line) : undefined;
-  if (!line) {
-    // Unknown network — solid default (no fake line color) + no fake stations
-    return {
-      segments: [
-        {
-          mode: 'transit',
-          latlngs: straight(from, to),
-          label: leg.label ?? 'Transit',
-          ...ends,
-        },
-      ],
-      transfers: [],
-    };
-  }
+  if (!line) return { segments: [], transfers: [] };
 
   const fromSt = leg.fromStation
     ? (stationById(line, leg.fromStation) ?? nearestStation(line, from))
@@ -414,14 +386,16 @@ async function expandLeg(
   }
 
   const color = transitColor(line.id);
-  segs.push({
-    mode: 'transit',
-    latlngs: metroPath.length >= 2 ? metroPath : straight(fromSt, toSt),
-    lineId: color ? line.id : undefined,
-    color,
-    label: leg.label ?? line.name,
-    ...ends,
-  });
+  if (metroPath.length >= 2) {
+    segs.push({
+      mode: 'transit',
+      latlngs: metroPath,
+      lineId: color ? line.id : undefined,
+      color,
+      label: leg.label ?? line.name,
+      ...ends,
+    });
+  }
 
   if (walkOut) {
     segs.push({ mode: 'walk', latlngs: walkOut, ...ends });

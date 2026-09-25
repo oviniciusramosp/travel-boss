@@ -12,17 +12,19 @@ import {
 } from '../catalog';
 import type { MapHandle } from '../map/types';
 import { iconButton } from '../ui/controls';
+import { prefersReducedMotion } from '../ui/motion';
+import { mapsMark } from '../ui/maps-icon';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
 import { priceLevel, priceLevelOf } from '../ui/price';
-import { ratingSummary, starRating } from '../ui/rating';
+import { starRating } from '../ui/rating';
 import { openNowStatus, timeZoneForCity } from './open-now';
 import { createRouteButton, routePlannerOn } from './route-planner';
 
 function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
   const name = categoryMaterialName(category);
   if (!(ICONS as readonly string[]).includes(name)) return null;
-  const node = icon(name as IconName, { size: 16 });
+  const node = icon(name as IconName, { size: 16, fill: true });
   node.style.color = placeCategoryMeta[category].color;
   return node;
 }
@@ -40,8 +42,20 @@ function ticketLink(href: string, locale: Locale): HTMLAnchorElement {
 
 type CloseOptions = { focus?: boolean };
 
+/** Links shown on the place card. The trip timeline passes both. */
+export type PlaceLinks = {
+  maps?: string;
+  route?: string;
+};
+
 type Panel = {
-  open(place: TravelPlace, city: TravelCity, locale: Locale, origin: HTMLElement | null): void;
+  open(
+    place: TravelPlace,
+    city: TravelCity,
+    locale: Locale,
+    origin: HTMLElement | null,
+    links?: PlaceLinks,
+  ): void;
   close(opts?: CloseOptions): void;
   id(): string | null;
   retarget(origin: HTMLElement | null): void;
@@ -86,8 +100,15 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   column.append(root);
 
   let photoIndex = 0;
+  let collapsed = false;
+  let folding = false;
   let liveEpoch = 0;
-  let current: { place: TravelPlace; city: TravelCity; locale: Locale } | null = null;
+  let current: {
+    place: TravelPlace;
+    city: TravelCity;
+    locale: Locale;
+    links?: PlaceLinks;
+  } | null = null;
   let returnFocus: HTMLElement | null = null;
   let slides: { url: string; alt: string }[] = [];
   let front = 0;
@@ -205,7 +226,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       root.replaceChildren();
       return;
     }
-    const { place, city, locale } = current;
+    const { place, city, locale, links } = current;
     const photos = resolvePlacePhotos(place.id, place.photos) ?? [];
     const visit = resolveVisit(place.id, place.visit);
     const fields = visit ? visitFieldsForDisplay(visit, locale) : [];
@@ -229,6 +250,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     }));
     photoIndex = slideIndex(photoIndex, slides.length);
     const frame = el('div', 'tb-place-panel__photo tb-slider is-instant');
+    frame.classList.toggle('is-empty', photos.length === 0);
     const onError = (event: Event) => {
       const img = event.currentTarget;
       if (!(img instanceof HTMLImageElement)) return;
@@ -267,67 +289,97 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     frame.append(prevBtn, nextBtn, dotBar, fallbackEl);
     buildDots();
     showSlide(photoIndex);
-    root.append(frame, close);
+    const collapse = iconButton({
+      icon: collapsed ? 'chevron_left' : 'chevron_right',
+      label: pickLocale(
+        locale,
+        collapsed
+          ? { en: 'Show place', 'pt-BR': 'Mostrar lugar' }
+          : { en: 'Hide card', 'pt-BR': 'Recolher' },
+      ),
+      size: 'sm',
+    });
+    collapse.classList.add('tb-place-panel__collapse');
+    collapse.addEventListener('click', (event) => {
+      event.stopPropagation();
+      collapsed = !collapsed;
+      root.classList.toggle('is-collapsed', collapsed);
+      const glyph = collapse.querySelector('.material-symbols-rounded');
+      if (glyph) glyph.textContent = collapsed ? 'chevron_left' : 'chevron_right';
+      const label = pickLocale(
+        current?.locale ?? locale,
+        collapsed
+          ? { en: 'Show place', 'pt-BR': 'Mostrar lugar' }
+          : { en: 'Hide card', 'pt-BR': 'Recolher' },
+      );
+      collapse.setAttribute('aria-label', label);
+      collapse.setAttribute('data-tip', label);
+      folding = true;
+      syncPad();
+      if (prefersReducedMotion() && current) {
+        folding = false;
+        map.select(current.place.id);
+      }
+    });
+    root.classList.toggle('is-collapsed', collapsed);
+    root.append(frame, close, collapse);
     requestAnimationFrame(() => frame.classList.remove('is-instant'));
 
     const body = el('div', 'tb-panel__body');
-    const head = el('header', 'tb-panel__head');
-    const title = el('h2', undefined, pickLocale(locale, place.name));
+    const title = el('h2', 'tb-panel__title', pickLocale(locale, place.name));
     title.id = 'tb-place-title';
     title.tabIndex = -1;
-    head.append(title);
-    body.append(head);
+    body.append(title);
 
-    const badges = el('div', 'tb-badges');
-    const cat = el('span', 'tb-badge-soft');
+    const tags = el('div', 'tb-panel__tags');
+    const tagsMain = el('div', 'tb-panel__tags-main');
+    const cat = el('span', 'tb-panel__cat');
+    cat.style.setProperty('--cat-color', placeCategoryMeta[place.category].color);
     const catGlyph = categoryGlyph(place.category);
     if (catGlyph) cat.append(catGlyph);
     cat.append(document.createTextNode(pickLocale(locale, travelUi.categories[place.category])));
-    badges.append(cat);
+    tagsMain.append(cat);
     if (place.favorite) {
-      const fav = el('span', 'tb-badge-soft');
+      const fav = el('span', 'tb-panel__fav');
+      fav.setAttribute('aria-label', pickLocale(locale, travelUi.favorite));
       fav.append(icon('favorite', { fill: true, size: 16 }));
-      fav.append(document.createTextNode(pickLocale(locale, travelUi.favorite)));
-      badges.append(fav);
+      tagsMain.append(fav);
     }
-    for (const id of place.subcategories ?? []) {
-      badges.append(el('span', 'tb-badge-soft', subcategoryLabel(id, locale)));
+    tags.append(tagsMain);
+    const subs = place.subcategories ?? [];
+    if (subs.length) {
+      const row = el('div', 'tb-panel__subs');
+      for (const id of subs) row.append(el('span', 'tb-panel__sub', subcategoryLabel(id, locale)));
+      tags.append(row);
     }
-    body.append(badges);
+    body.append(tags);
 
-    const ratings = el('div', 'tb-ratings');
-    ratings.setAttribute('data-tip', ratingSummary(place.rating, place.googleRating, locale));
+    if (place.description) {
+      body.append(el('p', 'tb-panel__desc', pickLocale(locale, place.description)));
+    }
+
+    const ratings = el('div', 'tb-panel__ratings');
     ratings.append(
-      starRating({
-        rating: place.rating,
-        label: pickLocale(locale, travelUi.ratingMine),
-        locale,
-        icon: 'person',
-      }),
       starRating({
         rating: place.googleRating,
         label: pickLocale(locale, travelUi.ratingGoogle),
         locale,
         icon: 'map',
       }),
+      starRating({
+        rating: place.rating,
+        label: pickLocale(locale, travelUi.ratingMine),
+        locale,
+        icon: 'person',
+      }),
     );
-    const nightly = !place.visit?.avgPricePerPerson && place.visit?.pricePerNight;
-    const money = place.visit?.avgPricePerPerson ?? place.visit?.pricePerNight;
-    const level = priceLevelOf(money);
-    if (level != null && money) {
-      ratings.append(
-        priceLevel(
-          level,
-          pickLocale(locale, nightly ? travelUi.visit.pricePerNight : travelUi.visit.avgPrice),
-          locale,
-        ),
-      );
-    }
+    body.append(ratings);
+
     const live = el('span', 'tb-live');
     live.hidden = true;
-    ratings.append(live);
     const osmRef = visit?.osmRef;
     if (osmRef) {
+      body.append(live);
       const placeId = place.id;
       void openNowStatus(osmRef, timeZoneForCity(city.slug)).then((state) => {
         if (epoch !== liveEpoch || current?.place.id !== placeId || !live.isConnected) return;
@@ -341,44 +393,74 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         );
       });
     }
-    body.append(ratings);
-
-    if (place.description) {
-      body.append(el('p', 'tb-place-panel__copy', pickLocale(locale, place.description)));
-    }
 
     if (fields.length) {
-      const list = el('dl', 'tb-place-panel__facts');
+      const list = el('dl', 'tb-panel__meta');
       for (const field of fields) {
+        const row = el('div', 'tb-panel__meta-row');
         const label = travelUi.visit[field.key as keyof typeof travelUi.visit];
-        const dt = el('dt', undefined, label ? pickLocale(locale, label) : field.key);
-        const dd = el('dd', field.key === 'tips' ? 'tb-tips' : undefined);
-        if (field.key === 'ticket' && visit) {
-          dd.textContent = field.value;
-          const note = visit.ticket?.note ? pickLocale(locale, visit.ticket.note) : '';
-          if (note) dd.append(el('span', 'tb-note', note));
-          if (visit.ticketUrl) dd.append(ticketLink(visit.ticketUrl, locale));
-          if (visit.ticketPromos?.length) {
-            const promos = el('ul', 'tb-promos');
-            for (const promo of visit.ticketPromos) promos.append(el('li', undefined, pickLocale(locale, promo.label)));
-            dd.append(promos);
+        row.append(el('dt', undefined, label ? pickLocale(locale, label) : field.key));
+        const dd = el('dd');
+        const value = el('span', 'tb-panel__meta-value');
+        if (field.key === 'avgPrice' || field.key === 'pricePerNight') {
+          const money = field.key === 'avgPrice' ? visit?.avgPricePerPerson : visit?.pricePerNight;
+          const level = priceLevelOf(money);
+          if (level != null && money) {
+            value.append(
+              priceLevel(level, pickLocale(locale, travelUi.visit[field.key]), locale),
+            );
           }
-        } else {
-          dd.textContent = field.note ? `${field.value} — ${field.note}` : field.value;
         }
-        list.append(dt, dd);
+        value.append(document.createTextNode(field.value));
+        if (field.key === 'ticket' && visit?.ticketUrl) value.append(ticketLink(visit.ticketUrl, locale));
+        dd.append(value);
+        if (field.key === 'tips') {
+          value.classList.add('tb-tips');
+        } else if (field.note && field.key !== 'ticket') {
+          dd.append(el('span', 'tb-note', field.note));
+        } else if (field.key === 'ticket' && visit?.ticket?.note) {
+          dd.append(el('span', 'tb-note', pickLocale(locale, visit.ticket.note)));
+        }
+        if (field.key === 'ticket' && visit?.ticketPromos?.length) {
+          const promos = el('ul', 'tb-promos');
+          for (const promo of visit.ticketPromos) {
+            promos.append(el('li', undefined, pickLocale(locale, promo.label)));
+          }
+          dd.append(promos);
+        }
+        row.append(dd);
+        list.append(row);
       }
       body.append(list);
     }
 
-    const address = el('a', 'tb-place-panel__address');
+    const mapsRow = el('div', 'tb-panel__maps');
+    mapsRow.append(el('span', 'tb-panel__kicker', pickLocale(locale, travelUi.address)));
+    const address = el('a', 'tb-panel__maps-link');
     address.href = googleMapsUrl(place, city);
     address.target = '_blank';
     address.rel = 'noopener';
     address.setAttribute('aria-label', pickLocale(locale, travelUi.openInMaps));
-    address.append(icon('location_on', { size: 16 }));
-    address.append(document.createTextNode(place.address || pickLocale(locale, travelUi.openInMaps)));
-    body.append(address);
+    address.append(
+      el('span', place.address ? 'tb-panel__address' : 'tb-panel__address is-empty', place.address || '—'),
+      mapsMark(),
+    );
+    mapsRow.append(address);
+    body.append(mapsRow);
+    if (links?.route) {
+      const bar = el('div', 'tb-place-panel__links');
+      bar.append(
+        placeAction(
+          links.route,
+          pickLocale(locale, { en: 'Route', 'pt-BR': 'Rota' }),
+          pickLocale(locale, {
+            en: 'Directions from the previous stop',
+            'pt-BR': 'Como chegar desde a parada anterior',
+          }),
+        ),
+      );
+      body.append(bar);
+    }
     if (routePlannerOn()) body.append(createRouteButton(place.id, locale, true));
     root.append(body);
   };
@@ -397,7 +479,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   }
 
   const syncPad = () => {
-    if (root.hidden) {
+    if (root.hidden || root.classList.contains('is-collapsed')) {
       map.setPadding({ right: 0 });
       return;
     }
@@ -407,12 +489,20 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   };
   const padObserver = new ResizeObserver(() => syncPad());
   padObserver.observe(column);
+  root.addEventListener('transitionend', (event) => {
+    if (!folding || event.target !== root || event.propertyName !== 'transform') return;
+    folding = false;
+    syncPad();
+    if (current) map.select(current.place.id);
+  });
 
   panel = {
-    open(place, city, locale, origin) {
+    open(place, city, locale, origin, links) {
       photoIndex = 0;
+      collapsed = false;
+      root.classList.remove('is-collapsed');
       returnFocus = origin;
-      current = { place, city, locale };
+      current = links ? { place, city, locale, links } : { place, city, locale };
       paint();
       syncPad();
       map.select(place.id);
@@ -445,8 +535,19 @@ export function openPlace(
   city: TravelCity,
   locale: Locale,
   origin?: HTMLElement | null,
+  links?: PlaceLinks,
 ): void {
-  panel?.open(place, city, locale, listedOrigin(origin));
+  panel?.open(place, city, locale, listedOrigin(origin), links);
+}
+
+function placeAction(href: string, label: string, aria = label): HTMLAnchorElement {
+  const link = el('a', 'tb-btn-outline');
+  link.href = href;
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.setAttribute('aria-label', aria);
+  link.append(icon('route', { size: 16 }), document.createTextNode(label));
+  return link;
 }
 
 export function closePlace(opts?: CloseOptions): void {

@@ -52,7 +52,7 @@ UI (vale a partir da Fase 1):
 - Listas usam o primitivo de linha em subgrid: colunas fixas, ações no mesmo X.
 - Informação secundária aparece no hover e em `:focus-within`; em `@media (hover: none)` fica sempre visível. Não esconda o essencial nem o único caminho de uma ação.
 - Hover não move a câmera do mapa. Só clique ou Enter movem.
-- O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos.
+- O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos. Exceções pedidas pelo usuário: os ícones de orçamento do card do dia (comida `--color-food`, ingresso `--color-ticket`) e os de previsão do tempo (`--color-weather-*`, um tom por céu).
 
 Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`.
 

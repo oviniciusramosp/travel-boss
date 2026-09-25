@@ -3,7 +3,7 @@ import type { MapRouteSegment, MapRouteTransfer } from './types';
 export type RouteFocus =
   | null
   | { kind: 'place'; id: string }
-  | { kind: 'leg'; from: string; to: string };
+  | { kind: 'leg'; from: string; to: string; hop?: number; mode?: 'walk' | 'transit' };
 
 export type RouteStation = { lat: number; lng: number; end: boolean };
 
@@ -23,9 +23,11 @@ function nearTransfer(
   );
 }
 
-/** Station dots along a transit spine. A neutral dash and a walk have none. */
+/** Station dots along a transit spine. A road route and a walk have none. */
 export function stationsFor(segment: MapRouteSegment): RouteStation[] {
   if (routeLayerKind(segment) !== 'transit' || segment.latlngs.length < 2) return [];
+  // A road route has no line id and far more vertices than a station spine.
+  if (!segment.lineId && segment.latlngs.length > 12) return [];
   const transfers = segment.transfers ?? [];
   const last = segment.latlngs.length - 1;
   const stations: RouteStation[] = [];
@@ -38,13 +40,16 @@ export function stationsFor(segment: MapRouteSegment): RouteStation[] {
 
 export function routeEmphasis(
   focus: RouteFocus,
-  segment: { fromId?: string; toId?: string },
+  segment: { fromId?: string; toId?: string; hopIndex?: number; mode?: 'walk' | 'transit' },
 ): 'normal' | 'hot' | 'dim' {
   if (!focus) return 'normal';
   const { fromId, toId } = segment;
   if (!fromId || !toId) return 'dim';
   if (focus.kind === 'place') return fromId === focus.id || toId === focus.id ? 'hot' : 'dim';
-  return fromId === focus.from && toId === focus.to ? 'hot' : 'dim';
+  if (fromId !== focus.from || toId !== focus.to) return 'dim';
+  if (focus.hop != null) return segment.hopIndex === focus.hop ? 'hot' : 'dim';
+  if (focus.mode) return segment.mode === focus.mode ? 'hot' : 'dim';
+  return 'hot';
 }
 
 type RouteSource = {

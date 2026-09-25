@@ -286,6 +286,7 @@ button {
 .tb-nav {
   display: flex;
   align-items: center;
+  gap: var(--spacing-8);
   width: 100%;
   min-height: var(--h-lg);
   padding: 0 10px;
@@ -296,6 +297,10 @@ button {
   font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   color: var(--color-ink);
+}
+
+.tb-nav > .material-symbols-rounded {
+  flex: none;
 }
 
 .tb-nav small {
@@ -444,13 +449,27 @@ button {
   stroke: var(--color-paper);
 }
 
-.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap {
-  opacity: 0.22;
+.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap,
+.tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place'] {
+  opacity: 0.58;
+}
+
+.tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place'] .tb-pin {
+  --pin-scale: calc(8 / 28);
 }
 
 .tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap:hover,
-.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap:has(.is-hover, .is-active) {
+.tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap:has(.is-hover, .is-active),
+.tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place']:hover,
+.tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place']:has(.is-hover, .is-active) {
   opacity: 1;
+}
+
+.tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place']:hover .tb-pin,
+.tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place']:has(.is-hover, .is-active) .tb-pin,
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]):hover .tb-pin,
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]):has(.is-hover, .is-active) .tb-pin {
+  --pin-scale: 1;
 }
 
 .leaflet-marker-icon.tb-overview-wrap {
@@ -476,6 +495,7 @@ button {
   line-height: 1;
 }
 
+.tb-overview-wrap:hover .tb-overview-node,
 .tb-overview-wrap.is-hover .tb-overview-node {
   outline: 3px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
   transform: scale(1.08);
@@ -496,10 +516,11 @@ button {
   border-radius: var(--r-pill);
   background: var(--color-ink);
   box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .tb-city-pin-wrap:hover .tb-city-pin {
-  transform: scale(1.2);
+  transform: scale(1.35);
 }
 
 .tb-map path.tb-route {
@@ -513,6 +534,14 @@ button {
 .tb-map path.tb-route.is-hot {
   stroke-opacity: 1 !important;
   stroke-width: 7px;
+}
+
+.tb-map path.tb-route-walk {
+  animation: tb-route-walk var(--dur-flow) linear infinite;
+}
+
+.tb-map path.tb-route-walk.is-hot {
+  animation-duration: var(--dur-flow-hot);
 }
 
 .tb-map path.tb-route-flow {
@@ -532,6 +561,12 @@ button {
 @keyframes tb-route-flow {
   to {
     stroke-dashoffset: -28;
+  }
+}
+
+@keyframes tb-route-walk {
+  to {
+    stroke-dashoffset: -24;
   }
 }
 
@@ -636,11 +671,13 @@ button {
   --pin-scale: calc(9 / 28);
 }
 
-.tb-map .tb-pin:is(:hover, .is-hover, .is-active) {
+.tb-map .leaflet-container .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin,
+.tb-map .leaflet-container .tb-pin:is(.is-hover, .is-active) {
   --pin-scale: 1;
 }
 
-.tb-map .tb-pin.is-featured:is(:hover, .is-hover, .is-active) {
+.tb-map .leaflet-container .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin.is-featured,
+.tb-map .leaflet-container .tb-pin.is-featured:is(.is-hover, .is-active) {
   --pin-scale: calc(32 / 28);
 }
 
@@ -670,6 +707,10 @@ button {
   transition: transform var(--dur-base) var(--ease-out);
 }
 
+.tb-pin__face.is-on-ink {
+  color: var(--color-on-ink);
+}
+
 .tb-pin:not(.tb-pin--star) .tb-pin__face::after {
   content: '';
   position: absolute;
@@ -684,7 +725,8 @@ button {
   transition: opacity var(--dur-base) var(--ease-out);
 }
 
-.tb-pin:not(.tb-pin--star):is(:hover, .is-hover, .is-active) .tb-pin__face::after {
+.tb-map .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin:not(.tb-pin--star) .tb-pin__face::after,
+.tb-pin:not(.tb-pin--star):is(.is-hover, .is-active) .tb-pin__face::after {
   opacity: 1;
 }
 
@@ -716,7 +758,8 @@ button {
   transition: opacity var(--dur-base) var(--ease-out);
 }
 
-.tb-pin:is(:hover, .is-hover, .is-active) .tb-pin__glyph {
+.tb-map .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin__glyph,
+.tb-pin:is(.is-hover, .is-active) .tb-pin__glyph {
   opacity: 1;
 }
 
@@ -755,13 +798,15 @@ button {
   stroke-width: 1;
 }
 
-.tb-pin--star:is(:hover, .is-hover, .is-active) .tb-pin__star path {
+.tb-map .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin--star .tb-pin__star path,
+.tb-pin--star:is(.is-hover, .is-active) .tb-pin__star path {
   stroke: var(--color-paper);
   stroke-width: 4;
 }
 
 .tb-pin--star.is-featured .tb-pin__star,
-.tb-pin--star:is(:hover, .is-hover, .is-active) .tb-pin__star {
+.tb-map .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin--star .tb-pin__star,
+.tb-pin--star:is(.is-hover, .is-active) .tb-pin__star {
   filter: drop-shadow(0 0 4px color-mix(in srgb, var(--pin-color) 55%, transparent));
 }
 
@@ -948,7 +993,8 @@ p.tb-meta {
     opacity: 0.4;
   }
 
-  .tb-map path.tb-route-flow {
+  .tb-map path.tb-route-flow,
+  .tb-map path.tb-route-walk {
     animation: none;
   }
 }
