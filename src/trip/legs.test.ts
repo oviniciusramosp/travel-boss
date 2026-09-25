@@ -59,7 +59,7 @@ describe('resolveTripLeg', () => {
 
   it('sends a taxi hop to the road router', () => {
     expect(
-      resolveTripLeg(paris('par-cdg'), paris('par-aeroville'), {
+      resolveTripLeg(paris('par-casa-do-gui'), paris('par-gare-de-lyon'), {
         detail: 'Uber · 25 min',
         mode: 'taxi',
         durationMin: 25,
