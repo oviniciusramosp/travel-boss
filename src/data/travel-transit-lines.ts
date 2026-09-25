@@ -1,9 +1,9 @@
 /**
  * Curated Paris transit spines for itinerary map drawing.
  * Station order follows the line direction; slice with station ids.
- * Coordinates are station anchors, not full track geometry. Lines 2, 4, 8, 14 and the
- * central RER C stations use OpenStreetMap stop positions (route relations, 2026-09);
- * the rest are approximate.
+ * Coordinates are station anchors, not full track geometry. Lines 2, 4, 5, 8, 9, 14,
+ * RER A, B, E, Transilien L and the central RER C stations use OpenStreetMap stop
+ * positions (route relations, 2026-09); the rest are approximate.
  */
 
 export type LatLng = [number, number];
@@ -306,6 +306,130 @@ export const metro14: TransitLine = {
   ],
 };
 
+/** Metro Line 5 — République → Gare du Nord (the trip's stretch) */
+export const metro5: TransitLine = {
+  id: 'm5',
+  name: 'Métro 5',
+  color: '#FF7E2E',
+  stations: [
+    st('republique', 'République', 48.867887, 2.363883),
+    st('jacques-bonsergent', 'Jacques Bonsergent', 48.871119, 2.360755),
+    st('gare-est', "Gare de l'Est", 48.876364, 2.358128),
+    st('gare-nord', 'Gare du Nord', 48.880495, 2.357721),
+  ],
+};
+
+/** Metro Line 9 — Trocadéro → Chaussée d'Antin–La Fayette (the trip's stretch) */
+export const metro9: TransitLine = {
+  id: 'm9',
+  name: 'Métro 9',
+  color: '#B6BD00',
+  stations: [
+    st('trocadero', 'Trocadéro', 48.863136, 2.286232),
+    st('iena', 'Iéna', 48.864613, 2.293734),
+    st('alma-marceau', 'Alma–Marceau', 48.864868, 2.300292),
+    st('fdr', 'Franklin D. Roosevelt', 48.868116, 2.308509),
+    st('saint-philippe', 'Saint-Philippe du Roule', 48.872235, 2.310051),
+    st('miromesnil', 'Miromesnil', 48.873798, 2.315215),
+    st('saint-augustin', 'Saint-Augustin', 48.874471, 2.321792),
+    st('havre-caumartin', 'Havre–Caumartin', 48.873632, 2.328312),
+    st('chaussee-antin', "Chaussée d'Antin–La Fayette", 48.872879, 2.333872),
+  ],
+};
+
+/** RER A — La Défense → Marne-la-Vallée–Chessy (A4 branch, Disneyland) */
+export const rerA: TransitLine = {
+  id: 'rer-a',
+  name: 'RER A',
+  color: '#E3051C',
+  stations: [
+    st('la-defense', 'La Défense–Grande Arche', 48.891908, 2.238513),
+    st('etoile', 'Charles de Gaulle–Étoile', 48.874143, 2.296342),
+    st('auber', 'Auber', 48.871592, 2.330958),
+    st('chatelet', 'Châtelet–Les Halles', 48.860771, 2.347924),
+    st('gare-lyon', 'Gare de Lyon', 48.843663, 2.374487),
+    st('nation', 'Nation', 48.847999, 2.397219),
+    st('vincennes', 'Vincennes', 48.847329, 2.433647),
+    st('val-de-fontenay', 'Val de Fontenay', 48.854526, 2.489373),
+    st('neuilly-plaisance', 'Neuilly-Plaisance', 48.853448, 2.513857),
+    st('bry-sur-marne', 'Bry-sur-Marne', 48.844364, 2.526521),
+    st('noisy-mont-est', "Noisy-le-Grand–Mont d'Est", 48.840859, 2.547756),
+    st('noisy-champs', 'Noisy-Champs', 48.843004, 2.581185),
+    st('noisiel', 'Noisiel', 48.843546, 2.617605),
+    st('lognes', 'Lognes', 48.838958, 2.634578),
+    st('torcy', 'Torcy', 48.839861, 2.656743),
+    st('bussy-saint-georges', 'Bussy-Saint-Georges', 48.836668, 2.709886),
+    st('val-europe', "Val d'Europe", 48.854911, 2.77255),
+    st('chessy', 'Marne-la-Vallée–Chessy', 48.869926, 2.782099),
+  ],
+};
+
+/** RER B — Aéroport CDG 2 → Saint-Michel–Notre-Dame */
+export const rerB: TransitLine = {
+  id: 'rer-b',
+  name: 'RER B',
+  color: '#5291CE',
+  stations: [
+    st('cdg-2', 'Aéroport CDG 2 TGV', 49.005291, 2.570594),
+    st('cdg-1', 'Aéroport CDG 1', 49.009525, 2.559946),
+    st('parc-expositions', 'Parc des Expositions', 48.973372, 2.514553),
+    st('villepinte', 'Villepinte', 48.961733, 2.513289),
+    st('sevran-beaudottes', 'Sevran–Beaudottes', 48.947567, 2.524751),
+    st('aulnay', 'Aulnay-sous-Bois', 48.932154, 2.494066),
+    st('blanc-mesnil', 'Le Blanc-Mesnil', 48.932344, 2.47406),
+    st('drancy', 'Drancy', 48.932756, 2.453672),
+    st('le-bourget', 'Le Bourget', 48.930713, 2.425311),
+    st('la-courneuve', 'La Courneuve–Aubervilliers', 48.924136, 2.384924),
+    st('stade-de-france', 'La Plaine–Stade de France', 48.918091, 2.362661),
+    st('gare-nord', 'Gare du Nord', 48.881394, 2.357473),
+    st('chatelet', 'Châtelet–Les Halles', 48.860748, 2.347658),
+    st('saint-michel', 'Saint-Michel–Notre-Dame', 48.852708, 2.345239),
+  ],
+};
+
+/** RER E — Neuilly–Porte Maillot → Val de Fontenay (Tournan branch, via Noisy-le-Sec) */
+export const rerE: TransitLine = {
+  id: 'rer-e',
+  name: 'RER E',
+  color: '#C04191',
+  stations: [
+    st('neuilly-porte-maillot', 'Neuilly–Porte Maillot', 48.878149, 2.282399),
+    st('haussmann-saint-lazare', 'Haussmann–Saint-Lazare', 48.875016, 2.328696),
+    st('magenta', 'Magenta', 48.880744, 2.35863),
+    st('rosa-parks', 'Rosa Parks', 48.896571, 2.374021),
+    st('pantin', 'Pantin', 48.898175, 2.402353),
+    st('noisy-le-sec', 'Noisy-le-Sec', 48.896765, 2.458672),
+    st('rosny-bois-perrier', 'Rosny–Bois-Perrier', 48.881639, 2.482178),
+    st('rosny-sous-bois', 'Rosny-sous-Bois', 48.870331, 2.486012),
+    st('val-de-fontenay', 'Val de Fontenay', 48.85423, 2.489346),
+  ],
+};
+
+/** Transilien L — Paris Saint-Lazare → Versailles Rive Droite */
+export const transilienL: TransitLine = {
+  id: 'transilien-l',
+  name: 'Transilien L',
+  color: '#7584BC',
+  stations: [
+    st('saint-lazare', 'Paris Saint-Lazare', 48.876515, 2.323935),
+    st('pont-cardinet', 'Pont Cardinet', 48.887834, 2.31339),
+    st('clichy-levallois', 'Clichy–Levallois', 48.897623, 2.296887),
+    st('asnieres', 'Asnières-sur-Seine', 48.906054, 2.281921),
+    st('becon', 'Bécon-les-Bruyères', 48.90528, 2.268869),
+    st('courbevoie', 'Courbevoie', 48.898221, 2.248269),
+    st('la-defense', 'La Défense', 48.892639, 2.237309),
+    st('puteaux', 'Puteaux', 48.882606, 2.232935),
+    st('suresnes', 'Suresnes–Mont-Valérien', 48.870961, 2.220753),
+    st('val-dor', "Le Val d'Or", 48.856391, 2.216596),
+    st('saint-cloud', 'Saint-Cloud', 48.845224, 2.21738),
+    st('sevres-ville-avray', "Sèvres–Ville-d'Avray", 48.827407, 2.200779),
+    st('chaville-rd', 'Chaville–Rive Droite', 48.812337, 2.188089),
+    st('viroflay-rd', 'Viroflay–Rive Droite', 48.80547, 2.168326),
+    st('montreuil-versailles', 'Montreuil', 48.80661, 2.150842),
+    st('versailles-rd', 'Versailles–Rive Droite', 48.809529, 2.135282),
+  ],
+};
+
 export const transitLinesById: Record<string, TransitLine> = {
   m1: metro1,
   m2: metro2,
@@ -316,6 +440,12 @@ export const transitLinesById: Record<string, TransitLine> = {
   m13: metro13,
   m14: metro14,
   'rer-c': rerC,
+  m5: metro5,
+  m9: metro9,
+  'rer-a': rerA,
+  'rer-b': rerB,
+  'rer-e': rerE,
+  'transilien-l': transilienL,
 };
 
 export type TransitLineId = keyof typeof transitLinesById;

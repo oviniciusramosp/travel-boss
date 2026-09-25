@@ -52,17 +52,10 @@ export type ItineraryLegDef = {
   durationMin?: number;
 };
 
-/**
- * Fallback brand colors for lines not yet in travel-transit-lines
- * (RER B / RER E spines are still authored as free paths).
- */
+/** Fallback brand colors for lines not in travel-transit-lines. */
 export const TRANSIT_LINE_COLORS: Record<string, string> = {
   'mil-m3': '#F4CA16',
-  'rer-b': '#5291CE',
-  'rer-e': '#C04191',
-  'rer-a': '#E3051C',
   'rer-d': '#00814F',
-  m9: '#B6BD00',
 };
 
 /** Resolve RATP/RER brand color for a line id */
