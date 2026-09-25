@@ -2125,7 +2125,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.9,
         lat: 48.8838194,
         lng: 2.3416479,
-        address: '99 Quai de Valmy, 75010 Paris',
+        address: '4 Rue des Trois Frères, 75018 Paris',
         mapsQuery: 'Fric-Frac Paris',
         mapsUrl: 'https://www.google.fr/maps/place/Fric-Frac/@48.8838194,2.339073,17z',
       },
