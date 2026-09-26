@@ -944,24 +944,22 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro9, 'iena', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
-  // 5/10
-  trainLeg('par-casa-do-gui', 'par-michalak-printemps', 35, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
-  trainLeg('par-opera', 'par-creteil-soleil', 45, [ride(metro8, 'opera', 'creteil-prefecture')]),
-  trainLeg('par-creteil-soleil', 'par-uniqlo-opera', 45, [ride(metro8, 'creteil-prefecture', 'opera')]),
-  // M8 skips République until 22/04/2027 (renovation): get off at Filles du Calvaire
-  trainLeg('par-galeries-lafayette', 'par-bouillon-republique', 20, [ride(metro8, 'opera', 'filles-calvaire')]),
-  trainLeg('par-bouillon-republique', 'par-casa-do-gui', 40, [
-    ride(metro5, 'republique', 'gare-nord'),
-    ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN),
-  ]),
-  // 6/10
-  trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
+  // 5/10: Maison d'Isabelle is closed on Mondays, so breakfast is at La Parisienne next door
+  trainLeg('par-casa-do-gui', 'par-la-parisienne-saint-germain', 45, [
     ride(rerE, 'noisy-le-sec', 'magenta'),
     ride(rerB, 'gare-nord', 'saint-michel', GARE_DU_NORD_MAGENTA_MIN),
   ]),
   trainLeg('par-champ-mars', 'par-casa-do-gui', 60, [
     rerCToPorteMaillot,
     ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),
+  ]),
+  // 6/10
+  trainLeg('par-casa-do-gui', 'par-michalak-printemps', 35, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
+  // M8 skips République until 22/04/2027 (renovation): get off at Filles du Calvaire
+  trainLeg('par-galeries-lafayette', 'par-bouillon-republique', 20, [ride(metro8, 'opera', 'filles-calvaire')]),
+  trainLeg('par-bouillon-republique', 'par-casa-do-gui', 40, [
+    ride(metro5, 'republique', 'gare-nord'),
+    ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN),
   ]),
   // 7/10: no RER E after 22:30 (works 5–14 Oct), so the way back ends at Val de Fontenay
   trainLeg('par-noisy-le-sec-rer', 'par-chessy-rer', 40, [

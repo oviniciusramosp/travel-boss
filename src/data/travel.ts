@@ -1228,6 +1228,11 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-cdg-brioche-doree',
         name: { en: 'Brioche Dorée CDG 2E', 'pt-BR': 'Brioche Dorée CDG 2E' },
+        aiSuggested: true,
+        aiReason: {
+          en: 'a croissant right out of customs at Terminal 2E',
+          'pt-BR': 'croissant logo na saída da alfândega do Terminal 2E',
+        },
         category: 'cafes',
         subcategories: ['bakery', 'coffee-shop'],
         description: {
@@ -1854,6 +1859,26 @@ export const localTravelCities: TravelCity[] = [
         address: '47 Boulevard Saint-Germain, 75005 Paris',
         mapsQuery: 'La Maison d\'Isabelle Paris',
         mapsUrl: 'https://www.google.fr/maps/place/La+Maison+d\'Isabelle/@48.8498436,2.3457002,17z',
+      },
+      {
+        id: 'par-la-parisienne-saint-germain',
+        name: { en: 'La Parisienne (Saint-Germain)', 'pt-BR': 'La Parisienne (Saint-Germain)' },
+        aiSuggested: true,
+        aiReason: {
+          en: 'a Monday croissant, when La Maison d’Isabelle next door is closed',
+          'pt-BR': 'croissant na segunda, quando a La Maison d’Isabelle, ao lado, fecha',
+        },
+        category: 'cafes',
+        subcategories: ['bakery'],
+        description: {
+          en: 'Bakery on Boulevard Saint-Germain, a few doors from La Maison d’Isabelle: croissants, pains au chocolat and sandwiches. Open Monday to Saturday from 7:00.',
+          'pt-BR': 'Padaria no Boulevard Saint-Germain, a poucos passos da La Maison d’Isabelle: croissants, pains au chocolat e sanduíches. Abre de segunda a sábado, desde as 7h.',
+        },
+        googleRating: 4.2,
+        lat: 48.849946,
+        lng: 2.349782,
+        address: '52 Boulevard Saint-Germain, 75005 Paris',
+        mapsQuery: 'La Parisienne 52 Boulevard Saint-Germain Paris',
       },
       {
         id: 'par-luxembourg',
@@ -2581,6 +2606,11 @@ export const localTravelCities: TravelCity[] = [
         name: {
           en: 'Coffee Shop Michalak | Printemps',
           'pt-BR': 'Coffee Shop Michalak | Printemps',
+        },
+        aiSuggested: true,
+        aiReason: {
+          en: 'croissant and coffee to go, 3 min from the RER E at Haussmann–Saint-Lazare',
+          'pt-BR': 'croissant e café para levar a 3 min do RER E em Haussmann–Saint-Lazare',
         },
         category: 'cafes',
         subcategories: ['pastry', 'coffee-shop'],

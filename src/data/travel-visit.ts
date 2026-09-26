@@ -1425,6 +1425,9 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'par-eclair-genie': cafeVisit(6, 15),
+  'par-la-parisienne-saint-germain': cafeVisit(2, 6, {
+    bestDay: L('Mon–Sat 7:00–20:00; closed Sun', 'Seg–sáb 7h–20h; fecha domingo'),
+  }),
   'par-maison-isabelle': cafeVisit(4, 10, {
     tips: L(
       'Often a queue — go early if you can. Award-winning croissants.',

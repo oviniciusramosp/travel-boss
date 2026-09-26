@@ -784,6 +784,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-la-parisienne-saint-germain': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/9/91/Croissant_hk_jp.jpg',
+      'Croissant (generic photo)',
+      'Croissant (foto ilustrativa)',
+      'SUBARUsti2020hk · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
   'par-maison-isabelle': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Croissant%2C_whole.jpg/1280px-Croissant%2C_whole.jpg',
