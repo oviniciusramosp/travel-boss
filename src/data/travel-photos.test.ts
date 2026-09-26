@@ -30,6 +30,10 @@ const ALLOWED_HOSTS = new Set([
   'lh3.googleusercontent.com',
   // Google image thumbnails
   'encrypted-tbn0.gstatic.com',
+  // Rôtisserie Segar sandwich photos (press)
+  'cdn3.regie-agricole.com',
+  'cdn4.gustave-et-rosalie.com',
+  'www.finedininglovers.fr',
   // Blogger / Blogspot hosted images
   'blogger.googleusercontent.com',
   // TripAdvisor media CDN (curated place covers)
