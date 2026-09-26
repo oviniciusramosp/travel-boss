@@ -1196,10 +1196,10 @@ export const localTravelCities: TravelCity[] = [
             'Principal hub de longos voos ao norte de Paris. RER B até a cidade (~45–60 min ao centro).',
         },
         googleRating: 3.6,
-        // Pin at Terminal 2 (long-haul arrivals, next to the CDG 2 TGV station), not the airport centroid.
-        lat: 49.00278,
-        lng: 2.56701,
-        address: 'Terminal 2, 95700 Roissy-en-France, France',
+        // Pin at Terminal 2E (Google "Terminal 2E Gates K"), where Air France from Brazil lands (AF459).
+        lat: 49.002833,
+        lng: 2.578161,
+        address: 'Terminal 2E, 95700 Roissy-en-France, France',
         mapsQuery: 'Aéroport de Paris-Charles de Gaulle CDG',
       },
       {
