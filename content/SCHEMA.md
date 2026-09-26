@@ -116,6 +116,7 @@ The UI shows one card per date, not per `### Dia N`. Nothing here is a new synta
   - A list note never counts, so "Almoço alternativo: …" does not move the split.
   - Without a lunch stop the morning ends at 12:00. Without a dinner stop the evening starts at 18:00 (and before 05:00). A stop without a time stays in the period above it. A date with no time and no meal has no periods.
 - Food and tickets per person come from the catalog, not from the notes: the middle of each range, one count per place per date. A `**Comida:**` line in a note is text for the reader; the card does not read it. A leg's `€` price (see `via:`) is the one thing outside the catalog that counts, as a ticket. Both cards always show, €0 included.
+- A walk the timeline would show as "~1 min" gets no row of its own; the dotted line still joins the two stops, and the map still draws it.
 - A stop whose label or note says `por fora` or `fachada` (`outside`, `facade`) is seen from outside, so its place's ticket does not count that date: "Foto por fora" at the Moulin Rouge costs nothing. If the note also says `por dentro` (`inside`), as in "Por fora é grátis. Por dentro, €25", going in is part of the plan and the ticket counts.
 
 ## What not to edit for a trip change

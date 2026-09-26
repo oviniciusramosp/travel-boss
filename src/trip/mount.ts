@@ -38,6 +38,7 @@ import {
   planHop,
   previewHop,
   resolveHopSegments,
+  timelineLegs,
   transferLegs,
   type DateStop,
   type RouteHop,
@@ -1394,6 +1395,7 @@ export function mountTrip(
           const walk: ItineraryLegDef = { from: place.id, to: nextPlace.id, mode: 'walk' };
           legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, place, nextPlace) }];
         }
+        legs = timelineLegs(legs);
         const rails = legs.map((leg) => {
           const mode = leg.mode === 'walk' ? 'walk' : 'transit';
           const branded = 'color' in leg && typeof leg.color === 'string' ? leg.color : null;

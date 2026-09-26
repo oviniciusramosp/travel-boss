@@ -2,7 +2,15 @@ import { describe, expect, it, vi } from 'vitest';
 import { getTravelCity } from '../catalog';
 import { daysOnDate } from './calendar';
 import { parseTrip, type TripLeg } from './parse';
-import { dateStops, planHop, previewHop, resolveHopSegments, transferLegs, type RouteHop } from './route';
+import {
+  dateStops,
+  planHop,
+  previewHop,
+  resolveHopSegments,
+  timelineLegs,
+  transferLegs,
+  type RouteHop,
+} from './route';
 
 function place(city: string, id: string) {
   const found = getTravelCity(city)?.places.find((item) => item.id === id);
@@ -196,6 +204,17 @@ city: milao
   - via: a pé · 25 min
 - 14:45 [Joy 124](place:mil-joy124)
 `;
+
+describe('timelineLegs', () => {
+  it('drops a walk of about a minute and keeps the rest', () => {
+    const walk = (durationMin?: number) => ({ mode: 'walk' as const, durationMin });
+    const rer = { mode: 'transit' as const, durationMin: 14 };
+    expect(timelineLegs([walk(1)])).toEqual([]);
+    expect(timelineLegs([walk(1.4), rer, walk(3)])).toEqual([rer, walk(3)]);
+    expect(timelineLegs([walk(2)])).toEqual([walk(2)]);
+    expect(timelineLegs([walk()])).toEqual([walk()]);
+  });
+});
 
 describe('dateStops', () => {
   const trip = parseTrip('europa', 'content/trips/europa.md', sharedDay);

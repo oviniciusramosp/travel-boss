@@ -76,6 +76,17 @@ export function transferLegs(hop: RouteHop): TransferLeg[] {
   return hop.via ? [hop.via] : [];
 }
 
+/** A walk the timeline would show as "~1 min". */
+const SHORT_WALK_MAX_MIN = 1;
+
+/** Legs worth a timeline row: all but a walk of about a minute. The dotted rail still joins the stops. */
+export function timelineLegs<T extends { mode?: string; durationMin?: number }>(legs: readonly T[]): T[] {
+  return legs.filter(
+    (leg) =>
+      !(leg.mode === 'walk' && typeof leg.durationMin === 'number' && Math.round(leg.durationMin) <= SHORT_WALK_MAX_MIN),
+  );
+}
+
 export type HopDraw =
   | { kind: 'catalog'; leg: ItineraryLegDef }
   /** `through`: points the catalog walk must pass. */
