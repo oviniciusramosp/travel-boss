@@ -1,7 +1,7 @@
 import { divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { icon } from '../ui/icons';
-import { cssToken } from '../ui/motion';
+import { cameraMotion, cssToken } from '../ui/motion';
 import { AMENITY_EVENT, AMENITY_ICON, amenityOn, type AmenityKind } from './amenity-state';
 import { pinBox, pinHtml, type PinModel } from './pin-visual';
 
@@ -155,7 +155,7 @@ export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void
 
   const paint = async () => {
     const id = ++run;
-    if ((!amenityOn('water') && !amenityOn('toilet')) || map.getZoom() < MIN_ZOOM) {
+    if ((!amenityOn('water') && !amenityOn('toilet')) || Math.round(map.getZoom()) < MIN_ZOOM) {
       group.clearLayers();
       return;
     }
@@ -184,7 +184,15 @@ export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void
   };
 
   map.on('moveend', () => void paint());
-  document.addEventListener(AMENITY_EVENT, () => void paint());
+  let wasOn = 0;
+  document.addEventListener(AMENITY_EVENT, () => {
+    const count = Number(amenityOn('water')) + Number(amenityOn('toilet'));
+    const switchedOn = count > wasOn;
+    wasOn = count;
+    // Switching on from the city view would show nothing: step in to where the pins draw.
+    if (switchedOn && Math.round(map.getZoom()) < MIN_ZOOM) map.setZoom(MIN_ZOOM, cameraMotion());
+    else void paint();
+  });
   return {
     setWalks(lines) {
       walks = lines;
