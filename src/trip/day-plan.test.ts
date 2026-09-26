@@ -227,4 +227,16 @@ describe('dateBudget', () => {
     expect(budget.ticket).toBe(32);
     expect(budget.lines.map((line) => line.id)).toEqual(['lunch', 'museum']);
   });
+
+  it('adds each leg fare to tickets, even the same fare twice', () => {
+    const budget = dateBudget(
+      [{ id: 'museum', visit: { ticket: { currency: 'EUR', min: 10 } } }],
+      [
+        { label: 'RER E + metrô 9', eur: 2.55 },
+        { label: 'metrô 9 de Iéna', eur: 2.55 },
+      ],
+    );
+    expect(budget.ticket).toBeCloseTo(15.1);
+    expect(budget.lines.map((line) => line.label ?? line.id)).toEqual(['museum', 'RER E + metrô 9', 'metrô 9 de Iéna']);
+  });
 });

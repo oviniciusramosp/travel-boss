@@ -7,6 +7,8 @@ export type TripLeg = {
   detail: string;
   /** Text after ` — `. Mode and duration come only from the text before it. */
   note?: string;
+  /** Price per person of the leg: the first `€` amount before the note. A range counts its middle. */
+  fareEur?: number;
   mode?: TripLegMode;
   /**
    * Minutes. `N h` is N×60. `3h10` and `1 h 30 min` are one span (190 and 90).
@@ -133,6 +135,19 @@ function durationList(detail: string): number[] {
 }
 
 const LEG_NOTE = ' — ';
+// `€2,55`, `€2.55` or a range `€29–35`.
+const FARE_TOKEN = /€\s?(\d+(?:[.,]\d{1,2})?)(?:\s?[–-]\s?(\d+(?:[.,]\d{1,2})?))?/;
+
+function euros(value: string): number {
+  return Number(value.replace(',', '.'));
+}
+
+function legFare(head: string): number | undefined {
+  const match = FARE_TOKEN.exec(head);
+  if (!match?.[1]) return undefined;
+  const low = euros(match[1]);
+  return match[2] ? (low + euros(match[2])) / 2 : low;
+}
 
 function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   const cut = detail.indexOf(LEG_NOTE);
@@ -144,20 +159,23 @@ function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   let durationMin: number | undefined;
   if (matches.length === 1) durationMin = matches[0];
   else reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
+  const fareEur = legFare(head);
   return {
     detail,
     ...(note ? { note } : {}),
     ...(mode ? { mode } : {}),
     ...(durationMin !== undefined ? { durationMin } : {}),
+    ...(fareEur !== undefined ? { fareEur } : {}),
   };
 }
 
-/** Leg name for the timeline: no note and no duration, which sits beside it. */
+/** Leg name for the timeline: no note, duration or fare. The row shows the minutes beside it. */
 export function legLabel(leg: TripLeg): string {
   const cut = leg.detail.indexOf(LEG_NOTE);
   const head = (cut < 0 ? leg.detail : leg.detail.slice(0, cut)).trim();
   const bare = head
     .replace(new RegExp(DURATION_TOKEN.source, 'gi'), '')
+    .replace(new RegExp(FARE_TOKEN.source, 'g'), '')
     .replace(/\(\s*\)/g, '')
     .replace(/^[\s·•,–-]+|[\s·•,–-]+$/g, '')
     .replace(/\s{2,}/g, ' ');

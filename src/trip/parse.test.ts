@@ -199,8 +199,17 @@ describe('via legs', () => {
     expect(errors).toEqual([]);
   });
 
-  it('names a leg without its note and duration', () => {
+  it('reads the fare per person before the note', () => {
+    const leg = (via: string) => firstLegs(`- 09:00 [Louvre](place:par-louvre)\n  - via: ${via}`).stops[0]?.leg;
+    expect(leg('RER E + metrô 9 · 45 min · €2,55')?.fareEur).toBe(2.55);
+    expect(leg('Pegar um Bolt · 35 min · €15–18')?.fareEur).toBe(16.5);
+    expect(leg('Pegar um Bolt · 35 min — €29–35 na simulação')?.fareEur).toBeUndefined();
+    expect(leg('metrô · 10 min')?.fareEur).toBeUndefined();
+  });
+
+  it('names a leg without its note, duration and fare', () => {
     expect(legLabel({ detail: 'Pegar um Bolt · 35 min — o app mostra onde' })).toBe('Pegar um Bolt');
+    expect(legLabel({ detail: 'RER E + metrô 9 · 45 min · €2,55' })).toBe('RER E + metrô 9');
     expect(legLabel({ detail: 'RER E + metrô 9 · 45 min' })).toBe('RER E + metrô 9');
     expect(legLabel({ detail: 'Uber (25 min)' })).toBe('Uber');
     expect(legLabel({ detail: 'trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37' })).toBe(

@@ -153,11 +153,18 @@ export function midEur(money: MoneyInfo | undefined): number {
   return (low + high) / 2;
 }
 
-export type BudgetLine = { id: string; food: number; ticket: number };
+/** `label` names a leg fare; a place line is named by its id. */
+export type BudgetLine = { id: string; food: number; ticket: number; label?: string };
 export type DateBudget = { food: number; ticket: number; lines: BudgetLine[] };
 
-/** Food and tickets per person. A place visited twice on the date counts once. */
-export function dateBudget(places: readonly { id: string; visit?: VisitInfo }[]): DateBudget {
+/**
+ * Food and tickets per person. A place visited twice on the date counts once.
+ * Leg fares (`via: … · €2,55`) are tickets too, one per leg.
+ */
+export function dateBudget(
+  places: readonly { id: string; visit?: VisitInfo }[],
+  fares: readonly { label: string; eur: number }[] = [],
+): DateBudget {
   const seen = new Set<string>();
   const budget: DateBudget = { food: 0, ticket: 0, lines: [] };
   for (const place of places) {
@@ -170,5 +177,10 @@ export function dateBudget(places: readonly { id: string; visit?: VisitInfo }[])
     budget.ticket += line.ticket;
     budget.lines.push(line);
   }
+  fares.forEach((fare, index) => {
+    if (!(fare.eur > 0)) return;
+    budget.ticket += fare.eur;
+    budget.lines.push({ id: `fare:${index}`, food: 0, ticket: fare.eur, label: fare.label });
+  });
   return budget;
 }

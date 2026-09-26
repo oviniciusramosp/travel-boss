@@ -58,7 +58,7 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from '../views/place-panel';
-import { parseTrip, type Trip, type TripCity, type TripLeg } from './parse';
+import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { dateBudgetCards, periodLabel, slotSwitch, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
@@ -1206,15 +1206,19 @@ export function mountTrip(
       summary.append(heading, actions, chevron);
       details.append(summary);
       const body = el('div', 'tb-date__body');
-      const cards = dateBudgetCards(
-        dateBudget(placesHere),
-        (placeId) => {
-          const found = placesHere.find((place) => place.id === placeId);
-          return found ? pickLocale(locale, found.name) : placeId;
-        },
-        locale,
+      const fares = rows.flatMap((row) =>
+        row.depart?.fareEur ? [{ label: legLabel(row.depart), eur: row.depart.fareEur }] : [],
       );
-      if (cards) body.append(cards);
+      body.append(
+        dateBudgetCards(
+          dateBudget(placesHere, fares),
+          (placeId) => {
+            const found = placesHere.find((place) => place.id === placeId);
+            return found ? pickLocale(locale, found.name) : placeId;
+          },
+          locale,
+        ),
+      );
       // One list per period. A row's list is lists[rowIndex].
       const lists: HTMLOListElement[] = [];
       const timeline = el('div', 'tb-periods');

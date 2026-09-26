@@ -449,8 +449,8 @@ export function dateBudgetCards(
   budget: DateBudget,
   nameOf: (id: string) => string,
   locale: Locale,
-): HTMLElement | null {
-  if (budget.food <= 0 && budget.ticket <= 0) return null;
+): HTMLElement {
+  // Both cards always show, €0 included, so tickets sit to the right of food on every date.
   const group = el('div', 'tb-date__budgets');
   group.setAttribute('role', 'group');
   group.setAttribute('aria-label', pickLocale(locale, travelUi.itineraryBudgetGroup));
@@ -459,12 +459,14 @@ export function dateBudgetCards(
   const tip = (kind: 'food' | 'ticket') =>
     budget.lines
       .filter((line) => line[kind] > 0)
-      .map((line) => `${nameOf(line.id)} ${formatEur(line[kind], locale)}`)
+      .map((line) => `${line.label ?? nameOf(line.id)} ${formatEur(line[kind], locale)}`)
       .join(' · ');
   const food = pickLocale(locale, travelUi.itineraryFood);
   const ticket = pickLocale(locale, travelUi.itineraryParks);
-  if (budget.food > 0) group.append(budgetChip('restaurant', budget.food, food, unit, tip('food'), locale));
-  if (budget.ticket > 0) group.append(budgetChip('local_activity', budget.ticket, ticket, unit, tip('ticket'), locale));
+  group.append(
+    budgetChip('restaurant', budget.food, food, unit, tip('food'), locale),
+    budgetChip('local_activity', budget.ticket, ticket, unit, tip('ticket'), locale),
+  );
   return group;
 }
 
