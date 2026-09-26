@@ -3,7 +3,7 @@ import { readCssTime } from '../ui/motion';
 import type { TripPatch } from './api';
 import { markSpans } from './inline';
 
-export type NoteKind = 'stop' | 'item' | 'paragraph' | 'comment';
+export type NoteKind = 'stop' | 'item' | 'paragraph' | 'comment' | 'via';
 
 /** What an edit keeps on the line: bullet, time, link, `comentário:`. */
 const KEEP: Record<NoteKind, RegExp> = {
@@ -11,6 +11,8 @@ const KEEP: Record<NoteKind, RegExp> = {
   item: /^\s*-\s+(?:\d{2}:\d{2}\s+)?/,
   paragraph: /^\s*/,
   comment: /^\s+-\s+[^:]+:\s*/,
+  // Up to the first ` — `, where the parser cuts the leg from its note.
+  via: /^\s*(?:-\s+)?via:.*?(?= — |$)/i,
 };
 
 /** Each line trimmed, blank lines gone: a note breaks, it has no gaps. */
@@ -31,9 +33,12 @@ export function noteText(text: string): string {
 export function noteLines(kind: NoteKind, first: string, text: string): string[] | null {
   const keep = KEEP[kind].exec(first)?.[0];
   if (keep == null) return null;
-  const parts = noteText(text).split('\n').filter(Boolean);
-  if (!parts.length) return kind === 'stop' ? [keep] : [];
-  const lead = kind === 'stop' ? `${keep} — ` : keep;
+  const lines = noteText(text).split('\n').filter(Boolean);
+  // A leg's note stays on its `via:` line: the parser never carries one on.
+  const parts = kind === 'via' ? [lines.join(' ')].filter(Boolean) : lines;
+  const tail = kind === 'stop' || kind === 'via';
+  if (!parts.length) return tail ? [keep] : [];
+  const lead = tail ? `${keep} — ` : keep;
   const indent = ' '.repeat(/^\s*(?:-\s+)?/.exec(keep)?.[0].length ?? 0);
   return parts.map((part, index) => `${index ? indent : lead}${part}${index < parts.length - 1 ? '\\' : ''}`);
 }
@@ -350,11 +355,12 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
       node.blur();
     } else if (event.key === 'Enter') {
       event.preventDefault();
-      // Shift+Return breaks the line; Return alone is done.
+      // Shift+Return breaks the line, where the note can have one; Return alone is done.
       if (!event.shiftKey) {
         node.blur();
         return;
       }
+      if (opts.kind === 'via') return;
       const now = snapshot();
       const text = `${now.text.slice(0, now.start)}\n${now.text.slice(now.end)}`;
       edit({ text, start: now.start + 1, end: now.start + 1 });

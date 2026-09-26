@@ -15,6 +15,8 @@ export type TripLeg = {
    * Absent unless the line has exactly one duration.
    */
   durationMin?: number;
+  /** 1-based line of the `via:`. The app edits the note there. */
+  line?: number;
 };
 
 export type TripStop = {
@@ -172,6 +174,7 @@ function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   const fareEur = legFare(head);
   return {
     detail,
+    line,
     ...(note ? { note } : {}),
     ...(mode ? { mode } : {}),
     ...(durationMin !== undefined ? { durationMin } : {}),

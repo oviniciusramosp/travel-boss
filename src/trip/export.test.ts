@@ -69,9 +69,11 @@ city: paris
     );
 
     const again = parseTrip('europa', 'content/trips/europa.md', exported);
-    expect(again.cities[0]?.days[0]?.stops[0]?.leg).toEqual(
-      parsed.cities[0]?.days[0]?.stops[0]?.leg,
-    );
+    // Export drops `city:`, so the via sits on another line: the rest must match.
+    expect(again.cities[0]?.days[0]?.stops[0]?.leg).toEqual({
+      ...parsed.cities[0]?.days[0]?.stops[0]?.leg,
+      line: expect.any(Number),
+    });
 
     const nested = tripToHtml(exported);
     expect(nested).toMatch(
@@ -147,7 +149,7 @@ via: trem Frecciarossa · 3h10
     expect(exported).toContain('2026-04-02 → 2026-04-06\nvia: trem Frecciarossa · 3h10');
     expect(exported).not.toContain('city:');
     const again = parseTrip('europa', 'content/trips/europa.md', exported);
-    expect(again.cities[0]?.leg).toEqual(parsed.cities[0]?.leg);
+    expect(again.cities[0]?.leg).toEqual({ ...parsed.cities[0]?.leg, line: expect.any(Number) });
     expect(tripToHtml(exported)).toContain('<p>via: trem Frecciarossa · 3h10</p>');
   });
 

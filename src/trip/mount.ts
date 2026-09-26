@@ -1011,12 +1011,15 @@ export function mountTrip(
     transfer.addEventListener('pointerleave', () => preview(false));
     transfer.addEventListener('focus', () => preview(true));
     transfer.addEventListener('blur', () => preview(false));
+    // The `via:` note in the row is text to edit: its clicks and keys are not the row's.
+    const inNote = (event: Event) => event.target instanceof Element && event.target.closest('[data-note-edit]') !== null;
     transfer.addEventListener('click', (event) => {
+      if (inNote(event)) return;
       event.stopPropagation();
       activate();
     });
     transfer.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (inNote(event) || (event.key !== 'Enter' && event.key !== ' ')) return;
       event.preventDefault();
       activate();
     });
@@ -1160,6 +1163,12 @@ export function mountTrip(
         onFail: noteFailed,
         ...more,
       });
+
+    /** The note of a trip `via:` in its transfer row. Catalog legs have none. */
+    const editLegNote = (row: HTMLElement, leg: TripLeg | undefined, slug: string) => {
+      const note = row.querySelector<HTMLElement>('.tb-transfer__note');
+      if (note && leg?.note && leg.line) editNote(note, 'via', leg.note, lineAt(leg.line), slug);
+    };
 
     /** The stop's comments go in `host`. Returns the button that adds one. */
     const comments = (host: HTMLElement, stop: TripStop, slug: string): HTMLButtonElement => {
@@ -1518,6 +1527,7 @@ export function mountTrip(
         lists[rowIndex]!.append(item);
         rails.forEach((rail, index) => {
           const transfer = transferRow(legs[index]!, locale);
+          if (legs[index] === entry.depart) editLegNote(transfer, entry.depart, city.slug);
           transfer.classList.add('tb-timeline__hop');
           transfer.style.setProperty('--line-color', rail.color);
           if (chipTone(rail.color) === 'ink') transfer.classList.add('is-ink');
@@ -1549,7 +1559,9 @@ export function mountTrip(
         ) {
           const via = document.createElement('ul');
           via.className = 'tb-list tb-list--stops tb-city-via';
-          via.append(transferRow(dated.city.leg, locale));
+          const leaving = transferRow(dated.city.leg, locale);
+          editLegNote(leaving, dated.city.leg, dated.city.slug);
+          via.append(leaving);
           body.append(via);
         }
       }
