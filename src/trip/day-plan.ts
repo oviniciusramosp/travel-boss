@@ -153,7 +153,8 @@ export function midEur(money: MoneyInfo | undefined): number {
   return (low + high) / 2;
 }
 
-const OUTSIDE = /\b(por fora|fachada|outside|facade)\b/;
+const OUTSIDE =
+  /\b(por fora|fachada|passar na frente|sem subir|sem entrar|nao vamos subir|nao vamos entrar|outside|facade)\b/;
 const INSIDE = /\b(por dentro|inside)\b/;
 
 /**

@@ -233,6 +233,8 @@ describe('dateBudget', () => {
     expect(seenFromOutside('Moulin Rouge Foto por fora; daqui, suba a Rue Lepic')).toBe(true);
     expect(seenFromOutside('Arco do Triunfo No fim da caminhada; por fora é grátis')).toBe(true);
     expect(seenFromOutside('La Favorite Fachada')).toBe(true);
+    expect(seenFromOutside('Torre Eiffel Ainda não vamos subir. Só passar na frente.')).toBe(true);
+    expect(seenFromOutside('Moulin Rouge daqui, suba a Rue Lepic')).toBe(false);
     expect(seenFromOutside('Ópera Garnier Por fora é grátis. Por dentro, €25 e só online')).toBe(false);
     expect(seenFromOutside('Panteão €13, ~1h')).toBe(false);
     const budget = dateBudget(
