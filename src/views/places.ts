@@ -21,6 +21,7 @@ import {
   withResolvedArea,
 } from '../catalog';
 import type { ItineraryDay, ItineraryStop, Locale, PlaceCategory, TravelCity, TravelPlace } from '../catalog';
+import { AMENITY_EVENT, AMENITY_ICON, amenityName, amenityOn, setAmenity, type AmenityKind } from '../map/amenity-state';
 import type { MapHandle, MapPin } from '../map/types';
 import { aiBadge, aiSuggestionTip } from '../ui/ai-badge';
 import { segmented } from '../ui/controls';
@@ -188,6 +189,42 @@ function placeCard(
     item.append(heart);
   }
   return item;
+}
+
+/** Same pill as a category group, with only the map switch: no count, no list. */
+function amenityGroup(kind: AmenityKind, locale: Locale): HTMLElement {
+  const name = amenityName(kind, locale);
+  const section = el('div', 'tb-amenity-group');
+  const summary = el('div', 'tb-group__summary');
+  const glyph = icon(AMENITY_ICON[kind], { size: 16, fill: true });
+  glyph.classList.add('tb-cat-glyph');
+  glyph.style.color = kind === 'toilet' ? 'var(--color-restroom)' : 'var(--color-water)';
+  const toggle = el('button', 'tb-switch');
+  toggle.type = 'button';
+  toggle.setAttribute('role', 'switch');
+  toggle.append(el('span', 'tb-switch__thumb'));
+  const paint = () => {
+    const on = amenityOn(kind);
+    toggle.setAttribute('aria-checked', on ? 'true' : 'false');
+    toggle.setAttribute(
+      'aria-label',
+      pickLocale(locale, {
+        en: on ? `Hide ${name} on the map` : `Show ${name} on the map`,
+        'pt-BR': on ? `Esconder ${name} no mapa` : `Mostrar ${name} no mapa`,
+      }),
+    );
+  };
+  // A re-render drops this card; the listener leaves with it on the next switch.
+  const sync = () => {
+    if (toggle.isConnected) paint();
+    else document.removeEventListener(AMENITY_EVENT, sync);
+  };
+  toggle.addEventListener('click', () => setAmenity(kind, !amenityOn(kind)));
+  document.addEventListener(AMENITY_EVENT, sync);
+  paint();
+  summary.append(glyph, el('span', 'tb-group__label', name), toggle);
+  section.append(summary);
+  return section;
 }
 
 function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLElement {
@@ -708,6 +745,7 @@ export function mountCity(
       section.append(summary, list);
       body.append(section);
     }
+    for (const kind of ['water', 'toilet'] as const) body.append(amenityGroup(kind, locale));
     syncSwitches();
     syncExpand();
   };

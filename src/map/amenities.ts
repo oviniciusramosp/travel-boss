@@ -1,13 +1,15 @@
-import { circleMarker, divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
+import { divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { icon } from '../ui/icons';
 import { cssToken } from '../ui/motion';
+import { AMENITY_EVENT, AMENITY_ICON, amenityOn, type AmenityKind } from './amenity-state';
+import { pinBox, pinHtml, type PinModel } from './pin-visual';
 
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 /** How far off the walking line a tap or toilet still counts, in meters. */
 export const AMENITY_RADIUS_M = 150;
 
-export type AmenityKind = 'water' | 'toilet';
+export type { AmenityKind };
 export type Amenity = { id: number; kind: AmenityKind; lat: number; lng: number; tags: Record<string, string> };
 type Line = readonly (readonly [number, number])[];
 
@@ -112,25 +114,48 @@ export function tilesFor([s, w, n, e]: readonly number[]): [number, number, numb
   return out;
 }
 
-/** Below this zoom the city view is too wide to ask Overpass for every tap. */
-const MIN_ZOOM = 13;
+/** Below this zoom the view holds too many taps for one DOM pin each. */
+const MIN_ZOOM = 14;
+
+function amenityPin(point: Amenity, near: boolean, color: string, text: string) {
+  const model: PinModel = {
+    color,
+    label: text,
+    featured: near,
+    number: '',
+    glyph: icon(AMENITY_ICON[point.kind], { fill: true }).outerHTML,
+    star: true,
+  };
+  const box = pinBox(near);
+  const pin = marker([point.lat, point.lng], {
+    icon: divIcon({
+      className: 'tb-pin-wrap tb-amenity-wrap',
+      html: pinHtml(model),
+      iconSize: [box.size, box.size],
+      iconAnchor: [box.anchor, box.anchor],
+      tooltipAnchor: [0, near ? -18 : -12],
+    }),
+    keyboard: false,
+    riseOnHover: true,
+    zIndexOffset: near ? 400 : -400,
+  });
+  // Same tooltip as the place pins.
+  pin.bindTooltip(text, { direction: 'top', opacity: 1, className: 'tb-pin-tip' });
+  return pin;
+}
 
 /**
- * Every water tap or toilet in view, each kind toggled on its own. The ones near a
- * walking line get the badge; the rest stay small dots. Never part of the trip.
+ * Every water tap or toilet in view, each kind switched on its own, drawn as star pins.
+ * The ones near a walking line are the big pins. Never part of the trip.
  */
-export function mountAmenities(map: LeafletMap): {
-  setWalks(lines: Line[]): void;
-  setOn(kind: AmenityKind, on: boolean): void;
-} {
+export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void } {
   const group = layerGroup().addTo(map);
-  const on: Record<AmenityKind, boolean> = { water: false, toilet: false };
   let walks: Line[] = [];
   let run = 0;
 
   const paint = async () => {
     const id = ++run;
-    if ((!on.water && !on.toilet) || map.getZoom() < MIN_ZOOM) {
+    if ((!amenityOn('water') && !amenityOn('toilet')) || map.getZoom() < MIN_ZOOM) {
       group.clearLayers();
       return;
     }
@@ -145,9 +170,8 @@ export function mountAmenities(map: LeafletMap): {
       }
       if (id !== run) return;
     }
-    if (id !== run) return;
     group.clearLayers();
-    const shown = all.filter((point) => on[point.kind]);
+    const shown = all.filter((point) => amenityOn(point.kind) && view.contains([point.lat, point.lng]));
     const near = new Set(nearLines(shown, walks).map((point) => point.id));
     const locale: Locale = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
     const color = {
@@ -155,43 +179,15 @@ export function mountAmenities(map: LeafletMap): {
       toilet: cssToken('--color-restroom', '#7c3aed'),
     };
     for (const point of shown) {
-      const text = label(point, locale);
-      if (!near.has(point.id)) {
-        circleMarker([point.lat, point.lng], {
-          radius: 5,
-          color: cssToken('--color-paper', '#ffffff'),
-          weight: 1,
-          fillColor: color[point.kind],
-          fillOpacity: 0.7,
-        })
-          .bindTooltip(text, { direction: 'top', offset: [0, -4] })
-          .addTo(group);
-        continue;
-      }
-      const glyph = icon(point.kind === 'toilet' ? 'wc' : 'water_drop', { fill: true, size: 16 });
-      marker([point.lat, point.lng], {
-        icon: divIcon({
-          className: 'tb-amenity-wrap',
-          html: `<span class="tb-amenity is-${point.kind}">${glyph.outerHTML}</span>`,
-          iconSize: [22, 22],
-          iconAnchor: [11, 11],
-        }),
-        keyboard: false,
-        zIndexOffset: 500,
-      })
-        .bindTooltip(text, { direction: 'top', offset: [0, -10] })
-        .addTo(group);
+      amenityPin(point, near.has(point.id), color[point.kind], label(point, locale)).addTo(group);
     }
   };
 
   map.on('moveend', () => void paint());
+  document.addEventListener(AMENITY_EVENT, () => void paint());
   return {
     setWalks(lines) {
       walks = lines;
-      void paint();
-    },
-    setOn(kind, next) {
-      on[kind] = next;
       void paint();
     },
   };

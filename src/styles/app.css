@@ -1038,27 +1038,12 @@ p.tb-meta {
   color: var(--color-on-ink);
 }
 
-.leaflet-marker-icon.tb-amenity-wrap {
-  background: none;
-  border: 0;
+/* Water and restroom stars keep the glyph readable at every zoom; near the walk they are the big pin. */
+.tb-map .leaflet-container .leaflet-marker-icon.tb-amenity-wrap .tb-pin {
+  --pin-scale: calc(22 / 28);
 }
 
-.tb-amenity {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border: 1.5px solid var(--color-paper);
-  border-radius: var(--r-pill);
-  background: var(--color-water);
-  color: var(--color-paper);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-ink) 28%, transparent);
-}
-
-.tb-amenity.is-toilet {
-  background: var(--color-restroom);
-}
-
-.tb-amenity .material-symbols-rounded {
-  font-size: 14px;
+.tb-map .leaflet-container .leaflet-marker-icon.tb-amenity-wrap .tb-pin.is-featured,
+.tb-map .leaflet-container .leaflet-marker-icon.tb-amenity-wrap:hover .tb-pin {
+  --pin-scale: 1;
 }

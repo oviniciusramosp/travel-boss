@@ -1,7 +1,7 @@
 import { Control, DomEvent, type Map as LeafletMap } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { iconButton } from '../ui/controls';
-import type { AmenityKind } from './amenities';
+import { AMENITY_EVENT, amenityOn, setAmenity } from './amenity-state';
 import type { IconName } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
 
@@ -21,7 +21,6 @@ export function attachMapControls(
   map: LeafletMap,
   host: HTMLElement,
   fit: () => void,
-  setAmenity: (kind: AmenityKind, on: boolean) => void,
 ): void {
   const shell = host.closest<HTMLElement>('.tb-map-col') ?? host.parentElement ?? host;
   const zoomIn = iconButton({ icon: 'add', label: 'Zoom in' });
@@ -58,13 +57,14 @@ export function attachMapControls(
   fitBtn.addEventListener('click', () => {
     fit();
   });
-  for (const [button, kind] of [[water, 'water'], [toilets, 'toilet']] as const) {
-    button.addEventListener('click', () => {
-      const next = button.getAttribute('aria-pressed') !== 'true';
-      button.setAttribute('aria-pressed', next ? 'true' : 'false');
-      setAmenity(kind, next);
-    });
+  const amenityButtons = [[water, 'water'], [toilets, 'toilet']] as const;
+  const syncAmenities = () => {
+    for (const [button, kind] of amenityButtons) button.setAttribute('aria-pressed', amenityOn(kind) ? 'true' : 'false');
+  };
+  for (const [button, kind] of amenityButtons) {
+    button.addEventListener('click', () => setAmenity(kind, !amenityOn(kind)));
   }
+  document.addEventListener(AMENITY_EVENT, syncAmenities);
   fullscreen.addEventListener('click', () => {
     if (document.fullscreenElement === shell) void document.exitFullscreen();
     else void shell.requestFullscreen();

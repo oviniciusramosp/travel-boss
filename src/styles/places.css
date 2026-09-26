@@ -1278,7 +1278,8 @@ button.tb-icon-btn.tb-place-panel__collapse:active:not(:disabled) {
   font-size: var(--text-caption);
 }
 
-.tb-group {
+.tb-group,
+.tb-amenity-group {
   margin: 0 0 var(--spacing-8);
 }
 

@@ -791,6 +791,6 @@ export function mountMap(host: HTMLElement): MapHandle {
       };
     },
   };
-  attachMapControls(leafletMap, host, () => handle.fit(), amenities.setOn);
+  attachMapControls(leafletMap, host, () => handle.fit());
   return handle;
 }
