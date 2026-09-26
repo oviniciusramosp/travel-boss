@@ -1444,6 +1444,20 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
+  'par-port-debilly': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Port_Debilly%2C_tour_Eiffel%2C_Paris.jpg/960px-Port_Debilly%2C_tour_Eiffel%2C_Paris.jpg',
+      'Eiffel Tower seen from Port Debilly',
+      'Torre Eiffel vista do Port Debilly',
+      'Polymagou · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/P1030759_Paris_XVI_port_Debilly-passerelle_Debilly_tour_Eiffel.JPG/960px-P1030759_Paris_XVI_port_Debilly-passerelle_Debilly_tour_Eiffel.JPG',
+      'Port Debilly quay, Passerelle Debilly and the tower',
+      'Cais do Port Debilly, Passarela Debilly e a Torre',
+      'Mbzt · CC BY 3.0 · Wikimedia Commons',
+    ),
+  ],
   'par-pont-iena': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/View_of_Pont_d%27I%C3%A9na_from_Trocad%C3%A9ro%2C_Paris%2C_2008.jpg/1280px-View_of_Pont_d%27I%C3%A9na_from_Trocad%C3%A9ro%2C_Paris%2C_2008.jpg',
@@ -1556,6 +1570,22 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Bouillon République on Boulevard du Temple',
       'Bouillon République no Boulevard du Temple',
       'GFreihalter · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-bouillon-pigalle': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bouillon_Pigalle.jpg/960px-Bouillon_Pigalle.jpg',
+      'Bouillon Pigalle on Boulevard de Clichy',
+      'Bouillon Pigalle no Boulevard de Clichy',
+      'Thomon · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-chez-pradel': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Chez_Pradel_%2830626190691%29.jpg/960px-Chez_Pradel_%2830626190691%29.jpg',
+      'Chez Pradel on Rue Ordener',
+      'Chez Pradel na Rue Ordener',
+      'Jeanne Menjoulet · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-le-nesle': [

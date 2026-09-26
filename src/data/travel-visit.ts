@@ -1693,6 +1693,20 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Daily 11:30–00:00', 'Todo dia 11h30–0h'),
     tips: L('Book online to skip the queue.', 'Reserve online para fugir da fila.'),
   }),
+  'par-bouillon-pigalle': restaurantVisit(18, 30, {
+    bestDay: L('Daily 12:00–00:00; weekends and holidays from 11:30', 'Todo dia 12h–0h; fim de semana e feriado desde 11h30'),
+    tips: L(
+      'Book online at bouillonlesite.com or join the queue. Prices from the summer 2026 menu, service included. Metro Pigalle (2, 12).',
+      'Reserve online em bouillonlesite.com ou entre na fila. Preços da carta do verão de 2026, serviço incluso. Metrô Pigalle (2, 12).',
+    ),
+  }),
+  'par-chez-pradel': restaurantVisit(15, 25, {
+    bestDay: L('Tue–Sat 8:00–22:30; closed Sunday and Monday', 'Ter–sáb 8h–22h30; fecha domingo e segunda'),
+    tips: L(
+      'Set-menu prices from the June 2026 video. At lunch arrive early, by 13:30; for dinner book at 01 42 64 24 97.',
+      'Preços da fórmula no vídeo de junho de 2026. No almoço, chegue cedo, até 13h30; para jantar, reserve pelo 01 42 64 24 97.',
+    ),
+  }),
   'par-le-nesle': restaurantVisit(8, 15, {
     avgPricePerPerson: money(
       8,
@@ -1717,8 +1731,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     tips: L('Halal. Cards accepted.', 'Halal. Aceita cartão.'),
   }),
   'par-margaux': restaurantVisit(26, 40, {
-    bestDay: L('Daily 12:00–00:00', 'Todo dia 12h–0h'),
-    tips: L('Cordon bleu ~€26 with a side. Book ahead.', 'Cordon bleu ~€26 com acompanhamento. Reserve.'),
+    bestDay: L(
+      'Mon–Fri 12:00–14:30 and 19:00–23:30; Sat–Sun 12:00–17:00 and 19:00–00:30',
+      'Seg–sex 12h–14h30 e 19h–23h30; sáb–dom 12h–17h e 19h–0h30',
+    ),
+    tips: L(
+      'Cordon bleu €26 with one side; mains €19–32, desserts from €9. Per person: ~€28 main + dessert and ~€37 with a starter on the cheapest dishes; ~€35 and ~€44 with the cordon bleu. Book on ZenChef.',
+      'Cordon bleu €26 com um acompanhamento; pratos de €19 a €32, sobremesas desde €9. Por pessoa: ~€28 prato + sobremesa e ~€37 com entrada nos mais baratos; ~€35 e ~€44 com o cordon bleu. Reserve pela ZenChef.',
+    ),
   }),
   'par-arnaud-nicolas-caulaincourt': restaurantVisit(5, 17, {
     bestDay: L(
@@ -1797,6 +1817,16 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMax: 20,
     bestTime: L('After dark — the tower sparkles 5 min on the hour', 'Depois que escurece — a Torre brilha 5 min em cada hora cheia'),
     tips: L('Footbridge: no cars in the frame.', 'Passarela: sem carro no enquadramento.'),
+  }),
+  'par-port-debilly': landmarkOutdoor({
+    durationMin: 15,
+    durationMax: 45,
+    bestTime: L('After dark — the tower sparkles 5 min on the hour', 'Depois que escurece — a Torre brilha 5 min em cada hora cheia'),
+    bestDay: L('Any evening', 'Qualquer noite'),
+    tips: L(
+      'Sit at the edge with your feet over the Seine; bring cheese and a baguette.',
+      'Sente na beirada com os pés sobre o Sena; leve queijo e baguete.',
+    ),
   }),
   'par-pont-iena': landmarkOutdoor({
     durationMin: 10,
