@@ -1,7 +1,7 @@
 # Graph Report - roteiro-04-outubro-d264b0  (2026-09-26)
 
 ## Corpus Check
-- 191 files · ~281,975 words
+- 192 files · ~281,833 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `32c3417f`
+- Built from commit: `7736e2a5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -60,7 +60,7 @@
 - asMsg
 - transfer-row.ts
 - map.ts
-- travel.ts
+- travel-itineraries.ts
 - camera.ts
 - overlays.ts
 - parse.ts
@@ -69,7 +69,7 @@
 - expandTimelineTransferParts
 - el
 - open-now.ts
-- travel-milan.ts
+- travel.ts
 - hotel-ring.ts
 - hotel-dates.ts
 - pin-visual.ts
@@ -229,7 +229,7 @@ Nodes (10): Airbnb gratuito (busca local), Cartographic boundaries, Evidence and
 
 ### Community 29 - "Paris"
 Cohesion: 0.12
-Nodes (15): Dia 1 — Centro antigo, Dia 1 — Chegada, Duomo e Galleria, Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux, Dia 2 — Bate-volta, Dia 2 — Seg 5/10 · Printemps, Opéra, Créteil e pôr do sol na Galeries Lafayette, Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre, Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos, Dia 5 — Qui 8/10 · Marais, almoço no Chez Pradel e pôr do sol em Montmartre (+7 more)
+Nodes (15): Dia 1 — Centro antigo, Dia 1 — Chegada, Duomo e Galleria, Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux, Dia 2 — Bate-volta, Dia 2 — Seg 5/10 · Printemps, Opéra, Créteil e pôr do sol na Galeries Lafayette, Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre, Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos, Dia 5 — Qui 8/10 · Marais, almoço no Chez Pradel e pôr do sol em Montmartre (+7 more)
 
 ### Community 30 - "route.ts"
 Cohesion: 0.14
@@ -252,8 +252,8 @@ Cohesion: 0.19
 Nodes (18): mountMap(), drawRouteSegments(), paintRouteFocus(), RouteEntry, RoutePointer, safeColor(), walkColor(), nearTransfer() (+10 more)
 
 ### Community 36 - "travel-categories.ts"
-Cohesion: 0.10
-Nodes (28): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialName() (+20 more)
+Cohesion: 0.11
+Nodes (24): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialName() (+16 more)
 
 ### Community 37 - "walk-route.ts"
 Cohesion: 0.10
@@ -291,9 +291,9 @@ Nodes (16): formatLegDuration(), legLineColor(), TimelineTransferPart, TripLeg, 
 Cohesion: 0.23
 Nodes (12): Box, coveredInsets(), Insets, mergeInsets(), KINDS, MapCityPin, MapHandle, MapOverviewCity (+4 more)
 
-### Community 46 - "travel.ts"
-Cohesion: 0.10
-Nodes (28): favoritePlaceIds(), favoritePlaces(), computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug (+20 more)
+### Community 46 - "travel-itineraries.ts"
+Cohesion: 0.14
+Nodes (21): computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug, ItineraryArrivalOption, ItineraryDay (+13 more)
 
 ### Community 47 - "camera.ts"
 Cohesion: 0.30
@@ -327,9 +327,9 @@ Nodes (14): el(), row(), RowOptions, Copy, directionHref(), dirLink(), distanceS
 Cohesion: 0.32
 Nodes (10): CITY_ZONE, clearOpenNowCache(), fetchOpeningHours(), isOpenFromOsmHours(), OpenNow, openNowStatus(), overpassQuery(), session (+2 more)
 
-### Community 55 - "travel-milan.ts"
-Cohesion: 0.50
-Nodes (4): l(), milanCity, place(), TravelCity
+### Community 55 - "travel.ts"
+Cohesion: 0.13
+Nodes (15): PlaceCategory, favoritePlaceIds(), favoritePlaces(), localTravelCities, l(), milanCity, place(), PlaceSubcategory (+7 more)
 
 ### Community 56 - "hotel-ring.ts"
 Cohesion: 0.29
@@ -387,9 +387,9 @@ Nodes (3): greatCircle(), OverviewArc, overviewArcs()
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `ui/controls.ts`, `mountHotels`, `route-planner.ts`, `shell.ts`, `timeline.ts`, `index.ts`, `export.ts`, `hotel-rank.ts`, `transfer-row.ts`, `travel.ts`, `parse.ts`, `summary.ts`, `mount.ts`, `el`, `price.ts`, `rating.ts`, `main.ts`, `map/controls.ts`?**
+- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `ui/controls.ts`, `mountHotels`, `route-planner.ts`, `shell.ts`, `timeline.ts`, `index.ts`, `export.ts`, `hotel-rank.ts`, `transfer-row.ts`, `parse.ts`, `summary.ts`, `mount.ts`, `el`, `travel.ts`, `price.ts`, `rating.ts`, `main.ts`, `map/controls.ts`?**
   _High betweenness centrality (0.084) - this node is a cross-community bridge._
-- **Why does `getTravelCity()` connect `paint` to `legs.ts`, `hotels.ts`, `travel-stay-heatmap.ts`, `calendar.ts`, `places.ts`, `travel.ts`, `mountHotels`, `parse.ts`, `mount.ts`, `index.ts`, `timeline.ts`, `main.ts`, `route.ts`?**
+- **Why does `getTravelCity()` connect `paint` to `legs.ts`, `hotels.ts`, `travel-stay-heatmap.ts`, `calendar.ts`, `places.ts`, `travel-itineraries.ts`, `mountHotels`, `parse.ts`, `mount.ts`, `index.ts`, `timeline.ts`, `travel.ts`, `main.ts`, `route.ts`?**
   _High betweenness centrality (0.047) - this node is a cross-community bridge._
 - **Why does `mountTrip()` connect `paint` to `export.ts`, `calendar.ts`, `pickLocale`, `day-plan.ts`, `route-planner.ts`, `parse.ts`, `mount.ts`, `main.ts`, `route.ts`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
