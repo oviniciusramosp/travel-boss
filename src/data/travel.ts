@@ -4288,8 +4288,9 @@ export const localTravelCities: TravelCity[] = [
           en: 'Quay at water level below Avenue de New York, by Rue Fresnel, with the tower across the Seine. From the tower, cross Pont d’Iéna, turn right and take the stairs down to the river; walk on until the crowd thins.',
           'pt-BR': 'Cais na altura da água, abaixo da Avenue de New York, na frente da Rue Fresnel, com a Torre do outro lado do Sena. Da Torre, atravesse a Pont d’Iéna, vire à direita e desça a escada até o rio; siga até a multidão diminuir.',
         },
-        lat: 48.861968,
-        lng: 2.294065,
+        // OSM viewpoint node 9142720417: the slope between Avenue de New York and the quay.
+        lat: 48.86103,
+        lng: 2.292184,
         address: 'Port Debilly, 75116 Paris',
         mapsQuery: 'Port Debilly Paris',
         videos: ['https://www.instagram.com/reel/DcZWCIDjiJB/'],

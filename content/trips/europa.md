@@ -28,7 +28,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio.\
   Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59
   - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h · €2,55
-  - comentário: o ponto no mapa não está marcado corretamente. deveria se ro ponto de foto entre a Avenue de New York e a Port Debilly. Corrija.
 - 23:30 [Casa do Gui](place:par-casa-do-gui) — Fim do primeiro dia
 
 ### Dia 2 — Seg 5/10 · Printemps, Opéra e pôr do sol na Galeries Lafayette
