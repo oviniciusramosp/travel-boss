@@ -1861,26 +1861,6 @@ export const localTravelCities: TravelCity[] = [
         mapsUrl: 'https://www.google.fr/maps/place/La+Maison+d\'Isabelle/@48.8498436,2.3457002,17z',
       },
       {
-        id: 'par-la-parisienne-saint-germain',
-        name: { en: 'La Parisienne (Saint-Germain)', 'pt-BR': 'La Parisienne (Saint-Germain)' },
-        aiSuggested: true,
-        aiReason: {
-          en: 'a Monday croissant, when La Maison d’Isabelle next door is closed',
-          'pt-BR': 'croissant na segunda, quando a La Maison d’Isabelle, ao lado, fecha',
-        },
-        category: 'cafes',
-        subcategories: ['bakery'],
-        description: {
-          en: 'Bakery on Boulevard Saint-Germain, a few doors from La Maison d’Isabelle: croissants, pains au chocolat and sandwiches. Open Monday to Saturday from 7:00.',
-          'pt-BR': 'Padaria no Boulevard Saint-Germain, a poucos passos da La Maison d’Isabelle: croissants, pains au chocolat e sanduíches. Abre de segunda a sábado, desde as 7h.',
-        },
-        googleRating: 4.2,
-        lat: 48.849946,
-        lng: 2.349782,
-        address: '52 Boulevard Saint-Germain, 75005 Paris',
-        mapsQuery: 'La Parisienne 52 Boulevard Saint-Germain Paris',
-      },
-      {
         id: 'par-luxembourg',
         name: { en: 'Luxembourg Garden', 'pt-BR': 'Jardim de Luxemburgo' },
         category: 'parks',
