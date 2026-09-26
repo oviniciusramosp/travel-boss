@@ -8,6 +8,8 @@ import {
   periodAt,
   periodSections,
   rowPeriods,
+  freeMinutes,
+  isOpenSlot,
   seenFromOutside,
   zonedStamp,
 } from './day-plan';
@@ -212,6 +214,21 @@ describe('midEur', () => {
     expect(midEur({ currency: 'EUR', free: true, min: 10 })).toBe(0);
     expect(midEur(undefined)).toBe(0);
     expect(midEur({ currency: 'USD', min: 10, max: 20 })).toBe(0);
+  });
+});
+
+describe('isOpenSlot', () => {
+  it('opens a block when two hours or more are left after the stay and the way', () => {
+    // Lunch at 13:30 (no catalog stay: 1 h), 10 min on foot, next stop at 18:15.
+    expect(freeMinutes({ time: '13:30', nextTime: '18:15', legMin: 10 })).toBe(215);
+    expect(isOpenSlot({ time: '13:30', nextTime: '18:15', legMin: 10 })).toBe(true);
+    // A 4-hour museum fills its own gap.
+    expect(isOpenSlot({ time: '10:00', nextTime: '14:05', stayMin: 240 })).toBe(false);
+    // Resting at home is planned.
+    expect(isOpenSlot({ time: '14:30', nextTime: '17:15', samePlace: true })).toBe(false);
+    // Past midnight still counts forward.
+    expect(freeMinutes({ time: '23:22', nextTime: '00:12', stayMin: 0, legMin: 32 })).toBe(18);
+    expect(isOpenSlot({ time: '09:00' })).toBe(false);
   });
 });
 

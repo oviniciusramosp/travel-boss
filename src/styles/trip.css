@@ -473,11 +473,11 @@
 }
 
 /* A leg starts at its icon: above it the way in, below it the leg itself. */
-.tb-list.tb-timeline > .tb-transfer > .tb-timeline__rail.is-above {
+.tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot) > .tb-timeline__rail.is-above {
   bottom: 50%;
 }
 
-.tb-list.tb-timeline > .tb-transfer > .tb-timeline__rail.is-below {
+.tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot) > .tb-timeline__rail.is-below {
   top: 50%;
 }
 
@@ -933,4 +933,37 @@
   color: var(--color-mid-gray);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+/* "Roteiro em aberto": free time after a stop. Same grid as a transfer; the label is a
+   dashed pill so it reads as a slot to fill, not a place. */
+.tb-list.tb-timeline > .tb-open-slot {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--tl-pin) minmax(0, 1fr);
+  column-gap: var(--spacing-8);
+  align-items: center;
+  min-height: var(--h-md);
+  padding: var(--tl-pad);
+  list-style: none;
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+}
+
+.tb-open-slot__icon {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  justify-self: center;
+  color: var(--color-mid-gray);
+}
+
+.tb-open-slot__label {
+  grid-column: 2;
+  justify-self: start;
+  padding: var(--spacing-4) var(--spacing-8);
+  border: 1px dashed var(--color-mid-gray);
+  border-radius: var(--r-pill);
+  color: var(--color-mid-gray);
+  font-weight: var(--font-weight-medium);
 }

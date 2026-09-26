@@ -6,6 +6,7 @@ import {
   pickLocale,
   placeCategoryMeta,
   placePinIconHtml,
+  resolveVisit,
   travelUi,
 } from '../catalog';
 import type { ItineraryLegDef, Locale, TravelPlace } from '../catalog';
@@ -25,6 +26,7 @@ import {
   dateBudget,
   dayPeriods,
   hopRails,
+  isOpenSlot,
   pastPeriods,
   periodSections,
   seenFromOutside,
@@ -172,6 +174,16 @@ function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean,
 }
 
 /** Half of a leg's rail: `is-above` runs into its icon, `is-below` leaves it. */
+/** "Roteiro em aberto": free time after a stop, for another place nearby. */
+function openSlotRow(locale: Locale, rail: Rail | null): HTMLLIElement {
+  const row = el('li', 'tb-open-slot');
+  if (rail) row.append(railHalf('is-above', rail), railHalf('is-below', rail));
+  const glyph = icon('schedule', { size: 16 });
+  glyph.classList.add('tb-open-slot__icon');
+  row.append(glyph, el('span', 'tb-open-slot__label', pickLocale(locale, { en: 'Open time', 'pt-BR': 'Roteiro em aberto' })));
+  return row;
+}
+
 function railHalf(side: 'is-above' | 'is-below', rail: Rail): HTMLSpanElement {
   const half = el('span', `tb-timeline__rail ${side}`);
   half.dataset.rail = rail.mode;
@@ -1541,6 +1553,15 @@ export function mountTrip(
           markChanged(transfer);
           hopList.append(transfer);
         });
+        const open = isOpenSlot({
+          time: stop.time,
+          nextTime: nextStop?.time,
+          stayMin: place ? resolveVisit(place.id, place.visit)?.durationMax : undefined,
+          legMin: legs.reduce((sum, leg) => sum + (leg.durationMin ?? 0), 0),
+          samePlace,
+        });
+        // At the end of the stop's period; inside a period, just before the next stop, on the rail.
+        if (open) (crosses ? lists[rowIndex]! : hopList).append(openSlotRow(locale, crosses ? null : (hopPlan?.arrive ?? null)));
         railAbove = hopPlan?.arrive ?? { mode: 'none', color: null };
       });
       const bridged = new Set(

@@ -501,7 +501,7 @@ p.tb-budget {
   border-radius: 8px;
 }
 
-.tb-list.tb-timeline > .tb-transfer > .tb-timeline__rail {
+.tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot) > .tb-timeline__rail {
   position: absolute;
   /* Containing block is the row, not the pin cell. Same axis as the stop rail. */
   left: calc(var(--tl-pad) + var(--tl-pin) / 2);
@@ -514,7 +514,7 @@ p.tb-budget {
   background: var(--line-color, var(--color-mid-gray));
 }
 
-.tb-list.tb-timeline > .tb-transfer > .tb-timeline__rail[data-rail='walk'] {
+.tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot) > .tb-timeline__rail[data-rail='walk'] {
   width: 0;
   margin-left: 0;
   background: transparent;

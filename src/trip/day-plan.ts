@@ -153,6 +153,36 @@ export function midEur(money: MoneyInfo | undefined): number {
   return (low + high) / 2;
 }
 
+/** Free time at least this long after a stop gets a "Roteiro em aberto" block. */
+const OPEN_SLOT_MIN = 120;
+/** Stay when the catalog has no duration (a meal, a quick stop). */
+const DEFAULT_STAY_MIN = 60;
+
+export type SlotHop = {
+  time?: string;
+  nextTime?: string;
+  /** Catalog stay at the stop; a meal or a quick stop counts DEFAULT_STAY_MIN. */
+  stayMin?: number;
+  legMin?: number;
+  /** Arriving and leaving the same place is a planned rest, not open time. */
+  samePlace?: boolean;
+};
+
+const clockMin = (time: string) => Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
+
+/** Minutes left after the stay and the way to the next stop. Null without both times or at a rest. */
+export function freeMinutes(hop: SlotHop): number | null {
+  if (!hop.time || !hop.nextTime || hop.samePlace) return null;
+  let gap = clockMin(hop.nextTime) - clockMin(hop.time);
+  if (gap < 0) gap += 24 * 60;
+  return gap - (hop.stayMin ?? DEFAULT_STAY_MIN) - (hop.legMin ?? 0);
+}
+
+export function isOpenSlot(hop: SlotHop): boolean {
+  const free = freeMinutes(hop);
+  return free != null && free >= OPEN_SLOT_MIN;
+}
+
 const OUTSIDE =
   /\b(por fora|fachada|passar na frente|sem subir|sem entrar|nao vamos subir|nao vamos entrar|outside|facade)\b/;
 const INSIDE = /\b(por dentro|inside)\b/;
