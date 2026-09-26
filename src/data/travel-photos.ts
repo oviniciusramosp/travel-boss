@@ -257,46 +257,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   // Perto da BnF (IA, set/2026)
-  'par-fuuki': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Omurice_001.jpg/960px-Omurice_001.jpg',
-      "Omurice: omelette over rice with demi-glace sauce (generic photo)",
-      "Omurice: omelete sobre arroz com molho demi-glace (foto ilustrativa)",
-      "Ocdp / Wikimedia Commons (CC0)",
-    ),
-  ],
-  'par-n-plus-un': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Brasserie_du_Lizon_-_hamburger_et_frites.JPG/960px-Brasserie_du_Lizon_-_hamburger_et_frites.JPG',
-      "A seeded-bun burger with a cone of fries (generic photo)",
-      "Burger com pão de grãos e um cone de fritas (foto ilustrativa)",
-      "Benoît Prieur / Wikimedia Commons (CC0)",
-    ),
-  ],
-  'par-le-quai-bnf': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Steak-frites_%28steak-and-chips%29.jpg/960px-Steak-frites_%28steak-and-chips%29.jpg',
-      "Steak-frites in a Paris brasserie (generic photo)",
-      "Steak-frites numa brasserie de Paris (foto ilustrativa)",
-      "Dcollard / Wikimedia Commons (CC BY-SA 3.0)",
-    ),
-  ],
-  'par-cajou': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Flat_White_by_Nijat_Zayidov.jpg/960px-Flat_White_by_Nijat_Zayidov.jpg',
-      "Flat white with latte art (generic photo)",
-      "Flat white com latte art (foto ilustrativa)",
-      "Tokimemooo / Wikimedia Commons (CC0)",
-    ),
-  ],
-  'par-kawaa-lumiere': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Latte_art_4.jpg/960px-Latte_art_4.jpg',
-      "Cups of latte with latte art (generic photo)",
-      "Xícaras de latte com latte art (foto ilustrativa)",
-      "Kim Sanso / Wikimedia Commons (CC0)",
-    ),
-  ],
   'par-bercy-village': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Cour_Saint_%C3%89milion%2C_Bercy_Village_-_Paris_2012-04-08.jpg/960px-Cour_Saint_%C3%89milion%2C_Bercy_Village_-_Paris_2012-04-08.jpg',
