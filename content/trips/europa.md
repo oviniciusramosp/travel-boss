@@ -5,7 +5,7 @@ city: paris
 dates: 2026-10-04 → 2026-10-11
 via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
-### Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux
+### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
 - 13:00 [EXKi CDG 2E](place:par-cdg-exki) — **Almoço** no saguão público de partidas do 2E, um andar acima do desembarque: sopa, quiche, salada ou bowl (~€10–15). Sem subir com as malas: Brioche Dorée, no próprio desembarque
@@ -14,14 +14,13 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Comprar algo para comer e beber antes de chegar na casa do Gui
   - via: a pé · 6 min
 - 15:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
-- 16:30 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
+- 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
   - via: RER E + metrô 9 · 45 min
-- 17:15 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
-- 17:25 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
-- 17:35 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
-- 17:45 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
-- 18:05 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**, com ingresso das 18h30: chegue uns 20 min antes para a revista. Compre já, porque vende até 90 dias antes e esgota (só elevador €36,70; escada até o 2º andar + elevador €28). O sol se põe às 19h25: você vê lá de cima. Última subida às 22h45, se o voo atrasar
-- 20:15 [Champ de Mars](place:par-champ-mars) — Descida pelo gramado até a École Militaire, com a Torre acesa atrás
+- 18:00 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
+- 18:10 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
+- 18:25 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
+- 18:40 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
+- 19:00 [Champ de Mars](place:par-champ-mars) — Pôr do sol às 19h25 no gramado, a Torre acendendo ao escurecer e o brilho das 20h. Depois, descida até a École Militaire, com a Torre acesa atrás
 - 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Só por fora: a capela fica na ala norte do prédio da cúpula, que é área militar. Volta pelo gramado com a Torre de frente
 - 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
 - 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa): cordon bleu premiado (€26, com um acompanhamento) e uma sobremesa de €9. Precisa reservar: na Zenchef, o primeiro horário livre da noite é 21h15; o das 21h, só por telefone (01 86 04 40 54)
