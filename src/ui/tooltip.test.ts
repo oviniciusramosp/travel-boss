@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { TOOLTIP_SHOW_MS, isTruncated, tooltipPlacement, tooltipShowDelay } from './tooltip';
+import { TOOLTIP_SHOW_MS, isTruncated, ownsTooltip, tooltipPlacement, tooltipShowDelay } from './tooltip';
 
 describe('tooltipShowDelay', () => {
   it('waits before the first tooltip and stays warm after a recent one', () => {
@@ -7,6 +7,25 @@ describe('tooltipShowDelay', () => {
     expect(tooltipShowDelay(0)).toBe(0);
     expect(tooltipShowDelay(299)).toBe(0);
     expect(tooltipShowDelay(300)).toBe(TOOLTIP_SHOW_MS);
+  });
+});
+
+describe('ownsTooltip', () => {
+  const a = {};
+  const b = {};
+
+  it('holds a host still waiting out the delay, so leaving it cancels the show', () => {
+    expect(ownsTooltip(a, null, a)).toBe(true);
+  });
+
+  it('holds the host on screen', () => {
+    expect(ownsTooltip(a, a, null)).toBe(true);
+  });
+
+  it('ignores any other host', () => {
+    expect(ownsTooltip(b, a, null)).toBe(false);
+    expect(ownsTooltip(b, null, a)).toBe(false);
+    expect(ownsTooltip(a, null, null)).toBe(false);
   });
 });
 
