@@ -15,6 +15,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 | O que fazer no lugar: o que pedir, ingresso, horário que importa | nota da parada, depois de ` — ` |
 | Como chegar à próxima parada | `  - via:` embaixo da parada de onde se sai |
 | Detalhe do trajeto: preço do carro, onde encontrar o motorista, plataforma | nota do trecho, depois de ` — ` no `via:` |
+| Quanto cada pessoa paga naquele trecho (ticket avulso de metrô ou RER) | `· €2,55` no `via:`, antes da nota. Entra no card de ingressos |
 | Narrativa do dia | parágrafo sob o dia |
 | Alternativa, plano B, aviso de greve | só se o usuário pedir. Se não pediu, sugira na resposta |
 
@@ -39,7 +40,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 ## 4. Regras do app que o texto controla
 
 - **Períodos do card.** A manhã termina na última parada antes do jantar que diz "almoço" ou "lunch" (ou piquenique antes das 16h). A noite começa na primeira que diz "jantar" ou "dinner" (ou piquenique a partir das 18h). Trocar uma nota pode mover os períodos.
-- **Orçamento por pessoa.** Comida e ingressos vêm do catálogo, pelo meio da faixa. O card de ingressos some quando o dia não tem nenhuma parada com ingresso. Tirou ou pôs uma parada com preço? Diga no resumo como os cards mudaram.
+- **Orçamento por pessoa.** Comida e ingressos vêm do catálogo, pelo meio da faixa, mais o `€` de cada `via:`. Os dois cards sempre aparecem, mesmo com €0. Um gasto que só está escrito na nota ("Compre 2 tickets por pessoa, €2,55 cada") não entra na conta: ponha o preço no trecho. Tirou ou pôs uma parada ou trecho com preço? Diga no resumo como os cards mudaram.
 - **Trilhos da timeline.** A pé é pontilhado; trem, metrô e carro são contínuos. Carro de app só sai da porta quando parte da hospedagem; de outro lugar (café do aeroporto), o trecho até o carro é a pé.
 - **Pino.** Se o plano depende de um ponto exato (terminal onde o voo pousa, entrada, ponto de embarque), confira o pino no mapa. Para corrigir, use o `!3d…!4d…` do Google no catálogo.
 
@@ -58,7 +59,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 1. `npx tsc --noEmit && npm test`.
 2. Abra o dia no app (`npm run dev` na 5173; num worktree, `npx vite --port 5174 --strictPort`) e confira no card:
    - os períodos (manhã, tarde, noite) começam e terminam onde o usuário espera;
-   - os cards de comida e ingressos: se mudaram, explique;
+   - os cards de comida e ingressos: batem com o que o dia gasta (entrada, ticket de metrô)? Se mudaram, explique;
    - cada trecho: nome curto, duração uma vez, nota embaixo, trilho certo (a pé pontilhado);
    - os pinos no lugar certo do mapa.
 3. `graphify update .` e commit `feat(trip): …` ou `fix(trip): …`.
