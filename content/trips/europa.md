@@ -8,12 +8,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
-- 13:00 [EXKi CDG 2E](place:par-cdg-exki) — **Almoço** no saguão público de partidas do 2E, um andar acima do desembarque: sopa, quiche, salada ou bowl (~€10–15). Sem subir com as malas: Brioche Dorée, no próprio desembarque
-- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Se o Uber estiver até €40, compensa mais pegar o Uber: a diferença é de €12. Na Bolt, as estimativas do próprio site dão ~€30–35 até Noisy-le-Sec; a tarifa dinâmica do domingo às 13h só aparece no app e pode levar a ~€50. O UberX fez média de €28 no último mês. De trem, o bilhete aeroporto (€14 por pessoa, vale 2h e inclui o RER E) se compra aqui: nas máquinas de faixa rosa, já num Navigo Easy (€2), ou no guichê do nível 2 (6h–22h30). No iPhone, dá para comprar no app IDF Mobilités ou direto na Carteira
-  - via: RER B até Gare du Nord, RER E em Magenta até Noisy-le-Sec e caminhada até o mercado · 1h15
-- 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Comprar algo para comer e beber antes de chegar na casa do Gui
-  - via: a pé · 6 min
-- 15:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+- 13:00 [EXKi CDG 2E](place:par-cdg-exki) — **Almoço** no saguão público de partidas do 2E, um andar acima do desembarque: sopa, quiche, salada ou bowl (~€10–15). Sem subir com as malas: Brioche Dorée, no próprio desembarque. Depois, Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
+  - via: carro (Bolt) · 35 min
+- 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
   - via: RER E + metrô 9 · 45 min
 - 18:00 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
@@ -28,6 +25,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio. Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59, porque a linha fecha às 22h45 nos fins de semana, para obras
   - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h
 - 23:30 [Casa do Gui](place:par-casa-do-gui) — Volta
+- Se o Bolt passar de €40 no aeroporto: RER B + RER E pela estação CDG 2 TGV (~1h15), com o bilhete aeroporto de €14 por pessoa nas máquinas de faixa rosa
 - Se perder o último RER E ou o metrô 9 parar pela greve: Bolt até a casa (~€25)
 
 ### Dia 2 — Seg 5/10 · Printemps, Opéra, Créteil e pôr do sol na Galeries Lafayette
