@@ -80,6 +80,8 @@ Trecho de trem ou metrô entre dois lugares só aparece no mapa se `src/data/tra
 
 A fonte da verdade é `src/data/travel.ts` (`travelCities`), com `travel-visit.ts`, `travel-photos.ts` e `travel-subcategories.ts`. Não há CMS nem sincronização: o Notion era do portfólio e não é usado aqui. Lugar novo ou correção vai direto nesses arquivos.
 
+Lugar grande (parque, palácio) pode ter `subPoints`: pontos internos em ordem de caminhada, com nome em en e pt-BR e coordenada do OSM. A rota do dia entra pelo primeiro, passa por todos (bolinhas com nome no mapa) e sai do último; a timeline lista os pontos embaixo da parada.
+
 Vídeo de referência (reel do Instagram) entra em `videos` do lugar, sem a query de compartilhamento (`?stkn=`, `?igsh=`). O teste de `src/ui/video.test.ts` falha se sobrar query.
 
 ## Guia da cidade (Mercado e Comidas)

@@ -58,6 +58,10 @@ export type RouteHop = {
   from: TripLegPoint;
   to: TripLegPoint;
   via?: TripLeg;
+  /** Points the walk must pass, e.g. a place's sub-points. */
+  through?: [number, number][];
+  /** Named points drawn along the walk. */
+  subPoints?: { lat: number; lng: number; label: string }[];
 };
 
 function endpoints(hop: RouteHop): Pick<MapRouteSegment, 'fromId' | 'toId'> {
@@ -145,11 +149,11 @@ export async function resolveHopSegments(
       if (plan.kind === 'none') continue;
       if (plan.kind === 'walk' || plan.kind === 'drive') {
         const path =
-          plan.kind === 'walk' ? await deps.walk(hop.from, hop.to, plan.through) : await deps.drive(hop.from, hop.to);
+          plan.kind === 'walk' ? await deps.walk(hop.from, hop.to, plan.through ?? hop.through) : await deps.drive(hop.from, hop.to);
         if (!path || path.length < 2) continue;
         segments.push(
           plan.kind === 'walk'
-            ? { mode: 'walk', latlngs: path, ...endpoints(hop) }
+            ? { mode: 'walk', latlngs: path, ...endpoints(hop), ...(hop.subPoints ? { subPoints: hop.subPoints } : {}) }
             : { mode: 'transit', latlngs: path, color: deps.neutralColor, ...endpoints(hop) },
         );
         continue;

@@ -474,7 +474,11 @@ export function mountTrip(
         previous = null;
         continue;
       }
-      const point = { id: place.id, lat: place.lat, lng: place.lng };
+      // A place with sub-points is entered at the first, walked through and left from the last.
+      const subs = place.subPoints ?? [];
+      const first = subs[0];
+      const last = subs.at(-1);
+      const point = { id: place.id, lat: first?.lat ?? place.lat, lng: first?.lng ?? place.lng };
       if (previous) {
         hops.push({
           from: { id: previous.id, lat: previous.lat, lng: previous.lng },
@@ -482,7 +486,21 @@ export function mountTrip(
           ...(previous.leg ? { via: previous.leg } : {}),
         });
       }
-      previous = { ...point, ...(row.depart ? { leg: row.depart } : {}) };
+      if (first && last && subs.length > 1) {
+        const locale = shell.locale();
+        hops.push({
+          from: point,
+          to: { id: place.id, lat: last.lat, lng: last.lng },
+          through: subs.slice(1, -1).map((sub) => [sub.lat, sub.lng] as [number, number]),
+          subPoints: subs.map((sub) => ({ lat: sub.lat, lng: sub.lng, label: pickLocale(locale, sub.name) })),
+        });
+      }
+      previous = {
+        id: place.id,
+        lat: last?.lat ?? place.lat,
+        lng: last?.lng ?? place.lng,
+        ...(row.depart ? { leg: row.depart } : {}),
+      };
     }
     return hops;
   }
@@ -1474,6 +1492,10 @@ export function mountTrip(
           const note = el('span', 'tb-row__sub');
           editNote(note, 'stop', stop.note, lineAt(stop.line), city.slug);
           item.querySelector('.tb-row__main')?.after(note);
+        }
+        if (place?.subPoints?.length && !missingPlace) {
+          const inside = el('span', 'tb-row__subpoints', place.subPoints.map((sub) => pickLocale(locale, sub.name)).join(' → '));
+          item.append(inside);
         }
         item.querySelector('.tb-row__actions')?.append(comments(item, stop, city.slug));
         markChanged(item);

@@ -967,3 +967,12 @@
   color: var(--color-mid-gray);
   font-weight: var(--font-weight-medium);
 }
+
+/* Sub-points of a place (e.g. inside a park), in walking order, under the note. */
+.tb-list.tb-timeline > .tb-row > .tb-row__subpoints {
+  grid-column: 2;
+  grid-row: 4;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+}

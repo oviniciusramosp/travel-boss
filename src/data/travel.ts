@@ -112,6 +112,13 @@ export type TravelArea =
       paths: LatLngPoint[][];
     };
 
+/** A point inside a place, e.g. a park's fountain. The trip walks through them in order. */
+export type TravelSubPoint = {
+  name: LString;
+  lat: number;
+  lng: number;
+};
+
 /** Station / waypoint along a route (e.g. metro line) — shown on hover with the line */
 export type TravelRouteStop = {
   name: LString;
@@ -240,6 +247,11 @@ export interface TravelPlace {
    * any other link opens in a new tab. Store the link without its share query.
    */
   videos?: string[];
+  /**
+   * Points inside the place in walking order (a park's fountain, pond, statues). The trip
+   * route enters at the first, walks through all of them and leaves from the last.
+   */
+  subPoints?: TravelSubPoint[];
   /**
    * Visit logistics: avg meal price, ticket, duration, best time/day, tips.
    * When omitted, may still resolve from curated `visitByPlaceId` data.
@@ -1883,6 +1895,17 @@ export const localTravelCities: TravelCity[] = [
             [48.8465, 2.3328],
           ],
         },
+        // Walk from the Médicis gate (coming from Mouffetard) to the west side, toward
+        // Cherche-Midi. OSM: node 782601793, relation 975955, node 3099206293, way 62874921,
+        // node 2549604493. Palace front and Grand Bassin sit on the palace axis (no OSM name).
+        subPoints: [
+          { name: { en: 'Medici Fountain', 'pt-BR': 'Fontaine Médicis' }, lat: 48.848059, lng: 2.339294 },
+          { name: { en: 'Luxembourg Palace, south front', 'pt-BR': 'Palácio do Luxemburgo, fachada sul' }, lat: 48.8481, lng: 2.33714 },
+          { name: { en: 'Grand Bassin', 'pt-BR': 'Grand Bassin, o lago octogonal' }, lat: 48.8467, lng: 2.33712 },
+          { name: { en: 'Queens of France, west terrace', 'pt-BR': 'Rainhas da França, terraço oeste' }, lat: 48.847452, lng: 2.336261 },
+          { name: { en: 'Puppet theatre', 'pt-BR': 'Teatro de marionetes' }, lat: 48.846204, lng: 2.334532 },
+          { name: { en: 'Statue of Liberty (replica)', 'pt-BR': 'Estátua da Liberdade (réplica)' }, lat: 48.846376, lng: 2.333151 },
+        ],
         address: 'Rue de Médicis / Pl. Edmond Rostand, 75006 Paris',
         mapsQuery: 'Jardin du Luxembourg Paris',
       },

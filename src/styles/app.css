@@ -998,3 +998,20 @@ p.tb-meta {
     animation: none;
   }
 }
+
+/* A named point inside a place, on its walk. Walk color, smaller than a transfer dot. */
+.leaflet-marker-icon.tb-subpoint-wrap {
+  background: transparent;
+  border: 0;
+}
+
+.tb-subpoint-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 2px;
+  border: 2px solid var(--color-paper);
+  border-radius: var(--r-pill);
+  background: var(--color-walk);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
+}

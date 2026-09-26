@@ -47,6 +47,8 @@ export type MapRouteSegment = {
   walkIndex?: number;
   /** Two-color transfer dots that belong to this spine. */
   transfers?: MapRouteTransfer[];
+  /** Named points inside a place, drawn along a walk. */
+  subPoints?: { lat: number; lng: number; label: string }[];
 };
 
 /** Catalog city shown when no trip and no city are open. */

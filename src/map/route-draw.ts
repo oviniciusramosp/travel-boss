@@ -182,6 +182,30 @@ export function drawRouteSegments(
         points.push([transfer.lat, transfer.lng]);
       }
     }
+    for (const sub of segment.subPoints ?? []) {
+      if (!Number.isFinite(sub.lat) || !Number.isFinite(sub.lng)) continue;
+      const dot = marker([sub.lat, sub.lng], {
+        icon: divIcon({
+          className: 'tb-subpoint-wrap',
+          html: '<span class="tb-subpoint-dot"></span>',
+          iconSize: [14, 14],
+          iconAnchor: [7, 7],
+        }),
+        interactive: true,
+        keyboard: false,
+        bubblingMouseEvents: false,
+        title: sub.label,
+        zIndexOffset: 700,
+      });
+      dot.bindTooltip(sub.label, { direction: 'top', opacity: 1, className: 'tb-pin-tip' });
+      if (leg) {
+        dot.on('mouseover', () => onPointer(leg));
+        dot.on('mouseout', () => onPointer(null));
+      }
+      dot.addTo(group);
+      marks.push(dot);
+      points.push([sub.lat, sub.lng]);
+    }
     entries.push({
       fromId: segment.fromId,
       toId: segment.toId,

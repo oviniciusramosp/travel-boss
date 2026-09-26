@@ -106,6 +106,32 @@ describe('planHop through', () => {
 });
 
 describe('resolveHopSegments', () => {
+  it('walks a place through its sub-points and draws their names', async () => {
+    const calls = deps();
+    const park = place('paris', 'par-luxembourg');
+    const subs = getTravelCity('paris')!.places.find((item) => item.id === 'par-luxembourg')!.subPoints!;
+    const first = subs[0]!;
+    const last = subs.at(-1)!;
+    const segments = await resolveHopSegments(
+      [
+        {
+          from: { ...park, lat: first.lat, lng: first.lng },
+          to: { ...park, lat: last.lat, lng: last.lng },
+          through: subs.slice(1, -1).map((sub) => [sub.lat, sub.lng] as [number, number]),
+          subPoints: subs.map((sub) => ({ lat: sub.lat, lng: sub.lng, label: sub.name['pt-BR'] })),
+        },
+      ],
+      calls,
+    );
+    expect(subs.length).toBeGreaterThan(2);
+    expect(calls.walk).toHaveBeenCalledWith(
+      expect.objectContaining({ lat: first.lat }),
+      expect.objectContaining({ lat: last.lat }),
+      subs.slice(1, -1).map((sub) => [sub.lat, sub.lng]),
+    );
+    expect(segments[0]?.subPoints?.map((sub) => sub.label)[0]).toBe('Fontaine Médicis');
+  });
+
   it('asks the catalog drawer for a transit spine and the road router for a taxi', async () => {
     const calls = deps();
     const hops: RouteHop[] = [
