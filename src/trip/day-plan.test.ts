@@ -8,6 +8,7 @@ import {
   periodAt,
   periodSections,
   rowPeriods,
+  seenFromOutside,
   zonedStamp,
 } from './day-plan';
 
@@ -226,6 +227,24 @@ describe('dateBudget', () => {
     expect(budget.food).toBe(9);
     expect(budget.ticket).toBe(32);
     expect(budget.lines.map((line) => line.id)).toEqual(['lunch', 'museum']);
+  });
+
+  it('skips the ticket of a place seen only from outside', () => {
+    expect(seenFromOutside('Moulin Rouge Foto por fora; daqui, suba a Rue Lepic')).toBe(true);
+    expect(seenFromOutside('Arco do Triunfo No fim da caminhada; por fora é grátis')).toBe(true);
+    expect(seenFromOutside('La Favorite Fachada')).toBe(true);
+    expect(seenFromOutside('Ópera Garnier Por fora é grátis. Por dentro, €25 e só online')).toBe(false);
+    expect(seenFromOutside('Panteão €13, ~1h')).toBe(false);
+    const budget = dateBudget(
+      [
+        { id: 'cabaret', visit: { ticket: { currency: 'EUR', min: 175 } } },
+        { id: 'museum', visit: { ticket: { currency: 'EUR', min: 13 } } },
+      ],
+      [],
+      new Set(['cabaret']),
+    );
+    expect(budget.ticket).toBe(13);
+    expect(budget.lines.map((line) => line.id)).toEqual(['museum']);
   });
 
   it('adds each leg fare to tickets, even the same fare twice', () => {

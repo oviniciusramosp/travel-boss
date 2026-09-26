@@ -27,6 +27,7 @@ import {
   hopRails,
   pastPeriods,
   periodSections,
+  seenFromOutside,
   zonedStamp,
   type Period,
   type Rail,
@@ -1209,9 +1210,18 @@ export function mountTrip(
       const fares = rows.flatMap((row) =>
         row.depart?.fareEur ? [{ label: legLabel(row.depart), eur: row.depart.fareEur }] : [],
       );
+      // A place only seen from outside skips its ticket, unless another stop that date goes in.
+      const outside = new Set<string>();
+      const inside = new Set<string>();
+      for (const row of rows) {
+        const stop = row.dated.day.stops[row.stopIndex];
+        if (!stop?.placeId) continue;
+        (seenFromOutside(`${stop.label} ${stop.note ?? ''}`) ? outside : inside).add(stop.placeId);
+      }
+      for (const placeId of inside) outside.delete(placeId);
       body.append(
         dateBudgetCards(
-          dateBudget(placesHere, fares),
+          dateBudget(placesHere, fares, outside),
           (placeId) => {
             const found = placesHere.find((place) => place.id === placeId);
             return found ? pickLocale(locale, found.name) : placeId;
