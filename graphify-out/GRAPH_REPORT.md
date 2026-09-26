@@ -1,7 +1,7 @@
 # Graph Report - roteiro-04-outubro-d264b0  (2026-09-26)
 
 ## Corpus Check
-- 195 files · ~333,334 words
+- 195 files · ~333,688 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6382da04`
+- Built from commit: `3db0cf30`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -127,8 +127,8 @@ Cohesion: 0.17
 Nodes (15): ref_node_child_process, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbType(), extract(), run (+7 more)
 
 ### Community 2 - "paint"
-Cohesion: 0.11
-Nodes (40): setDocumentTitle(), getTravelCity(), cityDisplayName(), clearStopCurrent(), emptyNotice(), loadTripFile(), mountTrip(), applyQuery() (+32 more)
+Cohesion: 0.10
+Nodes (43): setDocumentTitle(), getTravelCity(), cityDisplayName(), clearStopCurrent(), emptyNotice(), loadTripFile(), mountTrip(), applyQuery() (+35 more)
 
 ### Community 3 - "googleDirectionsUrl"
 Cohesion: 0.29
@@ -236,7 +236,7 @@ Nodes (15): Dia 1 — Centro antigo, Dia 1 — Chegada, Duomo e Galleria, Dia 1 
 
 ### Community 30 - "route.ts"
 Cohesion: 0.09
-Nodes (35): ItineraryLegDef, milanDayLegsById, parisDayLegsById, DatedDay, catalogLegByPair, CatalogLegStroke, haversineM(), pairKey() (+27 more)
+Nodes (32): ItineraryLegDef, milanDayLegsById, parisDayLegsById, DatedDay, catalogLegByPair, CatalogLegStroke, haversineM(), pairKey() (+24 more)
 
 ### Community 31 - "Travel Boss"
 Cohesion: 0.40
@@ -413,6 +413,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `hotel-search.mjs` be split into smaller, more focused modules?**
   _Cohesion score 0.14772727272727273 - nodes in this community are weakly interconnected._
 - **Should `paint` be split into smaller, more focused modules?**
-  _Cohesion score 0.10897435897435898 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10299003322259136 - nodes in this community are weakly interconnected._
 - **Should `hotels.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
