@@ -2045,6 +2045,19 @@
       "norm_label": "itineraryslot"
     },
     {
+      "label": "TravelItinerary",
+      "file_type": "code",
+      "source_file": "src/data/travel-itineraries.ts",
+      "source_location": "L67",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_travel_itineraries_travelitinerary",
+      "community": 46,
+      "community_name": "travel-itineraries.ts",
+      "norm_label": "travelitinerary"
+    },
+    {
       "label": "GuideTab",
       "file_type": "code",
       "source_file": "src/views/guide.ts",
@@ -2784,19 +2797,6 @@
       "community": 71,
       "community_name": "links.ts",
       "norm_label": "cityhashtab"
-    },
-    {
-      "label": "TravelItinerary",
-      "file_type": "code",
-      "source_file": "src/data/travel-itineraries.ts",
-      "source_location": "L67",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_travel_itineraries_travelitinerary",
-      "community": 72,
-      "community_name": "travel-milan-itinerary.ts",
-      "norm_label": "travelitinerary"
     },
     {
       "label": "OverviewArc",
@@ -5772,18 +5772,6 @@
       "norm_label": "paint()"
     },
     {
-      "label": "paintWeather()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L1024",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_paintweather",
-      "community": 2,
-      "community_name": "paint",
-      "norm_label": "paintweather()"
-    },
-    {
       "label": "periodBlock()",
       "file_type": "code",
       "source_file": "src/trip/mount.ts",
@@ -5806,18 +5794,6 @@
       "community": 2,
       "community_name": "paint",
       "norm_label": "periodon()"
-    },
-    {
-      "label": "refreshWeather()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L1054",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_refreshweather",
-      "community": 2,
-      "community_name": "paint",
-      "norm_label": "refreshweather()"
     },
     {
       "label": "releaseLeg()",
@@ -5998,6 +5974,18 @@
       "community": 2,
       "community_name": "paint",
       "norm_label": "weatherslot()"
+    },
+    {
+      "label": "place()",
+      "file_type": "code",
+      "source_file": "src/trip/route.test.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_route_test_place",
+      "community": 2,
+      "community_name": "paint",
+      "norm_label": "place()"
     },
     {
       "label": "prefersReducedMotion()",
@@ -6202,18 +6190,6 @@
       "community": 20,
       "community_name": "route.ts",
       "norm_label": "deps()"
-    },
-    {
-      "label": "place()",
-      "file_type": "code",
-      "source_file": "src/trip/route.test.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_route_test_place",
-      "community": 20,
-      "community_name": "route.ts",
-      "norm_label": "place()"
     },
     {
       "label": "transferLegs()",
@@ -8388,6 +8364,30 @@
       "norm_label": "clamprating()"
     },
     {
+      "label": "favoritePlaceIds()",
+      "file_type": "code",
+      "source_file": "src/data/travel.ts",
+      "source_location": "L6691",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_favoriteplaceids",
+      "community": 43,
+      "community_name": "travel.ts",
+      "norm_label": "favoriteplaceids()"
+    },
+    {
+      "label": "favoritePlaces()",
+      "file_type": "code",
+      "source_file": "src/data/travel.ts",
+      "source_location": "L6686",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_favoriteplaces",
+      "community": 43,
+      "community_name": "travel.ts",
+      "norm_label": "favoriteplaces()"
+    },
+    {
       "label": "formatCityMeta()",
       "file_type": "code",
       "source_file": "src/data/travel.ts",
@@ -8436,52 +8436,16 @@
       "norm_label": "searchplacesplaceholder()"
     },
     {
-      "label": "formatDuration()",
+      "label": "priorityPlaceIds()",
       "file_type": "code",
-      "source_file": "src/data/travel-visit.ts",
-      "source_location": "L2346",
+      "source_file": "src/views/places.ts",
+      "source_location": "L340",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_data_travel_visit_formatduration",
+      "id": "src_views_places_priorityplaceids",
       "community": 43,
       "community_name": "travel.ts",
-      "norm_label": "formatduration()"
-    },
-    {
-      "label": "formatMoney()",
-      "file_type": "code",
-      "source_file": "src/data/travel-visit.ts",
-      "source_location": "L2289",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_visit_formatmoney",
-      "community": 43,
-      "community_name": "travel.ts",
-      "norm_label": "formatmoney()"
-    },
-    {
-      "label": "formatTicketPromo()",
-      "file_type": "code",
-      "source_file": "src/data/travel-visit.ts",
-      "source_location": "L2398",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_visit_formatticketpromo",
-      "community": 43,
-      "community_name": "travel.ts",
-      "norm_label": "formatticketpromo()"
-    },
-    {
-      "label": "visitFieldsForDisplay()",
-      "file_type": "code",
-      "source_file": "src/data/travel-visit.ts",
-      "source_location": "L2405",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_visit_visitfieldsfordisplay",
-      "community": 43,
-      "community_name": "travel.ts",
-      "norm_label": "visitfieldsfordisplay()"
+      "norm_label": "priorityplaceids()"
     },
     {
       "label": "formatLegDuration()",
@@ -8784,30 +8748,6 @@
       "norm_label": "t()"
     },
     {
-      "label": "favoritePlaceIds()",
-      "file_type": "code",
-      "source_file": "src/data/travel.ts",
-      "source_location": "L6691",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_favoriteplaceids",
-      "community": 46,
-      "community_name": "travel-itineraries.ts",
-      "norm_label": "favoriteplaceids()"
-    },
-    {
-      "label": "favoritePlaces()",
-      "file_type": "code",
-      "source_file": "src/data/travel.ts",
-      "source_location": "L6686",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_favoriteplaces",
-      "community": 46,
-      "community_name": "travel-itineraries.ts",
-      "norm_label": "favoriteplaces()"
-    },
-    {
       "label": "computeDayBudget()",
       "file_type": "code",
       "source_file": "src/data/travel-itineraries.ts",
@@ -8892,16 +8832,28 @@
       "norm_label": "legsforday()"
     },
     {
-      "label": "priorityPlaceIds()",
+      "label": "excursion()",
       "file_type": "code",
-      "source_file": "src/views/places.ts",
-      "source_location": "L340",
+      "source_file": "src/data/travel-milan-itinerary.ts",
+      "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_views_places_priorityplaceids",
+      "id": "src_data_travel_milan_itinerary_excursion",
       "community": 46,
       "community_name": "travel-itineraries.ts",
-      "norm_label": "priorityplaceids()"
+      "norm_label": "excursion()"
+    },
+    {
+      "label": "l()",
+      "file_type": "code",
+      "source_file": "src/data/travel-milan-itinerary.ts",
+      "source_location": "L4",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_milan_itinerary_l",
+      "community": 46,
+      "community_name": "travel-itineraries.ts",
+      "norm_label": "l()"
     },
     {
       "label": "pickLocale()",
@@ -9204,6 +9156,30 @@
       "norm_label": "cafevisit()"
     },
     {
+      "label": "formatDuration()",
+      "file_type": "code",
+      "source_file": "src/data/travel-visit.ts",
+      "source_location": "L2346",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_visit_formatduration",
+      "community": 5,
+      "community_name": "travel-visit.ts",
+      "norm_label": "formatduration()"
+    },
+    {
+      "label": "formatMoney()",
+      "file_type": "code",
+      "source_file": "src/data/travel-visit.ts",
+      "source_location": "L2289",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_visit_formatmoney",
+      "community": 5,
+      "community_name": "travel-visit.ts",
+      "norm_label": "formatmoney()"
+    },
+    {
       "label": "formatMoneyTypical()",
       "file_type": "code",
       "source_file": "src/data/travel-visit.ts",
@@ -9214,6 +9190,18 @@
       "community": 5,
       "community_name": "travel-visit.ts",
       "norm_label": "formatmoneytypical()"
+    },
+    {
+      "label": "formatTicketPromo()",
+      "file_type": "code",
+      "source_file": "src/data/travel-visit.ts",
+      "source_location": "L2398",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_visit_formatticketpromo",
+      "community": 5,
+      "community_name": "travel-visit.ts",
+      "norm_label": "formatticketpromo()"
     },
     {
       "label": "L()",
@@ -9310,6 +9298,18 @@
       "community": 5,
       "community_name": "travel-visit.ts",
       "norm_label": "restaurantvisit()"
+    },
+    {
+      "label": "visitFieldsForDisplay()",
+      "file_type": "code",
+      "source_file": "src/data/travel-visit.ts",
+      "source_location": "L2405",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_visit_visitfieldsfordisplay",
+      "community": 5,
+      "community_name": "travel-visit.ts",
+      "norm_label": "visitfieldsfordisplay()"
     },
     {
       "label": "capitalized()",
@@ -9478,6 +9478,30 @@
       "community": 50,
       "community_name": "summary.ts",
       "norm_label": "tripdatespan()"
+    },
+    {
+      "label": "paintWeather()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L1024",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_paintweather",
+      "community": 51,
+      "community_name": "weather.ts",
+      "norm_label": "paintweather()"
+    },
+    {
+      "label": "refreshWeather()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L1054",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_refreshweather",
+      "community": 51,
+      "community_name": "weather.ts",
+      "norm_label": "refreshweather()"
     },
     {
       "label": "keyOf()",
@@ -9915,7 +9939,7 @@
       "label": "photosForPlaceId()",
       "file_type": "code",
       "source_file": "src/data/travel-photos.ts",
-      "source_location": "L2403",
+      "source_location": "L2388",
       "_callable": true,
       "_origin": "ast",
       "id": "src_data_travel_photos_photosforplaceid",
@@ -11952,30 +11976,6 @@
       "norm_label": "cityhash()"
     },
     {
-      "label": "excursion()",
-      "file_type": "code",
-      "source_file": "src/data/travel-milan-itinerary.ts",
-      "source_location": "L5",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_milan_itinerary_excursion",
-      "community": 72,
-      "community_name": "travel-milan-itinerary.ts",
-      "norm_label": "excursion()"
-    },
-    {
-      "label": "l()",
-      "file_type": "code",
-      "source_file": "src/data/travel-milan-itinerary.ts",
-      "source_location": "L4",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_milan_itinerary_l",
-      "community": 72,
-      "community_name": "travel-milan-itinerary.ts",
-      "norm_label": "l()"
-    },
-    {
       "label": "greatCircle()",
       "file_type": "code",
       "source_file": "src/map/overview.ts",
@@ -13615,20 +13615,20 @@
       "norm_label": "memory"
     },
     {
-      "label": "CLAUDE.md",
+      "label": "AGENTS.md",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude",
       "community": 21,
       "community_name": "Trip artifact \u2014 `travel-boss/trip/v1`",
-      "norm_label": "claude.md"
+      "norm_label": "agents.md"
     },
     {
       "label": "Arquitetura",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L25",
       "_origin": "ast",
       "id": "claude_arquitetura",
@@ -13639,7 +13639,7 @@
     {
       "label": "Cat\u00e1logo de lugares",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L78",
       "_origin": "ast",
       "id": "claude_cat\u00e1logo_de_lugares",
@@ -13650,7 +13650,7 @@
     {
       "label": "Comandos",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L5",
       "_origin": "ast",
       "id": "claude_comandos",
@@ -13661,7 +13661,7 @@
     {
       "label": "Como um LLM edita um roteiro",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L62",
       "_origin": "ast",
       "id": "claude_como_um_llm_edita_um_roteiro",
@@ -13672,7 +13672,7 @@
     {
       "label": "Contrato",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L34",
       "_origin": "ast",
       "id": "claude_contrato",
@@ -13683,7 +13683,7 @@
     {
       "label": "Guia da cidade (Mercado e Comidas)",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L82",
       "_origin": "ast",
       "id": "claude_guia_da_cidade_mercado_e_comidas",
@@ -13694,7 +13694,7 @@
     {
       "label": "Travel Boss",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_travel_boss",
@@ -16629,6 +16629,28 @@
       "norm_label": "travel-itineraries.test.ts"
     },
     {
+      "label": "travel-milan-itinerary.ts",
+      "file_type": "code",
+      "source_file": "src/data/travel-milan-itinerary.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_data_travel_milan_itinerary",
+      "community": 46,
+      "community_name": "travel-itineraries.ts",
+      "norm_label": "travel-milan-itinerary.ts"
+    },
+    {
+      "label": "milanItinerary",
+      "file_type": "code",
+      "source_file": "src/data/travel-milan-itinerary.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_data_travel_milan_itinerary_milanitinerary",
+      "community": 46,
+      "community_name": "travel-itineraries.ts",
+      "norm_label": "milanitinerary"
+    },
+    {
       "label": "travel-milan.test.ts",
       "file_type": "code",
       "source_file": "src/data/travel-milan.test.ts",
@@ -18079,28 +18101,6 @@
       "community": 71,
       "community_name": "links.ts",
       "norm_label": "links.test.ts"
-    },
-    {
-      "label": "travel-milan-itinerary.ts",
-      "file_type": "code",
-      "source_file": "src/data/travel-milan-itinerary.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_data_travel_milan_itinerary",
-      "community": 72,
-      "community_name": "travel-milan-itinerary.ts",
-      "norm_label": "travel-milan-itinerary.ts"
-    },
-    {
-      "label": "milanItinerary",
-      "file_type": "code",
-      "source_file": "src/data/travel-milan-itinerary.ts",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_data_travel_milan_itinerary_milanitinerary",
-      "community": 72,
-      "community_name": "travel-milan-itinerary.ts",
-      "norm_label": "milanitinerary"
     },
     {
       "label": "overview.ts",
@@ -52123,7 +52123,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
@@ -52134,7 +52134,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
@@ -52145,7 +52145,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
@@ -52156,7 +52156,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
@@ -52167,7 +52167,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
@@ -52178,7 +52178,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
@@ -52189,7 +52189,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast",
@@ -57107,7 +57107,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/travel-photos.ts",
-      "source_location": "L2403",
+      "source_location": "L2388",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_travel_photos",
@@ -66943,7 +66943,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
@@ -66954,7 +66954,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
+      "source_file": "AGENTS.md",
       "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
@@ -67245,5 +67245,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8f3c04620876e960531314e8792565495ab70a5b"
+  "built_at_commit": "e464d3049b99593d549c5d638411ca241171c757"
 }
