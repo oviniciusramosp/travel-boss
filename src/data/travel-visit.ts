@@ -350,13 +350,20 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Café da manhã a caminho do CDG 2 TGV — leve antes do longo trajeto de RER para o leste.',
     ),
   }),
+  'par-cdg-exki': restaurantVisit(10, 15, {
+    bestDay: L('Daily 6:00–21:30', 'Todo dia 6h–21h30'),
+    tips: L(
+      'Landside, before security: after customs, go up one floor. Brioche Dorée on the arrivals level needs no escalator.',
+      'Fica antes da segurança: saindo da alfândega, suba um andar. Sem subir com as malas, a Brioche Dorée fica no próprio desembarque.',
+    ),
+  }),
   'par-cdg-rer': {
     ticket: money(
-      2,
-      2,
+      14,
+      16,
       L(
-        'Navigo Easy blank card (~€2). Load rides or a day pass after.',
-        'Cartão Navigo Easy em branco (~€2). Carregue viagens ou passe diário depois.',
+        'Airport ticket €14 (2 h, RER E included) on a phone, or +€2 for a Navigo Easy card.',
+        'Bilhete aeroporto €14 (2h, inclui o RER E) no celular, ou +€2 do cartão Navigo Easy.',
       ),
     ),
     durationMin: 15,
@@ -364,8 +371,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestTime: L('Right after coffee / baggage claim', 'Logo após o café / bagagem'),
     crowdProfile: 'transit',
     tips: L(
-      'RATP machines sell Navigo Easy. Board RER B toward Paris; change at Magenta (or Gare du Nord → Magenta) for RER E to Noisy-le-Sec.',
-      'Máquinas RATP vendem Navigo Easy. Pegue o RER B para Paris; troque em Magenta (ou Gare du Nord → Magenta) no RER E até Noisy-le-Sec.',
+      'Pink-header machines sell a Navigo Easy already loaded with the airport ticket; staffed counter on level 2, daily 6:00–22:30. On iPhone, buy it in the IDF Mobilités app or in Wallet. The €2.55 Métro-Train-RER ticket is not valid at CDG. RER B to Gare du Nord, then RER E at Magenta to Noisy-le-Sec.',
+      'As máquinas de faixa rosa vendem o Navigo Easy já carregado com o bilhete aeroporto; guichê no nível 2, todo dia das 6h às 22h30. No iPhone, compre no app IDF Mobilités ou na Carteira. O ticket Métro-Train-RER de €2,55 não vale no CDG. RER B até Gare du Nord e RER E em Magenta até Noisy-le-Sec.',
     ),
   },
   'par-orly-m14': {
@@ -893,7 +900,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Use a passagem subterrânea — nunca atravesse a rotatória no nível da rua. Túmulo do Soldado Desconhecido é grátis no nível da rua.',
     ),
   }),
-  'par-sainte-chapelle': museumVisit(13, {
+  // Non-EEA adult (EEA €16), official site Sep 2026. Oct–Mar 9:00–17:00, last entry 16:30.
+  'par-sainte-chapelle': museumVisit(22, {
     national: true,
     ticketUrl: 'https://www.sainte-chapelle.fr/en/',
     durationMin: 45,
@@ -906,8 +914,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ticketPromos: [PROMO_FIRST_SUNDAY_WINTER],
     osmRef: 'relation/3344870',
     tips: L(
-      'Upper chapel is the wow. Security queue can be long — book ahead even on free Sundays.',
-      'A capela superior é o show. Fila de segurança pode ser longa — reserve mesmo no domingo grátis.',
+      'Upper chapel is the wow. A time slot is mandatory, even on free Sundays; the security queue can be long.',
+      'A capela superior é o show. O horário marcado é obrigatório, mesmo no domingo grátis; a fila de segurança pode ser longa.',
     ),
   }),
   'par-pantheon': museumVisit(13, {
@@ -960,7 +968,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Melhor vista clássica da Torre no skyline. Vá pelo clima, não só pelo horário. Sem 1º domingo grátis.',
     ),
   }),
-  'par-opera': museumVisit(15, {
+  // Non-EEA adult (EEA €15), operadeparis.fr 2026. Online only; last entry 1 h before closing.
+  'par-opera': museumVisit(25, {
     // Self-guided palace tour — not a standard CMN free-Sunday monument
     ticketUrl: 'https://www.operadeparis.fr/en/visits/palais-garnier',
     durationMin: 60,
@@ -1315,6 +1324,16 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'par-michalak': cafeVisit(8, 20),
+  'par-michalak-printemps': cafeVisit(8, 12, {
+    bestDay: L(
+      'Mon–Fri 8:30–20:00; Sat 10:00–20:00; Sun 11:00–20:00',
+      'Seg–sex 8h30–20h; sáb 10h–20h; dom 11h–20h',
+    ),
+    tips: L(
+      'Viennoiseries €4–5, coffee from €3.50. Seats inside and out if you want to wait for Printemps to open at 10:00.',
+      'Viennoiseries de €4 a €5, café desde €3,50. Tem mesa dentro e fora, se quiser esperar o Printemps abrir às 10h.',
+    ),
+  }),
   'par-michalak-etienne': cafeVisit(6, 15, {
     tips: L(
       'Etienne Marcel counter near Montorgueil — go early for the best selection.',
@@ -1730,7 +1749,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
     tips: L('Halal. Cards accepted.', 'Halal. Aceita cartão.'),
   }),
-  'par-margaux': restaurantVisit(26, 40, {
+  'par-margaux': restaurantVisit(30, 40, {
     bestDay: L(
       'Mon–Fri 12:00–14:30 and 19:00–23:30; Sat–Sun 12:00–17:00 and 19:00–00:30',
       'Seg–sex 12h–14h30 e 19h–23h30; sáb–dom 12h–17h e 19h–0h30',

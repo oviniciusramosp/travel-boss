@@ -1218,6 +1218,22 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'PAUL Aéroport Charles de Gaulle Terminal 2',
       },
       {
+        id: 'par-cdg-exki',
+        name: { en: 'EXKi CDG 2E', 'pt-BR': 'EXKi CDG 2E' },
+        category: 'restaurants',
+        subcategories: ['self-service'],
+        description: {
+          en: 'Soups, quiches, salads and bowls in the public departures hall of Terminal 2E (level 2), one floor above arrivals.',
+          'pt-BR': 'Sopas, quiches, saladas e bowls no saguão público de partidas do Terminal 2E (nível 2), um andar acima do desembarque.',
+        },
+        googleRating: 4.4,
+        // Google pin of "EXKI - Terminal 2E - Départs" (landside, by doors 10–11)
+        lat: 49.003054,
+        lng: 2.577027,
+        address: 'Terminal 2E, niveau 2 (Départs), 95700 Roissy-en-France',
+        mapsQuery: 'EXKI Terminal 2E Départs Aéroport Charles de Gaulle',
+      },
+      {
         id: 'par-cdg-rer',
         name: {
           en: 'CDG 2 TGV · Navigo',
@@ -2364,6 +2380,24 @@ export const localTravelCities: TravelCity[] = [
         address: '37 Rue Étienne Marcel, 75002 Paris',
         mapsQuery: 'Pâtisserie Michalak Etienne Marcel Paris',
         mapsUrl: 'https://maps.app.goo.gl/hsYjfSBmJESa8o8S9',
+      },
+      {
+        id: 'par-michalak-printemps',
+        name: {
+          en: 'Coffee Shop Michalak | Printemps',
+          'pt-BR': 'Coffee Shop Michalak | Printemps',
+        },
+        category: 'cafes',
+        subcategories: ['pastry', 'coffee-shop'],
+        description: {
+          en: 'Christophe Michalak’s coffee shop on the ground floor of Printemps de l’Homme, at the corner of Rue du Havre: croissants, pains au chocolat and coffee, from 8:30 on weekdays.',
+          'pt-BR': 'O coffee shop do Christophe Michalak no térreo do Printemps de l’Homme, na esquina da Rue du Havre: croissants, pains au chocolat e café, desde as 8h30 nos dias de semana.',
+        },
+        googleRating: 3.5,
+        lat: 48.873953,
+        lng: 2.327456,
+        address: '2 Rue du Havre, 75009 Paris',
+        mapsQuery: 'Coffee Shop Michalak Printemps Haussmann',
       },
       {
         id: 'par-artizans',

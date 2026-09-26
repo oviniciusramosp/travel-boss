@@ -7,7 +7,6 @@ import type { LString } from './travel';
 import {
   getTransitLine,
   haversineM,
-  metro14,
   metro2,
   metro4,
   metro5,
@@ -15,7 +14,6 @@ import {
   metro9,
   rerA,
   rerB,
-  rerC,
   rerE,
   sliceLinePath,
   transilienL,
@@ -936,17 +934,17 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.85361, 2.301304],
     ],
   },
-  trainLeg('par-passerelle-debilly', 'par-casa-do-gui', 45, [
-    ride(metro9, 'alma-marceau', 'havre-caumartin'),
+  // Last RER E at 22:59: the line closes from 22:45 on weekends (works 26/09–6/12)
+  trainLeg('par-port-debilly', 'par-casa-do-gui', 60, [
+    ride(metro9, 'iena', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
   // 5/10
-  trainLeg('par-casa-do-gui', 'par-bohemia', 40, [
-    ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
-    ride(metro14, 'saint-lazare', 'pyramides'),
-  ]),
-  trainLeg('par-carre-opera', 'par-creteil-soleil', 45, [ride(metro8, 'opera', 'creteil-prefecture')]),
-  trainLeg('par-creteil-soleil', 'par-bouillon-republique', 35, [ride(metro8, 'creteil-prefecture', 'republique')]),
+  trainLeg('par-casa-do-gui', 'par-michalak-printemps', 35, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
+  trainLeg('par-opera', 'par-creteil-soleil', 45, [ride(metro8, 'opera', 'creteil-prefecture')]),
+  trainLeg('par-creteil-soleil', 'par-uniqlo-opera', 45, [ride(metro8, 'creteil-prefecture', 'opera')]),
+  // M8 skips République until 22/04/2027 (renovation): get off at Filles du Calvaire
+  trainLeg('par-galeries-lafayette', 'par-bouillon-republique', 20, [ride(metro8, 'opera', 'filles-calvaire')]),
   trainLeg('par-bouillon-republique', 'par-casa-do-gui', 40, [
     ride(metro5, 'republique', 'gare-nord'),
     ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN),
@@ -956,7 +954,6 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'magenta'),
     ride(rerB, 'gare-nord', 'saint-michel', GARE_DU_NORD_MAGENTA_MIN),
   ]),
-  trainLeg('par-place-dauphine', 'par-recrutement', 15, [ride(rerC, 'saint-michel', 'invalides')]),
   trainLeg('par-champ-mars', 'par-casa-do-gui', 60, [
     rerCToPorteMaillot,
     ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),

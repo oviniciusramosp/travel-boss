@@ -800,6 +800,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-michalak-printemps': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/d/dc/Croissants_au_beurre_%2818953292873%29.jpg',
+      'Butter croissants (generic photo)',
+      'Croissants na manteiga (foto ilustrativa)',
+      'Herry Wibisono · CC0 · Wikimedia Commons',
+    ),
+  ],
   'par-michalak-etienne': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Tarte_aux_fraises_%28Nice%29.jpg/1280px-Tarte_aux_fraises_%28Nice%29.jpg',
@@ -942,6 +950,20 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'PAUL CDG — croissants & coffee',
       'PAUL CDG — croissants e café',
       'Wikimedia Commons',
+    ),
+  ],
+  'par-cdg-exki': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Vegan_Food_at_Paris_CDG_Airport_Terminal_2F.jpg/960px-Vegan_Food_at_Paris_CDG_Airport_Terminal_2F.jpg',
+      'EXKi salad and bowl at CDG (Terminal 2F)',
+      'Salada e bowl da EXKi no CDG (Terminal 2F)',
+      'Tony Webster · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Terminal_2F_at_Paris_CDG_Airport_%2853925649847%29.jpg/960px-Terminal_2F_at_Paris_CDG_Airport_%2853925649847%29.jpg',
+      'EXKi sign in CDG Terminal 2F',
+      'Placa da EXKi no Terminal 2F do CDG',
+      'Tony Webster · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-cdg': [

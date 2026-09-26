@@ -7,69 +7,75 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux
 
-- 11:55 [CDG](place:par-cdg) — Pouso. Os voos do Brasil chegam no Terminal 2 (LATAM no 2A, Air France no 2E). Passaporte e malas: conte ~1h. Até a estação CDG 2 TGV são ~5 min a pé do 2E e ~10 min do 2A
-- 13:00 [PAUL CDG](place:par-cdg-paul) — Almoço no lado público do terminal (~€10–14). No 2E: Exki ou Café Eiffel, nível 2. Saindo do 2A: Pret A Manger ou PAUL no setor 2B–2D, no caminho da estação. Na própria estação CDG 2 TGV: Brioche Dorée, nível 4
-- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Bilhete aeroporto (€14 por pessoa, no app ou no cartão): vale 2h e já inclui o RER E. Se o Uber estiver até €40, compensa mais pegar o Uber: a diferença para os 2 bilhetes (€28) é de até €12
+- 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
+- 13:00 [EXKi CDG 2E](place:par-cdg-exki) — **Almoço** no saguão público de partidas do 2E, um andar acima do desembarque: sopa, quiche, salada ou bowl (~€10–15). Sem subir com as malas: Brioche Dorée, no próprio desembarque
+- 13:45 [CDG 2 TGV · Navigo](place:par-cdg-rer) — Se o Uber estiver até €40, compensa mais pegar o Uber: a diferença é de €12. Na Bolt, as estimativas do próprio site dão ~€30–35 até Noisy-le-Sec; a tarifa dinâmica do domingo às 13h só aparece no app e pode levar a ~€50. O UberX fez média de €28 no último mês. De trem, o bilhete aeroporto (€14 por pessoa, vale 2h e inclui o RER E) se compra aqui: nas máquinas de faixa rosa, já num Navigo Easy (€2), ou no guichê do nível 2 (6h–22h30). No iPhone, dá para comprar no app IDF Mobilités ou direto na Carteira
   - via: RER B até Gare du Nord, RER E em Magenta até Noisy-le-Sec e caminhada até o mercado · 1h15
-- 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Compras da casa: abre domingo das 9h30 às 23h. O Auchan em frente fecha às 12h30
+- 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Comprar algo para comer e beber antes de chegar na casa do Gui
   - via: a pé · 6 min
-- 15:30 [Casa do Gui](place:par-casa-do-gui) — Malas, banho e descanso depois do almoço no aeroporto
-- 16:30 [Casa do Gui](place:par-casa-do-gui) — Saída. Compre 2 tickets Métro-Train-RER por pessoa no app IDF Mobilités (€2,55 cada), um para ir e outro para voltar: cada um vale 2h, com as trocas de linha. A Navigo Semaine só começa amanhã. Greve no metrô 9: RER E até Neuilly–Porte Maillot e RER C até Champ de Mars, fazendo o passeio ao contrário
+- 15:30 [Casa do Gui](place:par-casa-do-gui) — Chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+- 16:30 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
   - via: RER E + metrô 9 · 45 min
 - 17:15 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
 - 17:25 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
 - 17:35 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
 - 17:45 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
-- 18:00 [Le café by Maison Bergeron](place:par-bake-blend) — Café da tarde: pain au chocolat e café (nota 4,5 no Google). Domingo abre até 19h e costuma ter fila no fim da tarde
-- 18:20 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**, com ingresso das 18h30: compre já, porque vende até 90 dias antes e esgota (só elevador €36,70; escada até o 2º andar + elevador €28). O sol se põe às 19h26: você vê lá de cima. Última subida às 22h45, se o voo atrasar
+- 18:05 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**, com ingresso das 18h30: chegue uns 20 min antes para a revista. Compre já, porque vende até 90 dias antes e esgota (só elevador €36,70; escada até o 2º andar + elevador €28). O sol se põe às 19h25: você vê lá de cima. Última subida às 22h45, se o voo atrasar
 - 20:15 [Champ de Mars](place:par-champ-mars) — Descida pelo gramado até a École Militaire, com a Torre acesa atrás
 - 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Só por fora: a capela fica na ala norte do prédio da cúpula, que é área militar. Volta pelo gramado com a Torre de frente
 - 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
-- 21:05 [Margaux](place:par-margaux) — Jantar: cordon bleu premiado (~€26). Reserve para 21h
-- 22:00 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h, se ainda houver energia. Greve no metrô 9: RER C em Pont de l'Alma até Neuilly–Porte Maillot e RER E
-  - via: metrô 9 + RER E · 45 min
-- 23:00 [Casa do Gui](place:par-casa-do-gui) — Volta
+- 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa): cordon bleu premiado (€26, com um acompanhamento) e uma sobremesa de €9. Precisa reservar: na Zenchef, o primeiro horário livre da noite é 21h15; o das 21h, só por telefone (01 86 04 40 54)
+- 22:00 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h
+- 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio. Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59, porque a linha fecha às 22h45 nos fins de semana, para obras
+  - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h
+- 23:30 [Casa do Gui](place:par-casa-do-gui) — Volta
+- Se perder o último RER E ou o metrô 9 parar pela greve: Bolt até a casa (~€25)
 
-### Dia 2 — Seg 5/10 · Café reforçado, Opéra, Uniqlo e Créteil
+### Dia 2 — Seg 5/10 · Printemps, Opéra, Créteil e pôr do sol na Galeries Lafayette
 
-- 08:15 [Casa do Gui](place:par-casa-do-gui) — Saída. Greve no metrô 14: de Haussmann–Saint-Lazare, 15 min a pé até o café
-  - via: RER E até Haussmann–Saint-Lazare e metrô 14 até Pyramides · 40 min
-- 09:00 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã reforçado**: pancakes, ovos Benedict ou pain perdu (€20–30). Não aceita reserva; abre às 8h30
-- 10:15 [Ópera Garnier](place:par-opera) — Por fora é grátis; por dentro €25, só com ingresso online (entradas 10h–16h; às vezes fecha para ensaio)
-- 11:15 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris
-- 11:30 [Galeries Lafayette](place:par-galeries-lafayette) — Cúpula e terraço grátis no 8º andar (fecha com chuva ou vento)
-- 12:30 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
-- 12:45 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma
-- 13:30 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100. Greve no metrô 8: deixe o Créteil para outro dia
-  - via: metrô 8 · 45 min
-- 14:30 [Créteil Soleil (Primark, Normal)](place:par-creteil-soleil) — Primark, Normal, H&M, Sephora e Bershka, até 20h30
-  - via: metrô 8 · 35 min
-- 18:15 [Bouillon République](place:par-bouillon-republique) — Jantar clássico (~€20–30), no caminho de casa. Reserve online. Greve no metrô 5: 15 min a pé até a Gare de l'Est e RER E em Magenta
+- 08:40 [Casa do Gui](place:par-casa-do-gui) — Saída. Agora sim com o ticket semanal: a Navigo Semaine vale de hoje até domingo
+  - via: RER E até Haussmann–Saint-Lazare · 35 min
+- 09:15 [Coffee Shop Michalak | Printemps](place:par-michalak-printemps) — Croissant e café para levar (~€8–10 por pessoa), a 3 min do RER. Mais barato: só o café na Cuvée Noire, 96 Rue Saint-Lazare (nota 4,6)
+- 10:00 [Printemps](place:par-printemps) — Abre às 10h: cúpula de vitral no 6º andar do Printemps Femme e terraço grátis no 7º (confira se reabriu: até 30/09 era um pop-up)
+- 11:00 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
+- 11:20 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris
+- 11:40 [Ópera Garnier](place:par-opera) — Por fora é grátis. Por dentro, €25 e só online: em 5/10 as manhãs já esgotaram e restam horários das 12h às 14h. Sem a visita, siga direto para o Créteil. Greve no metrô 8: deixe o Créteil para outro dia
+  - via: metrô 8 de Opéra até Créteil–Préfecture · 45 min
+- 14:00 [Créteil Soleil (Primark, Normal)](place:par-creteil-soleil) — **Almoço** no shopping e compras: Primark, Normal, H&M, Sephora e Bershka, até 20h30
+  - via: metrô 8 de Créteil–Préfecture até Opéra · 45 min
+- 18:15 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
+- 18:40 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100
+- 19:00 [Galeries Lafayette](place:par-galeries-lafayette) — **Pôr do sol às 19h23** no terraço grátis do 8º andar: suba até as 19h, porque ele pode fechar às 19h30 (e fecha com chuva ou vento). A cúpula fica no caminho
+  - via: metrô 8 de Opéra até Filles du Calvaire, que não para em République até abril de 2027 · 20 min
+- 19:55 [Bouillon République](place:par-bouillon-republique) — Jantar clássico (~€20–30), no caminho de casa. Reserve online. Saia até 21h40: de 5 a 14/10 o RER E para às 22h15. Greve no metrô 5: 15 min a pé até a Gare de l'Est e RER E em Magenta
   - via: metrô 5 até Gare du Nord e RER E em Magenta · 40 min
-- 20:00 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
+- 22:00 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
 
 ### Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre
 
 - 07:55 [Casa do Gui](place:par-casa-do-gui) — Saída. Greve no RER B: RER E até Neuilly–Porte Maillot e RER C até Saint-Michel (~50 min)
   - via: RER E até Magenta e RER B de Gare du Nord até Saint-Michel Notre-Dame · 45 min
-- 08:45 [La Maison d'Isabelle](place:par-maison-isabelle) — Croissant premiado (~€1,40); fecha segunda
-- 09:05 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
-- 10:05 [Shakespeare and Company](place:par-shakespeare) — Livraria à beira do Sena
-- 10:40 [Panteão](place:par-pantheon) — ~€13, 1h
-- 11:50 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
-- 12:15 [Au P'tit Grec](place:par-auptitgrec) — Almoço: crepe enorme (€7–10), só dinheiro
-- 13:15 [Jardim de Luxemburgo](place:par-luxembourg) — Cadeiras em volta do lago e o Palais du Luxembourg; fecha às 18h45
-- 14:30 [La Marquise (Villa Marquise)](place:par-villa-marquise) — Fachada
-- 15:00 [CityPharma](place:par-citypharma) — Dermocosméticos
-- 15:45 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10)
-- 16:45 [Brasserie Le Nesle](place:par-le-nesle) — Fatia do bolo da Matilda (~€21–30) para viagem: é a sobremesa do piquenique
-- 17:15 [Patate](place:par-patate) — Batata no cone, se bater fome (€4–7,50)
-- 17:30 [Pont Neuf](place:par-pont-neuf) — Fim de tarde no Sena
-- 17:45 [Place Dauphine](place:par-place-dauphine) — Praça calma ao lado da ponte
-  - via: RER C até Invalides · 15 min
-- 18:10 [Le Recrutement Café](place:par-recrutement) — Café de esquina com vista para a Torre
+- 08:45 [La Maison d'Isabelle](place:par-maison-isabelle) — Croissant premiado (~€1,40), para viagem: não tem onde sentar
+- 09:00 [Shakespeare and Company](place:par-shakespeare) — Café para acompanhar o croissant: o café da livraria abre às 9h
+- 09:15 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
+- 10:05 [Sainte-Chapelle](place:par-sainte-chapelle) — Vitrais da capela alta. €22 por pessoa (fora da UE), com horário obrigatório: reserve o das 10h15. Em outubro fecha às 17h
+- 11:05 [Relógio da Conciergerie](place:par-horloge) — Relógio de 1370 na torre da esquina com o Quai de l'Horloge
+- 11:10 [Place Dauphine](place:par-place-dauphine) — Praça calma ao lado da ponte
+- 11:20 [Pont Neuf](place:par-pont-neuf) — Travessia para a margem esquerda
+- 11:30 [Brasserie Le Nesle](place:par-le-nesle) — Uma fatia do bolo da Matilda para dividir (~€21–30); o que sobrar vai para viagem
+- 12:00 [Patate](place:par-patate) — Um cone de batata para dividir (€4–7,50); abre às 11h30
+- 12:20 [Rue de la Sorbonne](place:par-sorbonne) — Subida até o Panteão
+- 12:35 [Panteão](place:par-pantheon) — €13, ~1h
+- 13:45 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
+- 14:00 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: um crepe para cada (€7–10); aceita cartão
+- 14:50 [Jardim de Luxemburgo](place:par-luxembourg) — Cadeiras em volta do lago e o Palais du Luxembourg
+- 16:05 [Poilâne (Cherche-Midi)](place:par-poilane-cherche-midi) — A padaria original, de 1932: punitions (~€5) e a miche
+- 16:25 [CityPharma](place:par-citypharma) — Dermocosméticos; aberta até 21h
+- 17:15 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10)
+  - via: a pé pela Rue de Grenelle · 30 min
+- 18:25 [Le Recrutement Café](place:par-recrutement) — Café de esquina com vista para a Torre
 - 18:40 [Rua Cler (mercado)](place:par-rue-cler) — Queijo, baguete e vinho para o piquenique
-- 19:10 [Champ de Mars](place:par-champ-mars) — Piquenique no gramado: pôr do sol às 19h22 e brilho às 20h
+- 19:10 [Champ de Mars](place:par-champ-mars) — Piquenique no gramado: pôr do sol às 19h21 e brilho às 20h
   - via: RER C até Neuilly–Porte Maillot e RER E até Noisy-le-Sec · 1h
 - 21:15 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Almoço alternativo em Saint-Germain: [Spécimen Burger](place:par-specimen-burger) — hambúrguer ~€13, seg–sex até 15h
