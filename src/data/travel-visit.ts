@@ -1141,6 +1141,121 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   },
 
+  // —— Perto da BnF (checked Sep 2026) ——
+  'par-fuuki': restaurantVisit(16, 25, {
+    bestDay: L(
+      'Mon–Fri 11:10–14:50 and 18:10–22:50; weekends 11:10–22:50',
+      'Seg–sex 11h10–14h50 e 18h10–22h50; fim de semana 11h10–22h50',
+    ),
+    tips: L(
+      'Omurice €13.90, karaage donburi €15.90, ramen from €15.90; shiratama zenzai dessert €6.50.',
+      'Omurice €13,90, donburi de karaage €15,90, ramen a partir de €15,90; de sobremesa, shiratama zenzai €6,50.',
+    ),
+  }),
+  'par-n-plus-un': restaurantVisit(19, 29, {
+    bestDay: L(
+      'Lunch daily 11:45–14:30; dinner Tue–Sat 19:00–22:00',
+      'Almoço todo dia 11h45–14h30; jantar ter–sáb 19h–22h',
+    ),
+    tips: L(
+      'Burgers with fries €18–19. Weekday lunch menu: starter or dessert + main €23, three courses €29.',
+      'Burgers com fritas €18–19. Menu de almoço de seg a sex: entrada ou sobremesa + prato €23, três tempos €29.',
+    ),
+  }),
+  'par-le-quai-bnf': restaurantVisit(15, 20, {
+    bestDay: L(
+      'Mon–Fri from 8:00, kitchen 11:30–23:30; Sat–Sun from 16:00',
+      'Seg–sex a partir das 8h, cozinha 11h30–23h30; sáb–dom a partir das 16h',
+    ),
+    tips: L(
+      'Daily specials at lunch only. From 16:00 a pint is €3.50 and home-made fries with mayo €4.50.',
+      'Prato do dia só no almoço. A partir das 16h, o chope de 50 cl sai a €3,50 e a porção de fritas caseiras com maionese a €4,50.',
+    ),
+  }),
+  'par-cajou': cafeVisit(13, 19, {
+    bestDay: L(
+      'Mon–Fri 8:30–18:30; Sat 9:00–18:00; closed Sun. Lunch 12:00–14:00',
+      'Seg–sex 8h30–18h30; sáb 9h–18h; fecha domingo. Almoço 12h–14h',
+    ),
+    tips: L(
+      'Main €13, two courses €16, three €19; desserts €4 all day.',
+      'Prato €13, dois tempos €16, três €19; sobremesa €4 o dia todo.',
+    ),
+  }),
+  'par-kawaa-lumiere': {
+    bestDay: L(
+      'Mon–Fri 8:00–18:00 (Thu after-work until 20:00); Sat–Sun 12:00–19:00',
+      'Seg–sex 8h–18h (quinta tem after-work até 20h); sáb–dom 12h–19h',
+    ),
+    crowdProfile: 'cafe',
+  },
+  'par-bercy-village': {
+    ticket: free,
+    durationMin: 30,
+    durationMax: 90,
+    bestDay: L(
+      'Shops daily 10:00–20:00, Sundays too; restaurants until 02:00',
+      'Lojas todo dia 10h–20h, domingo inclusive; restaurantes até 2h',
+    ),
+    crowdProfile: 'shop',
+    tips: L(
+      'Dammann Frères tea comes in sealed tins that travel well.',
+      'Os chás da Dammann Frères vêm em latas lacradas, que viajam bem.',
+    ),
+  },
+  'par-passerelle-simone-de-beauvoir': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    bestTime: L('Late afternoon light on the Seine', 'Luz de fim de tarde no Sena'),
+    tips: L(
+      'Pedestrians and bikes only. Cross from the BnF steps straight into the Parc de Bercy.',
+      'Só pedestres e bicicletas. Da escadaria da BnF você sai direto no Parc de Bercy.',
+    ),
+  }),
+  'par-parc-de-bercy': parkVisit({
+    tips: L(
+      'The big lawns are open around the clock; the vines and the rose garden are in the middle section, the pond by Bercy Village.',
+      'Os gramados grandes ficam abertos direto; as parreiras e o roseiral estão na parte do meio, e o lago, perto do Bercy Village.',
+    ),
+  }),
+  'par-cinematheque-francaise': museumVisit(
+    { min: 10, max: 14 },
+    {
+      durationMin: 60,
+      durationMax: 120,
+      bestDay: L(
+        'Mon and Wed–Fri 12:00–19:00; weekends 11:00–20:00; closed Tue. Last entry 45 min before closing',
+        'Seg e qua–sex 12h–19h; fim de semana 11h–20h; fecha terça. Última entrada 45 min antes de fechar',
+      ),
+      tips: L(
+        'Musée Méliès €10; Belmondo exhibition €14, no combined ticket.',
+        'Musée Méliès €10; exposição do Belmondo €14, sem ingresso combinado.',
+      ),
+      ticketUrl: 'https://www.cinematheque.fr/informations-pratiques.html',
+    },
+  ),
+  'par-musee-arts-forains': museumVisit(21, {
+    durationMin: 90,
+    durationMax: 90,
+    // ponytail: guided tours only, so the museum default "opening hour" does not apply
+    bestTime: undefined,
+    bestDay: L(
+      'Guided tours on Wednesdays, weekends, public holidays and school holidays',
+      'Visitas guiadas às quartas, fins de semana, feriados e férias escolares',
+    ),
+    tips: L(
+      'Tickets online only, released 2–3 weeks ahead; children 4–11 €14. No free wandering and no cloakroom.',
+      'Ingresso só online, liberado 2–3 semanas antes; criança de 4 a 11 anos €14. Não dá para andar sozinho e não há guarda-volumes.',
+    ),
+    ticketUrl: 'https://arts-forains.tickeasy.com/fr-FR/accueil',
+  }),
+  'par-les-frigos': landmarkOutdoor({
+    durationMin: 10,
+    durationMax: 20,
+    bestTime: L('Daylight', 'De dia'),
+    tips: L('Outside only: the studios are a private workplace.', 'Só por fora: os ateliês são local de trabalho particular.'),
+  }),
+
   // —— Photo / metro ——
   'par-metro-6': {
     ticket: money(2.5, 2.5, L('Single t+ ticket / Navigo (approx.)', 'Bilhete t+ / Navigo (aprox.)')),
