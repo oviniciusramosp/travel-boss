@@ -1031,7 +1031,8 @@ p.tb-meta {
 
 .tb-subpoint-wrap.is-hover .tb-subpoint-dot--n {
   transform: scale(1.5);
-=======
+}
+
 .tb-map .tb-map-controls .tb-icon-btn[aria-pressed='true'] {
   background: var(--color-ink);
   color: var(--color-on-ink);
