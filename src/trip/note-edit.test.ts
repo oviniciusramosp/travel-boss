@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { noteBlock, noteLines } from './note-edit';
+import { noteBlock, noteLines, toggleMark, type MarkEdit } from './note-edit';
 
 describe('noteLines', () => {
   it('rewrites only the note of a stop and keeps bullet, time and link', () => {
@@ -44,5 +44,44 @@ describe('noteBlock', () => {
     expect(noteBlock(lines, 1)).toEqual(lines.slice(0, 3));
     expect(noteBlock(lines, 5)).toEqual(['Fim.']);
     expect(noteBlock(['Linha\\', ''], 1)).toEqual(['Linha\\']);
+  });
+});
+
+/** The text after an edit, and the selection in it marked with [ and ]. */
+function apply(text: string, edit: MarkEdit): string {
+  const next = text.slice(0, edit.from) + edit.insert + text.slice(edit.to);
+  return `${next.slice(0, edit.start)}[${next.slice(edit.start, edit.end)}]${next.slice(edit.end)}`;
+}
+
+/** `[` and `]` in `marked` are the selection. */
+function toggle(marked: string, mark: '**' | '*'): string {
+  const start = marked.indexOf('[');
+  const end = marked.indexOf(']') - 1;
+  const text = marked.replace('[', '').replace(']', '');
+  return apply(text, toggleMark(text, start, end, mark));
+}
+
+describe('toggleMark', () => {
+  it('wraps the selection and keeps the spaces at its edges outside', () => {
+    expect(toggle('Subida [ao topo] às 18h', '**')).toBe('Subida **[ao topo]** às 18h');
+    expect(toggle('Subida[ ao topo ]às 18h', '*')).toBe('Subida *[ao topo]* às 18h');
+  });
+
+  it('takes the marks off when they are around the selection or selected with it', () => {
+    expect(toggle('Subida **[ao topo]** às 18h', '**')).toBe('Subida [ao topo] às 18h');
+    expect(toggle('Subida [**ao topo**] às 18h', '**')).toBe('Subida [ao topo] às 18h');
+    expect(toggle('Subida *[ao topo]* às 18h', '*')).toBe('Subida [ao topo] às 18h');
+  });
+
+  it('keeps bold and italic apart: *** is both', () => {
+    expect(toggle('**[x]**', '*')).toBe('***[x]***');
+    expect(toggle('***[x]***', '**')).toBe('*[x]*');
+    expect(toggle('***[x]***', '*')).toBe('**[x]**');
+    expect(toggle('[**x**]', '*')).toBe('*[**x**]*');
+  });
+
+  it('gives a caret an empty pair, and takes an empty pair back', () => {
+    expect(toggle('Jantar []', '**')).toBe('Jantar **[]**');
+    expect(toggle('Jantar **[]**', '**')).toBe('Jantar []');
   });
 });
