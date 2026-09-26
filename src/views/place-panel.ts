@@ -223,6 +223,15 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     nextBtn = null;
     fallbackEl = null;
     front = 0;
+    const shown = current?.place;
+    map.setSubPoints(
+      (shown?.subPoints ?? []).map((sub) => ({
+        lat: sub.lat,
+        lng: sub.lng,
+        label: pickLocale(current!.locale, sub.name),
+        color: placeCategoryMeta[shown!.category].color,
+      })),
+    );
     if (!current) {
       root.hidden = true;
       root.replaceChildren();
@@ -377,7 +386,21 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       row.append(el('dt', undefined, pickLocale(locale, { en: 'Points along the walk', 'pt-BR': 'Pontos no caminho' })));
       const dd = el('dd');
       const steps = el('ol', 'tb-panel__subpoints');
-      for (const sub of subPoints) steps.append(el('li', undefined, pickLocale(locale, sub.name)));
+      subPoints.forEach((sub, index) => {
+        const item = el('li', 'tb-panel__subpoint');
+        if (sub.photo) {
+          const img = el('img', 'tb-panel__subpoint-photo');
+          img.src = sub.photo;
+          img.alt = '';
+          img.loading = 'lazy';
+          item.append(img);
+        }
+        item.append(el('span', undefined, pickLocale(locale, sub.name)));
+        // Hover lights the numbered dot; the camera stays put.
+        item.addEventListener('pointerenter', () => map.hoverSubPoint(index));
+        item.addEventListener('pointerleave', () => map.hoverSubPoint(null));
+        steps.append(item);
+      });
       dd.append(steps);
       row.append(dd);
       list.append(row);

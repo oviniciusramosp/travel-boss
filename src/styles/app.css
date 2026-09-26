@@ -1015,3 +1015,20 @@ p.tb-meta {
   background: var(--subpoint-color, var(--color-walk));
   box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
 }
+
+/* Numbered sub-point while the place card is open. The card list hover enlarges it. */
+.tb-subpoint-dot--n {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  color: var(--color-paper);
+  font-size: 9px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.tb-subpoint-wrap.is-hover .tb-subpoint-dot--n {
+  transform: scale(1.5);
+}

@@ -117,6 +117,8 @@ export type TravelSubPoint = {
   name: LString;
   lat: number;
   lng: number;
+  /** Commons thumb, same pattern as the guide (`500px-…` on upload.wikimedia.org). */
+  photo?: string;
 };
 
 /** Station / waypoint along a route (e.g. metro line) — shown on hover with the line */
@@ -1603,6 +1605,16 @@ export const localTravelCities: TravelCity[] = [
             [48.8622, 2.3218],
           ],
         },
+        // Walk from the Carrousel west to Concorde. OSM ids per point.
+        subPoints: [
+          { name: { en: 'Arc de Triomphe du Carrousel', 'pt-BR': 'Arco do Triunfo do Carrousel' }, lat: 48.861728, lng: 2.332908, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Arc_de_triomphe_du_carrousel_in_Paris_France.jpg/500px-Arc_de_triomphe_du_carrousel_in_Paris_France.jpg' }, // way 227483542
+          { name: { en: 'Maillol statues', 'pt-BR': 'Estátuas de Maillol' }, lat: 48.862417, lng: 2.331472, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/L%27Air_by_Aristide_Maillol%2C_Tuileries_garden%2C_Paris_11_August_2015.jpg/500px-L%27Air_by_Aristide_Maillol%2C_Tuileries_garden%2C_Paris_11_August_2015.jpg' }, // node 1934643467
+          { name: { en: 'Grand Bassin Rond', 'pt-BR': 'Grand Bassin Rond, o lago redondo' }, lat: 48.862873, lng: 2.329293, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Grand_bassin_rond_Jardin_des_Tuileries_001.jpg/500px-Grand_bassin_rond_Jardin_des_Tuileries_001.jpg' }, // way 14037695
+          { name: { en: 'Grande Allée', 'pt-BR': 'Grande Allée, a alameda central' }, lat: 48.863676, lng: 2.326765, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Paris_75001_Jardin_des_Tuileries_-_all%C3%A9e_centrale_towards_Palais_du_Louvre.jpg/500px-Paris_75001_Jardin_des_Tuileries_-_all%C3%A9e_centrale_towards_Palais_du_Louvre.jpg' }, // way 54568947
+          { name: { en: 'Grand Bassin Octogonal', 'pt-BR': 'Grand Bassin Octogonal, o lago octogonal' }, lat: 48.864522, lng: 2.324136, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Grand_bassin_octogonal_Jardin_des_Tuileries_003.jpg/500px-Grand_bassin_octogonal_Jardin_des_Tuileries_003.jpg' }, // way 54188993
+          { name: { en: "Musée de l'Orangerie", 'pt-BR': 'Museu da Orangerie' }, lat: 48.863765, lng: 2.322659, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Orangerie_Tuileries.jpg/500px-Orangerie_Tuileries.jpg' }, // way 54188996
+          { name: { en: 'Jeu de Paume', 'pt-BR': 'Jeu de Paume' }, lat: 48.865816, lng: 2.324083, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Le_Jeu_de_Paume%2C_1_place_de_la_Concorde_%C3%A0_Paris%2C_juillet_2021.jpg/500px-Le_Jeu_de_Paume%2C_1_place_de_la_Concorde_%C3%A0_Paris%2C_juillet_2021.jpg' }, // way 54188994
+        ],
         address: 'Place de la Concorde, 75001 Paris',
         mapsQuery: 'Jardin des Tuileries Paris',
       },
@@ -1899,12 +1911,12 @@ export const localTravelCities: TravelCity[] = [
         // Cherche-Midi. OSM: node 782601793, relation 975955, node 3099206293, way 62874921,
         // node 2549604493. Palace front and Grand Bassin sit on the palace axis (no OSM name).
         subPoints: [
-          { name: { en: 'Medici Fountain', 'pt-BR': 'Fontaine Médicis' }, lat: 48.848059, lng: 2.339294 },
-          { name: { en: 'Luxembourg Palace, south front', 'pt-BR': 'Palácio do Luxemburgo, fachada sul' }, lat: 48.8481, lng: 2.33714 },
-          { name: { en: 'Grand Bassin', 'pt-BR': 'Grand Bassin, o lago octogonal' }, lat: 48.8467, lng: 2.33712 },
-          { name: { en: 'Queens of France, west terrace', 'pt-BR': 'Rainhas da França, terraço oeste' }, lat: 48.847452, lng: 2.336261 },
-          { name: { en: 'Puppet theatre', 'pt-BR': 'Teatro de marionetes' }, lat: 48.846204, lng: 2.334532 },
-          { name: { en: 'Statue of Liberty (replica)', 'pt-BR': 'Estátua da Liberdade (réplica)' }, lat: 48.846376, lng: 2.333151 },
+          { name: { en: 'Medici Fountain', 'pt-BR': 'Fontaine Médicis' }, lat: 48.848059, lng: 2.339294, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Fontaine_M%C3%A9dicis_du_Jardin_du_Luxembourg.jpg/500px-Fontaine_M%C3%A9dicis_du_Jardin_du_Luxembourg.jpg' },
+          { name: { en: 'Luxembourg Palace, south front', 'pt-BR': 'Palácio do Luxemburgo, fachada sul' }, lat: 48.8481, lng: 2.33714, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Palais_Luxembourg_fa%C3%A7ade_sud_Paris_1.jpg/500px-Palais_Luxembourg_fa%C3%A7ade_sud_Paris_1.jpg' },
+          { name: { en: 'Grand Bassin', 'pt-BR': 'Grand Bassin, o lago octogonal' }, lat: 48.8467, lng: 2.33712, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Paris_75006_Jardin_du_Luxembourg_Bassin_20160502.jpg/500px-Paris_75006_Jardin_du_Luxembourg_Bassin_20160502.jpg' },
+          { name: { en: 'Queens of France, west terrace', 'pt-BR': 'Rainhas da França, terraço oeste' }, lat: 48.847452, lng: 2.336261, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Statues_des_reines_de_France%2C_terrasse_ouest_du_jardin_du_Luxembourg%2C_6%C3%A8me_arrondissement%2C_Paris%2C_PH38881.jpg/500px-Statues_des_reines_de_France%2C_terrasse_ouest_du_jardin_du_Luxembourg%2C_6%C3%A8me_arrondissement%2C_Paris%2C_PH38881.jpg' },
+          { name: { en: 'Puppet theatre', 'pt-BR': 'Teatro de marionetes' }, lat: 48.846204, lng: 2.334532, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Paris_6e_Jardin_du_Luxembourg_Th%C3%A9%C3%A2tre_de_Marionnettes_129.jpg/500px-Paris_6e_Jardin_du_Luxembourg_Th%C3%A9%C3%A2tre_de_Marionnettes_129.jpg' },
+          { name: { en: 'Statue of Liberty (replica)', 'pt-BR': 'Estátua da Liberdade (réplica)' }, lat: 48.846376, lng: 2.333151, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Statue_de_la_Libert%C3%A9_du_jardin_de_Luxembourg%2C_September_2024_05.jpg/500px-Statue_de_la_Libert%C3%A9_du_jardin_de_Luxembourg%2C_September_2024_05.jpg' },
         ],
         address: 'Rue de Médicis / Pl. Edmond Rostand, 75006 Paris',
         mapsQuery: 'Jardin du Luxembourg Paris',
@@ -2487,6 +2499,14 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4,
         lat: 48.835414,
         lng: 2.382119,
+        // Walk from the Cinémathèque side east to the lake by Cour Saint-Émilion. OSM ids per point.
+        subPoints: [
+          { name: { en: 'Vineyard', 'pt-BR': 'Vinhedo' }, lat: 48.835872, lng: 2.381786, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Vineyard_of_the_parc_de_Bercy_2.jpg/500px-Vineyard_of_the_parc_de_Bercy_2.jpg' }, // way 165439644
+          { name: { en: 'Maison du Jardinage', 'pt-BR': 'Casa da Jardinagem' }, lat: 48.835606, lng: 2.382239, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Paris_Parc_Bercy_Maison_du_jardinage%26massifs_2014.jpg/500px-Paris_Parc_Bercy_Maison_du_jardinage%26massifs_2014.jpg' }, // way 165439645
+          { name: { en: 'Orangery', 'pt-BR': 'Orangerie' }, lat: 48.835618, lng: 2.383252, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Orangerie_of_Jaridn_Yitzhak_Rabin.jpg/500px-Orangerie_of_Jaridn_Yitzhak_Rabin.jpg' }, // way 165439640
+          { name: { en: 'Footbridge over Rue Joseph-Kessel', 'pt-BR': 'Passarela sobre a Rue Joseph-Kessel' }, lat: 48.834567, lng: 2.38403, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/La_passerelle_de_Bercy_et_rue_Joseph-Kessel.jpg/500px-La_passerelle_de_Bercy_et_rue_Joseph-Kessel.jpg' }, // way 1108377612
+          { name: { en: 'Maison du Lac, romantic garden', 'pt-BR': 'Casa do Lago, jardim romântico' }, lat: 48.833479, lng: 2.384847, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Paris_Parc_Bercy_Maison_du_lac_2014.jpg/500px-Paris_Parc_Bercy_Maison_du_lac_2014.jpg' }, // way 45441939
+        ],
         address: '128 Quai de Bercy, 75012 Paris',
         mapsQuery: 'Parc de Bercy Paris',
       },

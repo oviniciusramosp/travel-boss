@@ -160,6 +160,8 @@ export function mountMap(host: HTMLElement): MapHandle {
   let hoveredId: string | null = null;
   const padding = { top: 0, right: 0, bottom: 0, left: 0 };
   let radiusLayer: Circle | null = null;
+  const subPointLayer = layerGroup().addTo(leafletMap);
+  let subPointMarks: Marker[] = [];
   let routeLayer: LayerGroup | null = null;
   let routeEntries: RouteEntry[] = [];
   let routeFocus: RouteFocus = null;
@@ -602,6 +604,35 @@ export function mountMap(host: HTMLElement): MapHandle {
 
     flyTo(lat, lng, zoom = 16) {
       moveCamera(lat, lng, Math.max(leafletMap.getZoom(), zoom));
+    },
+
+    setSubPoints(points) {
+      subPointLayer.clearLayers();
+      subPointMarks = points
+        .filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lng))
+        .map((point, index) => {
+          const color = point.color && /^#[0-9a-f]{3,8}$/i.test(point.color) ? point.color : '';
+          const dot = marker([point.lat, point.lng], {
+            icon: divIcon({
+              className: 'tb-subpoint-wrap',
+              html: `<span class="tb-subpoint-dot tb-subpoint-dot--n"${color ? ` style="--subpoint-color:${color}"` : ''}>${index + 1}</span>`,
+              iconSize: [20, 20],
+              iconAnchor: [10, 10],
+            }),
+            keyboard: false,
+            bubblingMouseEvents: false,
+            zIndexOffset: 800,
+          });
+          dot.bindTooltip(point.label, { direction: 'top', opacity: 1, className: 'tb-pin-tip' });
+          return dot.addTo(subPointLayer);
+        });
+    },
+
+    hoverSubPoint(index) {
+      subPointMarks.forEach((dot, at) => {
+        dot.getElement()?.classList.toggle('is-hover', at === index);
+        dot.setZIndexOffset(at === index ? 900 : 800);
+      });
     },
 
     setRadius(ring: MapRadius) {

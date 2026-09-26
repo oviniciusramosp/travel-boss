@@ -121,6 +121,10 @@ export type MapHandle = {
   onHover(fn: (id: string | null) => void): () => void;
   /** Returns an unsubscribe. */
   onSelect(fn: (id: string) => void): () => void;
+  /** A place's sub-points while its card is open, numbered. [] clears. */
+  setSubPoints(points: readonly { lat: number; lng: number; label: string; color?: string }[]): void;
+  /** Enlarge one sub-point from `setSubPoints`. `null` clears. Does not move the camera. */
+  hoverSubPoint(index: number | null): void;
   /** Panel and other chrome. `fit` and `select` center in the free area. */
   setPadding(padding: MapPadding): void;
 };

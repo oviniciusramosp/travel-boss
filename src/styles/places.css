@@ -1949,3 +1949,18 @@ a.tb-route__google[hidden] {
   padding-left: var(--spacing-16);
   list-style: decimal;
 }
+
+.tb-panel__subpoint {
+  padding-block: var(--spacing-4);
+}
+
+/* Photo of a sub-point, above its name. */
+.tb-panel__subpoint-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-bottom: var(--spacing-4);
+  border-radius: var(--r-min);
+  background: var(--color-surface-alt);
+}
