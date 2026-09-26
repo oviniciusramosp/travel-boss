@@ -46,7 +46,7 @@
       "label": "BudgetLine",
       "file_type": "code",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L169",
+      "source_location": "L170",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -59,7 +59,7 @@
       "label": "dateBudget",
       "file_type": "code",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L177",
+      "source_location": "L178",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3771,7 +3771,7 @@
       "label": "seenFromOutside()",
       "file_type": "code",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L163",
+      "source_location": "L164",
       "_callable": true,
       "_origin": "ast",
       "id": "src_trip_day_plan_seenfromoutside",
@@ -5892,18 +5892,6 @@
       "norm_label": "dateplaces()"
     },
     {
-      "label": "drawTripRoutes()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L555",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_drawtriproutes",
-      "community": 2,
-      "community_name": "paint",
-      "norm_label": "drawtriproutes()"
-    },
-    {
       "label": "flashMs()",
       "file_type": "code",
       "source_file": "src/trip/mount.ts",
@@ -5926,18 +5914,6 @@
       "community": 2,
       "community_name": "paint",
       "norm_label": "flashsource()"
-    },
-    {
-      "label": "neutralColor()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L542",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_neutralcolor",
-      "community": 2,
-      "community_name": "paint",
-      "norm_label": "neutralcolor()"
     },
     {
       "label": "openDate()",
@@ -6118,18 +6094,6 @@
       "community": 2,
       "community_name": "paint",
       "norm_label": "syncview()"
-    },
-    {
-      "label": "walkPoints()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L547",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_walkpoints",
-      "community": 2,
-      "community_name": "paint",
-      "norm_label": "walkpoints()"
     },
     {
       "label": "paintDayMaps()",
@@ -6790,6 +6754,42 @@
       "community": 30,
       "community_name": "route.ts",
       "norm_label": "paris()"
+    },
+    {
+      "label": "drawTripRoutes()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L555",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_drawtriproutes",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "drawtriproutes()"
+    },
+    {
+      "label": "neutralColor()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L542",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_neutralcolor",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "neutralcolor()"
+    },
+    {
+      "label": "walkPoints()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L547",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_walkpoints",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "walkpoints()"
     },
     {
       "label": "dateStops()",
@@ -24486,7 +24486,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L187",
+      "source_location": "L188",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_trip_day_plan_datebudget",
@@ -24497,7 +24497,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L188",
+      "source_location": "L189",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_trip_day_plan_datebudget",
@@ -61420,7 +61420,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L163",
+      "source_location": "L164",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_trip_day_plan",
@@ -61431,7 +61431,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L169",
+      "source_location": "L170",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_trip_day_plan",
@@ -61442,7 +61442,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/trip/day-plan.ts",
-      "source_location": "L177",
+      "source_location": "L178",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_trip_day_plan",
@@ -68071,5 +68071,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3db0cf30f5d123848c269a0617473f1cdef45731"
+  "built_at_commit": "f9a48e882820dc638ffb437bf611e27b6e39ed35"
 }
