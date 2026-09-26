@@ -772,6 +772,16 @@
   white-space: nowrap;
 }
 
+/* `via:` note after " — ", under the label like a stop note. */
+.tb-transfer__note {
+  min-width: 0;
+  color: var(--color-mid-gray);
+}
+
+.tb-list > .tb-transfer > .tb-transfer__note {
+  grid-column: main;
+}
+
 .tb-transfer__chip {
   display: inline-flex;
   flex: none;

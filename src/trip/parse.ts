@@ -5,6 +5,8 @@ export type TripLegMode = 'walk' | 'transit' | 'taxi' | 'flight';
 export type TripLeg = {
   /** Author text after `via:`. Export writes it back unchanged. */
   detail: string;
+  /** Text after ` — `. Mode and duration come only from the text before it. */
+  note?: string;
   mode?: TripLegMode;
   /**
    * Minutes. `N h` is N×60. `3h10` and `1 h 30 min` are one span (190 and 90).
@@ -85,7 +87,7 @@ const DURATION_TOKEN =
 const MODE_WORDS: { mode: TripLegMode; words: string[] }[] = [
   { mode: 'walk', words: ['a pe', 'walk'] },
   { mode: 'transit', words: ['metro', 'rer', 'trem', 'train', 'onibus', 'bus', 'tram', 'ferry'] },
-  { mode: 'taxi', words: ['taxi', 'uber', 'carro', 'car'] },
+  { mode: 'taxi', words: ['taxi', 'uber', 'bolt', 'carro', 'car'] },
   { mode: 'flight', words: ['voo', 'flight'] },
 ];
 
@@ -130,18 +132,36 @@ function durationList(detail: string): number[] {
   return found;
 }
 
+const LEG_NOTE = ' — ';
+
 function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
-  const mode = legMode(detail);
+  const cut = detail.indexOf(LEG_NOTE);
+  const head = cut < 0 ? detail : detail.slice(0, cut);
+  const note = cut < 0 ? '' : detail.slice(cut + LEG_NOTE.length).trim();
+  const mode = legMode(head);
   if (!mode) reject(errors, line, 'via-no-mode');
-  const matches = durationList(detail);
+  const matches = durationList(head);
   let durationMin: number | undefined;
   if (matches.length === 1) durationMin = matches[0];
   else reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
   return {
     detail,
+    ...(note ? { note } : {}),
     ...(mode ? { mode } : {}),
     ...(durationMin !== undefined ? { durationMin } : {}),
   };
+}
+
+/** Leg name for the timeline: no note and no duration, which sits beside it. */
+export function legLabel(leg: TripLeg): string {
+  const cut = leg.detail.indexOf(LEG_NOTE);
+  const head = (cut < 0 ? leg.detail : leg.detail.slice(0, cut)).trim();
+  const bare = head
+    .replace(new RegExp(DURATION_TOKEN.source, 'gi'), '')
+    .replace(/\(\s*\)/g, '')
+    .replace(/^[\s·•,–-]+|[\s·•,–-]+$/g, '')
+    .replace(/\s{2,}/g, ' ');
+  return bare || head;
 }
 
 function parseStop(text: string, line: number, errors: TripError[]): TripStop {

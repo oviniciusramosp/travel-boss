@@ -31,6 +31,17 @@ describe('transferRowModel', () => {
     expect(taxi.label).toBe('táxi até o hotel');
     expect(taxi.duration).toBe(pickLocale('pt-BR', formatLegDuration(15)));
     expect(taxi.lineColor).toBeNull();
+    expect(taxi.note).toBeNull();
+
+    const bolt = via({
+      detail: 'Pegar um Bolt · 35 min — o app mostra onde',
+      note: 'o app mostra onde',
+      mode: 'taxi',
+      durationMin: 35,
+    });
+    expect(bolt.label).toBe('Pegar um Bolt');
+    expect(bolt.duration).toBe(pickLocale('pt-BR', formatLegDuration(35)));
+    expect(bolt.note).toBe('o app mostra onde');
   });
 
   it('labels a catalog walk and colors a metro chip from legLineColor', () => {

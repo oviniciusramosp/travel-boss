@@ -10,7 +10,7 @@ import {
   pickLocale,
 } from '../catalog';
 import type { ItineraryLegDef, Locale, TimelineTransferPart } from '../catalog';
-import type { TripLeg, TripLegMode } from '../trip/parse';
+import { legLabel, type TripLeg, type TripLegMode } from '../trip/parse';
 import { chipTone } from '../ui/contrast';
 import { el } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';
@@ -37,6 +37,8 @@ export type TransferRowModel = {
   duration: string | null;
   /** Stations to ride on one line ("4 estações"), or null. */
   stations: string | null;
+  /** The `via:` note after ` — `, shown under the row. */
+  note: string | null;
   /** Null for walks and for transit with no brand color. */
   lineColor: string | null;
   /** Foreground token on top of `lineColor`. Null when there is no chip. */
@@ -62,7 +64,7 @@ function transferMode(leg: TransferLeg): TripLegMode {
 function labelOf(leg: TransferLeg, locale: Locale): string {
   // A walk reads the same as a catalog walk. Its minutes already sit in `duration`.
   if (isTripLeg(leg) && leg.mode === 'walk') return pickLocale(locale, legDisplayLabel({ from: '', to: '', mode: 'walk' }));
-  if (isTripLeg(leg)) return leg.detail;
+  if (isTripLeg(leg)) return legLabel(leg);
   if (isTransferPart(leg)) return pickLocale(locale, leg.label);
   return pickLocale(locale, legDisplayLabel(leg));
 }
@@ -131,6 +133,7 @@ export function transferRowModel(leg: TransferLeg, locale: Locale = 'pt-BR'): Tr
     label: labelOf(leg, locale),
     duration: minutes == null ? null : pickLocale(locale, formatLegDuration(minutes)),
     stations: stationsOf(leg, locale),
+    note: isTripLeg(leg) ? (leg.note ?? null) : null,
     lineColor,
     chipTone: lineColor ? chipTone(lineColor) : null,
     ...identityOf(leg),
@@ -141,7 +144,10 @@ export function transferRowModel(leg: TransferLeg, locale: Locale = 'pt-BR'): Tr
 export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR'): HTMLLIElement {
   const model = transferRowModel(leg, locale);
   const item = el('li', `tb-transfer tb-transfer--${model.mode}`);
-  item.setAttribute('aria-label', [model.label, model.duration, model.stations].filter(Boolean).join(', '));
+  item.setAttribute(
+    'aria-label',
+    [model.label, model.duration, model.stations, model.note].filter(Boolean).join(', '),
+  );
   item.dataset.legMode = model.mode;
   if (model.from) item.dataset.legFrom = model.from;
   if (model.to) item.dataset.legTo = model.to;
@@ -166,5 +172,6 @@ export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR'): HTMLLIE
   if (model.stations) main.append(el('span', 'tb-transfer__stations', model.stations));
 
   item.append(lead, main);
+  if (model.note) item.append(el('span', 'tb-transfer__note', model.note));
   return item;
 }

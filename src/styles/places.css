@@ -555,6 +555,11 @@ p.tb-budget {
   grid-row: 1;
 }
 
+.tb-list.tb-timeline > .tb-transfer > .tb-transfer__note {
+  grid-column: 2;
+  grid-row: 2;
+}
+
 .tb-timeline__pin {
   display: flex;
   align-items: center;

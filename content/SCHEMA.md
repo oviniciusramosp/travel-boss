@@ -62,7 +62,7 @@ dates: 2026-04-06 → 2026-04-09
   - Mode is the earliest PT/EN keyword on the line. Matching ignores case and accents:
     - walk: `a pé`, `walk`
     - transit: `metrô` / `metro`, `rer`, `trem` / `train`, `ônibus` / `onibus`, `bus`, `tram`, `ferry`
-    - taxi: `táxi` / `taxi`, `uber`, `carro`, `car`
+    - taxi: `táxi` / `taxi`, `uber`, `bolt`, `carro`, `car`
     - flight: `voo`, `flight`
   - Duration is exactly one span. The unit is only `min` or `h` (`35 minutos` does not count):
     - `N min` or `Nmin`: `35 min`, `35min`.
@@ -70,6 +70,14 @@ dates: 2026-04-06 → 2026-04-09
     - `NhMM`: `3h10` = 190, `1h30` = 90. The minutes are one or two digits glued to `h`, not a second token.
     - `N h M min`: `1 h 30 min` = 90, `3 h 10 min` = 190. `1h30min` is the same span.
     - Two spans are an error (`20 min` and `40 min`, or `1 h` and `2 h`). `1 h 30 min` is one span, not two.
+  - Text after ` — ` is the leg's note: what to know on the way (price, where to meet the car). Mode and duration are read only before it, so a duration inside the note does not count.
+
+    ```markdown
+    - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café
+      - via: Pegar um Bolt · 35 min — €29–35 na simulação; o app mostra onde encontrar o carro
+    ```
+
+  - The timeline names the leg with the text before the note, minus the duration, which it already shows beside it. The note goes under that name. Write the name as a short action ("Pegar um Bolt"). A catalog leg keeps its own name and hops.
 - Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
-import { parseTrip } from './parse';
+import { legLabel, parseTrip } from './parse';
 
 const sample = `# Europa
 
@@ -112,6 +112,7 @@ const modeCases = [
   ['táxi · 10 min', 'taxi', 10],
   ['taxi · 10 min', 'taxi', 10],
   ['uber · 10 min', 'taxi', 10],
+  ['Pegar um Bolt · 10 min', 'taxi', 10],
   ['carro · 10 min', 'taxi', 10],
   ['car · 10 min', 'taxi', 10],
   ['voo · 1 h', 'flight', 60],
@@ -183,6 +184,29 @@ describe('via legs', () => {
     expect(both.errors).toEqual(['via-many-durations']);
     const twoHours = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - via: trem · 1 h 2 h');
     expect(twoHours.errors).toEqual(['via-many-durations']);
+  });
+
+  it('keeps a note after " — " out of the mode and the duration', () => {
+    const { stops, errors } = firstLegs(
+      '- 09:00 [Louvre](place:par-louvre)\n  - via: Pegar um Bolt · 35 min — o carro chega em 5 min; o app mostra onde',
+    );
+    expect(stops[0]?.leg).toEqual({
+      detail: 'Pegar um Bolt · 35 min — o carro chega em 5 min; o app mostra onde',
+      note: 'o carro chega em 5 min; o app mostra onde',
+      mode: 'taxi',
+      durationMin: 35,
+    });
+    expect(errors).toEqual([]);
+  });
+
+  it('names a leg without its note and duration', () => {
+    expect(legLabel({ detail: 'Pegar um Bolt · 35 min — o app mostra onde' })).toBe('Pegar um Bolt');
+    expect(legLabel({ detail: 'RER E + metrô 9 · 45 min' })).toBe('RER E + metrô 9');
+    expect(legLabel({ detail: 'Uber (25 min)' })).toBe('Uber');
+    expect(legLabel({ detail: 'trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37' })).toBe(
+      'trem Frecciarossa 07:30 → Milano Centrale 14:07',
+    );
+    expect(legLabel({ detail: '35 min' })).toBe('35 min');
   });
 
   it('uses the earliest mode keyword', () => {
