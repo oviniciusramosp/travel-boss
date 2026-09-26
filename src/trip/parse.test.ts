@@ -129,11 +129,13 @@ describe('via legs', () => {
     expect(stops).toHaveLength(2);
     expect(stops[0]?.leg).toEqual({
       detail: 'metrô M14 + RER E · 35 min',
+      line: 9,
       mode: 'transit',
       durationMin: 35,
     });
     expect(stops[1]?.leg).toEqual({
       detail: 'a pé · 12 min',
+      line: 11,
       mode: 'walk',
       durationMin: 12,
     });
@@ -193,6 +195,7 @@ describe('via legs', () => {
     );
     expect(stops[0]?.leg).toEqual({
       detail: 'Pegar um Bolt · 35 min — o carro chega em 5 min; o app mostra onde',
+      line: 9,
       note: 'o carro chega em 5 min; o app mostra onde',
       mode: 'taxi',
       durationMin: 35,
@@ -307,6 +310,7 @@ dates: 2026-04-06 → 2026-04-09
     expect(trip.errors).toEqual([]);
     expect(trip.cities[0]?.leg).toEqual({
       detail: 'trem Frecciarossa · 3h10',
+      line: 6,
       mode: 'transit',
       durationMin: 190,
     });

@@ -26,6 +26,18 @@ describe('noteLines', () => {
     expect(noteLines('paragraph', 'x', 'um\ndois\ntrês')).toEqual(['um\\', 'dois\\', 'três']);
   });
 
+  it('rewrites the note of a via after its first " — " and keeps the leg, on one line', () => {
+    const bolt = '  - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui';
+    expect(noteLines('via', bolt, 'Bolt até a casa do Gui;\no app mostra o carro')).toEqual([
+      '  - via: Pegar um Bolt · 35 min — Bolt até a casa do Gui; o app mostra o carro',
+    ]);
+    expect(noteLines('via', bolt, '')).toEqual(['  - via: Pegar um Bolt · 35 min']);
+    expect(noteLines('via', 'via: trem Frecciarossa · 3h10 — confira 2 dias antes', 'sem obra')).toEqual([
+      'via: trem Frecciarossa · 3h10 — sem obra',
+    ]);
+    expect(noteLines('via', '- 09:00 [Louvre](place:par-louvre)', 'x')).toBeNull();
+  });
+
   it('turns an empty note into no line', () => {
     expect(noteLines('item', '- Opcional: Avengers', '')).toEqual([]);
     expect(noteLines('comment', '  - comentário: ok', ' \n ')).toEqual([]);

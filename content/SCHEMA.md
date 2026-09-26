@@ -96,7 +96,7 @@ dates: 2026-04-06 → 2026-04-09
   - Keyword `comentário:`, `comentario:` or `comment:`, any case, indented like `via:`. A top-level `- comentário:` is a list note. An empty one is ignored. One before the first stop of a day is an error.
   - Not a stop, not a pin, not exported. The UI shows it under its item.
   - The LLM that acts on a comment deletes its line.
-- A stop note, a list note, a paragraph or a comment can break onto the next line: end the line with `\` (a Markdown hard break) and go on in the next one, indented under the bullet. The app writes this for Shift+Return.
+- A stop note, a list note, a paragraph or a comment can break onto the next line (a `via:` note stays on its line): end the line with `\` (a Markdown hard break) and go on in the next one, indented under the bullet. The app writes this for Shift+Return.
 
   ```markdown
   - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2.\
@@ -129,7 +129,7 @@ Export rewrites the same document for Apple Notes and Notion:
 
 ## Editing from the app
 
-With `npm run dev` the app writes the file too: a stop note, a list note, a paragraph or a comment, one line per save (`PATCH /api/trips/<id>`). A save lands only where the file still has the line the app saw, so the user and an LLM can change different lines at the same time. An LLM edits the current file in place. It never rewrites the whole file from an older copy.
+With `npm run dev` the app writes the file too: a stop note, a list note, a paragraph, a comment or the note of a `via:` (after ` — `), one line per save (`PATCH /api/trips/<id>`). A save lands only where the file still has the line the app saw, so the user and an LLM can change different lines at the same time. An LLM edits the current file in place. It never rewrites the whole file from an older copy.
 
 ## Multi-city
 
