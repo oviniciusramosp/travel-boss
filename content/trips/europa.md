@@ -13,7 +13,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: RER B até Gare du Nord, RER E em Magenta até Noisy-le-Sec e caminhada até o mercado · 1h15
 - 15:00 [Saint Georges (supérette)](place:par-saint-georges-noisy) — Comprar algo para comer e beber antes de chegar na casa do Gui
   - via: a pé · 6 min
-- 15:30 [Casa do Gui](place:par-casa-do-gui) — Chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+- 15:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
 - 16:30 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
   - via: RER E + metrô 9 · 45 min
 - 17:15 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
