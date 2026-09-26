@@ -6,6 +6,7 @@
 - `iconButton` / `iconLink` — `src/ui/controls.ts`. Botão ou link só de ícone, com `aria-label` e `data-tip`. Tamanho `sm` (24 px) ou `md` (28 px), círculo `--r-pill`.
 - tooltip — `mountTooltip` em `src/ui/tooltip.ts`. Um único balão `position: fixed` para `[data-tip]`. Espera 350 ms; se outro fechou há menos de 300 ms, abre na hora.
 - `row` — `src/ui/row.ts`. Linha de lista em subgrid (`.tb-list` / `.tb-row`). Ações na coluna `actions`, escondidas por opacidade no hover, no foco e em `aria-current`. Com `onSelect`, o título é um botão.
+- `editableNote` — `src/trip/note-edit.ts`. Nota que vira o próprio Markdown ao clicar (o caret fica onde foi o clique quando a nota não tem marcas nem links) ou com Tab. Salva numa pausa (`--delay-autosave`), ao sair e no Enter; Esc descarta o que não foi salvo. Cada save é um `PATCH` de uma linha ancorado no texto que o browser viu. `onEditing` avisa o documento para não repintar enquanto a nota está aberta.
 - `aiBadge` — `src/ui/ai-badge.ts`. Faíscas (`auto_awesome`, 16 px, cinza) no card de lugar com `aiSuggested`. `aiSuggestionTip` monta o tooltip e o nome acessível com os itens do guia que levaram ao lugar. Fica ao lado do nome no card da lista e nas tags do card aberto.
 
 ## Raio concêntrico

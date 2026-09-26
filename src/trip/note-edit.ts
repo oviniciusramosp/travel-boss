@@ -47,19 +47,32 @@ export async function sendPatch(id: string, patch: TripPatch): Promise<PatchResu
   }
 }
 
+/** A line as the browser saw it: 1-based number and full text. */
+export type SeenLine = { line: number; raw: string };
+
 export type NoteEditorOptions = {
   kind: NoteKind;
-  /** Markdown of the note on disk. */
+  /** Markdown of the note on disk. Empty for a new comment. */
   text: string;
-  /** 1-based line of the note and that line's full text. */
-  line: number;
-  raw: string;
+  /** The note's line. Null for a comment not written yet. */
+  at: SeenLine | null;
+  /** A new comment goes under this line, after its `via:` and comments. */
+  parent?: SeenLine;
   label: string;
+  placeholder?: string;
   render: (text: string) => Node[];
   save: (patch: TripPatch) => Promise<PatchResult>;
   /** True while open. The trip must not repaint under an open editor. */
   onEditing: (open: boolean) => void;
   onFail: (reason: 'conflict' | 'error', text: string) => void;
+  /** After it closes or is removed, with the text now on disk. */
+  onClose?: (text: string) => void;
+};
+
+export type NoteEditor = {
+  edit(): void;
+  /** Deletes the line, the same as clearing the text and leaving. */
+  remove(): void;
 };
 
 /** Offset of a screen point in `node`'s text, or null outside it. */
@@ -82,9 +95,9 @@ function caretAt(node: HTMLElement, x: number, y: number): number | null {
  * Click or Tab shows the note's Markdown in place. A pause in typing saves,
  * blur and Enter save now, Escape drops what is not saved yet.
  */
-export function editableNote(node: HTMLElement, opts: NoteEditorOptions): void {
+export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEditor {
   let saved = opts.text;
-  let anchor: { line: number; raw: string } | null = { line: opts.line, raw: opts.raw };
+  let anchor = opts.at;
   let open = false;
   let timer = 0;
   let queue = Promise.resolve();
@@ -92,24 +105,36 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): void {
   node.tabIndex = 0;
   node.setAttribute('role', 'textbox');
   node.setAttribute('aria-label', opts.label);
+  if (opts.placeholder) node.dataset.placeholder = opts.placeholder;
   node.replaceChildren(...opts.render(saved));
+
+  /** The patch that puts `text` on disk and the line it leaves, or null. */
+  const patchFor = (text: string): { patch: TripPatch; line?: string } | null => {
+    if (anchor) {
+      const after = noteLine(opts.kind, anchor.raw, text);
+      return after && { patch: { line: anchor.line, before: anchor.raw, after }, line: after[0] };
+    }
+    if (!opts.parent || !text) return null;
+    const child = `${/^\s*/.exec(opts.parent.raw)?.[0] ?? ''}  - comentário: ${text}`;
+    return { patch: { line: opts.parent.line, before: opts.parent.raw, child }, line: child };
+  };
 
   const write = async (final: boolean) => {
     const text = oneLine(node.textContent ?? '');
     // A pause never deletes: an empty box may be mid-rewrite.
-    if (!anchor || text === saved || (!text && !final)) return;
-    const after = noteLine(opts.kind, anchor.raw, text);
-    if (!after) {
-      opts.onFail('conflict', text);
+    if (text === saved || (!text && !final)) return;
+    const next = patchFor(text);
+    if (!next) {
+      if (anchor) opts.onFail('conflict', text);
       return;
     }
-    const result = await opts.save({ line: anchor.line, before: anchor.raw, after });
+    const result = await opts.save(next.patch);
     if (typeof result !== 'number') {
       opts.onFail(result, text);
       return;
     }
     saved = text;
-    anchor = after[0] != null ? { line: result, raw: after[0] } : null;
+    anchor = next.line != null ? { line: result, raw: next.line } : null;
   };
   // One write at a time, so each one anchors on the line the last one left.
   const flush = (final: boolean) => {
@@ -165,6 +190,18 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): void {
       node.removeAttribute('contenteditable');
       node.replaceChildren(...opts.render(saved));
       opts.onEditing(false);
+      opts.onClose?.(saved);
     });
   });
+
+  return {
+    edit: () => start(null),
+    remove: () => {
+      node.textContent = '';
+      void flush(true).then(() => {
+        node.replaceChildren(...opts.render(saved));
+        opts.onClose?.(saved);
+      });
+    },
+  };
 }

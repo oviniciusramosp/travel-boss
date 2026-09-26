@@ -32,7 +32,7 @@ import {
   type Rail,
 } from './day-plan';
 import { inlineNodes } from './inline';
-import { editableNote, sendPatch, type NoteKind } from './note-edit';
+import { editableNote, sendPatch, type NoteEditorOptions, type NoteKind, type SeenLine } from './note-edit';
 import {
   dateStops,
   planHop,
@@ -59,7 +59,7 @@ import {
   repaintPlace,
   setPlaceOrigin,
 } from '../views/place-panel';
-import { parseTrip, type Trip, type TripCity, type TripLeg } from './parse';
+import { parseTrip, type Trip, type TripCity, type TripLeg, type TripStop } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { dateBudgetCards, periodLabel, slotSwitch, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
@@ -371,6 +371,11 @@ export function mountTrip(
             'pt-BR': 'Não salvou: essa linha mudou no arquivo.',
           })
         : pickLocale(locale, { en: 'Could not save.', 'pt-BR': 'Falha ao salvar.' });
+    // A failed delete has no text to keep, and must not wipe the clipboard.
+    if (!text) {
+      showToast(why, true);
+      return;
+    }
     void navigator.clipboard.writeText(text).then(
       () =>
         showToast(`${why} ${pickLocale(locale, { en: 'Your text is on the clipboard.', 'pt-BR': 'Seu texto está na área de transferência.' })}`, true),
@@ -1125,19 +1130,69 @@ export function mountTrip(
     };
 
     const rawLines = lastRaw.split(/\r?\n/);
-    const editNote = (node: HTMLElement, kind: NoteKind, text: string, line: number, slug: string) =>
+    const lineAt = (line: number): SeenLine => ({ line, raw: rawLines[line - 1] ?? '' });
+    const editNote = (
+      node: HTMLElement,
+      kind: NoteKind,
+      text: string,
+      at: SeenLine | null,
+      slug: string,
+      more: Partial<NoteEditorOptions> = {},
+    ) =>
       editableNote(node, {
         kind,
         text,
-        line,
-        raw: rawLines[line - 1] ?? '',
+        at,
         label: pickLocale(locale, { en: 'Note', 'pt-BR': 'Anotação' }),
         render: (value) =>
           inlineNodes(value, { onPlace: (placeId, origin) => openLinkedPlace(slug, placeId, origin) }),
         save: (patch) => sendPatch(id, patch),
         onEditing,
         onFail: noteFailed,
+        ...more,
       });
+
+    /** The stop's comments go in `host`. Returns the button that adds one. */
+    const comments = (host: HTMLElement, stop: TripStop, slug: string): HTMLButtonElement => {
+      const list = el('ul', 'tb-comments');
+      const entry = (line: SeenLine | null, text: string) => {
+        const item = el('li', 'tb-comment');
+        const body = el('span', 'tb-comment__text');
+        const remove = iconButton({
+          icon: 'delete',
+          label: pickLocale(locale, { en: 'Delete comment', 'pt-BR': 'Apagar comentário' }),
+          size: 'sm',
+        });
+        item.append(icon('chat_bubble', { size: 16 }), body, remove);
+        list.append(item);
+        const editor = editNote(body, 'comment', text, line, slug, {
+          parent: lineAt(stop.line),
+          label: pickLocale(locale, { en: 'Comment for Claude', 'pt-BR': 'Comentário para o Claude' }),
+          placeholder: pickLocale(locale, { en: 'Comment for Claude…', 'pt-BR': 'Comentário para o Claude…' }),
+          onClose: (saved) => {
+            if (!saved) item.remove();
+          },
+        });
+        remove.addEventListener('click', () => editor.remove());
+        return editor;
+      };
+      for (const comment of stop.comments ?? []) entry(lineAt(comment.line), comment.text);
+      // Before the actions, so Tab reaches the comments first.
+      const actions = host.querySelector(':scope > .tb-row__actions');
+      if (actions) actions.before(list);
+      else host.append(list);
+      const add = iconButton({
+        icon: 'add_comment',
+        label: pickLocale(locale, { en: 'Add comment', 'pt-BR': 'Adicionar comentário' }),
+        size: 'sm',
+      });
+      add.dataset.action = 'comment';
+      add.addEventListener('click', (event) => {
+        event.stopPropagation();
+        entry(null, '').edit();
+      });
+      return add;
+    };
 
     const article = document.createElement('article');
     article.className = 'tb-doc';
@@ -1300,15 +1355,15 @@ export function mountTrip(
           noteItem.dataset.stop = '';
           noteItem.dataset.stopKey = key;
           noteItem.dataset.hay = `${city.name} ${stop.label}`.toLowerCase();
-          if (stop.time) {
-            const time = document.createElement('span');
-            time.className = 'tb-list-note__time';
-            time.textContent = stop.time;
-            noteItem.append(time);
-          }
+          const noteBody = el('span', 'tb-list-note__body');
+          if (stop.time) noteBody.append(el('span', 'tb-list-note__time', stop.time));
           const text = el('span', 'tb-list-note__text');
-          editNote(text, 'item', stop.label, stop.line, city.slug);
-          noteItem.append(text);
+          editNote(text, 'item', stop.label, lineAt(stop.line), city.slug);
+          noteBody.append(text);
+          noteItem.append(noteBody);
+          const noteActions = el('div', 'tb-row__actions');
+          noteActions.append(comments(noteItem, stop, city.slug));
+          noteItem.append(noteActions);
           markChanged(noteItem);
           lists[rowIndex]!.append(noteItem);
           return;
@@ -1374,9 +1429,10 @@ export function mountTrip(
         if (stop.note && !missingPlace) {
           // Beside the title button, not in it: a click on the note edits it.
           const note = el('span', 'tb-row__sub');
-          editNote(note, 'stop', stop.note, stop.line, city.slug);
+          editNote(note, 'stop', stop.note, lineAt(stop.line), city.slug);
           item.querySelector('.tb-row__main')?.after(note);
         }
+        item.querySelector('.tb-row__actions')?.append(comments(item, stop, city.slug));
         markChanged(item);
         if (place) {
           // Row hover and focus light the pin the way hovering the dot does.
@@ -1458,7 +1514,7 @@ export function mountTrip(
       for (const dated of daysHere) {
         for (const note of dated.day.notes) {
           const paragraph = el('p', 'tb-doc-note');
-          editNote(paragraph, 'paragraph', note.text, note.line, dated.city.slug);
+          editNote(paragraph, 'paragraph', note.text, lineAt(note.line), dated.city.slug);
           body.append(paragraph);
         }
         if (

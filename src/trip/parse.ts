@@ -25,6 +25,8 @@ export type TripStop = {
   leg?: TripLeg;
   /** 1-based line of the bullet. The UI edits the note on this line. */
   line: number;
+  /** Indented `comentário:` lines: the user's requests to the LLM. Not exported. */
+  comments?: TripLine[];
 };
 
 /** One line of the file: its text and 1-based number. */
@@ -60,6 +62,7 @@ export type TripErrorCode =
   | 'via-no-stop'
   | 'via-empty'
   | 'via-duplicate'
+  | 'comment-no-stop'
   | 'stop-outside-day'
   | 'line-outside-day'
   | 'no-title';
@@ -83,6 +86,7 @@ const DATES_LINE = /^dates:\s*(\d{4}-\d{2}-\d{2})\s*→\s*(\d{4}-\d{2}-\d{2})\s*
 const TIME_PREFIX = /^(\d{2}:\d{2})\s+/;
 const VIA_BULLET = /^[ \t]+-[ \t]+via:[ \t]*(.*)$/i;
 const CITY_VIA = /^via:[ \t]*(.*)$/i;
+const COMMENT_BULLET = /^[ \t]+-[ \t]+(?:comentário|comentario|comment):[ \t]*(.*)$/i;
 // `3h10` is glued. `1 h 30 min` needs the `min`. `1 h 2 h` stays two spans.
 const DURATION_TOKEN =
   /(?<![a-z0-9])(?:(\d+)\s*h\s*(\d{1,2})\s*min|(\d+)h(\d{1,2})|(\d+)\s?(min|h))(?![a-z0-9])/gi;
@@ -289,6 +293,15 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
         continue;
       }
       stop.leg = readLeg(detail, lineNo, errors);
+      continue;
+    }
+
+    const comment = COMMENT_BULLET.exec(line);
+    if (comment) {
+      const stop = day?.stops[day.stops.length - 1];
+      const text = (comment[1] ?? '').trim();
+      if (!stop) reject(errors, lineNo, 'comment-no-stop');
+      else if (text) (stop.comments ??= []).push({ text, line: lineNo });
       continue;
     }
 

@@ -331,6 +331,31 @@ describe('list notes', () => {
   });
 });
 
+describe('comments', () => {
+  it('hangs indented comentário lines on the stop above, with their lines, and keeps via', () => {
+    const { stops, errors } = firstLegs(`- 09:00 [Louvre](place:par-louvre)
+  - comentário: dá para entrar mais cedo?
+  - via: metrô · 20 min
+  - Comment: trocar por Orsay
+- Lembrar **ingresso**
+  - comentario: ainda vale?
+- comentário: fora do item`);
+    expect(errors).toEqual([]);
+    expect(stops[0]?.comments?.map((comment) => comment.text)).toEqual([
+      'dá para entrar mais cedo?',
+      'trocar por Orsay',
+    ]);
+    expect(stops[0]?.leg?.durationMin).toBe(20);
+    expect(stops[1]?.comments?.[0]).toEqual({ text: 'ainda vale?', line: (stops[1]?.line ?? 0) + 1 });
+    expect(stops[2]).toMatchObject({ label: 'comentário: fora do item', listNote: true });
+  });
+
+  it('reports a comment before any stop', () => {
+    const trip = parseTrip('europa', 'content/trips/europa.md', parisDay('  - comentário: sem parada'));
+    expect(trip.errors.map((error) => error.code)).toEqual(['comment-no-stop']);
+  });
+});
+
 describe('tripErrorText', () => {
   it('builds the sentence in the active language', () => {
     expect(tripErrorText({ line: 1, code: 'via-no-mode' }, 'pt-BR')).toBe('via sem modo');

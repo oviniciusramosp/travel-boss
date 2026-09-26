@@ -11,6 +11,7 @@ dates: 2026-04-02 → 2026-04-06
 ### Dia 1 — Chegada
 
 - 09:00 [Orly](place:par-ory) — Desembarque
+  - comentário: chegar mais cedo?
 - [Sumido](place:par-nao-existe)
 
 Notas com <script> e **negrito**.
@@ -34,6 +35,7 @@ describe('export', () => {
     expect(markdown).toContain('## Paris');
     expect(markdown).toContain('### Dia 1 — Chegada');
     expect(markdown).toContain('- 09:00 ');
+    expect(markdown).not.toContain('comentário');
   });
 
   it('builds headings, lists and links as html', () => {

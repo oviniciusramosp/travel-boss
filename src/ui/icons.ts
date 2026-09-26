@@ -5,6 +5,7 @@
 export const ICONS = [
   'account_balance',
   'add',
+  'add_comment',
   'apartment',
   'attach_money',
   'auto_awesome',
@@ -13,6 +14,7 @@ export const ICONS = [
   'bridge',
   'calendar_month',
   'castle',
+  'chat_bubble',
   'check',
   'chevron_left',
   'chevron_right',
@@ -24,6 +26,7 @@ export const ICONS = [
   'content_copy',
   'cookie',
   'dark_mode',
+  'delete',
   'directions',
   'directions_transit',
   'directions_walk',

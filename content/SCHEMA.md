@@ -70,6 +70,17 @@ dates: 2026-04-06 → 2026-04-09
     - `NhMM`: `3h10` = 190, `1h30` = 90. The minutes are one or two digits glued to `h`, not a second token.
     - `N h M min`: `1 h 30 min` = 90, `3 h 10 min` = 190. `1h30min` is the same span.
     - Two spans are an error (`20 min` and `40 min`, or `1 h` and `2 h`). `1 h 30 min` is one span, not two.
+- A stop or a list note may have indented `comentário:` sub-bullets. Each one is a request from the user to the LLM about that item, written from the app.
+
+  ```markdown
+  - 09:00 [Louvre](place:par-louvre) — Ingresso das 9h
+    - via: metrô · 20 min
+    - comentário: dá para entrar mais cedo?
+  ```
+
+  - Keyword `comentário:`, `comentario:` or `comment:`, any case, indented like `via:`. A top-level `- comentário:` is a list note. An empty one is ignored. One before the first stop of a day is an error.
+  - Not a stop, not a pin, not exported. The UI shows it under its item.
+  - The LLM that acts on a comment deletes its line.
 - Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 
@@ -80,12 +91,17 @@ Export rewrites the same document for Apple Notes and Notion:
 - H1, H2, H3 stay headings.
 - Bullets stay bullets. An indented `via:` stays nested under its stop. HTML export puts a `<ul>` inside that stop's `<li>` so Apple Notes and Notion keep the nesting. The `via:` text is copied as written; it is not rewritten from the parsed mode or minutes.
 - `**bold**` and `*italic*` stay.
+- `comentário:` lines are left out.
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.
 - `dates:` becomes a single line under the city heading.
 - A city-header `via:` stays on the next line, copied as written. `3h10` is not rewritten as minutes.
 - Clipboard writes `text/html` (Apple Notes uses this and keeps headings, lists and links) and `text/plain` Markdown (Notion pastes this).
 - A `.md` download uses the same Markdown.
+
+## Editing from the app
+
+With `npm run dev` the app writes the file too: a stop note, a list note, a paragraph or a comment, one line per save (`PATCH /api/trips/<id>`). A save lands only where the file still has the line the app saw, so the user and an LLM can change different lines at the same time. An LLM edits the current file in place. It never rewrites the whole file from an older copy.
 
 ## Multi-city
 
