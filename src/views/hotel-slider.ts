@@ -155,7 +155,7 @@ export function mountHotelSlider(
   next = nav('chevron_right', 1, 'tb-slider__nav--next');
   dots = el('div', 'tb-slider__dots');
   const fallback = el('div', 'tb-slider__fallback');
-  const glyph = icon('bed', { size: 20 });
+  const glyph = icon('hotel', { size: 20 });
   if (glyphColor) glyph.style.color = glyphColor;
   fallback.append(glyph);
   frame.append(...imgs, prev, next, dots, fallback);

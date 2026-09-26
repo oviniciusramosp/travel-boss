@@ -1,6 +1,11 @@
 import { inline, inlineWithLinks } from './inline';
 import type { Trip, TripDay, TripStop } from './parse';
 
+/** A break goes back as a Markdown hard break, the next line indented by `indent`. */
+function hardBreaks(text: string, indent: string): string {
+  return text.replaceAll('\n', `\\\n${indent}`);
+}
+
 function pushStop(
   lines: string[],
   stop: TripStop,
@@ -8,7 +13,7 @@ function pushStop(
 ) {
   const time = stop.time ? `${stop.time} ` : '';
   if (stop.listNote) {
-    lines.push(`- ${time}${stop.label}`);
+    lines.push(`- ${time}${hardBreaks(stop.label, '  ')}`);
   } else {
     let body: string;
     if (stop.href) body = `[${stop.label}](${stop.href})`;
@@ -16,7 +21,7 @@ function pushStop(
       const href = resolvePlace(stop.placeId);
       body = href ? `[${stop.label}](${href})` : `${stop.label} (lugar não encontrado)`;
     } else body = stop.label;
-    const note = stop.note ? ` — ${stop.note}` : '';
+    const note = stop.note ? ` — ${hardBreaks(stop.note, '  ')}` : '';
     lines.push(`- ${time}${body}${note}`);
   }
   if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
@@ -26,7 +31,7 @@ function pushDay(lines: string[], day: TripDay, resolvePlace: (placeId: string) 
   lines.push(`### ${day.title}`, '');
   for (const stop of day.stops) pushStop(lines, stop, resolvePlace);
   if (day.stops.length) lines.push('');
-  for (const note of day.notes) lines.push(note, '');
+  for (const note of day.notes) lines.push(hardBreaks(note.text, ''), '');
 }
 
 /** One day, same Markdown the trip export uses for that section. */
@@ -55,8 +60,11 @@ export function tripToMarkdown(
   return `${lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()}\n`;
 }
 
+/** Holds a hard break while the Markdown is read line by line. Private use, so `.` in a regex still matches it. */
+const HARD_BREAK = '\uE000';
+
 /**
- * HTML subset Apple Notes keeps: headings, paragraphs, lists, links.
+ * HTML subset Apple Notes keeps: headings, paragraphs, lists, links, `<br>`.
  * An indented bullet becomes a `<ul>` inside the parent `<li>`.
  * `resolvePlace` turns an inline `place:` link into an https href.
  */
@@ -96,7 +104,7 @@ export function tripToHtml(
     if (frame) frame.liOpen = true;
   };
 
-  for (const line of markdown.split('\n')) {
+  for (const line of markdown.replace(/\\\n[ \t]*/g, HARD_BREAK).split('\n')) {
     const bullet = /^(\s*)- (.*)$/.exec(line);
     if (bullet) {
       const indent = (bullet[1] ?? '').replaceAll('\t', '  ').length;
@@ -123,7 +131,7 @@ export function tripToHtml(
     out.push(`<p>${inlineWithLinks(line, resolvePlace)}</p>`);
   }
   closeAll();
-  return out.join('\n');
+  return out.join('\n').replaceAll(HARD_BREAK, '<br>');
 }
 
 export async function copyTrip(markdown: string, html: string): Promise<void> {

@@ -195,7 +195,7 @@
       "lng": 2.3408,
       "prefer": "polygon",
       "preserve_existing": true,
-      "note": "MANUAL multipolygon: OSM tourist_zone alone excludes Sacré-Cœur + Square Louise Michel. Union R6438767 + W45189726 + W23762981 in travel-areas-osm.ts. Do not plain re-fetch."
+      "note": "MANUAL multipolygon: Quartier des Grandes-Carrières R2195155 + Quartier de Clignancourt R2195154 (historic Montmartre). Do not plain re-fetch."
     },
     {
       "id": "par-madeleine",

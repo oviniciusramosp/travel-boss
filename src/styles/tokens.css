@@ -111,6 +111,8 @@
   --dur-slow: 320ms;
   --dur-flow: 2800ms;
   --dur-flow-hot: 1800ms;
+  /* Pause in typing before a note saves. Not motion, so reduced motion keeps it. */
+  --delay-autosave: 1500ms;
 
   --sidebar-width: 232px;
   --bar-height: 44px;

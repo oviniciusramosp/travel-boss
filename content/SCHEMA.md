@@ -85,6 +85,30 @@ dates: 2026-04-06 → 2026-04-09
     ```
 
   - The timeline names the leg with the text before the note, minus the duration and the price. It already shows the minutes beside the name. The note goes under that name. Write the name as a short action ("Pegar um Bolt"). A catalog leg keeps its own name and hops.
+- A stop or a list note may have indented `comentário:` sub-bullets. Each one is a request from the user to the LLM about that item, written from the app.
+
+  ```markdown
+  - 09:00 [Louvre](place:par-louvre) — Ingresso das 9h
+    - via: metrô · 20 min
+    - comentário: dá para entrar mais cedo?
+  ```
+
+  - Keyword `comentário:`, `comentario:` or `comment:`, any case, indented like `via:`. A top-level `- comentário:` is a list note. An empty one is ignored. One before the first stop of a day is an error.
+  - Not a stop, not a pin, not exported. The UI shows it under its item.
+  - The LLM that acts on a comment deletes its line.
+- A stop note, a list note, a paragraph or a comment can break onto the next line: end the line with `\` (a Markdown hard break) and go on in the next one, indented under the bullet. The app writes this for Shift+Return.
+
+  ```markdown
+  - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2.\
+    Passaporte e malas: conte ~1h.
+    - via: RER B · 35 min
+    - comentário: dá para pegar o RER B direto?\
+      Ou precisa do TGV?
+  ```
+
+  - The next line goes on the note whatever it starts with, even `- `, unless it is a heading. The line after one without `\` does not.
+  - Indent the rest under the text: 2 spaces for a stop or list note, 4 for a comment, none for a paragraph.
+  - A blank line ends the note. Export writes the breaks back the same way, and as `<br>` in the HTML.
 - Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 
@@ -95,12 +119,17 @@ Export rewrites the same document for Apple Notes and Notion:
 - H1, H2, H3 stay headings.
 - Bullets stay bullets. An indented `via:` stays nested under its stop. HTML export puts a `<ul>` inside that stop's `<li>` so Apple Notes and Notion keep the nesting. The `via:` text is copied as written; it is not rewritten from the parsed mode or minutes.
 - `**bold**` and `*italic*` stay.
+- `comentário:` lines are left out.
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.
 - `dates:` becomes a single line under the city heading.
 - A city-header `via:` stays on the next line, copied as written. `3h10` is not rewritten as minutes.
 - Clipboard writes `text/html` (Apple Notes uses this and keeps headings, lists and links) and `text/plain` Markdown (Notion pastes this).
 - A `.md` download uses the same Markdown.
+
+## Editing from the app
+
+With `npm run dev` the app writes the file too: a stop note, a list note, a paragraph or a comment, one line per save (`PATCH /api/trips/<id>`). A save lands only where the file still has the line the app saw, so the user and an LLM can change different lines at the same time. An LLM edits the current file in place. It never rewrites the whole file from an older copy.
 
 ## Multi-city
 

@@ -347,7 +347,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       fav.append(icon('favorite', { fill: true, size: 16 }));
       tagsMain.append(fav);
     }
-    if (place.aiSuggested) tagsMain.append(aiBadge(aiSuggestionTip(city.slug, place.id, locale)));
+    if (place.aiSuggested) tagsMain.append(aiBadge(aiSuggestionTip(city.slug, place, locale)));
     tags.append(tagsMain);
     const subs = place.subcategories ?? [];
     if (subs.length) {

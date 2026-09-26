@@ -19,6 +19,7 @@ export type TripLeg = {
 
 export type TripStop = {
   time?: string;
+  /** A list note's text. It and `note` hold hard breaks as `\n`. */
   label: string;
   placeId?: string;
   href?: string;
@@ -27,12 +28,19 @@ export type TripStop = {
   listNote?: boolean;
   /** Leg from this departure stop to the next stop. */
   leg?: TripLeg;
+  /** 1-based line of the bullet. The UI edits the note on this line. */
+  line: number;
+  /** Indented `comentário:` lines: the user's requests to the LLM. Not exported. */
+  comments?: TripLine[];
 };
+
+/** One line of the file: its text and 1-based number. */
+export type TripLine = { text: string; line: number };
 
 export type TripDay = {
   title: string;
   stops: TripStop[];
-  notes: string[];
+  notes: TripLine[];
 };
 
 export type TripCity = {
@@ -59,6 +67,7 @@ export type TripErrorCode =
   | 'via-no-stop'
   | 'via-empty'
   | 'via-duplicate'
+  | 'comment-no-stop'
   | 'stop-outside-day'
   | 'line-outside-day'
   | 'no-title';
@@ -82,6 +91,7 @@ const DATES_LINE = /^dates:\s*(\d{4}-\d{2}-\d{2})\s*→\s*(\d{4}-\d{2}-\d{2})\s*
 const TIME_PREFIX = /^(\d{2}:\d{2})\s+/;
 const VIA_BULLET = /^[ \t]+-[ \t]+via:[ \t]*(.*)$/i;
 const CITY_VIA = /^via:[ \t]*(.*)$/i;
+const COMMENT_BULLET = /^[ \t]+-[ \t]+(?:comentário|comentario|comment):[ \t]*(.*)$/i;
 // `3h10` is glued. `1 h 30 min` needs the `min`. `1 h 2 h` stays two spans.
 const DURATION_TOKEN =
   /(?<![a-z0-9])(?:(\d+)\s*h\s*(\d{1,2})\s*min|(\d+)h(\d{1,2})|(\d+)\s?(min|h))(?![a-z0-9])/gi;
@@ -182,7 +192,7 @@ export function legLabel(leg: TripLeg): string {
   return bare || head;
 }
 
-function parseStop(text: string, line: number, errors: TripError[]): TripStop {
+function parseStop(text: string, line: number, errors: TripError[]): Omit<TripStop, 'line'> {
   let rest = text.trim();
   let time: string | undefined;
   const timed = rest.match(TIME_PREFIX);
@@ -210,7 +220,7 @@ function parseStop(text: string, line: number, errors: TripError[]): TripStop {
   return { time, label, note };
 }
 
-function checkPlaces(city: TripCity, errors: TripError[], lineOf: Map<TripStop, number>) {
+function checkPlaces(city: TripCity, errors: TripError[]) {
   if (!city.slug) return;
   const known = getTravelCity(city.slug);
   if (!known) return;
@@ -218,7 +228,7 @@ function checkPlaces(city: TripCity, errors: TripError[], lineOf: Map<TripStop, 
     for (const stop of day.stops) {
       if (!stop.placeId) continue;
       if (!known.places.some((place) => place.id === stop.placeId)) {
-        reject(errors, lineOf.get(stop) ?? 0, 'place-missing', stop.placeId);
+        reject(errors, stop.line, 'place-missing', stop.placeId);
       }
     }
   }
@@ -233,7 +243,6 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
   const cities: TripCity[] = [];
   let city: TripCity | null = null;
   let day: TripDay | null = null;
-  const lineOf = new Map<TripStop, number>();
 
   const closeCity = () => {
     if (!city) return;
@@ -242,13 +251,26 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     } else if (!travelCities.some((item) => item.slug === city!.slug)) {
       reject(errors, 0, 'city-unknown', city.slug);
     }
-    checkPlaces(city, errors, lineOf);
+    checkPlaces(city, errors);
   };
+
+  /** The note a line ending in `\` breaks, which the next line goes on. */
+  let carry: ((text: string) => void) | null = null;
 
   for (let index = 0; index < lines.length; index += 1) {
     const lineNo = index + 1;
     const line = lines[index] ?? '';
     const trimmed = line.trim();
+    // A Markdown hard break: `\` at the end, the note goes on in the next line.
+    const hard = trimmed.endsWith('\\');
+    const body = hard ? trimmed.slice(0, -1).trimEnd() : trimmed;
+    // A heading still starts a day or city, as in CommonMark: a stray `\` never eats one.
+    if (carry && trimmed && !trimmed.startsWith('#')) {
+      carry(body);
+      if (!hard) carry = null;
+      continue;
+    }
+    carry = null;
     if (!trimmed) continue;
 
     if (trimmed.startsWith('### ')) {
@@ -326,19 +348,39 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       continue;
     }
 
+    const comment = COMMENT_BULLET.exec(line);
+    if (comment) {
+      const stop = day?.stops[day.stops.length - 1];
+      const tail = (comment[1] ?? '').trim();
+      const entry = { text: hard ? tail.slice(0, -1).trimEnd() : tail, line: lineNo };
+      if (!stop) reject(errors, lineNo, 'comment-no-stop');
+      else if (entry.text) {
+        (stop.comments ??= []).push(entry);
+        if (hard) carry = (more) => (entry.text += `\n${more}`);
+      }
+      continue;
+    }
+
     if (trimmed.startsWith('- ')) {
       if (!day) {
         reject(errors, lineNo, 'stop-outside-day');
         continue;
       }
-      const stop = parseStop(trimmed.slice(2), lineNo, errors);
-      lineOf.set(stop, lineNo);
+      const stop: TripStop = { ...parseStop(body.slice(2), lineNo, errors), line: lineNo };
       day.stops.push(stop);
+      if (hard) {
+        carry = (more) => {
+          if (stop.listNote) stop.label += `\n${more}`;
+          else stop.note = stop.note ? `${stop.note}\n${more}` : more;
+        };
+      }
       continue;
     }
 
     if (day) {
-      day.notes.push(trimmed);
+      const note = { text: body, line: lineNo };
+      day.notes.push(note);
+      if (hard) carry = (more) => (note.text += `\n${more}`);
       continue;
     }
 

@@ -256,6 +256,86 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Fernando Eichenberg',
     ),
   ],
+  // Perto da BnF (IA, set/2026)
+  'par-fuuki': [
+    photo('/photos/paris/par-fuuki-1.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-fuuki-2.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-fuuki-3.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-n-plus-un': [
+    photo('/photos/paris/par-n-plus-un-1.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-n-plus-un-2.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-n-plus-un-3.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-le-quai-bnf': [
+    photo('/photos/paris/par-le-quai-bnf-1.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-le-quai-bnf-2.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-le-quai-bnf-3.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-cajou': [
+    photo('/photos/paris/par-cajou-1.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-cajou-2.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-cajou-3.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-kawaa-lumiere': [
+    photo('/photos/paris/par-kawaa-lumiere-1.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-kawaa-lumiere-2.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-kawaa-lumiere-3.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-bercy-village': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Cour_Saint_%C3%89milion%2C_Bercy_Village_-_Paris_2012-04-08.jpg/960px-Cour_Saint_%C3%89milion%2C_Bercy_Village_-_Paris_2012-04-08.jpg',
+      "Gate of the Cour Saint-Émilion, the pedestrian street of Bercy Village",
+      "Portão da Cour Saint-Émilion, a rua de pedestres do Bercy Village",
+      "Jim Linwood from London / Wikimedia Commons (CC BY 2.0)",
+    ),
+  ],
+  'par-passerelle-simone-de-beauvoir': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Passerelle_Simone_Beauvoir_-_Paris_XII_%28FR75%29_-_2021-07-20_-_2.jpg/960px-Passerelle_Simone_Beauvoir_-_Paris_XII_%28FR75%29_-_2021-07-20_-_2.jpg',
+      "Wooden lower deck of the Passerelle Simone-de-Beauvoir under its steel arch, with the Seine on both sides and the BnF towers behind",
+      "Tabuleiro de madeira inferior da Passerelle Simone-de-Beauvoir sob o arco de aço, com o Sena dos dois lados e as torres da BnF ao fundo",
+      "Chabe01 / Wikimedia Commons (CC BY-SA 4.0)",
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Passerelle_Simone-de-Beauvoir.jpg/960px-Passerelle_Simone-de-Beauvoir.jpg',
+      "Side view of the lens-shaped Passerelle Simone-de-Beauvoir, its two curved decks crossing the Seine among trees",
+      "Vista lateral da Passerelle Simone-de-Beauvoir em forma de lente, com os dois tabuleiros curvos cruzando o Sena entre árvores",
+      "AHert / Wikimedia Commons (CC BY-SA 4.0)",
+    ),
+  ],
+  'par-parc-de-bercy': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Pond_in_the_Parc_de_Bercy.jpg/960px-Pond_in_the_Parc_de_Bercy.jpg',
+      "Pond and footbridge in the Parc de Bercy",
+      "Lago e pontezinha no Parc de Bercy",
+      "DiscoA340 / Wikimedia Commons (CC BY-SA 4.0)",
+    ),
+  ],
+  'par-cinematheque-francaise': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Gehrys_American_Center_2011.jpg/960px-Gehrys_American_Center_2011.jpg',
+      "The Frank Gehry building of the Cinémathèque française seen from the Parc de Bercy",
+      "O prédio de Frank Gehry da Cinémathèque française visto do Parc de Bercy",
+      "La Citta Vita / Wikimedia Commons (CC BY-SA 2.0)",
+    ),
+  ],
+  'par-musee-arts-forains': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Man%C3%A8ge_du_Mus%C3%A9e_des_Arts_Forains_-_Bercy.JPG/960px-Man%C3%A8ge_du_Mus%C3%A9e_des_Arts_Forains_-_Bercy.JPG',
+      "Painted canopy of an antique carousel at the Musée des Arts Forains",
+      "Teto pintado de um carrossel antigo no Musée des Arts Forains",
+      "Dinkum / Wikimedia Commons (CC0)",
+    ),
+  ],
+  'par-les-frigos': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Paris_-_Les_Frigos_%289584023031%29.jpg/960px-Paris_-_Les_Frigos_%289584023031%29.jpg',
+      "Graffiti-covered walls of Les Frigos",
+      "Paredes cobertas de grafites no Les Frigos",
+      "Anicius Olybrius / Wikimedia Commons (CC BY-SA 2.0)",
+    ),
+  ],
   'par-bohemia': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Blueberry_Pancakes_-_Nowhere_Man_2023-09-21.jpg/1280px-Blueberry_Pancakes_-_Nowhere_Man_2023-09-21.jpg',

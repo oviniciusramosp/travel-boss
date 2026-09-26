@@ -60,8 +60,9 @@ describe('parseTrip', () => {
     expect(external?.href).toMatch(/^https:\/\//);
   });
 
-  it('keeps day paragraphs as notes', () => {
-    expect(trip.cities[0]?.days[0]?.notes).toEqual(['Chegada tranquila.']);
+  it('keeps day paragraphs as notes, with the line of each note and stop', () => {
+    expect(trip.cities[0]?.days[0]?.notes).toEqual([{ text: 'Chegada tranquila.', line: 12 }]);
+    expect(trip.cities[0]?.days[0]?.stops.map((stop) => stop.line)).toEqual([9, 10]);
   });
 
   it('records a missing place and a broken link', () => {
@@ -345,7 +346,7 @@ via: trem · 3h10
 `,
     );
     expect(trip.cities[0]?.leg).toBeUndefined();
-    expect(trip.cities[0]?.days[0]?.notes).toEqual(['via: trem · 3h10']);
+    expect(trip.cities[0]?.days[0]?.notes.map((note) => note.text)).toEqual(['via: trem · 3h10']);
     expect(trip.errors).toEqual([]);
   });
 });
@@ -360,6 +361,65 @@ describe('list notes', () => {
     expect(stops[1]).toMatchObject({ label: 'Lembrar **ingresso**', listNote: true });
     expect(stops[0]?.placeId).toBe('par-louvre');
     expect(stops[2]?.placeId).toBe('par-orsay');
+  });
+});
+
+describe('comments', () => {
+  it('hangs indented comentário lines on the stop above, with their lines, and keeps via', () => {
+    const { stops, errors } = firstLegs(`- 09:00 [Louvre](place:par-louvre)
+  - comentário: dá para entrar mais cedo?
+  - via: metrô · 20 min
+  - Comment: trocar por Orsay
+- Lembrar **ingresso**
+  - comentario: ainda vale?
+- comentário: fora do item`);
+    expect(errors).toEqual([]);
+    expect(stops[0]?.comments?.map((comment) => comment.text)).toEqual([
+      'dá para entrar mais cedo?',
+      'trocar por Orsay',
+    ]);
+    expect(stops[0]?.leg?.durationMin).toBe(20);
+    expect(stops[1]?.comments?.[0]).toEqual({ text: 'ainda vale?', line: (stops[1]?.line ?? 0) + 1 });
+    expect(stops[2]).toMatchObject({ label: 'comentário: fora do item', listNote: true });
+  });
+
+  it('reports a comment before any stop', () => {
+    const trip = parseTrip('europa', 'content/trips/europa.md', parisDay('  - comentário: sem parada'));
+    expect(trip.errors.map((error) => error.code)).toEqual(['comment-no-stop']);
+  });
+});
+
+describe('hard breaks', () => {
+  it('carries a note on to the next line after a trailing backslash, and stops at the line without one', () => {
+    const trip = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      parisDay(`- 09:00 [Louvre](place:par-louvre) — Ingresso\\
+  das 9h
+  - via: metrô · 20 min
+  - comentário: mais cedo?\\
+    ou às 10h
+- Lembrar\\
+  do **ingresso**
+
+Narrativa um\\
+narrativa dois`),
+    );
+    const [louvre, reminder] = trip.cities[0]?.days[0]?.stops ?? [];
+    expect(trip.errors).toEqual([]);
+    expect(louvre?.note).toBe('Ingresso\ndas 9h');
+    expect(louvre?.leg?.durationMin).toBe(20);
+    expect(louvre?.comments?.map((comment) => comment.text)).toEqual(['mais cedo?\nou às 10h']);
+    expect(reminder).toMatchObject({ label: 'Lembrar\ndo **ingresso**', listNote: true });
+    expect(trip.cities[0]?.days[0]?.notes.map((note) => note.text)).toEqual(['Narrativa um\nnarrativa dois']);
+  });
+
+  it('drops a break that runs into a blank line or a heading', () => {
+    const { stops } = firstLegs('- 09:00 [Louvre](place:par-louvre) — Ingresso\\\n\n- 11:00 [Orsay](place:par-orsay)');
+    expect(stops.map((stop) => stop.note ?? null)).toEqual(['Ingresso', null]);
+    const trip = parseTrip('europa', 'content/trips/europa.md', parisDay('- 09:00 [Louvre](place:par-louvre) — Ingresso\\\n### Dia 2 — Versalhes\n\n- 10:00 [Orsay](place:par-orsay)'));
+    expect(trip.cities[0]?.days.map((day) => day.title)).toEqual(['Dia 1 — Museu', 'Dia 2 — Versalhes']);
+    expect(trip.cities[0]?.days[0]?.stops[0]?.note).toBe('Ingresso');
   });
 });
 

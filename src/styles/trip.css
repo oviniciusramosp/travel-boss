@@ -574,6 +574,134 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* A note shows its Markdown while you edit it. Hover says it is text. */
+/* pre-wrap: a hard break in the note (`\n`) shows as a new line, read or edited. */
+[data-note-edit] {
+  border-radius: var(--r-min);
+  cursor: text;
+  white-space: pre-wrap;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+[data-note-edit]:hover {
+  background: var(--color-hover);
+}
+
+[data-note-edit][contenteditable] {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+  background: transparent;
+  color: var(--color-ink);
+}
+
+/* While editing, the Markdown stays and bold and italic show between their marks,
+   with the weight and slant <strong> and <em> get once the note closes. */
+.tb-md-strong {
+  font-weight: bolder;
+}
+
+.tb-md-em {
+  font-style: italic;
+}
+
+.tb-md-mark {
+  color: var(--color-mid-gray);
+}
+
+/* The stop note sits under the title button, not inside it. */
+.tb-list.tb-timeline > .tb-row > .tb-row__sub {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: calc(-1 * var(--tl-row-gap));
+  white-space: pre-wrap;
+}
+
+/* The add-comment action sits beside time and title, in the row's own column. */
+.tb-list.tb-timeline > .tb-row > .tb-row__actions {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+/* Comments: the user's requests to the LLM, under the stop they are about. */
+.tb-comments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin: var(--spacing-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tb-comments:empty {
+  display: none;
+}
+
+.tb-list.tb-timeline > .tb-row > .tb-comments {
+  grid-column: 2;
+}
+
+.tb-comment {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  color: var(--color-ink);
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+}
+
+.tb-comment > .material-symbols-rounded {
+  flex: none;
+  color: var(--color-mid-gray);
+}
+
+.tb-comment__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.tb-comment > .tb-icon-btn {
+  flex: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.tb-comment:is(:hover, :focus-within) > .tb-icon-btn {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .tb-comment > .tb-icon-btn {
+    opacity: 1;
+  }
+}
+
+[data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--color-mid-gray);
+}
+
+/* List note: text and comments on the left, the add-comment action on the right. */
+.tb-list-note {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--spacing-8);
+  align-items: start;
+}
+
+.tb-list-note > .tb-comments {
+  grid-column: 1;
+}
+
+.tb-list-note > .tb-row__actions {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.tb-list-note:is(:hover, :focus-within) > .tb-row__actions {
+  opacity: 1;
+}
+
 .tb-place-link {
   padding: 0;
   border: 0;

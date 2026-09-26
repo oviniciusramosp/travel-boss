@@ -25,12 +25,16 @@ export function chipTone(color: string): ContrastInk {
 
 const INK = '#0a0a0a';
 const ON_INK = '#fafafa';
+/** Fills that keep the on-ink glyph even when ink would contrast more. */
+const ON_INK_FILLS = new Set(['#a78bfa']);
 
 /**
  * Foreground for a glyph sitting on a filled circle.
  * Picks whichever of ink / on-ink wins the contrast ratio.
  */
 export function circleInk(color: string): ContrastInk {
+  // ponytail: user asked for a white glyph on the lodging lilac, which ratio alone picks as ink.
+  if (ON_INK_FILLS.has(color.trim().toLowerCase())) return 'on-ink';
   const background = relativeLuminance(color);
   const ink = relativeLuminance(INK);
   const paper = relativeLuminance(ON_INK);

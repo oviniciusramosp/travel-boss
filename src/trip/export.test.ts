@@ -11,6 +11,7 @@ dates: 2026-04-02 → 2026-04-06
 ### Dia 1 — Chegada
 
 - 09:00 [Orly](place:par-ory) — Desembarque
+  - comentário: chegar mais cedo?
 - [Sumido](place:par-nao-existe)
 
 Notas com <script> e **negrito**.
@@ -34,6 +35,7 @@ describe('export', () => {
     expect(markdown).toContain('## Paris');
     expect(markdown).toContain('### Dia 1 — Chegada');
     expect(markdown).toContain('- 09:00 ');
+    expect(markdown).not.toContain('comentário');
   });
 
   it('builds headings, lists and links as html', () => {
@@ -95,6 +97,37 @@ city: paris
     expect(exported).not.toContain('item sem link');
     const html = tripToHtml(exported, (id) => `https://maps.example/${id}`);
     expect(html).toContain('<a href="https://maps.example/par-orsay">ingresso</a>');
+  });
+
+  it('writes hard breaks back as they were and as <br> in the html', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+
+### Dia 1 — Museu
+
+- 09:00 [Louvre](place:par-louvre) — Entrada\\
+  pela pirâmide
+  - via: metrô · 12 min
+- Lembrar\\
+  do ingresso
+
+Fila\\
+na entrada.
+`;
+    const parsed = parseTrip('europa', 'content/trips/europa.md', source);
+    const exported = tripToMarkdown(parsed, (_slug, placeId) => `https://maps.example/${placeId}`);
+    expect(exported).toContain(
+      '- 09:00 [Louvre](https://maps.example/par-louvre) — Entrada\\\n  pela pirâmide\n  - via: metrô · 12 min\n- Lembrar\\\n  do ingresso\n\nFila\\\nna entrada.',
+    );
+    expect(parseTrip('europa', 'content/trips/europa.md', exported).cities[0]?.days[0]?.stops[0]?.note).toBe(
+      'Entrada\npela pirâmide',
+    );
+    const html = tripToHtml(exported);
+    expect(html).toMatch(/— Entrada<br>pela pirâmide\s*<ul>\s*<li>via:/);
+    expect(html).toContain('<li>Lembrar<br>do ingresso');
+    expect(html).toContain('<p>Fila<br>na entrada.</p>');
   });
 
   it('keeps the city header via as written, including 3h10', () => {

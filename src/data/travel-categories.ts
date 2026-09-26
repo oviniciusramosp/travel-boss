@@ -99,7 +99,7 @@ export const categoryMaterialIcon: Record<PlaceCategoryIcon, string> = {
   utensils: 'restaurant',
   camera: 'photo_camera',
   star: 'star',
-  bed: 'bed',
+  bed: 'hotel',
   fastfood: 'lunch_dining',
   market: 'storefront',
   bag: 'shopping_bag',
