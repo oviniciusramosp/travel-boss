@@ -213,7 +213,7 @@ export function mountStayHeat(opts: {
       booking.href = heatMod.stayBookingUrl(located, opts.locale(), dates);
       booking.target = '_blank';
       booking.rel = 'noopener';
-      booking.prepend(icon('bed', { size: 16 }));
+      booking.prepend(icon('hotel', { size: 16 }));
       links.append(airbnb, booking);
     }
     root.append(links);
