@@ -1387,8 +1387,10 @@ export function mountTrip(
           return { mode, color } as const;
         });
         const walk = { mode: 'walk' as const, color: walkColor() };
+        // A ride comes to the door where you sleep. Elsewhere (an airport café) you walk to the pickup.
+        const doorToDoor = legs[0]?.mode === 'taxi' && place?.category === 'lodging';
         const hopPlan =
-          hopRails(rails, walk, legs[0]?.mode === 'taxi') ??
+          hopRails(rails, walk, doorToDoor) ??
           (nextPlace && !samePlace ? { depart: walk, parts: [], arrive: walk } : null);
         // A hop into the next period opens that period's list, like the portfolio.
         // The rail still runs down to that period, so the two read as one line.
