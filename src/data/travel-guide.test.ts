@@ -32,13 +32,14 @@ describe('city guides', () => {
     expect(fails, fails.join('\n')).toEqual([]);
   });
 
-  it('every AI-added place is suggested by a guide item of its city', () => {
+  it('every AI-added place has a reason: its own aiReason or a guide item of its city', () => {
     const fails: string[] = [];
     for (const city of travelCities) {
       const guide = cityGuide(city.slug);
       const pointed = new Set([...(guide?.market ?? []), ...(guide?.food ?? [])].flatMap((item) => item.where));
       for (const place of city.places) {
-        if (place.aiSuggested && !pointed.has(place.id)) fails.push(`${city.slug}/${place.id}`);
+        if (place.aiReason && (!place.aiSuggested || !filled(place.aiReason))) fails.push(`${city.slug}/${place.id}: aiReason`);
+        if (place.aiSuggested && !place.aiReason && !pointed.has(place.id)) fails.push(`${city.slug}/${place.id}`);
       }
     }
     expect(fails, fails.join('\n')).toEqual([]);
