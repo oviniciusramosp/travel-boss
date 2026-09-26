@@ -103,7 +103,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 00:10 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Outras opções baratas lá dentro: Toad Hall (fish & chips €12, até 17h), Au Chalet de la Marionnette (meio frango €12) e a pizza do Mickey no [Pizzeria Bella Notte](place:par-bella-notte) (€11–12). O Colonel Hathi's está fechado até 15/10. Fora dos portões: [McDonald's Disney Village](place:par-mcdonalds-disney) (fila de mais de 30 min: peça nos totens) e Earl of Sandwich
 
-### Dia 5 — Qui 8/10 · Marais, almoço no Chez Janou e pôr do sol em Montmartre
+### Dia 5 — Qui 8/10 · Marais, almoço no Chez Pradel e pôr do sol em Montmartre
 
 - 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Magenta e caminhada até a padaria · 40 min
@@ -113,19 +113,20 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 10:05 [Poilâne (Marais)](place:par-poilane) — Punitions (~€5) e pão para o café da manhã
 - 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
 - 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
-- 12:15 [Place des Vosges](place:par-vosges) — Volta pela praça antes do almoço
-- 12:30 [Chez Janou](place:par-chez-janou) — **Almoço**: prato provençal (~€20–30) e a mousse de chocolate (€12). Reserve para 12h30 (ZenChef ou 01 42 72 28 41)
-- 14:15 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
-- 14:30 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
-- 14:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui. Greve no metrô: ~45 min a pé até o Moulin Rouge
-  - via: metrô 4 de Châtelet até Barbès-Rochechouart e metrô 2 até Blanche · 30 min
-- 15:30 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora; daqui, suba a Rue Lepic
-- 16:30 [Charcuterie Arnaud Nicolas (Caulaincourt)](place:par-arnaud-nicolas-caulaincourt) — Croque-monsieur (~€5) para o fim de tarde; fecha às 20h
-- 17:15 [Montmartre](place:par-montmartre) — Place du Tertre e ruelas. Fête des Vendanges (7–11/out): mais gente e programação na rua
+- 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
+- 12:10 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
+- 12:20 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
+- 12:30 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui. Greve no metrô: ~1h a pé até o Chez Pradel
+  - via: metrô 4 de Châtelet até Simplon e caminhada pela Rue Ordener · 40 min
+- 13:20 [Chez Pradel](place:par-chez-pradel) — **Almoço**: fórmula do vídeo, prato €12,50, dois pratos €15 ou menu completo €18. Chegue até 13h30 para garantir mesa
+- 14:50 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora; daqui, suba a Rue Lepic
+- 15:45 [Charcuterie Arnaud Nicolas (Caulaincourt)](place:par-arnaud-nicolas-caulaincourt) — Croque-monsieur (~€5) para o fim de tarde; fecha às 20h
+- 16:15 [Montmartre](place:par-montmartre) — Place du Tertre e ruelas. Fête des Vendanges (7–11/out): mais gente e programação na rua
 - 18:40 [Sacré-Cœur](place:par-sacre-coeur) — **Pôr do sol às 19h18** na escadaria em frente à basílica; a basílica é grátis. Greve no metrô 2: ~20 min a pé até a Gare du Nord e RER E em Magenta
   - via: metrô 2 de Anvers até La Chapelle e RER E em Magenta · 45 min
 - 20:15 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Almoço alternativo, se não houver mesa no Janou: [L'As du Fallafel](place:par-as-du-fallafel) (pita ~€7–9) ou [Chez Alain Miam Miam](place:par-alain-miam) (26 Rue Charlot, qua–dom 9h–17h)
+- Almoço alternativo, se o Pradel estiver cheio: [Bouillon Pigalle](place:par-bouillon-pigalle) — a 5 min do Moulin Rouge, sem intervalo desde 12h; steak com fritas €12,60
+- Para almoçar no Marais: [Chez Janou](place:par-chez-janou) (prato provençal ~€20–30 e a mousse de chocolate de €12; reserve pela ZenChef ou no 01 42 72 28 41), [L'As du Fallafel](place:par-as-du-fallafel) (pita ~€7–9) ou [Chez Alain Miam Miam](place:par-alain-miam) (26 Rue Charlot, qua–dom 9h–17h)
 - Se sobrar tempo antes de Montmartre: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur), a 10 min a pé da Naturalia
 
 ### Dia 6 — Sex 9/10 · Versalhes

@@ -969,10 +969,8 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
   // 8/10
   trainLeg('par-casa-do-gui', 'par-du-pain-idees', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
-  trainLeg('par-naturalia-verrerie', 'par-moulin-rouge', 30, [
-    ride(metro4, 'chatelet', 'barbès'),
-    ride(metro2, 'barbès', 'blanche'),
-  ]),
+  // Simplon, then 1.1 km on foot along Rue Ordener
+  trainLeg('par-naturalia-verrerie', 'par-chez-pradel', 40, [ride(metro4, 'chatelet', 'simplon')]),
   trainLeg('par-sacre-coeur', 'par-casa-do-gui', 45, [
     ride(metro2, 'anvers', 'la-chapelle'),
     ride(rerE, 'magenta', 'noisy-le-sec'),
