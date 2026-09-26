@@ -1,6 +1,7 @@
 import { Control, DomEvent, type Map as LeafletMap } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { iconButton } from '../ui/controls';
+import type { AmenityKind } from './amenities';
 import type { IconName } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
 
@@ -15,18 +16,19 @@ function relabel(button: HTMLButtonElement, label: string, name: IconName) {
   if (glyph) glyph.textContent = name;
 }
 
-/** Zoom, fit, water/restrooms near the walk, and fullscreen. The fullscreen target includes the place panel. */
+/** Zoom, fit, water, restrooms, and fullscreen. The fullscreen target includes the place panel. */
 export function attachMapControls(
   map: LeafletMap,
   host: HTMLElement,
   fit: () => void,
-  setAmenities: (on: boolean) => void,
+  setAmenity: (kind: AmenityKind, on: boolean) => void,
 ): void {
   const shell = host.closest<HTMLElement>('.tb-map-col') ?? host.parentElement ?? host;
   const zoomIn = iconButton({ icon: 'add', label: 'Zoom in' });
   const zoomOut = iconButton({ icon: 'remove', label: 'Zoom out' });
   const fitBtn = iconButton({ icon: 'fit_screen', label: 'Fit places' });
-  const amenities = iconButton({ icon: 'wc', label: 'Water and restrooms', pressed: false });
+  const water = iconButton({ icon: 'water_drop', label: 'Drinking water', pressed: false });
+  const toilets = iconButton({ icon: 'wc', label: 'Restrooms', pressed: false });
   const fullscreen = iconButton({ icon: 'fullscreen', label: 'Full screen', pressed: false });
 
   const syncZoom = () => {
@@ -41,11 +43,8 @@ export function attachMapControls(
     relabel(zoomIn, pickLocale(uiLocale(), { en: 'Zoom in', 'pt-BR': 'Aproximar' }), 'add');
     relabel(zoomOut, pickLocale(uiLocale(), { en: 'Zoom out', 'pt-BR': 'Afastar' }), 'remove');
     relabel(fitBtn, pickLocale(uiLocale(), { en: 'Fit places', 'pt-BR': 'Enquadrar lugares' }), 'fit_screen');
-    relabel(
-      amenities,
-      pickLocale(uiLocale(), { en: 'Water and restrooms near the walk', 'pt-BR': 'Água e banheiros perto da caminhada' }),
-      'wc',
-    );
+    relabel(water, pickLocale(uiLocale(), { en: 'Drinking water', 'pt-BR': 'Água potável' }), 'water_drop');
+    relabel(toilets, pickLocale(uiLocale(), { en: 'Restrooms', 'pt-BR': 'Banheiros' }), 'wc');
     relabel(fullscreen, on ? exit : enter, on ? 'fullscreen_exit' : 'fullscreen');
     fullscreen.setAttribute('aria-pressed', on ? 'true' : 'false');
   };
@@ -59,11 +58,13 @@ export function attachMapControls(
   fitBtn.addEventListener('click', () => {
     fit();
   });
-  amenities.addEventListener('click', () => {
-    const next = amenities.getAttribute('aria-pressed') !== 'true';
-    amenities.setAttribute('aria-pressed', next ? 'true' : 'false');
-    setAmenities(next);
-  });
+  for (const [button, kind] of [[water, 'water'], [toilets, 'toilet']] as const) {
+    button.addEventListener('click', () => {
+      const next = button.getAttribute('aria-pressed') !== 'true';
+      button.setAttribute('aria-pressed', next ? 'true' : 'false');
+      setAmenity(kind, next);
+    });
+  }
   fullscreen.addEventListener('click', () => {
     if (document.fullscreenElement === shell) void document.exitFullscreen();
     else void shell.requestFullscreen();
@@ -82,7 +83,7 @@ export function attachMapControls(
 
   const bar = document.createElement('div');
   bar.className = 'tb-map-controls';
-  bar.append(zoomIn, zoomOut, fitBtn, amenities, fullscreen);
+  bar.append(zoomIn, zoomOut, fitBtn, water, toilets, fullscreen);
   DomEvent.disableClickPropagation(bar);
   DomEvent.disableScrollPropagation(bar);
 

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { amenityQuery, linesBounds, nearLines, type Amenity } from './amenities';
+import { amenityQuery, linesBounds, nearLines, tilesFor, type Amenity } from './amenities';
 
 vi.mock('leaflet', () => ({}));
 
@@ -21,5 +21,12 @@ describe('amenities', () => {
     expect(box[3]).toBeGreaterThan(2.3045);
     expect(linesBounds([])).toBeNull();
     expect(amenityQuery(box)).toContain('node["amenity"="toilets"]');
+  });
+
+  it('covers the view with fixed tiles', () => {
+    const tiles = tilesFor([48.84, 2.29, 48.87, 2.36]);
+    expect(tiles).toHaveLength(2);
+    expect(tiles[0][0]).toBeCloseTo(48.8);
+    expect(tilesFor([48.79, 2.31, 48.82, 2.32])).toHaveLength(2);
   });
 });

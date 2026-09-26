@@ -1,6 +1,7 @@
-import { divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
+import { circleMarker, divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { icon } from '../ui/icons';
+import { cssToken } from '../ui/motion';
 
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 /** How far off the walking line a tap or toilet still counts, in meters. */
@@ -52,16 +53,26 @@ export function nearLines(points: readonly Amenity[], lines: readonly Line[], ra
 
 const cache = new Map<string, Promise<Amenity[]>>();
 
+/** The public Overpass answers 429/504 under load; two retries, 4 s and 8 s apart. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function overpass(query: string, tries = 3): Promise<any> {
+  for (let i = 0; ; i++) {
+    const r = await fetch(OVERPASS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `data=${encodeURIComponent(query)}`,
+    });
+    if (r.ok) return r.json();
+    if (i + 1 >= tries || (r.status !== 429 && r.status !== 504)) throw new Error(String(r.status));
+    await new Promise((done) => setTimeout(done, 4000 * 2 ** i));
+  }
+}
+
 async function fetchAmenities(bounds: [number, number, number, number]): Promise<Amenity[]> {
   const query = amenityQuery(bounds);
   let hit = cache.get(query);
   if (!hit) {
-    hit = fetch(OVERPASS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `data=${encodeURIComponent(query)}`,
-    })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    hit = overpass(query)
       .then((data: { elements?: { id: number; lat: number; lon: number; tags?: Record<string, string> }[] }) =>
         (data.elements ?? []).map((el) => ({
           id: el.id,
@@ -91,27 +102,72 @@ function label(point: Amenity, locale: Locale): string {
   return `${base}${fee}`;
 }
 
-/** Water taps and toilets near the walking lines. Off by default; never part of the trip. */
-export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void; setOn(on: boolean): void } {
-  const group = layerGroup();
+/** Tiles of `TILE`° covering [s, w, n, e], so a pan refetches only new ground. */
+export const TILE = 0.1;
+export function tilesFor([s, w, n, e]: readonly number[]): [number, number, number, number][] {
+  const out: [number, number, number, number][] = [];
+  for (let y = Math.floor(s / TILE); y * TILE < n; y++)
+    for (let x = Math.floor(w / TILE); x * TILE < e; x++)
+      out.push([y * TILE, x * TILE, (y + 1) * TILE, (x + 1) * TILE]);
+  return out;
+}
+
+/** Below this zoom the city view is too wide to ask Overpass for every tap. */
+const MIN_ZOOM = 13;
+
+/**
+ * Every water tap or toilet in view, each kind toggled on its own. The ones near a
+ * walking line get the badge; the rest stay small dots. Never part of the trip.
+ */
+export function mountAmenities(map: LeafletMap): {
+  setWalks(lines: Line[]): void;
+  setOn(kind: AmenityKind, on: boolean): void;
+} {
+  const group = layerGroup().addTo(map);
+  const on: Record<AmenityKind, boolean> = { water: false, toilet: false };
   let walks: Line[] = [];
-  let on = false;
   let run = 0;
 
   const paint = async () => {
     const id = ++run;
-    group.clearLayers();
-    const bounds = on ? linesBounds(walks) : null;
-    if (!bounds) return;
-    let all: Amenity[];
-    try {
-      all = await fetchAmenities(bounds);
-    } catch {
+    if ((!on.water && !on.toilet) || map.getZoom() < MIN_ZOOM) {
+      group.clearLayers();
       return;
     }
+    const view = map.getBounds();
+    // One tile at a time: Overpass answers 429/504 to a burst. A failed tile is retried next move.
+    const all: Amenity[] = [];
+    for (const tile of tilesFor([view.getSouth(), view.getWest(), view.getNorth(), view.getEast()])) {
+      try {
+        all.push(...(await fetchAmenities(tile)));
+      } catch {
+        // keep the tiles that answered
+      }
+      if (id !== run) return;
+    }
     if (id !== run) return;
+    group.clearLayers();
+    const shown = all.filter((point) => on[point.kind]);
+    const near = new Set(nearLines(shown, walks).map((point) => point.id));
     const locale: Locale = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
-    for (const point of nearLines(all, walks)) {
+    const color = {
+      water: cssToken('--color-water', '#0891b2'),
+      toilet: cssToken('--color-restroom', '#7c3aed'),
+    };
+    for (const point of shown) {
+      const text = label(point, locale);
+      if (!near.has(point.id)) {
+        circleMarker([point.lat, point.lng], {
+          radius: 5,
+          color: cssToken('--color-paper', '#ffffff'),
+          weight: 1,
+          fillColor: color[point.kind],
+          fillOpacity: 0.7,
+        })
+          .bindTooltip(text, { direction: 'top', offset: [0, -4] })
+          .addTo(group);
+        continue;
+      }
       const glyph = icon(point.kind === 'toilet' ? 'wc' : 'water_drop', { fill: true, size: 16 });
       marker([point.lat, point.lng], {
         icon: divIcon({
@@ -123,20 +179,19 @@ export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void
         keyboard: false,
         zIndexOffset: 500,
       })
-        .bindTooltip(label(point, locale), { direction: 'top', offset: [0, -10] })
+        .bindTooltip(text, { direction: 'top', offset: [0, -10] })
         .addTo(group);
     }
   };
 
+  map.on('moveend', () => void paint());
   return {
     setWalks(lines) {
       walks = lines;
-      if (on) void paint();
+      void paint();
     },
-    setOn(next) {
-      on = next;
-      if (on) group.addTo(map);
-      else group.remove();
+    setOn(kind, next) {
+      on[kind] = next;
       void paint();
     },
   };
