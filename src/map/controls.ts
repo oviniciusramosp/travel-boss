@@ -15,12 +15,18 @@ function relabel(button: HTMLButtonElement, label: string, name: IconName) {
   if (glyph) glyph.textContent = name;
 }
 
-/** Zoom, fit, and fullscreen. The fullscreen target includes the place panel. */
-export function attachMapControls(map: LeafletMap, host: HTMLElement, fit: () => void): void {
+/** Zoom, fit, water/restrooms near the walk, and fullscreen. The fullscreen target includes the place panel. */
+export function attachMapControls(
+  map: LeafletMap,
+  host: HTMLElement,
+  fit: () => void,
+  setAmenities: (on: boolean) => void,
+): void {
   const shell = host.closest<HTMLElement>('.tb-map-col') ?? host.parentElement ?? host;
   const zoomIn = iconButton({ icon: 'add', label: 'Zoom in' });
   const zoomOut = iconButton({ icon: 'remove', label: 'Zoom out' });
   const fitBtn = iconButton({ icon: 'fit_screen', label: 'Fit places' });
+  const amenities = iconButton({ icon: 'wc', label: 'Water and restrooms', pressed: false });
   const fullscreen = iconButton({ icon: 'fullscreen', label: 'Full screen', pressed: false });
 
   const syncZoom = () => {
@@ -35,6 +41,11 @@ export function attachMapControls(map: LeafletMap, host: HTMLElement, fit: () =>
     relabel(zoomIn, pickLocale(uiLocale(), { en: 'Zoom in', 'pt-BR': 'Aproximar' }), 'add');
     relabel(zoomOut, pickLocale(uiLocale(), { en: 'Zoom out', 'pt-BR': 'Afastar' }), 'remove');
     relabel(fitBtn, pickLocale(uiLocale(), { en: 'Fit places', 'pt-BR': 'Enquadrar lugares' }), 'fit_screen');
+    relabel(
+      amenities,
+      pickLocale(uiLocale(), { en: 'Water and restrooms near the walk', 'pt-BR': 'Água e banheiros perto da caminhada' }),
+      'wc',
+    );
     relabel(fullscreen, on ? exit : enter, on ? 'fullscreen_exit' : 'fullscreen');
     fullscreen.setAttribute('aria-pressed', on ? 'true' : 'false');
   };
@@ -47,6 +58,11 @@ export function attachMapControls(map: LeafletMap, host: HTMLElement, fit: () =>
   });
   fitBtn.addEventListener('click', () => {
     fit();
+  });
+  amenities.addEventListener('click', () => {
+    const next = amenities.getAttribute('aria-pressed') !== 'true';
+    amenities.setAttribute('aria-pressed', next ? 'true' : 'false');
+    setAmenities(next);
   });
   fullscreen.addEventListener('click', () => {
     if (document.fullscreenElement === shell) void document.exitFullscreen();
@@ -66,7 +82,7 @@ export function attachMapControls(map: LeafletMap, host: HTMLElement, fit: () =>
 
   const bar = document.createElement('div');
   bar.className = 'tb-map-controls';
-  bar.append(zoomIn, zoomOut, fitBtn, fullscreen);
+  bar.append(zoomIn, zoomOut, fitBtn, amenities, fullscreen);
   DomEvent.disableClickPropagation(bar);
   DomEvent.disableScrollPropagation(bar);
 

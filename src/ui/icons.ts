@@ -82,6 +82,8 @@ export const ICONS = [
   'train',
   'visibility',
   'warning',
+  'water_drop',
+  'wc',
   'weather_snowy',
   'yard',
 ] as const;

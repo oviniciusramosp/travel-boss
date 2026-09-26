@@ -1015,3 +1015,33 @@ p.tb-meta {
   background: var(--subpoint-color, var(--color-walk));
   box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
 }
+
+.tb-map .tb-map-controls .tb-icon-btn[aria-pressed='true'] {
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+}
+
+.leaflet-marker-icon.tb-amenity-wrap {
+  background: none;
+  border: 0;
+}
+
+.tb-amenity {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--color-paper);
+  border-radius: var(--r-pill);
+  background: var(--color-water);
+  color: var(--color-paper);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+
+.tb-amenity.is-toilet {
+  background: var(--color-restroom);
+}
+
+.tb-amenity .material-symbols-rounded {
+  font-size: 14px;
+}
