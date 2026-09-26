@@ -8,25 +8,28 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
-- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café no lugar do almoço, só para forrar o estômago (~€4–8), logo na saída da alfândega
+- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8), logo na saída da alfândega
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
-- 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
+- 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
+  Navigo Semaine só começa a valer a partir de segunda-feira.
   - via: RER E + metrô 9 · 45 min · €2,55
 - 18:00 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
 - 18:10 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
 - 18:25 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
 - 18:40 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
-- 18:50 [Torre Eiffel](place:par-eiffel) — Por fora, de pertinho: daqui até a École Militaire é tudo pela Avenue Pierre Loti, com o gramado dos dois lados
-- 19:00 [Champ de Mars](place:par-champ-mars) — Pôr do sol às 19h25 no gramado, a Torre acendendo ao escurecer e o brilho das 20h. Depois, descida até a École Militaire, com a Torre acesa atrás
-- 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Só por fora: a capela fica na ala norte do prédio da cúpula, que é área militar. Volta pelo gramado com a Torre de frente
+- 18:50 [Torre Eiffel](place:par-eiffel) — Ainda não vamos subir. Só passar na frente.
+- 19:00 [Champ de Mars](place:par-champ-mars) — Pôr do sol às 19h25 no gramado, a Torre acendendo ao escurecer e o brilho das 20h.
+- 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Ir até a capela antes de seguir o roteiro.
 - 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
-- 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa): cordon bleu premiado (€26, com um acompanhamento) e uma sobremesa de €9. Precisa reservar: na Zenchef, o primeiro horário livre da noite é 21h15; o das 21h, só por telefone (01 86 04 40 54)
+- 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa): cordon bleu premiado (€26, com um acompanhamento) e uma sobremesa de €9.\
+  **Reservar:** na Zenchef, o primeiro horário livre da noite é 21h15; o das 21h, só por telefone (01 86 04 40 54)
 - 22:00 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h
-- 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio. Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59, porque a linha fecha às 22h45 nos fins de semana, para obras
+- 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio.\
+  Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59
   - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h · €2,55
-- 23:30 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Se o Bolt passar de €40 no aeroporto: RER B + RER E pela estação CDG 2 TGV (~1h15), com o bilhete aeroporto de €14 por pessoa nas máquinas de faixa rosa
+  - comentário: o ponto no mapa não está marcado corretamente. deveria se ro ponto de foto entre a Avenue de New York e a Port Debilly. Corrija.
+- 23:30 [Casa do Gui](place:par-casa-do-gui) — Fim do primeiro dia
 
 ### Dia 2 — Seg 5/10 · Printemps, Opéra e pôr do sol na Galeries Lafayette
 
