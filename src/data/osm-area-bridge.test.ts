@@ -4,7 +4,7 @@ import { loadOsmAreas, osmAreaFor, osmAreasReady, placeHasOsmArea } from './osm-
 describe('osm area bridge', () => {
   it('keeps outlines out until the geometry module loads', async () => {
     expect(placeHasOsmArea('par-montmartre')).toBe(true);
-    expect(placeHasOsmArea('par-eiffel')).toBe(false);
+    expect(placeHasOsmArea('par-no-such-place')).toBe(false);
     expect(osmAreasReady()).toBe(false);
     expect(osmAreaFor('par-montmartre')).toBeUndefined();
     await loadOsmAreas();

@@ -110,6 +110,8 @@ export type TravelArea =
       kind: 'multipolygon';
       /** Multiple outer rings (e.g. Petit + Grand Palais) */
       paths: LatLngPoint[][];
+      /** Lines drawn with the rings (e.g. Pont d'Iéna under the Eiffel Tower) */
+      lines?: LatLngPoint[][];
     };
 
 /** Station / waypoint along a route (e.g. metro line) — shown on hover with the line */
@@ -6707,7 +6709,7 @@ export function resolvePlaceArea(place: TravelPlace): TravelArea | undefined {
   if (!osm) return place.area;
   // Normalize OSM multipolygon/polygon/polyline into TravelArea
   if (osm.kind === 'multipolygon') {
-    return { kind: 'multipolygon', paths: osm.paths as LatLngPoint[][] };
+    return { kind: 'multipolygon', paths: osm.paths as LatLngPoint[][], lines: osm.lines as LatLngPoint[][] | undefined };
   }
   return {
     kind: osm.kind,

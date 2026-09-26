@@ -104,21 +104,21 @@ export function mountPlaceOverlays(map: LeafletMap): { sync(ids: readonly string
     const drawn = drawableRings(area);
     if (!drawn.paths.length) return null;
     const color = placeCategoryMeta[place.category]?.color ?? cssToken('--color-ink', '#0a0a0a');
-    if (drawn.line) {
-      return polyline(drawn.paths[0]!, {
-        renderer,
-        interactive: false,
-        bubblingMouseEvents: false,
-        className: 'tb-area tb-area--line',
-        color,
-        weight: 6,
-        opacity: 1,
-        lineCap: 'round',
-        lineJoin: 'round',
-      });
-    }
+    const lineOptions = {
+      renderer,
+      interactive: false,
+      bubblingMouseEvents: false,
+      className: 'tb-area tb-area--line',
+      color,
+      weight: 6,
+      opacity: 1,
+      lineCap: 'round',
+      lineJoin: 'round',
+    } as const;
+    if (drawn.line) return polyline(drawn.paths[0]!, lineOptions);
     const group = layerGroup();
     for (const ring of drawn.paths) group.addLayer(polygon(ring, polyOptions(color)));
+    for (const path of drawn.lines) group.addLayer(polyline(path, lineOptions));
     return group;
   };
 

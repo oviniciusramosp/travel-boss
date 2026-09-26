@@ -3,7 +3,7 @@ import { OSM_AREA_IDS } from './travel-area-ids';
 export type OsmOutline =
   | { kind: 'polygon'; path: [number, number][] }
   | { kind: 'polyline'; path: [number, number][] }
-  | { kind: 'multipolygon'; paths: [number, number][][] };
+  | { kind: 'multipolygon'; paths: [number, number][][]; lines?: [number, number][][] };
 
 type Lookup = (placeId: string) => OsmOutline | undefined;
 
