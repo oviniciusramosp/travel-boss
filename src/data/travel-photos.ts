@@ -257,6 +257,31 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   // Perto da BnF (IA, set/2026)
+  'par-fuuki': [
+    photo('/photos/paris/par-fuuki-1.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-fuuki-2.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-fuuki-3.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-n-plus-un': [
+    photo('/photos/paris/par-n-plus-un-1.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-n-plus-un-2.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-n-plus-un-3.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-le-quai-bnf': [
+    photo('/photos/paris/par-le-quai-bnf-1.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-le-quai-bnf-2.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-le-quai-bnf-3.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-cajou': [
+    photo('/photos/paris/par-cajou-1.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-cajou-2.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-cajou-3.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
+  ],
+  'par-kawaa-lumiere': [
+    photo('/photos/paris/par-kawaa-lumiere-1.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-kawaa-lumiere-2.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
+    photo('/photos/paris/par-kawaa-lumiere-3.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
+  ],
   'par-bercy-village': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Cour_Saint_%C3%89milion%2C_Bercy_Village_-_Paris_2012-04-08.jpg/960px-Cour_Saint_%C3%89milion%2C_Bercy_Village_-_Paris_2012-04-08.jpg',

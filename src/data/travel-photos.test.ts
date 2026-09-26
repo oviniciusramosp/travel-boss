@@ -71,6 +71,11 @@ describe('travel-photos registry', () => {
         continue;
       }
       for (const [i, photo] of list.entries()) {
+        // Local copies of photos whose remote links expire (public/photos/…).
+        if (photo.url?.startsWith('/photos/')) {
+          if (!photo.alt?.en || !photo.credit) fails.push(`${id}[${i}]: missing alt or credit`);
+          continue;
+        }
         if (!photo.url?.startsWith('https://')) {
           fails.push(`${id}[${i}]: missing https url`);
         }
