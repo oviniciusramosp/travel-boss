@@ -369,6 +369,20 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       });
       body.append(bar);
     }
+    // Points inside the place, in the walking order the trip route follows.
+    const subPoints = place.subPoints ?? [];
+    if (subPoints.length) {
+      const list = el('dl', 'tb-panel__meta');
+      const row = el('div', 'tb-panel__meta-row');
+      row.append(el('dt', undefined, pickLocale(locale, { en: 'Points along the walk', 'pt-BR': 'Pontos no caminho' })));
+      const dd = el('dd');
+      const steps = el('ol', 'tb-panel__subpoints');
+      for (const sub of subPoints) steps.append(el('li', undefined, pickLocale(locale, sub.name)));
+      dd.append(steps);
+      row.append(dd);
+      list.append(row);
+      body.append(list);
+    }
 
     const ratings = el('div', 'tb-panel__ratings');
     ratings.append(
