@@ -12,7 +12,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
-  - via: RER E + metrô 9 · 45 min
+  - via: RER E + metrô 9 · 45 min · €2,55
 - 18:00 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
 - 18:10 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
 - 18:25 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
@@ -23,10 +23,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa): cordon bleu premiado (€26, com um acompanhamento) e uma sobremesa de €9. Precisa reservar: na Zenchef, o primeiro horário livre da noite é 21h15; o das 21h, só por telefone (01 86 04 40 54)
 - 22:00 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h
 - 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio. Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59, porque a linha fecha às 22h45 nos fins de semana, para obras
-  - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h
+  - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h · €2,55
 - 23:30 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Se o Bolt passar de €40 no aeroporto: RER B + RER E pela estação CDG 2 TGV (~1h15), com o bilhete aeroporto de €14 por pessoa nas máquinas de faixa rosa
-- Se perder o último RER E ou o metrô 9 parar pela greve: Bolt até a casa (~€25)
 
 ### Dia 2 — Seg 5/10 · Printemps, Opéra, Créteil e pôr do sol na Galeries Lafayette
 
