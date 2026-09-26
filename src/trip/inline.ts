@@ -64,6 +64,54 @@ export function parseInline(value: string): InlinePart[] {
   return parts.filter((part) => part.type !== 'text' || part.text !== '');
 }
 
+/** A stretch of a note's Markdown that looks one way in the editor. */
+export type MarkSpan = { text: string; strong: boolean; em: boolean; mark: boolean };
+
+/**
+ * The Markdown of a note cut where its look changes, for the editor. The
+ * same rules as `parseInline`, but every character stays: `*` and the link
+ * syntax come back as `mark` spans. The texts joined are `value`.
+ */
+export function markSpans(value: string): MarkSpan[] {
+  const out: MarkSpan[] = [];
+  const push = (text: string, strong: boolean, em: boolean, mark = false) => {
+    if (text) out.push({ text, strong, em, mark });
+  };
+  const emphasis = (text: string, strong: boolean, em: boolean) => {
+    let buf = '';
+    let index = 0;
+    while (index < text.length) {
+      const pair = text.startsWith('**', index);
+      const end = pair ? text.indexOf('**', index + 2) : text[index] === '*' ? text.indexOf('*', index + 1) : -1;
+      if (end === -1) {
+        buf += text[index] ?? '';
+        index += 1;
+        continue;
+      }
+      const size = pair ? 2 : 1;
+      push(buf, strong, em);
+      buf = '';
+      push(text.slice(index, index + size), strong, em, true);
+      emphasis(text.slice(index + size, end), strong || pair, em || !pair);
+      push(text.slice(end, end + size), strong, em, true);
+      index = end + size;
+    }
+    push(buf, strong, em);
+  };
+  let last = 0;
+  for (const match of value.matchAll(LINK)) {
+    const at = match.index ?? 0;
+    const label = match[1] ?? '';
+    emphasis(value.slice(last, at), false, false);
+    push('[', false, false, true);
+    emphasis(label, false, false);
+    push(match[0].slice(1 + label.length), false, false, true);
+    last = at + match[0].length;
+  }
+  emphasis(value.slice(last), false, false);
+  return out;
+}
+
 function escapeHtml(value: string): string {
   return value
     .replaceAll('&', '&amp;')

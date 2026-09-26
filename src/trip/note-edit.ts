@@ -1,5 +1,7 @@
+import { el } from '../ui/dom';
 import { readCssTime } from '../ui/motion';
 import type { TripPatch } from './api';
+import { markSpans } from './inline';
 
 export type NoteKind = 'stop' | 'item' | 'paragraph' | 'comment';
 
@@ -127,6 +129,14 @@ function offsetIn(node: HTMLElement, at: Node, offset: number): number {
   return before.toString().length;
 }
 
+/** The selection as offsets in `node`'s text, or null when it is elsewhere. */
+function selectionIn(node: HTMLElement): [number, number] | null {
+  const selection = getSelection();
+  const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+  if (!range || !node.contains(range.startContainer) || !node.contains(range.endContainer)) return null;
+  return [offsetIn(node, range.startContainer, range.startOffset), offsetIn(node, range.endContainer, range.endOffset)];
+}
+
 /** Offset of a screen point in `node`'s text, or null outside it. */
 function caretAt(node: HTMLElement, x: number, y: number): number | null {
   const hit = document.caretPositionFromPoint?.(x, y);
@@ -154,18 +164,36 @@ function select(node: HTMLElement, start: number, end = start): void {
   getSelection()?.setBaseAndExtent(...point(start), ...point(end));
 }
 
-/** ⌘B and ⌘I on a Mac, Ctrl elsewhere: Ctrl+B on a Mac moves the caret back. */
-function markFor(event: KeyboardEvent): '**' | '*' | null {
-  const mac = navigator.platform.startsWith('Mac');
-  if (!(mac ? event.metaKey : event.ctrlKey) || event.altKey || event.shiftKey) return null;
-  const key = event.key.toLowerCase();
-  return key === 'b' ? '**' : key === 'i' ? '*' : null;
+/** The Markdown as it is, with bold and italic shown between their marks. */
+function paintMarkdown(node: HTMLElement, text: string): void {
+  const parts: Node[] = markSpans(text).map((span) => {
+    const look = [span.strong && 'tb-md-strong', span.em && 'tb-md-em', span.mark && 'tb-md-mark'].filter(Boolean).join(' ');
+    return look ? el('span', look, span.text) : document.createTextNode(span.text);
+  });
+  // An empty last line shows only with a <br>, which the text and its offsets skip.
+  if (text.endsWith('\n')) parts.push(document.createElement('br'));
+  node.replaceChildren(...parts);
 }
 
+/** ⌘ on a Mac, Ctrl elsewhere: Ctrl+B on a Mac moves the caret back. */
+function shortcutOf(event: KeyboardEvent): 'bold' | 'italic' | 'undo' | 'redo' | null {
+  const mac = navigator.platform.startsWith('Mac');
+  if (!(mac ? event.metaKey : event.ctrlKey) || event.altKey) return null;
+  const key = event.key.toLowerCase();
+  if (key === 'z') return event.shiftKey ? 'redo' : 'undo';
+  if (event.shiftKey) return null;
+  if (key === 'y' && !mac) return 'redo';
+  return key === 'b' ? 'bold' : key === 'i' ? 'italic' : null;
+}
+
+/** The note's text and selection, one step of its own undo. */
+type Snapshot = { text: string; start: number; end: number };
+
 /**
- * Click or Tab shows the note's Markdown in place. A pause in typing saves,
- * blur and Return save now, Shift+Return breaks the line, ⌘B and ⌘I put or
- * take `**` and `*` around the selection, Escape drops what is not saved yet.
+ * Click or Tab shows the note's Markdown in place, bold and italic already
+ * applied between their marks. A pause in typing saves, blur and Return save
+ * now, Shift+Return breaks the line, ⌘B and ⌘I put or take `**` and `*`
+ * around the selection, Escape drops what is not saved yet.
  */
 export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEditor {
   let saved = opts.text;
@@ -173,6 +201,11 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
   let open = false;
   let timer = 0;
   let queue = Promise.resolve();
+  // Repainting the marks on every key resets the browser's undo, so the note keeps its own.
+  const undo: Snapshot[] = [];
+  const redo: Snapshot[] = [];
+  /** What the browser did last, so a word typed or deleted is one undo step. */
+  let burst = '';
   node.dataset.noteEdit = opts.kind;
   node.tabIndex = 0;
   node.setAttribute('role', 'textbox');
@@ -216,13 +249,47 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
     return queue;
   };
 
+  const snapshot = (): Snapshot => {
+    const text = node.textContent ?? '';
+    const [start, end] = selectionIn(node) ?? [text.length, text.length];
+    return { text, start, end };
+  };
+  const show = (state: Snapshot) => {
+    paintMarkdown(node, state.text);
+    select(node, state.start, state.end);
+  };
+  const changed = () => {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => void flush(false), readCssTime('--delay-autosave'));
+  };
+  /** A change made here, not by the browser: one undo step. */
+  const edit = (next: Snapshot) => {
+    undo.push(snapshot());
+    redo.length = 0;
+    burst = '';
+    show(next);
+    changed();
+  };
+  /** Undo or redo: the last state of `from` comes back, the current one goes to `to`. */
+  const travel = (from: Snapshot[], to: Snapshot[]) => {
+    const state = from.pop();
+    if (!state) return;
+    to.push(snapshot());
+    burst = '';
+    show(state);
+    changed();
+  };
+
   const start = (at: number | null) => {
     if (open) return;
     open = true;
     opts.onEditing(true);
     const plain = node.textContent === saved;
+    undo.length = 0;
+    redo.length = 0;
+    burst = '';
     node.contentEditable = 'plaintext-only';
-    node.textContent = saved;
+    paintMarkdown(node, saved);
     node.focus();
     // The rendered text maps 1:1 to the Markdown only without marks or links.
     select(node, at != null && plain ? at : saved.length);
@@ -238,26 +305,43 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
   node.addEventListener('focus', () => {
     if (node.matches(':focus-visible')) start(null);
   });
-  node.addEventListener('input', () => {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => void flush(false), readCssTime('--delay-autosave'));
+  node.addEventListener('beforeinput', (event) => {
+    if (!open) return;
+    // Edit > Undo from the menu lands here too.
+    if (event.inputType === 'historyUndo' || event.inputType === 'historyRedo') {
+      event.preventDefault();
+      if (event.inputType === 'historyUndo') travel(undo, redo);
+      else travel(redo, undo);
+      return;
+    }
+    // Letters in a row, or deletes in a row, are one undo step.
+    const kind =
+      /^insert(Composition)?Text$/.test(event.inputType) && !/\s/.test(event.data ?? '') ? 'word' : event.inputType;
+    if (kind !== burst || !(kind === 'word' || kind.startsWith('deleteContent'))) {
+      undo.push(snapshot());
+      redo.length = 0;
+    }
+    burst = kind;
   });
+  node.addEventListener('input', (event) => {
+    changed();
+    // Mid-composition (an accent, an IME) the browser owns the text: paint when it ends.
+    if (!(event as InputEvent).isComposing) show(snapshot());
+  });
+  node.addEventListener('compositionend', () => show(snapshot()));
   node.addEventListener('keydown', (event) => {
     if (!open || event.isComposing) return;
-    const mark = markFor(event);
-    const selection = getSelection()?.rangeCount ? getSelection()!.getRangeAt(0) : null;
-    if (mark && selection && node.contains(selection.startContainer) && node.contains(selection.endContainer)) {
+    const shortcut = shortcutOf(event);
+    if (shortcut) {
       event.preventDefault();
-      const edit = toggleMark(
-        node.textContent ?? '',
-        offsetIn(node, selection.startContainer, selection.startOffset),
-        offsetIn(node, selection.endContainer, selection.endOffset),
-        mark,
-      );
-      // insertText keeps ⌘Z working.
-      select(node, edit.from, edit.to);
-      document.execCommand(edit.insert ? 'insertText' : 'delete', false, edit.insert);
-      select(node, edit.start, edit.end);
+      if (shortcut === 'undo') travel(undo, redo);
+      else if (shortcut === 'redo') travel(redo, undo);
+      else {
+        const now = snapshot();
+        const change = toggleMark(now.text, now.start, now.end, shortcut === 'bold' ? '**' : '*');
+        const text = now.text.slice(0, change.from) + change.insert + now.text.slice(change.to);
+        edit({ text, start: change.start, end: change.end });
+      }
       return;
     }
     if (event.key === 'Escape') {
@@ -267,8 +351,13 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
     } else if (event.key === 'Enter') {
       event.preventDefault();
       // Shift+Return breaks the line; Return alone is done.
-      if (event.shiftKey) document.execCommand('insertLineBreak');
-      else node.blur();
+      if (!event.shiftKey) {
+        node.blur();
+        return;
+      }
+      const now = snapshot();
+      const text = `${now.text.slice(0, now.start)}\n${now.text.slice(now.end)}`;
+      edit({ text, start: now.start + 1, end: now.start + 1 });
     }
   });
   node.addEventListener('blur', () => {

@@ -594,6 +594,20 @@
   color: var(--color-ink);
 }
 
+/* While editing, the Markdown stays and bold and italic show between their marks,
+   with the weight and slant <strong> and <em> get once the note closes. */
+.tb-md-strong {
+  font-weight: bolder;
+}
+
+.tb-md-em {
+  font-style: italic;
+}
+
+.tb-md-mark {
+  color: var(--color-mid-gray);
+}
+
 /* The stop note sits under the title button, not inside it. */
 .tb-list.tb-timeline > .tb-row > .tb-row__sub {
   grid-column: 2;
