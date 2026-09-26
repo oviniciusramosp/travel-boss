@@ -32,7 +32,14 @@ import {
   type Rail,
 } from './day-plan';
 import { inlineNodes } from './inline';
-import { editableNote, sendPatch, type NoteEditorOptions, type NoteKind, type SeenLine } from './note-edit';
+import {
+  editableNote,
+  noteBlock,
+  sendPatch,
+  type NoteEditorOptions,
+  type NoteKind,
+  type SeenLine,
+} from './note-edit';
 import {
   dateStops,
   planHop,
@@ -1130,7 +1137,7 @@ export function mountTrip(
     };
 
     const rawLines = lastRaw.split(/\r?\n/);
-    const lineAt = (line: number): SeenLine => ({ line, raw: rawLines[line - 1] ?? '' });
+    const lineAt = (line: number): SeenLine => ({ line, lines: noteBlock(rawLines, line) });
     const editNote = (
       node: HTMLElement,
       kind: NoteKind,

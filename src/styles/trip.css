@@ -575,9 +575,11 @@
 }
 
 /* A note shows its Markdown while you edit it. Hover says it is text. */
+/* pre-wrap: a hard break in the note (`\n`) shows as a new line, read or edited. */
 [data-note-edit] {
   border-radius: var(--r-min);
   cursor: text;
+  white-space: pre-wrap;
   transition: background-color var(--dur-fast) var(--ease-out);
 }
 
@@ -597,6 +599,7 @@
   grid-column: 2;
   grid-row: 3;
   margin-top: calc(-1 * var(--tl-row-gap));
+  white-space: pre-wrap;
 }
 
 /* The add-comment action sits beside time and title, in the row's own column. */

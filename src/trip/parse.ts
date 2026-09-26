@@ -15,6 +15,7 @@ export type TripLeg = {
 
 export type TripStop = {
   time?: string;
+  /** A list note's text. It and `note` hold hard breaks as `\n`. */
   label: string;
   placeId?: string;
   href?: string;
@@ -215,10 +216,23 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     checkPlaces(city, errors);
   };
 
+  /** The note a line ending in `\` breaks, which the next line goes on. */
+  let carry: ((text: string) => void) | null = null;
+
   for (let index = 0; index < lines.length; index += 1) {
     const lineNo = index + 1;
     const line = lines[index] ?? '';
     const trimmed = line.trim();
+    // A Markdown hard break: `\` at the end, the note goes on in the next line.
+    const hard = trimmed.endsWith('\\');
+    const body = hard ? trimmed.slice(0, -1).trimEnd() : trimmed;
+    // A heading still starts a day or city, as in CommonMark: a stray `\` never eats one.
+    if (carry && trimmed && !trimmed.startsWith('#')) {
+      carry(body);
+      if (!hard) carry = null;
+      continue;
+    }
+    carry = null;
     if (!trimmed) continue;
 
     if (trimmed.startsWith('### ')) {
@@ -299,9 +313,13 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     const comment = COMMENT_BULLET.exec(line);
     if (comment) {
       const stop = day?.stops[day.stops.length - 1];
-      const text = (comment[1] ?? '').trim();
+      const tail = (comment[1] ?? '').trim();
+      const entry = { text: hard ? tail.slice(0, -1).trimEnd() : tail, line: lineNo };
       if (!stop) reject(errors, lineNo, 'comment-no-stop');
-      else if (text) (stop.comments ??= []).push({ text, line: lineNo });
+      else if (entry.text) {
+        (stop.comments ??= []).push(entry);
+        if (hard) carry = (more) => (entry.text += `\n${more}`);
+      }
       continue;
     }
 
@@ -310,12 +328,21 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
         reject(errors, lineNo, 'stop-outside-day');
         continue;
       }
-      day.stops.push({ ...parseStop(trimmed.slice(2), lineNo, errors), line: lineNo });
+      const stop: TripStop = { ...parseStop(body.slice(2), lineNo, errors), line: lineNo };
+      day.stops.push(stop);
+      if (hard) {
+        carry = (more) => {
+          if (stop.listNote) stop.label += `\n${more}`;
+          else stop.note = stop.note ? `${stop.note}\n${more}` : more;
+        };
+      }
       continue;
     }
 
     if (day) {
-      day.notes.push({ text: trimmed, line: lineNo });
+      const note = { text: body, line: lineNo };
+      day.notes.push(note);
+      if (hard) carry = (more) => (note.text += `\n${more}`);
       continue;
     }
 

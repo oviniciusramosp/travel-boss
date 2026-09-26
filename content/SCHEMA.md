@@ -81,6 +81,19 @@ dates: 2026-04-06 → 2026-04-09
   - Keyword `comentário:`, `comentario:` or `comment:`, any case, indented like `via:`. A top-level `- comentário:` is a list note. An empty one is ignored. One before the first stop of a day is an error.
   - Not a stop, not a pin, not exported. The UI shows it under its item.
   - The LLM that acts on a comment deletes its line.
+- A stop note, a list note, a paragraph or a comment can break onto the next line: end the line with `\` (a Markdown hard break) and go on in the next one, indented under the bullet. The app writes this for Shift+Return.
+
+  ```markdown
+  - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2.\
+    Passaporte e malas: conte ~1h.
+    - via: RER B · 35 min
+    - comentário: dá para pegar o RER B direto?\
+      Ou precisa do TGV?
+  ```
+
+  - The next line goes on the note whatever it starts with, even `- `, unless it is a heading. The line after one without `\` does not.
+  - Indent the rest under the text: 2 spaces for a stop or list note, 4 for a comment, none for a paragraph.
+  - A blank line ends the note. Export writes the breaks back the same way, and as `<br>` in the HTML.
 - Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
 

@@ -11,22 +11,38 @@ const KEEP: Record<NoteKind, RegExp> = {
   comment: /^\s+-\s+[^:]+:\s*/,
 };
 
-/** A note is one Markdown line: breaks become spaces. */
-export function oneLine(text: string): string {
-  return text.replace(/\s*[\r\n]+\s*/g, ' ').trim();
+/** Each line trimmed, blank lines gone: a note breaks, it has no gaps. */
+export function noteText(text: string): string {
+  return text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .join('\n');
 }
 
 /**
- * `line` with `text` as its note. A stop left empty loses only ` — note`;
- * an empty list note, paragraph or comment is `[]`, so the line goes.
- * Null when the line no longer has that shape.
+ * The lines for `text` as the note that starts on `first`. A break is a
+ * Markdown hard break: `\` at the end, the rest indented under the bullet.
+ * A stop left empty loses only ` — note`; an empty list note, paragraph or
+ * comment is `[]`, so its lines go. Null when `first` lost its shape.
  */
-export function noteLine(kind: NoteKind, line: string, text: string): string[] | null {
-  const keep = KEEP[kind].exec(line)?.[0];
+export function noteLines(kind: NoteKind, first: string, text: string): string[] | null {
+  const keep = KEEP[kind].exec(first)?.[0];
   if (keep == null) return null;
-  const clean = oneLine(text);
-  if (kind === 'stop') return [clean ? `${keep} — ${clean}` : keep];
-  return clean ? [`${keep}${clean}`] : [];
+  const parts = noteText(text).split('\n').filter(Boolean);
+  if (!parts.length) return kind === 'stop' ? [keep] : [];
+  const lead = kind === 'stop' ? `${keep} — ` : keep;
+  const indent = ' '.repeat(/^\s*(?:-\s+)?/.exec(keep)?.[0].length ?? 0);
+  return parts.map((part, index) => `${index ? indent : lead}${part}${index < parts.length - 1 ? '\\' : ''}`);
+}
+
+/** The note on 1-based `line` and the lines its trailing `\` carries on to. */
+export function noteBlock(lines: readonly string[], line: number): string[] {
+  const block = [lines[line - 1] ?? ''];
+  while (block.at(-1)!.trimEnd().endsWith('\\') && lines[line - 1 + block.length]?.trim()) {
+    block.push(lines[line - 1 + block.length]!);
+  }
+  return block;
 }
 
 export type PatchResult = number | 'conflict' | 'error';
@@ -47,8 +63,8 @@ export async function sendPatch(id: string, patch: TripPatch): Promise<PatchResu
   }
 }
 
-/** A line as the browser saw it: 1-based number and full text. */
-export type SeenLine = { line: number; raw: string };
+/** A note as the browser saw it: its first 1-based line and all its lines. */
+export type SeenLine = { line: number; lines: string[] };
 
 export type NoteEditorOptions = {
   kind: NoteKind;
@@ -93,7 +109,8 @@ function caretAt(node: HTMLElement, x: number, y: number): number | null {
 
 /**
  * Click or Tab shows the note's Markdown in place. A pause in typing saves,
- * blur and Enter save now, Escape drops what is not saved yet.
+ * blur and Return save now, Shift+Return breaks the line, Escape drops what
+ * is not saved yet.
  */
 export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEditor {
   let saved = opts.text;
@@ -108,19 +125,20 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
   if (opts.placeholder) node.dataset.placeholder = opts.placeholder;
   node.replaceChildren(...opts.render(saved));
 
-  /** The patch that puts `text` on disk and the line it leaves, or null. */
-  const patchFor = (text: string): { patch: TripPatch; line?: string } | null => {
+  /** The patch that puts `text` on disk and the lines it leaves, or null. */
+  const patchFor = (text: string): { patch: TripPatch; lines: string[] } | null => {
     if (anchor) {
-      const after = noteLine(opts.kind, anchor.raw, text);
-      return after && { patch: { line: anchor.line, before: anchor.raw, after }, line: after[0] };
+      const after = noteLines(opts.kind, anchor.lines[0] ?? '', text);
+      return after && { patch: { line: anchor.line, before: anchor.lines, after }, lines: after };
     }
     if (!opts.parent || !text) return null;
-    const child = `${/^\s*/.exec(opts.parent.raw)?.[0] ?? ''}  - comentário: ${text}`;
-    return { patch: { line: opts.parent.line, before: opts.parent.raw, child }, line: child };
+    const pad = /^\s*/.exec(opts.parent.lines[0] ?? '')?.[0] ?? '';
+    const child = noteLines('comment', `${pad}  - comentário: `, text) ?? [];
+    return { patch: { line: opts.parent.line, before: opts.parent.lines, child }, lines: child };
   };
 
   const write = async (final: boolean) => {
-    const text = oneLine(node.textContent ?? '');
+    const text = noteText(node.textContent ?? '');
     // A pause never deletes: an empty box may be mid-rewrite.
     if (text === saved || (!text && !final)) return;
     const next = patchFor(text);
@@ -134,7 +152,7 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
       return;
     }
     saved = text;
-    anchor = next.line != null ? { line: result, raw: next.line } : null;
+    anchor = next.lines.length ? { line: result, lines: next.lines } : null;
   };
   // One write at a time, so each one anchors on the line the last one left.
   const flush = (final: boolean) => {
@@ -178,7 +196,9 @@ export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEd
       node.blur();
     } else if (event.key === 'Enter') {
       event.preventDefault();
-      node.blur();
+      // Shift+Return breaks the line; Return alone is done.
+      if (event.shiftKey) document.execCommand('insertLineBreak');
+      else node.blur();
     }
   });
   node.addEventListener('blur', () => {

@@ -356,6 +356,40 @@ describe('comments', () => {
   });
 });
 
+describe('hard breaks', () => {
+  it('carries a note on to the next line after a trailing backslash, and stops at the line without one', () => {
+    const trip = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      parisDay(`- 09:00 [Louvre](place:par-louvre) — Ingresso\\
+  das 9h
+  - via: metrô · 20 min
+  - comentário: mais cedo?\\
+    ou às 10h
+- Lembrar\\
+  do **ingresso**
+
+Narrativa um\\
+narrativa dois`),
+    );
+    const [louvre, reminder] = trip.cities[0]?.days[0]?.stops ?? [];
+    expect(trip.errors).toEqual([]);
+    expect(louvre?.note).toBe('Ingresso\ndas 9h');
+    expect(louvre?.leg?.durationMin).toBe(20);
+    expect(louvre?.comments?.map((comment) => comment.text)).toEqual(['mais cedo?\nou às 10h']);
+    expect(reminder).toMatchObject({ label: 'Lembrar\ndo **ingresso**', listNote: true });
+    expect(trip.cities[0]?.days[0]?.notes.map((note) => note.text)).toEqual(['Narrativa um\nnarrativa dois']);
+  });
+
+  it('drops a break that runs into a blank line or a heading', () => {
+    const { stops } = firstLegs('- 09:00 [Louvre](place:par-louvre) — Ingresso\\\n\n- 11:00 [Orsay](place:par-orsay)');
+    expect(stops.map((stop) => stop.note ?? null)).toEqual(['Ingresso', null]);
+    const trip = parseTrip('europa', 'content/trips/europa.md', parisDay('- 09:00 [Louvre](place:par-louvre) — Ingresso\\\n### Dia 2 — Versalhes\n\n- 10:00 [Orsay](place:par-orsay)'));
+    expect(trip.cities[0]?.days.map((day) => day.title)).toEqual(['Dia 1 — Museu', 'Dia 2 — Versalhes']);
+    expect(trip.cities[0]?.days[0]?.stops[0]?.note).toBe('Ingresso');
+  });
+});
+
 describe('tripErrorText', () => {
   it('builds the sentence in the active language', () => {
     expect(tripErrorText({ line: 1, code: 'via-no-mode' }, 'pt-BR')).toBe('via sem modo');
