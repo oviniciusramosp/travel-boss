@@ -919,6 +919,16 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  // 4/10: from the foot of the tower onto Avenue Pierre Loti (OSM ways 51259180, 1285858202)
+  {
+    from: 'par-eiffel',
+    to: 'par-champ-mars',
+    mode: 'walk',
+    through: [
+      [48.857625, 2.295043],
+      [48.856457, 2.296889],
+    ],
+  },
   // 4/10: down the middle of the Champ de Mars on Avenue Pierre Loti (OSM ways 688246686, 1285858200)
   {
     from: 'par-champ-mars',

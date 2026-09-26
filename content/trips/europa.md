@@ -17,6 +17,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:10 [Avenue de Camoëns](place:par-avenue-camoens) — Foto
 - 18:25 [Fontes do Trocadéro](place:par-fontaines-trocadero) — Foto com os jatos
 - 18:40 [Pont d'Iéna](place:par-pont-iena) — Foto sobre o Sena
+- 18:50 [Torre Eiffel](place:par-eiffel) — Por fora, de pertinho: daqui até a École Militaire é tudo pela Avenue Pierre Loti, com o gramado dos dois lados
 - 19:00 [Champ de Mars](place:par-champ-mars) — Pôr do sol às 19h25 no gramado, a Torre acendendo ao escurecer e o brilho das 20h. Depois, descida até a École Militaire, com a Torre acesa atrás
 - 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Só por fora: a capela fica na ala norte do prédio da cúpula, que é área militar. Volta pelo gramado com a Torre de frente
 - 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
@@ -30,7 +31,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 2 — Seg 5/10 · Printemps, Opéra, Créteil e pôr do sol na Galeries Lafayette
 
 - 08:40 [Casa do Gui](place:par-casa-do-gui) — Saída. Agora sim com o ticket semanal: a Navigo Semaine vale de hoje até domingo
-  - via: RER E até Haussmann–Saint-Lazare · 35 min
+  - via: RER E até Haussmann–Saint-Lazare, com a Navigo Semaine · 35 min · €32,40
 - 09:15 [Coffee Shop Michalak | Printemps](place:par-michalak-printemps) — Croissant e café para levar (~€8–10 por pessoa), a 3 min do RER. Mais barato: só o café na Cuvée Noire, 96 Rue Saint-Lazare (nota 4,6)
 - 10:00 [Printemps](place:par-printemps) — Abre às 10h: cúpula de vitral no 6º andar do Printemps Femme e terraço grátis no 7º (confira se reabriu: até 30/09 era um pop-up)
 - 11:00 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
