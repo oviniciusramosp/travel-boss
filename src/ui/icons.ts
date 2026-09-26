@@ -59,6 +59,7 @@ export const ICONS = [
   'partly_cloudy_night',
   'person',
   'photo_camera',
+  'play_circle',
   'rainy',
   'remove',
   'restaurant',

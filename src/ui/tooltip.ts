@@ -85,6 +85,9 @@ export function mountTooltip(): void {
     const text = explicit ?? target.textContent?.replace(/\s+/g, ' ').trim() ?? '';
     if (!text) return;
     current = target;
+    // A modal dialog sits in the top layer, over anything left in <body>.
+    const layer = target.closest('dialog[open]') ?? document.body;
+    if (tip.parentElement !== layer) layer.append(tip);
     tip.textContent = text;
     tip.hidden = false;
     const rect = target.getBoundingClientRect();

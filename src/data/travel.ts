@@ -234,6 +234,11 @@ export interface TravelPlace {
    */
   photos?: TravelPhoto[];
   /**
+   * Video references, one card button each. Instagram reels play in a modal;
+   * any other link opens in a new tab. Store the link without its share query.
+   */
+  videos?: string[];
+  /**
    * Visit logistics: avg meal price, ticket, duration, best time/day, tips.
    * When omitted, may still resolve from curated `visitByPlaceId` data.
    */

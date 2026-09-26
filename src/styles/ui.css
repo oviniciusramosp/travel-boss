@@ -415,3 +415,64 @@
 .tb-date[open]::details-content {
   height: auto;
 }
+
+/* Video modal. A native <dialog>: the top layer beats every z-index. */
+.tb-video {
+  width: min(400px, calc(100vw - 2 * var(--spacing-16)));
+  max-width: none;
+  max-height: calc(100dvh - 2 * var(--spacing-16));
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-card);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.tb-video:focus-visible {
+  outline: none;
+}
+
+.tb-video::backdrop {
+  background: var(--color-scrim);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+@starting-style {
+  .tb-video[open] {
+    opacity: 0;
+  }
+
+  .tb-video[open]::backdrop {
+    background: transparent;
+  }
+}
+
+.tb-video__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--inset-card) var(--inset-card) var(--spacing-8) var(--spacing-16);
+}
+
+.tb-video__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ponytail: Instagram's embed is 708px tall at 400px wide; a shorter window scrolls inside the iframe. */
+.tb-video__frame {
+  display: block;
+  width: 100%;
+  height: 708px;
+  max-height: calc(100dvh - 2 * var(--spacing-16) - var(--h-sm) - var(--inset-card) - var(--spacing-8));
+  border: 0;
+}

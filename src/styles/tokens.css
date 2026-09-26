@@ -12,6 +12,8 @@
   --color-hover: rgba(10, 10, 10, 0.04);
   --color-press: rgba(10, 10, 10, 0.08);
   --color-walk: #008fff;
+  /* Behind a modal dialog. Black in both themes. */
+  --color-scrim: rgba(0, 0, 0, 0.56);
   /* Place areas and the stay heatmap. Night is softer so the hues don't glare. */
   --map-area-opacity: 0.52;
   --map-heat-opacity: 0.22;

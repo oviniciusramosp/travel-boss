@@ -19,6 +19,7 @@ import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
 import { priceLevel, priceLevelOf } from '../ui/price';
 import { starRating } from '../ui/rating';
+import { videoButton } from '../ui/video';
 import { openNowStatus, timeZoneForCity } from './open-now';
 import { createRouteButton, routePlannerOn } from './route-planner';
 
@@ -358,6 +359,15 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
 
     if (place.description) {
       body.append(el('p', 'tb-panel__desc', pickLocale(locale, place.description)));
+    }
+    // Right under the description, so a long card does not push the video below the fold.
+    const videos = place.videos ?? [];
+    if (videos.length) {
+      const bar = el('div', 'tb-place-panel__links');
+      videos.forEach((url, index) => {
+        bar.append(videoButton(url, pickLocale(locale, place.name), locale, videos.length > 1 ? index + 1 : undefined));
+      });
+      body.append(bar);
     }
 
     const ratings = el('div', 'tb-panel__ratings');

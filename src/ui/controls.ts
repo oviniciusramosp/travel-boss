@@ -31,15 +31,17 @@ export function iconLink(opts: {
   icon: IconName;
   label: string;
   href: string;
+  size?: IconButtonSize;
 }): HTMLAnchorElement {
+  const size = opts.size ?? 'md';
   const link = document.createElement('a');
-  link.className = 'tb-icon-btn tb-icon-btn--ghost tb-icon-btn--md';
+  link.className = `tb-icon-btn tb-icon-btn--ghost tb-icon-btn--${size}`;
   link.href = opts.href;
   link.target = '_blank';
   link.rel = 'noopener';
   link.setAttribute('aria-label', opts.label);
   link.setAttribute('data-tip', opts.label);
-  link.append(icon(opts.icon, { size: 18 }));
+  link.append(icon(opts.icon, { size: size === 'sm' ? 16 : 18 }));
   return link;
 }
 
