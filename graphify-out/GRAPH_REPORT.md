@@ -1,16 +1,16 @@
-# Graph Report - friendly-booth-4d53c1  (2026-09-25)
+# Graph Report - place-cards-video-references-47b097  (2026-09-26)
 
 ## Corpus Check
-- 189 files · ~279,647 words
+- 191 files · ~281,189 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1537 nodes · 4069 edges · 69 communities (67 shown, 2 thin omitted)
+- 1542 nodes · 4098 edges · 64 communities (62 shown, 2 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8305635f`
+- Built from commit: `385c202b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -27,13 +27,13 @@
 - travel-stay-heatmap.ts
 - places.ts
 - day-plan.ts
-- itinerary-panel.ts
+- icons.ts
 - hotel-ranking.mjs
-- motion.ts
+- mountHotels
 - itinerary-route.ts
 - route-planner.ts
 - compilerOptions
-- map.ts
+- beginLocate
 - timeline.ts
 - index.ts
 - Travel Boss
@@ -45,11 +45,11 @@
 - Hotel priorities
 - hotel-scripts.d.ts
 - Paris
-- mount.ts
+- route.ts
 - Travel Boss
 - Milão — 11–14 de outubro de 2026
 - travel-areas.test.ts
-- cssToken
+- map.ts
 - travel-categories.ts
 - walk-route.ts
 - export.ts
@@ -57,51 +57,46 @@
 - hotel-rank.ts
 - calendar.ts
 - pickLocale
-- camera.ts
+- asMsg
 - transfer-row.ts
 - store.ts
 - travel-itineraries.ts
-- place-index.ts
 - overlays.ts
 - parse.ts
 - summary.ts
-- weather.ts
+- mount.ts
 - expandTimelineTransferParts
-- hotel-distance.ts
+- el
 - open-now.ts
 - travel.ts
 - hotel-ring.ts
 - hotel-dates.ts
-- osm-area-bridge.ts
-- pin-visual.ts
+- contrast.ts
 - rating.ts
 - main.ts
-- mountMap
-- getTravelCity
+- legs.ts
 - getTransitLine
-- trackpad.ts
-- overview.ts
 - links.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `pickLocale()` - 93 edges
-2. `el()` - 62 edges
+1. `pickLocale()` - 96 edges
+2. `el()` - 65 edges
 3. `paint()` - 61 edges
-4. `icon()` - 55 edges
+4. `icon()` - 57 edges
 5. `mountTrip()` - 44 edges
 6. `mountHotels()` - 42 edges
 7. `mountCity()` - 42 edges
 8. `getTravelCity()` - 34 edges
 9. `mountItineraryBoard()` - 31 edges
-10. `mountPlacePanel()` - 28 edges
+10. `mountPlacePanel()` - 29 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `hotelRankingContext()` --calls--> `rankingTargets()`  [EXTRACTED]
   src/data/hotel-ranking-context.ts → scripts/hotel-ranking.mjs
 - `resolvedPlaces()` --indirect_call--> `withResolvedArea()`  [INFERRED]
   src/data/travel-areas.test.ts → src/data/travel.ts
-- `ride()` --calls--> `sliceLinePath()`  [EXTRACTED]
-  src/data/travel-itinerary-legs.ts → src/data/travel-transit-lines.ts
+- `paris()` --calls--> `getTravelCity()`  [EXTRACTED]
+  src/trip/legs.test.ts → src/data/travel.ts
 - `tripApi()` --calls--> `tripIdFromPath()`  [EXTRACTED]
   vite.config.ts → src/trip/api.ts
 - `tripApi()` --calls--> `parseTripRequest()`  [EXTRACTED]
@@ -112,7 +107,7 @@
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (69 total, 2 thin omitted)
+## Communities (64 total, 2 thin omitted)
 
 ### Community 0 - "hotel-search.mjs"
 Cohesion: 0.15
@@ -123,20 +118,20 @@ Cohesion: 0.10
 Nodes (24): ref_node_child_process, ref_node_fs, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbSnapshot(), airbnbType() (+16 more)
 
 ### Community 2 - "paint"
-Cohesion: 0.12
-Nodes (39): pastPeriods(), periodSections(), googleDirectionsUrl(), clearStopCurrent(), mountTrip(), applyQuery(), armTransfer(), catalogPins() (+31 more)
+Cohesion: 0.10
+Nodes (43): setDocumentTitle(), getTravelCity(), googleDirectionsUrl(), cityDisplayName(), clearStopCurrent(), loadTripFile(), mountTrip(), applyQuery() (+35 more)
 
 ### Community 3 - "directions.ts"
 Cohesion: 0.31
 Nodes (7): directionsMode, DirectionsPoint, haversineM(), MAPS_MAX_POINTS, a, b, far
 
 ### Community 4 - "hotels.ts"
-Cohesion: 0.08
-Nodes (36): hotelPhotoUrls(), AccommodationType, addDays(), asMsg(), asResult(), Booking, CATEGORIES, CategoryKey (+28 more)
+Cohesion: 0.11
+Nodes (18): WhyPart, AccommodationType, Booking, CATEGORIES, CategoryKey, Eligibility, Hotel, HotelRanking (+10 more)
 
 ### Community 5 - "travel-visit.ts"
 Cohesion: 0.09
-Nodes (28): cafeVisit(), CrowdProfile, formatMoneyTypical(), free, L(), landmarkOutdoor(), Locale, lodgingVisit() (+20 more)
+Nodes (32): cafeVisit(), CrowdProfile, formatDuration(), formatMoney(), formatMoneyTypical(), formatTicketPromo(), free, L() (+24 more)
 
 ### Community 6 - "hotel-search-match.mjs"
 Cohesion: 0.19
@@ -147,56 +142,56 @@ Cohesion: 0.06
 Nodes (46): Any, concurrent_futures, contextlib, curl_cffi, json, travel:airbnb:setup, pyairbnb, pyairbnb_details (+38 more)
 
 ### Community 8 - "place-panel.ts"
-Cohesion: 0.14
-Nodes (29): googleMapsUrl(), Locale, subcategoryLabel(), aiBadge(), aiSuggestionTip(), TABS, iconButton(), tipText() (+21 more)
+Cohesion: 0.13
+Nodes (27): Locale, aiBadge(), aiSuggestionTip(), TABS, icon(), mapsIconLink(), mapsMark(), LEVEL_LABEL (+19 more)
 
 ### Community 9 - "travel-stay-heatmap.ts"
 Cohesion: 0.05
 Nodes (64): hotelRankingContext(), src_data_rome_hotel_boundaries, Boundary, entries, geometry, legacyById, legacyUrbanIds, profiles (+56 more)
 
 ### Community 10 - "places.ts"
-Cohesion: 0.14
-Nodes (26): categoryMaterialName(), resolveVisit(), guidePlaceIds(), listedOrigin(), onPlaceClose(), openPlace(), repaintPlace(), setPlaceOrigin() (+18 more)
+Cohesion: 0.13
+Nodes (28): placeCategoriesOffByDefault, placeCategoryOrder, ItineraryStop, subcategoryLabel(), resolveVisit(), guidePlaceIds(), applyCategoryClick(), categoriesPresent() (+20 more)
 
 ### Community 11 - "day-plan.ts"
-Cohesion: 0.18
-Nodes (16): MoneyInfo, VisitInfo, BudgetLine, dateBudget, dayPeriods(), hopRails(), mealOf(), midEur() (+8 more)
+Cohesion: 0.20
+Nodes (17): BudgetLine, dateBudget, dayPeriods(), hopRails(), mealOf(), midEur(), pastPeriods(), Period (+9 more)
 
-### Community 12 - "itinerary-panel.ts"
-Cohesion: 0.13
-Nodes (23): buildItineraryRoute(), buildItineraryRoutePreview(), buildItineraryRouteSync(), toMapRoute(), IconButtonSize, IconButtonVariant, iconLink(), onSegmentKey() (+15 more)
+### Community 12 - "icons.ts"
+Cohesion: 0.12
+Nodes (24): categoryMaterialIcon, attachMapControls(), relabel(), uiLocale(), iconButton(), IconButtonSize, IconButtonVariant, iconLink() (+16 more)
 
 ### Community 13 - "hotel-ranking.mjs"
 Cohesion: 0.08
 Nodes (37): ref_node_crypto, BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), STAFF_MINIMUM, validScore(), accommodationEligibility() (+29 more)
 
-### Community 14 - "motion.ts"
-Cohesion: 0.23
-Nodes (11): MAPLIBRE_PERF, maplibreFade(), CAMERA_DURATION_S, CHROME_MOTION_EVENT, CHROME_SETTLED_EVENT, EXIT_RATIO, LABEL_FADE_MS, labelFadeDuration() (+3 more)
+### Community 14 - "mountHotels"
+Cohesion: 0.14
+Nodes (12): hotelPhotoUrls(), addDays(), hotelSetupFailure(), isAbort(), isoDate(), kmBetween(), mountHotels(), nightsBetween() (+4 more)
 
 ### Community 15 - "itinerary-route.ts"
-Cohesion: 0.19
-Nodes (21): nearestStation(), sliceLinePath(), stationById(), asCoord(), BuildItineraryOptions, BuiltItineraryRoute, expandLeg(), expandLegSync() (+13 more)
+Cohesion: 0.15
+Nodes (24): ItineraryTransitHop, ride(), WALK_CONNECTOR_MIN_M, LatLng, sliceLinePath(), stationById(), asCoord(), BuildItineraryOptions (+16 more)
 
 ### Community 16 - "route-planner.ts"
-Cohesion: 0.08
-Nodes (55): apply(), barActive(), beginLocate(), CITY_FAR_KM, drawRoutePreview(), formatRouteDistance(), formatRouteDuration(), GeoPermission (+47 more)
+Cohesion: 0.10
+Nodes (42): apply(), CITY_FAR_KM, formatRouteDistance(), formatRouteDuration(), GeoPermission, googleDirectionsUrl(), locateFailure, MAX_ROUTE_STOPS (+34 more)
 
 ### Community 17 - "compilerOptions"
 Cohesion: 0.10
 Nodes (20): DOM, DOM.Iterable, ES2023, src, vite/client, compilerOptions, forceConsistentCasingInFileNames, isolatedModules (+12 more)
 
-### Community 18 - "map.ts"
-Cohesion: 0.23
-Nodes (12): Box, coveredInsets(), Insets, mergeInsets(), KINDS, MapCityPin, MapHandle, MapOverviewCity (+4 more)
+### Community 18 - "beginLocate"
+Cohesion: 0.20
+Nodes (14): fetchWalkingRoute(), barActive(), beginLocate(), drawRoutePreview(), isFarFromCity(), locateFailureLabel(), mountLocate(), paintLocate() (+6 more)
 
 ### Community 19 - "timeline.ts"
-Cohesion: 0.12
-Nodes (31): ItineraryStop, legsForDay(), dayDirectionsUrl(), daySummary(), directionPoints(), hopRow(), legBetween(), mapsLink() (+23 more)
+Cohesion: 0.10
+Nodes (47): googleMapsUrl(), legsForDay(), buildItineraryRoute(), buildItineraryRoutePreview(), buildItineraryRouteSync(), toMapRoute(), categoryGlyph(), emptyCopy() (+39 more)
 
 ### Community 20 - "index.ts"
 Cohesion: 0.14
-Nodes (16): placeCategoriesOffByDefault, placeCategoryOrder, cityGuide, FoodMeal, foodMeals, GuideItem, guides, MarketShelf (+8 more)
+Nodes (17): cityGuide, FoodMeal, foodMeals, GuideItem, guides, MarketShelf, marketShelves, parisGuide (+9 more)
 
 ### Community 21 - "Travel Boss"
 Cohesion: 0.11
@@ -211,8 +206,8 @@ Cohesion: 0.09
 Nodes (27): applyBrightBasemap(), BASEMAP_THEME_EVENT, BasemapTheme, BasemapTint, bindBrightBasemap(), CANVAS_FALLBACK, HIDDEN_HIGHWAY_INDICATOR_LAYERS, hideBasemapClutter() (+19 more)
 
 ### Community 24 - "view-state.ts"
-Cohesion: 0.21
-Nodes (13): changedStopKeys(), stopFingerprint(), visitStops(), TripStop, activeSectionKey(), cityInOsrmScope(), dayKey(), dayOpen() (+5 more)
+Cohesion: 0.20
+Nodes (14): changedStopKeys(), stopFingerprint(), trip(), visitStops(), TripStop, activeSectionKey(), cityInOsrmScope(), dayKey() (+6 more)
 
 ### Community 25 - "Travel Boss — plano de paridade com o portfólio + polimento de UI"
 Cohesion: 0.09
@@ -228,11 +223,11 @@ Nodes (10): Airbnb gratuito (busca local), Cartographic boundaries, Evidence and
 
 ### Community 29 - "Paris"
 Cohesion: 0.12
-Nodes (15): Dia 1 — Centro antigo, Dia 1 — Chegada, Duomo e Galleria, Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux, Dia 2 — Bate-volta, Dia 2 — Seg 5/10 · Café reforçado, Opéra, Uniqlo e Créteil, Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre, Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos, Dia 5 — Qui 8/10 · Marais, almoço no Chez Janou e pôr do sol em Montmartre (+7 more)
+Nodes (15): Dia 1 — Centro antigo, Dia 1 — Chegada, Duomo e Galleria, Dia 1 — Dom 4/10 · Chegada, topo da Torre Eiffel e jantar no Margaux, Dia 2 — Bate-volta, Dia 2 — Seg 5/10 · Café reforçado, Opéra, Uniqlo e Créteil, Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre, Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos, Dia 5 — Qui 8/10 · Marais, almoço no Chez Pradel e pôr do sol em Montmartre (+7 more)
 
-### Community 30 - "mount.ts"
-Cohesion: 0.15
-Nodes (22): fetchDrivingRoute(), fetchWalkingRoute(), peekWalkingRoute(), walkRouteKey(), emptyNotice(), loadTripFile(), drawTripRoutes(), walkPoints() (+14 more)
+### Community 30 - "route.ts"
+Cohesion: 0.14
+Nodes (21): drawTripRoutes(), neutralColor(), walkPoints(), DateStop, dateStops(), endpoints(), HopDraw, lastPlaceIndex() (+13 more)
 
 ### Community 31 - "Travel Boss"
 Cohesion: 0.40
@@ -243,92 +238,88 @@ Cohesion: 0.50
 Nodes (3): Fontes e limites, Milão — 11–14 de outubro de 2026, Rota
 
 ### Community 34 - "travel-areas.test.ts"
-Cohesion: 0.12
-Nodes (26): installOsmAreas(), AreaIssue, AreaIssueCode, AreaPolicy, DEFAULT_AREA_POLICY, distPointToPolygonM(), distPointToPolylineM(), distPointToSegmentM() (+18 more)
+Cohesion: 0.11
+Nodes (27): installOsmAreas(), AreaIssue, AreaIssueCode, AreaPolicy, DEFAULT_AREA_POLICY, distPointToPolygonM(), distPointToPolylineM(), distPointToSegmentM() (+19 more)
 
-### Community 35 - "cssToken"
-Cohesion: 0.19
-Nodes (16): drawRouteSegments(), RouteEntry, RoutePointer, safeColor(), walkColor(), nearTransfer(), RouteFocus, routeLayerKind() (+8 more)
+### Community 35 - "map.ts"
+Cohesion: 0.06
+Nodes (64): placePinIconHtml(), centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset() (+56 more)
 
 ### Community 36 - "travel-categories.ts"
-Cohesion: 0.10
-Nodes (26): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialIcon (+18 more)
+Cohesion: 0.11
+Nodes (24): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialName() (+16 more)
 
 ### Community 37 - "walk-route.ts"
 Cohesion: 0.11
-Nodes (27): abortError(), acquire(), bindUser(), cached(), execute(), fetchOsrm(), hydrate(), inflight (+19 more)
+Nodes (30): abortError(), acquire(), bindUser(), cached(), execute(), fetchDrivingRoute(), fetchOsrm(), hydrate() (+22 more)
 
 ### Community 38 - "export.ts"
 Cohesion: 0.19
 Nodes (18): copyTrip(), dayToMarkdown(), downloadTrip(), pushDay(), pushStop(), tripToHtml(), tripToMarkdown(), escapeHtml() (+10 more)
 
 ### Community 39 - "travel-itinerary-legs.ts"
-Cohesion: 0.06
-Nodes (36): day1, day1AfterBase, day1Cdg, day2, day3, day4, day5, day6 (+28 more)
+Cohesion: 0.07
+Nodes (33): day1, day1AfterBase, day1Cdg, day2, day3, day4, day5, day6 (+25 more)
 
 ### Community 40 - "hotel-rank.ts"
-Cohesion: 0.16
-Nodes (18): BARS, clampScore(), COMPARE, Copy, httpsSources(), MISSING, placeName(), RankInput (+10 more)
+Cohesion: 0.17
+Nodes (17): BARS, clampScore(), COMPARE, Copy, httpsSources(), MISSING, placeName(), RankInput (+9 more)
 
 ### Community 41 - "calendar.ts"
 Cohesion: 0.20
 Nodes (16): DateCity, DatedDay, daysOnDate(), fold(), mentionsCity(), nearestTripDate(), scheduleDays(), titleDate() (+8 more)
 
 ### Community 42 - "pickLocale"
-Cohesion: 0.20
-Nodes (19): pickLocale(), fillWeather(), el(), card(), GROUPS, GuideTab, GuideView, media() (+11 more)
+Cohesion: 0.33
+Nodes (10): pickLocale(), card(), GROUPS, GuideTab, GuideView, media(), renderGuide(), spotChip() (+2 more)
 
-### Community 43 - "camera.ts"
-Cohesion: 0.30
-Nodes (12): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset(), pinIncludedInCityFit() (+4 more)
+### Community 43 - "asMsg"
+Cohesion: 0.48
+Nodes (7): asMsg(), asResult(), finite(), interpretSearchBody(), isRecord(), normalizeHotel(), normalizeSkipped()
 
 ### Community 44 - "transfer-row.ts"
-Cohesion: 0.25
-Nodes (16): formatLegDuration(), legLineColor(), TimelineTransferPart, durationMinutes(), identityOf(), isTrainRide(), isTransferPart(), isTripLeg() (+8 more)
+Cohesion: 0.26
+Nodes (16): formatLegDuration(), legDisplayLabel(), legLineColor(), TripLeg, durationMinutes(), identityOf(), isTrainRide(), isTransferPart() (+8 more)
 
 ### Community 45 - "store.ts"
 Cohesion: 0.27
 Nodes (15): arrivalKey(), categoryFilterKey, groupsKey(), PeriodPrefs, periodsKey(), read(), readArrival(), readCategoryFilter() (+7 more)
 
 ### Community 46 - "travel-itineraries.ts"
-Cohesion: 0.12
-Nodes (24): favoritePlaceIds(), favoritePlaces(), computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug (+16 more)
-
-### Community 47 - "place-index.ts"
-Cohesion: 0.18
-Nodes (9): photosByPlaceId, photosForPlaceId(), ALLOWED_HOSTS, resolvePlaceArea(), resolvePlacePhotos(), travelCities, withResolvedArea(), Hit (+1 more)
+Cohesion: 0.14
+Nodes (21): computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug, ItineraryArrivalOption, ItineraryDay (+13 more)
 
 ### Community 48 - "overlays.ts"
-Cohesion: 0.23
-Nodes (10): PlaceCategoryMeta, Area, drawableRings(), modelFor(), fadeMs(), mountPlaceOverlays(), paint(), placeRecord() (+2 more)
+Cohesion: 0.13
+Nodes (20): loadOsmAreas(), Lookup, osmAreaFor(), osmAreasReady(), OsmOutline, placeHasOsmArea(), PlaceCategoryMeta, resolvePlaceArea() (+12 more)
 
 ### Community 49 - "parse.ts"
-Cohesion: 0.16
-Nodes (21): trip(), TEXT, tripErrorText(), warningCopyText(), warningCountLabel(), warningBadge(), checkPlaces(), durationList() (+13 more)
+Cohesion: 0.17
+Nodes (20): TEXT, tripErrorText(), warningCopyText(), warningCountLabel(), warningBadge(), checkPlaces(), durationList(), fold() (+12 more)
 
 ### Community 50 - "summary.ts"
 Cohesion: 0.23
 Nodes (17): capitalized(), formatDayTitle(), formatMonthYear(), formatSpan(), isoParts, monthName(), MONTHS, nightsBetween() (+9 more)
 
-### Community 51 - "weather.ts"
-Cohesion: 0.22
-Nodes (13): cache, Entry, Hourly, keyOf(), loadForecast(), mergeWeather(), parseHourly(), peekForecast() (+5 more)
+### Community 51 - "mount.ts"
+Cohesion: 0.13
+Nodes (26): emptyNotice(), fillWeather(), loadTripFiles(), paintWeather(), refreshWeather(), mountTripNav(), onTripFiles(), stopPin() (+18 more)
 
 ### Community 52 - "expandTimelineTransferParts"
-Cohesion: 0.36
-Nodes (10): estimateLegDurationMin(), expandTimelineTransferParts(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin(), walkMinutes() (+2 more)
-
-### Community 53 - "hotel-distance.ts"
 Cohesion: 0.27
-Nodes (10): row(), RowOptions, Copy, directionHref(), dirLink(), distanceSection(), formatMetres(), say() (+2 more)
+Nodes (12): estimateLegDurationMin(), expandTimelineTransferParts(), hopName(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin() (+4 more)
+
+### Community 53 - "el"
+Cohesion: 0.22
+Nodes (14): el(), row(), RowOptions, Copy, directionHref(), dirLink(), distanceSection(), formatMetres() (+6 more)
 
 ### Community 54 - "open-now.ts"
-Cohesion: 0.32
-Nodes (10): CITY_ZONE, clearOpenNowCache(), fetchOpeningHours(), isOpenFromOsmHours(), OpenNow, openNowStatus(), overpassQuery(), session (+2 more)
+Cohesion: 0.35
+Nodes (9): CITY_ZONE, clearOpenNowCache(), fetchOpeningHours(), isOpenFromOsmHours(), OpenNow, openNowStatus(), overpassQuery(), session (+1 more)
 
 ### Community 55 - "travel.ts"
 Cohesion: 0.13
-Nodes (16): PlaceCategory, localTravelCities, l(), milanCity, place(), TravelPhoto, PlaceSubcategory, TravelCity (+8 more)
+Nodes (15): PlaceCategory, favoritePlaceIds(), favoritePlaces(), localTravelCities, l(), milanCity, place(), PlaceSubcategory (+7 more)
 
 ### Community 56 - "hotel-ring.ts"
 Cohesion: 0.29
@@ -338,41 +329,25 @@ Nodes (9): capture(), clearSearchRing(), ink(), LeafletNs, loadLeaflet(), markCo
 Cohesion: 0.46
 Nodes (6): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(), StayRange, validStayRange()
 
-### Community 58 - "osm-area-bridge.ts"
-Cohesion: 0.28
-Nodes (9): loadOsmAreas(), Lookup, osmAreaFor(), osmAreasReady(), OsmOutline, placeHasOsmArea(), OSM_AREA_IDS, ensureOsmAreas() (+1 more)
-
-### Community 59 - "pin-visual.ts"
-Cohesion: 0.22
-Nodes (14): placePinIconHtml(), pinIcon(), cssColor(), pinBox(), pinHtml(), pinModel, samePinModel(), starSvg() (+6 more)
+### Community 59 - "contrast.ts"
+Cohesion: 0.60
+Nodes (4): chipTone(), circleInk(), ContrastInk, relativeLuminance()
 
 ### Community 60 - "rating.ts"
-Cohesion: 0.44
-Nodes (8): travelUi, clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
+Cohesion: 0.53
+Nodes (7): clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
 
 ### Community 61 - "main.ts"
 Cohesion: 0.05
-Nodes (68): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+60 more)
+Nodes (72): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+64 more)
 
-### Community 63 - "mountMap"
-Cohesion: 0.43
-Nodes (7): attachMapControls(), relabel(), uiLocale(), mountMap(), paintRouteFocus(), routeEmphasis(), cameraMotion
-
-### Community 64 - "getTravelCity"
-Cohesion: 0.10
-Nodes (27): getTravelCity(), ItineraryLegDef, lineBrandColor(), milanDayLegsById, parisDayLegsById, catalogGeometry(), catalogLegByPair, CatalogLegStroke (+19 more)
+### Community 64 - "legs.ts"
+Cohesion: 0.17
+Nodes (14): ItineraryLegDef, lineBrandColor(), milanDayLegsById, parisDayLegsById, catalogGeometry(), catalogLegByPair, CatalogLegStroke, haversineM() (+6 more)
 
 ### Community 65 - "getTransitLine"
-Cohesion: 0.38
-Nodes (5): hopName(), legDisplayLabel(), getTransitLine(), TransitLine, transitLineForPlace()
-
-### Community 67 - "trackpad.ts"
 Cohesion: 0.60
-Nodes (4): attachTrackpadGestures(), PinchMap, pinchZoom(), wheelPixels()
-
-### Community 69 - "overview.ts"
-Cohesion: 0.70
-Nodes (3): greatCircle(), OverviewArc, overviewArcs()
+Nodes (3): getTransitLine(), TransitLine, transitLineForPlace()
 
 ## Knowledge Gaps
 - **370 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+365 more)
@@ -382,12 +357,12 @@ Nodes (3): greatCircle(), OverviewArc, overviewArcs()
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `itinerary-panel.ts`, `route-planner.ts`, `timeline.ts`, `index.ts`, `mount.ts`, `export.ts`, `hotel-rank.ts`, `transfer-row.ts`, `parse.ts`, `summary.ts`, `hotel-distance.ts`, `travel.ts`, `rating.ts`, `main.ts`, `mountMap`, `getTravelCity`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
-- **Why does `getTravelCity()` connect `getTravelCity` to `paint`, `hotels.ts`, `travel-stay-heatmap.ts`, `calendar.ts`, `places.ts`, `itinerary-panel.ts`, `travel-itineraries.ts`, `place-index.ts`, `parse.ts`, `timeline.ts`, `index.ts`, `travel.ts`, `main.ts`, `mount.ts`?**
-  _High betweenness centrality (0.050) - this node is a cross-community bridge._
-- **Why does `mountTrip()` connect `paint` to `getTravelCity`, `export.ts`, `calendar.ts`, `pickLocale`, `places.ts`, `store.ts`, `parse.ts`, `main.ts`, `mount.ts`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `icons.ts`, `mountHotels`, `route-planner.ts`, `beginLocate`, `timeline.ts`, `index.ts`, `export.ts`, `hotel-rank.ts`, `transfer-row.ts`, `parse.ts`, `summary.ts`, `mount.ts`, `el`, `travel.ts`, `rating.ts`, `main.ts`?**
+  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+- **Why does `getTravelCity()` connect `paint` to `legs.ts`, `hotels.ts`, `travel-stay-heatmap.ts`, `calendar.ts`, `places.ts`, `travel-itineraries.ts`, `mountHotels`, `parse.ts`, `mount.ts`, `index.ts`, `timeline.ts`, `travel.ts`, `main.ts`, `route.ts`?**
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
+- **Why does `mountTrip()` connect `paint` to `export.ts`, `calendar.ts`, `pickLocale`, `day-plan.ts`, `store.ts`, `parse.ts`, `mount.ts`, `main.ts`, `route.ts`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `type` to the rest of the system?**
   _370 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `hotel-search.mjs` be split into smaller, more focused modules?**
@@ -395,4 +370,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `airbnb-search.mjs` be split into smaller, more focused modules?**
   _Cohesion score 0.09971509971509972 - nodes in this community are weakly interconnected._
 - **Should `paint` be split into smaller, more focused modules?**
-  _Cohesion score 0.1241565452091768 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10409745293466224 - nodes in this community are weakly interconnected._
