@@ -60,8 +60,9 @@ describe('parseTrip', () => {
     expect(external?.href).toMatch(/^https:\/\//);
   });
 
-  it('keeps day paragraphs as notes', () => {
-    expect(trip.cities[0]?.days[0]?.notes).toEqual(['Chegada tranquila.']);
+  it('keeps day paragraphs as notes, with the line of each note and stop', () => {
+    expect(trip.cities[0]?.days[0]?.notes).toEqual([{ text: 'Chegada tranquila.', line: 12 }]);
+    expect(trip.cities[0]?.days[0]?.stops.map((stop) => stop.line)).toEqual([9, 10]);
   });
 
   it('records a missing place and a broken link', () => {
@@ -312,7 +313,7 @@ via: trem · 3h10
 `,
     );
     expect(trip.cities[0]?.leg).toBeUndefined();
-    expect(trip.cities[0]?.days[0]?.notes).toEqual(['via: trem · 3h10']);
+    expect(trip.cities[0]?.days[0]?.notes.map((note) => note.text)).toEqual(['via: trem · 3h10']);
     expect(trip.errors).toEqual([]);
   });
 });

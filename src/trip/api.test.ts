@@ -42,6 +42,12 @@ describe('applyTripPatch', () => {
     const comment = applyTripPatch(day, { line: 5, before: '  - comentário: trocar', after: [] });
     expect(comment?.raw).not.toContain('comentário');
     expect(comment?.raw).toContain('  - via: metrô · 20 min');
+    const paragraph = applyTripPatch('### Dia 1\n\nNarrativa.\n\n- 09:00 [Louvre](place:par-louvre)\n', {
+      line: 3,
+      before: 'Narrativa.',
+      after: [],
+    });
+    expect(paragraph?.raw).toBe('### Dia 1\n\n- 09:00 [Louvre](place:par-louvre)\n');
   });
 
   it('adds a child after the indented lines and keeps CRLF', () => {

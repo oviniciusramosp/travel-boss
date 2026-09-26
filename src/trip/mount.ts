@@ -32,6 +32,7 @@ import {
   type Rail,
 } from './day-plan';
 import { inlineNodes } from './inline';
+import { editableNote, sendPatch, type NoteKind } from './note-edit';
 import {
   dateStops,
   planHop,
@@ -353,6 +354,28 @@ export function mountTrip(
     statusTimer = window.setTimeout(() => {
       toast.hidden = true;
     }, 2000);
+  };
+  /** A note editor is open. The document repaints when it closes, not under it. */
+  let editing = false;
+  const onEditing = (open: boolean) => {
+    editing = open;
+    if (!open) void render();
+  };
+  /** The file keeps its text. The user's text goes to the clipboard, or into the toast. */
+  const noteFailed = (reason: 'conflict' | 'error', text: string) => {
+    const locale = shell.locale();
+    const why =
+      reason === 'conflict'
+        ? pickLocale(locale, {
+            en: 'Not saved: that line changed in the file.',
+            'pt-BR': 'Não salvou: essa linha mudou no arquivo.',
+          })
+        : pickLocale(locale, { en: 'Could not save.', 'pt-BR': 'Falha ao salvar.' });
+    void navigator.clipboard.writeText(text).then(
+      () =>
+        showToast(`${why} ${pickLocale(locale, { en: 'Your text is on the clipboard.', 'pt-BR': 'Seu texto está na área de transferência.' })}`, true),
+      () => showToast(`${why} ${pickLocale(locale, { en: 'Your text:', 'pt-BR': 'Seu texto:' })} ${text}`, true),
+    );
   };
   let tripRouteEpoch = 0;
   let ignoreDateToggle = false;
@@ -1101,6 +1124,21 @@ export function mountTrip(
       });
     };
 
+    const rawLines = lastRaw.split(/\r?\n/);
+    const editNote = (node: HTMLElement, kind: NoteKind, text: string, line: number, slug: string) =>
+      editableNote(node, {
+        kind,
+        text,
+        line,
+        raw: rawLines[line - 1] ?? '',
+        label: pickLocale(locale, { en: 'Note', 'pt-BR': 'Anotação' }),
+        render: (value) =>
+          inlineNodes(value, { onPlace: (placeId, origin) => openLinkedPlace(slug, placeId, origin) }),
+        save: (patch) => sendPatch(id, patch),
+        onEditing,
+        onFail: noteFailed,
+      });
+
     const article = document.createElement('article');
     article.className = 'tb-doc';
     article.dataset.tripId = trip.id;
@@ -1268,11 +1306,9 @@ export function mountTrip(
             time.textContent = stop.time;
             noteItem.append(time);
           }
-          noteItem.append(
-            ...inlineNodes(stop.label, {
-              onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
-            }),
-          );
+          const text = el('span', 'tb-list-note__text');
+          editNote(text, 'item', stop.label, stop.line, city.slug);
+          noteItem.append(text);
           markChanged(noteItem);
           lists[rowIndex]!.append(noteItem);
           return;
@@ -1307,7 +1343,7 @@ export function mountTrip(
           time: stop.time,
           lead: place ? stopPin(place) : undefined,
           title: missingPlace ? (placeId ?? stop.label) : stop.label,
-          sub: missingPlace ? authored || undefined : stop.note,
+          sub: missingPlace ? authored || undefined : undefined,
           tip: false,
           data: {
             stop: '',
@@ -1336,11 +1372,10 @@ export function mountTrip(
           item.setAttribute('aria-disabled', 'true');
         }
         if (stop.note && !missingPlace) {
-          item.querySelector('.tb-row__sub')?.replaceChildren(
-            ...inlineNodes(stop.note, {
-              onPlace: (placeId, origin) => openLinkedPlace(city.slug, placeId, origin),
-            }),
-          );
+          // Beside the title button, not in it: a click on the note edits it.
+          const note = el('span', 'tb-row__sub');
+          editNote(note, 'stop', stop.note, stop.line, city.slug);
+          item.querySelector('.tb-row__main')?.after(note);
         }
         markChanged(item);
         if (place) {
@@ -1422,13 +1457,8 @@ export function mountTrip(
       );
       for (const dated of daysHere) {
         for (const note of dated.day.notes) {
-          const paragraph = document.createElement('p');
-          paragraph.className = 'tb-doc-note';
-          paragraph.append(
-            ...inlineNodes(note, {
-              onPlace: (placeId, origin) => openLinkedPlace(dated.city.slug, placeId, origin),
-            }),
-          );
+          const paragraph = el('p', 'tb-doc-note');
+          editNote(paragraph, 'paragraph', note.text, note.line, dated.city.slug);
           body.append(paragraph);
         }
         if (
@@ -1497,9 +1527,10 @@ export function mountTrip(
   }
 
   async function render() {
+    if (editing) return;
     try {
       const file = await loadTripFile(id);
-      if (!alive) return;
+      if (!alive || editing) return;
       if (file && file.raw === lastRaw && current && !failure) return;
       if (!file) {
         showFailure('missing');

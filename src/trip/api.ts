@@ -97,5 +97,7 @@ export function applyTripPatch(raw: string, patch: TripPatch): { raw: string; li
   }
   const after = patch.after ?? [];
   lines.splice(at, after.length ? 1 : end - at, ...after);
+  // A paragraph deleted between two blank lines leaves one of them.
+  if (!after.length && !lines[at - 1]?.trim() && !lines[at]?.trim()) lines.splice(at, 1);
   return { raw: lines.join(eol), line: at + 1 };
 }

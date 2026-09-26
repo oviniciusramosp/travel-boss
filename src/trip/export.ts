@@ -26,7 +26,7 @@ function pushDay(lines: string[], day: TripDay, resolvePlace: (placeId: string) 
   lines.push(`### ${day.title}`, '');
   for (const stop of day.stops) pushStop(lines, stop, resolvePlace);
   if (day.stops.length) lines.push('');
-  for (const note of day.notes) lines.push(note, '');
+  for (const note of day.notes) lines.push(note.text, '');
 }
 
 /** One day, same Markdown the trip export uses for that section. */

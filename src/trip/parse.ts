@@ -23,12 +23,17 @@ export type TripStop = {
   listNote?: boolean;
   /** Leg from this departure stop to the next stop. */
   leg?: TripLeg;
+  /** 1-based line of the bullet. The UI edits the note on this line. */
+  line: number;
 };
+
+/** One line of the file: its text and 1-based number. */
+export type TripLine = { text: string; line: number };
 
 export type TripDay = {
   title: string;
   stops: TripStop[];
-  notes: string[];
+  notes: TripLine[];
 };
 
 export type TripCity = {
@@ -144,7 +149,7 @@ function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   };
 }
 
-function parseStop(text: string, line: number, errors: TripError[]): TripStop {
+function parseStop(text: string, line: number, errors: TripError[]): Omit<TripStop, 'line'> {
   let rest = text.trim();
   let time: string | undefined;
   const timed = rest.match(TIME_PREFIX);
@@ -172,7 +177,7 @@ function parseStop(text: string, line: number, errors: TripError[]): TripStop {
   return { time, label, note };
 }
 
-function checkPlaces(city: TripCity, errors: TripError[], lineOf: Map<TripStop, number>) {
+function checkPlaces(city: TripCity, errors: TripError[]) {
   if (!city.slug) return;
   const known = getTravelCity(city.slug);
   if (!known) return;
@@ -180,7 +185,7 @@ function checkPlaces(city: TripCity, errors: TripError[], lineOf: Map<TripStop, 
     for (const stop of day.stops) {
       if (!stop.placeId) continue;
       if (!known.places.some((place) => place.id === stop.placeId)) {
-        reject(errors, lineOf.get(stop) ?? 0, 'place-missing', stop.placeId);
+        reject(errors, stop.line, 'place-missing', stop.placeId);
       }
     }
   }
@@ -195,7 +200,6 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
   const cities: TripCity[] = [];
   let city: TripCity | null = null;
   let day: TripDay | null = null;
-  const lineOf = new Map<TripStop, number>();
 
   const closeCity = () => {
     if (!city) return;
@@ -204,7 +208,7 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
     } else if (!travelCities.some((item) => item.slug === city!.slug)) {
       reject(errors, 0, 'city-unknown', city.slug);
     }
-    checkPlaces(city, errors, lineOf);
+    checkPlaces(city, errors);
   };
 
   for (let index = 0; index < lines.length; index += 1) {
@@ -293,14 +297,12 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
         reject(errors, lineNo, 'stop-outside-day');
         continue;
       }
-      const stop = parseStop(trimmed.slice(2), lineNo, errors);
-      lineOf.set(stop, lineNo);
-      day.stops.push(stop);
+      day.stops.push({ ...parseStop(trimmed.slice(2), lineNo, errors), line: lineNo });
       continue;
     }
 
     if (day) {
-      day.notes.push(trimmed);
+      day.notes.push({ text: trimmed, line: lineNo });
       continue;
     }
 

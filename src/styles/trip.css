@@ -574,6 +574,31 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* A note shows its Markdown while you edit it. Hover says it is text. */
+[data-note-edit] {
+  border-radius: var(--r-min);
+  cursor: text;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+[data-note-edit]:hover {
+  background: var(--color-hover);
+}
+
+[data-note-edit][contenteditable] {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+  background: transparent;
+  color: var(--color-ink);
+}
+
+/* The stop note sits under the title button, not inside it. */
+.tb-list.tb-timeline > .tb-row > .tb-row__sub {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: calc(-1 * var(--tl-row-gap));
+}
+
 .tb-place-link {
   padding: 0;
   border: 0;
