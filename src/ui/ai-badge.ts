@@ -1,5 +1,5 @@
 import { cityGuide, pickLocale } from '../catalog';
-import type { Locale } from '../catalog';
+import type { Locale, TravelPlace } from '../catalog';
 import { icon } from './icons';
 
 const TABS = [
@@ -7,12 +7,22 @@ const TABS = [
   ['food', { en: 'Food', 'pt-BR': 'Comidas' }],
 ] as const;
 
-/** Why an AI added the place: the guide items that point at it, with their tab. */
-export function aiSuggestionTip(slug: string, placeId: string, locale: Locale): string {
+/** Why an AI added the place: its own `aiReason`, else the guide items that point at it, with their tab. */
+export function aiSuggestionTip(
+  slug: string,
+  place: Pick<TravelPlace, 'id' | 'aiReason'>,
+  locale: Locale,
+): string {
+  if (place.aiReason) {
+    return pickLocale(locale, {
+      en: `AI suggestion: ${place.aiReason.en}`,
+      'pt-BR': `Sugestão feita por IA: ${place.aiReason['pt-BR']}`,
+    });
+  }
   const guide = cityGuide(slug);
   const reasons = TABS.flatMap(([tab, label]) =>
     (guide?.[tab] ?? [])
-      .filter((item) => item.where.includes(placeId))
+      .filter((item) => item.where.includes(place.id))
       .map((item) => `${pickLocale(locale, item.name)} (${pickLocale(locale, label)})`),
   );
   if (!reasons.length) return pickLocale(locale, { en: 'AI suggestion', 'pt-BR': 'Sugestão feita por IA' });

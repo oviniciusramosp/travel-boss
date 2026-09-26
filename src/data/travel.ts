@@ -181,10 +181,12 @@ export interface TravelPlace {
    */
   favorite?: boolean;
   /**
-   * Added by an AI as a city-guide suggestion (market or food), not picked by
-   * hand. Cards show a sparkle whose tip names the guide items behind it.
+   * Added by an AI, not picked by hand. Cards show a sparkle whose tip says
+   * why: `aiReason` when set, else the city-guide items (market or food) behind it.
    */
   aiSuggested?: boolean;
+  /** Why an AI added a place that no guide item points at (e.g. "near the BnF"). */
+  aiReason?: LString;
   /**
    * Already visited / known.
    * Omit or true = known; false = still to visit (Lisbon “Conhecer” list).

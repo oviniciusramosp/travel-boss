@@ -167,7 +167,7 @@ function placeCard(
   const body = el('span', 'tb-place-card__body');
   const title = el('span', 'tb-place-card__title');
   title.append(el('span', 'tb-name', pickLocale(locale, place.name)));
-  if (place.aiSuggested) title.append(aiBadge(aiSuggestionTip(city.slug, place.id, locale)));
+  if (place.aiSuggested) title.append(aiBadge(aiSuggestionTip(city.slug, place, locale)));
   body.append(title);
   const subs = (place.subcategories ?? []).map((id) => subcategoryLabel(id, locale)).join(' · ');
   if (subs) body.append(el('span', 'tb-place-card__sub', subs));

@@ -84,5 +84,5 @@ Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityG
 - Grupos e ordem: `marketShelves` (Mercado) e `foodMeals` (Comidas), no mesmo arquivo.
 - Item: `name` e `description` em en e pt-BR, `photo` do Commons (thumb `500px-…` em `upload.wikimedia.org`), `where` com 1 a 3 ids do catálogo da mesma cidade, o melhor primeiro.
 - Loja ou restaurante que ainda não existe entra antes em `travelCities` (foto em `travel-photos.ts`) e só depois no `where`. Assim vira pino, card e parada possível do roteiro.
-- Lugar que a IA adiciona leva `aiSuggested: true`. O card mostra as faíscas de IA com o motivo no tooltip, e o teste exige que algum item do guia aponte para ele.
+- Lugar que a IA adiciona leva `aiSuggested: true`. O card mostra as faíscas de IA com o motivo no tooltip, e o teste exige um motivo: algum item do guia aponta para ele, ou o lugar traz `aiReason` (en e pt-BR), como os achados perto de outro lugar.
 - `src/data/travel-guide.test.ts` falha com id desconhecido, texto vazio ou foto fora do padrão.
