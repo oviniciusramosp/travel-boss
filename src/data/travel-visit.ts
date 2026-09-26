@@ -350,11 +350,11 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Café da manhã a caminho do CDG 2 TGV — leve antes do longo trajeto de RER para o leste.',
     ),
   }),
-  'par-cdg-exki': restaurantVisit(10, 15, {
-    bestDay: L('Daily 6:00–21:30', 'Todo dia 6h–21h30'),
+  'par-cdg-brioche-doree': cafeVisit(4, 8, {
+    bestDay: L('Daily 6:00–21:00', 'Todo dia 6h–21h'),
     tips: L(
-      'Landside, before security: after customs, go up one floor. Brioche Dorée on the arrivals level needs no escalator.',
-      'Fica antes da segurança: saindo da alfândega, suba um andar. Sem subir com as malas, a Brioche Dorée fica no próprio desembarque.',
+      'Arrivals level, before the exit to the kerb: no escalator with the suitcases.',
+      'Fica no próprio desembarque, antes da saída para a calçada: nada de escada rolante com as malas.',
     ),
   }),
   'par-cdg-rer': {

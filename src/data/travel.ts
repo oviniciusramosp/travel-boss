@@ -1218,20 +1218,20 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'PAUL Aéroport Charles de Gaulle Terminal 2',
       },
       {
-        id: 'par-cdg-exki',
-        name: { en: 'EXKi CDG 2E', 'pt-BR': 'EXKi CDG 2E' },
-        category: 'restaurants',
-        subcategories: ['self-service'],
+        id: 'par-cdg-brioche-doree',
+        name: { en: 'Brioche Dorée CDG 2E', 'pt-BR': 'Brioche Dorée CDG 2E' },
+        category: 'cafes',
+        subcategories: ['bakery', 'coffee-shop'],
         description: {
-          en: 'Soups, quiches, salads and bowls in the public departures hall of Terminal 2E (level 2), one floor above arrivals.',
-          'pt-BR': 'Sopas, quiches, saladas e bowls no saguão público de partidas do Terminal 2E (nível 2), um andar acima do desembarque.',
+          en: 'Croissants, sandwiches and coffee on the Terminal 2E arrivals level, straight ahead as you leave customs.',
+          'pt-BR': 'Croissants, sanduíches e café no desembarque do Terminal 2E, logo em frente na saída da alfândega.',
         },
-        googleRating: 4.4,
-        // Google pin of "EXKI - Terminal 2E - Départs" (landside, by doors 10–11)
-        lat: 49.003054,
-        lng: 2.577027,
-        address: 'Terminal 2E, niveau 2 (Départs), 95700 Roissy-en-France',
-        mapsQuery: 'EXKI Terminal 2E Départs Aéroport Charles de Gaulle',
+        googleRating: 3.6,
+        // Google pin of "Brioche Doree - Terminal 2E - Arrivées" (landside, level 0)
+        lat: 49.003023,
+        lng: 2.577149,
+        address: 'Terminal 2E, niveau 0 (Arrivées), 95700 Roissy-en-France',
+        mapsQuery: 'Brioche Dorée Terminal 2E Arrivées Aéroport Charles de Gaulle',
       },
       {
         id: 'par-cdg-rer',

@@ -952,18 +952,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
-  'par-cdg-exki': [
+  'par-cdg-brioche-doree': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Vegan_Food_at_Paris_CDG_Airport_Terminal_2F.jpg/960px-Vegan_Food_at_Paris_CDG_Airport_Terminal_2F.jpg',
-      'EXKi salad and bowl at CDG (Terminal 2F)',
-      'Salada e bowl da EXKi no CDG (Terminal 2F)',
-      'Tony Webster · CC BY 2.0 · Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Terminal_2F_at_Paris_CDG_Airport_%2853925649847%29.jpg/960px-Terminal_2F_at_Paris_CDG_Airport_%2853925649847%29.jpg',
-      'EXKi sign in CDG Terminal 2F',
-      'Placa da EXKi no Terminal 2F do CDG',
-      'Tony Webster · CC BY 2.0 · Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/9/91/Croissant_hk_jp.jpg',
+      'Croissant (generic photo)',
+      'Croissant (foto ilustrativa)',
+      'SUBARUsti2020hk · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-cdg': [

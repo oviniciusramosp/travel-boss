@@ -8,8 +8,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
-- 13:00 [EXKi CDG 2E](place:par-cdg-exki) — **Almoço** no saguão público de partidas do 2E, um andar acima do desembarque: sopa, quiche, salada ou bowl (~€10–15). Sem subir com as malas: Brioche Dorée, no próprio desembarque. Depois, Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
-  - via: carro (Bolt) · 35 min
+- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café no lugar do almoço, só para forrar o estômago (~€4–8), logo na saída da alfândega
+  - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta. Navigo Semaine só começa a valer a partir de segunda-feira.
   - via: RER E + metrô 9 · 45 min
