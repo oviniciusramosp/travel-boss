@@ -187,7 +187,7 @@ export function drawRouteSegments(
       const dot = marker([sub.lat, sub.lng], {
         icon: divIcon({
           className: 'tb-subpoint-wrap',
-          html: '<span class="tb-subpoint-dot"></span>',
+          html: `<span class="tb-subpoint-dot" style="--subpoint-color:${safeColor(sub.color, walkColor())}"></span>`,
           iconSize: [14, 14],
           iconAnchor: [7, 7],
         }),

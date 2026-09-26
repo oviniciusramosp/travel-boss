@@ -999,7 +999,7 @@ p.tb-meta {
   }
 }
 
-/* A named point inside a place, on its walk. Walk color, smaller than a transfer dot. */
+/* A named point inside a place, on its walk. Parent place's pin color, smaller than a transfer dot. */
 .leaflet-marker-icon.tb-subpoint-wrap {
   background: transparent;
   border: 0;
@@ -1012,6 +1012,6 @@ p.tb-meta {
   margin: 2px;
   border: 2px solid var(--color-paper);
   border-radius: var(--r-pill);
-  background: var(--color-walk);
+  background: var(--subpoint-color, var(--color-walk));
   box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
 }

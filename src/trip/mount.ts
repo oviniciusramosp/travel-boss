@@ -492,7 +492,12 @@ export function mountTrip(
           from: point,
           to: { id: place.id, lat: last.lat, lng: last.lng },
           through: subs.slice(1, -1).map((sub) => [sub.lat, sub.lng] as [number, number]),
-          subPoints: subs.map((sub) => ({ lat: sub.lat, lng: sub.lng, label: pickLocale(locale, sub.name) })),
+          subPoints: subs.map((sub) => ({
+            lat: sub.lat,
+            lng: sub.lng,
+            label: pickLocale(locale, sub.name),
+            color: placeCategoryMeta[place.category].color,
+          })),
         });
       }
       previous = {

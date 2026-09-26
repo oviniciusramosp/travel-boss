@@ -61,7 +61,7 @@ export type RouteHop = {
   /** Points the walk must pass, e.g. a place's sub-points. */
   through?: [number, number][];
   /** Named points drawn along the walk. */
-  subPoints?: { lat: number; lng: number; label: string }[];
+  subPoints?: { lat: number; lng: number; label: string; color?: string }[];
 };
 
 function endpoints(hop: RouteHop): Pick<MapRouteSegment, 'fromId' | 'toId'> {
