@@ -60,12 +60,13 @@ Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--
 
 ## Como um LLM edita um roteiro
 
-Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `content/trips/<id>.md`.
+Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `content/trips/<id>.md`. Antes de mexer num roteiro, siga [`.claude/skills/roteiro/SKILL.md`](.claude/skills/roteiro/SKILL.md): onde vai cada informação, o que não acrescentar e o que conferir no app.
 
 - H1: título da viagem.
 - H2: cidade, na ordem. A linha seguinte é `city: <slug>` do catálogo; `dates: YYYY-MM-DD → YYYY-MM-DD` é opcional.
 - H3: `### Dia N — Título`.
 - Parada: bullet com `HH:mm` opcional e link `[Rótulo](place:<id>)` (o id já existe naquela cidade) ou URL `https://…`. Nota depois de ` — `.
+- Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho.
 - Parágrafo sob o dia é narrativa: entra no documento e no export, não vira pino.
 - Sem comentário HTML, front matter YAML ou HTML cru.
 
