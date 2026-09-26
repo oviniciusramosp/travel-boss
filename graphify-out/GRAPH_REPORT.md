@@ -1,16 +1,16 @@
-# Graph Report - travel-boss  (2026-09-26)
+# Graph Report - hospedagens-icon-update-79f5a5  (2026-09-26)
 
 ## Corpus Check
-- 192 files · ~329,293 words
+- 191 files · ~328,544 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1578 nodes · 4164 edges · 73 communities (71 shown, 2 thin omitted)
+- 1578 nodes · 4164 edges · 72 communities (70 shown, 2 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fc8c544d`
+- Built from commit: `3f9b54b7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -56,7 +56,6 @@
 - travel-itinerary-legs.ts
 - hotel-rank.ts
 - calendar.ts
-- travel-milan-itinerary.ts
 - travel.ts
 - transfer-row.ts
 - mountHotels
@@ -116,7 +115,7 @@
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (73 total, 2 thin omitted)
+## Communities (72 total, 2 thin omitted)
 
 ### Community 0 - "hotel-search.mjs"
 Cohesion: 0.13
@@ -140,7 +139,7 @@ Nodes (18): WhyPart, AccommodationType, Booking, CATEGORIES, CategoryKey, Eligib
 
 ### Community 5 - "travel-visit.ts"
 Cohesion: 0.09
-Nodes (28): cafeVisit(), CrowdProfile, formatMoneyTypical(), free, L(), landmarkOutdoor(), Locale, lodgingVisit() (+20 more)
+Nodes (32): cafeVisit(), CrowdProfile, formatDuration(), formatMoney(), formatMoneyTypical(), formatTicketPromo(), free, L() (+24 more)
 
 ### Community 6 - "hotel-search-match.mjs"
 Cohesion: 0.19
@@ -278,13 +277,9 @@ Nodes (17): BARS, clampScore(), COMPARE, Copy, httpsSources(), MISSING, placeNam
 Cohesion: 0.26
 Nodes (13): DateCity, daysOnDate(), fold(), mentionsCity(), nearestTripDate(), scheduleDays(), titleDate(), todayIso() (+5 more)
 
-### Community 42 - "travel-milan-itinerary.ts"
-Cohesion: 0.50
-Nodes (4): TravelItinerary, excursion(), l(), milanItinerary
-
 ### Community 43 - "travel.ts"
 Cohesion: 0.13
-Nodes (12): localTravelCities, l(), milanCity, place(), NEAR_BNF, travelCountryKeys, TravelLandmark, TravelRouteStop (+4 more)
+Nodes (11): favoritePlaceIds(), favoritePlaces(), localTravelCities, l(), milanCity, place(), NEAR_BNF, travelCountryKeys (+3 more)
 
 ### Community 44 - "transfer-row.ts"
 Cohesion: 0.25
@@ -295,8 +290,8 @@ Cohesion: 0.14
 Nodes (12): hotelPhotoUrls(), addDays(), hotelSetupFailure(), isAbort(), isoDate(), kmBetween(), mountHotels(), nightsBetween() (+4 more)
 
 ### Community 46 - "travel-itineraries.ts"
-Cohesion: 0.16
-Nodes (18): favoritePlaceIds(), favoritePlaces(), computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug (+10 more)
+Cohesion: 0.15
+Nodes (19): computeDayBudget(), computeTripBudget(), DayBudget, dayPrimaryRoutePlaceIds(), dayRoutePlaceIds(), itinerariesByCitySlug, ItineraryArrivalOption, itineraryForCity() (+11 more)
 
 ### Community 47 - "pickLocale"
 Cohesion: 0.24
