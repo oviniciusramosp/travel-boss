@@ -88,10 +88,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: metrô 7 de Censier–Daubenton até Jussieu e metrô 10 até Odéon · 25 min
 - 15:00 [Jardim de Luxemburgo](place:par-luxembourg)
 - 16:05 [Poilâne (Cherche-Midi)](place:par-poilane-cherche-midi) — A padaria original, de 1932: punitions (~€5) e a miche
-- 16:25 [CityPharma](place:par-citypharma) — Dermocosméticos; aberta até 21h
-- 17:15 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10)
-  - via: a pé pela Rue de Grenelle · 30 min
-- 18:40 [Rua Cler (mercado)](place:par-rue-cler) — Queijo, baguete e vinho para o piquenique
+- 16:30 [La Grande Épicerie (Rive Gauche)](place:par-grande-epicerie-rive-gauche) — Explorar o mercado e comprar queijo, baguete e vinho para o piquenique; sair até 17h05
+- 17:20 [CityPharma](place:par-citypharma) — Dermocosméticos; sair até 17h50
+- 18:00 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10); sair até 18h25
+  - via: Ir a pé até o Champ de Mars · 40 min
 - 19:10 [Champ de Mars](place:par-champ-mars) — Piquenique no gramado: pôr do sol às 19h21 e brilho às 20h
   - via: RER C até Neuilly–Porte Maillot e RER E até Noisy-le-Sec · 1h
 - 21:15 [Casa do Gui](place:par-casa-do-gui) — Volta
