@@ -226,6 +226,14 @@ const OUTSIDE =
   /\b(por fora|fachada|passar na frente|sem subir|sem entrar|nao vamos subir|nao vamos entrar|outside|facade)\b/;
 const INSIDE = /\b(por dentro|inside)\b/;
 
+const NO_PURCHASE = /\b(sem comprar|sem comer|sem consumir|so olhar|so uma olhada|so visitar|no purchase|just looking|just a look)\b/;
+
+/** The stop only looks at the place (a famous café, a shop), so its food does not count. */
+export function noPurchase(text: string): boolean {
+  const folded = text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+  return NO_PURCHASE.test(folded);
+}
+
 /**
  * The stop is seen only from outside, so the place's ticket does not count.
  * "Por fora é grátis. Por dentro, €25" still counts: going in is in the plan.
@@ -265,12 +273,14 @@ export type DateBudget = { food: number; ticket: number; lines: BudgetLine[] };
 /**
  * Food and tickets per person. A place visited twice on the date counts once.
  * Leg fares (`via: … · €2,55`) are tickets too, one per leg. `outside` places
- * (see `seenFromOutside`) keep their food but not their ticket.
+ * (see `seenFromOutside`) keep their food but not their ticket; `noFood` places
+ * (see `noPurchase`) keep their ticket but not their food.
  */
 export function dateBudget(
   places: readonly { id: string; visit?: VisitInfo }[],
   fares: readonly { label: string; eur: number }[] = [],
   outside: ReadonlySet<string> = new Set(),
+  noFood: ReadonlySet<string> = new Set(),
 ): DateBudget {
   const seen = new Set<string>();
   const budget: DateBudget = { food: 0, ticket: 0, lines: [] };
@@ -279,7 +289,7 @@ export function dateBudget(
     seen.add(place.id);
     const visit = resolveVisit(place.id, place.visit);
     const ticket = outside.has(place.id) ? 0 : midEur(visit?.ticket);
-    const line = { id: place.id, food: midEur(visit?.avgPricePerPerson), ticket };
+    const line = { id: place.id, food: noFood.has(place.id) ? 0 : midEur(visit?.avgPricePerPerson), ticket };
     if (line.food <= 0 && line.ticket <= 0) continue;
     budget.food += line.food;
     budget.ticket += line.ticket;

@@ -31,6 +31,7 @@ import {
   pastPeriods,
   periodSections,
   periodWindows,
+  noPurchase,
   seenFromOutside,
   withSubPointPlaces,
   zonedStamp,
@@ -1552,15 +1553,21 @@ export function mountTrip(
         row.depart?.fareEur ? [{ label: legLabel(row.depart), eur: row.depart.fareEur }] : [],
       );
       // A place only seen from outside skips its ticket, unless another stop that date goes in.
+      // A stop that only looks (a famous café, "sem comprar") skips its food the same way.
       const outside = new Set<string>();
+      const noFood = new Set<string>();
+      const buying = new Set<string>();
       const inside = new Set<string>();
       for (const row of rows) {
         const stop = row.dated.day.stops[row.stopIndex];
         if (!stop?.placeId) continue;
-        (seenFromOutside(`${stop.label} ${stop.note ?? ''}`) ? outside : inside).add(stop.placeId);
+        const text = `${stop.label} ${stop.note ?? ''}`;
+        (seenFromOutside(text) ? outside : inside).add(stop.placeId);
+        (noPurchase(text) ? noFood : buying).add(stop.placeId);
       }
       for (const placeId of inside) outside.delete(placeId);
-      const budget = dateBudget(placesHere, fares, outside);
+      for (const placeId of buying) noFood.delete(placeId);
+      const budget = dateBudget(placesHere, fares, outside, noFood);
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
       // A date across two cities takes the food target of the city of its first stop.

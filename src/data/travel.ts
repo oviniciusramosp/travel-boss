@@ -3736,7 +3736,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-starbucks-opera',
         name: { en: 'Starbucks Opéra', 'pt-BR': 'Starbucks Opéra' },
-        category: 'commons',
+        category: 'cafes',
         description: {
           en: 'Starbucks on the Opéra corner — Wi‑Fi, AC, and a familiar order between museums.',
           'pt-BR': 'Starbucks na esquina da Opéra — Wi‑Fi, ar-condicionado e pedido familiar entre museus.',

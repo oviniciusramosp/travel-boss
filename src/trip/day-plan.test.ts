@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   dateBudget,
   dayPeriods,
+  noPurchase,
   hopRails,
   midEur,
   pastPeriods,
@@ -344,5 +345,19 @@ describe('overBudget', () => {
 
   it('is zero without a target', () => {
     expect(overBudget(62, undefined)).toBe(0);
+  });
+});
+
+describe('noPurchase', () => {
+  it('reads the words that mean only looking, accents aside', () => {
+    expect(noPurchase('Uma olhada no Starbucks mais bonito de Paris, sem comprar')).toBe(true);
+    expect(noPurchase('Só olhar as vitrines')).toBe(true);
+    expect(noPurchase('Just looking at the room')).toBe(true);
+    expect(noPurchase('Croissant e café para levar')).toBe(false);
+  });
+  it('drops the food of a place the stop only looks at, and keeps its ticket', () => {
+    const places = [{ id: 'a', visit: { avgPricePerPerson: { currency: 'EUR' as const, min: 5, max: 12 }, ticket: { currency: 'EUR' as const, min: 10 } } }];
+    expect(dateBudget(places, [], new Set(), new Set(['a']))).toMatchObject({ food: 0, ticket: 10 });
+    expect(dateBudget(places)).toMatchObject({ food: 8.5, ticket: 10 });
   });
 });
