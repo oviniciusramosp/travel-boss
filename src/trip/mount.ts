@@ -1366,6 +1366,7 @@ export function mountTrip(
             const found = placesHere.find((place) => place.id === placeId);
             return found ? pickLocale(locale, found.name) : placeId;
           },
+          formatDayTitle(date, locale),
           locale,
         ),
       );

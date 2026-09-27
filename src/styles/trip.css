@@ -309,16 +309,38 @@
   padding-bottom: var(--inset-card);
 }
 
+/* Both chips are one button: it opens the day's receipt. */
 .tb-date__budgets {
   display: grid;
   grid-auto-columns: minmax(0, 1fr);
   grid-auto-flow: column;
   gap: var(--spacing-4);
   margin: 0 var(--inset-card);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tb-date__budgets:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 
 .tb-date__budgets .tb-budget-chip {
   justify-content: center;
+  transition: background-color var(--dur-instant) var(--ease-out);
+}
+
+.tb-date__budgets:hover .tb-budget-chip {
+  background-image: linear-gradient(var(--color-hover), var(--color-hover));
+}
+
+.tb-date__budgets:active .tb-budget-chip {
+  background-image: linear-gradient(var(--color-press), var(--color-press));
 }
 
 /* Narrow card: the amount alone. The group label still says it is per person. */
@@ -333,13 +355,109 @@
 }
 
 .tb-budget-chip.is-food .material-symbols-rounded,
-.tb-stop-cost.is-food .material-symbols-rounded {
+.tb-stop-cost.is-food .material-symbols-rounded,
+.tb-receipt__group.is-food .tb-receipt__head .material-symbols-rounded {
   color: var(--color-food);
 }
 
 .tb-budget-chip.is-ticket .material-symbols-rounded,
-.tb-stop-cost.is-ticket .material-symbols-rounded {
+.tb-stop-cost.is-ticket .material-symbols-rounded,
+.tb-receipt__group.is-ticket .tb-receipt__head .material-symbols-rounded {
   color: var(--color-ticket);
+}
+
+/* The day's receipt (`openDialog`): each line of the budget per kind, then the total. */
+.tb-receipt {
+  width: min(360px, calc(100vw - 2 * var(--spacing-16)));
+}
+
+.tb-receipt[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The rounded dialog does not scroll; its body does. */
+.tb-receipt__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  min-height: 0;
+  padding: 0 var(--spacing-16) var(--spacing-16);
+  overflow-y: auto;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.tb-receipt__caption {
+  margin: 0;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+}
+
+.tb-receipt__group,
+.tb-receipt__lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.tb-receipt__lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tb-receipt__head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Name, a dotted leader, the amount at the right edge: a receipt line. */
+.tb-receipt__line {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(var(--spacing-8), 1fr) max-content;
+  column-gap: var(--spacing-4);
+  align-items: baseline;
+  margin: 0;
+}
+
+.tb-receipt__line::before {
+  content: '';
+  grid-row: 1;
+  grid-column: 2;
+  align-self: end;
+  margin-bottom: 0.35em;
+  border-bottom: 1px dotted var(--color-mid-gray);
+}
+
+.tb-receipt__name {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.tb-receipt__amount {
+  grid-row: 1;
+  grid-column: 3;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tb-receipt__line.is-subtotal {
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-hairline);
+  color: var(--color-mid-gray);
+}
+
+.tb-receipt__line.is-total {
+  padding-top: var(--spacing-8);
+  border-top: 1px dashed var(--color-mid-gray);
+  font-weight: var(--font-weight-semibold);
 }
 
 .tb-date__body > .tb-doc-note {
