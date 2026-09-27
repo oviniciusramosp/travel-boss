@@ -66,6 +66,8 @@ export type ItineraryLegDef = {
    * When set, overrides single `path` / `line` for map expansion.
    */
   hops?: ItineraryTransitHop[];
+  /** Verified walking access to the first hop, available when live routing is offline. */
+  walkInPath?: LatLng[];
   /** Walk only: points the walk must pass, such as the central avenue of a park. */
   through?: LatLng[];
   /** Short label for UI (e.g. "M1", "RER E + M13") */
@@ -1133,7 +1135,64 @@ const tripEuropa2026: ItineraryLegDef[] = [
   { from: 'par-palais', to: 'par-alexandre-iii', mode: 'walk' },
   { from: 'par-alexandre-iii', to: 'par-luxor-obelisk', mode: 'walk', through: [[48.862723, 2.313436], [48.864541, 2.313651], [48.865803, 2.313203], [48.867754, 2.313963], [48.866301, 2.318531]] },
   trainLeg('par-casa-do-gui', 'par-bohemia', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
-  trainLeg('par-bohemia', 'par-arc-triomphe', 35, [ride(metro1, 'palais-royal', 'etoile')]),
+  {
+    ...trainLeg('par-bohemia', 'par-arc-triomphe', 35, [ride(metro1, 'palais-royal', 'etoile')]),
+    // Valhalla / OSM pedestrian route, verified 2026-09-27: 404 m, about 5 min.
+    walkInPath: [
+      [48.865487, 2.335073],
+      [48.865123, 2.334924],
+      [48.865113, 2.334868],
+      [48.865077, 2.334873],
+      [48.864998, 2.334909],
+      [48.864925, 2.334943],
+      [48.864914, 2.334947],
+      [48.864761, 2.335005],
+      [48.864551, 2.335096],
+      [48.864534, 2.335104],
+      [48.86452, 2.335108],
+      [48.864483, 2.335124],
+      [48.864436, 2.335146],
+      [48.864421, 2.335152],
+      [48.864374, 2.335184],
+      [48.864264, 2.335235],
+      [48.86407, 2.335305],
+      [48.864049, 2.335313],
+      [48.864036, 2.335318],
+      [48.86398, 2.335346],
+      [48.863845, 2.335417],
+      [48.863819, 2.335454],
+      [48.863786, 2.335435],
+      [48.86375, 2.335438],
+      [48.863725, 2.335455],
+      [48.863705, 2.335482],
+      [48.863669, 2.335472],
+      [48.86357, 2.33552],
+      [48.863518, 2.335564],
+      [48.863478, 2.33566],
+      [48.863448, 2.335732],
+      [48.863443, 2.335742],
+      [48.863432, 2.335771],
+      [48.863386, 2.335748],
+      [48.863189, 2.335743],
+      [48.863147, 2.335734],
+      [48.863102, 2.335724],
+      [48.863057, 2.335714],
+      [48.863048, 2.335718],
+      [48.862979, 2.335972],
+      [48.862881, 2.336359],
+      [48.862863, 2.33635],
+      [48.862784, 2.336303],
+      [48.862727, 2.33627],
+      [48.862629, 2.336214],
+      [48.862543, 2.336164],
+      [48.862527, 2.336216],
+      [48.862523, 2.336214],
+      [48.862513, 2.336249],
+      [48.862502, 2.336288],
+      [48.862491, 2.336329],
+      [48.862509, 2.336394],
+    ],
+  },
   trainLeg('par-bouillon', 'par-casa-do-gui', 35, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
   trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [

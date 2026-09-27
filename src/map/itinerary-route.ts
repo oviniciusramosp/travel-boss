@@ -163,7 +163,9 @@ async function expandMultiHop(
   const endPt = { lat: end[0], lng: end[1] };
 
   const [walkIn, walkOut] = await Promise.all([
-    haversineM(from, startPt) < WALK_MIN_M
+    leg.walkInPath?.length && leg.walkInPath.length >= 2
+      ? Promise.resolve(leg.walkInPath)
+      : haversineM(from, startPt) < WALK_MIN_M
       ? Promise.resolve(null as LatLng[] | null)
       : walkPath(from, startPt, opts),
     haversineM(endPt, to) < WALK_MIN_M
@@ -255,7 +257,11 @@ function expandMultiHopSync(
   const start = first.path[0]!;
   const end = last.path[last.path.length - 1]!;
 
-  pushWalkSync(segs, from, { lat: start[0], lng: start[1] }, { ...ends, walkIndex: 0 });
+  if (leg.walkInPath && leg.walkInPath.length >= 2) {
+    segs.push({ mode: 'walk', latlngs: leg.walkInPath, ...ends, walkIndex: 0 });
+  } else {
+    pushWalkSync(segs, from, { lat: start[0], lng: start[1] }, { ...ends, walkIndex: 0 });
+  }
 
   for (let i = 0; i < valid.length; i++) {
     const hop = valid[i]!;

@@ -73,7 +73,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 08:45 [La Maison d'Isabelle](place:par-maison-isabelle) — Croissant premiado (~€1,40), para viagem: não tem onde sentar
 - 09:00 [Shakespeare and Company](place:par-shakespeare)
 - 09:15 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
-  - decisão: 2026-09-27 · Sainte-Chapelle fica de fora por enquanto: €22 por pessoa é caro demais
 - 11:05 [Relógio da Conciergerie](place:par-horloge) — Relógio de 1370 na torre da esquina com o Quai de l'Horloge
 - 11:10 [Place Dauphine](place:par-place-dauphine)
 - 11:20 [Pont Neuf](place:par-pont-neuf) — Travessia para a margem esquerda
