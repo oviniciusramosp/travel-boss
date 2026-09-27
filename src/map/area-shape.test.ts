@@ -15,5 +15,12 @@ describe('drawableRings', () => {
         ],
       }).paths,
     ).toHaveLength(1);
+    expect(
+      drawableRings({
+        kind: 'multipolygon',
+        paths: [[[0, 0], [0, 1], [1, 1]]],
+        lines: [[[0, 0]], [[0, 0], [1, 1]]],
+      }).lines,
+    ).toEqual([[[0, 0], [1, 1]]]);
   });
 });
