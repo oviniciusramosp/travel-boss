@@ -131,6 +131,7 @@ Onda 1 executada por agentes e mesclada em `main` (tsc e 441 testes passando em 
 | C1 | Sonnet | `458cdd5` | `periodWindows` em `day-plan.ts`; a previsão de cada período cobre as paradas dele e o tooltip mostra a janela (`11h–17h`); 5 testes |
 | E2 | Sonnet | `106b43c` | 16 dos 21 lugares sem foto ganharam foto do Commons |
 | E1 | Sonnet | `b196ae7` | 39 dos 40 links abrem o card direto (`mapsUrl` canônico completo, o `data=` encurtado falha em aba nova); 10 pinos movidos |
+| G2 | Fable | ver `git log scripts/check-travel-photos.py` | `parse_photos` agora usa lookahead: 243 chaves com URL e as 354 URLs entram na checagem (antes, 122 e 185). Na rodada completa a 0,4 s o Commons devolveu 429 em 20 URLs, todas carregam devagar: 429 não é foto morta |
 
 Conferido no browser (Dia 1 do Europa): a decisão aparece sob a parada em cinza com o glifo; os tooltips do clima dizem `11h–17h`, `17h–21h` e `21h–24h`, batendo com as paradas e o almoço às 14h30.
 

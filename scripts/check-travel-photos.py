@@ -37,8 +37,10 @@ DELAY_S = 0.4
 def parse_photos(path: Path) -> list[tuple[str, str]]:
     text = path.read_text(encoding="utf-8")
     pairs: list[tuple[str, str]] = []
+    # The trailer is a lookahead: a consuming match would eat the next key's opening
+    # quote and silently drop every other entry. Blank and `//` lines may sit between entries.
     for m in re.finditer(
-        r"'([^']+)':\s*\[([\s\S]*?)\]\s*,\s*(?:\n  '|\n\};)",
+        r"'([^']+)':\s*\[([\s\S]*?)\]\s*,(?=(?:\s*//[^\n]*)*\s*(?:'|\};))",
         text,
     ):
         pid = m.group(1)
