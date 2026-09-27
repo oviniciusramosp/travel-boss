@@ -70,6 +70,7 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 - Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho. Preço (`· €2,55`, antes da nota) só quando é gasto a mais que o passe semanal.
 - Parágrafo sob o dia é narrativa: entra no documento e no export, não vira pino.
 - Comentário: `  - comentário: …` recuado sob uma parada ou nota de lista é um pedido do usuário para aquele ponto, escrito pelo app. Quando ele pedir para ler os comentários, rode `grep -n "comentário:" content/trips/<id>.md`; a parada é o bullet sem recuo logo acima. Aja em cada um e apague a linha dele.
+- Decisão: `  - decisão: <AAAA-MM-DD> · …` sob uma parada ou nota de lista é o que o usuário decidiu ali. Fica: nunca desfaça, mova nem apague o que ela protege sem ele pedir; antes de mexer numa parada, `grep -niE "decis(ão|ao|ion):" content/trips/<id>.md`.
 - Sem comentário HTML, front matter YAML ou HTML cru.
 
 Edite o `.md`. Com `npm run dev`, o save avisa o browser (`tb:trip`) e o roteiro aberto é relido de `/api/trips`. O usuário edita o mesmo arquivo pelo browser enquanto você trabalha, uma linha por save. Use Edit, que troca um trecho do arquivo atual; não use Write num roteiro, porque ele regrava o arquivo inteiro a partir da sua cópia e apaga o que o usuário salvou nesse meio-tempo. Não duplique o roteiro em TypeScript. Coordenadas, avaliações e ranking de hotel ficam em `src/data`; o arquivo da viagem só referencia ids.

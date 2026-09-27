@@ -34,6 +34,8 @@ export type TripStop = {
   line: number;
   /** Indented `comentário:` lines: the user's requests to the LLM. Not exported. */
   comments?: TripLine[];
+  /** Indented `decisão:` lines: what the user settled here. They stay, and the LLM never undoes them. Not exported. */
+  decisions?: TripLine[];
 };
 
 /** One line of the file: its text and 1-based number. */
@@ -70,6 +72,7 @@ export type TripErrorCode =
   | 'via-empty'
   | 'via-duplicate'
   | 'comment-no-stop'
+  | 'decision-no-stop'
   | 'stop-outside-day'
   | 'line-outside-day'
   | 'no-title';
@@ -94,6 +97,7 @@ const TIME_PREFIX = /^(\d{2}:\d{2})\s+/;
 const VIA_BULLET = /^[ \t]+-[ \t]+via:[ \t]*(.*)$/i;
 const CITY_VIA = /^via:[ \t]*(.*)$/i;
 const COMMENT_BULLET = /^[ \t]+-[ \t]+(?:comentário|comentario|comment):[ \t]*(.*)$/i;
+const DECISION_BULLET = /^[ \t]+-[ \t]+(?:decisão|decisao|decision):[ \t]*(.*)$/i;
 // `3h10` is glued. `1 h 30 min` needs the `min`. `1 h 2 h` stays two spans.
 const DURATION_TOKEN =
   /(?<![a-z0-9])(?:(\d+)\s*h\s*(\d{1,2})\s*min|(\d+)h(\d{1,2})|(\d+)\s?(min|h))(?![a-z0-9])/gi;
@@ -351,14 +355,16 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       continue;
     }
 
+    // A comment asks the LLM for something; a decision is what the user settled. Both hang on the item above.
     const comment = COMMENT_BULLET.exec(line);
-    if (comment) {
+    const aside = comment ?? DECISION_BULLET.exec(line);
+    if (aside) {
       const stop = day?.stops[day.stops.length - 1];
-      const tail = (comment[1] ?? '').trim();
+      const tail = (aside[1] ?? '').trim();
       const entry = { text: hard ? tail.slice(0, -1).trimEnd() : tail, line: lineNo };
-      if (!stop) reject(errors, lineNo, 'comment-no-stop');
+      if (!stop) reject(errors, lineNo, comment ? 'comment-no-stop' : 'decision-no-stop');
       else if (entry.text) {
-        (stop.comments ??= []).push(entry);
+        (comment ? (stop.comments ??= []) : (stop.decisions ??= [])).push(entry);
         if (hard) carry = (more) => (entry.text += `\n${more}`);
       }
       continue;

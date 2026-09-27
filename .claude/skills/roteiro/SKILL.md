@@ -28,6 +28,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 - Não acrescente notas, dicas, alternativas ("Mais barato: …"), planos B ou avisos que o usuário não pediu.
 - Texto que o usuário mandou entra como ele escreveu. Se o app depende de uma palavra que ele tirou (ver §4), avise em vez de recolocá-la escondido.
 - Não mova, crie nem remova parada fora do pedido sem dizer. Se uma mudança pedida arrasta outra (horário de saída, orçamento, período, pino), diga qual mudou e por quê.
+- Linha `decisão:` é decisão do usuário: nunca desfaça, mova nem apague o que ela protege sem ele pedir. Antes de mover, trocar ou remover uma parada, leia as decisões dela (`grep -niE "decis(ão|ao|ion):" content/trips/<id>.md`). Quando o usuário decidir algo no chat (exceção de orçamento, manter um lugar), grave `- decisão: <AAAA-MM-DD> · <decisão>` sob a parada.
 - Não mude preço, horário ou nota do Google no catálogo sem fonte consultada no dia.
 
 ## 3. Antes de editar

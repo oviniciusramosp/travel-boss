@@ -1186,8 +1186,19 @@ export function mountTrip(
       if (note && leg?.note && leg.line) editNote(note, 'via', leg.note, lineAt(leg.line), slug);
     };
 
-    /** The stop's comments go in `host`. Returns the button that adds one. */
+    /** The stop's decisions and comments go in `host`. Returns the button that adds a comment. */
     const comments = (host: HTMLElement, stop: TripStop, slug: string): HTMLButtonElement => {
+      // What the user settled: always shown, above the comments, with no delete button.
+      const decided = el('ul', 'tb-decisions');
+      for (const decision of stop.decisions ?? []) {
+        const item = el('li', 'tb-decision');
+        const body = el('span', 'tb-decision__text');
+        item.append(icon('verified', { size: 16 }), body);
+        decided.append(item);
+        editNote(body, 'decision', decision.text, lineAt(decision.line), slug, {
+          label: pickLocale(locale, { en: 'Decision', 'pt-BR': 'Decisão' }),
+        });
+      }
       const list = el('ul', 'tb-comments');
       const entry = (line: SeenLine | null, text: string) => {
         const item = el('li', 'tb-comment');
@@ -1211,10 +1222,10 @@ export function mountTrip(
         return editor;
       };
       for (const comment of stop.comments ?? []) entry(lineAt(comment.line), comment.text);
-      // Before the actions, so Tab reaches the comments first.
+      // Before the actions, so Tab reaches the decisions and comments first.
       const actions = host.querySelector(':scope > .tb-row__actions');
-      if (actions) actions.before(list);
-      else host.append(list);
+      if (actions) actions.before(decided, list);
+      else host.append(decided, list);
       const add = iconButton({
         icon: 'add_comment',
         label: pickLocale(locale, { en: 'Add comment', 'pt-BR': 'Adicionar comentário' }),

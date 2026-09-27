@@ -96,7 +96,17 @@ dates: 2026-04-06 → 2026-04-09
   - Keyword `comentário:`, `comentario:` or `comment:`, any case, indented like `via:`. A top-level `- comentário:` is a list note. An empty one is ignored. One before the first stop of a day is an error.
   - Not a stop, not a pin, not exported. The UI shows it under its item.
   - The LLM that acts on a comment deletes its line.
-- A stop note, a list note, a paragraph or a comment can break onto the next line (a `via:` note stays on its line): end the line with `\` (a Markdown hard break) and go on in the next one, indented under the bullet. The app writes this for Shift+Return.
+- A stop or a list note may also have indented `decisão:` sub-bullets. Each one is something the user decided about that item. Unlike a comment, it stays: the LLM never undoes, moves or deletes what it protects unless the user asks.
+
+  ```markdown
+  - 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa)
+    - via: metrô 9 · 20 min
+    - decisão: 2026-09-27 · manter o Margaux mesmo acima do orçamento do dia
+  ```
+
+  - Keyword `decisão:`, `decisao:` or `decision:`, any case, indented like `via:`. The date it was decided goes first (`2026-09-27 · …`); the parser does not check it. More than one per item is fine. A top-level `- decisão:` is a list note. An empty one is ignored. One before the first stop of a day is an error (`decision-no-stop`).
+  - Not a stop, not a pin, not exported. The UI shows it under its item, above the comments, always visible and with no delete button.
+- A stop note, a list note, a paragraph, a comment or a decision can break onto the next line (a `via:` note stays on its line): end the line with `\` (a Markdown hard break) and go on in the next one, indented under the bullet. The app writes this for Shift+Return.
 
   ```markdown
   - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2.\
@@ -107,7 +117,7 @@ dates: 2026-04-06 → 2026-04-09
   ```
 
   - The next line goes on the note whatever it starts with, even `- `, unless it is a heading. The line after one without `\` does not.
-  - Indent the rest under the text: 2 spaces for a stop or list note, 4 for a comment, none for a paragraph.
+  - Indent the rest under the text: 2 spaces for a stop or list note, 4 for a comment or a decision, none for a paragraph.
   - A blank line ends the note. Export writes the breaks back the same way, and as `<br>` in the HTML.
 - Paragraphs under a day are narrative. They render (including inline marks) and they export. They are not stops.
 - Do not use HTML comments, YAML front matter, or raw HTML.
@@ -119,7 +129,7 @@ Export rewrites the same document for Apple Notes and Notion:
 - H1, H2, H3 stay headings.
 - Bullets stay bullets. An indented `via:` stays nested under its stop. HTML export puts a `<ul>` inside that stop's `<li>` so Apple Notes and Notion keep the nesting. The `via:` text is copied as written; it is not rewritten from the parsed mode or minutes.
 - `**bold**` and `*italic*` stay.
-- `comentário:` lines are left out.
+- `comentário:` and `decisão:` lines are left out.
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.
 - `dates:` becomes a single line under the city heading.
@@ -129,7 +139,7 @@ Export rewrites the same document for Apple Notes and Notion:
 
 ## Editing from the app
 
-With `npm run dev` the app writes the file too: a stop note, a list note, a paragraph, a comment or the note of a `via:` (after ` — `), one line per save (`PATCH /api/trips/<id>`). A save lands only where the file still has the line the app saw, so the user and an LLM can change different lines at the same time. An LLM edits the current file in place. It never rewrites the whole file from an older copy.
+With `npm run dev` the app writes the file too: a stop note, a list note, a paragraph, a comment, a decision or the note of a `via:` (after ` — `), one line per save (`PATCH /api/trips/<id>`). A save lands only where the file still has the line the app saw, so the user and an LLM can change different lines at the same time. An LLM edits the current file in place. It never rewrites the whole file from an older copy.
 
 ## Multi-city
 
