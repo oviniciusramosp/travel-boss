@@ -366,6 +366,15 @@
   color: var(--color-ticket);
 }
 
+/* Food past the city's `budget:` target: bold, and a warning glyph in the text color, not a new one. */
+.tb-budget-chip.is-over {
+  font-weight: var(--font-weight-semibold);
+}
+
+.tb-budget-chip.is-over .tb-budget-chip__warn {
+  color: inherit;
+}
+
 /* The day's receipt (`openDialog`): each line of the budget per kind, then the total. */
 .tb-receipt {
   width: min(360px, calc(100vw - 2 * var(--spacing-16)));

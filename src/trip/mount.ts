@@ -1373,6 +1373,8 @@ export function mountTrip(
       const budget = dateBudget(placesHere, fares, outside);
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
+      // A date across two cities takes the food target of the city of its first stop.
+      const firstStop = rows.find((row) => !row.dated.day.stops[row.stopIndex]?.listNote);
       body.append(
         dateBudgetCards(
           budget,
@@ -1382,6 +1384,7 @@ export function mountTrip(
           },
           formatDayTitle(date, locale),
           locale,
+          firstStop?.dated.city.budget?.food,
         ),
       );
       // One list per period. A row's list is lists[rowIndex].
