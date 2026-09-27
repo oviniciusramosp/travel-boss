@@ -1,7 +1,7 @@
 # Graph Report - travel-boss  (2026-09-27)
 
 ## Corpus Check
-- 223 files · ~364,054 words
+- 223 files · ~364,068 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5cdd8676`
+- Built from commit: `1b50d9dd`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -187,8 +187,8 @@ Cohesion: 0.10
 Nodes (29): ref_node_crypto, accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing() (+21 more)
 
 ### Community 14 - "camera.ts"
-Cohesion: 0.30
-Nodes (12): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset(), pinIncludedInCityFit() (+4 more)
+Cohesion: 0.32
+Nodes (11): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), pinIncludedInCityFit(), pointsForFit() (+3 more)
 
 ### Community 15 - "itinerary-route.ts"
 Cohesion: 0.15
@@ -371,8 +371,8 @@ Cohesion: 0.05
 Nodes (69): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+61 more)
 
 ### Community 63 - "map.ts"
-Cohesion: 0.19
-Nodes (17): bindBrightBasemap(), Box, coveredInsets(), Insets, mergeInsets(), KINDS, mountMap(), paintRouteFocus() (+9 more)
+Cohesion: 0.18
+Nodes (18): bindBrightBasemap(), paddedCenterOffset(), Box, coveredInsets(), Insets, mergeInsets(), KINDS, mountMap() (+10 more)
 
 ### Community 64 - "index.ts"
 Cohesion: 0.12
