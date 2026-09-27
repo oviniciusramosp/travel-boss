@@ -638,6 +638,15 @@ export function mountMap(host: HTMLElement): MapHandle {
       });
     },
 
+    selectSubPoint(index) {
+      subPointMarks.forEach((dot, at) => dot.getElement()?.classList.toggle('is-active', at === index));
+      const dot = index == null ? undefined : subPointMarks[index];
+      if (!dot) return;
+      dot.setZIndexOffset(1000);
+      const { lat, lng } = dot.getLatLng();
+      if (!this.inView(lat, lng)) moveCamera(lat, lng, leafletMap.getZoom());
+    },
+
     setRadius(ring: MapRadius) {
       if (radiusLayer) {
         radiusLayer.remove();

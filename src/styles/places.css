@@ -1955,13 +1955,40 @@ a.tb-route__google[hidden] {
   padding-block: var(--spacing-4);
 }
 
-/* Photo of a sub-point, above its name. */
+.tb-panel__subpoint > details > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  cursor: pointer;
+  list-style: none;
+}
+
+.tb-panel__subpoint > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tb-panel__subpoint > details > summary .material-symbols-rounded {
+  margin-left: auto;
+  color: var(--color-mid-gray);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.tb-panel__subpoint > details[open] > summary .material-symbols-rounded {
+  transform: rotate(180deg);
+}
+
+.tb-panel__subpoint > details > summary:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Photo of a sub-point, under its name when opened. */
 .tb-panel__subpoint-photo {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  margin-bottom: var(--spacing-4);
+  margin-top: var(--spacing-4);
   border-radius: var(--r-min);
   background: var(--color-surface-alt);
 }

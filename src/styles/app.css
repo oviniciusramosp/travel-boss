@@ -1029,8 +1029,15 @@ p.tb-meta {
   transition: transform var(--dur-fast) var(--ease-out);
 }
 
-.tb-subpoint-wrap.is-hover .tb-subpoint-dot--n {
+.tb-subpoint-wrap.is-hover .tb-subpoint-dot--n,
+.tb-subpoint-wrap.is-active .tb-subpoint-dot--n {
   transform: scale(1.5);
+}
+
+/* Opened in the card: ink ring so it stands out from the hovered one. */
+.tb-subpoint-wrap.is-active .tb-subpoint-dot--n {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 1px;
 }
 
 .tb-map .tb-map-controls .tb-icon-btn[aria-pressed='true'] {
@@ -1038,12 +1045,41 @@ p.tb-meta {
   color: var(--color-on-ink);
 }
 
-/* Water and restroom stars keep the glyph readable at every zoom; near the walk they are the big pin. */
-.tb-map .leaflet-container .leaflet-marker-icon.tb-amenity-wrap .tb-pin {
-  --pin-scale: calc(22 / 28);
+/* Water and restroom pins: the glyph is the shape, as the star is for tourist places. */
+.leaflet-marker-icon.tb-amenity-wrap {
+  background: none;
+  border: 0;
 }
 
-.tb-map .leaflet-container .leaflet-marker-icon.tb-amenity-wrap .tb-pin.is-featured,
-.tb-map .leaflet-container .leaflet-marker-icon.tb-amenity-wrap:hover .tb-pin {
-  --pin-scale: 1;
+.tb-amenity {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--color-water);
+  filter: drop-shadow(0 0 1px var(--color-paper)) drop-shadow(0 1px 2px color-mix(in srgb, var(--color-ink) 35%, transparent));
+}
+
+.tb-amenity.is-toilet {
+  color: var(--color-restroom);
+}
+
+.tb-amenity .material-symbols-rounded {
+  font-size: var(--icon-pin);
+  transform: scale(var(--amenity-scale));
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.tb-amenity.is-near .material-symbols-rounded {
+  transform: scale(var(--amenity-scale-near));
+}
+
+/* Hover as the other pins: grows to the 28px badge with a glow in its own color. */
+.leaflet-marker-icon.tb-amenity-wrap:hover .tb-amenity .material-symbols-rounded {
+  transform: scale(1);
+}
+
+.leaflet-marker-icon.tb-amenity-wrap:hover .tb-amenity {
+  filter: drop-shadow(0 0 1px var(--color-paper)) drop-shadow(0 0 1px var(--color-paper))
+    drop-shadow(0 0 4px color-mix(in srgb, currentColor 55%, transparent));
 }

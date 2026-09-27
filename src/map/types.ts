@@ -125,6 +125,8 @@ export type MapHandle = {
   setSubPoints(points: readonly { lat: number; lng: number; label: string; color?: string }[]): void;
   /** Enlarge one sub-point from `setSubPoints`. `null` clears. Does not move the camera. */
   hoverSubPoint(index: number | null): void;
+  /** Keep one sub-point highlighted (a click in the card). Pans only if it is off screen. `null` clears. */
+  selectSubPoint(index: number | null): void;
   /** Panel and other chrome. `fit` and `select` center in the free area. */
   setPadding(padding: MapPadding): void;
 };
