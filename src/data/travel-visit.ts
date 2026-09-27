@@ -1418,7 +1418,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Doces esculturais de fruta (€18) esgotam. O Click & Collect pula a fila de 1–2 h: pedido até 15h fica pronto em 24 h, retirada 9h–19h. O salão de chá anunciou reforma a partir de 21 de setembro.',
     ),
   }),
-  'par-eclair-genie': cafeVisit(6, 15),
+  // One éclair: €4–7 in 2026 (parisatoutprix.fr, tripadvisor, consulted 2026-09-27).
+  'par-eclair-genie': cafeVisit(5, 8),
   'par-maison-isabelle': cafeVisit(4, 10, {
     tips: L(
       'Often a queue — go early if you can. Award-winning croissants.',
