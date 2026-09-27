@@ -39,7 +39,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
 - 10:00 [Louvre](place:par-louvre) — **3 horas**, com ingresso das 10h
   - via: a pé pelo Arco do Triunfo do Carrousel · 15 min — Seguir pelo jardim e pelas estátuas de Maillol antes de sair em direção ao Carrefour Express (Saint-Honoré)
-  - decisão: 2026-09-27 · Ir ao Carrefour pelo Arco do Triunfo do Carrousel, priorizando o caminho por dentro, mais bonito, mesmo sendo menos direto
 - +3 km — percurso dentro do museu, das salas Daru e Mollien ao Oriente Próximo (estimativa)
 - 13:15 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Pão, queijo, fruta e bebida (~€6–8), no caminho para as Tulherias
 - 13:40 [Jardim das Tulherias](place:par-tuileries) — Piquenique
@@ -48,7 +47,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:35 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
   - via: a pé pela Pont Alexandre III · 17 min
 - 15:55 [Invalides](place:par-invalides) — Por fora: a cúpula dourada e a esplanada, do outro lado da ponte; volta pelo mesmo caminho até a Champs-Élysées
-  - decisão: 2026-09-27 · Voltar pela Ponte Alexandre III e pelos Petit e Grand Palais, pelo mesmo caminho da ida, antes de retomar a Champs-Élysées
 - 16:40 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km), passando na frente das vitrines
 - 17:15 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
   - via: RER A de Charles de Gaulle–Étoile até Auber · 12 min
