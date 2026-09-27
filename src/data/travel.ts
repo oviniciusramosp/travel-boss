@@ -1649,6 +1649,13 @@ export const localTravelCities: TravelCity[] = [
         lat: 48.8698,
         lng: 2.3078,
         // Fallback; precise full-avenue polyline is in travel-areas-osm.ts
+        // Storefronts to pass on the way up, in walking order (OSM, 2026-09-27). The Disney Store at n° 44 closed in June 2023.
+        subPoints: [
+          { name: { en: 'Sephora (n° 72)', 'pt-BR': 'Sephora (n° 72)' }, lat: 48.871025, lng: 2.304927 },
+          { name: { en: 'Nike (n° 79)', 'pt-BR': 'Nike (n° 79)' }, lat: 48.871026, lng: 2.302439 },
+          { name: { en: 'Louis Vuitton (n° 101)', 'pt-BR': 'Louis Vuitton (n° 101)' }, lat: 48.871642, lng: 2.300526 },
+          { name: { en: 'Cartier (n° 154)', 'pt-BR': 'Cartier (n° 154)' }, lat: 48.87341, lng: 2.297436 },
+        ],
         area: {
           kind: 'polyline',
           path: [
@@ -2057,6 +2064,21 @@ export const localTravelCities: TravelCity[] = [
         address: '27 Rue Saint-André des Arts, 75006 Paris',
         mapsQuery: 'Crêperie des Arts Paris',
         mapsUrl: 'https://maps.app.goo.gl/rsrCWAkhMpS3nQDZ9',
+      },
+      {
+        id: 'par-fontaine-guy-lartigue',
+        name: { en: 'Fontaine Guy Lartigue', 'pt-BR': 'Fontaine Guy Lartigue' },
+        category: 'photo',
+        description: {
+          en: 'Red copper basin by the sculptor Guy Lartigue on Place Georges-Moustaki, where Rue Mouffetard ends by the Saint-Médard church.',
+          'pt-BR': 'Bacia de cobre vermelho do escultor Guy Lartigue na Place Georges-Moustaki, onde a Rue Mouffetard termina, ao lado da igreja Saint-Médard.',
+        },
+        googleRating: 4.3,
+        // OSM node 246512365.
+        lat: 48.83933,
+        lng: 2.350075,
+        address: 'Place Georges-Moustaki, 53 Rue Censier, 75005 Paris',
+        mapsQuery: 'Fontaine Guy Lartigue Paris',
       },
       {
         id: 'par-auptitgrec',

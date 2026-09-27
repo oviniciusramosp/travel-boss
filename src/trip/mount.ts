@@ -59,7 +59,7 @@ import {
 } from './route';
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
-import { extraWalkMeters, formatWalk, walkedMeters } from './walk-distance';
+import { extraWalkMeters, formatWalk, isExtraWalkNote, walkedMeters } from './walk-distance';
 import { attachSubPointNotes, stripNoteTitle, walkOrder, type SubPointNote } from './subpoints';
 import { aiBadge } from '../ui/ai-badge';
 import type { RouteDeps } from './route';
@@ -1667,13 +1667,16 @@ export function mountTrip(
         const stop = entry.dated.day.stops[entry.stopIndex];
         if (!stop || stop.listNote || !stop.placeId) return;
         const place = placeById(entry.dated.city.slug, stop.placeId);
-        if (!place?.subPoints?.length) return;
+        if (!place) return;
         const { attached, loose } = notesUnderStop(rows, rowIndex, place);
+        // Under a park, every note goes to its card. Under any other place, only a `+N km` note does.
+        const toCard = place.subPoints?.length ? loose : loose.filter((note) => isExtraWalkNote(note.text));
         if (attached.length) subNotesByRow.set(rowIndex, attached.map(({ index: _index, ...note }) => note));
-        // The other notes under the park go to its card too: the timeline keeps only the stops.
-        if (loose.length) parkNotesByRow.set(rowIndex, loose.map(({ index: _index, ...note }) => note));
-        for (const note of [...attached, ...loose]) attachedRows.add(note.index);
-        subNotesByPlace.set(place.id, { sub: subNotesByRow.get(rowIndex) ?? [], park: parkNotesByRow.get(rowIndex) ?? [] });
+        if (toCard.length) parkNotesByRow.set(rowIndex, toCard.map(({ index: _index, ...note }) => note));
+        for (const note of [...attached, ...toCard]) attachedRows.add(note.index);
+        if (attached.length || toCard.length) {
+          subNotesByPlace.set(place.id, { sub: subNotesByRow.get(rowIndex) ?? [], park: parkNotesByRow.get(rowIndex) ?? [] });
+        }
       });
       rows.forEach((entry, rowIndex) => {
         const city = entry.dated.city;

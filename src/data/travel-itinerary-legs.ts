@@ -7,9 +7,11 @@ import type { LString } from './travel';
 import {
   getTransitLine,
   haversineM,
+  metro10,
   metro14,
   metro2,
   metro4,
+  metro7,
   metro9,
   rerA,
   rerB,
@@ -971,13 +973,15 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   // 5/10: Louvre, Champs-Élysées, then the Opéra shops; Chartier is 6 min from the RER E at Haussmann
   trainLeg('par-casa-do-gui', 'par-bohemia', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
-  trainLeg('par-arc-triomphe', 'par-opera', 10, [ride(rerA, 'etoile', 'auber')]),
+  trainLeg('par-arc-triomphe', 'par-eclair-genie', 12, [ride(rerA, 'etoile', 'auber')]),
   trainLeg('par-bouillon', 'par-casa-do-gui', 35, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
   trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
     ride(rerE, 'noisy-le-sec', 'magenta'),
     ride(rerB, 'gare-nord', 'saint-michel', GARE_DU_NORD_MAGENTA_MIN),
   ]),
+  // From the fountain at the foot of Rue Mouffetard to the gardens: two stops on the 7, three on the 10, 6 min on foot from Odéon
+  trainLeg('par-fontaine-guy-lartigue', 'par-luxembourg', 25, [ride(metro7, 'censier-daubenton', 'jussieu'), ride(metro10, 'jussieu', 'odeon')]),
   trainLeg('par-champ-mars', 'par-casa-do-gui', 60, [
     rerCToPorteMaillot,
     ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),

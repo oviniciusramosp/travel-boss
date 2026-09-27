@@ -29,6 +29,11 @@ export function walkedMeters(
 /** A list note that starts with `+3 km`, `+1,5 km` or `+800 m` adds that much to the day (queues, a museum's corridors). */
 const EXTRA = /^\+\s*(\d+(?:[.,]\d+)?)\s*(km|m)\b/i;
 
+/** A note that starts with `+3 km` or `+800 m`. */
+export function isExtraWalkNote(text: string): boolean {
+  return EXTRA.test(text.trim());
+}
+
 export function extraWalkMeters(texts: readonly string[]): number {
   return texts.reduce((sum, text) => {
     const match = EXTRA.exec(text.trim());

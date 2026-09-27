@@ -306,6 +306,31 @@ export const metro14: TransitLine = {
   ],
 };
 
+/** Metro Line 7 — Censier–Daubenton → Jussieu (the trip's stretch, OSM 2026-09-27) */
+export const metro7: TransitLine = {
+  id: 'm7',
+  name: 'Métro 7',
+  color: '#F3A4BA',
+  stations: [
+    st('censier-daubenton', 'Censier–Daubenton', 48.840647, 2.351933),
+    st('place-monge', 'Place Monge', 48.842905, 2.352277),
+    st('jussieu', 'Jussieu', 48.845963, 2.354801),
+  ],
+};
+
+/** Metro Line 10 — Jussieu → Odéon (the trip's stretch, OSM 2026-09-27) */
+export const metro10: TransitLine = {
+  id: 'm10',
+  name: 'Métro 10',
+  color: '#C9910D',
+  stations: [
+    st('jussieu', 'Jussieu', 48.845963, 2.354801),
+    st('maubert-mutualite', 'Maubert–Mutualité', 48.850065, 2.34843),
+    st('cluny-la-sorbonne', 'Cluny–La Sorbonne', 48.851094, 2.344159),
+    st('odeon', 'Odéon', 48.852304, 2.339371),
+  ],
+};
+
 /** Metro Line 5 — République → Gare du Nord (the trip's stretch) */
 export const metro5: TransitLine = {
   id: 'm5',
@@ -441,7 +466,9 @@ export const transitLinesById: Record<string, TransitLine> = {
   m14: metro14,
   'rer-c': rerC,
   m5: metro5,
+  m7: metro7,
   m9: metro9,
+  m10: metro10,
   'rer-a': rerA,
   'rer-b': rerB,
   'rer-e': rerE,
