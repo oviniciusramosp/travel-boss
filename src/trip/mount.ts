@@ -30,6 +30,7 @@ import {
   pastPeriods,
   periodSections,
   seenFromOutside,
+  withSubPointPlaces,
   zonedStamp,
   type Period,
   type Rail,
@@ -45,14 +46,12 @@ import {
 } from './note-edit';
 import {
   dateStops,
-  gatedHops,
   planHop,
   previewHop,
   resolveHopSegments,
   timelineLegs,
   transferLegs,
   type DateStop,
-  type GroupedPoint,
   type RouteHop,
 } from './route';
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
@@ -131,15 +130,9 @@ function placeById(citySlug: string, placeId: string): TravelPlace | undefined {
 }
 
 /** Filled category dot. The glyph stays solid, same as a map pin. */
-function stopPin(place: TravelPlace, parent?: TravelPlace): HTMLSpanElement {
+function stopPin(place: TravelPlace): HTMLSpanElement {
   const lead = document.createElement('span');
   lead.className = 'tb-stop-pin';
-  if (parent) {
-    // Attraction inside its park: a small dot in the park's color, like a sub-point on the map.
-    lead.classList.add('tb-stop-pin--sub');
-    lead.style.setProperty('--pin-color', placeCategoryMeta[parent.category].color);
-    return lead;
-  }
   lead.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
   if (circleInk(placeCategoryMeta[place.category].color) === 'on-ink') lead.classList.add('is-on-ink');
   const markup = document.createElement('template');
@@ -476,7 +469,7 @@ export function mountTrip(
     const date = routedDate();
     if (!trip || !date) return [];
     const hops: RouteHop[] = [];
-    let previous: (GroupedPoint & { leg?: TripLeg }) | null = null;
+    let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
     for (const { row, place, on } of datePlaces(trip, date)) {
       // An off period breaks the chain, so the route never bridges it.
       if (!on) {
@@ -488,11 +481,12 @@ export function mountTrip(
       const first = subs[0];
       const last = subs.at(-1);
       const point = { id: place.id, lat: first?.lat ?? place.lat, lng: first?.lng ?? place.lng };
-      const parent = place.parentId ? placeById(row.dated.city.slug, place.parentId) : undefined;
-      const group = parent?.id ?? place.id;
       if (previous) {
-        const gate = parent ? { id: parent.id, lat: parent.lat, lng: parent.lng } : undefined;
-        hops.push(...gatedHops(previous, { ...point, group, ...(gate ? { gate } : {}) }, previous.leg));
+        hops.push({
+          from: { id: previous.id, lat: previous.lat, lng: previous.lng },
+          to: point,
+          ...(previous.leg ? { via: previous.leg } : {}),
+        });
       }
       if (first && last && subs.length > 1) {
         const locale = shell.locale();
@@ -512,8 +506,6 @@ export function mountTrip(
         id: place.id,
         lat: last?.lat ?? place.lat,
         lng: last?.lng ?? place.lng,
-        group,
-        ...(parent ? { gate: { id: parent.id, lat: parent.lat, lng: parent.lng } } : {}),
         ...(row.depart ? { leg: row.depart } : {}),
       };
     }
@@ -529,14 +521,9 @@ export function mountTrip(
     const locale = shell.locale();
     const date = routedDate();
     const numbers = new Map<string, number>();
-    // Attractions of the day draw as sub-points; their park takes the number where the first one sits.
-    const subs = new Map<string, string>();
     if (date) {
       for (const { place, on } of datePlaces(trip, date)) {
-        if (!on) continue;
-        const owner = place.parentId ?? place.id;
-        if (place.parentId) subs.set(place.id, place.parentId);
-        if (!numbers.has(owner)) numbers.set(owner, numbers.size + 1);
+        if (on && !numbers.has(place.id)) numbers.set(place.id, numbers.size + 1);
       }
     }
     const pins: MapPin[] = [];
@@ -549,15 +536,14 @@ export function mountTrip(
         if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
         seen.add(place.id);
         const number = numbers.get(place.id);
-        const parent = subs.has(place.id) ? placeById(city.slug, subs.get(place.id)!) : undefined;
         pins.push({
           id: place.id,
           lat: place.lat,
           lng: place.lng,
           label: pickLocale(locale, place.name),
-          color: placeCategoryMeta[(parent ?? place).category].color,
+          color: placeCategoryMeta[place.category].color,
           kind: 'place',
-          ...(parent ? { sub: true } : number ? { number } : {}),
+          ...(number ? { number } : {}),
         });
       }
     }
@@ -1298,7 +1284,11 @@ export function mountTrip(
       details.open = !firstPaint && openKeys.has(date);
       const daysHere = section.cities.flatMap((group) => group.days);
       const { rows, periods, past } = datePlan(daysHere, date);
-      const placesHere = datePlaces(trip, date).map(({ place }) => place);
+      // A park's rides and restaurants (its sub-points) count as the park's own spend.
+      const placesHere = withSubPointPlaces(
+        datePlaces(trip, date).map(({ place }) => place),
+        (id) => daysHere.map((dated) => placeById(dated.city.slug, id)).find(Boolean),
+      );
       const names: string[] = [];
       for (const group of section.cities) {
         const name = cityDisplayName(group.city, locale);
@@ -1412,6 +1402,13 @@ export function mountTrip(
         mode: 'none',
         color: null,
       };
+      // A stop's legs and its open slot wait for the next stop, so the notes after the stop
+      // (a park's rides at their times) come first, in the order of the day.
+      let pendingHop: (() => void) | null = null;
+      const flushHop = () => {
+        pendingHop?.();
+        pendingHop = null;
+      };
       rows.forEach((entry, rowIndex) => {
         const city = entry.dated.city;
         const day = entry.dated.day;
@@ -1482,7 +1479,7 @@ export function mountTrip(
         const placeId = stop.placeId;
         const item = row({
           time: stop.time,
-          lead: place ? stopPin(place, place.parentId ? placeById(city.slug, place.parentId) : undefined) : undefined,
+          lead: place ? stopPin(place) : undefined,
           title: missingPlace ? (placeId ?? stop.label) : stop.label,
           sub: missingPlace ? authored || undefined : undefined,
           tip: false,
@@ -1518,10 +1515,15 @@ export function mountTrip(
           editNote(note, 'stop', stop.note, lineAt(stop.line), city.slug);
           item.querySelector('.tb-row__main')?.after(note);
         }
-        const cost = place ? stopCosts.get(place.id) : undefined;
-        if (cost) {
-          stopCosts.delete(cost.id);
-          item.append(stopCostEl(cost, locale));
+        // A park's chip adds what its sub-points cost (the restaurants inside it).
+        const costs = (place ? [place.id, ...(place.subPoints ?? []).map((sub) => sub.placeId)] : []).flatMap((id) => {
+          const line = id ? stopCosts.get(id) : undefined;
+          if (line) stopCosts.delete(line.id);
+          return line ? [line] : [];
+        });
+        if (place && costs.length) {
+          const sum = (kind: 'food' | 'ticket') => costs.reduce((total, line) => total + line[kind], 0);
+          item.append(stopCostEl({ id: place.id, food: sum('food'), ticket: sum('ticket') }, locale));
         }
         if (place?.subPoints?.length && !missingPlace) {
           const inside = el('span', 'tb-row__subpoints', place.subPoints.map((sub) => pickLocale(locale, sub.name)).join(' → '));
@@ -1550,11 +1552,14 @@ export function mountTrip(
         const nextStop = nextRow ? nextRow.dated.day.stops[nextRow.stopIndex] : undefined;
         const nextPlace =
           nextRow && nextStop?.placeId ? placeById(nextRow.dated.city.slug, nextStop.placeId) : undefined;
+        // Like the map: leave a place from its last sub-point, reach the next at its first.
+        const exit = place?.subPoints?.at(-1) ?? place;
+        const entryPoint = nextPlace?.subPoints?.[0] ?? nextPlace;
         const routeHop =
-          place && nextPlace
+          place && nextPlace && exit && entryPoint
             ? {
-                from: { id: place.id, lat: place.lat, lng: place.lng },
-                to: { id: nextPlace.id, lat: nextPlace.lat, lng: nextPlace.lng },
+                from: { id: place.id, lat: exit.lat, lng: exit.lng },
+                to: { id: nextPlace.id, lat: entryPoint.lat, lng: entryPoint.lng },
                 ...(entry.depart ? { via: entry.depart } : {}),
               }
             : null;
@@ -1562,9 +1567,9 @@ export function mountTrip(
         // Arriving and leaving the same place (the rest at home) is no walk.
         const samePlace = place != null && nextPlace != null && place.id === nextPlace.id;
         let legs = routeHop ? transferLegs(routeHop) : entry.depart ? [entry.depart] : [];
-        if (legs.length === 0 && drawn && place && nextPlace && !samePlace) {
+        if (legs.length === 0 && drawn && routeHop && place && nextPlace && !samePlace) {
           const walk: ItineraryLegDef = { from: place.id, to: nextPlace.id, mode: 'walk' };
-          legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, place, nextPlace) }];
+          legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, routeHop.from, routeHop.to) }];
         }
         legs = timelineLegs(legs);
         const rails = legs.map((leg) => {
@@ -1585,11 +1590,13 @@ export function mountTrip(
         const hopList = crosses ? lists[nextIndex]! : lists[rowIndex]!;
         item.dataset.railAbove = railAbove.mode;
         item.dataset.railBelow = hopPlan?.depart.mode ?? 'none';
-        item.classList.toggle('is-period-end', crosses && hopPlan != null);
+        const notesAfter = rows.some((_, index) => index > rowIndex && index < nextIndex && lists[index] === lists[rowIndex]);
+        item.classList.toggle('is-period-end', crosses && hopPlan != null && !notesAfter);
         if (railAbove.color) item.style.setProperty('--rail-above', railAbove.color);
         if (hopPlan) item.style.setProperty('--rail-below', hopPlan.depart.color);
+        flushHop();
         lists[rowIndex]!.append(item);
-        rails.forEach((rail, index) => {
+        const appendHop = () => rails.forEach((rail, index) => {
           const transfer = transferRow(legs[index]!, locale);
           if (legs[index] === entry.depart) editLegNote(transfer, entry.depart, city.slug);
           transfer.classList.add('tb-timeline__hop');
@@ -1612,10 +1619,14 @@ export function mountTrip(
           legMin: legs.reduce((sum, leg) => sum + (leg.durationMin ?? 0), 0),
           samePlace,
         });
-        // At the end of the stop's period; inside a period, just before the next stop, on the rail.
-        if (open) (crosses ? lists[rowIndex]! : hopList).append(openSlotRow(locale, crosses ? null : (hopPlan?.arrive ?? null)));
+        pendingHop = () => {
+          appendHop();
+          // At the end of the stop's period; inside a period, just before the next stop, on the rail.
+          if (open) (crosses ? lists[rowIndex]! : hopList).append(openSlotRow(locale, crosses ? null : (hopPlan?.arrive ?? null)));
+        };
         railAbove = hopPlan?.arrive ?? { mode: 'none', color: null };
       });
+      flushHop();
       const bridged = new Set(
         rows.flatMap((row) => (row.depart && row.depart === row.dated.city.leg ? [row.dated.city] : [])),
       );
