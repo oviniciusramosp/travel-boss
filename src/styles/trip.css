@@ -268,6 +268,13 @@
   gap: var(--inset-group);
 }
 
+/* Route on the map: the button takes the walking route's blue. */
+.tb-date__actions .tb-icon-btn[data-day-action='route'][aria-pressed='true'] {
+  background: var(--color-walk);
+  color: var(--color-on-ink);
+  box-shadow: none;
+}
+
 .tb-date__copy {
   opacity: 0;
   transition: opacity var(--dur-fast) var(--ease-out);
