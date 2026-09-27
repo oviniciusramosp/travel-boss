@@ -224,6 +224,10 @@ Vale o contrato de `docs/plano-paridade.md` ("Contrato para quem executa") e o `
 - **Arquivos:** `src/data/travel-guide-milao.ts`, `src/data/travel-guide-roma.ts`, `src/data/travel-guide.ts`, `src/data/travel.ts` (lugares novos), `src/data/travel-photos.ts`.
 - **Fazer:** o mesmo padrão de `travel-guide-paris.ts` e a rotina em `AGENTS.md` ("Guia da cidade"); um agente por cidade.
 
+#### G2 · `scripts/check-travel-photos.py` pula metade das entradas — Sonnet
+- **Achado da E2 (2026-09-27):** a regex que delimita cada chave em `travel-photos.ts` consome a aspa de abertura da entrada seguinte, então o script confere só uma entrada sim, outra não (8 de 16 ids pedidos; metade das 232 chaves do arquivo) e não avisa. Trocar o delimitador por um lookahead, e fazer o script aceitar 429 como "tente de novo mais devagar" em vez de "quebrado". Teste: rodar com `--only` em duas chaves vizinhas e ver as duas no relatório.
+- **Arquivos:** `scripts/check-travel-photos.py`.
+
 #### G1 · Limpeza de worktrees mesclados — usuário decide
 - Listar com `git worktree list` e `git branch --merged main`; remover só com OK do usuário (`git worktree remove <caminho>` e `git branch -d <branch>`).
 
