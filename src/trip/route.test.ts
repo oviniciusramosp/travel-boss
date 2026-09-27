@@ -94,6 +94,18 @@ describe('planHop', () => {
   });
 });
 
+describe('planHop path', () => {
+  it('draws an authored walk path without asking the router', async () => {
+    const hop = { from: place('paris', 'par-sainte-chapelle'), to: place('paris', 'par-horloge') };
+    expect(planHop(hop).kind).toBe('path');
+    const calls = deps();
+    const segments = await resolveHopSegments([hop], calls);
+    expect(calls.walk).not.toHaveBeenCalled();
+    expect(segments[0]).toMatchObject({ mode: 'walk', fromId: 'par-sainte-chapelle', toId: 'par-horloge' });
+    expect(segments[0]?.latlngs.length).toBeGreaterThan(2);
+  });
+});
+
 describe('planHop through', () => {
   it('hands the walk fetch the points a catalog walk must pass', async () => {
     const hop = { from: place('paris', 'par-champ-mars'), to: place('paris', 'par-chapelle-saint-louis') };

@@ -95,6 +95,8 @@ export type HopDraw =
   | { kind: 'catalog'; leg: ItineraryLegDef }
   /** `through`: points the catalog walk must pass. */
   | { kind: 'walk'; through?: [number, number][] }
+  /** A catalog walk drawn as authored, where the router has no sidewalk. */
+  | { kind: 'path'; path: [number, number][] }
   | { kind: 'drive' }
   | { kind: 'none' };
 
@@ -102,6 +104,7 @@ export type HopDraw =
 export function planHop(hop: RouteHop): HopDraw {
   const decision = resolveTripLeg(hop.from, hop.to, hop.via);
   if (decision.kind === 'catalog' && decision.leg.mode === 'walk') {
+    if (decision.leg.path && decision.leg.path.length >= 2) return { kind: 'path', path: decision.leg.path };
     return decision.leg.through?.length ? { kind: 'walk', through: decision.leg.through } : { kind: 'walk' };
   }
   if (decision.kind === 'catalog') return { kind: 'catalog', leg: decision.leg };
@@ -117,6 +120,7 @@ export function planHop(hop: RouteHop): HopDraw {
 export function previewHop(hop: RouteHop, _neutralColor: string): MapRouteSegment[] | null {
   const plan = planHop(hop);
   if (plan.kind === 'none') return [];
+  if (plan.kind === 'path') return [{ mode: 'walk', latlngs: plan.path, ...endpoints(hop) }];
   if (plan.kind === 'walk') {
     const cached = rememberedWalk(hop.from, hop.to);
     return cached ? [{ mode: 'walk', latlngs: cached, ...endpoints(hop) }] : null;
@@ -147,6 +151,11 @@ export async function resolveHopSegments(
     try {
       const plan = planHop(hop);
       if (plan.kind === 'none') continue;
+      if (plan.kind === 'path') {
+        segments.push({ mode: 'walk', latlngs: plan.path, ...endpoints(hop) });
+        deps.onUpdate?.(segments);
+        continue;
+      }
       if (plan.kind === 'walk' || plan.kind === 'drive') {
         const path =
           plan.kind === 'walk' ? await deps.walk(hop.from, hop.to, plan.through ?? hop.through) : await deps.drive(hop.from, hop.to);
