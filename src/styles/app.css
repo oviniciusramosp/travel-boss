@@ -722,13 +722,25 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
-  color: var(--pin-color);
-  transform: translate(-50%, -50%);
+  color: var(--color-favorite);
+  transform: translate(-50%, -50%) scale(var(--pin-scale));
+  transition: transform var(--dur-base) var(--ease-out), filter var(--dur-base) var(--ease-out);
   pointer-events: none;
 }
 
 .tb-pin__heart .material-symbols-rounded {
   font-size: var(--h-md);
+}
+
+.tb-map .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin__heart,
+.tb-pin:is(.is-hover, .is-active) .tb-pin__heart {
+  filter: drop-shadow(0 0 var(--spacing-4) color-mix(in srgb, var(--color-favorite) 55%, transparent));
+  -webkit-text-stroke: calc(var(--spacing-4) / 2) var(--color-paper);
+  paint-order: stroke fill;
+}
+
+.tb-map.tb-show-favorites .tb-pin.is-favorite::before {
+  background: color-mix(in srgb, var(--color-favorite) 55%, transparent);
 }
 
 .tb-map.tb-show-favorites .tb-pin.is-favorite .tb-pin__heart {
@@ -843,6 +855,7 @@ button {
 }
 
 .tb-map .leaflet-container.is-zooming .tb-pin__face,
+.tb-map .leaflet-container.is-zooming .tb-pin__heart,
 .tb-map .leaflet-container.is-zooming .tb-pin__glyph,
 .tb-map .leaflet-container.is-zooming .tb-pin__face::after {
   transition: none;

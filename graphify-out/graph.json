@@ -14165,20 +14165,20 @@
       "norm_label": "weather_icons"
     },
     {
-      "label": "AGENTS.md",
+      "label": "CLAUDE.md",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude",
       "community": 21,
       "community_name": "Travel Boss",
-      "norm_label": "agents.md"
+      "norm_label": "claude.md"
     },
     {
       "label": "Arquitetura",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L29",
       "_origin": "ast",
       "id": "claude_arquitetura",
@@ -14189,7 +14189,7 @@
     {
       "label": "Cat\u00e1logo de lugares",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L98",
       "_origin": "ast",
       "id": "claude_cat\u00e1logo_de_lugares",
@@ -14200,7 +14200,7 @@
     {
       "label": "Comandos",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L9",
       "_origin": "ast",
       "id": "claude_comandos",
@@ -14211,7 +14211,7 @@
     {
       "label": "Como um LLM edita um roteiro",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L68",
       "_origin": "ast",
       "id": "claude_como_um_llm_edita_um_roteiro",
@@ -14222,7 +14222,7 @@
     {
       "label": "Contrato",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L38",
       "_origin": "ast",
       "id": "claude_contrato",
@@ -14233,7 +14233,7 @@
     {
       "label": "Guia da cidade (Mercado e Comidas)",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L110",
       "_origin": "ast",
       "id": "claude_guia_da_cidade_mercado_e_comidas",
@@ -14244,7 +14244,7 @@
     {
       "label": "Instru\u00e7\u00f5es compartilhadas (Codex e Claude Code)",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L5",
       "_origin": "ast",
       "id": "claude_instru\u00e7\u00f5es_compartilhadas_codex_e_claude_code",
@@ -14255,7 +14255,7 @@
     {
       "label": "Quem edita onde",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L88",
       "_origin": "ast",
       "id": "claude_quem_edita_onde",
@@ -14354,7 +14354,7 @@
     {
       "label": "Travel Boss",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_travel_boss",
@@ -55649,7 +55649,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
@@ -55737,7 +55737,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L110",
       "weight": 1.0,
       "_origin": "ast",
@@ -55748,7 +55748,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
@@ -55759,7 +55759,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
@@ -55770,7 +55770,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
@@ -55781,7 +55781,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L68",
       "weight": 1.0,
       "_origin": "ast",
@@ -55792,7 +55792,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
@@ -55803,7 +55803,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
@@ -55814,7 +55814,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L98",
       "weight": 1.0,
       "_origin": "ast",
@@ -72152,7 +72152,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
@@ -72163,7 +72163,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
@@ -72174,7 +72174,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
@@ -72520,5 +72520,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "34579fea58a6fe68ab06d49c98a39c01f7b26e21"
+  "built_at_commit": "cd1697af689246dd71193f57eadd54232b9246a7"
 }

@@ -90,6 +90,7 @@
   /* Budget glyphs on the day card, the one colored chrome (portfolio values). */
   --color-food: #c46a2a;
   --color-ticket: #0077cc;
+  --color-favorite: #e53935;
 
   --z-map: 0;
   --z-controls: 10;

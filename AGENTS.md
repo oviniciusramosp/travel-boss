@@ -52,7 +52,7 @@ Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não ed
 
 UI (vale a partir da Fase 1):
 
-- Controles do mapa: navegação (zoom, enquadrar, tela cheia) e camadas (água, banheiros, favoritos) ficam em barras separadas. “Mostrar favoritos” troca apenas os pins de lugares com `favorite: true` por corações na cor da categoria, preservando os demais pins, a numeração do roteiro e a câmera; desligar restaura a aparência normal.
+- Controles do mapa: navegação (zoom, enquadrar, tela cheia) e camadas (água, banheiros, favoritos) ficam em barras separadas. “Mostrar favoritos” troca apenas os pins de lugares com `favorite: true` por corações vermelhos (`--color-favorite`), com escala, destaque no hover e seleção como nos pins, preservando os demais pins, a numeração do roteiro e a câmera; desligar restaura a aparência normal.
 
 - Botão só-ícone só em ação repetida por linha, controle de mapa ou painel, ou convenção universal (fechar, anterior/próxima, tela cheia), sempre com `aria-label` e tooltip. A ação primária única da tela mantém o rótulo.
 - Listas usam o primitivo de linha em subgrid: colunas fixas, ações no mesmo X.
