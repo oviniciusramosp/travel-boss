@@ -35,18 +35,20 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 - 08:15 [Casa do Gui](place:par-casa-do-gui) — Agora sim com o ticket **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra, com a Navigo Semaine · 45 min · €32,40
-- 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu); não aceita reserva
+- 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu)
 - 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
 - 10:00 [Louvre](place:par-louvre) — **3 horas**, com ingresso das 10h
+  - comentário: Ajustei para apenas 3h, mude o horário do proximo ponto com base nisso.
 - +3 km — percurso dentro do museu, das salas Daru e Mollien ao Oriente Próximo (estimativa)
-- 14:05 [Monoprix Opéra (piquenique)](place:par-monoprix-rivoli) — Sanduíche, fruta e bebida (~€6–8)
+- 14:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Pão, queijo, fruta e bebida (~€6–8), no caminho para as Tulherias
 - 14:30 [Jardim das Tulherias](place:par-tuileries) — Piquenique
 - 15:20 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
   - via: a pé pela Champs-Élysées · 15 min
-- 15:35 [Petit e Grand Palais](place:par-palais) — Por fora: os dois museus fecham às segundas
+- 15:35 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
   - via: a pé pela Pont Alexandre III · 10 min
 - 15:55 [Invalides](place:par-invalides) — Por fora: a cúpula dourada e a esplanada, do outro lado da ponte; volta pelo mesmo caminho até a Champs-Élysées
-- 16:20 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km), passando na frente da Sephora, da Nike, da Louis Vuitton e da Cartier
+  - comentário: no mapa o roteiro não está voltando pelo mesmo caminho que viemos. Corrija-o imediatamente
+- 16:20 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km), passando na frente das vitrines
 - 17:15 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
   - via: RER A de Charles de Gaulle–Étoile até Auber · 12 min
 - 17:45 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
