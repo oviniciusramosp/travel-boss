@@ -4,6 +4,7 @@ import { daysOnDate } from './calendar';
 import { parseTrip, type TripLeg } from './parse';
 import {
   dateStops,
+  gatedHops,
   planHop,
   previewHop,
   resolveHopSegments,
@@ -91,6 +92,32 @@ describe('planHop', () => {
         to: place('paris', 'par-eiffel'),
       }).kind,
     ).toBe('walk');
+  });
+});
+
+describe('gatedHops', () => {
+  const gate = (id: string) => ({ id, lat: 0, lng: 0 });
+  const at = (id: string, group = id, park?: string) => ({ id, lat: 1, lng: 1, group, ...(park ? { gate: gate(park) } : {}) });
+  const ids = (hops: RouteHop[]) => hops.map((hop) => `${hop.from.id}>${hop.to.id}${hop.via ? '*' : ''}`);
+  const walk: TripLeg = { mode: 'walk', durationMin: 20, detail: 'a pé · 20 min' };
+
+  it('enters a park at its gate and keeps the leg outside', () => {
+    expect(ids(gatedHops(at('chessy'), at('spider', 'daw', 'daw'), walk))).toEqual(['chessy>daw*', 'daw>spider']);
+  });
+
+  it('crosses from one park to the other through both gates', () => {
+    expect(ids(gatedHops(at('frozen', 'daw', 'daw'), at('dlp')))).toEqual(['frozen>daw', 'daw>dlp']);
+    expect(ids(gatedHops(at('frozen', 'daw', 'daw'), at('pirates', 'dlp', 'dlp'), walk))).toEqual([
+      'frozen>daw',
+      'daw>dlp*',
+      'dlp>pirates',
+    ]);
+  });
+
+  it('leaves a park at its gate and walks straight inside one', () => {
+    expect(ids(gatedHops(at('tales', 'dlp', 'dlp'), at('chessy'), walk))).toEqual(['tales>dlp', 'dlp>chessy*']);
+    expect(ids(gatedHops(at('dlp'), at('star', 'dlp', 'dlp')))).toEqual(['dlp>star']);
+    expect(ids(gatedHops(at('star', 'dlp', 'dlp'), at('pirates', 'dlp', 'dlp')))).toEqual(['star>pirates']);
   });
 });
 

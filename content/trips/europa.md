@@ -83,6 +83,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 07:45 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — RER E das 07:51 sentido Tournan (o contrário de Paris) e, em Val de Fontenay, RER A das 08:02; chega às 08:30. Se perder: 08:00 e 08:09, chegando às 08:35. Greve no RER A: confira o app IDF Mobilités antes de sair
   - via: RER E até Val de Fontenay e RER A até Marne-la-Vallée–Chessy · 40 min
 - 08:30 [Marne-la-Vallée–Chessy](place:par-chessy-rer) — Revista de bolsas (10–20 min em dia de semana), que vale para os dois parques. Depois, fila na catraca do Disney Adventure World, à esquerda. Os dois parques abrem às 9h30 e fecham às 22h; a hora das 8h30 é só para hóspedes dos hotéis Disney
+- [Disney Adventure World](place:par-disney-adventure-world)
 - 09:30 [Spider-Man W.E.B. Adventure](place:par-daw-spider-man) — **Primeira atração**: simulador interativo em 3D, você lança teias com as mãos. ~25 min de fila na primeira hora; depois das 11h passa de 50. Às 9h25, olhe o app: se passar de 35 min ou estiver parado, comece pelo Ratatouille
 - Opcional, ao lado: **Avengers Assemble: Flight Force**, a montanha-russa da Marvel, com lançamento e looping. Antes das 10h a fila fica em ~6–10 min
 - 10:15 [Ratatouille](place:par-daw-ratatouille) — Simulador 3D sem trilho, no tamanho do Rémy. ~35–50 min de fila de manhã. O single rider (~16 min) separa vocês, mas serve para repetir. Na saída, comam o lanche de casa: não pode comer nas filas, e o almoço fica para as 14h
