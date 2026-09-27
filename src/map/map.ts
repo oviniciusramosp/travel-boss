@@ -340,6 +340,8 @@ export function mountMap(host: HTMLElement): MapHandle {
     overlays.sync(ids);
   };
 
+  const subPointFns = new Set<(parentId: string, index: number) => void>();
+
   const bindMarker = (dot: Marker, id: string) => {
     dot.on('click', () => {
       for (const fn of selectFns) fn(id);
@@ -469,6 +471,8 @@ export function mountMap(host: HTMLElement): MapHandle {
         applyRouteFocus();
         syncOverlays();
         for (const fn of legFns) fn(leg);
+      }, (parentId, index) => {
+        for (const fn of subPointFns) fn(parentId, index);
       });
       routeEntries = drawn.entries;
       group.addTo(leafletMap);
@@ -609,7 +613,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       moveCamera(lat, lng, Math.max(leafletMap.getZoom(), zoom));
     },
 
-    setSubPoints(points) {
+    setSubPoints(points, onClick) {
       subPointLayer.clearLayers();
       subPointMarks = points
         .filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lng))
@@ -627,6 +631,7 @@ export function mountMap(host: HTMLElement): MapHandle {
             zIndexOffset: 800,
           });
           dot.bindTooltip(point.label, { direction: 'top', opacity: 1, className: 'tb-pin-tip' });
+          if (onClick) dot.on('click', () => onClick(index));
           return dot.addTo(subPointLayer);
         });
     },
@@ -791,6 +796,13 @@ export function mountMap(host: HTMLElement): MapHandle {
       if (next.right != null) padding.right = next.right;
       if (next.bottom != null) padding.bottom = next.bottom;
       if (next.left != null) padding.left = next.left;
+    },
+
+    onSubPoint(fn) {
+      subPointFns.add(fn);
+      return () => {
+        subPointFns.delete(fn);
+      };
     },
 
     onSelect(fn) {

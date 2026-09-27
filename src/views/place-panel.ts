@@ -53,6 +53,8 @@ export type PlaceLinks = {
   subNotes?: readonly { sub: number; time?: string; text: string }[];
   /** Open this sub-point's fold at once (a click on it in the timeline). */
   focusSub?: number;
+  /** The trip's other notes under this stop (a parade spot, a cheap-food list): shown here, not on the timeline. */
+  parkNotes?: readonly { time?: string; text: string }[];
 };
 
 type Panel = {
@@ -236,6 +238,11 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         label: pickLocale(current!.locale, sub.name),
         color: placeCategoryMeta[shown!.category].color,
       })),
+      // A click on the numbered dot opens that point in the card.
+      (index) => {
+        const fold = root.querySelectorAll<HTMLDetailsElement>('.tb-panel__subpoint > details')[index];
+        if (fold) fold.open = true;
+      },
     );
     if (!current) {
       root.hidden = true;
@@ -398,6 +405,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         fold.name = 'tb-subpoints';
         const head = el('summary');
         head.append(el('span', undefined, pickLocale(locale, sub.name)));
+        if (sub.aiSuggested) head.append(aiBadge(pickLocale(locale, { en: 'Suggested by AI', 'pt-BR': 'Sugerido pela IA' })));
         const notes = (current?.links?.subNotes ?? []).filter((note) => note.sub === index);
         if (sub.photo || notes.length) head.append(icon('expand_more', { size: 16 }));
         fold.append(head);
@@ -427,6 +435,25 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         steps.append(item);
       });
       dd.append(steps);
+      row.append(dd);
+      list.append(row);
+      body.append(list);
+    }
+    // The trip's loose notes under this stop, in the day's order.
+    const parkNotes = current?.links?.parkNotes ?? [];
+    if (parkNotes.length) {
+      const list = el('dl', 'tb-panel__meta');
+      const row = el('div', 'tb-panel__meta-row');
+      row.append(el('dt', undefined, pickLocale(locale, { en: 'Trip notes', 'pt-BR': 'Notas do roteiro' })));
+      const dd = el('dd');
+      const notes = el('ul', 'tb-panel__trip-notes');
+      for (const note of parkNotes) {
+        const item = el('li', 'tb-panel__trip-note');
+        if (note.time) item.append(el('span', 'tb-panel__subpoint-time', note.time));
+        item.append(...inlineNodes(note.text));
+        notes.append(item);
+      }
+      dd.append(notes);
       row.append(dd);
       list.append(row);
       body.append(list);

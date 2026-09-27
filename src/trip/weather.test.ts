@@ -143,7 +143,8 @@ describe('weatherTip', () => {
     expect(weatherTip(weather, label, 'en', undefined, at, true, now)).toBe(
       'Partly cloudy\n17–21°\nRain 26%\nUpdated 14:32 · could not refresh',
     );
-    expect(weatherTip(weather, label, 'en', undefined, null, false, now)).toBe('Partly cloudy\n17–21°\nRain 26%\nOpen-Meteo (ECMWF + NOAA)');
+    expect(weatherTip(weather, label, 'en', undefined, null, false, now)).toBe('Partly cloudy\n17–21°\nRain 26%\nOpen-Meteo');
+    expect(weatherTip(weather, label, 'pt-BR', undefined, at, false, now, 'MET Norway')).toBe('Parcialmente nublado\n17–21°\nChuva 26%\nAtualizado às 14:32 · MET Norway');
   });
   it('dates an update from another day', () => {
     expect(updatedLabel(new Date(2026, 8, 26, 9, 5).getTime(), 'pt-BR', now)).toBe('26/09 09:05');

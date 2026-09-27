@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { basename, join, resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
@@ -12,6 +12,7 @@ import {
   type TripPushReason,
 } from './src/trip/api';
 import { ICON_FONT_HREF } from './src/ui/icons';
+import { MET_URL, metToEnsemble, OPEN_METEO_URL, openMeteoQuery, parseEnsemble, type Ensemble } from './src/trip/weather-source';
 
 const tripsDir = resolve(process.cwd(), 'content/trips');
 
@@ -124,6 +125,105 @@ function tripApi(): Plugin {
   };
 }
 
+/**
+ * `GET /api/weather?lat&lng&tz[&force]`: the forecast of a point, fetched from Open-Meteo at
+ * most once per half hour for every tab and session, kept on disk, and taken from MET Norway
+ * when Open-Meteo is out of quota. The answer is `{ at, source, hours }`; without any
+ * forecast it is `{ error, status }` with 502, and an old one comes back with `stale: true`.
+ */
+const WEATHER_DIR = resolve(process.cwd(), 'node_modules/.cache/weather');
+const WEATHER_FRESH_MS = 30 * 60 * 1000;
+const WEATHER_UA = 'TravelBoss/0.1 (local dev tool; github.com/viniciusramos)';
+type StoredForecast = { at: number; source: string; hours: Ensemble };
+const weatherInflight = new Map<string, Promise<{ body: object; status: number }>>();
+
+function weatherFile(key: string): string {
+  return join(WEATHER_DIR, `${key.replace(/[^0-9a-z.,-]/gi, '_')}.json`);
+}
+
+function readForecastFile(key: string): StoredForecast | null {
+  try {
+    const file = weatherFile(key);
+    if (!existsSync(file)) return null;
+    const data = JSON.parse(readFileSync(file, 'utf8')) as StoredForecast;
+    return data && typeof data.at === 'number' && data.hours?.time?.length ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchForecast(lat: number, lng: number, tz: string): Promise<{ fresh: StoredForecast } | { error: 'limit' | 'http' | 'network'; status: number | null }> {
+  let status: number | null = null;
+  try {
+    const answer = await fetch(`${OPEN_METEO_URL}?${openMeteoQuery(lat, lng, tz)}`, { headers: { 'User-Agent': WEATHER_UA } });
+    status = answer.status;
+    if (answer.ok) {
+      const hours = parseEnsemble(await answer.json());
+      if (hours) return { fresh: { at: Date.now(), source: 'Open-Meteo', hours } };
+    }
+  } catch {
+    status = null;
+  }
+  // Second source: one model, hourly for two days and six-hourly to ten. MET wants a real User-Agent.
+  try {
+    const met = await fetch(`${MET_URL}?lat=${lat}&lon=${lng}`, { headers: { 'User-Agent': WEATHER_UA } });
+    if (met.ok) {
+      const hours = metToEnsemble(await met.json(), tz);
+      if (hours) return { fresh: { at: Date.now(), source: 'MET Norway', hours } };
+    }
+  } catch {
+    /* Both down: the caller serves what it has. */
+  }
+  return { error: status == null ? 'network' : status === 429 ? 'limit' : 'http', status };
+}
+
+function weatherApi(): Plugin {
+  return {
+    name: 'weather-api',
+    configureServer(server) {
+      server.middlewares.use('/api/weather', (req, res, next) => {
+        if (req.method !== 'GET') return next();
+        const url = new URL(req.url ?? '/', 'http://localhost');
+        const lat = Number(url.searchParams.get('lat'));
+        const lng = Number(url.searchParams.get('lng'));
+        const tz = url.searchParams.get('tz') || 'Europe/Paris';
+        const force = url.searchParams.get('force') === '1';
+        const send = (status: number, body: object) => {
+          res.statusCode = status;
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.setHeader('Cache-Control', 'no-store');
+          res.end(JSON.stringify(body));
+        };
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return send(400, { error: 'http', status: 400 });
+        const key = `${lat.toFixed(3)},${lng.toFixed(3)}`;
+        const stored = readForecastFile(key);
+        if (stored && !force && Date.now() - stored.at < WEATHER_FRESH_MS) return send(200, stored);
+        let job = weatherInflight.get(key);
+        if (!job) {
+          job = fetchForecast(lat, lng, tz).then((result) => {
+            if ('fresh' in result) {
+              try {
+                mkdirSync(WEATHER_DIR, { recursive: true });
+                writeFileSync(weatherFile(key), JSON.stringify(result.fresh));
+              } catch {
+                /* No disk cache: memory and the browser still have it. */
+              }
+              return { body: result.fresh, status: 200 };
+            }
+            const old = readForecastFile(key);
+            return old
+              ? { body: { ...old, stale: true, error: result.error, status: result.status }, status: 200 }
+              : { body: { error: result.error, status: result.status }, status: 502 };
+          });
+          weatherInflight.set(key, job);
+          void job.finally(() => weatherInflight.delete(key));
+        }
+        job.then(({ body, status }) => send(status, body)).catch(() => send(502, { error: 'network', status: null }));
+      });
+    },
+  };
+}
+
 /** One icon list: the href is built in src/ui/icons.ts and injected here. */
 function iconFont(): Plugin {
   return {
@@ -155,7 +255,7 @@ function iconFont(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [iconFont(), hotelSearchVite(), tripApi()],
+  plugins: [iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
   server: {
     port: 5173,
     strictPort: false,

@@ -6,6 +6,7 @@ import {
   cityGuide,
   dayPrimaryRoutePlaceIds,
   favoritePlaces,
+  subPointParents,
   getTravelCity,
   googleMapsUrl,
   itineraryForCity,
@@ -577,7 +578,9 @@ export function mountCity(
     map.setPins('stop', planner.userPins());
     planner.syncAccuracy();
     if (!currentPlaceId) map.highlight(null);
-    const mapped = catalogPlaces.filter((place) => enabled.has(place.category));
+    // A park's rides are its sub-points: the parent's dots stand for them, so they draw no pin.
+    const inner = subPointParents(city);
+    const mapped = catalogPlaces.filter((place) => enabled.has(place.category) && !inner.has(place.id));
     map.setPins('place', toPins(mapped, 'place', shell.locale(), badges));
     const framing = opts.fit && planner.stopCount() >= 2;
     if (opts.fit && !framing) map.fit();

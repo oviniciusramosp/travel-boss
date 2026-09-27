@@ -11,6 +11,7 @@ export {
   pickLocale,
   googleMapsUrl,
   favoritePlaces,
+  subPointParents,
   placeCategoryOrder,
   placeCategoryMeta,
   itineraryForCity,

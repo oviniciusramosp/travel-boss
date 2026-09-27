@@ -48,7 +48,7 @@ export type MapRouteSegment = {
   /** Two-color transfer dots that belong to this spine. */
   transfers?: MapRouteTransfer[];
   /** Named points inside a place, drawn along a walk. */
-  subPoints?: { lat: number; lng: number; label: string; color?: string }[];
+  subPoints?: { lat: number; lng: number; label: string; color?: string; parentId?: string; index?: number }[];
 };
 
 /** Catalog city shown when no trip and no city are open. */
@@ -121,8 +121,10 @@ export type MapHandle = {
   onHover(fn: (id: string | null) => void): () => void;
   /** Returns an unsubscribe. */
   onSelect(fn: (id: string) => void): () => void;
-  /** A place's sub-points while its card is open, numbered. [] clears. */
-  setSubPoints(points: readonly { lat: number; lng: number; label: string; color?: string }[]): void;
+  /** A place's sub-points while its card is open, numbered. [] clears. A click on one reports its index. */
+  setSubPoints(points: readonly { lat: number; lng: number; label: string; color?: string }[], onClick?: (index: number) => void): void;
+  /** Click on a route sub-point dot: the parent place and the point's index. Returns an unsubscribe. */
+  onSubPoint(fn: (parentId: string, index: number) => void): () => void;
   /** Enlarge one sub-point from `setSubPoints`. `null` clears. Does not move the camera. */
   hoverSubPoint(index: number | null): void;
   /** Keep one sub-point highlighted (a click in the card). Pans only if it is off screen. `null` clears. */

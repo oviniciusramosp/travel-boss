@@ -2,6 +2,7 @@ import type { Shell } from '../app/shell';
 import {
   estimateLegDurationMin,
   getTravelCity,
+  subPointParents,
   googleMapsUrl,
   pickLocale,
   placeCategoryMeta,
@@ -59,6 +60,7 @@ import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { formatWalk, walkedMeters } from './walk-distance';
 import { attachSubPointNotes, stripNoteTitle, type SubPointNote } from './subpoints';
+import { aiBadge } from '../ui/ai-badge';
 import type { RouteDeps } from './route';
 import type { MapRouteSegment } from '../map/types';
 import { chipTone, circleInk } from '../ui/contrast';
@@ -220,7 +222,7 @@ function fillWeather(
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
   slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', `${temp} · ${rain}%`));
-  const tip = weatherTip(weather, look.label, locale, window, state.fetchedAt, state.failed);
+  const tip = weatherTip(weather, look.label, locale, window, state.fetchedAt, state.failed, new Date(), state.source);
   slot.setAttribute('data-tip', tip);
   slot.setAttribute('aria-label', tip.replaceAll('\n', '. '));
 }
@@ -450,6 +452,8 @@ export function mountTrip(
   const periodPrefs = readPeriods(id);
   /** Stops whose sub-points are listed on the timeline, by stop key. Saved per trip. */
   const subStops = readSubStops(id);
+  /** The trip's notes on a park's points and under the park, by place id, for a click on a map dot. */
+  const subNotesByPlace = new Map<string, { sub: SubPointNote[]; park: { time?: string; text: string }[] }>();
 
   /** Rows of a date, their periods, and the periods already over on the city's clock. */
   function datePlan(days: readonly DatedDay[], date: string) {
@@ -532,11 +536,13 @@ export function mountTrip(
           from: point,
           to: { id: place.id, lat: last.lat, lng: last.lng },
           through: subs.slice(1, -1).map((sub) => [sub.lat, sub.lng] as [number, number]),
-          subPoints: subs.map((sub) => ({
+          subPoints: subs.map((sub, index) => ({
             lat: sub.lat,
             lng: sub.lng,
             label: pickLocale(locale, sub.name),
             color: placeCategoryMeta[place.category].color,
+            parentId: place.id,
+            index,
           })),
         });
       }
@@ -784,7 +790,8 @@ export function mountTrip(
     const trip = current;
     if (!trip) return;
     const date = routedDate();
-    const pins = catalogPins(trip);
+    const inner = new Set(trip.cities.flatMap((city) => [...(getTravelCity(city.slug) ? subPointParents(getTravelCity(city.slug)!).keys() : [])]));
+    const pins = catalogPins(trip).filter((pin) => !inner.has(pin.id));
     map.setCities([]);
     map.setOverview(null);
     map.hoverOverview(null);
@@ -1177,7 +1184,7 @@ export function mountTrip(
         const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
         return record
           ? forecastState(record.lat, record.lng)
-          : { hours: null, fetchedAt: null, loading: false, failed: false, error: null };
+          : { hours: null, fetchedAt: null, loading: false, failed: false, error: null, source: null };
       };
       const cityOf = (index: number) => stateOf(index).hours;
       const parts: Weather[] = [];
@@ -1591,6 +1598,7 @@ export function mountTrip(
       // A park's rides: the timed notes right under a stop that name its sub-points hang on
       // those points (timeline list and place card), not on the timeline as paragraphs.
       const subNotesByRow = new Map<number, SubPointNote[]>();
+      const parkNotesByRow = new Map<number, { time?: string; text: string }[]>();
       const attachedRows = new Set<number>();
       rows.forEach((entry, rowIndex) => {
         const stop = entry.dated.day.stops[entry.stopIndex];
@@ -1603,13 +1611,17 @@ export function mountTrip(
           if (!candidate?.listNote) break;
           following.push({ index: next, label: candidate.label, line: candidate.line, ...(candidate.time ? { time: candidate.time } : {}) });
         }
-        const { attached } = attachSubPointNotes(following, place.subPoints);
-        if (!attached.length) return;
-        subNotesByRow.set(
-          rowIndex,
-          attached.map(({ note, sub }) => ({ sub, text: stripNoteTitle(note.label), line: note.line, ...(note.time ? { time: note.time } : {}) })),
-        );
-        for (const { note } of attached) attachedRows.add(note.index);
+        const { attached, loose } = attachSubPointNotes(following, place.subPoints);
+        if (attached.length) {
+          subNotesByRow.set(
+            rowIndex,
+            attached.map(({ note, sub }) => ({ sub, text: stripNoteTitle(note.label), line: note.line, ...(note.time ? { time: note.time } : {}) })),
+          );
+        }
+        // The other notes under the park go to its card too: the timeline keeps only the stops.
+        if (loose.length) parkNotesByRow.set(rowIndex, loose.map((note) => ({ text: note.label, ...(note.time ? { time: note.time } : {}) })));
+        for (const note of following) attachedRows.add(note.index);
+        subNotesByPlace.set(place.id, { sub: subNotesByRow.get(rowIndex) ?? [], park: parkNotesByRow.get(rowIndex) ?? [] });
       });
       rows.forEach((entry, rowIndex) => {
         const city = entry.dated.city;
@@ -1682,10 +1694,12 @@ export function mountTrip(
         const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
         const placeId = stop.placeId;
         const subNotes = subNotesByRow.get(rowIndex) ?? [];
+        const parkNotes = parkNotesByRow.get(rowIndex) ?? [];
         const cardLinks = (focusSub?: number) => ({
           ...(href ? { maps: href } : {}),
           ...(directions ? { route: directions } : {}),
           ...(subNotes.length ? { subNotes } : {}),
+          ...(parkNotes.length ? { parkNotes } : {}),
           ...(focusSub != null ? { focusSub } : {}),
         });
         const item = row({
@@ -1758,6 +1772,7 @@ export function mountTrip(
             dot.style.setProperty('--subpoint-color', color);
             const name = el('button', 'tb-substop__name', pickLocale(locale, sub.name));
             name.type = 'button';
+            if (sub.aiSuggested) name.append(aiBadge(pickLocale(locale, { en: 'Suggested by AI', 'pt-BR': 'Sugerido pela IA' })));
             if (record) {
               // Opens the place card on this point: its photo and what the trip says about it.
               name.addEventListener('click', () => {
@@ -1990,6 +2005,23 @@ export function mountTrip(
     }
   }
 
+  // A route dot of a park's point: the parent's card, open on that point.
+  const offSubPoint = map.onSubPoint((parentId, index) => {
+    const trip = current;
+    if (!trip) return;
+    for (const city of trip.cities) {
+      const record = getTravelCity(city.slug);
+      const place = record ? placeById(city.slug, parentId) : undefined;
+      if (!record || !place) continue;
+      const notes = subNotesByPlace.get(parentId);
+      openPlace(place, record, shell.locale(), null, {
+        focusSub: index,
+        ...(notes?.sub.length ? { subNotes: notes.sub } : {}),
+        ...(notes?.park.length ? { parkNotes: notes.park } : {}),
+      });
+      return;
+    }
+  });
   const offLeg = map.onHoverLeg((leg) => {
     if (!alive) return;
     main.querySelectorAll<HTMLElement>('.tb-transfer.is-hot').forEach((node) => {
@@ -2070,6 +2102,7 @@ export function mountTrip(
       offClose();
       stopsUnsub.fn();
       offLeg();
+      offSubPoint();
       tripRouteEpoch += 1;
       routeAbort?.abort();
       routeAbort = null;

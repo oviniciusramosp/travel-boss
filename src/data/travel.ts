@@ -123,9 +123,12 @@ export type TravelSubPoint = {
   photo?: string;
   /**
    * The catalog place this point is (a park's ride or restaurant). Its food and ticket
-   * count in the day budget when the parent is a stop. The point sits on that place's pin.
+   * count in the day budget when the parent is a stop. That place draws no pin of its
+   * own: this point's dot stands for it, and a click opens the parent's card here.
    */
   placeId?: string;
+  /** Added by an AI, not asked for by name. The card and the timeline show the sparkle. */
+  aiSuggested?: boolean;
 };
 
 /** Station / waypoint along a route (e.g. metro line) — shown on hover with the line */
@@ -3431,15 +3434,24 @@ export const localTravelCities: TravelCity[] = [
         // Park gate: the main turnstile row under the Disneyland Hotel (OSM node 3100784971).
         lat: 48.870425,
         lng: 2.779509,
-        // The 7/10 afternoon and evening in walking order; each point sits on its place's pin.
-        // The two restaurants bring their meals into the day budget (`placeId`).
+        // The 7/10 afternoon and evening in walking order: Main Street, Discoveryland, Fantasyland,
+        // Frontierland, Adventureland and back to Main Street for the show. Photo points the AI
+        // picked carry `aiSuggested`. The two restaurants bring their meals into the day budget.
         // Commons has no Paris photo of Star Tours, Bella Notte or Casa de Coco (France has no
         // freedom of panorama; those files get deleted). Tales of Magic shows the spot by day.
         subPoints: [
+          { name: { en: 'Town Square', 'pt-BR': 'Town Square' }, lat: 48.871074, lng: 2.778841, aiSuggested: true },
+          { name: { en: "Casey's Corner", 'pt-BR': "Casey's Corner" }, lat: 48.87188, lng: 2.777339, aiSuggested: true },
           { name: { en: 'Star Tours: The Adventures Continue', 'pt-BR': 'Star Tours: The Adventures Continue' }, lat: 48.87491, lng: 2.779051, placeId: 'par-dlp-star-tours' },
+          { name: { en: 'Buzz Lightyear Laser Blast', 'pt-BR': 'Buzz Lightyear Laser Blast' }, lat: 48.873511, lng: 2.777842 },
           { name: { en: 'Pizzeria Bella Notte', 'pt-BR': 'Pizzeria Bella Notte' }, lat: 48.874214, lng: 2.77626, placeId: 'par-bella-notte' },
-          { name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' }, lat: 48.8735, lng: 2.7728, placeId: 'par-dlp-pirates', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pirates_of_the_Caribbean_-_panoramio.jpg/500px-Pirates_of_the_Caribbean_-_panoramio.jpg' },
+          { name: { en: "Alice's Curious Labyrinth", 'pt-BR': 'Labirinto da Alice' }, lat: 48.87449, lng: 2.774487 },
+          { name: { en: "Peter Pan's Flight", 'pt-BR': "Peter Pan's Flight" }, lat: 48.873757, lng: 2.773746 },
+          { name: { en: 'Big Thunder Mountain', 'pt-BR': 'Big Thunder Mountain' }, lat: 48.871274, lng: 2.774517 },
+          { name: { en: "Rustler Roundup Shootin' Gallery", 'pt-BR': "Rustler Roundup Shootin' Gallery" }, lat: 48.871497, lng: 2.775526 },
           { name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' }, lat: 48.8706, lng: 2.7768, placeId: 'par-dlp-phantom-manor', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Disneyland_Paris_-_4481390960.jpg/500px-Disneyland_Paris_-_4481390960.jpg' },
+          { name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' }, lat: 48.8735, lng: 2.7728, placeId: 'par-dlp-pirates', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pirates_of_the_Caribbean_-_panoramio.jpg/500px-Pirates_of_the_Caribbean_-_panoramio.jpg' },
+          { name: { en: 'Skull Rock', 'pt-BR': 'Skull Rock' }, lat: 48.873041, lng: 2.773487, aiSuggested: true },
           { name: { en: 'Casa de Coco', 'pt-BR': 'Casa de Coco' }, lat: 48.871759, lng: 2.774672, placeId: 'par-dlp-casa-de-coco' },
           { name: { en: 'Disney Tales of Magic, viewing spot', 'pt-BR': 'Disney Tales of Magic, lugar para os fogos' }, lat: 48.87225, lng: 2.77723, placeId: 'par-dlp-tales-of-magic', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg/500px-Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg' },
         ],
@@ -3457,12 +3469,17 @@ export const localTravelCities: TravelCity[] = [
         // Park gate: turnstiles at the Front Lot (OSM node 11238857526, theme park way 205734843).
         lat: 48.8683,
         lng: 2.780766,
-        // The 7/10 morning in walking order; each point sits on its ride's pin.
+        // The 7/10 morning in walking order: Avengers Campus, Worlds of Pixar, Adventure Way,
+        // World of Frozen. Photo points the AI picked carry `aiSuggested`.
         // Commons has no Paris photo of the Spider-Man building or of World of Frozen.
         subPoints: [
           { name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' }, lat: 48.865951, lng: 2.779093, placeId: 'par-daw-spider-man' },
+          { name: { en: 'Avengers Campus', 'pt-BR': 'Avengers Campus' }, lat: 48.865493, lng: 2.779336, aiSuggested: true },
           { name: { en: 'Ratatouille: The Adventure', 'pt-BR': 'Ratatouille: The Adventure' }, lat: 48.867962, lng: 2.775708, placeId: 'par-daw-ratatouille', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Toon_Studio_Ratatouille_area.jpg/500px-Toon_Studio_Ratatouille_area.jpg' },
+          { name: { en: 'Toy Story Playland', 'pt-BR': 'Toy Story Playland' }, lat: 48.866781, lng: 2.77587 },
+          { name: { en: 'Raiponce Tangled Spin', 'pt-BR': 'Raiponce Tangled Spin' }, lat: 48.866256, lng: 2.776437 },
           { name: { en: 'Frozen Ever After', 'pt-BR': 'Frozen Ever After' }, lat: 48.864075, lng: 2.77343, placeId: 'par-daw-frozen' },
+          { name: { en: 'Arendelle village', 'pt-BR': 'Arendelle, a vila' }, lat: 48.864402, lng: 2.772892, aiSuggested: true },
         ],
         address: 'Boulevard de Parc, 77700 Chessy',
         mapsQuery: 'Disney Adventure World',
@@ -6905,6 +6922,15 @@ export function withResolvedArea(place: TravelPlace): TravelPlace {
  * Personal favorites in a city — prefer these when building itineraries
  * (LLM prompts, curated routes, etc.).
  */
+/** Places that are sub-points of another place of the city (a park's rides): child id → parent id. They get no pin of their own. */
+export function subPointParents(city: TravelCity): Map<string, string> {
+  const parents = new Map<string, string>();
+  for (const place of city.places) {
+    for (const sub of place.subPoints ?? []) if (sub.placeId) parents.set(sub.placeId, place.id);
+  }
+  return parents;
+}
+
 export function favoritePlaces(city: TravelCity): TravelPlace[] {
   return city.places.filter((p) => p.favorite);
 }

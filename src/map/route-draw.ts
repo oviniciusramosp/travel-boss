@@ -76,6 +76,7 @@ export function drawRouteSegments(
   renderer: Renderer,
   segments: readonly MapRouteSegment[],
   onPointer: (leg: RoutePointer) => void,
+  onSubPoint?: (parentId: string, index: number) => void,
 ): { entries: RouteEntry[]; points: [number, number][] } {
   const entries: RouteEntry[] = [];
   const points: [number, number][] = [];
@@ -201,6 +202,12 @@ export function drawRouteSegments(
       if (leg) {
         dot.on('mouseover', () => onPointer(leg));
         dot.on('mouseout', () => onPointer(null));
+      }
+      // The dot stands for the point (and for the place it may be): a click opens the parent's card there.
+      if (sub.parentId != null && sub.index != null && onSubPoint) {
+        const parentId = sub.parentId;
+        const index = sub.index;
+        dot.on('click', () => onSubPoint(parentId, index));
       }
       dot.addTo(group);
       marks.push(dot);

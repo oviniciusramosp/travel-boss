@@ -8,14 +8,18 @@ import { pickLocale, type Locale, type LString } from '../catalog';
 import type { Period } from './day-plan';
 import type { WeatherIcon } from '../ui/weather-icons';
 
-const FORECAST_URL = 'https://ensemble-api.open-meteo.com/v1/ensemble';
-const MODELS = 'ecmwf_ifs025,gfs05';
+import { parseEnsemble, type Ensemble, type Member } from './weather-source';
+export { parseEnsemble, type Ensemble, type Member };
+
+/**
+ * The dev server (`/api/weather`, see vite.config.ts) fetches once per city per half hour for
+ * every open tab and session, keeps the answer on disk, and falls back to MET Norway when
+ * Open-Meteo is out of quota. The browser never calls the providers itself.
+ */
+const FORECAST_URL = '/api/weather';
 // ponytail: one request per city per half hour; the ensembles run every 6 hours.
 const FRESH_MS = 30 * 60 * 1000;
 
-/** One run of the ensemble: hourly temperature, rain of the hour before, and cloud cover. */
-export type Member = { temp: (number | null)[]; rain: (number | null)[]; cloud: (number | null)[] };
-export type Ensemble = { time: string[]; members: Member[] };
 /** Median low and high, chance of rain in %, median rain of the runs that rain, median cloud. */
 export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number };
 
@@ -30,6 +34,8 @@ type Entry = {
   failed: boolean;
   /** Why it failed, for the message: the API's daily limit, no network, or another HTTP status. */
   error: FailureKind | null;
+  /** Who made the forecast in `hours`: `Open-Meteo` or `MET Norway`. */
+  source: string | null;
   request: Promise<Ensemble | null>;
 };
 
@@ -49,6 +55,7 @@ export type ForecastState = {
   loading: boolean;
   failed: boolean;
   error: FailureKind | null;
+  source: string | null;
 };
 
 /** The last forecast of each point survives a reload, so the card has something while the API is down. */
@@ -94,40 +101,25 @@ function readStored(key: string): Entry | null {
   const at = Number(store.getItem(`${STORAGE_KEY}:${key}:at`));
   const hours = unpackForecast(store.getItem(`${STORAGE_KEY}:${key}`));
   if (!hours || !Number.isFinite(at) || at <= 0) return null;
-  const entry: Entry = { at: 0, fetchedAt: at, hours, loading: false, failed: false, error: null, request: Promise.resolve(hours) };
+  const source = store.getItem(`${STORAGE_KEY}:${key}:source`);
+  const entry: Entry = { at: 0, fetchedAt: at, hours, loading: false, failed: false, error: null, source, request: Promise.resolve(hours) };
   cache.set(key, entry);
   return entry;
 }
 
-function writeStored(key: string, at: number, hours: Ensemble): void {
+function writeStored(key: string, at: number, hours: Ensemble, source: string | null): void {
   const store = storage();
   if (!store) return;
   try {
     store.setItem(`${STORAGE_KEY}:${key}`, packForecast(hours));
     store.setItem(`${STORAGE_KEY}:${key}:at`, String(at));
+    if (source) store.setItem(`${STORAGE_KEY}:${key}:source`, source);
   } catch {
     /* Quota: the session cache still has it. */
   }
 }
 
 const keyOf = (lat: number, lng: number) => `${lat.toFixed(3)},${lng.toFixed(3)}`;
-
-/** Every `temperature_2m…` column with its `precipitation…` and `cloud_cover…` twins. */
-export function parseEnsemble(data: unknown): Ensemble | null {
-  const hourly = (data as { hourly?: Record<string, unknown> } | null)?.hourly;
-  const time = hourly?.time;
-  if (!hourly || !Array.isArray(time)) return null;
-  const members: Member[] = [];
-  for (const key of Object.keys(hourly)) {
-    if (!key.startsWith('temperature_2m')) continue;
-    const suffix = key.slice('temperature_2m'.length);
-    const columns = [hourly[key], hourly[`precipitation${suffix}`], hourly[`cloud_cover${suffix}`]];
-    if (!columns.every((column) => Array.isArray(column) && column.length === time.length)) continue;
-    const [temp, rain, cloud] = columns as (number | null)[][];
-    members.push({ temp, rain, cloud });
-  }
-  return members.length ? { time, members } : null;
-}
 
 /**
  * Forecast of a point, fetched at most once per half hour unless `force`. A failure keeps
@@ -137,14 +129,7 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
   const key = keyOf(lat, lng);
   const hit = cache.get(key) ?? readStored(key);
   if (hit && (hit.loading || (!force && Date.now() - hit.at < FRESH_MS))) return hit.request;
-  const params = new URLSearchParams({
-    latitude: String(lat),
-    longitude: String(lng),
-    hourly: 'temperature_2m,precipitation,cloud_cover',
-    models: MODELS,
-    timezone: timeZone,
-    forecast_days: '16',
-  });
+  const params = new URLSearchParams({ lat: String(lat), lng: String(lng), tz: timeZone, ...(force ? { force: '1' } : {}) });
   const entry: Entry = {
     at: Date.now(),
     fetchedAt: hit?.fetchedAt ?? null,
@@ -152,26 +137,37 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
     loading: true,
     failed: false,
     error: null,
+    source: hit?.source ?? null,
     request: Promise.resolve(null),
   };
   let status: number | null = null;
+  let kind: FailureKind | null = null;
   entry.request = fetch(`${FORECAST_URL}?${params}`)
     .then((response) => {
       status = response.status;
-      return response.ok ? response.json() : null;
+      return response.json().catch(() => null);
     })
-    .then(parseEnsemble)
+    .then((body: unknown) => {
+      const answer = body as { hours?: unknown; at?: unknown; source?: unknown; stale?: unknown; error?: unknown } | null;
+      // The server says why it could not refresh, with or without an older forecast to show.
+      if (answer && typeof answer.error === 'string') kind = answer.error as FailureKind;
+      const hours = answer && !answer.stale ? readEnsemble(answer.hours) : null;
+      const at = typeof answer?.at === 'number' ? answer.at : Date.now();
+      const source = typeof answer?.source === 'string' ? answer.source : null;
+      return hours ? { hours, at, source } : null;
+    })
     .catch(() => null)
-    .then((hours) => {
+    .then((fresh) => {
       entry.loading = false;
-      if (hours) {
-        entry.hours = hours;
-        entry.fetchedAt = Date.now();
+      if (fresh) {
+        entry.hours = fresh.hours;
+        entry.fetchedAt = fresh.at;
+        entry.source = fresh.source;
         entry.error = null;
-        writeStored(key, entry.fetchedAt, hours);
+        writeStored(key, fresh.at, fresh.hours, fresh.source);
       } else {
         entry.failed = true;
-        entry.error = failureKind(status);
+        entry.error = kind ?? failureKind(status);
       }
       return entry.hours;
     });
@@ -193,7 +189,13 @@ export function forecastState(lat: number, lng: number): ForecastState {
     loading: hit?.loading ?? false,
     failed: hit?.failed ?? false,
     error: hit?.error ?? null,
+    source: hit?.source ?? null,
   };
+}
+
+/** An ensemble the server sent, if it has the shape. */
+function readEnsemble(value: unknown): Ensemble | null {
+  return unpackForecast(typeof value === 'string' ? value : JSON.stringify(value ?? null));
 }
 
 /** `14:32` today, else `26/09 14:32` (en `09/26 14:32`), in the reader's clock. */
@@ -216,6 +218,7 @@ export function weatherTip(
   fetchedAt: number | null,
   failed: boolean,
   now = new Date(),
+  source: string | null = null,
 ): string {
   const low = Math.round(weather.min);
   const high = Math.round(weather.max);
@@ -223,12 +226,13 @@ export function weatherTip(
   const span = window ? `${window[0]}h–${window[1]}h · ` : '';
   const rain = `${pickLocale(locale, { en: 'Rain', 'pt-BR': 'Chuva' })} ${Math.round(weather.rain)}%`;
   const when = fetchedAt == null ? null : updatedLabel(fetchedAt, locale, now);
+  const by = source ?? 'Open-Meteo';
   const updated =
     when == null
-      ? pickLocale(locale, { en: 'Open-Meteo (ECMWF + NOAA)', 'pt-BR': 'Open-Meteo (ECMWF + NOAA)' })
+      ? by
       : failed
         ? pickLocale(locale, { en: `Updated ${when} · could not refresh`, 'pt-BR': `Atualizado às ${when} · não deu para atualizar` })
-        : pickLocale(locale, { en: `Updated ${when} · Open-Meteo`, 'pt-BR': `Atualizado às ${when} · Open-Meteo` });
+        : pickLocale(locale, { en: `Updated ${when} · ${by}`, 'pt-BR': `Atualizado às ${when} · ${by}` });
   return [pickLocale(locale, label), `${span}${temp}`, rain, updated].join('\n');
 }
 

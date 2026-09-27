@@ -1709,6 +1709,19 @@ a.tb-route__google[hidden] {
   font-variant-numeric: tabular-nums;
 }
 
+/* The trip's loose notes under the park, in the card. */
+.tb-panel__trip-notes {
+  margin: 0;
+  padding-left: var(--spacing-16);
+}
+
+.tb-panel__trip-note {
+  padding-block: var(--spacing-4);
+  color: var(--color-ink);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
 /* Photo of a sub-point, under its name when opened. */
 .tb-panel__subpoint-photo {
   display: block;
