@@ -67,7 +67,7 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 - H2: cidade, na ordem. A linha seguinte é `city: <slug>` do catálogo; `dates: YYYY-MM-DD → YYYY-MM-DD` é opcional.
 - H3: `### Dia N — Título`.
 - Parada: bullet com `HH:mm` opcional e link `[Rótulo](place:<id>)` (o id já existe naquela cidade) ou URL `https://…`. Nota depois de ` — `.
-- Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho.
+- Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho. Preço (`· €2,55`, antes da nota) só quando é gasto a mais que o passe semanal.
 - Parágrafo sob o dia é narrativa: entra no documento e no export, não vira pino.
 - Comentário: `  - comentário: …` recuado sob uma parada ou nota de lista é um pedido do usuário para aquele ponto, escrito pelo app. Quando ele pedir para ler os comentários, rode `grep -n "comentário:" content/trips/<id>.md`; a parada é o bullet sem recuo logo acima. Aja em cada um e apague a linha dele.
 - Sem comentário HTML, front matter YAML ou HTML cru.

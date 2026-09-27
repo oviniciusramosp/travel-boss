@@ -77,7 +77,7 @@ dates: 2026-04-06 → 2026-04-09
       - via: Pegar um Bolt · 35 min — €29–35 na simulação; o app mostra onde encontrar o carro
     ```
 
-  - A `€` amount before the note is the leg's price per person (`€2,55`, or a range `€15–18`, which counts its middle). The day card adds it to tickets, once per leg. Write what each person pays on that leg: a single metro ticket, or a week pass on the first leg of the day it starts (`com a Navigo Semaine · 35 min · €32,40`).
+  - A `€` amount before the note is the leg's price per person (`€2,55`, or a range `€15–18`, which counts its middle). The day card adds it to tickets, once per leg. Write only what each person pays on top of the week pass: a single metro ticket on a day the pass does not cover, or the pass itself on the first leg of the day it starts (`com a Navigo Semaine · 35 min · €32,40`). A leg the pass covers has no `€`. The timeline shows the price at the right of the leg, on its first ride.
 
     ```markdown
     - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa

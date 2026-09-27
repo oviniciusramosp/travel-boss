@@ -1542,6 +1542,11 @@ export function mountTrip(
           legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, place, nextPlace) }];
         }
         legs = timelineLegs(legs);
+        // A `via:` price is what the week pass does not cover. It sits on the leg's own row
+        // or, when the leg is split into parts, on the first ride: where you pay.
+        const fare = entry.depart?.fareEur ?? 0;
+        const own = entry.depart ? legs.indexOf(entry.depart) : -1;
+        const fareAt = fare > 0 ? (own >= 0 ? own : Math.max(0, legs.findIndex((leg) => leg.mode !== 'walk'))) : -1;
         const rails = legs.map((leg) => {
           const mode = leg.mode === 'walk' ? 'walk' : 'transit';
           const branded = 'color' in leg && typeof leg.color === 'string' ? leg.color : null;
@@ -1567,6 +1572,15 @@ export function mountTrip(
         rails.forEach((rail, index) => {
           const transfer = transferRow(legs[index]!, locale);
           if (legs[index] === entry.depart) editLegNote(transfer, entry.depart, city.slug);
+          if (index === fareAt) {
+            const cost = stopCostEl({ id: '', food: 0, ticket: fare }, locale);
+            transfer.append(cost);
+            // The row is named by its aria-label, so the fare joins it.
+            transfer.setAttribute(
+              'aria-label',
+              `${transfer.getAttribute('aria-label')}, ${cost.firstElementChild?.getAttribute('aria-label')}`,
+            );
+          }
           transfer.classList.add('tb-timeline__hop');
           transfer.style.setProperty('--line-color', rail.color);
           if (chipTone(rail.color) === 'ink') transfer.classList.add('is-ink');

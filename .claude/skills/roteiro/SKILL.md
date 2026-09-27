@@ -15,7 +15,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 | O que fazer no lugar: o que pedir, ingresso, horário que importa | nota da parada, depois de ` — ` |
 | Como chegar à próxima parada | `  - via:` embaixo da parada de onde se sai |
 | Detalhe do trajeto: preço do carro, onde encontrar o motorista, plataforma | nota do trecho, depois de ` — ` no `via:` |
-| Quanto cada pessoa paga naquele trecho (ticket avulso de metrô ou RER) | `· €2,55` no `via:`, antes da nota. Entra no card de ingressos |
+| Quanto cada pessoa paga a mais que o passe semanal naquele trecho (ticket avulso num dia sem passe, a compra do passe) | `· €2,55` no `via:`, antes da nota. Trecho coberto pelo passe fica sem `€`. Entra no card de ingressos e aparece à direita do trecho |
 | Narrativa do dia | parágrafo sob o dia |
 | Alternativa, plano B, aviso de greve | só se o usuário pedir. Se não pediu, sugira na resposta |
 

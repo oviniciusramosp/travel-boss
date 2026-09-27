@@ -616,15 +616,22 @@
   justify-self: end;
 }
 
-/* The stop's food and ticket per person, right of the note, in the actions column. */
-.tb-list.tb-timeline > .tb-row > .tb-stop-costs {
+/* Per person, at the right edge: a stop's food and ticket beside its note, a leg's extra fare beside the leg. */
+.tb-list.tb-timeline > :is(.tb-row, .tb-transfer) > .tb-stop-costs {
   grid-column: 3;
-  grid-row: 3;
-  align-self: start;
   justify-self: end;
-  margin-top: calc(-1 * var(--tl-row-gap));
   line-height: var(--leading-caption);
   white-space: nowrap;
+}
+
+.tb-list.tb-timeline > .tb-row > .tb-stop-costs {
+  grid-row: 3;
+  align-self: start;
+  margin-top: calc(-1 * var(--tl-row-gap));
+}
+
+.tb-list.tb-timeline > .tb-transfer > .tb-stop-costs {
+  grid-row: 1;
 }
 
 /* Comments: the user's requests to the LLM, under the stop they are about. */
