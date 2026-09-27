@@ -383,10 +383,16 @@ button {
   font-family: var(--font-geist);
 }
 
+.tb-map .tb-map-control-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin: 0 var(--spacing-12) var(--spacing-12) 0;
+}
+
 .tb-map .tb-map-controls {
   display: flex;
   flex-direction: column;
-  margin: 0 var(--spacing-12) var(--spacing-12) 0;
   padding: var(--inset-group);
   border: 0;
   border-radius: var(--r-group);
@@ -709,6 +715,32 @@ button {
 
 .tb-pin__face.is-on-ink {
   color: var(--color-on-ink);
+}
+
+.tb-pin__heart {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--pin-color);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.tb-pin__heart .material-symbols-rounded {
+  font-size: var(--h-md);
+}
+
+.tb-map.tb-show-favorites .tb-pin.is-favorite .tb-pin__heart {
+  display: flex;
+}
+
+.tb-map.tb-show-favorites .tb-pin.is-favorite .tb-pin__face {
+  display: none;
+}
+
+.tb-map.tb-show-favorites .leaflet-marker-icon.tb-pin-wrap:has(.is-favorite) {
+  opacity: 1;
 }
 
 .tb-pin:not(.tb-pin--star) .tb-pin__face::after {

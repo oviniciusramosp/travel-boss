@@ -16,7 +16,7 @@ function relabel(button: HTMLButtonElement, label: string, name: IconName) {
   if (glyph) glyph.textContent = name;
 }
 
-/** Zoom, fit, water, restrooms, and fullscreen. The fullscreen target includes the place panel. */
+/** Separate navigation and map-layer bars. Fullscreen includes the place panel. */
 export function attachMapControls(
   map: LeafletMap,
   host: HTMLElement,
@@ -28,6 +28,7 @@ export function attachMapControls(
   const fitBtn = iconButton({ icon: 'fit_screen', label: 'Fit places' });
   const water = iconButton({ icon: 'water_drop', label: 'Drinking water', pressed: false });
   const toilets = iconButton({ icon: 'wc', label: 'Restrooms', pressed: false });
+  const favorites = iconButton({ icon: 'favorite', label: 'Show favorites', pressed: false });
   const fullscreen = iconButton({ icon: 'fullscreen', label: 'Full screen', pressed: false });
 
   const syncZoom = () => {
@@ -44,6 +45,7 @@ export function attachMapControls(
     relabel(fitBtn, pickLocale(uiLocale(), { en: 'Fit places', 'pt-BR': 'Enquadrar lugares' }), 'fit_screen');
     relabel(water, pickLocale(uiLocale(), { en: 'Drinking water', 'pt-BR': 'Água potável' }), 'water_drop');
     relabel(toilets, pickLocale(uiLocale(), { en: 'Restrooms', 'pt-BR': 'Banheiros' }), 'wc');
+    relabel(favorites, pickLocale(uiLocale(), { en: 'Show favorites', 'pt-BR': 'Mostrar favoritos' }), 'favorite');
     relabel(fullscreen, on ? exit : enter, on ? 'fullscreen_exit' : 'fullscreen');
     fullscreen.setAttribute('aria-pressed', on ? 'true' : 'false');
   };
@@ -65,6 +67,10 @@ export function attachMapControls(
     button.addEventListener('click', () => setAmenity(kind, !amenityOn(kind)));
   }
   document.addEventListener(AMENITY_EVENT, syncAmenities);
+  favorites.addEventListener('click', () => {
+    const on = host.classList.toggle('tb-show-favorites');
+    favorites.setAttribute('aria-pressed', String(on));
+  });
   fullscreen.addEventListener('click', () => {
     if (document.fullscreenElement === shell) void document.exitFullscreen();
     else void shell.requestFullscreen();
@@ -80,10 +86,17 @@ export function attachMapControls(
   map.on('zoomend', syncZoom);
   syncLabels();
   syncZoom();
+  syncAmenities();
 
   const bar = document.createElement('div');
-  bar.className = 'tb-map-controls';
-  bar.append(zoomIn, zoomOut, fitBtn, water, toilets, fullscreen);
+  bar.className = 'tb-map-control-stack';
+  const navigation = document.createElement('div');
+  navigation.className = 'tb-map-controls';
+  navigation.append(zoomIn, zoomOut, fitBtn, fullscreen);
+  const layers = document.createElement('div');
+  layers.className = 'tb-map-controls';
+  layers.append(water, toilets, favorites);
+  bar.append(navigation, layers);
   DomEvent.disableClickPropagation(bar);
   DomEvent.disableScrollPropagation(bar);
 

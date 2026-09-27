@@ -55,7 +55,17 @@ describe('pinHtml', () => {
     const model = pinModel({ label: 'A', color: '#000', category: 'parks' });
     expect(samePinModel(model, { ...model })).toBe(true);
     expect(samePinModel(model, { ...model, featured: true })).toBe(false);
+    expect(samePinModel(model, { ...model, favorite: true })).toBe(false);
     expect(samePinModel(undefined, model)).toBe(false);
+  });
+
+  it('marks only catalog favorites for the heart overlay and preserves their normal face', () => {
+    const favorite = pinModel({ label: 'Favorite', category: 'tourist', favorite: true });
+    const normal = pinModel({ label: 'Other', category: 'tourist' });
+    expect(pinHtml(favorite, undefined, 'heart')).toContain('tb-pin__heart');
+    expect(pinHtml(favorite)).toContain('tb-pin__star');
+    expect(pinHtml(normal, undefined, 'heart')).not.toContain('tb-pin__heart');
+    expect(pinHtml(normal)).not.toContain('is-favorite');
   });
 });
 

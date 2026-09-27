@@ -20,6 +20,7 @@ export type PinModel = {
   category?: string;
   subcategories?: readonly string[] | null;
   featured: boolean;
+  favorite: boolean;
   number: string;
   glyph: string;
   star: boolean;
@@ -41,6 +42,7 @@ export function pinModel(input: {
   label: string;
   color?: string;
   featured?: boolean;
+  favorite?: boolean;
   number?: number;
   category?: string;
   subcategories?: readonly string[] | null;
@@ -53,6 +55,7 @@ export function pinModel(input: {
     category,
     subcategories: input.subcategories,
     featured: Boolean(input.featured),
+    favorite: Boolean(input.favorite),
     number: input.number == null ? '' : String(input.number),
     glyph,
     star: category === 'tourist',
@@ -67,6 +70,7 @@ export function samePinModel(a: PinModel | undefined, b: PinModel): boolean {
     a.glyph === b.glyph &&
     a.star === b.star &&
     a.featured === b.featured &&
+    a.favorite === b.favorite &&
     a.number === b.number
   );
 }
@@ -80,12 +84,13 @@ function starSvg(): string {
 }
 
 /** `.tb-pin` markup. Zoom size is `--pin-scale` on the map, not width. */
-export function pinHtml(model: PinModel, state?: { active?: boolean; hover?: boolean }): string {
+export function pinHtml(model: PinModel, state?: { active?: boolean; hover?: boolean }, heart = ''): string {
   const classes = [
     'tb-pin',
     model.star ? 'tb-pin--star' : '',
     model.glyph ? 'tb-pin--has-glyph' : 'tb-pin--dot',
     model.featured ? 'is-featured' : '',
+    model.favorite ? 'is-favorite' : '',
     state?.active ? 'is-active' : '',
     state?.hover ? 'is-hover' : '',
   ]
@@ -96,7 +101,7 @@ export function pinHtml(model: PinModel, state?: { active?: boolean; hover?: boo
   const face = model.star
     ? `<span class="tb-pin__face${tone}">${starSvg()}${glyph}</span>`
     : `<span class="tb-pin__face${tone}">${glyph}</span>`;
-  return `<span class="${classes}" style="--pin-color:${model.color}">${face}</span>`;
+  return `<span class="${classes}" style="--pin-color:${model.color}">${face}${model.favorite ? `<span class="tb-pin__heart">${heart}</span>` : ''}</span>`;
 }
 
 export function pinBox(featured: boolean): { size: number; anchor: number } {

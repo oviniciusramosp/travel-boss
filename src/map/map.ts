@@ -14,6 +14,7 @@ import {
   type Marker,
 } from 'leaflet';
 import { placeCategoryMeta } from '../catalog';
+import { icon } from '../ui/icons';
 import {
   CHROME_MOTION_EVENT,
   CHROME_SETTLED_EVENT,
@@ -64,6 +65,7 @@ function modelFor(pin: MapPin): PinModel {
     label: pin.label,
     color: pin.color || fromCategory || cssToken('--color-ink', PIN_FALLBACK),
     featured: Boolean(pin.featured || place?.featured),
+    favorite: Boolean(place?.favorite),
     number: pin.number,
     category,
     subcategories: place?.subcategories,
@@ -74,7 +76,7 @@ function pinIcon(model: PinModel, state?: { active?: boolean; hover?: boolean })
   const box = pinBox(model.featured);
   return divIcon({
     className: 'tb-pin-wrap',
-    html: pinHtml(model, state),
+    html: pinHtml(model, state, model.favorite ? icon('favorite', { fill: true }).outerHTML : ''),
     iconSize: [box.size, box.size],
     iconAnchor: [box.anchor, box.anchor],
     tooltipAnchor: [0, model.featured ? -18 : -12],
