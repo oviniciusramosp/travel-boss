@@ -209,13 +209,12 @@ export function estimateLegDurationMin(
   );
 }
 
-/** Always-visible duration chip next to transfer label */
+/** Always-visible duration chip next to transfer label. From 60 min it reads like the trip Markdown: `~6h37`, `~1h`. */
 export function formatLegDuration(min: number): LString {
   const n = Math.max(1, Math.round(min));
-  return {
-    en: `~${n} min`,
-    'pt-BR': `~${n} min`,
-  };
+  const rest = n % 60;
+  const text = n < 60 ? `~${n} min` : `~${Math.floor(n / 60)}h${rest ? String(rest).padStart(2, '0') : ''}`;
+  return { en: text, 'pt-BR': text };
 }
 
 /**
