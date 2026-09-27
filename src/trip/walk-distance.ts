@@ -26,6 +26,18 @@ export function walkedMeters(
   return segments.reduce((sum, segment) => (segment.mode === 'walk' ? sum + polylineMeters(segment.latlngs) : sum), 0);
 }
 
+/** A list note that starts with `+3 km`, `+1,5 km` or `+800 m` adds that much to the day (queues, a museum's corridors). */
+const EXTRA = /^\+\s*(\d+(?:[.,]\d+)?)\s*(km|m)\b/i;
+
+export function extraWalkMeters(texts: readonly string[]): number {
+  return texts.reduce((sum, text) => {
+    const match = EXTRA.exec(text.trim());
+    if (!match) return sum;
+    const value = Number(match[1]!.replace(',', '.'));
+    return sum + (match[2]!.toLowerCase() === 'km' ? value * 1000 : value);
+  }, 0);
+}
+
 /** `800 m`, `4,2 km`, `12 km`. Under 1 km in metres (to 50 m), under 10 km with one decimal. */
 export function formatWalk(meters: number, locale: Locale): string {
   if (meters < 950) return `${Math.max(50, Math.round(meters / 50) * 50)} m`;

@@ -59,8 +59,8 @@ import {
 } from './route';
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
-import { formatWalk, walkedMeters } from './walk-distance';
-import { attachSubPointNotes, stripNoteTitle, type SubPointNote } from './subpoints';
+import { extraWalkMeters, formatWalk, walkedMeters } from './walk-distance';
+import { attachSubPointNotes, stripNoteTitle, walkOrder, type SubPointNote } from './subpoints';
 import { aiBadge } from '../ui/ai-badge';
 import type { RouteDeps } from './route';
 import type { MapRouteSegment } from '../map/types';
@@ -510,6 +510,28 @@ export function mountTrip(
     });
   }
 
+  /**
+   * The list notes right under a stop, split into the ones that name a point of the place
+   * (with its index) and the loose ones. `index` is the row of each note.
+   */
+  function notesUnderStop(
+    rows: readonly DateStop[],
+    rowIndex: number,
+    place: TravelPlace,
+  ): { attached: (SubPointNote & { index: number })[]; loose: { index: number; time?: string; text: string }[] } {
+    const following: { index: number; label: string; time?: string; line: number }[] = [];
+    for (let next = rowIndex + 1; next < rows.length; next += 1) {
+      const candidate = rows[next]!.dated.day.stops[rows[next]!.stopIndex];
+      if (!candidate?.listNote) break;
+      following.push({ index: next, label: candidate.label, line: candidate.line, ...(candidate.time ? { time: candidate.time } : {}) });
+    }
+    const { attached, loose } = attachSubPointNotes(following, place.subPoints ?? []);
+    return {
+      attached: attached.map(({ note, sub }) => ({ sub, index: note.index, text: stripNoteTitle(note.label), line: note.line, ...(note.time ? { time: note.time } : {}) })),
+      loose: loose.map((note) => ({ index: note.index, text: note.label, ...(note.time ? { time: note.time } : {}) })),
+    };
+  }
+
   /** Stops of the routed date, including the train that leaves one city for the next. */
   function routeHops(): RouteHop[] {
     const date = routedDate();
@@ -519,6 +541,7 @@ export function mountTrip(
   /** Hops between the places of a date. `all` keeps the periods switched off the map: the walked distance counts them. */
   function hopsForDate(trip: Trip, date: string, all: boolean): RouteHop[] {
     const hops: RouteHop[] = [];
+    const { rows } = datePlan(daysOnDate(trip, date), date);
     let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
     for (const { row, place, on } of datePlaces(trip, date)) {
       // An off period breaks the chain, so the route never bridges it.
@@ -526,8 +549,12 @@ export function mountTrip(
         previous = null;
         continue;
       }
-      // A place with sub-points is entered at the first, walked through and left from the last.
-      const subs = place.subPoints ?? [];
+      // A place with sub-points is walked in the order of the day's timed notes (a revisit counts
+      // again), else the catalog order: entered at the first point, left from the last.
+      const catalog = place.subPoints ?? [];
+      const rowAt = rows.indexOf(row);
+      const order = catalog.length ? walkOrder(catalog.length, rowAt >= 0 ? notesUnderStop(rows, rowAt, place).attached : []) : [];
+      const subs = order.map((index) => catalog[index]!);
       const first = subs[0];
       const last = subs.at(-1);
       const point = { id: place.id, lat: first?.lat ?? place.lat, lng: first?.lng ?? place.lng };
@@ -544,10 +571,10 @@ export function mountTrip(
           from: point,
           to: { id: place.id, lat: last.lat, lng: last.lng },
           through: subs.slice(1, -1).map((sub) => [sub.lat, sub.lng] as [number, number]),
-          subPoints: subs.map((sub, index) => ({
-            lat: sub.lat,
-            lng: sub.lng,
-            label: pickLocale(locale, sub.name),
+          subPoints: order.map((index) => ({
+            lat: catalog[index]!.lat,
+            lng: catalog[index]!.lng,
+            label: pickLocale(locale, catalog[index]!.name),
             color: placeCategoryMeta[place.category].color,
             parentId: place.id,
             index,
@@ -729,8 +756,8 @@ export function mountTrip(
     };
   }
 
-  /** Metres walked per date, from the same segments the map would draw. */
-  const walkMeters = new Map<string, number>();
+  /** Metres walked per date: the route's walk segments, plus what `+N km` notes add. */
+  const walkMeters = new Map<string, { route: number; extra: number }>();
   let walkEpoch = 0;
   let walkAbort: AbortController | null = null;
 
@@ -739,7 +766,7 @@ export function mountTrip(
     main.querySelectorAll<HTMLElement>(`[data-walk="${CSS.escape(date)}"]`).forEach((slot) => {
       slot.hidden = meters == null;
       if (meters == null) return;
-      const value = formatWalk(meters, locale);
+      const value = formatWalk(meters.route + meters.extra, locale);
       const unit = pickLocale(locale, { en: ' on foot', 'pt-BR': ' a pé' });
       slot.replaceChildren(
         icon('directions_walk', { size: 16 }),
@@ -747,6 +774,15 @@ export function mountTrip(
         el('span', 'tb-walk__unit tb-reveal', unit),
       );
       slot.setAttribute('aria-label', `${value}${unit}`);
+      // Route and noted extras apart, and what is never counted.
+      const parts = [
+        pickLocale(locale, { en: `${formatWalk(meters.route, locale)} on the route`, 'pt-BR': `${formatWalk(meters.route, locale)} na rota` }),
+        ...(meters.extra > 0
+          ? [pickLocale(locale, { en: `+${formatWalk(meters.extra, locale)} noted`, 'pt-BR': `+${formatWalk(meters.extra, locale)} anotados` })]
+          : []),
+        pickLocale(locale, { en: 'queues not counted', 'pt-BR': 'filas fora da conta' }),
+      ];
+      slot.setAttribute('data-tip', parts.join('\n'));
     });
   }
 
@@ -769,15 +805,22 @@ export function mountTrip(
       for (const section of tripDates(trip)) {
         if (!alive || epoch !== walkEpoch) return;
         const hops = hopsForDate(trip, section.date, true);
-        if (!hops.length) {
+        const { rows: dateRows } = datePlan(daysOnDate(trip, section.date), section.date);
+        const extra = extraWalkMeters(
+          dateRows.flatMap((row) => {
+            const stop = row.dated.day.stops[row.stopIndex];
+            return stop?.listNote ? [stop.label] : [];
+          }),
+        );
+        if (!hops.length && !extra) {
           walkMeters.delete(section.date);
           paintWalk(section.date, shell.locale());
           continue;
         }
         try {
-          const segments = await resolveHopSegments(hops, routeDeps(controller.signal, color));
+          const segments = hops.length ? await resolveHopSegments(hops, routeDeps(controller.signal, color)) : [];
           if (!alive || epoch !== walkEpoch) return;
-          walkMeters.set(section.date, walkedMeters(segments));
+          walkMeters.set(section.date, { route: walkedMeters(segments), extra });
           paintWalk(section.date, shell.locale());
         } catch {
           /* Aborted or offline: the slot keeps its last value. */
@@ -1619,22 +1662,11 @@ export function mountTrip(
         if (!stop || stop.listNote || !stop.placeId) return;
         const place = placeById(entry.dated.city.slug, stop.placeId);
         if (!place?.subPoints?.length) return;
-        const following: { index: number; label: string; time?: string; line: number }[] = [];
-        for (let next = rowIndex + 1; next < rows.length; next += 1) {
-          const candidate = rows[next]!.dated.day.stops[rows[next]!.stopIndex];
-          if (!candidate?.listNote) break;
-          following.push({ index: next, label: candidate.label, line: candidate.line, ...(candidate.time ? { time: candidate.time } : {}) });
-        }
-        const { attached, loose } = attachSubPointNotes(following, place.subPoints);
-        if (attached.length) {
-          subNotesByRow.set(
-            rowIndex,
-            attached.map(({ note, sub }) => ({ sub, text: stripNoteTitle(note.label), line: note.line, ...(note.time ? { time: note.time } : {}) })),
-          );
-        }
+        const { attached, loose } = notesUnderStop(rows, rowIndex, place);
+        if (attached.length) subNotesByRow.set(rowIndex, attached.map(({ index: _index, ...note }) => note));
         // The other notes under the park go to its card too: the timeline keeps only the stops.
-        if (loose.length) parkNotesByRow.set(rowIndex, loose.map((note) => ({ text: note.label, ...(note.time ? { time: note.time } : {}) })));
-        for (const note of following) attachedRows.add(note.index);
+        if (loose.length) parkNotesByRow.set(rowIndex, loose.map(({ index: _index, ...note }) => note));
+        for (const note of [...attached, ...loose]) attachedRows.add(note.index);
         subNotesByPlace.set(place.id, { sub: subNotesByRow.get(rowIndex) ?? [], park: parkNotesByRow.get(rowIndex) ?? [] });
       });
       rows.forEach((entry, rowIndex) => {
@@ -1779,8 +1811,15 @@ export function mountTrip(
           const points = el('ol', 'tb-substops');
           points.hidden = !shown;
           const color = placeCategoryMeta[place.category].color;
-          subs.forEach((sub, index) => {
-            const note = subNotes.find((candidate) => candidate.sub === index);
+          // In the order the day walks them; a revisit shows again with its own time.
+          const visits = walkOrder(subs.length, subNotes);
+          const seenSub = new Map<number, number>();
+          visits.forEach((index) => {
+            const sub = subs[index]!;
+            const nth = seenSub.get(index) ?? 0;
+            seenSub.set(index, nth + 1);
+            const timed = subNotes.filter((candidate) => candidate.sub === index && candidate.time).sort((a, b) => a.time!.localeCompare(b.time!));
+            const note = timed[nth] ?? subNotes.find((candidate) => candidate.sub === index);
             const point = el('li', 'tb-substop');
             const dot = el('span', 'tb-substop__dot');
             dot.style.setProperty('--subpoint-color', color);

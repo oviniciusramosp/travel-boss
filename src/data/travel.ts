@@ -4622,6 +4622,43 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'La Flottille Versailles',
       },
       {
+        id: 'par-versailles-jardins',
+        name: { en: 'Gardens of Versailles', 'pt-BR': 'Jardins de Versalhes' },
+        category: 'parks',
+        aiSuggested: true,
+        aiReason: {
+          en: 'the walk from the palace down to the Grand Canal, so the day counts it and the route to the Trianon starts there',
+          'pt-BR': 'a caminhada do palácio até o Grand Canal, para o dia contar e a rota ao Trianon sair de lá',
+        },
+        description: {
+          en: 'Le Nôtre’s gardens below the palace: the Parterre d’Eau, the Latona basin, the Tapis Vert down to Apollo’s basin and the head of the Grand Canal. Musical Gardens days are included in the Passport.',
+          'pt-BR': 'Os jardins de Le Nôtre abaixo do palácio: o Parterre d’Eau, o tanque de Latona, o Tapis Vert descendo até o tanque de Apolo e a cabeceira do Grand Canal. Nos dias de Jardins Musicais, entra no Passport.',
+        },
+        googleRating: 4.8,
+        // Parterre d'Eau, the terrace right below the palace (OSM relation 12446402).
+        lat: 48.805084,
+        lng: 2.119191,
+        // Down the central axis, in walking order; the route to the Trianon leaves from the canal.
+        subPoints: [
+          { name: { en: 'Parterre d’Eau', 'pt-BR': 'Parterre d’Eau' }, lat: 48.805084, lng: 2.119191 },
+          { name: { en: 'Latona basin', 'pt-BR': 'Tanque de Latona' }, lat: 48.8055, lng: 2.117697 },
+          { name: { en: 'Tapis Vert', 'pt-BR': 'Tapis Vert' }, lat: 48.806562, lng: 2.113692 },
+          { name: { en: 'Apollo’s basin', 'pt-BR': 'Tanque de Apolo' }, lat: 48.807352, lng: 2.110707 },
+          { name: { en: 'Grand Canal', 'pt-BR': 'Grand Canal' }, lat: 48.808737, lng: 2.108834 },
+        ],
+        address: 'Jardins du château de Versailles, 78000 Versailles',
+        mapsQuery: 'Jardins du château de Versailles',
+        visit: {
+          ticket: {
+            currency: 'EUR',
+            free: true,
+            note: { en: 'Included in the Passport; €15 alone on Musical Gardens days', 'pt-BR': 'Incluso no Passport; €15 avulso em dia de Jardins Musicais' },
+          },
+          durationMin: 60,
+          durationMax: 90,
+        },
+      },
+      {
         id: 'par-trianon',
         name: { en: 'Domaine de Trianon', 'pt-BR': 'Domaine de Trianon' },
         category: 'tourist',

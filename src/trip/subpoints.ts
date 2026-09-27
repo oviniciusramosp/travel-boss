@@ -41,6 +41,34 @@ export function stripNoteTitle(text: string): string {
   return text.trim().replace(/^\*\*[^*]+\*\*\s*(?:—\s*)?/, '');
 }
 
+/**
+ * The order the day walks a place's points: its timed notes in time order, repeats and all
+ * (Pirates again at 19:15), with the points that have no time slotted after their catalog
+ * neighbour. Without timed notes it is the catalog order.
+ */
+export function walkOrder(count: number, notes: readonly { sub: number; time?: string }[]): number[] {
+  const timed = notes
+    .filter((note) => note.time && note.sub >= 0 && note.sub < count)
+    .sort((a, b) => a.time!.localeCompare(b.time!))
+    .map((note) => note.sub);
+  if (!timed.length) return Array.from({ length: count }, (_, index) => index);
+  const order = timed.filter((sub, at) => at === 0 || timed[at - 1] !== sub);
+  for (let sub = 0; sub < count; sub += 1) {
+    if (order.includes(sub)) continue;
+    // After the nearest earlier catalog point that is on the walk; before everything when none is.
+    let at = 0;
+    for (let earlier = sub - 1; earlier >= 0; earlier -= 1) {
+      const hit = order.indexOf(earlier);
+      if (hit >= 0) {
+        at = hit + 1;
+        break;
+      }
+    }
+    order.splice(at, 0, sub);
+  }
+  return order;
+}
+
 /** The notes that name a sub-point, with its index, and the ones that stay on the timeline. */
 export function attachSubPointNotes<T extends { label: string }>(
   notes: readonly T[],

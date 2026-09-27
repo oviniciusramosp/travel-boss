@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatWalk, polylineMeters, walkedMeters } from './walk-distance';
+import { extraWalkMeters, formatWalk, polylineMeters, walkedMeters } from './walk-distance';
 
 describe('polylineMeters', () => {
   it('measures one degree of latitude as ~111 km', () => {
@@ -33,5 +33,12 @@ describe('formatWalk', () => {
     expect(formatWalk(4_240, 'en')).toBe('4.2 km');
     expect(formatWalk(9_960, 'en')).toBe('10 km');
     expect(formatWalk(12_400, 'pt-BR')).toBe('12 km');
+  });
+});
+
+describe('extraWalkMeters', () => {
+  it('adds the kilometres or metres a note starts with, and nothing else', () => {
+    expect(extraWalkMeters(['+3 km — filas e idas e voltas', '+1,5 km — dentro do palácio', '+800 m'])).toBe(5300);
+    expect(extraWalkMeters(['Piquenique a 3 km do hotel', '3 km a pé', ''])).toBe(0);
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { attachSubPointNotes, matchSubPoint, noteTitle, stripNoteTitle } from './subpoints';
+import { attachSubPointNotes, matchSubPoint, noteTitle, stripNoteTitle, walkOrder } from './subpoints';
 
 const subs = [
   { name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' } },
@@ -51,5 +51,24 @@ describe('attachSubPointNotes', () => {
     const { attached, loose } = attachSubPointNotes(notes, subs);
     expect(attached.map((item) => [item.sub, item.note.line])).toEqual([[0, 10], [1, 12]]);
     expect(loose.map((note) => note.line)).toEqual([11]);
+  });
+});
+
+describe('walkOrder', () => {
+  it('follows the timed notes, keeps a revisit, and slots untimed points after their catalog neighbour', () => {
+    // Catalog: 0 Star Tours, 1 Buzz (untimed), 2 Bella Notte, 3 Alice, 4 Pirates, 5 Casa de Coco.
+    const notes = [
+      { sub: 0, time: '13:05' },
+      { sub: 2, time: '14:00' },
+      { sub: 4, time: '16:00' },
+      { sub: 5, time: '18:30' },
+      { sub: 4, time: '19:15' },
+      { sub: 3, time: '14:45' },
+    ];
+    expect(walkOrder(6, notes)).toEqual([0, 1, 2, 3, 4, 5, 4]);
+  });
+  it('is the catalog order without timed notes, and drops an index out of range', () => {
+    expect(walkOrder(3, [])).toEqual([0, 1, 2]);
+    expect(walkOrder(3, [{ sub: 7, time: '10:00' }, { sub: 1 }])).toEqual([0, 1, 2]);
   });
 });
