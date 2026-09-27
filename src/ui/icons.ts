@@ -72,6 +72,7 @@ export const ICONS = [
   'sync',
   'theater_comedy',
   'train',
+  'verified',
   'visibility',
   'warning',
   'water_drop',

@@ -23,6 +23,7 @@ describe('noteLines', () => {
       '  Malas: ~1h.',
     ]);
     expect(noteLines('comment', '  - comentário: x', 'um\ndois')).toEqual(['  - comentário: um\\', '    dois']);
+    expect(noteLines('decision', '  - decisão: x', 'um\ndois')).toEqual(['  - decisão: um\\', '    dois']);
     expect(noteLines('paragraph', 'x', 'um\ndois\ntrês')).toEqual(['um\\', 'dois\\', 'três']);
   });
 

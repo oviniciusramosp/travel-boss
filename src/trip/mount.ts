@@ -29,6 +29,7 @@ import {
   isOpenSlot,
   pastPeriods,
   periodSections,
+  periodWindows,
   seenFromOutside,
   withSubPointPlaces,
   zonedStamp,
@@ -155,8 +156,14 @@ function weatherSlot(key: string): HTMLSpanElement {
   return slot;
 }
 
-/** Glyph, low–high and chance of rain. The tip has the rest. */
-function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean, locale: Locale): void {
+/** Glyph, low–high and chance of rain. The tip has the rest, and the period's own window first. */
+function fillWeather(
+  slot: HTMLElement,
+  weather: Weather | null,
+  night: boolean,
+  locale: Locale,
+  window?: readonly [number, number],
+): void {
   slot.hidden = !weather;
   if (!weather) {
     slot.replaceChildren();
@@ -170,7 +177,8 @@ function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean,
   slot.replaceChildren(weatherIcon(look.icon), document.createTextNode(`${temp} · ${rain}%`));
   const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
   const source = pickLocale(locale, { en: 'ECMWF + NOAA ensembles', 'pt-BR': 'ensembles ECMWF + NOAA' });
-  const tip = `${pickLocale(locale, look.label)} · ${low}–${high}° · ${words} ${rain}% · ${source} · Open-Meteo`;
+  const span = window ? `${window[0]}h–${window[1]}h · ` : '';
+  const tip = `${pickLocale(locale, look.label)} · ${span}${low}–${high}° · ${words} ${rain}% · ${source} · Open-Meteo`;
   slot.setAttribute('data-tip', tip);
   slot.setAttribute('aria-label', tip);
 }
@@ -1040,13 +1048,15 @@ export function mountTrip(
     });
   }
 
-  /** Forecast per period on its fixed clock window, in the city of its first stop. The day card sums its periods. */
+  /** Forecast per period on the window covering its own stops (see `periodWindows`), in the city of its first stop. The day card sums its periods. */
   function paintWeather(trip: Trip) {
     const locale = shell.locale();
     for (const section of tripDates(trip)) {
       const card = main.querySelector<HTMLElement>(`details.tb-date[data-date="${CSS.escape(section.date)}"]`);
       if (!card) continue;
       const { rows, periods } = datePlan(section.cities.flatMap((group) => group.days), section.date);
+      const times = rows.map((row) => row.dated.day.stops[row.stopIndex]?.time);
+      const windows = periodWindows(times, periods, WINDOWS);
       const cityOf = (index: number) => {
         const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
         return record ? peekForecast(record.lat, record.lng) : null;
@@ -1055,10 +1065,10 @@ export function mountTrip(
       for (const { period, rows: indexes } of periodSections(periods)) {
         if (!period) continue;
         const hours = cityOf(indexes[0] ?? -1);
-        const weather = hours && weatherIn(hours, section.date, WINDOWS[period]);
+        const weather = hours && weatherIn(hours, section.date, windows[period]);
         if (weather) parts.push(weather);
         const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
-        if (slot) fillWeather(slot, weather, period === 'evening', locale);
+        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period]);
       }
       // A date without times reads all three periods of its first city.
       const whole = periods.some(Boolean) ? null : cityOf(0);
@@ -1186,8 +1196,19 @@ export function mountTrip(
       if (note && leg?.note && leg.line) editNote(note, 'via', leg.note, lineAt(leg.line), slug);
     };
 
-    /** The stop's comments go in `host`. Returns the button that adds one. */
+    /** The stop's decisions and comments go in `host`. Returns the button that adds a comment. */
     const comments = (host: HTMLElement, stop: TripStop, slug: string): HTMLButtonElement => {
+      // What the user settled: always shown, above the comments, with no delete button.
+      const decided = el('ul', 'tb-decisions');
+      for (const decision of stop.decisions ?? []) {
+        const item = el('li', 'tb-decision');
+        const body = el('span', 'tb-decision__text');
+        item.append(icon('verified', { size: 16 }), body);
+        decided.append(item);
+        editNote(body, 'decision', decision.text, lineAt(decision.line), slug, {
+          label: pickLocale(locale, { en: 'Decision', 'pt-BR': 'Decisão' }),
+        });
+      }
       const list = el('ul', 'tb-comments');
       const entry = (line: SeenLine | null, text: string) => {
         const item = el('li', 'tb-comment');
@@ -1211,10 +1232,10 @@ export function mountTrip(
         return editor;
       };
       for (const comment of stop.comments ?? []) entry(lineAt(comment.line), comment.text);
-      // Before the actions, so Tab reaches the comments first.
+      // Before the actions, so Tab reaches the decisions and comments first.
       const actions = host.querySelector(':scope > .tb-row__actions');
-      if (actions) actions.before(list);
-      else host.append(list);
+      if (actions) actions.before(decided, list);
+      else host.append(decided, list);
       const add = iconButton({
         icon: 'add_comment',
         label: pickLocale(locale, { en: 'Add comment', 'pt-BR': 'Adicionar comentário' }),

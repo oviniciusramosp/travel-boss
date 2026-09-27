@@ -7,12 +7,14 @@ import {
   pastPeriods,
   periodAt,
   periodSections,
+  periodWindows,
   rowPeriods,
   freeMinutes,
   isOpenSlot,
   seenFromOutside,
   withSubPointPlaces,
   zonedStamp,
+  type Period,
 } from './day-plan';
 
 describe('periodAt', () => {
@@ -124,6 +126,36 @@ describe('periodSections', () => {
       { period: 'afternoon', rows: [2] },
       { period: 'morning', rows: [3] },
     ]);
+  });
+});
+
+describe('periodWindows', () => {
+  const fallback: Record<Period, [number, number]> = { morning: [7, 12], afternoon: [12, 18], evening: [18, 23] };
+
+  it('ends the morning at the next timed stop, past a 14:00 lunch', () => {
+    const windows = periodWindows(['08:45', '14:00', '14:30'], ['morning', 'morning', 'afternoon'], fallback);
+    expect(windows.morning).toEqual([8, 14]);
+    expect(windows.afternoon[0]).toBe(14);
+  });
+
+  it('ends the night an hour past its last stop', () => {
+    const windows = periodWindows(['21:15', '23:30'], ['evening', 'evening'], fallback);
+    expect(windows.evening).toEqual([21, 24]);
+  });
+
+  it('keeps the fixed windows on a day with no time', () => {
+    const windows = periodWindows([undefined, undefined], [null, null], fallback);
+    expect(windows).toEqual(fallback);
+  });
+
+  it('grows a window under an hour to exactly one', () => {
+    const windows = periodWindows(['12:30', '12:50'], ['morning', 'afternoon'], fallback);
+    expect(windows.morning).toEqual([12, 13]);
+  });
+
+  it('treats a last stop before 05:00 as still that same night', () => {
+    const windows = periodWindows(['21:00', '00:45'], ['evening', 'evening'], fallback);
+    expect(windows.evening).toEqual([21, 24]);
   });
 });
 
