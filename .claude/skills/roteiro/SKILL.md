@@ -29,13 +29,16 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 - Texto que o usuário mandou entra como ele escreveu. Se o app depende de uma palavra que ele tirou (ver §4), avise em vez de recolocá-la escondido.
 - Não mova, crie nem remova parada fora do pedido sem dizer. Se uma mudança pedida arrasta outra (horário de saída, orçamento, período, pino), diga qual mudou e por quê.
 - Não mude preço, horário ou nota do Google no catálogo sem fonte consultada no dia.
+- Não grave `favorite: true` num lugar por conta própria — só a pedido do usuário — nem tire um `favorite` existente sem pedido.
+- Lugar novo que você acrescenta sem pedido direto pelo nome (busca na região, achado perto de outro lugar) leva `aiSuggested: true` e `aiReason` (en e pt-BR); pedido pelo nome não leva.
 
 ## 3. Antes de editar
 
-1. `graphify query "<tema>"`. Depois leia o dia inteiro no `.md` e as paradas vizinhas.
-2. Veja se outro agente mexeu no mesmo dia: `git worktree list` e `git log main..<branch>`. Rebase no branch que já mudou aquele dia.
-3. Lugar novo entra antes no catálogo: `src/data/travel.ts`, foto em `travel-photos.ts` (café e padaria: foto da comida), visita e preço em `travel-visit.ts`. O `.md` só referencia o id.
-4. Trecho de trem ou metrô só aparece no mapa com perna em `src/data/travel-itinerary-legs.ts` (`tripEuropa2026`, `ride(linha, de, até)`). Perna que ficou sem uso sai do arquivo.
+1. Confira onde sua edição vai cair: app do usuário aberto no checkout principal (5173) ou você está num worktree próprio? Num worktree, a mudança só chega ao app do usuário depois do merge — avise no resumo (ver "Quem edita onde" no `AGENTS.md`).
+2. `graphify query "<tema>"`. Depois leia o dia inteiro no `.md` e as paradas vizinhas.
+3. Veja se outro agente mexeu no mesmo dia: `git worktree list` e `git log main..<branch>`. Rebase no branch que já mudou aquele dia.
+4. Lugar novo entra antes no catálogo: `src/data/travel.ts`, foto em `travel-photos.ts` (café e padaria: foto da comida), visita e preço em `travel-visit.ts`. O `.md` só referencia o id.
+5. Trecho de trem ou metrô só aparece no mapa com perna em `src/data/travel-itinerary-legs.ts` (`tripEuropa2026`, `ride(linha, de, até)`). Perna que ficou sem uso sai do arquivo.
 
 ## 4. Regras do app que o texto controla
 
