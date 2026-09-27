@@ -7,13 +7,13 @@ import type { LString } from './travel';
 import {
   getTransitLine,
   haversineM,
+  metro14,
   metro2,
   metro4,
-  metro5,
-  metro8,
   metro9,
   rerA,
   rerB,
+  rerC,
   rerE,
   sliceLinePath,
   transilienL,
@@ -969,14 +969,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro9, 'iena', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
-  // 5/10
-  trainLeg('par-casa-do-gui', 'par-michalak-printemps', 35, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
-  // M8 skips République until 22/04/2027 (renovation): get off at Filles du Calvaire
-  trainLeg('par-galeries-lafayette', 'par-bouillon-republique', 20, [ride(metro8, 'opera', 'filles-calvaire')]),
-  trainLeg('par-bouillon-republique', 'par-casa-do-gui', 40, [
-    ride(metro5, 'republique', 'gare-nord'),
-    ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN),
-  ]),
+  // 5/10: Louvre, Champs-Élysées, then the Opéra shops; Chartier is 6 min from the RER E at Haussmann
+  trainLeg('par-casa-do-gui', 'par-bohemia', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
+  trainLeg('par-arc-triomphe', 'par-opera', 10, [ride(rerA, 'etoile', 'auber')]),
+  trainLeg('par-bouillon', 'par-casa-do-gui', 35, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
   trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
     ride(rerE, 'noisy-le-sec', 'magenta'),
@@ -1005,14 +1001,20 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
     ride(transilienL, 'saint-lazare', 'versailles-rd'),
   ]),
-  trainLeg('par-trianon', 'par-casa-do-gui', 110, [
-    ride(transilienL, 'versailles-rd', 'saint-lazare'),
-    ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
-  ]),
-  // 10/10
-  trainLeg('par-casa-do-gui', 'par-cedric-grolet', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
+  // 35 min on foot from the Trianon to the Rive Gauche station, then the RER C straight to the tower
+  trainLeg('par-trianon', 'par-eiffel', 65, [ride(rerC, 'versailles-chateau', 'champ-mars')]),
+  trainLeg('par-eiffel', 'par-entrecote', 25, [ride(metro9, 'trocadero', 'fdr')]),
   trainLeg('par-entrecote', 'par-casa-do-gui', 45, [
     ride(metro9, 'fdr', 'chaussee-antin'),
+    ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
+  ]),
+  // 10/10: Grolet and the Opéra by day, the BnF, the boat at sunset
+  trainLeg('par-casa-do-gui', 'par-cedric-grolet', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
+  trainLeg('par-palais-royal', 'par-bnf', 20, [ride(metro14, 'pyramides', 'bibliotheque')]),
+  trainLeg('par-cajou', 'par-opera', 20, [ride(metro14, 'bibliotheque', 'pyramides')]),
+  trainLeg('par-opera', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
+  trainLeg('par-bateaux-mouches', 'par-casa-do-gui', 50, [
+    ride(metro9, 'alma-marceau', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
 ];
