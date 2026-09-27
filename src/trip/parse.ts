@@ -20,6 +20,7 @@ export type TripLeg = {
 };
 
 export type TripStop = {
+  status?: 'a confirmar';
   time?: string;
   /** A list note's text. It and `note` hold hard breaks as `\n`. */
   label: string;
@@ -42,6 +43,8 @@ export type TripStop = {
 export type TripLine = { text: string; line: number };
 
 export type TripDay = {
+  line?: number;
+  status?: 'fechado';
   title: string;
   stops: TripStop[];
   notes: TripLine[];
@@ -311,7 +314,7 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
         reject(errors, lineNo, 'day-outside-city');
         continue;
       }
-      day = { title: trimmed.slice(4).trim(), stops: [], notes: [] };
+      day = { title: trimmed.slice(4).trim(), line: lineNo, stops: [], notes: [] };
       city.days.push(day);
       continue;
     }
@@ -366,6 +369,13 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       else if (city.budget) reject(errors, lineNo, 'budget-twice');
       else city.budget = { ...target, detail };
       continue;
+    }
+
+    const status = /^[ \t]+- status: (fechado|a confirmar)\s*$/.exec(line);
+    if (status && day) {
+      const stop = day.stops.at(-1);
+      if (stop && status[1] === 'a confirmar') { stop.status = 'a confirmar'; continue; }
+      if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
     }
 
     const via = VIA_BULLET.exec(line);

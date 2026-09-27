@@ -18,6 +18,7 @@ import { setDocumentTitle } from '../app/router';
 import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
+import { statusPatch } from './status';
 import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
@@ -1387,6 +1388,46 @@ export function mountTrip(
 
     const rawLines = lastRaw.split(/\r?\n/);
     const lineAt = (line: number): SeenLine => ({ line, lines: noteBlock(rawLines, line) });
+    const statusSync: (() => void)[] = [];
+    const statusButton = (line: number, kind: 'fechado' | 'a confirmar', active: boolean, changed: (on: boolean) => void) => {
+      const button = el('button', 'tb-btn-outline tb-review-status');
+      button.type = 'button';
+      let block = statusPatch(lastRaw, line, kind, active).before;
+      let busy = false;
+      const sync = () => {
+        button.textContent = kind === 'fechado'
+          ? pickLocale(locale, { en: active ? 'Day finalized' : 'Finalize day', 'pt-BR': active ? 'Dia fechado' : 'Fechar dia' })
+          : pickLocale(locale, { en: active ? 'To confirm' : 'Mark as tentative', 'pt-BR': active ? 'A confirmar' : 'Marcar dúvida' });
+        button.setAttribute('aria-pressed', String(active));
+      };
+      sync();
+      button.addEventListener('focus', () => onEditing(true));
+      button.addEventListener('blur', () => { if (!busy) onEditing(false); });
+      button.addEventListener('click', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (busy) return;
+        busy = true;
+        onEditing(true);
+        button.setAttribute('aria-busy', 'true');
+        const patch = statusPatch(block.join('\n'), 1, kind, !active);
+        const result = await sendPatch(id, { ...patch, line });
+        if (typeof result === 'number') {
+          block = patch.after!;
+          active = !active;
+          changed(active);
+          sync();
+          statusSync.forEach((update) => update());
+        } else noteFailed(result, '');
+        busy = false;
+        button.removeAttribute('aria-busy');
+        if (document.activeElement !== button) onEditing(false);
+      });
+      return button;
+    };
+    const stopStatus = (stop: TripStop) => statusButton(stop.line, 'a confirmar', Boolean(stop.status), (on) => {
+      stop.status = on ? 'a confirmar' : undefined;
+    });
     const editNote = (
       node: HTMLElement,
       kind: NoteKind,
@@ -1590,6 +1631,26 @@ export function mountTrip(
         );
       });
       const actions = el('span', 'tb-date__actions');
+      for (const { day, city } of daysHere) {
+        if (!day.line) continue;
+        const review = statusButton(day.line, 'fechado', Boolean(day.status), (on) => { day.status = on ? 'fechado' : undefined; });
+        review.dataset.dayAction = 'review';
+        const syncReview = () => {
+          const pending = day.stops.some((stop) => stop.status);
+          review.disabled = pending;
+          if (pending) {
+            review.textContent = pickLocale(locale, { en: 'Pending places', 'pt-BR': 'Pontos a confirmar' });
+            review.setAttribute('aria-pressed', 'false');
+          } else {
+            review.textContent = pickLocale(locale, { en: day.status ? 'Day finalized' : 'Finalize day', 'pt-BR': day.status ? 'Dia fechado' : 'Fechar dia' });
+            review.setAttribute('aria-pressed', String(Boolean(day.status)));
+          }
+          if (daysHere.length > 1) review.textContent += ` · ${cityDisplayName(city, locale)}`;
+        };
+        statusSync.push(syncReview);
+        syncReview();
+        actions.append(review);
+      }
       actions.append(copyDay, routeToggle);
       const chevron = icon('expand_more', { size: 18 });
       chevron.classList.add('tb-date__chevron');
@@ -1714,7 +1775,7 @@ export function mountTrip(
           noteBody.append(text);
           noteItem.append(noteBody);
           const noteActions = el('div', 'tb-row__actions');
-          noteActions.append(comments(noteItem, stop, city.slug));
+          noteActions.append(stopStatus(stop), comments(noteItem, stop, city.slug));
           noteItem.append(noteActions);
           markChanged(noteItem);
           lists[rowIndex]!.append(noteItem);
@@ -1832,13 +1893,15 @@ export function mountTrip(
             }
             if (subNotes.some((candidate) => candidate.time)) point.append(el('span', 'tb-substop__time', note?.time ?? ''));
             point.append(dot, name);
+            const source = note && daysHere.flatMap(({ day }) => day.stops).find((entry) => entry.line === note.line);
+            if (source) point.append(stopStatus(source));
             points.append(point);
           });
           // Without a single time in the list, the time column goes too.
           if (!subNotes.some((note) => note.time)) points.classList.add('is-untimed');
           item.append(points);
         }
-        item.querySelector('.tb-row__actions')?.append(comments(item, stop, city.slug));
+        item.querySelector('.tb-row__actions')?.append(stopStatus(stop), comments(item, stop, city.slug));
         markChanged(item);
         if (place) {
           // Row hover and focus light the pin the way hovering the dot does.

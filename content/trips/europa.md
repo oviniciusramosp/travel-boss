@@ -37,6 +37,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída. A **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e RER A de Auber até Charles de Gaulle–Étoile · 55 min · €32,40
 - 09:05 [Café Latéral](place:par-cafe-lateral) — **Café da manhã para levar**: um café allongé (€3,90) e um croissant (€3,20) por pessoa; pedir e retirar até 9h20, comendo no caminho
+  - status: a confirmar
 - 09:30 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
 - 09:55 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
 - 09:55 **Cartier** — Por fora

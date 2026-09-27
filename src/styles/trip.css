@@ -397,6 +397,21 @@
   gap: var(--inset-group);
 }
 
+.tb-review-status {
+  font-size: var(--text-caption);
+  white-space: nowrap;
+}
+
+.tb-review-status[aria-pressed='true'] {
+  color: var(--color-ink);
+  background: var(--color-paper);
+  font-weight: var(--font-weight-semibold);
+}
+
+.tb-row__actions:has(.tb-review-status[aria-pressed='true']) {
+  opacity: 1;
+}
+
 /* Route on the map: the button takes the walking route's blue. */
 .tb-date__actions .tb-icon-btn[data-day-action='route'][aria-pressed='true'] {
   background: var(--color-walk);

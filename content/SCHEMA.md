@@ -56,6 +56,8 @@ dates: 2026-04-06 → 2026-04-09
   - The line is not a bullet. An indented `- via:` before any day is still outside a day.
   - A paragraph that starts with `via:` under a day stays narrative. It is not this leg.
 - One H3 per day, in order, inside that city: `### Dia N — Title`.
+- A day can have `  - status: fechado` immediately below its H3. A stop or list note (including a timed sub-point note) can have `  - status: a confirmar` among its indented metadata. These lines are not stops or narrative. Absence means unreviewed day / no explicit doubt about the point.
+- The day button toggles its closed status; each point button toggles its uncertainty. A day with any uncertain point shows “Pontos a confirmar” and cannot be closed until the doubts are cleared. Closing does not lock editing. A saved closed mark becomes effective again once all doubts are cleared. Export includes “Dia fechado” only for an effectively closed day and preserves the point's uncertainty.
 - A stop is a bullet that starts with optional `HH:mm`, then a link.
   - Catalog stop: `[Label](place:<placeId>)`. The id must already exist on that city.
   - External stop: `[Label](https://...)`.

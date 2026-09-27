@@ -67,6 +67,8 @@ Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--
 
 ## Como um LLM edita um roteiro
 
+Estado de revisão: `  - status: fechado` logo sob o H3 registra um dia aprovado pelo usuário; preserve esse plano salvo pedido dele. `  - status: a confirmar` sob uma parada ou nota de sub-ponto indica dúvida explícita. Nunca feche um dia nem retire uma dúvida por conta própria. São metadados, não anotações; não alteram horários, orçamento ou rota.
+
 Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `content/trips/<id>.md`. Antes de mexer num roteiro, siga [`.claude/skills/roteiro/SKILL.md`](.claude/skills/roteiro/SKILL.md): onde vai cada informação, o que não acrescentar e o que conferir no app.
 
 - H1: título da viagem.
