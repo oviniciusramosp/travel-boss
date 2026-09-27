@@ -11,6 +11,53 @@ export type Ensemble = { time: string[]; members: Member[] };
 export const OPEN_METEO_URL = 'https://ensemble-api.open-meteo.com/v1/ensemble';
 export const OPEN_METEO_MODELS = 'ecmwf_ifs025,gfs05';
 export const MET_URL = 'https://api.met.no/weatherapi/locationforecast/2.0/complete';
+/** Open-Meteo's single-model forecast: its quota is separate from the ensemble API's. */
+export const OPEN_METEO_FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
+
+export function openMeteoForecastQuery(lat: number, lng: number, timeZone: string): string {
+  return new URLSearchParams({
+    latitude: String(lat),
+    longitude: String(lng),
+    hourly: 'temperature_2m,precipitation,cloud_cover,precipitation_probability',
+    timezone: timeZone,
+    forecast_days: '16',
+  }).toString();
+}
+
+/** Stand-in runs that carry a probability: with ten, a 30% hour rains in three of them. */
+export const STAND_IN_RUNS = 10;
+
+/**
+ * One model with a probability of rain, shaped as an ensemble: the same temperature and
+ * cloud in every run, and the hour's rain in the first `round(p / 10)` runs. The card then
+ * reads the chance as the share of wet runs, in steps of 10%, and the amount as the median
+ * of the wet ones, which is the model's amount.
+ */
+export function forecastToEnsemble(data: unknown): Ensemble | null {
+  const hourly = (data as { hourly?: Record<string, unknown> } | null)?.hourly;
+  const time = hourly?.time;
+  if (!hourly || !Array.isArray(time)) return null;
+  const column = (key: string) => {
+    const list = hourly[key];
+    return Array.isArray(list) && list.length === time.length ? (list as (number | null)[]) : null;
+  };
+  const temp = column('temperature_2m');
+  const rain = column('precipitation');
+  const cloud = column('cloud_cover');
+  const chance = column('precipitation_probability');
+  if (!temp || !rain || !cloud) return null;
+  const members: Member[] = Array.from({ length: STAND_IN_RUNS }, (_, run) => ({
+    temp,
+    cloud,
+    rain: rain.map((mm, index) => {
+      const p = chance?.[index];
+      // Without a probability the model's own amount decides, in every run.
+      if (p == null) return mm;
+      return run < Math.round(p / (100 / STAND_IN_RUNS)) ? mm : 0;
+    }),
+  }));
+  return { time: time as string[], members };
+}
 
 export function openMeteoQuery(lat: number, lng: number, timeZone: string): string {
   return new URLSearchParams({

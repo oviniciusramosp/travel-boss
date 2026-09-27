@@ -12,7 +12,17 @@ import {
   type TripPushReason,
 } from './src/trip/api';
 import { ICON_FONT_HREF } from './src/ui/icons';
-import { MET_URL, metToEnsemble, OPEN_METEO_URL, openMeteoQuery, parseEnsemble, type Ensemble } from './src/trip/weather-source';
+import {
+  forecastToEnsemble,
+  MET_URL,
+  metToEnsemble,
+  OPEN_METEO_FORECAST_URL,
+  OPEN_METEO_URL,
+  openMeteoForecastQuery,
+  openMeteoQuery,
+  parseEnsemble,
+  type Ensemble,
+} from './src/trip/weather-source';
 
 const tripsDir = resolve(process.cwd(), 'content/trips');
 
@@ -159,12 +169,22 @@ async function fetchForecast(lat: number, lng: number, tz: string): Promise<{ fr
     status = answer.status;
     if (answer.ok) {
       const hours = parseEnsemble(await answer.json());
-      if (hours) return { fresh: { at: Date.now(), source: 'Open-Meteo', hours } };
+      if (hours) return { fresh: { at: Date.now(), source: 'Open-Meteo (ECMWF + NOAA)', hours } };
     }
   } catch {
     status = null;
   }
-  // Second source: one model, hourly for two days and six-hourly to ten. MET wants a real User-Agent.
+  // Second source: Open-Meteo's single model, on a separate quota, with a probability of rain and 16 days.
+  try {
+    const single = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(lat, lng, tz)}`, { headers: { 'User-Agent': WEATHER_UA } });
+    if (single.ok) {
+      const hours = forecastToEnsemble(await single.json());
+      if (hours) return { fresh: { at: Date.now(), source: 'Open-Meteo (modelo)', hours } };
+    }
+  } catch {
+    /* Down too: on to MET. */
+  }
+  // Third source: MET Norway, one model without probability, hourly for two days and six-hourly to ten. It wants a real User-Agent.
   try {
     const met = await fetch(`${MET_URL}?lat=${lat}&lon=${lng}`, { headers: { 'User-Agent': WEATHER_UA } });
     if (met.ok) {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { metToEnsemble, openMeteoQuery, parseEnsemble } from './weather-source';
+import { forecastToEnsemble, metToEnsemble, openMeteoQuery, parseEnsemble, STAND_IN_RUNS } from './weather-source';
 
 describe('metToEnsemble', () => {
   const step = (time: string, temp: number, cloud: number, rain1?: number, rain6?: number) => ({
@@ -48,5 +48,28 @@ describe('openMeteoQuery / parseEnsemble', () => {
       members: [{ temp: [1], rain: [0], cloud: [2] }],
     });
     expect(parseEnsemble({})).toBeNull();
+  });
+});
+
+describe('forecastToEnsemble', () => {
+  it('spreads a probability over stand-in runs so the card reads it back as a chance', () => {
+    const data = {
+      hourly: {
+        time: ['2026-10-04T12:00', '2026-10-04T13:00'],
+        temperature_2m: [17, 18],
+        precipitation: [0.6, 0],
+        cloud_cover: [40, 50],
+        precipitation_probability: [30, 0],
+      },
+    };
+    const ensemble = forecastToEnsemble(data)!;
+    expect(ensemble.members).toHaveLength(STAND_IN_RUNS);
+    expect(ensemble.members.filter((member) => member.rain[0]! > 0)).toHaveLength(3);
+    expect(ensemble.members.every((member) => member.rain[1] === 0 && member.temp[0] === 17)).toBe(true);
+  });
+  it('keeps the amount in every run when the model gives no probability, and is null without the columns', () => {
+    const ensemble = forecastToEnsemble({ hourly: { time: ['a'], temperature_2m: [1], precipitation: [0.4], cloud_cover: [0] } })!;
+    expect(ensemble.members.every((member) => member.rain[0] === 0.4)).toBe(true);
+    expect(forecastToEnsemble({ hourly: { time: ['a'], temperature_2m: [1] } })).toBeNull();
   });
 });
