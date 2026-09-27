@@ -76,20 +76,3 @@ export function readPeriods(trip: string): PeriodPrefs {
 export function writePeriods(trip: string, prefs: Readonly<PeriodPrefs>): void {
   write(periodsKey(trip), prefs);
 }
-
-export function subStopsKey(trip: string): string {
-  return `substops:${trip}`;
-}
-
-/** Sub-point lists the user folded on the timeline (`false`), by `date:placeId`. Open is the default. */
-export function readSubStops(trip: string): Record<string, boolean> {
-  const value = read<unknown>(subStopsKey(trip), null);
-  const prefs: Record<string, boolean> = {};
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return prefs;
-  for (const [key, entry] of Object.entries(value)) if (typeof entry === 'boolean') prefs[key] = entry;
-  return prefs;
-}
-
-export function writeSubStops(trip: string, prefs: Readonly<Record<string, boolean>>): void {
-  write(subStopsKey(trip), prefs);
-}

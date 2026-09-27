@@ -1247,52 +1247,11 @@
 }
 
 /* Sub-points of a place (e.g. inside a park), in walking order, under the note. */
-/* The points in one line. It is a toggle: pressed, the points list under it as dots. */
-.tb-list.tb-timeline > .tb-row > .tb-row__subpoints {
-  display: inline-flex;
-  grid-column: 2;
-  grid-row: 4;
-  align-items: center;
-  gap: var(--spacing-4);
-  justify-self: start;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  border-radius: var(--r-min);
-  background: none;
-  color: var(--color-mid-gray);
-  font: inherit;
-  font-size: var(--text-caption);
-  line-height: var(--leading-caption);
-  text-align: left;
-  cursor: pointer;
-}
-
-.tb-row__subpoints-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.tb-row__subpoints > .material-symbols-rounded {
-  flex: none;
-  transition: transform var(--dur-fast) var(--ease-out);
-}
-
-.tb-row__subpoints[aria-expanded='true'] > .material-symbols-rounded {
-  transform: rotate(180deg);
-}
-
-.tb-row__subpoints:focus-visible {
-  outline: 2px solid var(--color-ink);
-  outline-offset: 2px;
-}
-
-/* The points as the map draws them: small dots in the parent's color, with the trip's time when it has one. */
+/* The points as the map draws them: small dots in the parent's color, in the day's order, with the trip's time when it has one. */
 .tb-list.tb-timeline > .tb-row > .tb-substops {
   display: grid;
   grid-column: 2;
-  grid-row: 5;
+  grid-row: 4;
   grid-template-columns: auto auto minmax(0, 1fr);
   align-items: center;
   column-gap: var(--spacing-8);
@@ -1302,8 +1261,9 @@
   list-style: none;
 }
 
-.tb-list.tb-timeline > .tb-row > .tb-substops[hidden] {
-  display: none;
+/* No time on any point: no column for it. */
+.tb-list.tb-timeline > .tb-row > .tb-substops.is-untimed {
+  grid-template-columns: auto minmax(0, 1fr);
 }
 
 .tb-substop {

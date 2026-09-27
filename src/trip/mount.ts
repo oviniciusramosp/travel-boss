@@ -15,7 +15,7 @@ import { buildItineraryRoute } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { fetchDrivingRoute, fetchWalkingRoute, peekWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
-import { readPeriods, readSubStops, writePeriods, writeSubStops } from '../app/store';
+import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
 import { googleDirectionsUrl } from './directions';
@@ -458,8 +458,6 @@ export function mountTrip(
   const routeHidden = new Set<string>();
   /** Folded and switched periods, `date:period`. Only what the user touched; saved per trip. */
   const periodPrefs = readPeriods(id);
-  /** Stops whose sub-points are listed on the timeline, by stop key. Saved per trip. */
-  const subStops = readSubStops(id);
   /** The trip's notes on a park's points and under the park, by place id, for a click on a map dot. */
   const subNotesByPlace = new Map<string, { sub: SubPointNote[]; park: { time?: string; text: string }[] }>();
 
@@ -1805,22 +1803,7 @@ export function mountTrip(
         if (place?.subPoints?.length && !missingPlace) {
           // The points in one line, and a toggle that lists them as small dots in the parent's color.
           const subs = place.subPoints;
-          // Open unless folded by hand; the choice is kept by date and place, so a note added above does not lose it.
-          const subKey = `${date}:${place.id}`;
-          const shown = subStops[subKey] !== false;
-          const toggle = el('button', 'tb-row__subpoints');
-          toggle.type = 'button';
-          toggle.setAttribute('aria-expanded', String(shown));
-          toggle.setAttribute(
-            'data-tip',
-            pickLocale(locale, { en: 'Points along the walk, on the timeline', 'pt-BR': 'Pontos do caminho na timeline' }),
-          );
-          toggle.append(
-            el('span', 'tb-row__subpoints-text', subs.map((sub) => pickLocale(locale, sub.name)).join(' → ')),
-            icon('expand_more', { size: 16 }),
-          );
           const points = el('ol', 'tb-substops');
-          points.hidden = !shown;
           const color = placeCategoryMeta[place.category].color;
           // In the order the day walks them; a revisit shows again with its own time.
           const visits = walkOrder(subs.length, subNotes);
@@ -1846,17 +1829,13 @@ export function mountTrip(
                 openPlace(place, record, locale, name, cardLinks(index));
               });
             }
-            point.append(el('span', 'tb-substop__time', note?.time ?? ''), dot, name);
+            if (subNotes.some((candidate) => candidate.time)) point.append(el('span', 'tb-substop__time', note?.time ?? ''));
+            point.append(dot, name);
             points.append(point);
           });
-          toggle.addEventListener('click', () => {
-            const open = points.hidden;
-            points.hidden = !open;
-            toggle.setAttribute('aria-expanded', String(open));
-            subStops[subKey] = open;
-            writeSubStops(id, subStops);
-          });
-          item.append(toggle, points);
+          // Without a single time in the list, the time column goes too.
+          if (!subNotes.some((note) => note.time)) points.classList.add('is-untimed');
+          item.append(points);
         }
         item.querySelector('.tb-row__actions')?.append(comments(item, stop, city.slug));
         markChanged(item);
