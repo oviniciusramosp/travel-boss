@@ -62,7 +62,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:00 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; 1h15 para escolher e experimentar, até as 19h15; fecha às 20h
 - 19:25 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
 - 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico no salão (~€15–28), sem reserva: 1h20 para fila e refeição; sair até 21h20
-- 21:25 [Passage des Panoramas](place:par-passage-panoramas) — Passear pela galeria coberta e fotografar; sair até 21h40 para chegar a Haussmann–Saint-Lazare por volta das 22h, antes das obras noturnas do RER E
+- 21:25 [Passage des Panoramas](place:par-passage-panoramas) — Se o jantar passar das **21h20**, pular esta parada e seguir direto para Haussmann–Saint-Lazare, para não arriscar perder o trem de volta. Caso contrário, passear e fotografar até 21h40; chegar à estação por volta das 22h, antes das obras noturnas do RER E
   - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min
 - 22:30 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
 
