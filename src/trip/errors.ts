@@ -21,6 +21,8 @@ const TEXT: Record<TripErrorCode, { en: string; 'pt-BR': string }> = {
   'via-duplicate': { en: 'duplicate via', 'pt-BR': 'via duplicado' },
   'comment-no-stop': { en: 'comment without a stop', 'pt-BR': 'comentário sem parada' },
   'decision-no-stop': { en: 'decision without a stop', 'pt-BR': 'decisão sem parada' },
+  'budget-empty': { en: 'budget without an amount', 'pt-BR': 'budget sem valor' },
+  'budget-twice': { en: 'duplicate budget', 'pt-BR': 'budget duplicado' },
   'stop-outside-day': { en: 'stop outside a day', 'pt-BR': 'parada fora de um dia' },
   'line-outside-day': { en: 'line outside a day', 'pt-BR': 'linha fora de um dia' },
   'no-title': { en: 'document without a title', 'pt-BR': 'documento sem título' },

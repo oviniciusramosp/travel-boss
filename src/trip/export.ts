@@ -50,6 +50,7 @@ export function tripToMarkdown(
   for (const city of trip.cities) {
     lines.push(`## ${city.name}`);
     if (city.dates) lines.push(`${city.dates.start} → ${city.dates.end}`);
+    if (city.budget) lines.push(`budget: ${city.budget.detail}`);
     if (city.leg) lines.push(`via: ${city.leg.detail}`);
     lines.push('');
     for (const day of city.days) {

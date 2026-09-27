@@ -47,10 +47,19 @@ export type TripDay = {
   notes: TripLine[];
 };
 
+/** Target per person per day, from the city header `budget:`. Only food is checked by the day card. */
+export type TripBudget = {
+  food?: number;
+  ticket?: number;
+  /** Author text after `budget:`. Export writes it back unchanged. */
+  detail: string;
+};
+
 export type TripCity = {
   slug: string;
   name: string;
   dates?: { start: string; end: string };
+  budget?: TripBudget;
   /** Departure to the next city. The header line `via:`, not a stop leg. */
   leg?: TripLeg;
   days: TripDay[];
@@ -73,6 +82,8 @@ export type TripErrorCode =
   | 'via-duplicate'
   | 'comment-no-stop'
   | 'decision-no-stop'
+  | 'budget-empty'
+  | 'budget-twice'
   | 'stop-outside-day'
   | 'line-outside-day'
   | 'no-title';
@@ -96,6 +107,10 @@ const DATES_LINE = /^dates:\s*(\d{4}-\d{2}-\d{2})\s*→\s*(\d{4}-\d{2}-\d{2})\s*
 const TIME_PREFIX = /^(\d{2}:\d{2})\s+/;
 const VIA_BULLET = /^[ \t]+-[ \t]+via:[ \t]*(.*)$/i;
 const CITY_VIA = /^via:[ \t]*(.*)$/i;
+const CITY_BUDGET = /^budget:[ \t]*(.*)$/i;
+// `comida €50 · ingressos €30`: a keyword, then `€` and the amount (`€47,50` or `€47.50`).
+const BUDGET_FOOD = /\b(?:comida|food)\s*€\s?(\d+(?:[.,]\d{1,2})?)/i;
+const BUDGET_TICKET = /\b(?:ingressos|tickets)\s*€\s?(\d+(?:[.,]\d{1,2})?)/i;
 const COMMENT_BULLET = /^[ \t]+-[ \t]+(?:comentário|comentario|comment):[ \t]*(.*)$/i;
 const DECISION_BULLET = /^[ \t]+-[ \t]+(?:decisão|decisao|decision):[ \t]*(.*)$/i;
 // `3h10` is glued. `1 h 30 min` needs the `min`. `1 h 2 h` stays two spans.
@@ -156,6 +171,17 @@ const FARE_TOKEN = /€\s?(\d+(?:[.,]\d{1,2})?)(?:\s?[–-]\s?(\d+(?:[.,]\d{1,2}
 
 function euros(value: string): number {
   return Number(value.replace(',', '.'));
+}
+
+/** Targets per person per day in the text after `budget:`. Either one may be missing; null when both are. */
+export function parseBudget(text: string): { food?: number; ticket?: number } | null {
+  const food = BUDGET_FOOD.exec(text)?.[1];
+  const ticket = BUDGET_TICKET.exec(text)?.[1];
+  if (food === undefined && ticket === undefined) return null;
+  return {
+    ...(food !== undefined ? { food: euros(food) } : {}),
+    ...(ticket !== undefined ? { ticket: euros(ticket) } : {}),
+  };
 }
 
 function legFare(head: string): number | undefined {
@@ -328,6 +354,17 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
         continue;
       }
       city.leg = readLeg(detail, lineNo, errors);
+      continue;
+    }
+
+    // Like `city:`, the target stays in the file: it is not a paragraph and the document does not draw it.
+    const headerBudget = trimmed.match(CITY_BUDGET);
+    if (headerBudget && city && !day) {
+      const detail = (headerBudget[1] ?? '').trim();
+      const target = parseBudget(detail);
+      if (!target) reject(errors, lineNo, 'budget-empty');
+      else if (city.budget) reject(errors, lineNo, 'budget-twice');
+      else city.budget = { ...target, detail };
       continue;
     }
 

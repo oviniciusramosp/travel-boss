@@ -65,6 +65,7 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 
 - H1: título da viagem.
 - H2: cidade, na ordem. A linha seguinte é `city: <slug>` do catálogo; `dates: YYYY-MM-DD → YYYY-MM-DD` é opcional.
+- Meta de comida: `budget: comida €50` no cabeçalho da cidade, junto de `city:` e `dates:`, é por pessoa por dia. Fica só no Markdown, como `city:`; o chip de comida do card do dia avisa quando a data passa. Ingressos não têm meta.
 - H3: `### Dia N — Título`.
 - Parada: bullet com `HH:mm` opcional e link `[Rótulo](place:<id>)` (o id já existe naquela cidade) ou URL `https://…`. Nota depois de ` — `.
 - Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho. Preço (`· €2,55`, antes da nota) só quando é gasto a mais que o passe semanal.

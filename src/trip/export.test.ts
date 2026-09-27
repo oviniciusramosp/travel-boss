@@ -181,6 +181,27 @@ via: trem Frecciarossa · 3h10
     expect(tripToHtml(exported)).toContain('<p>via: trem Frecciarossa · 3h10</p>');
   });
 
+  it('writes the city budget back as it was, under the dates', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+dates: 2026-10-04 → 2026-10-11
+budget: Comida €47,50 · ingressos €30
+via: trem Frecciarossa · 3h10
+
+### Dia 1 — Museu
+
+- 09:00 [Louvre](place:par-louvre)
+`;
+    const parsed = parseTrip('europa', 'content/trips/europa.md', source);
+    const exported = tripToMarkdown(parsed, () => 'https://maps.example/par-louvre');
+    expect(exported).toContain(
+      '## Paris\n2026-10-04 → 2026-10-11\nbudget: Comida €47,50 · ingressos €30\nvia: trem Frecciarossa · 3h10\n',
+    );
+    expect(parseTrip('europa', 'content/trips/europa.md', exported).cities[0]?.budget).toEqual(parsed.cities[0]?.budget);
+  });
+
   it('copies one day as markdown, with the via nested under its stop', () => {
     const source = `# Europa
 
