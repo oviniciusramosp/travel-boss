@@ -3427,13 +3427,15 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.779509,
         // The 7/10 afternoon and evening in walking order; each point sits on its place's pin.
         // The two restaurants bring their meals into the day budget (`placeId`).
+        // Commons has no Paris photo of Star Tours, Bella Notte or Casa de Coco (France has no
+        // freedom of panorama; those files get deleted). Tales of Magic shows the spot by day.
         subPoints: [
           { name: { en: 'Star Tours: The Adventures Continue', 'pt-BR': 'Star Tours: The Adventures Continue' }, lat: 48.87491, lng: 2.779051, placeId: 'par-dlp-star-tours' },
           { name: { en: 'Pizzeria Bella Notte', 'pt-BR': 'Pizzeria Bella Notte' }, lat: 48.874214, lng: 2.77626, placeId: 'par-bella-notte' },
-          { name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' }, lat: 48.8735, lng: 2.7728, placeId: 'par-dlp-pirates' },
-          { name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' }, lat: 48.8706, lng: 2.7768, placeId: 'par-dlp-phantom-manor' },
+          { name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' }, lat: 48.8735, lng: 2.7728, placeId: 'par-dlp-pirates', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pirates_of_the_Caribbean_-_panoramio.jpg/500px-Pirates_of_the_Caribbean_-_panoramio.jpg' },
+          { name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' }, lat: 48.8706, lng: 2.7768, placeId: 'par-dlp-phantom-manor', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Disneyland_Paris_-_4481390960.jpg/500px-Disneyland_Paris_-_4481390960.jpg' },
           { name: { en: 'Casa de Coco', 'pt-BR': 'Casa de Coco' }, lat: 48.871759, lng: 2.774672, placeId: 'par-dlp-casa-de-coco' },
-          { name: { en: 'Disney Tales of Magic, viewing spot', 'pt-BR': 'Disney Tales of Magic, lugar para os fogos' }, lat: 48.87225, lng: 2.77723, placeId: 'par-dlp-tales-of-magic' },
+          { name: { en: 'Disney Tales of Magic, viewing spot', 'pt-BR': 'Disney Tales of Magic, lugar para os fogos' }, lat: 48.87225, lng: 2.77723, placeId: 'par-dlp-tales-of-magic', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg/500px-Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg' },
         ],
         address: 'Boulevard de Parc, 77700 Chessy',
         mapsQuery: 'Disneyland Paris',
@@ -3450,9 +3452,10 @@ export const localTravelCities: TravelCity[] = [
         lat: 48.8683,
         lng: 2.780766,
         // The 7/10 morning in walking order; each point sits on its ride's pin.
+        // Commons has no Paris photo of the Spider-Man building or of World of Frozen.
         subPoints: [
           { name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' }, lat: 48.865951, lng: 2.779093, placeId: 'par-daw-spider-man' },
-          { name: { en: 'Ratatouille: The Adventure', 'pt-BR': 'Ratatouille: The Adventure' }, lat: 48.867962, lng: 2.775708, placeId: 'par-daw-ratatouille' },
+          { name: { en: 'Ratatouille: The Adventure', 'pt-BR': 'Ratatouille: The Adventure' }, lat: 48.867962, lng: 2.775708, placeId: 'par-daw-ratatouille', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Toon_Studio_Ratatouille_area.jpg/500px-Toon_Studio_Ratatouille_area.jpg' },
           { name: { en: 'Frozen Ever After', 'pt-BR': 'Frozen Ever After' }, lat: 48.864075, lng: 2.77343, placeId: 'par-daw-frozen' },
         ],
         address: 'Boulevard de Parc, 77700 Chessy',
