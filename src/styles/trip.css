@@ -252,13 +252,84 @@
 }
 
 .tb-date__meta {
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
   color: var(--color-mid-gray);
   font-size: var(--text-caption);
   font-variant-numeric: tabular-nums;
   line-height: var(--leading-caption);
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.tb-date__names {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* A dot between the cities, the count, the sky and the distance. */
+.tb-date__meta > * + *::before {
+  content: '·';
+  margin-inline-end: var(--spacing-4);
+}
+
+.tb-count,
+.tb-walk {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+
+.tb-walk[hidden] {
+  display: none;
+}
+
+.tb-walk > .material-symbols-rounded {
+  margin-inline-end: var(--inset-group);
+  color: var(--color-mid-gray);
+}
+
+/* Words the number or glyph already imply slide out on hover or focus; without hover they stay. */
+.tb-reveal {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: pre;
+  vertical-align: bottom;
+  transition:
+    max-width var(--dur-base) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.tb-date__head:is(:hover, :focus-within) :is(.tb-count__unit, .tb-walk__unit),
+.tb-weather:is(:hover, :focus-within) .tb-weather__text {
+  max-width: 12em;
+  opacity: 1;
+}
+
+.tb-weather__text {
+  margin-inline-start: 0;
+  transition:
+    max-width var(--dur-base) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out),
+    margin var(--dur-base) var(--ease-out);
+}
+
+.tb-weather:is(:hover, :focus-within) .tb-weather__text {
+  margin-inline-start: var(--inset-group);
+}
+
+@media (hover: none) {
+  .tb-reveal {
+    max-width: none;
+    opacity: 1;
+  }
+
+  .tb-weather__text {
+    margin-inline-start: var(--inset-group);
+  }
 }
 
 .tb-date__actions {
@@ -501,7 +572,6 @@
 .tb-weather {
   display: inline-flex;
   align-items: center;
-  gap: var(--inset-group);
   color: var(--color-mid-gray);
   font-size: var(--text-caption);
   font-variant-numeric: tabular-nums;
@@ -517,11 +587,6 @@
   flex: none;
   width: var(--icon-md);
   height: var(--icon-md);
-}
-
-.tb-date__meta .tb-weather::before {
-  content: '·';
-  margin-inline: var(--spacing-4);
 }
 
 /* In a period header the forecast sits just left of the switch. Without it,

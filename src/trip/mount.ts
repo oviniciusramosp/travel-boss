@@ -57,6 +57,9 @@ import {
 } from './route';
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
+import { formatWalk, walkedMeters } from './walk-distance';
+import type { RouteDeps } from './route';
+import type { MapRouteSegment } from '../map/types';
 import { chipTone, circleInk } from '../ui/contrast';
 import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
@@ -156,6 +159,15 @@ function weatherSlot(key: string): HTMLSpanElement {
   return slot;
 }
 
+/** Empty until the date's walks are measured. */
+function walkSlot(date: string): HTMLSpanElement {
+  const slot = el('span', 'tb-walk');
+  slot.dataset.walk = date;
+  slot.setAttribute('role', 'img');
+  slot.hidden = true;
+  return slot;
+}
+
 /** Glyph, low–high and chance of rain. The tip has the rest, and the period's own window first. */
 function fillWeather(
   slot: HTMLElement,
@@ -174,7 +186,8 @@ function fillWeather(
   const high = Math.round(weather.max);
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
-  slot.replaceChildren(weatherIcon(look.icon), document.createTextNode(`${temp} · ${rain}%`));
+  // Only the glyph shows; the reading slides out on hover (`.tb-reveal`).
+  slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', `${temp} · ${rain}%`));
   const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
   const source = pickLocale(locale, { en: 'ECMWF + NOAA ensembles', 'pt-BR': 'ensembles ECMWF + NOAA' });
   const span = window ? `${window[0]}h–${window[1]}h · ` : '';
@@ -456,14 +469,17 @@ export function mountTrip(
 
   /** Stops of the routed date, including the train that leaves one city for the next. */
   function routeHops(): RouteHop[] {
-    const trip = current;
     const date = routedDate();
-    if (!trip || !date) return [];
+    return current && date ? hopsForDate(current, date, false) : [];
+  }
+
+  /** Hops between the places of a date. `all` keeps the periods switched off the map: the walked distance counts them. */
+  function hopsForDate(trip: Trip, date: string, all: boolean): RouteHop[] {
     const hops: RouteHop[] = [];
     let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
     for (const { row, place, on } of datePlaces(trip, date)) {
       // An off period breaks the chain, so the route never bridges it.
-      if (!on) {
+      if (!on && !all) {
         previous = null;
         continue;
       }
@@ -601,12 +617,29 @@ export function mountTrip(
       map.setRoute(known);
       return;
     }
-    void resolveHopSegments(hops, {
-      neutralColor: color,
-      onUpdate: (segments) => {
+    void resolveHopSegments(
+      hops,
+      routeDeps(signal, color, (segments) => {
         if (!alive || epoch !== tripRouteEpoch) return;
         map.setRoute([...segments]);
-      },
+      }),
+    )
+      .then((segments) => {
+        if (!alive || epoch !== tripRouteEpoch) return;
+        map.setRoute(segments);
+      })
+      .catch(() => undefined);
+  }
+
+  /** How a hop becomes segments: cached walks, OSRM, the catalog's train legs. The map and the walked distance share it. */
+  function routeDeps(
+    signal: AbortSignal,
+    neutralColor: string,
+    onUpdate?: (segments: readonly MapRouteSegment[]) => void,
+  ): RouteDeps {
+    return {
+      neutralColor,
+      ...(onUpdate ? { onUpdate } : {}),
       walk: async (from, to, through) => {
         const cached = rememberedWalk(from, to);
         if (cached) return cached;
@@ -648,12 +681,64 @@ export function mountTrip(
           ...(segment.walkIndex != null ? { walkIndex: segment.walkIndex } : {}),
         }));
       },
-    })
-      .then((segments) => {
-        if (!alive || epoch !== tripRouteEpoch) return;
-        map.setRoute(segments);
-      })
-      .catch(() => undefined);
+    };
+  }
+
+  /** Metres walked per date, from the same segments the map would draw. */
+  const walkMeters = new Map<string, number>();
+  let walkEpoch = 0;
+  let walkAbort: AbortController | null = null;
+
+  function paintWalk(date: string, locale: Locale) {
+    const meters = walkMeters.get(date);
+    main.querySelectorAll<HTMLElement>(`[data-walk="${CSS.escape(date)}"]`).forEach((slot) => {
+      slot.hidden = meters == null;
+      if (meters == null) return;
+      const value = formatWalk(meters, locale);
+      const unit = pickLocale(locale, { en: ' on foot', 'pt-BR': ' a pé' });
+      slot.replaceChildren(
+        icon('directions_walk', { size: 16 }),
+        el('span', 'tb-walk__text', value),
+        el('span', 'tb-walk__unit tb-reveal', unit),
+      );
+      slot.setAttribute('aria-label', `${value}${unit}`);
+    });
+  }
+
+  function paintWalks(trip: Trip) {
+    const locale = shell.locale();
+    for (const section of tripDates(trip)) paintWalk(section.date, locale);
+  }
+
+  /**
+   * Measured again after every paint, so the number follows the file: known walks
+   * resolve at once from memory, a new hop fetches its route once and is remembered.
+   */
+  function refreshWalks(trip: Trip) {
+    const epoch = ++walkEpoch;
+    walkAbort?.abort();
+    const controller = new AbortController();
+    walkAbort = controller;
+    const color = neutralColor();
+    void (async () => {
+      for (const section of tripDates(trip)) {
+        if (!alive || epoch !== walkEpoch) return;
+        const hops = hopsForDate(trip, section.date, true);
+        if (!hops.length) {
+          walkMeters.delete(section.date);
+          paintWalk(section.date, shell.locale());
+          continue;
+        }
+        try {
+          const segments = await resolveHopSegments(hops, routeDeps(controller.signal, color));
+          if (!alive || epoch !== walkEpoch) return;
+          walkMeters.set(section.date, walkedMeters(segments));
+          paintWalk(section.date, shell.locale());
+        } catch {
+          /* Aborted or offline: the slot keeps its last value. */
+        }
+      }
+    })();
   }
 
   /** Route toggle of each card, updated in place. Maps opens per period: a whole day is too many stops. */
@@ -1299,12 +1384,16 @@ export function mountTrip(
       }).length;
       const summary = el('summary', 'tb-date__head');
       const heading = el('span', 'tb-date__heading');
-      const meta = el(
-        'span',
-        'tb-date__meta',
-        [names.join(' → '), stopCountLabel(stopCount, locale)].filter(Boolean).join(' · '),
+      const meta = el('span', 'tb-date__meta');
+      if (names.length) meta.append(el('span', 'tb-date__names', names.join(' → ')));
+      const countLabel = stopCountLabel(stopCount, locale);
+      const count = el('span', 'tb-count');
+      count.setAttribute('aria-label', countLabel);
+      count.append(
+        el('span', 'tb-count__n', String(stopCount)),
+        el('span', 'tb-count__unit tb-reveal', ` ${countLabel.replace(/^\d+\s*/, '')}`),
       );
-      meta.append(weatherSlot('day'));
+      meta.append(count, weatherSlot('day'), walkSlot(date));
       heading.append(el('span', 'tb-date__title', formatDayTitle(date, locale)), meta);
       const routeToggle = iconButton({
         icon: 'route',
@@ -1703,6 +1792,8 @@ export function mountTrip(
     );
     paintWeather(trip);
     refreshWeather(trip);
+    paintWalks(trip);
+    refreshWalks(trip);
     shell.setSource(trip.file);
     if (updated) flashSource(trip.file);
     previousTrip = trip;
