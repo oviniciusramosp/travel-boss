@@ -58,6 +58,9 @@
   --icon-sm: 16px;
   --icon-md: 18px;
   --icon-lg: 20px;
+  /* Water and restroom map pins: the glyph is the pin. */
+  --icon-pin: 24px;
+  --icon-pin-lg: 32px;
 
   --r-none: 0px;
   --r-min: 4px;

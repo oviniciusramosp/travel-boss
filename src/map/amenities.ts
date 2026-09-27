@@ -1,34 +1,16 @@
 import { divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { icon } from '../ui/icons';
-import { cameraMotion, cssToken } from '../ui/motion';
+import { cameraMotion } from '../ui/motion';
+import type { PackedAmenity } from './amenity-cells';
 import { AMENITY_EVENT, AMENITY_ICON, amenityOn, type AmenityKind } from './amenity-state';
-import { pinBox, pinHtml, type PinModel } from './pin-visual';
 
-const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 /** How far off the walking line a tap or toilet still counts, in meters. */
 export const AMENITY_RADIUS_M = 150;
 
 export type { AmenityKind };
 export type Amenity = { id: number; kind: AmenityKind; lat: number; lng: number; tags: Record<string, string> };
 type Line = readonly (readonly [number, number])[];
-
-/** [south, west, north, east] around every walking line, padded by the radius. */
-export function linesBounds(lines: readonly Line[], padM = AMENITY_RADIUS_M): [number, number, number, number] | null {
-  let s = 90, w = 180, n = -90, e = -180;
-  for (const line of lines) for (const [lat, lng] of line) {
-    s = Math.min(s, lat); n = Math.max(n, lat); w = Math.min(w, lng); e = Math.max(e, lng);
-  }
-  if (s > n) return null;
-  const dLat = padM / 111_320;
-  const dLng = dLat / Math.cos(((s + n) / 2) * (Math.PI / 180));
-  return [s - dLat, w - dLng, n + dLat, e + dLng];
-}
-
-export function amenityQuery([s, w, n, e]: readonly number[]): string {
-  const box = [s, w, n, e].map((v) => v.toFixed(5)).join(',');
-  return `[out:json][timeout:25];(node["amenity"="drinking_water"](${box});node["amenity"="toilets"](${box}););out;`;
-}
 
 /** Meters from a point to a segment, flat projection (fine at walking scale). */
 function toSegment(p: readonly [number, number], a: readonly [number, number], b: readonly [number, number]): number {
@@ -53,41 +35,52 @@ export function nearLines(points: readonly Amenity[], lines: readonly Line[], ra
   });
 }
 
-const cache = new Map<string, Promise<Amenity[]>>();
+type Box = readonly [number, number, number, number];
 
-/** The public Overpass answers 429/504 under load; two retries, 4 s and 8 s apart. */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function overpass(query: string, tries = 3): Promise<any> {
-  for (let i = 0; ; i++) {
-    const r = await fetch(OVERPASS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `data=${encodeURIComponent(query)}`,
-    });
-    if (r.ok) return r.json();
-    if (i + 1 >= tries || (r.status !== 429 && r.status !== 504)) throw new Error(String(r.status));
-    await new Promise((done) => setTimeout(done, 4000 * 2 ** i));
-  }
+export function boxesOverlap(a: Box, b: Box): boolean {
+  return a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
 }
 
-async function fetchAmenities(bounds: [number, number, number, number]): Promise<Amenity[]> {
-  const query = amenityQuery(bounds);
-  let hit = cache.get(query);
-  if (!hit) {
-    hit = overpass(query)
-      .then((data: { elements?: { id: number; lat: number; lon: number; tags?: Record<string, string> }[] }) =>
-        (data.elements ?? []).map((el) => ({
-          id: el.id,
-          kind: el.tags?.amenity === 'toilets' ? ('toilet' as const) : ('water' as const),
-          lat: el.lat,
-          lng: el.lon,
-          tags: el.tags ?? {},
-        })),
-      );
-    cache.set(query, hit);
-    hit.catch(() => cache.delete(query));
-  }
-  return hit;
+export function unpackAmenities(rows: readonly PackedAmenity[]): Amenity[] {
+  return rows.map(([lat, lng, kind, fee], id): Amenity => ({
+    id,
+    kind: kind === 1 ? 'toilet' : 'water',
+    lat,
+    lng,
+    tags: fee === 1 ? { fee: 'yes' } : fee === 2 ? { fee: 'no' } : ({} as Record<string, string>),
+  }));
+}
+
+// Written by `npm run travel:amenities`; a city's file loads once, on first need.
+let index: Promise<Record<string, Box>> | null = null;
+const cities = new Map<string, Promise<Amenity[]>>();
+
+function loadJson<T>(path: string): Promise<T> {
+  return fetch(`${import.meta.env.BASE_URL}amenities/${path}`).then((r) =>
+    r.ok ? r.json() : Promise.reject(new Error(String(r.status))),
+  );
+}
+
+async function amenitiesIn(view: Box): Promise<Amenity[]> {
+  index ??= loadJson<Record<string, Box>>('index.json').catch((error) => {
+    index = null;
+    throw error;
+  });
+  const slugs = Object.entries(await index)
+    .filter(([, box]) => boxesOverlap(box, view))
+    .map(([slug]) => slug);
+  const lists = await Promise.all(
+    slugs.map((slug) => {
+      let hit = cities.get(slug);
+      if (!hit) {
+        hit = loadJson<PackedAmenity[]>(`${slug}.json`).then(unpackAmenities);
+        cities.set(slug, hit);
+        hit.catch(() => cities.delete(slug));
+      }
+      return hit;
+    }),
+  );
+  return lists.flat();
 }
 
 function label(point: Amenity, locale: Locale): string {
@@ -104,36 +97,20 @@ function label(point: Amenity, locale: Locale): string {
   return `${base}${fee}`;
 }
 
-/** Tiles of `TILE`° covering [s, w, n, e], so a pan refetches only new ground. */
-export const TILE = 0.1;
-export function tilesFor([s, w, n, e]: readonly number[]): [number, number, number, number][] {
-  const out: [number, number, number, number][] = [];
-  for (let y = Math.floor(s / TILE); y * TILE < n; y++)
-    for (let x = Math.floor(w / TILE); x * TILE < e; x++)
-      out.push([y * TILE, x * TILE, (y + 1) * TILE, (x + 1) * TILE]);
-  return out;
-}
-
 /** Below this zoom the view holds too many taps for one DOM pin each. */
 const MIN_ZOOM = 14;
 
-function amenityPin(point: Amenity, near: boolean, color: string, text: string) {
-  const model: PinModel = {
-    color,
-    label: text,
-    featured: near,
-    number: '',
-    glyph: icon(AMENITY_ICON[point.kind], { fill: true }).outerHTML,
-    star: true,
-  };
-  const box = pinBox(near);
+/** The glyph is the pin, the way the tourist star replaces the circle. */
+function amenityPin(point: Amenity, near: boolean, text: string) {
+  const size = near ? 32 : 24;
+  const glyph = icon(AMENITY_ICON[point.kind], { fill: true }).outerHTML;
   const pin = marker([point.lat, point.lng], {
     icon: divIcon({
-      className: 'tb-pin-wrap tb-amenity-wrap',
-      html: pinHtml(model),
-      iconSize: [box.size, box.size],
-      iconAnchor: [box.anchor, box.anchor],
-      tooltipAnchor: [0, near ? -18 : -12],
+      className: 'tb-amenity-wrap',
+      html: `<span class="tb-amenity is-${point.kind}${near ? ' is-near' : ''}">${glyph}</span>`,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      tooltipAnchor: [0, -size / 2],
     }),
     keyboard: false,
     riseOnHover: true,
@@ -145,13 +122,14 @@ function amenityPin(point: Amenity, near: boolean, color: string, text: string) 
 }
 
 /**
- * Every water tap or toilet in view, each kind switched on its own, drawn as star pins.
- * The ones near a walking line are the big pins. Never part of the trip.
+ * Every water tap or toilet in view, each kind switched on its own, drawn as their own glyph.
+ * The ones near a walking line are bigger. Never part of the trip.
  */
 export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void } {
   const group = layerGroup().addTo(map);
   let walks: Line[] = [];
   let run = 0;
+  let debounce = 0;
 
   const paint = async () => {
     const id = ++run;
@@ -160,30 +138,26 @@ export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void
       return;
     }
     const view = map.getBounds();
-    // One tile at a time: Overpass answers 429/504 to a burst. A failed tile is retried next move.
-    const all: Amenity[] = [];
-    for (const tile of tilesFor([view.getSouth(), view.getWest(), view.getNorth(), view.getEast()])) {
-      try {
-        all.push(...(await fetchAmenities(tile)));
-      } catch {
-        // keep the tiles that answered
-      }
-      if (id !== run) return;
+    let all: Amenity[];
+    try {
+      all = await amenitiesIn([view.getSouth(), view.getWest(), view.getNorth(), view.getEast()]);
+    } catch {
+      return;
     }
+    if (id !== run) return;
     group.clearLayers();
     const shown = all.filter((point) => amenityOn(point.kind) && view.contains([point.lat, point.lng]));
     const near = new Set(nearLines(shown, walks).map((point) => point.id));
     const locale: Locale = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
-    const color = {
-      water: cssToken('--color-water', '#0891b2'),
-      toilet: cssToken('--color-restroom', '#7c3aed'),
-    };
     for (const point of shown) {
-      amenityPin(point, near.has(point.id), color[point.kind], label(point, locale)).addTo(group);
+      amenityPin(point, near.has(point.id), label(point, locale)).addTo(group);
     }
   };
 
-  map.on('moveend', () => void paint());
+  map.on('moveend', () => {
+    window.clearTimeout(debounce);
+    debounce = window.setTimeout(() => void paint(), 150);
+  });
   let wasOn = 0;
   document.addEventListener(AMENITY_EVENT, () => {
     const count = Number(amenityOn('water')) + Number(amenityOn('toilet'));
