@@ -181,7 +181,7 @@ via: trem Frecciarossa · 3h10
     expect(tripToHtml(exported)).toContain('<p>via: trem Frecciarossa · 3h10</p>');
   });
 
-  it('writes the city budget back as it was, under the dates', () => {
+  it('leaves the city budget out of the export, like the city slug', () => {
     const source = `# Europa
 
 ## Paris
@@ -196,10 +196,9 @@ via: trem Frecciarossa · 3h10
 `;
     const parsed = parseTrip('europa', 'content/trips/europa.md', source);
     const exported = tripToMarkdown(parsed, () => 'https://maps.example/par-louvre');
-    expect(exported).toContain(
-      '## Paris\n2026-10-04 → 2026-10-11\nbudget: Comida €47,50 · ingressos €30\nvia: trem Frecciarossa · 3h10\n',
-    );
-    expect(parseTrip('europa', 'content/trips/europa.md', exported).cities[0]?.budget).toEqual(parsed.cities[0]?.budget);
+    expect(exported).toContain('## Paris\n2026-10-04 → 2026-10-11\nvia: trem Frecciarossa · 3h10\n');
+    expect(exported).not.toContain('budget:');
+    expect(tripToHtml(exported)).not.toContain('budget');
   });
 
   it('copies one day as markdown, with the via nested under its stop', () => {

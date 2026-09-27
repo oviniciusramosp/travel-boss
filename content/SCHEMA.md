@@ -143,7 +143,7 @@ Export rewrites the same document for Apple Notes and Notion:
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.
 - `dates:` becomes a single line under the city heading.
-- A city-header `budget:` stays under it, copied as written (`budget: comida €47,50`).
+- A city-header `budget:` is left out, like `city:`: the target is for the app, not for the reader.
 - A city-header `via:` stays on the next line, copied as written. `3h10` is not rewritten as minutes.
 - Clipboard writes `text/html` (Apple Notes uses this and keeps headings, lists and links) and `text/plain` Markdown (Notion pastes this).
 - A `.md` download uses the same Markdown.
