@@ -986,10 +986,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-montparnasse': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Parc_de_Saint-Cloud_avec_vue_sur_la_Tour_Montparnasse.jpg/1280px-Parc_de_Saint-Cloud_avec_vue_sur_la_Tour_Montparnasse.jpg',
-      'Tour Montparnasse',
-      'Tour Montparnasse',
-      'Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QlqkpGttf5QhZpqcRO4GgFVkgvoLx3X_ubDgqFF3OaVAKdwvkuz5lrptL81rQJVXdPs_Ckd6BzGPocQZ73HZuSsun2Xkes_OPrYz82W-QLmKxqw3FJxEvpQSeDLgCHxNcyenPG=s928-k-no',
+      'Tour Montparnasse over the rooftops, Eiffel Tower in the distance',
+      'Tour Montparnasse sobre os telhados, com a Torre Eiffel ao fundo',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RL5PP2rYrfKBOi3lfiAAkQK0QW6232raeOELmTrQaFv3o7LFCzK_H9wIxhacRgIND3M44MjhX81a5iSKoCtkFjTQg1Ft8uHTOnmsgjRAC074ka71fjF3XKZPl0CMHvEvcP-MXkfZilcoU=s811-k-no',
+      'Rooftop terrace with the PARIS letters',
+      'Terraço do topo com as letras PARIS',
+      'Google Maps',
     ),
   ],
   'par-moulin-rouge': [

@@ -555,7 +555,7 @@ p.tb-budget {
   grid-row: 1;
 }
 
-.tb-list.tb-timeline > .tb-transfer > .tb-transfer__note {
+.tb-list.tb-timeline > .tb-transfer > :is(.tb-transfer__note, .tb-transfer__stations) {
   grid-column: 2;
   grid-row: 2;
 }

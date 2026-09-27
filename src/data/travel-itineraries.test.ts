@@ -129,9 +129,9 @@ describe('paris itinerary', () => {
     expect(towerLeg).toBeTruthy();
     const parts = expandTimelineTransferParts(towerLeg!);
     expect(parts.map((p) => p.mode)).toEqual(['transit', 'walk', 'transit']);
-    expect(parts[0]?.label.en).toBe('RER E → Haussmann–Saint-Lazare');
+    expect(parts[0]).toMatchObject({ label: { en: 'RER E' }, exit: 'Haussmann–Saint-Lazare' });
     expect(parts[1]?.label.en).toMatch(/Walk to M9/i);
-    expect(parts[2]?.label.en).toBe('M9 → Trocadéro');
+    expect(parts[2]).toMatchObject({ label: { en: 'M9' }, board: 'Havre–Caumartin', exit: 'Trocadéro' });
     // Same-station multi-hop (M14 + RER E) must not invent a walk
     const ory = legs.find((l) => l.label === 'M14 + RER E');
     const oryParts = expandTimelineTransferParts(ory!);
@@ -209,7 +209,7 @@ describe('paris itinerary', () => {
     }
   });
 
-  it('trip train chips: rail rides faster than metro, exit station, corridor walk', () => {
+  it('trip train chips: rail rides faster than metro, board and exit stations, corridor walk', () => {
     const rerE = getTransitLine('rer-e')!;
     const metro8 = getTransitLine('m8')!;
     const rail = sliceLinePath(rerE, 'noisy-le-sec', 'haussmann-saint-lazare');
@@ -218,7 +218,7 @@ describe('paris itinerary', () => {
       from: 'a',
       to: 'b',
       mode: 'transit',
-      hops: [{ line: 'rer-e', label: 'RER E', exit: 'Haussmann–Saint-Lazare', path: rail }],
+      hops: [{ line: 'rer-e', label: 'RER E', board: 'Noisy-le-Sec', exit: 'Haussmann–Saint-Lazare', path: rail }],
     });
     const [metroChip] = expandTimelineTransferParts({
       from: 'a',
@@ -226,7 +226,11 @@ describe('paris itinerary', () => {
       mode: 'transit',
       hops: [{ line: 'm8', label: 'M8', path: metro }],
     });
-    expect(railChip?.label.en).toBe('RER E → Haussmann–Saint-Lazare');
+    expect(railChip).toMatchObject({
+      label: { en: 'RER E' },
+      board: 'Noisy-le-Sec',
+      exit: 'Haussmann–Saint-Lazare',
+    });
     // ~11 km of RER in under 20 min; ~13 km of metro takes over 35
     expect(railChip?.durationMin).toBeLessThan(20);
     expect(metroChip?.durationMin).toBeGreaterThan(35);

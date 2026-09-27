@@ -89,15 +89,23 @@ describe('transferRowModel', () => {
     expect(dark.duration).toBe(pickLocale('pt-BR', formatLegDuration(12)));
   });
 
-  it('counts the stations of a ride and tags each walk of a train leg', () => {
+  it('lists where a ride boards and gets off, and tags each walk of a train leg', () => {
     const tower = legsForDay('paris-d1').find((leg) => leg.label === 'RER E + M9')!;
     const parts = expandTimelineTransferParts(tower);
     // Noisy-le-Sec → Pantin, Rosa Parks, Magenta, Haussmann–Saint-Lazare
-    expect(transferRowModel(parts[0]!, 'pt-BR').stations).toBe('4 estações');
-    expect(transferRowModel(parts[0]!, 'en').stations).toBe('4 stops');
+    const rer = transferRowModel(parts[0]!, 'pt-BR');
+    expect(rer.label).toBe('RER E');
+    expect(rer.stations).toEqual(['Noisy-le-Sec', 'Haussmann–Saint-Lazare (4 estações)']);
+    expect(transferRowModel(parts[0]!, 'en').stations).toEqual(['Noisy-le-Sec', 'Haussmann–Saint-Lazare (4 stops)']);
     const walk = parts.find((part) => part.mode === 'walk')!;
-    expect(transferRowModel(walk).stations).toBeNull();
+    expect(transferRowModel(walk).stations).toEqual([]);
     expect(transferRowModel(walk).walkIndex).toBe(1);
+
+    // A hand-drawn ride with no station names keeps its count; one name stands alone.
+    const [bare] = expandTimelineTransferParts({ ...tower, hops: [{ ...tower.hops![0]!, board: undefined, exit: undefined }] });
+    expect(transferRowModel(bare!, 'pt-BR').stations).toEqual(['4 estações']);
+    const [named] = expandTimelineTransferParts({ ...tower, hops: [{ ...tower.hops![0]!, board: undefined, path: [] }] });
+    expect(transferRowModel(named!, 'pt-BR').stations).toEqual(['Haussmann–Saint-Lazare']);
   });
 
   it('reads a metro hop and the walk to the next line', () => {
@@ -105,7 +113,7 @@ describe('transferRowModel', () => {
     expect(tower).toBeTruthy();
     const parts = expandTimelineTransferParts(tower!);
     const walk = parts.find((part) => part.mode === 'walk');
-    const m9 = parts.find((part) => part.label.en === 'M9 → Trocadéro');
+    const m9 = parts.find((part) => part.label.en === 'M9');
     expect(walk).toBeTruthy();
     expect(m9).toBeTruthy();
 
@@ -129,7 +137,8 @@ describe('transferRowModel', () => {
     expect(hop).toMatchObject({
       mode: 'transit',
       icon: 'directions_transit',
-      label: 'M9 → Trocadéro',
+      label: 'M9',
+      stations: ['Havre–Caumartin', 'Trocadéro (7 stops)'],
       duration: pickLocale('en', formatLegDuration(m9!.durationMin)),
       lineColor: m9!.color,
       hopIndex: 1,

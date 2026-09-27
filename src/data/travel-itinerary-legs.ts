@@ -35,7 +35,9 @@ export type ItineraryTransitHop = {
   path: LatLng[];
   /** Short label for this hop (e.g. "M14") */
   label?: string;
-  /** Station where this ride ends, shown on its chip ("RER E → Magenta"). */
+  /** Station where this ride starts, shown under its chip. */
+  board?: string;
+  /** Station where this ride ends, shown under the board station. */
   exit?: string;
   /** Walk from the previous ride, when the corridors run longer than the straight line. */
   transferMin?: number;
@@ -269,6 +271,9 @@ export type TimelineTransferPart = {
    * Walk has 0; transit uses hop/leg path length (min 2 when known).
    */
   stationCount: number;
+  /** Where the ride starts and ends, when known. Walks have neither. */
+  board?: string;
+  exit?: string;
 };
 
 function walkTo(name: string): LString {
@@ -342,15 +347,16 @@ export function expandTimelineTransferParts(
     for (let i = 0; i < hops.length; i++) {
       const hop = hops[i]!;
       const name = hopName(hop);
-      const chip = hop.exit ? `${name} → ${hop.exit}` : name;
       parts.push({
         mode: 'transit',
         leg,
-        label: { en: chip, 'pt-BR': chip },
+        label: { en: name, 'pt-BR': name },
         color: lineBrandColor(hop.line) ?? '#008fff',
         durationMin: transitPathDurationMin(hop.path, hop.line),
         hopIndex: i,
         stationCount: stationCountFromPath(hop.path),
+        ...(hop.board ? { board: hop.board } : {}),
+        ...(hop.exit ? { exit: hop.exit } : {}),
       });
 
       // Different stations (e.g. RER E St-Lazare → M9 St-Augustin): show walk
@@ -881,14 +887,16 @@ const day7: ItineraryLegDef[] = [
 ];
 
 /** day.id → ordered legs between primary stops (default arrival when day has variants) */
-/** One ride along a registry line, with where to get off. Throws on an unknown stretch. */
+/** One ride along a registry line, with where to get on and off. Throws on an unknown stretch. */
 function ride(line: TransitLine, from: string, to: string, transferMin?: number): ItineraryTransitHop {
   const path = sliceLinePath(line, from, to);
+  const board = line.stations.find((station) => station.id === from);
   const exit = line.stations.find((station) => station.id === to);
-  if (path.length < 2 || !exit) throw new Error(`${line.id}: no ride ${from} → ${to}`);
+  if (path.length < 2 || !board || !exit) throw new Error(`${line.id}: no ride ${from} → ${to}`);
   return {
     line: line.id,
     label: line.name.replace('Métro ', 'M'),
+    board: board.name,
     exit: exit.name,
     path,
     ...(transferMin ? { transferMin } : {}),
@@ -903,6 +911,7 @@ function trainLeg(from: string, to: string, durationMin: number, hops: Itinerary
 const rerCToPorteMaillot: ItineraryTransitHop = {
   line: 'rer-c',
   label: 'RER C',
+  board: 'Champ de Mars–Tour Eiffel',
   exit: 'Neuilly–Porte Maillot',
   path: [
     [48.856069, 2.289535], // Champ de Mars–Tour Eiffel

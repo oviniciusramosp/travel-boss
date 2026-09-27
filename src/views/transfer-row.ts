@@ -1,6 +1,7 @@
 /**
  * One line between stops: icon, label, duration, and the line chip.
  * Pass a `TimelineTransferPart` for one metro hop or "a pé até <linha>".
+ * A ride lists where you board and where you get off under the chip.
  * A whole multi-hop `ItineraryLegDef` stays a single row.
  */
 import {
@@ -35,8 +36,8 @@ export type TransferRowModel = {
   label: string;
   /** `formatLegDuration`, or null when the leg has no duration. */
   duration: string | null;
-  /** Stations to ride on one line ("4 estações"), or null. */
-  stations: string | null;
+  /** Lines under the chip: the board station, then the exit with the count ("Magenta (3 estações)"). */
+  stations: string[];
   /** The `via:` note after ` — `, shown under the row. */
   note: string | null;
   /** Null for walks and for transit with no brand color. */
@@ -111,13 +112,21 @@ function identityOf(leg: TransferLeg): Pick<TransferRowModel, 'from' | 'to' | 'h
 }
 
 /** Stations after boarding, to where you get off. A path lists both ends. */
-function stationsOf(leg: TransferLeg, locale: Locale): string | null {
-  if (!isTransferPart(leg) || leg.mode !== 'transit' || leg.stationCount < 2) return null;
+function stationCountOf(leg: TimelineTransferPart, locale: Locale): string | null {
+  if (leg.stationCount < 2) return null;
   const count = leg.stationCount - 1;
   return pickLocale(locale, {
     en: count === 1 ? '1 stop' : `${count} stops`,
     'pt-BR': count === 1 ? '1 estação' : `${count} estações`,
   });
+}
+
+/** Board station, then the exit with the count. A ride with no names keeps the count. */
+function stationsOf(leg: TransferLeg, locale: Locale): string[] {
+  if (!isTransferPart(leg) || leg.mode !== 'transit') return [];
+  const count = stationCountOf(leg, locale);
+  const exit = leg.exit && count ? `${leg.exit} (${count})` : (leg.exit ?? count);
+  return [leg.board, exit].filter((line): line is string => Boolean(line));
 }
 
 /** Icon, label, duration and line color. No DOM — safe under the node test runner. */
@@ -146,7 +155,7 @@ export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR'): HTMLLIE
   const item = el('li', `tb-transfer tb-transfer--${model.mode}`);
   item.setAttribute(
     'aria-label',
-    [model.label, model.duration, model.stations, model.note].filter(Boolean).join(', '),
+    [model.label, model.duration, ...model.stations, model.note].filter(Boolean).join(', '),
   );
   item.dataset.legMode = model.mode;
   if (model.from) item.dataset.legFrom = model.from;
@@ -169,9 +178,13 @@ export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR'): HTMLLIE
     main.append(el('span', 'tb-transfer__label', model.label));
   }
   if (model.duration) main.append(el('span', 'tb-transfer__duration', model.duration));
-  if (model.stations) main.append(el('span', 'tb-transfer__stations', model.stations));
 
   item.append(lead, main);
+  if (model.stations.length) {
+    const stations = el('span', 'tb-transfer__stations');
+    stations.append(...model.stations.map((line) => el('span', undefined, line)));
+    item.append(stations);
+  }
   if (model.note) item.append(el('span', 'tb-transfer__note', model.note));
   return item;
 }
