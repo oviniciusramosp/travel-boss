@@ -12,6 +12,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8), logo na saída da alfândega
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+- 16:00 **Comprar os doces do Cédric Grolet** — Fazer o [Click & Collect da Opéra](https://cedric-grolet.com/opera/) para **10/10 às 10h**, conforme o horário disponível no checkout; guardar a confirmação. As encomendas já estão abertas: não esperar a véspera.
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
   - via: RER E + metrô 9 · 45 min · €2,55
@@ -31,12 +32,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h · €2,55
 - 23:30 [Casa do Gui](place:par-casa-do-gui) — Fim do primeiro dia
 
-### Dia 2 — Seg 5/10 · Baguett’s, Arco do Triunfo, Louvre e compras na Opéra
+### Dia 2 — Seg 5/10 · Arco do Triunfo, Louvre e compras na Opéra
 
-- 07:40 [Casa do Gui](place:par-casa-do-gui) — Agora sim com o ticket **Navigo Semaine** vale de hoje até domingo
-  - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra, com a Navigo Semaine · 45 min · €32,40
-- 08:30 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã**: pancakes ou pain perdu; sair às 09h20
-  - via: metrô 1 até Charles de Gaulle–Étoile · 35 min — Caminhar até Palais Royal–Musée du Louvre e embarcar sentido La Défense
+- 09:00 [Casa do Gui](place:par-casa-do-gui) — **Café da manhã** em casa às 08h30; saída às 09h. A **Navigo Semaine** vale de hoje até domingo
+  - via: RER E até Haussmann–Saint-Lazare e RER A de Auber até Charles de Gaulle–Étoile · 55 min · €32,40
 - 09:55 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
 - 10:20 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
 - 10:20 **Cartier** — Por fora
@@ -184,16 +183,16 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - Almoço mais em conta: [La Flottille](place:par-la-flottille) — brasserie de 1900 no Grand Canal, pratos €16–20, almoço até 15h30
 - Opcional, no lugar do Trianon: [One Nation Paris (outlet)](place:par-one-nation) — do castelo, 20 min a pé até Versailles-Chantiers, linha N até Villepreux–Les Clayes (12 min) e 10 min a pé; aberto até 20h. Volta: linha N até Montparnasse (~30 min; último trem 21h56), metrô 4 até Gare de l'Est e RER E em Magenta
 
-### Dia 7 — Sáb 10/10 · Cédric Grolet, Ópera por dentro, Biblioteca e barco no Sena
+### Dia 7 — Sáb 10/10 · Cédric Grolet, Baguett’s, Biblioteca, Ópera e barco no Sena
 
-- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída
+- 09:10 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra · 45 min
-- 09:00 [Cédric Grolet](place:par-cedric-grolet) — **Café da manhã**: os doces saem às 9h. Faça o Click & Collect até quinta, 15h (flores de fruta €18) e retire às 9h, sem a fila de 1–2 h. Se o salão de chá já tiver reaberto, reserve a mesa das 9h; a loja só abre de quarta a domingo
-- 09:25 [Palais-Royal](place:par-palais-royal) — Comer os doces no jardim (abre às 8h)
+- 10:00 [Cédric Grolet](place:par-cedric-grolet) — **Café da manhã**: retirar os doces encomendados (flores €18) na fila prioritária de Click & Collect, com a confirmação. Retiradas de pâtisseries a partir das 10h; pode haver uma breve espera pela finalização
+- 10:25 [Palais-Royal](place:par-palais-royal) — Comer os doces no jardim
   - via: metrô 14 de Pyramides até Bibliothèque François Mitterrand · 20 min
-- 10:15 [Biblioteca Nacional](place:par-bnf) — Esplanada de madeira e o jardim entre as quatro torres. O passe de um dia do Haut-de-jardin custa €5; a exposição do bicentenário da fotografia está em cartaz (€15)
-- 12:45 [Cajou](place:par-cajou) — **Almoço** caseiro da semana (€13–19), a 5 min da BnF
+- 11:15 [Biblioteca Nacional](place:par-bnf) — Esplanada de madeira e o jardim entre as quatro torres; sair às 12h40. O passe de um dia do Haut-de-jardin custa €5; a exposição do bicentenário da fotografia está em cartaz (€15)
   - via: metrô 14 de Bibliothèque François Mitterrand até Pyramides · 20 min
+- 13:15 [Baguett's Café (Molière)](place:par-bohemia) — **Almoço / brunch**: pancakes ou pain perdu; reservar cerca de 1h e sair até 14h30 para a Opéra
 - 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala. Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
 - 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar (até 20h); a loja fecha às 20h30
 - 17:10 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h.\
