@@ -33,7 +33,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 2 — Seg 5/10 · Louvre, Champs-Élysées e compras na Opéra
 
-- 08:1540 [Casa do Gui](place:par-casa-do-gui) — Agora sim com o ticket **Navigo Semaine** vale de hoje até domingo
+- 08:15 [Casa do Gui](place:par-casa-do-gui) — Agora sim com o ticket **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra, com a Navigo Semaine · 45 min · €32,40
 - 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu); não aceita reserva
 - 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
@@ -46,10 +46,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 16:50 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
   - via: RER A de Charles de Gaulle–Étoile até Auber · 10 min
 - 17:30 [Ópera Garnier](place:par-opera) — Por fora, já iluminada. A visita por dentro fica para sábado de manhã: fecha às 17h
-- 17:4520 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris
-- 18:0000 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
-- 18:2015 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
-- 18:5040 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
+- 17:45 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris
+- 18:00 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
+- 18:20 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
+- 18:50 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
 - 19:00 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h. O terraço do 7º teve um pop-up até 30/09: confira se reabriu
 - 19:15 [Galeries Lafayette](place:par-galeries-lafayette) — **Pôr do sol às 19h21** no terraço grátis do 8º andar, aberto até 20h (a temporada vai até 13/10): suba até as 19h15. A cúpula fica no caminho; a loja fecha às 20h30
 - 20:20 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico (~€15–28), sem reserva e sem intervalo até meia-noite: fila na porta. Saia até 21h40: de 5 a 14/10 o RER E para às 22h15
