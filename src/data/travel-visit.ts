@@ -1427,6 +1427,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   // One éclair: €4–7 in 2026 (parisatoutprix.fr, tripadvisor, consulted 2026-09-27).
   'par-eclair-genie': cafeVisit(5, 8),
+  // cafelateral.com/fr/services and Google Maps, checked 2026-09-27.
+  'par-cafe-lateral': cafeVisit(7.1, 7.1, {
+    bestDay: L('Daily from 7:00; breakfast until noon', 'Todos os dias a partir das 7h; café da manhã até meio-dia'),
+    tips: L(
+      'Planned order per person: one café allongé (€3.90) and one croissant (€3.20).',
+      'Pedido previsto por pessoa: um café allongé (€3,90) e um croissant (€3,20).',
+    ),
+  }),
   'par-maison-isabelle': cafeVisit(4, 10, {
     tips: L(
       'Often a queue — go early if you can. Award-winning croissants.',

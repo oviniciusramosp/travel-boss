@@ -552,6 +552,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-cafe-lateral': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/d/dc/Croissants_au_beurre_%2818953292873%29.jpg',
+      'Butter croissants (illustrative photo)',
+      'Croissants na manteiga (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
   'par-eclair-genie': [
     photo(
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhMAM7N2tcdxVfxVPeyk8nRURyi11fzq8FSMdaOG7zWqVZA8D7aGTgyKU&s=10',

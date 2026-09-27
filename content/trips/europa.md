@@ -33,8 +33,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 2 — Seg 5/10 · Arco do Triunfo, Louvre e compras na Opéra
 
-- 09:00 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã fora, local e horário a definir. A **Navigo Semaine** vale de hoje até domingo
+- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída. A **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e RER A de Auber até Charles de Gaulle–Étoile · 55 min · €32,40
+- 09:05 [Café Latéral](place:par-cafe-lateral) — **Café da manhã**: um café allongé (€3,90) e um croissant (€3,20) por pessoa; sair às 9h45
 - 09:55 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
 - 10:20 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
 - 10:20 **Cartier** — Por fora

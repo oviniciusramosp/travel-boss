@@ -1133,7 +1133,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
   { from: 'par-champs-elysees', to: 'par-palais', mode: 'walk', path: [...palaisToChampsWalk].reverse() },
   { from: 'par-palais', to: 'par-alexandre-iii', mode: 'walk' },
   { from: 'par-alexandre-iii', to: 'par-luxor-obelisk', mode: 'walk', through: [[48.862723, 2.313436], [48.864541, 2.313651], [48.865803, 2.313203], [48.867754, 2.313963], [48.866301, 2.318531]] },
-  trainLeg('par-casa-do-gui', 'par-arc-triomphe', 55, [
+  trainLeg('par-casa-do-gui', 'par-cafe-lateral', 55, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
     ride(rerA, 'auber', 'etoile'),
   ]),

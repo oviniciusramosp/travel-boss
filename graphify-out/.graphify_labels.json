@@ -64,7 +64,7 @@
   "63": "map.ts",
   "64": "index.ts",
   "65": "contrast.ts",
-  "66": "getTransitLine",
+  "66": "transit.ts",
   "68": "pin-visual.ts",
   "71": "links.ts",
   "72": "note-edit.ts",

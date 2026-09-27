@@ -1886,6 +1886,25 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Printemps Haussmann Paris',
       },
       {
+        id: 'par-cafe-lateral',
+        name: { en: 'Café Latéral', 'pt-BR': 'Café Latéral' },
+        category: 'cafes',
+        description: {
+          en: 'French café and brasserie on Avenue Mac-Mahon, with a terrace overlooking the Arc de Triomphe and breakfast served until noon.',
+          'pt-BR': 'Café e brasserie francesa na Avenue Mac-Mahon, com terraço voltado para o Arco do Triunfo e café da manhã servido até meio-dia.',
+        },
+        aiSuggested: true,
+        aiReason: {
+          en: 'Suggested for breakfast near the Arc de Triomphe, with early opening and an allongé with croissant for €7.10.',
+          'pt-BR': 'Sugerido para tomar café perto do Arco do Triunfo: abre cedo e oferece allongé com croissant por €7,10.',
+        },
+        googleRating: 4.3,
+        lat: 48.8753986,
+        lng: 2.2951135,
+        address: '4 Avenue Mac-Mahon, 75017 Paris',
+        mapsQuery: 'Café Latéral 4 Avenue Mac-Mahon Paris',
+      },
+      {
         id: 'par-eclair-genie',
         name: { en: 'L\'Éclair de Génie', 'pt-BR': 'L\'Éclair de Génie' },
         category: 'cafes',

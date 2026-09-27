@@ -1,16 +1,16 @@
 # Graph Report - travel-boss  (2026-09-27)
 
 ## Corpus Check
-- 224 files · ~364,378 words
+- 224 files · ~364,589 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1754 nodes · 4449 edges · 78 communities (76 shown, 2 thin omitted)
+- 1754 nodes · 4449 edges · 78 communities (75 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bba21619`
+- Built from commit: `a1f32540`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -78,7 +78,7 @@
 - map.ts
 - index.ts
 - contrast.ts
-- getTransitLine
+- transit.ts
 - pin-visual.ts
 - links.ts
 - note-edit.ts
@@ -121,7 +121,7 @@
 - 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (78 total, 2 thin omitted)
+## Communities (78 total, 3 thin omitted)
 
 ### Community 0 - "hotel-search.mjs"
 Cohesion: 0.15
@@ -180,12 +180,12 @@ Cohesion: 0.10
 Nodes (29): ref_node_crypto, accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing() (+21 more)
 
 ### Community 14 - "camera.ts"
-Cohesion: 0.30
-Nodes (12): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset(), pinIncludedInCityFit() (+4 more)
+Cohesion: 0.32
+Nodes (11): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), pinIncludedInCityFit(), pointsForFit() (+3 more)
 
 ### Community 15 - "itinerary-route.ts"
 Cohesion: 0.13
-Nodes (29): ItineraryLegDef, ItineraryTransitHop, lineBrandColor(), ride(), WALK_CONNECTOR_MIN_M, LatLng, nearestStation(), sliceLinePath() (+21 more)
+Nodes (29): hopName(), ItineraryLegDef, ItineraryTransitHop, lineBrandColor(), WALK_CONNECTOR_MIN_M, getTransitLine(), LatLng, nearestStation() (+21 more)
 
 ### Community 16 - "route-planner.ts"
 Cohesion: 0.06
@@ -273,7 +273,7 @@ Nodes (18): airbnbSnapshot(), BOOKING_CATEGORIES, bookingEligibility(), CORE_CAT
 
 ### Community 39 - "travel-itinerary-legs.ts"
 Cohesion: 0.06
-Nodes (37): day1, day1AfterBase, day1Cdg, day2, day3, day4, day5, day6 (+29 more)
+Nodes (39): day1, day1AfterBase, day1Cdg, day2, day3, day4, day5, day6 (+31 more)
 
 ### Community 40 - "hotel-rank.ts"
 Cohesion: 0.17
@@ -308,8 +308,8 @@ Cohesion: 0.25
 Nodes (7): photosByPlaceId, photosForPlaceId(), ALLOWED_HOSTS, TravelPhoto, resolvePlaceArea(), resolvePlacePhotos(), withResolvedArea()
 
 ### Community 48 - "expandTimelineTransferParts"
-Cohesion: 0.31
-Nodes (11): estimateLegDurationMin(), expandTimelineTransferParts(), hopName(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin() (+3 more)
+Cohesion: 0.36
+Nodes (10): estimateLegDurationMin(), expandTimelineTransferParts(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin(), walkMinutes() (+2 more)
 
 ### Community 49 - "parse.ts"
 Cohesion: 0.05
@@ -360,8 +360,8 @@ Cohesion: 0.08
 Nodes (46): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+38 more)
 
 ### Community 63 - "map.ts"
-Cohesion: 0.19
-Nodes (17): bindBrightBasemap(), Box, coveredInsets(), Insets, mergeInsets(), KINDS, mountMap(), paintRouteFocus() (+9 more)
+Cohesion: 0.18
+Nodes (18): bindBrightBasemap(), paddedCenterOffset(), Box, coveredInsets(), Insets, mergeInsets(), KINDS, mountMap() (+10 more)
 
 ### Community 64 - "index.ts"
 Cohesion: 0.12
@@ -370,10 +370,6 @@ Nodes (20): placeCategoriesOffByDefault, PlaceCategory, placeCategoryOrder, Food
 ### Community 65 - "contrast.ts"
 Cohesion: 0.39
 Nodes (6): stopPin(), chipTone(), circleInk(), ContrastInk, ON_INK_FILLS, relativeLuminance()
-
-### Community 66 - "getTransitLine"
-Cohesion: 0.60
-Nodes (3): getTransitLine(), TransitLine, transitLineForPlace()
 
 ### Community 68 - "pin-visual.ts"
 Cohesion: 0.35
@@ -422,7 +418,7 @@ Nodes (7): 2. Sem foto ou com foto que não carrega — 21 lugares (tarefa E2), 
 ## Knowledge Gaps
 - **458 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+453 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
