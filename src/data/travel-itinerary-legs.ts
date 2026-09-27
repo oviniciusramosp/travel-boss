@@ -985,6 +985,14 @@ const tripEuropa2026: ItineraryLegDef[] = [
   // 5/10: Louvre, Champs-Élysées, then the Opéra shops; Chartier is 6 min from the RER E at Haussmann
   // Concorde → the Palais along the avenue's north sidewalk (OSM way nodes), not through the gardens or along the quay.
   { from: 'par-luxor-obelisk', to: 'par-palais', mode: 'walk', through: [[48.866301, 2.318531], [48.867754, 2.313963]] },
+  // Same bridge in both directions; return past the Palais before rejoining the avenue.
+  { from: 'par-palais', to: 'par-invalides', mode: 'walk', through: [[48.8638, 2.3135]] },
+  {
+    from: 'par-invalides',
+    to: 'par-champs-elysees',
+    mode: 'walk',
+    through: [[48.8638, 2.3135], [48.8661, 2.3126], [48.867754, 2.313963], [48.8698, 2.3078]],
+  },
   trainLeg('par-casa-do-gui', 'par-bohemia', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
   trainLeg('par-arc-triomphe', 'par-eclair-genie', 12, [ride(rerA, 'etoile', 'auber')]),
   trainLeg('par-bouillon', 'par-casa-do-gui', 35, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
