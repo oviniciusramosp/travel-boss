@@ -1,5 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { foodTarget, formatEur, stopCountLabel, typicalEur } from './timeline';
+import { foodTarget, formatEur, stopCountLabel, sunsetTip, typicalEur } from './timeline';
+
+describe('sunset marker', () => {
+  it('reads the planned sunset and its time from Portuguese and English notes', () => {
+    expect(sunsetTip('**Pôr do sol às 19h21** no terraço', 'pt-BR')).toBe('Pôr do sol · 19:21');
+    expect(sunsetTip('Subida ao topo para ver o pôr do sol às 19h13', 'pt-BR')).toBe('Pôr do sol · 19:13');
+    expect(sunsetTip('Sunset at 19:21 on the terrace', 'en')).toBe('Sunset · 19:21');
+    expect(sunsetTip('Ver o pôr do sol no gramado', 'pt-BR')).toBe('Pôr do sol');
+    expect(sunsetTip('Piquenique no gramado: pôr do sol às 19h21 e brilho às 20h', 'pt-BR')).toBe('Pôr do sol · 19:21');
+  });
+  it('does not mark ordinary visits, negated plans, or visits before or after sunset', () => {
+    for (const text of ['Piquenique às 19h', 'Depois do pôr do sol', 'Antes do pôr do sol', 'Não veremos o pôr do sol', 'After sunset', 'No sunset view']) {
+      expect(sunsetTip(text, 'pt-BR')).toBeNull();
+    }
+  });
+});
 
 describe('day header helpers', () => {
   it('labels the stop count', () => {

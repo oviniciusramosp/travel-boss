@@ -41,7 +41,7 @@ Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não ed
 - A UI importa o catálogo só por `src/catalog/index.ts`. Reexporte ali o que faltar.
 - Não edite `src/data/*` salvo tarefa explícita. Sem dependência npm nova sem a tarefa pedir.
 - Tokens de cor, espaço, tipo, raio, motion e z-index só em `src/styles/tokens.css`. Nada de ms, px de raio, cor ou z-index soltos.
-- Ícones só via `icon()` de `src/ui/icons.ts`. Glifo novo entra em `ICONS` (ordenado, único). O teste falha se categoria ou subcategoria ficar de fora. A exceção é a previsão do tempo: `weatherIcon()` (`src/ui/weather-icons.ts`) desenha os SVGs do pack em `public/weather/`.
+- Ícones só via `icon()` de `src/ui/icons.ts`. Glifo novo entra em `ICONS` (ordenado, único). O teste falha se categoria ou subcategoria ficar de fora. A exceção é a previsão do tempo e o indicador de pôr do sol: `weatherIcon()` (`src/ui/weather-icons.ts`) desenha os SVGs do pack em `public/weather/`. No roteiro, a menção a pôr do sol na própria parada mostra `sunset` na coluna dos valores, com nome acessível e tooltip; não acrescentar anotações para registrar a implementação.
 - Idioma: `pickLocale(locale, { en, 'pt-BR' })`. A função está em `src/data/travel.ts`; a UI importa de `src/catalog`.
 - Re-render não recria o controle focado: atualize atributos no lugar (como `syncView` em `src/trip/mount.ts`).
 - Foco desktop (conferir em 1440×900). Itens mobile do portfólio ficam fora.

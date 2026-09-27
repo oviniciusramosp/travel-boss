@@ -158,6 +158,8 @@ Several H2 sections in one file are one trip. The UI shows one scrolling documen
 
 ## Day card
 
+- A stop whose label or note mentions `pôr do sol` / `sunset` shows the user's sunset icon beside its costs, including free stops. An explicit `19h21` or `19:21` immediately after that phrase is included in the tooltip. Negated plans and mentions of before/after sunset in the same clause do not mark the stop. This indicates the authored plan; it does not calculate astronomical times or use the day's heading.
+
 The UI shows one card per date, not per `### Dia N`. Nothing here is a new syntax.
 
 - Lunch and dinner split the day. Morning runs from waking up through lunch, afternoon until dinner, evening from dinner on. Write the meal in the stop label or note:

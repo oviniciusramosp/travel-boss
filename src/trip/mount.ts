@@ -81,7 +81,7 @@ import {
 } from '../views/place-panel';
 import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripStop } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
-import { dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel } from '../views/timeline';
+import { dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel, sunsetTip } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
 import {
   dayWeather,
@@ -1796,9 +1796,10 @@ export function mountTrip(
           if (line) stopCosts.delete(line.id);
           return line ? [line] : [];
         });
-        if (place && costs.length) {
+        const sunset = sunsetTip(authored, locale);
+        if (place && (costs.length || sunset)) {
           const sum = (kind: 'food' | 'ticket') => costs.reduce((total, line) => total + line[kind], 0);
-          item.append(stopCostEl({ id: place.id, food: sum('food'), ticket: sum('ticket') }, locale));
+          item.append(stopCostEl({ id: place.id, food: sum('food'), ticket: sum('ticket') }, locale, sunset));
         }
         if (place?.subPoints?.length && !missingPlace) {
           // The points in one line, and a toggle that lists them as small dots in the parent's color.

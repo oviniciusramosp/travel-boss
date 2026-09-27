@@ -8,6 +8,19 @@ import { overBudget, type BudgetLine, type DateBudget } from '../trip/day-plan';
 import { openDialog } from '../ui/dialog';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
+import { weatherIcon } from '../ui/weather-icons';
+
+/** Planned sunset in the stop's own text; never inferred from a day's heading. */
+export function sunsetTip(text: string, locale: Locale): string | null {
+  const plain = text.normalize('NFD').replace(/\p{M}/gu, '').replace(/\*+/g, '').toLowerCase();
+  const match = /\b(?:por do sol|sunset)\b/.exec(plain);
+  if (!match) return null;
+  const before = plain.slice(0, match.index).split(/[.;!?]/).at(-1) ?? '';
+  if (/\b(?:sem|nao|not|after|before|depois|apos|antes)\b/.test(before) || /\bno\s+sunset\b/.test(plain)) return null;
+  const time = /^\s*(?:as|at)?\s*([01]?\d|2[0-3])(?:h|:)([0-5]\d)\b/.exec(plain.slice(match.index + match[0].length));
+  const label = pickLocale(locale, { en: 'Sunset', 'pt-BR': 'Pôr do sol' });
+  return time ? `${label} · ${time[1]!.padStart(2, '0')}:${time[2]}` : label;
+}
 
 type Money = { currency?: string; free?: boolean; min?: number; max?: number };
 
@@ -181,8 +194,16 @@ function openReceipt(
 }
 
 /** A stop's line of the date budget: icon and amount per person, each kind above €0. */
-export function stopCostEl(line: BudgetLine, locale: Locale): HTMLElement {
+export function stopCostEl(line: BudgetLine, locale: Locale, sunset?: string | null): HTMLElement {
   const costs = el('span', 'tb-stop-costs');
+  if (sunset) {
+    const mark = el('span', 'tb-stop-cost');
+    mark.setAttribute('role', 'img');
+    mark.setAttribute('aria-label', sunset);
+    mark.setAttribute('data-tip', sunset);
+    mark.append(weatherIcon('sunset'));
+    costs.append(mark);
+  }
   const kinds = [
     ['food', 'restaurant', travelUi.itineraryFood],
     ['ticket', 'local_activity', travelUi.itineraryParks],

@@ -12,6 +12,7 @@ export const WEATHER_ICONS = [
   'clouds-sun',
   'moon-stars',
   'sun',
+  'sunset',
 ] as const;
 
 export type WeatherIcon = (typeof WEATHER_ICONS)[number];
