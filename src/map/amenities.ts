@@ -100,9 +100,14 @@ function label(point: Amenity, locale: Locale): string {
 /** Below this zoom the view holds too many taps for one DOM pin each. */
 const MIN_ZOOM = 14;
 
+/** Google Maps pin on the exact point, the reference for the tap or toilet. */
+export function amenityMapsUrl(point: { lat: number; lng: number }): string {
+  return `https://www.google.com/maps/search/?api=1&query=${point.lat},${point.lng}`;
+}
+
 /** The glyph is the pin, the way the tourist star replaces the circle. */
 function amenityPin(point: Amenity, near: boolean, text: string) {
-  const size = near ? 32 : 24;
+  const size = 28;
   const glyph = icon(AMENITY_ICON[point.kind], { fill: true }).outerHTML;
   const pin = marker([point.lat, point.lng], {
     icon: divIcon({
@@ -110,7 +115,7 @@ function amenityPin(point: Amenity, near: boolean, text: string) {
       html: `<span class="tb-amenity is-${point.kind}${near ? ' is-near' : ''}">${glyph}</span>`,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2],
-      tooltipAnchor: [0, -size / 2],
+      tooltipAnchor: [0, -8],
     }),
     keyboard: false,
     riseOnHover: true,
@@ -118,6 +123,8 @@ function amenityPin(point: Amenity, near: boolean, text: string) {
   });
   // Same tooltip as the place pins.
   pin.bindTooltip(text, { direction: 'top', opacity: 1, className: 'tb-pin-tip' });
+  // Click opens the point in Google Maps; the camera stays put.
+  pin.on('click', () => window.open(amenityMapsUrl(point), '_blank', 'noopener'));
   return pin;
 }
 

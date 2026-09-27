@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { amenityCells, packAmenities } from './amenity-cells';
-import { boxesOverlap, nearLines, unpackAmenities, type Amenity } from './amenities';
+import { amenityMapsUrl, boxesOverlap, nearLines, unpackAmenities, type Amenity } from './amenities';
 
 vi.mock('leaflet', () => ({}));
 
@@ -37,5 +37,11 @@ describe('amenities', () => {
   it('matches a city to the view by overlap', () => {
     expect(boxesOverlap([48.7, 1.96, 49.04, 2.82], [48.85, 2.3, 48.87, 2.34])).toBe(true);
     expect(boxesOverlap([48.7, 1.96, 49.04, 2.82], [41.8, 12.4, 41.9, 12.5])).toBe(false);
+  });
+
+  it('links the point to Google Maps by its coordinates', () => {
+    expect(amenityMapsUrl({ lat: 48.86061, lng: 2.33764 })).toBe(
+      'https://www.google.com/maps/search/?api=1&query=48.86061,2.33764',
+    );
   });
 });

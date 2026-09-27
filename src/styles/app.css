@@ -1059,9 +1059,20 @@ p.tb-meta {
 
 .tb-amenity .material-symbols-rounded {
   font-size: var(--icon-pin);
+  transform: scale(var(--amenity-scale));
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
-.tb-amenity.is-near .material-symbols-rounded,
-.leaflet-marker-icon.tb-amenity-wrap:hover .material-symbols-rounded {
-  font-size: var(--icon-pin-lg);
+.tb-amenity.is-near .material-symbols-rounded {
+  transform: scale(var(--amenity-scale-near));
+}
+
+/* Hover as the other pins: grows to the 28px badge with a glow in its own color. */
+.leaflet-marker-icon.tb-amenity-wrap:hover .tb-amenity .material-symbols-rounded {
+  transform: scale(1);
+}
+
+.leaflet-marker-icon.tb-amenity-wrap:hover .tb-amenity {
+  filter: drop-shadow(0 0 1px var(--color-paper)) drop-shadow(0 0 1px var(--color-paper))
+    drop-shadow(0 0 4px color-mix(in srgb, currentColor 55%, transparent));
 }
