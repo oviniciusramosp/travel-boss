@@ -406,14 +406,6 @@
   color: var(--color-weather-rain);
 }
 
-.tb-weather[data-tone='snow'] .material-symbols-rounded {
-  color: var(--color-weather-snow);
-}
-
-.tb-weather[data-tone='storm'] .material-symbols-rounded {
-  color: var(--color-weather-storm);
-}
-
 /* In a period header the forecast sits just left of the switch. Without it,
    the switch keeps the right edge on its own. */
 .tb-period__head .tb-weather {

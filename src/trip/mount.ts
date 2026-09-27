@@ -74,7 +74,7 @@ import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripS
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { dateBudgetCards, periodLabel, slotSwitch, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
-import { loadForecast, mergeWeather, peekForecast, weatherBetween, weatherLook, type Weather } from './weather';
+import { loadForecast, peekForecast, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -153,22 +153,23 @@ function weatherSlot(key: string): HTMLSpanElement {
   return slot;
 }
 
-/** Glyph and temperature; rain when it is likely. The tip has the rest. */
-function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean, range: boolean, locale: Locale): void {
+/** Glyph, low–high and chance of rain. The tip has the rest. */
+function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean, locale: Locale): void {
   slot.hidden = !weather;
   if (!weather) {
     slot.replaceChildren();
     return;
   }
-  const look = weatherLook(weather.code, night);
+  const look = weatherLook(weather, night);
   slot.dataset.tone = look.tone;
   const low = Math.round(weather.min);
   const high = Math.round(weather.max);
-  const temp = range && low !== high ? `${low}–${high}°` : `${Math.round((weather.min + weather.max) / 2)}°`;
+  const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
-  slot.replaceChildren(icon(look.icon, { size: 16, fill: true }), document.createTextNode(rain >= 30 ? `${temp} · ${rain}%` : temp));
+  slot.replaceChildren(icon(look.icon, { size: 16, fill: true }), document.createTextNode(`${temp} · ${rain}%`));
   const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
-  const tip = `${pickLocale(locale, look.label)} · ${low}–${high}° · ${words} ${rain}% · Open-Meteo`;
+  const source = pickLocale(locale, { en: 'ECMWF + NOAA ensembles', 'pt-BR': 'ensembles ECMWF + NOAA' });
+  const tip = `${pickLocale(locale, look.label)} · ${low}–${high}° · ${words} ${rain}% · ${source} · Open-Meteo`;
   slot.setAttribute('data-tip', tip);
   slot.setAttribute('aria-label', tip);
 }
@@ -1060,33 +1061,26 @@ export function mountTrip(
     });
   }
 
-  /** Forecast per period, on the hours of its stops, and the day as their sum. */
+  /** Forecast per period on its fixed clock window, and the day from 07 to 23, in the city of its first stop. */
   function paintWeather(trip: Trip) {
     const locale = shell.locale();
     for (const section of tripDates(trip)) {
       const card = main.querySelector<HTMLElement>(`details.tb-date[data-date="${CSS.escape(section.date)}"]`);
       if (!card) continue;
       const { rows, periods } = datePlan(section.cities.flatMap((group) => group.days), section.date);
-      const parts = periodSections(periods).map(({ period, rows: indexes }) => {
-        const first = rows[indexes[0] ?? -1];
-        const record = first ? getTravelCity(first.dated.city.slug) : undefined;
-        const hours = record ? peekForecast(record.lat, record.lng) : null;
-        const times = indexes.flatMap((index) => {
-          const row = rows[index];
-          const time = row?.dated.day.stops[row.stopIndex]?.time;
-          return time ? [time] : [];
-        });
-        // A day without times reads the daylight hours.
-        const weather = hours ? weatherBetween(hours, section.date, times[0] ?? '08:00', times.at(-1) ?? '20:00') : null;
-        return { period, weather };
-      });
-      for (const { period, weather } of parts) {
+      const cityOf = (index: number) => {
+        const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
+        return record ? peekForecast(record.lat, record.lng) : null;
+      };
+      for (const { period, rows: indexes } of periodSections(periods)) {
         if (!period) continue;
         const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
-        if (slot) fillWeather(slot, weather, period === 'evening', false, locale);
+        const hours = cityOf(indexes[0] ?? -1);
+        if (slot) fillWeather(slot, hours && weatherIn(hours, section.date, WINDOWS[period]), period === 'evening', locale);
       }
       const slot = card.querySelector<HTMLElement>('[data-weather="day"]');
-      if (slot) fillWeather(slot, mergeWeather(parts.map((part) => part.weather)), false, true, locale);
+      const hours = cityOf(0);
+      if (slot) fillWeather(slot, hours && weatherIn(hours, section.date, WINDOWS.day), false, locale);
     }
   }
 

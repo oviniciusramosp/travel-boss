@@ -91,8 +91,6 @@
   --color-weather-night: #6366f1;
   --color-weather-cloud: #94a3b8;
   --color-weather-rain: #3b82f6;
-  --color-weather-snow: #38bdf8;
-  --color-weather-storm: #8b5cf6;
 
   --z-map: 0;
   --z-controls: 10;
@@ -155,8 +153,6 @@
   --color-weather-night: #a5b4fc;
   --color-weather-cloud: #cbd5e1;
   --color-weather-rain: #60a5fa;
-  --color-weather-snow: #7dd3fc;
-  --color-weather-storm: #a78bfa;
   --map-area-opacity: 0.32;
   --map-heat-opacity: 0.18;
 }
@@ -188,8 +184,6 @@
     --color-weather-night: #a5b4fc;
     --color-weather-cloud: #cbd5e1;
     --color-weather-rain: #60a5fa;
-    --color-weather-snow: #7dd3fc;
-    --color-weather-storm: #a78bfa;
     --map-area-opacity: 0.32;
     --map-heat-opacity: 0.18;
   }
