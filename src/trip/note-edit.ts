@@ -3,14 +3,15 @@ import { readCssTime } from '../ui/motion';
 import type { TripPatch } from './api';
 import { markSpans } from './inline';
 
-export type NoteKind = 'stop' | 'item' | 'paragraph' | 'comment' | 'via';
+export type NoteKind = 'stop' | 'item' | 'paragraph' | 'comment' | 'decision' | 'via';
 
-/** What an edit keeps on the line: bullet, time, link, `comentário:`. */
+/** What an edit keeps on the line: bullet, time, link, `comentário:`, `decisão:`. */
 const KEEP: Record<NoteKind, RegExp> = {
   stop: /^\s*-\s+(?:\d{2}:\d{2}\s+)?\[[^\]]+\]\([^)]+\)/,
   item: /^\s*-\s+(?:\d{2}:\d{2}\s+)?/,
   paragraph: /^\s*/,
   comment: /^\s+-\s+[^:]+:\s*/,
+  decision: /^\s+-\s+[^:]+:\s*/,
   // Up to the first ` — `, where the parser cuts the leg from its note.
   via: /^\s*(?:-\s+)?via:.*?(?= — |$)/i,
 };

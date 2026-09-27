@@ -393,6 +393,57 @@ describe('comments', () => {
   });
 });
 
+describe('decisions', () => {
+  it('hangs indented decisão lines on the stop or list note above, in order, apart from via and comments', () => {
+    const { stops, errors } = firstLegs(`- 09:00 [Louvre](place:par-louvre) — Ingresso das 9h
+  - via: metrô · 20 min
+  - decisão: 2026-09-27 · manter o Louvre mesmo acima do orçamento do dia
+  - comentário: dá para entrar mais cedo?
+  - Decision: no Orsay swap
+- Lembrar **ingresso**
+  - DECISÃO: comprar na hora
+  - decisao: sem fila rápida
+- decisão: fora do item`);
+    expect(errors).toEqual([]);
+    expect(stops).toHaveLength(3);
+    expect(stops[0]?.decisions).toEqual([
+      { text: '2026-09-27 · manter o Louvre mesmo acima do orçamento do dia', line: 10 },
+      { text: 'no Orsay swap', line: 12 },
+    ]);
+    expect(stops[0]?.comments?.map((comment) => comment.text)).toEqual(['dá para entrar mais cedo?']);
+    expect(stops[0]?.leg?.durationMin).toBe(20);
+    expect(stops[1]?.decisions?.map((decision) => decision.text)).toEqual(['comprar na hora', 'sem fila rápida']);
+    expect(stops[2]).toMatchObject({ label: 'decisão: fora do item', listNote: true });
+  });
+
+  it('reports a decision before any stop and ignores an empty one', () => {
+    const before = parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      parisDay('  - decisão: sem parada\n- 09:00 [Louvre](place:par-louvre)'),
+    );
+    expect(before.errors).toEqual([{ line: 8, code: 'decision-no-stop' }]);
+    expect(before.cities[0]?.days[0]?.stops[0]?.decisions).toBeUndefined();
+
+    const empty = firstLegs('- 09:00 [Louvre](place:par-louvre)\n  - decisão:   \n  - decision:');
+    expect(empty.errors).toEqual([]);
+    expect(empty.stops).toHaveLength(1);
+    expect(empty.stops[0]?.decisions).toBeUndefined();
+  });
+
+  it('carries a decision on to the next line after a trailing backslash', () => {
+    const { stops, errors } = firstLegs(`- 09:00 [Louvre](place:par-louvre)
+  - decisão: 2026-09-27 · manter o Louvre\\
+    mesmo acima do orçamento
+  - comentário: e o Orsay?`);
+    expect(errors).toEqual([]);
+    expect(stops[0]?.decisions).toEqual([
+      { text: '2026-09-27 · manter o Louvre\nmesmo acima do orçamento', line: 9 },
+    ]);
+    expect(stops[0]?.comments?.map((comment) => comment.text)).toEqual(['e o Orsay?']);
+  });
+});
+
 describe('hard breaks', () => {
   it('carries a note on to the next line after a trailing backslash, and stops at the line without one', () => {
     const trip = parseTrip(

@@ -132,6 +132,34 @@ na entrada.
     expect(html).toContain('<p>Fila<br>na entrada.</p>');
   });
 
+  it('leaves decisions out of the markdown, the day copy and the html', () => {
+    const source = `# Europa
+
+## Paris
+city: paris
+
+### Dia 1 — Museu
+
+- 09:00 [Louvre](place:par-louvre) — Entrada
+  - via: metrô · 12 min
+  - decisão: 2026-09-27 · manter o Louvre\\
+    mesmo acima do orçamento
+- Lembrar do ingresso
+  - decision: comprar na hora
+- 10:00 [Orsay](place:par-orsay)
+`;
+    const parsed = parseTrip('europa', 'content/trips/europa.md', source);
+    const href = (placeId: string) => `https://maps.example/${placeId}`;
+    const exported = tripToMarkdown(parsed, (_slug, placeId) => href(placeId));
+    expect(exported).toContain(
+      '- 09:00 [Louvre](https://maps.example/par-louvre) — Entrada\n  - via: metrô · 12 min\n- Lembrar do ingresso\n- 10:00 [Orsay](https://maps.example/par-orsay)',
+    );
+    const day = dayToMarkdown(parsed.cities[0]!.days[0]!, href);
+    for (const text of [exported, day, tripToHtml(exported)]) {
+      expect(text).not.toMatch(/decis|orçamento|comprar na hora/i);
+    }
+  });
+
   it('keeps the city header via as written, including 3h10', () => {
     const source = `# Europa
 
