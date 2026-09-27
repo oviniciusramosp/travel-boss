@@ -1174,7 +1174,7 @@ export function mountTrip(
         const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
         return record
           ? forecastState(record.lat, record.lng)
-          : { hours: null, fetchedAt: null, loading: false, failed: false };
+          : { hours: null, fetchedAt: null, loading: false, failed: false, error: null };
       };
       const cityOf = (index: number) => stateOf(index).hours;
       const parts: Weather[] = [];
@@ -1214,12 +1214,37 @@ export function mountTrip(
       seen.add(city.slug);
       loads.push(
         loadForecast(record.lat, record.lng, timeZoneForCity(city.slug), force).then(() => {
-          if (alive && current) paintWeather(current);
+          if (alive && current && !force) paintWeather(current);
         }),
       );
     }
     if (loads.length && alive && current) paintWeather(current);
     return Promise.all(loads).then(() => undefined);
+  }
+
+  /** The button's answer: the loading glyph for at least a moment, then the new forecast or why there is none. */
+  async function refreshWeatherByHand(trip: Trip, slug: string | undefined) {
+    const locale = shell.locale();
+    // ponytail: 600 ms so a 429 that comes back in 200 ms still reads as "it tried".
+    await Promise.all([refreshWeather(trip, true), new Promise((resolve) => setTimeout(resolve, 600))]);
+    if (!alive || !current) return;
+    paintWeather(current);
+    const record = getTravelCity(slug ?? '');
+    const state = record ? forecastState(record.lat, record.lng) : null;
+    if (!state?.failed) {
+      showToast(pickLocale(locale, { en: 'Forecast updated', 'pt-BR': 'Previsão atualizada' }));
+      return;
+    }
+    const why =
+      state.error === 'limit'
+        ? { en: 'Open-Meteo hit its daily request limit. The forecast comes back tomorrow.', 'pt-BR': 'O Open-Meteo chegou ao limite diário de consultas. A previsão volta amanhã.' }
+        : state.error === 'network'
+          ? { en: 'No connection to Open-Meteo.', 'pt-BR': 'Sem conexão com o Open-Meteo.' }
+          : { en: 'Open-Meteo did not answer.', 'pt-BR': 'O Open-Meteo não respondeu.' };
+    const kept = state.hours
+      ? pickLocale(locale, { en: ' Showing the last forecast.', 'pt-BR': ' Mostrando a última previsão.' })
+      : '';
+    showToast(`${pickLocale(locale, why)}${kept}`, true);
   }
 
   /**
@@ -1449,7 +1474,7 @@ export function mountTrip(
       refresh.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        void refreshWeather(trip, true);
+        void refreshWeatherByHand(trip, rows[0]?.dated.city.slug);
       });
       sky.append(weatherSlot('day'), refresh);
       meta.append(count, sky, walkSlot(date));

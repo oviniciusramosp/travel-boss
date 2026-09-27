@@ -290,20 +290,21 @@
   color: var(--color-mid-gray);
 }
 
-/* Words the number or glyph already imply slide out on hover of that number or glyph; without hover they stay. */
+/* Words the number or glyph already imply slide out on hover of that number or glyph; without hover they stay.
+   The way back is this rule's transition (quick, eased in); the way out is the hover rule's (slow, with a light bounce). */
 .tb-reveal {
   display: inline-block;
   max-width: 0;
   overflow: hidden;
   opacity: 0;
-  transform: translateX(calc(var(--spacing-4) * -1));
+  transform: translateX(calc(var(--spacing-8) * -1));
   white-space: pre;
   vertical-align: bottom;
   transition:
-    max-width var(--dur-slow) var(--ease-out),
-    opacity var(--dur-slow) var(--ease-out),
-    transform var(--dur-slow) var(--ease-out),
-    margin var(--dur-slow) var(--ease-out);
+    max-width var(--dur-base) var(--ease-in),
+    opacity var(--dur-fast) var(--ease-in),
+    transform var(--dur-base) var(--ease-in),
+    margin var(--dur-base) var(--ease-in);
 }
 
 .tb-count:is(:hover, :focus-within) .tb-count__unit,
@@ -312,6 +313,11 @@
   max-width: 12em;
   opacity: 1;
   transform: translateX(0);
+  transition:
+    max-width var(--dur-reveal) var(--ease-out),
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-bounce),
+    margin var(--dur-reveal) var(--ease-out);
 }
 
 .tb-weather__text {

@@ -28,12 +28,28 @@ type Entry = {
   loading: boolean;
   /** The last request brought nothing; `hours` is what was already known. */
   failed: boolean;
+  /** Why it failed, for the message: the API's daily limit, no network, or another HTTP status. */
+  error: FailureKind | null;
   request: Promise<Ensemble | null>;
 };
+
+export type FailureKind = 'limit' | 'network' | 'http';
+
+/** 429 is Open-Meteo's daily limit; no status at all is the network. */
+export function failureKind(status: number | null): FailureKind {
+  if (status == null) return 'network';
+  return status === 429 ? 'limit' : 'http';
+}
 const cache = new Map<string, Entry>();
 
 /** What the card needs beyond the hours: is it loading, did the last refresh fail, when is it from. */
-export type ForecastState = { hours: Ensemble | null; fetchedAt: number | null; loading: boolean; failed: boolean };
+export type ForecastState = {
+  hours: Ensemble | null;
+  fetchedAt: number | null;
+  loading: boolean;
+  failed: boolean;
+  error: FailureKind | null;
+};
 
 /** The last forecast of each point survives a reload, so the card has something while the API is down. */
 const STORAGE_KEY = 'tb:weather';
@@ -78,7 +94,7 @@ function readStored(key: string): Entry | null {
   const at = Number(store.getItem(`${STORAGE_KEY}:${key}:at`));
   const hours = unpackForecast(store.getItem(`${STORAGE_KEY}:${key}`));
   if (!hours || !Number.isFinite(at) || at <= 0) return null;
-  const entry: Entry = { at: 0, fetchedAt: at, hours, loading: false, failed: false, request: Promise.resolve(hours) };
+  const entry: Entry = { at: 0, fetchedAt: at, hours, loading: false, failed: false, error: null, request: Promise.resolve(hours) };
   cache.set(key, entry);
   return entry;
 }
@@ -135,10 +151,15 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
     hours: hit?.hours ?? null,
     loading: true,
     failed: false,
+    error: null,
     request: Promise.resolve(null),
   };
+  let status: number | null = null;
   entry.request = fetch(`${FORECAST_URL}?${params}`)
-    .then((response) => (response.ok ? response.json() : null))
+    .then((response) => {
+      status = response.status;
+      return response.ok ? response.json() : null;
+    })
     .then(parseEnsemble)
     .catch(() => null)
     .then((hours) => {
@@ -146,9 +167,11 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
       if (hours) {
         entry.hours = hours;
         entry.fetchedAt = Date.now();
+        entry.error = null;
         writeStored(key, entry.fetchedAt, hours);
       } else {
         entry.failed = true;
+        entry.error = failureKind(status);
       }
       return entry.hours;
     });
@@ -164,7 +187,13 @@ export function peekForecast(lat: number, lng: number): Ensemble | null {
 export function forecastState(lat: number, lng: number): ForecastState {
   const key = keyOf(lat, lng);
   const hit = cache.get(key) ?? readStored(key);
-  return { hours: hit?.hours ?? null, fetchedAt: hit?.fetchedAt ?? null, loading: hit?.loading ?? false, failed: hit?.failed ?? false };
+  return {
+    hours: hit?.hours ?? null,
+    fetchedAt: hit?.fetchedAt ?? null,
+    loading: hit?.loading ?? false,
+    failed: hit?.failed ?? false,
+    error: hit?.error ?? null,
+  };
 }
 
 /** `14:32` today, else `26/09 14:32` (en `09/26 14:32`), in the reader's clock. */

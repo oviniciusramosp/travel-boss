@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { WEATHER_ICONS } from '../ui/weather-icons';
 import {
   dayWeather,
+  failureKind,
   packForecast,
   parseEnsemble,
   unpackForecast,
@@ -147,5 +148,13 @@ describe('weatherTip', () => {
   it('dates an update from another day', () => {
     expect(updatedLabel(new Date(2026, 8, 26, 9, 5).getTime(), 'pt-BR', now)).toBe('26/09 09:05');
     expect(updatedLabel(at, 'pt-BR', now)).toBe('14:32');
+  });
+});
+
+describe('failureKind', () => {
+  it('names the daily limit, the network and any other status', () => {
+    expect(failureKind(429)).toBe('limit');
+    expect(failureKind(null)).toBe('network');
+    expect(failureKind(500)).toBe('http');
   });
 });
