@@ -72,7 +72,7 @@ import {
 } from '../views/place-panel';
 import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripStop } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
-import { dateBudgetCards, periodLabel, slotSwitch, stopCountLabel } from '../views/timeline';
+import { dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
 import { dayWeather, loadForecast, peekForecast, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
 import { weatherIcon } from '../ui/weather-icons';
@@ -1366,9 +1366,12 @@ export function mountTrip(
         (seenFromOutside(`${stop.label} ${stop.note ?? ''}`) ? outside : inside).add(stop.placeId);
       }
       for (const placeId of inside) outside.delete(placeId);
+      const budget = dateBudget(placesHere, fares, outside);
+      // The date counts a place once, so its line sits on its first stop only.
+      const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
       body.append(
         dateBudgetCards(
-          dateBudget(placesHere, fares, outside),
+          budget,
           (placeId) => {
             const found = placesHere.find((place) => place.id === placeId);
             return found ? pickLocale(locale, found.name) : placeId;
@@ -1499,6 +1502,11 @@ export function mountTrip(
           const note = el('span', 'tb-row__sub');
           editNote(note, 'stop', stop.note, lineAt(stop.line), city.slug);
           item.querySelector('.tb-row__main')?.after(note);
+        }
+        const cost = place ? stopCosts.get(place.id) : undefined;
+        if (cost) {
+          stopCosts.delete(cost.id);
+          item.append(stopCostEl(cost, locale));
         }
         if (place?.subPoints?.length && !missingPlace) {
           const inside = el('span', 'tb-row__subpoints', place.subPoints.map((sub) => pickLocale(locale, sub.name)).join(' → '));
