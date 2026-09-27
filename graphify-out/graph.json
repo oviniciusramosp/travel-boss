@@ -39,7 +39,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_budgetline",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "budgetline"
     },
     {
@@ -52,7 +52,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_datebudget",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "datebudget"
     },
     {
@@ -65,7 +65,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_period",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "period"
     },
     {
@@ -78,8 +78,21 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_periodrow",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "periodrow"
+    },
+    {
+      "label": "Rail",
+      "file_type": "code",
+      "source_file": "src/trip/day-plan.ts",
+      "source_location": "L119",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_trip_day_plan_rail",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "rail"
     },
     {
       "label": "SlotHop",
@@ -91,8 +104,21 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_slothop",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "slothop"
+    },
+    {
+      "label": "TripFile",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L100",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_tripfile",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "tripfile"
     },
     {
       "label": "Money",
@@ -1029,6 +1055,19 @@
       "community": 30,
       "community_name": "route.ts",
       "norm_label": "routehop"
+    },
+    {
+      "label": "WalkPoint",
+      "file_type": "code",
+      "source_file": "src/trip/walk-memory.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_memory_walkpoint",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "walkpoint"
     },
     {
       "label": "GuideTab",
@@ -2496,34 +2535,8 @@
       "_origin": "ast",
       "id": "src_data_travel_transit_lines_transitline",
       "community": 66,
-      "community_name": "transit.ts",
+      "community_name": "getTransitLine",
       "norm_label": "transitline"
-    },
-    {
-      "label": "Rail",
-      "file_type": "code",
-      "source_file": "src/trip/day-plan.ts",
-      "source_location": "L119",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_trip_day_plan_rail",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "rail"
-    },
-    {
-      "label": "TripFile",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L100",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_tripfile",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "tripfile"
     },
     {
       "label": "pinModel",
@@ -2719,19 +2732,6 @@
       "community": 73,
       "community_name": "overlays.ts",
       "norm_label": "hit"
-    },
-    {
-      "label": "WalkPoint",
-      "file_type": "code",
-      "source_file": "src/trip/walk-memory.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_memory_walkpoint",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "walkpoint"
     },
     {
       "label": "cityGuide",
@@ -3809,7 +3809,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_clockmin",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "clockmin()"
     },
     {
@@ -3821,7 +3821,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_dayperiods",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "dayperiods()"
     },
     {
@@ -3833,7 +3833,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_freeminutes",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "freeminutes()"
     },
     {
@@ -3845,7 +3845,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_hoprails",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "hoprails()"
     },
     {
@@ -3857,7 +3857,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_isopenslot",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "isopenslot()"
     },
     {
@@ -3869,7 +3869,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_mealof",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "mealof()"
     },
     {
@@ -3881,7 +3881,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_mideur",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "mideur()"
     },
     {
@@ -3893,7 +3893,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_nopurchase",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "nopurchase()"
     },
     {
@@ -3905,7 +3905,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_overbudget",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "overbudget()"
     },
     {
@@ -3917,7 +3917,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_pastperiods",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "pastperiods()"
     },
     {
@@ -3929,7 +3929,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_periodat",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "periodat()"
     },
     {
@@ -3941,7 +3941,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_periodsections",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "periodsections()"
     },
     {
@@ -3953,7 +3953,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_periodwindows",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "periodwindows()"
     },
     {
@@ -3965,7 +3965,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_rowperiods",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "rowperiods()"
     },
     {
@@ -3977,7 +3977,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_seenfromoutside",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "seenfromoutside()"
     },
     {
@@ -3989,7 +3989,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_withsubpointplaces",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "withsubpointplaces()"
     },
     {
@@ -4001,8 +4001,80 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_zonedstamp",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "zonedstamp()"
+    },
+    {
+      "label": "emptyNotice()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L266",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_emptynotice",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "emptynotice()"
+    },
+    {
+      "label": "extraWalkMeters()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.ts",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_distance_extrawalkmeters",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "extrawalkmeters()"
+    },
+    {
+      "label": "formatWalk()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.ts",
+      "source_location": "L47",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_distance_formatwalk",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "formatwalk()"
+    },
+    {
+      "label": "isExtraWalkNote()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.ts",
+      "source_location": "L33",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_distance_isextrawalknote",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "isextrawalknote()"
+    },
+    {
+      "label": "polylineMeters()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_distance_polylinemeters",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "polylinemeters()"
+    },
+    {
+      "label": "walkedMeters()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.ts",
+      "source_location": "L23",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_distance_walkedmeters",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "walkedmeters()"
     },
     {
       "label": "googleMapsUrl()",
@@ -4557,6 +4629,18 @@
       "norm_label": "medianof()"
     },
     {
+      "label": "paddedCenterOffset()",
+      "file_type": "code",
+      "source_file": "src/map/camera.ts",
+      "source_location": "L95",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_map_camera_paddedcenteroffset",
+      "community": 14,
+      "community_name": "camera.ts",
+      "norm_label": "paddedcenteroffset()"
+    },
+    {
       "label": "pinIncludedInCityFit()",
       "file_type": "code",
       "source_file": "src/map/camera.ts",
@@ -4617,18 +4701,6 @@
       "norm_label": "selectionzoom()"
     },
     {
-      "label": "hopName()",
-      "file_type": "code",
-      "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L286",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_itinerary_legs_hopname",
-      "community": 15,
-      "community_name": "itinerary-route.ts",
-      "norm_label": "hopname()"
-    },
-    {
       "label": "lineBrandColor()",
       "file_type": "code",
       "source_file": "src/data/travel-itinerary-legs.ts",
@@ -4641,16 +4713,16 @@
       "norm_label": "linebrandcolor()"
     },
     {
-      "label": "getTransitLine()",
+      "label": "ride()",
       "file_type": "code",
-      "source_file": "src/data/travel-transit-lines.ts",
-      "source_location": "L480",
+      "source_file": "src/data/travel-itinerary-legs.ts",
+      "source_location": "L893",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_data_travel_transit_lines_gettransitline",
+      "id": "src_data_travel_itinerary_legs_ride",
       "community": 15,
       "community_name": "itinerary-route.ts",
-      "norm_label": "gettransitline()"
+      "norm_label": "ride()"
     },
     {
       "label": "nearestStation()",
@@ -4663,6 +4735,18 @@
       "community": 15,
       "community_name": "itinerary-route.ts",
       "norm_label": "neareststation()"
+    },
+    {
+      "label": "sliceLinePath()",
+      "file_type": "code",
+      "source_file": "src/data/travel-transit-lines.ts",
+      "source_location": "L526",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_transit_lines_slicelinepath",
+      "community": 15,
+      "community_name": "itinerary-route.ts",
+      "norm_label": "slicelinepath()"
     },
     {
       "label": "stationById()",
@@ -5865,16 +5949,28 @@
       "norm_label": "tripdates()"
     },
     {
-      "label": "paris()",
+      "label": "clearStopCurrent()",
       "file_type": "code",
-      "source_file": "src/trip/legs.test.ts",
-      "source_location": "L6",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L282",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_trip_legs_test_paris",
+      "id": "src_trip_mount_clearstopcurrent",
       "community": 2,
       "community_name": "mountTrip",
-      "norm_label": "paris()"
+      "norm_label": "clearstopcurrent()"
+    },
+    {
+      "label": "datePeriods()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L257",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_dateperiods",
+      "community": 2,
+      "community_name": "mountTrip",
+      "norm_label": "dateperiods()"
     },
     {
       "label": "mountTrip()",
@@ -6235,6 +6331,30 @@
       "community": 2,
       "community_name": "mountTrip",
       "norm_label": "placebyid()"
+    },
+    {
+      "label": "dateStops()",
+      "file_type": "code",
+      "source_file": "src/trip/route.ts",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_route_datestops",
+      "community": 2,
+      "community_name": "mountTrip",
+      "norm_label": "datestops()"
+    },
+    {
+      "label": "lastPlaceIndex()",
+      "file_type": "code",
+      "source_file": "src/trip/route.ts",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_route_lastplaceindex",
+      "community": 2,
+      "community_name": "mountTrip",
+      "norm_label": "lastplaceindex()"
     },
     {
       "label": "place()",
@@ -7353,16 +7473,52 @@
       "norm_label": "resolvetripleg()"
     },
     {
-      "label": "dateStops()",
+      "label": "paris()",
       "file_type": "code",
-      "source_file": "src/trip/route.ts",
-      "source_location": "L28",
+      "source_file": "src/trip/legs.test.ts",
+      "source_location": "L6",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_trip_route_datestops",
+      "id": "src_trip_legs_test_paris",
       "community": 30,
       "community_name": "route.ts",
-      "norm_label": "datestops()"
+      "norm_label": "paris()"
+    },
+    {
+      "label": "drawTripRoutes()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L675",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_drawtriproutes",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "drawtriproutes()"
+    },
+    {
+      "label": "routeDeps()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L711",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_routedeps",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "routedeps()"
+    },
+    {
+      "label": "walkPoints()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L667",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_mounttrip_walkpoints",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "walkpoints()"
     },
     {
       "label": "endpoints()",
@@ -7375,18 +7531,6 @@
       "community": 30,
       "community_name": "route.ts",
       "norm_label": "endpoints()"
-    },
-    {
-      "label": "lastPlaceIndex()",
-      "file_type": "code",
-      "source_file": "src/trip/route.ts",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_route_lastplaceindex",
-      "community": 30,
-      "community_name": "route.ts",
-      "norm_label": "lastplaceindex()"
     },
     {
       "label": "planHop()",
@@ -7459,6 +7603,42 @@
       "community": 30,
       "community_name": "route.ts",
       "norm_label": "transferlegs()"
+    },
+    {
+      "label": "rememberedWalk()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-memory.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_memory_rememberedwalk",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "rememberedwalk()"
+    },
+    {
+      "label": "rememberWalk()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-memory.ts",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_memory_rememberwalk",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "rememberwalk()"
+    },
+    {
+      "label": "walkMemoryKey()",
+      "file_type": "code",
+      "source_file": "src/trip/walk-memory.ts",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_walk_memory_walkmemorykey",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "walkmemorykey()"
     },
     {
       "label": "hotelPhotoUrls()",
@@ -8313,18 +8493,6 @@
       "norm_label": "legsforday()"
     },
     {
-      "label": "ride()",
-      "file_type": "code",
-      "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L893",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_itinerary_legs_ride",
-      "community": 39,
-      "community_name": "travel-itinerary-legs.ts",
-      "norm_label": "ride()"
-    },
-    {
       "label": "trainLeg()",
       "file_type": "code",
       "source_file": "src/data/travel-itinerary-legs.ts",
@@ -8347,18 +8515,6 @@
       "community": 39,
       "community_name": "travel-itinerary-legs.ts",
       "norm_label": "linepath()"
-    },
-    {
-      "label": "sliceLinePath()",
-      "file_type": "code",
-      "source_file": "src/data/travel-transit-lines.ts",
-      "source_location": "L526",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_transit_lines_slicelinepath",
-      "community": 39,
-      "community_name": "travel-itinerary-legs.ts",
-      "norm_label": "slicelinepath()"
     },
     {
       "label": "st()",
@@ -9079,6 +9235,18 @@
       "community": 48,
       "community_name": "expandTimelineTransferParts",
       "norm_label": "expandtimelinetransferparts()"
+    },
+    {
+      "label": "hopName()",
+      "file_type": "code",
+      "source_file": "src/data/travel-itinerary-legs.ts",
+      "source_location": "L286",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_itinerary_legs_hopname",
+      "community": 48,
+      "community_name": "expandTimelineTransferParts",
+      "norm_label": "hopname()"
     },
     {
       "label": "interHopWalkM()",
@@ -11229,18 +11397,6 @@
       "norm_label": "bindbrightbasemap()"
     },
     {
-      "label": "paddedCenterOffset()",
-      "file_type": "code",
-      "source_file": "src/map/camera.ts",
-      "source_location": "L95",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_map_camera_paddedcenteroffset",
-      "community": 63,
-      "community_name": "map.ts",
-      "norm_label": "paddedcenteroffset()"
-    },
-    {
       "label": "coveredInsets()",
       "file_type": "code",
       "source_file": "src/map/chrome.ts",
@@ -11409,6 +11565,18 @@
       "norm_label": "relativeluminance()"
     },
     {
+      "label": "getTransitLine()",
+      "file_type": "code",
+      "source_file": "src/data/travel-transit-lines.ts",
+      "source_location": "L480",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_transit_lines_gettransitline",
+      "community": 66,
+      "community_name": "getTransitLine",
+      "norm_label": "gettransitline()"
+    },
+    {
       "label": "transitLineForPlace()",
       "file_type": "code",
       "source_file": "src/map/transit.ts",
@@ -11417,104 +11585,8 @@
       "_origin": "ast",
       "id": "src_map_transit_transitlineforplace",
       "community": 66,
-      "community_name": "transit.ts",
+      "community_name": "getTransitLine",
       "norm_label": "transitlineforplace()"
-    },
-    {
-      "label": "clearStopCurrent()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L282",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_clearstopcurrent",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "clearstopcurrent()"
-    },
-    {
-      "label": "datePeriods()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L257",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_dateperiods",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "dateperiods()"
-    },
-    {
-      "label": "emptyNotice()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L266",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_emptynotice",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "emptynotice()"
-    },
-    {
-      "label": "extraWalkMeters()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.ts",
-      "source_location": "L37",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_distance_extrawalkmeters",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "extrawalkmeters()"
-    },
-    {
-      "label": "formatWalk()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.ts",
-      "source_location": "L47",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_distance_formatwalk",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "formatwalk()"
-    },
-    {
-      "label": "isExtraWalkNote()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.ts",
-      "source_location": "L33",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_distance_isextrawalknote",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "isextrawalknote()"
-    },
-    {
-      "label": "polylineMeters()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_distance_polylinemeters",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "polylinemeters()"
-    },
-    {
-      "label": "walkedMeters()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.ts",
-      "source_location": "L23",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_distance_walkedmeters",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "walkedmeters()"
     },
     {
       "label": "placePinIconHtml()",
@@ -12477,78 +12549,6 @@
       "norm_label": "resolvedplace()"
     },
     {
-      "label": "drawTripRoutes()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L675",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_drawtriproutes",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "drawtriproutes()"
-    },
-    {
-      "label": "routeDeps()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L711",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_routedeps",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "routedeps()"
-    },
-    {
-      "label": "walkPoints()",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L667",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_mount_mounttrip_walkpoints",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "walkpoints()"
-    },
-    {
-      "label": "rememberedWalk()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-memory.ts",
-      "source_location": "L17",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_memory_rememberedwalk",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "rememberedwalk()"
-    },
-    {
-      "label": "rememberWalk()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-memory.ts",
-      "source_location": "L25",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_memory_rememberwalk",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "rememberwalk()"
-    },
-    {
-      "label": "walkMemoryKey()",
-      "file_type": "code",
-      "source_file": "src/trip/walk-memory.ts",
-      "source_location": "L12",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_walk_memory_walkmemorykey",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "walkmemorykey()"
-    },
-    {
       "label": "aiBadge()",
       "file_type": "code",
       "source_file": "src/ui/ai-badge.ts",
@@ -13248,7 +13248,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "day-plan.ts"
     },
     {
@@ -13259,7 +13259,7 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_periods",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "periods"
     },
     {
@@ -13270,8 +13270,52 @@
       "_origin": "ast",
       "id": "src_trip_day_plan_test",
       "community": 11,
-      "community_name": "day-plan.ts",
+      "community_name": "mount.ts",
       "norm_label": "day-plan.test.ts"
+    },
+    {
+      "label": "mount.ts",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_mount",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "mount.ts"
+    },
+    {
+      "label": "tripFileListeners",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "src_trip_mount_tripfilelisteners",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "tripfilelisteners"
+    },
+    {
+      "label": "walk-distance.ts",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_walk_distance",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "walk-distance.ts"
+    },
+    {
+      "label": "walk-distance.test.ts",
+      "file_type": "code",
+      "source_file": "src/trip/walk-distance.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_walk_distance_test",
+      "community": 11,
+      "community_name": "mount.ts",
+      "norm_label": "walk-distance.test.ts"
     },
     {
       "label": "timeline.ts",
@@ -14064,28 +14108,6 @@
       "community": 19,
       "community_name": "vite.config.ts",
       "norm_label": "weatherinflight"
-    },
-    {
-      "label": "legs.test.ts",
-      "file_type": "code",
-      "source_file": "src/trip/legs.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_trip_legs_test",
-      "community": 2,
-      "community_name": "mountTrip",
-      "norm_label": "legs.test.ts"
-    },
-    {
-      "label": "viaWalk",
-      "file_type": "code",
-      "source_file": "src/trip/legs.test.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "src_trip_legs_test_viawalk",
-      "community": 2,
-      "community_name": "mountTrip",
-      "norm_label": "viawalk"
     },
     {
       "label": "weather.ts",
@@ -15928,7 +15950,7 @@
       "label": "Dia 1 \u2014 Centro antigo",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L237",
+      "source_location": "L236",
       "_origin": "ast",
       "id": "content_trips_europa_dia_1_centro_antigo",
       "community": 29,
@@ -15939,7 +15961,7 @@
       "label": "Dia 1 \u2014 Chegada, Duomo e Galleria",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L215",
+      "source_location": "L214",
       "_origin": "ast",
       "id": "content_trips_europa_dia_1_chegada_duomo_e_galleria",
       "community": 29,
@@ -15961,7 +15983,7 @@
       "label": "Dia 2 \u2014 Bate-volta",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L225",
+      "source_location": "L224",
       "_origin": "ast",
       "id": "content_trips_europa_dia_2_bate_volta",
       "community": 29,
@@ -15972,7 +15994,7 @@
       "label": "Dia 2 \u2014 Seg 5/10 \u00b7 Arco do Triunfo, Louvre e compras na Op\u00e9ra",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "content_trips_europa_dia_2_seg_5_10_arco_do_triunfo_louvre_e_compras_na_op\u00e9ra",
       "community": 29,
@@ -15983,7 +16005,7 @@
       "label": "Dia 3 \u2014 Ter 6/10 \u00b7 Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L68",
+      "source_location": "L67",
       "_origin": "ast",
       "id": "content_trips_europa_dia_3_ter_6_10_notre_dame_quartier_latin_luxemburgo_e_piquenique_na_torre",
       "community": 29,
@@ -15994,7 +16016,7 @@
       "label": "Dia 4 \u2014 Qua 7/10 \u00b7 Disney: Adventure World de manh\u00e3, Disneyland Park e fogos",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L97",
+      "source_location": "L96",
       "_origin": "ast",
       "id": "content_trips_europa_dia_4_qua_7_10_disney_adventure_world_de_manh\u00e3_disneyland_park_e_fogos",
       "community": 29,
@@ -16005,7 +16027,7 @@
       "label": "Dia 5 \u2014 Qui 8/10 \u00b7 Marais, almo\u00e7o no Chez Pradel e p\u00f4r do sol em Montmartre",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L142",
+      "source_location": "L141",
       "_origin": "ast",
       "id": "content_trips_europa_dia_5_qui_8_10_marais_almo\u00e7o_no_chez_pradel_e_p\u00f4r_do_sol_em_montmartre",
       "community": 29,
@@ -16016,7 +16038,7 @@
       "label": "Dia 6 \u2014 Sex 9/10 \u00b7 Versalhes, Torre Eiffel ao p\u00f4r do sol e Relais de l'Entrec\u00f4te",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L168",
+      "source_location": "L167",
       "_origin": "ast",
       "id": "content_trips_europa_dia_6_sex_9_10_versalhes_torre_eiffel_ao_p\u00f4r_do_sol_e_relais_de_l_entrec\u00f4te",
       "community": 29,
@@ -16027,7 +16049,7 @@
       "label": "Dia 7 \u2014 S\u00e1b 10/10 \u00b7 C\u00e9dric Grolet, Baguett\u2019s, Biblioteca, \u00d3pera e barco no Sena",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L186",
+      "source_location": "L185",
       "_origin": "ast",
       "id": "content_trips_europa_dia_7_s\u00e1b_10_10_c\u00e9dric_grolet_baguett_s_biblioteca_\u00f3pera_e_barco_no_sena",
       "community": 29,
@@ -16038,7 +16060,7 @@
       "label": "Dia 8 \u2014 Dom 11/10 \u00b7 Partida para Mil\u00e3o",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L205",
+      "source_location": "L204",
       "_origin": "ast",
       "id": "content_trips_europa_dia_8_dom_11_10_partida_para_mil\u00e3o",
       "community": 29,
@@ -16060,7 +16082,7 @@
       "label": "Mil\u00e3o",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L211",
+      "source_location": "L210",
       "_origin": "ast",
       "id": "content_trips_europa_mil\u00e3o",
       "community": 29,
@@ -16082,7 +16104,7 @@
       "label": "Roma",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L233",
+      "source_location": "L232",
       "_origin": "ast",
       "id": "content_trips_europa_roma",
       "community": 29,
@@ -16200,6 +16222,28 @@
       "norm_label": "cataloglegbypair"
     },
     {
+      "label": "legs.test.ts",
+      "file_type": "code",
+      "source_file": "src/trip/legs.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_legs_test",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "legs.test.ts"
+    },
+    {
+      "label": "viaWalk",
+      "file_type": "code",
+      "source_file": "src/trip/legs.test.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_trip_legs_test_viawalk",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "viawalk"
+    },
+    {
       "label": "route.ts",
       "file_type": "code",
       "source_file": "src/trip/route.ts",
@@ -16231,6 +16275,28 @@
       "community": 30,
       "community_name": "route.ts",
       "norm_label": "viatransit"
+    },
+    {
+      "label": "walk-memory.ts",
+      "file_type": "code",
+      "source_file": "src/trip/walk-memory.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_walk_memory",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "walk-memory.ts"
+    },
+    {
+      "label": "memory",
+      "file_type": "code",
+      "source_file": "src/trip/walk-memory.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_trip_walk_memory_memory",
+      "community": 30,
+      "community_name": "route.ts",
+      "norm_label": "memory"
     },
     {
       "label": "README.md",
@@ -18748,7 +18814,7 @@
       "_origin": "ast",
       "id": "src_map_transit",
       "community": 66,
-      "community_name": "transit.ts",
+      "community_name": "getTransitLine",
       "norm_label": "transit.ts"
     },
     {
@@ -18759,52 +18825,8 @@
       "_origin": "ast",
       "id": "src_map_transit_test",
       "community": 66,
-      "community_name": "transit.ts",
+      "community_name": "getTransitLine",
       "norm_label": "transit.test.ts"
-    },
-    {
-      "label": "mount.ts",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_trip_mount",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "mount.ts"
-    },
-    {
-      "label": "tripFileListeners",
-      "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L102",
-      "_origin": "ast",
-      "id": "src_trip_mount_tripfilelisteners",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "tripfilelisteners"
-    },
-    {
-      "label": "walk-distance.ts",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_trip_walk_distance",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "walk-distance.ts"
-    },
-    {
-      "label": "walk-distance.test.ts",
-      "file_type": "code",
-      "source_file": "src/trip/walk-distance.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_trip_walk_distance_test",
-      "community": 67,
-      "community_name": "mount.ts",
-      "norm_label": "walk-distance.test.ts"
     },
     {
       "label": "pin-visual.ts",
@@ -19300,28 +19322,6 @@
       "community": 75,
       "community_name": "Os 12 crit\u00e9rios",
       "norm_label": "os 12 criterios"
-    },
-    {
-      "label": "walk-memory.ts",
-      "file_type": "code",
-      "source_file": "src/trip/walk-memory.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_trip_walk_memory",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "walk-memory.ts"
-    },
-    {
-      "label": "memory",
-      "file_type": "code",
-      "source_file": "src/trip/walk-memory.ts",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "src_trip_walk_memory_memory",
-      "community": 76,
-      "community_name": "drawTripRoutes",
-      "norm_label": "memory"
     },
     {
       "label": "cafes (2)",
@@ -55913,7 +55913,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L211",
+      "source_location": "L210",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_europa",
@@ -55924,7 +55924,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L233",
+      "source_location": "L232",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_europa",
@@ -55946,7 +55946,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L215",
+      "source_location": "L214",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_mil\u00e3o",
@@ -55957,7 +55957,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L225",
+      "source_location": "L224",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_mil\u00e3o",
@@ -55968,7 +55968,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L142",
+      "source_location": "L141",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -55979,7 +55979,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L168",
+      "source_location": "L167",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -55990,7 +55990,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L186",
+      "source_location": "L185",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -56001,7 +56001,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L205",
+      "source_location": "L204",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -56012,7 +56012,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -56023,7 +56023,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L68",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -56045,7 +56045,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L97",
+      "source_location": "L96",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_paris",
@@ -56056,7 +56056,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L237",
+      "source_location": "L236",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_roma",
@@ -72508,5 +72508,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5cf2ffe5f2d34463b47db4ab0a8ae561a9538926"
+  "built_at_commit": "bba216197c1a029bae4d0d99cc561815d25fff97"
 }

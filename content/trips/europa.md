@@ -12,7 +12,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8), logo na saída da alfândega
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
-- 16:00 **Comprar os doces do Cédric Grolet** — Fazer o [Click & Collect da Opéra](https://cedric-grolet.com/opera/) para **10/10 às 10h**, conforme o horário disponível no checkout; guardar a confirmação. As encomendas já estão abertas: não esperar a véspera.
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
   - via: RER E + metrô 9 · 45 min · €2,55
@@ -34,7 +33,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 2 — Seg 5/10 · Arco do Triunfo, Louvre e compras na Opéra
 
-- 09:00 [Casa do Gui](place:par-casa-do-gui) — **Café da manhã** em casa às 08h30; saída às 09h. A **Navigo Semaine** vale de hoje até domingo
+- 09:00 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã fora, local e horário a definir. A **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e RER A de Auber até Charles de Gaulle–Étoile · 55 min · €32,40
 - 09:55 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
 - 10:20 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
@@ -187,7 +186,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 - 09:10 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra · 45 min
-- 10:00 [Cédric Grolet](place:par-cedric-grolet) — **Café da manhã**: retirar os doces encomendados (flores €18) na fila prioritária de Click & Collect, com a confirmação. Retiradas de pâtisseries a partir das 10h; pode haver uma breve espera pela finalização
+- 10:00 [Cédric Grolet](place:par-cedric-grolet) — **Café da manhã**: vamos buscar a encomenda reservada com antecedência pelo Click & Collect
 - 10:25 [Palais-Royal](place:par-palais-royal) — Comer os doces no jardim
   - via: metrô 14 de Pyramides até Bibliothèque François Mitterrand · 20 min
 - 11:15 [Biblioteca Nacional](place:par-bnf) — Esplanada de madeira e o jardim entre as quatro torres; sair às 12h40. O passe de um dia do Haut-de-jardin custa €5; a exposição do bicentenário da fotografia está em cartaz (€15)
