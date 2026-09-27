@@ -3415,18 +3415,33 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-disneyland',
-        name: { en: 'Disneyland Paris', 'pt-BR': 'Disneyland Paris' },
+        name: { en: 'Disneyland Park', 'pt-BR': 'Disneyland Park' },
         category: 'parks',
         description: {
-          en: 'Two theme parks in Marne-la-Vallée (Disneyland Park + Adventure World). RER A to Chessy (~40 min) + short walk; full day of rides and parades.',
-          'pt-BR': 'Dois parques temáticos em Marne-la-Vallée (Disneyland Park + Adventure World). RER A até Chessy (~40 min) + caminhada curta; dia inteiro de brinquedos e paradas.',
+          en: 'The castle park of Disneyland Paris, in Marne-la-Vallée: Main Street, Frontierland, Adventureland, Fantasyland and Discoveryland. RER A to Chessy (~40 min), then a short walk.',
+          'pt-BR': 'O parque do castelo da Disneyland Paris, em Marne-la-Vallée: Main Street, Frontierland, Adventureland, Fantasyland e Discoveryland. RER A até Chessy (~40 min) e uma caminhada curta.',
         },
         googleRating: 4.5,
-        // Pin inside Parc Disneyland ring (multipolygon with Adventure World)
-        lat: 48.871,
-        lng: 2.7765,
+        // Park gate: the main turnstile row under the Disneyland Hotel (OSM node 3100784971).
+        // Its attractions sit inside it (`parentId`), so the day's route enters and leaves here.
+        lat: 48.870425,
+        lng: 2.779509,
         address: 'Boulevard de Parc, 77700 Chessy',
         mapsQuery: 'Disneyland Paris',
+      },
+      {
+        id: 'par-disney-adventure-world',
+        name: { en: 'Disney Adventure World', 'pt-BR': 'Disney Adventure World' },
+        category: 'parks',
+        description: {
+          en: 'The second park of Disneyland Paris (the former Walt Disney Studios): Avengers Campus, Worlds of Pixar and World of Frozen, opened in 2026. Its gate faces the Disneyland Park one across the esplanade from the Chessy station.',
+          'pt-BR': 'O segundo parque da Disneyland Paris (o antigo Walt Disney Studios): Avengers Campus, Worlds of Pixar e a World of Frozen, aberta em 2026. O portão fica de frente para o do Disneyland Park, na esplanada da estação de Chessy.',
+        },
+        // Park gate: turnstiles at the Front Lot (OSM node 11238857526, theme park way 205734843).
+        lat: 48.8683,
+        lng: 2.780766,
+        address: 'Boulevard de Parc, 77700 Chessy',
+        mapsQuery: 'Disney Adventure World',
       },
       {
         id: 'par-bella-notte',
@@ -3503,7 +3518,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-spider-man',
-        parentId: 'par-disneyland',
+        parentId: 'par-disney-adventure-world',
         name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' },
         category: 'tourist',
         description: {
@@ -3519,7 +3534,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-ratatouille',
-        parentId: 'par-disneyland',
+        parentId: 'par-disney-adventure-world',
         name: { en: 'Ratatouille: The Adventure', 'pt-BR': 'Ratatouille: The Adventure' },
         category: 'tourist',
         description: {
@@ -3535,7 +3550,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-frozen',
-        parentId: 'par-disneyland',
+        parentId: 'par-disney-adventure-world',
         name: { en: 'Frozen Ever After', 'pt-BR': 'Frozen Ever After' },
         category: 'tourist',
         description: {
@@ -3551,7 +3566,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-stark-factory',
-        parentId: 'par-disneyland',
+        parentId: 'par-disney-adventure-world',
         name: { en: 'Stark Factory', 'pt-BR': 'Stark Factory' },
         category: 'restaurants',
         description: {

@@ -45,12 +45,14 @@ import {
 } from './note-edit';
 import {
   dateStops,
+  gatedHops,
   planHop,
   previewHop,
   resolveHopSegments,
   timelineLegs,
   transferLegs,
   type DateStop,
+  type GroupedPoint,
   type RouteHop,
 } from './route';
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
@@ -474,7 +476,7 @@ export function mountTrip(
     const date = routedDate();
     if (!trip || !date) return [];
     const hops: RouteHop[] = [];
-    let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
+    let previous: (GroupedPoint & { leg?: TripLeg }) | null = null;
     for (const { row, place, on } of datePlaces(trip, date)) {
       // An off period breaks the chain, so the route never bridges it.
       if (!on) {
@@ -486,12 +488,11 @@ export function mountTrip(
       const first = subs[0];
       const last = subs.at(-1);
       const point = { id: place.id, lat: first?.lat ?? place.lat, lng: first?.lng ?? place.lng };
+      const parent = place.parentId ? placeById(row.dated.city.slug, place.parentId) : undefined;
+      const group = parent?.id ?? place.id;
       if (previous) {
-        hops.push({
-          from: { id: previous.id, lat: previous.lat, lng: previous.lng },
-          to: point,
-          ...(previous.leg ? { via: previous.leg } : {}),
-        });
+        const gate = parent ? { id: parent.id, lat: parent.lat, lng: parent.lng } : undefined;
+        hops.push(...gatedHops(previous, { ...point, group, ...(gate ? { gate } : {}) }, previous.leg));
       }
       if (first && last && subs.length > 1) {
         const locale = shell.locale();
@@ -511,6 +512,8 @@ export function mountTrip(
         id: place.id,
         lat: last?.lat ?? place.lat,
         lng: last?.lng ?? place.lng,
+        group,
+        ...(parent ? { gate: { id: parent.id, lat: parent.lat, lng: parent.lng } } : {}),
         ...(row.depart ? { leg: row.depart } : {}),
       };
     }
