@@ -444,7 +444,8 @@
 
 .tb-date__head:is(:hover, :focus-within) .tb-review-status:not(:disabled),
 .tb-date__title .tb-review-status[aria-pressed='true'],
-.tb-row:is(:hover, :focus-within) .tb-review-status {
+.tb-row:hover .tb-review-status,
+.tb-review-place:focus-visible {
   opacity: 1;
   pointer-events: auto;
 }
