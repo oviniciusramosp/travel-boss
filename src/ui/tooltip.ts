@@ -8,7 +8,6 @@ export const TRUNCATED_SELECTOR = [
   '.tb-name',
   '.tb-row__sub',
   '.tb-date__meta',
-  '.tb-day-summary',
   '.tb-route__name',
   '.tb-transfer__label',
   '.tb-span__name',

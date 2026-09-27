@@ -1,16 +1,13 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
-  arrivalKey,
   categoryFilterKey,
   groupsKey,
   periodsKey,
   read,
-  readArrival,
   readCategoryFilter,
   readGroups,
   readPeriods,
   write,
-  writeArrival,
   writeCategoryFilter,
   writeGroups,
   writePeriods,
@@ -56,7 +53,7 @@ describe('store', () => {
     expect(() => write('categories', ['parks'])).not.toThrow();
   });
 
-  it('stores the category filter, open groups and the arrival', () => {
+  it('stores the category filter and open groups', () => {
     installStorage();
     expect(readCategoryFilter()).toBeNull();
     writeCategoryFilter(['parks', 'cafes']);
@@ -67,11 +64,6 @@ describe('store', () => {
     writeGroups('paris', { parks: true, cafes: false });
     expect(readGroups('paris')).toEqual({ parks: true, cafes: false });
     expect(groupsKey('paris')).toBe('groups:paris');
-
-    expect(readArrival('paris', 'paris-d1')).toBeNull();
-    writeArrival('paris', 'paris-d1', 'cdg');
-    expect(readArrival('paris', 'paris-d1')).toBe('cdg');
-    expect(arrivalKey('paris', 'paris-d1')).toBe('arrival:paris:paris-d1');
   });
 
   it('keeps only the boolean choices of each period', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { routeEmphasis, routeLayerKind, stationsFor, toMapRoute } from './route-model';
+import { routeEmphasis, routeLayerKind, stationsFor } from './route-model';
 import type { MapRouteSegment } from './types';
 
 const spine: MapRouteSegment = {
@@ -60,50 +60,5 @@ describe('route emphasis', () => {
     expect(routeEmphasis(focus, toStop)).toBe('hot');
     expect(routeEmphasis(focus, toStation)).toBe('dim');
     expect(routeEmphasis(focus, spine)).toBe('dim');
-  });
-});
-
-describe('toMapRoute', () => {
-  it('attaches a transfer only to the matching transit hop', () => {
-    const mapped = toMapRoute({
-      segments: [
-        { mode: 'walk', latlngs: [[0, 0], [1, 1]], fromId: 'a', toId: 'b' },
-        {
-          mode: 'transit',
-          latlngs: [[1, 1], [2, 2]],
-          fromId: 'a',
-          toId: 'b',
-          hopIndex: 0,
-          color: '#111111',
-        },
-        {
-          mode: 'transit',
-          latlngs: [[2, 2], [3, 3]],
-          fromId: 'a',
-          toId: 'b',
-          hopIndex: 1,
-          color: '#222222',
-        },
-      ],
-      transfers: [
-        {
-          lat: 2,
-          lng: 2,
-          fromColor: '#111111',
-          toColor: '#222222',
-          fromLabel: 'M1',
-          toLabel: 'M6',
-          fromId: 'a',
-          toId: 'b',
-          hopIndex: 0,
-        },
-      ],
-    });
-    expect(mapped[0]?.transfers).toBeUndefined();
-    expect(mapped[1]?.transfers).toEqual([
-      { lat: 2, lng: 2, fromColor: '#111111', toColor: '#222222', label: 'M1 → M6' },
-    ]);
-    expect(mapped[2]?.transfers).toBeUndefined();
-    expect(mapped[1]?.dash).toBeUndefined();
   });
 });

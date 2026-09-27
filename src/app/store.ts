@@ -26,10 +26,6 @@ export function groupsKey(city: string): string {
   return `groups:${city}`;
 }
 
-export function arrivalKey(city: string, dayId: string): string {
-  return `arrival:${city}:${dayId}`;
-}
-
 export function readCategoryFilter(): string[] | null {
   const value = read<unknown>(categoryFilterKey, null);
   if (!Array.isArray(value)) return null;
@@ -79,13 +75,4 @@ export function readPeriods(trip: string): PeriodPrefs {
 
 export function writePeriods(trip: string, prefs: Readonly<PeriodPrefs>): void {
   write(periodsKey(trip), prefs);
-}
-
-export function readArrival(city: string, dayId: string): string | null {
-  const value = read<unknown>(arrivalKey(city, dayId), null);
-  return typeof value === 'string' && value ? value : null;
-}
-
-export function writeArrival(city: string, dayId: string, arrivalId: string): void {
-  write(arrivalKey(city, dayId), arrivalId);
 }

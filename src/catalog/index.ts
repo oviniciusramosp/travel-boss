@@ -16,8 +16,6 @@ export {
   itineraryForCity,
   dayRoutePlaceIds,
   dayPrimaryRoutePlaceIds,
-  computeDayBudget,
-  computeTripBudget,
   withResolvedArea,
   travelUi,
   resolveVisit,
@@ -55,15 +53,11 @@ export type {
   LString,
   TravelCity,
   TravelPlace,
-  TravelItinerary,
   ItineraryDay,
   ItineraryStop,
   PlaceCategory,
-  DayBudget,
   MoneyInfo,
   VisitInfo,
 } from '../data/travel';
-
-export type { ItineraryArrivalOption } from '../data/travel-itineraries';
 
 export { loadOsmAreas, osmAreasReady, placeHasOsmArea } from '../data/osm-area-bridge';
