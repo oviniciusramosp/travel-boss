@@ -805,7 +805,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-louvre': museumVisit(32, {
     national: true,
-    ticketUrl: 'https://www.ticket.louvre.fr/en',
+    ticketUrl: 'https://ticket.louvre.fr/en/billetterie/3313',
     durationMin: 150,
     durationMax: 300,
     duration: L('3–5 hours (or two short visits)', '3–5 horas (ou duas visitas curtas)'),
