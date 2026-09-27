@@ -416,9 +416,8 @@
   height: auto;
 }
 
-/* Video modal. A native <dialog>: the top layer beats every z-index. */
-.tb-video {
-  width: min(400px, calc(100vw - 2 * var(--spacing-16)));
+/* Modal (`openDialog`). A native <dialog>: the top layer beats every z-index. */
+.tb-dialog {
   max-width: none;
   max-height: calc(100dvh - 2 * var(--spacing-16));
   padding: 0;
@@ -431,33 +430,33 @@
   transition: opacity var(--dur-base) var(--ease-out);
 }
 
-.tb-video:focus-visible {
+.tb-dialog:focus-visible {
   outline: none;
 }
 
-.tb-video::backdrop {
+.tb-dialog::backdrop {
   background: var(--color-scrim);
   transition: background-color var(--dur-base) var(--ease-out);
 }
 
 @starting-style {
-  .tb-video[open] {
+  .tb-dialog[open] {
     opacity: 0;
   }
 
-  .tb-video[open]::backdrop {
+  .tb-dialog[open]::backdrop {
     background: transparent;
   }
 }
 
-.tb-video__bar {
+.tb-dialog__bar {
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
   padding: var(--inset-card) var(--inset-card) var(--spacing-8) var(--spacing-16);
 }
 
-.tb-video__title {
+.tb-dialog__title {
   flex: 1;
   min-width: 0;
   margin: 0;
@@ -466,6 +465,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.tb-video {
+  width: min(400px, calc(100vw - 2 * var(--spacing-16)));
 }
 
 /* ponytail: Instagram's embed is 708px tall at 400px wide; a shorter window scrolls inside the iframe. */

@@ -22,7 +22,6 @@ export function mapsMark(opts?: { badge?: boolean }): HTMLSpanElement {
 export function mapsIconLink(opts: {
   label: string;
   href?: string | null;
-  badge?: boolean;
   size?: 'sm' | 'md';
 }): HTMLAnchorElement {
   const link = document.createElement('a');
@@ -31,7 +30,7 @@ export function mapsIconLink(opts: {
   link.rel = 'noopener';
   link.setAttribute('aria-label', opts.label);
   link.setAttribute('data-tip', opts.label);
-  link.append(mapsMark({ badge: opts.badge }));
+  link.append(mapsMark());
   if (opts.href) link.href = opts.href;
   else {
     link.setAttribute('aria-disabled', 'true');

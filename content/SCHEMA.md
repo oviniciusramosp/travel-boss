@@ -77,7 +77,7 @@ dates: 2026-04-06 → 2026-04-09
       - via: Pegar um Bolt · 35 min — €29–35 na simulação; o app mostra onde encontrar o carro
     ```
 
-  - A `€` amount before the note is the leg's price per person (`€2,55`, or a range `€15–18`, which counts its middle). The day card adds it to tickets, once per leg. Write what each person pays on that leg: a single metro ticket, or a week pass on the first leg of the day it starts (`com a Navigo Semaine · 35 min · €32,40`).
+  - A `€` amount before the note is the leg's price per person (`€2,55`, or a range `€15–18`, which counts its middle). The day card adds it to tickets, once per leg. Write only what each person pays on top of the week pass: a single metro ticket on a day the pass does not cover, or the pass itself on the first leg of the day it starts (`com a Navigo Semaine · 35 min · €32,40`). A leg the pass covers has no `€`. The timeline shows the price at the right of the leg, on its first ride.
 
     ```markdown
     - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa
@@ -144,7 +144,7 @@ The UI shows one card per date, not per `### Dia N`. Nothing here is a new synta
   - Dinner: the first stop that says `jantar` / `dinner`, or a picnic from 18:00.
   - A list note never counts, so "Almoço alternativo: …" does not move the split.
   - Without a lunch stop the morning ends at 12:00. Without a dinner stop the evening starts at 18:00 (and before 05:00). A stop without a time stays in the period above it. A date with no time and no meal has no periods.
-- Food and tickets per person come from the catalog, not from the notes: the middle of each range, one count per place per date. A `**Comida:**` line in a note is text for the reader; the card does not read it. A leg's `€` price (see `via:`) is the one thing outside the catalog that counts, as a ticket. A stop's sub-points that name a catalog place (`placeId`, such as the restaurants inside a park) count too, on the park's row. Both cards always show, €0 included.
+- Food and tickets per person come from the catalog, not from the notes: the middle of each range, one count per place per date. A `**Comida:**` line in a note is text for the reader; the card does not read it. A leg's `€` price (see `via:`) is the one thing outside the catalog that counts, as a ticket. A stop's sub-points that name a catalog place (`placeId`, such as the restaurants inside a park) count too, on the park's row. Both cards always show, €0 included. A click on them opens the day's receipt: each place and leg price, a subtotal per kind and the total per person.
 - When two hours or more are left after a stop (its catalog stay, or 1 h without one, and the way to the next stop), the timeline adds a "Roteiro em aberto" block: at the end of the stop's period, or right before the next stop inside the same period. Arriving and leaving the same place (a rest at home) does not count. It is not a stop and is not written in the file.
 - A walk the timeline would show as "~1 min" gets no row of its own; the dotted line still joins the two stops, and the map still draws it.
 - A leg's row sits just before the next stop, after any list notes between the two. A park is the stop and its rides are timed list notes under it, so the walk out of the park shows after the last ride. Walks start at a place's last sub-point and end at the next place's first, like the map.

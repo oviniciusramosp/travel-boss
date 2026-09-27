@@ -53,9 +53,9 @@ UI (vale a partir da Fase 1):
 - Informação secundária aparece no hover e em `:focus-within`; em `@media (hover: none)` fica sempre visível. Não esconda o essencial nem o único caminho de uma ação.
 - Hover não move a câmera do mapa. Só clique ou Enter movem.
 - Nota editável usa `editableNote` (`src/trip/note-edit.ts`): o texto vira o próprio Markdown no lugar e cada save é um `PATCH` de uma linha. Com um editor aberto, o documento não repinta.
-- O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos. Exceções pedidas pelo usuário: os ícones de orçamento do card do dia e do valor de cada parada, à direita da nota (comida `--color-food`, ingresso `--color-ticket`), e os de previsão do tempo (o pack duotone de `public/weather/`, com as cores do próprio SVG).
+- O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos. Exceções pedidas pelo usuário: os ícones de orçamento do card do dia, da nota do dia e do valor de cada parada, à direita da nota (comida `--color-food`, ingresso `--color-ticket`), o botão de rota do card do dia quando ligado (fundo `--color-walk`), e os de previsão do tempo (o pack duotone de `public/weather/`, com as cores do próprio SVG).
 
-Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`, `aiBadge`, `videoButton`, `editableNote`, `weatherIcon`.
+Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`, `aiBadge`, `openDialog`, `videoButton`, `editableNote`, `weatherIcon`.
 
 Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--r-min`, canto reto `--r-none`. Os pares (`--r-card`/`--inset-card`/`--r-card-inner`, e o mesmo para row, popover e group) ficam em `src/styles/tokens.css`. Filho que encosta no canto usa o `*-inner`. Linha de uma linha é `--r-pill`; linha com `.tb-row__sub` é `--r-row`. Foco é `outline` + `outline-offset`, nunca `box-shadow`. Quem rola é `.tb-panel__body`, não o card arredondado. `grep border-radius src/styles` só pode mostrar `var(--r-*)`.
 
@@ -67,7 +67,7 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 - H2: cidade, na ordem. A linha seguinte é `city: <slug>` do catálogo; `dates: YYYY-MM-DD → YYYY-MM-DD` é opcional.
 - H3: `### Dia N — Título`.
 - Parada: bullet com `HH:mm` opcional e link `[Rótulo](place:<id>)` (o id já existe naquela cidade) ou URL `https://…`. Nota depois de ` — `.
-- Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho.
+- Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho. Preço (`· €2,55`, antes da nota) só quando é gasto a mais que o passe semanal.
 - Parágrafo sob o dia é narrativa: entra no documento e no export, não vira pino.
 - Comentário: `  - comentário: …` recuado sob uma parada ou nota de lista é um pedido do usuário para aquele ponto, escrito pelo app. Quando ele pedir para ler os comentários, rode `grep -n "comentário:" content/trips/<id>.md`; a parada é o bullet sem recuo logo acima. Aja em cada um e apague a linha dele.
 - Sem comentário HTML, front matter YAML ou HTML cru.

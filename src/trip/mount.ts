@@ -17,7 +17,7 @@ import { setDocumentTitle } from '../app/router';
 import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
-import { googleDirectionsUrl, MAPS_MAX_POINTS } from './directions';
+import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
@@ -203,28 +203,6 @@ function datePeriods(rows: readonly DateStop[]): (Period | null)[] {
   );
 }
 
-/** Stops of the periods on the map. Past the Maps limit the label says how many go. */
-function paintDayMaps(link: HTMLAnchorElement, points: { lat: number; lng: number }[], locale: Locale): void {
-  const url = googleDirectionsUrl(points, 'transit');
-  const base = pickLocale(locale, { en: 'Open route in Google Maps', 'pt-BR': 'Abrir rota no Google Maps' });
-  const cut = pickLocale(locale, {
-    en: `${MAPS_MAX_POINTS} of ${points.length} stops`,
-    'pt-BR': `${MAPS_MAX_POINTS} de ${points.length} paradas`,
-  });
-  const label = points.length > MAPS_MAX_POINTS ? `${base} · ${cut}` : base;
-  link.setAttribute('aria-label', label);
-  link.setAttribute('data-tip', label);
-  if (url) {
-    link.href = url;
-    link.removeAttribute('aria-disabled');
-    link.removeAttribute('tabindex');
-  } else {
-    link.removeAttribute('href');
-    link.setAttribute('aria-disabled', 'true');
-    link.tabIndex = -1;
-  }
-}
-
 function emptyNotice(title: string, detail?: string, error = false): HTMLDivElement {
   const wrap = document.createElement('div');
   wrap.className = 'tb-empty';
@@ -406,7 +384,8 @@ export function mountTrip(
     );
   };
   let tripRouteEpoch = 0;
-  let ignoreDateToggle = false;
+  /** Date cards in the order they opened. Several stay open; the last one open is on the map. */
+  let openOrder: string[] = [];
   let pinPick = false;
   let routeAbort: AbortController | null = null;
   let hasPainted = false;
@@ -441,11 +420,15 @@ export function mountTrip(
     writePeriods(id, periodPrefs);
   }
 
+  /** The card opened last among the open ones. */
   function openDate(): string | null {
-    return main.querySelector<HTMLDetailsElement>('details.tb-date[open]')?.dataset.date ?? null;
+    const open = new Set(
+      [...main.querySelectorAll<HTMLDetailsElement>('details.tb-date[open]')].map((card) => card.dataset.date),
+    );
+    return openOrder.findLast((date) => open.has(date)) ?? null;
   }
 
-  /** The open date, unless its card hid the route. */
+  /** That date, unless its card hid the route. */
   function routedDate(): string | null {
     const date = openDate();
     return date && !routeHidden.has(date) ? date : null;
@@ -665,16 +648,11 @@ export function mountTrip(
       .catch(() => undefined);
   }
 
-  /** Route toggle and day Maps link, updated in place. */
-  function syncDayChrome(trip: Trip) {
-    const locale = shell.locale();
+  /** Route toggle of each card, updated in place. Maps opens per period: a whole day is too many stops. */
+  function syncDayChrome() {
     const routed = routedDate();
     main.querySelectorAll<HTMLDetailsElement>('details.tb-date').forEach((card) => {
-      const date = card.dataset.date;
-      if (!date) return;
-      card.querySelector('[data-day-action="route"]')?.setAttribute('aria-pressed', String(date === routed));
-      const link = card.querySelector<HTMLAnchorElement>('[data-day-action="maps"]');
-      if (link) paintDayMaps(link, datedPoints(trip, date), locale);
+      card.querySelector('[data-day-action="route"]')?.setAttribute('aria-pressed', String(card.dataset.date === routed));
     });
   }
 
@@ -690,7 +668,7 @@ export function mountTrip(
     map.setPins('stop', []);
     map.setPins('hotel', []);
     setDayLayer(Boolean(date));
-    syncDayChrome(trip);
+    syncDayChrome();
     seenPinIds = new Set(pins.map((pin) => pin.id));
     if (date) {
       drawTripRoutes();
@@ -1323,16 +1301,16 @@ export function mountTrip(
           details.open = true;
           return;
         }
-        if (routeHidden.delete(date)) {
-          syncView(true);
+        if (routedDate() === date) {
+          routeHidden.add(date);
+          syncView(false);
           return;
         }
-        routeHidden.add(date);
-        syncView(false);
+        // Its route was hidden, or another open card had the map: this one takes it.
+        routeHidden.delete(date);
+        openOrder = [...openOrder.filter((other) => other !== date), date];
+        syncView(true);
       });
-      const dayMaps = mapsIconLink({ badge: true, size: 'sm', label: '' });
-      dayMaps.dataset.dayAction = 'maps';
-      paintDayMaps(dayMaps, datedPoints(trip, date), locale);
       const copyDay = iconButton({
         icon: 'content_copy',
         label: pickLocale(locale, { en: 'Copy day (Markdown)', 'pt-BR': 'Copiar dia (Markdown)' }),
@@ -1353,7 +1331,7 @@ export function mountTrip(
         );
       });
       const actions = el('span', 'tb-date__actions');
-      actions.append(copyDay, routeToggle, dayMaps);
+      actions.append(copyDay, routeToggle);
       const chevron = icon('expand_more', { size: 18 });
       chevron.classList.add('tb-date__chevron');
       summary.append(heading, actions, chevron);
@@ -1381,6 +1359,7 @@ export function mountTrip(
             const found = placesHere.find((place) => place.id === placeId);
             return found ? pickLocale(locale, found.name) : placeId;
           },
+          formatDayTitle(date, locale),
           locale,
         ),
       );
@@ -1572,6 +1551,11 @@ export function mountTrip(
           legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, routeHop.from, routeHop.to) }];
         }
         legs = timelineLegs(legs);
+        // A `via:` price is what the week pass does not cover. It sits on the leg's own row
+        // or, when the leg is split into parts, on the first ride: where you pay.
+        const fare = entry.depart?.fareEur ?? 0;
+        const own = entry.depart ? legs.indexOf(entry.depart) : -1;
+        const fareAt = fare > 0 ? (own >= 0 ? own : Math.max(0, legs.findIndex((leg) => leg.mode !== 'walk'))) : -1;
         const rails = legs.map((leg) => {
           const mode = leg.mode === 'walk' ? 'walk' : 'transit';
           const branded = 'color' in leg && typeof leg.color === 'string' ? leg.color : null;
@@ -1599,6 +1583,15 @@ export function mountTrip(
         const appendHop = () => rails.forEach((rail, index) => {
           const transfer = transferRow(legs[index]!, locale);
           if (legs[index] === entry.depart) editLegNote(transfer, entry.depart, city.slug);
+          if (index === fareAt) {
+            const cost = stopCostEl({ id: '', food: 0, ticket: fare }, locale);
+            transfer.append(cost);
+            // The row is named by its aria-label, so the fare joins it.
+            transfer.setAttribute(
+              'aria-label',
+              `${transfer.getAttribute('aria-label')}, ${cost.firstElementChild?.getAttribute('aria-label')}`,
+            );
+          }
           transfer.classList.add('tb-timeline__hop');
           transfer.style.setProperty('--line-color', rail.color);
           if (chipTone(rail.color) === 'ink') transfer.classList.add('is-ink');
@@ -1658,16 +1651,16 @@ export function mountTrip(
           restoring = false;
           return;
         }
-        if (ignoreDateToggle) return;
+        // The other open cards stay open. This one goes on the map, or leaves it.
+        // `toggle` fires after the change, so "was on the map" reads the order, not the DOM.
+        const wasOnMap = openOrder.at(-1) === date && !routeHidden.has(date);
+        openOrder = openOrder.filter((other) => other !== date);
         if (details.open) {
           routeHidden.delete(date);
-          ignoreDateToggle = true;
-          for (const other of main.querySelectorAll<HTMLDetailsElement>('details.tb-date')) {
-            if (other !== details) other.open = false;
-          }
-          ignoreDateToggle = false;
+          openOrder.push(date);
         }
-        const fitDay = details.open && !pinPick;
+        // Opening frames the day, unless a pin opened it. Closing the day on the map frames the one it hands the map to.
+        const fitDay = details.open ? !pinPick : wasOnMap && routedDate() !== null;
         pinPick = false;
         syncView(fitDay);
       });
@@ -1752,8 +1745,10 @@ export function mountTrip(
   stopsUnsub.fn = map.onSelect((pinId) => {
     if (!alive || !current) return;
     const selector = `[data-place-id="${CSS.escape(pinId)}"]`;
-    // Home shows up on most dates. The open card's row wins.
+    // Home shows up on most dates. The row of the card on the map wins, then any open card's.
+    const onMap = openDate();
     const item =
+      (onMap ? main.querySelector<HTMLElement>(`details.tb-date[data-date="${CSS.escape(onMap)}"] ${selector}`) : null) ??
       main.querySelector<HTMLElement>(`details.tb-date[open] ${selector}`) ??
       main.querySelector<HTMLElement>(selector);
     if (item) {
