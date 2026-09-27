@@ -20,7 +20,7 @@ npm run travel:photos:check
 graphify query "<tema>"
 ```
 
-Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não edite `graph.json` na mão. Não commite `graphify-out/cache/`.
+Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não edite `graph.json` na mão. Não commite `graphify-out/cache/`. O merge de `graph.json` usa o driver do graphify (`.gitattributes`); em clone novo, rode `git config merge.graphify.driver "graphify merge-driver %O %A %B"`, senão o git volta a escrever marcadores de conflito.
 
 ## Arquitetura
 
