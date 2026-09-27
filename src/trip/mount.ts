@@ -1638,15 +1638,15 @@ export function mountTrip(
           return;
         }
         // The other open cards stay open. This one goes on the map, or leaves it.
-        const before = routedDate();
+        // `toggle` fires after the change, so "was on the map" reads the order, not the DOM.
+        const wasOnMap = openOrder.at(-1) === date && !routeHidden.has(date);
         openOrder = openOrder.filter((other) => other !== date);
         if (details.open) {
           routeHidden.delete(date);
           openOrder.push(date);
         }
         // Opening frames the day, unless a pin opened it. Closing the day on the map frames the one it hands the map to.
-        const after = routedDate();
-        const fitDay = details.open ? !pinPick : after !== null && after !== before;
+        const fitDay = details.open ? !pinPick : wasOnMap && routedDate() !== null;
         pinPick = false;
         syncView(fitDay);
       });
