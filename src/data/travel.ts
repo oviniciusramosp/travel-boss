@@ -1551,6 +1551,26 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Esplanade du Général de Gaulle La Défense',
       },
       {
+        id: 'par-carrefour-express-saint-honore',
+        name: { en: 'Carrefour Express (Saint-Honoré)', 'pt-BR': 'Carrefour Express (Saint-Honoré)' },
+        category: 'markets',
+        aiSuggested: true,
+        aiReason: {
+          en: 'a convenience store halfway between the Louvre and the Tuileries gate, for a simple picnic without the detour to the Monoprix',
+          'pt-BR': 'conveniência no meio do caminho entre o Louvre e o portão das Tulherias, para um piquenique simples sem o desvio até o Monoprix',
+        },
+        description: {
+          en: 'Small Carrefour on Rue Saint-Honoré, 370 m from the Tuileries gate on Rue de Rivoli: bread, cheese, fruit and drinks for a picnic. Mon–Sat 7:00–22:00.',
+          'pt-BR': 'Carrefour pequeno na Rue Saint-Honoré, a 370 m do portão das Tulherias pela Rue de Rivoli: pão, queijo, fruta e bebida para o piquenique. Seg–sáb 7h–22h.',
+        },
+        googleRating: 3.6,
+        // OSM node 3980764070.
+        lat: 48.865056,
+        lng: 2.331471,
+        address: '205 Rue Saint-Honoré, 75001 Paris',
+        mapsQuery: 'Carrefour Express 205 Rue Saint-Honoré Paris',
+      },
+      {
         id: 'par-monoprix-rivoli',
         name: { en: 'Monoprix Opéra', 'pt-BR': 'Monoprix Opéra' },
         category: 'markets',

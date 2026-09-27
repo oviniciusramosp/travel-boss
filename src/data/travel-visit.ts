@@ -708,6 +708,11 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Ande a esplanada em direção à cidade — torres + céu aberto no enquadramento.',
     ),
   }),
+  'par-carrefour-express-saint-honore': {
+    avgPricePerPerson: money(6, 12, L('Picnic supplies / person', 'Suprimentos de piquenique / pessoa')),
+    durationMin: 15,
+    durationMax: 25,
+  },
   'par-monoprix-rivoli': {
     avgPricePerPerson: money(6, 12, L('Picnic supplies / person', 'Suprimentos de piquenique / pessoa')),
     durationMin: 15,
