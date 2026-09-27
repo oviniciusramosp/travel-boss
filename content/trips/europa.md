@@ -45,7 +45,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:50 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km)
 - 16:50 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
   - via: RER A de Charles de Gaulle–Étoile até Auber · 10 min
-- 17:30 [Ópera Garnier](place:par-opera) — Por fora, já iluminada. A visita por dentro fica para sábado de manhã: fecha às 17h
+- 17:30 [Ópera Garnier](place:par-opera) — Por fora, já iluminada; a visita ao interior fica para sábado, porque ela fecha às 17h
 - 17:45 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris
 - 18:00 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
 - 18:20 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
