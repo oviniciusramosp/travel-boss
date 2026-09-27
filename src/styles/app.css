@@ -1029,6 +1029,13 @@ p.tb-meta {
   transition: transform var(--dur-fast) var(--ease-out);
 }
 
-.tb-subpoint-wrap.is-hover .tb-subpoint-dot--n {
+.tb-subpoint-wrap.is-hover .tb-subpoint-dot--n,
+.tb-subpoint-wrap.is-active .tb-subpoint-dot--n {
   transform: scale(1.5);
+}
+
+/* Opened in the card: ink ring so it stands out from the hovered one. */
+.tb-subpoint-wrap.is-active .tb-subpoint-dot--n {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 1px;
 }

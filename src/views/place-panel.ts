@@ -388,14 +388,25 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       const steps = el('ol', 'tb-panel__subpoints');
       subPoints.forEach((sub, index) => {
         const item = el('li', 'tb-panel__subpoint');
+        // One open at a time (`name`). Opening lights the numbered dot on the map.
+        const fold = el('details');
+        fold.name = 'tb-subpoints';
+        const head = el('summary');
+        head.append(el('span', undefined, pickLocale(locale, sub.name)));
+        if (sub.photo) head.append(icon('expand_more', { size: 16 }));
+        fold.append(head);
         if (sub.photo) {
           const img = el('img', 'tb-panel__subpoint-photo');
           img.src = sub.photo;
-          img.alt = '';
+          img.alt = pickLocale(locale, sub.name);
           img.loading = 'lazy';
-          item.append(img);
+          fold.append(img);
         }
-        item.append(el('span', undefined, pickLocale(locale, sub.name)));
+        fold.addEventListener('toggle', () => {
+          if (fold.open) map.selectSubPoint(index);
+          else if (!steps.querySelector('details[open]')) map.selectSubPoint(null);
+        });
+        item.append(fold);
         // Hover lights the numbered dot; the camera stays put.
         item.addEventListener('pointerenter', () => map.hoverSubPoint(index));
         item.addEventListener('pointerleave', () => map.hoverSubPoint(null));
