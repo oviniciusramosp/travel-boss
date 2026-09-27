@@ -1390,14 +1390,17 @@ export function mountTrip(
     const lineAt = (line: number): SeenLine => ({ line, lines: noteBlock(rawLines, line) });
     const statusSync: (() => void)[] = [];
     const statusButton = (line: number, kind: 'fechado' | 'a confirmar', active: boolean, changed: (on: boolean) => void) => {
-      const button = el('button', 'tb-btn-outline tb-review-status');
-      button.type = 'button';
+      const button = iconButton({ icon: 'help', label: '', size: 'sm' });
+      button.classList.add('tb-review-status');
       let block = statusPatch(lastRaw, line, kind, active).before;
       let busy = false;
       const sync = () => {
-        button.textContent = kind === 'fechado'
-          ? pickLocale(locale, { en: active ? 'Day finalized' : 'Finalize day', 'pt-BR': active ? 'Dia fechado' : 'Fechar dia' })
-          : pickLocale(locale, { en: active ? 'To confirm' : 'Mark as tentative', 'pt-BR': active ? 'A confirmar' : 'Marcar dúvida' });
+        const label = kind === 'fechado'
+          ? pickLocale(locale, { en: active ? 'Day finalized · Reopen day' : 'Finalize day', 'pt-BR': active ? 'Dia fechado · Reabrir dia' : 'Fechar dia' })
+          : pickLocale(locale, { en: active ? 'Tentative place · Confirm place' : 'Mark as tentative', 'pt-BR': active ? 'Lugar a confirmar · Confirmar lugar' : 'Marcar dúvida' });
+        button.setAttribute('aria-label', label);
+        button.dataset.tip = label;
+        button.replaceChildren(icon(kind === 'fechado' ? (active ? 'check' : 'check_circle') : (active ? 'check_circle' : 'help'), { size: 16 }));
         button.setAttribute('aria-pressed', String(active));
       };
       sync();
@@ -1638,18 +1641,17 @@ export function mountTrip(
         const syncReview = () => {
           const pending = day.stops.some((stop) => stop.status);
           review.disabled = pending;
-          if (pending) {
-            review.textContent = pickLocale(locale, { en: 'Pending places', 'pt-BR': 'Pontos a confirmar' });
-            review.setAttribute('aria-pressed', 'false');
-          } else {
-            review.textContent = pickLocale(locale, { en: day.status ? 'Day finalized' : 'Finalize day', 'pt-BR': day.status ? 'Dia fechado' : 'Fechar dia' });
-            review.setAttribute('aria-pressed', String(Boolean(day.status)));
-          }
-          if (daysHere.length > 1) review.textContent += ` · ${cityDisplayName(city, locale)}`;
+          const closed = Boolean(day.status) && !pending;
+          let label = pickLocale(locale, { en: pending ? 'Pending places' : closed ? 'Day finalized · Reopen day' : 'Finalize day', 'pt-BR': pending ? 'Pontos a confirmar' : closed ? 'Dia fechado · Reabrir dia' : 'Fechar dia' });
+          if (daysHere.length > 1) label += ` · ${cityDisplayName(city, locale)}`;
+          review.setAttribute('aria-label', label);
+          review.dataset.tip = label;
+          review.setAttribute('aria-pressed', String(closed));
+          review.replaceChildren(icon(closed ? 'check' : 'check_circle', { size: 16 }));
         };
         statusSync.push(syncReview);
         syncReview();
-        actions.append(review);
+        heading.querySelector('.tb-date__title')?.append(review);
       }
       actions.append(copyDay, routeToggle);
       const chevron = icon('expand_more', { size: 18 });
@@ -1775,7 +1777,7 @@ export function mountTrip(
           noteBody.append(text);
           noteItem.append(noteBody);
           const noteActions = el('div', 'tb-row__actions');
-          noteActions.append(stopStatus(stop), comments(noteItem, stop, city.slug));
+          noteActions.append(comments(noteItem, stop, city.slug));
           noteItem.append(noteActions);
           markChanged(noteItem);
           lists[rowIndex]!.append(noteItem);
@@ -1893,8 +1895,6 @@ export function mountTrip(
             }
             if (subNotes.some((candidate) => candidate.time)) point.append(el('span', 'tb-substop__time', note?.time ?? ''));
             point.append(dot, name);
-            const source = note && daysHere.flatMap(({ day }) => day.stops).find((entry) => entry.line === note.line);
-            if (source) point.append(stopStatus(source));
             points.append(point);
           });
           // Without a single time in the list, the time column goes too.
