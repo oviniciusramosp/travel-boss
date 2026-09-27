@@ -439,6 +439,23 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       list.append(row);
       body.append(list);
     }
+    const ratings = el('div', 'tb-panel__ratings');
+    ratings.append(
+      starRating({
+        rating: place.googleRating,
+        label: pickLocale(locale, travelUi.ratingGoogle),
+        locale,
+        icon: 'map',
+      }),
+      starRating({
+        rating: place.rating,
+        label: pickLocale(locale, travelUi.ratingMine),
+        locale,
+        icon: 'person',
+      }),
+    );
+    body.append(ratings);
+
     // The trip's loose notes under this stop, in the day's order.
     const parkNotes = current?.links?.parkNotes ?? [];
     if (parkNotes.length) {
@@ -458,23 +475,6 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       list.append(row);
       body.append(list);
     }
-
-    const ratings = el('div', 'tb-panel__ratings');
-    ratings.append(
-      starRating({
-        rating: place.googleRating,
-        label: pickLocale(locale, travelUi.ratingGoogle),
-        locale,
-        icon: 'map',
-      }),
-      starRating({
-        rating: place.rating,
-        label: pickLocale(locale, travelUi.ratingMine),
-        locale,
-        icon: 'person',
-      }),
-    );
-    body.append(ratings);
 
     const live = el('span', 'tb-live');
     live.hidden = true;

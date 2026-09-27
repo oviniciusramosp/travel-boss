@@ -1593,8 +1593,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'tourist',
         landmark: 'louvre',
         description: {
-          en: 'Plan a route. The building is half the experience.',
-          'pt-BR': 'Planeje um roteiro. O prédio é metade da experiência.',
+          en: 'Art museum housed in a former royal palace, with collections spanning ancient civilisations and European painting. Highlights include the Mona Lisa, the Venus de Milo and the Winged Victory of Samothrace.',
+          'pt-BR': 'Museu de arte instalado em um antigo palácio real, com coleções de civilizações antigas e pintura europeia. Entre os destaques estão a Mona Lisa, a Vênus de Milo e a Vitória de Samotrácia.',
         },
         rating: 5,
         googleRating: 4.7,
