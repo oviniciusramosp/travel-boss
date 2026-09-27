@@ -46,7 +46,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 16:50 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
   - via: RER A de Charles de Gaulle–Étoile até Auber · 10 min
 - 17:30 [Ópera Garnier](place:par-opera) — Por fora, já iluminada; a visita ao interior fica para sábado, porque ela fecha às 17h
-- 17:45 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris
+- 17:45 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris, sem comprar
 - 18:00 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
 - 18:20 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
 - 18:50 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
@@ -61,7 +61,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 07:55 [Casa do Gui](place:par-casa-do-gui)
   - via: RER E até Magenta e RER B de Gare du Nord até Saint-Michel Notre-Dame · 45 min
 - 08:45 [La Maison d'Isabelle](place:par-maison-isabelle) — Croissant premiado (~€1,40), para viagem: não tem onde sentar
-- 09:00 [Shakespeare and Company](place:par-shakespeare) — Café para acompanhar o croissant: o café da livraria abre às 9h
+- 09:00 [Shakespeare and Company](place:par-shakespeare)
 - 09:15 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
 - 10:05 [Sainte-Chapelle](place:par-sainte-chapelle) — Reserve o horário das 10h15.
 - 11:05 [Relógio da Conciergerie](place:par-horloge) — Relógio de 1370 na torre da esquina com o Quai de l'Horloge
