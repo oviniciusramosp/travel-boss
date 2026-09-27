@@ -1,16 +1,16 @@
 # Graph Report - roteiros-valores-pessoa-7575f7  (2026-09-27)
 
 ## Corpus Check
-- 211 files · ~342,200 words
+- 211 files · ~341,807 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1647 nodes · 4363 edges · 75 communities (73 shown, 2 thin omitted)
+- 1647 nodes · 4363 edges · 74 communities (72 shown, 2 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 22 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d0644403`
+- Built from commit: `ff6a1626`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -67,7 +67,7 @@
 - calendar.ts
 - mount.ts
 - expandTimelineTransferParts
-- el
+- hotel-distance.ts
 - open-now.ts
 - view-state.ts
 - hotel-ring.ts
@@ -87,7 +87,6 @@
 - links.ts
 - getTransitLine
 - maplibre-perf.ts
-- guide.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `pickLocale()` - 104 edges
@@ -118,7 +117,7 @@
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (75 total, 2 thin omitted)
+## Communities (74 total, 2 thin omitted)
 
 ### Community 0 - "hotel-search.mjs"
 Cohesion: 0.13
@@ -293,8 +292,8 @@ Cohesion: 0.25
 Nodes (17): formatLegDuration(), legDisplayLabel(), legLineColor(), legLabel(), TripLeg, durationMinutes(), identityOf(), isTrainRide() (+9 more)
 
 ### Community 45 - "pickLocale"
-Cohesion: 0.20
-Nodes (15): Locale, pickLocale(), applyChrome(), cityLabel(), citySource(), paintCities(), amenityName(), iconLink() (+7 more)
+Cohesion: 0.13
+Nodes (28): Locale, pickLocale(), applyChrome(), cityLabel(), citySource(), paintCities(), amenityName(), openSlotRow() (+20 more)
 
 ### Community 46 - "mountHotels"
 Cohesion: 0.14
@@ -324,9 +323,9 @@ Nodes (25): emptyNotice(), fillWeather(), loadTripFile(), mountTripNav(), onTrip
 Cohesion: 0.36
 Nodes (10): estimateLegDurationMin(), expandTimelineTransferParts(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin(), walkMinutes() (+2 more)
 
-### Community 53 - "el"
-Cohesion: 0.24
-Nodes (13): openSlotRow(), railHalf(), el(), row(), RowOptions, Copy, directionHref(), dirLink() (+5 more)
+### Community 53 - "hotel-distance.ts"
+Cohesion: 0.25
+Nodes (10): row(), RowOptions, Copy, directionHref(), dirLink(), distanceSection(), formatMetres(), say() (+2 more)
 
 ### Community 54 - "open-now.ts"
 Cohesion: 0.32
@@ -400,10 +399,6 @@ Nodes (4): hopName(), getTransitLine(), TransitLine, transitLineForPlace()
 Cohesion: 0.70
 Nodes (3): MAPLIBRE_PERF, maplibreFade(), labelFadeDuration()
 
-### Community 74 - "guide.ts"
-Cohesion: 0.25
-Nodes (10): card(), GROUPS, guidePlaceIds(), GuideTab, GuideView, media(), renderGuide(), spotChip() (+2 more)
-
 ## Knowledge Gaps
 - **398 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+393 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -414,9 +409,9 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `getTravelCity()` connect `getTravelCity` to `index.ts`, `paint`, `travel.ts`, `hotels.ts`, `travel-stay-heatmap.ts`, `places.ts`, `day-plan.ts`, `travel-itineraries.ts`, `pickLocale`, `mountHotels`, `legs.ts`, `parse.ts`, `calendar.ts`, `timeline.ts`, `mount.ts`, `main.ts`?**
   _High betweenness centrality (0.048) - this node is a cross-community bridge._
-- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `shell.ts`, `route-planner.ts`, `summary.ts`, `timeline.ts`, `getTravelCity`, `travel.ts`, `note-edit.ts`, `hotel-rank.ts`, `transfer-row.ts`, `mountHotels`, `amenities.ts`, `parse.ts`, `mount.ts`, `el`, `rating.ts`, `main.ts`, `index.ts`, `beginLocate`, `price.ts`, `guide.ts`?**
+- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `shell.ts`, `route-planner.ts`, `summary.ts`, `timeline.ts`, `getTravelCity`, `travel.ts`, `note-edit.ts`, `hotel-rank.ts`, `transfer-row.ts`, `mountHotels`, `amenities.ts`, `parse.ts`, `mount.ts`, `hotel-distance.ts`, `rating.ts`, `main.ts`, `index.ts`, `beginLocate`, `price.ts`?**
   _High betweenness centrality (0.044) - this node is a cross-community bridge._
-- **Why does `el()` connect `el` to `paint`, `beginLocate`, `hotels.ts`, `price.ts`, `note-edit.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `guide.ts`, `places.ts`, `transfer-row.ts`, `pickLocale`, `shell.ts`, `mountHotels`, `route-planner.ts`, `mount.ts`, `timeline.ts`, `rating.ts`?**
+- **Why does `el()` connect `pickLocale` to `paint`, `beginLocate`, `hotels.ts`, `price.ts`, `note-edit.ts`, `place-panel.ts`, `travel-stay-heatmap.ts`, `places.ts`, `transfer-row.ts`, `shell.ts`, `mountHotels`, `route-planner.ts`, `mount.ts`, `timeline.ts`, `hotel-distance.ts`, `rating.ts`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `type` to the rest of the system?**
   _398 weakly-connected nodes found - possible documentation gaps or missing edges._

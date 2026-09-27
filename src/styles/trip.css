@@ -325,11 +325,13 @@
   }
 }
 
-.tb-budget-chip.is-food .material-symbols-rounded {
+.tb-budget-chip.is-food .material-symbols-rounded,
+.tb-stop-cost.is-food .material-symbols-rounded {
   color: var(--color-food);
 }
 
-.tb-budget-chip.is-ticket .material-symbols-rounded {
+.tb-budget-chip.is-ticket .material-symbols-rounded,
+.tb-stop-cost.is-ticket .material-symbols-rounded {
   color: var(--color-ticket);
 }
 
@@ -604,6 +606,18 @@
   grid-column: 3;
   grid-row: 1 / 3;
   align-self: center;
+  justify-self: end;
+}
+
+/* The stop's food and ticket per person, right of the note, in the actions column. */
+.tb-list.tb-timeline > .tb-row > .tb-stop-costs {
+  grid-column: 3;
+  grid-row: 3;
+  align-self: start;
+  justify-self: end;
+  margin-top: calc(-1 * var(--tl-row-gap));
+  line-height: var(--leading-caption);
+  white-space: nowrap;
 }
 
 /* Comments: the user's requests to the LLM, under the stop they are about. */

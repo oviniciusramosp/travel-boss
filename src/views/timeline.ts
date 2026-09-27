@@ -21,7 +21,7 @@ import type {
   TravelItinerary,
   TravelPlace,
 } from '../catalog';
-import type { DateBudget } from '../trip/day-plan';
+import type { BudgetLine, DateBudget } from '../trip/day-plan';
 import { googleDirectionsUrl } from '../trip/directions';
 import { iconButton } from '../ui/controls';
 import { mapsMark } from '../ui/maps-icon';
@@ -468,6 +468,26 @@ export function dateBudgetCards(
     budgetChip('local_activity', budget.ticket, ticket, unit, tip('ticket'), locale),
   );
   return group;
+}
+
+/** A stop's line of the date budget: icon and amount per person, each kind above €0. */
+export function stopCostEl(line: BudgetLine, locale: Locale): HTMLElement {
+  const costs = el('span', 'tb-stop-costs');
+  const kinds = [
+    ['food', 'restaurant', travelUi.itineraryFood],
+    ['ticket', 'local_activity', travelUi.itineraryParks],
+  ] as const;
+  for (const [kind, glyph, label] of kinds) {
+    if (!(line[kind] > 0)) continue;
+    const figure = formatEur(line[kind], locale);
+    const chip = el('span', `tb-stop-cost is-${kind}`);
+    // No tip: the timeline has none. The name carries what the glyph says.
+    chip.setAttribute('role', 'img');
+    chip.setAttribute('aria-label', `${pickLocale(locale, label)} ${figure}`);
+    chip.append(icon(glyph, { size: 16, fill: true }), figure);
+    costs.append(chip);
+  }
+  return costs;
 }
 
 function mapsLink(url: string | null, label: string): HTMLAnchorElement {
