@@ -45,7 +45,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:20 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
   - via: a pé pela Champs-Élysées · 15 min
 - 15:35 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
-  - via: a pé pela Pont Alexandre III · 17 min
+  - via: a pé pela Pont Alexandre III · 18 min
 - 15:55 [Invalides](place:par-invalides) — Por fora: a cúpula dourada e a esplanada, do outro lado da ponte; volta pelo mesmo caminho até a Champs-Élysées
 - 16:40 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km), passando na frente das vitrines
 - 17:15 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)

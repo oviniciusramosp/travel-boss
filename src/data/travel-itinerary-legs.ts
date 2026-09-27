@@ -923,6 +923,61 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
   ],
 };
 
+/** Pedestrian paths via Pont Alexandre III, Valhalla / OSM, 2026-09-27; simplified to 1 m. */
+const palaisToInvalidesWalk: LatLng[] = [
+  [48.865803, 2.313203],
+  [48.865049, 2.313135],
+  [48.865052, 2.313298],
+  [48.864667, 2.313299],
+  [48.864549, 2.313334],
+  [48.864541, 2.313651],
+  [48.862723, 2.313436],
+  [48.862694, 2.311769],
+  [48.862674, 2.311652],
+  [48.862437, 2.311641],
+  [48.859653, 2.311328],
+  [48.858575, 2.311231],
+  [48.858525, 2.312046],
+  [48.858537, 2.312082],
+  [48.858529, 2.312184],
+  [48.858372, 2.312162],
+  [48.85833, 2.312918],
+  [48.856977, 2.312769],
+  [48.856999, 2.312277],
+  [48.856513, 2.312225],
+];
+
+const palaisToChampsWalk: LatLng[] = [
+  [48.865803, 2.313203],
+  [48.865788, 2.313289],
+  [48.865735, 2.313346],
+  [48.865752, 2.313405],
+  [48.865788, 2.313414],
+  [48.86578, 2.313609],
+  [48.865955, 2.31351],
+  [48.866248, 2.313548],
+  [48.866432, 2.3137],
+  [48.866715, 2.313733],
+  [48.866707, 2.313897],
+  [48.867517, 2.31399],
+  [48.867754, 2.313963],
+  [48.868851, 2.310514],
+  [48.868973, 2.310606],
+  [48.869003, 2.310539],
+  [48.86904, 2.310512],
+  [48.869075, 2.310516],
+  [48.8692, 2.31036],
+  [48.869219, 2.310252],
+  [48.869258, 2.310218],
+  [48.869256, 2.31001],
+  [48.869216, 2.309933],
+  [48.869223, 2.309788],
+  [48.869117, 2.30971],
+  [48.870212, 2.306261],
+  [48.870467, 2.306446],
+  [48.870963, 2.304882],
+];
+
 /**
  * Train hops of content/trips/europa.md that no portfolio day covers.
  * Without a spine the trip view leaves a transit hop off the map.
@@ -986,12 +1041,13 @@ const tripEuropa2026: ItineraryLegDef[] = [
   // Concorde → the Palais along the avenue's north sidewalk (OSM way nodes), not through the gardens or along the quay.
   { from: 'par-luxor-obelisk', to: 'par-palais', mode: 'walk', through: [[48.866301, 2.318531], [48.867754, 2.313963]] },
   // Same bridge in both directions; return past the Palais before rejoining the avenue.
-  { from: 'par-palais', to: 'par-invalides', mode: 'walk', through: [[48.8638, 2.3135]] },
+  { from: 'par-palais', to: 'par-invalides', mode: 'walk', path: palaisToInvalidesWalk, durationMin: 18 },
   {
     from: 'par-invalides',
     to: 'par-champs-elysees',
     mode: 'walk',
-    through: [[48.8638, 2.3135], [48.8661, 2.3126], [48.867754, 2.313963], [48.8698, 2.3078]],
+    path: [...palaisToInvalidesWalk].reverse().concat(palaisToChampsWalk.slice(1)),
+    durationMin: 32,
   },
   trainLeg('par-casa-do-gui', 'par-bohemia', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
   trainLeg('par-arc-triomphe', 'par-eclair-genie', 12, [ride(rerA, 'etoile', 'auber')]),

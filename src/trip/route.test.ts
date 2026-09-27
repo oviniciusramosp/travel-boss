@@ -107,6 +107,24 @@ describe('planHop path', () => {
 });
 
 describe('planHop through', () => {
+  it('keeps the Palais–Invalides walk visible offline and retraces it before the Champs-Élysées', async () => {
+    const outward = { from: place('paris', 'par-palais'), to: place('paris', 'par-invalides') };
+    const back = { from: outward.to, to: place('paris', 'par-champs-elysees') };
+    const outPlan = planHop(outward);
+    const backPlan = planHop(back);
+    expect(outPlan.kind).toBe('path');
+    expect(backPlan.kind).toBe('path');
+    if (outPlan.kind !== 'path' || backPlan.kind !== 'path') throw new Error('Missing authored walk');
+    expect(backPlan.path.slice(0, outPlan.path.length)).toEqual([...outPlan.path].reverse());
+    expect(backPlan.path.length).toBeGreaterThan(outPlan.path.length);
+    const calls = deps();
+    calls.walk.mockRejectedValue(new Error('Routing service unavailable'));
+    const segments = await resolveHopSegments([outward, back], calls);
+    expect(segments).toHaveLength(2);
+    expect(segments.map((segment) => segment.latlngs)).toEqual([outPlan.path, backPlan.path]);
+    expect(calls.walk).not.toHaveBeenCalled();
+  });
+
   it('hands the walk fetch the points a catalog walk must pass', async () => {
     const hop = { from: place('paris', 'par-champ-mars'), to: place('paris', 'par-chapelle-saint-louis') };
     const plan = planHop(hop);
