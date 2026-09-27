@@ -120,6 +120,30 @@ Vale o contrato de `docs/plano-paridade.md` ("Contrato para quem executa") e o `
 7. **Modelo:** Opus para parser, schema, timeline e mount (`src/trip/*`, `src/views/timeline.ts`); Sonnet para dados (`src/data/*`), docs, skills e cálculos puros com teste.
 8. Diff acima de ~250 linhas: pare e divida.
 
+### Status (2026-09-27, fim da sessão da auditoria)
+
+Onda 1 executada por agentes e mesclada em `main` (tsc e 441 testes passando em cada merge):
+
+| Tarefa | Modelo | Commit | Resultado |
+|---|---|---|---|
+| A1 | Sonnet | `bbcfb0e` | `AGENTS.md` ganhou "Quem edita onde", favoritos e a regra geral de `aiSuggested`; skill `roteiro` §2 e §3 |
+| B1 | Opus | `3370672` | `decisão:` no parser, render sob a parada (glifo `verified`, sempre visível, editável), fora do export; `SCHEMA.md`, skill §2, `AGENTS.md`; 8 testes |
+| C1 | Sonnet | `458cdd5` | `periodWindows` em `day-plan.ts`; a previsão de cada período cobre as paradas dele e o tooltip mostra a janela (`11h–17h`); 5 testes |
+| E2 | Sonnet | `106b43c` | 16 dos 21 lugares sem foto ganharam foto do Commons |
+| E1 | Sonnet | `b196ae7` | 39 dos 40 links abrem o card direto (`mapsUrl` canônico completo, o `data=` encurtado falha em aba nova); 10 pinos movidos |
+
+Conferido no browser (Dia 1 do Europa): a decisão aparece sob a parada em cinza com o glifo; os tooltips do clima dizem `11h–17h`, `17h–21h` e `21h–24h`, batendo com as paradas e o almoço às 14h30.
+
+Ficou para o usuário decidir:
+- `par-pierre-herme` (Champs-Élysées) consta como fechado em definitivo no Google: tirar do catálogo ou apontar para outra loja Pierre Hermé.
+- Pinos movidos pela E1 para o pino do Google (conferir se algum era proposital): `par-cdg-paul` 297 m, `par-orly-paul` 589 m, `par-orly-m14` 550 m, `par-boulogne` 378 m, `par-five-guys-rivoli` 792 m, `par-mcdonalds-champs` 218 m, `par-promenade-plantee` 370 m (ancorado na Bastille), `par-trianon` 384 m (Grand Trianon), `par-creteil-soleil` 224 m, `par-metro-2` 430 m (de Pigalle para Anvers, onde o roteiro embarca).
+- 5 atrações da Disney seguem sem foto livre no Commons: Spider-Man W.E.B., Frozen Ever After, Stark Factory, Star Tours, Casa de Coco.
+- Uma decisão pode ser apagada pelo app ao esvaziar o texto (mesmo caminho do comentário); bloquear custa poucas linhas em `note-edit.ts`.
+- `docs/ui-primitives.md` ainda não cita o tipo `decision` do `editableNote` (B1 deixou para não colidir com C1).
+- Os `routeStops` da linha 2 (Anvers, Barbès, La Chapelle) parecem deslocados ~0,01° de longitude (observação da E1, fora do escopo dela).
+
+Próximas ondas (2 e 3) não começaram. Ordem sugerida: B2 (orçamento) → B4, B3, D1 → D2, E3a/E3b, depois D3, A2, F1, G2.
+
 ### Onda 1 (sem dependências; arquivos disjuntos)
 
 #### A1 · Regras de colaboração, favoritos e sugestão de IA no `AGENTS.md` — Sonnet

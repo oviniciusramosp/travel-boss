@@ -1,6 +1,8 @@
 # Paris — pontos para revisão (varredura de 2026-09-27)
 
-Gerado pelos agentes de varredura da auditoria (`docs/auditoria-2026-09-27.md`). Cada lista alimenta uma tarefa do plano: E1 (links), E2 (sem foto) e E3 (foto fraca). Um lugar sai da lista quando a tarefa corrige e comita.
+Gerado pelos agentes de varredura da auditoria (`docs/auditoria-2026-09-27.md`). Cada lista alimenta uma tarefa do plano: E1 (links), E2 (sem foto) e E3 (foto fraca).
+
+**Status (2026-09-27):** E1 corrigiu 39 dos 40 links da lista 1 (fica `par-pierre-herme`, fechado no Google); E2 deu foto a 16 dos 21 da lista 2 (ficam as 5 atrações da Disney sem foto livre). A lista 3 (E3) ainda não foi tocada. As listas abaixo são o retrato da varredura, antes das correções.
 
 ## 1. Link do Google Maps que não abre o lugar direto — 40 de 232 verificados (tarefa E1)
 
