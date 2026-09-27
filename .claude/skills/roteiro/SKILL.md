@@ -1,7 +1,6 @@
 ---
 name: roteiro
 description: Use ao criar ou editar dias de roteiro em content/trips/*.md do Travel Boss (paradas, notas, trechos via:, horários, lugares novos no catálogo). Diz onde cada informação vai, o que não acrescentar, como pesquisar horário e preço e o que conferir no app antes de terminar.
-user-invocable: true
 ---
 
 # Editar um roteiro
@@ -59,7 +58,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 - Trem, metrô, obras e greve: Transitous `api.transitous.org/api/v1/plan` (horário em UTC; em outubro some 2 h). Alerta da IDFM ("arrêt non desservi", obras à noite) vale mais que o plano calculado.
 - Carro de app: páginas de rota da Bolt (`bolt.eu/fr-fr/cities/paris/route/<de>-to-<para>/`) e do Uber (`uber.com/global/en/r/routes/…`). O preço que vale é o que o usuário simulou no app.
 - Pôr do sol: `api.sunrise-sunset.org` (UTC).
-- Endpoints e casos já resolvidos estão nas memórias do projeto (`dlp-idfm-live-data-sources`, `paris-oct-2026-transit-disruptions`, `place-location-verification`).
+- Endpoints e casos já resolvidos estão nas referências compartilhadas: [Disney e fontes de transporte](../../../docs/references/dlp-idfm-live-data-sources.md), [obras e interrupções em Paris](../../../docs/references/paris-oct-2026-transit-disruptions.md) e [verificação de localização](../../../docs/references/place-location-verification.md). As datas de consulta estão em cada arquivo; reconfira fatos que podem mudar. Os links funcionam tanto por `.claude/skills/roteiro/` quanto por `.agents/skills/roteiro/`.
 - Fato sem fonte leva 🤔 na resposta.
 
 ## 6. Antes de dizer que terminou

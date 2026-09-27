@@ -2,6 +2,10 @@
 
 Vite + TypeScript, DOM puro. O Markdown do roteiro é a fonte da verdade; a UI acompanha o save. O portfólio (Astro) é a origem do comportamento — porte é adaptar, não copiar.
 
+## Instruções compartilhadas (Codex e Claude Code)
+
+`AGENTS.md` é a fonte única das regras; `CLAUDE.md` aponta para ele. A skill de roteiro fica em `.claude/skills/roteiro/`, com link simbólico em `.agents/skills/roteiro/` para descoberta pelo Codex. Edite o mesmo conteúdo, sem criar cópias. As referências de pesquisa ficam em `docs/references/`, acessíveis aos dois agentes; novas referências necessárias ao roteiro devem ficar no repositório, não apenas na memória privada de um assistente.
+
 ## Comandos
 
 ```bash
