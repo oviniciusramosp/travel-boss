@@ -1408,12 +1408,6 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Peça o flan no site com antecedência. Retirada costuma ser na Convention (15e), não na Gaîté.',
     ),
   }),
-  'par-pierre-herme': cafeVisit(8, 20, {
-    tips: L(
-      'Macaron / pastry temple. The 86 Champs-Élysées shop appears to have closed for good — check before going.',
-      'Templo de macaron / pâtisserie. A loja da 86 Champs-Élysées parece ter fechado de vez — confira antes de ir.',
-    ),
-  }),
   'par-cedric-grolet': cafeVisit(18, 25, {
     bestDay: L(
       'Wed–Sun; boutique 9:00–19:00, tea room 9:00–16:00 by online booking only; closed Mon–Tue',

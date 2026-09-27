@@ -1677,22 +1677,6 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Arc de Triomphe Paris',
       },
       {
-        id: 'par-pierre-herme',
-        name: { en: 'Pierre Hermé', 'pt-BR': 'Pierre Hermé' },
-        category: 'cafes',
-        description: {
-          en: 'Macaron pilgrimage. Pick a signature box.',
-          'pt-BR': 'Peregrinação de macaron. Pegue uma caixa assinatura.',
-        },
-        rating: 4,
-        googleRating: 4.4,
-        lat: 48.871363,
-        lng: 2.3037531,
-        address: '86 Av. des Champs-Élysées, 75008 Paris',
-        mapsQuery: 'Pierre Hermé Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/Pierre+Herm%C3%A9/@48.871363,2.3015,18z',
-      },
-      {
         id: 'par-maison-balzac',
         name: { en: 'Maison de Balzac', 'pt-BR': 'Maison de Balzac' },
         category: 'parks',

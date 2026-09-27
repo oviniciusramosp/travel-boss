@@ -434,15 +434,6 @@ export const parisItinerary: TravelItinerary = {
           },
         },
         {
-          placeId: 'par-pierre-herme',
-          time: '14:20',
-          slot: 'afternoon',
-          note: {
-            en: 'Macarons (~€6/person).',
-            'pt-BR': 'Macarons (~€6/pessoa).',
-          },
-        },
-        {
           placeId: 'par-arc-triomphe',
           time: '14:50',
           slot: 'afternoon',

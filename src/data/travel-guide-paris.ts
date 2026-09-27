@@ -15,7 +15,7 @@ export const parisGuide: CityGuide = {
         alt: { en: 'Assorted Pierre Hermé macarons', 'pt-BR': 'Macarons variados da Pierre Hermé' },
         credit: 'Tristan Ferne / Wikimedia Commons (CC BY 2.0)',
       },
-      where: ['par-pierre-herme', 'par-laduree-royale'],
+      where: ['par-laduree-royale'],
     },
     {
       id: 'fine-chocolates',

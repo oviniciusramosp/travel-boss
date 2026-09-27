@@ -1198,20 +1198,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'SUBARUsti2020hk · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
-  'par-pierre-herme': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Various_Pierre_Herme_macarons.jpg/1280px-Various_Pierre_Herme_macarons.jpg',
-      'Pierre Hermé macarons assortment',
-      'Seleção de macarons Pierre Hermé',
-      'Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/5/52/A_selection_of_Pierre_Herm%C3%A9_pastry_creations.jpg',
-      'Pierre Hermé pastry creations',
-      'Criações de confeitaria Pierre Hermé',
-      'Wikimedia Commons',
-    ),
-  ],
   'par-pompidou': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Apud_la_Centro_Georges-Pompidou_5.jpg/1280px-Apud_la_Centro_Georges-Pompidou_5.jpg',

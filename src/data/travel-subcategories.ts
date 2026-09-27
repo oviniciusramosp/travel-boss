@@ -302,7 +302,6 @@ export const parisSubcategoriesByPlaceId: Record<string, PlaceSubcategory[]> = {
 
   // Cafés
   'par-bake-blend': ['bakery', 'coffee-shop'],
-  'par-pierre-herme': ['pastry'],
   'par-cedric-grolet': ['pastry'],
   'par-eclair-genie': ['pastry'],
   'par-maison-isabelle': ['pastry', 'bakery'],
