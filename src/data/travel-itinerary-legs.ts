@@ -939,6 +939,24 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.85361, 2.301304],
     ],
   },
+  // 6/10: out of the Sainte-Chapelle through the Palais gate on Bd du Palais, then north on
+  // its sidewalk to the tower corner. The foot router has no sidewalk there and loops 680 m
+  // round Place Dauphine, so the walk is drawn as authored (gate from routed-foot).
+  {
+    from: 'par-sainte-chapelle',
+    to: 'par-horloge',
+    mode: 'walk',
+    path: [
+      [48.8554, 2.345],
+      [48.85515, 2.345556],
+      [48.855317, 2.345703],
+      [48.85522, 2.345975],
+      [48.855423, 2.346168],
+      [48.855515, 2.346248],
+      [48.85615, 2.34632],
+      [48.856193, 2.346233],
+    ],
+  },
   // Last RER E at 22:59: the line closes from 22:45 on weekends (works 26/09–6/12)
   trainLeg('par-port-debilly', 'par-casa-do-gui', 60, [
     ride(metro9, 'iena', 'havre-caumartin'),

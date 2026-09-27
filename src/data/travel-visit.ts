@@ -1821,6 +1821,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'par-patate': restaurantVisit(4, 9, {
+    // One €7 cone for two, so €3.50 each on the day card.
+    avgPricePerPerson: money(3.5, 3.5, L('One €7 cone split by two', 'Um cone de €7 dividido por dois')),
     bestDay: L('Sun–Thu 11:30–22:30; Fri–Sat until 23:00', 'Dom–qui 11h30–22h30; sex–sáb até 23h'),
     tips: L('Cone €4 / €5.50 / €7.50, sauce +€1. Standing only.', 'Cone €4 / €5,50 / €7,50, molho +€1. Só em pé.'),
   }),

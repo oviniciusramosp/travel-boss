@@ -500,6 +500,18 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-creperie-arts': [
     photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SQQYs3a-EKG7K-KK1xQemI-V8axeDMrsR5iXBm2kDddLP4XNCho_ivInLO5DN9yxJ7qmOleJj5ZO_6b_RA5jaDFHOljiz9VXIBxN51qauBwC9a217iR1KYgifmwZrnJ1ImcE_LwSAAdWkI=s920-k-no',
+      'Crêperie des Arts',
+      'Crêperie des Arts',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9S-Co9vEUCGmQy0OnvdX3Z5A4szI7xSahAQkUjm8huq3cHSPF3TlVmrhMpZo-z92VNl3qrWLehDK6W3IL04ZtoiOlQ71VqoL-Kp0dOFd9lmMTPmxEN3L8gH7OIVFruBLssKeoV6PfwLKh3s=s731-k-no',
+      'Crêperie des Arts',
+      'Crêperie des Arts',
+      'Google Maps',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/5/59/Cr%C3%AAperie_des_Arts%2C_27_Rue_Saint-Andr%C3%A9-des-Arts_%28Paris%29_2010-07-29.jpg',
       'Crêperie des Arts',
       'Crêperie des Arts',
@@ -680,6 +692,18 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-horloge': [
     photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QBlML2ylD2p4TXk9FgMi90Nl1zRfJMigvQyI_80-haM7pDffTq7miNkDXt964Pbgt-yLES7P_-SdFRis4K-1TtIMIni1qvIMStdl2gDATgPI7yZ1QQD0bEXVLe0xiIXE0A4UI6aQ=s693-k-no',
+      'Conciergerie Clock',
+      'Relógio da Conciergerie',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q4xBpHgLw5zBXFO10Izad6wdbQnctb56aJaP9xn5l11Ruhz4ljOduMzmgFRjccldppn58FT2BmWhNi7mUbiB3kkcmH1aUl0RzOPJQy9HFSkIyST9abKxkEUaYBlZim7BlBb_eD40J8qS9M=s608-k-no',
+      'Conciergerie Clock',
+      'Relógio da Conciergerie',
+      'Google Maps',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/5/5f/Paris_Conciergerie_265.jpg',
       'Conciergerie Clock',
       'Conciergerie Clock',
@@ -786,10 +810,28 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-maison-isabelle': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Croissant%2C_whole.jpg/1280px-Croissant%2C_whole.jpg',
-      'Butter croissant',
-      'Croissant de manteiga',
-      'Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SmqsLPSRsrnEAj0ghApbdgEZyyjRRTZ6KjKvGykjako-N7MmzNczx0ZrWLSOKYo43Bf2wO6YhaKFFogJh05LnEmAPo2o63DbXTywG5QB7KND55n7_sEF696OYwFRnXAGtCh7UBiddYxG0=s1016-k-no',
+      "La Maison d'Isabelle",
+      "La Maison d'Isabelle",
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SYOrwUjKmbonqSVOTQ1GPSdxeSDTnEciQBFONz5IlpR4eK1TViRVM_Vh-fMGF_fDnSJGsiQjXfNyKh4HbJlRrGudtm1m3VlAveZ-sdzf4zat4qE5kxd6evpibpIwjmwAqQPSwjHOgmxOQh=s812-k-no',
+      "La Maison d'Isabelle",
+      "La Maison d'Isabelle",
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SznvKsiXeuOvjo7K06S5V_SYa7yq0qULMkFhDf5Z4417WPzzpmVexQJsEQrVUFZfMDPitrHjt3QApCdu9GLgu-6c_MNQ_U_3TKDMtKWbpLJnBPVV-XRql4ryDNMc2neiIP2H6-DvqXI_4S=s773-k-no',
+      "La Maison d'Isabelle",
+      "La Maison d'Isabelle",
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9R7ioJtxYKis-SS65Ju_xYTuTt4eykD37V40ASx9T9iBO8twaMP0ah6Iu9jHNn6w1_C-6_vLhVzv9upj6SQqakrlSWwoNx8sqY5q5N_iAoxznV-ikXbXrWRlz8KULXzllyB5sli=s1354-k-no',
+      "La Maison d'Isabelle",
+      "La Maison d'Isabelle",
+      'Google Maps',
     ),
   ],
   'par-marais': [
@@ -1268,6 +1310,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-sainte-chapelle': [
     photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlPqtYYavw0lekCEptKtcyHbgJwSh3qFKSNXJZSZPclyvUwu1z40xs1Qb1VLv3iD2i42j0d6LTpKcyjfJVhvGkk3b9PZ2erOCtkdAriAt4D0iXto3ART7pLydyc2yN3n3Ks7cBv=s696-k-no',
+      'Sainte-Chapelle',
+      'Sainte-Chapelle',
+      'Google Maps',
+    ),
+    photo(
       'https://i0.wp.com/www.citiestotravel.com/wp-content/uploads/2025/03/Sainte-Chapelle-in-Parijs-scaled.webp?fit=2560%2C1431&ssl=1',
       'Sainte-Chapelle — upper chapel stained glass',
       'Sainte-Chapelle — vitrais da capela superior',
@@ -1648,16 +1696,22 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-patate': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/c/cb/French_fries_with_mayonnaise_%283487440272%29.jpg',
-      'Fries with mayonnaise (generic photo)',
-      'Batata frita com maionese (foto ilustrativa)',
-      'Kham Tran · CC BY 2.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWklLE1lPjJpcBF7fn3ialhedSsaaJ9pszzaN-Vmsg3qJaEewlNk-VghetbjUh5Ya-UsSTJKmGx6mcBqYI-VV5YFdy682yJ5DS3Xtc-uCBjEyCe03A3Ead3XBt0tPdTlk5ijfjdpNNNqxoqw=s608-k-no',
+      'Patate',
+      'Patate',
+      'Google Maps',
     ),
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/20220602_puntzak_friet_schaftlokaal_ulft.jpg/1280px-20220602_puntzak_friet_schaftlokaal_ulft.jpg',
-      'Fries in a paper cone (generic photo)',
-      'Batata frita no cone (foto ilustrativa)',
-      'Ziko van Dijk · CC BY-SA 4.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnsnTKUkRSf5EjwttdiZO4oGJAShzLwG64jlrOJUvhcYUILbBfZYRXQivU7mjfxWmj7xd2kQMfLDyVjZXA0it9DgGAxD57wlqN9VqfwdW-uGg9-Cmiz5r7D5NTqP-R5vpWfBroDFaRNmYvp=s811-k-no',
+      'Patate',
+      'Patate',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlxoHLHBUZ13EY2R701ozXDB8T41hmPAnlbIpm-xHyJR51GY6Muv3K601l_5ZSDIsVANP1okf8UT6x8f3kiG_891IHmDIwHb9DI6JVkc9ZNF3yVPWlspzoVXTe2zSm3_RoUcQJfB8juyfmV=s731-k-no',
+      'Patate',
+      'Patate',
+      'Google Maps',
     ),
   ],
   'par-bouillon-republique': [
@@ -1706,16 +1760,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-le-nesle': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Chocolate_Cake_Slice_in_bin_%2832180558890%29.jpg/1280px-Chocolate_Cake_Slice_in_bin_%2832180558890%29.jpg',
-      'Chocolate cake slice (generic photo)',
-      'Fatia de bolo de chocolate (foto ilustrativa)',
-      'Willis Lam · CC BY-SA 2.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmAHN9C_H81Amv8AkcgJlXfZyq0nVVDgprjDFqdUe4q1OjeDmp_8VnK2Ez4cwD3n-2z5ZT3dD9FQJO0q84ABUYao9esK_VzpW5kT8ELNGHCeDS8HI0FzuNAh1_RlKiOk_2uH0m5bDOZDDyc=w310-h403-p-k-no',
+      'Brasserie Le Nesle',
+      'Brasserie Le Nesle',
+      'Google Maps',
     ),
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Slice_of_chocolate_cake.jpg/1280px-Slice_of_chocolate_cake.jpg',
-      'Chocolate cake slice (generic photo)',
-      'Fatia de bolo de chocolate (foto ilustrativa)',
-      'Ruth Hartnup · CC BY 2.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkRordXKIj9g1fTwGtjpPkm02c3GOND9yqHw-72bahGP7hXQBtw4e19JHd7oqnW79mM_5oKPLiBGnnu1aRsgb0JEGhke1mVLgTsPHUQN2yTShxYDXhn-b9lGhiaPVqy_saIAlKWRj5208I=w310-h403-p-k-no',
+      'Brasserie Le Nesle',
+      'Brasserie Le Nesle',
+      'Google Maps',
     ),
   ],
   'par-specimen-burger': [
@@ -1836,10 +1890,22 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-deux-magots': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/080410_Les_Deux_Magots_01.JPG/1280px-080410_Les_Deux_Magots_01.JPG',
-      'Salads at Les Deux Magots',
-      'Saladas no Les Deux Magots',
-      'BKP · CC BY-SA 3.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmv5cbeRbVMMYbd7Skk4Mt-nf7nmCZ1dB3oKn8L49JcgY36wEizfC5pLo3e6etEm8RIDt_kYFX3P0sJrpxoVIAPdkWCxQR5QvyyL6S9rQdYBi44vrd4qjt3WCIpzVekZbjN_SM=s928-k-no',
+      'Les Deux Magots',
+      'Les Deux Magots',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWndVVnKF_hbLqufF_wcTIIkVNXxOcgT64_WAXOtESe-dQPFk2DyQdqtEZpi_yg2iWqCghN5_85ToToYho4QdjTO8GLn8Tqq0f6mqHPX9_6K2CHA_GGMkiepg35LvwuJ1zY1PdoQ4skEzIyy=s1219-k-no',
+      'Les Deux Magots',
+      'Les Deux Magots',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T3wep3rQsATfrH67N-tKgprdMHjPYxvG_XVbVSKs2wwB8lqNmSAVDEwU_Juuj2fOlaVxqYJdu62AkbU0FhhZwdbvp3OBUEygnDdSzSAqI8SmPwfyaM9lQpCUn3dvYM_Py5m81mlEoC--l9=s1219-k-no',
+      'Les Deux Magots',
+      'Les Deux Magots',
+      'Google Maps',
     ),
   ],
   'par-du-pain-idees': [
@@ -1956,10 +2022,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-citypharma': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Croix_verte_-_Pharmacie_-_Route_de_la_Reine_-_%28Boulogne-Billancourt%2C_FR92%29_-_27-12-2023.jpg/1280px-Croix_verte_-_Pharmacie_-_Route_de_la_Reine_-_%28Boulogne-Billancourt%2C_FR92%29_-_27-12-2023.jpg',
-      'Pharmacy green cross (generic photo)',
-      'Cruz verde de farmácia (foto ilustrativa)',
-      'Manchesterunited1234 · CC BY-SA 4.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SZMnnLJVq7T6jPRxHul2XZIqPVoQ0zzSj70YHHrBKsmB1wvPWG1__bq9edhuTL4XPyVTkOfeavZXByPDrVz8NsYAPveEv7iREAJAUbfX4mB7lmESWjkpL70iAuTONwzx0xswXQ_ZEDbl9f=s927-k-no',
+      'CityPharma',
+      'CityPharma',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Re_Lz_ym0C5uhaVbJ-QCij78OMl2qBO67mQbru-7VgyIM9qOcxzKrvCr1Eryv_FC129RLm8m2ps2SdBq1F6Gpd0Hvdhw1lGWVN2Uli9P4hFPYD7XTyh_YSsU9iOO4MQwQHQwdufD00pcw=s1219-k-no',
+      'CityPharma',
+      'CityPharma',
+      'Google Maps',
     ),
   ],
   'par-carre-opera': [
@@ -2267,10 +2339,28 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-poilane-cherche-midi': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Pain_Po%C3%AElane-_Paris_15e.jpg/960px-Pain_Po%C3%AElane-_Paris_15e.jpg',
-      "Poilâne sourdough loaves marked with a 'P' (photographed at the Grenelle shop)",
-      "Pães de fermentação natural da Poilâne marcados com um 'P' (foto da loja de Grenelle)",
-      'Gilbert Bochenek / Wikimedia Commons (CC BY-SA 3.0)',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9R61KiGUY-puOhtGhB-I6D4n02xxgv-SzyDy16-b9XzypheGCEMSaHlXP_IHqF1Hpch_sQzZBrMokWt1nLi1UWN1GwACf80vZGKKvLxPjGgmJ8VhJNXt6AMRs6tsa7LitUysKQ9MWJSXQSm=s811-k-no',
+      'Poilâne, Rue du Cherche-Midi',
+      'Poilâne, Rue du Cherche-Midi',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SH36SHVNrSTNOnhAmc80xM8v7D-TO3rQ71POKaJbHj8mK_zXTd65wfCa4Nj_VMg6Qj1nKpVT6wVz14qiI3XCLzHPO9N4grn4tzeHi8OGhRYVN4rGHlPY5cH1FlqaCd4b9M6qLB0bxkGQQ=s811-k-no',
+      'Poilâne, Rue du Cherche-Midi',
+      'Poilâne, Rue du Cherche-Midi',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TTE1-DMyE8bk6sbYXJ8Fq7P9qgsU_OefG8eOkyFE4jFqfAStMgcJPCmtS2FuR6wxzxzAM39yBGIk6jY9pg1N2cGwSsVZnj_1HJkDMebQ_LOmLeAhkBswvtG9ZC7yXgkfBtl78M2tyF4vln=s1219-k-no',
+      'Poilâne, Rue du Cherche-Midi',
+      'Poilâne, Rue du Cherche-Midi',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TyfHZoqYPj4HDXE6hHj76iINU_ViSE_gG4defKV_Et5tF0W4OGhRIFsSSleEqX-xPGfpxJ6kPE56EmuBgQxc9haTRM6dmlF_MugWpeosnZXrhweBcwtoywhnzT9O737kN6nYA=s608-k-no',
+      'Poilâne, Rue du Cherche-Midi',
+      'Poilâne, Rue du Cherche-Midi',
+      'Google Maps',
     ),
   ],
   'par-maille-madeleine': [
