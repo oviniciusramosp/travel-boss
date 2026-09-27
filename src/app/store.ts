@@ -81,7 +81,7 @@ export function subStopsKey(trip: string): string {
   return `substops:${trip}`;
 }
 
-/** Stops whose sub-points the user opened on the timeline, by stop key. */
+/** Sub-point lists the user folded on the timeline (`false`), by `date:placeId`. Open is the default. */
 export function readSubStops(trip: string): Record<string, boolean> {
   const value = read<unknown>(subStopsKey(trip), null);
   const prefs: Record<string, boolean> = {};

@@ -1802,7 +1802,9 @@ export function mountTrip(
         if (place?.subPoints?.length && !missingPlace) {
           // The points in one line, and a toggle that lists them as small dots in the parent's color.
           const subs = place.subPoints;
-          const shown = subStops[key] === true;
+          // Open unless folded by hand; the choice is kept by date and place, so a note added above does not lose it.
+          const subKey = `${date}:${place.id}`;
+          const shown = subStops[subKey] !== false;
           const toggle = el('button', 'tb-row__subpoints');
           toggle.type = 'button';
           toggle.setAttribute('aria-expanded', String(shown));
@@ -1848,7 +1850,7 @@ export function mountTrip(
             const open = points.hidden;
             points.hidden = !open;
             toggle.setAttribute('aria-expanded', String(open));
-            subStops[key] = open;
+            subStops[subKey] = open;
             writeSubStops(id, subStops);
           });
           item.append(toggle, points);
