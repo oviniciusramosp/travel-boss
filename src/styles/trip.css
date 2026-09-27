@@ -290,41 +290,76 @@
   color: var(--color-mid-gray);
 }
 
-/* Words the number or glyph already imply slide out on hover or focus; without hover they stay. */
+/* Words the number or glyph already imply slide out on hover of that number or glyph; without hover they stay. */
 .tb-reveal {
   display: inline-block;
   max-width: 0;
   overflow: hidden;
   opacity: 0;
+  transform: translateX(calc(var(--spacing-4) * -1));
   white-space: pre;
   vertical-align: bottom;
   transition:
-    max-width var(--dur-base) var(--ease-out),
-    opacity var(--dur-fast) var(--ease-out);
+    max-width var(--dur-slow) var(--ease-out),
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out),
+    margin var(--dur-slow) var(--ease-out);
 }
 
-.tb-date__head:is(:hover, :focus-within) :is(.tb-count__unit, .tb-walk__unit),
+.tb-count:is(:hover, :focus-within) .tb-count__unit,
+.tb-walk:is(:hover, :focus-within) .tb-walk__unit,
 .tb-weather:is(:hover, :focus-within) .tb-weather__text {
   max-width: 12em;
   opacity: 1;
+  transform: translateX(0);
 }
 
 .tb-weather__text {
   margin-inline-start: 0;
-  transition:
-    max-width var(--dur-base) var(--ease-out),
-    opacity var(--dur-fast) var(--ease-out),
-    margin var(--dur-base) var(--ease-out);
 }
 
 .tb-weather:is(:hover, :focus-within) .tb-weather__text {
   margin-inline-start: var(--inset-group);
 }
 
+/* The forecast and its refresh button, which appears only after a fetch failed. */
+.tb-sky {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--inset-group);
+}
+
+.tb-weather__refresh[hidden] {
+  display: none;
+}
+
+/* Waiting for the API: the glyph breathes. Without an answer: it goes grey. */
+.tb-weather.is-loading .tb-weather__icon {
+  opacity: 0.5;
+  animation: tb-breathe var(--dur-flow) var(--ease-in-out) infinite;
+}
+
+.tb-weather.is-off .tb-weather__icon {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+/* An older forecast, shown because the new one did not come. */
+.tb-weather.is-stale .tb-weather__icon {
+  opacity: 0.7;
+}
+
+@keyframes tb-breathe {
+  50% {
+    opacity: 0.2;
+  }
+}
+
 @media (hover: none) {
   .tb-reveal {
     max-width: none;
     opacity: 1;
+    transform: none;
   }
 
   .tb-weather__text {
@@ -1045,7 +1080,8 @@
   .tb-row.is-changed,
   .tb-list-note.is-changed,
   .tb-transfer.is-changed,
-  .tb-source.is-updated {
+  .tb-source.is-updated,
+  .tb-weather.is-loading .tb-weather__icon {
     animation: none;
   }
 }

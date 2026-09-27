@@ -79,7 +79,17 @@ import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripS
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
-import { dayWeather, loadForecast, peekForecast, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
+import {
+  dayWeather,
+  forecastState,
+  loadForecast,
+  weatherIn,
+  weatherLook,
+  weatherTip,
+  WINDOWS,
+  type ForecastState,
+  type Weather,
+} from './weather';
 import { weatherIcon } from '../ui/weather-icons';
 import { transferRow } from '../views/transfer-row';
 
@@ -168,17 +178,39 @@ function walkSlot(date: string): HTMLSpanElement {
   return slot;
 }
 
-/** Glyph, low–high and chance of rain. The tip has the rest, and the period's own window first. */
+/**
+ * Glyph only; the reading slides out on hover (`.tb-reveal`) and the tip has the rest, one
+ * fact per line. With `placeholder`, an empty slot still shows while the forecast loads or
+ * after it failed, so the card says why there is nothing.
+ */
 function fillWeather(
   slot: HTMLElement,
   weather: Weather | null,
   night: boolean,
   locale: Locale,
-  window?: readonly [number, number],
+  window: readonly [number, number] | undefined,
+  state: ForecastState,
+  placeholder = false,
 ): void {
-  slot.hidden = !weather;
+  const empty = !weather && placeholder && (state.loading || state.failed);
+  slot.classList.toggle('is-loading', empty && state.loading);
+  slot.classList.toggle('is-off', empty && !state.loading);
+  slot.classList.toggle('is-stale', Boolean(weather) && state.failed);
+  slot.hidden = !weather && !empty;
   if (!weather) {
-    slot.replaceChildren();
+    if (!empty) {
+      slot.replaceChildren();
+      return;
+    }
+    const text = state.loading
+      ? pickLocale(locale, { en: 'Loading the forecast…', 'pt-BR': 'Carregando a previsão…' })
+      : pickLocale(locale, {
+          en: 'No forecast right now.\nRefresh to try again.',
+          'pt-BR': 'Sem previsão agora.\nAtualize para tentar de novo.',
+        });
+    slot.replaceChildren(weatherIcon(state.loading ? 'cloud-sun' : 'clouds'));
+    slot.setAttribute('data-tip', text);
+    slot.setAttribute('aria-label', text.replace('\n', ' '));
     return;
   }
   const look = weatherLook(weather, night);
@@ -186,14 +218,10 @@ function fillWeather(
   const high = Math.round(weather.max);
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
-  // Only the glyph shows; the reading slides out on hover (`.tb-reveal`).
   slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', `${temp} · ${rain}%`));
-  const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
-  const source = pickLocale(locale, { en: 'ECMWF + NOAA ensembles', 'pt-BR': 'ensembles ECMWF + NOAA' });
-  const span = window ? `${window[0]}h–${window[1]}h · ` : '';
-  const tip = `${pickLocale(locale, look.label)} · ${span}${low}–${high}° · ${words} ${rain}% · ${source} · Open-Meteo`;
+  const tip = weatherTip(weather, look.label, locale, window, state.fetchedAt, state.failed);
   slot.setAttribute('data-tip', tip);
-  slot.setAttribute('aria-label', tip);
+  slot.setAttribute('aria-label', tip.replaceAll('\n', '. '));
 }
 
 /** Half of a leg's rail: `is-above` runs into its icon, `is-below` leaves it. */
@@ -1142,18 +1170,21 @@ export function mountTrip(
       const { rows, periods } = datePlan(section.cities.flatMap((group) => group.days), section.date);
       const times = rows.map((row) => row.dated.day.stops[row.stopIndex]?.time);
       const windows = periodWindows(times, periods, WINDOWS);
-      const cityOf = (index: number) => {
+      const stateOf = (index: number): ForecastState => {
         const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
-        return record ? peekForecast(record.lat, record.lng) : null;
+        return record
+          ? forecastState(record.lat, record.lng)
+          : { hours: null, fetchedAt: null, loading: false, failed: false };
       };
+      const cityOf = (index: number) => stateOf(index).hours;
       const parts: Weather[] = [];
       for (const { period, rows: indexes } of periodSections(periods)) {
         if (!period) continue;
-        const hours = cityOf(indexes[0] ?? -1);
-        const weather = hours && weatherIn(hours, section.date, windows[period]);
+        const state = stateOf(indexes[0] ?? -1);
+        const weather = state.hours && weatherIn(state.hours, section.date, windows[period]);
         if (weather) parts.push(weather);
         const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
-        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period]);
+        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period], state);
       }
       // A date without times reads all three periods of its first city.
       const whole = periods.some(Boolean) ? null : cityOf(0);
@@ -1161,22 +1192,34 @@ export function mountTrip(
         const weather = whole && weatherIn(whole, section.date, window);
         if (weather) parts.push(weather);
       }
+      const dayState = stateOf(0);
       const slot = card.querySelector<HTMLElement>('[data-weather="day"]');
-      if (slot) fillWeather(slot, dayWeather(parts), false, locale);
+      if (slot) fillWeather(slot, dayWeather(parts), false, locale, undefined, dayState, true);
+      // The refresh button shows once a fetch failed, with or without an older forecast to show.
+      const refresh = card.querySelector<HTMLButtonElement>('[data-day-action="weather"]');
+      if (refresh) {
+        refresh.hidden = !dayState.failed;
+        refresh.disabled = dayState.loading;
+      }
     }
   }
 
-  /** One request per city; each answer repaints the forecast in place. */
-  function refreshWeather(trip: Trip) {
+  /** One request per city; each answer repaints the forecast in place. `force` ignores the half-hour freshness. */
+  function refreshWeather(trip: Trip, force = false): Promise<void> {
     const seen = new Set<string>();
+    const loads: Promise<unknown>[] = [];
     for (const city of trip.cities) {
       const record = getTravelCity(city.slug);
       if (!record || seen.has(city.slug)) continue;
       seen.add(city.slug);
-      void loadForecast(record.lat, record.lng, timeZoneForCity(city.slug)).then(() => {
-        if (alive && current) paintWeather(current);
-      });
+      loads.push(
+        loadForecast(record.lat, record.lng, timeZoneForCity(city.slug), force).then(() => {
+          if (alive && current) paintWeather(current);
+        }),
+      );
     }
+    if (loads.length && alive && current) paintWeather(current);
+    return Promise.all(loads).then(() => undefined);
   }
 
   /**
@@ -1393,7 +1436,23 @@ export function mountTrip(
         el('span', 'tb-count__n', String(stopCount)),
         el('span', 'tb-count__unit tb-reveal', ` ${countLabel.replace(/^\d+\s*/, '')}`),
       );
-      meta.append(count, weatherSlot('day'), walkSlot(date));
+      // Sky: the forecast and, after a failed fetch, the button that asks again.
+      const sky = el('span', 'tb-sky');
+      const refresh = iconButton({
+        icon: 'sync',
+        label: pickLocale(locale, { en: 'Refresh the forecast', 'pt-BR': 'Atualizar a previsão' }),
+        size: 'sm',
+      });
+      refresh.classList.add('tb-weather__refresh');
+      refresh.dataset.dayAction = 'weather';
+      refresh.hidden = true;
+      refresh.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        void refreshWeather(trip, true);
+      });
+      sky.append(weatherSlot('day'), refresh);
+      meta.append(count, sky, walkSlot(date));
       heading.append(el('span', 'tb-date__title', formatDayTitle(date, locale)), meta);
       const routeToggle = iconButton({
         icon: 'route',
