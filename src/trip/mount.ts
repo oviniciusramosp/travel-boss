@@ -18,7 +18,7 @@ import { setDocumentTitle } from '../app/router';
 import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
-import { statusPatch } from './status';
+import { isTentative, statusPatch } from './status';
 import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
@@ -1392,15 +1392,21 @@ export function mountTrip(
     const statusButton = (line: number, kind: 'fechado' | 'a confirmar', active: boolean, changed: (on: boolean) => void) => {
       const button = iconButton({ icon: 'help', label: '', size: 'sm' });
       button.classList.add('tb-review-status');
+      if (kind === 'a confirmar') button.classList.add('tb-review-place');
       let block = statusPatch(lastRaw, line, kind, active).before;
       let busy = false;
       const sync = () => {
         const label = kind === 'fechado'
           ? pickLocale(locale, { en: active ? 'Day finalized · Reopen day' : 'Finalize day', 'pt-BR': active ? 'Dia fechado · Reabrir dia' : 'Fechar dia' })
-          : pickLocale(locale, { en: active ? 'Tentative place · Confirm place' : 'Mark as tentative', 'pt-BR': active ? 'Lugar a confirmar · Confirmar lugar' : 'Marcar dúvida' });
+          : pickLocale(locale, { en: active ? 'Tentative place · Confirm place' : 'Confirmed place · Mark as tentative', 'pt-BR': active ? 'Em dúvida · Confirmar lugar' : 'Com certeza · Marcar dúvida' });
         button.setAttribute('aria-label', label);
         button.dataset.tip = label;
-        button.replaceChildren(icon(kind === 'fechado' ? (active ? 'check' : 'check_circle') : (active ? 'check_circle' : 'help'), { size: 16 }));
+        button.replaceChildren(icon(kind === 'fechado' ? (active ? 'check' : 'check_circle') : 'help', { size: 16, fill: kind === 'a confirmar' && active }));
+        if (kind === 'a confirmar' && active) {
+          const confirm = icon('check', { size: 16 });
+          confirm.classList.add('tb-review-confirm');
+          button.append(confirm);
+        }
         button.setAttribute('aria-pressed', String(active));
       };
       sync();
@@ -1428,8 +1434,8 @@ export function mountTrip(
       });
       return button;
     };
-    const stopStatus = (stop: TripStop) => statusButton(stop.line, 'a confirmar', Boolean(stop.status), (on) => {
-      stop.status = on ? 'a confirmar' : undefined;
+    const stopStatus = (stop: TripStop) => statusButton(stop.line, 'a confirmar', isTentative(stop), (on) => {
+      stop.status = on ? 'a confirmar' : 'confirmado';
     });
     const editNote = (
       node: HTMLElement,
@@ -1639,7 +1645,7 @@ export function mountTrip(
         const review = statusButton(day.line, 'fechado', Boolean(day.status), (on) => { day.status = on ? 'fechado' : undefined; });
         review.dataset.dayAction = 'review';
         const syncReview = () => {
-          const pending = day.stops.some((stop) => stop.status);
+          const pending = day.stops.some(isTentative);
           review.disabled = pending;
           const closed = Boolean(day.status) && !pending;
           let label = pickLocale(locale, { en: pending ? 'Pending places' : closed ? 'Day finalized · Reopen day' : 'Finalize day', 'pt-BR': pending ? 'Pontos a confirmar' : closed ? 'Dia fechado · Reabrir dia' : 'Fechar dia' });

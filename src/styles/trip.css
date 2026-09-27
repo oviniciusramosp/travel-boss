@@ -418,6 +418,30 @@
   display: none;
 }
 
+.tb-row__actions:has(.tb-review-place[aria-pressed='true']) {
+  opacity: 1;
+}
+
+.tb-review-place[aria-pressed='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tb-review-place .tb-review-confirm,
+.tb-review-place[aria-pressed='true']:is(:hover, :focus-visible) > .is-fill {
+  display: none;
+}
+
+.tb-review-place:is(:hover, :focus-visible) .tb-review-confirm {
+  display: inline-block;
+}
+
+@media (hover: hover) {
+  .tb-row:not(:hover, :focus-within) > .tb-row__actions:has(.tb-review-place[aria-pressed='true']) > :not(.tb-review-place) {
+    opacity: 0;
+  }
+}
+
 .tb-date__head:is(:hover, :focus-within) .tb-review-status:not(:disabled),
 .tb-date__title .tb-review-status[aria-pressed='true'],
 .tb-row:is(:hover, :focus-within) .tb-review-status {

@@ -20,7 +20,8 @@ export type TripLeg = {
 };
 
 export type TripStop = {
-  status?: 'a confirmar';
+  /** Missing status means tentative. Only parent stops participate in review. */
+  status?: 'a confirmar' | 'confirmado';
   time?: string;
   /** A list note's text. It and `note` hold hard breaks as `\n`. */
   label: string;
@@ -371,10 +372,10 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       continue;
     }
 
-    const status = /^[ \t]+- status: (fechado|a confirmar)\s*$/.exec(line);
+    const status = /^[ \t]+- status: (fechado|a confirmar|confirmado)\s*$/.exec(line);
     if (status && day) {
       const stop = day.stops.at(-1);
-      if (stop && status[1] === 'a confirmar') { stop.status = 'a confirmar'; continue; }
+      if (stop && (status[1] === 'a confirmar' || status[1] === 'confirmado')) { stop.status = status[1]; continue; }
       if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
     }
 

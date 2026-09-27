@@ -10,27 +10,43 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: fechado
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
+  - status: confirmado
 - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8), logo na saída da alfândega
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
+  - status: confirmado
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+  - status: confirmado
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
   - via: RER E + metrô 9 · 45 min · €2,55
+  - status: confirmado
 - 18:00 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
+  - status: confirmado
 - 18:10 [Avenue de Camoëns](place:par-avenue-camoens)
+  - status: confirmado
 - 18:25 [Fontes do Trocadéro](place:par-fontaines-trocadero)
+  - status: confirmado
 - 18:40 [Pont d'Iéna](place:par-pont-iena)
+  - status: confirmado
 - 18:50 [Torre Eiffel](place:par-eiffel) — Ainda não vamos subir. Só passar na frente.
+  - status: confirmado
 - 19:00 [Champ de Mars](place:par-champ-mars) — Pôr do sol às 19h25 no gramado, a Torre acendendo ao escurecer e o brilho das 20h.
+  - status: confirmado
 - 20:30 [Capela Saint-Louis (École Militaire)](place:par-chapelle-saint-louis) — Ir até a capela antes de seguir o roteiro.
+  - status: confirmado
 - 20:50 [Rue de l'Université](place:par-rue-universite) — Foto da esquina com a Av. Rapp
+  - status: confirmado
 - 21:15 [Margaux](place:par-margaux) — **Jantar** (~€35 por pessoa): cordon bleu premiado (€26, com um acompanhamento) e uma sobremesa de €9.\
   **Reservar:** na Zenchef, o primeiro horário livre da noite é 21h15; o das 21h, só por telefone (01 86 04 40 54)
+  - status: confirmado
 - 22:00 [Passerelle Debilly](place:par-passerelle-debilly) — Brilho das 22h
+  - status: confirmado
 - 22:10 [Port Debilly (beira do Sena)](place:par-port-debilly) — Mais uma foto da Torre, da beira do rio.\
   Saia até 22h25: o último RER E sai de Haussmann–Saint-Lazare às 22h59
   - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h · €2,55
+  - status: confirmado
 - 23:30 [Casa do Gui](place:par-casa-do-gui) — Fim do primeiro dia
+  - status: confirmado
 
 ### Dia 2 — Seg 5/10 · Arco do Triunfo, Louvre e compras na Opéra
 
