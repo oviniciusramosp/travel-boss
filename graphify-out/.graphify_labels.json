@@ -52,7 +52,7 @@
   "50": "calendar.ts",
   "51": "mount.ts",
   "52": "expandTimelineTransferParts",
-  "53": "hotel-distance.ts",
+  "53": "el",
   "54": "open-now.ts",
   "55": "view-state.ts",
   "56": "hotel-ring.ts",
@@ -72,5 +72,6 @@
   "70": "asMsg",
   "71": "links.ts",
   "72": "getTransitLine",
-  "73": "maplibre-perf.ts"
+  "73": "maplibre-perf.ts",
+  "74": "guide.ts"
 }
