@@ -2839,6 +2839,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3219,
         address: '33 Av. du Maine, 75015 Paris',
         mapsQuery: 'Tour Montparnasse observation deck',
+        mapsUrl: 'https://maps.app.goo.gl/WtzQ3fZetEQwER917',
       },
       {
         id: 'par-entrecote',
