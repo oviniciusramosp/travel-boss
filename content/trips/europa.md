@@ -13,7 +13,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
 - 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
-  Navigo Semaine só começa a valer a partir de segunda.
+  Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
   - via: RER E + metrô 9 · 45 min · €2,55
 - 18:00 [Trocadéro](place:par-trocadero) — Primeira vista da Torre
 - 18:10 [Avenue de Camoëns](place:par-avenue-camoens)
