@@ -1239,10 +1239,11 @@ export const localTravelCities: TravelCity[] = [
             'Padaria-café no Terminal 2 — croissants e café a caminho do RER.',
         },
         googleRating: 3.8,
-        lat: 49.0046,
-        lng: 2.5718,
+        lat: 49.006447,
+        lng: 2.5745881,
         address: 'Aéroport Paris-Charles de Gaulle, Terminal 2, 95700 Roissy-en-France',
         mapsQuery: 'PAUL Aéroport Charles de Gaulle Terminal 2',
+        mapsUrl: 'https://www.google.com/maps/place/Paul+terminal+2/@49.006447,2.572335,18z/data=!4m10!1m2!2m1!1sPAUL+A%C3%A9roport+Charles+de+Gaulle+Terminal+2!3m6!1s0x47e6172aa2093e61:0xbc3bb3b0adbbfec1!8m2!3d49.006447!4d2.5745881!15sCitQQVVMIEHDqXJvcG9ydCBDaGFybGVzIGRlIEdhdWxsZSBUZXJtaW5hbCAyWi0iK3BhdWwgYcOpcm9wb3J0IGNoYXJsZXMgZGUgZ2F1bGxlIHRlcm1pbmFsIDKSAQZiYWtlcnmaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjA0ZUZaVWJFVlNiVmt6VTFkak1sTkliek5VUm14RFkwVkdibUV5WXhBQuABAPoBBAgAEDw!16s%2Fg%2F11sbdy6vmf',
       },
       {
         id: 'par-cdg-brioche-doree',
@@ -1264,6 +1265,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.577149,
         address: 'Terminal 2E, niveau 0 (Arrivées), 95700 Roissy-en-France',
         mapsQuery: 'Brioche Dorée Terminal 2E Arrivées Aéroport Charles de Gaulle',
+        mapsUrl: 'https://www.google.com/maps/place/Brioche+Doree+-+Terminal+2E+-+Arriv%C3%A9es/@49.0086381,2.5598013,15z/data=!4m10!1m2!2m1!1sBrioche+Dor%C3%A9e+Terminal+2E+Arriv%C3%A9es+A%C3%A9roport+Charles+de+Gaulle!3m6!1s0x47e63f441075aad3:0xc94f8a2b4f3bcd2b!8m2!3d49.0030227!4d2.5771493!15sCkBCcmlvY2hlIERvcsOpZSBUZXJtaW5hbCAyRSBBcnJpdsOpZXMgQcOpcm9wb3J0IENoYXJsZXMgZGUgR2F1bGxlIgOIAQFaQiJAYnJpb2NoZSBkb3LDqWUgdGVybWluYWwgMmUgYXJyaXbDqWVzIGHDqXJvcG9ydCBjaGFybGVzIGRlIGdhdWxsZZIBBmJha2VyeeABAA!16s%2Fg%2F11g_pb6bk',
       },
       {
         id: 'par-cdg-rer',
@@ -1282,6 +1284,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.5708,
         address: 'Gare Aéroport Charles de Gaulle 2 TGV, 95700 Roissy-en-France',
         mapsQuery: 'Gare Aéroport Charles de Gaulle 2 TGV Navigo',
+        mapsUrl: 'https://www.google.com/maps/place/A%C3%A9roport+Charles+de+Gaulle+2+TGV/@49.0045699,2.5663968,17z/data=!4m10!1m2!2m1!1sGare+A%C3%A9roport+Charles+de+Gaulle+2+TGV+Navigo!3m6!1s0x47e6160546969387:0xa2536b8e6c87e97!8m2!3d49.0045699!4d2.5709029!15sCi1HYXJlIEHDqXJvcG9ydCBDaGFybGVzIGRlIEdhdWxsZSAyIFRHViBOYXZpZ2-SAQ10cmFpbl9zdGF0aW9u4AEA!16s%2Fm%2F026svdt',
       },
       {
         id: 'par-orly-m14',
@@ -1296,10 +1299,11 @@ export const localTravelCities: TravelCity[] = [
             'Ponto RATP mais perto após o desembarque — compre Navigo Easy para todos e pegue a M14 para Paris.',
         },
         googleRating: 4.0,
-        lat: 48.7292,
-        lng: 2.3698,
+        lat: 48.72796,
+        lng: 2.36253,
         address: 'Gare Orly 1-2-3 / Orly 4, Métro ligne 14',
         mapsQuery: 'Métro Orly ligne 14 Navigo',
+        mapsUrl: 'https://www.google.com/maps/place/A%C3%A9roport+d%27Orly/@48.72796,2.3580239,17z/data=!4m10!1m2!2m1!1sA%C3%A9roport+d%27Orly+m%C3%A9tro+14+station!3m6!1s0x47e675d12d4a8821:0xb94eb29b36f28592!8m2!3d48.72796!4d2.36253!15sCiJBw6lyb3BvcnQgZCdPcmx5IG3DqXRybyAxNCBzdGF0aW9ukgEOc3Vid2F5X3N0YXRpb27gAQA!16s%2Fg%2F11w3scfqgc',
       },
       {
         id: 'par-orly-paul',
@@ -1311,10 +1315,11 @@ export const localTravelCities: TravelCity[] = [
             'Padaria-café em Orly — croissants e café logo após comprar o Navigo.',
         },
         googleRating: 3.9,
-        lat: 48.7285,
-        lng: 2.3685,
+        lat: 48.727074,
+        lng: 2.36077,
         address: 'Aéroport d’Orly, 94390 Orly',
         mapsQuery: 'PAUL Aéroport Orly',
+        mapsUrl: 'https://www.google.com/maps/place/PAUL/@48.727074,2.3517578,16z/data=!3m1!5s0x47e675d0dbf390dd:0xad94e25394b8e2a7!4m10!1m2!2m1!1sPAUL+A%C3%A9roport+Orly!3m6!1s0x47e675d73d1663b1:0x2239155ba4763400!8m2!3d48.727074!4d2.36077!15sChNQQVVMIEHDqXJvcG9ydCBPcmx5WhUiE3BhdWwgYcOpcm9wb3J0IG9ybHmSAQ1zYW5kd2ljaF9zaG9w4AEA!16s%2Fg%2F11yvmt7sr4',
       },
       {
         id: 'par-noisy-le-sec-rer',
@@ -1403,6 +1408,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.303565,
         address: '13 Place Joffre, 75007 Paris',
         mapsQuery: 'Chapelle Saint-Louis École Militaire Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Military+School/@48.8525716,2.3009501,18z/data=!3m1!5s0x47e6702402cd3bb1:0xbcc4c8ec271ed8a0!4m10!1m2!2m1!1s%C3%89cole+Militaire+13+Place+Joffre+Paris!3m6!1s0x47e67023ff82163f:0x107f0f1a571a7c85!8m2!3d48.8525716!4d2.3032032!15sCibDiWNvbGUgTWlsaXRhaXJlIDEzIFBsYWNlIEpvZmZyZSBQYXJpc1ooIibDqWNvbGUgbWlsaXRhaXJlIDEzIHBsYWNlIGpvZmZyZSBwYXJpc5IBD21pbGl0YXJ5X3NjaG9vbJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VObFh5MWhabnBuUlJBQuABAPoBBAgAECQ!16zL20vMDJyOGd2',
       },
       {
         id: 'par-eiffel',
@@ -1421,7 +1427,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.2945,
         address: 'Champ de Mars, 5 Av. Anatole France, 75007 Paris',
         mapsQuery: 'Tour Eiffel Paris',
-        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tour%20Eiffel%20Paris&query_place_id=ChIJLU7jZClu5kcR4pc9BdEGZig',
+        mapsUrl: 'https://www.google.com/maps/place/Eiffel+Tower/@48.8583701,2.2944813,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e2964e34e2d:0x8ddca9ee380ef7e0!8m2!3d48.8583701!4d2.2944813!16zL20vMDJqODE',
         placeId: 'ChIJLU7jZClu5kcR4pc9BdEGZig',
       },
       {
@@ -1497,6 +1503,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.2378,
         address: 'Parvis de la Défense / Les Quatre Temps, 92800 Puteaux',
         mapsQuery: 'PAUL La Défense Parvis',
+        mapsUrl: 'https://www.google.com/maps/place/PAUL/@48.89103,2.2350669,18z/data=!3m1!5s0x47e66502e2f1b319:0x6898ed8f92c6703c!4m10!1m2!2m1!1sPAUL+Parvis+de+la+D%C3%A9fense+Les+Quatre+Temps+Puteaux!3m6!1s0x47e66567954dc6e3:0xba1941d1f739cec0!8m2!3d48.89103!4d2.23732!15sCjNQQVVMIFBhcnZpcyBkZSBsYSBEw6lmZW5zZSBMZXMgUXVhdHJlIFRlbXBzIFB1dGVhdXhaNSIzcGF1bCBwYXJ2aXMgZGUgbGEgZMOpZmVuc2UgbGVzIHF1YXRyZSB0ZW1wcyBwdXRlYXV4kgEGYmFrZXJ54AEA!16s%2Fg%2F11wc4v7rz5',
       },
       {
         id: 'par-grande-arche',
@@ -1696,7 +1703,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.2809102,
         address: '47 Rue Raynouard, 75016 Paris',
         mapsQuery: 'Maison de Balzac Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/Maison+de+Balzac/@48.8520676,2.2646642,14z',
+        mapsUrl: 'https://www.google.com/maps/place/Maison+de+Balzac/@48.8554541,2.2809102,17z/data=!3m1!4b1!4m6!3m5!1s0x47e67001a388cef7:0x19d1c664b0cd3a1f!8m2!3d48.8554541!4d2.2809102!16s%2Fm%2F0465nlc',
       },
       {
         id: 'par-invalides',
@@ -1713,6 +1720,7 @@ export const localTravelCities: TravelCity[] = [
         // OSM complex outline via travel-areas-osm.ts (par-invalides)
         address: '129 Rue de Grenelle, 75007 Paris',
         mapsQuery: 'Invalides Paris',
+        mapsUrl: 'https://www.google.com/maps/place/H%C3%B4tel+des+Invalides/@48.8561074,2.3127829,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fd7b98f3053:0x455a14459c80c16a!8m2!3d48.856529!4d2.3127059!16zL20vMGd4cWo',
       },
       {
         id: 'par-alexandre-iii',
@@ -1745,6 +1753,7 @@ export const localTravelCities: TravelCity[] = [
         // OSM multipolygon: both buildings via travel-areas-osm.ts (par-palais)
         address: 'Av. Winston Churchill, 75008 Paris',
         mapsQuery: 'Grand Palais Petit Palais Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Petit+Palais/@48.8660479,2.3145896,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fd1ce8f4349:0xf3f5be813dd2469c!8m2!3d48.8660479!4d2.3145896!16zL20vMDhkc3du',
       },
       {
         id: 'par-petit-palais-cafe',
@@ -1762,6 +1771,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.31455,
         address: 'Avenue Winston-Churchill, 75008 Paris',
         mapsQuery: 'Café du Petit Palais Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Caf%C3%A9+1902/@48.8661005,2.3146725,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66f2855966feb:0x9bdac70ebcb6ba29!8m2!3d48.8661005!4d2.3146725!16s%2Fg%2F11j0q683_7',
       },
       {
         id: 'par-vendome',
@@ -1793,7 +1803,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3332982,
         address: "35 Avenue de l'Opéra, 75002 Paris",
         mapsQuery: 'Cédric Grolet Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/C%C3%A9dric+Grolet/@48.8678522,2.3307233,17z',
+        mapsUrl: 'https://www.google.com/maps/place/Cedric+Grolet+Op%C3%A9ra/@48.8678522,2.3332982,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66f0c31ec0787:0xec70be4fbd091765!8m2!3d48.8678522!4d2.3332982!16s%2Fg%2F11fnbfg03d',
       },
       {
         id: 'par-opera',
@@ -1990,6 +2000,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.35595,
         address: '57 Rue Cuvier, 75005 Paris',
         mapsQuery: 'Fontaine Cuvier Jardin des Plantes Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Jardin+des+Plantes/@48.8439069,2.359658,17z/data=!3m1!4b1!4m6!3m5!1s0x47e671f0d126ec6b:0xa67a22fb91573d4e!8m2!3d48.8439069!4d2.359658!16zL20vMDIwaHZ0',
       },
       {
         id: 'par-carnavalet',
@@ -2103,7 +2114,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3387975,
         address: '13 Rue de l\'Ancienne Comédie, 75006 Paris',
         mapsQuery: 'Le Procope Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/Le+Procope/@48.853095,2.3383737,18.5z',
+        mapsUrl: 'https://www.google.com/maps/place/Le+Procope/@48.8529913,2.3387975,17z/data=!3m1!4b1!4m6!3m5!1s0x47e671deccfb0975:0x2d2503c1a3d5a984!8m2!3d48.8529913!4d2.3387975!16zL20vMGRxOW5n',
       },
       {
         id: 'par-brasserie-pres',
@@ -2118,7 +2129,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3391987,
         address: '6 Cour du Commerce Saint-André, 75006 Paris',
         mapsQuery: 'Brasserie des Prés Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/Brasserie+des+Pr%C3%A9s/@48.853095,2.3383737,18.5z',
+        mapsUrl: 'https://www.google.com/maps/place/Brasserie+des+Pr%C3%A9s/@48.8529451,2.3391987,17z/data=!3m1!4b1!4m6!3m5!1s0x47e67109f2a2f49b:0xa9c3307ddd2ab577!8m2!3d48.8529451!4d2.3391987!16s%2Fg%2F11txfblpd6',
       },
       {
         id: 'par-saint-michel',
@@ -2208,7 +2219,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3416479,
         address: '4 Rue des Trois Frères, 75018 Paris',
         mapsQuery: 'Fric-Frac Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/Fric-Frac/@48.8838194,2.339073,17z',
+        mapsUrl: 'https://www.google.com/maps/place/Fric-Frac/@48.8838194,2.3416479,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fc0706582db:0xe996fa24c5f4ebc1!8m2!3d48.8838194!4d2.3416479!16s%2Fg%2F11frjl8pmj',
       },
       {
         id: 'par-montmartre',
@@ -2273,7 +2284,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.316021,
         address: '8 Rue de Lévis, 75017 Paris',
         mapsQuery: 'Charcuterie Arnaud Nicolas Lévis Paris',
-        mapsUrl: 'https://www.google.com/maps/place/Charcuterie+Arnaud+Nicolas+L%C3%A9vis/@48.8757052,2.3221345,13.75z',
+        mapsUrl: 'https://www.google.com/maps/place/Charcuterie+Arnaud+Nicolas+L%C3%A9vis/@48.8818624,2.3161397,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fe45d310d55:0x14f9c74a5ddecd83!8m2!3d48.8818624!4d2.3161397!16s%2Fg%2F11sbspp718',
       },
       {
         id: 'par-bateaux-mouches',
@@ -2290,7 +2301,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3059374,
         address: 'Port de la Conférence, 75008 Paris',
         mapsQuery: 'Bateaux-Mouches Paris',
-        mapsUrl: 'https://www.google.fr/maps/place/Bateau-mouche/@48.8629662,2.306493,16.25z',
+        mapsUrl: 'https://www.google.com/maps/place/Bateaux-Mouches/@48.8640106,2.3059374,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fda56cd2849:0xeb1543c56c29aad3!8m2!3d48.8640106!4d2.3059374!16s%2Fg%2F1tdgjkyw',
       },
       {
         id: 'par-michalak',
@@ -2338,6 +2349,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3371,
         address: '8 Rue de Montpensier, 75001 Paris',
         mapsQuery: 'Palais-Royal Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Jardin+du+Palais-Royal/@48.8649723,2.3378061,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e25aa74bce5:0x26b66d8ea44cf7b3!8m2!3d48.8649723!4d2.3378061!16s%2Fg%2F120t9gzk',
       },
       {
         id: 'par-bohemia',
@@ -2357,6 +2369,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.335,
         address: '30 Rue de Richelieu, 75001 Paris',
         mapsQuery: "Baguett's Café Molière Paris",
+        mapsUrl: 'https://www.google.com/maps/place/Baguett%27s+Caf%C3%A9/@48.8653071,2.3365686,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e25204c73d1:0x7db1f2e94cd6eb82!8m2!3d48.8653071!4d2.3365686!16s%2Fg%2F11b8z5k4xz',
       },
       {
         id: 'par-bnf',
@@ -2371,6 +2384,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.376,
         address: 'Quai François Mauriac, 75013 Paris',
         mapsQuery: 'Bibliothèque nationale de France',
+        mapsUrl: 'https://www.google.com/maps/place/Biblioth%C3%A8que+Fran%C3%A7ois-Mitterrand/@48.8335842,2.3757659,17z/data=!3m1!4b1!4m6!3m5!1s0x47e6723cff6df901:0x28f6e235ce38e199!8m2!3d48.8335842!4d2.3757659!16zL20vMDFjYjZy',
       },
 
       // ── Perto da BnF: almoço, café, compras e passeio (IA, set/2026) ──
@@ -2714,7 +2728,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3244,
         address: 'Pl. de la Madeleine, 75008 Paris',
         mapsQuery: 'Église de la Madeleine Paris',
-        mapsUrl: 'https://www.foyerdelamadeleine.fr/restaurant',
+        mapsUrl: 'https://www.google.com/maps/place/La+Madeleine/@48.8700435,2.3245502,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e32f5011cef:0x5ff753fc9448c2b6!8m2!3d48.8700435!4d2.3245502!16zL20vMDE5bXRs',
       },
       {
         id: 'par-jeffrey-cagnes',
@@ -2808,6 +2822,7 @@ export const localTravelCities: TravelCity[] = [
         ],
         address: 'Métro ligne 6, Paris',
         mapsQuery: 'Métro ligne 6 Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Bir-Hakeim/@48.853918,2.2848635,17z/data=!4m10!1m2!2m1!1sBir-Hakeim+m%C3%A9tro+station+Paris!3m6!1s0x47e6701cd078d76d:0xb64ae1d176b28ce4!8m2!3d48.853918!4d2.2893696!15sCh9CaXItSGFrZWltIG3DqXRybyBzdGF0aW9uIFBhcmlzWiEiH2JpciBoYWtlaW0gbcOpdHJvIHN0YXRpb24gcGFyaXOSAQ5zdWJ3YXlfc3RhdGlvbpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyNVdjVlZIZEZGVlZ6VnVUbFZrZGxsclNrcGtWVmwwWWtjd01sUXlZeEFC4AEA-gEECAAQKA!16zL20vMDJqYmo3',
       },
       {
         id: 'par-bakery-gaite',
@@ -2916,6 +2931,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3821,
         address: '1 Rue Botzaris, 75019 Paris',
         mapsQuery: 'Parc des Buttes-Chaumont Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Parc+des+Buttes-Chaumont/@48.8809496,2.3827609,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66dc6143ed387:0xf26bed6076959491!8m2!3d48.8809496!4d2.3827609!16zL20vMDVodzM1',
       },
       {
         id: 'par-boulogne',
@@ -2926,10 +2942,11 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'Parque bonito e gigante — a “floresta” de Paris no 16ème. Lagos, caminhadas longas e ótimos restaurantes e cafés dentro.',
         },
         googleRating: 4.3,
-        lat: 48.86409,
-        lng: 2.24826,
+        lat: 48.8619839,
+        lng: 2.2523138,
         address: 'Bois de Boulogne, 75016 Paris',
         mapsQuery: 'Bois de Boulogne Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Bois+de+Boulogne/@48.8619839,2.2162649,14z/data=!4m10!1m2!2m1!1sBois+de+Boulogne+Paris!3m6!1s0x47e67ada5b5ac9db:0x4e579c1149864c2e!8m2!3d48.8619839!4d2.2523138!15sChZCb2lzIGRlIEJvdWxvZ25lIFBhcmlzWhgiFmJvaXMgZGUgYm91bG9nbmUgcGFyaXOSAQRwYXJrmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVI0YkVwSVRtbDNSUkFC4AEA-gEFCJkBEEk!16zL20vMDNxOWpx',
       },
       {
         id: 'par-fondation-lv',
@@ -3175,9 +3192,9 @@ export const localTravelCities: TravelCity[] = [
           en: 'Elevated stretches with panoramic city views — great return after the canals / La Villette. Ride it on purpose.',
           'pt-BR': 'Trechos elevados com vista panorâmica da cidade — ótimo na volta dos canais / La Villette. Pegue de propósito.',
         },
-        // Anchor at elevated Pigalle (on the authored station spine)
-        lat: 48.8828,
-        lng: 2.3499,
+        // Anchor at Anvers (roteiro boards line 2 here)
+        lat: 48.8828912,
+        lng: 2.3440843,
         area: {
           kind: 'polyline',
           // Full line 2 via main stations (Porte Dauphine → Nation)
@@ -3258,6 +3275,7 @@ export const localTravelCities: TravelCity[] = [
         ],
         address: 'Métro ligne 2, Paris',
         mapsQuery: 'Métro ligne 2 Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Anvers/@48.8828912,2.3440843,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e424970d8b5:0xb94b777036e2543!8m2!3d48.8828912!4d2.3440843!16zL20vMDJqMjYx',
       },
       {
         id: 'par-royal-cambronne',
@@ -3352,6 +3370,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.34301,
         address: '7 Rue du Faubourg Montmartre, 75009 Paris',
         mapsQuery: 'Bouillon Chartier Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Bouillon+Chartier+Grands+Boulevards/@48.8719224,2.3430304,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e3e7dad1be3:0xf5848e4836f69968!8m2!3d48.8719224!4d2.3430304!16s%2Fm%2F0br_rks',
       },
       {
         id: 'par-train-bleu',
@@ -3519,6 +3538,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.782173,
         address: 'Place des Passagers du Vent, 77700 Chessy',
         mapsQuery: 'Gare de Marne-la-Vallée Chessy',
+        mapsUrl: 'https://www.google.com/maps/place/Marne-la-Vall%C3%A9e+Chessy/@48.8704437,2.7828241,17z/data=!3m1!4b1!4m6!3m5!1s0x47e61d190dfc4715:0xc770c92d9418aae2!8m2!3d48.8704437!4d2.7828241!16s%2Fg%2F1tj4gbvd',
       },
       {
         id: 'par-val-de-fontenay-rer',
@@ -3533,6 +3553,7 @@ export const localTravelCities: TravelCity[] = [
         lat: 48.854526,
         lng: 2.489373,
         mapsQuery: 'Gare de Val de Fontenay RER',
+        mapsUrl: 'https://www.google.com/maps/place/Val+de+Fontenay/@48.8543099,2.48456,17z/data=!4m10!1m2!2m1!1sGare+de+Val+de+Fontenay+Paris!3m6!1s0x47e6129cb1a7fd8d:0xf57e08b345f1d405!8m2!3d48.8543099!4d2.4890661!15sCh1HYXJlIGRlIFZhbCBkZSBGb250ZW5heSBQYXJpc5IBDXRyYWluX3N0YXRpb27gAQA!16s%2Fm%2F04069hb',
       },
       {
         id: 'par-daw-spider-man',
@@ -3689,10 +3710,11 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'O McDonald’s famoso da Champs-Élysées — turístico, abre tarde, opção fácil quando você quer algo previsível.',
         },
         googleRating: 3.7,
-        lat: 48.87185,
-        lng: 2.30155,
+        lat: 48.8728825,
+        lng: 2.2990078,
         address: '140 Av. des Champs-Élysées, 75008 Paris',
         mapsQuery: "McDonald's Champs-Élysées Paris",
+        mapsUrl: 'https://www.google.com/maps/place/McDonald%27s/@48.8728825,2.2990078,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fea26bafdc7:0x21ea7aaf1fb2b3e3!8m2!3d48.8728825!4d2.2990078!16s%2Fg%2F1hd_88rdh',
       },
       {
         id: 'par-burger-king-opera',
@@ -3731,10 +3753,11 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'Burgers da rede americana perto do eixo do Louvre — bagunçado, enche, sem drama de reserva.',
         },
         googleRating: 4.2,
-        lat: 48.8608,
-        lng: 2.3365,
+        lat: 48.8609296,
+        lng: 2.3473464,
         address: '105 Rue de Rivoli, 75001 Paris',
         mapsQuery: 'Five Guys Rue de Rivoli Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Five+Guys/@48.8609296,2.2752486,13z/data=!4m10!1m2!2m1!1sFive+Guys+105+Rue+de+Rivoli+Paris!3m6!1s0x47e66f0db26b3979:0x346627e26c6bdcf3!8m2!3d48.8609296!4d2.3473464!15sCiFGaXZlIEd1eXMgMTA1IFJ1ZSBkZSBSaXZvbGkgUGFyaXMiA4gBAVojIiFmaXZlIGd1eXMgMTA1IHJ1ZSBkZSByaXZvbGkgcGFyaXOSARRoYW1idXJnZXJfcmVzdGF1cmFudJoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQycGFkRTF1U2tWU00zQnlUVE5STWs1RmVGWlVTR3Q2WWtWc2RVNUhZeEFC4AEA-gEECAAQTA!16s%2Fg%2F11lq9cj5bb',
       },
       {
         id: 'par-kfc-les-halles',
@@ -3803,6 +3826,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.13201,
         address: 'Place du Marché Notre-Dame, 78000 Versailles',
         mapsQuery: 'Point Alph Marché Notre-Dame Versailles',
+        mapsUrl: 'https://www.google.com/maps/place/Notre-Dame+Market/@48.8065744,2.1321226,17z/data=!3m1!4b1!4m6!3m5!1s0x47e67db16c8a45bf:0xc5466b2b00ada3f7!8m2!3d48.8065744!4d2.1321226!16s%2Fg%2F11fy1mh0ty',
       },
       {
         id: 'par-marche-aligre',
@@ -3817,6 +3841,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3779,
         address: "Place d'Aligre, 75012 Paris",
         mapsQuery: "Marché d'Aligre Paris",
+        mapsUrl: 'https://www.google.com/maps/place/Le+march%C3%A9+couvert+Beauvau/@48.8491053,2.3778158,17z/data=!3m1!4b1!4m6!3m5!1s0x47e6720f65e99dc5:0x77b1d937943503e6!8m2!3d48.8491053!4d2.3778158!16s%2Fg%2F1218czfg',
       },
       {
         id: 'par-marche-bastille',
@@ -4017,10 +4042,11 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'Caminhada elevada e verde a partir da Bastille — alternativa local aos jardins do centro.',
         },
         googleRating: 4.5,
-        lat: 48.847,
-        lng: 2.375,
+        lat: 48.8494178,
+        lng: 2.371518,
         address: '1 Coulée verte René-Dumont, 75012 Paris',
         mapsQuery: 'Promenade Plantée Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Viaduc+des+Arts/@48.8494178,2.371518,17z/data=!3m1!4b1!4m6!3m5!1s0x47e67211c5660bd7:0x5191bfe1b3ca2b1f!8m2!3d48.8494178!4d2.371518!16s%2Fm%2F010rnyg0',
       },
 
       // ── Oct 2026 trip list: food ──
@@ -4418,6 +4444,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.458939,
         address: '97 Rue Jean Jaurès, 93130 Noisy-le-Sec',
         mapsQuery: 'Saint Georges supérette 97 Rue Jean Jaurès Noisy-le-Sec',
+        mapsUrl: 'https://www.google.com/maps/place/97+Rue+Jean+Jaur%C3%A8s,+93130+Noisy-le-Sec,+France/@48.8950689,2.4589613,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66cd54200ec67:0x3162dfe6dc58b18e!8m2!3d48.8950689!4d2.4589613!16s%2Fg%2F11rgdk6rqz',
       },
       {
         id: 'par-uniqlo-opera',
@@ -4441,10 +4468,11 @@ export const localTravelCities: TravelCity[] = [
           en: 'Big mall at the end of metro 8 — a large Primark with lots of choice, plus Normal, H&M, Sephora and Bershka. No Uniqlo here.',
           'pt-BR': 'Shopping grande no fim da linha 8 do metrô — Primark grande e com muita variedade, mais Normal, H&M, Sephora e Bershka. Não tem Uniqlo.',
         },
-        lat: 48.779888,
-        lng: 2.45614,
+        lat: 48.7818046,
+        lng: 2.4551639,
         address: 'Avenue de la France Libre, 94000 Créteil',
         mapsQuery: 'Primark Créteil Soleil',
+        mapsUrl: 'https://www.google.com/maps/place/Primark/@48.7818046,2.4551639,17z/data=!3m1!4b1!4m6!3m5!1s0x47e60cae9c91576d:0xd0f8fba488fdd5ba!8m2!3d48.7818046!4d2.4551639!16s%2Fg%2F11ck6pl2kh',
       },
       {
         id: 'par-citypharma',
@@ -4599,10 +4627,11 @@ export const localTravelCities: TravelCity[] = [
           en: 'Grand Trianon, Petit Trianon and the Queen’s Hamlet, deep in the Versailles park. Included in the Passport.',
           'pt-BR': 'Grand Trianon, Petit Trianon e o Hameau da Rainha, no fundo do parque de Versalhes. Incluso no Passport.',
         },
-        lat: 48.814914,
-        lng: 2.109952,
+        lat: 48.8145625,
+        lng: 2.1047193,
         address: 'Domaine de Trianon, 78000 Versailles',
         mapsQuery: 'Domaine de Trianon Versailles',
+        mapsUrl: 'https://www.google.com/maps/place/Grand+Trianon/@48.8145625,2.1024662,18z/data=!4m10!1m2!2m1!1sDomaine+de+Trianon+Versailles!3m6!1s0x47e67dbea536a7f9:0x19bfe73b4be2678d!8m2!3d48.8145625!4d2.1047193!15sCh1Eb21haW5lIGRlIFRyaWFub24gVmVyc2FpbGxlc1ofIh1kb21haW5lIGRlIHRyaWFub24gdmVyc2FpbGxlc5IBF2hpc3RvcmljYWxfcGxhY2VfbXVzZXVtmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJ1YzJOWE4ySlJFQUXgAQD6AQUI4AYQPA!16zL20vMDRtNGw3',
       },
 
       // ── Guia da cidade: onde comprar e onde comer (Mercado e Comidas) ──
@@ -4943,6 +4972,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.356719,
         address: "29-31 Rue Saint-Louis-en-l'Île, 75004 Paris",
         mapsQuery: "Berthillon 29-31 Rue Saint-Louis-en-l'Île, 75004 Paris",
+        mapsUrl: 'https://www.google.com/maps/place/Berthillon/@48.8517135,2.3522145,17z/data=!4m10!1m2!2m1!1sBerthillon+29+Rue+Saint-Louis-en-l%27%C3%8Ele+Paris!3m6!1s0x47e671e31035116b:0x3351811a156c6d4a!8m2!3d48.8517135!4d2.3567206!15sCi1CZXJ0aGlsbG9uIDI5IFJ1ZSBTYWludC1Mb3Vpcy1lbi1sJ8OObGUgUGFyaXNaLyItYmVydGhpbGxvbiAyOSBydWUgc2FpbnQgbG91aXMgZW4gbCDDrmxlIHBhcmlzkgEOaWNlX2NyZWFtX3Nob3CaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVXY0ZsVmVFbFhSa1pOVkVoT01sSlhWbTFPYlhSUlQwWmtjV0l4UlJBQuABAPoBBQjaARA0!16s%2Fg%2F1tfpj3r0',
       },
       {
         id: 'par-petit-vendome-capucines',
