@@ -1618,6 +1618,24 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Musée du Louvre Paris',
       },
       {
+        id: 'par-carrousel',
+        name: { en: 'Arc de Triomphe du Carrousel', 'pt-BR': 'Arco do Triunfo do Carrousel' },
+        category: 'photo',
+        description: { en: 'Arch between the Louvre and the Carrousel Garden.', 'pt-BR': 'Arco entre o Louvre e o Jardim do Carrousel.' },
+        lat: 48.861728,
+        lng: 2.332908, // OSM way 227483542
+        mapsQuery: 'Arc de Triomphe du Carrousel Jardin du Carrousel Paris',
+      },
+      {
+        id: 'par-maillol',
+        name: { en: 'Maillol statues', 'pt-BR': 'Estátuas de Maillol' },
+        category: 'photo',
+        description: { en: 'Outdoor sculptures in the Carrousel Garden.', 'pt-BR': 'Esculturas ao ar livre no Jardim do Carrousel.' },
+        lat: 48.862417,
+        lng: 2.331472, // OSM node 1934643467
+        mapsQuery: 'Maillol statues Jardin du Carrousel Paris',
+      },
+      {
         id: 'par-tuileries',
         name: { en: 'Tuileries Garden', 'pt-BR': 'Jardim das Tulherias' },
         category: 'parks',
@@ -1642,10 +1660,8 @@ export const localTravelCities: TravelCity[] = [
             [48.8622, 2.3218],
           ],
         },
-        // Walk from the Carrousel west to Concorde. OSM ids per point.
+        // Walk from the Grand Bassin Rond west to Concorde. Carrousel and Maillol are separate stops.
         subPoints: [
-          { name: { en: 'Arc de Triomphe du Carrousel', 'pt-BR': 'Arco do Triunfo do Carrousel' }, lat: 48.861728, lng: 2.332908, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Arc_de_triomphe_du_carrousel_in_Paris_France.jpg/500px-Arc_de_triomphe_du_carrousel_in_Paris_France.jpg' }, // way 227483542
-          { name: { en: 'Maillol statues', 'pt-BR': 'Estátuas de Maillol' }, lat: 48.862417, lng: 2.331472, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/L%27Air_by_Aristide_Maillol%2C_Tuileries_garden%2C_Paris_11_August_2015.jpg/500px-L%27Air_by_Aristide_Maillol%2C_Tuileries_garden%2C_Paris_11_August_2015.jpg' }, // node 1934643467
           { name: { en: 'Grand Bassin Rond', 'pt-BR': 'Grand Bassin Rond, o lago redondo' }, lat: 48.862873, lng: 2.329293, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Grand_bassin_rond_Jardin_des_Tuileries_001.jpg/500px-Grand_bassin_rond_Jardin_des_Tuileries_001.jpg' }, // way 14037695
           { name: { en: 'Grande Allée', 'pt-BR': 'Grande Allée, a alameda central' }, lat: 48.863676, lng: 2.326765, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Paris_75001_Jardin_des_Tuileries_-_all%C3%A9e_centrale_towards_Palais_du_Louvre.jpg/500px-Paris_75001_Jardin_des_Tuileries_-_all%C3%A9e_centrale_towards_Palais_du_Louvre.jpg' }, // way 54568947
           { name: { en: 'Grand Bassin Octogonal', 'pt-BR': 'Grand Bassin Octogonal, o lago octogonal' }, lat: 48.864522, lng: 2.324136, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Grand_bassin_octogonal_Jardin_des_Tuileries_003.jpg/500px-Grand_bassin_octogonal_Jardin_des_Tuileries_003.jpg' }, // way 54188993

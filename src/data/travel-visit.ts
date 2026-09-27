@@ -449,6 +449,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Parada longa no gramado — coma o que pegou no Bake & Blend, fotos, primeiro respiro ao ar livre. Controle de segurança em dias de evento.',
     ),
   }),
+  'par-carrousel': { ticket: free, durationMin: 3, durationMax: 5 },
+  'par-maillol': { ticket: free, durationMin: 2, durationMax: 5 },
   'par-tuileries': parkVisit({
     durationMin: 40,
     durationMax: 100,
