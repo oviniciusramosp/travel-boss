@@ -20,3 +20,6 @@
 .tb-indoor__detail p { margin: 0 0 var(--spacing-12); font-size: var(--text-body); line-height: var(--leading-body); }
 .tb-indoor__sources { display: flex; gap: var(--spacing-16); flex-wrap: wrap; font-size: var(--text-caption); }
 .tb-indoor__sources a { color: var(--color-ink-soft); }
+.tb-indoor__external { margin-top: var(--spacing-16); font-size: var(--text-body); }
+.tb-indoor__external summary { cursor: pointer; margin-bottom: var(--spacing-12); }
+.tb-indoor__external textarea { width: 100%; min-height: var(--indoor-map-height); font: inherit; }

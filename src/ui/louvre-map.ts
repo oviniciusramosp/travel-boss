@@ -52,6 +52,43 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
       sources.append(link);
     }
     body.append(intro, layout, warning, sources);
+    const external = el('details', 'tb-indoor__external');
+    external.append(el('summary', undefined, t('Try room-to-room navigation · Museum Buddy', 'Testar navegação entre salas · Museum Buddy')));
+    external.append(el('p', 'tb-indoor__intro', t(
+      'Independent app with in-app purchases. Its developer advertises room-to-room navigation and a custom planner. Reproduce the sequence manually; automatic import and preservation of this order have not been verified. Test before buying: recent store reviews report download and premium-access failures. Check museum closures separately.',
+      'App independente, com compras internas. O desenvolvedor anuncia navegação entre salas e planejador próprio. Reproduza a sequência manualmente; importação automática e preservação desta ordem não foram verificadas. Teste antes de comprar: avaliações recentes relatam falhas de download e de acesso premium. Confira as salas fechadas no site do Louvre.')));
+    const externalActions = el('div', 'tb-indoor__toolbar');
+    const copy = el('button', 'tb-btn-outline', t('Copy visit sequence', 'Copiar sequência da visita'));
+    copy.type = 'button';
+    const sequence = louvreRoute.map((step, i) => `${i + 1}. ${pickLocale(locale, step.name)} — ${step.room} — ${t('Level', 'Nível')} ${step.floor}`).join('\n');
+    const manual = el('textarea');
+    manual.readOnly = true;
+    manual.value = sequence;
+    manual.hidden = true;
+    manual.setAttribute('aria-label', t('Visit sequence to copy manually', 'Sequência da visita para copiar manualmente'));
+    const feedback = el('span');
+    feedback.setAttribute('role', 'status');
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(sequence);
+        feedback.textContent = t('Sequence copied', 'Sequência copiada');
+      } catch {
+        manual.hidden = false;
+        manual.focus(); manual.select();
+        feedback.textContent = t('Select and copy the text below', 'Selecione e copie o texto abaixo');
+      }
+    });
+    externalActions.append(copy);
+    for (const [label, url] of [
+      ['iPhone / iPad', 'https://apps.apple.com/us/app/louvre-museum-audio-tours/id1076660928'],
+      ['Android', 'https://play.google.com/store/apps/details?id=air.com.lvr.paris.vusiem'],
+    ]) {
+      const link = el('a', 'tb-btn-outline', label);
+      link.href = url; link.target = '_blank'; link.rel = 'noopener';
+      externalActions.append(link);
+    }
+    external.append(externalActions, feedback, manual);
+    body.append(external);
     const dialog = openDialog({ className: 'tb-indoor', title: t('Louvre · indoor route', 'Louvre · percurso interno'), locale, body: [body] });
     const map = L.map(mapNode, { crs: L.CRS.Simple, zoomControl: false, attributionControl: false, minZoom: -2, maxZoom: 3, zoomSnap: 0.25, scrollWheelZoom: true });
     const bounds = L.latLngBounds([0, 0], [477.6, 949.2]);
