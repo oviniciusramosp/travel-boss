@@ -94,9 +94,10 @@
   font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
   line-height: var(--leading-caption);
-  /* Short tips stay on one line; a long one (the AI reason) wraps. */
+  /* Short tips stay on one line; a long one (the AI reason) wraps, and a tip written in lines keeps them. */
   width: max-content;
   max-width: calc(var(--h-lg) * 10);
+  white-space: pre-line;
   pointer-events: none;
 }
 

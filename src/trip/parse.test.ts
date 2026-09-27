@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
-import { legLabel, parseTrip } from './parse';
+import { legLabel, parseBudget, parseTrip } from './parse';
 
 const sample = `# Europa
 
@@ -351,6 +351,70 @@ via: trem · 3h10
     );
     expect(trip.cities[0]?.leg).toBeUndefined();
     expect(trip.cities[0]?.days[0]?.notes.map((note) => note.text)).toEqual(['via: trem · 3h10']);
+    expect(trip.errors).toEqual([]);
+  });
+});
+
+describe('city budget', () => {
+  const withHeader = (header: string, day = '- 09:00 [Louvre](place:par-louvre)') =>
+    parseTrip(
+      'europa',
+      'content/trips/europa.md',
+      `# Europa
+
+## Paris
+${header}
+
+### Dia 1 — Museu
+
+${day}
+`,
+    );
+
+  it('reads food and ticket targets, either one alone, any case, with a comma or a dot', () => {
+    expect(parseBudget('comida €50')).toEqual({ food: 50 });
+    expect(parseBudget('comida €50 · ingressos €30')).toEqual({ food: 50, ticket: 30 });
+    expect(parseBudget('ingressos €30')).toEqual({ ticket: 30 });
+    expect(parseBudget('Comida €47,50')).toEqual({ food: 47.5 });
+    expect(parseBudget('FOOD €12.5 · Tickets € 8')).toEqual({ food: 12.5, ticket: 8 });
+    expect(parseBudget('')).toBeNull();
+    expect(parseBudget('comida 50')).toBeNull();
+  });
+
+  it('keeps the header line as the city target, in any order with city and dates', () => {
+    const trip = withHeader('budget: comida €50 · ingressos €30\ncity: paris\ndates: 2026-10-04 → 2026-10-11');
+    expect(trip.errors).toEqual([]);
+    expect(trip.cities[0]).toMatchObject({ slug: 'paris', dates: { start: '2026-10-04', end: '2026-10-11' } });
+    expect(trip.cities[0]?.budget).toEqual({ food: 50, ticket: 30, detail: 'comida €50 · ingressos €30' });
+    expect(withHeader('city: paris\nbudget: ingressos €30').cities[0]?.budget).toEqual({
+      ticket: 30,
+      detail: 'ingressos €30',
+    });
+    expect(withHeader('city: paris\nbudget: Comida €47,50').cities[0]?.budget?.food).toBe(47.5);
+  });
+
+  it('does not turn the header line into a paragraph, a note or a stop', () => {
+    const trip = withHeader('city: paris\ndates: 2026-10-04 → 2026-10-11\nbudget: comida €50');
+    const day = trip.cities[0]?.days[0];
+    expect(trip.errors).toEqual([]);
+    expect(day?.notes).toEqual([]);
+    expect(day?.stops.map((stop) => stop.label)).toEqual(['Louvre']);
+  });
+
+  it('reports a second or an empty budget and keeps the first', () => {
+    const trip = withHeader('city: paris\nbudget: comida €50\nbudget:\nbudget: comida €80\nbudget: cinquenta');
+    expect(trip.cities[0]?.budget).toEqual({ food: 50, detail: 'comida €50' });
+    expect(trip.errors).toEqual([
+      { line: 6, code: 'budget-empty' },
+      { line: 7, code: 'budget-twice' },
+      { line: 8, code: 'budget-empty' },
+    ]);
+  });
+
+  it('keeps a budget line under a day as a paragraph, not the target', () => {
+    const trip = withHeader('city: paris', '- 09:00 [Louvre](place:par-louvre)\n\nbudget: comida €50');
+    expect(trip.cities[0]?.budget).toBeUndefined();
+    expect(trip.cities[0]?.days[0]?.notes.map((note) => note.text)).toEqual(['budget: comida €50']);
     expect(trip.errors).toEqual([]);
   });
 });

@@ -57,6 +57,9 @@ import {
 } from './route';
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
+import { formatWalk, walkedMeters } from './walk-distance';
+import type { RouteDeps } from './route';
+import type { MapRouteSegment } from '../map/types';
 import { chipTone, circleInk } from '../ui/contrast';
 import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
@@ -76,7 +79,17 @@ import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripS
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
-import { dayWeather, loadForecast, peekForecast, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
+import {
+  dayWeather,
+  forecastState,
+  loadForecast,
+  weatherIn,
+  weatherLook,
+  weatherTip,
+  WINDOWS,
+  type ForecastState,
+  type Weather,
+} from './weather';
 import { weatherIcon } from '../ui/weather-icons';
 import { transferRow } from '../views/transfer-row';
 
@@ -156,17 +169,48 @@ function weatherSlot(key: string): HTMLSpanElement {
   return slot;
 }
 
-/** Glyph, low–high and chance of rain. The tip has the rest, and the period's own window first. */
+/** Empty until the date's walks are measured. */
+function walkSlot(date: string): HTMLSpanElement {
+  const slot = el('span', 'tb-walk');
+  slot.dataset.walk = date;
+  slot.setAttribute('role', 'img');
+  slot.hidden = true;
+  return slot;
+}
+
+/**
+ * Glyph only; the reading slides out on hover (`.tb-reveal`) and the tip has the rest, one
+ * fact per line. With `placeholder`, an empty slot still shows while the forecast loads or
+ * after it failed, so the card says why there is nothing.
+ */
 function fillWeather(
   slot: HTMLElement,
   weather: Weather | null,
   night: boolean,
   locale: Locale,
-  window?: readonly [number, number],
+  window: readonly [number, number] | undefined,
+  state: ForecastState,
+  placeholder = false,
 ): void {
-  slot.hidden = !weather;
+  const empty = !weather && placeholder && (state.loading || state.failed);
+  slot.classList.toggle('is-loading', empty && state.loading);
+  slot.classList.toggle('is-off', empty && !state.loading);
+  slot.classList.toggle('is-stale', Boolean(weather) && state.failed);
+  slot.hidden = !weather && !empty;
   if (!weather) {
-    slot.replaceChildren();
+    if (!empty) {
+      slot.replaceChildren();
+      return;
+    }
+    const text = state.loading
+      ? pickLocale(locale, { en: 'Loading the forecast…', 'pt-BR': 'Carregando a previsão…' })
+      : pickLocale(locale, {
+          en: 'No forecast right now.\nRefresh to try again.',
+          'pt-BR': 'Sem previsão agora.\nAtualize para tentar de novo.',
+        });
+    slot.replaceChildren(weatherIcon(state.loading ? 'cloud-sun' : 'clouds'));
+    slot.setAttribute('data-tip', text);
+    slot.setAttribute('aria-label', text.replace('\n', ' '));
     return;
   }
   const look = weatherLook(weather, night);
@@ -174,13 +218,10 @@ function fillWeather(
   const high = Math.round(weather.max);
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
-  slot.replaceChildren(weatherIcon(look.icon), document.createTextNode(`${temp} · ${rain}%`));
-  const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
-  const source = pickLocale(locale, { en: 'ECMWF + NOAA ensembles', 'pt-BR': 'ensembles ECMWF + NOAA' });
-  const span = window ? `${window[0]}h–${window[1]}h · ` : '';
-  const tip = `${pickLocale(locale, look.label)} · ${span}${low}–${high}° · ${words} ${rain}% · ${source} · Open-Meteo`;
+  slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', `${temp} · ${rain}%`));
+  const tip = weatherTip(weather, look.label, locale, window, state.fetchedAt, state.failed);
   slot.setAttribute('data-tip', tip);
-  slot.setAttribute('aria-label', tip);
+  slot.setAttribute('aria-label', tip.replaceAll('\n', '. '));
 }
 
 /** Half of a leg's rail: `is-above` runs into its icon, `is-below` leaves it. */
@@ -456,14 +497,17 @@ export function mountTrip(
 
   /** Stops of the routed date, including the train that leaves one city for the next. */
   function routeHops(): RouteHop[] {
-    const trip = current;
     const date = routedDate();
-    if (!trip || !date) return [];
+    return current && date ? hopsForDate(current, date, false) : [];
+  }
+
+  /** Hops between the places of a date. `all` keeps the periods switched off the map: the walked distance counts them. */
+  function hopsForDate(trip: Trip, date: string, all: boolean): RouteHop[] {
     const hops: RouteHop[] = [];
     let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
     for (const { row, place, on } of datePlaces(trip, date)) {
       // An off period breaks the chain, so the route never bridges it.
-      if (!on) {
+      if (!on && !all) {
         previous = null;
         continue;
       }
@@ -601,12 +645,29 @@ export function mountTrip(
       map.setRoute(known);
       return;
     }
-    void resolveHopSegments(hops, {
-      neutralColor: color,
-      onUpdate: (segments) => {
+    void resolveHopSegments(
+      hops,
+      routeDeps(signal, color, (segments) => {
         if (!alive || epoch !== tripRouteEpoch) return;
         map.setRoute([...segments]);
-      },
+      }),
+    )
+      .then((segments) => {
+        if (!alive || epoch !== tripRouteEpoch) return;
+        map.setRoute(segments);
+      })
+      .catch(() => undefined);
+  }
+
+  /** How a hop becomes segments: cached walks, OSRM, the catalog's train legs. The map and the walked distance share it. */
+  function routeDeps(
+    signal: AbortSignal,
+    neutralColor: string,
+    onUpdate?: (segments: readonly MapRouteSegment[]) => void,
+  ): RouteDeps {
+    return {
+      neutralColor,
+      ...(onUpdate ? { onUpdate } : {}),
       walk: async (from, to, through) => {
         const cached = rememberedWalk(from, to);
         if (cached) return cached;
@@ -648,12 +709,64 @@ export function mountTrip(
           ...(segment.walkIndex != null ? { walkIndex: segment.walkIndex } : {}),
         }));
       },
-    })
-      .then((segments) => {
-        if (!alive || epoch !== tripRouteEpoch) return;
-        map.setRoute(segments);
-      })
-      .catch(() => undefined);
+    };
+  }
+
+  /** Metres walked per date, from the same segments the map would draw. */
+  const walkMeters = new Map<string, number>();
+  let walkEpoch = 0;
+  let walkAbort: AbortController | null = null;
+
+  function paintWalk(date: string, locale: Locale) {
+    const meters = walkMeters.get(date);
+    main.querySelectorAll<HTMLElement>(`[data-walk="${CSS.escape(date)}"]`).forEach((slot) => {
+      slot.hidden = meters == null;
+      if (meters == null) return;
+      const value = formatWalk(meters, locale);
+      const unit = pickLocale(locale, { en: ' on foot', 'pt-BR': ' a pé' });
+      slot.replaceChildren(
+        icon('directions_walk', { size: 16 }),
+        el('span', 'tb-walk__text', value),
+        el('span', 'tb-walk__unit tb-reveal', unit),
+      );
+      slot.setAttribute('aria-label', `${value}${unit}`);
+    });
+  }
+
+  function paintWalks(trip: Trip) {
+    const locale = shell.locale();
+    for (const section of tripDates(trip)) paintWalk(section.date, locale);
+  }
+
+  /**
+   * Measured again after every paint, so the number follows the file: known walks
+   * resolve at once from memory, a new hop fetches its route once and is remembered.
+   */
+  function refreshWalks(trip: Trip) {
+    const epoch = ++walkEpoch;
+    walkAbort?.abort();
+    const controller = new AbortController();
+    walkAbort = controller;
+    const color = neutralColor();
+    void (async () => {
+      for (const section of tripDates(trip)) {
+        if (!alive || epoch !== walkEpoch) return;
+        const hops = hopsForDate(trip, section.date, true);
+        if (!hops.length) {
+          walkMeters.delete(section.date);
+          paintWalk(section.date, shell.locale());
+          continue;
+        }
+        try {
+          const segments = await resolveHopSegments(hops, routeDeps(controller.signal, color));
+          if (!alive || epoch !== walkEpoch) return;
+          walkMeters.set(section.date, walkedMeters(segments));
+          paintWalk(section.date, shell.locale());
+        } catch {
+          /* Aborted or offline: the slot keeps its last value. */
+        }
+      }
+    })();
   }
 
   /** Route toggle of each card, updated in place. Maps opens per period: a whole day is too many stops. */
@@ -1057,18 +1170,21 @@ export function mountTrip(
       const { rows, periods } = datePlan(section.cities.flatMap((group) => group.days), section.date);
       const times = rows.map((row) => row.dated.day.stops[row.stopIndex]?.time);
       const windows = periodWindows(times, periods, WINDOWS);
-      const cityOf = (index: number) => {
+      const stateOf = (index: number): ForecastState => {
         const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
-        return record ? peekForecast(record.lat, record.lng) : null;
+        return record
+          ? forecastState(record.lat, record.lng)
+          : { hours: null, fetchedAt: null, loading: false, failed: false };
       };
+      const cityOf = (index: number) => stateOf(index).hours;
       const parts: Weather[] = [];
       for (const { period, rows: indexes } of periodSections(periods)) {
         if (!period) continue;
-        const hours = cityOf(indexes[0] ?? -1);
-        const weather = hours && weatherIn(hours, section.date, windows[period]);
+        const state = stateOf(indexes[0] ?? -1);
+        const weather = state.hours && weatherIn(state.hours, section.date, windows[period]);
         if (weather) parts.push(weather);
         const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
-        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period]);
+        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period], state);
       }
       // A date without times reads all three periods of its first city.
       const whole = periods.some(Boolean) ? null : cityOf(0);
@@ -1076,22 +1192,34 @@ export function mountTrip(
         const weather = whole && weatherIn(whole, section.date, window);
         if (weather) parts.push(weather);
       }
+      const dayState = stateOf(0);
       const slot = card.querySelector<HTMLElement>('[data-weather="day"]');
-      if (slot) fillWeather(slot, dayWeather(parts), false, locale);
+      if (slot) fillWeather(slot, dayWeather(parts), false, locale, undefined, dayState, true);
+      // The refresh button shows once a fetch failed, with or without an older forecast to show.
+      const refresh = card.querySelector<HTMLButtonElement>('[data-day-action="weather"]');
+      if (refresh) {
+        refresh.hidden = !dayState.failed;
+        refresh.disabled = dayState.loading;
+      }
     }
   }
 
-  /** One request per city; each answer repaints the forecast in place. */
-  function refreshWeather(trip: Trip) {
+  /** One request per city; each answer repaints the forecast in place. `force` ignores the half-hour freshness. */
+  function refreshWeather(trip: Trip, force = false): Promise<void> {
     const seen = new Set<string>();
+    const loads: Promise<unknown>[] = [];
     for (const city of trip.cities) {
       const record = getTravelCity(city.slug);
       if (!record || seen.has(city.slug)) continue;
       seen.add(city.slug);
-      void loadForecast(record.lat, record.lng, timeZoneForCity(city.slug)).then(() => {
-        if (alive && current) paintWeather(current);
-      });
+      loads.push(
+        loadForecast(record.lat, record.lng, timeZoneForCity(city.slug), force).then(() => {
+          if (alive && current) paintWeather(current);
+        }),
+      );
     }
+    if (loads.length && alive && current) paintWeather(current);
+    return Promise.all(loads).then(() => undefined);
   }
 
   /**
@@ -1299,12 +1427,32 @@ export function mountTrip(
       }).length;
       const summary = el('summary', 'tb-date__head');
       const heading = el('span', 'tb-date__heading');
-      const meta = el(
-        'span',
-        'tb-date__meta',
-        [names.join(' → '), stopCountLabel(stopCount, locale)].filter(Boolean).join(' · '),
+      const meta = el('span', 'tb-date__meta');
+      if (names.length) meta.append(el('span', 'tb-date__names', names.join(' → ')));
+      const countLabel = stopCountLabel(stopCount, locale);
+      const count = el('span', 'tb-count');
+      count.setAttribute('aria-label', countLabel);
+      count.append(
+        el('span', 'tb-count__n', String(stopCount)),
+        el('span', 'tb-count__unit tb-reveal', ` ${countLabel.replace(/^\d+\s*/, '')}`),
       );
-      meta.append(weatherSlot('day'));
+      // Sky: the forecast and, after a failed fetch, the button that asks again.
+      const sky = el('span', 'tb-sky');
+      const refresh = iconButton({
+        icon: 'sync',
+        label: pickLocale(locale, { en: 'Refresh the forecast', 'pt-BR': 'Atualizar a previsão' }),
+        size: 'sm',
+      });
+      refresh.classList.add('tb-weather__refresh');
+      refresh.dataset.dayAction = 'weather';
+      refresh.hidden = true;
+      refresh.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        void refreshWeather(trip, true);
+      });
+      sky.append(weatherSlot('day'), refresh);
+      meta.append(count, sky, walkSlot(date));
       heading.append(el('span', 'tb-date__title', formatDayTitle(date, locale)), meta);
       const routeToggle = iconButton({
         icon: 'route',
@@ -1373,6 +1521,8 @@ export function mountTrip(
       const budget = dateBudget(placesHere, fares, outside);
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
+      // A date across two cities takes the food target of the city of its first stop.
+      const firstStop = rows.find((row) => !row.dated.day.stops[row.stopIndex]?.listNote);
       body.append(
         dateBudgetCards(
           budget,
@@ -1382,6 +1532,7 @@ export function mountTrip(
           },
           formatDayTitle(date, locale),
           locale,
+          firstStop?.dated.city.budget?.food,
         ),
       );
       // One list per period. A row's list is lists[rowIndex].
@@ -1703,6 +1854,8 @@ export function mountTrip(
     );
     paintWeather(trip);
     refreshWeather(trip);
+    paintWalks(trip);
+    refreshWalks(trip);
     shell.setSource(trip.file);
     if (updated) flashSource(trip.file);
     previousTrip = trip;

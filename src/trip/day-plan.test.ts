@@ -11,6 +11,7 @@ import {
   rowPeriods,
   freeMinutes,
   isOpenSlot,
+  overBudget,
   seenFromOutside,
   withSubPointPlaces,
   zonedStamp,
@@ -326,5 +327,22 @@ describe('dateBudget', () => {
     );
     expect(budget.ticket).toBeCloseTo(15.1);
     expect(budget.lines.map((line) => line.label ?? line.id)).toEqual(['museum', 'RER E + metrô 9', 'metrô 9 de Iéna']);
+  });
+});
+
+describe('overBudget', () => {
+  it('says how far the date went past the target', () => {
+    expect(overBudget(62, 50)).toBe(12);
+    expect(overBudget(52.5, 47.5)).toBe(5);
+  });
+
+  it('is zero at or under the target, float drift included', () => {
+    expect(overBudget(42, 50)).toBe(0);
+    expect(overBudget(50, 50)).toBe(0);
+    expect(overBudget(0.1 + 0.2, 0.3)).toBe(0);
+  });
+
+  it('is zero without a target', () => {
+    expect(overBudget(62, undefined)).toBe(0);
   });
 });

@@ -249,6 +249,15 @@ export function withSubPointPlaces<T extends { subPoints?: readonly { placeId?: 
   ]);
 }
 
+/**
+ * Euros `spent` is past the city's `target` (`budget:`), to the cent: 0 when it is not, or with no target.
+ * Rounded so a sum that lands on the target by float drift is not "over".
+ */
+export function overBudget(spent: number, target: number | undefined): number {
+  if (target === undefined) return 0;
+  return Math.max(0, Math.round((spent - target) * 100) / 100);
+}
+
 /** `label` names a leg fare; a place line is named by its id. */
 export type BudgetLine = { id: string; food: number; ticket: number; label?: string };
 export type DateBudget = { food: number; ticket: number; lines: BudgetLine[] };

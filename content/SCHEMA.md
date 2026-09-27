@@ -35,6 +35,16 @@ dates: 2026-04-06 → 2026-04-09
 - One H1. It is the trip title.
 - One H2 per city, in travel order. The next non-empty line is `city: <slug>` using a slug from the catalog (`paris`, `milao`, `roma`, `lisboa`, `porto`, `sao-paulo`, `florianopolis`, `new-york`, `miami`).
 - Optional `dates: YYYY-MM-DD → YYYY-MM-DD` on the following line.
+- Optional `budget:` in that same city header, before the first day, in any order with `city:` and `dates:`. It is the city's food target per person per day.
+
+  ```markdown
+  budget: comida €50
+  ```
+
+  - `comida €50` (or `food`) and `ingressos €30` (or `tickets`), either one or both, joined by ` · `. Any case. The amount follows `€`, with a comma or a dot (`€47,50`).
+  - One line per city. A second `budget:` is an error (`budget-twice`); the first is kept. One with no amount is an error (`budget-empty`).
+  - Like `city:`, the document does not draw it: not a paragraph, not a stop. A paragraph that starts with `budget:` under a day stays narrative.
+  - Only food is checked. When a date's food (see "Day card") goes past the target, the food chip turns bold with a `warning` glyph; with a target, its tooltip compares the two (`€62 de €50 por pessoa`). The day's receipt adds `Meta: €50 · passou €12` (or `sobram €8`) under the food subtotal. A date across two cities uses the city of its first stop. Tickets have no target: `ingressos` is read and exported, and nothing warns on it.
 - Optional `via:` in that same city header, before the first day. It says how you leave this city for the next one. It is not a stop and it does not become a pin.
 
   ```markdown
@@ -133,6 +143,7 @@ Export rewrites the same document for Apple Notes and Notion:
 - `place:<id>` becomes a normal `https://` Google Maps link, using the catalog URL for that place.
 - The `city:` line is omitted.
 - `dates:` becomes a single line under the city heading.
+- A city-header `budget:` is left out, like `city:`: the target is for the app, not for the reader.
 - A city-header `via:` stays on the next line, copied as written. `3h10` is not rewritten as minutes.
 - Clipboard writes `text/html` (Apple Notes uses this and keeps headings, lists and links) and `text/plain` Markdown (Notion pastes this).
 - A `.md` download uses the same Markdown.

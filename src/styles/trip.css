@@ -252,13 +252,119 @@
 }
 
 .tb-date__meta {
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
   color: var(--color-mid-gray);
   font-size: var(--text-caption);
   font-variant-numeric: tabular-nums;
   line-height: var(--leading-caption);
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.tb-date__names {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* A dot between the cities, the count, the sky and the distance. */
+.tb-date__meta > * + *::before {
+  content: '·';
+  margin-inline-end: var(--spacing-4);
+}
+
+.tb-count,
+.tb-walk {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+
+.tb-walk[hidden] {
+  display: none;
+}
+
+.tb-walk > .material-symbols-rounded {
+  margin-inline-end: var(--inset-group);
+  color: var(--color-mid-gray);
+}
+
+/* Words the number or glyph already imply slide out on hover of that number or glyph; without hover they stay. */
+.tb-reveal {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(calc(var(--spacing-4) * -1));
+  white-space: pre;
+  vertical-align: bottom;
+  transition:
+    max-width var(--dur-slow) var(--ease-out),
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out),
+    margin var(--dur-slow) var(--ease-out);
+}
+
+.tb-count:is(:hover, :focus-within) .tb-count__unit,
+.tb-walk:is(:hover, :focus-within) .tb-walk__unit,
+.tb-weather:is(:hover, :focus-within) .tb-weather__text {
+  max-width: 12em;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tb-weather__text {
+  margin-inline-start: 0;
+}
+
+.tb-weather:is(:hover, :focus-within) .tb-weather__text {
+  margin-inline-start: var(--inset-group);
+}
+
+/* The forecast and its refresh button, which appears only after a fetch failed. */
+.tb-sky {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--inset-group);
+}
+
+.tb-weather__refresh[hidden] {
+  display: none;
+}
+
+/* Waiting for the API: the glyph breathes. Without an answer: it goes grey. */
+.tb-weather.is-loading .tb-weather__icon {
+  opacity: 0.5;
+  animation: tb-breathe var(--dur-flow) var(--ease-in-out) infinite;
+}
+
+.tb-weather.is-off .tb-weather__icon {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+/* An older forecast, shown because the new one did not come. */
+.tb-weather.is-stale .tb-weather__icon {
+  opacity: 0.7;
+}
+
+@keyframes tb-breathe {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@media (hover: none) {
+  .tb-reveal {
+    max-width: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .tb-weather__text {
+    margin-inline-start: var(--inset-group);
+  }
 }
 
 .tb-date__actions {
@@ -364,6 +470,15 @@
 .tb-stop-cost.is-ticket .material-symbols-rounded,
 .tb-receipt__group.is-ticket .tb-receipt__head .material-symbols-rounded {
   color: var(--color-ticket);
+}
+
+/* Food past the city's `budget:` target: bold, and a warning glyph in the text color, not a new one. */
+.tb-budget-chip.is-over {
+  font-weight: var(--font-weight-semibold);
+}
+
+.tb-budget-chip.is-over .tb-budget-chip__warn {
+  color: inherit;
 }
 
 /* The day's receipt (`openDialog`): each line of the budget per kind, then the total. */
@@ -501,7 +616,6 @@
 .tb-weather {
   display: inline-flex;
   align-items: center;
-  gap: var(--inset-group);
   color: var(--color-mid-gray);
   font-size: var(--text-caption);
   font-variant-numeric: tabular-nums;
@@ -517,11 +631,6 @@
   flex: none;
   width: var(--icon-md);
   height: var(--icon-md);
-}
-
-.tb-date__meta .tb-weather::before {
-  content: '·';
-  margin-inline: var(--spacing-4);
 }
 
 /* In a period header the forecast sits just left of the switch. Without it,
@@ -971,7 +1080,8 @@
   .tb-row.is-changed,
   .tb-list-note.is-changed,
   .tb-transfer.is-changed,
-  .tb-source.is-updated {
+  .tb-source.is-updated,
+  .tb-weather.is-loading .tb-weather__icon {
     animation: none;
   }
 }

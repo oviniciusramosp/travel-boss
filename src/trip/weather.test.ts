@@ -1,6 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { WEATHER_ICONS } from '../ui/weather-icons';
-import { dayWeather, parseEnsemble, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
+import {
+  dayWeather,
+  packForecast,
+  parseEnsemble,
+  unpackForecast,
+  updatedLabel,
+  weatherIn,
+  weatherLook,
+  weatherTip,
+  WINDOWS,
+  type Weather,
+} from './weather';
 
 // 07:00–13:00 of one date; rain is stamped at the end of its hour.
 const time = ['07', '08', '09', '10', '11', '12', '13'].map((hour) => `2026-10-04T${hour}:00`);
@@ -101,5 +112,40 @@ describe('dayWeather', () => {
     const evening = { ...sky(70, 3, 95), min: 12, max: 16 };
     expect(dayWeather([morning, evening])).toEqual({ ...evening, min: 9, max: 16 });
     expect(dayWeather([])).toBeNull();
+  });
+});
+
+describe('packForecast / unpackForecast', () => {
+  it('keeps one decimal and comes back as the same ensemble', () => {
+    const packed = packForecast({ time: ['2026-10-04T07:00'], members: [{ temp: [10.26], rain: [0.04], cloud: [null] }] });
+    expect(unpackForecast(packed)).toEqual({ time: ['2026-10-04T07:00'], members: [{ temp: [10.3], rain: [0], cloud: [null] }] });
+  });
+  it('rejects what is not a whole ensemble', () => {
+    expect(unpackForecast(null)).toBeNull();
+    expect(unpackForecast('{')).toBeNull();
+    expect(unpackForecast(JSON.stringify({ time: ['a'], members: [] }))).toBeNull();
+    expect(unpackForecast(JSON.stringify({ time: ['a'], members: [{ temp: [1, 2], rain: [0], cloud: [0] }] }))).toBeNull();
+  });
+});
+
+describe('weatherTip', () => {
+  const weather: Weather = { min: 16.6, max: 21.2, rain: 26.4, mm: 0.3, cloud: 40, hours: 6 };
+  const label = { en: 'Partly cloudy', 'pt-BR': 'Parcialmente nublado' };
+  const now = new Date(2026, 8, 27, 15, 0);
+  const at = new Date(2026, 8, 27, 14, 32).getTime();
+  it('writes one fact per line, with the window and when the forecast is from', () => {
+    expect(weatherTip(weather, label, 'pt-BR', [11, 17], at, false, now)).toBe(
+      'Parcialmente nublado\n11h–17h · 17–21°\nChuva 26%\nAtualizado às 14:32 · Open-Meteo',
+    );
+  });
+  it('says when the refresh failed, and skips the window on the day', () => {
+    expect(weatherTip(weather, label, 'en', undefined, at, true, now)).toBe(
+      'Partly cloudy\n17–21°\nRain 26%\nUpdated 14:32 · could not refresh',
+    );
+    expect(weatherTip(weather, label, 'en', undefined, null, false, now)).toBe('Partly cloudy\n17–21°\nRain 26%\nOpen-Meteo (ECMWF + NOAA)');
+  });
+  it('dates an update from another day', () => {
+    expect(updatedLabel(new Date(2026, 8, 26, 9, 5).getTime(), 'pt-BR', now)).toBe('26/09 09:05');
+    expect(updatedLabel(at, 'pt-BR', now)).toBe('14:32');
   });
 });
