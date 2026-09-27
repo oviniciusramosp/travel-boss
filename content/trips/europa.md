@@ -38,6 +38,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu); não aceita reserva
 - 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
 - 10:00 [Louvre](place:par-louvre) — **4 horas**, com ingresso das 10h (€32): Vitória de Samotrácia, Galerie d'Apollon, Mona Lisa, Grande Galerie, salas Daru e Mollien, Vênus de Milo, Esfinge, Louvre medieval, apartamentos de Napoleão III (se abertos) e Oriente Próximo
+- +3 km — percurso dentro do museu, das salas Daru e Mollien ao Oriente Próximo (estimativa)
 - 14:05 [Monoprix Opéra (piquenique)](place:par-monoprix-rivoli) — Sanduíche, fruta e bebida (~€6–8)
 - 14:30 [Jardim das Tulherias](place:par-tuileries) — Piquenique
 - 15:20 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
@@ -102,6 +103,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 11:10 **Raiponce Tangled Spin** — Giro leve das lanternas, na Adventure Way, perto da entrada do Pixar: ~8 min de fila de manhã (~20 à tarde). Não vale Premier Access
 - 11:30 **Frozen Ever After** — Barco de ~5 min por Arendelle, na World of Frozen, a área nova de 2026; o caminho passa pela Adventure Way. É uma das maiores filas da Disney: ~75–80 min no fim da manhã, na média de 90 dias puxada pelo verão. Se o app mostrar mais de 80 min, vão pelo single rider (~40 min), que separa vocês em barcos diferentes. O Premier Access One (€16 por pessoa) esgota cedo: em 25/9, às 8h35, já tinha acabado
 - 12:35 **Arendelle** — Foto da vila e do castelo do outro lado do lago, na saída da World of Frozen
+- +1,5 km — filas do Spider-Man, do Ratatouille e do Frozen (estimativa)
 - 12:55 [Disneyland Park](place:par-disneyland) — Troca de parque: ~20 min a pé desde o Frozen, sem nova revista. Ingressos já pagos: €221 para os 3, ou €73,67 por pessoa (2 saíram a €55 com a promo de morador e 1 a €111). Dá para sair e voltar no mesmo dia, cada um com o próprio ingresso. **Halloween Festival** (26/9–1/11, incluso no ingresso): Main Street decorada, vitrais dos vilões na estação, Stitch de vampiro no coreto do Casey's Corner e vilões no pé do castelo
   - via: a pé pela Main Street até a estação · 20 min
 - 13:05 **Star Tours** — Simulador de Star Wars: ~15 min de fila de manhã, ~30 à tarde, ~20 à noite. Ao lado, Les Mystères du Nautilus, a pé, com ~5 min de fila
@@ -117,6 +119,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:30 **Casa de Coco** — **Jantar**: burrito €12 e churros €4,30, com água da torneira grátis. Peça pelo app
 - 19:30 **Peter Pan's Flight** — Voo suspenso sobre Londres, de capacidade baixa: ~55 min de fila à tarde e ~40 à noite. Depois do jantar é a hora
 - 20:15 **Casey's Corner** — Stitch vampiro no coreto e, no caminho, as abóboras do Mickey e as velas do Donald na Town Square: foto antes de pegar lugar para o show
+- +3 km — filas e idas e voltas entre as áreas do parque (estimativa)
 - Se sobrar tempo: Piratas e Phantom Manor de novo, com fila curta. Opcional: **Star Wars Hyperspace Mountain**, montanha-russa com looping, com 16–21 min de fila depois das 20h
 - 20:45 **Disney Tales of Magic** — **Lugar para os fogos** no eixo da Main Street com o castelo, junto ao quiosque técnico do Casey's Corner: o melhor ponto para foto e vídeo, e o mais rápido para sair. Ali costuma encher 30–45 min antes; chegando 1h15 antes, sobra margem. A Central Plaza, mais perto do castelo, pede 1h–1h30 (chegue às 20h30). Lanche para a espera: hot dog do Casey's Corner (€10,50, pelo app, até 21h30). O show começa às 22h (~20 min), com projeções, fogos e lasers; confirme o horário no app no dia
 - Outras opções baratas lá dentro: Toad Hall (fish & chips €12, até 17h), Au Chalet de la Marionnette (meio frango €12) e, no Adventure World, o [Stark Factory](place:par-daw-stark-factory) (pizza de €14 que dá para duas pessoas). O Colonel Hathi's está fechado até 15/10. Fora dos portões: [McDonald's Disney Village](place:par-mcdonalds-disney) (fila de mais de 30 min: peça nos totens) e Earl of Sandwich
@@ -157,8 +160,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 07:55 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Haussmann–Saint-Lazare, trem L até Versailles Rive Droite e caminhada até o castelo · 1h35
 - 09:30 [Château de Versailles](place:par-versailles) — Passport €35 com horário: palácio das 9h às 18h30, última entrada 17h45. Sexta é dia de Jardins Musicais (€15, incluso no Passport)
+- +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
 - 12:15 [Ore — Ducasse (Versalhes)](place:par-ore-ducasse) — Almoço no Pavillon Dufour, sem precisar de ingresso: prato ~€30 e o Louis XIV de chocolate (€14). Reserve
-- 13:30 Jardins Musicais, descendo até o Grand Canal
+- 13:30 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais (inclusos no Passport), descendo pelo Tapis Vert até a cabeceira do Grand Canal
 - 14:30 [Domaine de Trianon](place:par-trianon) — Grand Trianon, Petit Trianon e o Hameau da Rainha (12h–18h30). Saia às 16h: são 35 min a pé pelo parque até a estação Versailles-Château–Rive Gauche
   - via: RER C de Versailles-Château–Rive Gauche até Champ de Mars–Tour Eiffel · 1h05
 - 17:35 [Torre Eiffel](place:par-eiffel) — **Subida ao topo** com horário marcado: reserve o das 17h30 para ver o pôr do sol às 19h13 lá de cima (elevador até o topo €36,70; escada até o 2º e elevador até o topo €28). Conte ~2 h entre a revista, os elevadores e os dois andares
