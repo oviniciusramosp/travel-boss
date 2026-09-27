@@ -3,6 +3,7 @@
 ## Paris
 city: paris
 dates: 2026-10-04 → 2026-10-11
+budget: comida €50
 via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
