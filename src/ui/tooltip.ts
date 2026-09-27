@@ -39,6 +39,11 @@ export function tooltipShowDelay(msSinceHide: number | null): number {
   return TOOLTIP_SHOW_MS;
 }
 
+/** On screen or still waiting out the delay. Entering an owner changes nothing; leaving one ends its tip. */
+export function ownsTooltip<T>(host: T, current: T | null, pending: T | null): boolean {
+  return host === current || host === pending;
+}
+
 export function tooltipPlacement(
   target: { top: number; bottom: number; left: number; width: number },
   tip: { width: number; height: number },
@@ -69,11 +74,17 @@ export function mountTooltip(): void {
   document.body.append(tip);
 
   let current: HTMLElement | null = null;
+  let pending: HTMLElement | null = null;
   let hideAt: number | null = null;
   let showTimer = 0;
 
-  const hide = () => {
+  const cancel = () => {
     window.clearTimeout(showTimer);
+    pending = null;
+  };
+
+  const hide = () => {
+    cancel();
     if (!current && tip.hidden) return;
     if (!tip.hidden) hideAt = performance.now();
     current = null;
@@ -81,6 +92,8 @@ export function mountTooltip(): void {
   };
 
   const show = (target: HTMLElement) => {
+    // A target can vanish under a still pointer (Escape closes its dialog) without an out event.
+    if (!target.checkVisibility()) return;
     const explicit = target.getAttribute('data-tip');
     const text = explicit ?? target.textContent?.replace(/\s+/g, ' ').trim() ?? '';
     if (!text) return;
@@ -103,12 +116,16 @@ export function mountTooltip(): void {
   };
 
   const schedule = (target: HTMLElement) => {
-    if (target === current) return;
-    window.clearTimeout(showTimer);
+    if (ownsTooltip(target, current, pending)) return;
+    cancel();
     const since = hideAt == null ? null : performance.now() - hideAt;
     const delay = tooltipShowDelay(since);
-    if (delay === 0) show(target);
-    else showTimer = window.setTimeout(() => show(target), delay);
+    if (delay === 0) return show(target);
+    pending = target;
+    showTimer = window.setTimeout(() => {
+      pending = null;
+      show(target);
+    }, delay);
   };
 
   const hostOf = (event: Event): HTMLElement | null => {
@@ -132,11 +149,11 @@ export function mountTooltip(): void {
   });
   document.addEventListener('pointerout', (event) => {
     const host = hostOf(event);
-    if (host && host === current && leaves(event, host)) hide();
+    if (host && ownsTooltip(host, current, pending) && leaves(event, host)) hide();
   });
   document.addEventListener('focusout', (event) => {
     const host = hostOf(event);
-    if (host && host === current && leaves(event, host)) hide();
+    if (host && ownsTooltip(host, current, pending) && leaves(event, host)) hide();
   });
   document.addEventListener('scroll', () => hide(), true);
   document.addEventListener('pointerdown', () => hide(), true);
