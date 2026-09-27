@@ -76,6 +76,16 @@ Edite o `.md`. Com `npm run dev`, o save avisa o browser (`tb:trip`) e o roteiro
 
 Trecho de trem ou metrô entre dois lugares só aparece no mapa se `src/data/travel-itinerary-legs.ts` tiver uma perna para esse par (a lista da viagem é `tripEuropa2026`). Monte a perna com `ride(linha, estação, estação)` sobre as estações de `src/data/travel-transit-lines.ts`, que vêm do OSM. Mudou uma parada que tem `via:` de trem? Atualize a perna junto.
 
+## Quem edita onde
+
+O usuário vê o app pelo checkout principal (porta 5173). Um worktree (`.claude/worktrees/<nome>`) tem cópia própria de `content/trips` e `src/data`: uma edição feita lá não aparece no app do usuário até o merge, e o `PATCH` que o usuário salva pelo browser vai para o checkout principal, não para o worktree.
+
+- Tarefa de conteúdo (roteiro, catálogo) com o app aberto: edite no checkout principal. Se estiver num worktree, diga no resumo que a mudança ficou só no branch e como ela chega ao `main`.
+- Antes de tocar num dia do roteiro: `git worktree list` e `git log main..<branch>` de cada branch que mexeu naquele dia ou em `src/data/travel-visit.ts`. Rebase no branch que já mudou aquele dia.
+- Porta do Vite: `lsof -nP -iTCP:<porta> -sTCP:LISTEN` antes de subir. Num worktree, `npx vite --port <livre> --strictPort`.
+- Sem `origin`: merge é local. `git merge main` no branch, `tsc` + testes, depois `git -C <checkout-principal> merge --ff-only <branch>` com o `main` limpo.
+- `git stash` é compartilhado entre worktrees. Nunca `git stash` / `git stash pop` puros.
+
 ## Catálogo de lugares
 
 A fonte da verdade é `src/data/travel.ts` (`travelCities`), com `travel-visit.ts`, `travel-photos.ts` e `travel-subcategories.ts`. Não há CMS nem sincronização: o Notion era do portfólio e não é usado aqui. Lugar novo ou correção vai direto nesses arquivos.
@@ -84,6 +94,10 @@ Lugar grande (parque, palácio) pode ter `subPoints`: pontos internos em ordem d
 
 Vídeo de referência (reel do Instagram) entra em `videos` do lugar, sem a query de compartilhamento (`?stkn=`, `?igsh=`). O teste de `src/ui/video.test.ts` falha se sobrar query.
 
+Favorito: `favorite: true` no lugar desenha o coração na lista e no card e dá prioridade no ranking de hotéis. Só grava a pedido do usuário; o LLM nunca tira um `favorite` existente por conta própria.
+
+Sugestão de IA: todo lugar que o LLM acrescenta sem pedido direto pelo nome (busca na região, "achei perto do X", alternativa que ele mesmo propôs) leva `aiSuggested: true` e `aiReason` (en e pt-BR) dizendo o porquê. Lugar que o usuário pediu pelo nome não leva. Vale para qualquer lugar do catálogo, não só o guia da cidade.
+
 ## Guia da cidade (Mercado e Comidas)
 
 Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityGuide` (`src/data/travel-guide.ts`). Cidade sem guia mostra as abas vazias.
@@ -91,5 +105,5 @@ Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityG
 - Grupos e ordem: `marketShelves` (Mercado) e `foodMeals` (Comidas), no mesmo arquivo.
 - Item: `name` e `description` em en e pt-BR, `photo` do Commons (thumb `500px-…` em `upload.wikimedia.org`), `where` com 1 a 3 ids do catálogo da mesma cidade, o melhor primeiro.
 - Loja ou restaurante que ainda não existe entra antes em `travelCities` (foto em `travel-photos.ts`) e só depois no `where`. Assim vira pino, card e parada possível do roteiro.
-- Lugar que a IA adiciona leva `aiSuggested: true`. O card mostra as faíscas de IA com o motivo no tooltip, e o teste exige um motivo: algum item do guia aponta para ele, ou o lugar traz `aiReason` (en e pt-BR), como os achados perto de outro lugar.
+- Lugar que a IA adiciona segue a regra de sugestão de IA em "Catálogo de lugares" (`aiSuggested` + `aiReason`). O card mostra as faíscas de IA com o motivo no tooltip, e o teste exige um motivo: algum item do guia aponta para ele, ou o lugar traz `aiReason`, como os achados perto de outro lugar.
 - `src/data/travel-guide.test.ts` falha com id desconhecido, texto vazio ou foto fora do padrão.
