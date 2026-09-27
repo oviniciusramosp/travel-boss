@@ -1,4 +1,14 @@
 :root {
+  --indoor-width: 1240px;
+  --indoor-sidebar: 288px;
+  --indoor-height: 550px;
+  --indoor-map-height: 350px;
+  --indoor-chrome: 100px;
+  --color-map-paper: #ffffff;
+  --color-map-ink: #0a0a0a;
+  --indoor-focus: 2px solid var(--color-ink);
+  --indoor-focus-offset: 2px;
+  --indoor-border: 1px;
   --color-canvas: #f5f5f5;
   --color-paper: #ffffff;
   --color-surface-alt: #fafafa;

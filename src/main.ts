@@ -12,6 +12,7 @@ import './styles/places.css';
 import './styles/trip.css';
 import './styles/hotels.css';
 import './styles/ui.css';
+import './styles/indoor.css';
 import { mountShell } from './app/shell';
 import { bootTheme } from './app/theme';
 import {

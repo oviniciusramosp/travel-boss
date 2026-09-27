@@ -118,3 +118,5 @@ Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityG
 - Loja ou restaurante que ainda não existe entra antes em `travelCities` (foto em `travel-photos.ts`) e só depois no `where`. Assim vira pino, card e parada possível do roteiro.
 - Lugar que a IA adiciona segue a regra de sugestão de IA em "Catálogo de lugares" (`aiSuggested` + `aiReason`). O card mostra as faíscas de IA com o motivo no tooltip, e o teste exige um motivo: algum item do guia aponta para ele, ou o lugar traz `aiReason`, como os achados perto de outro lugar.
 - `src/data/travel-guide.test.ts` falha com id desconhecido, texto vazio ou foto fora do padrão.
+
+Mapa interno: `louvreMapButton` abre `openDialog` com plantas oficiais, níveis e sequência numerada. Coordenadas e roteiro vêm do catálogo; não desenhar caminhos por corredores sem validação. Selecionar uma etapa troca o andar; zoom e arraste ficam dentro da modal.

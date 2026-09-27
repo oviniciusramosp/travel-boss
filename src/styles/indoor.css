@@ -1,0 +1,22 @@
+.tb-indoor { width: min(var(--indoor-width), calc(100vw - 2 * var(--spacing-16))); }
+.tb-indoor__body { max-height: calc(100dvh - var(--indoor-chrome)); padding: var(--spacing-16); }
+.tb-indoor__intro { margin: 0 0 var(--spacing-16); font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-ink-soft); }
+.tb-indoor__layout { display: grid; grid-template-columns: var(--indoor-sidebar) minmax(0, 1fr); gap: var(--spacing-16); margin-bottom: var(--spacing-16); }
+.tb-indoor__steps { display: flex; flex-direction: column; gap: var(--spacing-4); max-height: var(--indoor-height); overflow: auto; }
+.tb-indoor__step { display: flex; flex-direction: column; gap: var(--spacing-4); text-align: left; border: 0; background: transparent; color: var(--color-ink); border-radius: var(--r-row); padding: var(--spacing-12); cursor: pointer; font: inherit; }
+.tb-indoor__step strong { font-size: var(--text-body); font-weight: 500; }
+.tb-indoor__step span { font-size: var(--text-caption); color: var(--color-ink-soft); }
+.tb-indoor__step:hover { background: var(--color-hover); }
+.tb-indoor__step[aria-current="step"], .tb-indoor__toolbar [aria-pressed="true"] { background: var(--color-press); }
+.tb-indoor__step:focus-visible { outline: var(--indoor-focus); outline-offset: var(--indoor-focus-offset); }
+.tb-indoor__canvas { min-width: 0; }
+.tb-indoor__toolbar { display: flex; flex-wrap: wrap; gap: var(--spacing-8); align-items: center; margin-bottom: var(--spacing-8); }
+.tb-indoor__map { height: var(--indoor-map-height); background: var(--color-map-paper); border-radius: var(--r-row); }
+.tb-indoor__pin { display: grid; place-items: center; background: var(--color-map-paper); color: var(--color-map-ink); border-radius: var(--r-pill); border: var(--indoor-border) solid var(--color-map-ink); font: 600 var(--text-body) var(--font-geist); }
+.tb-indoor__pin.is-active { background: var(--color-map-ink); color: var(--color-map-paper); outline: var(--indoor-border) solid var(--color-map-paper); outline-offset: var(--indoor-focus-offset); }
+.tb-indoor__pin:hover { filter: brightness(1.4); }
+.tb-indoor__detail { padding-top: var(--spacing-12); }
+.tb-indoor__detail h3 { margin: 0 0 var(--spacing-8); font-size: var(--text-h3); }
+.tb-indoor__detail p { margin: 0 0 var(--spacing-12); font-size: var(--text-body); line-height: var(--leading-body); }
+.tb-indoor__sources { display: flex; gap: var(--spacing-16); flex-wrap: wrap; font-size: var(--text-caption); }
+.tb-indoor__sources a { color: var(--color-ink-soft); }

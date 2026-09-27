@@ -20,6 +20,7 @@ import { icon, ICONS, type IconName } from '../ui/icons';
 import { priceLevel, priceLevelOf } from '../ui/price';
 import { starRating } from '../ui/rating';
 import { videoButton } from '../ui/video';
+import { louvreMapButton } from '../ui/louvre-map';
 import { openNowStatus, timeZoneForCity } from './open-now';
 import { inlineNodes } from '../trip/inline';
 import { createRouteButton, routePlannerOn } from './route-planner';
@@ -381,6 +382,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     if (place.description) {
       body.append(el('p', 'tb-panel__desc', pickLocale(locale, place.description)));
     }
+    if (place.id === 'par-louvre') body.append(louvreMapButton(locale));
     // Right under the description, so a long card does not push the video below the fold.
     const videos = place.videos ?? [];
     if (videos.length) {
