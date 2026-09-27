@@ -1,7 +1,7 @@
-# Graph Report - montparnasse-tour-update-4f8aec  (2026-09-27)
+# Graph Report - roteiro-04-outubro-d264b0  (2026-09-27)
 
 ## Corpus Check
-- 211 files · ~344,312 words
+- 212 files · ~344,389 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c3b2fac9`
+- Built from commit: `f5594029`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -108,8 +108,8 @@
   vite.config.ts → src/trip/api.ts
 
 ## Import Cycles
-- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
+- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
 ## Communities (69 total, 2 thin omitted)
@@ -180,7 +180,7 @@ Nodes (28): hopName(), ItineraryTransitHop, ride(), WALK_CONNECTOR_MIN_M, getTra
 
 ### Community 16 - "route-planner.ts"
 Cohesion: 0.08
-Nodes (55): apply(), barActive(), beginLocate(), CITY_FAR_KM, createRouteButton(), drawRoutePreview(), formatRouteDistance(), formatRouteDuration() (+47 more)
+Nodes (56): apply(), barActive(), beginLocate(), CITY_FAR_KM, createRouteButton(), drawRoutePreview(), formatRouteDistance(), formatRouteDuration() (+48 more)
 
 ### Community 17 - "compilerOptions"
 Cohesion: 0.10
@@ -191,8 +191,8 @@ Cohesion: 0.22
 Nodes (18): capitalized(), formatDayTitle(), formatMonthYear(), formatSpan(), isoParts, monthName(), MONTHS, nightsBetween() (+10 more)
 
 ### Community 19 - "pickLocale"
-Cohesion: 0.09
-Nodes (55): legsForDay(), pickLocale(), travelUi, amenityName(), buildItineraryRoute(), buildItineraryRoutePreview(), buildItineraryRouteSync(), categoryGlyph() (+47 more)
+Cohesion: 0.10
+Nodes (53): legsForDay(), pickLocale(), amenityName(), buildItineraryRoute(), buildItineraryRoutePreview(), buildItineraryRouteSync(), categoryGlyph(), emptyCopy() (+45 more)
 
 ### Community 20 - "pin-visual.ts"
 Cohesion: 0.20
@@ -347,8 +347,8 @@ Cohesion: 0.20
 Nodes (15): iconButton(), IconButtonSize, IconButtonVariant, iconLink(), onSegmentKey(), segmentButtons(), segmented(), segmentedMove() (+7 more)
 
 ### Community 60 - "rating.ts"
-Cohesion: 0.53
-Nodes (7): clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
+Cohesion: 0.44
+Nodes (8): travelUi, clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
 
 ### Community 61 - "main.ts"
 Cohesion: 0.05
@@ -383,9 +383,9 @@ Nodes (7): asMsg(), asResult(), finite(), interpretSearchBody(), isRecord(), nor
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `places.ts`, `stay-heatmap.ts`, `route-planner.ts`, `summary.ts`, `travel.ts`, `amenities.ts`, `mount.ts`, `note-edit.ts`, `hotel-rank.ts`, `transfer-row.ts`, `mountHotels`, `parse.ts`, `weather.ts`, `el`, `ui/controls.ts`, `rating.ts`, `main.ts`, `index.ts`?**
-  _High betweenness centrality (0.066) - this node is a cross-community bridge._
+  _High betweenness centrality (0.065) - this node is a cross-community bridge._
 - **Why does `getTravelCity()` connect `paint` to `index.ts`, `travel-itineraries.ts`, `hotels.ts`, `places.ts`, `mountHotels`, `legs.ts`, `parse.ts`, `calendar.ts`, `pickLocale`, `travel.ts`, `main.ts`, `mount.ts`, `hotel-ranking-context.ts`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
 - **Why does `el()` connect `el` to `paint`, `hotels.ts`, `note-edit.ts`, `place-panel.ts`, `places.ts`, `stay-heatmap.ts`, `mountHotels`, `transfer-row.ts`, `route-planner.ts`, `pickLocale`, `ui/controls.ts`, `rating.ts`, `main.ts`, `mount.ts`?**
   _High betweenness centrality (0.022) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `type` to the rest of the system?**
