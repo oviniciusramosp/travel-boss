@@ -3424,6 +3424,20 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Obélisque de Louxor Place de la Concorde Paris',
       },
       {
+        id: 'par-passage-panoramas',
+        name: { en: 'Passage des Panoramas', 'pt-BR': 'Passage des Panoramas' },
+        category: 'tourist',
+        description: {
+          en: 'Historic covered passage with a glass roof, old shopfronts, stamp dealers and restaurants between Boulevard Montmartre and Rue Saint-Marc.',
+          'pt-BR': 'Passagem histórica coberta por uma vidraça, com fachadas antigas, lojas de selos e restaurantes entre o Boulevard Montmartre e a Rue Saint-Marc.',
+        },
+        googleRating: 4.4,
+        lat: 48.8715109,
+        lng: 2.341904,
+        address: '11 Boulevard Montmartre, 75002 Paris',
+        mapsQuery: 'Passage des Panoramas Paris',
+      },
+      {
         id: 'par-bouillon',
         name: { en: 'Bouillon Chartier', 'pt-BR': 'Bouillon Chartier' },
         category: 'restaurants',

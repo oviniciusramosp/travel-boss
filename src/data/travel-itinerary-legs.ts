@@ -1137,7 +1137,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
     ride(rerA, 'auber', 'etoile'),
   ]),
-  trainLeg('par-bouillon', 'par-casa-do-gui', 35, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
+  trainLeg('par-passage-panoramas', 'par-casa-do-gui', 50, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
   trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
     ride(rerE, 'noisy-le-sec', 'magenta'),

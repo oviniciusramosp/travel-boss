@@ -61,9 +61,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 17:30 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
 - 18:00 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; 1h15 para escolher e experimentar, até as 19h15; fecha às 20h
 - 19:25 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
-- 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico (~€15–28), sem reserva: fila na porta. Sair às 21h para voltar com margem
-  - via: RER E de Haussmann–Saint-Lazare · 35 min
-- 21:35 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
+- 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico no salão (~€15–28), sem reserva: 1h20 para fila e refeição; sair até 21h20
+- 21:25 [Passage des Panoramas](place:par-passage-panoramas) — Passear pela galeria coberta e fotografar; sair até 21h40 para chegar a Haussmann–Saint-Lazare por volta das 22h, antes das obras noturnas do RER E
+  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min
+- 22:30 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
 
 ### Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre
 

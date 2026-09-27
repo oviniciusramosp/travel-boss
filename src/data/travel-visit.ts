@@ -451,6 +451,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-carrousel': { ticket: free, durationMin: 3, durationMax: 5 },
   'par-maillol': { ticket: free, durationMin: 2, durationMax: 5 },
+  // Paris Région: passage open daily 6:00–00:00; checked 2026-09-27.
+  'par-passage-panoramas': {
+    ticket: free,
+    durationMin: 15,
+    durationMax: 20,
+    bestDay: L('Daily, 6:00–midnight', 'Todos os dias, 6h–meia-noite'),
+    tips: L('Shops and restaurants have their own opening hours.', 'Lojas e restaurantes têm horários próprios.'),
+  },
   'par-tuileries': parkVisit({
     durationMin: 40,
     durationMax: 100,

@@ -35,6 +35,14 @@ function photo(
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   'par-carrousel': [photo('https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Arc_de_triomphe_du_carrousel_in_Paris_France.jpg/500px-Arc_de_triomphe_du_carrousel_in_Paris_France.jpg', 'Arc de Triomphe du Carrousel', 'Arco do Triunfo do Carrousel', 'Wikimedia Commons')],
   'par-maillol': [photo('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/L%27Air_by_Aristide_Maillol%2C_Tuileries_garden%2C_Paris_11_August_2015.jpg/500px-L%27Air_by_Aristide_Maillol%2C_Tuileries_garden%2C_Paris_11_August_2015.jpg', 'Maillol statues', 'Estátuas de Maillol', 'Wikimedia Commons')],
+  'par-passage-panoramas': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Passage_des_Panoramas%2C_Paris.jpg/500px-Passage_des_Panoramas%2C_Paris.jpg',
+      'Passage des Panoramas glass roof and shopfronts',
+      'Vidraça e fachadas do Passage des Panoramas',
+      'Thomas Doussau · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
   'par-bouillon': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/%C5%92uf_mayonnaise.jpg/500px-%C5%92uf_mayonnaise.jpg',
