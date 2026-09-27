@@ -77,6 +77,45 @@ export function periodSections(
   return sections;
 }
 
+/**
+ * Clock window of each period from its own stops, not the fixed `fallback`: it runs from
+ * the first timed stop of the period (morning never before 6) to the first timed stop of
+ * the next period that has one. The last period with any time instead ends an hour past
+ * its last stop, capped at 24; a stop before 05:00 there is still last night (see
+ * `periodAt`), so it counts as 24 + hour first. A period with no timed stop keeps
+ * `fallback`'s window; one under an hour wide grows to exactly one.
+ */
+export function periodWindows(
+  times: readonly (string | undefined)[],
+  periods: readonly (Period | null)[],
+  fallback: Record<Period, [number, number]>,
+): Record<Period, [number, number]> {
+  const hourOf = (time: string) => Number(time.slice(0, 2));
+  const nightHour = (hour: number) => (hour < 5 ? hour + 24 : hour);
+  const hoursOf = (period: Period): number[] =>
+    periods.flatMap((own, index) => {
+      const time = times[index];
+      return own === period && time ? [hourOf(time)] : [];
+    });
+
+  const windowOf = (period: Period): [number, number] => {
+    const hours = hoursOf(period);
+    if (!hours.length) return fallback[period];
+    let from = period === 'morning' ? Math.max(6, hours[0]) : hours[0];
+    const next = PERIODS.slice(PERIODS.indexOf(period) + 1)
+      .map(hoursOf)
+      .find((later) => later.length);
+    let to = next ? next[0] : Math.min(24, nightHour(hours[hours.length - 1]) + 1);
+    if (to - from < 1) {
+      to = Math.min(24, from + 1);
+      if (to - from < 1) from = to - 1;
+    }
+    return [from, to];
+  };
+
+  return { morning: windowOf('morning'), afternoon: windowOf('afternoon'), evening: windowOf('evening') };
+}
+
 export type Rail = { mode: 'walk' | 'transit'; color: string };
 
 /**
