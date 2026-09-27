@@ -407,21 +407,6 @@ async function expandLeg(
   return { segments: segs, transfers: [] };
 }
 
-/**
- * Instant geometry: transit spines + straight-line walks. No network.
- * Used for the first paint so “show on map” feels immediate.
- */
-export function buildItineraryRoutePreview(
-  stopIds: string[],
-  legs: ItineraryLegDef[],
-  places: Map<string, PlaceCoord>,
-): BuiltItineraryRoute {
-  // walkMode straight is sync in practice (no await to network), but expandLeg is async —
-  // use a blocking path via the same expand with a flag by running microtasks is wrong.
-  // Expand synchronously with a pure sync implementation instead.
-  return buildItineraryRouteSync(stopIds, legs, places);
-}
-
 function buildItineraryRouteSync(
   stopIds: string[],
   legs: ItineraryLegDef[],
