@@ -552,7 +552,13 @@ export function mountTrip(
       // A place with sub-points is walked in the order of the day's timed notes (a revisit counts
       // again), else the catalog order: entered at the first point, left from the last.
       const catalog = place.subPoints ?? [];
-      const rowAt = rows.indexOf(row);
+      // `datePlaces` built its own rows: find this stop by city, day and index, not by identity.
+      const rowAt = rows.findIndex(
+        (candidate) =>
+          candidate.dated.city.slug === row.dated.city.slug &&
+          candidate.dated.dayIndex === row.dated.dayIndex &&
+          candidate.stopIndex === row.stopIndex,
+      );
       const order = catalog.length ? walkOrder(catalog.length, rowAt >= 0 ? notesUnderStop(rows, rowAt, place).attached : []) : [];
       const subs = order.map((index) => catalog[index]!);
       const first = subs[0];
@@ -678,9 +684,9 @@ export function mountTrip(
     for (const hop of hops) {
       const plan = planHop(hop);
       if (plan.kind !== 'walk') continue;
-      if (rememberedWalk(hop.from, hop.to)) continue;
+      if (rememberedWalk(hop.from, hop.to, plan.through)) continue;
       const cached = peekWalkingRoute(walkPoints(hop.from, hop.to, plan.through));
-      if (cached && cached.latlngs.length >= 2) rememberWalk(hop.from, hop.to, cached.latlngs);
+      if (cached && cached.latlngs.length >= 2) rememberWalk(hop.from, hop.to, cached.latlngs, plan.through);
     }
     const color = neutralColor();
     const preview = hops.map((hop) => previewHop(hop, color));
@@ -713,11 +719,11 @@ export function mountTrip(
       neutralColor,
       ...(onUpdate ? { onUpdate } : {}),
       walk: async (from, to, through) => {
-        const cached = rememberedWalk(from, to);
+        const cached = rememberedWalk(from, to, through);
         if (cached) return cached;
         const route = await fetchWalkingRoute(walkPoints(from, to, through), signal);
         if (!route || route.latlngs.length < 2) return null;
-        rememberWalk(from, to, route.latlngs);
+        rememberWalk(from, to, route.latlngs, through);
         return route.latlngs;
       },
       drive: async (from, to) => {

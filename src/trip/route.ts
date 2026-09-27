@@ -122,7 +122,7 @@ export function previewHop(hop: RouteHop, _neutralColor: string): MapRouteSegmen
   if (plan.kind === 'none') return [];
   if (plan.kind === 'path') return [{ mode: 'walk', latlngs: plan.path, ...endpoints(hop) }];
   if (plan.kind === 'walk') {
-    const cached = rememberedWalk(hop.from, hop.to);
+    const cached = rememberedWalk(hop.from, hop.to, plan.through);
     return cached ? [{ mode: 'walk', latlngs: cached, ...endpoints(hop) }] : null;
   }
   return null;

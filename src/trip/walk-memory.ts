@@ -8,15 +8,26 @@ export type WalkPoint = { lat: number; lng: number };
 
 const memory = new Map<string, [number, number][]>();
 
-export function walkMemoryKey(from: WalkPoint, to: WalkPoint): string {
-  return `${from.lat.toFixed(5)},${from.lng.toFixed(5)};${to.lat.toFixed(5)},${to.lng.toFixed(5)}`;
+/** The ends and every point the walk must pass: a park walked in another order is another walk. */
+export function walkMemoryKey(from: WalkPoint, to: WalkPoint, through: readonly (readonly [number, number])[] = []): string {
+  const point = (lat: number, lng: number) => `${lat.toFixed(5)},${lng.toFixed(5)}`;
+  return [point(from.lat, from.lng), ...through.map(([lat, lng]) => point(lat, lng)), point(to.lat, to.lng)].join(';');
 }
 
-export function rememberedWalk(from: WalkPoint, to: WalkPoint): [number, number][] | undefined {
-  return memory.get(walkMemoryKey(from, to));
+export function rememberedWalk(
+  from: WalkPoint,
+  to: WalkPoint,
+  through: readonly (readonly [number, number])[] = [],
+): [number, number][] | undefined {
+  return memory.get(walkMemoryKey(from, to, through));
 }
 
-export function rememberWalk(from: WalkPoint, to: WalkPoint, path: [number, number][]): void {
+export function rememberWalk(
+  from: WalkPoint,
+  to: WalkPoint,
+  path: [number, number][],
+  through: readonly (readonly [number, number])[] = [],
+): void {
   if (path.length < 2) return;
-  memory.set(walkMemoryKey(from, to), path);
+  memory.set(walkMemoryKey(from, to, through), path);
 }
