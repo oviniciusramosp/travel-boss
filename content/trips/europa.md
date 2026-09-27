@@ -35,27 +35,27 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 - 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída. A **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e RER A de Auber até Charles de Gaulle–Étoile · 55 min · €32,40
-- 09:05 [Café Latéral](place:par-cafe-lateral) — **Café da manhã**: um café allongé (€3,90) e um croissant (€3,20) por pessoa; sair às 9h45
-- 09:55 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
-- 10:20 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
-- 10:20 **Cartier** — Por fora
-- 10:25 **Louis Vuitton** — Por fora
-- 10:30 **Nike** — Por fora
-- 10:35 **Sephora** — Por fora
-- 11:05 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
-- 11:20 [Ponte Alexandre III](place:par-alexandre-iii) — Atravessar até o fim da ponte e voltar pelo mesmo caminho, sem seguir até os Invalides
+- 09:05 [Café Latéral](place:par-cafe-lateral) — **Café da manhã para levar**: um café allongé (€3,90) e um croissant (€3,20) por pessoa; pedir e retirar até 9h20, comendo no caminho
+- 09:30 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
+- 09:55 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
+- 09:55 **Cartier** — Por fora
+- 10:00 **Louis Vuitton** — Por fora
+- 10:05 **Nike** — Por fora
+- 10:10 **Sephora** — Por fora
+- 10:40 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
+- 10:55 [Ponte Alexandre III](place:par-alexandre-iii) — Atravessar até o fim da ponte e voltar pelo mesmo caminho, sem seguir até os Invalides
   - via: a pé até a Concorde · 15 min — Voltar pelo Petit e Grand Palais
-- 11:50 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
-- 12:00 [Jardim das Tulherias](place:par-tuileries)
-- 12:00 **Jeu de Paume** — Por fora
-- 12:05 **Museu da Orangerie** — Por fora
-- 12:10 **Grand Bassin Octogonal**
-- 12:15 **Grande Allée**
-- 12:20 **Grand Bassin Rond**
-- 12:30 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida (~€6–8); piquenique nas Tulherias antes do Louvre
-- 13:00 [Estátuas de Maillol](place:par-maillol)
-- 13:05 [Arco do Triunfo do Carrousel](place:par-carrousel) — Seguir para a entrada do Louvre
-- 13:30 [Louvre](place:par-louvre) — **3h30 de visita, até as 17h**; ingresso a reservar para as 13h30
+- 11:25 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
+- 11:35 [Jardim das Tulherias](place:par-tuileries)
+- 11:35 **Jeu de Paume** — Por fora
+- 11:40 **Museu da Orangerie** — Por fora
+- 11:45 **Grand Bassin Octogonal**
+- 11:50 **Grande Allée**
+- 11:55 **Grand Bassin Rond**
+- 12:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida (~€6–8); reservar 40 min para compra, caminhada e piquenique nas Tulherias
+- 12:45 [Estátuas de Maillol](place:par-maillol)
+- 12:50 [Arco do Triunfo do Carrousel](place:par-carrousel) — Seguir para a entrada do Louvre, chegando por volta das 13h
+- 13:30 [Louvre](place:par-louvre) — Chegar à entrada às **13h**, com 30 min de margem; **3h30 de visita, até as 17h**. Ingresso a reservar para as 13h30
   - via: a pé até o Lafayette Gourmet · 30 min
 - +3 km — percurso dentro do museu (estimativa)
 - 17:30 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
