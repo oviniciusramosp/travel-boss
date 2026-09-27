@@ -14,7 +14,7 @@ import { buildItineraryRoute } from '../map/itinerary-route';
 import type { MapHandle, MapPin } from '../map/types';
 import { fetchDrivingRoute, fetchWalkingRoute, peekWalkingRoute } from '../map/walk-route';
 import { setDocumentTitle } from '../app/router';
-import { readPeriods, writePeriods } from '../app/store';
+import { readPeriods, readSubStops, writePeriods, writeSubStops } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
 import { googleDirectionsUrl } from './directions';
@@ -58,6 +58,7 @@ import {
 import { shouldRefit, stopKey, type FocusMark } from './view-state';
 import { rememberWalk, rememberedWalk } from './walk-memory';
 import { formatWalk, walkedMeters } from './walk-distance';
+import { attachSubPointNotes, stripNoteTitle, type SubPointNote } from './subpoints';
 import type { RouteDeps } from './route';
 import type { MapRouteSegment } from '../map/types';
 import { chipTone, circleInk } from '../ui/contrast';
@@ -447,6 +448,8 @@ export function mountTrip(
   const routeHidden = new Set<string>();
   /** Folded and switched periods, `date:period`. Only what the user touched; saved per trip. */
   const periodPrefs = readPeriods(id);
+  /** Stops whose sub-points are listed on the timeline, by stop key. Saved per trip. */
+  const subStops = readSubStops(id);
 
   /** Rows of a date, their periods, and the periods already over on the city's clock. */
   function datePlan(days: readonly DatedDay[], date: string) {
@@ -1585,6 +1588,29 @@ export function mountTrip(
         pendingHop?.();
         pendingHop = null;
       };
+      // A park's rides: the timed notes right under a stop that name its sub-points hang on
+      // those points (timeline list and place card), not on the timeline as paragraphs.
+      const subNotesByRow = new Map<number, SubPointNote[]>();
+      const attachedRows = new Set<number>();
+      rows.forEach((entry, rowIndex) => {
+        const stop = entry.dated.day.stops[entry.stopIndex];
+        if (!stop || stop.listNote || !stop.placeId) return;
+        const place = placeById(entry.dated.city.slug, stop.placeId);
+        if (!place?.subPoints?.length) return;
+        const following: { index: number; label: string; time?: string; line: number }[] = [];
+        for (let next = rowIndex + 1; next < rows.length; next += 1) {
+          const candidate = rows[next]!.dated.day.stops[rows[next]!.stopIndex];
+          if (!candidate?.listNote) break;
+          following.push({ index: next, label: candidate.label, line: candidate.line, ...(candidate.time ? { time: candidate.time } : {}) });
+        }
+        const { attached } = attachSubPointNotes(following, place.subPoints);
+        if (!attached.length) return;
+        subNotesByRow.set(
+          rowIndex,
+          attached.map(({ note, sub }) => ({ sub, text: stripNoteTitle(note.label), line: note.line, ...(note.time ? { time: note.time } : {}) })),
+        );
+        for (const { note } of attached) attachedRows.add(note.index);
+      });
       rows.forEach((entry, rowIndex) => {
         const city = entry.dated.city;
         const day = entry.dated.day;
@@ -1609,6 +1635,8 @@ export function mountTrip(
           });
         };
         if (stop.listNote) {
+          // Attached to a sub-point above: the point's row and the place card show it.
+          if (attachedRows.has(rowIndex)) return;
           const noteItem = document.createElement('li');
           noteItem.className = 'tb-list-note';
           noteItem.dataset.stop = '';
@@ -1653,6 +1681,13 @@ export function mountTrip(
         previousEnd = point ? { ...point, ...(entry.depart ? { leg: entry.depart } : {}) } : null;
         const authored = [stop.label, stop.note].filter(Boolean).join(' — ');
         const placeId = stop.placeId;
+        const subNotes = subNotesByRow.get(rowIndex) ?? [];
+        const cardLinks = (focusSub?: number) => ({
+          ...(href ? { maps: href } : {}),
+          ...(directions ? { route: directions } : {}),
+          ...(subNotes.length ? { subNotes } : {}),
+          ...(focusSub != null ? { focusSub } : {}),
+        });
         const item = row({
           time: stop.time,
           lead: place ? stopPin(place) : undefined,
@@ -1674,10 +1709,7 @@ export function mountTrip(
                   clearStopCurrent();
                   item.setAttribute('aria-current', 'true');
                   const origin = item.querySelector<HTMLElement>('.tb-row__main');
-                  openPlace(place, record, locale, origin, {
-                    ...(href ? { maps: href } : {}),
-                    ...(directions ? { route: directions } : {}),
-                  });
+                  openPlace(place, record, locale, origin, cardLinks());
                 }
               : undefined,
         });
@@ -1702,8 +1734,50 @@ export function mountTrip(
           item.append(stopCostEl({ id: place.id, food: sum('food'), ticket: sum('ticket') }, locale));
         }
         if (place?.subPoints?.length && !missingPlace) {
-          const inside = el('span', 'tb-row__subpoints', place.subPoints.map((sub) => pickLocale(locale, sub.name)).join(' → '));
-          item.append(inside);
+          // The points in one line, and a toggle that lists them as small dots in the parent's color.
+          const subs = place.subPoints;
+          const shown = subStops[key] === true;
+          const toggle = el('button', 'tb-row__subpoints');
+          toggle.type = 'button';
+          toggle.setAttribute('aria-expanded', String(shown));
+          toggle.setAttribute(
+            'data-tip',
+            pickLocale(locale, { en: 'Points along the walk, on the timeline', 'pt-BR': 'Pontos do caminho na timeline' }),
+          );
+          toggle.append(
+            el('span', 'tb-row__subpoints-text', subs.map((sub) => pickLocale(locale, sub.name)).join(' → ')),
+            icon('expand_more', { size: 16 }),
+          );
+          const points = el('ol', 'tb-substops');
+          points.hidden = !shown;
+          const color = placeCategoryMeta[place.category].color;
+          subs.forEach((sub, index) => {
+            const note = subNotes.find((candidate) => candidate.sub === index);
+            const point = el('li', 'tb-substop');
+            const dot = el('span', 'tb-substop__dot');
+            dot.style.setProperty('--subpoint-color', color);
+            const name = el('button', 'tb-substop__name', pickLocale(locale, sub.name));
+            name.type = 'button';
+            if (record) {
+              // Opens the place card on this point: its photo and what the trip says about it.
+              name.addEventListener('click', () => {
+                releaseLeg();
+                clearStopCurrent();
+                item.setAttribute('aria-current', 'true');
+                openPlace(place, record, locale, name, cardLinks(index));
+              });
+            }
+            point.append(el('span', 'tb-substop__time', note?.time ?? ''), dot, name);
+            points.append(point);
+          });
+          toggle.addEventListener('click', () => {
+            const open = points.hidden;
+            points.hidden = !open;
+            toggle.setAttribute('aria-expanded', String(open));
+            subStops[key] = open;
+            writeSubStops(id, subStops);
+          });
+          item.append(toggle, points);
         }
         item.querySelector('.tb-row__actions')?.append(comments(item, stop, city.slug));
         markChanged(item);

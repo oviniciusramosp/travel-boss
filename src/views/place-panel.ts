@@ -21,6 +21,7 @@ import { priceLevel, priceLevelOf } from '../ui/price';
 import { starRating } from '../ui/rating';
 import { videoButton } from '../ui/video';
 import { openNowStatus, timeZoneForCity } from './open-now';
+import { inlineNodes } from '../trip/inline';
 import { createRouteButton, routePlannerOn } from './route-planner';
 
 export function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
@@ -44,10 +45,14 @@ function ticketLink(href: string, locale: Locale): HTMLAnchorElement {
 
 type CloseOptions = { focus?: boolean };
 
-/** Links shown on the place card. The trip timeline passes both. */
+/** What the trip timeline hands the card: its links, the trip's notes on the sub-points, and one point to open. */
 export type PlaceLinks = {
   maps?: string;
   route?: string;
+  /** The trip's timed notes that name a sub-point (`sub` is its index), shown inside that point. */
+  subNotes?: readonly { sub: number; time?: string; text: string }[];
+  /** Open this sub-point's fold at once (a click on it in the timeline). */
+  focusSub?: number;
 };
 
 type Panel = {
@@ -393,7 +398,8 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         fold.name = 'tb-subpoints';
         const head = el('summary');
         head.append(el('span', undefined, pickLocale(locale, sub.name)));
-        if (sub.photo) head.append(icon('expand_more', { size: 16 }));
+        const notes = (current?.links?.subNotes ?? []).filter((note) => note.sub === index);
+        if (sub.photo || notes.length) head.append(icon('expand_more', { size: 16 }));
         fold.append(head);
         if (sub.photo) {
           const img = el('img', 'tb-panel__subpoint-photo');
@@ -402,6 +408,14 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
           img.loading = 'lazy';
           fold.append(img);
         }
+        // What the trip says about this point: its time and the note, with its marks.
+        for (const note of notes) {
+          const text = el('p', 'tb-panel__subpoint-note');
+          if (note.time) text.append(el('span', 'tb-panel__subpoint-time', note.time));
+          text.append(...inlineNodes(note.text));
+          fold.append(text);
+        }
+        if (current?.links?.focusSub === index) fold.open = true;
         fold.addEventListener('toggle', () => {
           if (fold.open) map.selectSubPoint(index);
           else if (!steps.querySelector('details[open]')) map.selectSubPoint(null);

@@ -1230,10 +1230,109 @@
 }
 
 /* Sub-points of a place (e.g. inside a park), in walking order, under the note. */
+/* The points in one line. It is a toggle: pressed, the points list under it as dots. */
 .tb-list.tb-timeline > .tb-row > .tb-row__subpoints {
+  display: inline-flex;
   grid-column: 2;
   grid-row: 4;
+  align-items: center;
+  gap: var(--spacing-4);
+  justify-self: start;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-min);
+  background: none;
   color: var(--color-mid-gray);
+  font: inherit;
   font-size: var(--text-caption);
   line-height: var(--leading-caption);
+  text-align: left;
+  cursor: pointer;
+}
+
+.tb-row__subpoints-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tb-row__subpoints > .material-symbols-rounded {
+  flex: none;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.tb-row__subpoints[aria-expanded='true'] > .material-symbols-rounded {
+  transform: rotate(180deg);
+}
+
+.tb-row__subpoints:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* The points as the map draws them: small dots in the parent's color, with the trip's time when it has one. */
+.tb-list.tb-timeline > .tb-row > .tb-substops {
+  display: grid;
+  grid-column: 2;
+  grid-row: 5;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--spacing-8);
+  row-gap: var(--tl-row-gap);
+  margin: var(--spacing-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tb-list.tb-timeline > .tb-row > .tb-substops[hidden] {
+  display: none;
+}
+
+.tb-substop {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: center;
+}
+
+.tb-substop__time {
+  min-width: 5ch;
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-caption);
+}
+
+.tb-substop__dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--color-paper);
+  border-radius: var(--r-pill);
+  background: var(--subpoint-color, var(--color-walk));
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--color-ink) 30%, transparent);
+}
+
+.tb-substop__name {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-min);
+  background: none;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.tb-substop__name:hover {
+  text-decoration: underline;
+}
+
+.tb-substop__name:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }

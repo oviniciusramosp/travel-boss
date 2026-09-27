@@ -1694,6 +1694,21 @@ a.tb-route__google[hidden] {
   outline-offset: 2px;
 }
 
+/* What the trip says about the point, under its photo: the time in the margin, then the note. */
+.tb-panel__subpoint-note {
+  margin: var(--spacing-4) 0 0;
+  color: var(--color-ink);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.tb-panel__subpoint-time {
+  margin-right: var(--spacing-8);
+  color: var(--color-mid-gray);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
 /* Photo of a sub-point, under its name when opened. */
 .tb-panel__subpoint-photo {
   display: block;
