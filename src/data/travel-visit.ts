@@ -816,8 +816,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
     ticketPromos: [PROMO_LOUVRE_FIRST_FRIDAY],
     tips: L(
-      'Closed Tuesdays. Book timed entry. Pick wings in advance — you will not see everything. No free first-Sunday (unlike Orsay).',
-      'Fecha terça. Reserve horário. Escolha alas antes — você não vê tudo. Sem 1º domingo grátis (diferente do Orsay).',
+      'Free self-service lockers under the Pyramid (level −2), subject to availability. Collect belongings the same day, before leaving. Bags larger than 55 × 35 × 20 cm are not allowed inside. Use the Pyramid lockers: the Lions hall closes at 15:00. Closed Tuesdays; book timed entry.',
+      'Guarda-volumes gratuito e de autoatendimento sob a Pirâmide (nível −2), sujeito à disponibilidade. Retire tudo no mesmo dia, antes de sair. Malas maiores que 55 × 35 × 20 cm não entram no museu. Use os armários da Pirâmide: o hall dos Leões fecha às 15h. Fecha terça; reserve horário.',
     ),
     osmRef: 'relation/7515426',
   }),

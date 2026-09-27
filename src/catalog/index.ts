@@ -38,6 +38,8 @@ export {
 export type { ItineraryLegDef, TimelineTransferPart } from '../data/travel-itinerary-legs';
 
 export { placeCategoriesOffByDefault } from '../data/travel-categories';
+export { louvreRoute, louvreSources } from '../data/travel-indoor';
+export type { LouvreFloor, IndoorStep } from '../data/travel-indoor';
 export {
   MAPS_MATERIAL_ICON,
   categoryMaterialName,
