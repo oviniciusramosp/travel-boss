@@ -132,6 +132,8 @@ Onda 1 executada por agentes e mesclada em `main` (tsc e 441 testes passando em 
 | E2 | Sonnet | `106b43c` | 16 dos 21 lugares sem foto ganharam foto do Commons |
 | E1 | Sonnet | `b196ae7` | 39 dos 40 links abrem o card direto (`mapsUrl` canônico completo, o `data=` encurtado falha em aba nova); 10 pinos movidos |
 | B2 | Opus | `fa7dac6` `748f775` `a830ad2` | `budget: comida €50` no cabeçalho da cidade (por pessoa por dia, só comida); o chip de comida ganha `is-over`, glifo `warning` e tooltip `€80,50 de €50 por pessoa`; a nota do dia mostra `Meta: €50 · passou €30,50`. A linha não aparece no documento nem no export. Paris ganhou a linha em `europa.md` (`6f2b50f`) |
+| E3 | Sonnet | `cad4a7a` | 46 das 54 capas fracas trocadas (30 das 36 sem fachada nem produto; 16 das 18 só fachada). Ficaram: Burger King e McDonald's Disney (já no padrão de rede), Casa do Gui, Auchan Noisy, One Nation, Uniqlo Opéra, Ore Ducasse e Procope, sem foto livre melhor |
+| Previsão (pedido de 27/09) | Fable | ver `git log src/trip/weather.ts` | Cache persistente da última previsão, estados carregando/falhou, botão de atualizar, tooltip em linhas com a hora da atualização; reveal só no hover do número, do km e do glifo |
 | Card do dia (pedido de 27/09) | Fable | ver `git log src/trip/walk-distance.ts` | Só o número de paradas e o glifo do clima; a palavra e a leitura deslizam no hover ou foco (`.tb-reveal`); km a pé do dia somados dos segmentos a pé da rota (OSRM), recalculados a cada save |
 | G2 | Fable | ver `git log scripts/check-travel-photos.py` | `parse_photos` agora usa lookahead: 243 chaves com URL e as 354 URLs entram na checagem (antes, 122 e 185). Na rodada completa a 0,4 s o Commons devolveu 429 em 20 URLs, todas carregam devagar: 429 não é foto morta |
 
@@ -145,7 +147,7 @@ Ficou para o usuário decidir:
 - `docs/ui-primitives.md` ainda não cita o tipo `decision` do `editableNote` (B1 deixou para não colidir com C1).
 - Os `routeStops` da linha 2 (Anvers, Barbès, La Chapelle) parecem deslocados ~0,01° de longitude (observação da E1, fora do escopo dela).
 
-Onda 2 em andamento: B2 entrou; E3 (fotos fracas) em execução. Faltam B4, B3, D1 → D2, depois D3, A2, F1. G1 feita em 27/09 (24 worktrees e 7 branches mesclados apagados; sobra só o backup do dia da Disney). G2 feita.
+Onda 2: B2 e E3 entraram. Faltam B4, B3, D1 → D2, depois D3, A2, F1. G1 feita em 27/09 (24 worktrees e 7 branches mesclados apagados; sobra só o backup do dia da Disney). G2 feita.
 
 ### Onda 1 (sem dependências; arquivos disjuntos)
 
