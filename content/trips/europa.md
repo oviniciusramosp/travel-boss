@@ -31,34 +31,40 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: metrô 9 de Iéna até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 1h · €2,55
 - 23:30 [Casa do Gui](place:par-casa-do-gui) — Fim do primeiro dia
 
-### Dia 2 — Seg 5/10 · Louvre, Champs-Élysées e compras na Opéra
+### Dia 2 — Seg 5/10 · Baguett’s, Arco do Triunfo, Louvre e compras na Opéra
 
-- 08:15 [Casa do Gui](place:par-casa-do-gui) — Agora sim com o ticket **Navigo Semaine** vale de hoje até domingo
+- 07:40 [Casa do Gui](place:par-casa-do-gui) — Agora sim com o ticket **Navigo Semaine** vale de hoje até domingo
   - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra, com a Navigo Semaine · 45 min · €32,40
-- 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu)
-- 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
-- 10:00 [Louvre](place:par-louvre) — **3 horas**, com ingresso das 10h
-- +3 km — percurso dentro do museu, das salas Daru e Mollien ao Oriente Próximo (estimativa)
-- 13:05 [Arco do Triunfo do Carrousel](place:par-carrousel)
-- 13:10 [Estátuas de Maillol](place:par-maillol)
-- 13:20 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Pão, queijo, fruta e bebida (~€6–8), no caminho para as Tulherias
-- 13:40 [Jardim das Tulherias](place:par-tuileries) — Piquenique
-- 15:20 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
-  - via: a pé pela Champs-Élysées · 15 min
-- 15:35 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
-  - via: a pé pela Pont Alexandre III · 18 min
-- 15:55 [Invalides](place:par-invalides) — Por fora: a cúpula dourada e a esplanada, do outro lado da ponte; volta pelo mesmo caminho até a Champs-Élysées
-- 16:40 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km), passando na frente das vitrines
-- 17:15 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
-  - via: RER A de Charles de Gaulle–Étoile até Auber · 12 min
-- 17:45 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
-- 18:05 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
-- 18:35 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
-- 18:50 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h. O terraço do 7º teve um pop-up até 30/09: confira se reabriu
-- 19:15 [Galeries Lafayette](place:par-galeries-lafayette) — **Pôr do sol às 19h21** no terraço grátis do 8º andar, aberto até 20h (a temporada vai até 13/10): suba até as 19h15. A cúpula fica no caminho; a loja fecha às 20h30
-- 20:20 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico (~€15–28), sem reserva e sem intervalo até meia-noite: fila na porta. Saia até 21h40: de 5 a 14/10 o RER E para às 22h15
+- 08:30 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã**: pancakes ou pain perdu; sair às 09h20
+  - via: metrô 1 até Charles de Gaulle–Étoile · 35 min — Caminhar até Palais Royal–Musée du Louvre e embarcar sentido La Défense
+- 09:55 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
+- 10:20 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
+- 10:20 **Cartier** — Por fora
+- 10:25 **Louis Vuitton** — Por fora
+- 10:30 **Nike** — Por fora
+- 10:35 **Sephora** — Por fora
+- 11:05 [Petit e Grand Palais](place:par-palais) — Passar por fora: os dois museus fecham às segundas
+- 11:20 [Ponte Alexandre III](place:par-alexandre-iii) — Atravessar até o fim da ponte e voltar pelo mesmo caminho, sem seguir até os Invalides
+  - via: a pé até a Concorde · 15 min — Voltar pelo Petit e Grand Palais
+- 11:50 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
+- 12:00 [Jardim das Tulherias](place:par-tuileries)
+- 12:00 **Jeu de Paume** — Por fora
+- 12:05 **Museu da Orangerie** — Por fora
+- 12:10 **Grand Bassin Octogonal**
+- 12:15 **Grande Allée**
+- 12:20 **Grand Bassin Rond**
+- 12:30 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida (~€6–8); piquenique nas Tulherias antes do Louvre
+- 13:00 [Estátuas de Maillol](place:par-maillol)
+- 13:05 [Arco do Triunfo do Carrousel](place:par-carrousel) — Seguir para a entrada do Louvre
+- 13:30 [Louvre](place:par-louvre) — **3h30 de visita, até as 17h**; ingresso a reservar para as 13h30
+  - via: a pé até o Lafayette Gourmet · 30 min
+- +3 km — percurso dentro do museu (estimativa)
+- 17:30 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
+- 18:00 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; 1h15 para escolher e experimentar, até as 19h15; fecha às 20h
+- 19:25 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
+- 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico (~€15–28), sem reserva: fila na porta. Sair às 21h para voltar com margem
   - via: RER E de Haussmann–Saint-Lazare · 35 min
-- 22:15 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
+- 21:35 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
 
 ### Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre
 
@@ -190,6 +196,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:45 [Cajou](place:par-cajou) — **Almoço** caseiro da semana (€13–19), a 5 min da BnF
   - via: metrô 14 de Bibliothèque François Mitterrand até Pyramides · 20 min
 - 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala. Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
+- 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar (até 20h); a loja fecha às 20h30
+- 17:10 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h.\
+  O terraço do 7º teve um pop-up até 30/09: confira se reabriu
   - via: metrô 9 de Havre–Caumartin até Alma–Marceau · 20 min
 - 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena (€20), saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
   - via: metrô 9 de Alma–Marceau até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 50 min
@@ -236,4 +245,3 @@ dates: 2026-10-09 → 2026-10-13
 - 18:00 [Piazza Venezia](place:rom-piazza-venezia) — Ponto de orientação do centro
 
 Um dia a pé no centro. Os outros lugares de Roma ficam no catálogo da cidade, não neste arquivo.
-

@@ -7,6 +7,7 @@ import type { LString } from './travel';
 import {
   getTransitLine,
   haversineM,
+  metro1,
   metro10,
   metro14,
   metro2,
@@ -923,30 +924,6 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
   ],
 };
 
-/** Pedestrian paths via Pont Alexandre III, Valhalla / OSM, 2026-09-27; simplified to 1 m. */
-const palaisToInvalidesWalk: LatLng[] = [
-  [48.865803, 2.313203],
-  [48.865049, 2.313135],
-  [48.865052, 2.313298],
-  [48.864667, 2.313299],
-  [48.864549, 2.313334],
-  [48.864541, 2.313651],
-  [48.862723, 2.313436],
-  [48.862694, 2.311769],
-  [48.862674, 2.311652],
-  [48.862437, 2.311641],
-  [48.859653, 2.311328],
-  [48.858575, 2.311231],
-  [48.858525, 2.312046],
-  [48.858537, 2.312082],
-  [48.858529, 2.312184],
-  [48.858372, 2.312162],
-  [48.85833, 2.312918],
-  [48.856977, 2.312769],
-  [48.856999, 2.312277],
-  [48.856513, 2.312225],
-];
-
 const palaisToChampsWalk: LatLng[] = [
   [48.865803, 2.313203],
   [48.865788, 2.313289],
@@ -983,10 +960,10 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
-  // 5/10: Carrousel and Maillol before shopping; then straight to the Grand Bassin Rond.
+  // 5/10: Tulheries → market → Maillol → Carrousel → Louvre.
   // Pedestrian geometry: Valhalla / OSM, 2026-09-27.
   {
-    from: 'par-louvre', to: 'par-carrousel', mode: 'walk', durationMin: 5,
+    from: 'par-carrousel', to: 'par-louvre', mode: 'walk', durationMin: 5,
     path: [
       [48.86059, 2.337594],
       [48.860619, 2.337475],
@@ -1018,10 +995,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.861587, 2.33336],
       [48.861715, 2.332952],
       [48.861728, 2.33291],
-    ],
+    ].reverse() as LatLng[],
   },
   {
-    from: 'par-carrousel', to: 'par-maillol', mode: 'walk', durationMin: 2,
+    from: 'par-maillol', to: 'par-carrousel', mode: 'walk', durationMin: 2,
     path: [
       [48.861728, 2.33291],
       [48.861741, 2.332866],
@@ -1029,10 +1006,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.862064, 2.331849],
       [48.862271, 2.331191],
       [48.862462, 2.331335],
-    ],
+    ].reverse() as LatLng[],
   },
   {
-    from: 'par-maillol', to: 'par-carrefour-express-saint-honore', mode: 'walk', durationMin: 5,
+    from: 'par-carrefour-express-saint-honore', to: 'par-maillol', mode: 'walk', durationMin: 5,
     path: [
       [48.862462, 2.331335],
       [48.863276, 2.331949],
@@ -1066,10 +1043,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.86489, 2.33187],
       [48.864916, 2.331819],
       [48.865081, 2.3315],
-    ],
+    ].reverse() as LatLng[],
   },
   {
-    from: 'par-carrefour-express-saint-honore', to: 'par-tuileries', mode: 'walk', durationMin: 6,
+    from: 'par-tuileries', to: 'par-carrefour-express-saint-honore', mode: 'walk', durationMin: 6,
     path: [
       [48.865081, 2.3315],
       [48.864916, 2.331819],
@@ -1106,7 +1083,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.862745, 2.329686],
       [48.862671, 2.329604],
       [48.862643, 2.329546],
-    ],
+    ].reverse() as LatLng[],
   },
   // 4/10: from the foot of the tower onto Avenue Pierre Loti (OSM ways 51259180, 1285858202)
   {
@@ -1151,20 +1128,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro9, 'iena', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
-  // 5/10: Louvre, Champs-Élysées, then the Opéra shops; Chartier is 6 min from the RER E at Haussmann
-  // Concorde → the Palais along the avenue's north sidewalk (OSM way nodes), not through the gardens or along the quay.
-  { from: 'par-luxor-obelisk', to: 'par-palais', mode: 'walk', through: [[48.866301, 2.318531], [48.867754, 2.313963]] },
-  // Same bridge in both directions; return past the Palais before rejoining the avenue.
-  { from: 'par-palais', to: 'par-invalides', mode: 'walk', path: palaisToInvalidesWalk, durationMin: 18 },
-  {
-    from: 'par-invalides',
-    to: 'par-champs-elysees',
-    mode: 'walk',
-    path: [...palaisToInvalidesWalk].reverse().concat(palaisToChampsWalk.slice(1)),
-    durationMin: 32,
-  },
+  // 5/10: breakfast, Arc, west-to-east walk, Louvre and Opéra shops.
+  { from: 'par-champs-elysees', to: 'par-palais', mode: 'walk', path: [...palaisToChampsWalk].reverse() },
+  { from: 'par-palais', to: 'par-alexandre-iii', mode: 'walk' },
+  { from: 'par-alexandre-iii', to: 'par-luxor-obelisk', mode: 'walk', through: [[48.862723, 2.313436], [48.864541, 2.313651], [48.865803, 2.313203], [48.867754, 2.313963], [48.866301, 2.318531]] },
   trainLeg('par-casa-do-gui', 'par-bohemia', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
-  trainLeg('par-arc-triomphe', 'par-eclair-genie', 12, [ride(rerA, 'etoile', 'auber')]),
+  trainLeg('par-bohemia', 'par-arc-triomphe', 35, [ride(metro1, 'palais-royal', 'etoile')]),
   trainLeg('par-bouillon', 'par-casa-do-gui', 35, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
   trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
@@ -1207,7 +1176,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-casa-do-gui', 'par-cedric-grolet', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
   trainLeg('par-palais-royal', 'par-bnf', 20, [ride(metro14, 'pyramides', 'bibliotheque')]),
   trainLeg('par-cajou', 'par-opera', 20, [ride(metro14, 'bibliotheque', 'pyramides')]),
-  trainLeg('par-opera', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
+  trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
   trainLeg('par-bateaux-mouches', 'par-casa-do-gui', 50, [
     ride(metro9, 'alma-marceau', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
