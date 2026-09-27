@@ -2545,6 +2545,135 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Matt Ryall / Wikimedia Commons (CC BY 2.0)',
     ),
   ],
+
+  'par-avant-comptoir-odeon': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Paris_street_market_stall_-_charcuterie_counter_1.jpg/500px-Paris_street_market_stall_-_charcuterie_counter_1.jpg',
+      'Charcuterie counter at a Paris market stall (generic photo)',
+      'Balcão de charcutaria em uma banca de mercado parisiense (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-berthillon-ile-saint-louis': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/c/c0/Blood_Orange_Sorbet_by_Berthillon.jpg',
+      'Blood orange sorbet by Berthillon',
+      'Sorvete de laranja-sanguínea da Berthillon',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-chessy-rer': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Gare_de_Marne-la-Vall%C3%A9e_-_Chessy_%282026-08-02%29-1.jpg/500px-Gare_de_Marne-la-Vall%C3%A9e_-_Chessy_%282026-08-02%29-1.jpg',
+      'Platform hall at Marne-la-Vallée–Chessy station',
+      'Saguão de plataformas da estação Marne-la-Vallée–Chessy',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-daw-ratatouille': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Toon_Studio_Ratatouille_area.jpg/500px-Toon_Studio_Ratatouille_area.jpg',
+      'Facade of Ratatouille: The Adventure, Disney Adventure World',
+      'Fachada da atração Ratatouille: The Adventure, Disney Adventure World',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-disney-adventure-world': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Entrance_gate_of_Walt_Disney_Studios_Park%2C_Disneyland_Paris.jpg/500px-Entrance_gate_of_Walt_Disney_Studios_Park%2C_Disneyland_Paris.jpg',
+      'Entrance gate of the park, formerly Walt Disney Studios Park',
+      'Portão de entrada do parque, antigo Walt Disney Studios Park',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-dlp-phantom-manor': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Disneyland_Paris_-_4481390960.jpg/500px-Disneyland_Paris_-_4481390960.jpg',
+      'Phantom Manor, Disneyland Park',
+      'Phantom Manor, Disneyland Park',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-dlp-pirates': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pirates_of_the_Caribbean_-_panoramio.jpg/500px-Pirates_of_the_Caribbean_-_panoramio.jpg',
+      'Pirates of the Caribbean ride, Disneyland Park',
+      'Atração Piratas do Caribe, Disneyland Park',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-dlp-tales-of-magic': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg/500px-Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg',
+      'Sleeping Beauty Castle at Disneyland Park, the Disney Tales of Magic viewing spot',
+      'Castelo da Bela Adormecida no Disneyland Park, o lugar para assistir ao Disney Tales of Magic',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-equilibre-blomet': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Len%C3%B4tre-Paris-Brest.jpg/500px-Len%C3%B4tre-Paris-Brest.jpg',
+      'Paris-Brest pastry, choux ring filled with praline cream (generic photo)',
+      'Paris-Brest, anel de massa choux recheado com creme de praliné (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-jacques-genin-marais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Caramel_au_beurre_sal%C3%A9_02.jpg/500px-Caramel_au_beurre_sal%C3%A9_02.jpg',
+      'Salted butter caramels (generic photo)',
+      'Caramelos de manteiga salgada (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-la-chambre-marais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Bocaux_de_confiture_de_l%27%C3%AEle_de_la_r%C3%A9union.jpg/500px-Bocaux_de_confiture_de_l%27%C3%AEle_de_la_r%C3%A9union.jpg',
+      'Jars of jam (generic photo)',
+      'Potes de geleia (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-le-roux-saint-germain': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/CARAMEL_CBS.jpeg/500px-CARAMEL_CBS.jpeg',
+      'Salted-butter caramel (CBS), the style Henri Le Roux created in 1977 (generic photo)',
+      'Caramelo de manteiga salgada (CBS), o estilo criado por Henri Le Roux em 1977 (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-marie-anne-cantin-champ-de-mars': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Comt%C3%A9_cheese_dice.jpg/500px-Comt%C3%A9_cheese_dice.jpg',
+      'Comté cheese, diced (generic photo)',
+      'Queijo Comté em cubos (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-matthieu-pauline-cler': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Paris_Brest_pastry_variation_by_Philippe_Conticini.JPG/500px-Paris_Brest_pastry_variation_by_Philippe_Conticini.JPG',
+      'Paris-Brest pastry, a modern bakery variation (generic photo)',
+      'Paris-Brest, uma variação moderna de padaria (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-mere-de-famille-faubourg-montmartre': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/P%C3%A2tes_de_fruits.JPG/500px-P%C3%A2tes_de_fruits.JPG',
+      'Pâtes de fruits, French fruit jelly candies (generic photo)',
+      'Pâtes de fruits, balas de fruta francesas (foto ilustrativa)',
+      'Wikimedia Commons',
+    ),
+  ],
+  'par-val-de-fontenay-rer': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Gare_Val_Fontenay_RER_A_Fontenay_Bois_1.jpg/500px-Gare_Val_Fontenay_RER_A_Fontenay_Bois_1.jpg',
+      'RER A platforms at Val de Fontenay station',
+      'Plataformas do RER A na estação Val de Fontenay',
+      'Wikimedia Commons',
+    ),
+  ],
 };
 
 export function photosForPlaceId(id: string): TravelPhoto[] | undefined {

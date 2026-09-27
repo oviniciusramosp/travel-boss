@@ -1,7 +1,7 @@
-# Graph Report - roteiro-04-outubro-d264b0  (2026-09-27)
+# Graph Report - agent-ad28559255805105f  (2026-09-27)
 
 ## Corpus Check
-- 212 files · ~344,389 words
+- 210 files · ~344,746 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f5594029`
+- Built from commit: `52b7c45f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -108,8 +108,8 @@
   vite.config.ts → src/trip/api.ts
 
 ## Import Cycles
-- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
+- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
 ## Communities (69 total, 2 thin omitted)
@@ -147,8 +147,8 @@ Cohesion: 0.06
 Nodes (46): Any, concurrent_futures, contextlib, curl_cffi, json, travel:airbnb:setup, pyairbnb, pyairbnb_details (+38 more)
 
 ### Community 8 - "place-panel.ts"
-Cohesion: 0.11
-Nodes (32): googleMapsUrl(), Locale, aiBadge(), aiSuggestionTip(), TABS, icon(), IconName, ICONS (+24 more)
+Cohesion: 0.12
+Nodes (32): googleMapsUrl(), aiBadge(), aiSuggestionTip(), TABS, iconButton(), icon(), IconName, ICONS (+24 more)
 
 ### Community 9 - "travel-stay-heatmap.ts"
 Cohesion: 0.12
@@ -180,7 +180,7 @@ Nodes (28): hopName(), ItineraryTransitHop, ride(), WALK_CONNECTOR_MIN_M, getTra
 
 ### Community 16 - "route-planner.ts"
 Cohesion: 0.08
-Nodes (56): apply(), barActive(), beginLocate(), CITY_FAR_KM, createRouteButton(), drawRoutePreview(), formatRouteDistance(), formatRouteDuration() (+48 more)
+Nodes (54): apply(), barActive(), beginLocate(), CITY_FAR_KM, drawRoutePreview(), formatRouteDistance(), formatRouteDuration(), GeoPermission (+46 more)
 
 ### Community 17 - "compilerOptions"
 Cohesion: 0.10
@@ -191,8 +191,8 @@ Cohesion: 0.22
 Nodes (18): capitalized(), formatDayTitle(), formatMonthYear(), formatSpan(), isoParts, monthName(), MONTHS, nightsBetween() (+10 more)
 
 ### Community 19 - "pickLocale"
-Cohesion: 0.10
-Nodes (53): legsForDay(), pickLocale(), amenityName(), buildItineraryRoute(), buildItineraryRoutePreview(), buildItineraryRouteSync(), categoryGlyph(), emptyCopy() (+45 more)
+Cohesion: 0.09
+Nodes (55): legsForDay(), pickLocale(), travelUi, amenityName(), buildItineraryRoute(), buildItineraryRoutePreview(), buildItineraryRouteSync(), categoryGlyph() (+47 more)
 
 ### Community 20 - "pin-visual.ts"
 Cohesion: 0.20
@@ -320,7 +320,7 @@ Nodes (24): day1, day1AfterBase, day1Cdg, day2, day3, day4, day5, day6 (+16 more
 
 ### Community 53 - "el"
 Cohesion: 0.14
-Nodes (23): googleDirectionsUrl(), openSlotRow(), railHalf(), el(), row(), RowOptions, card(), GROUPS (+15 more)
+Nodes (24): googleDirectionsUrl(), openSlotRow(), railHalf(), el(), row(), RowOptions, card(), GROUPS (+16 more)
 
 ### Community 54 - "open-now.ts"
 Cohesion: 0.32
@@ -343,12 +343,12 @@ Cohesion: 0.20
 Nodes (16): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset(), pinIncludedInCityFit() (+8 more)
 
 ### Community 59 - "ui/controls.ts"
-Cohesion: 0.20
-Nodes (15): iconButton(), IconButtonSize, IconButtonVariant, iconLink(), onSegmentKey(), segmentButtons(), segmented(), segmentedMove() (+7 more)
+Cohesion: 0.19
+Nodes (15): Locale, IconButtonSize, IconButtonVariant, iconLink(), onSegmentKey(), segmentButtons(), segmented(), segmentedMove() (+7 more)
 
 ### Community 60 - "rating.ts"
-Cohesion: 0.44
-Nodes (8): travelUi, clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
+Cohesion: 0.53
+Nodes (7): clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
 
 ### Community 61 - "main.ts"
 Cohesion: 0.05

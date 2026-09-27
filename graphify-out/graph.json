@@ -2669,6 +2669,19 @@
       "norm_label": "insets"
     },
     {
+      "label": "Locale",
+      "file_type": "code",
+      "source_file": "src/data/travel.ts",
+      "source_location": "L84",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_travel_locale",
+      "community": 59,
+      "community_name": "ui/controls.ts",
+      "norm_label": "locale"
+    },
+    {
       "label": "IconButtonSize",
       "file_type": "code",
       "source_file": "src/ui/controls.ts",
@@ -2888,19 +2901,6 @@
       "community": 71,
       "community_name": "links.ts",
       "norm_label": "cityhashtab"
-    },
-    {
-      "label": "Locale",
-      "file_type": "code",
-      "source_file": "src/data/travel.ts",
-      "source_location": "L84",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_travel_locale",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "locale"
     },
     {
       "label": "IconName",
@@ -4785,18 +4785,6 @@
       "norm_label": "beginlocate()"
     },
     {
-      "label": "createRouteButton()",
-      "file_type": "code",
-      "source_file": "src/views/route-planner.ts",
-      "source_location": "L586",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_route_planner_createroutebutton",
-      "community": 16,
-      "community_name": "route-planner.ts",
-      "norm_label": "createroutebutton()"
-    },
-    {
       "label": "drawRoutePreview()",
       "file_type": "code",
       "source_file": "src/views/route-planner.ts",
@@ -4855,18 +4843,6 @@
       "community": 16,
       "community_name": "route-planner.ts",
       "norm_label": "isfarfromcity()"
-    },
-    {
-      "label": "locateFailureLabel()",
-      "file_type": "code",
-      "source_file": "src/views/route-planner.ts",
-      "source_location": "L40",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_route_planner_locatefailurelabel",
-      "community": 16,
-      "community_name": "route-planner.ts",
-      "norm_label": "locatefailurelabel()"
     },
     {
       "label": "mergeRankingIds()",
@@ -5575,6 +5551,18 @@
       "community": 19,
       "community_name": "pickLocale",
       "norm_label": "amenitygroup()"
+    },
+    {
+      "label": "locateFailureLabel()",
+      "file_type": "code",
+      "source_file": "src/views/route-planner.ts",
+      "source_location": "L40",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_route_planner_locatefailurelabel",
+      "community": 19,
+      "community_name": "pickLocale",
+      "norm_label": "locatefailurelabel()"
     },
     {
       "label": "budgetChip()",
@@ -6876,7 +6864,7 @@
       "label": "photosForPlaceId()",
       "file_type": "code",
       "source_file": "src/data/travel-photos.ts",
-      "source_location": "L2550",
+      "source_location": "L2679",
       "_callable": true,
       "_origin": "ast",
       "id": "src_data_travel_photos_photosforplaceid",
@@ -10439,6 +10427,18 @@
     {
       "label": "categoryGlyph()",
       "file_type": "code",
+      "source_file": "src/views/place-panel.ts",
+      "source_location": "L26",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_place_panel_categoryglyph",
+      "community": 53,
+      "community_name": "el",
+      "norm_label": "categoryglyph()"
+    },
+    {
+      "label": "categoryGlyph()",
+      "file_type": "code",
       "source_file": "src/views/places.ts",
       "source_location": "L230",
       "_callable": true,
@@ -10963,18 +10963,6 @@
       "community": 58,
       "community_name": "camera.ts",
       "norm_label": "mergeinsets()"
-    },
-    {
-      "label": "iconButton()",
-      "file_type": "code",
-      "source_file": "src/ui/controls.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_controls_iconbutton",
-      "community": 59,
-      "community_name": "ui/controls.ts",
-      "norm_label": "iconbutton()"
     },
     {
       "label": "iconLink()",
@@ -12573,6 +12561,18 @@
       "norm_label": "aisuggestiontip()"
     },
     {
+      "label": "iconButton()",
+      "file_type": "code",
+      "source_file": "src/ui/controls.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_controls_iconbutton",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "iconbutton()"
+    },
+    {
       "label": "icon()",
       "file_type": "code",
       "source_file": "src/ui/icons.ts",
@@ -12643,18 +12643,6 @@
       "community": 8,
       "community_name": "place-panel.ts",
       "norm_label": "mounthotelslider()"
-    },
-    {
-      "label": "categoryGlyph()",
-      "file_type": "code",
-      "source_file": "src/views/place-panel.ts",
-      "source_location": "L26",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_place_panel_categoryglyph",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "categoryglyph()"
     },
     {
       "label": "dropSlide()",
@@ -12787,6 +12775,18 @@
       "community": 8,
       "community_name": "place-panel.ts",
       "norm_label": "placemeta()"
+    },
+    {
+      "label": "createRouteButton()",
+      "file_type": "code",
+      "source_file": "src/views/route-planner.ts",
+      "source_location": "L586",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_route_planner_createroutebutton",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "createroutebutton()"
     },
     {
       "label": "routePlannerOn()",
@@ -14067,6 +14067,17 @@
       "norm_label": "summary.test.ts"
     },
     {
+      "label": "travelUi",
+      "file_type": "code",
+      "source_file": "src/data/travel.ts",
+      "source_location": "L284",
+      "_origin": "ast",
+      "id": "src_data_travel_travelui",
+      "community": 19,
+      "community_name": "pickLocale",
+      "norm_label": "travelui"
+    },
+    {
       "label": "itinerary-panel.ts",
       "file_type": "code",
       "source_file": "src/views/itinerary-panel.ts",
@@ -14177,20 +14188,20 @@
       "norm_label": "contrast.test.ts"
     },
     {
-      "label": "AGENTS.md",
+      "label": "CLAUDE.md",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude",
       "community": 21,
       "community_name": "Trip artifact \u2014 `travel-boss/trip/v1`",
-      "norm_label": "agents.md"
+      "norm_label": "claude.md"
     },
     {
       "label": "Arquitetura",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L25",
       "_origin": "ast",
       "id": "claude_arquitetura",
@@ -14201,7 +14212,7 @@
     {
       "label": "Cat\u00e1logo de lugares",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L79",
       "_origin": "ast",
       "id": "claude_cat\u00e1logo_de_lugares",
@@ -14212,7 +14223,7 @@
     {
       "label": "Comandos",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L5",
       "_origin": "ast",
       "id": "claude_comandos",
@@ -14223,7 +14234,7 @@
     {
       "label": "Como um LLM edita um roteiro",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L62",
       "_origin": "ast",
       "id": "claude_como_um_llm_edita_um_roteiro",
@@ -14234,7 +14245,7 @@
     {
       "label": "Contrato",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L34",
       "_origin": "ast",
       "id": "claude_contrato",
@@ -14245,7 +14256,7 @@
     {
       "label": "Guia da cidade (Mercado e Comidas)",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L87",
       "_origin": "ast",
       "id": "claude_guia_da_cidade_mercado_e_comidas",
@@ -14344,7 +14355,7 @@
     {
       "label": "Travel Boss",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_travel_boss",
@@ -18278,17 +18289,6 @@
       "community": 6,
       "community_name": "hotel-search-match.mjs",
       "norm_label": "hotel-search.test.ts"
-    },
-    {
-      "label": "travelUi",
-      "file_type": "code",
-      "source_file": "src/data/travel.ts",
-      "source_location": "L284",
-      "_origin": "ast",
-      "id": "src_data_travel_travelui",
-      "community": 60,
-      "community_name": "rating.ts",
-      "norm_label": "travelui"
     },
     {
       "label": "rating.ts",
@@ -54876,7 +54876,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
@@ -54964,7 +54964,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
@@ -54975,7 +54975,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
@@ -54986,7 +54986,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
@@ -54997,7 +54997,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
@@ -55008,7 +55008,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast",
@@ -55019,7 +55019,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L87",
       "weight": 1.0,
       "_origin": "ast",
@@ -59981,22 +59981,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/travel-photos.ts",
-      "source_location": "L2550",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_travel_photos",
-      "target": "src_data_travel_photos_photosforplaceid",
+      "target": "src_data_travel_photos_photo",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/travel-photos.ts",
-      "source_location": "L26",
+      "source_location": "L2679",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_travel_photos",
-      "target": "src_data_travel_photos_photo",
+      "target": "src_data_travel_photos_photosforplaceid",
       "confidence_score": 1.0
     },
     {
@@ -70400,7 +70400,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
@@ -70411,7 +70411,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
@@ -70422,7 +70422,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
@@ -70725,5 +70725,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f55940290399fb5cf2c23b5b883c654595fad6b8"
+  "built_at_commit": "52b7c45f7a2f9c5b1afba804def24496264af4b2"
 }
