@@ -582,13 +582,18 @@
   top: var(--tl-dot-y);
 }
 
-/* A leg starts at its icon: above it the way in, below it the leg itself. */
+/* A leg starts at its icon: above it the way in, below it the leg itself. A row with a
+   second line keeps the icon on the first, a chip high. */
+.tb-list.tb-timeline > .tb-transfer:has(> :is(.tb-transfer__note, .tb-transfer__stations)) {
+  --tl-hop-y: calc(var(--tl-pad) + var(--h-sm) / 2);
+}
+
 .tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot) > .tb-timeline__rail.is-above {
-  bottom: 50%;
+  bottom: calc(100% - var(--tl-hop-y, 50%));
 }
 
 .tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot) > .tb-timeline__rail.is-below {
-  top: 50%;
+  top: var(--tl-hop-y, 50%);
 }
 
 /* Hover and focus grow the pin and ring it, like the dot on the map. */
@@ -750,6 +755,12 @@
 
 .tb-list.tb-timeline > .tb-transfer > .tb-stop-costs {
   grid-row: 1;
+}
+
+/* Under a note or the stations, the fare sits beside their first line, as a stop's costs do. */
+.tb-list.tb-timeline > .tb-transfer:has(> :is(.tb-transfer__note, .tb-transfer__stations)) > .tb-stop-costs {
+  grid-row: 2;
+  align-self: start;
 }
 
 /* Comments: the user's requests to the LLM, under the stop they are about. */
@@ -1036,13 +1047,20 @@
   white-space: nowrap;
 }
 
-/* `via:` note after " — ", under the label like a stop note. */
-.tb-transfer__note {
+/* `via:` note after " — ", under the label like a stop note. A ride's board and exit
+   stations read the same, one per line. */
+.tb-transfer__note,
+.tb-transfer__stations {
   min-width: 0;
   color: var(--color-mid-gray);
 }
 
-.tb-list > .tb-transfer > .tb-transfer__note {
+.tb-transfer__stations {
+  display: flex;
+  flex-direction: column;
+}
+
+.tb-list > .tb-transfer > :is(.tb-transfer__note, .tb-transfer__stations) {
   grid-column: main;
 }
 
@@ -1063,8 +1081,7 @@
   color: var(--color-ink);
 }
 
-.tb-transfer__duration,
-.tb-transfer__stations {
+.tb-transfer__duration {
   flex: none;
   color: var(--color-mid-gray);
   font-variant-numeric: tabular-nums;
