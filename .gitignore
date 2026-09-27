@@ -10,3 +10,4 @@ __pycache__/
 src/data/.push-tmp-*.json
 graphify-out/cache
 *.tsbuildinfo
+src/data/travel-photos-report.json
