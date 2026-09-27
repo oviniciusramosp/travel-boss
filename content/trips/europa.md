@@ -37,21 +37,22 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: RER E até Haussmann–Saint-Lazare e caminhada pela Av. de l'Opéra, com a Navigo Semaine · 45 min · €32,40
 - 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu); não aceita reserva
 - 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
-- 10:00 [Louvre](place:par-louvre) — **4 horas**, com ingresso das 10h (€32): Vitória de Samotrácia, Galerie d'Apollon, Mona Lisa, Grande Galerie, salas Daru e Mollien, Vênus de Milo, Esfinge, Louvre medieval, apartamentos de Napoleão III (se abertos) e Oriente Próximo
+- 10:00 [Louvre](place:par-louvre) — **3 horas**, com ingresso das 10h
 - +3 km — percurso dentro do museu, das salas Daru e Mollien ao Oriente Próximo (estimativa)
 - 14:05 [Monoprix Opéra (piquenique)](place:par-monoprix-rivoli) — Sanduíche, fruta e bebida (~€6–8)
 - 14:30 [Jardim das Tulherias](place:par-tuileries) — Piquenique
 - 15:20 [Obelisco de Luxor](place:par-luxor-obelisk) — Place de la Concorde
+  - via: a pé pela Champs-Élysées · 15 min
 - 15:35 [Petit e Grand Palais](place:par-palais) — Por fora: os dois museus fecham às segundas
-- 15:50 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km)
-- 16:50 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
-  - via: RER A de Charles de Gaulle–Étoile até Auber · 10 min
-- 17:30 [Ópera Garnier](place:par-opera) — Por fora, já iluminada; a visita ao interior fica para sábado, porque ela fecha às 17h
-- 17:45 [Starbucks Opéra](place:par-starbucks-opera) — Uma olhada no Starbucks mais bonito de Paris, sem comprar
-- 18:00 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
-- 18:20 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
-- 18:50 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
-- 19:00 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h. O terraço do 7º teve um pop-up até 30/09: confira se reabriu
+  - via: a pé pela Pont Alexandre III · 10 min
+- 15:55 [Invalides](place:par-invalides) — Por fora: a cúpula dourada e a esplanada, do outro lado da ponte; volta pelo mesmo caminho até a Champs-Élysées
+- 16:20 [Champs-Élysées](place:par-champs-elysees) — Subida a pé até o Arco (2 km), passando na frente da Sephora, da Nike, da Louis Vuitton e da Cartier
+- 17:15 [Arco do Triunfo](place:par-arc-triomphe) — No fim da caminhada; por fora é grátis (use a passagem subterrânea)
+  - via: RER A de Charles de Gaulle–Étoile até Auber · 12 min
+- 17:45 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
+- 18:05 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; fecha às 20h
+- 18:35 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
+- 18:50 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h. O terraço do 7º teve um pop-up até 30/09: confira se reabriu
 - 19:15 [Galeries Lafayette](place:par-galeries-lafayette) — **Pôr do sol às 19h21** no terraço grátis do 8º andar, aberto até 20h (a temporada vai até 13/10): suba até as 19h15. A cúpula fica no caminho; a loja fecha às 20h30
 - 20:20 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico (~€15–28), sem reserva e sem intervalo até meia-noite: fila na porta. Saia até 21h40: de 5 a 14/10 o RER E para às 22h15
   - via: RER E de Haussmann–Saint-Lazare · 35 min
@@ -64,7 +65,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 08:45 [La Maison d'Isabelle](place:par-maison-isabelle) — Croissant premiado (~€1,40), para viagem: não tem onde sentar
 - 09:00 [Shakespeare and Company](place:par-shakespeare)
 - 09:15 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
-- 10:05 [Sainte-Chapelle](place:par-sainte-chapelle) — Reserve o horário das 10h15.
+  - decisão: 2026-09-27 · Sainte-Chapelle fica de fora por enquanto: €22 por pessoa é caro demais
 - 11:05 [Relógio da Conciergerie](place:par-horloge) — Relógio de 1370 na torre da esquina com o Quai de l'Horloge
 - 11:10 [Place Dauphine](place:par-place-dauphine)
 - 11:20 [Pont Neuf](place:par-pont-neuf) — Travessia para a margem esquerda
@@ -74,7 +75,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:35 [Panteão](place:par-pantheon) — ~1h
 - 13:45 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
 - 14:00 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: um crepe para cada (€7–10); aceita cartão
-- 14:50 [Jardim de Luxemburgo](place:par-luxembourg)
+- 14:35 [Fontaine Guy Lartigue](place:par-fontaine-guy-lartigue) — Descida pela Rue Mouffetard até a bacia de cobre vermelho, na Place Georges-Moustaki
+  - via: metrô 7 de Censier–Daubenton até Jussieu e metrô 10 até Odéon · 25 min
+- 15:00 [Jardim de Luxemburgo](place:par-luxembourg)
 - 16:05 [Poilâne (Cherche-Midi)](place:par-poilane-cherche-midi) — A padaria original, de 1932: punitions (~€5) e a miche
 - 16:25 [CityPharma](place:par-citypharma) — Dermocosméticos; aberta até 21h
 - 17:15 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10)
@@ -104,7 +107,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 11:30 **Frozen Ever After** — Barco de ~5 min por Arendelle, na World of Frozen, a área nova de 2026; o caminho passa pela Adventure Way. É uma das maiores filas da Disney: ~75–80 min no fim da manhã, na média de 90 dias puxada pelo verão. Se o app mostrar mais de 80 min, vão pelo single rider (~40 min), que separa vocês em barcos diferentes. O Premier Access One (€16 por pessoa) esgota cedo: em 25/9, às 8h35, já tinha acabado
 - 12:35 **Arendelle** — Foto da vila e do castelo do outro lado do lago, na saída da World of Frozen
 - +1,5 km — filas do Spider-Man, do Ratatouille e do Frozen (estimativa)
-- 12:55 [Disneyland Park](place:par-disneyland) — Troca de parque: ~20 min a pé desde o Frozen, sem nova revista. Ingressos já pagos: €221 para os 3, ou €73,67 por pessoa (2 saíram a €55 com a promo de morador e 1 a €111). Dá para sair e voltar no mesmo dia, cada um com o próprio ingresso. **Halloween Festival** (26/9–1/11, incluso no ingresso): Main Street decorada, vitrais dos vilões na estação, Stitch de vampiro no coreto do Casey's Corner e vilões no pé do castelo
+- 12:55 [Disneyland Park](place:par-disneyland) — Troca de parque: ~20 min a pé desde o Frozen.\
+  **Halloween Festival**: Main Street decorada, vitrais dos vilões na estação, Stitch de vampiro no coreto do Casey's Corner e vilões no pé do castelo
   - via: a pé pela Main Street até a estação · 20 min
 - 13:05 **Star Tours** — Simulador de Star Wars: ~15 min de fila de manhã, ~30 à tarde, ~20 à noite. Ao lado, Les Mystères du Nautilus, a pé, com ~5 min de fila
 - **Buzz Lightyear Laser Blast** — Ao lado do Star Tours, mas **fechado para reforma de 5 a 17/10** (Pixie Dust DLP): não conta com ele neste dia
