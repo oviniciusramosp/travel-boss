@@ -62,6 +62,7 @@ describe('weatherIn', () => {
       mm: 5,
       cloud: 50,
       hours: 5,
+      runs: 5,
     });
   });
 
@@ -71,7 +72,7 @@ describe('weatherIn', () => {
   });
 });
 
-const sky = (rain: number, mm: number, cloud = 50): Weather => ({ min: 10, max: 15, rain, mm, cloud, hours: 5 });
+const sky = (rain: number, mm: number, cloud = 50): Weather => ({ min: 10, max: 15, rain, mm, cloud, hours: 5, runs: 10 });
 
 describe('weatherLook', () => {
   it('keeps the sky under a 30% chance, may rain up to 60%, then says how much falls', () => {
@@ -130,7 +131,7 @@ describe('packForecast / unpackForecast', () => {
 });
 
 describe('weatherTip', () => {
-  const weather: Weather = { min: 16.6, max: 21.2, rain: 26.4, mm: 0.3, cloud: 40, hours: 6 };
+  const weather: Weather = { min: 16.6, max: 21.2, rain: 26.4, mm: 0.3, cloud: 40, hours: 6, runs: 82 };
   const label = { en: 'Partly cloudy', 'pt-BR': 'Parcialmente nublado' };
   const now = new Date(2026, 8, 27, 15, 0);
   const at = new Date(2026, 8, 27, 14, 32).getTime();
@@ -145,6 +146,13 @@ describe('weatherTip', () => {
     );
     expect(weatherTip(weather, label, 'en', undefined, null, false, now)).toBe('Partly cloudy\n17–21°\nRain 26%\nOpen-Meteo');
     expect(weatherTip(weather, label, 'pt-BR', undefined, at, false, now, 'MET Norway')).toBe('Parcialmente nublado\n17–21°\nChuva 26%\nAtualizado às 14:32 · MET Norway');
+  });
+  it('says what a single model forecasts instead of a chance', () => {
+    const one: Weather = { ...weather, rain: 100, mm: 0.4, runs: 1 };
+    expect(weatherTip(one, { en: 'Drizzle', 'pt-BR': 'Garoa' }, 'pt-BR', undefined, at, false, now, 'MET Norway')).toBe(
+      'Garoa\n17–21°\nO modelo prevê 0,4 mm de chuva, sem probabilidade\nAtualizado às 14:32 · MET Norway',
+    );
+    expect(weatherTip({ ...one, rain: 0, mm: 0 }, label, 'en', undefined, at, false, now, 'MET Norway')).toContain('No rain in the model, no probability');
   });
   it('dates an update from another day', () => {
     expect(updatedLabel(new Date(2026, 8, 26, 9, 5).getTime(), 'pt-BR', now)).toBe('26/09 09:05');

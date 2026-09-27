@@ -21,7 +21,8 @@ const FORECAST_URL = '/api/weather';
 const FRESH_MS = 30 * 60 * 1000;
 
 /** Median low and high, chance of rain in %, median rain of the runs that rain, median cloud. */
-export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number };
+/** `runs` is how many members covered the window: with one (a single model) `rain` is 0 or 100 and not a chance. */
+export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number; runs: number };
 
 type Entry = {
   /** When the last request started; 0 for a forecast read from storage, so the next load refreshes it. */
@@ -224,7 +225,14 @@ export function weatherTip(
   const high = Math.round(weather.max);
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const span = window ? `${window[0]}h–${window[1]}h · ` : '';
-  const rain = `${pickLocale(locale, { en: 'Rain', 'pt-BR': 'Chuva' })} ${Math.round(weather.rain)}%`;
+  // One model has no share of runs to report: say what it forecasts, in millimetres.
+  const mm = `${weather.mm.toFixed(1).replace('.', locale === 'pt-BR' ? ',' : '.')} mm`;
+  const rain =
+    weather.runs > 1
+      ? `${pickLocale(locale, { en: 'Rain', 'pt-BR': 'Chuva' })} ${Math.round(weather.rain)}%`
+      : weather.rain >= 50
+        ? pickLocale(locale, { en: `The model forecasts ${mm} of rain, no probability`, 'pt-BR': `O modelo prevê ${mm} de chuva, sem probabilidade` })
+        : pickLocale(locale, { en: 'No rain in the model, no probability', 'pt-BR': 'Sem chuva no modelo, sem probabilidade' });
   const when = fetchedAt == null ? null : updatedLabel(fetchedAt, locale, now);
   const by = source ?? 'Open-Meteo';
   const updated =
@@ -283,6 +291,7 @@ export function weatherIn(ensemble: Ensemble, date: string, window: readonly [nu
     mm: wet.length ? median(wet) : 0,
     cloud: median(clouds),
     hours: hours.length,
+    runs,
   };
 }
 

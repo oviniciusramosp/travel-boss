@@ -221,7 +221,14 @@ function fillWeather(
   const high = Math.round(weather.max);
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
-  slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', `${temp} · ${rain}%`));
+  // An ensemble gives a chance; a single model gives an amount, or nothing to add.
+  const reading =
+    weather.runs > 1
+      ? `${temp} · ${rain}%`
+      : weather.rain >= 50
+        ? `${temp} · ${weather.mm.toFixed(1).replace('.', locale === 'pt-BR' ? ',' : '.')} mm`
+        : temp;
+  slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', reading));
   const tip = weatherTip(weather, look.label, locale, window, state.fetchedAt, state.failed, new Date(), state.source);
   slot.setAttribute('data-tip', tip);
   slot.setAttribute('aria-label', tip.replaceAll('\n', '. '));
