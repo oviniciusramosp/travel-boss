@@ -291,41 +291,54 @@
 }
 
 /* Words the number or glyph already imply slide out on hover of that number or glyph; without hover they stay.
+   The word floats beside its number, over whatever follows, so revealing one never moves the others.
    The way back is this rule's transition (quick, eased in); the way out is the hover rule's (slow, with a light bounce). */
+.tb-count,
+.tb-walk,
+.tb-weather {
+  position: relative;
+}
+
 .tb-reveal {
-  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  z-index: 1;
   max-width: 0;
   overflow: hidden;
+  padding-inline: 0 var(--spacing-4);
+  border-radius: var(--r-pill);
+  background: var(--color-paper);
   opacity: 0;
-  transform: translateX(calc(var(--spacing-8) * -1));
+  transform: translate(calc(var(--spacing-8) * -1), -50%);
   white-space: pre;
-  vertical-align: bottom;
+  line-height: var(--leading-caption);
   transition:
     max-width var(--dur-base) var(--ease-in),
     opacity var(--dur-fast) var(--ease-in),
-    transform var(--dur-base) var(--ease-in),
-    margin var(--dur-base) var(--ease-in);
+    transform var(--dur-base) var(--ease-in);
 }
 
-.tb-count:is(:hover, :focus-within) .tb-count__unit,
-.tb-walk:is(:hover, :focus-within) .tb-walk__unit,
-.tb-weather:is(:hover, :focus-within) .tb-weather__text {
-  max-width: 12em;
+:is(.tb-count, .tb-walk, .tb-weather):is(:hover, :focus-within) > .tb-reveal {
+  max-width: 14em;
   opacity: 1;
-  transform: translateX(0);
+  transform: translate(0, -50%);
   transition:
     max-width var(--dur-reveal) var(--ease-out),
     opacity var(--dur-reveal) var(--ease-out),
-    transform var(--dur-reveal) var(--ease-bounce),
-    margin var(--dur-reveal) var(--ease-out);
+    transform var(--dur-reveal) var(--ease-bounce);
 }
 
-.tb-weather__text {
-  margin-inline-start: 0;
+/* In a period header the forecast sits at the right edge: the reading opens to the left. */
+.tb-period__head .tb-weather > .tb-reveal {
+  left: auto;
+  right: 100%;
+  padding-inline: var(--spacing-4) 0;
+  transform: translate(var(--spacing-8), -50%);
 }
 
-.tb-weather:is(:hover, :focus-within) .tb-weather__text {
-  margin-inline-start: var(--inset-group);
+.tb-period__head .tb-weather:is(:hover, :focus-within) > .tb-reveal {
+  transform: translate(0, -50%);
 }
 
 /* The forecast and its refresh button, which appears only after a fetch failed. */
@@ -362,8 +375,12 @@
 }
 
 @media (hover: none) {
-  .tb-reveal {
+  .tb-reveal,
+  .tb-period__head .tb-weather > .tb-reveal {
+    position: static;
     max-width: none;
+    padding-inline: 0;
+    background: none;
     opacity: 1;
     transform: none;
   }
