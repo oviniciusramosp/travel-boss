@@ -129,9 +129,15 @@ function placeById(citySlug: string, placeId: string): TravelPlace | undefined {
 }
 
 /** Filled category dot. The glyph stays solid, same as a map pin. */
-function stopPin(place: TravelPlace): HTMLSpanElement {
+function stopPin(place: TravelPlace, parent?: TravelPlace): HTMLSpanElement {
   const lead = document.createElement('span');
   lead.className = 'tb-stop-pin';
+  if (parent) {
+    // Attraction inside its park: a small dot in the park's color, like a sub-point on the map.
+    lead.classList.add('tb-stop-pin--sub');
+    lead.style.setProperty('--pin-color', placeCategoryMeta[parent.category].color);
+    return lead;
+  }
   lead.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
   if (circleInk(placeCategoryMeta[place.category].color) === 'on-ink') lead.classList.add('is-on-ink');
   const markup = document.createElement('template');
@@ -520,9 +526,14 @@ export function mountTrip(
     const locale = shell.locale();
     const date = routedDate();
     const numbers = new Map<string, number>();
+    // Attractions of the day draw as sub-points; their park takes the number where the first one sits.
+    const subs = new Map<string, string>();
     if (date) {
       for (const { place, on } of datePlaces(trip, date)) {
-        if (on && !numbers.has(place.id)) numbers.set(place.id, numbers.size + 1);
+        if (!on) continue;
+        const owner = place.parentId ?? place.id;
+        if (place.parentId) subs.set(place.id, place.parentId);
+        if (!numbers.has(owner)) numbers.set(owner, numbers.size + 1);
       }
     }
     const pins: MapPin[] = [];
@@ -535,14 +546,15 @@ export function mountTrip(
         if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
         seen.add(place.id);
         const number = numbers.get(place.id);
+        const parent = subs.has(place.id) ? placeById(city.slug, subs.get(place.id)!) : undefined;
         pins.push({
           id: place.id,
           lat: place.lat,
           lng: place.lng,
           label: pickLocale(locale, place.name),
-          color: placeCategoryMeta[place.category].color,
+          color: placeCategoryMeta[(parent ?? place).category].color,
           kind: 'place',
-          ...(number ? { number } : {}),
+          ...(parent ? { sub: true } : number ? { number } : {}),
         });
       }
     }
@@ -1464,7 +1476,7 @@ export function mountTrip(
         const placeId = stop.placeId;
         const item = row({
           time: stop.time,
-          lead: place ? stopPin(place) : undefined,
+          lead: place ? stopPin(place, place.parentId ? placeById(city.slug, place.parentId) : undefined) : undefined,
           title: missingPlace ? (placeId ?? stop.label) : stop.label,
           sub: missingPlace ? authored || undefined : undefined,
           tip: false,

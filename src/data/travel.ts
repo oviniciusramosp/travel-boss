@@ -255,6 +255,11 @@ export interface TravelPlace {
    */
   subPoints?: TravelSubPoint[];
   /**
+   * Bigger place this one sits inside (an attraction in its park). On the routed day the map
+   * draws it as a sub-point in the parent's color, unnumbered, and the timeline as a small dot.
+   */
+  parentId?: string;
+  /**
    * Visit logistics: avg meal price, ticket, duration, best time/day, tips.
    * When omitted, may still resolve from curated `visitByPlaceId` data.
    */
@@ -3425,6 +3430,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-bella-notte',
+        parentId: 'par-disneyland',
         name: {
           en: 'Pizzeria Bella Notte',
           'pt-BR': 'Pizzeria Bella Notte',
@@ -3497,6 +3503,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-spider-man',
+        parentId: 'par-disneyland',
         name: { en: 'Spider-Man W.E.B. Adventure', 'pt-BR': 'Spider-Man W.E.B. Adventure' },
         category: 'tourist',
         description: {
@@ -3512,6 +3519,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-ratatouille',
+        parentId: 'par-disneyland',
         name: { en: 'Ratatouille: The Adventure', 'pt-BR': 'Ratatouille: The Adventure' },
         category: 'tourist',
         description: {
@@ -3527,6 +3535,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-frozen',
+        parentId: 'par-disneyland',
         name: { en: 'Frozen Ever After', 'pt-BR': 'Frozen Ever After' },
         category: 'tourist',
         description: {
@@ -3542,6 +3551,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-daw-stark-factory',
+        parentId: 'par-disneyland',
         name: { en: 'Stark Factory', 'pt-BR': 'Stark Factory' },
         category: 'restaurants',
         description: {
@@ -3557,6 +3567,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-dlp-star-tours',
+        parentId: 'par-disneyland',
         name: {
           en: 'Star Tours: The Adventures Continue',
           'pt-BR': 'Star Tours: The Adventures Continue',
@@ -3575,6 +3586,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-dlp-pirates',
+        parentId: 'par-disneyland',
         name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' },
         category: 'tourist',
         description: {
@@ -3590,6 +3602,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-dlp-phantom-manor',
+        parentId: 'par-disneyland',
         name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' },
         category: 'tourist',
         description: {
@@ -3605,6 +3618,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-dlp-casa-de-coco',
+        parentId: 'par-disneyland',
         name: {
           en: 'Casa de Coco – Restaurante de Familia',
           'pt-BR': 'Casa de Coco – Restaurante de Familia',
@@ -3623,6 +3637,7 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-dlp-tales-of-magic',
+        parentId: 'par-disneyland',
         name: { en: 'Disney Tales of Magic', 'pt-BR': 'Disney Tales of Magic' },
         category: 'tourist',
         description: {

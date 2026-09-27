@@ -65,6 +65,7 @@ function modelFor(pin: MapPin): PinModel {
     color: pin.color || fromCategory || cssToken('--color-ink', PIN_FALLBACK),
     featured: Boolean(pin.featured || place?.featured),
     number: pin.number,
+    sub: pin.sub,
     category,
     subcategories: place?.subcategories,
   });
@@ -217,6 +218,8 @@ export function mountMap(host: HTMLElement): MapHandle {
     else delete node.dataset.featured;
     if (meta.number) node.dataset.pinNumber = meta.number;
     else delete node.dataset.pinNumber;
+    if (meta.sub) node.dataset.pinSub = 'true';
+    else delete node.dataset.pinSub;
   };
 
   const root = leafletMap.getContainer();

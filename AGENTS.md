@@ -82,6 +82,8 @@ A fonte da verdade é `src/data/travel.ts` (`travelCities`), com `travel-visit.t
 
 Lugar grande (parque, palácio) pode ter `subPoints`: pontos internos em ordem de caminhada, com nome em en e pt-BR e coordenada do OSM. A rota do dia entra pelo primeiro, passa por todos (bolinhas com nome no mapa) e sai do último; a timeline lista os pontos embaixo da parada. `photo` opcional (thumb Commons `500px-…`) aparece no card quando o ponto é expandido (um aberto por vez); com o card aberto o mapa numera os pontos, o hover realça a bolinha e o ponto expandido fica destacado.
 
+Atração dentro de um parque leva `parentId` com o id do parque (as da Disney apontam para `par-disneyland`). O `.md` continua com a atração como parada, com horário e nota; no dia roteado o mapa a desenha como sub-ponto na cor do parque, sem número (o parque fica com o número onde aparece a primeira), e a timeline como bolinha pequena.
+
 Vídeo de referência (reel do Instagram) entra em `videos` do lugar, sem a query de compartilhamento (`?stkn=`, `?igsh=`). O teste de `src/ui/video.test.ts` falha se sobrar query.
 
 ## Guia da cidade (Mercado e Comidas)

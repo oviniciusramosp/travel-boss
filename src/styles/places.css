@@ -16,6 +16,19 @@
   opacity: 1;
 }
 
+/* An attraction of the day inside its park: a solid sub-point in the park's color, no glyph. */
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-sub] {
+  opacity: 1;
+}
+
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-sub] .tb-pin {
+  --pin-scale: calc(12 / 28);
+}
+
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-sub] .tb-pin__glyph {
+  visibility: hidden;
+}
+
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-number]::after {
   content: attr(data-pin-number);
   position: absolute;

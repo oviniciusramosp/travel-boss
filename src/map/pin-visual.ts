@@ -23,6 +23,7 @@ export type PinModel = {
   number: string;
   glyph: string;
   star: boolean;
+  sub: boolean;
 };
 
 export function zoomPinBucket(zoom: number): 'far' | 'mid' | 'near' {
@@ -44,6 +45,7 @@ export function pinModel(input: {
   number?: number;
   category?: string;
   subcategories?: readonly string[] | null;
+  sub?: boolean;
 }): PinModel {
   const category = input.category;
   const glyph = placePinIconHtml(category, input.subcategories);
@@ -56,6 +58,7 @@ export function pinModel(input: {
     number: input.number == null ? '' : String(input.number),
     glyph,
     star: category === 'tourist',
+    sub: Boolean(input.sub),
   };
 }
 
@@ -67,7 +70,8 @@ export function samePinModel(a: PinModel | undefined, b: PinModel): boolean {
     a.glyph === b.glyph &&
     a.star === b.star &&
     a.featured === b.featured &&
-    a.number === b.number
+    a.number === b.number &&
+    a.sub === b.sub
   );
 }
 

@@ -769,6 +769,13 @@
   box-shadow: 0 0 0 2px var(--color-paper);
 }
 
+/* Attraction inside its park: the timeline twin of the map sub-point. */
+.tb-stop-pin--sub {
+  width: 12px;
+  height: 12px;
+  margin: 5px;
+}
+
 .tb-stop-pin.is-on-ink {
   color: var(--color-on-ink);
 }
