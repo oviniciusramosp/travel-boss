@@ -624,19 +624,6 @@
   scroll-margin-top: var(--spacing-16);
 }
 
-.tb-doc .tb-day[aria-current='true'] > summary {
-  background: var(--color-ink);
-  color: var(--color-on-ink);
-}
-
-.tb-doc .tb-day[aria-current='true'] > summary .tb-day-actions {
-  opacity: 1;
-}
-
-.tb-doc .tb-day > summary {
-  width: 100%;
-}
-
 .tb-city-section h2 {
   margin: 0;
   font-size: var(--text-h2);

@@ -132,10 +132,8 @@
 .tb-locale button,
 .tb-nav,
 .tb-place,
-.tb-stop,
 .tb-stops li,
 .tb-hotels__chip,
-.tb-day > summary,
 .tb-input,
 .tb-select {
   transition:
@@ -157,9 +155,7 @@
 .tb-locale button:hover:not([aria-pressed='true']):not([aria-selected='true']),
 .tb-nav:hover:not([aria-current='true']),
 .tb-place:hover:not([aria-current='true']),
-.tb-stop:hover:not([aria-current='true']),
-.tb-stops li:hover:not([aria-current='true']),
-.tb-day > summary:hover {
+.tb-stops li:hover:not([aria-current='true']) {
   background: var(--color-hover);
 }
 
@@ -178,10 +174,8 @@
 .tb-locale button:active,
 .tb-nav:active,
 .tb-place:active,
-.tb-stop:active,
 .tb-stops li:active,
 .tb-hotels__chip:active,
-.tb-day > summary:active,
 .tb-input:active:not(:disabled):not([readonly]),
 .tb-select:active:not(:disabled) {
   transform: scale(0.97);
@@ -194,9 +188,7 @@
 .tb-locale button:active:not([aria-pressed='true']):not([aria-selected='true']),
 .tb-nav:active:not([aria-current='true']),
 .tb-place:active:not([aria-current='true']),
-.tb-stop:active:not([aria-current='true']),
-.tb-hotels__chip.tb-badge-soft:active,
-.tb-day > summary:active {
+.tb-hotels__chip.tb-badge-soft:active {
   background: var(--color-press);
 }
 
@@ -387,17 +379,13 @@
 }
 
 /* Days, categories, periods. Without interpolate-size the toggle is instant. */
-.tb-day,
 .tb-group,
-.tb-slot,
 .tb-period,
 .tb-date {
   interpolate-size: allow-keywords;
 }
 
-.tb-day::details-content,
 .tb-group::details-content,
-.tb-slot::details-content,
 .tb-period::details-content,
 .tb-date::details-content {
   height: 0;
@@ -408,9 +396,7 @@
   transition-behavior: allow-discrete;
 }
 
-.tb-day[open]::details-content,
 .tb-group[open]::details-content,
-.tb-slot[open]::details-content,
 .tb-period[open]::details-content,
 .tb-date[open]::details-content {
   height: auto;
