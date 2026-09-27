@@ -319,19 +319,20 @@ describe('paris itinerary', () => {
   });
 });
 
-describe('parentId', () => {
-  it('points to another place of the same city that has no parent itself', async () => {
+describe('subPoints placeId', () => {
+  it('names a place of the same city and sits on its pin', async () => {
     const { travelCities } = await import('./travel');
     const fails: string[] = [];
     for (const city of travelCities) {
       const ids = new Map(city.places.map((place) => [place.id, place]));
       for (const place of city.places) {
-        if (!place.parentId) continue;
-        const parent = ids.get(place.parentId);
-        if (!parent || parent.id === place.id || parent.parentId) fails.push(`${place.id} → ${place.parentId}`);
+        for (const sub of place.subPoints ?? []) {
+          if (!sub.placeId) continue;
+          const target = ids.get(sub.placeId);
+          if (!target || target.lat !== sub.lat || target.lng !== sub.lng) fails.push(`${place.id} → ${sub.placeId}`);
+        }
       }
     }
     expect(fails).toEqual([]);
-    expect(travelCities.flatMap((city) => city.places).some((place) => place.parentId === 'par-disneyland')).toBe(true);
   });
 });

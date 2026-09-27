@@ -196,6 +196,20 @@ export function seenFromOutside(text: string): boolean {
   return OUTSIDE.test(folded) && !INSIDE.test(folded);
 }
 
+/** The stops' places plus the catalog places their sub-points name, for the budget. */
+export function withSubPointPlaces<T extends { subPoints?: readonly { placeId?: string }[] }>(
+  places: readonly T[],
+  byId: (id: string) => T | undefined,
+): T[] {
+  return places.flatMap((place) => [
+    place,
+    ...(place.subPoints ?? []).flatMap((sub) => {
+      const found = sub.placeId ? byId(sub.placeId) : undefined;
+      return found ? [found] : [];
+    }),
+  ]);
+}
+
 /** `label` names a leg fare; a place line is named by its id. */
 export type BudgetLine = { id: string; food: number; ticket: number; label?: string };
 export type DateBudget = { food: number; ticket: number; lines: BudgetLine[] };

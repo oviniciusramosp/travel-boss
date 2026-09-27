@@ -11,6 +11,7 @@ import {
   freeMinutes,
   isOpenSlot,
   seenFromOutside,
+  withSubPointPlaces,
   zonedStamp,
 } from './day-plan';
 
@@ -229,6 +230,23 @@ describe('isOpenSlot', () => {
     // Past midnight still counts forward.
     expect(freeMinutes({ time: '23:22', nextTime: '00:12', stayMin: 0, legMin: 32 })).toBe(18);
     expect(isOpenSlot({ time: '09:00' })).toBe(false);
+  });
+});
+
+describe('withSubPointPlaces', () => {
+  it('adds the places named by sub-points; dateBudget still counts each once', () => {
+    const food = (eur: number) => ({ avgPricePerPerson: { min: eur, max: eur, currency: 'EUR' as const } });
+    const catalog = new Map([
+      ['pizza', { id: 'pizza', visit: food(14) }],
+      ['tacos', { id: 'tacos', visit: food(12) }],
+    ]);
+    const park = { id: 'park', subPoints: [{ placeId: 'pizza' }, {}, { placeId: 'tacos' }, { placeId: 'gone' }] };
+    const places = withSubPointPlaces<{ id: string; subPoints?: { placeId?: string }[]; visit?: object }>(
+      [park, catalog.get('pizza')!],
+      (id) => catalog.get(id),
+    );
+    expect(places.map((place) => place.id)).toEqual(['park', 'pizza', 'tacos', 'pizza']);
+    expect(dateBudget(places).food).toBe(26);
   });
 });
 

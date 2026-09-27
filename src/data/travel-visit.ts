@@ -1715,6 +1715,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Da Casa do Gui: RER E até Val de Fontenay + RER A até Marne-la-Vallée–Chessy (~40 min); a estação fica a 2 min dos portões. A Navigo Semaine cobre.\nUma revista de bolsas vale para os dois parques.\nOs parques abrem às 9h30; a hora extra das 8h30 é só para hóspedes dos hotéis Disney.\nComece no Disney Adventure World (Spider-Man, Ratatouille) e depois vá ao Disneyland Park. O Crush’s Coaster está fechado até o verão de 2027.\nO Disney Tales of Magic dura ~20 min, no fechamento do parque. De 5 a 14/10 não há RER E depois das 22h30: RER A até Val de Fontenay e ônibus 145 ou 301.\nO Disney Village (McDonald’s, Five Guys, Earl of Sandwich) fica fora dos portões; dá para sair e voltar, cada adulto com o próprio ingresso.',
     ),
   },
+  // A planning estimate: the morning of the two-park day, 09:30 until the switch.
+  'par-disney-adventure-world': {
+    durationMin: 180,
+    durationMax: 300,
+    duration: L('Half a day (3–5 h)', 'Meio dia (3–5 h)'),
+    crowdProfile: 'tourist-heavy',
+  },
   'par-dlp-tales-of-magic': {
     durationMin: 20,
     durationMax: 25,

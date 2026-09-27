@@ -64,27 +64,6 @@ export type RouteHop = {
   subPoints?: { lat: number; lng: number; label: string; color?: string }[];
 };
 
-/** A stop and the park it sits in: `group` is the park id (or its own), `gate` the park pin. */
-export type GroupedPoint = TripLegPoint & { group: string; gate?: TripLegPoint };
-
-/**
- * Hops from one stop to the next. Moving between parks, or in and out of one, passes through the
- * park gates. The authored leg rides on the stretch outside the parks.
- */
-export function gatedHops(from: GroupedPoint, to: GroupedPoint, via?: TripLeg): RouteHop[] {
-  const crossing = from.group !== to.group;
-  const exit = crossing ? from.gate : undefined;
-  const entry = crossing ? to.gate : undefined;
-  const strip = ({ group: _group, gate: _gate, ...point }: GroupedPoint): TripLegPoint => point;
-  const chain = [strip(from), ...(exit ? [exit] : []), ...(entry ? [entry] : []), strip(to)];
-  const outside = exit ? 1 : 0;
-  return chain.slice(1).map((point, at) => ({
-    from: chain[at]!,
-    to: point,
-    ...(at === outside && via ? { via } : {}),
-  }));
-}
-
 function endpoints(hop: RouteHop): Pick<MapRouteSegment, 'fromId' | 'toId'> {
   return {
     ...(hop.from.id ? { fromId: hop.from.id } : {}),

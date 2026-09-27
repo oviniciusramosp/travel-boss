@@ -12,8 +12,6 @@ export type MapPin = {
   icon?: string;
   featured?: boolean;
   number?: number;
-  /** Drawn as a small sub-point dot (an attraction inside its park). */
-  sub?: boolean;
 };
 
 export type MapPadding = {
