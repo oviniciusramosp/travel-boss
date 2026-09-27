@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { parseEnsemble, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
+import { WEATHER_ICONS } from '../ui/weather-icons';
+import { dayWeather, parseEnsemble, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
 
 // 07:00–13:00 of one date; rain is stamped at the end of its hour.
 const time = ['07', '08', '09', '10', '11', '12', '13'].map((hour) => `2026-10-04T${hour}:00`);
@@ -58,22 +59,47 @@ describe('weatherIn', () => {
   });
 });
 
-describe('weatherLook', () => {
-  const sky = (rain: number, mm: number, cloud = 50): Weather => ({ min: 10, max: 15, rain, mm, cloud, hours: 5 });
+const sky = (rain: number, mm: number, cloud = 50): Weather => ({ min: 10, max: 15, rain, mm, cloud, hours: 5 });
 
-  it('shows rain only from half the runs, by how much falls', () => {
-    expect(weatherLook(sky(49, 20)).icon).toBe('partly_cloudy_day');
-    expect(weatherLook(sky(50, 0.5)).icon).toBe('rainy_light');
-    expect(weatherLook(sky(80, 3)).icon).toBe('rainy');
-    expect(weatherLook(sky(80, 10)).icon).toBe('rainy_heavy');
+describe('weatherLook', () => {
+  it('keeps the sky under a 30% chance, may rain up to 60%, then says how much falls', () => {
+    expect(weatherLook(sky(16, 3)).icon).toBe('cloud-sun');
+    expect(weatherLook(sky(30, 3)).icon).toBe('cloud-sun-rain');
+    expect(weatherLook(sky(59, 3), true).icon).toBe('cloud-moon-rain');
+    // Five hours: under 1 mm is drizzle, from 7.5 mm heavy rain.
+    expect(weatherLook(sky(60, 0.5)).icon).toBe('cloud-rain');
+    expect(weatherLook(sky(60, 0.5)).label['pt-BR']).toBe('Garoa');
+    expect(weatherLook(sky(80, 3)).icon).toBe('cloud-showers');
+    expect(weatherLook(sky(80, 10)).icon).toBe('cloud-showers-heavy');
     expect(weatherLook(sky(80, 10)).label['pt-BR']).toBe('Chuva forte');
   });
 
   it('reads the sky from the median cloud, with the moon at night', () => {
-    expect(weatherLook(sky(0, 0, 10)).icon).toBe('clear_day');
-    expect(weatherLook(sky(0, 0, 10), true).icon).toBe('clear_night');
-    expect(weatherLook(sky(0, 0, 90)).icon).toBe('cloud');
-    expect(weatherLook(sky(0, 0, 50), true).tone).toBe('night');
-    expect(weatherLook(sky(90, 3)).tone).toBe('rain');
+    expect(weatherLook(sky(0, 0, 10)).icon).toBe('sun');
+    expect(weatherLook(sky(0, 0, 10), true).icon).toBe('moon-stars');
+    expect(weatherLook(sky(0, 0, 70)).icon).toBe('clouds-sun');
+    expect(weatherLook(sky(0, 0, 70), true).icon).toBe('clouds-moon');
+    expect(weatherLook(sky(0, 0, 90)).icon).toBe('clouds');
+  });
+
+  it('draws every glyph from a file of the pack', () => {
+    const files = Object.keys(import.meta.glob('../../public/weather/*.svg'));
+    expect(WEATHER_ICONS.filter((name) => !files.includes(`../../public/weather/${name}.svg`))).toEqual([]);
+  });
+});
+
+describe('dayWeather', () => {
+  it('never shows rain that no period shows', () => {
+    // 4 Oct as the user saw it: 16% all day is no rain at all.
+    const day = dayWeather([sky(16, 1, 60), sky(16, 1, 60), sky(16, 1, 80)])!;
+    expect(weatherLook(day).icon).toBe('clouds-sun');
+    expect(day.rain).toBe(16);
+  });
+
+  it('takes the whole range and the rainiest period', () => {
+    const morning = { ...sky(20, 0, 10), min: 9, max: 14 };
+    const evening = { ...sky(70, 3, 95), min: 12, max: 16 };
+    expect(dayWeather([morning, evening])).toEqual({ ...evening, min: 9, max: 16 });
+    expect(dayWeather([])).toBeNull();
   });
 });

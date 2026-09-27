@@ -6,7 +6,7 @@
  */
 import type { LString } from '../catalog';
 import type { Period } from './day-plan';
-import type { IconName } from '../ui/icons';
+import type { WeatherIcon } from '../ui/weather-icons';
 
 const FORECAST_URL = 'https://ensemble-api.open-meteo.com/v1/ensemble';
 const MODELS = 'ecmwf_ifs025,gfs05';
@@ -72,12 +72,11 @@ export function peekForecast(lat: number, lng: number): Ensemble | null {
   return cache.get(keyOf(lat, lng))?.hours ?? null;
 }
 
-/** Clock hours of each period, start in, end out. The day card reads all of them. */
-export const WINDOWS: Record<Period | 'day', [number, number]> = {
+/** Clock hours of each period, start in, end out. */
+export const WINDOWS: Record<Period, [number, number]> = {
   morning: [7, 12],
   afternoon: [12, 18],
   evening: [18, 23],
-  day: [7, 23],
 };
 
 // Met Office "rain day": 0.2 mm is the least a gauge counts as rain.
@@ -123,33 +122,58 @@ export function weatherIn(ensemble: Ensemble, date: string, window: readonly [nu
   };
 }
 
-export type WeatherTone = 'sun' | 'night' | 'cloud' | 'rain';
-
-// ponytail: calibration knobs. Rain wins the glyph from half the runs up; the rate
-// is the median rain of the runs that rain, spread over the window.
-const RAIN_ICON_FROM = 50;
+// ponytail: calibration knobs. The NWS words: from 30% rain is a "chance", from 60%
+// it is "likely". The rate is the median rain of the runs that rain, over the window.
+const MAYBE_FROM = 30;
+const LIKELY_FROM = 60;
 const DRIZZLE_BELOW_MM_H = 0.2;
 const HEAVY_FROM_MM_H = 1.5;
 
-/** A glyph, a word and the tone that colors the glyph. */
-export function weatherLook(weather: Weather, night = false): { icon: IconName; label: LString; tone: WeatherTone } {
-  if (weather.rain >= RAIN_ICON_FROM) {
-    const rate = weather.mm / weather.hours;
-    if (rate < DRIZZLE_BELOW_MM_H) return { icon: 'rainy_light', label: { en: 'Drizzle', 'pt-BR': 'Garoa' }, tone: 'rain' };
-    if (rate >= HEAVY_FROM_MM_H) return { icon: 'rainy_heavy', label: { en: 'Heavy rain', 'pt-BR': 'Chuva forte' }, tone: 'rain' };
-    return { icon: 'rainy', label: { en: 'Rain', 'pt-BR': 'Chuva' }, tone: 'rain' };
-  }
-  if (weather.cloud >= 70) return { icon: 'cloud', label: { en: 'Cloudy', 'pt-BR': 'Nublado' }, tone: 'cloud' };
-  if (weather.cloud >= 30) {
-    return {
-      icon: night ? 'partly_cloudy_night' : 'partly_cloudy_day',
-      label: { en: 'Partly cloudy', 'pt-BR': 'Parcialmente nublado' },
-      tone: night ? 'night' : 'sun',
-    };
-  }
+/** 0 dry, 1 may rain, 2 drizzle, 3 rain, 4 heavy rain. */
+function rainTier(weather: Weather): number {
+  if (weather.rain < MAYBE_FROM) return 0;
+  if (weather.rain < LIKELY_FROM) return 1;
+  const rate = weather.mm / weather.hours;
+  if (rate < DRIZZLE_BELOW_MM_H) return 2;
+  return rate < HEAVY_FROM_MM_H ? 3 : 4;
+}
+
+/**
+ * The day as its periods: their whole range, and the sky and chance of the rainiest,
+ * so the day never shows rain that no period shows. A dry day reads their mean cloud.
+ */
+export function dayWeather(parts: readonly Weather[]): Weather | null {
+  const first = parts[0];
+  if (!first) return null;
+  const rank = (weather: Weather) => rainTier(weather) * 1000 + weather.rain;
+  const wettest = parts.reduce((best, part) => (rank(part) > rank(best) ? part : best), first);
   return {
-    icon: night ? 'clear_night' : 'clear_day',
-    label: { en: 'Clear', 'pt-BR': 'Céu limpo' },
-    tone: night ? 'night' : 'sun',
+    ...wettest,
+    min: Math.min(...parts.map((part) => part.min)),
+    max: Math.max(...parts.map((part) => part.max)),
+    cloud: rainTier(wettest) ? wettest.cloud : parts.reduce((sum, part) => sum + part.cloud, 0) / parts.length,
   };
+}
+
+/** A glyph from the pack and its word. Below a 30% chance only the sky shows. */
+export function weatherLook(weather: Weather, night = false): { icon: WeatherIcon; label: LString } {
+  switch (rainTier(weather)) {
+    case 4:
+      return { icon: 'cloud-showers-heavy', label: { en: 'Heavy rain', 'pt-BR': 'Chuva forte' } };
+    case 3:
+      return { icon: 'cloud-showers', label: { en: 'Rain', 'pt-BR': 'Chuva' } };
+    case 2:
+      return { icon: 'cloud-rain', label: { en: 'Drizzle', 'pt-BR': 'Garoa' } };
+    case 1:
+      return { icon: night ? 'cloud-moon-rain' : 'cloud-sun-rain', label: { en: 'Chance of rain', 'pt-BR': 'Pode chover' } };
+  }
+  // NWS sky cover: up to 2/8 is sunny, 3–5/8 partly, 6–7/8 mostly cloudy, 8/8 cloudy.
+  if (weather.cloud >= 87.5) return { icon: 'clouds', label: { en: 'Cloudy', 'pt-BR': 'Nublado' } };
+  if (weather.cloud >= 62.5) {
+    return { icon: night ? 'clouds-moon' : 'clouds-sun', label: { en: 'Mostly cloudy', 'pt-BR': 'Muitas nuvens' } };
+  }
+  if (weather.cloud >= 25) {
+    return { icon: night ? 'cloud-moon' : 'cloud-sun', label: { en: 'Partly cloudy', 'pt-BR': 'Parcialmente nublado' } };
+  }
+  return { icon: night ? 'moon-stars' : 'sun', label: { en: 'Clear', 'pt-BR': 'Céu limpo' } };
 }

@@ -370,7 +370,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Forecast: glyph and temperature, as quiet as the stop count. */
+/* Forecast: glyph, low–high and chance of rain, as quiet as the stop count. */
 .tb-weather {
   display: inline-flex;
   align-items: center;
@@ -385,25 +385,16 @@
   display: none;
 }
 
+/* The pack's duotone SVG keeps its own colors. */
+.tb-weather__icon {
+  flex: none;
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
 .tb-date__meta .tb-weather::before {
   content: '·';
   margin-inline: var(--spacing-4);
-}
-
-.tb-weather[data-tone='sun'] .material-symbols-rounded {
-  color: var(--color-weather-sun);
-}
-
-.tb-weather[data-tone='night'] .material-symbols-rounded {
-  color: var(--color-weather-night);
-}
-
-.tb-weather[data-tone='cloud'] .material-symbols-rounded {
-  color: var(--color-weather-cloud);
-}
-
-.tb-weather[data-tone='rain'] .material-symbols-rounded {
-  color: var(--color-weather-rain);
 }
 
 /* In a period header the forecast sits just left of the switch. Without it,

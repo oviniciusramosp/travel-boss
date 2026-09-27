@@ -74,7 +74,8 @@ import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripS
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { dateBudgetCards, periodLabel, slotSwitch, stopCountLabel } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
-import { loadForecast, peekForecast, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
+import { dayWeather, loadForecast, peekForecast, weatherIn, weatherLook, WINDOWS, type Weather } from './weather';
+import { weatherIcon } from '../ui/weather-icons';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -161,12 +162,11 @@ function fillWeather(slot: HTMLElement, weather: Weather | null, night: boolean,
     return;
   }
   const look = weatherLook(weather, night);
-  slot.dataset.tone = look.tone;
   const low = Math.round(weather.min);
   const high = Math.round(weather.max);
   const temp = low === high ? `${low}°` : `${low}–${high}°`;
   const rain = Math.round(weather.rain);
-  slot.replaceChildren(icon(look.icon, { size: 16, fill: true }), document.createTextNode(`${temp} · ${rain}%`));
+  slot.replaceChildren(weatherIcon(look.icon), document.createTextNode(`${temp} · ${rain}%`));
   const words = pickLocale(locale, { en: 'rain', 'pt-BR': 'chuva' });
   const source = pickLocale(locale, { en: 'ECMWF + NOAA ensembles', 'pt-BR': 'ensembles ECMWF + NOAA' });
   const tip = `${pickLocale(locale, look.label)} · ${low}–${high}° · ${words} ${rain}% · ${source} · Open-Meteo`;
@@ -1061,7 +1061,7 @@ export function mountTrip(
     });
   }
 
-  /** Forecast per period on its fixed clock window, and the day from 07 to 23, in the city of its first stop. */
+  /** Forecast per period on its fixed clock window, in the city of its first stop. The day card sums its periods. */
   function paintWeather(trip: Trip) {
     const locale = shell.locale();
     for (const section of tripDates(trip)) {
@@ -1072,15 +1072,23 @@ export function mountTrip(
         const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
         return record ? peekForecast(record.lat, record.lng) : null;
       };
+      const parts: Weather[] = [];
       for (const { period, rows: indexes } of periodSections(periods)) {
         if (!period) continue;
-        const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
         const hours = cityOf(indexes[0] ?? -1);
-        if (slot) fillWeather(slot, hours && weatherIn(hours, section.date, WINDOWS[period]), period === 'evening', locale);
+        const weather = hours && weatherIn(hours, section.date, WINDOWS[period]);
+        if (weather) parts.push(weather);
+        const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
+        if (slot) fillWeather(slot, weather, period === 'evening', locale);
+      }
+      // A date without times reads all three periods of its first city.
+      const whole = periods.some(Boolean) ? null : cityOf(0);
+      for (const window of whole ? Object.values(WINDOWS) : []) {
+        const weather = whole && weatherIn(whole, section.date, window);
+        if (weather) parts.push(weather);
       }
       const slot = card.querySelector<HTMLElement>('[data-weather="day"]');
-      const hours = cityOf(0);
-      if (slot) fillWeather(slot, hours && weatherIn(hours, section.date, WINDOWS.day), false, locale);
+      if (slot) fillWeather(slot, dayWeather(parts), false, locale);
     }
   }
 
