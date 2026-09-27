@@ -4096,6 +4096,22 @@ export const localTravelCities: TravelCity[] = [
         videos: ['https://www.instagram.com/reel/DcG6jLkTUtf/'],
       },
       {
+        id: 'par-segar',
+        name: { en: 'Rôtisserie Segar', 'pt-BR': 'Rôtisserie Segar' },
+        category: 'restaurants',
+        subcategories: ['chicken', 'french'],
+        description: {
+          en: 'Rotisserie on Rue Mouffetard: Landes chicken raised 105 days outdoors, flame-roasted and hand-pulled. Eat it with sides or in a baguette sandwich — mayo, curry, or Caesar with aged parmesan and crispy chicken-skin chips.',
+          'pt-BR': 'Rotisserie na Rue Mouffetard: frango das Landes criado 105 dias ao ar livre, assado na chama e desfiado à mão. Com acompanhamentos ou em sanduíche de baguete — maionese, curry ou Caesar com parmesão curado e chips de pele de frango crocante.',
+        },
+        googleRating: 4.5,
+        lat: 48.840624,
+        lng: 2.349767,
+        address: '111 Rue Mouffetard, 75005 Paris',
+        mapsQuery: 'Rôtisserie Segar 111 Rue Mouffetard Paris',
+        videos: ['https://www.instagram.com/reel/DdjPwghObbW/'],
+      },
+      {
         id: 'par-chez-pradel',
         name: { en: 'Chez Pradel', 'pt-BR': 'Chez Pradel' },
         category: 'restaurants',

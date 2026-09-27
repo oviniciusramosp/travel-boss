@@ -1676,6 +1676,26 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Thomon · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
+  'par-segar': [
+    photo(
+      'https://cdn3.regie-agricole.com/ulf/CMS_Content/2/articles/873721/_4.CS_Segar_SandwichspouletrOti-1000x562.jpg',
+      'Roast chicken sandwiches, mayo/curry and mayonnaise',
+      'Sanduíches de frango assado, maionese/curry e maionese',
+      'La Toque',
+    ),
+    photo(
+      'https://cdn4.gustave-et-rosalie.com/media/cache/share_image/upload/article/c7a87b8a8e-385491011-17937065972733827-1575080690355667531-n.jpg',
+      'Roast chicken baguette sandwich on Segar paper',
+      'Baguete de frango assado no papel da Segar',
+      'Gustave et Rosalie',
+    ),
+    photo(
+      'https://www.finedininglovers.fr/sites/default/files/places/r%C3%B4tisserie-segar-chijmde7f5bx5kcr3gxzniz1xgw-2.png',
+      'Pulled roast chicken sandwich',
+      'Sanduíche de frango assado desfiado',
+      'Fine Dining Lovers',
+    ),
+  ],
   'par-chez-pradel': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Chez_Pradel_%2830626190691%29.jpg/960px-Chez_Pradel_%2830626190691%29.jpg',

@@ -31,6 +31,7 @@ import {
   selectionZoom,
 } from './camera';
 import { coveredInsets, mergeInsets, type Insets } from './chrome';
+import { mountAmenities } from './amenities';
 import { attachMapControls } from './controls';
 import { mountPlaceOverlays } from './overlays';
 import { pinBox, pinHtml, pinModel, samePinModel, zoomPinBucket, type PinModel } from './pin-visual';
@@ -39,7 +40,7 @@ import { MAPLIBRE_PERF, maplibreFade } from './maplibre-perf';
 import { attachTrackpadGestures } from './trackpad';
 import { overviewArcs } from './overview';
 import { drawRouteSegments, paintRouteFocus, type RouteEntry } from './route-draw';
-import { routeEmphasis, type RouteFocus } from './route-model';
+import { routeEmphasis, routeLayerKind, type RouteFocus } from './route-model';
 import type {
   MapCityPin,
   MapHandle,
@@ -310,6 +311,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   const routePane = leafletMap.getPane('tb-route');
   if (routePane) routePane.style.zIndex = cssToken('--z-map-route', '460');
   const routeRenderer = svg({ pane: 'tb-route' });
+  const amenities = mountAmenities(leafletMap);
 
   const overlays = mountPlaceOverlays(leafletMap);
   const applyRouteFocus = () => paintRouteFocus(routeEntries, routeFocus, routeSource !== 'map');
@@ -429,6 +431,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       }
       routeEntries = [];
       leafletMap.getContainer().dataset.route = String(segments.length);
+      amenities.setWalks(segments.filter((s) => routeLayerKind(s) === 'walk').map((s) => s.latlngs));
       if (!segments.length) {
         routeFocus = null;
         pinnedLeg = null;

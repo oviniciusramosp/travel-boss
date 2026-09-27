@@ -12,6 +12,9 @@
   --color-hover: rgba(10, 10, 10, 0.04);
   --color-press: rgba(10, 10, 10, 0.08);
   --color-walk: #008fff;
+  /* Water and restroom points near the walk (map toggle). */
+  --color-water: #38bdf8;
+  --color-restroom: #7c3aed;
   /* Behind a modal dialog. Black in both themes. */
   --color-scrim: rgba(0, 0, 0, 0.56);
   /* Place areas and the stay heatmap. Night is softer so the hues don't glare. */
@@ -55,6 +58,10 @@
   --icon-sm: 16px;
   --icon-md: 18px;
   --icon-lg: 20px;
+  /* Water and restroom map pins: the glyph is the pin, drawn at hover size and scaled down at rest. */
+  --icon-pin: 28px;
+  --amenity-scale: 0.43;
+  --amenity-scale-near: 0.57;
 
   --r-none: 0px;
   --r-min: 4px;
