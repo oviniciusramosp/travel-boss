@@ -928,6 +928,17 @@ const rerCToPorteMaillot: ItineraryTransitHop = {
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  // 5/10: scenic exit via the Carrousel arch and Maillol garden (OSM points in par-tuileries).
+  {
+    from: 'par-louvre',
+    to: 'par-carrefour-express-saint-honore',
+    mode: 'walk',
+    durationMin: 15, // Planning estimate, allowing a slower walk through the garden.
+    through: [
+      [48.861728, 2.332908], // Arc de Triomphe du Carrousel
+      [48.862417, 2.331472], // Maillol statues, inside the garden
+    ],
+  },
   // 4/10: from the foot of the tower onto Avenue Pierre Loti (OSM ways 51259180, 1285858202)
   {
     from: 'par-eiffel',

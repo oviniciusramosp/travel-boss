@@ -38,6 +38,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:05 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã** rápido antes do Louvre (pancakes ou pain perdu)
 - 09:45 [Palais-Royal](place:par-palais-royal) — Volta pelo jardim a caminho do Louvre
 - 10:00 [Louvre](place:par-louvre) — **3 horas**, com ingresso das 10h
+  - via: a pé pelo Arco do Triunfo do Carrousel · 15 min — Seguir pelo jardim e pelas estátuas de Maillol antes de sair em direção ao Carrefour Express (Saint-Honoré)
+  - decisão: 2026-09-27 · Ir ao Carrefour pelo Arco do Triunfo do Carrousel, priorizando o caminho por dentro, mais bonito, mesmo sendo menos direto
   - comentário: Ajustei para apenas 3h, mude o horário do proximo ponto com base nisso.
 - +3 km — percurso dentro do museu, das salas Daru e Mollien ao Oriente Próximo (estimativa)
 - 14:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Pão, queijo, fruta e bebida (~€6–8), no caminho para as Tulherias
