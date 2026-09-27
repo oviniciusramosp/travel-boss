@@ -389,7 +389,8 @@ export function mountTrip(
     );
   };
   let tripRouteEpoch = 0;
-  let ignoreDateToggle = false;
+  /** Date cards in the order they opened. Several stay open; the last one open is on the map. */
+  let openOrder: string[] = [];
   let pinPick = false;
   let routeAbort: AbortController | null = null;
   let hasPainted = false;
@@ -424,11 +425,15 @@ export function mountTrip(
     writePeriods(id, periodPrefs);
   }
 
+  /** The card opened last among the open ones. */
   function openDate(): string | null {
-    return main.querySelector<HTMLDetailsElement>('details.tb-date[open]')?.dataset.date ?? null;
+    const open = new Set(
+      [...main.querySelectorAll<HTMLDetailsElement>('details.tb-date[open]')].map((card) => card.dataset.date),
+    );
+    return openOrder.findLast((date) => open.has(date)) ?? null;
   }
 
-  /** The open date, unless its card hid the route. */
+  /** That date, unless its card hid the route. */
   function routedDate(): string | null {
     const date = openDate();
     return date && !routeHidden.has(date) ? date : null;
@@ -1303,12 +1308,15 @@ export function mountTrip(
           details.open = true;
           return;
         }
-        if (routeHidden.delete(date)) {
-          syncView(true);
+        if (routedDate() === date) {
+          routeHidden.add(date);
+          syncView(false);
           return;
         }
-        routeHidden.add(date);
-        syncView(false);
+        // Its route was hidden, or another open card had the map: this one takes it.
+        routeHidden.delete(date);
+        openOrder = [...openOrder.filter((other) => other !== date), date];
+        syncView(true);
       });
       const copyDay = iconButton({
         icon: 'content_copy',
@@ -1614,16 +1622,16 @@ export function mountTrip(
           restoring = false;
           return;
         }
-        if (ignoreDateToggle) return;
+        // The other open cards stay open. This one goes on the map, or leaves it.
+        const before = routedDate();
+        openOrder = openOrder.filter((other) => other !== date);
         if (details.open) {
           routeHidden.delete(date);
-          ignoreDateToggle = true;
-          for (const other of main.querySelectorAll<HTMLDetailsElement>('details.tb-date')) {
-            if (other !== details) other.open = false;
-          }
-          ignoreDateToggle = false;
+          openOrder.push(date);
         }
-        const fitDay = details.open && !pinPick;
+        // Opening frames the day, unless a pin opened it. Closing the day on the map frames the one it hands the map to.
+        const after = routedDate();
+        const fitDay = details.open ? !pinPick : after !== null && after !== before;
         pinPick = false;
         syncView(fitDay);
       });
@@ -1708,8 +1716,10 @@ export function mountTrip(
   stopsUnsub.fn = map.onSelect((pinId) => {
     if (!alive || !current) return;
     const selector = `[data-place-id="${CSS.escape(pinId)}"]`;
-    // Home shows up on most dates. The open card's row wins.
+    // Home shows up on most dates. The row of the card on the map wins, then any open card's.
+    const onMap = openDate();
     const item =
+      (onMap ? main.querySelector<HTMLElement>(`details.tb-date[data-date="${CSS.escape(onMap)}"] ${selector}`) : null) ??
       main.querySelector<HTMLElement>(`details.tb-date[open] ${selector}`) ??
       main.querySelector<HTMLElement>(selector);
     if (item) {
