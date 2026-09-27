@@ -35,6 +35,12 @@ function photo(
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   'par-bouillon': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/%C5%92uf_mayonnaise.jpg/500px-%C5%92uf_mayonnaise.jpg',
+      'Œuf mayonnaise, a bouillon classic (generic photo)',
+      'Œuf mayonnaise, clássico dos bouillons (foto ilustrativa)',
+      'Zheng Zhou · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/e/ef/Chez_Chartier_1.JPG',
       'Bouillon Chartier',
       'Bouillon Chartier',
@@ -134,13 +140,19 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-arnaud-nicolas': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/9/9e/P1160897_Paris_XVII_rue_de_L%C3%A9vis_rwk.jpg',
-      'Charcuterie Arnaud Nicolas',
-      'Charcuterie Arnaud Nicolas',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Paris_street_market_stall_-_charcuterie_counter_1.jpg/500px-Paris_street_market_stall_-_charcuterie_counter_1.jpg',
+      'Charcuterie counter at a Paris market (generic photo)',
+      'Balcão de charcutaria num mercado de Paris (foto ilustrativa)',
+      'jimmyweee · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-auptitgrec': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Cr%C3%AApe_with_ham%2C_bacon%2C_cheese_%26_spinach_%40_Cr%C3%AAperie_Josselin_%40_Montparnasse_%40_Paris_%2833789534444%29.jpg/500px-Cr%C3%AApe_with_ham%2C_bacon%2C_cheese_%26_spinach_%40_Cr%C3%AAperie_Josselin_%40_Montparnasse_%40_Paris_%2833789534444%29.jpg',
+      'Savory crêpe with ham, cheese and spinach (generic photo)',
+      'Crepe salgado com presunto, queijo e espinafre (foto ilustrativa)',
+      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Paris-Rue_Mouffetard-160-nr_68-Au_p%27tit_Grec-2017-gje.jpg/1280px-Paris-Rue_Mouffetard-160-nr_68-Au_p%27tit_Grec-2017-gje.jpg',
       "Au P'tit Grec at 68 Rue Mouffetard",
@@ -258,29 +270,29 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   // Perto da BnF (IA, set/2026)
   'par-fuuki': [
+    photo('/photos/paris/par-fuuki-3.webp', 'Gyoza on a plate at Fuuki', 'Gyoza no prato do Fuuki', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-fuuki-1.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-fuuki-2.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
-    photo('/photos/paris/par-fuuki-3.webp', 'Fuuki', 'Fuuki', 'Google Maps (foto de usuário, cópia local)'),
   ],
   'par-n-plus-un': [
+    photo('/photos/paris/par-n-plus-un-3.webp', 'Gazpacho at N+1', 'Gaspacho no N+1', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-n-plus-un-1.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-n-plus-un-2.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
-    photo('/photos/paris/par-n-plus-un-3.webp', 'N+1', 'N+1', 'Google Maps (foto de usuário, cópia local)'),
   ],
   'par-le-quai-bnf': [
+    photo('/photos/paris/par-le-quai-bnf-3.webp', 'Pizza at Le Quai', 'Pizza no Le Quai', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-le-quai-bnf-1.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-le-quai-bnf-2.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
-    photo('/photos/paris/par-le-quai-bnf-3.webp', 'Le Quai', 'Le Quai', 'Google Maps (foto de usuário, cópia local)'),
   ],
   'par-cajou': [
+    photo('/photos/paris/par-cajou-3.webp', 'Pasta salad with tofu at Cajou', 'Salada de macarrão com tofu no Cajou', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-cajou-1.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-cajou-2.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
-    photo('/photos/paris/par-cajou-3.webp', 'Cajou', 'Cajou', 'Google Maps (foto de usuário, cópia local)'),
   ],
   'par-kawaa-lumiere': [
+    photo('/photos/paris/par-kawaa-lumiere-3.webp', 'Lemonade, coffee and a cookie at Kawaa Lumière', 'Limonada, café e cookie no Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-kawaa-lumiere-1.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
     photo('/photos/paris/par-kawaa-lumiere-2.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
-    photo('/photos/paris/par-kawaa-lumiere-3.webp', 'Kawaa Lumière', 'Kawaa Lumière', 'Google Maps (foto de usuário, cópia local)'),
   ],
   'par-bercy-village': [
     photo(
@@ -366,18 +378,18 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-boulogne': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/La_D%C3%A9fense_and_Bois_de_Boulogne_from_the_Eiffel_Tower%2C_11_June_2017_001.jpg/3840px-La_D%C3%A9fense_and_Bois_de_Boulogne_from_the_Eiffel_Tower%2C_11_June_2017_001.jpg',
-      'Bois de Boulogne',
-      'Bois de Boulogne',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Lac_Inf%C3%A9rieur_du_Bois_de_Boulogne%2C_Paris_26_August_2015.jpg/500px-Lac_Inf%C3%A9rieur_du_Bois_de_Boulogne%2C_Paris_26_August_2015.jpg',
+      'The lower lake in the Bois de Boulogne',
+      'O lago inferior do Bois de Boulogne',
+      'BikerNormand · CC BY-SA 2.0 · Wikimedia Commons',
     ),
   ],
   'par-brasserie-pres': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/0/0e/P1020083_Paris_VI_Cour_du_Commerce-Saint-Andr%C3%A9_reductwk.JPG',
-      'Brasserie des Prés',
-      'Brasserie des Prés',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Steak_frites_-paris_%2815126302149%29.jpg/500px-Steak_frites_-paris_%2815126302149%29.jpg',
+      'Steak frites in Paris (generic photo)',
+      'Steak frites em Paris (foto ilustrativa)',
+      'Geoff Peters · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-burger-king-opera': [
@@ -426,6 +438,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-chapelle-saint-louis': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/%C3%89cole_Militaire%2C_Paris_-_Main_facade_central_pavilion_roof_detailing_showing_clock_and_triangular_pediment.jpg/500px-%C3%89cole_Militaire%2C_Paris_-_Main_facade_central_pavilion_roof_detailing_showing_clock_and_triangular_pediment.jpg',
+      "Close-up of the École Militaire's central pavilion, clock and pediment",
+      'Pavilhão central da École Militaire de perto, com o relógio e o frontão',
+      'iMahesh · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/%C3%89cole_Militaire_from_Champ-de-Mars%2C_May_2012.jpg/1280px-%C3%89cole_Militaire_from_Champ-de-Mars%2C_May_2012.jpg',
       'École Militaire from the Champ de Mars; the chapel is in its north wing',
       'École Militaire vista do Champ de Mars; a capela fica na ala norte',
@@ -471,6 +489,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-chez-janou': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Mousse_au_Chocolat_2010_003.JPG/500px-Mousse_au_Chocolat_2010_003.JPG',
+      'Chocolate mousse (generic photo)',
+      'Mousse de chocolate (foto ilustrativa)',
+      'Bin im Garten · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
     photo(
       'https://live.staticflickr.com/55/143096731_7a3ef7ff8f_b.jpg',
       'Chez Janou',
@@ -576,6 +600,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-esplanade-de-gaulle': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Grande_Arche_de_La_D%C3%A9fense_et_fontaine_FOPed_grey.jpg/1280px-Grande_Arche_de_La_D%C3%A9fense_et_fontaine_FOPed_grey.jpg',
+      'Grande Arche and fountain at La Défense, by the esplanade',
+      'Grande Arche e fonte em La Défense, na esplanada',
+      'Atoma · CC BY 2.5 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Esplanade_G%C3%A9n%C3%A9ral_Gaulle_-_Courbevoie_%28FR92%29_-_2023-09-16_-_6.jpg/1280px-Esplanade_G%C3%A9n%C3%A9ral_Gaulle_-_Courbevoie_%28FR92%29_-_2023-09-16_-_6.jpg',
       'Esplanade du Général de Gaulle, La Défense',
       'Esplanade du Général de Gaulle, La Défense',
@@ -597,6 +627,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-felicita': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Pizza_%2840295714762%29.jpg/500px-Pizza_%2840295714762%29.jpg',
+      'Pizza (generic photo)',
+      'Pizza (foto ilustrativa)',
+      'N i c o l a · CC BY 2.0 · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/1/17/Bar_et_restaurant_dans_La_Felicit%C3%A0%2C_Paris._02.jpg',
       'La Felicità',
@@ -628,18 +664,18 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-francette': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/a/aa/P1080375_Paris_XV_Port_de_Suffren_rwk.JPG',
-      'Francette',
-      'Francette',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Moules-frites_bi%C3%A8re.jpg/500px-Moules-frites_bi%C3%A8re.jpg',
+      'Mussels and fries with beer (generic photo)',
+      'Moules-frites com cerveja (foto ilustrativa)',
+      'Olga Rithme · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-franklin-passy': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/1/1c/Statue_de_Benjamin_Franklin%2C_square_de_Yorktown%2C_Paris_16e_9.jpg',
-      'Le Franklin Passy',
-      'Le Franklin Passy',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Entrec%C3%B4te.JPG/500px-Entrec%C3%B4te.JPG',
+      'Entrecôte steak (generic photo)',
+      'Entrecôte (foto ilustrativa)',
+      'Abracadabra2000 · Public domain · Wikimedia Commons',
     ),
   ],
   'par-fric-frac': [
@@ -658,16 +694,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-galeries-lafayette': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Paris_-_Galeries_Lafayette_Haussmann_%E2%80%93_Cupola_%E2%80%93_20230425_PvE_%28Q113561459%29.jpg/1280px-Paris_-_Galeries_Lafayette_Haussmann_%E2%80%93_Cupola_%E2%80%93_20230425_PvE_%28Q113561459%29.jpg',
-      'Galeries Lafayette dome',
-      'Cúpula das Galeries Lafayette',
-      'Pveverdingen · CC BY-SA 4.0 · Wikimedia Commons',
-    ),
-    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Paris%2C_Galeries_Lafayette_Haussmann%2C_Coupole.jpg/1280px-Paris%2C_Galeries_Lafayette_Haussmann%2C_Coupole.jpg',
       'Galeries Lafayette dome and balconies',
       'Cúpula e balcões das Galeries Lafayette',
       'Dr. Thomas Liptak · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Paris_-_Galeries_Lafayette_Haussmann_%E2%80%93_Cupola_%E2%80%93_20230425_PvE_%28Q113561459%29.jpg/1280px-Paris_-_Galeries_Lafayette_Haussmann_%E2%80%93_Cupola_%E2%80%93_20230425_PvE_%28Q113561459%29.jpg',
+      'Galeries Lafayette dome',
+      'Cúpula das Galeries Lafayette',
+      'Pveverdingen · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/GaleriesLafayetteNuit.jpg/1280px-GaleriesLafayetteNuit.jpg',
@@ -692,13 +728,13 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-horloge': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QBlML2ylD2p4TXk9FgMi90Nl1zRfJMigvQyI_80-haM7pDffTq7miNkDXt964Pbgt-yLES7P_-SdFRis4K-1TtIMIni1qvIMStdl2gDATgPI7yZ1QQD0bEXVLe0xiIXE0A4UI6aQ=s693-k-no',
-      'Conciergerie Clock',
-      'Relógio da Conciergerie',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q4xBpHgLw5zBXFO10Izad6wdbQnctb56aJaP9xn5l11Ruhz4ljOduMzmgFRjccldppn58FT2BmWhNi7mUbiB3kkcmH1aUl0RzOPJQy9HFSkIyST9abKxkEUaYBlZim7BlBb_eD40J8qS9M=s608-k-no',
+      'Close-up of the ornate Conciergerie clock',
+      'Relógio ornamentado da Conciergerie, de perto',
       'Google Maps',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q4xBpHgLw5zBXFO10Izad6wdbQnctb56aJaP9xn5l11Ruhz4ljOduMzmgFRjccldppn58FT2BmWhNi7mUbiB3kkcmH1aUl0RzOPJQy9HFSkIyST9abKxkEUaYBlZim7BlBb_eD40J8qS9M=s608-k-no',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QBlML2ylD2p4TXk9FgMi90Nl1zRfJMigvQyI_80-haM7pDffTq7miNkDXt964Pbgt-yLES7P_-SdFRis4K-1TtIMIni1qvIMStdl2gDATgPI7yZ1QQD0bEXVLe0xiIXE0A4UI6aQ=s693-k-no',
       'Conciergerie Clock',
       'Relógio da Conciergerie',
       'Google Maps',
@@ -810,13 +846,13 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-maison-isabelle': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SmqsLPSRsrnEAj0ghApbdgEZyyjRRTZ6KjKvGykjako-N7MmzNczx0ZrWLSOKYo43Bf2wO6YhaKFFogJh05LnEmAPo2o63DbXTywG5QB7KND55n7_sEF696OYwFRnXAGtCh7UBiddYxG0=s1016-k-no',
-      "La Maison d'Isabelle",
-      "La Maison d'Isabelle",
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SYOrwUjKmbonqSVOTQ1GPSdxeSDTnEciQBFONz5IlpR4eK1TViRVM_Vh-fMGF_fDnSJGsiQjXfNyKh4HbJlRrGudtm1m3VlAveZ-sdzf4zat4qE5kxd6evpibpIwjmwAqQPSwjHOgmxOQh=s812-k-no',
+      "Award-winning croissants at La Maison d'Isabelle",
+      "Croissants premiados da La Maison d'Isabelle",
       'Google Maps',
     ),
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SYOrwUjKmbonqSVOTQ1GPSdxeSDTnEciQBFONz5IlpR4eK1TViRVM_Vh-fMGF_fDnSJGsiQjXfNyKh4HbJlRrGudtm1m3VlAveZ-sdzf4zat4qE5kxd6evpibpIwjmwAqQPSwjHOgmxOQh=s812-k-no',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SmqsLPSRsrnEAj0ghApbdgEZyyjRRTZ6KjKvGykjako-N7MmzNczx0ZrWLSOKYo43Bf2wO6YhaKFFogJh05LnEmAPo2o63DbXTywG5QB7KND55n7_sEF696OYwFRnXAGtCh7UBiddYxG0=s1016-k-no',
       "La Maison d'Isabelle",
       "La Maison d'Isabelle",
       'Google Maps',
@@ -900,10 +936,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-metro-2': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/3/35/Musician_Mohamed_Lamouri_in_Paris_Metro_line_2.jpg',
-      'Metro Line 2',
-      'Metro Line 2',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Viaduc_Ligne_2_M%C3%A9tro_Boulevard_Chapelle_Paris_7.jpg/500px-Viaduc_Ligne_2_M%C3%A9tro_Boulevard_Chapelle_Paris_7.jpg',
+      "Line 2's elevated viaduct over Boulevard de la Chapelle",
+      'Viaduto elevado da Linha 2 sobre o Boulevard de la Chapelle',
+      'Chabe01 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-metro-6': [
@@ -940,10 +976,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-artizans': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/e/ef/Chez_Chartier_1.JPG',
-      'Classic Paris bistro dining room',
-      'Salão clássico de bistrô parisiense',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Steak-frites_%28steak-and-chips%29.jpg/500px-Steak-frites_%28steak-and-chips%29.jpg',
+      'Steak frites (generic photo)',
+      'Steak frites (foto ilustrativa)',
+      'Dcollard · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-monceau': [
@@ -964,10 +1000,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-montmartre': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg/3840px-View_from_Notre-Dame_de_Paris%2C_24_June_2014_004.jpg',
-      'Montmartre',
-      'Montmartre',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Butte_Montmartre%2C_Place_du_Tertre%2C_Paris.jpg/500px-Butte_Montmartre%2C_Place_du_Tertre%2C_Paris.jpg',
+      'Place du Tertre, at the top of Montmartre',
+      'Place du Tertre, no alto de Montmartre',
+      'Britchi Mirela · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-montorgueil': [
@@ -1112,6 +1148,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-petit-palais-cafe': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Lyon_2e_-_Hard_Rock_Cafe%2C_p%C3%A2tisseries_du_th%C3%A9_ou_caf%C3%A9_gourmand.jpg/500px-Lyon_2e_-_Hard_Rock_Cafe%2C_p%C3%A2tisseries_du_th%C3%A9_ou_caf%C3%A9_gourmand.jpg',
+      'Café gourmand with mini desserts (generic photo)',
+      'Café gourmand com mini sobremesas (foto ilustrativa)',
+      'Romainbehar · CC0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Petit_Palais_%40_Paris_%2834081852943%29.jpg/1280px-Petit_Palais_%40_Paris_%2834081852943%29.jpg',
       'Petit Palais courtyard café',
       'Café no pátio do Petit Palais',
@@ -1170,6 +1212,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-paname-brewing': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Beer_Flight.jpg/500px-Beer_Flight.jpg',
+      'Flight of craft beers (generic photo)',
+      'Flight de cervejas artesanais (foto ilustrativa)',
+      'Wanderstheworld · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Paname_Tap_House_%28Quartier_Crim%C3%A9e%29_01.jpg/1280px-Paname_Tap_House_%28Quartier_Crim%C3%A9e%29_01.jpg',
       'Paname Brewing Company tap house',
       'Bar da Paname Brewing Company',
@@ -1200,15 +1248,15 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-pompidou': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Apud_la_Centro_Georges-Pompidou_5.jpg/1280px-Apud_la_Centro_Georges-Pompidou_5.jpg',
-      'Centre Pompidou façade and escalator tubes',
-      'Fachada do Centre Pompidou e tubos das escadas',
-      'Wikimedia Commons',
-    ),
-    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Place_Georges-Pompidou%2C_Paris_24_April_2011.jpg/1280px-Place_Georges-Pompidou%2C_Paris_24_April_2011.jpg',
       'Place Georges-Pompidou and the Centre',
       'Place Georges-Pompidou e o Centre',
+      'Wikimedia Commons',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Apud_la_Centro_Georges-Pompidou_5.jpg/1280px-Apud_la_Centro_Georges-Pompidou_5.jpg',
+      'Centre Pompidou façade and escalator tubes',
+      'Fachada do Centre Pompidou e tubos das escadas',
       'Wikimedia Commons',
     ),
   ],
@@ -1244,10 +1292,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-royal-cambronne': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Place_Cambronne_-_Paris_XV_%28FR75%29_-_2021-08-09_-_3.jpg/3840px-Place_Cambronne_-_Paris_XV_%28FR75%29_-_2021-08-09_-_3.jpg',
-      'Le Royal Cambronne',
-      'Le Royal Cambronne',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Steak-frites_-_Le_Relais_de_l%27Entrec%C3%B4te_%28Geneva%29.jpg/500px-Steak-frites_-_Le_Relais_de_l%27Entrec%C3%B4te_%28Geneva%29.jpg',
+      'Steak frites (generic photo)',
+      'Steak frites (foto ilustrativa)',
+      'Dcollard · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
   'par-rue-cler': [
@@ -1328,10 +1376,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-serres-auteuil': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/7/74/Serianthes_calycina_au_Jardin_des_Serres_d%27Auteuil_%28Paris%29.jpg',
-      'Jardin des Serres d\'Auteuil',
-      'Jardin des Serres d\'Auteuil',
-      'Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Serres_d%27Auteuil_Palmarium_and_french_garden_in_autumn_2015.jpg/500px-Serres_d%27Auteuil_Palmarium_and_french_garden_in_autumn_2015.jpg',
+      "The Palmarium greenhouse and garden at the Serres d'Auteuil",
+      "A estufa Palmarium e o jardim das Serres d'Auteuil",
+      'Salix · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-shakespeare': [
@@ -1358,6 +1406,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-train-bleu': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Le_Train_Bleu_%28Paris%29_assiette_de_charcuterie_au_salon_%28f%C3%A9vrier_2023%29.jpg/500px-Le_Train_Bleu_%28Paris%29_assiette_de_charcuterie_au_salon_%28f%C3%A9vrier_2023%29.jpg',
+      'Charcuterie plate in the Train Bleu dining room',
+      'Prato de charcutaria no salão do Train Bleu',
+      'Benoît Prieur · CC0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/c/cb/Le_Train_Bleu.jpg',
       'Le Train Bleu',
       'Le Train Bleu',
@@ -1366,10 +1420,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-trocadero': [
     photo(
-      'https://live.staticflickr.com/4010/4175210166_4b92dc7454_b.jpg',
-      'Trocadéro',
-      'Trocadéro',
-      'Flickr (CC via Openverse)',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Esplanade_du_Trocad%C3%A9ro%2C_Paris.jpg/500px-Esplanade_du_Trocad%C3%A9ro%2C_Paris.jpg',
+      'Esplanade du Trocadéro, with the Eiffel Tower',
+      'Esplanade do Trocadéro, com a Torre Eiffel',
+      'Nicolas Vigier · CC0 · Wikimedia Commons',
     ),
   ],
   'par-tuileries': [
@@ -1462,16 +1516,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-belleville': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/1/16/Parc_de_Belleville_Paris_01.jpg',
+      'Landscaped path in Parc de Belleville',
+      'Caminho ajardinado do Parc de Belleville',
+      'Pol · Public domain · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Belv%C3%A9d%C3%A8re_de_Belleville_%40_Parc_de_Belleville_%40_Paris_20_%2825137120823%29.jpg/1280px-Belv%C3%A9d%C3%A8re_de_Belleville_%40_Parc_de_Belleville_%40_Paris_20_%2825137120823%29.jpg',
       'Belleville lookout over Paris',
       'Mirante de Belleville sobre Paris',
       'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/1/16/Parc_de_Belleville_Paris_01.jpg',
-      'Parc de Belleville',
-      'Parc de Belleville',
-      'Pol · Public domain · Wikimedia Commons',
     ),
   ],
   'par-villa-marquise': [
@@ -1518,16 +1572,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-archives-nationales': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Archives_nationales_%40_Le_Marais_%40_Paris_%2833693687914%29.jpg/1280px-Archives_nationales_%40_Le_Marais_%40_Paris_%2833693687914%29.jpg',
-      'Hôtel de Soubise, Archives nationales',
-      'Hôtel de Soubise, Archives nationales',
-      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Garden_%40_Archives_nationales_%40_Le_Marais_%40_Paris_%2834494938086%29.jpg/1280px-Garden_%40_Archives_nationales_%40_Le_Marais_%40_Paris_%2834494938086%29.jpg',
-      'Archives nationales garden',
-      'Jardim dos Archives nationales',
-      'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/H%C3%B4tel_de_Soubise%2C_Paris_9_June_2017.jpg/500px-H%C3%B4tel_de_Soubise%2C_Paris_9_June_2017.jpg',
+      'Hôtel de Soubise, home of the Archives nationales',
+      'Hôtel de Soubise, sede dos Archives nationales',
+      'Guilhem Vellut · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-pont-neuf': [
@@ -1652,16 +1700,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-rosa-bonheur': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Moules_frites_wth_rose_and_pastis.JPG/500px-Moules_frites_wth_rose_and_pastis.JPG',
+      'Mussels and fries with rosé and pastis (generic photo)',
+      'Moules-frites com rosé e pastis (foto ilustrativa)',
+      'LittleGun · Public domain · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Rosa_Bonheur%2C_Paris_5_June_2015.jpg/1280px-Rosa_Bonheur%2C_Paris_5_June_2015.jpg',
       'Rosa Bonheur in the Buttes-Chaumont',
       'Rosa Bonheur no Buttes-Chaumont',
       'Tom Hilton · CC BY 2.0 · Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Guinguette_Rosa_Bonheur_-_Parc_des_Buttes-Chaumont.jpg/1280px-Guinguette_Rosa_Bonheur_-_Parc_des_Buttes-Chaumont.jpg',
-      'Rosa Bonheur guinguette',
-      'Guinguette Rosa Bonheur',
-      'W. of Landshire · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
   'par-baron-rouge': [
@@ -1673,6 +1721,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-as-du-fallafel': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Falafel_in_a_pita.jpg/500px-Falafel_in_a_pita.jpg',
+      'Falafel in pita bread (generic photo)',
+      'Falafel no pão pita (foto ilustrativa)',
+      'Israel_photo_gallery · CC BY-SA 2.0 · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/LAs_Du_Fallafel%2C_34_Rue_des_Rosiers%2C_75004_Paris_2008.jpg/1280px-LAs_Du_Fallafel%2C_34_Rue_des_Rosiers%2C_75004_Paris_2008.jpg',
       "L'As du Fallafel on Rue des Rosiers",
@@ -1708,6 +1762,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-bouillon-republique': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Oeuf_Mayo_Le_Petit_Littr%C3%A9_Paris.jpg/500px-Oeuf_Mayo_Le_Petit_Littr%C3%A9_Paris.jpg',
+      'Œuf mayonnaise at a Paris bouillon-style restaurant',
+      'Œuf mayonnaise num restaurante estilo bouillon em Paris',
+      'Benreis · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Paris_3e_Boulevard_du_Temple_Bouillon_R%C3%A9publique_679.jpg/1280px-Paris_3e_Boulevard_du_Temple_Bouillon_R%C3%A9publique_679.jpg',
       'Bouillon République on Boulevard du Temple',
       'Bouillon République no Boulevard du Temple',
@@ -1715,6 +1775,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-bouillon-pigalle': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Steak_Au_Poivre.jpg/500px-Steak_Au_Poivre.jpg',
+      'Steak au poivre with pepper sauce (generic photo)',
+      'Steak com molho de pimenta (foto ilustrativa)',
+      'Mark Mitchell · CC BY 2.0 · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bouillon_Pigalle.jpg/960px-Bouillon_Pigalle.jpg',
       'Bouillon Pigalle on Boulevard de Clichy',
@@ -1743,6 +1809,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-chez-pradel': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Steak-frites_as_served_at_Le_Relais_de_Venise_-_L%27Entrecote.jpg/500px-Steak-frites_as_served_at_Le_Relais_de_Venise_-_L%27Entrecote.jpg',
+      'Steak frites (generic photo)',
+      'Steak frites (foto ilustrativa)',
+      'Dcollard · Public domain · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Chez_Pradel_%2830626190691%29.jpg/960px-Chez_Pradel_%2830626190691%29.jpg',
       'Chez Pradel on Rue Ordener',
@@ -1808,16 +1880,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-arnaud-nicolas-caulaincourt': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Modern_Charcuterie_display.jpg/500px-Modern_Charcuterie_display.jpg',
+      'Charcuterie display (generic photo)',
+      'Charcutaria em exposição (foto ilustrativa)',
+      'Tanner-Christopher · Public domain · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bonjour%2C_Croque_Monsieur_-_Lunch_in_Paris%2C_27_June_2023.jpg/1280px-Bonjour%2C_Croque_Monsieur_-_Lunch_in_Paris%2C_27_June_2023.jpg',
       'Croque-monsieur (generic photo)',
       'Croque-monsieur (foto ilustrativa)',
       'Sharon Hahn Darlin · CC BY 2.0 · Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Croque_Monsieur_and_salad_at_Paris_Bakery.jpg/1280px-Croque_Monsieur_and_salad_at_Paris_Bakery.jpg',
-      'Croque-monsieur with salad (generic photo)',
-      'Croque-monsieur com salada (foto ilustrativa)',
-      'Ruth Hartnup · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-ore-ducasse': [
@@ -1836,6 +1908,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-la-flottille': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Moules_et_Frites.jpg/500px-Moules_et_Frites.jpg',
+      'Mussels and fries (generic photo)',
+      'Moules-frites (foto ilustrativa)',
+      'Barbara y Eugenio · CC BY 2.0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Grand_Canal_de_Versailles_near_Grand_Trianon%2C_24.07.13.jpg/1280px-Grand_Canal_de_Versailles_near_Grand_Trianon%2C_24.07.13.jpg',
       'Grand Canal at Versailles, where La Flottille sits',
       'Grand Canal de Versalhes, onde fica La Flottille',
@@ -1852,24 +1930,24 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-starbucks-opera': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Starbucks_mug%2C_CDG_airport%2C_2025.png/1280px-Starbucks_mug%2C_CDG_airport%2C_2025.png',
-      'Starbucks mug (generic photo)',
-      'Caneca da Starbucks (foto ilustrativa)',
-      'Rosiestep · CC BY-SA 4.0 · Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Starbucks_Frappuccino_%2824564745748%29.jpg/500px-Starbucks_Frappuccino_%2824564745748%29.jpg',
+      'Starbucks Frappuccino (generic photo)',
+      'Frappuccino da Starbucks (foto ilustrativa)',
+      'Push Doctor · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-kfc-les-halles': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/KFC_restaurant_in_Paris_May_4%2C_2008.jpg/500px-KFC_restaurant_in_Paris_May_4%2C_2008.jpg',
+      'KFC storefront in Paris',
+      'Fachada de um KFC em Paris',
+      'Betsy Weber · CC BY 2.0 · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Fried-Chicken-Set.jpg/1280px-Fried-Chicken-Set.jpg',
       'Fried chicken (generic photo)',
       'Frango frito (foto ilustrativa)',
       'Evan-Amos · CC0 · Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Fried_chicken_%2825163375255%29.jpg/1280px-Fried_chicken_%2825163375255%29.jpg',
-      'Fried chicken (generic photo)',
-      'Frango frito (foto ilustrativa)',
-      'T.Tseng · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-poilane': [
@@ -1882,21 +1960,21 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-deux-magots': [
     photo(
-      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmv5cbeRbVMMYbd7Skk4Mt-nf7nmCZ1dB3oKn8L49JcgY36wEizfC5pLo3e6etEm8RIDt_kYFX3P0sJrpxoVIAPdkWCxQR5QvyyL6S9rQdYBi44vrd4qjt3WCIpzVekZbjN_SM=s928-k-no',
-      'Les Deux Magots',
-      'Les Deux Magots',
-      'Google Maps',
-    ),
-    photo(
       'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWndVVnKF_hbLqufF_wcTIIkVNXxOcgT64_WAXOtESe-dQPFk2DyQdqtEZpi_yg2iWqCghN5_85ToToYho4QdjTO8GLn8Tqq0f6mqHPX9_6K2CHA_GGMkiepg35LvwuJ1zY1PdoQ4skEzIyy=s1219-k-no',
-      'Les Deux Magots',
-      'Les Deux Magots',
+      'Hot chocolate with the Les Deux Magots logo on the cup',
+      'Chocolate quente com a marca do Les Deux Magots na xícara',
       'Google Maps',
     ),
     photo(
       'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T3wep3rQsATfrH67N-tKgprdMHjPYxvG_XVbVSKs2wwB8lqNmSAVDEwU_Juuj2fOlaVxqYJdu62AkbU0FhhZwdbvp3OBUEygnDdSzSAqI8SmPwfyaM9lQpCUn3dvYM_Py5m81mlEoC--l9=s1219-k-no',
-      'Les Deux Magots',
-      'Les Deux Magots',
+      'Hot chocolate at Les Deux Magots',
+      'Chocolate quente do Les Deux Magots',
+      'Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmv5cbeRbVMMYbd7Skk4Mt-nf7nmCZ1dB3oKn8L49JcgY36wEizfC5pLo3e6etEm8RIDt_kYFX3P0sJrpxoVIAPdkWCxQR5QvyyL6S9rQdYBi44vrd4qjt3WCIpzVekZbjN_SM=s928-k-no',
+      'Les Deux Magots terrace',
+      'Terraço do Les Deux Magots',
       'Google Maps',
     ),
   ],
@@ -1924,6 +2002,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-recrutement': [
     photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Cappuccino_on_the_table.jpg/500px-Cappuccino_on_the_table.jpg',
+      'Cappuccino (generic photo)',
+      'Cappuccino (foto ilustrativa)',
+      'Leontereyes · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Paris_75007_Rue_Saint-Dominique_x_Boulevard_de_La_Tour-Maubourg_20150607.jpg/1280px-Paris_75007_Rue_Saint-Dominique_x_Boulevard_de_La_Tour-Maubourg_20150607.jpg',
       "Eiffel Tower down Rue Saint-Dominique, at the café's corner",
       'Torre Eiffel no fim da Rue Saint-Dominique, na esquina do café',
@@ -1946,15 +2030,15 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-orly-m14': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_3.jpg/1280px-Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_3.jpg',
-      'Line 14 station at Orly Airport',
-      'Estação da linha 14 no aeroporto de Orly',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_5.jpg/1280px-Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_5.jpg',
+      'Orly Airport line 14 platform, with its characteristic wavy ceiling',
+      'Plataforma da linha 14 em Orly, com o teto ondulado característico',
       'Manchesterunited1234 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_5.jpg/1280px-Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_5.jpg',
-      'Orly Airport line 14 station',
-      'Estação da linha 14 em Orly',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_3.jpg/1280px-Station_M%C3%A9tro_-_A%C3%A9roport_d%27Orly_-_%28RATP_-_Ligne_14%29_-_%28Paray-Vieille-Poste%2C_FR91%29_-_24-06-2024_3.jpg',
+      'Line 14 station at Orly Airport',
+      'Estação da linha 14 no aeroporto de Orly',
       'Manchesterunited1234 · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
@@ -2058,24 +2142,24 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-rue-rivoli': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/0/09/Rue_de_Rivoli_Arcades_and_Urban_Life_Paris_2026.jpg',
-      'Arcades on Rue de Rivoli',
-      'Arcadas da Rue de Rivoli',
-      'Tolga Bakı · CC BY 4.0 · Wikimedia Commons',
-    ),
-    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Arcades%2C_Rue_de_Rivoli%2C_Paris_26_December_2016_001.jpg/1280px-Arcades%2C_Rue_de_Rivoli%2C_Paris_26_December_2016_001.jpg',
       'Arcades on Rue de Rivoli',
       'Arcadas da Rue de Rivoli',
       'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
     ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/0/09/Rue_de_Rivoli_Arcades_and_Urban_Life_Paris_2026.jpg',
+      'Arcades on Rue de Rivoli',
+      'Arcadas da Rue de Rivoli',
+      'Tolga Bakı · CC BY 4.0 · Wikimedia Commons',
+    ),
   ],
   'par-naturalia-verrerie': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sourdough_starter_in_a_plastic_tub.jpg/1280px-Sourdough_starter_in_a_plastic_tub.jpg',
-      'Sourdough starter (generic photo)',
-      'Levain, fermento natural (foto ilustrativa)',
-      'Anon423 · CC BY-SA 4.0 · Wikimedia Commons',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Naturalia%2C_59_Rue_Saint-Antoine%2C_75004_Paris%2C_October_2010.jpg/500px-Naturalia%2C_59_Rue_Saint-Antoine%2C_75004_Paris%2C_October_2010.jpg',
+      'Naturalia organic grocery storefront (another branch)',
+      'Fachada de uma loja Naturalia (outra unidade)',
+      'jean-louis Zimmermann · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
   'par-gare-de-lyon': [
@@ -2372,6 +2456,12 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-mariage-freres-marais': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Mariage_Freres_30_rue_du_Bourg_Tibourg_Interieur.jpg/500px-Mariage_Freres_30_rue_du_Bourg_Tibourg_Interieur.jpg',
+      'Tea counter inside Mariage Frères',
+      'Balcão de chás dentro da Mariage Frères',
+      'Oliver H · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Mariage_Fr%C3%A8res%2C_30_rue_du_Bourg-Tibourg%2C_Paris_19_June_2008.jpg/960px-Mariage_Fr%C3%A8res%2C_30_rue_du_Bourg-Tibourg%2C_Paris_19_June_2008.jpg',
       'The Mariage Frères hanging sign at 30 Rue du Bourg-Tibourg (sepia photo)',

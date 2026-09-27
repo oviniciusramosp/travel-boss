@@ -1,7 +1,7 @@
-# Graph Report - travel-boss  (2026-09-27)
+# Graph Report - agent-a49daa9ec947d8b9f  (2026-09-27)
 
 ## Corpus Check
-- 214 files · ~350,186 words
+- 212 files · ~350,694 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `655253ea`
+- Built from commit: `dfe26894`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -117,8 +117,8 @@
   src/trip/route.test.ts → src/data/travel.ts
 
 ## Import Cycles
-- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
+- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
 ## Communities (78 total, 2 thin omitted)
