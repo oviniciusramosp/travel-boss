@@ -7,6 +7,7 @@ budget: comida €50
 via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
+  - status: fechado
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
 - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8), logo na saída da alfândega
@@ -52,7 +53,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 11:45 **Grand Bassin Octogonal**
 - 11:50 **Grande Allée**
 - 11:55 **Grand Bassin Rond**
-- 12:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida (~€6–8); reservar 40 min para compra, caminhada e piquenique nas Tulherias
+- 12:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida (~€6–8); reservar 40 min para compra, caminhada e piquenique nas Tulherias. Se às **12h40** ainda estivermos comendo, seguir caminhando e comendo em direção ao Louvre, para chegar à entrada às 13h; guardar o que sobrar em um saco fechado antes dos controles
 - 12:45 [Estátuas de Maillol](place:par-maillol)
 - 12:50 [Arco do Triunfo do Carrousel](place:par-carrousel) — Seguir para a entrada do Louvre, chegando por volta das 13h
 - 13:30 [Louvre](place:par-louvre) — Chegar à entrada às **13h**, com 30 min de margem; **3h30 de visita, até as 17h**. Ingresso a reservar para as 13h30
