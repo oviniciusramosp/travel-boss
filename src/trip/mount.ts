@@ -17,7 +17,7 @@ import { setDocumentTitle } from '../app/router';
 import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { changedStopKeys } from './diff';
-import { googleDirectionsUrl, MAPS_MAX_POINTS } from './directions';
+import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
 import { daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
@@ -206,28 +206,6 @@ function datePeriods(rows: readonly DateStop[]): (Period | null)[] {
       return { time: stop?.time, text: `${stop?.label ?? ''} ${stop?.note ?? ''}`, listNote: stop?.listNote };
     }),
   );
-}
-
-/** Stops of the periods on the map. Past the Maps limit the label says how many go. */
-function paintDayMaps(link: HTMLAnchorElement, points: { lat: number; lng: number }[], locale: Locale): void {
-  const url = googleDirectionsUrl(points, 'transit');
-  const base = pickLocale(locale, { en: 'Open route in Google Maps', 'pt-BR': 'Abrir rota no Google Maps' });
-  const cut = pickLocale(locale, {
-    en: `${MAPS_MAX_POINTS} of ${points.length} stops`,
-    'pt-BR': `${MAPS_MAX_POINTS} de ${points.length} paradas`,
-  });
-  const label = points.length > MAPS_MAX_POINTS ? `${base} · ${cut}` : base;
-  link.setAttribute('aria-label', label);
-  link.setAttribute('data-tip', label);
-  if (url) {
-    link.href = url;
-    link.removeAttribute('aria-disabled');
-    link.removeAttribute('tabindex');
-  } else {
-    link.removeAttribute('href');
-    link.setAttribute('aria-disabled', 'true');
-    link.tabIndex = -1;
-  }
 }
 
 function emptyNotice(title: string, detail?: string, error = false): HTMLDivElement {
@@ -676,16 +654,11 @@ export function mountTrip(
       .catch(() => undefined);
   }
 
-  /** Route toggle and day Maps link, updated in place. */
-  function syncDayChrome(trip: Trip) {
-    const locale = shell.locale();
+  /** Route toggle of each card, updated in place. Maps opens per period: a whole day is too many stops. */
+  function syncDayChrome() {
     const routed = routedDate();
     main.querySelectorAll<HTMLDetailsElement>('details.tb-date').forEach((card) => {
-      const date = card.dataset.date;
-      if (!date) return;
-      card.querySelector('[data-day-action="route"]')?.setAttribute('aria-pressed', String(date === routed));
-      const link = card.querySelector<HTMLAnchorElement>('[data-day-action="maps"]');
-      if (link) paintDayMaps(link, datedPoints(trip, date), locale);
+      card.querySelector('[data-day-action="route"]')?.setAttribute('aria-pressed', String(card.dataset.date === routed));
     });
   }
 
@@ -701,7 +674,7 @@ export function mountTrip(
     map.setPins('stop', []);
     map.setPins('hotel', []);
     setDayLayer(Boolean(date));
-    syncDayChrome(trip);
+    syncDayChrome();
     seenPinIds = new Set(pins.map((pin) => pin.id));
     if (date) {
       drawTripRoutes();
@@ -1337,9 +1310,6 @@ export function mountTrip(
         routeHidden.add(date);
         syncView(false);
       });
-      const dayMaps = mapsIconLink({ badge: true, size: 'sm', label: '' });
-      dayMaps.dataset.dayAction = 'maps';
-      paintDayMaps(dayMaps, datedPoints(trip, date), locale);
       const copyDay = iconButton({
         icon: 'content_copy',
         label: pickLocale(locale, { en: 'Copy day (Markdown)', 'pt-BR': 'Copiar dia (Markdown)' }),
@@ -1360,7 +1330,7 @@ export function mountTrip(
         );
       });
       const actions = el('span', 'tb-date__actions');
-      actions.append(copyDay, routeToggle, dayMaps);
+      actions.append(copyDay, routeToggle);
       const chevron = icon('expand_more', { size: 18 });
       chevron.classList.add('tb-date__chevron');
       summary.append(heading, actions, chevron);
