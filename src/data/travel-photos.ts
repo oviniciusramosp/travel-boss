@@ -33,6 +33,30 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'par-sweet-lab': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
+      'A slice of flan pâtissier (illustrative photo)',
+      'Uma fatia de flan pâtissier (foto ilustrativa)',
+      'Gouglov / Wikimedia Commons (CC0)',
+    ),
+  ],
+  'par-a-deux-mains': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
+      'A slice of flan pâtissier (illustrative photo)',
+      'Uma fatia de flan pâtissier (foto ilustrativa)',
+      'Gouglov / Wikimedia Commons (CC0)',
+    ),
+  ],
+  'par-la-pompadour': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
+      'A slice of flan pâtissier (illustrative photo)',
+      'Uma fatia de flan pâtissier (foto ilustrativa)',
+      'Gouglov / Wikimedia Commons (CC0)',
+    ),
+  ],
   'par-des-racines-et-du-pain': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
