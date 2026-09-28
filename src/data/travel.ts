@@ -5194,6 +5194,7 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-maison-thevenin-buci',
         name: { en: 'Maison Thevenin', 'pt-BR': 'Maison Thevenin' },
+        googleRating: 4.1,
         aiSuggested: true,
         category: 'cafes',
         subcategories: ['bakery', 'pastry'],
