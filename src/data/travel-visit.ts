@@ -1183,6 +1183,18 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Sítio François-Mitterrand é parada de arquitetura; exposição é opcional.',
     ),
   },
+  'par-bnf-richelieu': {
+    ticket: free,
+    durationMin: 60,
+    durationMax: 90,
+    bestDay: L('Tue 10:00–20:00; Wed–Sun 10:00–18:00; closed Monday', 'Ter 10h–20h; qua–dom 10h–18h; fecha segunda'),
+    bestTime: L('At opening for a quieter visit to the Oval Room', 'Na abertura para visitar a sala oval com mais calma'),
+    crowdProfile: 'museum',
+    tips: L(
+      'Free access to the Oval Room and Jardin Vivienne via 5 rue Vivienne. Allow 60–90 min for these spaces; this estimate does not include the paid museum or exhibitions.',
+      'Acesso gratuito à sala oval e ao Jardin Vivienne pela 5 rue Vivienne. Reserve 60–90 min para esses espaços; a estimativa não inclui o museu pago nem exposições.',
+    ),
+  },
 
   // —— Perto da BnF (checked Sep 2026) ——
   'par-fuuki': restaurantVisit(16, 25, {

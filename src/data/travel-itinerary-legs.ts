@@ -9,7 +9,6 @@ import {
   getTransitLine,
   haversineM,
   metro10,
-  metro14,
   metro2,
   metro4,
   metro7,
@@ -1229,12 +1228,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro9, 'fdr', 'chaussee-antin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
-  // 10/10: BnF first, Le Meurice pickup at noon, Opéra and sunset boat
-  trainLeg('par-casa-do-gui', 'par-bnf', 60, [
+  // 10/10: Baguett’s, Richelieu and Le Meurice on foot in the same neighbourhood
+  trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
-    ride(metro14, 'saint-lazare', 'bibliotheque'),
   ]),
-  trainLeg('par-bnf', 'par-cedric-grolet-meurice', 35, [ride(metro14, 'bibliotheque', 'pyramides')]),
   trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
   trainLeg('par-bateaux-mouches', 'par-casa-do-gui', 50, [
     ride(metro9, 'alma-marceau', 'havre-caumartin'),

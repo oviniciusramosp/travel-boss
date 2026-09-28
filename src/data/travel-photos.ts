@@ -358,6 +358,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Fernando Eichenberg',
     ),
   ],
+  'par-bnf-richelieu': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/BNF_Richelieu_Salle_Ovale.jpg/500px-BNF_Richelieu_Salle_Ovale.jpg',
+      'Oval Room at the BnF Richelieu',
+      'Sala Oval da BnF Richelieu',
+      'ZeusUpsistos / Wikimedia Commons — CC BY-SA 4.0',
+    ),
+  ],
   // Perto da BnF (IA, set/2026)
   'par-fuuki': [
     photo('/photos/paris/par-fuuki-3.webp', 'Gyoza on a plate at Fuuki', 'Gyoza no prato do Fuuki', 'Google Maps (foto de usuário, cópia local)'),

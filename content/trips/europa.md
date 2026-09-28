@@ -213,16 +213,17 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - Almoço mais em conta: [La Flottille](place:par-la-flottille) — brasserie de 1900 no Grand Canal, pratos €16–20, almoço até 15h30
 - Opcional, no lugar do Trianon: [One Nation Paris (outlet)](place:par-one-nation) — do castelo, 20 min a pé até Versailles-Chantiers, linha N até Villepreux–Les Clayes (12 min) e 10 min a pé; aberto até 20h. Volta: linha N até Montparnasse (~30 min; último trem 21h56), metrô 4 até Gare de l'Est e RER E em Magenta
 
-### Dia 7 — Sáb 10/10 · Cédric Grolet, Baguett’s, Biblioteca, Ópera e barco no Sena
+### Dia 7 — Sáb 10/10 · Baguett’s, Richelieu, Cédric Grolet, Vendôme, Ópera e barco no Sena
 
-- 09:00 [Casa do Gui](place:par-casa-do-gui) — Café da manhã em casa e saída
-  - via: RER E até Haussmann–Saint-Lazare e metrô 14 até Bibliothèque François Mitterrand · 1h
-- 10:00 [Biblioteca Nacional](place:par-bnf) — Esplanada de madeira e o jardim entre as quatro torres; sair às 11h15. O passe de um dia do Haut-de-jardin custa €5; a exposição do bicentenário da fotografia está em cartaz (€15)
-  - via: metrô 14 até Pyramides e caminhada até Le Meurice · 35 min
+- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída
+  - via: RER E até Haussmann–Saint-Lazare e caminhada até o Baguett’s · 50 min
+- 09:00 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã / brunch**: pancakes ou pain perdu; abre às 9h no sábado. Sair até 10h
+- 10:15 [BnF Richelieu — Sala Oval](place:par-bnf-richelieu) — Conhecer a sala oval e o Jardin Vivienne, com entrada gratuita pela 5 rue Vivienne; reservar 1h15 e sair às 11h30
+  - status: confirmado
 - 12:00 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/); encomendar para 10/10 às 12h. Retirada na 6 rue de Castiglione; sair até 12h15
   - status: confirmado
-- 12:30 [Palais-Royal](place:par-palais-royal) — Comer os doces no jardim
-- 13:15 [Baguett's Café (Molière)](place:par-bohemia) — **Almoço / brunch**: pancakes ou pain perdu; reservar cerca de 1h e sair até 14h30 para a Opéra
+- 12:20 [Place Vendôme](place:par-vendome) — Comer os doces do Cédric Grolet e passear pela praça, olhando as vitrines das joalherias e lojas de luxo
+- 13:00 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim
 - 14:30 [Monoprix Opéra](place:par-monoprix-rivoli) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 14h50
 - 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala. Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
 - 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar (até 20h); a loja fecha às 20h30

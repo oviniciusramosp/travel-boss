@@ -2498,11 +2498,11 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-bnf',
-        name: { en: 'Bibliothèque nationale', 'pt-BR': 'Biblioteca Nacional' },
+        name: { en: 'BnF François-Mitterrand', 'pt-BR': 'BnF François-Mitterrand' },
         category: 'parks',
         description: {
-          en: 'Richelieu or François-Mitterrand depending on the day.',
-          'pt-BR': 'Richelieu ou François-Mitterrand, conforme o dia.',
+          en: 'The modern four-tower site beside the Seine. The historic Oval Room is at the separate Richelieu site.',
+          'pt-BR': 'Unidade moderna das quatro torres, junto ao Sena. A sala oval histórica fica na outra unidade, Richelieu.',
         },
         googleRating: 4.7,
         lat: 48.8338,
@@ -2510,6 +2510,22 @@ export const localTravelCities: TravelCity[] = [
         address: 'Quai François Mauriac, 75013 Paris',
         mapsQuery: 'Bibliothèque nationale de France',
         mapsUrl: 'https://www.google.com/maps/place/Biblioth%C3%A8que+Fran%C3%A7ois-Mitterrand/@48.8335842,2.3757659,17z/data=!3m1!4b1!4m6!3m5!1s0x47e6723cff6df901:0x28f6e235ce38e199!8m2!3d48.8335842!4d2.3757659!16zL20vMDFjYjZy',
+      },
+
+      {
+        id: 'par-bnf-richelieu',
+        name: { en: 'BnF Richelieu — Oval Room', 'pt-BR': 'BnF Richelieu — Sala Oval' },
+        category: 'tourist',
+        description: {
+          en: 'Historic National Library of France, home to the Oval Room. The reading room and Jardin Vivienne are free to visit; the museum is a separate paid visit. Visitor entrance at 5 rue Vivienne.',
+          'pt-BR': 'Edifício histórico da Biblioteca Nacional da França, com a famosa sala oval. A sala de leitura e o Jardin Vivienne têm acesso gratuito; o museu é uma visita paga à parte. Entrada de visitantes pela 5 rue Vivienne.',
+        },
+        googleRating: 4.7,
+        lat: 48.8673812,
+        lng: 2.3384826,
+        address: '5 Rue Vivienne, 75002 Paris',
+        mapsQuery: 'Bibliothèque nationale de France Richelieu 5 rue Vivienne Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Biblioth%C3%A8que+nationale+de+France+(BnF)+%7C+Richelieu/@48.8673812,2.3384826,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e3b15cb6245:0x4ff77a2495418885!8m2!3d48.8673812!4d2.3384826!16s%2Fg%2F1vl9qt4t',
       },
 
       // ── Perto da BnF: almoço, café, compras e passeio (IA, set/2026) ──
