@@ -9,6 +9,14 @@ Consultado em 27/09/2026. O usuário confirmou o funicular, não o trenzinho tur
 - [Passeio de Montmartre, turismo oficial](https://parisjetaime.com/article/paris-montmartre-et-pigalle-a922) e [bairro de Montmartre](https://parisjetaime.com/article/montmartre-village-a-paris-a728): Place du Tertre, Rue de l’Abreuvoir, Maison Rose, vinhedo, cabarés e moinhos. O circuito mantém a Charcuterie Arnaud Nicolas já escolhida, agora como sub-ponto com `placeId`, e termina na igreja Saint-Pierre antes da Sacré-Cœur. Há ladeiras no bairro mesmo usando o funicular.
 - [Fête des Vendanges](https://fetedesvendangesdemontmartre.com/le-programme/): 7–11/10/2026. A visita guiada das vinhas de 8/10 é às 14h, incompatível com este roteiro; o plano vê o vinhedo por fora, sem prometer entrada.
 
+## Ajuste de transporte — 28/09/2026
+
+Por pedido do usuário, o Moulin Rouge passa para depois do pôr do sol. Esta sequência substitui os trajetos anteriores descritos acima.
+
+- Ida: M4 Étienne Marcel → Barbès–Rochechouart, caminhada até o funicular inferior e subida; reservados 50 min desde o Pompidou, incluindo acessos e espera.
+- OSRM a pé: Barbès → funicular inferior, cerca de 631 m / 8 min (roteiro reserva cerca de 10 min); Sacré-Cœur → Moulin Rouge, cerca de 1,2 km / 16 min (roteiro reserva 20 min).
+- Transitous consultado para 8/10 às 17:55 UTC: Moulin Rouge → Noisy-le-Sec, M2 Blanche → La Chapelle, caminhada a Magenta e RER E → Noisy-le-Sec, cerca de 42–43 min incluindo acessos calculados pela API. Roteiro reserva 45 min e chegada às 20:40.
+
 ## Coordenadas OSM
 
 Consulta Overpass por POST a `https://overpass-api.de/api/interpreter`, `out center` para os locais e `out geom` para o funicular; Nominatim para conferir nomes. Não usar o restaurante homônimo como pino da escultura Passe-Muraille.

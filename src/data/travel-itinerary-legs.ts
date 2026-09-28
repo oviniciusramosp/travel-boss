@@ -1209,12 +1209,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
   // 8/10
   trainLeg('par-casa-do-gui', 'par-canals', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
-  trainLeg('par-pompidou', 'par-moulin-rouge', 35, [
-    ride(metro4, 'etienne-marcel', 'barbès'), ride(metro2, 'barbès', 'blanche'),
+  trainLeg('par-pompidou', 'par-montmartre', 50, [
+    ride(metro4, 'etienne-marcel', 'barbès'),
+    ride(funicularMontmartre, 'gare-basse', 'gare-haute'),
   ]),
-  trainLeg('par-moulin-rouge', 'par-montmartre', 25, [ride(funicularMontmartre, 'gare-basse', 'gare-haute')]),
-  trainLeg('par-sacre-coeur', 'par-casa-do-gui', 45, [
-    ride(metro2, 'anvers', 'la-chapelle'),
+  trainLeg('par-moulin-rouge', 'par-casa-do-gui', 45, [
+    ride(metro2, 'blanche', 'la-chapelle'),
     ride(rerE, 'magenta', 'noisy-le-sec'),
   ]),
   // 9/10

@@ -178,11 +178,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
 - 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
 - 14:00 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14:10
-  - via: metrô 4 de Étienne Marcel até Barbès–Rochechouart e metrô 2 até Blanche · 35 min
-- 14:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora; sair às 14:55
-  - via: funicular de Montmartre · 25 min — Caminhar até a estação inferior, junto à Place Saint-Pierre e à Rue Foyatier; subir com a Navigo Semaine. Tempo inclui caminhada e espera
-- 15:20 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
-- 15:30 **Place du Tertre** — Praça dos pintores e retratistas
+  - via: metrô 4 até Barbès–Rochechouart e funicular de Montmartre · 50 min — Embarcar em Étienne Marcel; de Barbès, caminhar cerca de 10 min até a estação inferior, junto à Place Saint-Pierre e à Rue Foyatier. Subir com a Navigo Semaine; tempo inclui caminhadas e espera
+- 15:00 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
+- 15:10 **Place du Tertre** — Praça dos pintores e retratistas
 - 15:55 **La Maison Rose e Rue de l'Abreuvoir** — Fachada rosa e passeio pela rua, sem consumir
 - 16:10 **Vinhedo Clos Montmartre** — Ver as vinhas por fora, pela Rue des Saules
 - 16:20 **Au Lapin Agile** — Fachada do cabaré, sem entrar
@@ -191,8 +189,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 17:30 **Moulin de la Galette** — Ver por fora o moinho Radet, sobre o restaurante, na esquina da Rue Lepic com a Rue Girardon
 - 18:10 **Église Saint-Pierre de Montmartre** — Fachada da igreja medieval, ao lado da Place du Tertre
 - 18:40 [Sacré-Cœur](place:par-sacre-coeur) — **Pôr do sol às 19h18** na escadaria em frente à basílica; a basílica é grátis. Greve no metrô 2: ~20 min a pé até a Gare du Nord e RER E em Magenta
-  - via: metrô 2 de Anvers até La Chapelle e RER E em Magenta · 45 min
-- 20:15 [Casa do Gui](place:par-casa-do-gui) — Volta
+  - via: descer a pé até o Moulin Rouge · 20 min — Sair às 19:25, depois do pôr do sol
+- 19:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora, com a fachada iluminada; sair às 19:55
+  - via: metrô 2 de Blanche até La Chapelle e RER E em Magenta · 45 min — Caminhar da estação La Chapelle até Magenta para a conexão
+- 20:40 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Se sobrar tempo antes de Montmartre: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur), a 10 min a pé da Naturalia
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
