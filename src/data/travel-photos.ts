@@ -1637,6 +1637,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-versailles-jardins': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Versailles_view_from_the_Parterre_d%27eau.jpg/1280px-Versailles_view_from_the_Parterre_d%27eau.jpg',
+      'Versailles gardens — perspective from the Parterre d’Eau',
+      'Jardins de Versalhes — perspectiva do Parterre d’Eau',
+      'Paolo Costa Baldi / Wikimedia Commons · CC BY-SA 3.0',
+    ),
+  ],
   'par-versailles': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue_a%C3%A9rienne_du_domaine_de_Versailles_par_ToucanWings_-_Creative_Commons_By_Sa_3.0_-_081_%28cropped%29.jpg/1280px-Vue_a%C3%A9rienne_du_domaine_de_Versailles_par_ToucanWings_-_Creative_Commons_By_Sa_3.0_-_081_%28cropped%29.jpg',

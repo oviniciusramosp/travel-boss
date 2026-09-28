@@ -16,6 +16,7 @@
     "travel:amenities": "NODE_OPTIONS=--dns-result-order=ipv4first vite-node scripts/fetch-amenities.ts",
     "travel:areas:check": "vitest run src/data/travel-areas.test.ts",
     "travel:photos:check": "python3 scripts/check-travel-photos.py",
+    "travel:locations:check": "vite-node scripts/check-travel-locations.ts",
     "travel:airbnb:setup": "uv venv --allow-existing node_modules/.cache/airbnb-venv && uv pip install --python node_modules/.cache/airbnb-venv/bin/python -r scripts/airbnb-requirements.txt"
   },
   "dependencies": {

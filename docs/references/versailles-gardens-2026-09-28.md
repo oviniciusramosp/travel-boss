@@ -38,3 +38,28 @@ Consulta direta à API OSM em 28/09/2026: `https://api.openstreetmap.org/api/0.6
 16 subpontos (5 existentes + 11 novos). Começa nos terraços do palácio, passa pelos bosques de leste e norte, segue a oeste, cruza o eixo pelo Tapis Vert para Miroir e Colonnade e termina em Apolo/Grand Canal. Preserva o ponto de saída para o Trianon ainda previsto no roteiro. Ordem geográfica inicial para exploração, não prova de caminho mínimo nem percurso obrigatório.
 
 Estimativa editorial de 2h30–3h30, sem almoço, para caminhar e parar nos 16 pontos. A hora hoje reservada no dia é insuficiente para esta seleção completa; o usuário pediu primeiro mapear os pontos. Orçamento de comida e ingressos não muda; a caminhada calculada pelo app aumenta.
+
+## Fotos e descrições do card
+
+Descrições baseadas nas páginas oficiais dos [bosques](https://www.chateauversailles.fr/decouvrir/domaine/jardins/bosquets), [parterres](https://www.chateauversailles.fr/decouvrir/domaine/jardins/parterres) e [fontes](https://www.chateauversailles.fr/decouvrir/domaine/les-jardins/les-bassins-les-fontaines). Fotos históricas ilustram os atrativos; não garantem fontes ligadas na visita. A primeira também é a capa.
+
+| Foto Commons | Autor / crédito informado | Licença |
+|---|---|---|
+| [Versailles view from the Parterre d'eau.jpg](https://commons.wikimedia.org/wiki/File:Versailles_view_from_the_Parterre_d%27eau.jpg) | Paolo Costa Baldi | CC BY-SA 3.0 |
+| [Château de Versailles.-l'orangerie du parc.jpg](https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Versailles.-l%27orangerie_du_parc.jpg) | Pierre André | CC BY-SA 4.0 |
+| [Salle de Bal — vista geral da cascata](https://commons.wikimedia.org/wiki/File:Parc_de_Versailles,_bosquet_des_Rocailles,_cascade_01.jpg) | Coyau / Wikimedia Commons | CC BY-SA 3.0 |
+| [Parc de Versailles, parterre de Latone, bassin de Latone 05.jpg](https://commons.wikimedia.org/wiki/File:Parc_de_Versailles,_parterre_de_Latone,_bassin_de_Latone_05.jpg) | Coyau | CC BY-SA 3.0 |
+| [Apollon et 5 nymphes, Bosquet des bains d'Apollon, Versailles (retouché).jpg](https://commons.wikimedia.org/wiki/File:Apollon_et_5_nymphes,_Bosquet_des_bains_d%27Apollon,_Versailles_(retouch%C3%A9).jpg) | Girardon et Regnaudin Photo par User:Plyd Derivative work MagentaGreen | CC0 |
+| [Palace of Versailles 20130810 - fountain 2.jpg](https://commons.wikimedia.org/wiki/File:Palace_of_Versailles_20130810_-_fountain_2.jpg) | Martin Robson from Brighton, UK | CC BY-SA 2.0 |
+| [Versailles - Bassin Dragon (1).JPG](https://commons.wikimedia.org/wiki/File:Versailles_-_Bassin_Dragon_(1).JPG) | Remi Jouan | CC BY 4.0 |
+| [Parc de Versailles, bassin de Neptune, vue générale.jpg](https://commons.wikimedia.org/wiki/File:Parc_de_Versailles,_bassin_de_Neptune,_vue_g%C3%A9n%C3%A9rale.jpg) | Coyau | CC BY-SA 3.0 |
+| [Bosquet des Trois Fontaines - Versailles - P1620201.jpg](https://commons.wikimedia.org/wiki/File:Bosquet_des_Trois_Fontaines_-_Versailles_-_P1620201.jpg) | Vincent Torri | CC BY-SA 3.0 |
+| [Bosquet du théâtre d eau Les Belles Danses.jpg](https://commons.wikimedia.org/wiki/File:Bosquet_du_th%C3%A9%C3%A2tre_d_eau_Les_Belles_Danses.jpg) | Hyperios | CC BY-SA 4.0 |
+| [Gaspard Marsy, Fontaine de l'Encelade, Musée national des châteaux de Versailles et de Trianon, Versailles, France (1675–1676) - 20051218.jpg](https://commons.wikimedia.org/wiki/File:Gaspard_Marsy,_Fontaine_de_l%27Encelade,_Mus%C3%A9e_national_des_ch%C3%A2teaux_de_Versailles_et_de_Trianon,_Versailles,_France_(1675%E2%80%931676)_-_20051218.jpg) | Gaspard Marsy | CC BY-SA 3.0 |
+| [Tapis Vert - Versailles - P1170976-P1170983.jpg](https://commons.wikimedia.org/wiki/File:Tapis_Vert_-_Versailles_-_P1170976-P1170983.jpg) | Yves Tennevin | CC BY-SA 3.0 |
+| [Parc de Versailles, Bassin du Miroir, jets d'eau 10.jpg](https://commons.wikimedia.org/wiki/File:Parc_de_Versailles,_Bassin_du_Miroir,_jets_d%27eau_10.jpg) | Coyau | CC BY-SA 3.0 |
+| [Parc de Versailles, Bosquet de la colonnade, Vue d'ensemble.jpg](https://commons.wikimedia.org/wiki/File:Parc_de_Versailles,_Bosquet_de_la_colonnade,_Vue_d%27ensemble.jpg) | Coyau | CC BY-SA 3.0 |
+| [Palace of Versailles, Bassin d’Apollon.jpg](https://commons.wikimedia.org/wiki/File:Palace_of_Versailles,_Bassin_d%E2%80%99Apollon.jpg) | Melodie Mesiano | CC BY-SA 2.0 |
+| [Panorama at the Château de Versailles - Grand Canal.jpg](https://commons.wikimedia.org/wiki/File:Panorama_at_the_Ch%C3%A2teau_de_Versailles_-_Grand_Canal.jpg) | DiscoA340 | CC BY-SA 4.0 |
+
+Verificação do percurso em 28/09/2026: OSRM routed-foot, com as 16 coordenadas na ordem do catálogo, retornou 4.814,3 m e 64 minutos de deslocamento. Não inclui observação, fotos, filas ou almoço. O app soma a caminhada desses subpontos aos demais trechos do dia; a duração de visita de 150–210 minutos é editorial e não recalcula os horários do roteiro.
