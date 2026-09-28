@@ -305,6 +305,30 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-carnavalet': [
     photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Salle_des_enseignes_03684.jpg/960px-Salle_des_enseignes_03684.jpg",
+      "Gallery of historic shop signs",
+      "Galeria de letreiros históricos",
+      "Gérald Garitan · CC BY-SA 4.0 · Wikimedia Commons",
+    ),
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Mus%C3%A9e_Carnavalet_Paris_-018.JPG/960px-Mus%C3%A9e_Carnavalet_Paris_-018.JPG",
+      "Historic salon with period furniture",
+      "Salão histórico com móveis de época",
+      "Thesupermat · CC BY-SA 3.0 · Wikimedia Commons",
+    ),
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Mus%C3%A9e_Carnavalet%2C_Paris_-_Bijouterie_Fouquet_by_Mucha%2C_Detail.jpg/960px-Mus%C3%A9e_Carnavalet%2C_Paris_-_Bijouterie_Fouquet_by_Mucha%2C_Detail.jpg",
+      "Art Nouveau stained glass from the Fouquet jewellery shop",
+      "Vitral art nouveau da joalheria Fouquet",
+      "Poulpy · CC BY-SA 3.0 · Wikimedia Commons",
+    ),
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cimeti%C3%A8re_des_Innocents_1504109.jpg/960px-Cimeti%C3%A8re_des_Innocents_1504109.jpg",
+      "Sculpture from the Innocents cemetery in the archaeology collection",
+      "Escultura do cemitério dos Inocentes na coleção de arqueologia",
+      "Gérald Garitan · CC BY-SA 4.0 · Wikimedia Commons",
+    ),
+    photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Carnavalet_Par%C3%ADs_10.JPG/1280px-Carnavalet_Par%C3%ADs_10.JPG',
       'Musée Carnavalet',
       'Musée Carnavalet',
@@ -1816,6 +1840,30 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
     ),
   ],
   'par-archives-nationales': [
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Grande_chambre_de_la_princesse_in_the_H%C3%B4tel_de_Soubise_%2802%29.jpg/960px-Grande_chambre_de_la_princesse_in_the_H%C3%B4tel_de_Soubise_%2802%29.jpg",
+      "Princess’s bedroom and display cases",
+      "Quarto da princesa e vitrines",
+      "Neoclassicism Enthusiast · CC BY-SA 4.0 · Wikimedia Commons",
+    ),
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Salon_ovale_de_la_princesse_in_the_H%C3%B4tel_de_Soubise_%2802%29.jpg/960px-Salon_ovale_de_la_princesse_in_the_H%C3%B4tel_de_Soubise_%2802%29.jpg",
+      "Princess’s oval salon",
+      "Salão oval da princesa",
+      "Neoclassicism Enthusiast · CC BY-SA 4.0 · Wikimedia Commons",
+    ),
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Parigi%2C_H%C3%B4tel_de_Soubise_%286%29.JPG/960px-Parigi%2C_H%C3%B4tel_de_Soubise_%286%29.JPG",
+      "Prince’s chamber",
+      "Câmara do príncipe",
+      "Parsifall · CC BY-SA 3.0 · Wikimedia Commons",
+    ),
+    photo(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/2023-06-07_Hotel_de_Soubise_02.jpg/960px-2023-06-07_Hotel_de_Soubise_02.jpg",
+      "Hôtel de Soubise exhibition room",
+      "Sala de exposição do Hôtel de Soubise",
+      "Thomas1313 · CC BY-SA 4.0 · Wikimedia Commons",
+    ),
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/H%C3%B4tel_de_Soubise%2C_Paris_9_June_2017.jpg/500px-H%C3%B4tel_de_Soubise%2C_Paris_9_June_2017.jpg',
       'Hôtel de Soubise, home of the Archives nationales',
