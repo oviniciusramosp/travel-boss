@@ -57,7 +57,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:30 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
 - 09:55 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
 - 09:55 **Cartier** — Por fora
-- 09:58 **Casa de Santos Dumont** — Ver a fachada e a placa no nº 114, atual Apple Champs-Élysées
+- 09:58 **Apple Champs-Élysées · Casa de Santos Dumont** — Passar pela fachada e ver a placa no nº 114. Se a loja estiver aberta e o iPhone Duo estiver em demonstração, entrar para dar uma olhada; caso contrário, seguir o passeio
 - 10:00 **Louis Vuitton** — Por fora
 - 10:05 **Nike** — Por fora
 - 10:10 **Sephora** — Por fora

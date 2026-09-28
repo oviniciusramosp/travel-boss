@@ -1716,7 +1716,7 @@ export const localTravelCities: TravelCity[] = [
           // Nick Gordon / Wikimedia Commons — public domain.
           { name: { en: 'Louis Vuitton (n° 101)', 'pt-BR': 'Louis Vuitton (n° 101)' }, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Louis_Vuitton_Champs_Elysees.jpg/500px-Louis_Vuitton_Champs_Elysees.jpg', lat: 48.871642, lng: 2.300526 },
           // Former home and plaque: Paris.fr; marker coordinates: HMDB #243728 (2026-09-28).
-          { name: { en: 'Santos Dumont’s former home · plaque (n° 114)', 'pt-BR': 'Casa de Santos Dumont · placa (n° 114)' }, lat: 48.8721833, lng: 2.3012167 },
+          { name: { en: 'Apple Champs-Élysées · Santos Dumont’s former home (n° 114)', 'pt-BR': 'Apple Champs-Élysées · Casa de Santos Dumont (n° 114)' }, lat: 48.8721833, lng: 2.3012167 },
           // Dr. Thomas Liptak / Wikimedia Commons — CC BY-SA 4.0.
           { name: { en: 'Cartier (n° 154)', 'pt-BR': 'Cartier (n° 154)' }, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Paris%2C_Av._des_Champs-%C3%89lys%C3%A9es_154%2C_Cartier.jpg/500px-Paris%2C_Av._des_Champs-%C3%89lys%C3%A9es_154%2C_Cartier.jpg', lat: 48.87341, lng: 2.297436 },
         ],
