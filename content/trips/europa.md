@@ -108,7 +108,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 16:05 [Poilâne (Cherche-Midi)](place:par-poilane-cherche-midi) — A padaria original, de 1932: punitions (~€5) e a miche
 - 16:30 [La Grande Épicerie (Rive Gauche)](place:par-grande-epicerie-rive-gauche) — 1h para passear pelo mercado e comprar queijo, baguete e vinho para o piquenique no Port du Louvre; sair às 17h30
 - 17:45 [CityPharma](place:par-citypharma) — Dermocosméticos; sair até 18h15
-- 18:25 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10); sair até 18h50
+- 18:25 [Les Deux Magots](place:par-deux-magots) — Um bule de chocolate quente para dividir em 2 (€12 no total); sair até 18h50
   - via: Ir a pé até o Port du Louvre · 15 min
 - 19:10 [Port du Louvre](place:par-port-louvre) — **Jantar**: piquenique à beira do Sena com as compras da La Grande Épicerie; ficar até 20h10
   - via: a pé até Saint-Michel–Notre-Dame, RER B até Gare du Nord e RER E de Magenta até Noisy-le-Sec · 55 min

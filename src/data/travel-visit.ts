@@ -1828,10 +1828,11 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'par-deux-magots': cafeVisit(10, 15, {
+    avgPricePerPerson: money(6, undefined, L('One €12 pot of hot chocolate shared by two', 'Um bule de chocolate quente de €12 dividido por duas pessoas')),
     bestDay: L('Daily 7:30–01:00', 'Todo dia 7h30–1h'),
     tips: L(
-      'Hot chocolate €10 a cup, €12 a pot, +€3 whipped cream. Café de Flore next door charges the same.',
-      'Chocolate quente €10 a xícara, €12 o bule, +€3 de chantilly. O Café de Flore ao lado cobra o mesmo.',
+      'Hot chocolate: €10 for a 125 ml cup or €12 for a pot; whipped cream +€3. Made with Valrhona Equatoriale 55% chocolate.',
+      'Chocolate quente: €10 a xícara de 125 ml ou €12 o bule; chantilly +€3. Feito com chocolate Valrhona Equatoriale 55%.',
     ),
   }),
   'par-as-du-fallafel': restaurantVisit(8, 10, {
