@@ -1106,11 +1106,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.85361, 2.301304],
     ],
   },
-  // 6/10: pass the Sainte-Chapelle street access without entering the palace.
-  // Routed approach via Quai du Marché-Neuf; Boulevard du Palais alignment from
-  // OSM ways 123461253 / 865084962 (foot router otherwise detours around Dauphine).
+  // 6/10: outside Sainte-Chapelle; Quai du Marché-Neuf then Boulevard du Palais.
+  // OSM ways 123461253 / 865084962; avoid the foot router's detour via Dauphine.
   {
-    from: 'par-notre-dame', to: 'par-horloge', mode: 'walk',
+    from: 'par-notre-dame', to: 'par-sainte-chapelle', mode: 'walk',
     path: [
       [48.853, 2.3499],
       [48.853312, 2.350128],
@@ -1164,6 +1163,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.8543358, 2.3449201],
       [48.8544187, 2.3449997],
       [48.8551379, 2.3457458],
+    ],
+  },
+  {
+    from: 'par-sainte-chapelle', to: 'par-horloge', mode: 'walk',
+    path: [
+      [48.8551379, 2.3457458],
       [48.8552427, 2.3458309],
       [48.8552653, 2.3458498],
       [48.8552901, 2.3458701],
@@ -1177,24 +1182,6 @@ const tripEuropa2026: ItineraryLegDef[] = [
       [48.8560819, 2.3464429],
       [48.8561106, 2.3464624],
       [48.8561977, 2.3464808],
-      [48.856193, 2.346233],
-    ],
-  },
-  // 6/10: out of the Sainte-Chapelle through the Palais gate on Bd du Palais, then north on
-  // its sidewalk to the tower corner. The foot router has no sidewalk there and loops 680 m
-  // round Place Dauphine, so the walk is drawn as authored (gate from routed-foot).
-  {
-    from: 'par-sainte-chapelle',
-    to: 'par-horloge',
-    mode: 'walk',
-    path: [
-      [48.8554, 2.345],
-      [48.85515, 2.345556],
-      [48.855317, 2.345703],
-      [48.85522, 2.345975],
-      [48.855423, 2.346168],
-      [48.855515, 2.346248],
-      [48.85615, 2.34632],
       [48.856193, 2.346233],
     ],
   },

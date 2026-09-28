@@ -1,16 +1,16 @@
 # Graph Report - travel-boss  (2026-09-27)
 
 ## Corpus Check
-- 233 files · ~380,827 words
+- 233 files · ~380,791 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1778 nodes · 4532 edges · 90 communities (85 shown, 5 thin omitted)
+- 1778 nodes · 4532 edges · 90 communities (84 shown, 6 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.64)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d8aac2b9`
+- Built from commit: `0897d965`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -27,7 +27,7 @@
 - travel-stay-heatmap.ts
 - places.ts
 - day-plan.ts
-- timeline.ts
+- walk-route.test.ts
 - hotel-ranking.mjs
 - mountMap
 - itinerary-route.ts
@@ -60,7 +60,7 @@
 - cssToken
 - transfer-row.ts
 - trackpad.ts
-- hotel-booking-details.test.ts
+- ai-badge.ts
 - calendar.ts
 - grande-epicerie-2026-10-06.md
 - parse.ts
@@ -73,7 +73,7 @@
 - hotel-ring.ts
 - hotel-dates.ts
 - subpoints.ts
-- ui/controls.ts
+- icons.ts
 - rating.ts
 - main.ts
 - legs.ts
@@ -133,11 +133,11 @@
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (90 total, 5 thin omitted)
+## Communities (90 total, 6 thin omitted)
 
 ### Community 0 - "hotel-search.mjs"
-Cohesion: 0.17
-Nodes (23): AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), BOOKING_EXTRACT, bookingDetails(), bookingLookup() (+15 more)
+Cohesion: 0.13
+Nodes (30): airbnbSnapshot(), parseCategoryScores(), AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), BOOKING_EXTRACT (+22 more)
 
 ### Community 1 - "airbnb-search.mjs"
 Cohesion: 0.16
@@ -168,8 +168,8 @@ Cohesion: 0.06
 Nodes (46): Any, concurrent_futures, contextlib, curl_cffi, json, travel:airbnb:setup, pyairbnb, pyairbnb_details (+38 more)
 
 ### Community 8 - "place-panel.ts"
-Cohesion: 0.12
-Nodes (21): PlaceCategoryMeta, cityGuide, Locale, resolvePlacePhotos(), TravelCity, aiSuggestionTip(), TABS, IconName (+13 more)
+Cohesion: 0.13
+Nodes (29): PlaceCategoryMeta, Locale, resolvePlacePhotos(), TravelCity, aiBadge(), iconButton(), iconLink(), openDialog() (+21 more)
 
 ### Community 9 - "travel-stay-heatmap.ts"
 Cohesion: 0.06
@@ -183,13 +183,9 @@ Nodes (36): categoryMaterialName(), googleMapsUrl(), subcategoryLabel(), subPoin
 Cohesion: 0.17
 Nodes (22): clockMin(), dateBudget, dayPeriods(), freeMinutes(), hopRails(), isOpenSlot(), mealOf(), midEur() (+14 more)
 
-### Community 12 - "timeline.ts"
-Cohesion: 0.21
-Nodes (16): BudgetLine, overBudget(), budgetChip(), dateBudgetCards(), foodTarget(), formatEur(), Money, openReceipt() (+8 more)
-
 ### Community 13 - "hotel-ranking.mjs"
-Cohesion: 0.15
-Nodes (22): ref_node_crypto, accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing() (+14 more)
+Cohesion: 0.10
+Nodes (33): ref_node_crypto, BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), STAFF_MINIMUM, validScore(), accommodationEligibility() (+25 more)
 
 ### Community 14 - "mountMap"
 Cohesion: 0.18
@@ -268,16 +264,16 @@ Cohesion: 0.10
 Nodes (34): tripToHtml(), escapeHtml(), inline(), InlineNodeOptions, inlineNodes(), InlinePart, inlineWithLinks(), MarkSpan (+26 more)
 
 ### Community 35 - "pickLocale"
-Cohesion: 0.14
-Nodes (34): pickLocale(), paintWalk(), periodBlock(), savePeriod(), openSlotRow(), railHalf(), weatherSlot(), aiBadge() (+26 more)
+Cohesion: 0.12
+Nodes (36): pickLocale(), BudgetLine, overBudget(), paintWalk(), periodBlock(), savePeriod(), openSlotRow(), railHalf() (+28 more)
 
 ### Community 36 - "travel-categories.ts"
 Cohesion: 0.10
 Nodes (26): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialIcon (+18 more)
 
 ### Community 37 - "walk-route.ts"
-Cohesion: 0.11
-Nodes (30): abortError(), acquire(), bindUser(), cached(), execute(), fetchDrivingRoute(), fetchOsrm(), hydrate() (+22 more)
+Cohesion: 0.14
+Nodes (28): abortError(), acquire(), bindUser(), cached(), execute(), fetchDrivingRoute(), fetchOsrm(), hydrate() (+20 more)
 
 ### Community 38 - "view-state.ts"
 Cohesion: 0.21
@@ -311,9 +307,9 @@ Nodes (19): formatLegDuration(), legDisplayLabel(), legLineColor(), TimelineTran
 Cohesion: 0.60
 Nodes (4): attachTrackpadGestures(), PinchMap, pinchZoom(), wheelPixels()
 
-### Community 46 - "hotel-booking-details.test.ts"
-Cohesion: 0.12
-Nodes (18): airbnbSnapshot(), BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), parseCategoryScores(), STAFF_MINIMUM, validScore() (+10 more)
+### Community 46 - "ai-badge.ts"
+Cohesion: 0.60
+Nodes (3): cityGuide, aiSuggestionTip(), TABS
 
 ### Community 47 - "calendar.ts"
 Cohesion: 0.20
@@ -355,9 +351,9 @@ Nodes (6): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(
 Cohesion: 0.35
 Nodes (9): notesUnderStop(), attachSubPointNotes(), fold(), matchSubPoint(), noteTitle(), stripNoteTitle(), SubPointNote, subs (+1 more)
 
-### Community 59 - "ui/controls.ts"
-Cohesion: 0.33
-Nodes (9): IconButtonSize, IconButtonVariant, onSegmentKey(), segmentButtons(), segmented(), segmentedMove(), segmentOn(), syncSegmented() (+1 more)
+### Community 59 - "icons.ts"
+Cohesion: 0.22
+Nodes (12): IconButtonSize, IconButtonVariant, onSegmentKey(), segmentButtons(), segmented(), segmentedMove(), segmentOn(), syncSegmented() (+4 more)
 
 ### Community 60 - "rating.ts"
 Cohesion: 0.44
@@ -470,22 +466,22 @@ Nodes (7): 2. Sem foto ou com foto que não carrega — 21 lugares (tarefa E2), 
 ## Knowledge Gaps
 - **462 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+457 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `places.ts`, `timeline.ts`, `route-planner.ts`, `weather.ts`, `summary.ts`, `amenities.ts`, `mount.ts`, `hotel-rank.ts`, `stay-heatmap.ts`, `index.ts`, `transfer-row.ts`, `parse.ts`, `travel.ts`, `hotel-distance.ts`, `shell.ts`, `rating.ts`, `main.ts`, `route-planner.test.ts`, `export.ts`, `beginLocate`, `price.ts`?**
+- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `place-panel.ts`, `places.ts`, `route-planner.ts`, `weather.ts`, `summary.ts`, `amenities.ts`, `mount.ts`, `hotel-rank.ts`, `stay-heatmap.ts`, `index.ts`, `transfer-row.ts`, `ai-badge.ts`, `parse.ts`, `travel.ts`, `hotel-distance.ts`, `shell.ts`, `rating.ts`, `main.ts`, `route-planner.test.ts`, `export.ts`, `beginLocate`, `price.ts`?**
   _High betweenness centrality (0.068) - this node is a cross-community bridge._
 - **Why does `getTravelCity()` connect `paint` to `travel-guide.ts`, `hotels.ts`, `travel-itinerary-legs.ts`, `export.ts`, `travel-stay-heatmap.ts`, `index.ts`, `places.ts`, `calendar.ts`, `parse.ts`, `travel.ts`, `main.ts`, `mount.ts`?**
   _High betweenness centrality (0.035) - this node is a cross-community bridge._
-- **Why does `icon()` connect `pickLocale` to `paint`, `map.ts`, `pin-visual.ts`, `hotels.ts`, `place-panel.ts`, `stay-heatmap.ts`, `places.ts`, `timeline.ts`, `transfer-row.ts`, `route-planner.ts`, `parse.ts`, `hotel-distance.ts`, `price.ts`, `shell.ts`, `amenities.ts`, `ui/controls.ts`, `rating.ts`, `mount.ts`?**
+- **Why does `icon()` connect `place-panel.ts` to `paint`, `map.ts`, `pin-visual.ts`, `pickLocale`, `hotels.ts`, `stay-heatmap.ts`, `places.ts`, `transfer-row.ts`, `ai-badge.ts`, `route-planner.ts`, `parse.ts`, `hotel-distance.ts`, `price.ts`, `shell.ts`, `amenities.ts`, `icons.ts`, `rating.ts`, `mount.ts`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `type` to the rest of the system?**
   _462 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `hotel-search.mjs` be split into smaller, more focused modules?**
+  _Cohesion score 0.13277310924369748 - nodes in this community are weakly interconnected._
 - **Should `paint` be split into smaller, more focused modules?**
   _Cohesion score 0.09224489795918367 - nodes in this community are weakly interconnected._
 - **Should `hotels.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.08013937282229965 - nodes in this community are weakly interconnected._
-- **Should `travel-visit.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.08522727272727272 - nodes in this community are weakly interconnected._

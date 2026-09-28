@@ -2282,6 +2282,9 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.345,
         address: '10 Bd du Palais, 75001 Paris',
         mapsQuery: 'Sainte-Chapelle Paris',
+        subPoints: [
+          { name: { en: 'Outside · Boulevard du Palais', 'pt-BR': 'Por fora · Boulevard du Palais' }, lat: 48.8551379, lng: 2.3457458 },
+        ],
       },
       {
         id: 'par-fric-frac',
