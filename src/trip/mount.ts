@@ -2100,7 +2100,7 @@ export function mountTrip(
       checklist = tripChecklist(id, locale, (open) => { editing = open || Boolean(checklist?.querySelector('[data-checklist-editor]')); });
       checklistLocale = locale;
     }
-    main.append(tripTabs(article, checklist, selectedTab, (index) => { selectedTab = index; }, locale), head, article, checklist);
+    main.append(head, tripTabs(article, checklist, selectedTab, (index) => { selectedTab = index; }, locale), article, checklist);
     if (currentStopKey) {
       main
         .querySelector<HTMLElement>(`[data-stop-key="${CSS.escape(currentStopKey)}"]`)
