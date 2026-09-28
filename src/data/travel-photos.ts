@@ -1986,16 +1986,28 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-arnaud-nicolas-caulaincourt': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Modern_Charcuterie_display.jpg/500px-Modern_Charcuterie_display.jpg',
-      'Charcuterie display (generic photo)',
-      'Charcutaria em exposição (foto ilustrativa)',
-      'Tanner-Christopher · Public domain · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9ROLCkF6Bmeglm1XaVlqpydbmmREnAwFP0hzBv9IqXuGcn6TD7bthgAJjIfzrSHBviOAANNdPbGRHh1wZF7Rvkt-TpRlceqOjWywlG6XbyxRHGS6C4WFfW4sJrKVY-xv5PiqnjnNv8IqIpq=s783-k-no',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — photo 1',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — foto 1',
+      'Google Maps · seleção do usuário',
     ),
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bonjour%2C_Croque_Monsieur_-_Lunch_in_Paris%2C_27_June_2023.jpg/1280px-Bonjour%2C_Croque_Monsieur_-_Lunch_in_Paris%2C_27_June_2023.jpg',
-      'Croque-monsieur (generic photo)',
-      'Croque-monsieur (foto ilustrativa)',
-      'Sharon Hahn Darlin · CC BY 2.0 · Wikimedia Commons',
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Tt6r1kMbvftSyGQkVcQrYSUFSVyT_PrJCdrjLpajryUerFBBqVQ20mFa41t0QUSGj1CFvo5q8C-sOVMeaJOb5_ryCkflHDM9GT71wkD4ZoeMLJwz8cNMPKQuS0R3hMPahhZydFypkdySzw=s1219-k-no',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — photo 2',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — foto 2',
+      'Google Maps · seleção do usuário',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q0nbExvUJM-xIBo_uVPYLQLhfPEH8e3XrrnwlsHP5kkhdkgQfYR89YMfM1b6tV_3nnarPmTYJHrdmvxwuJSNNc5sTHLLbL0mCPrGIVsdeTppjQt686dDhGclHiNOFcLQ9eAys=s696-k-no',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — photo 3',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — foto 3',
+      'Google Maps · seleção do usuário',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9So3v_ku5E-fAnqFH0KKpnakgfC9tnZI4DWjr2pr_ggdzJbq2cA0_-FwdRvYdCnUMHwIfefE9PaFkzL984ecETZmcFoRW-aGXzwWJwgXHwBFy47D1F9zV_c0vJkdBhEwXcuZjsWLbJgRV4=s731-k-no',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — photo 4',
+      'Charcuterie Arnaud Nicolas (Caulaincourt) — foto 4',
+      'Google Maps · seleção do usuário',
     ),
   ],
   'par-ore-ducasse': [

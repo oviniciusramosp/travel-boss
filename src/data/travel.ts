@@ -4738,6 +4738,7 @@ export const localTravelCities: TravelCity[] = [
           en: 'Montmartre shop of charcutier Arnaud Nicolas — croque-monsieur and takeaway lunch.',
           'pt-BR': 'Loja de Montmartre do charcutier Arnaud Nicolas — croque-monsieur e almoço para viagem.',
         },
+        googleRating: 4.5,
         lat: 48.889855,
         lng: 2.342016,
         address: '125 Rue Caulaincourt, 75018 Paris',
