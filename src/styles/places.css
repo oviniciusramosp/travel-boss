@@ -1656,11 +1656,11 @@ a.tb-route__google[hidden] {
   pointer-events: none;
 }
 
-/* Sub-points of a place in the card, numbered in walking order. */
+/* Sub-points follow the timeline’s round markers, in walking order. */
 .tb-panel__subpoints {
   margin: 0;
-  padding-left: var(--spacing-16);
-  list-style: decimal;
+  padding-left: 0;
+  list-style: none;
 }
 
 .tb-panel__subpoint {
@@ -1673,6 +1673,10 @@ a.tb-route__google[hidden] {
   gap: var(--spacing-4);
   cursor: pointer;
   list-style: none;
+}
+
+.tb-panel__subpoint .tb-substop__dot {
+  flex-shrink: 0;
 }
 
 .tb-panel__subpoint > details > summary::-webkit-details-marker {

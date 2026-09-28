@@ -117,6 +117,8 @@ export type TravelArea =
 /** A point inside a place, e.g. a park's fountain. The trip walks through them in order. */
 export type TravelSubPoint = {
   name: LString;
+  /** Details shown inside the point’s expandable card. */
+  description?: LString;
   lat: number;
   lng: number;
   /** Commons thumb, same pattern as the guide (`500px-…` on upload.wikimedia.org). */
@@ -3564,7 +3566,7 @@ export const localTravelCities: TravelCity[] = [
         // Commons has no Paris photo of Star Tours, Bella Notte or Casa de Coco (France has no
         // freedom of panorama; those files get deleted). Tales of Magic shows the spot by day.
         subPoints: [
-          { name: { en: 'Town Square', 'pt-BR': 'Town Square' }, lat: 48.871074, lng: 2.778841, aiSuggested: true },
+          { name: { en: 'Town Square', 'pt-BR': 'Town Square' }, description: { en: 'The square at the entrance to Main Street, beneath Main Street Station. For Halloween 2026, look for Mickey and Minnie pumpkins and Donald and Goofy candles in the gardens.', 'pt-BR': 'Praça na entrada da Main Street, junto à estação. No Halloween 2026, procure nos jardins as abóboras do Mickey e da Minnie e as velas do Donald e do Pateta.' }, lat: 48.871074, lng: 2.778841, aiSuggested: true },
           { name: { en: "Casey's Corner", 'pt-BR': "Casey's Corner" }, lat: 48.87188, lng: 2.777339, aiSuggested: true },
           { name: { en: 'Star Tours: The Adventures Continue', 'pt-BR': 'Star Tours: The Adventures Continue' }, lat: 48.87491, lng: 2.779051, placeId: 'par-dlp-star-tours' },
           { name: { en: 'Buzz Lightyear Laser Blast', 'pt-BR': 'Buzz Lightyear Laser Blast' }, lat: 48.873511, lng: 2.777842 },
@@ -3575,7 +3577,7 @@ export const localTravelCities: TravelCity[] = [
           { name: { en: "Rustler Roundup Shootin' Gallery", 'pt-BR': "Rustler Roundup Shootin' Gallery" }, lat: 48.871497, lng: 2.775526 },
           { name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' }, lat: 48.8706, lng: 2.7768, placeId: 'par-dlp-phantom-manor', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Disneyland_Paris_-_4481390960.jpg/500px-Disneyland_Paris_-_4481390960.jpg' },
           { name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' }, lat: 48.8735, lng: 2.7728, placeId: 'par-dlp-pirates', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pirates_of_the_Caribbean_-_panoramio.jpg/500px-Pirates_of_the_Caribbean_-_panoramio.jpg' },
-          { name: { en: 'Skull Rock', 'pt-BR': 'Skull Rock' }, lat: 48.873041, lng: 2.773487, aiSuggested: true },
+          { name: { en: 'Skull Rock', 'pt-BR': 'Skull Rock' }, description: { en: 'The 12-metre skull-shaped rock at Adventure Isle, overlooking Cannonball Cove beside the pirate galleon. Inspired by Peter Pan; when access is open, explore inside and look out through its mouth and eyes.', 'pt-BR': 'Rocha de 12 metros em forma de caveira na Adventure Isle, diante da Cannonball Cove e ao lado do galeão pirata. Inspirada em Peter Pan; quando o acesso estiver aberto, explore por dentro e olhe a paisagem pela boca e pelos olhos.' }, lat: 48.873041, lng: 2.773487, aiSuggested: true },
           { name: { en: 'Casa de Coco', 'pt-BR': 'Casa de Coco' }, lat: 48.871759, lng: 2.774672, placeId: 'par-dlp-casa-de-coco' },
           { name: { en: 'Disney Tales of Magic, viewing spot', 'pt-BR': 'Disney Tales of Magic, lugar para os fogos' }, lat: 48.87225, lng: 2.77723, placeId: 'par-dlp-tales-of-magic', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg/500px-Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg' },
         ],

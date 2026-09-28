@@ -34,10 +34,10 @@ describe('paris itinerary', () => {
     expect(primary.filter((id) => id === 'par-casa-do-gui')).toHaveLength(2);
     expect(primary).toContain('par-bella-notte');
     expect(primary).toContain('par-mcdonalds-disney');
-    // Park pin appears for rope drop, afternoon, and fireworks
-    expect(primary.filter((id) => id === 'par-disneyland')).toHaveLength(3);
+    // Adventure World first; Disneyland Park in the afternoon and for fireworks
+    expect(primary.filter((id) => id === 'par-disneyland')).toHaveLength(2);
     const ticketStops = d7.stops.filter(
-      (s) => s.placeId === 'par-disneyland' && s.countTicket !== false,
+      (s) => s.placeId === 'par-disney-adventure-world' && s.countTicket !== false,
     );
     expect(ticketStops).toHaveLength(1);
     const fireworks = d7.stops.find(
@@ -51,7 +51,7 @@ describe('paris itinerary', () => {
       city.places.map((p) => [p.id, withResolvedArea(p)]),
     );
     const budget = computeDayBudget(d7, placesById);
-    expect(budget.ticketPlaceIds).toContain('par-disneyland');
+    expect(budget.ticketPlaceIds).toContain('par-disney-adventure-world');
     expect(budget.ticketsEur).toBeCloseTo(221 / 3, 1);
     expect(budget.foodPlaceIds).toContain('par-bella-notte');
     expect(budget.foodPlaceIds).toContain('par-mcdonalds-disney');
@@ -314,7 +314,7 @@ describe('paris itinerary', () => {
     // Disney day (day 7): the ticket paid (€221 for 3) + food, starts/ends at home (no lodging cost)
     const d7 = computeDayBudget(parisItinerary.days[6]!, placesById);
     expect(d7.ticketsEur).toBeCloseTo(221 / 3, 1);
-    expect(d7.ticketPlaceIds).toEqual(['par-disneyland']);
+    expect(d7.ticketPlaceIds).toEqual(['par-disney-adventure-world']);
     expect(d7.foodEur).toBeGreaterThan(0);
   });
 });

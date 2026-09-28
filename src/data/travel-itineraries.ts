@@ -970,7 +970,7 @@ export const parisItinerary: TravelItinerary = {
           },
         },
         {
-          placeId: 'par-disneyland',
+          placeId: 'par-disney-adventure-world',
           time: '09:00',
           slot: 'morning',
           note: {

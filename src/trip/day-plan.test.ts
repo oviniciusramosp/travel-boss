@@ -1,3 +1,4 @@
+import { getTravelCity } from '../catalog';
 import { describe, expect, it } from 'vitest';
 import {
   dateBudget,
@@ -359,5 +360,20 @@ describe('noPurchase', () => {
     const places = [{ id: 'a', visit: { avgPricePerPerson: { currency: 'EUR' as const, min: 5, max: 12 }, ticket: { currency: 'EUR' as const, min: 10 } } }];
     expect(dateBudget(places, [], new Set(), new Set(['a']))).toMatchObject({ food: 0, ticket: 10 });
     expect(dateBudget(places)).toMatchObject({ food: 8.5, ticket: 10 });
+  });
+});
+
+
+describe('Disney two-park budget', () => {
+  it('charges the shared ticket at Adventure World and keeps meals at Disneyland Park', () => {
+    const city = getTravelCity('paris')!;
+    const parkBudget = (id: string) => dateBudget(withSubPointPlaces(
+      [city.places.find((place) => place.id === id)!],
+      (placeId) => city.places.find((place) => place.id === placeId),
+    ));
+    expect(parkBudget('par-disney-adventure-world')).toMatchObject({ ticket: 73.67, food: 0 });
+    const afternoon = parkBudget('par-disneyland');
+    expect(afternoon.ticket).toBe(0);
+    expect(afternoon.lines.some((line) => line.id === 'par-bella-notte' && line.food > 0)).toBe(true);
   });
 });

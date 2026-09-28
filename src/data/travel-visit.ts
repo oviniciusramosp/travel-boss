@@ -1726,16 +1726,6 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     tips: L('Best free panoramic view of the city skyline.', 'Melhor vista panorâmica grátis do skyline.'),
   }),
   'par-disneyland': {
-    // What the trip paid, so the day budget is real: €221 for 3 people.
-    ticket: money(
-      73.67,
-      undefined,
-      L(
-        'Our tickets: €221 for 3, or €73.67 per person (2 at €55 with the resident promo and 1 at €111)',
-        'Nossos ingressos: €221 para os 3, ou €73,67 por pessoa (2 a €55 com a promo de morador e 1 a €111)',
-      ),
-    ),
-    ticketUrl: 'https://tickets.disneylandparis.com/',
     durationMin: 480,
     durationMax: 720,
     duration: L('Full day (plan 8–12 h)', 'Dia inteiro (planeje 8–12 h)'),
@@ -1749,6 +1739,16 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   },
   // A planning estimate: the morning of the two-park day, 09:30 until the switch.
   'par-disney-adventure-world': {
+    // What the trip paid, so the day budget is real: €221 for 3 people.
+    ticket: money(
+      73.67,
+      undefined,
+      L(
+        'Our tickets: €221 for 3, or €73.67 per person (2 at €55 with the resident promo and 1 at €111)',
+        'Nossos ingressos: €221 para os 3, ou €73,67 por pessoa (2 a €55 com a promo de morador e 1 a €111)',
+      ),
+    ),
+    ticketUrl: 'https://tickets.disneylandparis.com/',
     durationMin: 180,
     durationMax: 300,
     duration: L('Half a day (3–5 h)', 'Meio dia (3–5 h)'),

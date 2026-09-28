@@ -400,16 +400,19 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       row.append(el('dt', undefined, pickLocale(locale, { en: 'Points along the walk', 'pt-BR': 'Pontos no caminho' })));
       const dd = el('dd');
       const steps = el('ol', 'tb-panel__subpoints');
+      steps.style.setProperty('--subpoint-color', placeCategoryMeta[place.category].color);
       subPoints.forEach((sub, index) => {
         const item = el('li', 'tb-panel__subpoint');
         // One open at a time (`name`). Opening lights the numbered dot on the map.
         const fold = el('details');
         fold.name = 'tb-subpoints';
         const head = el('summary');
-        head.append(el('span', undefined, pickLocale(locale, sub.name)));
+        const dot = el('span', 'tb-substop__dot');
+        dot.setAttribute('aria-hidden', 'true');
+        head.append(dot, el('span', undefined, pickLocale(locale, sub.name)));
         if (sub.aiSuggested) head.append(aiBadge(pickLocale(locale, { en: 'Suggested by AI', 'pt-BR': 'Sugerido pela IA' })));
         const notes = (current?.links?.subNotes ?? []).filter((note) => note.sub === index);
-        if (sub.photo || notes.length) head.append(icon('expand_more', { size: 16 }));
+        if (sub.photo || sub.description || notes.length) head.append(icon('expand_more', { size: 16 }));
         fold.append(head);
         if (sub.photo) {
           const img = el('img', 'tb-panel__subpoint-photo');
@@ -418,6 +421,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
           img.loading = 'lazy';
           fold.append(img);
         }
+        if (sub.description) fold.append(el('p', 'tb-panel__subpoint-note', pickLocale(locale, sub.description)));
         // What the trip says about this point: its time and the note, with its marks.
         for (const note of notes) {
           const text = el('p', 'tb-panel__subpoint-note');

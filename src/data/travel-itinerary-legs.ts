@@ -801,7 +801,7 @@ const day6: ItineraryLegDef[] = [
 const day7: ItineraryLegDef[] = [
   {
     from: 'par-casa-do-gui',
-    to: 'par-disneyland',
+    to: 'par-disney-adventure-world',
     mode: 'transit',
     // Walk house → Noisy RER (auto), then multi-line into Marne-la-Vallée–Chessy.
     hops: [
@@ -841,7 +841,7 @@ const day7: ItineraryLegDef[] = [
     label: 'RER E + RER D + RER A',
     durationMin: 75,
   },
-  { from: 'par-disneyland', to: 'par-bella-notte', mode: 'walk' },
+  { from: 'par-disney-adventure-world', to: 'par-bella-notte', mode: 'walk' },
   { from: 'par-bella-notte', to: 'par-disneyland', mode: 'walk' },
   { from: 'par-disneyland', to: 'par-mcdonalds-disney', mode: 'walk' },
   { from: 'par-mcdonalds-disney', to: 'par-disneyland', mode: 'walk' },
