@@ -1258,17 +1258,17 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Brioche Dorée CDG 2E', 'pt-BR': 'Brioche Dorée CDG 2E' },
         aiSuggested: true,
         aiReason: {
-          en: 'a croissant right out of customs at Terminal 2E',
-          'pt-BR': 'croissant logo na saída da alfândega do Terminal 2E',
+          en: 'a croissant at Terminal 2E; public arrivals access still needs confirmation',
+          'pt-BR': 'croissant no Terminal 2E; acesso pelo desembarque público ainda precisa de confirmação',
         },
         category: 'cafes',
         subcategories: ['bakery', 'coffee-shop'],
         description: {
-          en: "Branch of the French bakery-café chain in Terminal 2E arrivals. It serves viennoiseries, sandwiches and coffee in the public area of the airport.",
-          'pt-BR': "Unidade da rede francesa de padarias e cafés no desembarque do Terminal 2E. Oferece croissants, outros folhados, sanduíches e café na área pública do aeroporto.",
+          en: "Branch of the French bakery-café chain listed at Terminal 2E arrivals. It serves viennoiseries, sandwiches and coffee.",
+          'pt-BR': "Unidade da rede francesa de padarias e cafés cadastrada no desembarque do Terminal 2E. Oferece croissants, outros folhados, sanduíches e café.",
         },
         googleRating: 3.6,
-        // Google pin of "Brioche Doree - Terminal 2E - Arrivées" (landside, level 0)
+        // Google listing "Brioche Doree - Terminal 2E - Arrivées"; public access unconfirmed.
         lat: 49.003023,
         lng: 2.577149,
         address: 'Terminal 2E, niveau 0 (Arrivées), 95700 Roissy-en-France',
@@ -1345,7 +1345,7 @@ export const localTravelCities: TravelCity[] = [
         // Station building (OSM). The old pin sat 620 m south, on Place Jean-Jaurès.
         lat: 48.896356,
         lng: 2.460278,
-        address: 'Place Jean Coquelin, 93130 Noisy-le-Sec',
+        address: 'Rue de la Gare, 93130 Noisy-le-Sec',
         mapsQuery: 'Gare de Noisy-le-Sec RER E',
       },
       {
@@ -1811,9 +1811,9 @@ export const localTravelCities: TravelCity[] = [
         lat: 48.8661,
         lng: 2.3126,
         // OSM multipolygon: both buildings via travel-areas-osm.ts (par-palais)
-        address: 'Av. Winston Churchill, 75008 Paris',
-        mapsQuery: 'Grand Palais Petit Palais Paris',
-        mapsUrl: 'https://www.google.com/maps/place/Petit+Palais/@48.8660479,2.3145896,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66fd1ce8f4349:0xf3f5be813dd2469c!8m2!3d48.8660479!4d2.3145896!16zL20vMDhkc3du',
+        address: 'Grand Palais: 17 Av. du Général Eisenhower; Petit Palais: Av. Winston Churchill, 75008 Paris',
+        mapsQuery: 'Grand Palais Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Grand+Palais/data=!4m6!3m5!1s0x47e66fd048eedcd1:0x499b45575147a06b!8m2!3d48.8661091!4d2.3124544!16zL20vMDdfa2Zq',
       },
       {
         id: 'par-petit-palais-cafe',
@@ -2092,15 +2092,15 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'tourist',
         description: {
-          en: 'Botanical garden + natural-history museums. Best entry via Fontaine Cuvier (Rue Cuvier side).',
-          'pt-BR': 'Jardim botânico + museus de história natural. Entrada pela Fontaine Cuvier (lado da Rue Cuvier).',
+          en: 'Botanical garden and natural-history museums of the Muséum national d’Histoire naturelle.',
+          'pt-BR': 'Jardim botânico e museus de história natural do Muséum national d’Histoire naturelle.',
         },
         googleRating: 4.6,
-        // Pin on Fontaine Cuvier entrance
-        lat: 48.84455,
-        lng: 2.35595,
+        // Public Porte Jussieu, 57 rue Cuvier — OSM node/707256960.
+        lat: 48.8443464,
+        lng: 2.3562118,
         address: '57 Rue Cuvier, 75005 Paris',
-        mapsQuery: 'Fontaine Cuvier Jardin des Plantes Paris',
+        mapsQuery: 'Jardin des Plantes Porte Jussieu 57 Rue Cuvier Paris',
         mapsUrl: 'https://www.google.com/maps/place/Jardin+des+Plantes/@48.8439069,2.359658,17z/data=!3m1!4b1!4m6!3m5!1s0x47e671f0d126ec6b:0xa67a22fb91573d4e!8m2!3d48.8439069!4d2.359658!16zL20vMDIwaHZ0',
       },
       {
@@ -2117,7 +2117,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
         lat: 48.8574,
         lng: 2.3621,
-        address: '23 Rue de Sévigné, 75003 Paris',
+        address: '23 Rue Madame de Sévigné, 75003 Paris',
         mapsQuery: 'Musée Carnavalet Paris',
       },
       {
@@ -2776,7 +2776,7 @@ export const localTravelCities: TravelCity[] = [
         // Midpoint of full Rue Montorgueil polyline (OSM multi-way merge)
         lat: 48.864494,
         lng: 2.346697,
-        address: 'Rue Montorgueil, 75001 Paris',
+        address: 'Rue Montorgueil, 75002 Paris',
         mapsQuery: 'Rue Montorgueil Paris',
       },
       {
@@ -3283,8 +3283,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Canal Saint-Martin — to République', 'pt-BR': 'Canal Saint-Martin — até République' },
         category: 'parks',
         description: {
-          en: 'Southern stretch of Canal Saint-Martin: follow Quai de Valmy to the end of the open canal, then walk to Place de la République.',
-          'pt-BR': 'Trecho sul do Canal Saint-Martin: seguir o Quai de Valmy até o fim do canal a céu aberto e continuar até a Place de la République.',
+          en: 'Southern stretch of Canal Saint-Martin: follow Quai de Jemmapes, cross to Quai de Valmy at Rue du Faubourg du Temple, then walk to Place de la République.',
+          'pt-BR': 'Trecho sul do Canal Saint-Martin: seguir o Quai de Jemmapes, atravessar para o Quai de Valmy na Rue du Faubourg du Temple e continuar até a Place de la République.',
         },
         lat: 48.871155,
         lng: 2.365665,
@@ -3307,7 +3307,7 @@ export const localTravelCities: TravelCity[] = [
         },
         subPoints: [
           {
-            name: { en: 'Back to Quai de Valmy', 'pt-BR': 'Retorno ao Quai de Valmy' },
+            name: { en: 'Back to Quai de Jemmapes', 'pt-BR': 'Retorno ao Quai de Jemmapes' },
             lat: 48.871155, lng: 2.365665,
           },
           {
@@ -3319,8 +3319,8 @@ export const localTravelCities: TravelCity[] = [
             lat: 48.867557, lng: 2.363983,
           },
         ],
-        address: 'Quai de Valmy → Place de la République, Paris',
-        mapsQuery: 'Quai de Valmy Rue Dieu Paris',
+        address: 'Quai de Jemmapes → Quai de Valmy → Place de la République, Paris',
+        mapsQuery: '70 Quai de Jemmapes Paris',
       },
       {
         id: 'par-paname-brewing',
@@ -3454,7 +3454,7 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 3.9,
         lat: 48.84767,
         lng: 2.30097,
-        address: '1 Place Cambronne, 75015 Paris',
+        address: '2 Place Cambronne, 75015 Paris',
         mapsQuery: 'Le Royal Cambronne Paris',
       },
       {
@@ -3933,17 +3933,18 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-burger-king-opera',
-        name: { en: 'Burger King Opéra', 'pt-BR': 'Burger King Opéra' },
+        name: { en: 'Burger King Opéra Italiens', 'pt-BR': 'Burger King Opéra Italiens' },
         category: 'commons',
         description: {
           en: 'Central BK near Opéra — reliable chain stop between department stores and métro.',
           'pt-BR': 'BK no centro perto da Opéra — parada de rede entre grands magasins e metrô.',
         },
         googleRating: 3.5,
-        lat: 48.8714,
-        lng: 2.3312,
-        address: '4 Bd des Capucines, 75009 Paris',
-        mapsQuery: 'Burger King Opéra Paris',
+        lat: 48.871335,
+        lng: 2.334919,
+        address: '36 Boulevard des Italiens, 75009 Paris',
+        mapsQuery: 'Burger King Paris Opéra Italiens 36 Boulevard des Italiens',
+        mapsUrl: 'https://www.google.com/maps/place/Burger+King/data=!4m6!3m5!1s0x47e66e3a03b73cef:0xcc5f9cc48a023fb!8m2!3d48.871335!4d2.334919!16s%2Fg%2F11c53sfj2v',
       },
       {
         id: 'par-starbucks-opera',
@@ -3984,10 +3985,11 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'KFC no cluster do Forum des Halles — frango rápido quando a cidade está barulhenta.',
         },
         googleRating: 3.4,
-        lat: 48.8615,
-        lng: 2.3472,
-        address: 'Forum des Halles, 75001 Paris',
+        lat: 48.8617293,
+        lng: 2.3473201,
+        address: '101 Porte Berger, Forum des Halles, 75001 Paris',
         mapsQuery: 'KFC Forum des Halles Paris',
+        mapsUrl: 'https://www.google.com/maps/place/KFC/data=!4m6!3m5!1s0x47e66f6ad96051ff:0x7400ce188510cb2e!8m2!3d48.8617293!4d2.3473201!16s%2Fg%2F11sc3hws9c',
       },
 
       // ── Markets ──
@@ -4193,10 +4195,11 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'Guinguette dentro do Buttes-Chaumont — bem parisiense, drinks e comida descontraídos.',
         },
         googleRating: 4.3,
-        lat: 48.8797,
-        lng: 2.3825,
+        lat: 48.879936,
+        lng: 2.386241,
         address: '2 Allée de la Cascade, 75019 Paris',
         mapsQuery: 'Rosa Bonheur Buttes Chaumont Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Rosa+Bonheur+Buttes+Chaumont/data=!4m6!3m5!1s0x47e60d801cda5e25:0x89efbd3e08fcca35!8m2!3d48.879936!4d2.386241!16s%2Fg%2F1tfv4fd5',
       },
       {
         id: 'par-belleville',

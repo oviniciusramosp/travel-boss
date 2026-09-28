@@ -363,8 +363,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   'par-cdg-brioche-doree': cafeVisit(4, 8, {
     bestDay: L('Daily 6:00–21:00', 'Todo dia 6h–21h'),
     tips: L(
-      'Arrivals level, before the exit to the kerb: no escalator with the suitcases.',
-      'Fica no próprio desembarque, antes da saída para a calçada: nada de escada rolante com as malas.',
+      'Confirm access from public arrivals before relying on this stop. The terminal plan also lists a branch at Gates L, in the boarding area.',
+      'Confirme o acesso pelo desembarque público antes de contar com esta parada. O plano do terminal também lista uma unidade nas Portes L, na área de embarque.',
     ),
   }),
   'par-cdg-rer': {
@@ -526,8 +526,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMin: 60,
     durationMax: 150,
     tips: L(
-      'Enter via Fontaine Cuvier. Gardens free; museums/zoo are separate tickets.',
-      'Entre pela Fontaine Cuvier. Jardins grátis; museus/zoo são bilhetes à parte.',
+      'Enter through Porte Jussieu, 57 Rue Cuvier. Gardens free; museums/zoo are separate tickets.',
+      'Entre pela Porte Jussieu, 57 rue Cuvier. Jardins grátis; museus/zoo são bilhetes à parte.',
     ),
   }),
   'par-buttes-chaumont': parkVisit({
@@ -1097,8 +1097,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Depends on exhibition', 'Depende da exposição'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'Petit Palais permanent collections are often free. Grand Palais depends on show.',
-      'Coleções permanentes do Petit Palais costumam ser grátis. Grand Palais depende da mostra.',
+      'The map pin marks the Grand Palais. Its main entrance is on Square Jean Perrin; the Petit Palais has a separate entrance across Avenue Winston Churchill. Petit Palais permanent collections are free; Grand Palais admission depends on the exhibition.',
+      'O pino marca o Grand Palais. A entrada principal fica no Square Jean Perrin; o Petit Palais tem acesso separado, do outro lado da Avenue Winston Churchill. Coleções permanentes do Petit Palais são grátis; Grand Palais depende da mostra.',
     ),
   },
   'par-vendome': landmarkOutdoor({
