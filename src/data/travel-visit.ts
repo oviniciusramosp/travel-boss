@@ -511,8 +511,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMin: 40,
     durationMax: 90,
     tips: L(
-      'Walk Fontaine Guy Lartigue → up Rue Mouffetard → Panthéon. Food street energy.',
-      'Caminhe Fontaine Guy Lartigue → sobe Rue Mouffetard → Panteão. Rua de comida.',
+      'From the Panthéon, reach Rue Mouffetard via Rue Descartes and walk downhill through Place de la Contrescarpe. After lunch, continue down the same street to Fontaine Guy Lartigue.',
+      'Do Panteão, entre na Rue Mouffetard pela Rue Descartes e desça pela Place de la Contrescarpe. Depois do almoço, continue pela mesma rua até a Fontaine Guy Lartigue.',
     ),
   }),
   'par-jardin-plantes': parkVisit({

@@ -2012,25 +2012,31 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'parks',
         description: {
-          en: 'One of the nicest Latin Quarter walks: start at Fontaine Guy Lartigue (bottom of the street / Place Saint-Médard) and stroll up Rue Mouffetard toward the Panthéon.',
-          'pt-BR': 'Uma das caminhadas mais gostosas do Quartier Latin: comece na Fontaine Guy Lartigue (pé da rua / Place Saint-Médard) e suba a Rue Mouffetard até o Panteão.',
+          en: 'A historic market street in the Latin Quarter, lined with food shops and cafés. Walk downhill from Rue Descartes through Place de la Contrescarpe.',
+          'pt-BR': 'Rua histórica de comércio e comida no Quartier Latin, com lojas e cafés. A caminhada desce desde a Rue Descartes, passando pela Place de la Contrescarpe.',
         },
         googleRating: 4.6,
-        // Mid-street pin; polyline = fountain → Panthéon
+        // OSM Rue Mouffetard ways; north → south. Lunch interrupts the walk before the fountain.
         lat: 48.8438,
         lng: 2.3495,
         area: {
           kind: 'polyline',
           path: [
-            [48.84155, 2.34975], // Fontaine Guy Lartigue / Place Saint-Médard
-            [48.8424, 2.3496],
-            [48.8435, 2.3494],
-            [48.8446, 2.3491],
-            [48.8455, 2.3484],
-            [48.8462, 2.3469],
-            [48.8462, 2.346], // Panthéon
+            [48.8450019, 2.3491671],
+            [48.8445074, 2.3492536],
+            [48.8437521, 2.3494085],
+            [48.8431509, 2.3496018],
+            [48.8422894, 2.3497730],
+            [48.8414434, 2.3496366],
+            [48.8400753, 2.3497812],
+            [48.8393601, 2.3499558],
           ],
         },
+        subPoints: [
+          { name: { en: 'Rue Mouffetard · start at Rue Descartes', 'pt-BR': 'Rue Mouffetard · início na Rue Descartes' }, lat: 48.8450019, lng: 2.3491671 }, // node 25033083
+          { name: { en: 'Place de la Contrescarpe', 'pt-BR': 'Place de la Contrescarpe' }, lat: 48.8445074, lng: 2.3492536 }, // node 245978167
+          { name: { en: 'Rue Mouffetard · toward lunch', 'pt-BR': 'Rue Mouffetard · descida até o almoço' }, lat: 48.8431509, lng: 2.3496018 }, // node 25034321
+        ],
         address: 'Rue Mouffetard, 75005 Paris',
         mapsQuery: 'Rue Mouffetard Paris',
       },
