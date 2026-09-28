@@ -63,3 +63,15 @@ Descrições baseadas nas páginas oficiais dos [bosques](https://www.chateauver
 | [Panorama at the Château de Versailles - Grand Canal.jpg](https://commons.wikimedia.org/wiki/File:Panorama_at_the_Ch%C3%A2teau_de_Versailles_-_Grand_Canal.jpg) | DiscoA340 | CC BY-SA 4.0 |
 
 Verificação do percurso em 28/09/2026: OSRM routed-foot, com as 16 coordenadas na ordem do catálogo, retornou 4.814,3 m e 64 minutos de deslocamento. Não inclui observação, fotos, filas ou almoço. O app soma a caminhada desses subpontos aos demais trechos do dia; a duração de visita de 150–210 minutos é editorial e não recalcula os horários do roteiro.
+
+## Ajuste do dia para preservar o pôr do sol
+
+Pedido de 28/09/2026: ampliar o tempo dos jardins, almoçar durante a visita e preservar o pôr do sol na Torre. Saída de casa mantida às 6h45. Palácio 9h30–11h10 (visita focada); jardins 11h15–13h45, com 30 min de compra e almoço no Grand Canal a partir de 13h15. As duas horas de passeio são uma versão ágil, abaixo da estimativa de visita completa de 150–210 min sem almoço: aproximadamente 64 min andando e 56 min distribuídos pelas paradas. Não equivale a visita demorada de todos os bosques nem espera por todos os jogos de água.
+
+Grand Trianon 14h–14h45; mercado 15h30–15h45; café 16h–16h15. Retorno pela mesma linha/estação, com 55 min de janela até a Torre às 17h10, ingresso planejado 17h30 (disponibilidade não verificada), visita até 20h. Jantar passou para 20h30; saída até 21h30 preservada, portanto fila no restaurante reduz o tempo de refeição. Retirada a alternativa de almoço sentado porque o usuário escolheu sanduíche.
+
+- [Piquenique oficial](https://en.chateauversailles.fr/plan-your-visit/facilities/picnic) e [sugestão oficial de almoço no Grand Canal](https://www.chateauversailles.fr/journee-versailles-2): refeição nas áreas autorizadas do parque, sem presumir autorização para comer andando por todos os jardins. Compra após o interior do palácio; fornecedor/preço do sanduíche ainda não escolhido, portanto não está somado ao chip de comida.
+- [Torre Eiffel — duração oficial](https://www.toureiffel.paris/en/faq/getting-tower/how-long-does-visit-take): recomenda 2h30 para o topo; há troca de elevador no segundo andar. Prioridade ao topo antes do pôr do sol.
+- [Pôr do sol](https://api.sunrise-sunset.org/json?lat=48.8584&lng=2.2945&date=2026-10-09&formatted=0), consultado em 28/09/2026: 17:15:28 UTC = 19h15 CEST. A previsão astronômica do app difere cerca de dois minutos; o planejamento usa margem, não precisão de segundos.
+- Transitous `/api/v1/plan`, origem 48.7984416,2.1271255, destino 48.8584,2.2945, `time=2026-10-09T14:10:00Z`: caminhada de 6 min, RER C da Rive Gauche às 16h25 → Champ de Mars 16h54, caminhada de 8 min → Torre 17h02. Saída do café às 16h15 deixa margem para embarque e meta de chegada 17h10. Não é garantia contra atrasos.
+- [Obras oficiais RER C outubro](https://monrercetlignev.transilien.com/events/categorie/paris-versailles-chateau-rive-gauche/2026-10/): em 9/10 a interrupção indicada começa às 23h, fora deste retorno à tarde.

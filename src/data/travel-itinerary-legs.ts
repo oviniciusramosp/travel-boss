@@ -1224,7 +1224,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-castellane', 'par-versailles', 75, [
     ride(transilienL, 'saint-lazare', 'versailles-rd'),
   ]),
-  trainLeg('par-stray-bean', 'par-eiffel', 45, [ride(rerC, 'versailles-chateau', 'champ-mars')]),
+  trainLeg('par-stray-bean', 'par-eiffel', 55, [ride(rerC, 'versailles-chateau', 'champ-mars')]),
   trainLeg('par-eiffel', 'par-entrecote', 25, [ride(metro9, 'trocadero', 'fdr')]),
   trainLeg('par-entrecote', 'par-casa-do-gui', 45, [
     ride(metro9, 'fdr', 'chaussee-antin'),

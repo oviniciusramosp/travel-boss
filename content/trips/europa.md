@@ -205,22 +205,21 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
 - 07:30 [Boulangerie Castellane](place:par-castellane) — **Café da manhã**: croissant, éclair ou mil-folhas com café; €7–10 por pessoa (estimativa). Sair às 8h
   - via: a pé até Saint-Lazare, trem L até Versailles Rive Droite e caminhada até o castelo · 1h15
-- 09:30 [Château de Versailles](place:par-versailles) — Passport €35 com horário: palácio das 9h às 18h30, última entrada 17h45.\
-  Sexta é dia de Jardins Musicais (€15, incluso no Passport).
+- 09:30 [Château de Versailles](place:par-versailles) — Visita de 1h40 aos Grands Appartements e à Galerie des Glaces; sair às 11h10 para os jardins. Passport com entrada marcada para 9h30; Jardins Musicais inclusos
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
-- 13:00 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais (inclusos no Passport), descendo pelo Tapis Vert até a cabeceira do Grand Canal
-- 14:00 [Domaine de Trianon](place:par-trianon) — Visitar o Grand Trianon (12h–18h30). Sair às 15h para passar pelo mercado antes do café da tarde
+- 11:15 [Jardins de Versalhes](place:par-versailles-jardins) — Passeio em ritmo ágil, com paradas curtas, e **almoço** de sanduíche para levar: 2h30 no total, até 13h45
+- 13:15 **Grand Canal** — Comprar o sanduíche para levar após a visita ao palácio e almoçar na área permitida do parque junto ao canal; 30 min para compra e refeição, saindo às 13h45 para o Trianon
+- 14:00 [Domaine de Trianon](place:par-trianon) — Visita breve de 45 min ao Grand Trianon; sair às 14h45 para o mercado
   - via: a pé até o Marché Notre-Dame · 45 min
-- 15:45 [Marché Notre-Dame](place:par-point-alph) — Visitar por dentro as halles do mercado, sem comprar; abertas das 15h às 19h30. Sair às 16h; a feira externa termina às 14h
+- 15:30 [Marché Notre-Dame](place:par-point-alph) — Passar por dentro das halles do mercado, sem comprar; sair às 15h45. Pavilhões abertos das 15h às 19h30; a feira externa termina às 14h
   - via: a pé até o The Stray Bean · 15 min
-- 16:15 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo; €7–10 por pessoa (estimativa). Sair às 16h35; fecha às 17h
-  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 45 min
-- 17:20 [Torre Eiffel](place:par-eiffel) — **Subida ao topo** com horário marcado: reserve o das 17h30 para ver o pôr do sol às 19h13 lá de cima (elevador até o topo €36,70; escada até o 2º e elevador até o topo €28). Conte ~2 h entre a revista, os elevadores e os dois andares
+- 16:00 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo; €7–10 por pessoa (estimativa). Pausa rápida: sair até 16h15 para preservar a chegada à Torre Eiffel
+  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 55 min — Mirar o trem das 16h25; horário consultado, a reconfirmar no dia
+- 17:10 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**: chegar 20 min antes do ingresso a reservar para 17h30; subir primeiro ao topo para acompanhar o pôr do sol por volta das 19h15. Reservar até 20h para a visita e descida
   - via: metrô 9 de Trocadéro até Franklin D. Roosevelt · 25 min
-- 20:00 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa (~€26,50), sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h30: de 5 a 14/10 o RER E para às 22h15
+- 20:30 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa (~€26,50), sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h30: de 5 a 14/10 o RER E para às 22h15
   - via: metrô 9 de Franklin D. Roosevelt até Chaussée d'Antin e RER E em Haussmann–Saint-Lazare · 45 min
 - 22:15 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Almoço mais em conta: [La Flottille](place:par-la-flottille) — brasserie de 1900 no Grand Canal, pratos €16–20, almoço até 15h30
 - Opcional, no lugar do Trianon: [One Nation Paris (outlet)](place:par-one-nation) — do castelo, 20 min a pé até Versailles-Chantiers, linha N até Villepreux–Les Clayes (12 min) e 10 min a pé; aberto até 20h. Volta: linha N até Montparnasse (~30 min; último trem 21h56), metrô 4 até Gare de l'Est e RER E em Magenta
 
 ### Dia 7 — Sáb 10/10 · Baguett’s, Richelieu, Vendôme, Cédric Grolet, Ópera e barco no Sena
