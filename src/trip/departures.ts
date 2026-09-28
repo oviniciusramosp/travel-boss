@@ -21,7 +21,7 @@ function matches(leg: TransferLeg, service: TripBoarding): boolean {
 /** Published trains anchor the walks. Never derive a train departure from a duration. */
 export function departureTimes(
   legs: readonly TransferLeg[], date: string, fromTime?: string, toTime?: string,
-  services: readonly TripBoarding[] = [],
+  services: readonly TripBoarding[] = [], explicitDeparture?: string,
 ): DepartureTime[] {
   const result: DepartureTime[] = legs.map(() => ({}));
   const origin = minutes(fromTime);
@@ -50,6 +50,7 @@ export function departureTimes(
     const prior = first > 0 ? ends[first - 1] : null;
     const target = i < legs.length ? starts[i] : destination;
     let start = prior ?? (target == null ? null : target - total - (i < legs.length ? 3 : 0));
+    if (first === 0 && minutes(explicitDeparture) != null) start = minutes(explicitDeparture);
     if (start == null) continue;
     const conflict = (origin != null && start < origin)
       || (target != null && start + total + (i < legs.length ? 3 : 0) > target);

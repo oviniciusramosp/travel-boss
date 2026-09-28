@@ -193,3 +193,5 @@ Under the departure stop, repeat `  - embarque: YYYY-MM-DD · SERVICE · BOARD �
 ```
 
 The UI only uses a service when the date, line and both stations match the current route. Exports retain these metadata lines. Missing or mismatched service data must never become a fabricated train departure. Walking departure times are estimates based on the next stop or checked boarding, including connection margins; absent stop times remain unspecified.
+
+A stop can also carry `  - saída: HH:mm` for an explicit walking exit from an authored note. This overrides the backward walking estimate, never a published train time. Impossible connections remain visibly flagged. This field exports with the stop.

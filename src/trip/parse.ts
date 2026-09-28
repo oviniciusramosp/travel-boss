@@ -1,3 +1,4 @@
+import { isoParts } from './dates';
 import type { Period } from './day-plan';
 import { getTravelCity, travelCities } from '../catalog';
 
@@ -32,6 +33,8 @@ export type TripBoarding = {
 export type TripStop = {
   /** Published services checked for this departure stop and date. */
   boardings?: TripBoarding[];
+  /** Explicit planned exit, independent from the arrival time of the stop. */
+  departureTime?: string;
   /** Missing status means tentative. Only parent stops participate in review. */
   status?: 'a confirmar' | 'confirmado';
   time?: string;
@@ -399,11 +402,18 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
     }
 
+    const departure = /^[ \t]+- saída:[ \t]*(.*)$/.exec(line);
+    if (departure) {
+      const stop = day?.stops.at(-1);
+      if (stop && !stop.listNote && /^([01]\d|2[0-3]):[0-5]\d$/.test(departure[1] ?? '')) stop.departureTime = departure[1];
+      else reject(errors, lineNo, 'boarding-invalid');
+      continue;
+    }
     const boarding = /^[ \t]+- embarque:[ \t]*(.*)$/.exec(line);
     if (boarding) {
       const stop = day?.stops.at(-1);
       const match = /^(\d{4}-\d{2}-\d{2}) · (.+?) · (.+?) → (.+?) · ([0-2]\d:[0-5]\d) → ([0-2]\d:[0-5]\d)$/.exec(boarding[1] ?? '');
-      if (!stop || stop.listNote || !match || Number(match[5]!.slice(0, 2)) > 23 || Number(match[6]!.slice(0, 2)) > 23) {
+      if (!stop || stop.listNote || !match || !isoParts(match[1]!) || Number(match[5]!.slice(0, 2)) > 23 || Number(match[6]!.slice(0, 2)) > 23) {
         reject(errors, lineNo, 'boarding-invalid');
       } else {
         (stop.boardings ??= []).push({ date: match[1]!, service: match[2]!, board: match[3]!, exit: match[4]!, departure: match[5]!, arrival: match[6]! });

@@ -27,6 +27,7 @@ function pushStop(
   }
   if (stop.status && !stop.listNote) lines.push(`  - status: ${stop.status}`);
   if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
+  if (stop.departureTime) lines.push(`  - saída: ${stop.departureTime}`);
   for (const ride of stop.boardings ?? []) {
     lines.push(`  - embarque: ${ride.date} · ${ride.service} · ${ride.board} → ${ride.exit} · ${ride.departure} → ${ride.arrival}`);
   }

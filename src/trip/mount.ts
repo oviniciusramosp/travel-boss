@@ -1989,8 +1989,14 @@ export function mountTrip(
           const walk: ItineraryLegDef = { from: place.id, to: nextPlace.id, mode: 'walk' };
           legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, routeHop.from, routeHop.to) }];
         }
+        // An authored bus + walk without catalog geometry still has a separate final walk.
+        if (legs.length === 1 && entry.depart?.mode === 'transit' && /caminhada/i.test(entry.depart.detail)) {
+          const ride = departureTimes(legs, date, stop.time, nextStop?.time, stop.boardings)[0];
+          const walkMin = (entry.depart.durationMin ?? 0) - (ride?.durationMin ?? 0);
+          if (ride?.verified && walkMin > 1) legs.push({ mode: 'walk', detail: `a pé · ${walkMin} min`, durationMin: walkMin });
+        }
         const allTimings = departureTimes(legs, date,
-          subNotes.filter(note => note.time).at(-1)?.time ?? stop.time, nextStop?.time, stop.boardings);
+          subNotes.filter(note => note.time).at(-1)?.time ?? stop.time, nextStop?.time, stop.boardings, stop.departureTime);
         const timings = allTimings.filter((_, index) => timelineLegs([legs[index]!]).length > 0);
         legs = timelineLegs(legs);
         // A `via:` price is what the week pass does not cover. It sits on the leg's own row

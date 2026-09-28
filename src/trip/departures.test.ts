@@ -24,3 +24,10 @@ describe('departure times', () => {
     expect(result[0]?.durationMin).toBe(20);
   });
 });
+
+it('respects an explicit exit and flags a missed train instead of moving it', () => {
+  const result = departureTimes([walk, train], service.date, '08:00', '09:00', [service], '08:10');
+  expect(result.map(item => item.time)).toEqual(['08:10', '08:15']);
+  expect(result[0]?.conflict).toBe(true);
+  expect(result[1]?.conflict).toBe(true);
+});

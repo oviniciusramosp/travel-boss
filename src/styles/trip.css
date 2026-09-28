@@ -1427,7 +1427,17 @@ button.tb-receipt__name {
 }
 
 .tb-list > .tb-transfer > .tb-transfer__time {
-  grid-column: time;
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
   font-variant-numeric: tabular-nums;
   color: var(--color-mid-gray);
 }
+
+.tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time) {
+  --tl-hop-y: calc(var(--tl-pad) + var(--text-caption) * var(--leading-caption) + var(--h-sm) / 2);
+}
+.tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time) > :is(.tb-transfer__lead, .tb-transfer__main) { grid-row: 2; }
+.tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time) > :is(.tb-transfer__stations, .tb-transfer__note, .tb-stop-costs) { grid-row: 3; }
