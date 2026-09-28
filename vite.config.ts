@@ -12,6 +12,7 @@ import {
   type TripPushReason,
 } from './src/trip/api';
 import { placeEditsApi } from './scripts/vite-place-edits';
+import { checklistApi } from './scripts/vite-checklists';
 import { ICON_FONT_HREF } from './src/ui/icons';
 import {
   forecastToEnsemble,
@@ -276,7 +277,7 @@ function iconFont(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
+  plugins: [checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
   server: {
     port: 5173,
     strictPort: false,
