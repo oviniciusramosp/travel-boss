@@ -83,7 +83,7 @@ import {
 } from '../views/place-panel';
 import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripStop } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
-import { dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel, sunsetTip } from '../views/timeline';
+import { averageBudgetCards, dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel, sunsetTip } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
 import {
   dayWeather,
@@ -1545,6 +1545,7 @@ export function mountTrip(
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
 
+    const dailyBudgets: { title: string; budget: ReturnType<typeof dateBudget> }[] = [];
     for (const section of tripDates(trip)) {
       const date = section.date;
       const details = document.createElement('details');
@@ -1687,6 +1688,7 @@ export function mountTrip(
       for (const placeId of inside) outside.delete(placeId);
       for (const placeId of buying) noFood.delete(placeId);
       const budget = dateBudget(placesHere, fares, outside, noFood);
+      dailyBudgets.push({ title: formatDayTitle(date, locale), budget });
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
       const receiptStops = new Map<string, { time?: string; select: () => void }>();
@@ -2096,6 +2098,7 @@ export function mountTrip(
       article.append(details);
     }
 
+    if (dailyBudgets.length) article.prepend(averageBudgetCards(dailyBudgets, locale));
     if (!checklist || checklistLocale !== locale) {
       checklist = tripChecklist(id, locale, (open) => { editing = open || Boolean(checklist?.querySelector('[data-checklist-editor]')); });
       checklistLocale = locale;

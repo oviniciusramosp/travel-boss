@@ -1,6 +1,7 @@
 import { getTravelCity } from '../catalog';
 import { describe, expect, it } from 'vitest';
 import {
+  averageDateBudget,
   dateBudget,
   dayPeriods,
   noPurchase,
@@ -19,6 +20,17 @@ import {
   zonedStamp,
   type Period,
 } from './day-plan';
+
+describe('averageDateBudget', () => {
+  it('includes zero-cost dates in both averages and retains cents', () => {
+    expect(averageDateBudget([{ food: 50, ticket: 12.55 }, { food: 0, ticket: 0 }, { food: 25, ticket: 50 }]))
+      .toEqual({ food: 25, ticket: 62.55 / 3 });
+  });
+  it('returns zero without dates and preserves a single day', () => {
+    expect(averageDateBudget([])).toEqual({ food: 0, ticket: 0 });
+    expect(averageDateBudget([{ food: 22.5, ticket: 7 }])).toEqual({ food: 22.5, ticket: 7 });
+  });
+});
 
 describe('periodAt', () => {
   it('splits the day at 12:00 and 18:00', () => {

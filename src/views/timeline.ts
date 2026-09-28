@@ -4,7 +4,7 @@
  */
 import { pickLocale, travelUi } from '../catalog';
 import type { Locale } from '../catalog';
-import { overBudget, type BudgetLine, type DateBudget } from '../trip/day-plan';
+import { averageDateBudget, overBudget, type BudgetLine, type DateBudget } from '../trip/day-plan';
 import { openDialog } from '../ui/dialog';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
@@ -119,6 +119,42 @@ const RECEIPT_KINDS = [
 ] as const;
 
 export type ReceiptStop = { time?: string; select: () => void };
+
+/** Same daily chips, averaged over all calendar dates, with a daily breakdown. */
+export function averageBudgetCards(days: readonly { title: string; budget: DateBudget }[], locale: Locale): HTMLElement {
+  const group = el('div', 'tb-date__budgets');
+  const average = averageDateBudget(days.map(({ budget }) => budget));
+  const unit = pickLocale(locale, { en: 'per person / day', 'pt-BR': 'por pessoa / dia' });
+  const heading = pickLocale(locale, { en: 'Daily average', 'pt-BR': 'Média diária' });
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', heading);
+  for (const { kind, glyph, label } of RECEIPT_KINDS) {
+    const name = pickLocale(locale, label);
+    const chip = budgetChip(glyph, average[kind], unit, locale);
+    const tip = `${heading} · ${name}: ${formatEur(average[kind], locale)} ${unit}`;
+    chip.setAttribute('aria-label', tip);
+    chip.setAttribute('aria-haspopup', 'dialog');
+    chip.dataset.tip = tip;
+    chip.onclick = () => {
+      const body = el('div', 'tb-receipt__body');
+      const list = el('ul', 'tb-receipt__lines');
+      for (const day of days) list.append(receiptLine('li', 'tb-receipt__line', day.title, day.budget[kind], locale));
+      const total = days.reduce((sum, { budget }) => sum + budget[kind], 0);
+      body.append(
+        el('p', 'tb-receipt__caption', pickLocale(locale, {
+          en: `Planned total per person divided by ${days.length} days, including days with no expenses.`,
+          'pt-BR': `Total previsto por pessoa dividido por ${days.length} dias, incluindo dias sem gastos.`,
+        })),
+        list,
+        receiptLine('p', 'tb-receipt__line is-subtotal', pickLocale(locale, { en: 'Trip total per person', 'pt-BR': 'Total da viagem por pessoa' }), total, locale),
+        receiptLine('p', 'tb-receipt__line is-total', heading, average[kind], locale),
+      );
+      openDialog({ className: 'tb-receipt', title: `${heading} · ${name}`, locale, body: [body] });
+    };
+    group.append(chip);
+  }
+  return group;
+}
 
 /** Each kind opens its own receipt, including dates with no expenses. */
 export function dateBudgetCards(
