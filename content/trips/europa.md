@@ -178,7 +178,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
 - 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
 - 14:00 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14:10
-  - via: a pé até a Boulangerie du Sentier · 16 min
+  - via: metrô 4 de Étienne Marcel até Réaumur–Sébastopol · 20 min — Uma estação, sentido Porte de Clignancourt; cerca de 9 min a pé até o metrô e 5 min da saída até a padaria. Tempo estimado inclui espera
 - 14:30 [Boulangerie du Sentier](place:par-boulangerie-du-sentier) — Provar o croissant de manteiga vencedor do Grand Paris de 2026. Comprar para levar e sair às 14:40
   - via: metrô 4 até Barbès–Rochechouart e funicular de Montmartre · 40 min — Caminhar cerca de 5 min até Réaumur–Sébastopol e embarcar sentido Porte de Clignancourt; de Barbès, caminhar até a estação inferior do funicular, junto à Place Saint-Pierre. Subir com a Navigo Semaine; tempo estimado inclui caminhadas e espera
 - 15:20 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
