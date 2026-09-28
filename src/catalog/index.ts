@@ -67,3 +67,6 @@ export { loadOsmAreas, osmAreasReady, placeHasOsmArea } from '../data/osm-area-b
 
 export { louvrePaths } from '../data/travel-indoor-paths';
 export type { IndoorPathPart } from '../data/travel-indoor-paths';
+
+export { savePlaceEdits } from './place-edits';
+export type { PlaceEdits } from './place-edits';

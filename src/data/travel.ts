@@ -32,6 +32,7 @@ import {
   resolvePlaceSubcategories,
   type PlaceSubcategory,
 } from './travel-subcategories';
+import { withPlaceEdits } from '../catalog/place-edits';
 import { milanCity } from './travel-milan';
 
 export type { TravelPhoto } from './travel-photos';
@@ -7154,7 +7155,9 @@ export const localTravelCities: TravelCity[] = [
   },
 ];
 
-export const travelCities: TravelCity[] = localTravelCities;
+export const travelCities: TravelCity[] = localTravelCities.map((city) => ({
+  ...city, places: city.places.map(withPlaceEdits),
+}));
 
 export function getTravelCity(slug: string): TravelCity | undefined {
   return travelCities.find((c) => c.slug === slug);
@@ -7232,13 +7235,13 @@ export function withResolvedArea(place: TravelPlace): TravelPlace {
     place.id,
     place.subcategories,
   );
-  return {
+  return withPlaceEdits({
     ...place,
     ...(area ? { area } : {}),
     ...(visit ? { visit } : {}),
     ...(photos ? { photos } : {}),
     ...(subcategories.length > 0 ? { subcategories } : {}),
-  };
+  });
 }
 
 /**
