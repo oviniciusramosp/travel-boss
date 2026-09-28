@@ -50,6 +50,8 @@ button {
 }
 
 .tb-bar {
+  position: relative;
+  z-index: var(--z-popover);
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
@@ -78,8 +80,10 @@ button {
 }
 
 .tb-search {
-  flex: 1;
-  max-width: 440px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(440px, 40%);
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
@@ -134,25 +138,7 @@ button {
   flex: 1;
 }
 
-.tb-source {
-  max-width: 280px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  color: var(--color-mid-gray);
-  font: inherit;
-  font-size: var(--text-caption);
-  letter-spacing: 0.01em;
-  text-align: right;
-  cursor: pointer;
-}
 
-.tb-source:is(:hover, :focus-visible) {
-  color: var(--color-ink);
-}
 
 .tb-locale {
   display: flex;
@@ -1128,3 +1114,28 @@ p.tb-meta {
   filter: drop-shadow(0 0 1px var(--color-paper)) drop-shadow(0 0 1px var(--color-paper))
     drop-shadow(0 0 4px color-mix(in srgb, currentColor 55%, transparent));
 }
+
+.tb-search-results {
+  position: absolute;
+  top: calc(100% + var(--spacing-8));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 80vw);
+  max-height: 70vh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--inset-popover);
+  gap: var(--spacing-8);
+  background: var(--color-paper);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-popover);
+  box-shadow: var(--shadow-float);
+  z-index: var(--z-popover);
+}
+.tb-search-results[hidden] { display: none; }
+.tb-search-group { min-width: 0; }
+.tb-search-heading { display: block; padding: var(--spacing-8); font-size: var(--text-caption); color: var(--color-mid-gray); }
+.tb-search-option { display: grid; gap: var(--spacing-4); padding: var(--spacing-8); border-radius: var(--r-popover-inner); cursor: pointer; }
+.tb-search-option:hover, .tb-search-option[aria-selected="true"] { background: var(--color-canvas); }
+.tb-search-option small { color: var(--color-mid-gray); }

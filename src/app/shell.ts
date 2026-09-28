@@ -82,7 +82,7 @@ export function mountShell(root: HTMLElement): Shell {
   markMeta.textContent = 'roteiros';
   mark.append(markMeta);
 
-  const search = el('label', 'tb-search');
+  const search = el('div', 'tb-search');
   const searchInput = el('input');
   searchInput.type = 'search';
   searchInput.placeholder = 'Buscar lugar ou roteiro';
@@ -94,40 +94,6 @@ export function mountShell(root: HTMLElement): Shell {
   search.append(icon('search', { size: 16 }), searchInput, kbd);
 
   const spacer = el('div', 'tb-bar-spacer');
-  const source = el('button', 'tb-source');
-  source.type = 'button';
-  const paintSource = (path: string) => {
-    source.dataset.path = path;
-    source.textContent = path;
-    const action = pickLocale(locale, { en: 'Copy path', 'pt-BR': 'Copiar caminho' });
-    source.setAttribute('aria-label', `${action}: ${path}`);
-    source.setAttribute('data-tip', path);
-  };
-  source.dataset.path = 'content/trips';
-  source.textContent = 'content/trips';
-  source.addEventListener('click', () => {
-    const path = source.dataset.path ?? '';
-    const write = navigator.clipboard?.writeText;
-    if (!path || !write) return;
-    const ok = pickLocale(locale, { en: 'Copied', 'pt-BR': 'Copiado' });
-    const fail = pickLocale(locale, { en: 'Could not copy', 'pt-BR': 'Falha ao copiar' });
-    void write.call(navigator.clipboard, path).then(
-      () => {
-        source.setAttribute('data-tip', ok);
-        source.setAttribute('aria-label', ok);
-        window.setTimeout(() => {
-          if (source.dataset.path) paintSource(source.dataset.path);
-        }, 1200);
-      },
-      () => {
-        source.setAttribute('aria-label', fail);
-        window.setTimeout(() => {
-          if (source.dataset.path) paintSource(source.dataset.path);
-        }, 1200);
-      },
-    );
-  });
-
   const localeWrap = el('div', 'tb-locale');
   localeWrap.setAttribute('role', 'group');
   localeWrap.setAttribute('aria-label', 'Language');
@@ -137,19 +103,15 @@ export function mountShell(root: HTMLElement): Shell {
   enBtn.type = 'button';
   localeWrap.append(ptBtn, enBtn);
 
-  const exportBtn = el('button', 'tb-btn');
-  const exportLabel = el('span');
-  exportBtn.type = 'button';
+  const exportBtn = iconButton({ icon: 'ios_share', label: 'Exportar roteiro' });
   exportBtn.disabled = true;
-  exportBtn.title = 'Copy Markdown for Notes or Notion';
-  exportBtn.append(icon('ios_share', { size: 18 }), exportLabel);
 
   const themeBtn = iconButton({
     icon: 'dark_mode',
     label: 'Mudar para modo escuro',
   });
 
-  bar.append(sideToggle, mark, search, spacer, source, themeBtn, localeWrap, exportBtn);
+  bar.append(sideToggle, mark, search, spacer, themeBtn, localeWrap, exportBtn);
 
   const workspace = el('div', 'tb-workspace');
   const side = el('nav', 'tb-side');
@@ -319,7 +281,6 @@ export function mountShell(root: HTMLElement): Shell {
   const exportFns = new Set<() => void>();
 
   const paintLocale = () => {
-    if (source.dataset.path) paintSource(source.dataset.path);
     ptBtn.setAttribute('aria-pressed', locale === 'pt-BR' ? 'true' : 'false');
     enBtn.setAttribute('aria-pressed', locale === 'en' ? 'true' : 'false');
     document.documentElement.lang = locale === 'pt-BR' ? 'pt-BR' : 'en';
@@ -335,11 +296,13 @@ export function mountShell(root: HTMLElement): Shell {
       'aria-label',
       pickLocale(locale, { en: 'Language', 'pt-BR': 'Idioma' }),
     );
-    exportBtn.title = pickLocale(locale, {
-      en: 'Copy Markdown for Notes or Notion',
-      'pt-BR': 'Copiar Markdown para Notes ou Notion',
+    const exportTip = pickLocale(locale, {
+      en: 'Copy the open trip and download a Markdown (.md) file',
+      'pt-BR': 'Copiar o roteiro aberto e baixar um arquivo Markdown (.md)',
     });
-    exportLabel.textContent = pickLocale(locale, { en: 'Export', 'pt-BR': 'Exportar' });
+    exportBtn.setAttribute('aria-label', exportTip);
+    exportBtn.setAttribute('data-tip', exportTip);
+    kbd.setAttribute('data-tip', pickLocale(locale, { en: 'Focus search', 'pt-BR': 'Focar a busca' }));
     side.setAttribute(
       'aria-label',
       pickLocale(locale, { en: 'Trips and cities', 'pt-BR': 'Roteiros e cidades' }),
@@ -466,8 +429,7 @@ export function mountShell(root: HTMLElement): Shell {
   enBtn.addEventListener('click', () => setLocale('en'));
 
   searchInput.addEventListener('input', () => {
-    const value = searchInput.value;
-    for (const fn of queryFns) fn(value);
+    // Autocomplete owns typing; selecting a suggestion navigates to the result.
   });
 
   window.addEventListener('keydown', (event) => {
@@ -493,14 +455,12 @@ export function mountShell(root: HTMLElement): Shell {
       localeFns.add(fn);
       return () => localeFns.delete(fn);
     },
-    query: () => searchInput.value,
+    query: () => '',
     onQuery(fn) {
       queryFns.add(fn);
       return () => queryFns.delete(fn);
     },
-    setSource(path) {
-      paintSource(path);
-    },
+    setSource() {},
     setExportEnabled(on) {
       exportBtn.disabled = !on;
     },
