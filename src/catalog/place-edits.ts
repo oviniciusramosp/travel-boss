@@ -1,28 +1,16 @@
 import saved from '../data/travel-place-edits.json';
 
-export type PlaceEdits = { favorite?: boolean; rating?: number | null; googleRating?: number | null };
-export type PlaceEditStore = Record<string, PlaceEdits>;
+import type { PlaceEdits, PlaceEditStore } from './place-edit-model';
+export { readPlaceEdits } from './place-edit-model';
+export type { PlaceEdits, PlaceEditStore } from './place-edit-model';
 let edits: PlaceEditStore = saved;
 
-export function readPlaceEdits(value: unknown): PlaceEdits | null {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
-  const entries = Object.entries(value);
-  if (!entries.length) return null;
-  for (const [key, v] of entries) {
-    if (key === 'favorite') { if (typeof v !== 'boolean') return null; }
-    else if (key === 'rating' || key === 'googleRating') {
-      if (v !== null && (typeof v !== 'number' || !Number.isFinite(v) || v < 1 || v > 5)) return null;
-    } else return null;
-  }
-  return value as PlaceEdits;
-}
-
 /** Getters keep resolved catalog copies in sync without recreating focused controls. */
-export function withPlaceEdits<T extends { id: string; favorite?: boolean; rating?: number; googleRating?: number }>(place: T): T {
+export function withPlaceEdits<T extends { id: string; favorite?: boolean; rating?: number; googleRating?: number }>(place: T, defaults: Pick<T, 'favorite' | 'rating' | 'googleRating'> = place): T {
   return Object.defineProperties({ ...place }, Object.fromEntries(
     (['favorite', 'rating', 'googleRating'] as const).map((key) => [key, {
       enumerable: true,
-      get: () => Object.hasOwn(edits[place.id] ?? {}, key) ? edits[place.id][key] ?? undefined : place[key],
+      get: () => Object.hasOwn(edits[place.id] ?? {}, key) ? edits[place.id][key] ?? undefined : defaults[key],
     }]),
   ));
 }

@@ -815,5 +815,18 @@ export function mountMap(host: HTMLElement): MapHandle {
     },
   };
   attachMapControls(leafletMap, host, () => handle.fit());
+  window.addEventListener('tb:place-edits', () => {
+    for (const kind of KINDS) for (const [id, dot] of markers[kind]) {
+      const previous = pinMeta[kind].get(id);
+      if (!previous) continue;
+      const next = { ...previous, favorite: !!resolvedPlace(id)?.favorite };
+      pinMeta[kind].set(id, next);
+      dot.setIcon(pinIcon(next, { active: id === selectedId, hover: id === hoveredId }));
+      rememberPin(dot, next);
+      const node = dot.getElement();
+      if (node) node.dataset.pinKind = kind;
+      paintMarker(dot, id === selectedId, id === hoveredId);
+    }
+  });
   return handle;
 }

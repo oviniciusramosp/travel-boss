@@ -1,16 +1,15 @@
 import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
-import { readPlaceEdits, type PlaceEditStore } from '../src/catalog/place-edits';
-import { travelCities } from '../src/data/travel';
+import { readPlaceEdits, type PlaceEditStore } from '../src/catalog/place-edit-model';
 
 export function placeEditsApi(): Plugin {
   const file = resolve('src/data/travel-place-edits.json');
-  const ids = new Set(travelCities.flatMap((city) => city.places.map((place) => place.id)));
   return {
     name: 'place-edits',
     handleHotUpdate(ctx) {
       if (ctx.file !== file) return;
+      for (const mod of ctx.modules) ctx.server.moduleGraph.invalidateModule(mod);
       ctx.server.ws.send({ type: 'custom', event: 'tb:place-edits', data: JSON.parse(readFileSync(file, 'utf8')) });
       return [];
     },
@@ -23,7 +22,10 @@ export function placeEditsApi(): Plugin {
           res.end(JSON.stringify(data));
         };
         const id = req.url?.match(/^\/([a-z0-9-]+)$/)?.[1];
-        if (!id || !ids.has(id)) return send(404, { error: 'Unknown place' });
+        if (!id || !['travel.ts', 'travel-milan.ts'].some((name) => {
+          const source = readFileSync(resolve('src/data', name), 'utf8');
+          return new RegExp(`(?:\\bid:\\s*|\\bplace\\(\\s*)['"]${id}['"]`).test(source);
+        })) return send(404, { error: 'Unknown place' });
         // Only same-origin JSON writes; no cross-site form submissions.
         if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}` && req.headers.origin !== `https://${req.headers.host}`) return send(403, {});
         if (!req.headers['content-type']?.startsWith('application/json')) return send(415, {});

@@ -900,6 +900,12 @@ export function mountCity(
     planner.sync();
   });
 
+  const refreshEdits = () => {
+    for (const place of catalogPlaces) blob.set(place.id, searchBlob(place));
+    if (tab === 'places') renderPlaceResults();
+  };
+  window.addEventListener('tb:place-edits', refreshEdits);
+
   const unsubQuery = shell.onQuery((value) => {
     query = value;
     if (tab !== 'places') return;
@@ -998,6 +1004,7 @@ export function mountCity(
       planner.dispose();
       unsubLocale();
       unsubQuery();
+      window.removeEventListener('tb:place-edits', refreshEdits);
       unsubSelect();
       offClose();
       const close = hotelsDispose;

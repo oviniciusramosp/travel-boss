@@ -1736,3 +1736,13 @@ a.tb-route__google[hidden] {
   border-radius: var(--r-min);
   background: var(--color-surface-alt);
 }
+
+.tb-place-rating {
+  display: grid;
+  gap: var(--spacing-4);
+  font-size: var(--text-caption);
+}
+.tb-place-rating input { width: 100%; min-width: 0; }
+.tb-place-edit-status { display: grid; gap: var(--spacing-4); }
+
+.tb-place-edit-status [hidden] { display: none; }

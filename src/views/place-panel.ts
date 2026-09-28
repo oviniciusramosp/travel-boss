@@ -18,7 +18,7 @@ import { mapsMark } from '../ui/maps-icon';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
 import { priceLevel, priceLevelOf } from '../ui/price';
-import { starRating } from '../ui/rating';
+import { placeEditor } from './place-edit';
 import { videoButton } from '../ui/video';
 import { louvreMapButton } from '../ui/louvre-map';
 import { openNowStatus, timeZoneForCity } from './open-now';
@@ -109,6 +109,8 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   root.setAttribute('aria-labelledby', 'tb-place-title');
   column.append(root);
 
+  let syncEdits = () => {};
+  window.addEventListener('tb:place-edits', () => syncEdits());
   let photoIndex = 0;
   let collapsed = false;
   let folding = false;
@@ -363,12 +365,9 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     if (catGlyph) cat.append(catGlyph);
     cat.append(document.createTextNode(pickLocale(locale, travelUi.categories[place.category])));
     tagsMain.append(cat);
-    if (place.favorite) {
-      const fav = el('span', 'tb-panel__fav');
-      fav.setAttribute('aria-label', pickLocale(locale, travelUi.favorite));
-      fav.append(icon('favorite', { fill: true, size: 16 }));
-      tagsMain.append(fav);
-    }
+    const editor = placeEditor(place, locale);
+    syncEdits = editor.sync;
+    tagsMain.append(editor.favorite);
     if (place.aiSuggested) tagsMain.append(aiBadge(aiSuggestionTip(city.slug, place, locale)));
     tags.append(tagsMain);
     const subs = place.subcategories ?? [];
@@ -392,22 +391,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       });
       body.append(bar);
     }
-    const ratings = el('div', 'tb-panel__ratings');
-    ratings.append(
-      starRating({
-        rating: place.googleRating,
-        label: pickLocale(locale, travelUi.ratingGoogle),
-        locale,
-        icon: 'map',
-      }),
-      starRating({
-        rating: place.rating,
-        label: pickLocale(locale, travelUi.ratingMine),
-        locale,
-        icon: 'person',
-      }),
-    );
-    body.append(ratings);
+    body.append(editor.ratings, editor.feedback);
 
     // The trip's loose notes under this stop, in the day's order.
     const parkNotes = current?.links?.parkNotes ?? [];

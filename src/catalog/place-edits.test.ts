@@ -21,5 +21,8 @@ describe('place edits', () => {
     syncPlaceEdits({ test: { rating: 3.5 } });
     expect(resolved.rating).toBe(3.5);
     expect(place.favorite).toBe(true);
+    const later = withPlaceEdits({ ...place }, place);
+    syncPlaceEdits({});
+    expect(later.rating).toBe(4);
   });
 });

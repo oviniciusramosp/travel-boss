@@ -7140,7 +7140,7 @@ export const localTravelCities: TravelCity[] = [
 ];
 
 export const travelCities: TravelCity[] = localTravelCities.map((city) => ({
-  ...city, places: city.places.map(withPlaceEdits),
+  ...city, places: city.places.map((place) => withPlaceEdits(place)),
 }));
 
 export function getTravelCity(slug: string): TravelCity | undefined {
@@ -7225,7 +7225,7 @@ export function withResolvedArea(place: TravelPlace): TravelPlace {
     ...(visit ? { visit } : {}),
     ...(photos ? { photos } : {}),
     ...(subcategories.length > 0 ? { subcategories } : {}),
-  });
+  }, place);
 }
 
 /**
