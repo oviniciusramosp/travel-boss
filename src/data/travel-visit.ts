@@ -1456,8 +1456,17 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Qua–dom; boutique 9h–19h, salão de chá 9h–16h só com reserva online; fecha seg e ter',
     ),
     tips: L(
-      'Sculptural fruit pastries (€18) sell out. Click & Collect skips the 1–2 h queue: orders before 15:00 are ready in 24 h, pickup 9:00–19:00. The tea room announced a renovation from 21 September.',
-      'Doces esculturais de fruta (€18) esgotam. O Click & Collect pula a fila de 1–2 h: pedido até 15h fica pronto em 24 h, retirada 9h–19h. O salão de chá anunciou reforma a partir de 21 de setembro.',
+      'Flower-shaped pastries, not the sculpted fruits sold at Le Meurice. Order at https://cedric-grolet.com/opera/ and follow the pickup details in the confirmation.',
+      'Doces em formato de flores; as frutas esculpidas são do Le Meurice. Encomende em https://cedric-grolet.com/opera/ e siga os dados de retirada da confirmação.',
+    ),
+  }),
+  'par-cedric-grolet-meurice': cafeVisit(18, 18, {
+    durationMin: 15,
+    durationMax: 25,
+    bestDay: L('Wed–Sun 12:00–18:00; Click & Collect 12:00–17:00', 'Qua–dom 12h–18h; Click & Collect 12h–17h'),
+    tips: L(
+      'Fruit and nut-shaped pastries (€18 each). Order at https://cedric-grolet.com/meurice/ — allow at least 24 h for orders before 15:00, otherwise 48 h. Collect at 6 rue de Castiglione; no pickup before noon.',
+      'Doces em formato de frutas e castanhas (€18 cada). Encomende em https://cedric-grolet.com/meurice/ — antecedência mínima de 24 h para pedidos antes das 15h; depois, 48 h. Retirada na 6 rue de Castiglione, nunca antes das 12h.',
     ),
   }),
   // One éclair: €4–7 in 2026 (parisatoutprix.fr, tripadvisor, consulted 2026-09-27).

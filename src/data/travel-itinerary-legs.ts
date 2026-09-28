@@ -1229,10 +1229,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro9, 'fdr', 'chaussee-antin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
-  // 10/10: Grolet and the Opéra by day, the BnF, the boat at sunset
-  trainLeg('par-casa-do-gui', 'par-cedric-grolet', 45, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
-  trainLeg('par-palais-royal', 'par-bnf', 20, [ride(metro14, 'pyramides', 'bibliotheque')]),
-  trainLeg('par-bnf', 'par-bohemia', 20, [ride(metro14, 'bibliotheque', 'pyramides')]),
+  // 10/10: BnF first, Le Meurice pickup at noon, Opéra and sunset boat
+  trainLeg('par-casa-do-gui', 'par-bnf', 60, [
+    ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
+    ride(metro14, 'saint-lazare', 'bibliotheque'),
+  ]),
+  trainLeg('par-bnf', 'par-cedric-grolet-meurice', 35, [ride(metro14, 'bibliotheque', 'pyramides')]),
   trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
   trainLeg('par-bateaux-mouches', 'par-casa-do-gui', 50, [
     ride(metro9, 'alma-marceau', 'havre-caumartin'),

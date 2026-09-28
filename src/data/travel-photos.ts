@@ -137,6 +137,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Google',
     ),
   ],
+  'par-cedric-grolet-meurice': [
+    photo(
+      'https://cedric-grolet.com/meurice/5835-product_laptop/mangueindv26.jpg',
+      'Mango-shaped pastry from Cédric Grolet Le Meurice',
+      'Doce em formato de manga do Cédric Grolet Le Meurice',
+      'Cédric Grolet — site oficial',
+    ),
+  ],
 
   'par-alexandre-iii': [
     photo(

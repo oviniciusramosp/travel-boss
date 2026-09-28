@@ -16,6 +16,8 @@ import {
 const WIKI_HOST = 'upload.wikimedia.org';
 const ALLOWED_HOSTS = new Set([
   WIKI_HOST,
+  // Official Le Meurice product photo (sculpted mango pastry)
+  'cedric-grolet.com',
   'live.staticflickr.com',
   // Legacy Flickr CDN hosts
   'farm1.staticflickr.com',
@@ -203,4 +205,3 @@ describe('travel-photos registry', () => {
     expect(fails, fails.join('\n')).toEqual([]);
   });
 });
-

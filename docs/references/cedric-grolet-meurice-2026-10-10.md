@@ -1,0 +1,7 @@
+# Cédric Grolet — consulta em 28/09/2026
+
+- [Click & Collect Le Meurice](https://cedric-grolet.com/meurice/): 6 rue de Castiglione; loja quarta a domingo, 12h–18h. Doces individuais de manga, maçã, pistache e outras frutas/castanhas a €18. Pedido antes das 15h exige ao menos 24 h; depois, 48 h.
+- [Horários de retirada](https://support.cedric-grolet.com/hc/fr/articles/15812645836188-Pourriez-vous-m-indiquer-%C3%A0-partir-de-quelle-heure-il-me-serait-possible-de-venir-retirer-ma-commande): Le Meurice 12h–17h; não é possível manter o café da manhã às 10h.
+- [Diferença entre as unidades](https://support.cedric-grolet.com/hc/fr/articles/14563233806364-Pourquoi-ne-puis-je-pas-acheter-de-fruits-%C3%A0-la-boutique-Op%C3%A9ra-ni-de-fleurs-%C3%A0-la-boutique-du-Meurice): frutas no Le Meurice; flores na Opéra.
+- [Google Maps](https://www.google.com/maps/search/?api=1&hl=en&query=Cedric+Grolet+Le+Meurice+6+rue+de+Castiglione+Paris): endereço confirmado; pino `48.86566, 2.32784` extraído do destino `!3d…!4d…`; nota Google 3,7. A nota pessoal 5 e o favorito foram pedidos pelo usuário; a unidade Opéra perde apenas o favorito.
+- Foto do doce: [manga, site oficial](https://cedric-grolet.com/meurice/5835-product_laptop/mangueindv26.jpg).
