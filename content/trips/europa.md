@@ -197,15 +197,21 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
 
-- 07:55 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Haussmann–Saint-Lazare, trem L até Versailles Rive Droite e caminhada até o castelo · 1h35
-- 09:30 [Château de Versailles](place:par-versailles) — Passport €35 com horário: palácio das 9h às 18h30, última entrada 17h45. Sexta é dia de Jardins Musicais (€15, incluso no Passport)
+- 06:45 [Casa do Gui](place:par-casa-do-gui) — Saída
+  - via: RER E até Haussmann–Saint-Lazare e caminhada até a Castellane · 45 min
+  - status: confirmado
+- 07:30 [Boulangerie Castellane](place:par-castellane) — **Café da manhã**: croissant, éclair ou mil-folhas com café; €7–10 por pessoa (estimativa). Sair às 8h
+  - via: a pé até Saint-Lazare, trem L até Versailles Rive Droite e caminhada até o castelo · 1h15
+- 09:30 [Château de Versailles](place:par-versailles) — Passport €35 com horário: palácio das 9h às 18h30, última entrada 17h45.\
+  Sexta é dia de Jardins Musicais (€15, incluso no Passport).
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
 - 12:15 [Ore — Ducasse (Versalhes)](place:par-ore-ducasse) — Almoço no Pavillon Dufour, sem precisar de ingresso: prato ~€30 e o Louis XIV de chocolate (€14). Reserve
-- 13:30 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais (inclusos no Passport), descendo pelo Tapis Vert até a cabeceira do Grand Canal
-- 14:30 [Domaine de Trianon](place:par-trianon) — Grand Trianon, Petit Trianon e o Hameau da Rainha (12h–18h30). Saia às 16h: são 35 min a pé pelo parque até a estação Versailles-Château–Rive Gauche
-  - via: RER C de Versailles-Château–Rive Gauche até Champ de Mars–Tour Eiffel · 1h05
-- 17:35 [Torre Eiffel](place:par-eiffel) — **Subida ao topo** com horário marcado: reserve o das 17h30 para ver o pôr do sol às 19h13 lá de cima (elevador até o topo €36,70; escada até o 2º e elevador até o topo €28). Conte ~2 h entre a revista, os elevadores e os dois andares
+- 13:00 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais (inclusos no Passport), descendo pelo Tapis Vert até a cabeceira do Grand Canal
+- 14:00 [Domaine de Trianon](place:par-trianon) — Grand Trianon, Petit Trianon e o Hameau da Rainha (12h–18h30). Sair às 15h30 para o café da tarde
+  - via: a pé até o The Stray Bean · 45 min
+- 16:15 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo; €7–10 por pessoa (estimativa). Sair às 16h35; fecha às 17h
+  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 45 min
+- 17:20 [Torre Eiffel](place:par-eiffel) — **Subida ao topo** com horário marcado: reserve o das 17h30 para ver o pôr do sol às 19h13 lá de cima (elevador até o topo €36,70; escada até o 2º e elevador até o topo €28). Conte ~2 h entre a revista, os elevadores e os dois andares
   - via: metrô 9 de Trocadéro até Franklin D. Roosevelt · 25 min
 - 20:00 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa (~€26,50), sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h30: de 5 a 14/10 o RER E para às 22h15
   - via: metrô 9 de Franklin D. Roosevelt até Chaussée d'Antin e RER E em Haussmann–Saint-Lazare · 45 min

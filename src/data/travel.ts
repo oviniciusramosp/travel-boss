@@ -4793,6 +4793,36 @@ export const localTravelCities: TravelCity[] = [
 
       // ── Oct 2026 trip list: Versailles ──
       {
+        id: 'par-castellane',
+        name: { en: 'Boulangerie Castellane', 'pt-BR': 'Boulangerie Castellane' },
+        category: 'cafes',
+        subcategories: ['bakery', 'coffee-shop'],
+        description: {
+          en: 'Bakery near Saint-Lazare serving croissants, éclairs, mille-feuilles and coffee.',
+          'pt-BR': 'Padaria perto de Saint-Lazare com croissants, éclairs, mil-folhas e café.',
+        },
+        googleRating: 4.3,
+        lat: 48.8722805,
+        lng: 2.3254013,
+        address: '6 Rue de Castellane, 75008 Paris',
+        mapsQuery: 'Boulangerie Castellane 6 Rue de Castellane Paris',
+      },
+      {
+        id: 'par-stray-bean',
+        name: { en: 'The Stray Bean', 'pt-BR': 'The Stray Bean' },
+        category: 'cafes',
+        subcategories: ['coffee-shop'],
+        description: {
+          en: 'Specialty coffee shop in Versailles, with cakes and a location near the Rive Gauche station.',
+          'pt-BR': 'Cafeteria de cafés especiais em Versalhes, com bolos e localização próxima à estação Rive Gauche.',
+        },
+        googleRating: 4.7,
+        lat: 48.7984416,
+        lng: 2.1271255,
+        address: '6 Rue Royale, 78000 Versailles',
+        mapsQuery: 'The Stray Bean Versailles',
+      },
+      {
         id: 'par-ore-ducasse',
         name: { en: 'Ore — Ducasse (Versailles)', 'pt-BR': 'Ore — Ducasse (Versalhes)' },
         category: 'restaurants',

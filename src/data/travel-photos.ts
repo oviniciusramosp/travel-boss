@@ -33,6 +33,23 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'par-castellane': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
+      'Butter croissants (illustrative photo)',
+      'Croissants de manteiga (foto ilustrativa)',
+      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+    ),
+  ],
+  'par-stray-bean': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Cappuccino_on_the_table.jpg/500px-Cappuccino_on_the_table.jpg',
+      'Cappuccino (illustrative photo)',
+      'Cappuccino (foto ilustrativa)',
+      'Leontereyes · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
+  'par-carrefour-express-saint-honore': [photo('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Baguettes_-_stonesoup.jpg/960px-Baguettes_-_stonesoup.jpg', 'Baguettes — illustrative groceries photo, not this store', 'Baguetes — foto ilustrativa de alimentos, não desta loja', 'jules / stonesoup / Wikimedia Commons — CC BY 2.0')],
   'par-dlp-chalet-marionnette': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Roast_Chicken_Hot_Plate.jpg/500px-Roast_Chicken_Hot_Plate.jpg',

@@ -1447,6 +1447,20 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
 
   // —— Cafés / pastry ——
+  'par-castellane': cafeVisit(7, 10, {
+    durationMin: 25,
+    durationMax: 30,
+    avgPricePerPerson: money(7, 10, L('Estimated coffee + pastry; counter prices not confirmed', 'Estimativa de café + doce; preços de balcão não confirmados')),
+    bestDay: L('Mon–Fri 07:00–20:00', 'Seg–sex 7h–20h'),
+    tips: L('Croissant, éclair or mille-feuille with coffee.', 'Croissant, éclair ou mil-folhas com café.'),
+  }),
+  'par-stray-bean': cafeVisit(7, 10, {
+    durationMin: 20,
+    durationMax: 25,
+    avgPricePerPerson: money(7, 10, L('Estimated coffee + cake; current menu prices not confirmed', 'Estimativa de café + bolo; preços atuais da carta não confirmados')),
+    bestDay: L('Friday 08:00–17:00', 'Sexta 8h–17h'),
+    tips: L('Coffee and a slice of cake before the train back to Paris.', 'Café e uma fatia de bolo antes do trem de volta a Paris.'),
+  }),
   'par-bake-blend': cafeVisit(6, 14, {
     durationMin: 20,
     durationMax: 30,
