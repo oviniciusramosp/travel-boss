@@ -1336,6 +1336,10 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     tips: L('Solid crêpe stop in Saint-Germain.', 'Boa parada de crêpe em Saint-Germain.'),
   }),
   'par-auptitgrec': restaurantVisit(8, 16, {
+    avgPricePerPerson: money(8, undefined, L(
+      'Estimate: one savoury crêpe (€10) + one sweet crêpe (€6), shared by two; fillings to be chosen, drinks excluded',
+      'Estimativa: 1 crepe salgado (€10) + 1 doce (€6), divididos por 2; recheios a escolher, sem bebidas',
+    )),
     tips: L('Fast crêpe / street-food energy. Cash sometimes handy.', 'Crêpe rápido. Dinheiro às vezes ajuda.'),
   }),
   'par-procope': restaurantVisit(35, 60, {
