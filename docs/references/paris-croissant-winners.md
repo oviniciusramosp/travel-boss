@@ -23,4 +23,4 @@ Os cinco novos pins, endereços e notas foram conferidos nos cards do Google Map
 | par-maison-carton | 48.8791711 | 2.3545874 | 4.2 |
 | par-patisserie-colbert | 48.7779828 | 2.2926634 | 3.7 |
 
-Fotos de croissants do Commons são ilustrativas, identificadas como tal; não são fotos dos produtos dessas casas. Preço específico do croissant não foi verificado, portanto não foi atribuído gasto por pessoa.
+Fotos substituídas em 28/09/2026 por alimento e fachada de cada unidade; [fontes e notas Google verificadas](paris-award-photos.md). Preço específico do croissant não foi verificado, portanto não foi atribuído gasto por pessoa.

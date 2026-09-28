@@ -5160,6 +5160,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.349031,
         address: '47 Rue du Caire, 75002 Paris',
         mapsQuery: 'Boulangerie du Sentier 47 Rue du Caire, 75002 Paris',
+        googleRating: 4.6,
       },
       {
         id: 'par-sweet-lab',

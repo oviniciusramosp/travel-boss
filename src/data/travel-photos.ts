@@ -3,11 +3,9 @@
  *
  * Place-specific preferred — Wikimedia Commons / Wikipedia / Openverse CC.
  *
- * Cafés & pâtisseries: food/dishes only (macarons, croissants, gelato…),
- * never owner portraits or street façades. When a free photo of that exact
- * counter doesn’t exist, use a clear plate of what they sell.
- *
- * Google Place Photos are not used (API billing + ephemeral media URLs).
+ * Cafés & pâtisseries: food covers; place-specific façades when requested.
+ * Paris award winners use optimized local photos with individual attribution.
+ * Sources: docs/references/paris-award-photos.md.
  *
  * Link health:
  *  - Structural tests: `src/data/travel-photos.test.ts` (hosts, banned 404s)
@@ -60,66 +58,114 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-sweet-lab': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
-      'A slice of flan pâtissier (illustrative photo)',
-      'Uma fatia de flan pâtissier (foto ilustrativa)',
-      'Gouglov / Wikimedia Commons (CC0)',
+      '/photos/paris-awards/par-sweet-lab-food.webp',
+      'Flan pâtissier at Sweet Lab',
+      'Flan pâtissier da Sweet Lab',
+      'Sweet Lab / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-sweet-lab-facade.webp',
+      'Storefront of Sweet Lab',
+      'Fachada da Sweet Lab',
+      'David Aubertini / Google Maps',
     ),
   ],
   'par-a-deux-mains': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
-      'A slice of flan pâtissier (illustrative photo)',
-      'Uma fatia de flan pâtissier (foto ilustrativa)',
-      'Gouglov / Wikimedia Commons (CC0)',
+      '/photos/paris-awards/par-a-deux-mains-food.webp',
+      'Flan pâtissier at À Deux Mains',
+      'Flan pâtissier da À Deux Mains',
+      'Sofi S / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-a-deux-mains-facade.webp',
+      'Storefront of À Deux Mains',
+      'Fachada da À Deux Mains',
+      'À Deux Mains by Elio & Franck / Google Maps',
     ),
   ],
   'par-la-pompadour': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',
-      'A slice of flan pâtissier (illustrative photo)',
-      'Uma fatia de flan pâtissier (foto ilustrativa)',
-      'Gouglov / Wikimedia Commons (CC0)',
+      '/photos/paris-awards/par-la-pompadour-food.webp',
+      'Flan pâtissier at La Pompadour',
+      'Flan pâtissier da La Pompadour',
+      'Beyza Çalışkan / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-la-pompadour-facade.webp',
+      'Storefront of La Pompadour',
+      'Fachada da La Pompadour',
+      'La Pompadour / Google Maps',
     ),
   ],
   'par-des-racines-et-du-pain': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
-      'Butter croissants in a Paris bakery basket (illustrative photo)',
-      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
-      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+      '/photos/paris-awards/par-des-racines-et-du-pain-food.webp',
+      'Butter croissant at Des Racines et du Pain',
+      'Croissant de manteiga da Des Racines et du Pain',
+      'Ana Veres / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-des-racines-et-du-pain-facade.webp',
+      'Storefront of Des Racines et du Pain',
+      'Fachada da Des Racines et du Pain',
+      'Des Racines et Du Pain / Google Maps',
     ),
   ],
   'par-maison-doucet': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
-      'Butter croissants in a Paris bakery basket (illustrative photo)',
-      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
-      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+      '/photos/paris-awards/par-maison-doucet-food.webp',
+      'Butter croissant at Maison Doucet',
+      'Croissant de manteiga da Maison Doucet',
+      'Le Douze Pépouze',
+    ),
+    photo(
+      '/photos/paris-awards/par-maison-doucet-facade.webp',
+      'Storefront of Maison Doucet',
+      'Fachada da Maison Doucet',
+      'Jean-Baptiste Damiens-Morrin / Google Maps',
     ),
   ],
   'par-chez-meunier-crimee': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
-      'Butter croissants in a Paris bakery basket (illustrative photo)',
-      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
-      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+      '/photos/paris-awards/par-chez-meunier-crimee-food.webp',
+      'Butter croissant at Chez Meunier (Crimée)',
+      'Croissant de manteiga da Chez Meunier (Crimée)',
+      'Michelle Yang / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-chez-meunier-crimee-facade.webp',
+      'Storefront of Chez Meunier (Crimée)',
+      'Fachada da Chez Meunier (Crimée)',
+      'Gérard L / Google Maps',
     ),
   ],
   'par-maison-carton': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
-      'Butter croissants in a Paris bakery basket (illustrative photo)',
-      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
-      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+      '/photos/paris-awards/par-maison-carton-food.webp',
+      'Croissants in the Maison Carton display',
+      'Croissants na vitrine da Maison Carton',
+      'Ashley I / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-maison-carton-facade.webp',
+      'Storefront of Maison Carton',
+      'Fachada da Maison Carton',
+      'Carton Paris / Google Maps',
     ),
   ],
   'par-patisserie-colbert': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
-      'Butter croissants in a Paris bakery basket (illustrative photo)',
-      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
-      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+      '/photos/paris-awards/par-patisserie-colbert-food.webp',
+      'Croissant and apple tart at Pâtisserie Colbert',
+      'Croissant e torta de maçã da Pâtisserie Colbert',
+      'Dominique / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-patisserie-colbert-facade.webp',
+      'Storefront of Pâtisserie Colbert',
+      'Fachada da Pâtisserie Colbert',
+      'Pâtisserie Colbert par Frédéric Comyn / Google Maps',
     ),
   ],
   'par-carrousel': [photo('https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Arc_de_triomphe_du_carrousel_in_Paris_France.jpg/500px-Arc_de_triomphe_du_carrousel_in_Paris_France.jpg', 'Arc de Triomphe du Carrousel', 'Arco do Triunfo do Carrousel', 'Wikimedia Commons')],
@@ -2658,10 +2704,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-boulangerie-du-sentier': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
-      'Butter croissants in a Paris bakery basket (illustrative photo)',
-      'Croissants de manteiga numa cesta de padaria parisiense (foto ilustrativa)',
-      'Thomon / Wikimedia Commons (CC BY-SA 4.0)',
+      '/photos/paris-awards/par-boulangerie-du-sentier-food.webp',
+      'Butter croissant at Boulangerie du Sentier',
+      'Croissant de manteiga da Boulangerie du Sentier',
+      'marisol / Google Maps',
+    ),
+    photo(
+      '/photos/paris-awards/par-boulangerie-du-sentier-facade.webp',
+      'Storefront of Boulangerie du Sentier',
+      'Fachada da Boulangerie du Sentier',
+      'Icare Phenix / Google Maps',
     ),
   ],
   'par-maison-thevenin-buci': [

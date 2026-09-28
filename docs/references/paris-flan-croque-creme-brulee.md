@@ -22,7 +22,7 @@ Google Maps consultado no navegador para endereço, nota e coordenadas reais do 
 | par-a-deux-mains | 48.86936 | 2.227256 | 4.4 |
 | par-la-pompadour | 48.8628138 | 2.2765373 | 4.1 |
 
-As fotos do Commons são ilustrativas, identificadas como tal. Não foi atribuído preço por pessoa: a faixa geral do Google não confirma o preço da fatia de flan.
+Fotos substituídas em 28/09/2026 por alimento e fachada de cada unidade; [fontes e notas Google verificadas](paris-award-photos.md). Não foi atribuído preço por pessoa: a faixa geral do Google não confirma o preço da fatia de flan.
 
 ## Croque-monsieur: recomendação editorial
 
