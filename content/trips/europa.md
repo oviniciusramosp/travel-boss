@@ -207,7 +207,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:30 [Château de Versailles](place:par-versailles) — Passport €35 com horário: palácio das 9h às 18h30, última entrada 17h45.\
   Sexta é dia de Jardins Musicais (€15, incluso no Passport).
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
-- 12:15 [Ore — Ducasse (Versalhes)](place:par-ore-ducasse) — Almoço no Pavillon Dufour, sem precisar de ingresso: prato ~€30 e o Louis XIV de chocolate (€14). Reserve
 - 13:00 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais (inclusos no Passport), descendo pelo Tapis Vert até a cabeceira do Grand Canal
 - 14:00 [Domaine de Trianon](place:par-trianon) — Visitar o Grand Trianon (12h–18h30). Sair às 15h para passar pelo mercado antes do café da tarde
   - via: a pé até o Marché Notre-Dame · 45 min
