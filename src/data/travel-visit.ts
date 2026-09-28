@@ -1990,7 +1990,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestTime: L('After dark — the tower sparkles 5 min on the hour', 'Depois que escurece — a Torre brilha 5 min em cada hora cheia'),
     tips: L('Footbridge: no cars in the frame.', 'Passarela: sem carro no enquadramento.'),
   }),
-  'par-grande-epicerie-rive-gauche': { durationMin: 60, durationMax: 60 },
+  'par-grande-epicerie-rive-gauche': {
+    durationMin: 60,
+    durationMax: 60,
+    avgPricePerPerson: money(20, undefined, L(
+      'Estimated picnic dinner budget per person: bread, cheese, accompaniments and shared wine; actual spend depends on the basket.',
+      'Orçamento estimado do jantar por pessoa: pão, queijo, acompanhamentos e vinho compartilhado; o gasto depende das compras.',
+    )),
+  },
   'par-port-louvre': parkVisit({
     durationMin: 60,
     durationMax: 60,
