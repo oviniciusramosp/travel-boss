@@ -751,11 +751,11 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   'par-cour-commerce': parkVisit({
     durationMin: 15,
     durationMax: 45,
-    bestTime: L('When dining nearby', 'Quando for comer por perto'),
+    bestTime: L('During a walk around Saint-Germain', 'Durante um passeio por Saint-Germain'),
     crowdProfile: 'local',
     tips: L(
-      'Only if you are lunching/dining in the passage — not worth a pure walk-through.',
-      'Só se for almoçar/jantar na passagem — não vale só passar por passar.',
+      'Walk through the passage to see its cobblestones and old shopfronts; no restaurant stop is needed.',
+      'Atravesse a passagem para conhecer o calçamento de pedras e as fachadas antigas; não é preciso parar em um restaurante.',
     ),
   }),
   'par-saint-michel': parkVisit({

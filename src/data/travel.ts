@@ -2160,8 +2160,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Cour du Commerce Saint-André', 'pt-BR': 'Cour du Commerce Saint-André' },
         category: 'parks',
         description: {
-          en: 'Only worth it if you are lunching or dining at a restaurant in the passage. Do not detour just to walk through.',
-          'pt-BR': 'Só se for almoçar/jantar num restaurante da passagem. Não compensa só passar por passar.',
+          en: 'A cobbled passage in Saint-Germain-des-Prés, lined with historic shopfronts and restaurants, including the back of Le Procope.',
+          'pt-BR': 'Passagem de pedras em Saint-Germain-des-Prés, com fachadas antigas e restaurantes, incluindo os fundos do Le Procope.',
         },
         rating: 5,
         googleRating: 5.0,
@@ -2171,6 +2171,11 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3390876,
         address: 'Cr du Commerce Saint-André, 75006 Paris',
         mapsQuery: 'Cour du Commerce Saint-André Paris',
+        // Same OSM passage geometry as travel-areas-osm.ts, entered from Odéon.
+        subPoints: [
+          { name: { en: 'Entrance · Boulevard Saint-Germain', 'pt-BR': 'Entrada · Boulevard Saint-Germain' }, lat: 48.852582, lng: 2.339275 },
+          { name: { en: 'Exit · Rue Saint-André des Arts', 'pt-BR': 'Saída · Rue Saint-André des Arts' }, lat: 48.853257, lng: 2.33902 },
+        ],
         mapsUrl: 'https://www.google.fr/maps/place/Cr+du+Commerce+Saint-Andr%C3%A9,+75006+Paris/@48.853095,2.3383737,18.5z',
       },
       {

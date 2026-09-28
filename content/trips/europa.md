@@ -102,7 +102,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 14:00 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: um crepe para cada (€7–10); aceita cartão
 - 14:35 [Fontaine Guy Lartigue](place:par-fontaine-guy-lartigue) — Descida pela Rue Mouffetard até a bacia de cobre vermelho, na Place Georges-Moustaki
   - via: metrô 7 de Censier–Daubenton até Jussieu e metrô 10 até Odéon · 25 min
-- 15:00 [Jardim de Luxemburgo](place:par-luxembourg)
+- 15:00 [Cour du Commerce Saint-André](place:par-cour-commerce) — Passagem rápida de 10 min para entrar e conhecer a rua, sem parar para comer
+- 15:20 [Jardim de Luxemburgo](place:par-luxembourg)
 - 16:05 [Poilâne (Cherche-Midi)](place:par-poilane-cherche-midi) — A padaria original, de 1932: punitions (~€5) e a miche
 - 16:30 [La Grande Épicerie (Rive Gauche)](place:par-grande-epicerie-rive-gauche) — Explorar o mercado e comprar queijo, baguete e vinho para o piquenique; sair até 17h05
 - 17:20 [CityPharma](place:par-citypharma) — Dermocosméticos; sair até 17h50

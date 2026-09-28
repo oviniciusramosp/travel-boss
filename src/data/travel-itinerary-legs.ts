@@ -1223,8 +1223,8 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'magenta'),
     ride(rerB, 'gare-nord', 'saint-michel', GARE_DU_NORD_MAGENTA_MIN),
   ]),
-  // From the fountain at the foot of Rue Mouffetard to the gardens: two stops on the 7, three on the 10, 6 min on foot from Odéon
-  trainLeg('par-fontaine-guy-lartigue', 'par-luxembourg', 25, [ride(metro7, 'censier-daubenton', 'jussieu'), ride(metro10, 'jussieu', 'odeon')]),
+  // From Rue Mouffetard to the passage near Odéon, before walking to Luxembourg.
+  trainLeg('par-fontaine-guy-lartigue', 'par-cour-commerce', 25, [ride(metro7, 'censier-daubenton', 'jussieu'), ride(metro10, 'jussieu', 'odeon')]),
   trainLeg('par-champ-mars', 'par-casa-do-gui', 60, [
     rerCToPorteMaillot,
     ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),
