@@ -34,6 +34,7 @@ import {
 } from './travel-subcategories';
 import { withPlaceEdits } from '../catalog/place-edits';
 import { milanCity } from './travel-milan';
+import { parisMcDonalds } from './travel-paris-mcdonalds';
 
 export type { TravelPhoto } from './travel-photos';
 export type {
@@ -3907,6 +3908,7 @@ export const localTravelCities: TravelCity[] = [
       },
 
       // ── Chains (commons) ──
+      ...parisMcDonalds,
       {
         id: 'par-mcdonalds-champs',
         name: {
