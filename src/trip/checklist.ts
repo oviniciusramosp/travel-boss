@@ -138,7 +138,7 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
     input.maxLength = 500;
     input.required = true;
     form.onfocusin = () => onEditing(true);
-    form.onfocusout = (event) => { if (!form.contains(event.relatedTarget as Node | null)) onEditing(false); };
+    form.onfocusout = (event: FocusEvent) => { if (!form.contains(event.relatedTarget as Node | null)) onEditing(false); };
     const add = el('button', 'tb-btn-outline', t('Add', 'Adicionar'));
     form.append(input);
     const schedule = scheduleFields(form, key);
