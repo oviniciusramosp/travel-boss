@@ -3436,6 +3436,11 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.341904,
         address: '11 Boulevard Montmartre, 75002 Paris',
         mapsQuery: 'Passage des Panoramas Paris',
+        // OSM way 152319685, north → south: arrive from Chartier, leave toward the RER.
+        subPoints: [
+          { name: { en: 'Entrance · Boulevard Montmartre', 'pt-BR': 'Entrada · Boulevard Montmartre' }, lat: 48.8715311, lng: 2.3418231 },
+          { name: { en: 'Exit · Rue Saint-Marc', 'pt-BR': 'Saída · Rue Saint-Marc' }, lat: 48.8703749, lng: 2.3415039 },
+        ],
       },
       {
         id: 'par-bouillon',
