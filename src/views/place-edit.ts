@@ -17,6 +17,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
   retry.hidden = true;
   const feedback = el('div', 'tb-place-edit-status');
   feedback.append(status, retry);
+  feedback.hidden = true;
   let queue = Promise.resolve();
   let pending = 0;
   let failed: PlaceEdits = {};
@@ -36,6 +37,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
   };
   const save = (patch: PlaceEdits) => {
     pending++;
+    feedback.hidden = false;
     status.textContent = text('Saving…', 'Salvando…');
     queue = queue.then(async () => {
       try {
@@ -45,6 +47,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
       pending--;
       retry.hidden = !Object.keys(failed).length;
       status.textContent = !retry.hidden ? text('Not saved', 'Não foi salvo') : pending ? text('Saving…', 'Salvando…') : text('Saved', 'Salvo');
+      feedback.hidden = retry.hidden && pending === 0;
       favorite.disabled = false;
       sync();
     });
@@ -56,7 +59,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
   });
   for (const key of ['googleRating', 'rating'] as const) {
     const title = pickLocale(locale, key === 'rating' ? travelUi.ratingMine : travelUi.ratingGoogle);
-    const picker = ratingPicker(title, locale);
+    const picker = ratingPicker(title, locale, key === 'rating' ? 'person' : 'map');
     pickers[key] = picker;
     const { input } = picker;
     inputs[key] = input;

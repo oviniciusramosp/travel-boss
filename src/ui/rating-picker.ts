@@ -1,23 +1,23 @@
 import { pickLocale, type Locale } from '../catalog';
 import { el } from './dom';
-import { icon } from './icons';
+import { icon, type IconName } from './icons';
 import { formatRating } from './rating';
 
 /** Half-star slider with a directly editable decimal score. */
-export function ratingPicker(title: string, locale: Locale) {
-  const root = el('div', 'tb-place-rating');
-  const caption = el('span', undefined, title);
-  const controls = el('div', 'tb-rating-picker');
+export function ratingPicker(title: string, locale: Locale, glyph: IconName) {
+  const root = el('div', 'tb-stars tb-rating-picker');
+  root.setAttribute('role', 'group');
+  root.setAttribute('aria-label', title);
   const input = el('input', 'tb-input tb-rating-picker__number');
   input.type = 'number'; input.min = '0'; input.max = '5'; input.step = '0.1';
-  input.placeholder = '—';
+  input.placeholder = '-.-';
   input.setAttribute('aria-label', title);
   input.setAttribute('data-tip', pickLocale(locale, { en: 'Type a score from 0 to 5 · clear to remove', 'pt-BR': 'Digite uma nota de 0 a 5 · apague para remover' }));
   const stars = el('span', 'tb-rating-picker__stars');
   for (const filled of [false, true]) {
     const row = el('span', filled ? 'tb-rating-picker__fill' : 'tb-rating-picker__outline');
     row.setAttribute('aria-hidden', 'true');
-    for (let n = 0; n < 5; n++) row.append(icon('star', { size: 18, fill: filled }));
+    for (let n = 0; n < 5; n++) row.append(icon('star', { size: 16, fill: filled }));
     stars.append(row);
   }
   const slider = el('input', 'tb-rating-picker__slider');
@@ -40,7 +40,6 @@ export function ratingPicker(title: string, locale: Locale) {
   input.addEventListener('input', paint);
   input.addEventListener('focus', () => input.select());
   stars.append(slider);
-  controls.append(input, stars);
-  root.append(caption, controls);
+  root.append(icon(glyph, { size: 16, fill: true }), input, stars);
   return { root, input, paint, slider };
 }
