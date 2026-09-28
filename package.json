@@ -11,6 +11,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "travel:videos:sync": "node scripts/sync-travel-videos.mjs",
     "travel:areas": "python3 scripts/fetch-travel-polygons.py",
     "travel:areas:force": "python3 scripts/fetch-travel-polygons.py --force",
     "travel:amenities": "NODE_OPTIONS=--dns-result-order=ipv4first vite-node scripts/fetch-amenities.ts",

@@ -5,21 +5,31 @@ import { openDialog } from './dialog';
 import { el } from './dom';
 import { icon } from './icons';
 
-/** Instagram post or reel → its embed page, which plays inside an iframe. Null for any other link. */
-export function videoEmbedUrl(url: string): string | null {
-  const match = /^https:\/\/(?:www\.)?instagram\.com\/(?:[\w.]+\/)?(p|reels?)\/([\w-]+)/.exec(url);
+/** Public Instagram media prepared by travel:videos:sync; never load the remote embed. */
+export function videoSourceUrl(url: string): string | null {
+  const match = /^https:\/\/(?:www\.)?instagram\.com\/(?:[\w.]+\/)?(?:p|reels?)\/([\w-]+)\/?(?:[?#].*)?$/.exec(url);
   if (!match) return null;
-  const kind = match[1] === 'p' ? 'p' : 'reel';
-  return `https://www.instagram.com/${kind}/${match[2]}/embed/`;
+  return `${import.meta.env.BASE_URL}videos/instagram/${match[1]}.mp4`;
 }
 
-function openVideo(embed: string, url: string, title: string, locale: Locale): void {
-  const frame = el('iframe', 'tb-video__frame');
-  frame.src = embed;
-  frame.title = pickLocale(locale, { en: `Video: ${title}`, 'pt-BR': `Vídeo: ${title}` });
-  frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
-  // Closing drops the dialog and the iframe with it, which is what stops the video.
-  openDialog({
+function openVideo(source: string, url: string, title: string, locale: Locale): void {
+  const video = el('video', 'tb-video__frame');
+  video.controls = true;
+  video.playsInline = true;
+  video.preload = 'metadata';
+  video.setAttribute('aria-label', pickLocale(locale, { en: `Video: ${title}`, 'pt-BR': `Vídeo: ${title}` }));
+  const status = el('p', 'tb-video__status');
+  status.setAttribute('role', 'status');
+  status.hidden = true;
+  video.addEventListener('error', () => {
+    status.hidden = false;
+    status.textContent = pickLocale(locale, {
+      en: 'This video is not available locally yet. Try again after the video library is updated.',
+      'pt-BR': 'Este vídeo ainda não está disponível localmente. Tente novamente após a atualização da biblioteca de vídeos.',
+    });
+  });
+  video.src = source;
+  const dialog = openDialog({
     className: 'tb-video',
     title,
     locale,
@@ -31,18 +41,23 @@ function openVideo(embed: string, url: string, title: string, locale: Locale): v
         size: 'sm',
       }),
     ],
-    body: [frame],
+    body: [video, status],
+  });
+  dialog.addEventListener('close', () => {
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
   });
 }
 
 /** One card button per video: Instagram opens in a modal, any other link in a new tab. */
 export function videoButton(url: string, title: string, locale: Locale, index?: number): HTMLElement {
-  const embed = videoEmbedUrl(url);
+  const source = videoSourceUrl(url);
   let node: HTMLAnchorElement | HTMLButtonElement;
-  if (embed) {
+  if (source) {
     node = el('button', 'tb-btn-outline');
     node.type = 'button';
-    node.addEventListener('click', () => openVideo(embed, url, title, locale));
+    node.addEventListener('click', () => openVideo(source, url, title, locale));
   } else {
     node = el('a', 'tb-btn-outline');
     node.href = url;

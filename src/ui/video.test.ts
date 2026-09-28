@@ -1,22 +1,24 @@
 import { describe, expect, it } from 'vitest';
 import { travelCities } from '../catalog';
-import { videoEmbedUrl } from './video';
+import { videoSourceUrl } from './video';
 
-describe('videoEmbedUrl', () => {
-  it('turns an Instagram reel or post into its embed page', () => {
-    const reel = 'https://www.instagram.com/reel/DcG6jLkTUtf/embed/';
-    expect(videoEmbedUrl('https://www.instagram.com/reel/DcG6jLkTUtf/')).toBe(reel);
-    expect(videoEmbedUrl('https://www.instagram.com/jjslavin/reel/DcG6jLkTUtf/?stkn=abc')).toBe(reel);
-    expect(videoEmbedUrl('https://instagram.com/reels/DcG6jLkTUtf')).toBe(reel);
-    expect(videoEmbedUrl('https://www.instagram.com/p/DdBWEG0gPnD/')).toBe(
-      'https://www.instagram.com/p/DdBWEG0gPnD/embed/',
+describe('videoSourceUrl', () => {
+  it('maps Instagram links to stable local MP4 files', () => {
+    const reel = '/videos/instagram/DcG6jLkTUtf.mp4';
+    expect(videoSourceUrl('https://www.instagram.com/reel/DcG6jLkTUtf/')).toBe(reel);
+    expect(videoSourceUrl('https://www.instagram.com/jjslavin/reel/DcG6jLkTUtf/?stkn=abc')).toBe(reel);
+    expect(videoSourceUrl('https://instagram.com/reels/DcG6jLkTUtf')).toBe(reel);
+    expect(videoSourceUrl('https://www.instagram.com/p/DdBWEG0gPnD/')).toBe(
+      '/videos/instagram/DdBWEG0gPnD.mp4',
     );
   });
 
   it('leaves profiles and other hosts to a new tab', () => {
-    expect(videoEmbedUrl('https://www.instagram.com/jjslavin/')).toBeNull();
-    expect(videoEmbedUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBeNull();
-    expect(videoEmbedUrl('http://www.instagram.com/reel/DcG6jLkTUtf/')).toBeNull();
+    expect(videoSourceUrl('https://www.instagram.com/jjslavin/')).toBeNull();
+    expect(videoSourceUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBeNull();
+    expect(videoSourceUrl('https://www.instagram.com.evil.test/reel/DcG6jLkTUtf/')).toBeNull();
+    expect(videoSourceUrl('https://www.instagram.com/reel/../../secret')).toBeNull();
+    expect(videoSourceUrl('http://www.instagram.com/reel/DcG6jLkTUtf/')).toBeNull();
   });
 });
 

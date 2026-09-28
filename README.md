@@ -15,6 +15,8 @@ Busca de hotel (Azul + Booking) e Airbnb só existe no dev server, em `/api/hote
 
 ## Artefato
 
+Vídeos do Instagram usam MP4 locais com controles nativos. Após adicionar links ao catálogo ou clonar o projeto, execute `npm run travel:videos:sync` (requer `yt-dlp` no PATH). O comando obtém apenas vídeos públicos, preserva os arquivos existentes e retorna erro se algum download falhar. Os arquivos ficam em `public/videos/instagram/`, fora do Git; o Vite os serve no dev e os inclui no build. Prepare-os antes de gerar o build ou transferir o app para outro computador. Não há dependência do embed, login ou cookies do Instagram durante a reprodução.
+
 O formato está em `content/SCHEMA.md`. Exportar copia HTML (Apple Notes) e Markdown (Notion) e também baixa o `.md`.
 
 ## Catálogo
