@@ -1226,9 +1226,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'airport',
         featured: true,
         description: {
-          en: 'Main long-haul hub north of Paris. RER B into the city (~45–60 min to the center).',
-          'pt-BR':
-            'Principal hub de longos voos ao norte de Paris. RER B até a cidade (~45–60 min ao centro).',
+          en: "Opened in 1974, Paris–Charles de Gaulle is the capital’s main international airport. Its original circular Terminal 1, designed by Paul Andreu, became a landmark of modern airport architecture.",
+          'pt-BR': "Inaugurado em 1974, Paris–Charles de Gaulle é o principal aeroporto internacional da capital. Seu Terminal 1 circular, projetado por Paul Andreu, tornou-se um marco da arquitetura aeroportuária moderna.",
         },
         googleRating: 3.6,
         // Pin at Terminal 2E (Google "Terminal 2E Gates K"), where Air France from Brazil lands (AF459).
@@ -1264,8 +1263,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'cafes',
         subcategories: ['bakery', 'coffee-shop'],
         description: {
-          en: 'Croissants, sandwiches and coffee on the Terminal 2E arrivals level, straight ahead as you leave customs.',
-          'pt-BR': 'Croissants, sanduíches e café no desembarque do Terminal 2E, logo em frente na saída da alfândega.',
+          en: "Branch of the French bakery-café chain in Terminal 2E arrivals. It serves viennoiseries, sandwiches and coffee in the public area of the airport.",
+          'pt-BR': "Unidade da rede francesa de padarias e cafés no desembarque do Terminal 2E. Oferece croissants, outros folhados, sanduíches e café na área pública do aeroporto.",
         },
         googleRating: 3.6,
         // Google pin of "Brioche Doree - Terminal 2E - Arrivées" (landside, level 0)
@@ -1387,8 +1386,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Champ de Mars', 'pt-BR': 'Champ de Mars' },
         category: 'parks',
         description: {
-          en: 'The lawn under the Tower. Sunset picnic territory.',
-          'pt-BR': 'O gramado sob a Torre. Território de piquenique no pôr do sol.',
+          en: "Large public garden between the Eiffel Tower and the École Militaire, originally used for military exercises. It later hosted world’s fairs, including the 1889 exhibition for which the Tower was built. Its open lawns preserve the monumental perspective between the two buildings.",
+          'pt-BR': "Grande jardim público entre a Torre Eiffel e a École Militaire, originalmente usado para exercícios militares. Depois recebeu exposições universais, incluindo a de 1889, para a qual a Torre foi construída. Seus gramados abertos preservam a perspectiva monumental entre os dois edifícios.",
         },
         rating: 5,
         googleRating: 4.6,
@@ -1407,9 +1406,8 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'tourist',
         description: {
-          en: 'Chapel in the north wing of the domed École Militaire building, at the end of the Champ de Mars. Active military site: you see the façade; inside only for Sunday Mass (11:00) and Heritage Days.',
-          'pt-BR':
-            'Capela na ala norte do prédio da cúpula da École Militaire, no fim do Champ de Mars. É área militar: você vê a fachada; por dentro, só na missa de domingo (11h) e nas Jornadas do Patrimônio.',
+          en: "Completed in 1773 by Ange-Jacques Gabriel, the royal chapel of the École Militaire was part of Louis XV’s project to educate army officers. Its paintings of the life of Saint Louis linked the cadets’ religious education to the prestige of the French monarchy.",
+          'pt-BR': "Concluída em 1773 por Ange-Jacques Gabriel, a capela real da École Militaire integrava o projeto de Luís XV para formar oficiais. Seus quadros sobre a vida de São Luís ligavam a educação religiosa dos cadetes ao prestígio da monarquia francesa.",
         },
         // OSM node 3032793634 (Wikidata Q26203260).
         lat: 48.852731,
@@ -1424,8 +1422,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'tourist',
         landmark: 'eiffel',
         description: {
-          en: 'Still worth it. Go early or late for better light.',
-          'pt-BR': 'Ainda vale. Vá cedo ou tarde pela luz.',
+          en: "Built by Gustave Eiffel’s company for the 1889 World’s Fair, the iron tower was a demonstration of French engineering on the centenary of the Revolution. Its exposed metal structure broke with traditional monumental architecture and became the defining symbol of Paris.",
+          'pt-BR': "Construída pela empresa de Gustave Eiffel para a Exposição Universal de 1889, a torre de ferro demonstrava a engenharia francesa no centenário da Revolução. Sua estrutura metálica aparente rompeu com a arquitetura monumental tradicional e se tornou o principal símbolo de Paris.",
         },
         rating: 5,
         googleRating: 4.7,
@@ -1444,8 +1442,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         landmark: 'monument',
         description: {
-          en: 'The classic postcard angle of the Tower.',
-          'pt-BR': 'O ângulo clássico de cartão-postal da Torre.',
+          en: "The esplanade between the wings of the Palais de Chaillot overlooks the Seine and the Eiffel Tower. The ensemble took its present form for the 1937 international exhibition, creating one of Paris’s most recognisable monumental perspectives.",
+          'pt-BR': "A esplanada entre as alas do Palais de Chaillot domina o Sena e a Torre Eiffel. O conjunto ganhou sua forma atual para a exposição internacional de 1937, criando uma das perspectivas monumentais mais reconhecíveis de Paris.",
         },
         rating: 5,
         googleRating: 4.6,
@@ -1563,8 +1561,8 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'conveniência no meio do caminho entre o Louvre e o portão das Tulherias, para um piquenique simples sem o desvio até o Monoprix',
         },
         description: {
-          en: 'Small Carrefour on Rue Saint-Honoré, 370 m from the Tuileries gate on Rue de Rivoli: bread, cheese, fruit and drinks for a picnic. Mon–Sat 7:00–22:00.',
-          'pt-BR': 'Carrefour pequeno na Rue Saint-Honoré, a 370 m do portão das Tulherias pela Rue de Rivoli: pão, queijo, fruta e bebida para o piquenique. Seg–sáb 7h–22h.',
+          en: "Neighbourhood supermarket at 205 Rue Saint-Honoré, near the Tuileries. This compact Carrefour branch sells everyday groceries, including bread, cheese, fruit and drinks.",
+          'pt-BR': "Supermercado de bairro na Rue Saint-Honoré, 205, perto das Tulherias. Esta unidade compacta do Carrefour vende alimentos do dia a dia, como pão, queijo, frutas e bebidas.",
         },
         googleRating: 3.6,
         // OSM node 3980764070.
@@ -1638,7 +1636,10 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-carrousel',
         name: { en: 'Arc de Triomphe du Carrousel', 'pt-BR': 'Arco do Triunfo do Carrousel' },
         category: 'photo',
-        description: { en: 'Arch between the Louvre and the Carrousel Garden.', 'pt-BR': 'Arco entre o Louvre e o Jardim do Carrousel.' },
+        description: {
+          en: "Triumphal arch built in 1806–1808 to celebrate Napoleon’s military victories and mark the entrance to the Tuileries Palace, since demolished. Its three arches, red marble columns and crowning chariot draw on ancient Roman triumphal architecture.",
+          'pt-BR': "Arco construído entre 1806 e 1808 para celebrar as vitórias militares de Napoleão e marcar a entrada do Palácio das Tulherias, hoje desaparecido. Seus três vãos, colunas de mármore vermelho e carro puxado por quatro cavalos retomam a arquitetura triunfal da Roma antiga.",
+        },
         lat: 48.861728,
         lng: 2.332908, // OSM way 227483542
         mapsQuery: 'Arc de Triomphe du Carrousel Jardin du Carrousel Paris',
@@ -1647,7 +1648,10 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-maillol',
         name: { en: 'Maillol statues', 'pt-BR': 'Estátuas de Maillol' },
         category: 'photo',
-        description: { en: 'Outdoor sculptures in the Carrousel Garden.', 'pt-BR': 'Esculturas ao ar livre no Jardim do Carrousel.' },
+        description: {
+          en: "Ensemble of bronze sculptures by Aristide Maillol in the Carrousel Garden, installed from 1964 through the initiative of André Malraux and Dina Vierny. The balanced, solid forms of works such as The Mediterranean and The River make the garden an open-air introduction to modern sculpture.",
+          'pt-BR': "Conjunto de esculturas de bronze de Aristide Maillol no Jardim do Carrousel, instalado a partir de 1964 por iniciativa de André Malraux e Dina Vierny. As formas equilibradas e volumosas de obras como O Mediterrâneo e O Rio fazem do jardim uma introdução à escultura moderna ao ar livre.",
+        },
         lat: 48.862417,
         lng: 2.331472, // OSM node 1934643467
         mapsQuery: 'Maillol statues Jardin du Carrousel Paris',
@@ -1657,8 +1661,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Tuileries Garden', 'pt-BR': 'Jardim das Tulherias' },
         category: 'parks',
         description: {
-          en: 'Between Louvre and Concorde. Perfect walking spine.',
-          'pt-BR': 'Entre o Louvre e a Concorde. Eixo perfeito para caminhar.',
+          en: "Created for Catherine de’ Medici in 1564 and redesigned by André Le Nôtre from 1664, this former royal garden is a landmark of French formal landscaping. Its central avenue, symmetrical ponds and sculptures extend the Louvre’s perspective towards Place de la Concorde.",
+          'pt-BR': "Criado para Catarina de Médici em 1564 e redesenhado por André Le Nôtre a partir de 1664, o antigo jardim real é um marco do paisagismo francês. A alameda central, os lagos simétricos e as esculturas prolongam a perspectiva do Louvre até a Place de la Concorde.",
         },
         rating: 5,
         googleRating: 4.6,
@@ -1693,8 +1697,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Champs-Élysées', 'pt-BR': 'Champs-Élysées' },
         category: 'parks',
         description: {
-          en: 'The avenue. Walk from Concorde up to the Arc.',
-          'pt-BR': 'A avenida. Suba da Concorde até o Arco.',
+          en: "Monumental avenue linking Place de la Concorde to the Arc de Triomphe, along Paris’s historic axis. Gardens occupy its lower section, while cinemas, cafés and major fashion stores define its upper stretch; it is also a stage for national celebrations.",
+          'pt-BR': "Avenida monumental que liga a Place de la Concorde ao Arco do Triunfo, no eixo histórico de Paris. Jardins ocupam o trecho mais baixo; cinemas, cafés e grandes lojas de moda marcam a parte alta. Também é palco de celebrações nacionais.",
         },
         rating: 4.5,
         googleRating: 4.7,
@@ -1704,10 +1708,14 @@ export const localTravelCities: TravelCity[] = [
         // Fallback; precise full-avenue polyline is in travel-areas-osm.ts
         // Storefronts to pass on the way up, in walking order (OSM, 2026-09-27). The Disney Store at n° 44 closed in June 2023.
         subPoints: [
-          { name: { en: 'Sephora (n° 72)', 'pt-BR': 'Sephora (n° 72)' }, lat: 48.871025, lng: 2.304927 },
-          { name: { en: 'Nike (n° 79)', 'pt-BR': 'Nike (n° 79)' }, lat: 48.871026, lng: 2.302439 },
-          { name: { en: 'Louis Vuitton (n° 101)', 'pt-BR': 'Louis Vuitton (n° 101)' }, lat: 48.871642, lng: 2.300526 },
-          { name: { en: 'Cartier (n° 154)', 'pt-BR': 'Cartier (n° 154)' }, lat: 48.87341, lng: 2.297436 },
+          // InSapphoWeTrust / Wikimedia Commons — CC BY-SA 2.0; façade in 2009.
+          { name: { en: 'Sephora (n° 72)', 'pt-BR': 'Sephora (n° 72)' }, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Sephora_Champs-%C3%89lys%C3%A9es%2C_Paris_November_2009.jpg/500px-Sephora_Champs-%C3%89lys%C3%A9es%2C_Paris_November_2009.jpg', lat: 48.871025, lng: 2.304927 },
+          // Nike — official House of Innovation Paris store photo.
+          { name: { en: 'Nike (n° 79)', 'pt-BR': 'Nike (n° 79)' }, photo: 'https://static.nike.com/a/images/f_auto/8fd27351-737c-433f-a61d-d5c265b283b4/image.jpg', lat: 48.871026, lng: 2.302439 },
+          // Nick Gordon / Wikimedia Commons — public domain.
+          { name: { en: 'Louis Vuitton (n° 101)', 'pt-BR': 'Louis Vuitton (n° 101)' }, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Louis_Vuitton_Champs_Elysees.jpg/500px-Louis_Vuitton_Champs_Elysees.jpg', lat: 48.871642, lng: 2.300526 },
+          // Dr. Thomas Liptak / Wikimedia Commons — CC BY-SA 4.0.
+          { name: { en: 'Cartier (n° 154)', 'pt-BR': 'Cartier (n° 154)' }, photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Paris%2C_Av._des_Champs-%C3%89lys%C3%A9es_154%2C_Cartier.jpg/500px-Paris%2C_Av._des_Champs-%C3%89lys%C3%A9es_154%2C_Cartier.jpg', lat: 48.87341, lng: 2.297436 },
         ],
         area: {
           kind: 'polyline',
@@ -1728,8 +1736,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'tourist',
         landmark: 'arc',
         description: {
-          en: 'Climb for the axis view over the city.',
-          'pt-BR': 'Suba pela vista do eixo sobre a cidade.',
+          en: "Commissioned by Napoleon in 1806 and inaugurated in 1836, the arch honours the armies of the Revolution and the Empire. Its reliefs and inscriptions commemorate soldiers and battles. Beneath it, the Tomb of the Unknown Soldier and the flame of remembrance made it a national memorial to those killed in war.",
+          'pt-BR': "Encomendado por Napoleão em 1806 e inaugurado em 1836, o arco homenageia os exércitos da Revolução e do Império. Seus relevos e inscrições recordam soldados e batalhas. Sob ele, o Túmulo do Soldado Desconhecido e a chama da memória o tornaram um memorial nacional aos mortos em guerra.",
         },
         rating: 5,
         favorite: true,
@@ -1776,8 +1784,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Pont Alexandre III', 'pt-BR': 'Ponte Alexandre III' },
         category: 'photo',
         description: {
-          en: 'Most ornate bridge in the city. Golden hour magic.',
-          'pt-BR': 'A ponte mais ornamentada da cidade. Magia no golden hour.',
+          en: "Inaugurated for the 1900 World’s Fair, this bridge links the Grand and Petit Palais to the Invalides. Its gilded sculptures, nymphs and ornate lamps embody Belle Époque Paris; its name recalls the Franco-Russian alliance.",
+          'pt-BR': "Inaugurada para a Exposição Universal de 1900, a ponte liga o Grand e o Petit Palais aos Invalides. Esculturas douradas, ninfas e luminárias ornamentadas expressam a Paris da Belle Époque; seu nome recorda a aliança franco-russa.",
         },
         googleRating: 4.8,
         lat: 48.8638,
@@ -1791,8 +1799,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Petit & Grand Palais', 'pt-BR': 'Petit e Grand Palais' },
         category: 'tourist',
         description: {
-          en: 'Twin exhibition palaces on the Champs-Élysées / Seine side. Petit Palais permanent collections are often free; Grand Palais depends on the show. Café inside the Petit is worth it for the room alone.',
-          'pt-BR': 'Palácios de exposição na Champs-Élysées / Sena. Coleções permanentes do Petit costumam ser grátis; Grand depende da mostra. O café de dentro do Petit vale pelo ambiente.',
+          en: "Built for the 1900 World’s Fair, these two palaces celebrate the art and architecture of the Belle Époque. The Grand Palais is distinguished by its immense glass-and-metal nave; the Petit Palais, designed by Charles Girault, houses the City of Paris Museum of Fine Arts around an interior garden.",
+          'pt-BR': "Construídos para a Exposição Universal de 1900, os dois palácios celebram a arte e a arquitetura da Belle Époque. O Grand Palais se destaca pela imensa nave de vidro e metal; o Petit Palais, de Charles Girault, abriga o Museu de Belas-Artes da cidade de Paris em torno de um jardim interno.",
         },
         rating: 4.5,
         favorite: true,
@@ -1923,8 +1931,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Café Latéral', 'pt-BR': 'Café Latéral' },
         category: 'cafes',
         description: {
-          en: 'French café and brasserie on Avenue Mac-Mahon, with a terrace overlooking the Arc de Triomphe and breakfast served until noon.',
-          'pt-BR': 'Café e brasserie francesa na Avenue Mac-Mahon, com terraço voltado para o Arco do Triunfo e café da manhã servido até meio-dia.',
+          en: "French café and brasserie on Avenue Mac-Mahon, beside Place de l’Étoile. Its terrace faces the Arc de Triomphe, combining a neighbourhood café setting with a view of the monument.",
+          'pt-BR': "Café e brasserie francesa na Avenue Mac-Mahon, junto à Place de l’Étoile. O terraço voltado para o Arco do Triunfo combina o ambiente de café de bairro com a vista do monumento.",
         },
         aiSuggested: true,
         aiReason: {
@@ -1942,8 +1950,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'L\'Éclair de Génie', 'pt-BR': 'L\'Éclair de Génie' },
         category: 'cafes',
         description: {
-          en: 'Éclair specialists. Grab one and walk.',
-          'pt-BR': 'Especialistas em éclair. Pegue um e caminhe.',
+          en: "Pâtisserie founded by Christophe Adam in 2012, dedicated to creative versions of the éclair: choux pastry filled with cream and finished with colourful glazes. This counter is inside Galeries Lafayette Le Gourmet, which has hosted the brand since 2014.",
+          'pt-BR': "Confeitaria criada por Christophe Adam em 2012, dedicada a versões criativas do éclair: massa choux recheada com creme e coberta por glacês coloridos. Este balcão fica no Galeries Lafayette Le Gourmet, que recebe a marca desde 2014.",
         },
         googleRating: 4.8,
         lat: 48.8731,
@@ -3499,8 +3507,8 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'tourist',
         description: {
-          en: 'Ancient Egyptian obelisk at Place de la Concorde — centerpiece of the historic axis.',
-          'pt-BR': 'Obelisco egípcio antigo na Place de la Concorde — marco do eixo histórico.',
+          en: "Ancient Egyptian obelisk from the temple of Luxor, erected on Place de la Concorde in 1836 after being offered to France by Egypt. Its hieroglyphs honour Ramses II, placing a monument over three thousand years old at the centre of Paris’s historic axis.",
+          'pt-BR': "Obelisco do antigo Egito vindo do templo de Luxor, erguido na Place de la Concorde em 1836 após ser oferecido à França pelo Egito. Seus hieróglifos homenageiam Ramsés II: um monumento de mais de três mil anos no centro do eixo histórico de Paris.",
         },
         rating: 4,
         googleRating: 4.7,
@@ -3515,8 +3523,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Passage des Panoramas', 'pt-BR': 'Passage des Panoramas' },
         category: 'tourist',
         description: {
-          en: 'Historic covered passage with a glass roof, old shopfronts, stamp dealers and restaurants between Boulevard Montmartre and Rue Saint-Marc.',
-          'pt-BR': 'Passagem histórica coberta por uma vidraça, com fachadas antigas, lojas de selos e restaurantes entre o Boulevard Montmartre e a Rue Saint-Marc.',
+          en: "Opened in 1799, this is one of Paris’s oldest covered shopping passages. Its glass roof and historic shopfronts preserve the atmosphere of the early arcades that preceded department stores; stamp dealers and restaurants continue that commercial tradition.",
+          'pt-BR': "Aberta em 1799, é uma das passagens comerciais cobertas mais antigas de Paris. A vidraça e as fachadas históricas preservam o ambiente das galerias que antecederam as grandes lojas; comerciantes de selos e restaurantes mantêm sua vocação comercial.",
         },
         googleRating: 4.4,
         lat: 48.8715109,
@@ -3534,8 +3542,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Bouillon Chartier', 'pt-BR': 'Bouillon Chartier' },
         category: 'restaurants',
         description: {
-          en: 'The original Bouillon Chartier (1896): a huge listed dining hall under a glass roof, starters from €1 and mains €7–14. No reservations — expect a queue.',
-          'pt-BR': 'O Bouillon Chartier original (1896): salão enorme e tombado, sob teto de vidro, com entradas a partir de €1 e pratos de €7 a €14. Não aceita reserva — espere fila.',
+          en: "Founded in 1896 by the Chartier brothers, this restaurant preserves the Parisian bouillon tradition: simple French cooking at accessible prices. Its listed Belle Époque dining room, with mirrors, woodwork and a glass roof, is as much a part of its identity as the food.",
+          'pt-BR': "Fundado em 1896 pelos irmãos Chartier, o restaurante preserva a tradição dos bouillons parisienses: cozinha francesa simples a preços acessíveis. O salão tombado da Belle Époque, com espelhos, madeira e teto de vidro, faz parte de sua identidade tanto quanto a comida.",
         },
         googleRating: 4.1,
         lat: 48.87194,
@@ -3577,8 +3585,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Casa do Gui', 'pt-BR': 'Casa do Gui' },
         category: 'lodging',
         description: {
-          en: 'Home base in Noisy-le-Sec — east of Paris, easy RER access into the city.',
-          'pt-BR': 'Base em Noisy-le-Sec — leste de Paris, com bom acesso de RER ao centro.',
+          en: "Private home in Noisy-le-Sec, a residential town east of Paris served by the RER E.",
+          'pt-BR': "Residência particular em Noisy-le-Sec, município residencial a leste de Paris servido pelo RER E.",
         },
         lat: 48.893017,
         lng: 2.454059,
@@ -4550,8 +4558,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         subcategories: ['viewpoint'],
         description: {
-          en: 'Quiet street by Trocadéro with a straight view of the Eiffel Tower.',
-          'pt-BR': 'Rua tranquila ao lado do Trocadéro, com vista direta da Torre Eiffel.',
+          en: "Short residential avenue near the Trocadéro, named after the Portuguese poet Luís de Camões. Its double staircase and stone façades frame a distinctive view of the Eiffel Tower, linking the elevated street to Boulevard Delessert below.",
+          'pt-BR': "Pequena avenida residencial perto do Trocadéro, batizada em homenagem ao poeta português Luís de Camões. A escadaria dupla e as fachadas de pedra emolduram uma vista característica da Torre Eiffel, ligando a rua elevada ao Boulevard Delessert, abaixo.",
         },
         lat: 48.859673,
         lng: 2.286183,
@@ -4564,8 +4572,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         subcategories: ['viewpoint'],
         description: {
-          en: 'The tower framed at the end of the street — shoot west from the corner with Avenue Rapp.',
-          'pt-BR': 'A Torre enquadrada no fim da rua — fotografe olhando para oeste, da esquina com a Avenue Rapp.',
+          en: "Historic street on the Left Bank, named after land once owned by the University of Paris. Near the Champ de Mars, its stone façades frame the Eiffel Tower at the end of the street, contrasting the old city with the iron monument.",
+          'pt-BR': "Rua histórica da margem esquerda, cujo nome remete a terrenos que pertenceram à Universidade de Paris. Perto do Champ de Mars, as fachadas de pedra emolduram a Torre Eiffel no fim da rua, contrastando a cidade antiga com o monumento de ferro.",
         },
         lat: 48.860986,
         lng: 2.301191,
@@ -4578,8 +4586,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         subcategories: ['bridge', 'viewpoint'],
         description: {
-          en: 'Footbridge over the Seine facing the tower — good for the hourly sparkle after dark.',
-          'pt-BR': 'Passarela sobre o Sena de frente para a Torre — boa para o brilho de hora em hora depois que escurece.',
+          en: "Metal footbridge built for the 1900 World’s Fair to connect exhibition areas on both banks of the Seine. Its light structure is a surviving example of the engineering of that period, with open views towards the Eiffel Tower.",
+          'pt-BR': "Passarela metálica construída para a Exposição Universal de 1900, ligando áreas da mostra nas duas margens do Sena. A estrutura leve é um testemunho da engenharia daquele período, com vistas abertas para a Torre Eiffel.",
         },
         lat: 48.862561,
         lng: 2.29693,
@@ -4592,8 +4600,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         subcategories: ['viewpoint'],
         description: {
-          en: 'Quay at water level below Avenue de New York, by Rue Fresnel, with the tower across the Seine. From the tower, cross Pont d’Iéna, turn right and take the stairs down to the river; walk on until the crowd thins.',
-          'pt-BR': 'Cais na altura da água, abaixo da Avenue de New York, na frente da Rue Fresnel, com a Torre do outro lado do Sena. Da Torre, atravesse a Pont d’Iéna, vire à direita e desça a escada até o rio; siga até a multidão diminuir.',
+          en: "Lower riverside quay on the Right Bank, below Avenue de New York and opposite the Eiffel Tower. Unlike the elevated Trocadéro esplanade, it offers a view close to water level, with the Seine in the foreground.",
+          'pt-BR': "Cais na margem direita do Sena, abaixo da Avenue de New York e em frente à Torre Eiffel. Diferente da esplanada elevada do Trocadéro, oferece uma perspectiva próxima à água, com o rio em primeiro plano.",
         },
         // OSM viewpoint node 9142720417: the slope between Avenue de New York and the quay.
         lat: 48.86103,
@@ -4608,8 +4616,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         subcategories: ['bridge', 'viewpoint'],
         description: {
-          en: 'The bridge between Trocadéro and the tower — the tower straight ahead.',
-          'pt-BR': 'A ponte entre o Trocadéro e a Torre — a Torre bem à frente.',
+          en: "Stone bridge commissioned by Napoleon and named after his victory at Jena in 1806. It connects the Trocadéro to the Champ de Mars, forming the central river crossing in the monumental axis of the Eiffel Tower.",
+          'pt-BR': "Ponte de pedra encomendada por Napoleão e batizada em homenagem à vitória em Jena, em 1806. Liga o Trocadéro ao Champ de Mars, formando a travessia central do Sena no eixo monumental da Torre Eiffel.",
         },
         lat: 48.859833,
         lng: 2.292035,
@@ -4622,8 +4630,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'photo',
         subcategories: ['viewpoint', 'garden'],
         description: {
-          en: 'Fontaine de Varsovie in the Trocadéro gardens, with the tower behind the water jets.',
-          'pt-BR': 'Fontaine de Varsovie nos jardins do Trocadéro, com a Torre atrás dos jatos d’água.',
+          en: "The Warsaw Fountain is the centrepiece of the Trocadéro gardens, laid out for the 1937 international exhibition. Its long basin, water jets and sculptures extend the symmetrical composition of the Palais de Chaillot towards the Seine and the Eiffel Tower.",
+          'pt-BR': "A Fonte de Varsóvia é o centro dos jardins do Trocadéro, organizados para a exposição internacional de 1937. O longo espelho d’água, os jatos e as esculturas prolongam a composição simétrica do Palais de Chaillot em direção ao Sena e à Torre Eiffel.",
         },
         lat: 48.861093,
         lng: 2.29008,
@@ -4652,8 +4660,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Uniqlo Opéra', 'pt-BR': 'Uniqlo Opéra' },
         category: 'shopping',
         description: {
-          en: 'Uniqlo beside the Palais Garnier, a few minutes from Galeries Lafayette — warm layers in the same walk as the grands magasins.',
-          'pt-BR': 'Uniqlo ao lado do Palais Garnier, a poucos minutos da Galeries Lafayette — roupa de frio no mesmo passeio das grandes lojas.',
+          en: "Opened in 2009, the Paris Opéra flagship marked the Japanese brand’s expansion into central Paris. The store near the Palais Garnier specialises in everyday clothing, from thermal layers to lightweight down jackets.",
+          'pt-BR': "Inaugurada em 2009, a loja Paris Opéra marcou a expansão da marca japonesa no centro de Paris. Perto do Palais Garnier, reúne roupas para o dia a dia, de peças térmicas a jaquetas leves de pluma.",
         },
         lat: 48.87278,
         lng: 2.330885,
@@ -4694,8 +4702,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Pharmacie Carré Opéra', 'pt-BR': 'Farmácia Carré Opéra' },
         category: 'shopping',
         description: {
-          en: 'Cosmetics pharmacy next to Galeries Lafayette, with a 10% voucher for Brazilian visitors.',
-          'pt-BR': 'Farmácia de cosméticos ao lado da Galeries Lafayette, com voucher de 10% para brasileiros.',
+          en: "Pharmacy and parapharmacy in the Opéra district, near Galeries Lafayette. Its range of French dermocosmetics and personal-care products makes it a shopping destination as well as a neighbourhood pharmacy.",
+          'pt-BR': "Farmácia e parafarmácia no bairro da Opéra, perto da Galeries Lafayette. A variedade de dermocosméticos franceses e produtos de cuidado pessoal faz dela um destino de compras além de uma farmácia de bairro.",
         },
         lat: 48.874028,
         lng: 2.332925,

@@ -424,8 +424,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMax: 40,
     crowdProfile: 'local',
     tips: L(
-      'Drop bags on arrival; end the day back here. Auchan is ~5 min walk for basics.',
-      'Deixe as malas na chegada; termine o dia de volta aqui. Auchan fica a ~5 min a pé para os básicos.',
+      'Residential accommodation; the gallery illustrates Noisy-le-Sec, not the private house.',
+      'Hospedagem residencial; a galeria ilustra Noisy-le-Sec, não a casa particular.',
     ),
   },
   'par-auchan-noisy': {
@@ -455,10 +455,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestTime: L('Late afternoon picnic under the Tower', 'Fim de tarde em piquenique sob a Torre'),
     bestDay: L('Weekday afternoon / early evening', 'Tarde / início de noite em dia de semana'),
     tips: L(
-      'Long lawn pause — eat what you grabbed at Bake & Blend, photos, first real outdoor breath. Security checks on big event days.',
-      'Parada longa no gramado — coma o que pegou no Bake & Blend, fotos, primeiro respiro ao ar livre. Controle de segurança em dias de evento.',
+      'The open lawns offer a broad view of the Tower; respect any fenced-off areas.',
+      'Os gramados abertos oferecem uma vista ampla da Torre; respeite as áreas eventualmente cercadas.',
     ),
   }),
+  'par-chapelle-saint-louis': {
+    tips: L('The chapel is inside an active military site; interior access depends on authorised services or events. The exterior view is of the École Militaire building.', 'A capela fica dentro de uma área militar ativa; o acesso interno depende de celebrações ou eventos autorizados. Por fora, vê-se o edifício da École Militaire.'),
+  },
   'par-carrousel': { ticket: free, durationMin: 3, durationMax: 5 },
   'par-maillol': { ticket: free, durationMin: 2, durationMax: 5 },
   // Paris Région: passage open daily 6:00–00:00; checked 2026-09-27.
@@ -472,7 +475,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   'par-tuileries': parkVisit({
     durationMin: 40,
     durationMax: 100,
-    bestTime: L('Morning walk Louvre → Concorde', 'Caminhada de manhã Louvre → Concorde'),
+    bestTime: L('Morning light around the ponds', 'Luz da manhã junto aos lagos'),
     tips: L(
       'Free garden. Great connector between Louvre, Orangerie, and Concorde.',
       'Jardim gratuito. Conecta Louvre, Orangerie e Concorde.',
@@ -655,8 +658,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Weekday morning (less retail crush)', 'Manhã de semana (menos multidão de lojas)'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'Walk Concorde → Arc. The avenue is the experience; skip most chain shops.',
-      'Ande Concorde → Arco. A avenida é a experiência; pule a maior parte das redes.',
+      'The avenue can be explored in either direction. Use pedestrian crossings between the two sides.',
+      'A avenida pode ser percorrida nos dois sentidos. Use as travessias de pedestres para mudar de lado.',
     ),
   }),
   'par-montmartre': parkVisit({
@@ -739,6 +742,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-carrefour-express-saint-honore': {
     avgPricePerPerson: money(6, 12, L('Picnic supplies / person', 'Suprimentos de piquenique / pessoa')),
+    bestDay: L('Mon–Sat 7:00–22:00', 'Seg–sáb 7h–22h'),
     durationMin: 15,
     durationMax: 25,
   },
@@ -882,8 +886,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Any day', 'Qualquer dia'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'Best as a stop on the Tuileries → Concorde → Champs walk. Night lighting is strong.',
-      'Melhor como parada no passeio Tuileries → Concorde → Champs. A iluminação noturna é forte.',
+      'The hieroglyphs are on the shaft; the pedestal depicts the transport and erection of the monument.',
+      'Os hieróglifos ficam no fuste; o pedestal representa o transporte e a instalação do monumento.',
     ),
   },
   'par-fondation-lv': museumVisit(
@@ -1496,13 +1500,15 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   // One éclair: €4–7 in 2026 (parisatoutprix.fr, tripadvisor, consulted 2026-09-27).
-  'par-eclair-genie': cafeVisit(5, 8),
+  'par-eclair-genie': cafeVisit(5, 8, {
+    tips: L('This is the counter on the ground floor of Lafayette Gourmet, not a table-service café.', 'Esta unidade é o balcão no térreo do Lafayette Gourmet, não um café com serviço de mesa.'),
+  }),
   // cafelateral.com/fr/services and Google Maps, checked 2026-09-27.
   'par-cafe-lateral': cafeVisit(7.1, 7.1, {
     bestDay: L('Daily from 7:00; breakfast until noon', 'Todos os dias a partir das 7h; café da manhã até meio-dia'),
     tips: L(
-      'Planned order per person: one café allongé (€3.90) and one croissant (€3.20).',
-      'Pedido previsto por pessoa: um café allongé (€3,90) e um croissant (€3,20).',
+      'Choose the terrace for a view of the Arc de Triomphe.',
+      'O terraço é a opção para quem quer vista do Arco do Triunfo.',
     ),
   }),
   'par-maison-isabelle': cafeVisit(4, 10, {
@@ -2084,8 +2090,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestTime: L('After dark — the tower sparkles 5 min on the hour', 'Depois que escurece — a Torre brilha 5 min em cada hora cheia'),
     bestDay: L('Any evening', 'Qualquer noite'),
     tips: L(
-      'Sit at the edge with your feet over the Seine; bring cheese and a baguette.',
-      'Sente na beirada com os pés sobre o Sena; leve queijo e baguete.',
+      'Access is from the lower riverbank below Avenue de New York, near Pont d’Iéna. There are stairs between street and quay levels.',
+      'O acesso fica na margem baixa, sob a Avenue de New York, perto da Pont d’Iéna. Há escadas entre o nível da rua e o cais.',
     ),
   }),
   'par-pont-iena': landmarkOutdoor({
@@ -2117,8 +2123,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     crowdProfile: 'shop',
     bestDay: L('Open Sunday 11:00–20:00', 'Abre domingo 11h–20h'),
     tips: L(
-      'The Uniqlo closest to Haussmann–Saint-Lazare (RER E). Créteil Soleil has none.',
-      'A Uniqlo mais perto de Haussmann–Saint-Lazare (RER E). O Créteil Soleil não tem.',
+      'Check the selected size and colour in the store stock before visiting.',
+      'Confira o estoque da loja para o tamanho e a cor desejados antes da visita.',
     ),
   },
   'par-creteil-soleil': {
