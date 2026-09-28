@@ -805,10 +805,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-cafe-lateral': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/d/dc/Croissants_au_beurre_%2818953292873%29.jpg',
-      'Butter croissants (illustrative photo)',
-      'Croissants na manteiga (foto ilustrativa)',
-      'Wikimedia Commons',
+      'https://uniiti.com/images/shops/slides/27f52033a5c6c87fbf88cafa08ec87cedb4cd482.jpeg',
+      'Café Latéral façade and terrace on Avenue Mac-Mahon',
+      'Fachada e terraço do Café Latéral na Avenue Mac-Mahon',
+      'Café Latéral — galeria oficial / Uniiti',
+    ),
+    photo(
+      'https://uniiti.com/images/shops/slides/f521ccee7678f82ee9c8072fbf18d7d4fd68b583.jpeg',
+      'Breakfast at Café Latéral: croissant, bread, fruit, pancakes and scrambled eggs',
+      'Café da manhã do Café Latéral: croissant, pães, frutas, panquecas e ovos mexidos',
+      'Café Latéral — galeria oficial / Uniiti',
     ),
   ],
   'par-eclair-genie': [

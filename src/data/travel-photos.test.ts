@@ -16,6 +16,8 @@ import {
 const WIKI_HOST = 'upload.wikimedia.org';
 const ALLOWED_HOSTS = new Set([
   WIKI_HOST,
+  // Café Latéral official gallery, hosted by its website provider.
+  'uniiti.com',
   // Official Le Meurice product photo (sculpted mango pastry)
   'cedric-grolet.com',
   'live.staticflickr.com',
