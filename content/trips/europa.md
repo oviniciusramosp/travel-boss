@@ -223,6 +223,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 11:15 [Biblioteca Nacional](place:par-bnf) — Esplanada de madeira e o jardim entre as quatro torres; sair às 12h40. O passe de um dia do Haut-de-jardin custa €5; a exposição do bicentenário da fotografia está em cartaz (€15)
   - via: metrô 14 de Bibliothèque François Mitterrand até Pyramides · 20 min
 - 13:15 [Baguett's Café (Molière)](place:par-bohemia) — **Almoço / brunch**: pancakes ou pain perdu; reservar cerca de 1h e sair até 14h30 para a Opéra
+- 14:30 [Monoprix Opéra](place:par-monoprix-rivoli) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 14h50
 - 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala. Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
 - 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar (até 20h); a loja fecha às 20h30
 - 17:10 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h.\
