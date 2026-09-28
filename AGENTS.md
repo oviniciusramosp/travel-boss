@@ -128,3 +128,5 @@ Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityG
 Mapa interno: `louvreMapButton` abre `openDialog` com plantas oficiais, níveis e sequência numerada. Coordenadas e roteiro vêm do catálogo; não desenhar caminhos por corredores sem validação. Selecionar uma etapa troca o andar; zoom e arraste ficam dentro da modal.
 
 Seletor de avaliação: `ratingPicker` (`src/ui/rating-picker.ts`) combina estrelas de 0 a 5 em passos de 0,5 com número editável em décimos. Zero é uma nota; campo vazio remove a nota. Setas, Home e End operam as estrelas; o salvamento mantém o controle focado.
+
+Busca da top bar: `mountSearch` (`src/app/search.ts`) mostra autocomplete em dois grupos, roteiro aberto e catálogo de cidades. Digitar não filtra a tela nem move o mapa; clique ou Enter abre o resultado, setas navegam e Escape fecha. O campo mantém o foco com `aria-activedescendant`. ⌘K/Ctrl K foca a busca. A exportação da top bar é uma exceção autorizada de botão só-ícone, com tooltip explicando cópia e download do roteiro em Markdown.

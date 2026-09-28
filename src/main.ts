@@ -13,6 +13,7 @@ import './styles/trip.css';
 import './styles/hotels.css';
 import './styles/ui.css';
 import './styles/indoor.css';
+import { mountSearch } from './app/search';
 import { mountShell } from './app/shell';
 import { bootTheme } from './app/theme';
 import {
@@ -257,6 +258,8 @@ shell.onLocale(() => {
   setDocumentTitle(cityLabel(current.slug));
   shell.setSource(citySource(current.slug));
 });
+
+mountSearch(shell, route => show(route, 'push'));
 
 const initial = parseHash(location.hash);
 if (initial) show(initial, 'none');
