@@ -70,6 +70,7 @@
   --icon-lg: 20px;
   /* Water and restroom map pins: the glyph is the pin, drawn at hover size and scaled down at rest. */
   --icon-pin: 28px;
+  --pin-rest-scale: 0.6;
   --amenity-scale: 0.43;
   --amenity-scale-near: 0.57;
 

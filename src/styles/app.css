@@ -461,7 +461,7 @@ button {
 }
 
 .tb-map.is-trip .leaflet-marker-icon[data-pin-kind='place'] .tb-pin {
-  --pin-scale: calc(8 / 28);
+  --pin-scale: calc(8 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map.is-overview .leaflet-marker-icon.tb-pin-wrap:hover,
@@ -653,28 +653,28 @@ button {
 
 /* Rest size is one variable on the map. 28px is the hover badge; zoom scales it. */
 .tb-map .leaflet-container {
-  --pin-scale: calc(12 / 28);
+  --pin-scale: calc(12 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map .leaflet-container.tb-zoom-mid {
-  --pin-scale: calc(6 / 28);
+  --pin-scale: calc(6 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map .leaflet-container.tb-zoom-far {
-  --pin-scale: calc(3 / 28);
+  --pin-scale: calc(3 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map .leaflet-container.tb-zoom-near .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)),
 .tb-map .leaflet-container:not(.tb-zoom-mid):not(.tb-zoom-far) .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)) {
-  --pin-scale: calc(16 / 28);
+  --pin-scale: calc(16 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map .leaflet-container.tb-zoom-mid .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)) {
-  --pin-scale: calc(14 / 28);
+  --pin-scale: calc(14 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map .leaflet-container.tb-zoom-far .tb-pin.is-featured:not(:is(:hover, .is-hover, .is-active)) {
-  --pin-scale: calc(9 / 28);
+  --pin-scale: calc(9 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map .leaflet-container .leaflet-marker-icon.tb-pin-wrap:hover .tb-pin,

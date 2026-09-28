@@ -8,7 +8,7 @@
 }
 
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]) .tb-pin {
-  --pin-scale: calc(8 / 28);
+  --pin-scale: calc(8 / 28 * var(--pin-rest-scale));
 }
 
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]):hover,
