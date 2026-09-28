@@ -64,3 +64,6 @@ export type {
 } from '../data/travel';
 
 export { loadOsmAreas, osmAreasReady, placeHasOsmArea } from '../data/osm-area-bridge';
+
+export { louvrePaths } from '../data/travel-indoor-paths';
+export type { IndoorPathPart } from '../data/travel-indoor-paths';

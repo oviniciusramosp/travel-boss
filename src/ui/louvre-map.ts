@@ -1,11 +1,12 @@
 import type * as Leaflet from 'leaflet';
-import { louvreRoute, louvreSources, pickLocale, type Locale, type LouvreFloor } from '../catalog';
+import { louvreRoute, louvrePaths, louvreSources, pickLocale, type Locale, type LouvreFloor } from '../catalog';
 import { el } from './dom';
 import { icon } from './icons';
 import { iconButton } from './controls';
 import { openDialog } from './dialog';
+import { attachTrackpadGestures } from '../map/trackpad';
 
-/** Official floor plans with a proposed sequence; deliberately no invented corridor polyline. */
+/** Official floor plans with indicative walking sections and explicit floor changes. */
 export function louvreMapButton(locale: Locale): HTMLButtonElement {
   const t = (en: string, pt: string) => pickLocale(locale, { en, 'pt-BR': pt });
   const trigger = el('button', 'tb-btn-outline', t('Explore the indoor route', 'Ver percurso dentro do Louvre'));
@@ -29,12 +30,14 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
     detail.setAttribute('aria-live', 'polite');
     const title = el('h3');
     const directions = el('p');
+    const levels = el('div', 'tb-indoor__toolbar');
+    const hint = el('p', undefined, t('Dotted line: indicative walking route. Pinch to zoom; two fingers to pan.', 'Pontilhado: trajeto indicativo a pé. Faça pinça para zoom; use dois dedos para mover.'));
     const pagination = el('div', 'tb-indoor__toolbar');
     const previous = el('button', 'tb-btn-outline', t('Previous', 'Anterior'));
     const next = el('button', 'tb-btn-outline', t('Next stop', 'Próxima parada'));
     previous.type = next.type = 'button';
     pagination.append(previous, next);
-    detail.append(title, directions, pagination);
+    detail.append(title, directions, levels, hint, pagination);
     canvas.append(toolbar, mapNode, detail);
     layout.append(list, canvas);
     const warning = el('p', 'tb-indoor__intro', t(
@@ -90,14 +93,20 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
     external.append(externalActions, feedback, manual);
     body.append(external);
     const dialog = openDialog({ className: 'tb-indoor', title: t('Louvre · indoor route', 'Louvre · percurso interno'), locale, body: [body] });
-    const map = L.map(mapNode, { crs: L.CRS.Simple, zoomControl: false, attributionControl: false, minZoom: -2, maxZoom: 3, zoomSnap: 0.25, scrollWheelZoom: true });
+    const map = L.map(mapNode, { crs: L.CRS.Simple, zoomControl: false, attributionControl: false, minZoom: -2, maxZoom: 3, zoomSnap: 0, scrollWheelZoom: false, zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false, preferCanvas: true });
+    const detachGestures = attachTrackpadGestures(map);
+    const paths = L.layerGroup().addTo(map);
+    const walkColor = getComputedStyle(mapNode).getPropertyValue('--color-walk').trim();
+    const position = ([x, y]: readonly [number, number]): Leaflet.LatLngTuple => [477.6 - y, x];
     const bounds = L.latLngBounds([0, 0], [477.6, 949.2]);
     const markers = L.layerGroup().addTo(map);
     const markerRefs = new Map<number, Leaflet.Marker>();
     let overlay: Leaflet.ImageOverlay | undefined;
+    const overlays = new Map<number, Leaflet.ImageOverlay>();
     let selected = 0;
     let floor: LouvreFloor | undefined;
     const floorButtons = new Map<LouvreFloor, HTMLButtonElement>();
+    const partButtons: HTMLButtonElement[] = [];
     const stepButtons = louvreRoute.map((step, index) => {
       const button = el('button', 'tb-indoor__step');
       button.type = 'button';
@@ -108,20 +117,63 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
       return button;
     });
     const fit = () => map.fitBounds(bounds, { padding: [12, 12], animate: false });
-    function select(index: number) {
+    function select(index: number, viewFloor: LouvreFloor = louvreRoute[index].floor) {
       selected = index;
       const step = louvreRoute[index];
-      const changedFloor = floor !== step.floor;
+      const changedFloor = floor !== viewFloor;
       if (changedFloor) {
-        floor = step.floor;
+        floor = viewFloor;
         overlay?.remove();
-        overlay = L.imageOverlay(`/maps/louvre/niveau${Math.max(-1, floor)}.svg`, bounds).addTo(map);
-        fit();
+        const plan = Math.max(-1, floor);
+        overlay = overlays.get(plan) ?? L.imageOverlay(`/maps/louvre/niveau${plan}.svg`, bounds);
+        overlays.set(plan, overlay);
+        overlay.addTo(map);
       }
       floorButtons.forEach((button, level) => button.setAttribute('aria-pressed', String(level === floor)));
       stepButtons.forEach((button, i) => button.setAttribute('aria-current', i === index ? 'step' : 'false'));
-      title.textContent = `${index + 1}. ${pickLocale(locale, step.name)} · ${t('Level', 'Nível')} ${floor}`;
+      title.textContent = `${index + 1}. ${pickLocale(locale, step.name)} · ${t('Level', 'Nível')} ${step.floor}`;
       directions.textContent = pickLocale(locale, step.directions);
+      paths.clearLayers();
+      const parts = louvrePaths[index];
+      const visible = parts.filter(part => part.floor === floor);
+      for (const part of visible) {
+        L.polyline(part.points.map(position), {
+          color: walkColor, weight: 3, opacity: 0.95, dashArray: '2 10',
+          lineCap: 'round', lineJoin: 'round', interactive: false,
+        }).addTo(paths);
+      }
+      if (visible.length) {
+        map.fitBounds(L.latLngBounds(visible.flatMap(part => part.points.map(position))), {
+          padding: [45, 45], maxZoom: 1.5, animate: false,
+        });
+      } else fit();
+      // Keep the same visit step while inspecting each section of its floor changes.
+      partButtons.forEach((button, i) => { button.hidden = i >= parts.length; });
+      parts.forEach((part, partIndex) => {
+        const label = partIndex === 0 ? t('Start', 'Início')
+          : part.floor > parts[partIndex - 1].floor ? t('Go up', 'Subir') : t('Go down', 'Descer');
+        let button = partButtons[partIndex];
+        if (!button) {
+          button = el('button', 'tb-btn-outline');
+          button.type = 'button';
+          button.addEventListener('click', () => select(selected, louvrePaths[selected][partIndex].floor));
+          partButtons.push(button);
+          levels.append(button);
+        }
+        button.textContent = `${label} · ${t('Level', 'Nível')} ${part.floor}`;
+        button.setAttribute('aria-pressed', String(part.floor === floor));
+
+        if (part.floor !== floor) return;
+        const following = parts[partIndex + 1];
+        if (!following) return;
+        const arrow = icon('expand_more');
+        if (following.floor > part.floor) arrow.style.transform = 'rotate(180deg)';
+        const transition = L.marker(position(part.points[part.points.length - 1]), {
+          icon: L.divIcon({ className: 'tb-indoor__pin', html: arrow.outerHTML, iconSize: [28, 28], iconAnchor: [14, 14] }),
+          title: `${t('Continue on level', 'Continuar no nível')} ${following.floor}`,
+        }).addTo(paths);
+        transition.on('click', () => select(index, following.floor));
+      });
       previous.disabled = index === 0;
       next.disabled = index === louvreRoute.length - 1;
       if (changedFloor) { markers.clearLayers(); markerRefs.clear(); }
@@ -144,13 +196,13 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
     for (const level of [-2, -1, 0, 1] as const) {
       const button = el('button', 'tb-btn-outline', `${t('Level', 'Nível')} ${level}`);
       button.type = 'button';
-      button.addEventListener('click', () => select(louvreRoute.findIndex(step => step.floor === level)));
+      button.addEventListener('click', () => select(selected, level));
       floorButtons.set(level, button);
       toolbar.append(button);
     }
     for (const [glyph, label, action] of [
-      ['add', t('Zoom in', 'Aproximar'), () => map.zoomIn()],
-      ['remove', t('Zoom out', 'Afastar'), () => map.zoomOut()],
+      ['add', t('Zoom in', 'Aproximar'), () => map.zoomIn(0.5, { animate: false })],
+      ['remove', t('Zoom out', 'Afastar'), () => map.zoomOut(0.5, { animate: false })],
       ['fit_screen', t('Show whole floor', 'Mostrar andar inteiro'), fit],
     ] as const) {
       const button = iconButton({ icon: glyph, label, size: 'sm' });
@@ -162,7 +214,7 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
     select(0);
     const resize = new ResizeObserver(() => { map.invalidateSize(); });
     resize.observe(mapNode);
-    dialog.addEventListener('close', () => { resize.disconnect(); map.remove(); trigger.focus(); });
+    dialog.addEventListener('close', () => { resize.disconnect(); detachGestures(); map.remove(); trigger.focus(); });
   });
   return trigger;
 }

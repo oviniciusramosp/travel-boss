@@ -23,3 +23,5 @@
 .tb-indoor__external { margin-top: var(--spacing-16); font-size: var(--text-body); }
 .tb-indoor__external summary { cursor: pointer; margin-bottom: var(--spacing-12); }
 .tb-indoor__external textarea { width: 100%; min-height: var(--indoor-map-height); font: inherit; }
+
+.tb-indoor__toolbar [hidden] { display: none; }

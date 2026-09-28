@@ -3,9 +3,32 @@ import lower from '../../public/maps/louvre/niveau-1.svg?raw';
 import ground from '../../public/maps/louvre/niveau0.svg?raw';
 import upper from '../../public/maps/louvre/niveau1.svg?raw';
 const plans: Record<number, string> = { [-1]: lower, 0: ground, 1: upper };
+import { louvrePaths } from './travel-indoor-paths';
 import { louvreRoute } from './travel-indoor';
 
 describe('Louvre visit plan', () => {
+  it('connects every visit step and keeps floor changes separate', () => {
+    expect(louvrePaths).toHaveLength(louvreRoute.length);
+    louvrePaths.forEach((parts, index) => {
+      const arrival = parts.at(-1)!;
+      expect(arrival.floor).toBe(louvreRoute[index].floor);
+      expect(arrival.points.at(-1)).toEqual(louvreRoute[index].point);
+      if (index > 0) {
+        expect(parts[0].floor).toBe(louvreRoute[index - 1].floor);
+        expect(parts[0].points[0]).toEqual(louvreRoute[index - 1].point);
+      }
+      parts.forEach((part, i) => {
+        expect(part.points.length).toBeGreaterThan(1);
+        if (i) expect(Math.abs(part.floor - parts[i - 1].floor)).toBe(1);
+        for (const [x, y] of part.points) {
+          expect(x).toBeGreaterThanOrEqual(0);
+          expect(x).toBeLessThan(949.2);
+          expect(y).toBeGreaterThanOrEqual(0);
+          expect(y).toBeLessThan(477.6);
+        }
+      });
+    });
+  });
   it('fits the 13:30–17:00 visit including reception and departure', () => {
     expect(louvreRoute.reduce((total, step) => total + step.minutes, 0)).toBeLessThanOrEqual(210);
     expect(louvreRoute.at(0)?.floor).toBe(-2);
