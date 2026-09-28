@@ -585,15 +585,24 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-canals': {
     ticket: free,
-    durationMin: 55,
-    durationMax: 75,
-    duration: L('About 1 hour, including breakfast', 'Cerca de 1h, incluindo o café da manhã'),
+    durationMin: 15,
+    durationMax: 20,
     bestTime: L('Late afternoon into golden hour', 'Fim da tarde / golden hour'),
     bestDay: L('Weekday afternoon or Sunday stroll', 'Tarde de semana ou domingo devagar'),
     crowdProfile: 'local',
     tips: L(
-      'Follow Quai de Valmy south from Rue Eugène-Varlin, with breakfast at Du Pain et des Idées, then continue to République.',
-      'Siga o Quai de Valmy para o sul desde a Rue Eugène-Varlin, com café na Du Pain et des Idées, e termine na République.',
+      'Follow Quai de Valmy south from Rue Eugène-Varlin to the Récollets locks.',
+      'Siga o Quai de Valmy para o sul desde a Rue Eugène-Varlin até as eclusas dos Récollets.',
+    ),
+  },
+  'par-canals-republique': {
+    ticket: free,
+    durationMin: 10,
+    durationMax: 15,
+    crowdProfile: 'local',
+    tips: L(
+      'Continue south beside the open canal, then leave the waterfront for Place de la République.',
+      'Continue para o sul junto ao canal a céu aberto e depois saia da margem para chegar à Place de la République.',
     ),
   },
   'par-bike': {
@@ -1873,7 +1882,10 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-du-pain-idees': cafeVisit(5, 8, {
     bestDay: L('Mon–Fri ~7:00–19:30; closed weekends', 'Seg–sex ~7h–19h30; fecha sábado e domingo'),
-    tips: L('Escargot pastry ~€5–6.', 'Escargot ~€5–6.'),
+    tips: L(
+      'Pistachio-and-chocolate escargot (~€5–6): a sweet spiral-shaped laminated pastry, not cooked snails.',
+      'Escargot de pistache e chocolate (~€5–6): pão doce folhado em espiral, não o prato de caracóis.',
+    ),
   }),
   'par-merveilleux-fred': cafeVisit(4, 6, {
     bestDay: L('Daily 7:30–20:00', 'Todo dia 7h30–20h'),

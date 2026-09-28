@@ -165,9 +165,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 - 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy, sem atravessar a ponte
-- 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, terminando na Place de la République
-- 09:05 **Du Pain et des Idées** — **Café da manhã**: escargot de pistache e chocolate (~€5–6); sair às 09:30. Abre de segunda a sexta
-- 09:40 **Place de la République** — Fim da caminhada pelos canais
+- 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
+- 09:05 [Du Pain et des Idées](place:par-du-pain-idees) — **Café da manhã**: escargot de pistache e chocolate (~€5–6), um pão doce folhado em espiral, não o prato de caracóis. Sair às 09:30; abre de segunda a sexta
+- 09:35 [Canal Saint-Martin — até République](place:par-canals-republique) — Retomar a caminhada para o sul pelo Quai de Valmy
+- 09:45 **Place de la République** — Fim da caminhada pelos canais
 - 09:55 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615
 - 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
 - 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda

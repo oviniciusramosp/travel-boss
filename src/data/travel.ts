@@ -3184,8 +3184,8 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'parks',
         description: {
-          en: 'Walk south along Canal Saint-Martin from Quai de Valmy at Rue Eugène-Varlin to Place de la République, with breakfast at Du Pain et des Idées along the way.',
-          'pt-BR': 'Caminhada para o sul pelo Canal Saint-Martin, do Quai de Valmy na Rue Eugène-Varlin até a Place de la République, com café na Du Pain et des Idées no caminho.',
+          en: 'Walk south along Canal Saint-Martin, from Quai de Valmy at Rue Eugène-Varlin past Jardin Villemin to the Récollets locks.',
+          'pt-BR': 'Caminhada para o sul pelo Canal Saint-Martin, do Quai de Valmy na Rue Eugène-Varlin, passando pelo Jardin Villemin, até as eclusas dos Récollets.',
         },
         googleRating: 4.4,
         // West bank at Rue Eugène-Varlin; OSM foot routing checked 2026-09-27.
@@ -3193,14 +3193,15 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.365344,
         area: {
           kind: 'polyline',
-          // Canal highlight; sub-points below define the pedestrian route.
+          // OSM pedestrian geometry via OSRM; checked 2026-09-27.
           path: [
-            [48.877483, 2.365585],
-            [48.874893, 2.363353],
-            [48.873902, 2.363316],
-            [48.873018, 2.363995],
-            [48.868956, 2.367169],
-            [48.86754, 2.36396],
+            [48.877602, 2.365344], [48.877517, 2.365344],
+            [48.876426, 2.364372], [48.876477, 2.364429],
+            [48.876454, 2.364493], [48.874948, 2.363195],
+            [48.874388, 2.362997], [48.873983, 2.363087],
+            [48.873952, 2.363209], [48.8739, 2.363079],
+            [48.873796, 2.363117], [48.872924, 2.363827],
+            [48.873029, 2.363978],
           ],
         },
         subPoints: [
@@ -3216,11 +3217,38 @@ export const localTravelCities: TravelCity[] = [
             name: { en: 'Quai de Valmy — Récollets locks', 'pt-BR': 'Quai de Valmy — eclusas dos Récollets' },
             lat: 48.873029, lng: 2.363978,
           },
-          {
-            name: { en: 'Du Pain et des Idées', 'pt-BR': 'Du Pain et des Idées' },
-            lat: 48.871197, lng: 2.362886,
-            placeId: 'par-du-pain-idees',
-          },
+        ],
+        address: 'Quai de Valmy / Rue Eugène-Varlin → Écluses des Récollets, Paris',
+        mapsQuery: 'Quai de Valmy Rue Eugène Varlin Paris',
+      },
+      {
+        id: 'par-canals-republique',
+        name: { en: 'Canal Saint-Martin — to République', 'pt-BR': 'Canal Saint-Martin — até République' },
+        category: 'parks',
+        description: {
+          en: 'Southern stretch of Canal Saint-Martin: follow Quai de Valmy to the end of the open canal, then walk to Place de la République.',
+          'pt-BR': 'Trecho sul do Canal Saint-Martin: seguir o Quai de Valmy até o fim do canal a céu aberto e continuar até a Place de la République.',
+        },
+        lat: 48.871155,
+        lng: 2.365665,
+        area: {
+          kind: 'polyline',
+          // OSM pedestrian geometry via OSRM; checked 2026-09-27.
+          path: [
+            [48.871155, 2.365665], [48.870998, 2.365786],
+            [48.870996, 2.365826], [48.870917, 2.365906],
+            [48.869979, 2.366612], [48.869876, 2.366729],
+            [48.868999, 2.367411], [48.868881, 2.367404],
+            [48.868816, 2.367308], [48.8688, 2.367159],
+            [48.868829, 2.367078], [48.868805, 2.367108],
+            [48.868803, 2.367271], [48.868785, 2.367073],
+            [48.868716, 2.366926], [48.868647, 2.366974],
+            [48.868177, 2.365482], [48.867799, 2.364466],
+            [48.867745, 2.364358], [48.867508, 2.364237],
+            [48.867453, 2.364154], [48.867557, 2.363983],
+          ],
+        },
+        subPoints: [
           {
             name: { en: 'Back to Quai de Valmy', 'pt-BR': 'Retorno ao Quai de Valmy' },
             lat: 48.871155, lng: 2.365665,
@@ -3234,8 +3262,8 @@ export const localTravelCities: TravelCity[] = [
             lat: 48.867557, lng: 2.363983,
           },
         ],
-        address: 'Quai de Valmy / Rue Eugène-Varlin → Place de la République, Paris',
-        mapsQuery: 'Quai de Valmy Rue Eugène Varlin Paris',
+        address: 'Quai de Valmy → Place de la République, Paris',
+        mapsQuery: 'Quai de Valmy Rue Dieu Paris',
       },
       {
         id: 'par-paname-brewing',
@@ -4227,8 +4255,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'cafes',
         subcategories: ['bakery'],
         description: {
-          en: 'Famous bakery by Canal Saint-Martin — escargot pastries and pain des amis.',
-          'pt-BR': 'Padaria famosa perto do Canal Saint-Martin — escargots folhados e pain des amis.',
+          en: 'Bakery by Canal Saint-Martin, known for its pistachio-and-chocolate escargot: a sweet spiral-shaped laminated pastry, not the savoury snail dish. Also known for pain des amis.',
+          'pt-BR': 'Padaria perto do Canal Saint-Martin, famosa pelo escargot de pistache e chocolate: um pão doce de massa folhada enrolado em espiral, não o prato salgado de caracóis. Também conhecida pelo pain des amis.',
         },
         lat: 48.871197,
         lng: 2.362886,

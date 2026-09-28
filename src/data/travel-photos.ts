@@ -510,6 +510,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Superbass · CC BY-SA 4.0 · Wikimedia Commons',
     ),
   ],
+  'par-canals-republique': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Canal_Saint-Martin_Passerelle_de_la_Grange-aux-Belles_001.JPG/1280px-Canal_Saint-Martin_Passerelle_de_la_Grange-aux-Belles_001.JPG',
+      'Grange-aux-Belles footbridge, Canal Saint-Martin',
+      'Passarela da Grange-aux-Belles, Canal Saint-Martin',
+      'Moonik · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
   'par-champ-mars': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Champ_de_Mars_from_the_Eiffel_Tower_-_July_2006_edit.jpg/1280px-Champ_de_Mars_from_the_Eiffel_Tower_-_July_2006_edit.jpg',
