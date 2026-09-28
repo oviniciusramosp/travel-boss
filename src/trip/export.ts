@@ -1,6 +1,6 @@
 import { inline, inlineWithLinks } from './inline';
 import type { Trip, TripDay, TripStop } from './parse';
-import { isTentative } from './status';
+import { closedPeriods, isDayClosed, PERIOD_NAMES } from './status';
 
 /** A break goes back as a Markdown hard break, the next line indented by `indent`. */
 function hardBreaks(text: string, indent: string): string {
@@ -31,7 +31,8 @@ function pushStop(
 
 function pushDay(lines: string[], day: TripDay, resolvePlace: (placeId: string) => string | null) {
   lines.push(`### ${day.title}`, '');
-  if (day.status && !day.stops.some(isTentative)) lines.push('Dia fechado', '');
+  if (closedPeriods(day).length) lines.push(`  - períodos fechados: ${closedPeriods(day).map((period) => PERIOD_NAMES[period]).join(', ')}`, '');
+  if (isDayClosed(day)) lines.push('Dia fechado', '');
   for (const stop of day.stops) pushStop(lines, stop, resolvePlace);
   if (day.stops.length) lines.push('');
   for (const note of day.notes) lines.push(hardBreaks(note.text, ''), '');

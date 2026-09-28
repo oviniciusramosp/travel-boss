@@ -1,3 +1,4 @@
+import type { Period } from './day-plan';
 import { getTravelCity, travelCities } from '../catalog';
 
 export type TripLegMode = 'walk' | 'transit' | 'taxi' | 'flight';
@@ -46,6 +47,7 @@ export type TripLine = { text: string; line: number };
 export type TripDay = {
   line?: number;
   status?: 'fechado';
+  closedPeriods?: Period[];
   title: string;
   stops: TripStop[];
   notes: TripLine[];
@@ -372,6 +374,12 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       continue;
     }
 
+    const periods = /^[ \t]+- períodos fechados:[ \t]*(.*)$/.exec(line);
+    if (periods && day && !day.stops.length) {
+      const names: Record<string, Period> = { manhã: 'morning', tarde: 'afternoon', noite: 'evening' };
+      day.closedPeriods = periods[1]!.split(',').flatMap((name) => names[name.trim()] ? [names[name.trim()]!] : []);
+      continue;
+    }
     const status = /^[ \t]+- status: (fechado|a confirmar|confirmado)\s*$/.exec(line);
     if (status && day) {
       const stop = day.stops.at(-1);

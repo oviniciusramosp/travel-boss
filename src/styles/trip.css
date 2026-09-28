@@ -436,7 +436,7 @@
   pointer-events: none;
 }
 
-.tb-review-status:disabled {
+.tb-review-status:disabled:not([data-day-action]) {
   display: none;
 }
 
@@ -464,8 +464,8 @@
   }
 }
 
-.tb-date__head:is(:hover, :focus-within) .tb-review-status:not(:disabled),
-.tb-date__title .tb-review-status[aria-pressed='true'],
+.tb-period__head:is(:hover, :focus-within) .tb-review-status,
+.tb-period__head .tb-review-status[aria-pressed='true'],
 .tb-row:hover .tb-review-status,
 .tb-review-place:focus-visible {
   opacity: 1;
@@ -473,7 +473,7 @@
 }
 
 @media (hover: none) {
-  .tb-review-status:not(:disabled) {
+  .tb-review-status {
     opacity: 1;
     pointer-events: auto;
   }

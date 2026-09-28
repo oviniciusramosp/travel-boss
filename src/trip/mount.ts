@@ -19,7 +19,7 @@ import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
 import { tripChecklist, tripTabs } from './checklist';
 import { changedStopKeys } from './diff';
-import { isTentative, statusPatch } from './status';
+import { closedPeriods, isDayClosed, isTentative, periodStatusPatch, statusPatch } from './status';
 import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
@@ -1393,19 +1393,23 @@ export function mountTrip(
     const rawLines = lastRaw.split(/\r?\n/);
     const lineAt = (line: number): SeenLine => ({ line, lines: noteBlock(rawLines, line) });
     const statusSync: (() => void)[] = [];
-    const statusButton = (line: number, kind: 'fechado' | 'a confirmar', active: boolean, changed: (on: boolean) => void) => {
+    const statusBlocks = new Map<number, string[]>();
+    const statusButton = (line: number, kind: Period | 'a confirmar', active: boolean, changed: (on: boolean) => void, endLine = line, headingCount = 1) => {
       const button = iconButton({ icon: 'help', label: '', size: 'sm' });
       button.classList.add('tb-review-status');
       if (kind === 'a confirmar') button.classList.add('tb-review-place');
-      let block = statusPatch(lastRaw, line, kind, active).before;
+      if (!statusBlocks.has(line)) {
+        const end = endLine - 1 + statusPatch(lastRaw, endLine, kind, active).before.length;
+        statusBlocks.set(line, rawLines.slice(line - 1, end));
+      }
       let busy = false;
       const sync = () => {
-        const label = kind === 'fechado'
-          ? pickLocale(locale, { en: active ? 'Day finalized · Reopen day' : 'Finalize day', 'pt-BR': active ? 'Dia fechado · Reabrir dia' : 'Fechar dia' })
+        const label = kind !== 'a confirmar'
+          ? pickLocale(locale, { en: `${periodLabel(kind as Period, locale)} · ${active ? 'Reopen period' : 'Finalize period'}`, 'pt-BR': `${periodLabel(kind as Period, locale)} · ${active ? 'Reabrir período' : 'Fechar período'}` })
           : pickLocale(locale, { en: active ? 'Tentative place · Confirm place' : 'Confirmed place · Mark as tentative', 'pt-BR': active ? 'Em dúvida · Confirmar lugar' : 'Com certeza · Marcar dúvida' });
         button.setAttribute('aria-label', label);
         button.dataset.tip = label;
-        button.replaceChildren(icon(kind === 'fechado' ? (active ? 'check' : 'check_circle') : 'help', { size: 16, fill: kind === 'a confirmar' && active }));
+        button.replaceChildren(icon(kind !== 'a confirmar' ? (active ? 'check' : 'check_circle') : 'help', { size: 16, fill: kind === 'a confirmar' && active }));
         if (kind === 'a confirmar' && active) {
           const confirm = icon('check', { size: 16 });
           confirm.classList.add('tb-review-confirm');
@@ -1423,10 +1427,11 @@ export function mountTrip(
         busy = true;
         onEditing(true);
         button.setAttribute('aria-busy', 'true');
-        const patch = statusPatch(block.join('\n'), 1, kind, !active);
+        const source = statusBlocks.get(line)!.join('\n');
+        const patch = kind === 'a confirmar' ? statusPatch(source, 1, kind, !active) : periodStatusPatch(source, kind, !active, headingCount);
         const result = await sendPatch(id, { ...patch, line });
         if (typeof result === 'number') {
-          block = patch.after!;
+          statusBlocks.set(line, patch.after!);
           active = !active;
           changed(active);
           sync();
@@ -1644,25 +1649,14 @@ export function mountTrip(
         );
       });
       const actions = el('span', 'tb-date__actions');
-      for (const { day, city } of daysHere) {
-        if (!day.line) continue;
-        const review = statusButton(day.line, 'fechado', Boolean(day.status), (on) => { day.status = on ? 'fechado' : undefined; });
-        review.dataset.dayAction = 'review';
-        const syncReview = () => {
-          const pending = day.stops.some(isTentative);
-          review.disabled = pending;
-          const closed = Boolean(day.status) && !pending;
-          let label = pickLocale(locale, { en: pending ? 'Pending places' : closed ? 'Day finalized · Reopen day' : 'Finalize day', 'pt-BR': pending ? 'Pontos a confirmar' : closed ? 'Dia fechado · Reabrir dia' : 'Fechar dia' });
-          if (daysHere.length > 1) label += ` · ${cityDisplayName(city, locale)}`;
-          review.setAttribute('aria-label', label);
-          review.dataset.tip = label;
-          review.setAttribute('aria-pressed', String(closed));
-          review.replaceChildren(icon(closed ? 'check' : 'check_circle', { size: 16 }));
-        };
-        statusSync.push(syncReview);
-        syncReview();
-        heading.querySelector('.tb-date__title')?.append(review);
-      }
+      const review = el('span', 'tb-day-closed');
+      review.append(icon('check', { size: 16 }));
+      review.setAttribute('aria-label', pickLocale(locale, { en: 'Day finalized', 'pt-BR': 'Dia fechado' }));
+      review.dataset.tip = review.getAttribute('aria-label')!;
+      const syncReview = () => { review.hidden = !daysHere.every(({ day }) => isDayClosed(day)); };
+      statusSync.push(syncReview);
+      syncReview();
+      heading.querySelector('.tb-date__title')?.append(review);
       actions.append(copyDay, routeToggle);
       const chevron = icon('expand_more', { size: 18 });
       chevron.classList.add('tb-date__chevron');
@@ -1710,14 +1704,39 @@ export function mountTrip(
       // One list per period. A row's list is lists[rowIndex].
       const lists: HTMLOListElement[] = [];
       const timeline = el('div', 'tb-periods');
-      for (const part of periodSections(periods)) {
+      const sections = periodSections(periods);
+      for (const period of ['morning', 'afternoon', 'evening'] as const) {
+        if (sections.some((part) => part.period === period)) continue;
+        const next = sections.findIndex((part) => part.period && ['morning', 'afternoon', 'evening'].indexOf(part.period) > ['morning', 'afternoon', 'evening'].indexOf(period));
+        sections.splice(next < 0 ? sections.length : next, 0, { period, rows: [] });
+      }
+      for (const part of sections) {
         const list = el('ol', 'tb-list tb-timeline');
         for (const index of part.rows) lists[index] = list;
-        timeline.append(
-          part.period
-            ? periodBlock(date, part.period, part.rows.map((index) => rows[index]!), list, past, locale)
-            : list,
-        );
+        const block = part.period
+          ? periodBlock(date, part.period, part.rows.map((index) => rows[index]!), list, past, locale)
+          : list;
+        const reviewDays = daysHere.map(({ day }) => day).filter((day) => day.line).sort((a, b) => a.line! - b.line!);
+        if (part.period && reviewDays.length) {
+          const period = part.period;
+          const review = statusButton(reviewDays[0]!.line!, period, reviewDays.every((day) => closedPeriods(day).includes(period)), (on) => {
+            for (const day of reviewDays) day.closedPeriods = on ? [...new Set([...closedPeriods(day), period])] : closedPeriods(day).filter((saved) => saved !== period);
+          }, reviewDays.at(-1)!.line!, reviewDays.length);
+          review.dataset.dayAction = `review-${period}`;
+          const syncPeriod = () => {
+            review.disabled = rows.some((row, index) => periods[index] === period && isTentative(row.dated.day.stops[row.stopIndex]!));
+            const closed = !review.disabled && reviewDays.every((day) => closedPeriods(day).includes(period));
+            review.setAttribute('aria-pressed', String(closed));
+            review.replaceChildren(icon(closed ? 'check' : 'check_circle', { size: 16 }));
+            review.dataset.tip = review.disabled
+              ? pickLocale(locale, { en: 'Confirm this period’s places first', 'pt-BR': 'Confirme os lugares deste período primeiro' })
+              : review.getAttribute('aria-label')!;
+          };
+          statusSync.push(syncPeriod);
+          syncPeriod();
+          block.querySelector('.tb-period__label')?.after(review);
+        }
+        timeline.append(block);
       }
       body.append(timeline);
       let previousEnd: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;

@@ -67,7 +67,7 @@ Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--
 
 ## Como um LLM edita um roteiro
 
-Estado de revisão: `  - status: fechado` logo sob o H3 registra um dia aprovado pelo usuário; preserve esse plano salvo pedido dele. `  - status: a confirmar` sob uma parada ou nota de sub-ponto indica dúvida explícita. Nunca feche um dia nem retire uma dúvida por conta própria. São metadados, não anotações; não alteram horários, orçamento ou rota.
+Estado de revisão: `  - períodos fechados: manhã, tarde, noite` logo sob o H3 registra os períodos aprovados pelo usuário. O dia fecha automaticamente com os três períodos fechados e sem lugares em dúvida. Preserve as aprovações salvo pedido dele; o legado `  - status: fechado` equivale aos três períodos. `  - status: a confirmar` sob uma parada ou nota de sub-ponto indica dúvida explícita. Nunca feche um dia nem retire uma dúvida por conta própria. São metadados, não anotações; não alteram horários, orçamento ou rota.
 
 Todo lugar principal sem status começa em dúvida. Certeza exige `  - status: confirmado`, só a pedido do usuário. Notas e sub-pontos não participam da revisão. Acrescentar um lugar sem confirmação torna um dia fechado pendente; não herde a confirmação do dia para lugares novos.
 
