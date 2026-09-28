@@ -5151,10 +5151,10 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Boulangerie du Sentier', 'pt-BR': 'Boulangerie du Sentier' },
         aiSuggested: true,
         category: 'cafes',
-        subcategories: ['bakery'],
+        subcategories: ['bakery', 'croissant', 'award-2026'],
         description: {
-          en: 'Franco-Jewish bakery in the Sentier whose butter croissant won the 2026 Greater Paris contest; also known for challah, pita and babka, and closed on Saturdays.',
-          'pt-BR': 'Padaria franco-judaica no Sentier cujo croissant de manteiga venceu o concurso do Grand Paris de 2026; também conhecida pela chalá, pelo pita e pela babka, e fechada aos sábados.',
+          en: 'Winner of the 2026 best butter croissant in Greater Paris contest. Franco-Jewish bakery in the Sentier, also known for challah, pita and babka, and closed on Saturdays.',
+          'pt-BR': 'Eleito o melhor croissant de manteiga do Grand Paris em 2026. Padaria franco-judaica no Sentier, também conhecida pela chalá, pelo pita e pela babka, e fechada aos sábados.',
         },
         lat: 48.867899,
         lng: 2.349031,
@@ -5166,7 +5166,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-sweet-lab',
         name: { en: 'Sweet Lab', 'pt-BR': 'Sweet Lab' },
         category: 'cafes',
-        subcategories: ['bakery', 'pastry'],
+        subcategories: ['bakery', 'pastry', 'flan', 'award-2026'],
         aiSuggested: true,
         aiReason: {
           en: 'Found while researching the 2026 best-flan winner requested by the user.',
@@ -5187,7 +5187,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-a-deux-mains',
         name: { en: 'À Deux Mains', 'pt-BR': 'À Deux Mains' },
         category: 'cafes',
-        subcategories: ['bakery', 'pastry'],
+        subcategories: ['bakery', 'pastry', 'flan', 'award-2025'],
         aiSuggested: true,
         aiReason: {
           en: 'Found while researching the 2025 best-flan winner requested by the user.',
@@ -5208,7 +5208,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-la-pompadour',
         name: { en: 'La Pompadour', 'pt-BR': 'La Pompadour' },
         category: 'cafes',
-        subcategories: ['bakery', 'pastry'],
+        subcategories: ['bakery', 'pastry', 'flan', 'award-2024'],
         aiSuggested: true,
         aiReason: {
           en: 'Found while researching the 2024 best-flan winner requested by the user.',
@@ -5229,7 +5229,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-des-racines-et-du-pain',
         name: { en: 'Des Racines et du Pain', 'pt-BR': 'Des Racines et du Pain' },
         category: 'cafes',
-        subcategories: ['bakery'],
+        subcategories: ['bakery', 'croissant', 'award-2025'],
         description: {
           en: 'Best butter croissant in Greater Paris in 2025, awarded to Basile Fourmont. The winning bakery is in Clamart, outside Paris proper.',
           'pt-BR': 'Eleito o melhor croissant de manteiga do Grand Paris em 2025, com Basile Fourmont. A padaria premiada fica em Clamart, fora de Paris.',
@@ -5245,7 +5245,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-maison-doucet',
         name: { en: 'Maison Doucet', 'pt-BR': 'Maison Doucet' },
         category: 'cafes',
-        subcategories: ['bakery'],
+        subcategories: ['bakery', 'croissant', 'award-2024'],
         description: {
           en: 'Best butter croissant in Greater Paris in 2024, awarded to Georges Doucet. Winning bakery on rue du Faubourg Saint-Antoine, in the 12th arrondissement.',
           'pt-BR': 'Eleito o melhor croissant de manteiga do Grand Paris em 2024, com Georges Doucet. Unidade premiada na rue du Faubourg Saint-Antoine, no 12º arrondissement.',
@@ -5261,7 +5261,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-chez-meunier-crimee',
         name: { en: 'Chez Meunier (Crimée)', 'pt-BR': 'Chez Meunier (Crimée)' },
         category: 'cafes',
-        subcategories: ['bakery'],
+        subcategories: ['bakery', 'croissant', 'award-2023'],
         description: {
           en: 'Best butter croissant in Greater Paris in 2023, awarded to Éric Teboul. Winning branch at 185 rue de Crimée, in the 19th arrondissement.',
           'pt-BR': 'Eleito o melhor croissant de manteiga do Grand Paris em 2023, com Éric Teboul. Unidade premiada no 185 rue de Crimée, no 19º arrondissement.',
@@ -5277,7 +5277,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-maison-carton',
         name: { en: 'Maison Carton (Carton Paris)', 'pt-BR': 'Maison Carton (Carton Paris)' },
         category: 'cafes',
-        subcategories: ['bakery'],
+        subcategories: ['bakery', 'croissant', 'award-2022'],
         description: {
           en: 'Best butter croissant in Greater Paris in 2022, awarded to Jean-Michel Carton. Winning bakery on boulevard de Denain, beside Gare du Nord.',
           'pt-BR': 'Eleito o melhor croissant de manteiga do Grand Paris em 2022, com Jean-Michel Carton. Unidade premiada no boulevard de Denain, junto à Gare du Nord.',
@@ -5293,7 +5293,7 @@ export const localTravelCities: TravelCity[] = [
         id: 'par-patisserie-colbert',
         name: { en: 'Pâtisserie Colbert', 'pt-BR': 'Pâtisserie Colbert' },
         category: 'cafes',
-        subcategories: ['bakery', 'pastry'],
+        subcategories: ['bakery', 'pastry', 'croissant', 'award-2021'],
         description: {
           en: 'Best butter croissant in Greater Paris in 2021, awarded to Frédéric Comyn. The winning bakery is in Sceaux, outside Paris proper.',
           'pt-BR': 'Eleito o melhor croissant de manteiga do Grand Paris em 2021, com Frédéric Comyn. A padaria premiada fica em Sceaux, fora de Paris.',

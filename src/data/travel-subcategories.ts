@@ -23,6 +23,14 @@ export type PlaceSubcategory =
   | 'pastry'
   | 'ice-cream'
   | 'coffee-shop'
+  | 'croissant'
+  | 'flan'
+  | 'award-2026'
+  | 'award-2025'
+  | 'award-2024'
+  | 'award-2023'
+  | 'award-2022'
+  | 'award-2021'
   // Parks & walks
   | 'park'
   | 'garden'
@@ -110,6 +118,38 @@ export const placeSubcategoryMeta: Record<
   },
   bakery: {
     label: { en: 'Bakery', 'pt-BR': 'Padaria' },
+    parents: ['cafes'],
+  },
+  'croissant': {
+    label: { en: 'Croissant', 'pt-BR': 'Croissant' },
+    parents: ['cafes'],
+  },
+  'flan': {
+    label: { en: 'Flan', 'pt-BR': 'Flan' },
+    parents: ['cafes'],
+  },
+  'award-2026': {
+    label: { en: 'Award-winning 2026', 'pt-BR': 'Premiado 2026' },
+    parents: ['cafes'],
+  },
+  'award-2025': {
+    label: { en: 'Award-winning 2025', 'pt-BR': 'Premiado 2025' },
+    parents: ['cafes'],
+  },
+  'award-2024': {
+    label: { en: 'Award-winning 2024', 'pt-BR': 'Premiado 2024' },
+    parents: ['cafes'],
+  },
+  'award-2023': {
+    label: { en: 'Award-winning 2023', 'pt-BR': 'Premiado 2023' },
+    parents: ['cafes'],
+  },
+  'award-2022': {
+    label: { en: 'Award-winning 2022', 'pt-BR': 'Premiado 2022' },
+    parents: ['cafes'],
+  },
+  'award-2021': {
+    label: { en: 'Award-winning 2021', 'pt-BR': 'Premiado 2021' },
     parents: ['cafes'],
   },
   pastry: {
@@ -247,6 +287,14 @@ export const placeSubcategoryOrder: PlaceSubcategory[] = [
   'pastry',
   'ice-cream',
   'coffee-shop',
+  'croissant',
+  'flan',
+  'award-2026',
+  'award-2025',
+  'award-2024',
+  'award-2023',
+  'award-2022',
+  'award-2021',
   'park',
   'garden',
   'neighborhood',
