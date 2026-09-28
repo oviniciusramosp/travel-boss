@@ -1,8 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { editChecklist, type ChecklistItem } from './checklist-state';
+import { compareTaskSchedule, editChecklist, type ChecklistItem } from './checklist-state';
 
 const item: ChecklistItem = { id: 'one', group: 'tasks', text: 'Passaporte', done: false };
 describe('checklist edits', () => {
+  it('orders dates and times chronologically, keeping undated tasks last and ties stable', () => {
+    const entries = [
+      { id: 'undated' }, { id: 'later', date: '2026-10-03' },
+      { id: 'afternoon', date: '2026-10-02', time: '15:00' },
+      { id: 'morning', date: '2026-10-02', time: '09:00' },
+      { id: 'all-day', date: '2026-10-02' }, { id: 'same-day', date: '2026-10-02' },
+      { id: 'time-only', time: '08:00' }, { id: 'past', date: '2026-09-01' },
+    ];
+    expect(entries.sort(compareTaskSchedule).map(({ id }) => id)).toEqual([
+      'past', 'all-day', 'same-day', 'morning', 'afternoon', 'later', 'undated', 'time-only',
+    ]);
+  });
   it('supports independent optional date and time, including clearing them', () => {
     for (const schedule of [{ date: '2026-10-02' }, { time: '09:30' }, { date: '2028-02-29', time: '23:59' }]) {
       const after = { ...item, ...schedule };

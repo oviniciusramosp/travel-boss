@@ -1,6 +1,11 @@
 export type ChecklistItem = { id: string; group: 'tasks' | 'packing'; text: string; done: boolean; date?: string; time?: string };
 export type ChecklistEdit = { before: ChecklistItem | null; after: ChecklistItem | null };
 
+/** Chronological dates, all-day tasks first on each date, undated tasks last. */
+export function compareTaskSchedule(a: Pick<ChecklistItem, 'date' | 'time'>, b: Pick<ChecklistItem, 'date' | 'time'>): number {
+  return (a.date ?? '\uffff').localeCompare(b.date ?? '\uffff') || (a.time ?? '').localeCompare(b.time ?? '');
+}
+
 function validDate(value: unknown): boolean {
   if (typeof value !== 'string' || !/^(?!0000)\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const date = new Date(`${value}T00:00:00Z`);

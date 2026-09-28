@@ -2,7 +2,7 @@ import { pickLocale, type Locale } from '../catalog';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { row } from '../ui/row';
-import type { ChecklistEdit, ChecklistItem } from './checklist-state';
+import { compareTaskSchedule, type ChecklistEdit, type ChecklistItem } from './checklist-state';
 
 export function tripChecklist(id: string, locale: Locale, onEditing: (open: boolean) => void) {
   const t = (en: string, pt: string) => pickLocale(locale, { en, 'pt-BR': pt });
@@ -14,12 +14,29 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
   panel.append(status, retry);
   const url = `/api/checklists/${encodeURIComponent(id)}`;
   const forms: HTMLFieldSetElement[] = [];
+  const rowItems = new WeakMap<HTMLElement, ChecklistItem>();
   const groups = new Map<string, { list: HTMLUListElement; count: HTMLElement; empty: HTMLElement; input: HTMLInputElement }>();
   function scheduleFields(form: HTMLFormElement, group: ChecklistItem['group'], item?: ChecklistItem) {
     const date = el('input', 'tb-checklist-input');
     const time = el('input', 'tb-checklist-input');
+    const fields = el('div', 'tb-checklist-schedule');
+    const toggle = iconButton({ icon: 'schedule', label: t('Date and time', 'Dia e horário'), size: 'sm' });
+    const setExpanded = (expanded: boolean) => {
+      fields.hidden = !expanded;
+      toggle.setAttribute('aria-expanded', String(expanded));
+    };
     if (group === 'tasks') {
-      const fields = el('div', 'tb-checklist-schedule');
+      const text = form.querySelector<HTMLInputElement>('.tb-checklist-input')!;
+      const wrapper = el('div', 'tb-checklist-entry');
+      text.replaceWith(wrapper);
+      wrapper.append(text, toggle);
+      fields.id = `checklist-schedule-${crypto.randomUUID()}`;
+      toggle.setAttribute('aria-controls', fields.id);
+      setExpanded(Boolean(item?.date || item?.time));
+      toggle.onclick = () => {
+        setExpanded(fields.hidden);
+        if (!fields.hidden) date.focus();
+      };
       for (const [input, type, label] of [
         [date, 'date', t('Date (optional)', 'Dia (opcional)')],
         [time, 'time', t('Time (optional)', 'Horário (opcional)')],
@@ -33,7 +50,7 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
       }
       form.append(fields);
     }
-    return { values: () => ({ date: date.value || undefined, time: time.value || undefined }), clear: () => { date.value = ''; time.value = ''; } };
+    return { values: () => ({ date: date.value || undefined, time: time.value || undefined }), clear: () => { date.value = ''; time.value = ''; setExpanded(false); } };
   }
   async function save(edit: ChecklistEdit, done: () => void) {
     const focus = document.activeElement as HTMLElement | null;
@@ -81,6 +98,17 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
         sub.textContent = schedule;
       } else sub?.remove();
       line.classList.toggle('is-done', item.done);
+      rowItems.set(line, item);
+      if (item.group === 'tasks') {
+        const focus = document.activeElement as HTMLElement | null;
+        const restoreFocus = focus && group.list.contains(focus);
+        const ordered = [...group.list.children] as HTMLElement[];
+        ordered.sort((a, b) => compareTaskSchedule(rowItems.get(a)!, rowItems.get(b)!));
+        ordered.forEach((entry, index) => {
+          if (group.list.children[index] !== entry) group.list.insertBefore(entry, group.list.children[index] ?? null);
+        });
+        if (restoreFocus && document.activeElement !== focus) focus.focus();
+      }
       count(item.group);
     }
     function edit() {
