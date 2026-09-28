@@ -25,7 +25,7 @@ import type { ItineraryDay, ItineraryStop, Locale, PlaceCategory, TravelCity, Tr
 import { AMENITY_EVENT, AMENITY_ICON, amenityName, amenityOn, setAmenity, type AmenityKind } from '../map/amenity-state';
 import type { MapHandle, MapPin } from '../map/types';
 import { aiBadge, aiSuggestionTip } from '../ui/ai-badge';
-import { segmented } from '../ui/controls';
+import { iconButton, segmented } from '../ui/controls';
 import { mapsIconLink } from '../ui/maps-icon';
 import { el } from '../ui/dom';
 import { icon, ICONS, type IconName } from '../ui/icons';
@@ -491,6 +491,7 @@ export function mountCity(
   const present = categoriesPresent(placeCategoryOrder, catalogPlaces);
   let groupState = groupOpenState(present, readGroups(city.slug));
   let expandBtn: HTMLButtonElement | null = null;
+  let allCategoriesSwitch: HTMLButtonElement | null = null;
 
   let tab: Tab = initial?.tab ?? 'places';
   let favoritesOnly = false;
@@ -658,11 +659,23 @@ export function mountCity(
     if (!expandBtn) return;
     const groups = visibleGroupNodes();
     const allOpen = groups.length > 0 && groups.every((section) => section.open);
-    expandBtn.textContent = groupsToggleLabel(allOpen, shell.locale());
+    const label = groupsToggleLabel(allOpen, shell.locale());
+    expandBtn.setAttribute('aria-label', label);
+    expandBtn.setAttribute('data-tip', label);
+    expandBtn.disabled = groups.length === 0;
     expandBtn.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
   };
 
   const syncSwitches = () => {
+    if (allCategoriesSwitch) {
+      const allOn = present.every((category) => enabled.has(category));
+      const label = pickLocale(shell.locale(), allOn
+        ? { en: 'Disable all categories on the map', 'pt-BR': 'Desativar todas as categorias no mapa' }
+        : { en: 'Enable all categories on the map', 'pt-BR': 'Ativar todas as categorias no mapa' });
+      allCategoriesSwitch.setAttribute('aria-checked', String(allOn));
+      allCategoriesSwitch.setAttribute('aria-label', label);
+      allCategoriesSwitch.setAttribute('data-tip', label);
+    }
     body.querySelectorAll<HTMLButtonElement>('button.tb-switch[data-category]').forEach((button) => {
       const category = button.dataset.category;
       if (!category || !isCategory(category)) return;
@@ -703,6 +716,7 @@ export function mountCity(
         ? emptyState(pickLocale(locale, { en: 'No favorites found', 'pt-BR': 'Nenhum favorito encontrado' }),
           pickLocale(locale, { en: 'Mark places with a heart or adjust your search.', 'pt-BR': 'Marque lugares com o coração ou ajuste a busca.' }))
         : emptyState(text.emptyPlacesTitle, text.emptyPlaces));
+      syncSwitches();
       syncExpand();
       return;
     }
@@ -805,17 +819,31 @@ export function mountCity(
       filters.append(button);
     }
     segmented(filters);
-    body.append(filters);
     const tools = el('div', 'tb-place-tools');
-    const expand = el('button', 'tb-expand');
-    expand.type = 'button';
+    const globalToggle = el('button', 'tb-switch');
+    globalToggle.type = 'button';
+    globalToggle.setAttribute('role', 'switch');
+    globalToggle.append(el('span', 'tb-switch__thumb'));
+    allCategoriesSwitch = globalToggle;
+    globalToggle.addEventListener('click', () => {
+      const allOn = present.every((category) => enabled.has(category));
+      for (const category of present) {
+        if (allOn) enabled.delete(category);
+        else enabled.add(category);
+      }
+      writeCategoryFilter([...enabled]);
+      syncSwitches();
+      showPlacePins({ fit: false, pan: false });
+    });
+    const expand = iconButton({ icon: 'expand_more', label: groupsToggleLabel(false, shell.locale()), size: 'sm' });
+    expand.classList.add('tb-expand');
     expandBtn = expand;
     expand.addEventListener('click', () => {
       const groups = visibleGroupNodes();
       const allOpen = groups.length > 0 && groups.every((section) => section.open);
       setEveryGroup(!allOpen);
     });
-    tools.append(expand);
+    tools.append(filters, globalToggle, expand);
     body.append(tools);
     appendPlaceGroups();
   };
