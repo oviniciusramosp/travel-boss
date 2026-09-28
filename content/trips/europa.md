@@ -163,8 +163,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 5 — Qui 8/10 · Canal Saint-Martin, Marais, almoço no Chez Janou e pôr do sol em Montmartre
 
-- 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy, sem atravessar a ponte
+- 07:15 [Casa do Gui](place:par-casa-do-gui) — Saída
+  - via: RER E até Magenta e caminhada até a Sentier · 50 min — Cerca de 20 min a pé de Magenta até a padaria; tempo total estimado com espera
+- 08:05 [Boulangerie du Sentier](place:par-boulangerie-du-sentier) — **Café da manhã**: provar o croissant de manteiga vencedor do Grand Paris de 2026. Comprar para levar e sair às 08:20
+  - via: a pé até o Canal Saint-Martin · 26 min — Seguir até o Quai de Valmy, junto à Rue Eugène-Varlin
 - 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
 - 09:05 [Du Pain et des Idées](place:par-du-pain-idees) — **Café da manhã**: escargot de pistache e chocolate (~€5–6), um pão doce folhado em espiral, não o prato de caracóis. Sair às 09:30; abre de segunda a sexta
 - 09:35 [Canal Saint-Martin — até République](place:par-canals-republique) — Retomar a caminhada para o sul pelo Quai de Valmy

@@ -1,5 +1,13 @@
 # 8/10/2026 — Canal Saint-Martin e Chez Janou
 
+## Sentier antes do canal — consulta em 28/09/2026
+
+- Boulangerie du Sentier adicionada ao Dia 5 às 08:05, antes do canal, a pedido do usuário. Saída de casa antecipada para 07:15; os demais horários foram preservados.
+- Google Maps: 47 Rue du Caire; quinta 7h–20h, sábado fechado. Croissant vencedor do Grand Paris de 2026; relatos de clientes indicam que pode esgotar à tarde. [Ficha](https://www.google.com/maps/search/?api=1&query=Boulangerie+du+Sentier+47+rue+du+Caire+Paris).
+- OSRM a pé: Magenta (48.8785, 2.358) → Sentier (48.867899, 2.349031), 1.599 m / 21 min; Sentier → início do canal (48.877602, 2.365344), 1.952 m / 26 min. O trecho desde casa foi estimado em 50 min com RER E, caminhadas e espera; não é um trem reservado.
+- Transitous consultado para 8/10 às 05:35 UTC desde Noisy-le-Sec: retornou RER E Noisy-le-Sec → Magenta às 07:51–08:00 locais, confirmando serviço pela manhã. A saída proposta é anterior a essa consulta e requer conferir o trem no dia.
+- A Sentier ainda não possui preço cadastrado: o croissant não entra no total de comida do app (€71 por pessoa nesta consulta). Não foi inventado preço nem alterado outro consumo.
+
 Consulta em 27/09/2026; tempos a pé são estimativas do roteador, sem paradas.
 
 - Acesso desde Magenta comparado com OSRM a pé (`routing.openstreetmap.de/routed-foot/route/v1/foot`): Rue Eugène-Varlin ~894 m / 12 min; Jardin Villemin ~969 m / 13 min; ponte Louis-Blanc ~983 m / 13 min. Origem do catálogo: 48.8785, 2.358. O acesso escolhido fica no Quai de Valmy, margem oeste, sem atravessar a ponte. Não é uma prova de mínimo entre todas as saídas da estação.
