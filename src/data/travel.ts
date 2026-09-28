@@ -4022,19 +4022,19 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-point-alph',
         name: {
-          en: 'Point Alph (Versailles market)',
-          'pt-BR': 'Point Alph (feira de Versalhes)',
+          en: 'Marché Notre-Dame',
+          'pt-BR': 'Marché Notre-Dame',
         },
         category: 'markets',
         description: {
-          en: 'Market stop in Versailles — handy if you are already at the château / Notre-Dame market area.',
-          'pt-BR': 'Parada de feira em Versalhes — boa se já estiver no castelo / área do Marché Notre-Dame.',
+          en: 'Historic food market in Versailles, with covered halls and outdoor stalls around Place du Marché Notre-Dame.',
+          'pt-BR': 'Mercado de alimentos histórico de Versalhes, com pavilhões cobertos e bancas externas na Place du Marché Notre-Dame.',
         },
-        googleRating: 4.3,
-        lat: 48.80663,
-        lng: 2.13201,
+        googleRating: 4.5,
+        lat: 48.8065744,
+        lng: 2.1321226,
         address: 'Place du Marché Notre-Dame, 78000 Versailles',
-        mapsQuery: 'Point Alph Marché Notre-Dame Versailles',
+        mapsQuery: 'Marché Notre-Dame Versailles',
         mapsUrl: 'https://www.google.com/maps/place/Notre-Dame+Market/@48.8065744,2.1321226,17z/data=!3m1!4b1!4m6!3m5!1s0x47e67db16c8a45bf:0xc5466b2b00ada3f7!8m2!3d48.8065744!4d2.1321226!16s%2Fg%2F11fy1mh0ty',
       },
       {

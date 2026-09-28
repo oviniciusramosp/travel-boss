@@ -1732,12 +1732,12 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     avgPricePerPerson: money(5, 20),
     durationMin: 40,
     durationMax: 90,
-    bestTime: L('Morning market hours', 'Horário de manhã da feira'),
-    bestDay: L('Tue–Sun (check hall hours)', 'Ter–dom (confira horário das halles)'),
+    bestTime: L('Covered halls: Tue–Sat 7am–1:30pm and 3pm–7:30pm; Sun 7am–2pm', 'Halles: ter–sáb 7h–13h30 e 15h–19h30; dom 7h–14h'),
+    bestDay: L('Tue, Fri and Sun for the outdoor food market', 'Ter, sex e dom para a feira externa de alimentos'),
     crowdProfile: 'local',
     tips: L(
-      'Versailles market stop near Notre-Dame square — easy add-on to the château day.',
-      'Feira em Versalhes perto da praça Notre-Dame — fácil de encaixar no dia do castelo.',
+      'Outdoor food stalls run 7:30am–2pm on Tuesday, Friday and Sunday. Covered halls close on Monday.',
+      'Bancas externas de alimentos: terça, sexta e domingo, 7h30–14h. Os pavilhões cobertos fecham às segundas.',
     ),
   },
   'par-marche-aligre': {

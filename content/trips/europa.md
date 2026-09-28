@@ -207,8 +207,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
 - 12:15 [Ore — Ducasse (Versalhes)](place:par-ore-ducasse) — Almoço no Pavillon Dufour, sem precisar de ingresso: prato ~€30 e o Louis XIV de chocolate (€14). Reserve
 - 13:00 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais (inclusos no Passport), descendo pelo Tapis Vert até a cabeceira do Grand Canal
-- 14:00 [Domaine de Trianon](place:par-trianon) — Grand Trianon, Petit Trianon e o Hameau da Rainha (12h–18h30). Sair às 15h30 para o café da tarde
-  - via: a pé até o The Stray Bean · 45 min
+- 14:00 [Domaine de Trianon](place:par-trianon) — Visitar o Grand Trianon (12h–18h30). Sair às 15h para passar pelo mercado antes do café da tarde
+  - via: a pé até o Marché Notre-Dame · 45 min
+- 15:45 [Marché Notre-Dame](place:par-point-alph) — Visitar por dentro as halles do mercado, sem comprar; abertas das 15h às 19h30. Sair às 16h; a feira externa termina às 14h
+  - via: a pé até o The Stray Bean · 15 min
 - 16:15 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo; €7–10 por pessoa (estimativa). Sair às 16h35; fecha às 17h
   - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 45 min
 - 17:20 [Torre Eiffel](place:par-eiffel) — **Subida ao topo** com horário marcado: reserve o das 17h30 para ver o pôr do sol às 19h13 lá de cima (elevador até o topo €36,70; escada até o 2º e elevador até o topo €28). Conte ~2 h entre a revista, os elevadores e os dois andares

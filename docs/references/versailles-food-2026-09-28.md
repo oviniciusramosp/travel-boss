@@ -78,3 +78,11 @@ Pesquisa para sexta-feira, 09/10/2026. Opções para escolha do usuário; não a
 
 - [FAQ oficial](https://www.chateauversailles.fr/preparer-ma-visite/faq): comida e bebidas proibidas no interior do palácio e dos Trianons; exceção para água em garrafa transparente até 50 cl. Não assumir entrada com sanduíches na mochila. A página menciona casiers, mas não confirma armazenamento adequado de alimentos.
 - [Piquenique oficial](https://www.chateauversailles.fr/preparer-ma-visite/sur-place/pique-nique): permitido em áreas do parque, incluindo plaine Saint-Antoine; também menciona área na halle des Marmousets. Não equivale a autorização para comer em qualquer jardim.
+
+## Marché Notre-Dame e sequência de visita
+
+- [Turismo de Versalhes](https://www.versailles-tourisme.com/marche-notre-dame.html): halles cobertas terça–sábado 7h–13h30 e 15h–19h30; domingo 7h–14h. Feira externa de alimentos terça, sexta e domingo 7h30–14h. Em 9/10/2026, sexta, a visita à tarde é aos pavilhões cobertos.
+- Google Maps consultado em 28/09/2026: 4,5/5, 3.707 avaliações; pino 48.8065744, 2.1321226. O registro antigo `par-point-alph` apontava para o mesmo mercado, mas tinha nome incorreto; corrigido sem criar duplicata.
+- Sequência planejada: Grand Trianon → Marché Notre-Dame → Stray Bean → Versailles-Château–Rive Gauche. Caminhadas de 45 e 15 minutos são estimativas, não horários de transporte confirmados. Mercado próximo da Rive Droite, mas o café fica ao sul e o retorno atual à Torre Eiffel usa o RER C pela Rive Gauche.
+- A página oficial de piquenique explicita que a Halle des Marmousets, próxima à Allée d’Eau, é o único local dos jardins formais onde se permite piquenique. Comprar sanduíches depois de terminar o interior do palácio; consumir antes de entrar nos Trianons.
+- [Condições oficiais de venda](https://www.chateauversailles.fr/sites/default/files/cgv-vel-indiv-dec-25.pdf): ingresso de acesso único. Almoço na cidade deve ficar entre a visita completa ao palácio e a primeira entrada nos jardins; não planejar reentrada no palácio.
