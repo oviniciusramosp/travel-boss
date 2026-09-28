@@ -2,12 +2,47 @@ import { describe, expect, it } from 'vitest';
 import { auditPin, destinationPin, distanceMeters } from '../../scripts/location-audit';
 import { travelCities } from './travel';
 
+const evidenceFiles = import.meta.glob<string>(
+  '../../docs/references/paris-location-audit-2026-09-28/*.jsonl',
+  { query: '?raw', import: 'default', eager: true },
+);
+const evidence = Object.values(evidenceFiles).flatMap(text =>
+  text.trim().split('\n').filter(Boolean).map(line => JSON.parse(line)),
+);
+
 describe('location audit', () => {
+  it('requires a dated audit record for every Paris place, without concealing pending findings', () => {
+    const places = travelCities.find(city => city.slug === 'paris')!.places;
+    expect(evidence.map(record => record.id).sort()).toEqual(places.map(place => place.id).sort());
+    for (const record of evidence) {
+      expect(record.checkedAt, record.id).toMatch(/^\d{4}-\d{2}-\d{2}/);
+      expect(['verified', 'correction', 'ambiguous', 'blocked']).toContain(record.status);
+      expect(record.evidence, record.id).toBeTruthy();
+      if (record.status !== 'blocked') expect(record.sourceUrls.length, record.id).toBeGreaterThan(0);
+    }
+  });
+  it('requires renewed evidence when audited Paris identities, coordinates or subpoints change', () => {
+    for (const place of travelCities.find(city => city.slug === 'paris')!.places) {
+      if (place.id === 'par-casa-do-gui') continue; // Private residence, explicitly not externally verified.
+      const snapshot = {
+        name: place.name, lat: place.lat, lng: place.lng, address: place.address,
+        mapsQuery: place.mapsQuery, mapsUrl: place.mapsUrl,
+        subPoints: place.subPoints?.map(point => ({
+          name: point.name, lat: point.lat, lng: point.lng, placeId: point.placeId,
+        })),
+      };
+      const record = evidence.find(record => record.id === place.id);
+      expect(record?.catalogSnapshot, `${place.id}: recheck sources before updating the audit snapshot`)
+        .toEqual(JSON.parse(JSON.stringify(snapshot)));
+      expect(record?.subPointsAudit?.length ?? 0, place.id).toBe(place.subPoints?.length ?? 0);
+    }
+  });
   it('keeps reviewed business pins synchronized with their exact Maps destinations', () => {
     const places = travelCities.flatMap(city => city.places);
     for (const id of ['par-bohemia', 'par-starbucks-opera', 'par-chez-janou',
       'par-bien-eleve', 'par-chez-elo', 'par-maison-isabelle', 'par-felicita',
-      'par-franklin-passy', 'par-francette', 'par-bakery-gaite', 'par-paul-defense']) {
+      'par-franklin-passy', 'par-francette', 'par-bakery-gaite', 'par-paul-defense',
+      'par-rosa-bonheur', 'par-kfc-les-halles']) {
       const place = places.find(p => p.id === id);
       expect(place, id).toBeDefined();
       expect(auditPin(place!).status, id).toBe('coordinate-match');

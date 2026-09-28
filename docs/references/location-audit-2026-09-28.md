@@ -1,60 +1,71 @@
-# Auditoria de localização — 28/09/2026
+# Auditoria de localização de Paris — 28/09/2026
 
-## Conclusão e limites
+## Resultado
 
-Não há evidência suficiente para certificar todos os pinos. Varredura inicial: 393 lugares, 39 com coordenadas coerentes com o destino de seu link, 10 divergentes em mais de 25 m e 344 sem coordenadas de destino explícitas no link. Coerência não prova identidade, unidade, acesso ou operação atual.
+Auditoria do catálogo completo de Paris, iniciada pelos lugares referenciados nos roteiros: **259 lugares e 81 subpontos**, sem IDs ausentes ou repetidos. Três revisores trabalharam em paralelo; a revisão principal reconciliou divergências e aplicou as correções no checkout usado pelo app.
 
-Após as correções e inclusões simultâneas de outro trabalho: 399 lugares, 44 coerentes, 10 a revisar e 345 sem fonte de coordenadas explícita. No roteiro Europa: 12 coerentes, 5 a revisar e 94 sem essa fonte. Estes números são uma fotografia; o comando abaixo recalcula o estado atual.
+| Escopo | Verificados sem correção | Correções aplicadas | Pendências | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Lugares referenciados nos roteiros | 94 | 4 | 2 | 100 |
+| Demais lugares de Paris | 145 | 14 | 0 | 159 |
+| Total de lugares | 239 | 18 | 2 | 259 |
+| Subpontos internos | 80 | 1 | 0 | 81 |
 
-“Sem fonte” aqui significa que o link cadastrado não contém `!3d!4d` inequívocos, não que o lugar esteja errado ou nunca tenha sido pesquisado. Links curtos, pesquisas, referências OSM e pontos internos exigem outra verificação. Não extrair coordenadas de `@lat,lng`: são da câmera.
+A correção do subponto do canal já integra um dos 18 lugares; não é um 19º cadastro. As duas pendências são a residência particular e o acesso público da Brioche Dorée do CDG. **Não há certificação irrestrita de todos os pontos.**
 
-## Verificações manuais realizadas
+## Causa e método
 
-Nome, unidade, endereço e coordenadas foram lidos nas fichas do Google Maps. Os links canônicos estão nos respectivos `mapsUrl` do catálogo.
+O problema do Baguett’s expôs uma falha de validação do cadastro: nome/unidade, endereço, pino e destino do link não haviam sido conferidos juntos. O mapa desenhava as coordenadas cadastradas; não era evidência de um deslocamento geral causado pela renderização. Outros registros também misturavam unidade/endereço/link ou usavam coordenadas aproximadas.
 
-| Lugar | Resultado |
+Cada registro foi confrontado com ficha específica do Maps, fonte oficial e/ou objeto cartográfico OSM identificável. Para polígonos e pontos internos, foi examinada a geometria do próprio lugar. Não se aceitou um comércio vizinho retornado pelo geocodificador reverso como prova da identidade. Endereço geocodificado serve para triagem, não para provar que uma loja ocupa aquele endereço.
+
+Coordenadas `@lat,lng` de URLs Google são da câmera e não foram usadas como destino. Coordenadas explícitas `!3d!4d` só foram aceitas depois da conferência da identidade da ficha. Um centro Google diferente não significa necessariamente erro: prédio, parque, aeroporto, praça e estação podem ter várias âncoras válidas.
+
+## Correções aplicadas nesta rodada
+
+| Cadastro | Alteração |
 | --- | --- |
-| Baguett’s Molière | Corrigido na etapa anterior; nº 30, não a unidade nº 33. |
-| Starbucks Capucines | Pino corrigido para 48.8709, 2.33378; mesmo nº 3 Bd des Capucines. |
-| Chez Janou | Pino corrigido para 48.8567159, 2.3671983; nº 2 Rue Roger Verlomme. |
-| Bien Élevé | Pino corrigido para 48.8740003, 2.3433307; nº 47 Rue Richer; deslocamento anterior de cerca de 1,9 km. |
-| Chez Elo | Pino corrigido para 48.8639957, 2.3602498; nº 61 Rue de Bretagne. |
-| Maison d’Isabelle | Pino já correto; endereço corrigido de 47 para 47 ter Bd Saint-Germain. |
-| Paris Bakery & Co | Pendente: link curto abre Paris & Co em 48.8385671, 2.3227985, enquanto cadastro usa Convention e outro pino. Não mover para uma unidade arbitrária. |
+| Paris & Co — Convention | Pino corrigido em aproximadamente 816 m; link antigo abria Gaîté. Nome e link agora explicitam Convention. |
+| Francette | Pino corrigido em aproximadamente 338 m para a embarcação no Port de Suffren. |
+| Rosa Bonheur Buttes-Chaumont | Pino corrigido em aproximadamente 275 m para o restaurante, e não outro ponto do parque. |
+| Burger King Opéra Italiens | Endereço antigo sem unidade comprovada; cadastro agora corresponde à unidade nominal oficial, 36 boulevard des Italiens. Pino ajustado em aproximadamente 272 m. |
+| Le Franklin Passy | Pino corrigido em aproximadamente 192 m, no nº 1 rue Benjamin Franklin. |
+| La Felicità | Pino ajustado em aproximadamente 83 m para a ficha do estabelecimento. |
+| PAUL La Défense | Pino alinhado à unidade já indicada pelo link, aproximadamente 78 m. |
+| Jardin des Plantes | Entrada Porte Jussieu, 57 rue Cuvier, identificada no OSM; ajuste de aproximadamente 30 m. Removida confusão com Fontaine Cuvier. |
+| KFC Les Halles | Ajuste de aproximadamente 27 m para a ficha da unidade dentro do shopping; endereço e link específico registrados. |
+| Amorino | Nome/endereço agora Beaubourg, 119–121 rue Saint-Martin, conforme pino e link existentes; não Île Saint-Louis. |
+| Five Guys | Nome/endereço agora Châtelet Les Halles, 1 place Joachim du Bellay, conforme pino e link existentes. |
+| Michalak Étienne Marcel | Código postal corrigido para 75001. |
+| Noisy-le-Sec RER | Endereço oficial corrigido para Rue de la Gare. Pino preservado. |
+| Carnavalet | Endereço completo: 23 rue Madame de Sévigné. Pino dentro do complexo preservado. |
+| Montorgueil | Código postal 75002 no trecho onde fica o pino. |
+| Le Royal Cambronne | Endereço corrigido para 2 place Cambronne. |
+| Petit e Grand Palais | Preservado o card conjunto; o pino no Grand Palais agora abre a ficha desse edifício. Endereço e dicas distinguem os dois acessos. |
+| Canal Saint-Martin — até République | Percurso existente começa no Quai de Jemmapes; primeiro subponto, descrição, endereço e nota do roteiro corrigidos. Atravessa para Valmy na Rue du Faubourg du Temple. |
 
-## Triagem por endereço
+Correções anteriores que motivaram esta auditoria também foram reconferidas: Baguett’s Molière (30 rue de Richelieu), Starbucks Capucines, Chez Janou, Bien Élevé e Chez Elo; endereço da Maison d’Isabelle completado para 47 ter boulevard Saint-Germain. Elas não entram novamente nas 18 correções desta rodada.
 
-249 endereços públicos do catálogo Paris consultados pela API oficial IGN/BAN `https://data.geopf.fr/geocodage/search?q=...&limit=1`. Hospedagem privada excluída. 246 respostas com resultado, duas sem resultado e um timeout. Isso é triagem geográfica, não validação de comércio.
+## Pendências e limites para usar o roteiro
 
-Outros conflitos que merecem conferência: Amorino (pino x endereço da Île Saint-Louis), Five Guys Rivoli (pino x nº 105) e Paris Bakery & Co. Não corrigir pelo endereço isolado: pode ser esse campo que está errado. A Maison d’Isabelle demonstrou esse risco (número incompleto).
+- **Brioche Dorée CDG 2E:** a ficha “Arrivées” corresponde ao pino, mas o plano oficial consultado identifica uma unidade em Portes L. Não foi comprovado acesso à unidade cadastrada a partir do desembarque público. O card e a parada do roteiro deixaram de prometer esse acesso; confirmar no aeroporto antes de contar com a parada.
+- **Casa do Gui:** residência particular; endereço e coordenadas não foram enviados a novos serviços externos. A conferência independente depende de confirmação do anfitrião/usuário ou evidência local confiável. Não foi marcado como verificado.
 
-Os dez destinos com divergência >25 m na triagem inicial: `par-jardin-plantes`, `par-buttes-chaumont`, `par-palais`, `par-palais-royal`, `par-paul-defense`, `par-chessy-rer`, `par-cdg-rer`, `par-val-de-fontenay-rer`, `par-chapelle-saint-louis`, `par-bnf`. Muitos são áreas ou estações e a diferença pode corresponder ao ponto de entrada ou centro; precisam de revisão, não de sincronização automática. A conferência posterior confirmou que o link de `par-bnf` é da biblioteca François-Mitterrand, não da estação: a diferença de 29 m ocorre dentro do complexo.
+“Verificado” significa **identidade e localização**, com as ressalvas de cada registro. Não garante funcionamento na data futura, acesso interno, fila, ingresso ou que uma âncora do prédio seja sua porta. Orly mantém referência do aeródromo; uma rota terrestre deve escolher o terminal. A capela Saint-Louis mantém localização comprovada dentro da École Militaire, com acesso sujeito a autorização. O ponto do show Disney está em Main Street, sem garantia de vista, assento ou espaço reservado. No Grand Canal de Versailles, o ponto fica no passeio da margem, não dentro da água.
 
-## Auditoria paralela do catálogo Paris
+Geometrias impediram falsas correções: BHV (way 29168869), Carnavalet (relation 2405955), One Nation (relation 3414182), Orly (relation 10867719), CDG RER (way 1020882998), Disneyland/Disney Adventure World (portões nodes 3100784971/11238857526), Ratatouille (way 1269073076), Pirates (way 1243661105) e Grand Bassin Rond das Tuileries (way 14037695). A instalação olímpica próxima do bassin não invalida o lago.
 
-Inventário inicial desta etapa: 259 lugares de Paris, dos quais 100 referenciados nos arquivos de roteiro e 159 restantes, além de 81 subpontos. Três revisores conferem primeiro os 100 prioritários; a revisão principal trata 40 registros restantes com links e conflitos conhecidos. Resultados individuais, fontes e ressalvas ficam em [paris-location-audit-2026-09-28](paris-location-audit-2026-09-28/). A auditoria está em andamento; os registros concluídos não certificam os ainda ausentes.
+## Evidência por lugar e prevenção
 
-Primeiro lote de correções desta etapa:
+Os [registros JSONL da auditoria](paris-location-audit-2026-09-28/) guardam ID, data, fontes, evidência, status, proposta original quando pertinente, resolução aplicada, ressalvas e estado final do cadastro (`catalogSnapshot`). Os três arquivos `itinerary-*` cobrem 100 lugares; os demais cobrem 159. Os 81 subpontos ficam dentro dos respectivos registros. Proposta de revisor não equivale a alteração aplicada: `resolution` e `catalogSnapshot` registram a decisão final.
 
-| Registro | Correção | Evidência |
-| --- | --- | --- |
-| Paris & Co Convention | Pino ~816 m fora; link abria Gaîté. Mantida a unidade Convention já pretendida; corrigidos pino/link e nome explícito. | Google Maps + [site da padaria](https://boulangerieparisandco.fr/2-accueil) |
-| Le Franklin Passy | Pino ~192 m fora, corrigido no nº 1 rue Benjamin Franklin. | Ficha Maps da unidade |
-| Francette | Pino ~338 m fora, corrigido para a embarcação no Port de Suffren. | Maps + [restaurante](https://fugafamily.com/restaurants/francette) |
-| La Felicità | Pino ~83 m deslocado do estabelecimento; corrigido e link canônico registrado. | Maps + [restaurante](https://www.lafelicita.fr/) |
-| PAUL La Défense | Pino ~78 m distante da unidade já selecionada pelo link; alinhado a ela. | Ficha Maps cadastrada |
-| Amorino | Nome/endereço/consulta agora Beaubourg, unidade correspondente ao pino e link existentes. Não é a Île Saint-Louis. | Maps + [localizador oficial](https://www.amorino.com/en/storelocator) |
-| Five Guys | Nome/endereço/consulta agora Châtelet Les Halles, 1 place Joachim du Bellay, conforme pino/link existentes. | Maps + [ficha oficial](https://restaurants.fiveguys.fr/ile-de-france/1-place-joachim-du-belay) |
-| Michalak Étienne Marcel | Código postal 75001, sem mudança de pino. | [Site oficial](https://www.christophemichalak.com/) |
+- `verified`: localização conferida, com ressalvas descritas.
+- `correction`: divergência encontrada e corrigida nesta rodada.
+- `ambiguous`: evidência insuficiente ou conflitante; não certificado.
+- `blocked`: conferência externa não realizada, neste caso residência particular.
 
-`verified` nos arquivos de evidência significa localização/identidade conferidas com as ressalvas registradas; não comprova horário futuro, disponibilidade, ingresso ou cada porta de acesso. `correction` registra divergência encontrada, com a aplicação descrita no relatório. `ambiguous`/`blocked` permanecem pendências. O resultado do geocodificador reverso sozinho não foi aceito como prova de unidade: no Moulin Rouge, por exemplo, ele retornou o endereço de um vizinho, embora o pino da atração estivesse correto.
+O teste `src/data/location-audit.test.ts` exige cobertura de todos os lugares de Paris e de seus subpontos. Mudanças no nome, endereço, pino, link/consulta Maps ou subpontos invalidam o registro até nova revisão das fontes. **Não atualizar snapshots automaticamente para fazer o teste passar.** O teste não converte uma pendência em confirmação; também preserva a checagem dos estabelecimentos com destino Maps explícito.
 
-## Como repetir e concluir
+`npm run travel:locations:check -- /tmp/travel-location-audit.json` continua sendo uma triagem global por coordenadas dos links, não uma leitura desta auditoria. Pode apontar divergências justificadas entre centro/entrada e ausência de coordenadas em links curtos ou consultas; código de saída 1 não significa que todos esses pinos estejam errados. A triagem inicial dos 399 lugares globais não é uma certificação de cidades fora de Paris.
 
-`npm run travel:locations:check -- /tmp/travel-location-audit.json`
-
-O comando lê o catálogo efetivo, lista divergências e grava inventário completo se receber caminho de saída. Retorna código 1 enquanto houver falta de fonte, coordenada inválida ou divergência. Não representa uma certificação mesmo se todas as coordenadas coincidirem: a identidade e a unidade precisam de confirmação humana na fonte.
-
-Para concluir a validação: abrir a ficha de cada pendência, confirmar nome + unidade + endereço, escolher entrada pública quando relevante, registrar fonte e data, atualizar pino/link juntos e repetir a checagem. Grandes áreas, estações e subpontos precisam de justificativa de entrada/centro; não devem ser movidos cegamente para o centro do Google.
-
-O teste de regressão cobre os seis estabelecimentos conferidos nesta conversa e falha se seus pinos se afastarem do destino cadastrado. Os demais continuam explicitamente pendentes: nenhum teste deve transformar ausência de evidência em confirmação.
+Validação: TypeScript, suíte de testes e inspeção do app a 1440×900; detalhes finais de execução registrados na entrega. As regras de cadastro no AGENTS.md passam a exigir fonte, data e conferência da unidade antes de novas coordenadas.
