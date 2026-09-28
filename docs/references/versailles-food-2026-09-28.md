@@ -1,5 +1,15 @@
 # Alimentação em Versalhes — pesquisa de 28/09/2026
 
+## Comparação sem Castellane e jardins (28/09)
+
+- Consulta Transitous via curl passou a responder HTTP 200. Para 09/10/2026, partida da casa às 06h52: RER E Noisy-le-Sec 07h04 → La Défense 07h25; U 07h29 → Versailles-Chantiers 07h51. São horários planejados, com conexão de só 4 minutos; reservar margem. Cerca de 62 minutos porta–saída da estação. A alternativa por Montparnasse devolveu 56 minutos, mas com mais trocas e apenas 2 minutos entre metrô e TER: não recomendada como plano robusto. E + L via La Défense também aparece, cerca de 65 minutos até Rive Droite. O C não apareceu entre as opções mais rápidas dessa janela; isso não prova que nunca seja mais rápido.
+- Endpoint usado: `https://api.transitous.org/api/v1/plan?fromPlace=48.893017,2.454059&toPlace=48.7956,2.1355&time=2026-10-09T04%3A45%3A00Z`. Horários da resposta em UTC convertidos para Paris (+2h).
+- Aux Pains de la Ferme, 9 rue Royale: Google Maps consultado diretamente, 4,7/5, 1.155 avaliações; sexta 7h–20h. Candidata preferida para café depois de chegar a Chantiers e caminhar rumo ao palácio. [Maps](https://www.google.com/maps/search/?api=1&hl=en&query=Aux+Pains+de+la+Ferme+Versailles).
+- Maison Hervet, 49 rue des États Généraux: Google Maps consultado diretamente, 4,1/5, 542 avaliações; sexta 6h30–20h. Alternativa junto de Chantiers. [Maps](https://www.google.com/maps/search/?api=1&hl=en&query=Maison+Hervet+49+Rue+des+Etats+Generaux+Versailles).
+- Café e viennoiserie estimados em €5–8, café e pâtisserie €7–10; cardápios de balcão não confirmados.
+- Jardins: os cinco subpontos atuais cobrem apenas o eixo central. Proposta de dedicar 2h30–3h (estimativa) ao eixo, vista superior da Orangerie, Salle de Bal, Colonnade, Encelade, Bains d’Apollon e Neptune. Exige reconsiderar Trianon para preservar mercado, café e Torre Eiffel; ainda não aplicada ao dia.
+- [Bosquets oficiais](https://www.chateauversailles.fr/decouvrir/domaine/jardins/bosquets) e [programação 2026](https://www.chateauversailles.fr/actualites/spectacles/grandes-eaux-jardins-musicaux): sexta 9/10 é Jardins Musicaux, bosquets 9h–19h, música 10h–19h; Neptune 5 min a cada 15 min, 10h–18h45; Miroir 7 min a cada 10 min, 10h–19h. A página avisa interrupção técnica dos jogos d’água do Théâtre d’Eau na data da consulta. Não prometer todas as fontes ligadas.
+
 ## Aplicação ao roteiro e reentrada (28/09)
 
 - Usuário pediu a inclusão nominal da Castellane e do Stray Bean; os dois foram acrescentados ao catálogo e ao dia 9. Almoço ainda não escolhido.
