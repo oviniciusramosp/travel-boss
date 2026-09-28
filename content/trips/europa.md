@@ -163,10 +163,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 5 — Qui 8/10 · Canal Saint-Martin, Marais, almoço no Chez Janou e pôr do sol em Montmartre
 
-- 07:15 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Magenta e caminhada até a Sentier · 50 min — Cerca de 20 min a pé de Magenta até a padaria; tempo total estimado com espera
-- 08:05 [Boulangerie du Sentier](place:par-boulangerie-du-sentier) — **Café da manhã**: provar o croissant de manteiga vencedor do Grand Paris de 2026. Comprar para levar e sair às 08:20
-  - via: a pé até o Canal Saint-Martin · 26 min — Seguir até o Quai de Valmy, junto à Rue Eugène-Varlin
+- 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída
+  - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy, sem atravessar a ponte
 - 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
 - 09:05 [Du Pain et des Idées](place:par-du-pain-idees) — **Café da manhã**: escargot de pistache e chocolate (~€5–6), um pão doce folhado em espiral, não o prato de caracóis. Sair às 09:30; abre de segunda a sexta
 - 09:35 [Canal Saint-Martin — até République](place:par-canals-republique) — Retomar a caminhada para o sul pelo Quai de Valmy
@@ -180,9 +178,11 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
 - 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
 - 14:00 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14:10
-  - via: metrô 4 até Barbès–Rochechouart e funicular de Montmartre · 50 min — Embarcar em Étienne Marcel; de Barbès, caminhar cerca de 10 min até a estação inferior, junto à Place Saint-Pierre e à Rue Foyatier. Subir com a Navigo Semaine; tempo inclui caminhadas e espera
-- 15:00 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
-- 15:10 **Place du Tertre** — Praça dos pintores e retratistas
+  - via: a pé até a Boulangerie du Sentier · 16 min
+- 14:30 [Boulangerie du Sentier](place:par-boulangerie-du-sentier) — Provar o croissant de manteiga vencedor do Grand Paris de 2026. Comprar para levar e sair às 14:40
+  - via: metrô 4 até Barbès–Rochechouart e funicular de Montmartre · 40 min — Caminhar cerca de 5 min até Réaumur–Sébastopol e embarcar sentido Porte de Clignancourt; de Barbès, caminhar até a estação inferior do funicular, junto à Place Saint-Pierre. Subir com a Navigo Semaine; tempo estimado inclui caminhadas e espera
+- 15:20 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
+- 15:30 **Place du Tertre** — Praça dos pintores e retratistas
 - 15:55 **La Maison Rose e Rue de l'Abreuvoir** — Fachada rosa e passeio pela rua, sem consumir
 - 16:10 **Vinhedo Clos Montmartre** — Ver as vinhas por fora, pela Rue des Saules
 - 16:20 **Au Lapin Agile** — Fachada do cabaré, sem entrar

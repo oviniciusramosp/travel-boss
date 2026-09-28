@@ -1,11 +1,12 @@
 # 8/10/2026 — Canal Saint-Martin e Chez Janou
 
-## Sentier antes do canal — consulta em 28/09/2026
+## Sentier entre Pompidou e Montmartre — consulta em 28/09/2026
 
-- Boulangerie du Sentier adicionada ao Dia 5 às 08:05, antes do canal, a pedido do usuário. Saída de casa antecipada para 07:15; os demais horários foram preservados.
+- Boulangerie du Sentier às 14:30, depois do Pompidou; saída às 14:40 para Montmartre. Saída de casa às 08:05, canal às 08:45, Montmartre às 15:20 e Place du Tertre às 15:30; demais horários preservados.
 - Google Maps: 47 Rue du Caire; quinta 7h–20h, sábado fechado. Croissant vencedor do Grand Paris de 2026; relatos de clientes indicam que pode esgotar à tarde. [Ficha](https://www.google.com/maps/search/?api=1&query=Boulangerie+du+Sentier+47+rue+du+Caire+Paris).
-- OSRM a pé: Magenta (48.8785, 2.358) → Sentier (48.867899, 2.349031), 1.599 m / 21 min; Sentier → início do canal (48.877602, 2.365344), 1.952 m / 26 min. O trecho desde casa foi estimado em 50 min com RER E, caminhadas e espera; não é um trem reservado.
-- Transitous consultado para 8/10 às 05:35 UTC desde Noisy-le-Sec: retornou RER E Noisy-le-Sec → Magenta às 07:51–08:00 locais, confirmando serviço pela manhã. A saída proposta é anterior a essa consulta e requer conferir o trem no dia.
+- OSRM a pé: Pompidou → Sentier, 1.196 m / 16 min; Sentier → Réaumur–Sébastopol, 346 m / 5 min. O acesso anterior Pompidou → Étienne Marcel era 658 m / 9 min: o novo encaixe acrescenta cerca de 12 min a pé. Descer do metrô uma estação depois de Étienne Marcel exige os mesmos 9 min de acesso mais o percurso Réaumur–Sentier de ida e volta (10 min), além de escadas e espera: não reduz substancialmente a caminhada.
+- Comparação dos outros dias: sábado passa pela BnF Richelieu (~12 min a pé), mas a padaria fecha; segunda passa pelo Passage des Panoramas (~12 min) às 21:25, depois do fechamento. Terça está concentrada nas ilhas e na margem esquerda; quarta é Disney, sexta é Versalhes/Torre Eiffel e os domingos são chegada e partida.
+- Transitous consultado para 8/10 às 12:40 UTC: linha 4 Réaumur–Sébastopol → Barbès–Rochechouart às 14:45–14:51 locais. Reservados 40 min desde a padaria até Montmartre, incluindo acesso, espera, caminhada e funicular; estimativa, não conexão garantida.
 - A Sentier ainda não possui preço cadastrado: o croissant não entra no total de comida do app (€71 por pessoa nesta consulta). Não foi inventado preço nem alterado outro consumo.
 
 Consulta em 27/09/2026; tempos a pé são estimativas do roteador, sem paradas.
