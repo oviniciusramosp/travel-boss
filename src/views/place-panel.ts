@@ -392,6 +392,43 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       });
       body.append(bar);
     }
+    const ratings = el('div', 'tb-panel__ratings');
+    ratings.append(
+      starRating({
+        rating: place.googleRating,
+        label: pickLocale(locale, travelUi.ratingGoogle),
+        locale,
+        icon: 'map',
+      }),
+      starRating({
+        rating: place.rating,
+        label: pickLocale(locale, travelUi.ratingMine),
+        locale,
+        icon: 'person',
+      }),
+    );
+    body.append(ratings);
+
+    // The trip's loose notes under this stop, in the day's order.
+    const parkNotes = current?.links?.parkNotes ?? [];
+    if (parkNotes.length) {
+      const list = el('dl', 'tb-panel__meta');
+      const row = el('div', 'tb-panel__meta-row');
+      row.append(el('dt', undefined, pickLocale(locale, { en: 'Trip notes', 'pt-BR': 'Notas do roteiro' })));
+      const dd = el('dd');
+      const notes = el('ul', 'tb-panel__trip-notes');
+      for (const note of parkNotes) {
+        const item = el('li', 'tb-panel__trip-note');
+        if (note.time) item.append(el('span', 'tb-panel__subpoint-time', note.time));
+        item.append(...inlineNodes(note.text));
+        notes.append(item);
+      }
+      dd.append(notes);
+      row.append(dd);
+      list.append(row);
+      body.append(list);
+    }
+
     // Points inside the place, in the walking order the trip route follows.
     const subPoints = place.subPoints ?? [];
     if (subPoints.length) {
@@ -441,42 +478,6 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
         steps.append(item);
       });
       dd.append(steps);
-      row.append(dd);
-      list.append(row);
-      body.append(list);
-    }
-    const ratings = el('div', 'tb-panel__ratings');
-    ratings.append(
-      starRating({
-        rating: place.googleRating,
-        label: pickLocale(locale, travelUi.ratingGoogle),
-        locale,
-        icon: 'map',
-      }),
-      starRating({
-        rating: place.rating,
-        label: pickLocale(locale, travelUi.ratingMine),
-        locale,
-        icon: 'person',
-      }),
-    );
-    body.append(ratings);
-
-    // The trip's loose notes under this stop, in the day's order.
-    const parkNotes = current?.links?.parkNotes ?? [];
-    if (parkNotes.length) {
-      const list = el('dl', 'tb-panel__meta');
-      const row = el('div', 'tb-panel__meta-row');
-      row.append(el('dt', undefined, pickLocale(locale, { en: 'Trip notes', 'pt-BR': 'Notas do roteiro' })));
-      const dd = el('dd');
-      const notes = el('ul', 'tb-panel__trip-notes');
-      for (const note of parkNotes) {
-        const item = el('li', 'tb-panel__trip-note');
-        if (note.time) item.append(el('span', 'tb-panel__subpoint-time', note.time));
-        item.append(...inlineNodes(note.text));
-        notes.append(item);
-      }
-      dd.append(notes);
       row.append(dd);
       list.append(row);
       body.append(list);
