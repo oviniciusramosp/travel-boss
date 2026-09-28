@@ -2323,8 +2323,8 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Montmartre', 'pt-BR': 'Montmartre' },
         category: 'parks',
         description: {
-          en: 'Hill village vibe. Wander before the Sacré-Cœur crowds peak.',
-          'pt-BR': 'Clima de vilarejo na colina. Vagueie antes do pico no Sacré-Cœur.',
+          en: 'Walk through the hilltop village: artists on Place du Tertre, Rue de l’Abreuvoir, the vineyard, historic cabarets and windmills, ending beside Sacré-Cœur.',
+          'pt-BR': 'Passeio pelo vilarejo no alto da colina: pintores da Place du Tertre, Rue de l’Abreuvoir, vinhedo, cabarés históricos e moinhos, terminando ao lado da Sacré-Cœur.',
         },
         rating: 5,
         googleRating: 4.7,
@@ -2335,6 +2335,18 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.3408,
         address: 'Place du Tertre, 75018 Paris',
         mapsQuery: 'Place du Tertre Montmartre Paris',
+        // OSM nodes/ways and station anchors checked 2026-09-27; see docs/references/paris-montmartre-2026-10-08.md.
+        subPoints: [
+          { name: { en: 'Funicular — upper station', 'pt-BR': 'Funicular — estação superior' }, lat: 48.8856581, lng: 2.3425549 },
+          { name: { en: 'Place du Tertre', 'pt-BR': 'Place du Tertre' }, lat: 48.8865274, lng: 2.3408043, aiSuggested: true },
+          { name: { en: 'La Maison Rose and Rue de l’Abreuvoir', 'pt-BR': "La Maison Rose e Rue de l'Abreuvoir" }, lat: 48.8879853, lng: 2.3396455, aiSuggested: true },
+          { name: { en: 'Clos Montmartre vineyard', 'pt-BR': 'Vinhedo Clos Montmartre' }, lat: 48.8881857, lng: 2.339834, aiSuggested: true },
+          { name: { en: 'Au Lapin Agile', 'pt-BR': 'Au Lapin Agile' }, lat: 48.888611, lng: 2.3399947, aiSuggested: true },
+          { name: { en: 'Charcuterie Arnaud Nicolas (Caulaincourt)', 'pt-BR': 'Charcuterie Arnaud Nicolas (Caulaincourt)' }, lat: 48.889855, lng: 2.342016, placeId: 'par-arnaud-nicolas-caulaincourt' },
+          { name: { en: 'Le Passe-Muraille', 'pt-BR': 'Le Passe-Muraille' }, lat: 48.8875399, lng: 2.3380698, aiSuggested: true },
+          { name: { en: 'Moulin de la Galette', 'pt-BR': 'Moulin de la Galette' }, lat: 48.8874, lng: 2.3371053, aiSuggested: true },
+          { name: { en: 'Église Saint-Pierre de Montmartre', 'pt-BR': 'Église Saint-Pierre de Montmartre' }, lat: 48.8867202, lng: 2.3420378, aiSuggested: true },
+        ],
       },
       {
         id: 'par-sacre-coeur',

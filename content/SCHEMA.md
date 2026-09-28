@@ -51,7 +51,7 @@ dates: 2026-04-06 → 2026-04-09
   via: trem Frecciarossa · 3h10
   ```
 
-  - Same mode keywords and the same duration rules as a stop `via:`.
+  - Same mode keywords and the same duration rules as a stop `via:`. `funicular` is a transit keyword, like `metrô` or `trem`.
   - One line per city. A second `via:` is an error; the first leg is kept. An empty `via:` is an error.
   - The line is not a bullet. An indented `- via:` before any day is still outside a day.
   - A paragraph that starts with `via:` under a day stays narrative. It is not this leg.

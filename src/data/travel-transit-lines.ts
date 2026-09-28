@@ -455,7 +455,19 @@ export const transilienL: TransitLine = {
   ],
 };
 
+/** OSM station nodes 3417692497 / 3417692499, checked 2026-09-27. */
+export const funicularMontmartre: TransitLine = {
+  id: 'funicular-montmartre',
+  name: 'Funicular de Montmartre',
+  color: '#622282',
+  stations: [
+    st('gare-basse', 'Estação inferior', 48.8846923, 2.3426644),
+    st('gare-haute', 'Estação superior', 48.8856581, 2.3425549),
+  ],
+};
+
 export const transitLinesById: Record<string, TransitLine> = {
+  'funicular-montmartre': funicularMontmartre,
   m1: metro1,
   m2: metro2,
   m4: metro4,

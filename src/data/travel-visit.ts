@@ -666,8 +666,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Weekday', 'Dia de semana'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'Climb from Abbesses, not only the funicular. Watch for pickpockets near Sacré-Cœur.',
-      'Suba a pé de Abbesses, não só funicular. Cuidado com carteiristas perto do Sacré-Cœur.',
+      'The funicular handles the main climb; the village walk still has slopes. Finish beside Sacré-Cœur.',
+      'O funicular vence a subida principal; o passeio pelo bairro ainda tem ladeiras. Termine junto à Sacré-Cœur.',
     ),
   }),
   'par-chatelet': landmarkOutdoor({

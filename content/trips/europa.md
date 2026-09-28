@@ -173,14 +173,23 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
 - 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
 - 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
-- 12:10 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
-- 12:20 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
-- 12:30 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
-- 13:00 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa (€20–30 cada) e uma mousse de chocolate (€12) para dividir em dois; €26–36 por pessoa, sem bebidas. Reservar e sair às 14:05
-  - via: metrô 8 de Chemin Vert até Richelieu–Drouot e caminhada até o Moulin Rouge · 45 min
-- 14:50 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora; daqui, suba a Rue Lepic
-- 15:45 [Charcuterie Arnaud Nicolas (Caulaincourt)](place:par-arnaud-nicolas-caulaincourt) — Croque-monsieur (~€5) para o fim de tarde; fecha às 20h
-- 16:15 [Montmartre](place:par-montmartre) — Place du Tertre e ruelas. Fête des Vendanges (7–11/out): mais gente e programação na rua
+- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa (€20–30 cada) e uma mousse de chocolate (€12) para dividir em dois; €26–36 por pessoa, sem bebidas. Reservar e sair às 13:15
+- 13:25 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
+- 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
+- 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
+- 14:00 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14:10
+  - via: metrô 4 de Étienne Marcel até Barbès–Rochechouart e metrô 2 até Blanche · 35 min
+- 14:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora; sair às 14:55
+  - via: funicular de Montmartre · 25 min — Caminhar até a estação inferior, junto à Place Saint-Pierre e à Rue Foyatier; subir com a Navigo Semaine. Tempo inclui caminhada e espera
+- 15:20 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
+- 15:30 **Place du Tertre** — Praça dos pintores e retratistas
+- 15:55 **La Maison Rose e Rue de l'Abreuvoir** — Fachada rosa e passeio pela rua, sem consumir
+- 16:10 **Vinhedo Clos Montmartre** — Ver as vinhas por fora, pela Rue des Saules
+- 16:20 **Au Lapin Agile** — Fachada do cabaré, sem entrar
+- 16:35 **Charcuterie Arnaud Nicolas (Caulaincourt)** — Croque-monsieur (~€5) para o fim de tarde; fecha às 20h
+- 17:10 **Le Passe-Muraille** — Escultura do homem atravessando a parede, na Place Marcel-Aymé
+- 17:30 **Moulin de la Galette** — Ver por fora o moinho Radet, sobre o restaurante, na esquina da Rue Lepic com a Rue Girardon
+- 18:10 **Église Saint-Pierre de Montmartre** — Fachada da igreja medieval, ao lado da Place du Tertre
 - 18:40 [Sacré-Cœur](place:par-sacre-coeur) — **Pôr do sol às 19h18** na escadaria em frente à basílica; a basílica é grátis. Greve no metrô 2: ~20 min a pé até a Gare du Nord e RER E em Magenta
   - via: metrô 2 de Anvers até La Chapelle e RER E em Magenta · 45 min
 - 20:15 [Casa do Gui](place:par-casa-do-gui) — Volta

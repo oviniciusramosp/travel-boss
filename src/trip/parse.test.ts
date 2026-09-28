@@ -110,6 +110,7 @@ const modeCases = [
   ['bus · 10 min', 'transit', 10],
   ['tram · 10 min', 'transit', 10],
   ['ferry · 10 min', 'transit', 10],
+  ['funicular de Montmartre · 25 min', 'transit', 25],
   ['táxi · 10 min', 'taxi', 10],
   ['taxi · 10 min', 'taxi', 10],
   ['uber · 10 min', 'taxi', 10],

@@ -123,7 +123,7 @@ const DURATION_TOKEN =
 
 const MODE_WORDS: { mode: TripLegMode; words: string[] }[] = [
   { mode: 'walk', words: ['a pe', 'walk'] },
-  { mode: 'transit', words: ['metro', 'rer', 'trem', 'train', 'onibus', 'bus', 'tram', 'ferry'] },
+  { mode: 'transit', words: ['metro', 'rer', 'trem', 'train', 'onibus', 'bus', 'tram', 'ferry', 'funicular'] },
   { mode: 'taxi', words: ['taxi', 'uber', 'bolt', 'carro', 'car'] },
   { mode: 'flight', words: ['voo', 'flight'] },
 ];
