@@ -190,11 +190,11 @@ export interface TravelPlace {
   subcategories?: PlaceSubcategory[];
   description: LString;
   /**
-   * Personal rating 1–5 (halves ok). Omit → empty outlined gray stars in UI.
+   * Personal rating 0–5 (halves ok). Omit → empty outlined gray stars in UI.
    */
   rating?: number;
   /**
-   * Google Maps rating 1–5 (halves ok). Omit → empty outlined gray stars.
+   * Google Maps rating 0–5 (halves ok). Omit → empty outlined gray stars.
    */
   googleRating?: number;
   /**

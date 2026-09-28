@@ -2,6 +2,7 @@ import { pickLocale, savePlaceEdits, travelUi, type Locale, type PlaceEdits, typ
 import { el } from '../ui/dom';
 import { iconButton } from '../ui/controls';
 import { icon } from '../ui/icons';
+import { ratingPicker } from '../ui/rating-picker';
 import { readCssTime } from '../ui/motion';
 
 /** Card controls save independently; requests remain ordered even during fast edits. */
@@ -20,6 +21,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
   let pending = 0;
   let failed: PlaceEdits = {};
   const inputs: Partial<Record<'rating' | 'googleRating', HTMLInputElement>> = {};
+  const pickers: Partial<Record<'rating' | 'googleRating', ReturnType<typeof ratingPicker>>> = {};
   const submitted: Partial<Record<'rating' | 'googleRating', string>> = {};
   const sync = () => {
     const label = place.favorite ? text('Remove favorite', 'Remover dos favoritos') : text('Add favorite', 'Favoritar lugar');
@@ -29,7 +31,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
     favorite.replaceChildren(icon('favorite', { size: 18, fill: !!place.favorite }));
     for (const key of ['rating', 'googleRating'] as const) {
       const input = inputs[key];
-      if (input && document.activeElement !== input && !pending && !Object.hasOwn(failed, key)) { input.value = String(place[key] ?? ''); submitted[key] = input.value; }
+      if (input && !pickers[key]?.root.contains(document.activeElement) && !pending && !Object.hasOwn(failed, key)) { input.value = String(place[key] ?? ''); submitted[key] = input.value; pickers[key]?.paint(); }
     }
   };
   const save = (patch: PlaceEdits) => {
@@ -53,14 +55,10 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
     save({ favorite: !place.favorite });
   });
   for (const key of ['googleRating', 'rating'] as const) {
-    const label = el('label', 'tb-place-rating');
     const title = pickLocale(locale, key === 'rating' ? travelUi.ratingMine : travelUi.ratingGoogle);
-    const caption = el('span', undefined, title);
-    const input = el('input', 'tb-input');
-    input.type = 'number'; input.min = '1'; input.max = '5'; input.step = '0.1';
-    input.placeholder = '—';
-    input.setAttribute('aria-label', title);
-    input.setAttribute('data-tip', text('1–5 · clear to remove', '1–5 · apague para remover'));
+    const picker = ratingPicker(title, locale);
+    pickers[key] = picker;
+    const { input } = picker;
     inputs[key] = input;
     let timer = 0;
     submitted[key] = String(place[key] ?? '');
@@ -78,8 +76,7 @@ export function placeEditor(place: TravelPlace, locale: Locale) {
     input.addEventListener('change', flush);
     input.addEventListener('blur', flush);
     input.addEventListener('keydown', (event) => { if (event.key === 'Enter') flush(); });
-    label.append(caption, input);
-    ratings.append(label);
+    ratings.append(picker.root);
   }
   sync();
   return { favorite, ratings, feedback, sync };

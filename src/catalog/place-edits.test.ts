@@ -6,8 +6,14 @@ describe('place edits', () => {
   it('accepts favorites, decimal ratings and clearing a rating', () => {
     expect(readPlaceEdits({ favorite: false, rating: null, googleRating: 4.7 })).toEqual({ favorite: false, rating: null, googleRating: 4.7 });
   });
+  it('keeps zero distinct from an absent score and accepts half stars', () => {
+    expect(readPlaceEdits({ rating: 0, googleRating: 0.5 })).toEqual({ rating: 0, googleRating: 0.5 });
+    const place = withPlaceEdits({ id: 'zero', rating: 4 });
+    syncPlaceEdits({ zero: { rating: 0 } });
+    expect(place.rating).toBe(0);
+  });
   it('rejects unknown fields and invalid ratings', () => {
-    for (const value of [{}, [], { favorite: 1 }, { rating: '4' }, { rating: 0 }, { rating: 6 }, { rating: NaN }, { name: 'x' }]) expect(readPlaceEdits(value)).toBeNull();
+    for (const value of [{}, [], { favorite: 1 }, { rating: '4' }, { rating: -0.5 }, { rating: 6 }, { rating: NaN }, { name: 'x' }]) expect(readPlaceEdits(value)).toBeNull();
   });
   it('keeps existing and resolved records current without overwriting authored defaults', () => {
     const authored = { id: 'test', favorite: true, rating: 4, googleRating: 4.5 };

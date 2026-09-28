@@ -122,3 +122,5 @@ Um arquivo por cidade, `src/data/travel-guide-<cidade>.ts`, registrado em `cityG
 - `src/data/travel-guide.test.ts` falha com id desconhecido, texto vazio ou foto fora do padrão.
 
 Mapa interno: `louvreMapButton` abre `openDialog` com plantas oficiais, níveis e sequência numerada. Coordenadas e roteiro vêm do catálogo; não desenhar caminhos por corredores sem validação. Selecionar uma etapa troca o andar; zoom e arraste ficam dentro da modal.
+
+Seletor de avaliação: `ratingPicker` (`src/ui/rating-picker.ts`) combina estrelas de 0 a 5 em passos de 0,5 com número editável em décimos. Zero é uma nota; campo vazio remove a nota. Setas, Home e End operam as estrelas; o salvamento mantém o controle focado.
