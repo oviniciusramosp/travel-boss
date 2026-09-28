@@ -31,6 +31,54 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'par-mcdonalds-carrousel-du-louvre-autogrill': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SS2FEv6MD4Oa2gzzQoNgZ1XkzHMP54T7s2ZgDjmi_fkkDp97vuoV55DHult81bx9rBOZHe5nC5NE0n7tSBwVt5N3ja3Wp2J-hbSpK8Vz20aAzIpNo4Vua_hXTl8TujVlFogTQV=w408-h306-k-no',
+      "McDonald's Carrousel du Louvre",
+      "McDonald's Carrousel du Louvre",
+      'Google Maps · McDonald’s Carrousel du Louvre',
+    ),
+  ],
+  'par-mcdonalds-louvre-rivoli': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9THUE95Su3WdRb5SqzqHq0KleWjnHkEfi0bVTzui_8Osq3Zz9-6pVFNr54xWYgd6IurLsmMKNcZL-p4E2EE4sIduFzj7j_uJsBi6Q4cVG4UG6RvdzCmto5HHXR2_itGZmpY0BAeNw=w408-h306-k-no',
+      "McDonald's Louvre–Rivoli",
+      "McDonald's Louvre–Rivoli",
+      'Google Maps · McDonald’s Louvre–Rivoli',
+    ),
+  ],
+  'par-mcdonalds-luxembourg-pantheon': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9S9c_IVOUHRoGTKyDkIvNKJpfjN51NxmH-QJcUwxoDX1khzLkhLbiTeyDaEvEkVPEAap2GKWddNfXUn_aN4wVsfbdv_TknYoA8RT19PeApLyuMQakzlAU2KgJ_Rl6UfQbGv8wNlUA=w408-h274-k-no',
+      "McDonald's Luxembourg · Panthéon",
+      "McDonald's Luxembourg · Panthéon",
+      'Google Maps · McDonald’s Luxembourg · Panthéon',
+    ),
+  ],
+  'par-mcdonalds-opera-bld-des-italiens': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QcwY-7YARFkzffp0yi6afTE0CaqcarVQupBTXBLscFIuJ829AwRecg27gRVdFZkTiKALrR7Pz436IGPMy7-VlvEfwg0eB1zBh7aHNGsBzCvHH2kUzo7DUptMLwNADTOqN53ZXa=w426-h240-k-no',
+      "McDonald's Opéra · Boulevard des Italiens",
+      "McDonald's Opéra · Boulevard des Italiens",
+      'Google Maps · McDonald’s Opéra · Boulevard des Italiens',
+    ),
+  ],
+  'par-mcdonalds-place-pigalle': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QEDHfaWXD7nzJDigwTtbKRnCL7QklR4kU_PnY5CUsOvra8UkT1_pBpCxjyEOKFqO7P3v8pU79Gb7K48V0apxfmp-TWjmdJUsVKNsjxg6WwbtJqd4b6ddDTc5KNZP-CclxRj-dGJX5MaK4=w408-h307-k-no',
+      "McDonald's Place Pigalle",
+      "McDonald's Place Pigalle",
+      'Google Maps · McDonald’s Place Pigalle',
+    ),
+  ],
+  'par-mcdonalds-rue-saint-lazare': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QOcSTVuyw6ehiR0Krxlrk6DbtdU41-sZII_d5ZTBdBulZr0WwzuG4Jn6RV0azRGzz-Zlk7wwa-libyUZg0bYIp-BpflD6cwQct4yB9Rh1svFTer9tETcqfDclK5ZhkG9lm5-Tq=w408-h271-k-no',
+      "McDonald's Rue Saint-Lazare",
+      "McDonald's Rue Saint-Lazare",
+      'Google Maps · McDonald’s Rue Saint-Lazare',
+    ),
+  ],
   'par-castellane': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Croissants_dans_une_boulangerie.jpg/960px-Croissants_dans_une_boulangerie.jpg',
@@ -2139,10 +2187,10 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
   'par-mcdonalds-disney': [
     photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Big_Mac_hamburger.jpg/1280px-Big_Mac_hamburger.jpg',
-      'Big Mac (generic photo)',
-      'Big Mac (foto ilustrativa)',
-      'Evan-Amos · CC0 · Wikimedia Commons',
+      '/photos/mcdonalds-disney-village-2026.jpg',
+      "McDonald's Disney Village",
+      "McDonald's Disney Village",
+      'McDonald’s / Disneyland Paris News · 2026',
     ),
   ],
   'par-starbucks-opera': [

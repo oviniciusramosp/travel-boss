@@ -3711,7 +3711,7 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR':
             'McDonald’s na Disney Village (fora dos portões) — refeição barata e fácil depois do rope drop ou quando os parques fecham. Five Guys e Starbucks ficam na mesma faixa do Village.',
         },
-        googleRating: 3.6,
+        googleRating: 3.2,
         // OSM way/1466595233 — Disney Village, Chessy
         lat: 48.86813,
         lng: 2.78564,
@@ -3924,7 +3924,7 @@ export const localTravelCities: TravelCity[] = [
           en: 'The famous Champs-Élysées McDonald’s — touristy, open late, known quantity when you need something easy.',
           'pt-BR': 'O McDonald’s famoso da Champs-Élysées — turístico, abre tarde, opção fácil quando você quer algo previsível.',
         },
-        googleRating: 3.7,
+        googleRating: 3.8,
         lat: 48.8728825,
         lng: 2.2990078,
         address: '140 Av. des Champs-Élysées, 75008 Paris',
