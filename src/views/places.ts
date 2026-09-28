@@ -493,6 +493,7 @@ export function mountCity(
   let expandBtn: HTMLButtonElement | null = null;
 
   let tab: Tab = initial?.tab ?? 'places';
+  let favoritesOnly = false;
   const planner = mountRoutePlanner({
     slug: city.slug,
     places: catalogPlaces,
@@ -542,6 +543,7 @@ export function mountCity(
   const visiblePlaces = (): TravelPlace[] => {
     const needle = fold(query.trim());
     return catalogPlaces.filter((place) => {
+      if (favoritesOnly && !place.favorite) return false;
       if (!needle) return true;
       return blob.get(place.id)?.includes(needle) ?? false;
     });
@@ -580,7 +582,9 @@ export function mountCity(
     if (!currentPlaceId) map.highlight(null);
     // A park's rides are its sub-points: the parent's dots stand for them, so they draw no pin.
     const inner = subPointParents(city);
-    const mapped = catalogPlaces.filter((place) => enabled.has(place.category) && !inner.has(place.id));
+    const mapped = (favoritesOnly ? visiblePlaces() : catalogPlaces).filter(
+      (place) => enabled.has(place.category) && !inner.has(place.id),
+    );
     map.setPins('place', toPins(mapped, 'place', shell.locale(), badges));
     const framing = opts.fit && planner.stopCount() >= 2;
     if (opts.fit && !framing) map.fit();
@@ -689,8 +693,16 @@ export function mountCity(
     const locale = shell.locale();
     const text = copy(locale);
     const places = visiblePlaces();
+    const results = el('div');
+    results.id = 'tb-place-results';
+    results.setAttribute('role', 'tabpanel');
+    results.setAttribute('aria-labelledby', favoritesOnly ? 'tb-places-favorites' : 'tb-places-all');
+    body.append(results);
     if (places.length === 0) {
-      body.append(emptyState(text.emptyPlacesTitle, text.emptyPlaces));
+      results.append(favoritesOnly
+        ? emptyState(pickLocale(locale, { en: 'No favorites found', 'pt-BR': 'Nenhum favorito encontrado' }),
+          pickLocale(locale, { en: 'Mark places with a heart or adjust your search.', 'pt-BR': 'Marque lugares com o coração ou ajuste a busca.' }))
+        : emptyState(text.emptyPlacesTitle, text.emptyPlaces));
       syncExpand();
       return;
     }
@@ -746,21 +758,54 @@ export function mountCity(
         list.append(item);
       }
       section.append(summary, list);
-      body.append(section);
+      results.append(section);
     }
-    for (const kind of ['water', 'toilet'] as const) body.append(amenityGroup(kind, locale));
+    if (!favoritesOnly) {
+      for (const kind of ['water', 'toilet'] as const) results.append(amenityGroup(kind, locale));
+    }
     syncSwitches();
     syncExpand();
   };
 
   const renderPlaceResults = () => {
-    body.querySelectorAll('.tb-group, .tb-cat-head, .tb-place-list, .tb-empty').forEach((node) => node.remove());
+    body.querySelector('#tb-place-results')?.remove();
     appendPlaceGroups();
     keepOrigin();
   };
 
   const renderPlaces = () => {
     body.replaceChildren();
+    const filters = el('div', 'tb-locale tb-place-filters');
+    filters.setAttribute('role', 'tablist');
+    filters.setAttribute('aria-label', pickLocale(shell.locale(), { en: 'Places filter', 'pt-BR': 'Filtrar lugares' }));
+    for (const only of [false, true]) {
+      const button = el('button', undefined, pickLocale(shell.locale(), only
+        ? { en: 'Favorites', 'pt-BR': 'Favoritos' }
+        : { en: 'All', 'pt-BR': 'Todos' }));
+      button.type = 'button';
+      button.id = only ? 'tb-places-favorites' : 'tb-places-all';
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-selected', String(favoritesOnly === only));
+      button.setAttribute('aria-controls', 'tb-place-results');
+      button.addEventListener('click', () => {
+        if (favoritesOnly === only) return;
+        favoritesOnly = only;
+        window.clearTimeout(searchFitTimer);
+        for (const sibling of filters.querySelectorAll('button')) {
+          sibling.setAttribute('aria-selected', String(sibling === button));
+        }
+        segmented(filters);
+        if (currentPlaceId && !visiblePlaces().some((place) => place.id === currentPlaceId)) {
+          closePlace({ focus: false });
+        }
+        paintChrome();
+        renderPlaceResults();
+        showPlacePins({ fit: true, pan: false });
+      });
+      filters.append(button);
+    }
+    segmented(filters);
+    body.append(filters);
     const tools = el('div', 'tb-place-tools');
     const expand = el('button', 'tb-expand');
     expand.type = 'button';
@@ -902,7 +947,11 @@ export function mountCity(
 
   const refreshEdits = () => {
     for (const place of catalogPlaces) blob.set(place.id, searchBlob(place));
-    if (tab === 'places') renderPlaceResults();
+    if (tab === 'places') {
+      paintChrome();
+      renderPlaceResults();
+      showPlacePins({ fit: false, pan: false });
+    }
   };
   window.addEventListener('tb:place-edits', refreshEdits);
 
