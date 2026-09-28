@@ -10,7 +10,7 @@
   --indoor-focus-offset: 2px;
   --indoor-border: 1px;
   --color-canvas: #f5f5f5;
-  --color-budget-average: color-mix(in srgb, var(--color-canvas) 88%, #000000);
+  --color-budget-average: color-mix(in srgb, var(--color-canvas) 95%, #000000);
   --color-paper: #ffffff;
   --color-surface-alt: #fafafa;
   --color-ink: #0a0a0a;
@@ -145,6 +145,7 @@
 /* Saved choice. System dark applies only while data-theme is absent. */
 :root[data-theme='dark'] {
   color-scheme: dark;
+  --color-budget-average: color-mix(in srgb, var(--color-canvas) 95%, #ffffff);
   --color-canvas: #111111;
   --color-paper: #1c1c1c;
   --color-surface-alt: #161616;
@@ -172,6 +173,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
+    --color-budget-average: color-mix(in srgb, var(--color-canvas) 95%, #ffffff);
     --color-canvas: #111111;
     --color-paper: #1c1c1c;
     --color-surface-alt: #161616;
