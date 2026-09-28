@@ -27,6 +27,9 @@ function pushStop(
   }
   if (stop.status && !stop.listNote) lines.push(`  - status: ${stop.status}`);
   if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
+  for (const ride of stop.boardings ?? []) {
+    lines.push(`  - embarque: ${ride.date} · ${ride.service} · ${ride.board} → ${ride.exit} · ${ride.departure} → ${ride.arrival}`);
+  }
 }
 
 function pushDay(lines: string[], day: TripDay, resolvePlace: (placeId: string) => string | null) {

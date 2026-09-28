@@ -20,7 +20,18 @@ export type TripLeg = {
   line?: number;
 };
 
+export type TripBoarding = {
+  date: string;
+  service: string;
+  board: string;
+  exit: string;
+  departure: string;
+  arrival: string;
+};
+
 export type TripStop = {
+  /** Published services checked for this departure stop and date. */
+  boardings?: TripBoarding[];
   /** Missing status means tentative. Only parent stops participate in review. */
   status?: 'a confirmar' | 'confirmado';
   time?: string;
@@ -72,6 +83,7 @@ export type TripCity = {
 };
 
 export type TripErrorCode =
+  | 'boarding-invalid'
   | 'via-no-mode'
   | 'via-no-duration'
   | 'via-many-durations'
@@ -385,6 +397,18 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       const stop = day.stops.at(-1);
       if (stop && (status[1] === 'a confirmar' || status[1] === 'confirmado')) { stop.status = status[1]; continue; }
       if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
+    }
+
+    const boarding = /^[ \t]+- embarque:[ \t]*(.*)$/.exec(line);
+    if (boarding) {
+      const stop = day?.stops.at(-1);
+      const match = /^(\d{4}-\d{2}-\d{2}) · (.+?) · (.+?) → (.+?) · ([0-2]\d:[0-5]\d) → ([0-2]\d:[0-5]\d)$/.exec(boarding[1] ?? '');
+      if (!stop || stop.listNote || !match || Number(match[5]!.slice(0, 2)) > 23 || Number(match[6]!.slice(0, 2)) > 23) {
+        reject(errors, lineNo, 'boarding-invalid');
+      } else {
+        (stop.boardings ??= []).push({ date: match[1]!, service: match[2]!, board: match[3]!, exit: match[4]!, departure: match[5]!, arrival: match[6]! });
+      }
+      continue;
     }
 
     const via = VIA_BULLET.exec(line);

@@ -2,6 +2,7 @@ import { pickLocale, type Locale } from '../catalog';
 import type { TripError, TripErrorCode } from './parse';
 
 const TEXT: Record<TripErrorCode, { en: string; 'pt-BR': string }> = {
+  'boarding-invalid': { en: 'Invalid boarding schedule or missing stop', 'pt-BR': 'Horário de embarque inválido ou sem parada' },
   'via-no-mode': { en: 'via without a mode', 'pt-BR': 'via sem modo' },
   'via-no-duration': { en: 'via without a duration', 'pt-BR': 'via sem duração' },
   'via-many-durations': {

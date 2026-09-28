@@ -225,3 +225,12 @@ Fila na entrada.
     expect(markdown).not.toContain('## Paris');
   });
 });
+
+it('preserves checked boarding metadata through parsing and export', () => {
+  const text = '# Trip\n## Paris\ncity: paris\n### Day\n- 08:10 [Home](place:par-casa-do-gui)\n  - embarque: 2026-10-05 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 08:25 → 08:40';
+  const trip = parseTrip('test', 'test.md', text);
+  expect(trip.cities[0]!.days[0]!.stops).toHaveLength(1);
+  expect(trip.cities[0]!.days[0]!.stops[0]!.boardings?.[0]?.departure).toBe('08:25');
+  expect(tripToMarkdown(trip, () => 'https://example.com')).toContain('embarque: 2026-10-05 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 08:25 → 08:40');
+  expect(parseTrip('test', 'test.md', text.replace('08:25', '29:25')).errors.some(error => error.code === 'boarding-invalid')).toBe(true);
+});

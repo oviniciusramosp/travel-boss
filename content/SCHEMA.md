@@ -181,3 +181,15 @@ The UI shows one card per date, not per `### Dia N`. Nothing here is a new synta
 ## What not to edit for a trip change
 
 Place coordinates, ratings and hotel ranking stay in `src/data`. Hotel and Airbnb search stays on `/api/hotel-search`. A trip file only references place ids.
+
+### Verified departure schedules
+
+Under the departure stop, repeat `  - embarque: YYYY-MM-DD · SERVICE · BOARD → EXIT · HH:mm → HH:mm` for each checked service, in connection order. Date and times are local to the journey. The metadata is not a stop, note, confirmation or budget item. Keep the dated sources in `docs/references/`; never populate it with a duration-based estimate. Example:
+
+```markdown
+- 08:10 [Casa do Gui](place:par-casa-do-gui)
+  - via: RER E + RER A · 55 min
+  - embarque: 2026-10-05 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 08:25 → 08:40
+```
+
+The UI only uses a service when the date, line and both stations match the current route. Exports retain these metadata lines. Missing or mismatched service data must never become a fabricated train departure. Walking departure times are estimates based on the next stop or checked boarding, including connection margins; absent stop times remain unspecified.
