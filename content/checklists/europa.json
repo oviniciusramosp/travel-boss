@@ -1,1 +1,142 @@
-[]
+[
+  {
+    "id": "b4c394ae-3908-4f80-a0cd-b42dcb05951a",
+    "group": "tasks",
+    "text": "Comprar paçoquinhas para o Guilherme",
+    "done": false,
+    "date": "2026-10-02"
+  },
+  {
+    "id": "7be3e574-7a25-40d9-a028-29f0877810d1",
+    "group": "tasks",
+    "text": "Imprimir todos os itinerários da viagem, passagens e hospedagens",
+    "done": false,
+    "date": "2026-10-02"
+  },
+  {
+    "id": "0c96daf8-b5a8-4bf6-9c6b-2c7c59788a4f",
+    "group": "packing",
+    "text": "Passaporte Vinícius",
+    "done": false
+  },
+  {
+    "id": "3cf8fd67-c487-4bfc-b19e-2bc6a7c9db80",
+    "group": "packing",
+    "text": "Passaporte Caroline",
+    "done": false
+  },
+  {
+    "id": "8e81e02d-4b93-48db-8519-0def43568e06",
+    "group": "packing",
+    "text": "Cuecas — quantidade X",
+    "done": false
+  },
+  {
+    "id": "39588f4b-c9ee-45d4-ab14-e0cf23806d76",
+    "group": "packing",
+    "text": "Meias",
+    "done": false
+  },
+  {
+    "id": "073b57c1-5be7-43bf-b473-5545685381c1",
+    "group": "packing",
+    "text": "Calça jeans",
+    "done": false
+  },
+  {
+    "id": "d15783a1-b071-498d-a34f-d13380b4f37a",
+    "group": "packing",
+    "text": "Calça preta",
+    "done": false
+  },
+  {
+    "id": "f73e725e-5978-44d9-a94d-0c42f25fadde",
+    "group": "packing",
+    "text": "Tênis Nike",
+    "done": false
+  },
+  {
+    "id": "de334743-0af9-4a05-b39e-fbe0153aebcc",
+    "group": "packing",
+    "text": "Tênis Adidas",
+    "done": false
+  },
+  {
+    "id": "68f567c3-ae32-4dd8-bf1c-97d6c457a7f4",
+    "group": "packing",
+    "text": "Camisetas",
+    "done": false
+  },
+  {
+    "id": "2027bfc0-40ec-4f68-b89f-66393fb8172c",
+    "group": "packing",
+    "text": "Moletom preto",
+    "done": false
+  },
+  {
+    "id": "05118abb-3f17-4c1a-908c-9877db586da6",
+    "group": "packing",
+    "text": "Moletom bege",
+    "done": false
+  },
+  {
+    "id": "122c37cc-d21f-474e-aa1d-081cbbacc4b1",
+    "group": "packing",
+    "text": "Lã bege",
+    "done": false
+  },
+  {
+    "id": "4d7ca2fa-92e1-4836-98f8-ce28ea7e50b6",
+    "group": "packing",
+    "text": "Lã preta",
+    "done": false
+  },
+  {
+    "id": "2d0af7f6-6e93-4fa7-b1ce-371861bf51fe",
+    "group": "packing",
+    "text": "Shampoo",
+    "done": false
+  },
+  {
+    "id": "9fccc595-959e-483b-b3f7-9efdca88402a",
+    "group": "packing",
+    "text": "Escova de dente",
+    "done": false
+  },
+  {
+    "id": "6069d5fc-16b6-486f-9cfd-69e9ac18e6cf",
+    "group": "packing",
+    "text": "Fio dental",
+    "done": false
+  },
+  {
+    "id": "81ad44fe-1f60-4418-b7f6-7c3373cd94d6",
+    "group": "packing",
+    "text": "Pasta de dente",
+    "done": false
+  },
+  {
+    "id": "414282df-7706-4586-9db4-fd439f9a8a03",
+    "group": "packing",
+    "text": "Pomada em pó para o cabelo",
+    "done": false
+  },
+  {
+    "id": "e81d9f79-8e0c-4170-beba-b62100468796",
+    "group": "packing",
+    "text": "Filtro solar",
+    "done": false
+  },
+  {
+    "id": "77a2ed15-c55b-4460-8198-5d17e02603ba",
+    "group": "packing",
+    "text": "Cotonetes",
+    "done": false
+  },
+  {
+    "id": "caca3db2-ff8c-4233-99e2-d27ec1301c19",
+    "group": "packing",
+    "text": "Cortador de unha",
+    "done": false
+  }
+]
