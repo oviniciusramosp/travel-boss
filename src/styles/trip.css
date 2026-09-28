@@ -3,6 +3,7 @@
 }
 
 .tb-doc > .tb-date__budgets { margin: 0 0 var(--spacing-16); }
+.tb-doc > .tb-date__budgets .tb-budget-chip { background: var(--color-budget-average); }
 
 .tb-trip-tabs { width: fit-content; margin-block: var(--spacing-16); }
 .tb-checklist { max-width: 760px; }
@@ -691,6 +692,11 @@ button.tb-receipt__name {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+.tb-receipt--average .tb-receipt__line { grid-template-columns: minmax(0, max-content) minmax(var(--spacing-8), 1fr) max-content; }
+.tb-receipt--average .tb-receipt__line .tb-receipt__name { grid-column: 1; }
+.tb-receipt--average .tb-receipt__line::before { grid-column: 2; }
+.tb-receipt--average .tb-receipt__amount { grid-column: 3; }
 
 .tb-receipt__line.is-subtotal {
   padding-top: var(--spacing-4);

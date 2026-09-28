@@ -270,10 +270,11 @@ export function overBudget(spent: number, target: number | undefined): number {
 export type BudgetLine = { id: string; food: number; ticket: number; label?: string };
 export type DateBudget = { food: number; ticket: number; lines: BudgetLine[] };
 
-/** One entry per calendar date, including zero-cost days; round only for display. */
+/** Food ignores unbudgeted dates; tickets include every date. Round only for display. */
 export function averageDateBudget(days: readonly Pick<DateBudget, 'food' | 'ticket'>[]): { food: number; ticket: number } {
   const total = days.reduce((sum, day) => ({ food: sum.food + day.food, ticket: sum.ticket + day.ticket }), { food: 0, ticket: 0 });
-  return { food: days.length ? total.food / days.length : 0, ticket: days.length ? total.ticket / days.length : 0 };
+  const foodDays = days.filter((day) => day.food > 0).length;
+  return { food: foodDays ? total.food / foodDays : 0, ticket: days.length ? total.ticket / days.length : 0 };
 }
 
 /**

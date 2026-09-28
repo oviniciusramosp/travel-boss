@@ -22,12 +22,13 @@ import {
 } from './day-plan';
 
 describe('averageDateBudget', () => {
-  it('includes zero-cost dates in both averages and retains cents', () => {
+  it('ignores zero-food dates only for food and retains cents', () => {
     expect(averageDateBudget([{ food: 50, ticket: 12.55 }, { food: 0, ticket: 0 }, { food: 25, ticket: 50 }]))
-      .toEqual({ food: 25, ticket: 62.55 / 3 });
+      .toEqual({ food: 37.5, ticket: 62.55 / 3 });
   });
   it('returns zero without dates and preserves a single day', () => {
     expect(averageDateBudget([])).toEqual({ food: 0, ticket: 0 });
+    expect(averageDateBudget([{ food: 0, ticket: 10 }, { food: 0, ticket: 0 }])).toEqual({ food: 0, ticket: 5 });
     expect(averageDateBudget([{ food: 22.5, ticket: 7 }])).toEqual({ food: 22.5, ticket: 7 });
   });
 });
