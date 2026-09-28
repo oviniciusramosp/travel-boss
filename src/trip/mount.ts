@@ -17,6 +17,7 @@ import { fetchDrivingRoute, fetchWalkingRoute, peekWalkingRoute } from '../map/w
 import { setDocumentTitle } from '../app/router';
 import { readPeriods, writePeriods } from '../app/store';
 import type { TripPush } from './api';
+import { tripChecklist, tripTabs } from './checklist';
 import { changedStopKeys } from './diff';
 import { isTentative, statusPatch } from './status';
 import { googleDirectionsUrl } from './directions';
@@ -419,6 +420,9 @@ export function mountTrip(
   };
   /** A note editor is open. The document repaints when it closes, not under it. */
   let editing = false;
+  let selectedTab = 0;
+  let checklist: HTMLElement | null = null;
+  let checklistLocale: Locale | null = null;
   const onEditing = (open: boolean) => {
     editing = open;
     if (!open) void render();
@@ -1540,7 +1544,6 @@ export function mountTrip(
     unmountWarnings();
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
-    article.append(head);
 
     for (const section of tripDates(trip)) {
       const date = section.date;
@@ -2093,7 +2096,11 @@ export function mountTrip(
       article.append(details);
     }
 
-    main.append(article);
+    if (!checklist || checklistLocale !== locale) {
+      checklist = tripChecklist(id, locale, (open) => { editing = open || Boolean(checklist?.querySelector('[data-checklist-editor]')); });
+      checklistLocale = locale;
+    }
+    main.append(tripTabs(article, checklist, selectedTab, (index) => { selectedTab = index; }, locale), head, article, checklist);
     if (currentStopKey) {
       main
         .querySelector<HTMLElement>(`[data-stop-key="${CSS.escape(currentStopKey)}"]`)
