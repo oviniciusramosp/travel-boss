@@ -585,15 +585,15 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'par-canals': {
     ticket: free,
-    durationMin: 90,
-    durationMax: 180,
-    duration: L('2–3 hours walk (République → Villette)', '2–3h a pé (République → Villette)'),
+    durationMin: 55,
+    durationMax: 75,
+    duration: L('About 1 hour, including breakfast', 'Cerca de 1h, incluindo o café da manhã'),
     bestTime: L('Late afternoon into golden hour', 'Fim da tarde / golden hour'),
     bestDay: L('Weekday afternoon or Sunday stroll', 'Tarde de semana ou domingo devagar'),
     crowdProfile: 'local',
     tips: L(
-      'Stop by Jardin Villemin to eat. Paname Brewing at the Bassin. Return on Metro Line 2 for elevated views.',
-      'Pare no Jardin Villemin para comer. Paname no Bassin. Volte na linha 2 (vista elevada).',
+      'Follow Quai de Valmy south from Rue Eugène-Varlin, with breakfast at Du Pain et des Idées, then continue to République.',
+      'Siga o Quai de Valmy para o sul desde a Rue Eugène-Varlin, com café na Du Pain et des Idées, e termine na République.',
     ),
   },
   'par-bike': {
@@ -1349,7 +1349,11 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'par-brasserie-pres': restaurantVisit(30, 50),
-  'par-chez-janou': restaurantVisit(35, 55, {
+  'par-chez-janou': restaurantVisit(26, 36, {
+    avgPricePerPerson: money(26, 36, L(
+      'One main (€20–30) each and one chocolate mousse (€12) shared by two; drinks excluded. Official menu checked 2026-09-27.',
+      'Um prato (€20–30) por pessoa e uma mousse de chocolate (€12) dividida por dois; sem bebidas. Cardápio oficial consultado em 27/09/2026.',
+    )),
     bestDay: L('Daily; lunch 12:00–15:00, dinner 19:00–00:00', 'Todo dia; almoço 12h–15h, jantar 19h–0h'),
     tips: L(
       'Provençal vibes; the chocolate mousse (€12) is the legend. Book on ZenChef or at 01 42 72 28 41.',

@@ -3184,74 +3184,58 @@ export const localTravelCities: TravelCity[] = [
         },
         category: 'parks',
         description: {
-          en: 'Walk from Place de la République along the canals to Bassin de la Villette — a very Parisian outing. Stop by the water to eat (Jardin Villemin is a great spot). At the Bassin: bars and restaurants, including Paname Brewing Company. A bit further: Parc de la Villette. On the way back, Metro Line 2 has elevated panoramic views over the city.',
-          'pt-BR': 'Andar da Place de la République pelos canais até o Bassin de la Villette — atividade bem gostosa e parisiense. Pare na beira para comer (em frente ao Jardin Villemin é um bom spot). No Bassin: vários bares e restaurantes; Paname Brewing Company tem cerveja própria. Um pouco mais: La Villette. Na volta, a linha 2 do metrô tem vista panorâmica — anda sobre a cidade.',
+          en: 'Walk south along Canal Saint-Martin from Quai de Valmy at Rue Eugène-Varlin to Place de la République, with breakfast at Du Pain et des Idées along the way.',
+          'pt-BR': 'Caminhada para o sul pelo Canal Saint-Martin, do Quai de Valmy na Rue Eugène-Varlin até a Place de la République, com café na Du Pain et des Idées no caminho.',
         },
         googleRating: 4.4,
-        // Pin on canal waterline by Jardin Villemin (not garden centroid)
-        lat: 48.87489,
-        lng: 2.36335,
+        // West bank at Rue Eugène-Varlin; OSM foot routing checked 2026-09-27.
+        lat: 48.877602,
+        lng: 2.365344,
         area: {
           kind: 'polyline',
-          /**
-           * Walk spine: République → Canal Saint-Martin (OSM waterway) →
-           * Bassin de la Villette → Parc de la Villette.
-           * Canal segment decimated from Nominatim/OSM MultiLineString
-           * (not a freehand chord through the garden).
-           */
+          // Canal highlight; sub-points below define the pedestrian route.
           path: [
-            [48.86754, 2.36396], // Place de la République
-            [48.868956, 2.367169], // Join Canal Saint-Martin (Quai de Valmy)
-            [48.873018, 2.363995], // Locks / mid canal
-            [48.873902, 2.363316],
-            [48.874893, 2.363353], // Canal opposite Jardin Villemin
             [48.877483, 2.365585],
-            [48.87834, 2.366324],
-            [48.879692, 2.367485],
-            [48.882273, 2.369705], // Toward Stalingrad / Jaurès
-            [48.883074, 2.370404],
-            [48.884489, 2.371615], // Bassin de la Villette (SW entry)
-            [48.88644, 2.37553], // Bassin centerline
-            [48.888392, 2.379452], // Bassin NE / Paname side
-            [48.891441, 2.385573], // Toward Ourcq / Villette
-            [48.89194, 2.386225],
-            [48.89489, 2.38844], // Parc de la Villette
+            [48.874893, 2.363353],
+            [48.873902, 2.363316],
+            [48.873018, 2.363995],
+            [48.868956, 2.367169],
+            [48.86754, 2.36396],
           ],
         },
-        routeStops: [
+        subPoints: [
           {
-            name: {
-              en: 'Place de la République',
-              'pt-BR': 'Place de la République',
-            },
-            lat: 48.86754,
-            lng: 2.36396,
+            name: { en: 'Quai de Valmy — Rue Eugène-Varlin', 'pt-BR': 'Quai de Valmy — Rue Eugène-Varlin' },
+            lat: 48.877602, lng: 2.365344,
           },
           {
-            // Marker on the canal edge by the park (path passes here)
-            name: { en: 'Jardin Villemin', 'pt-BR': 'Jardin Villemin' },
-            lat: 48.87489,
-            lng: 2.36335,
+            name: { en: 'Canal beside Jardin Villemin', 'pt-BR': 'Canal junto ao Jardin Villemin' },
+            lat: 48.874948, lng: 2.363195,
           },
           {
-            name: {
-              en: 'Bassin de la Villette',
-              'pt-BR': 'Bassin de la Villette',
-            },
-            lat: 48.88644,
-            lng: 2.37553,
+            name: { en: 'Quai de Valmy — Récollets locks', 'pt-BR': 'Quai de Valmy — eclusas dos Récollets' },
+            lat: 48.873029, lng: 2.363978,
           },
           {
-            name: {
-              en: 'Parc de la Villette',
-              'pt-BR': 'Parc de la Villette',
-            },
-            lat: 48.89489,
-            lng: 2.38844,
+            name: { en: 'Du Pain et des Idées', 'pt-BR': 'Du Pain et des Idées' },
+            lat: 48.871197, lng: 2.362886,
+            placeId: 'par-du-pain-idees',
+          },
+          {
+            name: { en: 'Back to Quai de Valmy', 'pt-BR': 'Retorno ao Quai de Valmy' },
+            lat: 48.871155, lng: 2.365665,
+          },
+          {
+            name: { en: 'Quai de Valmy — end of the open canal', 'pt-BR': 'Quai de Valmy — fim do canal a céu aberto' },
+            lat: 48.868829, lng: 2.367078,
+          },
+          {
+            name: { en: 'Place de la République', 'pt-BR': 'Place de la République' },
+            lat: 48.867557, lng: 2.363983,
           },
         ],
-        address: 'Canal Saint-Martin → Bassin de la Villette, Paris',
-        mapsQuery: 'Canal Saint-Martin Paris',
+        address: 'Quai de Valmy / Rue Eugène-Varlin → Place de la République, Paris',
+        mapsQuery: 'Quai de Valmy Rue Eugène Varlin Paris',
       },
       {
         id: 'par-paname-brewing',

@@ -10,8 +10,8 @@ import {
   metro10,
   metro14,
   metro2,
-  metro4,
   metro7,
+  metro8,
   metro9,
   rerA,
   rerB,
@@ -1207,9 +1207,8 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
   // 8/10
-  trainLeg('par-casa-do-gui', 'par-du-pain-idees', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
-  // Simplon, then 1.1 km on foot along Rue Ordener
-  trainLeg('par-naturalia-verrerie', 'par-chez-pradel', 40, [ride(metro4, 'chatelet', 'simplon')]),
+  trainLeg('par-casa-do-gui', 'par-canals', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
+  trainLeg('par-chez-janou', 'par-moulin-rouge', 45, [ride(metro8, 'chemin-vert', 'richelieu')]),
   trainLeg('par-sacre-coeur', 'par-casa-do-gui', 45, [
     ride(metro2, 'anvers', 'la-chapelle'),
     ride(rerE, 'magenta', 'noisy-le-sec'),

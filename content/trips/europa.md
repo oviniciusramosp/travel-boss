@@ -161,30 +161,28 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: ônibus 145 até Jeanne d'Arc e caminhada · 32 min
 - 00:12 [Casa do Gui](place:par-casa-do-gui) — Volta
 
-### Dia 5 — Qui 8/10 · Marais, almoço no Chez Pradel e pôr do sol em Montmartre
+### Dia 5 — Qui 8/10 · Canal Saint-Martin, Marais, almoço no Chez Janou e pôr do sol em Montmartre
 
 - 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Magenta e caminhada até a padaria · 40 min
-- 08:45 [Du Pain et des Idées](place:par-du-pain-idees) — Escargot (~€5–6); só abre de segunda a sexta
-- 09:15 [Canais de Paris](place:par-canals) — Beira do Canal Saint-Martin, a caminho da République
-- 09:50 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615
-- 10:05 [Poilâne (Marais)](place:par-poilane) — Punitions (~€5) e pão para o café da manhã
+  - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy, sem atravessar a ponte
+- 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, terminando na Place de la République
+- 09:05 **Du Pain et des Idées** — **Café da manhã**: escargot de pistache e chocolate (~€5–6); sair às 09:30. Abre de segunda a sexta
+- 09:40 **Place de la République** — Fim da caminhada pelos canais
+- 09:55 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615
 - 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
 - 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
 - 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
 - 12:10 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
 - 12:20 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
-- 12:30 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui. Greve no metrô: ~1h a pé até o Chez Pradel
-  - via: metrô 4 de Châtelet até Simplon e caminhada pela Rue Ordener · 40 min
-- 13:20 [Chez Pradel](place:par-chez-pradel) — **Almoço**: fórmula do vídeo, prato €12,50, dois pratos €15 ou menu completo €18. Chegue até 13h30 para garantir mesa
+- 12:30 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
+- 13:00 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa (€20–30 cada) e uma mousse de chocolate (€12) para dividir em dois; €26–36 por pessoa, sem bebidas. Reservar e sair às 14:05
+  - via: metrô 8 de Chemin Vert até Richelieu–Drouot e caminhada até o Moulin Rouge · 45 min
 - 14:50 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora; daqui, suba a Rue Lepic
 - 15:45 [Charcuterie Arnaud Nicolas (Caulaincourt)](place:par-arnaud-nicolas-caulaincourt) — Croque-monsieur (~€5) para o fim de tarde; fecha às 20h
 - 16:15 [Montmartre](place:par-montmartre) — Place du Tertre e ruelas. Fête des Vendanges (7–11/out): mais gente e programação na rua
 - 18:40 [Sacré-Cœur](place:par-sacre-coeur) — **Pôr do sol às 19h18** na escadaria em frente à basílica; a basílica é grátis. Greve no metrô 2: ~20 min a pé até a Gare du Nord e RER E em Magenta
   - via: metrô 2 de Anvers até La Chapelle e RER E em Magenta · 45 min
 - 20:15 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Almoço alternativo, se o Pradel estiver cheio: [Bouillon Pigalle](place:par-bouillon-pigalle) — a 5 min do Moulin Rouge, sem intervalo desde 12h; steak com fritas €12,60
-- Para almoçar no Marais: [Chez Janou](place:par-chez-janou) (prato provençal ~€20–30 e a mousse de chocolate de €12; reserve pela ZenChef ou no 01 42 72 28 41), [L'As du Fallafel](place:par-as-du-fallafel) (pita ~€7–9) ou [Chez Alain Miam Miam](place:par-alain-miam) (26 Rue Charlot, qua–dom 9h–17h)
 - Se sobrar tempo antes de Montmartre: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur), a 10 min a pé da Naturalia
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
