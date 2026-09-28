@@ -1139,6 +1139,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   trainLeg('par-passage-panoramas', 'par-casa-do-gui', 50, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
+  // Return from breakfast on different streets from the RER approach (Galande / des Anglais).
+  // OSM Rue Frédéric Sauton and Rue de la Bûcherie; checked with the foot router.
+  {
+    from: 'par-maison-isabelle', to: 'par-shakespeare', mode: 'walk',
+    through: [[48.8508365, 2.3490314], [48.8520978, 2.3481998]],
+  },
   trainLeg('par-casa-do-gui', 'par-maison-isabelle', 45, [
     ride(rerE, 'noisy-le-sec', 'magenta'),
     ride(rerB, 'gare-nord', 'saint-michel', GARE_DU_NORD_MAGENTA_MIN),
