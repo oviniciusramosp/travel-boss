@@ -101,8 +101,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:20 [Rue de la Sorbonne](place:par-sorbonne) — Subida até o Panteão
 - 12:35 [Panteão](place:par-pantheon) — ~1h
 - 13:45 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
-- 13:50 [Rôtisserie Segar](place:par-segar) — Comprar um sanduíche de frango por pessoa para levar à Disney no dia seguinte (~€10 cada; confirmar preço no balcão). Fecha às 14h; pedir orientação de conservação até amanhã e manter em bolsa térmica com gelo durante o passeio, na geladeira à noite e novamente refrigerado no trajeto à Disney.
-- 14:00 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: 1 crepe salgado + 1 crepe doce para dividir em 2 (~€16 no total, sem bebidas); aceita cartão
+- 13:50 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: 1 crepe salgado + 1 crepe doce para dividir em 2 (~€16 no total, sem bebidas); aceita cartão
+- 14:25 [Rôtisserie Segar](place:par-segar) — Comprar um sanduíche de frango por pessoa para levar à Disney no dia seguinte (~€10 cada; confirmar preço no balcão). Fecha às 14h; pedir orientação de conservação até amanhã e manter em bolsa térmica com gelo durante o passeio, na geladeira à noite e novamente refrigerado no trajeto à Disney.
 - 14:35 [Fontaine Guy Lartigue](place:par-fontaine-guy-lartigue) — Descida pela Rue Mouffetard até a bacia de cobre vermelho, na Place Georges-Moustaki
   - via: metrô 7 de Censier–Daubenton até Jussieu e metrô 10 até Odéon · 25 min
 - 15:00 [Cour du Commerce Saint-André](place:par-cour-commerce) — Passagem rápida de 10 min para entrar e conhecer a rua, sem parar para comer
