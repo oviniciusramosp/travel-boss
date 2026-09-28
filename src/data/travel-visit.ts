@@ -319,6 +319,12 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  // Croissant winners: prices not verified; do not assume a per-person spend.
+  'par-des-racines-et-du-pain': { crowdProfile: 'cafe' },
+  'par-maison-doucet': { crowdProfile: 'cafe' },
+  'par-chez-meunier-crimee': { crowdProfile: 'cafe' },
+  'par-maison-carton': { crowdProfile: 'cafe' },
+  'par-patisserie-colbert': { crowdProfile: 'cafe' },
   // —— Air / logistics ——
   'par-ory': {
     ticket: free,
