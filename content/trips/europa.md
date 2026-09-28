@@ -11,7 +11,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 - 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
   - status: confirmado
-- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8), logo na saída da alfândega
+- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8); acesso à unidade pelo desembarque público a confirmar
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
   - status: confirmado
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
@@ -168,7 +168,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy, sem atravessar a ponte
 - 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
 - 09:05 [Du Pain et des Idées](place:par-du-pain-idees) — **Café da manhã**: escargot de pistache e chocolate (~€5–6), um pão doce folhado em espiral, não o prato de caracóis. Sair às 09:30; abre de segunda a sexta
-- 09:35 [Canal Saint-Martin — até République](place:par-canals-republique) — Retomar a caminhada para o sul pelo Quai de Valmy
+- 09:35 [Canal Saint-Martin — até République](place:par-canals-republique) — Retomar a caminhada para o sul pelo Quai de Jemmapes; atravessar para o Quai de Valmy na Rue du Faubourg du Temple
 - 09:45 **Place de la République** — Fim da caminhada pelos canais
 - 09:55 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615
 - 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
