@@ -4868,18 +4868,30 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR': 'a caminhada do palácio até o Grand Canal, para o dia contar e a rota ao Trianon sair de lá',
         },
         description: {
-          en: 'Le Nôtre’s gardens below the palace: the Parterre d’Eau, the Latona basin, the Tapis Vert down to Apollo’s basin and the head of the Grand Canal. Musical Gardens days are included in the Passport.',
-          'pt-BR': 'Os jardins de Le Nôtre abaixo do palácio: o Parterre d’Eau, o tanque de Latona, o Tapis Vert descendo até o tanque de Apolo e a cabeceira do Grand Canal. Nos dias de Jardins Musicais, entra no Passport.',
+          en: 'Designed by André Le Nôtre for Louis XIV from 1661, these French formal gardens combine long perspectives, ornamental pools and mythological sculpture. Behind the geometric avenues, enclosed groves reveal marble colonnades, an outdoor ballroom and Apollo’s sculpted grotto.',
+          'pt-BR': 'Projetados por André Le Nôtre para Luís XIV a partir de 1661, os jardins franceses combinam grandes perspectivas, tanques ornamentais e esculturas mitológicas. Atrás das alamedas geométricas, os bosques revelam colunatas de mármore, um salão de baile ao ar livre e a gruta esculpida de Apolo.',
         },
         googleRating: 4.8,
         // Parterre d'Eau, the terrace right below the palace (OSM relation 12446402).
         lat: 48.805084,
         lng: 2.119191,
-        // Down the central axis, in walking order; the route to the Trianon leaves from the canal.
+        // Palace terraces, eastern/northern groves, then western/southern groves and canal.
+        // OSM sources and selection: docs/references/versailles-gardens-2026-09-28.md.
         subPoints: [
           { name: { en: 'Parterre d’Eau', 'pt-BR': 'Parterre d’Eau' }, lat: 48.805084, lng: 2.119191 },
+          { name: { en: 'South Parterre — Orangery view', 'pt-BR': 'Parterre do Midi — vista da Orangerie' }, lat: 48.8037091, lng: 2.1193342, aiSuggested: true },
+          { name: { en: 'Ballroom Grove — Salle de Bal', 'pt-BR': 'Bosque da Salle de Bal' }, lat: 48.8043191, lng: 2.1168242, aiSuggested: true },
           { name: { en: 'Latona basin', 'pt-BR': 'Tanque de Latona' }, lat: 48.8055, lng: 2.117697 },
+          { name: { en: 'Apollo’s Baths Grove', 'pt-BR': 'Bosque dos Banhos de Apolo' }, lat: 48.8066377, lng: 2.1182514, aiSuggested: true },
+          { name: { en: 'Pyramid Fountain', 'pt-BR': 'Fonte da Pirâmide' }, lat: 48.8064846, lng: 2.1210684, aiSuggested: true },
+          { name: { en: 'Dragon Fountain', 'pt-BR': 'Fonte do Dragão' }, lat: 48.8081691, lng: 2.1220999, aiSuggested: true },
+          { name: { en: 'Neptune basin', 'pt-BR': 'Tanque de Netuno' }, lat: 48.8087094, lng: 2.1223241, aiSuggested: true },
+          { name: { en: 'Three Fountains Grove', 'pt-BR': 'Bosque das Três Fontes' }, lat: 48.8074947, lng: 2.1208052, aiSuggested: true },
+          { name: { en: 'Water Theatre Grove', 'pt-BR': 'Bosque do Teatro de Água' }, lat: 48.8080138, lng: 2.1189969, aiSuggested: true },
+          { name: { en: 'Enceladus Grove', 'pt-BR': 'Bosque de Encélado' }, lat: 48.8082025, lng: 2.1125823, aiSuggested: true },
           { name: { en: 'Tapis Vert', 'pt-BR': 'Tapis Vert' }, lat: 48.806562, lng: 2.113692 },
+          { name: { en: 'Mirror Pool', 'pt-BR': 'Tanque do Espelho — Miroir' }, lat: 48.8040797, lng: 2.1125507, aiSuggested: true },
+          { name: { en: 'Colonnade Grove', 'pt-BR': 'Bosque da Colunata' }, lat: 48.8059924, lng: 2.1117159, aiSuggested: true },
           { name: { en: 'Apollo’s basin', 'pt-BR': 'Tanque de Apolo' }, lat: 48.807352, lng: 2.110707 },
           { name: { en: 'Grand Canal', 'pt-BR': 'Grand Canal' }, lat: 48.808737, lng: 2.108834 },
         ],
@@ -4891,8 +4903,12 @@ export const localTravelCities: TravelCity[] = [
             free: true,
             note: { en: 'Included in the Passport; €15 alone on Musical Gardens days', 'pt-BR': 'Incluso no Passport; €15 avulso em dia de Jardins Musicais' },
           },
-          durationMin: 60,
-          durationMax: 90,
+          durationMin: 150,
+          durationMax: 210,
+          tips: {
+            en: 'Allow roughly 2½–3½ hours for the expanded garden walk, excluding lunch. Grove access and fountain displays depend on the day’s programme; Musical Gardens do not run every fountain. The Orangery viewpoint is on the upper South Parterre.',
+            'pt-BR': 'Reserve aproximadamente 2h30–3h30 para o passeio ampliado, sem almoço. O acesso aos bosques e os jogos de água dependem da programação; Jardins Musicais não ligam todas as fontes. A vista da Orangerie fica no Parterre do Midi, no terraço superior.',
+          },
         },
       },
       {
