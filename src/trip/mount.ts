@@ -1686,6 +1686,7 @@ export function mountTrip(
       const budget = dateBudget(placesHere, fares, outside, noFood);
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
+      const receiptStops = new Map<string, { time?: string; select: () => void }>();
       // A date across two cities takes the food target of the city of its first stop.
       const firstStop = rows.find((row) => !row.dated.day.stops[row.stopIndex]?.listNote);
       body.append(
@@ -1698,6 +1699,7 @@ export function mountTrip(
           formatDayTitle(date, locale),
           locale,
           firstStop?.dated.city.budget?.food,
+          (placeId) => receiptStops.get(placeId),
         ),
       );
       // One list per period. A row's list is lists[rowIndex].
@@ -1849,6 +1851,25 @@ export function mountTrip(
                 }
               : undefined,
         });
+        const revealReceiptStop = (control: HTMLElement | null) => {
+          closePlace({ focus: false });
+          details.open = true;
+          const period = item.closest('details.tb-period');
+          if (period instanceof HTMLDetailsElement) period.open = true;
+          releaseLeg();
+          clearStopCurrent();
+          item.setAttribute('aria-current', 'true');
+          requestAnimationFrame(() => {
+            item.scrollIntoView({ block: 'center' });
+            control?.focus({ preventScroll: true });
+          });
+        };
+        if (place && !receiptStops.has(place.id)) {
+          receiptStops.set(place.id, {
+            time: stop.time,
+            select: () => revealReceiptStop(item.querySelector<HTMLElement>('.tb-row__main')),
+          });
+        }
         if (missingPlace) {
           item.classList.add('is-disabled');
           item.setAttribute('aria-disabled', 'true');
@@ -1900,6 +1921,12 @@ export function mountTrip(
               });
             }
             if (subNotes.some((candidate) => candidate.time)) point.append(el('span', 'tb-substop__time', note?.time ?? ''));
+            if (sub.placeId && !receiptStops.has(sub.placeId)) {
+              receiptStops.set(sub.placeId, {
+                time: note?.time,
+                select: () => revealReceiptStop(name),
+              });
+            }
             point.append(dot, name);
             points.append(point);
           });

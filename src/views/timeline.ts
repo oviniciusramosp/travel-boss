@@ -89,8 +89,7 @@ export function foodTarget(
   };
 }
 
-// The date button names the pair, so a chip has no name of its own. With a target, the food
-// chip's tip compares the two; past it, the chip goes bold with a `warning` glyph by the amount.
+// Each chip opens its own receipt; food also shows its target on hover.
 function budgetChip(
   glyph: 'restaurant' | 'local_activity',
   amount: number,
@@ -98,7 +97,8 @@ function budgetChip(
   locale: Locale,
   target: { over: boolean; tip: string } | null = null,
 ): HTMLElement {
-  const chip = el('span', 'tb-budget-chip');
+  const chip = el('button', 'tb-budget-chip');
+  chip.type = 'button';
   chip.classList.add(glyph === 'restaurant' ? 'is-food' : 'is-ticket');
   chip.append(icon(glyph, { size: 16, fill: true }));
   chip.append(el('strong', undefined, formatEur(amount, locale)));
@@ -118,37 +118,29 @@ const RECEIPT_KINDS = [
   { kind: 'ticket', glyph: 'local_activity', label: { en: 'Tickets', 'pt-BR': 'Ingressos' } },
 ] as const;
 
-/**
- * Trip date card: one chip per kind, €0 included. The pair is one button that opens the day's receipt.
- * `goal` is the food target per person of the date's city (`budget:`); tickets have none.
- */
+export type ReceiptStop = { time?: string; select: () => void };
+
+/** Each kind opens its own receipt, including dates with no expenses. */
 export function dateBudgetCards(
   budget: DateBudget,
   nameOf: (id: string) => string,
   title: string,
   locale: Locale,
   goal?: number,
-): HTMLButtonElement {
-  // Both chips always show, €0 included, so tickets sit to the right of food on every date.
-  const button = el('button', 'tb-date__budgets');
-  button.type = 'button';
-  button.dataset.dayAction = 'budget';
-  button.setAttribute('aria-haspopup', 'dialog');
+  stopFor?: (id: string) => ReceiptStop | undefined,
+): HTMLElement {
+  const group = el('div', 'tb-date__budgets');
   const target = foodTarget(budget.food, goal, locale);
-  // The name says the target too: the chip's tip only shows on hover.
-  const [food, ticket] = RECEIPT_KINDS.map(
-    ({ kind, label }) =>
-      `${pickLocale(locale, label)} ${kind === 'food' && target ? target.tip : formatEur(budget[kind], locale)}`,
-  );
-  button.setAttribute('aria-label', `${pickLocale(locale, travelUi.itineraryBudgetGroup)}: ${food}, ${ticket}`);
-  // The receipt says per person; the chip only needs "each".
   const unit = pickLocale(locale, { en: 'each', 'pt-BR': 'cada' });
-  button.append(
-    budgetChip('restaurant', budget.food, unit, locale, target),
-    budgetChip('local_activity', budget.ticket, unit, locale),
-  );
-  button.addEventListener('click', () => openReceipt(budget, nameOf, title, locale, target?.line));
-  return button;
+  for (const { kind, glyph, label } of RECEIPT_KINDS) {
+    const chip = budgetChip(glyph, budget[kind], unit, locale, kind === 'food' ? target : null);
+    chip.dataset.dayAction = 'budget';
+    chip.setAttribute('aria-haspopup', 'dialog');
+    chip.setAttribute('aria-label', `${pickLocale(locale, label)}: ${kind === 'food' && target ? target.tip : formatEur(budget[kind], locale)}`);
+    chip.addEventListener('click', () => openReceipt(budget, kind, nameOf, title, locale, target?.line, stopFor));
+    group.append(chip);
+  }
+  return group;
 }
 
 /** Name on the left, amount at the right edge. */
@@ -159,19 +151,23 @@ function receiptLine(tag: 'li' | 'p', className: string, name: string, amount: n
 }
 
 /**
- * The day's receipt: each place and extra fare per kind, a subtotal per kind, then the total per person.
+ * A single kind's receipt, with links back to the itinerary.
  * `targetLine` (see `foodTarget`) goes under the food subtotal.
  */
 function openReceipt(
   budget: DateBudget,
+  selectedKind: 'food' | 'ticket',
   nameOf: (id: string) => string,
   title: string,
   locale: Locale,
   targetLine?: string,
+  stopFor?: (id: string) => ReceiptStop | undefined,
 ): void {
+  let dialog: HTMLDialogElement;
   const body = el('div', 'tb-receipt__body');
   body.append(el('p', 'tb-receipt__caption', pickLocale(locale, travelUi.itineraryBudgetGroup)));
   for (const { kind, glyph, label } of RECEIPT_KINDS) {
+    if (kind !== selectedKind) continue;
     const lines = budget.lines.filter((line) => line[kind] > 0);
     if (lines.length === 0) continue;
     const group = el('section', `tb-receipt__group is-${kind}`);
@@ -179,18 +175,31 @@ function openReceipt(
     head.append(icon(glyph, { size: 16, fill: true }), pickLocale(locale, label));
     const list = el('ul', 'tb-receipt__lines');
     for (const line of lines) {
-      list.append(receiptLine('li', 'tb-receipt__line', line.label ?? nameOf(line.id), line[kind], locale));
+      const row = receiptLine('li', 'tb-receipt__line', line.label ?? nameOf(line.id), line[kind], locale);
+      const stop = stopFor?.(line.id);
+      if (stop) {
+        const name = el('button', 'tb-receipt__name', line.label ?? nameOf(line.id));
+        name.type = 'button';
+        name.addEventListener('click', () => {
+          dialog.addEventListener('close', () => requestAnimationFrame(stop.select), { once: true });
+          dialog.close();
+        });
+        row.querySelector('.tb-receipt__name')?.replaceWith(name);
+      }
+      row.prepend(el('span', 'tb-receipt__time', stop?.time ?? '—'));
+      list.append(row);
     }
     group.append(head, list, receiptLine('p', 'tb-receipt__line is-subtotal', 'Subtotal', budget[kind], locale));
     if (kind === 'food' && targetLine) group.append(el('p', 'tb-receipt__caption tb-receipt__target', targetLine));
     body.append(group);
   }
-  if (budget.lines.length === 0) {
+  if (!budget.lines.some((line) => line[selectedKind] > 0)) {
     body.append(el('p', 'tb-receipt__caption', pickLocale(locale, { en: 'Nothing to pay this day.', 'pt-BR': 'Nada a pagar neste dia.' })));
   }
   const total = pickLocale(locale, { en: 'Total per person', 'pt-BR': 'Total por pessoa' });
-  body.append(receiptLine('p', 'tb-receipt__line is-total', total, budget.food + budget.ticket, locale));
-  openDialog({ className: 'tb-receipt', title, locale, body: [body] });
+  body.append(receiptLine('p', 'tb-receipt__line is-total', total, budget[selectedKind], locale));
+  const label = pickLocale(locale, RECEIPT_KINDS.find(({ kind }) => kind === selectedKind)!.label);
+  dialog = openDialog({ className: 'tb-receipt', title: `${label} · ${title}`, locale, body: [body] });
 }
 
 /** A stop's line of the date budget: icon and amount per person, each kind above €0. */

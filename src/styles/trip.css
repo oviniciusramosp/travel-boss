@@ -498,7 +498,7 @@
   padding-bottom: var(--inset-card);
 }
 
-/* Both chips are one button: it opens the day's receipt. */
+/* Each chip opens the receipt for its own kind. */
 .tb-date__budgets {
   display: grid;
   grid-auto-columns: minmax(0, 1fr);
@@ -514,21 +514,24 @@
   cursor: pointer;
 }
 
-.tb-date__budgets:focus-visible {
+.tb-date__budgets .tb-budget-chip:focus-visible {
   outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
 
 .tb-date__budgets .tb-budget-chip {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
   justify-content: center;
   transition: background-color var(--dur-instant) var(--ease-out);
 }
 
-.tb-date__budgets:hover .tb-budget-chip {
+.tb-date__budgets .tb-budget-chip:hover {
   background-image: linear-gradient(var(--color-hover), var(--color-hover));
 }
 
-.tb-date__budgets:active .tb-budget-chip {
+.tb-date__budgets .tb-budget-chip:active {
   background-image: linear-gradient(var(--color-press), var(--color-press));
 }
 
@@ -618,7 +621,7 @@
 /* Name, a dotted leader, the amount at the right edge: a receipt line. */
 .tb-receipt__line {
   display: grid;
-  grid-template-columns: minmax(0, max-content) minmax(var(--spacing-8), 1fr) max-content;
+  grid-template-columns: 5ch minmax(0, max-content) minmax(var(--spacing-8), 1fr) max-content;
   column-gap: var(--spacing-4);
   align-items: baseline;
   margin: 0;
@@ -627,20 +630,42 @@
 .tb-receipt__line::before {
   content: '';
   grid-row: 1;
-  grid-column: 2;
+  grid-column: 3;
   align-self: end;
   margin-bottom: 0.35em;
   border-bottom: 1px dotted var(--color-mid-gray);
 }
 
-.tb-receipt__name {
+.tb-receipt__time {
   grid-row: 1;
   grid-column: 1;
+  color: var(--color-mid-gray);
+  font-variant-numeric: tabular-nums;
+}
+
+.tb-receipt__name {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+button.tb-receipt__name {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tb-receipt__line:is(.is-subtotal, .is-total) .tb-receipt__name {
+  grid-column: 1 / 3;
 }
 
 .tb-receipt__amount {
   grid-row: 1;
-  grid-column: 3;
+  grid-column: 4;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
