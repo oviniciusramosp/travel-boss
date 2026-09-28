@@ -130,3 +130,5 @@ Mapa interno: `louvreMapButton` abre `openDialog` com plantas oficiais, níveis 
 Seletor de avaliação: `ratingPicker` (`src/ui/rating-picker.ts`) combina estrelas de 0 a 5 em passos de 0,5 com número editável em décimos. Zero é uma nota; campo vazio remove a nota. Setas, Home e End operam as estrelas; o salvamento mantém o controle focado.
 
 Busca da top bar: `mountSearch` (`src/app/search.ts`) mostra autocomplete em dois grupos, roteiro aberto e catálogo de cidades. Digitar não filtra a tela nem move o mapa; clique ou Enter abre o resultado, setas navegam e Escape fecha. O campo mantém o foco com `aria-activedescendant`. ⌘K/Ctrl K foca a busca. A exportação da top bar é uma exceção autorizada de botão só-ícone, com tooltip explicando cópia e download do roteiro em Markdown.
+
+Círculo de categoria: `placePin` (`src/ui/place-pin.ts`) compartilha o ícone por subcategoria, a cor e o contraste entre timeline e autocomplete. Resultados de paradas no autocomplete mostram `DD Mmm · HH:mm`, omitindo o horário quando não existe no roteiro.

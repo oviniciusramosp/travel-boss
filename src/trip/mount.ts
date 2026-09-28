@@ -1,3 +1,4 @@
+import { placePin as stopPin } from '../ui/place-pin';
 import type { Shell } from '../app/shell';
 import {
   estimateLegDurationMin,
@@ -6,7 +7,6 @@ import {
   googleMapsUrl,
   pickLocale,
   placeCategoryMeta,
-  placePinIconHtml,
   resolveVisit,
   travelUi,
 } from '../catalog';
@@ -66,7 +66,7 @@ import { attachSubPointNotes, stripNoteTitle, walkOrder, type SubPointNote } fro
 import { aiBadge } from '../ui/ai-badge';
 import type { RouteDeps } from './route';
 import type { MapRouteSegment } from '../map/types';
-import { chipTone, circleInk } from '../ui/contrast';
+import { chipTone } from '../ui/contrast';
 import { iconButton } from '../ui/controls';
 import { el } from '../ui/dom';
 import { mapsIconLink } from '../ui/maps-icon';
@@ -149,18 +149,6 @@ function placeById(citySlug: string, placeId: string): TravelPlace | undefined {
   return getTravelCity(citySlug)?.places.find((item) => item.id === placeId);
 }
 
-/** Filled category dot. The glyph stays solid, same as a map pin. */
-function stopPin(place: TravelPlace): HTMLSpanElement {
-  const lead = document.createElement('span');
-  lead.className = 'tb-stop-pin';
-  lead.style.setProperty('--pin-color', placeCategoryMeta[place.category].color);
-  if (circleInk(placeCategoryMeta[place.category].color) === 'on-ink') lead.classList.add('is-on-ink');
-  const markup = document.createElement('template');
-  markup.innerHTML = placePinIconHtml(place.category, place.subcategories);
-  lead.append(markup.content);
-  lead.querySelector('.material-symbols-rounded')?.classList.add('is-16');
-  return lead;
-}
 
 function walkColor(): string {
   return cssToken('--color-walk', '#008fff');

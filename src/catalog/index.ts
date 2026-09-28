@@ -44,6 +44,7 @@ export {
   MAPS_MATERIAL_ICON,
   categoryMaterialName,
   placePinIconHtml,
+  placePinMaterialName,
 } from '../data/travel-categories';
 export { subcategoryLabel } from '../data/travel-subcategories';
 export { cityGuide, foodMeals, marketShelves } from '../data/travel-guide';

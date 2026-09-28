@@ -1136,6 +1136,9 @@ p.tb-meta {
 .tb-search-results[hidden] { display: none; }
 .tb-search-group { min-width: 0; }
 .tb-search-heading { display: block; padding: var(--spacing-8); font-size: var(--text-caption); color: var(--color-mid-gray); }
-.tb-search-option { display: grid; gap: var(--spacing-4); padding: var(--spacing-8); border-radius: var(--r-popover-inner); cursor: pointer; }
+.tb-search-option { display: grid; grid-template-columns: var(--spacing-24) minmax(0, 1fr); align-items: center; gap: var(--spacing-8); padding: var(--spacing-8); border-radius: var(--r-popover-inner); cursor: pointer; }
 .tb-search-option:hover, .tb-search-option[aria-selected="true"] { background: var(--color-canvas); }
 .tb-search-option small { color: var(--color-mid-gray); }
+
+.tb-search-lead { display: flex; align-items: center; justify-content: center; }
+.tb-search-text { display: grid; gap: var(--spacing-4); }
