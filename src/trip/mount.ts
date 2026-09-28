@@ -1,3 +1,4 @@
+import { departureTimes } from './departures';
 import { placePin as stopPin } from '../ui/place-pin';
 import type { Shell } from '../app/shell';
 import {
@@ -1988,6 +1989,9 @@ export function mountTrip(
           const walk: ItineraryLegDef = { from: place.id, to: nextPlace.id, mode: 'walk' };
           legs = [{ ...walk, durationMin: estimateLegDurationMin(walk, routeHop.from, routeHop.to) }];
         }
+        const allTimings = departureTimes(legs, date,
+          subNotes.filter(note => note.time).at(-1)?.time ?? stop.time, nextStop?.time, stop.boardings);
+        const timings = allTimings.filter((_, index) => timelineLegs([legs[index]!]).length > 0);
         legs = timelineLegs(legs);
         // A `via:` price is what the week pass does not cover. It sits on the leg's own row
         // or, when the leg is split into parts, on the first ride: where you pay.
@@ -2019,7 +2023,7 @@ export function mountTrip(
         flushHop();
         lists[rowIndex]!.append(item);
         const appendHop = () => rails.forEach((rail, index) => {
-          const transfer = transferRow(legs[index]!, locale);
+          const transfer = transferRow(legs[index]!, locale, timings[index]);
           if (legs[index] === entry.depart) editLegNote(transfer, entry.depart, city.slug);
           if (index === fareAt) {
             const cost = stopCostEl({ id: '', food: 0, ticket: fare }, locale);

@@ -1425,3 +1425,9 @@ button.tb-receipt__name {
   outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
+
+.tb-list > .tb-transfer > .tb-transfer__time {
+  grid-column: time;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-mid-gray);
+}

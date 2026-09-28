@@ -12,6 +12,7 @@ import {
 } from '../catalog';
 import type { ItineraryLegDef, Locale, TimelineTransferPart } from '../catalog';
 import { legLabel, type TripLeg, type TripLegMode } from '../trip/parse';
+import type { DepartureTime } from '../trip/departures';
 import { chipTone } from '../ui/contrast';
 import { el } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';
@@ -150,8 +151,8 @@ export function transferRowModel(leg: TransferLeg, locale: Locale = 'pt-BR'): Tr
 }
 
 /** One transfer row. `locale` defaults to pt-BR, same as the shell. */
-export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR'): HTMLLIElement {
-  const model = transferRowModel(leg, locale);
+export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR', departure?: DepartureTime): HTMLLIElement {
+  const model = transferRowModel(departure?.durationMin != null ? { ...leg, durationMin: departure.durationMin } : leg, locale);
   const item = el('li', `tb-transfer tb-transfer--${model.mode}`);
   item.setAttribute(
     'aria-label',
@@ -179,6 +180,20 @@ export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR'): HTMLLIE
   }
   if (model.duration) main.append(el('span', 'tb-transfer__duration', model.duration));
 
+  if (departure) {
+    const time = el('span', 'tb-transfer__time', departure.time ?? '—');
+    const label = departure.conflict
+      ? pickLocale(locale, { en: 'Departure conflicts with the planned stop or connection', 'pt-BR': 'Saída em conflito com o horário da parada ou conexão' })
+      : departure.verified
+        ? pickLocale(locale, { en: 'Published departure, checked for this date', 'pt-BR': 'Partida publicada, consultada para esta data' })
+        : departure.time
+          ? pickLocale(locale, { en: 'Estimated walking departure', 'pt-BR': 'Saída prevista a pé (estimativa)' })
+          : pickLocale(locale, { en: 'Departure not verified', 'pt-BR': 'Partida a conferir' });
+    time.setAttribute('data-tip', label);
+    time.setAttribute('aria-label', `${label}${departure.time ? `: ${departure.time}` : ''}`);
+    item.setAttribute('aria-label', `${time.getAttribute('aria-label')}, ${item.getAttribute('aria-label')}`);
+    item.append(time);
+  }
   item.append(lead, main);
   if (model.stations.length) {
     const stations = el('span', 'tb-transfer__stations');
