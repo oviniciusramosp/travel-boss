@@ -15,6 +15,26 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
   const url = `/api/checklists/${encodeURIComponent(id)}`;
   const forms: HTMLFieldSetElement[] = [];
   const groups = new Map<string, { list: HTMLUListElement; count: HTMLElement; empty: HTMLElement; input: HTMLInputElement }>();
+  function scheduleFields(form: HTMLFormElement, group: ChecklistItem['group'], item?: ChecklistItem) {
+    const date = el('input', 'tb-checklist-input');
+    const time = el('input', 'tb-checklist-input');
+    if (group === 'tasks') {
+      const fields = el('div', 'tb-checklist-schedule');
+      for (const [input, type, label] of [
+        [date, 'date', t('Date (optional)', 'Dia (opcional)')],
+        [time, 'time', t('Time (optional)', 'Horário (opcional)')],
+      ] as const) {
+        input.type = type;
+        input.value = item?.[type] ?? '';
+        if (type === 'date') { input.min = '0001-01-01'; input.max = '9999-12-31'; }
+        const field = el('label', 'tb-checklist-field', label);
+        field.append(input);
+        fields.append(field);
+      }
+      form.append(fields);
+    }
+    return { values: () => ({ date: date.value || undefined, time: time.value || undefined }), clear: () => { date.value = ''; time.value = ''; } };
+  }
   async function save(edit: ChecklistEdit, done: () => void) {
     const focus = document.activeElement as HTMLElement | null;
     status.textContent = t('Saving…', 'Salvando…');
@@ -54,6 +74,12 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
       main.setAttribute('aria-label', t('Edit: ', 'Editar: ') + item.text);
       main.setAttribute('data-tip', t('Edit item', 'Editar item'));
       main.querySelector('.tb-row__title')!.textContent = item.text;
+      const schedule = [item.date ? new Intl.DateTimeFormat(locale, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${item.date}T00:00:00Z`)) : '', item.time ?? ''].filter(Boolean).join(' · ');
+      let sub = main.querySelector<HTMLElement>('.tb-row__sub');
+      if (schedule) {
+        if (!sub) { sub = el('span', 'tb-row__sub'); main.append(sub); }
+        sub.textContent = schedule;
+      } else sub?.remove();
       line.classList.toggle('is-done', item.done);
       count(item.group);
     }
@@ -69,6 +95,8 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
       input.setAttribute('aria-label', t('Item text', 'Texto do item'));
       const submit = el('button', 'tb-btn-outline', t('Save', 'Salvar'));
       const cancel = el('button', 'tb-btn-ghost', t('Cancel', 'Cancelar'));
+      form.append(input);
+      const schedule = scheduleFields(form, item.group, item);
       cancel.type = 'button';
       const close = () => { form.remove(); main.hidden = false; onEditing(false); main.focus(); };
       cancel.onclick = close;
@@ -76,10 +104,10 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
       form.onsubmit = (event) => {
         event.preventDefault();
         if (!input.value.trim()) return;
-        const after = { ...item, text: input.value.trim() };
+        const after = { ...item, text: input.value.trim(), ...schedule.values() };
         void save({ before: item, after }, () => { item = after; sync(); close(); });
       };
-      form.append(input, submit, cancel);
+      form.append(submit, cancel);
       main.hidden = true;
       main.after(form);
       input.focus();
@@ -109,16 +137,18 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
     input.setAttribute('aria-label', input.placeholder);
     input.maxLength = 500;
     input.required = true;
-    input.onfocus = () => onEditing(true);
-    input.onblur = () => onEditing(false);
+    form.onfocusin = () => onEditing(true);
+    form.onfocusout = (event) => { if (!form.contains(event.relatedTarget as Node | null)) onEditing(false); };
     const add = el('button', 'tb-btn-outline', t('Add', 'Adicionar'));
+    form.append(input);
+    const schedule = scheduleFields(form, key);
     form.onsubmit = (event) => {
       event.preventDefault();
       if (!input.value.trim()) return;
-      const after = { id: crypto.randomUUID(), group: key, text: input.value.trim(), done: false };
-      void save({ before: null, after }, () => { addItem(after); input.value = ''; input.focus(); });
+      const after = { id: crypto.randomUUID(), group: key, text: input.value.trim(), done: false, ...schedule.values() };
+      void save({ before: null, after }, () => { addItem(after); input.value = ''; schedule.clear(); input.focus(); });
     };
-    form.append(input, add);
+    form.append(add);
     card.append(heading, progress, list, empty, form);
     panel.append(card);
     groups.set(key, { list, count: progress, empty, input });

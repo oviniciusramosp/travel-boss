@@ -3,6 +3,20 @@ import { editChecklist, type ChecklistItem } from './checklist-state';
 
 const item: ChecklistItem = { id: 'one', group: 'tasks', text: 'Passaporte', done: false };
 describe('checklist edits', () => {
+  it('supports independent optional date and time, including clearing them', () => {
+    for (const schedule of [{ date: '2026-10-02' }, { time: '09:30' }, { date: '2028-02-29', time: '23:59' }]) {
+      const after = { ...item, ...schedule };
+      expect(editChecklist([item], { before: item, after })).toEqual([after]);
+      expect(editChecklist([after], { before: after, after: item })).toEqual([item]);
+      expect(editChecklist([after], { before: item, after: null })).toBeNull();
+    }
+  });
+  it('rejects invalid dates, times and schedules on packing items', () => {
+    for (const schedule of [{ date: '2026-02-29' }, { date: '2026-13-02' }, { date: '' }, { date: 2026 },
+      { time: '24:00' }, { time: '12:60' }, { time: '' }, { time: null }, { group: 'packing', date: '2026-10-02' }]) {
+      expect(editChecklist([], { before: null, after: { ...item, ...schedule } })).toBeNull();
+    }
+  });
   it('adds, edits, completes and deletes a single item', () => {
     expect(editChecklist([], { before: null, after: item })).toEqual([item]);
     const after = { ...item, text: 'Documentos', done: true };

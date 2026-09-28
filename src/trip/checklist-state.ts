@@ -1,5 +1,11 @@
-export type ChecklistItem = { id: string; group: 'tasks' | 'packing'; text: string; done: boolean };
+export type ChecklistItem = { id: string; group: 'tasks' | 'packing'; text: string; done: boolean; date?: string; time?: string };
 export type ChecklistEdit = { before: ChecklistItem | null; after: ChecklistItem | null };
+
+function validDate(value: unknown): boolean {
+  if (typeof value !== 'string' || !/^(?!0000)\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
 
 function isItem(value: unknown): value is ChecklistItem {
   if (!value || typeof value !== 'object') return false;
@@ -7,7 +13,9 @@ function isItem(value: unknown): value is ChecklistItem {
   return typeof item.id === 'string' && /^[\w-]{1,80}$/.test(item.id)
     && (item.group === 'tasks' || item.group === 'packing')
     && typeof item.text === 'string' && item.text.trim().length > 0 && item.text.length <= 500
-    && typeof item.done === 'boolean';
+    && typeof item.done === 'boolean'
+    && (item.date === undefined || item.group === 'tasks' && validDate(item.date))
+    && (item.time === undefined || item.group === 'tasks' && typeof item.time === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(item.time));
 }
 
 /** Apply one item edit; reject stale edits instead of overwriting another tab. */
@@ -20,6 +28,7 @@ export function editChecklist(items: ChecklistItem[], value: unknown): Checklist
   const index = items.findIndex((item) => item.id === id);
   if (!before) return index < 0 ? [...items, after!] : null;
   const current = items[index];
-  if (!current || current.group !== before.group || current.text !== before.text || current.done !== before.done) return null;
+  if (!current || current.group !== before.group || current.text !== before.text || current.done !== before.done
+    || current.date !== before.date || current.time !== before.time) return null;
   return items.flatMap((item) => item.id === id ? after ? [after] : [] : [item]);
 }
