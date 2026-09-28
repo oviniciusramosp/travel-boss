@@ -1606,6 +1606,24 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Pizza €14 (uma dá para dois), massa €13, bowl €8,50. Água da torneira grátis.\nAbre às 11h; sem pedido pelo app. Salão grande, costuma ter lugar.',
     ),
   },
+  'par-dlp-chalet-marionnette': {
+    avgPricePerPerson: money(8.25, undefined, L(
+      'Planned shared meal: one €16.50 half-chicken menu for two, including fries or salad and a 50 cl drink (official 09/2026 menu).',
+      'Refeição planejada para dividir: um menu de meio frango de €16,50 para dois, com batatas ou salada e bebida de 50 cl (menu oficial 09/2026).',
+    )),
+    durationMin: 30,
+    durationMax: 45,
+    tips: L('Check the opening hours for your visit date in the Disney app.', 'Conferir no app Disney o horário de funcionamento no dia da visita.'),
+  },
+  'par-segar': {
+    avgPricePerPerson: money(10, undefined, L(
+      'Budget for one takeaway sandwich for the next day. Mayo/curry listed at €10 on Deliveroo; counter price to confirm.',
+      'Reserva para um sanduíche para viagem, a consumir no dia seguinte. Maionese/curry a €10 no Deliveroo; confirmar preço no balcão.',
+    )),
+    durationMin: 10,
+    durationMax: 10,
+    tips: L('Tuesday: 10:30–14:00 and 16:30–19:30 (Google Maps, checked 27/09/2026).', 'Terça: 10h30–14h e 16h30–19h30 (Google Maps, consultado em 27/09/2026).'),
+  },
   'par-dlp-casa-de-coco': {
     avgPricePerPerson: money(12, 16),
     durationMin: 30,

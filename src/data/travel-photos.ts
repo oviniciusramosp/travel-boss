@@ -33,6 +33,14 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'par-dlp-chalet-marionnette': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Roast_Chicken_Hot_Plate.jpg/500px-Roast_Chicken_Hot_Plate.jpg',
+      'Roast chicken (illustrative photo, not the restaurant’s dish)',
+      'Frango assado (foto ilustrativa, não é o prato do restaurante)',
+      'safaritravelplus / Wikimedia Commons — CC0',
+    ),
+  ],
   'par-sweet-lab': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Flan_p%C3%A2tissier_bron.jpg/960px-Flan_p%C3%A2tissier_bron.jpg',

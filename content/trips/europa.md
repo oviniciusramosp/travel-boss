@@ -100,6 +100,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:20 [Rue de la Sorbonne](place:par-sorbonne) — Subida até o Panteão
 - 12:35 [Panteão](place:par-pantheon) — ~1h
 - 13:45 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
+- 13:50 [Rôtisserie Segar](place:par-segar) — Comprar um sanduíche de frango por pessoa para levar à Disney no dia seguinte (~€10 cada; confirmar preço no balcão). Fecha às 14h; pedir orientação de conservação até amanhã e manter em bolsa térmica com gelo durante o passeio, na geladeira à noite e novamente refrigerado no trajeto à Disney.
 - 14:00 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: 1 crepe salgado + 1 crepe doce para dividir em 2 (~€16 no total, sem bebidas); aceita cartão
 - 14:35 [Fontaine Guy Lartigue](place:par-fontaine-guy-lartigue) — Descida pela Rue Mouffetard até a bacia de cobre vermelho, na Place Georges-Moustaki
   - via: metrô 7 de Censier–Daubenton até Jussieu e metrô 10 até Odéon · 25 min
@@ -117,7 +118,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ### Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos
 
-- 07:35 [Casa do Gui](place:par-casa-do-gui) — Saída com garrafa de água (há bebedouros nos parques) e lanche de casa, que é permitido.
+- 07:35 [Casa do Gui](place:par-casa-do-gui) — Saída com garrafa de água (há bebedouros nos parques) e um sanduíche da Segar por pessoa, comprado ontem, em bolsa térmica com gelo.
   - via: a pé · 10 min
 - 07:45 [Gare de Noisy-le-Sec](place:par-noisy-le-sec-rer) — RER E das 07:51 sentido Tournan (o contrário de Paris) e, em Val de Fontenay, RER A das 08:02; chega às 08:30.\
   Se perder: 08:00 e 08:09, chegando às 08:35.
@@ -147,13 +148,13 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 17:10 **Phantom Manor** — ~15–22 min de fila à tarde e até ~9 min à noite. Ao lado, o **Unlucky Nugget Saloon**, só no Halloween: o saloon vira a festa do casamento que nunca aconteceu, com cardápio temático (~€30 em 2025)
 - 17:40 Halloween em Frontierland e Adventureland: Dr. Facilier em Frontierland, o Día de los Muertos em volta da Casa de Coco e a foto na Skull Rock
 - 18:00 **Piratas do Caribe** — ~25 min de fila à tarde, ~15 à noite. Depois das 19h cai para até ~9 min: vale repetir
-- 18:30 **Casa de Coco** — **Jantar**: burrito €12 e churros €4,30, com água da torneira grátis. Peça pelo app
+- 18:30 **Au Chalet de la Marionnette** — **Jantar**: dividir em dois um menu de meio frango assado + batatas fritas ou salada + bebida de 50 cl (€16,50 no total; €8,25 por pessoa). Fica entre Piratas do Caribe e Peter Pan; confirmar no app o horário de funcionamento neste dia.
 - 19:30 **Peter Pan's Flight** — Voo suspenso sobre Londres, de capacidade baixa: ~55 min de fila à tarde e ~40 à noite. Depois do jantar é a hora
 - 20:15 **Casey's Corner** — Stitch vampiro no coreto e, no caminho, as abóboras do Mickey e as velas do Donald na Town Square: foto antes de pegar lugar para o show
 - +3 km — filas e idas e voltas entre as áreas do parque (estimativa)
 - Se sobrar tempo: Piratas e Phantom Manor de novo, com fila curta. Opcional: **Star Wars Hyperspace Mountain**, montanha-russa com looping, com 16–21 min de fila depois das 20h
 - 20:45 **Disney Tales of Magic** — **Lugar para os fogos** no eixo da Main Street com o castelo, junto ao quiosque técnico do Casey's Corner: o melhor ponto para foto e vídeo, e o mais rápido para sair. Ali costuma encher 30–45 min antes; chegando 1h15 antes, sobra margem. A Central Plaza, mais perto do castelo, pede 1h–1h30 (chegue às 20h30). Lanche para a espera: hot dog do Casey's Corner (€10,50, pelo app, até 21h30). O show começa às 22h (~20 min), com projeções, fogos e lasers; confirme o horário no app no dia
-- Outras opções baratas lá dentro: Toad Hall (fish & chips €12, até 17h), Au Chalet de la Marionnette (meio frango €12) e, no Adventure World, o [Stark Factory](place:par-daw-stark-factory) (pizza de €14 que dá para duas pessoas). O Colonel Hathi's está fechado até 15/10. Fora dos portões: [McDonald's Disney Village](place:par-mcdonalds-disney) (fila de mais de 30 min: peça nos totens) e Earl of Sandwich
+- Outras opções baratas lá dentro: Toad Hall (fish & chips €12, até 17h) e, no Adventure World, o [Stark Factory](place:par-daw-stark-factory) (pizza de €14 que dá para duas pessoas). O Colonel Hathi's está fechado até 15/10. Fora dos portões: [McDonald's Disney Village](place:par-mcdonalds-disney) (fila de mais de 30 min: peça nos totens) e Earl of Sandwich
 - 22:56 [Marne-la-Vallée–Chessy](place:par-chessy-rer) — RER A das 22:56 sentido Paris, com a Navigo Semaine: sobra ~35 min depois do show para sair sem correria
   - via: RER A até Val de Fontenay · 26 min
 - 23:22 [Val de Fontenay](place:par-val-de-fontenay-rer) — Sem RER E depois das 22h30 (obras de modernização). Ônibus 145 das 23:40, na Gare de Val de Fontenay, até a parada Jeanne d'Arc; o próximo sai às 00:00

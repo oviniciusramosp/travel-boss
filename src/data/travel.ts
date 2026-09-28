@@ -3578,7 +3578,7 @@ export const localTravelCities: TravelCity[] = [
           { name: { en: 'Phantom Manor', 'pt-BR': 'Phantom Manor' }, lat: 48.8706, lng: 2.7768, placeId: 'par-dlp-phantom-manor', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Disneyland_Paris_-_4481390960.jpg/500px-Disneyland_Paris_-_4481390960.jpg' },
           { name: { en: 'Pirates of the Caribbean', 'pt-BR': 'Piratas do Caribe' }, lat: 48.8735, lng: 2.7728, placeId: 'par-dlp-pirates', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pirates_of_the_Caribbean_-_panoramio.jpg/500px-Pirates_of_the_Caribbean_-_panoramio.jpg' },
           { name: { en: 'Skull Rock', 'pt-BR': 'Skull Rock' }, description: { en: 'The 12-metre skull-shaped rock at Adventure Isle, overlooking Cannonball Cove beside the pirate galleon. Inspired by Peter Pan; when access is open, explore inside and look out through its mouth and eyes.', 'pt-BR': 'Rocha de 12 metros em forma de caveira na Adventure Isle, diante da Cannonball Cove e ao lado do galeão pirata. Inspirada em Peter Pan; quando o acesso estiver aberto, explore por dentro e olhe a paisagem pela boca e pelos olhos.' }, lat: 48.873041, lng: 2.773487, aiSuggested: true },
-          { name: { en: 'Casa de Coco', 'pt-BR': 'Casa de Coco' }, lat: 48.871759, lng: 2.774672, placeId: 'par-dlp-casa-de-coco' },
+          { name: { en: 'Au Chalet de la Marionnette', 'pt-BR': 'Au Chalet de la Marionnette' }, lat: 48.8733038, lng: 2.774716, placeId: 'par-dlp-chalet-marionnette' },
           { name: { en: 'Disney Tales of Magic, viewing spot', 'pt-BR': 'Disney Tales of Magic, lugar para os fogos' }, lat: 48.87225, lng: 2.77723, placeId: 'par-dlp-tales-of-magic', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg/500px-Parc_Disneyland_-_Chessy_%28FR77%29_-_2025-10-13_-_33.jpg' },
         ],
         address: 'Boulevard de Parc, 77700 Chessy',
@@ -3791,6 +3791,21 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.7768,
         address: 'Frontierland, Disneyland Park, 77700 Chessy',
         mapsQuery: 'Phantom Manor Disneyland Paris',
+      },
+      {
+        id: 'par-dlp-chalet-marionnette',
+        name: { en: 'Au Chalet de la Marionnette', 'pt-BR': 'Au Chalet de la Marionnette' },
+        category: 'restaurants',
+        subcategories: ['chicken'],
+        description: {
+          en: 'Pinocchio-themed counter service in Fantasyland, between Pirates of the Caribbean and Peter Pan. Roast chicken, hot dogs and burgers.',
+          'pt-BR': 'Restaurante de balcão inspirado em Pinóquio, na Fantasyland, entre Piratas do Caribe e Peter Pan. Frango assado, hot dogs e hambúrgueres.',
+        },
+        // OSM way/1267201550, checked 2026-09-27.
+        lat: 48.8733038,
+        lng: 2.774716,
+        address: 'Fantasyland, Disneyland Park, 77700 Chessy',
+        mapsQuery: 'Au Chalet de la Marionnette Disneyland Paris',
       },
       {
         id: 'par-dlp-casa-de-coco',

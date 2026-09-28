@@ -374,6 +374,8 @@ describe('Disney two-park budget', () => {
     expect(parkBudget('par-disney-adventure-world')).toMatchObject({ ticket: 73.67, food: 0 });
     const afternoon = parkBudget('par-disneyland');
     expect(afternoon.ticket).toBe(0);
+    expect(afternoon.lines.find((line) => line.id === 'par-dlp-chalet-marionnette')?.food).toBe(8.25);
+    expect(afternoon.lines.some((line) => line.id === 'par-dlp-casa-de-coco')).toBe(false);
     expect(afternoon.lines.some((line) => line.id === 'par-bella-notte' && line.food > 0)).toBe(true);
   });
 });

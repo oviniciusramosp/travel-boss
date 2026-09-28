@@ -30,3 +30,12 @@ Há alternativas viáveis, portanto não é obrigatório aumentar o gasto do dia
 ## Ingresso
 
 Apenas realocação do valor já pago e registrado no catálogo: €221/3 = €73,67/pessoa, agora no primeiro parque (Disney Adventure World). Não é nova cotação nem cobrança adicional.
+
+## Escolha aplicada — 27/09/2026
+
+- Usuário escolheu dividir um menu de meio frango no Chalet. Ao abrir o PDF completo (versão 09/26), o preço atualizado é **€16,50**, corrigindo os €16 do resultado indexado anterior. Com batatas ou salada e bebida de 50 cl: **€8,25/pessoa para dois**. Substitui a Casa de Coco no subponto e no gasto; almoço Bella Notte permanece.
+- Localização OSM: way/1267201550, centro 48.8733038, 2.7747160, retornado por https://nominatim.openstreetmap.org/search?q=Au%20Chalet%20de%20la%20Marionnette&format=json . Entre Pirates (48.8735, 2.7728) e Peter Pan (48.873757, 2.773746), junto à passagem Adventureland/Fantasyland; jantar mantido às 18h30. A sequência evita voltar à Frontierland para a Casa de Coco. Funcionamento específico de 7/10 segue a conferir no app.
+- Segar: compra às **13h50 de 6/10**, entre Rue Mouffetard e Au P’tit Grec. Google Maps consultado diretamente confirmou terça **10h30–14h / 16h30–19h30**. https://www.google.com/maps/search/?api=1&hl=en&query=Rotisserie+Segar+111+Rue+Mouffetard+Paris
+- Menu de venda publicado no Deliveroo: sanduíche frango/maionese ou curry €10; César €11,50. Reserva no orçamento **€10/pessoa**, preço de balcão a confirmar. Gasto no dia da compra, sem segunda cobrança no dia 7. https://deliveroo.fr/fr/menu/Paris/paris-5eme-jardin-des-plantes-monge/rotisserie-segar-111-rue-mouffetard
+- A compra antecipada de sanduíche de frango exige manter frio durante o restante do passeio do dia 6, guardar na geladeira à noite e transportar refrigerado no dia 7; perguntar à loja a conservação até o dia seguinte. Referência: https://agriculture.gouv.fr/alimentation-les-bons-gestes-de-lete . Sem cadeia fria, essa compra às 13h50 para consumir no dia seguinte não é um plano adequado.
+- Foto do Chalet: frango ilustrativo, identificado como tal no alt; safaritravelplus, CC0. https://commons.wikimedia.org/wiki/File:Roast_Chicken_Hot_Plate.jpg
