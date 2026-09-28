@@ -6,7 +6,8 @@ describe('location audit', () => {
   it('keeps reviewed business pins synchronized with their exact Maps destinations', () => {
     const places = travelCities.flatMap(city => city.places);
     for (const id of ['par-bohemia', 'par-starbucks-opera', 'par-chez-janou',
-      'par-bien-eleve', 'par-chez-elo', 'par-maison-isabelle']) {
+      'par-bien-eleve', 'par-chez-elo', 'par-maison-isabelle', 'par-felicita',
+      'par-franklin-passy', 'par-francette', 'par-bakery-gaite', 'par-paul-defense']) {
       const place = places.find(p => p.id === id);
       expect(place, id).toBeDefined();
       expect(auditPin(place!).status, id).toBe('coordinate-match');

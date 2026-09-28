@@ -28,7 +28,26 @@ Nome, unidade, endereço e coordenadas foram lidos nas fichas do Google Maps. Os
 
 Outros conflitos que merecem conferência: Amorino (pino x endereço da Île Saint-Louis), Five Guys Rivoli (pino x nº 105) e Paris Bakery & Co. Não corrigir pelo endereço isolado: pode ser esse campo que está errado. A Maison d’Isabelle demonstrou esse risco (número incompleto).
 
-Os dez destinos com divergência >25 m: `par-jardin-plantes`, `par-buttes-chaumont`, `par-palais`, `par-palais-royal`, `par-paul-defense`, `par-chessy-rer`, `par-cdg-rer`, `par-val-de-fontenay-rer`, `par-chapelle-saint-louis`, `par-bnf`. Muitos são áreas ou estações e a diferença pode corresponder ao ponto de entrada ou centro; precisam de revisão, não de sincronização automática. O link de `par-bnf` também deve ser conferido quanto a biblioteca versus estação homônima.
+Os dez destinos com divergência >25 m na triagem inicial: `par-jardin-plantes`, `par-buttes-chaumont`, `par-palais`, `par-palais-royal`, `par-paul-defense`, `par-chessy-rer`, `par-cdg-rer`, `par-val-de-fontenay-rer`, `par-chapelle-saint-louis`, `par-bnf`. Muitos são áreas ou estações e a diferença pode corresponder ao ponto de entrada ou centro; precisam de revisão, não de sincronização automática. A conferência posterior confirmou que o link de `par-bnf` é da biblioteca François-Mitterrand, não da estação: a diferença de 29 m ocorre dentro do complexo.
+
+## Auditoria paralela do catálogo Paris
+
+Inventário inicial desta etapa: 259 lugares de Paris, dos quais 100 referenciados nos arquivos de roteiro e 159 restantes, além de 81 subpontos. Três revisores conferem primeiro os 100 prioritários; a revisão principal trata 40 registros restantes com links e conflitos conhecidos. Resultados individuais, fontes e ressalvas ficam em [paris-location-audit-2026-09-28](paris-location-audit-2026-09-28/). A auditoria está em andamento; os registros concluídos não certificam os ainda ausentes.
+
+Primeiro lote de correções desta etapa:
+
+| Registro | Correção | Evidência |
+| --- | --- | --- |
+| Paris & Co Convention | Pino ~816 m fora; link abria Gaîté. Mantida a unidade Convention já pretendida; corrigidos pino/link e nome explícito. | Google Maps + [site da padaria](https://boulangerieparisandco.fr/2-accueil) |
+| Le Franklin Passy | Pino ~192 m fora, corrigido no nº 1 rue Benjamin Franklin. | Ficha Maps da unidade |
+| Francette | Pino ~338 m fora, corrigido para a embarcação no Port de Suffren. | Maps + [restaurante](https://fugafamily.com/restaurants/francette) |
+| La Felicità | Pino ~83 m deslocado do estabelecimento; corrigido e link canônico registrado. | Maps + [restaurante](https://www.lafelicita.fr/) |
+| PAUL La Défense | Pino ~78 m distante da unidade já selecionada pelo link; alinhado a ela. | Ficha Maps cadastrada |
+| Amorino | Nome/endereço/consulta agora Beaubourg, unidade correspondente ao pino e link existentes. Não é a Île Saint-Louis. | Maps + [localizador oficial](https://www.amorino.com/en/storelocator) |
+| Five Guys | Nome/endereço/consulta agora Châtelet Les Halles, 1 place Joachim du Bellay, conforme pino/link existentes. | Maps + [ficha oficial](https://restaurants.fiveguys.fr/ile-de-france/1-place-joachim-du-belay) |
+| Michalak Étienne Marcel | Código postal 75001, sem mudança de pino. | [Site oficial](https://www.christophemichalak.com/) |
+
+`verified` nos arquivos de evidência significa localização/identidade conferidas com as ressalvas registradas; não comprova horário futuro, disponibilidade, ingresso ou cada porta de acesso. `correction` registra divergência encontrada, com a aplicação descrita no relatório. `ambiguous`/`blocked` permanecem pendências. O resultado do geocodificador reverso sozinho não foi aceito como prova de unidade: no Moulin Rouge, por exemplo, ele retornou o endereço de um vizinho, embora o pino da atração estivesse correto.
 
 ## Como repetir e concluir
 
