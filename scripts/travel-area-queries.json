@@ -605,6 +605,15 @@
       "note": "MANUAL: multipolygon of both Haussmann buildings (W69224062 + W69224141)"
     },
     {
+      "id": "par-bnf-richelieu",
+      "q": "Bibliothèque nationale de France Richelieu, Paris, France",
+      "lat": 48.8673812,
+      "lng": 2.3384826,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "MANUAL: building outer outline R545655 / W54567992 (RDP 0.4 m)"
+    },
+    {
       "id": "par-opera",
       "q": "Opéra Garnier, Paris, France",
       "lat": 48.8719,

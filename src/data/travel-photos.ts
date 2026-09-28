@@ -365,6 +365,18 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Sala Oval da BnF Richelieu',
       'ZeusUpsistos / Wikimedia Commons — CC BY-SA 4.0',
     ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/BNF_Richelieu_Plafond_Salle_Ovale.jpg/500px-BNF_Richelieu_Plafond_Salle_Ovale.jpg',
+      'Glass ceiling and upper galleries of the Oval Room',
+      'Teto de vidro e galerias superiores da Sala Oval',
+      'ZeusUpsistos / Wikimedia Commons — CC BY-SA 4.0',
+    ),
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/BNF_Richelieu_-_Salle_ovale_20260724_114846.jpg/500px-BNF_Richelieu_-_Salle_ovale_20260724_114846.jpg',
+      'Reading desks and shelves in the Oval Room, July 2026',
+      'Mesas de leitura e estantes da Sala Oval, julho de 2026',
+      'OwenBlacker / Wikimedia Commons — CC0',
+    ),
   ],
   // Perto da BnF (IA, set/2026)
   'par-fuuki': [

@@ -37,6 +37,7 @@ export const OSM_AREA_IDS: ReadonlySet<string> = new Set([
   'par-boulogne',
   'par-bourse-commerce',
   'par-buttes-chaumont',
+  'par-bnf-richelieu',
   'par-carnavalet',
   'par-cdg',
   'par-champ-mars',

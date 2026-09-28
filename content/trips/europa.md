@@ -218,7 +218,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Haussmann–Saint-Lazare e caminhada até o Baguett’s · 50 min
 - 09:00 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã / brunch**: pancakes ou pain perdu; abre às 9h no sábado. Sair até 10h
-- 10:15 [BnF Richelieu — Sala Oval](place:par-bnf-richelieu) — Conhecer a sala oval e o Jardin Vivienne, com entrada gratuita pela 5 rue Vivienne; reservar 1h15 e sair às 11h30
+- 10:15 [BnF Richelieu — Sala Oval](place:par-bnf-richelieu) — Sala oval e Jardin Vivienne: entrada gratuita, sem ingresso pago, pela 5 rue Vivienne. Sábado 10/10: 10h–18h; reservar 1h15 e sair às 11h30
   - status: confirmado
 - 12:00 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/); encomendar para 10/10 às 12h. Retirada na 6 rue de Castiglione; sair até 12h15
   - status: confirmado
