@@ -224,15 +224,17 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:15 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; escolher retirada em 10/10 às 12h15, conforme disponibilidade. Chegar no horário do pedido e usar a fila prioritária de retirada; reservar até 12h40
   - status: confirmado
 - 13:00 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim e sentar para comer os doces do Cédric Grolet com calma
-- 14:30 [Monoprix Opéra](place:par-monoprix-rivoli) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 14h50
+- 14:30 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; 15 min, até 14h45
 - 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala. Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
 - 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar (até 20h); a loja fecha às 20h30
 - 17:10 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; a loja fecha às 20h.\
   O terraço do 7º teve um pop-up até 30/09: confira se reabriu
   - via: metrô 9 de Havre–Caumartin até Alma–Marceau · 20 min
 - 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena (€20), saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
-  - via: metrô 9 de Alma–Marceau até Havre–Caumartin e RER E em Haussmann–Saint-Lazare · 50 min
-- 21:00 [Casa do Gui](place:par-casa-do-gui) — Volta; jantar em casa e arrumar as malas
+  - via: metrô 9 de Alma–Marceau até Chaussée d’Antin e caminhada até o Monoprix · 40 min
+- 20:20 [Monoprix Opéra](place:par-monoprix-rivoli) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 20h45. Fecha às 22h no sábado
+  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 45 min
+- 21:30 [Casa do Gui](place:par-casa-do-gui) — Volta; jantar em casa e arrumar as malas
 
 ### Dia 8 — Dom 11/10 · Partida para Milão
 

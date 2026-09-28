@@ -1,0 +1,7 @@
+# Ópera, Starbucks e compras — consulta em 28/09/2026
+
+- [Condições oficiais da visita Garnier](https://www.operadeparis.fr/conditions-generales/conditions-de-visite-du-palais-garnier): os espaços de visita, incluindo Grand Escalier e Grand Foyer, exigem ingresso. Visita autônoma não significa gratuita. Não foi encontrada modalidade gratuita parcial dos salões históricos para o público geral.
+- [Tarifas atuais](https://www.operadeparis.fr/en/visits/visit-and-explore/ticket-rates-documents): adulto de fora do EEE €25; 13–25 anos de fora do EEE €20. Gratuidade depende de elegibilidade e comprovante (12 anos ou menos, pessoas com deficiência e acompanhante, entre outras categorias).
+- [Serviços da Ópera](https://www.operadeparis.fr/infos-pratiques/services-sur-place): a livraria-boutique tem acesso independente pela Place de l’Opéra. Isso não comprova acesso gratuito aos salões históricos; não usar como substituto da visita interna.
+- [Starbucks Capucines, parceiro Bobochic](https://bobochicparis.com/fr/collab-starbucks-bobochic): 3 boulevard des Capucines, sábado 7h30–23h. Parada solicitada apenas para conhecer o interior, sem consumo; nenhuma garantia de acesso turístico sem consumo encontrada.
+- [Monoprix Opéra](https://www.monoprix.fr/766.html): 23 avenue de l’Opéra, sábado 8h–22h. Compras movidas para 20h20–20h45, depois do barco, para carregar as sacolas apenas na volta. Tempos de deslocamento são margens de planejamento; chegada à casa passa de 21h para 21h30.
