@@ -909,22 +909,6 @@ function trainLeg(from: string, to: string, durationMin: number, hops: Itinerary
   return { from, to, mode: 'transit', hops, label: hops.map((hop) => hop.label).join(' + '), durationMin };
 }
 
-/** RER C branch Champ de Mars → Neuilly–Porte Maillot (OSM stop positions); the registry holds the Versailles spine. */
-const rerCToPorteMaillot: ItineraryTransitHop = {
-  line: 'rer-c',
-  label: 'RER C',
-  board: 'Champ de Mars–Tour Eiffel',
-  exit: 'Neuilly–Porte Maillot',
-  path: [
-    [48.856069, 2.289535], // Champ de Mars–Tour Eiffel
-    [48.853234, 2.280131], // Avenue du Président Kennedy
-    [48.856555, 2.275139], // Boulainvilliers
-    [48.865323, 2.272074], // Avenue Henri Martin
-    [48.869792, 2.274698], // Avenue Foch
-    [48.878781, 2.28557], // Neuilly–Porte Maillot
-  ],
-};
-
 const palaisToChampsWalk: LatLng[] = [
   [48.865803, 2.313203],
   [48.865788, 2.313289],
@@ -1212,9 +1196,9 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   // From Rue Mouffetard to the passage near Odéon, before walking to Luxembourg.
   trainLeg('par-fontaine-guy-lartigue', 'par-cour-commerce', 25, [ride(metro7, 'censier-daubenton', 'jussieu'), ride(metro10, 'jussieu', 'odeon')]),
-  trainLeg('par-champ-mars', 'par-casa-do-gui', 60, [
-    rerCToPorteMaillot,
-    ride(rerE, 'neuilly-porte-maillot', 'noisy-le-sec'),
+  trainLeg('par-port-louvre', 'par-casa-do-gui', 55, [
+    ride(rerB, 'saint-michel', 'gare-nord'),
+    ride(rerE, 'magenta', 'noisy-le-sec', GARE_DU_NORD_MAGENTA_MIN),
   ]),
   // 7/10: no RER E after 22:30 (works 5–14 Oct), so the way back ends at Val de Fontenay
   trainLeg('par-noisy-le-sec-rer', 'par-chessy-rer', 40, [

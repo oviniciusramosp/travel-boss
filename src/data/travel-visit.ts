@@ -1990,6 +1990,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestTime: L('After dark — the tower sparkles 5 min on the hour', 'Depois que escurece — a Torre brilha 5 min em cada hora cheia'),
     tips: L('Footbridge: no cars in the frame.', 'Passarela: sem carro no enquadramento.'),
   }),
+  'par-grande-epicerie-rive-gauche': { durationMin: 60, durationMax: 60 },
+  'par-port-louvre': parkVisit({
+    durationMin: 60,
+    durationMax: 60,
+    bestTime: L('Early evening', 'Início da noite'),
+    tips: L('Picnic on the lower riverbank with food bought beforehand.', 'Piquenique na margem baixa com os alimentos comprados antes.'),
+  }),
   'par-port-debilly': landmarkOutdoor({
     durationMin: 15,
     durationMax: 45,

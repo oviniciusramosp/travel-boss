@@ -1588,6 +1588,20 @@ export const localTravelCities: TravelCity[] = [
           'https://www.google.com/maps/search/?api=1&query=Monoprix+23+Avenue+de+l%27Op%C3%A9ra+Paris',
       },
       {
+        id: 'par-port-louvre',
+        name: { en: 'Port du Louvre', 'pt-BR': 'Port du Louvre' },
+        category: 'parks',
+        description: {
+          en: 'Pedestrian riverbank below the Louvre and Quai François-Mitterrand, between Pont des Arts and Pont Royal, with views across the Seine.',
+          'pt-BR': 'Margem pedestre em frente ao Louvre, abaixo do Quai François-Mitterrand, entre a Pont des Arts e a Pont Royal, com vista para a outra margem do Sena.',
+        },
+        // OSM way 54201553: on the lower riverbank, not the road above.
+        lat: 48.8591803,
+        lng: 2.3368429,
+        address: 'Port du Louvre, 75001 Paris',
+        mapsQuery: 'Port du Louvre Paris',
+      },
+      {
         id: 'par-louvre',
         name: { en: 'Louvre', 'pt-BR': 'Louvre' },
         category: 'tourist',
@@ -4798,6 +4812,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.323297,
         address: '38 Rue de Sèvres, 75007 Paris',
         mapsQuery: 'La Grande Épicerie de Paris 38 Rue de Sèvres, 75007 Paris',
+        googleRating: 4.5,
       },
       {
         id: 'par-lafayette-gourmet-haussmann',

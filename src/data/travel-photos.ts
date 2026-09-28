@@ -1710,6 +1710,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Guilhem Vellut · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
+  'par-port-louvre': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/P1050537_Paris_Ier_port_du_Louvre_rwk.jpg/500px-P1050537_Paris_Ier_port_du_Louvre_rwk.jpg',
+      'Port du Louvre beside the Seine',
+      'Port du Louvre à beira do Sena',
+      'Mbzt · Wikimedia Commons · CC BY-SA 3.0',
+    ),
+  ],
   'par-port-debilly': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Port_Debilly%2C_tour_Eiffel%2C_Paris.jpg/960px-Port_Debilly%2C_tour_Eiffel%2C_Paris.jpg',

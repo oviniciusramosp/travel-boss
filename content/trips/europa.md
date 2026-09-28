@@ -84,7 +84,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min
 - 22:30 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
 
-### Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique na Torre
+### Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique no Sena
 
 - 07:55 [Casa do Gui](place:par-casa-do-gui)
   - via: RER E até Magenta e RER B de Gare du Nord até Saint-Michel Notre-Dame · 45 min
@@ -106,13 +106,13 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:00 [Cour du Commerce Saint-André](place:par-cour-commerce) — Passagem rápida de 10 min para entrar e conhecer a rua, sem parar para comer
 - 15:20 [Jardim de Luxemburgo](place:par-luxembourg)
 - 16:05 [Poilâne (Cherche-Midi)](place:par-poilane-cherche-midi) — A padaria original, de 1932: punitions (~€5) e a miche
-- 16:30 [La Grande Épicerie (Rive Gauche)](place:par-grande-epicerie-rive-gauche) — Explorar o mercado e comprar queijo, baguete e vinho para o piquenique; sair até 17h05
-- 17:20 [CityPharma](place:par-citypharma) — Dermocosméticos; sair até 17h50
-- 18:00 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10); sair até 18h25
-  - via: Ir a pé até o Champ de Mars · 40 min
-- 19:10 [Champ de Mars](place:par-champ-mars) — Piquenique no gramado: pôr do sol às 19h21 e brilho às 20h
-  - via: RER C até Neuilly–Porte Maillot e RER E até Noisy-le-Sec · 1h
-- 21:15 [Casa do Gui](place:par-casa-do-gui) — Volta
+- 16:30 [La Grande Épicerie (Rive Gauche)](place:par-grande-epicerie-rive-gauche) — 1h para passear pelo mercado e comprar queijo, baguete e vinho para o piquenique no Port du Louvre; sair às 17h30
+- 17:45 [CityPharma](place:par-citypharma) — Dermocosméticos; sair até 18h15
+- 18:25 [Les Deux Magots](place:par-deux-magots) — Chocolate quente (€10); sair até 18h50
+  - via: Ir a pé até o Port du Louvre · 15 min
+- 19:10 [Port du Louvre](place:par-port-louvre) — **Jantar**: piquenique à beira do Sena com as compras da La Grande Épicerie; ficar até 20h10
+  - via: a pé até Saint-Michel–Notre-Dame, RER B até Gare du Nord e RER E de Magenta até Noisy-le-Sec · 55 min
+- 21:05 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Almoço alternativo em Saint-Germain: [Spécimen Burger](place:par-specimen-burger) — hambúrguer ~€13, seg–sex até 15h
 
 ### Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos
