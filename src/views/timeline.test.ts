@@ -28,9 +28,11 @@ describe('day header helpers', () => {
     expect(typicalEur({ currency: 'USD', min: 8 })).toBe(0);
   });
 
-  it('formats whole euros without cents', () => {
-    expect(formatEur(12, 'en')).toContain('12');
-    expect(formatEur(12, 'en')).not.toContain('12.00');
+  it('always shows two decimal places, including whole amounts and zero', () => {
+    for (const [amount, en, pt] of [[12, '12.00', '12,00'], [0, '0.00', '0,00'], [4.1, '4.10', '4,10'], [47.075, '47.08', '47,08']] as const) {
+      expect(formatEur(amount, 'en')).toContain(en);
+      expect(formatEur(amount, 'pt-BR')).toContain(pt);
+    }
   });
 });
 
@@ -42,23 +44,23 @@ describe('foodTarget', () => {
   it('marks the food chip over past the city target, with the tip and the receipt line', () => {
     expect(foodTarget(62, 50, 'en')).toEqual({
       over: true,
-      tip: '€62 of €50 per person',
-      line: 'Target: €50 · €12 over',
+      tip: '€62.00 of €50.00 per person',
+      line: 'Target: €50.00 · €12.00 over',
     });
     const pt = foodTarget(62, 50, 'pt-BR');
     expect(pt?.over).toBe(true);
-    expect(plain(pt?.tip)).toBe('€ 62 de € 50 por pessoa');
-    expect(plain(pt?.line)).toBe('Meta: € 50 · passou € 12');
+    expect(plain(pt?.tip)).toBe('€ 62,00 de € 50,00 por pessoa');
+    expect(plain(pt?.line)).toBe('Meta: € 50,00 · passou € 12,00');
   });
 
   it('keeps the chip without the class at or under the target, and says what is left', () => {
     expect(foodTarget(42, 50, 'en')).toEqual({
       over: false,
-      tip: '€42 of €50 per person',
-      line: 'Target: €50 · €8 left',
+      tip: '€42.00 of €50.00 per person',
+      line: 'Target: €50.00 · €8.00 left',
     });
-    expect(plain(foodTarget(42, 50, 'pt-BR')?.line)).toBe('Meta: € 50 · sobram € 8');
-    expect(foodTarget(50, 50, 'en')).toMatchObject({ over: false, line: 'Target: €50 · €0 left' });
+    expect(plain(foodTarget(42, 50, 'pt-BR')?.line)).toBe('Meta: € 50,00 · sobram € 8,00');
+    expect(foodTarget(50, 50, 'en')).toMatchObject({ over: false, line: 'Target: €50.00 · €0.00 left' });
   });
 
   it('leaves the chip and the receipt as they were without a target', () => {

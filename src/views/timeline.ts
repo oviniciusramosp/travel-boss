@@ -35,12 +35,11 @@ export function typicalEur(money: Money | undefined): number {
 
 export function formatEur(amount: number, locale: Locale): string {
   const cents = Math.round(amount * 100);
-  const hasCents = cents % 100 !== 0;
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: 'EUR',
-    minimumFractionDigits: hasCents ? 2 : 0,
-    maximumFractionDigits: hasCents ? 2 : 0,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(cents / 100);
 }
 
