@@ -95,17 +95,43 @@
       "norm_label": "slothop"
     },
     {
-      "label": "cityGuide",
+      "label": "BudgetLine",
       "file_type": "code",
-      "source_file": "src/data/travel-guide.ts",
-      "source_location": "L50",
+      "source_file": "src/trip/day-plan.ts",
+      "source_location": "L270",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_data_travel_guide_cityguide",
+      "id": "src_trip_day_plan_budgetline",
       "community": 12,
-      "community_name": "ai-badge.ts",
-      "norm_label": "cityguide"
+      "community_name": "timeline.ts",
+      "norm_label": "budgetline"
+    },
+    {
+      "label": "Money",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L25",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_money",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "money"
+    },
+    {
+      "label": "Period",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L55",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_period",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "period"
     },
     {
       "label": "FitPoint",
@@ -1122,19 +1148,6 @@
       "norm_label": "snapshot"
     },
     {
-      "label": "BudgetLine",
-      "file_type": "code",
-      "source_file": "src/trip/day-plan.ts",
-      "source_location": "L270",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_trip_day_plan_budgetline",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "budgetline"
-    },
-    {
       "label": "GuideTab",
       "file_type": "code",
       "source_file": "src/views/guide.ts",
@@ -1159,32 +1172,6 @@
       "community": 35,
       "community_name": "pickLocale",
       "norm_label": "guideview"
-    },
-    {
-      "label": "Money",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L25",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_money",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "money"
-    },
-    {
-      "label": "Period",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L55",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_period",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "period"
     },
     {
       "label": "PlaceCategoryIcon",
@@ -2444,7 +2431,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_iconbuttonsize",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "iconbuttonsize"
     },
     {
@@ -2457,34 +2444,8 @@
       "_origin": "ast",
       "id": "src_ui_controls_iconbuttonvariant",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "iconbuttonvariant"
-    },
-    {
-      "label": "IconName",
-      "file_type": "code",
-      "source_file": "src/ui/icons.ts",
-      "source_location": "L85",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_ui_icons_iconname",
-      "community": 59,
-      "community_name": "icons.ts",
-      "norm_label": "iconname"
-    },
-    {
-      "label": "IconSize",
-      "file_type": "code",
-      "source_file": "src/ui/icons.ts",
-      "source_location": "L87",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_ui_icons_iconsize",
-      "community": 59,
-      "community_name": "icons.ts",
-      "norm_label": "iconsize"
     },
     {
       "label": "starParts",
@@ -2864,6 +2825,19 @@
       "norm_label": "placecategorymeta"
     },
     {
+      "label": "cityGuide",
+      "file_type": "code",
+      "source_file": "src/data/travel-guide.ts",
+      "source_location": "L50",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_travel_guide_cityguide",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "cityguide"
+    },
+    {
       "label": "Locale",
       "file_type": "code",
       "source_file": "src/data/travel.ts",
@@ -2888,6 +2862,32 @@
       "community": 8,
       "community_name": "place-panel.ts",
       "norm_label": "travelcity"
+    },
+    {
+      "label": "IconName",
+      "file_type": "code",
+      "source_file": "src/ui/icons.ts",
+      "source_location": "L85",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_ui_icons_iconname",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "iconname"
+    },
+    {
+      "label": "IconSize",
+      "file_type": "code",
+      "source_file": "src/ui/icons.ts",
+      "source_location": "L87",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_ui_icons_iconsize",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "iconsize"
     },
     {
       "label": "CloseOptions",
@@ -4032,16 +4032,136 @@
       "norm_label": "zonedstamp()"
     },
     {
-      "label": "aiSuggestionTip()",
+      "label": "overBudget()",
       "file_type": "code",
-      "source_file": "src/ui/ai-badge.ts",
-      "source_location": "L11",
+      "source_file": "src/trip/day-plan.ts",
+      "source_location": "L264",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_ui_ai_badge_aisuggestiontip",
+      "id": "src_trip_day_plan_overbudget",
       "community": 12,
-      "community_name": "ai-badge.ts",
-      "norm_label": "aisuggestiontip()"
+      "community_name": "timeline.ts",
+      "norm_label": "overbudget()"
+    },
+    {
+      "label": "budgetChip()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L94",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_budgetchip",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "budgetchip()"
+    },
+    {
+      "label": "dateBudgetCards()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L125",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_datebudgetcards",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "datebudgetcards()"
+    },
+    {
+      "label": "foodTarget()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L70",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_foodtarget",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "foodtarget()"
+    },
+    {
+      "label": "formatEur()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L36",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_formateur",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "formateur()"
+    },
+    {
+      "label": "openReceipt()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L165",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_openreceipt",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "openreceipt()"
+    },
+    {
+      "label": "receiptLine()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L155",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_receiptline",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "receiptline()"
+    },
+    {
+      "label": "stopCostEl()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L197",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_stopcostel",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "stopcostel()"
+    },
+    {
+      "label": "stopCountLabel()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L47",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_stopcountlabel",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "stopcountlabel()"
+    },
+    {
+      "label": "sunsetTip()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_sunsettip",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "sunsettip()"
+    },
+    {
+      "label": "typicalEur()",
+      "file_type": "code",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_timeline_typicaleur",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "typicaleur()"
     },
     {
       "label": "accommodationEligibility()",
@@ -4414,30 +4534,6 @@
       "community": 14,
       "community_name": "mountMap",
       "norm_label": "routeemphasis()"
-    },
-    {
-      "label": "hopName()",
-      "file_type": "code",
-      "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L286",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_itinerary_legs_hopname",
-      "community": 15,
-      "community_name": "itinerary-route.ts",
-      "norm_label": "hopname()"
-    },
-    {
-      "label": "getTransitLine()",
-      "file_type": "code",
-      "source_file": "src/data/travel-transit-lines.ts",
-      "source_location": "L480",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_travel_transit_lines_gettransitline",
-      "community": 15,
-      "community_name": "itinerary-route.ts",
-      "norm_label": "gettransitline()"
     },
     {
       "label": "nearestStation()",
@@ -7212,18 +7308,6 @@
       "norm_label": "picklocale()"
     },
     {
-      "label": "overBudget()",
-      "file_type": "code",
-      "source_file": "src/trip/day-plan.ts",
-      "source_location": "L264",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_day_plan_overbudget",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "overbudget()"
-    },
-    {
       "label": "paintWalk()",
       "file_type": "code",
       "source_file": "src/trip/mount.ts",
@@ -7296,6 +7380,54 @@
       "norm_label": "weatherslot()"
     },
     {
+      "label": "aiBadge()",
+      "file_type": "code",
+      "source_file": "src/ui/ai-badge.ts",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_ai_badge_aibadge",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "aibadge()"
+    },
+    {
+      "label": "iconButton()",
+      "file_type": "code",
+      "source_file": "src/ui/controls.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_controls_iconbutton",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "iconbutton()"
+    },
+    {
+      "label": "iconLink()",
+      "file_type": "code",
+      "source_file": "src/ui/controls.ts",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_controls_iconlink",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "iconlink()"
+    },
+    {
+      "label": "openDialog()",
+      "file_type": "code",
+      "source_file": "src/ui/dialog.ts",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_dialog_opendialog",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "opendialog()"
+    },
+    {
       "label": "el()",
       "file_type": "code",
       "source_file": "src/ui/dom.ts",
@@ -7306,6 +7438,78 @@
       "community": 35,
       "community_name": "pickLocale",
       "norm_label": "el()"
+    },
+    {
+      "label": "icon()",
+      "file_type": "code",
+      "source_file": "src/ui/icons.ts",
+      "source_location": "L94",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_icons_icon",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "icon()"
+    },
+    {
+      "label": "louvreMapButton()",
+      "file_type": "code",
+      "source_file": "src/ui/louvre-map.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_louvre_map_louvremapbutton",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "louvremapbutton()"
+    },
+    {
+      "label": "select()",
+      "file_type": "code",
+      "source_file": "src/ui/louvre-map.ts",
+      "source_location": "L120",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_louvre_map_louvremapbutton_select",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "select()"
+    },
+    {
+      "label": "openVideo()",
+      "file_type": "code",
+      "source_file": "src/ui/video.ts",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_video_openvideo",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "openvideo()"
+    },
+    {
+      "label": "videoButton()",
+      "file_type": "code",
+      "source_file": "src/ui/video.ts",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_video_videobutton",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "videobutton()"
+    },
+    {
+      "label": "videoEmbedUrl()",
+      "file_type": "code",
+      "source_file": "src/ui/video.ts",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_ui_video_videoembedurl",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "videoembedurl()"
     },
     {
       "label": "card()",
@@ -7356,6 +7560,66 @@
       "norm_label": "spotchip()"
     },
     {
+      "label": "categoryGlyph()",
+      "file_type": "code",
+      "source_file": "src/views/place-panel.ts",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_place_panel_categoryglyph",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "categoryglyph()"
+    },
+    {
+      "label": "mountPlacePanel()",
+      "file_type": "code",
+      "source_file": "src/views/place-panel.ts",
+      "source_location": "L103",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_place_panel_mountplacepanel",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "mountplacepanel()"
+    },
+    {
+      "label": "dismiss()",
+      "file_type": "code",
+      "source_file": "src/views/place-panel.ts",
+      "source_location": "L571",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_place_panel_mountplacepanel_dismiss",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "dismiss()"
+    },
+    {
+      "label": "placeAction()",
+      "file_type": "code",
+      "source_file": "src/views/place-panel.ts",
+      "source_location": "L646",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_place_panel_placeaction",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "placeaction()"
+    },
+    {
+      "label": "ticketLink()",
+      "file_type": "code",
+      "source_file": "src/views/place-panel.ts",
+      "source_location": "L36",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_place_panel_ticketlink",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "ticketlink()"
+    },
+    {
       "label": "mountCityNav()",
       "file_type": "code",
       "source_file": "src/views/places.ts",
@@ -7366,66 +7630,6 @@
       "community": 35,
       "community_name": "pickLocale",
       "norm_label": "mountcitynav()"
-    },
-    {
-      "label": "budgetChip()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L94",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_budgetchip",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "budgetchip()"
-    },
-    {
-      "label": "dateBudgetCards()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L125",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_datebudgetcards",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "datebudgetcards()"
-    },
-    {
-      "label": "foodTarget()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L70",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_foodtarget",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "foodtarget()"
-    },
-    {
-      "label": "formatEur()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L36",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_formateur",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "formateur()"
-    },
-    {
-      "label": "openReceipt()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L165",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_openreceipt",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "openreceipt()"
     },
     {
       "label": "periodLabel()",
@@ -7440,18 +7644,6 @@
       "norm_label": "periodlabel()"
     },
     {
-      "label": "receiptLine()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L155",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_receiptline",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "receiptline()"
-    },
-    {
       "label": "slotSwitch()",
       "file_type": "code",
       "source_file": "src/views/timeline.ts",
@@ -7462,54 +7654,6 @@
       "community": 35,
       "community_name": "pickLocale",
       "norm_label": "slotswitch()"
-    },
-    {
-      "label": "stopCostEl()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L197",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_stopcostel",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "stopcostel()"
-    },
-    {
-      "label": "stopCountLabel()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L47",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_stopcountlabel",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "stopcountlabel()"
-    },
-    {
-      "label": "sunsetTip()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L14",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_sunsettip",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "sunsettip()"
-    },
-    {
-      "label": "typicalEur()",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L28",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_timeline_typicaleur",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "typicaleur()"
     },
     {
       "label": "transferRow()",
@@ -8079,7 +8223,7 @@
       "label": "legsForDay()",
       "file_type": "code",
       "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L1230",
+      "source_location": "L1304",
       "_callable": true,
       "_origin": "ast",
       "id": "src_data_travel_itinerary_legs_legsforday",
@@ -10184,7 +10328,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_onsegmentkey",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "onsegmentkey()"
     },
     {
@@ -10196,7 +10340,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_segmentbuttons",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "segmentbuttons()"
     },
     {
@@ -10208,7 +10352,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_segmented",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "segmented()"
     },
     {
@@ -10220,7 +10364,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_segmentedmove",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "segmentedmove()"
     },
     {
@@ -10232,7 +10376,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_segmenton",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "segmenton()"
     },
     {
@@ -10244,7 +10388,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_syncsegmented",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "syncsegmented()"
     },
     {
@@ -10256,7 +10400,7 @@
       "_origin": "ast",
       "id": "src_ui_controls_tiptext",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "tiptext()"
     },
     {
@@ -11136,6 +11280,18 @@
       "norm_label": "expandtimelinetransferparts()"
     },
     {
+      "label": "hopName()",
+      "file_type": "code",
+      "source_file": "src/data/travel-itinerary-legs.ts",
+      "source_location": "L286",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_itinerary_legs_hopname",
+      "community": 69,
+      "community_name": "expandTimelineTransferParts",
+      "norm_label": "hopname()"
+    },
+    {
       "label": "interHopWalkM()",
       "file_type": "code",
       "source_file": "src/data/travel-itinerary-legs.ts",
@@ -11218,6 +11374,18 @@
       "community": 69,
       "community_name": "expandTimelineTransferParts",
       "norm_label": "walkto()"
+    },
+    {
+      "label": "getTransitLine()",
+      "file_type": "code",
+      "source_file": "src/data/travel-transit-lines.ts",
+      "source_location": "L480",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_transit_lines_gettransitline",
+      "community": 69,
+      "community_name": "expandTimelineTransferParts",
+      "norm_label": "gettransitline()"
     },
     {
       "label": "haversineM()",
@@ -12228,88 +12396,16 @@
       "norm_label": "resolveplacephotos()"
     },
     {
-      "label": "aiBadge()",
+      "label": "aiSuggestionTip()",
       "file_type": "code",
       "source_file": "src/ui/ai-badge.ts",
-      "source_location": "L37",
+      "source_location": "L11",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_ui_ai_badge_aibadge",
+      "id": "src_ui_ai_badge_aisuggestiontip",
       "community": 8,
       "community_name": "place-panel.ts",
-      "norm_label": "aibadge()"
-    },
-    {
-      "label": "iconButton()",
-      "file_type": "code",
-      "source_file": "src/ui/controls.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_controls_iconbutton",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "iconbutton()"
-    },
-    {
-      "label": "iconLink()",
-      "file_type": "code",
-      "source_file": "src/ui/controls.ts",
-      "source_location": "L30",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_controls_iconlink",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "iconlink()"
-    },
-    {
-      "label": "openDialog()",
-      "file_type": "code",
-      "source_file": "src/ui/dialog.ts",
-      "source_location": "L12",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_dialog_opendialog",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "opendialog()"
-    },
-    {
-      "label": "icon()",
-      "file_type": "code",
-      "source_file": "src/ui/icons.ts",
-      "source_location": "L94",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_icons_icon",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "icon()"
-    },
-    {
-      "label": "louvreMapButton()",
-      "file_type": "code",
-      "source_file": "src/ui/louvre-map.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_louvre_map_louvremapbutton",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "louvremapbutton()"
-    },
-    {
-      "label": "select()",
-      "file_type": "code",
-      "source_file": "src/ui/louvre-map.ts",
-      "source_location": "L120",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_louvre_map_louvremapbutton_select",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "select()"
+      "norm_label": "aisuggestiontip()"
     },
     {
       "label": "mapsIconLink()",
@@ -12336,42 +12432,6 @@
       "norm_label": "mapsmark()"
     },
     {
-      "label": "openVideo()",
-      "file_type": "code",
-      "source_file": "src/ui/video.ts",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_video_openvideo",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "openvideo()"
-    },
-    {
-      "label": "videoButton()",
-      "file_type": "code",
-      "source_file": "src/ui/video.ts",
-      "source_location": "L39",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_video_videobutton",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "videobutton()"
-    },
-    {
-      "label": "videoEmbedUrl()",
-      "file_type": "code",
-      "source_file": "src/ui/video.ts",
-      "source_location": "L9",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_ui_video_videoembedurl",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "videoembedurl()"
-    },
-    {
       "label": "mountHotelSlider()",
       "file_type": "code",
       "source_file": "src/views/hotel-slider.ts",
@@ -12382,18 +12442,6 @@
       "community": 8,
       "community_name": "place-panel.ts",
       "norm_label": "mounthotelslider()"
-    },
-    {
-      "label": "categoryGlyph()",
-      "file_type": "code",
-      "source_file": "src/views/place-panel.ts",
-      "source_location": "L28",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_place_panel_categoryglyph",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "categoryglyph()"
     },
     {
       "label": "dropSlide()",
@@ -12420,30 +12468,6 @@
       "norm_label": "listedorigin()"
     },
     {
-      "label": "mountPlacePanel()",
-      "file_type": "code",
-      "source_file": "src/views/place-panel.ts",
-      "source_location": "L103",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_place_panel_mountplacepanel",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "mountplacepanel()"
-    },
-    {
-      "label": "dismiss()",
-      "file_type": "code",
-      "source_file": "src/views/place-panel.ts",
-      "source_location": "L571",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_place_panel_mountplacepanel_dismiss",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "dismiss()"
-    },
-    {
       "label": "openPlace()",
       "file_type": "code",
       "source_file": "src/views/place-panel.ts",
@@ -12456,18 +12480,6 @@
       "norm_label": "openplace()"
     },
     {
-      "label": "placeAction()",
-      "file_type": "code",
-      "source_file": "src/views/place-panel.ts",
-      "source_location": "L646",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_place_panel_placeaction",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "placeaction()"
-    },
-    {
       "label": "slideIndex()",
       "file_type": "code",
       "source_file": "src/views/place-panel.ts",
@@ -12478,18 +12490,6 @@
       "community": 8,
       "community_name": "place-panel.ts",
       "norm_label": "slideindex()"
-    },
-    {
-      "label": "ticketLink()",
-      "file_type": "code",
-      "source_file": "src/views/place-panel.ts",
-      "source_location": "L36",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_place_panel_ticketlink",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "ticketlink()"
     },
     {
       "label": "routePlannerOn()",
@@ -13373,37 +13373,48 @@
       "norm_label": "day-plan.test.ts"
     },
     {
-      "label": "ai-badge.ts",
+      "label": "timeline.ts",
       "file_type": "code",
-      "source_file": "src/ui/ai-badge.ts",
+      "source_file": "src/views/timeline.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_ui_ai_badge",
+      "id": "src_views_timeline",
       "community": 12,
-      "community_name": "ai-badge.ts",
-      "norm_label": "ai-badge.ts"
+      "community_name": "timeline.ts",
+      "norm_label": "timeline.ts"
     },
     {
-      "label": "TABS",
+      "label": "PERIODS",
       "file_type": "code",
-      "source_file": "src/ui/ai-badge.ts",
-      "source_location": "L5",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L54",
       "_origin": "ast",
-      "id": "src_ui_ai_badge_tabs",
+      "id": "src_views_timeline_periods",
       "community": 12,
-      "community_name": "ai-badge.ts",
-      "norm_label": "tabs"
+      "community_name": "timeline.ts",
+      "norm_label": "periods"
     },
     {
-      "label": "ai-badge.test.ts",
+      "label": "RECEIPT_KINDS",
       "file_type": "code",
-      "source_file": "src/ui/ai-badge.test.ts",
+      "source_file": "src/views/timeline.ts",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "src_views_timeline_receipt_kinds",
+      "community": 12,
+      "community_name": "timeline.ts",
+      "norm_label": "receipt_kinds"
+    },
+    {
+      "label": "timeline.test.ts",
+      "file_type": "code",
+      "source_file": "src/views/timeline.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_ui_ai_badge_test",
+      "id": "src_views_timeline_test",
       "community": 12,
-      "community_name": "ai-badge.ts",
-      "norm_label": "ai-badge.test.ts"
+      "community_name": "timeline.ts",
+      "norm_label": "timeline.test.ts"
     },
     {
       "label": "hotel-ranking.mjs",
@@ -16321,6 +16332,61 @@
       "norm_label": "note-edit.test.ts"
     },
     {
+      "label": "dialog.ts",
+      "file_type": "code",
+      "source_file": "src/ui/dialog.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_ui_dialog",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "dialog.ts"
+    },
+    {
+      "label": "dom.ts",
+      "file_type": "code",
+      "source_file": "src/ui/dom.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_ui_dom",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "dom.ts"
+    },
+    {
+      "label": "louvre-map.ts",
+      "file_type": "code",
+      "source_file": "src/ui/louvre-map.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_ui_louvre_map",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "louvre-map.ts"
+    },
+    {
+      "label": "video.ts",
+      "file_type": "code",
+      "source_file": "src/ui/video.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_ui_video",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "video.ts"
+    },
+    {
+      "label": "video.test.ts",
+      "file_type": "code",
+      "source_file": "src/ui/video.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_ui_video_test",
+      "community": 35,
+      "community_name": "pickLocale",
+      "norm_label": "video.test.ts"
+    },
+    {
       "label": "guide.ts",
       "file_type": "code",
       "source_file": "src/views/guide.ts",
@@ -16352,50 +16418,6 @@
       "community": 35,
       "community_name": "pickLocale",
       "norm_label": "where"
-    },
-    {
-      "label": "timeline.ts",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_views_timeline",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "timeline.ts"
-    },
-    {
-      "label": "PERIODS",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L54",
-      "_origin": "ast",
-      "id": "src_views_timeline_periods",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "periods"
-    },
-    {
-      "label": "RECEIPT_KINDS",
-      "file_type": "code",
-      "source_file": "src/views/timeline.ts",
-      "source_location": "L116",
-      "_origin": "ast",
-      "id": "src_views_timeline_receipt_kinds",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "receipt_kinds"
-    },
-    {
-      "label": "timeline.test.ts",
-      "file_type": "code",
-      "source_file": "src/views/timeline.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_views_timeline_test",
-      "community": 35,
-      "community_name": "pickLocale",
-      "norm_label": "timeline.test.ts"
     },
     {
       "label": "travel-categories.ts",
@@ -18220,7 +18242,7 @@
       "_origin": "ast",
       "id": "src_ui_controls",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "ui/controls.ts"
     },
     {
@@ -18231,30 +18253,8 @@
       "_origin": "ast",
       "id": "src_ui_controls_test",
       "community": 59,
-      "community_name": "icons.ts",
+      "community_name": "ui/controls.ts",
       "norm_label": "controls.test.ts"
-    },
-    {
-      "label": "icons.ts",
-      "file_type": "code",
-      "source_file": "src/ui/icons.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_ui_icons",
-      "community": 59,
-      "community_name": "icons.ts",
-      "norm_label": "icons.ts"
-    },
-    {
-      "label": "ICONS",
-      "file_type": "code",
-      "source_file": "src/ui/icons.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_ui_icons_icons",
-      "community": 59,
-      "community_name": "icons.ts",
-      "norm_label": "icons"
     },
     {
       "label": "hotel-search-match.mjs",
@@ -18436,7 +18436,7 @@
       "label": "milanDayLegsById",
       "file_type": "code",
       "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L1209",
+      "source_location": "L1283",
       "_origin": "ast",
       "id": "src_data_travel_itinerary_legs_milandaylegsbyid",
       "community": 63,
@@ -18447,7 +18447,7 @@
       "label": "parisDayLegsById",
       "file_type": "code",
       "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L1195",
+      "source_location": "L1269",
       "_origin": "ast",
       "id": "src_data_travel_itinerary_legs_parisdaylegsbyid",
       "community": 63,
@@ -19643,37 +19643,59 @@
       "norm_label": "onda 2 (depois da onda 1)"
     },
     {
-      "label": "dialog.ts",
+      "label": "ai-badge.ts",
       "file_type": "code",
-      "source_file": "src/ui/dialog.ts",
+      "source_file": "src/ui/ai-badge.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_ui_dialog",
+      "id": "src_ui_ai_badge",
       "community": 8,
       "community_name": "place-panel.ts",
-      "norm_label": "dialog.ts"
+      "norm_label": "ai-badge.ts"
     },
     {
-      "label": "dom.ts",
+      "label": "TABS",
       "file_type": "code",
-      "source_file": "src/ui/dom.ts",
-      "source_location": "L1",
+      "source_file": "src/ui/ai-badge.ts",
+      "source_location": "L5",
       "_origin": "ast",
-      "id": "src_ui_dom",
+      "id": "src_ui_ai_badge_tabs",
       "community": 8,
       "community_name": "place-panel.ts",
-      "norm_label": "dom.ts"
+      "norm_label": "tabs"
     },
     {
-      "label": "louvre-map.ts",
+      "label": "ai-badge.test.ts",
       "file_type": "code",
-      "source_file": "src/ui/louvre-map.ts",
+      "source_file": "src/ui/ai-badge.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_ui_louvre_map",
+      "id": "src_ui_ai_badge_test",
       "community": 8,
       "community_name": "place-panel.ts",
-      "norm_label": "louvre-map.ts"
+      "norm_label": "ai-badge.test.ts"
+    },
+    {
+      "label": "icons.ts",
+      "file_type": "code",
+      "source_file": "src/ui/icons.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_ui_icons",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "icons.ts"
+    },
+    {
+      "label": "ICONS",
+      "file_type": "code",
+      "source_file": "src/ui/icons.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_ui_icons_icons",
+      "community": 8,
+      "community_name": "place-panel.ts",
+      "norm_label": "icons"
     },
     {
       "label": "maps-icon.ts",
@@ -19685,28 +19707,6 @@
       "community": 8,
       "community_name": "place-panel.ts",
       "norm_label": "maps-icon.ts"
-    },
-    {
-      "label": "video.ts",
-      "file_type": "code",
-      "source_file": "src/ui/video.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_ui_video",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "video.ts"
-    },
-    {
-      "label": "video.test.ts",
-      "file_type": "code",
-      "source_file": "src/ui/video.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_ui_video_test",
-      "community": 8,
-      "community_name": "place-panel.ts",
-      "norm_label": "video.test.ts"
     },
     {
       "label": "hotel-slider.ts",
@@ -62184,39 +62184,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L1195",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_data_travel_itinerary_legs",
-      "target": "src_data_travel_itinerary_legs_parisdaylegsbyid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L1209",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_data_travel_itinerary_legs",
-      "target": "src_data_travel_itinerary_legs_milandaylegsbyid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/data/travel-itinerary-legs.ts",
-      "source_location": "L1230",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_data_travel_itinerary_legs",
-      "target": "src_data_travel_itinerary_legs_legsforday",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/data/travel-itinerary-legs.ts",
       "source_location": "L124",
       "weight": 1.0,
       "_origin": "ast",
@@ -62228,11 +62195,44 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/travel-itinerary-legs.ts",
+      "source_location": "L1269",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_travel_itinerary_legs",
+      "target": "src_data_travel_itinerary_legs_parisdaylegsbyid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/travel-itinerary-legs.ts",
       "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_travel_itinerary_legs",
       "target": "src_data_travel_itinerary_legs_walkminutes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/travel-itinerary-legs.ts",
+      "source_location": "L1283",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_travel_itinerary_legs",
+      "target": "src_data_travel_itinerary_legs_milandaylegsbyid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/travel-itinerary-legs.ts",
+      "source_location": "L1304",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_travel_itinerary_legs",
+      "target": "src_data_travel_itinerary_legs_legsforday",
       "confidence_score": 1.0
     },
     {
@@ -73765,5 +73765,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "028730d51997b664f045f266d7b14390c0dd0faa"
+  "built_at_commit": "2ef17f68292c452db4babf9f8e8f0a5b92d159f4"
 }
