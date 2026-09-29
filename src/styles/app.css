@@ -519,11 +519,24 @@ button {
   cursor: pointer;
 }
 
-/* At regional zoom, city markers replace the detailed location dots. */
+/* City dots replace detailed points at regional zoom; details fade in on arrival. */
+.leaflet-marker-icon[data-pin-kind],
+.tb-station-wrap,
+.tb-transfer-wrap,
+.tb-subpoint-wrap {
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
 .tb-zoom-far .leaflet-marker-icon[data-pin-kind],
 .tb-zoom-far .tb-station-wrap,
 .tb-zoom-far .tb-transfer-wrap,
 .tb-zoom-far .tb-subpoint-wrap {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.leaflet-container:not(.tb-zoom-far) .tb-route-intercity {
   display: none;
 }
 

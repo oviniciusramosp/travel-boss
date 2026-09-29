@@ -7,9 +7,12 @@ import {
   type Polyline,
   type Renderer,
 } from 'leaflet';
+import { travelCities } from '../catalog';
 import { cssToken } from '../ui/motion';
 import { routeEmphasis, routeLayerKind, stationsFor, type RouteFocus } from './route-model';
 import type { MapRouteSegment } from './types';
+
+const cityByPlace = new Map(travelCities.flatMap((city) => city.places.map((place) => [place.id, city.slug] as const)));
 
 const WALK_FALLBACK = '#008fff';
 
@@ -83,6 +86,10 @@ export function drawRouteSegments(
   for (const segment of segments) {
     if (segment.latlngs.length < 2) continue;
     const kind = routeLayerKind(segment);
+    const fromCity = cityByPlace.get(segment.fromId ?? '');
+    const toCity = cityByPlace.get(segment.toId ?? '');
+    const intercity = segment.flight || (segment.mode === 'transit' && fromCity && toCity && fromCity !== toCity);
+    const distanceClass = intercity ? ' tb-route-intercity' : '';
     const color = kind === 'walk' ? walkColor() : safeColor(segment.color, walkColor());
     const dashed = kind !== 'transit';
     const mode: 'walk' | 'transit' = kind === 'walk' ? 'walk' : 'transit';
@@ -96,7 +103,7 @@ export function drawRouteSegments(
       lineJoin: 'round',
       interactive: true,
       bubblingMouseEvents: false,
-      className: `tb-route tb-route-${kind}`,
+      className: `tb-route tb-route-${kind}${distanceClass}`,
     });
     const leg: RoutePointer =
       segment.fromId && segment.toId
@@ -125,7 +132,7 @@ export function drawRouteSegments(
         lineJoin: 'round',
         interactive: false,
         bubblingMouseEvents: false,
-        className: 'tb-route-flow',
+        className: `tb-route-flow${distanceClass}`,
       });
       flow.addTo(group);
     }
@@ -134,7 +141,7 @@ export function drawRouteSegments(
       for (const station of stationsFor(segment)) {
         const dot = marker([station.lat, station.lng], {
           icon: divIcon({
-            className: station.end ? 'tb-station-wrap is-end' : 'tb-station-wrap',
+            className: `tb-station-wrap${station.end ? ' is-end' : ''}${distanceClass}`,
             html: `<span class="tb-station-dot" style="--station-color:${color}"></span>`,
             iconSize: [16, 16],
             iconAnchor: [8, 8],
@@ -152,7 +159,7 @@ export function drawRouteSegments(
         const toColor = safeColor(transfer.toColor, walkColor());
         const dot = marker([transfer.lat, transfer.lng], {
           icon: divIcon({
-            className: 'tb-transfer-wrap',
+            className: `tb-transfer-wrap${distanceClass}`,
             html:
               `<span class="tb-transfer-dot">` +
               `<span class="tb-transfer-dot__half" style="background:${fromColor}"></span>` +
