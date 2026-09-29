@@ -773,7 +773,6 @@ export function mountTrip(
       slot.replaceChildren(
         icon('directions_walk', { size: 16 }),
         el('span', 'tb-walk__text', value),
-        el('span', 'tb-walk__unit tb-reveal', unit),
       );
       slot.setAttribute('aria-label', `${value}${unit}`);
       // Route and noted extras apart, and what is never counted.

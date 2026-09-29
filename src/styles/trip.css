@@ -397,6 +397,28 @@
   display: none;
 }
 
+/* Keep the weather's right edge fixed: its reading pushes the glyph left. */
+.tb-date__meta > .tb-sky {
+  justify-content: flex-end;
+}
+
+.tb-date__meta .tb-weather {
+  flex: none;
+  background: var(--color-paper);
+}
+
+.tb-date__meta .tb-weather > .tb-reveal {
+  position: static;
+  padding: 0;
+  transform: none;
+  background: none;
+}
+
+.tb-date__meta .tb-weather:is(:hover, :focus-within) > .tb-reveal {
+  padding-inline-start: var(--spacing-4);
+  transform: none;
+}
+
 /* Waiting for the API: the glyph breathes. Without an answer: it goes grey. */
 .tb-weather.is-loading .tb-weather__icon {
   opacity: 0.5;
