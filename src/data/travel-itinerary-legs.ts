@@ -1251,10 +1251,8 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
   trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
-  trainLeg('par-bateaux-mouches', 'par-monoprix-rivoli', 40, [
-    ride(metro9, 'alma-marceau', 'chaussee-antin'),
-  ]),
-  trainLeg('par-monoprix-rivoli', 'par-casa-do-gui', 45, [
+  trainLeg('par-monoprix-champs', 'par-casa-do-gui', 45, [
+    ride(metro9, 'saint-philippe', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
 ];

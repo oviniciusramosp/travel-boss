@@ -378,6 +378,7 @@ export const parisSubcategoriesByPlaceId: Record<string, PlaceSubcategory[]> = {
   'par-grande-arche': ['architecture', 'viewpoint'],
   'par-esplanade-de-gaulle': ['architecture', 'viewpoint'],
   'par-monoprix-rivoli': ['market'],
+  'par-monoprix-champs': ['market'],
   'par-tuileries': ['garden', 'park'],
   'par-orangerie': ['museum', 'architecture'],
   'par-luxor-obelisk': ['monument'],

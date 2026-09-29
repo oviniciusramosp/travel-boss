@@ -757,6 +757,16 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       '23 Av. de l’Opéra (loja aberta). Pegue sanduíches, fruta e bebidas para as Tuileries — ~€6/pessoa. Comida costuma ficar no fundo.',
     ),
   },
+  'par-monoprix-champs': {
+    avgPricePerPerson: money(6, 12, L('Picnic supplies / person (estimate)', 'Suprimentos de piquenique / pessoa (estimativa)')),
+    durationMin: 30,
+    durationMax: 45,
+    crowdProfile: 'shop',
+    tips: L(
+      '107 Rue La Boétie. Monday–Saturday 08:00–23:00; Sunday 09:00–21:30. Grocery supermarket; use the Rue La Boétie address.',
+      '107 Rue La Boétie. Segunda a sábado 8h–23h; domingo 9h–21h30. Supermercado de alimentos; use o endereço da rue La Boétie.',
+    ),
+  },
   'par-palais-royal': parkVisit({
     durationMin: 30,
     durationMax: 60,

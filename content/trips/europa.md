@@ -305,11 +305,11 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: metrô 9 de Havre–Caumartin até Alma–Marceau · 20 min
   - embarque: 2026-10-10 · M9 · Havre–Caumartin → Alma–Marceau · 18:14 → 18:21
 - 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena (€20), saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
-  - via: metrô 9 de Alma–Marceau até Chaussée d’Antin e caminhada até o Monoprix · 40 min
-  - embarque: 2026-10-10 · M9 · Alma–Marceau → Chaussée d'Antin–La Fayette · 19:58 → 20:06
+  - via: a pé até o Monoprix Les Champs · 20 min
   - saída: 19:40
-- 20:20 [Monoprix Opéra](place:par-monoprix-rivoli) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 20h45. Fecha às 22h no sábado
-  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 45 min
+- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 20h45. Supermercado na 107 rue La Boétie; fecha às 23h no sábado
+  - via: metrô 9 até Havre–Caumartin e RER E até Noisy-le-Sec · 45 min — Embarcar em Saint-Philippe-du-Roule e seguir a conexão para Haussmann–Saint-Lazare
+  - embarque: 2026-10-10 · M9 · Saint-Philippe-du-Roule → Havre–Caumartin · 20:56 → 21:00
   - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:07 → 21:20
   - saída: 20:45
 - 21:30 [Casa do Gui](place:par-casa-do-gui) — Volta; jantar em casa e arrumar as malas

@@ -1265,6 +1265,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'mayatomo · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
+  'par-monoprix-champs': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/MONOPRIX_-_%E3%83%A2%E3%83%8E%E3%83%97%E3%83%AA_-_panoramio.jpg/1280px-MONOPRIX_-_%E3%83%A2%E3%83%8E%E3%83%97%E3%83%AA_-_panoramio.jpg',
+      'A Monoprix store in Paris (illustrative image)',
+      'Uma loja Monoprix em Paris (imagem ilustrativa)',
+      'mayatomo · CC BY-SA 3.0 · Wikimedia Commons',
+    ),
+  ],
   'par-montmartre': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Butte_Montmartre%2C_Place_du_Tertre%2C_Paris.jpg/500px-Butte_Montmartre%2C_Place_du_Tertre%2C_Paris.jpg',

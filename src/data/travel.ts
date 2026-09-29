@@ -1573,6 +1573,26 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Carrefour Express 205 Rue Saint-Honoré Paris',
       },
       {
+        id: 'par-monoprix-champs',
+        name: { en: 'Monoprix Les Champs', 'pt-BR': 'Monoprix Les Champs' },
+        category: 'markets',
+        description: {
+          en: 'Supermarket on Rue La Boétie near the Champs-Élysées, with groceries, fresh food, drinks and everyday supplies.',
+          'pt-BR': 'Supermercado na rue La Boétie, perto dos Champs-Élysées, com mercearia, alimentos frescos, bebidas e produtos do dia a dia.',
+        },
+        aiSuggested: true,
+        aiReason: {
+          en: 'A supermarket with a broad grocery selection within walking distance of Bateaux-Mouches for shopping after the cruise.',
+          'pt-BR': 'Supermercado com variedade de alimentos a uma caminhada do Bateaux-Mouches, para fazer as compras depois do passeio de barco.',
+        },
+        googleRating: 3.9,
+        lat: 48.8710051,
+        lng: 2.3069745,
+        address: '107 Rue La Boétie, 75008 Paris',
+        mapsQuery: 'Monoprix Les Champs 107 Rue La Boétie Paris',
+        mapsUrl: 'https://www.google.com/maps/place/MONOPRIX/data=!4m6!3m5!1s0x47e66fc40c23f803:0x9f326d12cc31993c!8m2!3d48.8710051!4d2.3069745!16s%2Fg%2F1tdnw6gq',
+      },
+      {
         id: 'par-monoprix-rivoli',
         name: { en: 'Monoprix Opéra', 'pt-BR': 'Monoprix Opéra' },
         category: 'markets',
