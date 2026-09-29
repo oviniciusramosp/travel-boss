@@ -762,14 +762,23 @@ export function mountTrip(
 
   /** Metres walked per date: the route's walk segments, plus what `+N km` notes add. */
   const walkMeters = new Map<string, { route: number; extra: number }>();
+  const pendingWalks = new Set<string>();
+  const emptyWalks = new Set<string>();
   let walkEpoch = 0;
   let walkAbort: AbortController | null = null;
 
   function paintWalk(date: string, locale: Locale) {
     const meters = walkMeters.get(date);
     main.querySelectorAll<HTMLElement>(`[data-walk="${CSS.escape(date)}"]`).forEach((slot) => {
-      slot.hidden = meters == null;
-      if (meters == null) return;
+      slot.hidden = emptyWalks.has(date);
+      if (meters == null) {
+        const loading = pendingWalks.has(date);
+        const label = pickLocale(locale, loading ? { en: 'Calculating walking distance…', 'pt-BR': 'Calculando distância a pé…' } : { en: 'Walking distance unavailable', 'pt-BR': 'Distância a pé indisponível' });
+        slot.replaceChildren(icon('directions_walk', { size: 16 }), el('span', 'tb-walk__text', loading ? '…' : '—'));
+        slot.setAttribute('aria-label', label);
+        slot.setAttribute('data-tip', label);
+        return;
+      }
       const value = formatWalk(meters.route + meters.extra, locale);
       const unit = pickLocale(locale, { en: ' on foot', 'pt-BR': ' a pé' });
       slot.replaceChildren(
@@ -804,6 +813,10 @@ export function mountTrip(
     const controller = new AbortController();
     walkAbort = controller;
     const color = neutralColor();
+    pendingWalks.clear();
+    emptyWalks.clear();
+    for (const section of tripDates(trip)) pendingWalks.add(section.date);
+    paintWalks(trip);
     void (async () => {
       for (const section of tripDates(trip)) {
         if (!alive || epoch !== walkEpoch) return;
@@ -816,6 +829,8 @@ export function mountTrip(
           }),
         );
         if (!hops.length && !extra) {
+          pendingWalks.delete(section.date);
+          emptyWalks.add(section.date);
           walkMeters.delete(section.date);
           paintWalk(section.date, shell.locale());
           continue;
@@ -823,10 +838,13 @@ export function mountTrip(
         try {
           const segments = hops.length ? await resolveHopSegments(hops, routeDeps(controller.signal, color)) : [];
           if (!alive || epoch !== walkEpoch) return;
-          walkMeters.set(section.date, { route: walkedMeters(segments), extra });
+          pendingWalks.delete(section.date);
+          if (segments.some(segment => segment.mode === 'walk') || extra) walkMeters.set(section.date, { route: walkedMeters(segments), extra });
           paintWalk(section.date, shell.locale());
         } catch {
-          /* Aborted or offline: the slot keeps its last value. */
+          if (!alive || epoch !== walkEpoch) return;
+          pendingWalks.delete(section.date);
+          paintWalk(section.date, shell.locale());
         }
       }
     })();

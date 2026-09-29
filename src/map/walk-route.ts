@@ -1,3 +1,4 @@
+import { footFallback } from './foot-fallback';
 /** FOSSGIS public OSRM. No API key. At most two requests in flight. */
 const OSRM_FOOT = 'https://routing.openstreetmap.de/routed-foot/route/v1/foot';
 const OSRM_CAR = 'https://routing.openstreetmap.de/routed-car/route/v1/driving';
@@ -10,6 +11,7 @@ export const WALKING_ROUTE_CACHE_LIMIT = 300;
 
 const STORAGE_KEY = 'tb:walks';
 const MAX_IN_FLIGHT = 2;
+let footRetryAfter = 0;
 
 export type WalkingRoute = {
   latlngs: [number, number][];
@@ -166,10 +168,6 @@ function abortError(): DOMException {
   return new DOMException('Aborted', 'AbortError');
 }
 
-function isAbort(error: unknown): boolean {
-  return error instanceof DOMException && error.name === 'AbortError';
-}
-
 function acquire(signal: AbortSignal): Promise<void> {
   if (signal.aborted) return Promise.reject(abortError());
   if (active < MAX_IN_FLIGHT) {
@@ -265,12 +263,13 @@ async function execute(
     await acquire(job.controller.signal);
     held = true;
     if (job.controller.signal.aborted) throw abortError();
+    if (endpoint === OSRM_FOOT && Date.now() < footRetryAfter) throw new Error('Foot router cooling down');
     const coords = points.map((point) => `${point.lng},${point.lat}`).join(';');
     const res = await fetch(
       `${endpoint}/${coords}?overview=full&geometries=geojson&steps=false`,
-      { signal: job.controller.signal },
+      { signal: AbortSignal.any([job.controller.signal, AbortSignal.timeout(5000)]) },
     );
-    if (!res.ok) return null;
+    if (!res.ok) throw new Error('Routing service unavailable');
     const data = (await res.json()) as {
       code?: string;
       routes?: Array<{
@@ -281,7 +280,7 @@ async function execute(
     };
     const route = data.code === 'Ok' ? data.routes?.[0] : undefined;
     const raw = route?.geometry?.coordinates;
-    if (!route || !raw?.length) return null;
+    if (!route || !raw?.length) throw new Error('Route unavailable');
     const built: WalkingRoute = {
       latlngs: raw.map(([lng, lat]) => [lat, lng]),
       durationSec: route.duration,
@@ -290,7 +289,17 @@ async function execute(
     remember(key, built);
     return built;
   } catch (error) {
-    if (isAbort(error) || job.controller.signal.aborted) throw abortError();
+    if (job.controller.signal.aborted) throw abortError();
+    if (endpoint === OSRM_FOOT) {
+      footRetryAfter = Date.now() + 60_000;
+      try {
+        const route = await footFallback(points, AbortSignal.any([job.controller.signal, AbortSignal.timeout(10000)]));
+        if (route) remember(key, route);
+        return route;
+      } catch {
+        if (job.controller.signal.aborted) throw abortError();
+      }
+    }
     return null;
   } finally {
     if (held) release();
