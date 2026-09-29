@@ -1,0 +1,10 @@
+# Hospedagens — Europa 2026
+
+Informações de reserva transcritas das quatro imagens enviadas pelo usuário em 28/09/2026, na ordem Milão, La Spezia, Roma e Lisboa. A fonte dos horários, contatos, pagamentos, cancelamento e códigos é a reserva fornecida pelo usuário, não uma cotação ou nova consulta de disponibilidade. Os detalhes ficam nas notas da hospedagem em `content/trips/europa.md`.
+
+- Joy 124 Hotel Milano: cadastro existente `mil-joy124`; mantida a chegada prevista às 14h45 de 11/10, dentro da janela de check-in desde 14h. Checkout até 12h de 14/10.
+- Le camere in città: estadia 14–16/10 conforme o calendário da viagem; check-in desde 15h, checkout até 10h. [Ficha Booking](https://www.booking.com/hotel/it/le-camere-in-citta.html), consultada em 28/09/2026, confirma Via XXVII Marzo, 132 1. Não confundir com “Le camere in città 2”, no número 132 4. Link no roteiro, sem criar pino com coordenadas não verificadas. €10 de imposto municipal mantidos como valor informado, sem inferir se é por pessoa/noite nem somar como ingresso.
+- Roma: [Airbnb 1272445028608014060](https://www.airbnb.com.br/rooms/1272445028608014060), link visível na imagem. Check-in desde 16h em 16/10; checkout até 10h em 18/10. Endereço fornecido pelo usuário, sem inferir coordenadas a partir do mapa aproximado do Airbnb; nenhuma substituição de hospedagens já existentes no catálogo.
+- Lisboa: cadastro existente `lis-whome-bairro-alto`. O endereço da reserva traz CEP 1200-169, diferente do 1200-047 do catálogo; a nota preserva o endereço fornecido, sem deslocar o pino. Check-in disponível desde 16h de 18/10 não significa chegada às 16h: o calendário prevê táxi às 21h. Limite de checkout às 11h de 20/10 não significa ficar até esse horário: o voo sai às 9h35. Hospedagem e checkout registrados como notas com link para o card; não foi inventada duração de voo/táxi para desenhar rotas.
+
+Nenhum status de aprovação foi alterado. Os dados não significam que pagamentos futuros já foram efetuados. Prazos de cancelamento foram preservados como enviados, sem assumir gratuidade onde ela não foi informada.

@@ -331,7 +331,13 @@ budget: comida €50
 ### Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria
 
 - 14:10 [Milano Centrale](place:mil-centrale) — Chegada e caminhada até o hotel
-- 14:45 [Joy 124](place:mil-joy124) — Malas e pausa curta
+- 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h; malas e pausa curta. Quarto double room, só alojamento, para 2 adultos.\
+  **Estadia:** 11–14/10/2026; checkout até 12h em 14/10.\
+  **Reserva:** Azul Viagens · HR2Q63 · localizador 207-16707553.\
+  **E-mail:** viniciusarthur.rp@gmail.com.\
+  **Pagamento:** 07/10/2026 · cartão Azul **** 8090. Cancelamento grátis antes de 07/10/2026.\
+  **Endereço:** Via Melchiorre Gioia, 124, Estação Central, 20125 Milão, Itália.\
+  **Contato:** +39 2366682333.
 - 16:05 [Cesarino](place:mil-cesarino) — Lanche no centro
 - 17:00 [Duomo](place:mil-duomo) — Terraços, sujeito a ingresso
 - 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Passeio até a Piazza della Scala
@@ -352,6 +358,7 @@ budget: comida €50
 
 ### Dia 4 — Qua 14/10 · Partida para La Spezia
 
+- [Joy 124 Hotel Milano](place:mil-joy124) — Checkout até 12h
 - 13:30 [Milano Centrale](place:mil-centrale) — Partida do trem para La Spezia
 
 ## La Spezia
@@ -363,6 +370,14 @@ budget: comida €50
 
 Chegada de trem de Milão e hospedagem em La Spezia.
 
+- [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in a partir das 15h, após a chegada de Milão.\
+  **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.\
+  **Reserva:** Booking.com · confirmação 5003460305 · PIN 2525.\
+  **E-mail:** viniciusarthur.rp@gmail.com.\
+  **Pagamento:** 02/10/2026 · cartão MEXC. Imposto municipal informado: €10.\
+  **Endereço:** Via XXVII Marzo, 132 1, 19121 La Spezia, Itália.\
+  **Contato:** +39 366 195 7623.
+
 ### Dia 2 — Qui 15/10 · Cinque Terre
 
 Passeio de trem por Cinque Terre com o Cinque Terre Card; base em La Spezia.
@@ -370,6 +385,8 @@ Passeio de trem por Cinque Terre com o Cinque Terre Card; base em La Spezia.
 ### Dia 3 — Sex 16/10 · Partida para Roma
 
 Trem La Spezia → Roma.
+
+- [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout até 10h
 
 ## Roma
 city: roma
@@ -379,6 +396,11 @@ budget: comida €50
 ### Dia 1 — Sex 16/10 · Chegada a Roma
 
 Chegada de trem de La Spezia e hospedagem em Roma. Tickets de Roma previstos para esta etapa.
+
+- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in a partir das 16h; self check-in com fechadura inteligente.\
+  **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.\
+  **Reserva:** Airbnb · confirmação HM4E2Q3E3J.\
+  **Endereço:** Via Giovanni Aurispa, 9, Rome, Lazio 00167.
 
 ### Dia 2 — Sáb 17/10 · Centro antigo
 
@@ -392,6 +414,7 @@ Um dia a pé no centro. Os outros lugares de Roma ficam no catálogo da cidade, 
 
 ### Dia 3 — Dom 18/10 · Voo para Lisboa
 
+- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout até 10h
 - 18:30 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo FCO → LIS
 
 ## Lisboa
@@ -404,6 +427,12 @@ budget: comida €40
 Chegada do voo de Roma e hospedagem em Lisboa.
 
 - 21:00 Táxi para a hospedagem
+- **Hospedagem:** [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Chegada após o táxi; check-in disponível desde 16h.\
+  **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída antecipada para o voo das 9h35.\
+  **Reserva:** Booking.com · confirmação 5493388124 · PIN 5571.\
+  **Cartão:** KAST. Cancelamento informado: até 17/09/2026.\
+  **Endereço da reserva:** Rua da Barroca 11 2E, Misericórdia, 1200-169 Lisboa, Portugal.\
+  **Contato:** +351 912 868 604.
 
 ### Dia 2 — Seg 19/10 · Lisboa
 
@@ -411,4 +440,5 @@ Chegada do voo de Roma e hospedagem em Lisboa.
 
 Uber para o aeroporto.
 
+- **Checkout:** [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Antes de pegar o Uber para o voo das 9h35; limite da hospedagem às 11h
 - 09:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Partida do voo LIS → GRU
