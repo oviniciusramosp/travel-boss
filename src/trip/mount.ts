@@ -1465,10 +1465,16 @@ export function mountTrip(
         ...more,
       });
 
-    /** The note of a trip `via:` in its transfer row. Catalog legs have none. */
+    /** The note of a trip `via:` in its transfer row, including a catalog-expanded ride. */
     const editLegNote = (row: HTMLElement, leg: TripLeg | undefined, slug: string) => {
-      const note = row.querySelector<HTMLElement>('.tb-transfer__note');
-      if (note && leg?.note && leg.line) editNote(note, 'via', leg.note, lineAt(leg.line), slug);
+      if (!leg?.note || !leg.line) return;
+      let note = row.querySelector<HTMLElement>('.tb-transfer__note');
+      if (!note) {
+        note = el('span', 'tb-transfer__note', leg.note);
+        row.append(note);
+        row.setAttribute('aria-label', `${row.getAttribute('aria-label')}, ${leg.note}`);
+      }
+      editNote(note, 'via', leg.note, lineAt(leg.line), slug);
     };
 
     /** The stop's decisions and comments go in `host`. Returns the button that adds a comment. */
@@ -2018,6 +2024,9 @@ export function mountTrip(
         const fare = entry.depart?.fareEur ?? 0;
         const own = entry.depart ? legs.indexOf(entry.depart) : -1;
         const fareAt = fare > 0 ? (own >= 0 ? own : Math.max(0, legs.findIndex((leg) => leg.mode !== 'walk'))) : -1;
+        const noteAt = entry.depart?.note
+          ? (own >= 0 ? own : Math.max(0, legs.findIndex((leg) => leg.mode !== 'walk')))
+          : -1;
         const rails = legs.map((leg) => {
           const mode = leg.mode === 'walk' ? 'walk' : 'transit';
           const branded = 'color' in leg && typeof leg.color === 'string' ? leg.color : null;
@@ -2044,7 +2053,7 @@ export function mountTrip(
         lists[rowIndex]!.append(item);
         const appendHop = () => rails.forEach((rail, index) => {
           const transfer = transferRow(legs[index]!, locale, timings[index]);
-          if (legs[index] === entry.depart) editLegNote(transfer, entry.depart, city.slug);
+          if (index === noteAt) editLegNote(transfer, entry.depart, city.slug);
           if (index === fareAt) {
             const cost = stopCostEl({ id: '', food: 0, ticket: fare }, locale);
             transfer.append(cost);

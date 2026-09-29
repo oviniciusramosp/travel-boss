@@ -96,7 +96,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   **Sobremesas:** riz au lait — arroz-doce; crème au caramel maison — pudim de caramelo.
   - saída: 21:20
 - 21:25 [Passage des Panoramas](place:par-passage-panoramas) — Se o jantar passar das **21h20**, pular esta parada e seguir direto para Haussmann–Saint-Lazare, para não arriscar perder o trem de volta. Caso contrário, passear e fotografar até 21h40; chegar à estação por volta das 22h, antes das obras noturnas do RER E
-  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min
+  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min — O RER E é interrompido às **22h30** por obras; usar o trem confirmado das **22h07**. Se perder: M9 de Grands Boulevards a République, M5 até Bobigny–Pantin–Raymond Queneau, ônibus 145 até Jeanne d’Arc e 8 min a pé (~50 min)
   - embarque: 2026-10-05 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 22:07 → 22:19
   - saída: 21:40
 - 22:30 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
