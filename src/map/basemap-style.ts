@@ -255,6 +255,14 @@ function setLayerMinZoom(glMap: MaplibreMap, layerId: string, minzoom: number) {
 }
 
 function hideBasemapClutter(glMap: MaplibreMap) {
+  setLayout(glMap, 'ferry', 'visibility', 'none');
+  for (const id of ['boundary_state', 'boundary_country_z0-4', 'boundary_country_z5-']) {
+    if (!glMap.getLayer(id)) continue;
+    const filter = glMap.getFilter(id);
+    const landOnly: FilterSpecification = ['!=', ['get', 'maritime'], 1];
+    if (filter && JSON.stringify(filter).includes(JSON.stringify(landOnly))) continue;
+    glMap.setFilter(id, filter ? (['all', filter, landOnly] as FilterSpecification) : landOnly);
+  }
   for (const id of HIDDEN_HIGHWAY_INDICATOR_LAYERS) {
     setLayout(glMap, id, 'visibility', 'none');
   }

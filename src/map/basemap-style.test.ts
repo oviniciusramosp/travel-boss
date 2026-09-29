@@ -93,6 +93,16 @@ const BRIGHT_LAYERS = [
 ];
 
 describe('bright basemap', () => {
+  it('hides ferries and maritime borders while preserving land boundaries on repeated paints', () => {
+    const land = ['==', ['get', 'admin_level'], 2] as FilterSpecification;
+    const map = fakeMap(['ferry', 'boundary_country_z5-', 'water'], { 'boundary_country_z5-': land });
+    applyBrightBasemap(map.api, 'dark');
+    applyBrightBasemap(map.api, 'dark');
+    expect(map.layout.get('ferry')?.visibility).toBe('none');
+    expect(map.filters.get('boundary_country_z5-')).toEqual(['all', land, ['!=', ['get', 'maritime'], 1]]);
+    expect(map.layout.get('water')?.visibility).not.toBe('none');
+  });
+
   it('paints the portfolio light palette and hides overview clutter', () => {
     const map = fakeMap(BRIGHT_LAYERS, {
       poi_r1: ['all', ['match', ['geometry-type'], ['Point'], true, false]],
