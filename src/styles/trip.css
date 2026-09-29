@@ -409,14 +409,27 @@
 
 .tb-date__meta .tb-weather > .tb-reveal {
   position: static;
+  interpolate-size: allow-keywords;
+  width: 0;
+  max-width: none;
   padding: 0;
   transform: none;
   background: none;
+  transition:
+    width var(--dur-slow) var(--ease-in-out),
+    padding-inline-start var(--dur-slow) var(--ease-in-out),
+    opacity var(--dur-slow) var(--ease-in-out);
 }
 
 .tb-date__meta .tb-weather:is(:hover, :focus-within) > .tb-reveal {
+  width: max-content;
+  max-width: none;
   padding-inline-start: var(--spacing-4);
   transform: none;
+  transition:
+    width var(--dur-slow) var(--ease-in-out),
+    padding-inline-start var(--dur-slow) var(--ease-in-out),
+    opacity var(--dur-slow) var(--ease-in-out);
 }
 
 /* Waiting for the API: the glyph breathes. Without an answer: it goes grey. */
@@ -442,6 +455,10 @@
 }
 
 @media (hover: none) {
+  .tb-date__meta .tb-weather > .tb-reveal {
+    width: max-content;
+  }
+
   .tb-reveal,
   .tb-period__head .tb-weather > .tb-reveal {
     position: static;
