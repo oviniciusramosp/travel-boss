@@ -845,8 +845,8 @@ export function mountTrip(
     const inner = new Set(trip.cities.flatMap((city) => [...(getTripCity(city.slug) ? subPointParents(getTripCity(city.slug)!).keys() : [])]));
     const overview = !openDate();
     const hops = overview ? routeHops() : [];
-    const endpoints = new Set(hops.flatMap((hop) => [hop.from.id, hop.to.id]));
-    const pins = catalogPins(trip).filter((pin) => !inner.has(pin.id) && (!overview || !hops.length || endpoints.has(pin.id)));
+    // Keep the city catalog mounted: zoom controls visibility, including in the overview.
+    const pins = catalogPins(trip).filter((pin) => !inner.has(pin.id));
     map.setCities([]);
     map.setOverview(null);
     map.hoverOverview(null);
