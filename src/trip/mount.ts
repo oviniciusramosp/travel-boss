@@ -78,11 +78,11 @@ import { row } from '../ui/row';
 import {
   closePlace,
   onPlaceClose,
-  openPlace,
   openPlaceId,
   repaintPlace,
   setPlaceOrigin,
 } from '../views/place-panel';
+import { activatePlace, resetPlaceSelection } from '../views/place-activation';
 import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripStop } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { averageBudgetCards, dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel, sunsetTip } from '../views/timeline';
@@ -344,6 +344,7 @@ export function mountTrip(
   shell: Shell,
 ): { dispose(): void } {
   main.scrollTop = 0;
+  resetPlaceSelection(map);
   let alive = true;
   let failure: 'missing' | 'read' | null = null;
   const stopsUnsub = { fn: () => {} };
@@ -1383,7 +1384,7 @@ export function mountTrip(
       clearStopCurrent();
       const rowEl = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(placeId)}"]`);
       rowEl?.setAttribute('aria-current', 'true');
-      openPlace(found, placeCity(found.id, cityRecord), locale, origin, {
+      activatePlace(map, found, placeCity(found.id, cityRecord), locale, origin, {
         maps: googleMapsUrl(found, placeCity(found.id, cityRecord)),
       });
     };
@@ -1880,7 +1881,7 @@ export function mountTrip(
                   clearStopCurrent();
                   item.setAttribute('aria-current', 'true');
                   const origin = item.querySelector<HTMLElement>('.tb-row__main');
-                  openPlace(place, placeCity(place.id, record), locale, origin, cardLinks());
+                  activatePlace(map, place, placeCity(place.id, record), locale, origin, cardLinks());
                 }
               : undefined,
         });
@@ -1950,7 +1951,7 @@ export function mountTrip(
                 releaseLeg();
                 clearStopCurrent();
                 item.setAttribute('aria-current', 'true');
-                openPlace(place, placeCity(place.id, record), locale, name, cardLinks(index));
+                activatePlace(map, place, placeCity(place.id, record), locale, name, cardLinks(index));
               });
             }
             if (subNotes.some((candidate) => candidate.time)) point.append(el('span', 'tb-substop__time', note?.time ?? ''));
@@ -2204,7 +2205,7 @@ export function mountTrip(
       const place = record ? placeById(city.slug, parentId) : undefined;
       if (!record || !place) continue;
       const notes = subNotesByPlace.get(parentId);
-      openPlace(place, placeCity(place.id, record), shell.locale(), null, {
+      activatePlace(map, place, placeCity(place.id, record), shell.locale(), null, {
         focusSub: index,
         ...(notes?.sub.length ? { subNotes: notes.sub } : {}),
         ...(notes?.park.length ? { parkNotes: notes.park } : {}),
@@ -2263,7 +2264,7 @@ export function mountTrip(
       const place = record?.places.find((entry) => entry.id === pinId);
       if (!record || !place) continue;
       const origin = item?.querySelector<HTMLElement>('.tb-row__main') ?? null;
-      openPlace(place, placeCity(place.id, record), shell.locale(), origin);
+      activatePlace(map, place, placeCity(place.id, record), shell.locale(), origin);
       return;
     }
   });

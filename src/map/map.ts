@@ -304,7 +304,7 @@ export function mountMap(host: HTMLElement): MapHandle {
     const mapBox = frame.getBoundingClientRect();
     let extra: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
     const side = boxOf(document.querySelector('.tb-side'));
-    const panel = boxOf(document.querySelector('.tb-place-panel'));
+    const panel = boxOf(document.querySelector('.tb-map-col > .tb-place-panel'));
     if (side) extra = mergeInsets(extra, coveredInsets(mapBox, side));
     if (panel) extra = mergeInsets(extra, coveredInsets(mapBox, panel));
     return mergeInsets(padding, extra);
@@ -790,13 +790,13 @@ export function mountMap(host: HTMLElement): MapHandle {
       };
     },
 
-    select(id) {
+    select(id, fallback) {
       selectedId = id;
       paintAll();
       syncOverlays();
       const target = findMarker(id);
-      if (!target) return;
-      const ll = target.getLatLng();
+      const ll = target?.getLatLng() ?? fallback;
+      if (!ll) return;
       moveCamera(ll.lat, ll.lng, selectionZoom(leafletMap.getZoom()));
     },
 

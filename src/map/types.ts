@@ -113,7 +113,7 @@ export type MapHandle = {
     fn: (leg: { from: string; to: string; hop?: number; walk?: number; mode?: 'walk' | 'transit' } | null) => void,
   ): () => void;
   /** Highlight and frame the pin in the padded view. */
-  select(id: string): void;
+  select(id: string, fallback?: { lat: number; lng: number }): void;
   /**
    * Visual selection. `null` clears it without moving the camera.
    * An id selects, same as `select`.

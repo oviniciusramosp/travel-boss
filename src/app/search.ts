@@ -3,6 +3,7 @@ import { el } from '../ui/dom';
 import { placePin } from '../ui/place-pin';
 import { icon } from '../ui/icons';
 import { formatDayTitle } from '../trip/dates';
+import { isMobileLayout, preparePlaceSearch } from '../views/place-activation';
 import type { Shell } from './shell';
 import type { Route } from './router';
 
@@ -50,6 +51,7 @@ export function mountSearch(shell: Shell, navigate: (route: Route) => void) {
     if (!option) return;
     input.value = '';
     close();
+    if (isMobileLayout()) input.blur();
     option.select();
   };
   const paint = () => {
@@ -74,6 +76,7 @@ export function mountSearch(shell: Shell, navigate: (route: Route) => void) {
             if (parent instanceof HTMLDetailsElement) parent.open = true;
           }
           node.scrollIntoView({ block: 'center' });
+          if (node.dataset.placeId) preparePlaceSearch(node.dataset.placeId);
           const control = node.querySelector<HTMLElement>('.tb-row__main');
           if (control instanceof HTMLButtonElement) { control.focus({ preventScroll: true }); control.click(); }
           else { node.tabIndex = -1; node.focus({ preventScroll: true }); }
@@ -86,7 +89,7 @@ export function mountSearch(shell: Shell, navigate: (route: Route) => void) {
         select: () => navigate({ kind: 'city', slug: city.slug, tab: 'places' }),
       }, ...city.places.map(place => ({ label: pickLocale(locale, place.name), detail: name, lead: () => placePin(place),
         text: `${name} ${place.name.en} ${place.name['pt-BR']}`,
-        select: () => navigate({ kind: 'city', slug: city.slug, tab: 'places', place: place.id }),
+        select: () => { preparePlaceSearch(place.id); navigate({ kind: 'city', slug: city.slug, tab: 'places', place: place.id }); },
       }))];
     });
     for (const [label, items] of [

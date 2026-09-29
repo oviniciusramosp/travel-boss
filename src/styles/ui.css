@@ -470,3 +470,18 @@
 .tb-video__status {
   margin: var(--spacing-16);
 }
+
+@media (max-width: 767px) {
+  input, textarea, select { font-size: var(--text-input-mobile); }
+  .tb-row__main { min-height: var(--h-touch); justify-content: center; }
+  .tb-row__actions { opacity: 1; }
+  .tb-row__title { overflow-wrap: anywhere; }
+  [data-mobile-hint][aria-current='true']::after {
+    content: attr(data-mobile-hint);
+    grid-column: 1 / -1;
+    display: block;
+    padding: var(--spacing-4) var(--spacing-8);
+    color: var(--color-mid-gray);
+    font-size: var(--text-caption);
+  }
+}

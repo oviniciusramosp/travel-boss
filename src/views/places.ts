@@ -35,11 +35,11 @@ import { formatRating, ratingSummary } from '../ui/rating';
 import {
   closePlace,
   onPlaceClose,
-  openPlace,
   openPlaceId,
   repaintPlace,
   setPlaceOrigin,
 } from './place-panel';
+import { activatePlace, consumePlaceSearch, resetPlaceSelection, revealPlace } from './place-activation';
 import { guidePlaceIds, renderGuide, type GuideTab } from './guide';
 import { createRouteButton, mountRoutePlanner } from './route-planner';
 
@@ -453,6 +453,7 @@ export function mountCity(
   onChange?: (state: CityRouteState) => void,
 ): { dispose(): void; sync(state: CityRouteState): void } {
   main.scrollTop = 0;
+  resetPlaceSelection(map);
   const city = getTravelCity(slug);
   main.replaceChildren();
   if (!city) {
@@ -609,18 +610,23 @@ export function mountCity(
     return row?.querySelector<HTMLElement>('.tb-place-card__open, .tb-place-main, .tb-row__main') ?? null;
   };
 
-  const focusPlace = (id: string, origin?: HTMLElement | null) => {
+  const focusPlace = (id: string, origin?: HTMLElement | null, direct = false) => {
     const place = byId.get(id);
     if (!place) return;
     const changed = currentPlaceId !== id;
     currentPlaceId = id;
-    openPlace(place, city, shell.locale(), origin);
+    setRowCurrent(body, id, false);
+    const fromSearch = direct && consumePlaceSearch(id);
+    if (fromSearch) resetPlaceSelection(map);
+    if (direct && !fromSearch) revealPlace(map, place, city, shell.locale(), origin);
+    else activatePlace(map, place, city, shell.locale(), origin);
     if (changed) publish();
   };
 
   const clearPlaceSelection = () => {
     const hadPlace = currentPlaceId != null;
     currentPlaceId = null;
+    resetPlaceSelection(map);
     main.querySelectorAll('[data-place-id][aria-current]').forEach((node) => {
       node.removeAttribute('aria-current');
     });
@@ -1020,6 +1026,7 @@ export function mountCity(
     runViewTransition(() => {
       tab = next;
       if (leavingHotels) closeHotels();
+      clearPlaceSelection();
       closePlace({ focus: false });
       paintChrome();
       renderBody();
@@ -1042,10 +1049,11 @@ export function mountCity(
       if (place && place === currentPlaceId && openPlaceId() === place) return;
       if (!place) {
         if (currentPlaceId || openPlaceId()) closePlace({ focus: false });
+        clearPlaceSelection();
         return;
       }
       setRowCurrent(body, place, true);
-      focusPlace(place, rowButton(place));
+      focusPlace(place, rowButton(place), true);
     } finally {
       silence -= 1;
     }
@@ -1060,7 +1068,7 @@ export function mountCity(
   if (initialPlace) {
     silence += 1;
     setRowCurrent(body, initialPlace, true);
-    focusPlace(initialPlace, rowButton(initialPlace));
+    focusPlace(initialPlace, rowButton(initialPlace), true);
     silence -= 1;
   }
 
