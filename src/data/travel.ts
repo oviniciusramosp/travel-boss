@@ -3619,6 +3619,48 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: '30 Rue des Bergeries, 93130 Noisy-le-Sec',
       },
       {
+        id: 'par-le-jean-jaures-noisy',
+        name: { en: 'Le Jean Jaurès', 'pt-BR': 'Le Jean Jaurès' },
+        category: 'cafes',
+        subcategories: ['coffee-shop'],
+        aiSuggested: true,
+        aiReason: {
+          en: 'A neighbourhood café close to Casa do Gui for a seated morning or afternoon coffee; 4.3/5 from 16 Google reviews when checked.',
+          'pt-BR': 'Café de bairro perto da Casa do Gui para sentar e tomar café de manhã ou à tarde; 4,3/5 em 16 avaliações do Google na consulta.',
+        },
+        description: {
+          en: 'Neighbourhood café and brasserie on Rue Jean Jaurès in central Noisy-le-Sec. It serves coffee, drinks, snacks and simple meals, with seating on site.',
+          'pt-BR': 'Café e brasserie de bairro na Rue Jean Jaurès, no centro de Noisy-le-Sec. Serve café, bebidas, lanches e refeições simples, com consumo no local.',
+        },
+        googleRating: 4.3,
+        lat: 48.8919647,
+        lng: 2.4550058,
+        address: '25 Rue Jean Jaurès, 93130 Noisy-le-Sec',
+        mapsQuery: 'Le Jean Jaurès 25 Rue Jean Jaurès Noisy-le-Sec',
+        mapsUrl: 'https://www.google.com/maps?cid=13203866807052550018',
+      },
+      {
+        id: 'par-boulangerie-eden-noisy',
+        name: { en: 'Boulangerie Eden', 'pt-BR': 'Boulangerie Eden' },
+        category: 'cafes',
+        subcategories: ['bakery', 'pastry', 'coffee-shop'],
+        aiSuggested: true,
+        aiReason: {
+          en: 'A bakery with coffee and on-site seating in Noisy-le-Sec, for breakfast or an afternoon pastry; 4.9/5 from 83 Google reviews. Farther from Casa do Gui than Le Jean Jaurès.',
+          'pt-BR': 'Padaria com café e consumo no local em Noisy-le-Sec, para café da manhã ou um doce à tarde; 4,9/5 em 83 avaliações do Google. Mais distante da Casa do Gui que o Le Jean Jaurès.',
+        },
+        description: {
+          en: 'Artisan bakery and pâtisserie on Rue de Paris, with bread, butter viennoiseries, cakes and sandwiches. It also offers coffee and a seating area for eating on site.',
+          'pt-BR': 'Padaria e confeitaria artesanal na Rue de Paris, com pães, folhados de manteiga, bolos e sanduíches. Também oferece café e espaço para consumir no local.',
+        },
+        googleRating: 4.9,
+        lat: 48.9029248,
+        lng: 2.4632042,
+        address: '209 Rue de Paris, 93130 Noisy-le-Sec',
+        mapsQuery: 'Boulangerie Eden 209 Rue de Paris Noisy-le-Sec',
+        mapsUrl: 'https://www.google.com/maps?cid=6295388163114373633',
+      },
+      {
         id: 'par-auchan-noisy',
         name: {
           en: 'Auchan Supermarché (Noisy-le-Sec)',

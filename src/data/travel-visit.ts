@@ -428,6 +428,20 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Hospedagem residencial; a galeria ilustra Noisy-le-Sec, não a casa particular.',
     ),
   },
+  'par-le-jean-jaures-noisy': {
+    crowdProfile: 'cafe',
+    tips: L(
+      'A convenient nearby option for a seated coffee. This is a neighbourhood café/brasserie; a full breakfast menu has not been verified. Opening times differ between its website and Google Maps; check the listing before an early visit.',
+      'Opção próxima para tomar um café sentado. É um café/brasserie de bairro; não foi confirmado um cardápio de café da manhã completo. Os horários divergem entre o site e o Google Maps; confira a ficha antes de ir muito cedo.',
+    ),
+  },
+  'par-boulangerie-eden-noisy': {
+    crowdProfile: 'cafe',
+    tips: L(
+      'Coffee with butter viennoiseries in the morning, or pastries in the afternoon; eating on site is listed on Google Maps. Across the railway from central Noisy-le-Sec, so allow a longer walk from Casa do Gui and check the pedestrian route.',
+      'Café com folhados de manteiga de manhã ou doces à tarde; o Google Maps informa consumo no local. Fica do outro lado da ferrovia em relação ao centro de Noisy-le-Sec: reserve uma caminhada maior desde a Casa do Gui e confira o trajeto a pé.',
+    ),
+  },
   'par-auchan-noisy': {
     avgPricePerPerson: money(
       15,
