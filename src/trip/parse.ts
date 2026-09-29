@@ -32,6 +32,8 @@ export type TripBoarding = {
 };
 
 export type TripStop = {
+  /** Planned food spend per person for this date, replacing the catalog estimate. */
+  foodEur?: number;
   /** Published services checked for this departure stop and date. */
   boardings?: TripBoarding[];
   /** Explicit planned exit, independent from the arrival time of the stop. */
@@ -106,6 +108,7 @@ export type TripErrorCode =
   | 'decision-no-stop'
   | 'budget-empty'
   | 'budget-twice'
+  | 'food-invalid'
   | 'stop-outside-day'
   | 'line-outside-day'
   | 'no-title';
@@ -401,6 +404,16 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       const stop = day.stops.at(-1);
       if (stop && (status[1] === 'a confirmar' || status[1] === 'confirmado')) { stop.status = status[1]; continue; }
       if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
+    }
+
+    const food = /^[ \t]+- comida:[ \t]*(.*)$/.exec(line);
+    if (food) {
+      const stop = day?.stops.at(-1);
+      const amount = /^€\s?(\d+(?:[.,]\d{1,2})?)\s*$/.exec(food[1] ?? '');
+      if (!stop?.placeId || stop.listNote || !amount || stop.foodEur !== undefined || !Number.isFinite(euros(amount[1]!))) {
+        reject(errors, lineNo, 'food-invalid');
+      } else stop.foodEur = euros(amount[1]!);
+      continue;
     }
 
     const departure = /^[ \t]+- saída:[ \t]*(.*)$/.exec(line);

@@ -84,6 +84,7 @@ Formato: [`content/SCHEMA.md`](content/SCHEMA.md). Um arquivo por viagem em `con
 - Meta de comida: `budget: comida €50` no cabeçalho da cidade, junto de `city:` e `dates:`, é por pessoa por dia. Fica só no Markdown, como `city:`; o chip de comida do card do dia avisa quando a data passa. Ingressos não têm meta.
 - H3: `### Dia N — Título`.
 - Parada: bullet com `HH:mm` opcional e link `[Rótulo](place:<id>)` (o id já existe naquela cidade) ou URL `https://…`. Nota depois de ` — `.
+- Gasto de comida específico da viagem: `  - comida: €30` sob a parada do catálogo substitui a estimativa do catálogo por pessoa naquela data, inclusive com zero. Entra no total, na nota de gastos e no valor da parada; export preserva. Não alterar o preço do catálogo para representar uma compra planejada da viagem. Detalhes em `content/SCHEMA.md`.
 - Trecho: `  - via:` embaixo da parada de saída, com uma ação curta e a duração (`Pegar um Bolt · 35 min`). O detalhe do trajeto vai depois de ` — ` e aparece embaixo do trecho. Preço (`· €2,55`, antes da nota) só quando é gasto a mais que o passe semanal.
 - Partidas: `  - saída: HH:mm` preserva a saída a pé prevista; `  - embarque:` registra data, serviço, estações e horários consultados conforme `content/SCHEMA.md`. Trem sem serviço conferido fica a confirmar; nunca calcular sua partida pela duração. Caminhadas são estimativas e conexões incompatíveis aparecem sinalizadas.
 - Parágrafo sob o dia é narrativa: entra no documento e no export, não vira pino.

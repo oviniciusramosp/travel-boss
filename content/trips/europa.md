@@ -292,9 +292,11 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 11:45 [Place Vendôme](place:par-vendome) — Passar pela praça a caminho do Cédric Grolet: 15 min para fotos e vitrines; seguir às 12h
   - saída: 12:00
 - 12:15 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; escolher retirada em 10/10 às 12h15, conforme disponibilidade. Chegar no horário do pedido e usar a fila prioritária de retirada; reservar até 12h40
+  - comida: €30
   - status: confirmado
   - saída: 12:40
 - 12:50 [McDonald's Louvre–Rivoli](place:par-mcdonalds-louvre-rivoli) — Opção de almoço: comprar para levar e comer no Palais-Royal; estimativa de €15 por pessoa para um combo
+  - comida: €15
   - status: a confirmar
   - saída: 13:10
 - 13:20 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim e sentar para comer os doces do Cédric Grolet com calma
@@ -309,7 +311,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena (€20), saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
   - via: a pé até o Monoprix Les Champs · 20 min
   - saída: 19:40
-- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar as coisas do café da manhã e do lanche de amanhã (11/10), para levar no trem a Milão; sair até 20h45. Supermercado na 107 rue La Boétie; fecha às 23h no sábado
+- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar o café da manhã, o lanche da manhã e a refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; reservar €25 por pessoa com margem e sair até 20h45. Supermercado na 107 rue La Boétie; fecha às 23h no sábado
+  - comida: €25
   - via: metrô 9 até Havre–Caumartin e RER E até Noisy-le-Sec · 45 min — Embarcar em Saint-Philippe-du-Roule e seguir a conexão para Haussmann–Saint-Lazare
   - embarque: 2026-10-10 · M9 · Saint-Philippe-du-Roule → Havre–Caumartin · 20:56 → 21:00
   - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:07 → 21:20

@@ -1672,16 +1672,18 @@ export function mountTrip(
       const noFood = new Set<string>();
       const buying = new Set<string>();
       const inside = new Set<string>();
+      const foodOverrides = new Map<string, number>();
       for (const row of rows) {
         const stop = row.dated.day.stops[row.stopIndex];
         if (!stop?.placeId) continue;
+        if (stop.foodEur !== undefined) foodOverrides.set(stop.placeId, stop.foodEur);
         const text = `${stop.label} ${stop.note ?? ''}`;
         (seenFromOutside(text) ? outside : inside).add(stop.placeId);
         (noPurchase(text) ? noFood : buying).add(stop.placeId);
       }
       for (const placeId of inside) outside.delete(placeId);
       for (const placeId of buying) noFood.delete(placeId);
-      const budget = dateBudget(placesHere, fares, outside, noFood);
+      const budget = dateBudget(placesHere, fares, outside, noFood, foodOverrides);
       dailyBudgets.push({ title: formatDayTitle(date, locale), budget });
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));
