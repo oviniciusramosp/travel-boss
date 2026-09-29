@@ -1,3 +1,4 @@
+import { intercityHops } from './overview';
 import { getTripCity, placeCity } from './catalog';
 import { departureTimes } from './departures';
 import { placePin as stopPin } from '../ui/place-pin';
@@ -528,7 +529,9 @@ export function mountTrip(
   /** Stops of the routed date, including the train that leaves one city for the next. */
   function routeHops(): RouteHop[] {
     const date = routedDate();
-    return current && date ? hopsForDate(current, date, false) : [];
+    if (!current) return [];
+    if (date) return hopsForDate(current, date, false);
+    return openDate() ? [] : intercityHops(tripDates(current).flatMap((section) => hopsForDate(current!, section.date, true)));
   }
 
   /** Hops between the places of a date. `all` keeps the periods switched off the map: the walked distance counts them. */
@@ -667,7 +670,7 @@ export function mountTrip(
     return [{ lat: from.lat, lng: from.lng }, ...through.map(([lat, lng]) => ({ lat, lng })), { lat: to.lat, lng: to.lng }];
   }
 
-  function drawTripRoutes() {
+  function drawTripRoutes(fit = false) {
     const epoch = ++tripRouteEpoch;
     routeAbort?.abort();
     const controller = new AbortController();
@@ -685,7 +688,7 @@ export function mountTrip(
     const preview = hops.map((hop) => previewHop(hop, color));
     const known = preview.flatMap((part) => part ?? []);
     if (preview.every((part) => part !== null)) {
-      map.setRoute(known);
+      map.setRoute(known, { fit });
       return;
     }
     void resolveHopSegments(
@@ -697,7 +700,7 @@ export function mountTrip(
     )
       .then((segments) => {
         if (!alive || epoch !== tripRouteEpoch) return;
-        map.setRoute(segments);
+        map.setRoute(segments, { fit });
       })
       .catch(() => undefined);
   }
@@ -841,7 +844,10 @@ export function mountTrip(
     if (!trip) return;
     const date = routedDate();
     const inner = new Set(trip.cities.flatMap((city) => [...(getTripCity(city.slug) ? subPointParents(getTripCity(city.slug)!).keys() : [])]));
-    const pins = catalogPins(trip).filter((pin) => !inner.has(pin.id));
+    const overview = !openDate();
+    const hops = overview ? routeHops() : [];
+    const endpoints = new Set(hops.flatMap((hop) => [hop.from.id, hop.to.id]));
+    const pins = catalogPins(trip).filter((pin) => !inner.has(pin.id) && (!overview || !hops.length || endpoints.has(pin.id)));
     map.setCities([]);
     map.setOverview(null);
     map.hoverOverview(null);
@@ -857,6 +863,8 @@ export function mountTrip(
         const points = datedPoints(trip, date);
         if (points.length) map.frame(points, 13);
       }
+    } else if (overview && hops.length) {
+      drawTripRoutes(fit);
     } else {
       tripRouteEpoch += 1;
       routeAbort?.abort();
@@ -2111,7 +2119,7 @@ export function mountTrip(
           openOrder.push(date);
         }
         // Opening frames the day, unless a pin opened it. Closing the day on the map frames the one it hands the map to.
-        const fitDay = details.open ? !pinPick : wasOnMap && routedDate() !== null;
+        const fitDay = details.open ? !pinPick : !openDate() || (wasOnMap && routedDate() !== null);
         pinPick = false;
         syncView(fitDay);
       });

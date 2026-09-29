@@ -59,6 +59,7 @@ UI (vale a partir da Fase 1):
 - Informação secundária aparece no hover e em `:focus-within`; em `@media (hover: none)` fica sempre visível. Não esconda o essencial nem o único caminho de uma ação.
 - Hover não move a câmera do mapa. Só clique ou Enter movem.
 - Voos usam curvas ilustrativas entre aeroportos, com traços longos animados na direção do destino; movimento reduzido desliga a animação. Não representam o trajeto real do avião.
+- Com todos os cards de dias fechados, o mapa mostra os deslocamentos conhecidos entre cidades e seus terminais, incluindo bate-voltas. Fechar o último card enquadra o conjunto; abrir um dia restaura a rota daquele dia.
 - Nota editável usa `editableNote` (`src/trip/note-edit.ts`): o texto vira o próprio Markdown no lugar e cada save é um `PATCH` de uma linha. Com um editor aberto, o documento não repinta.
 - O chrome é acromático. Cor de categoria só em pinos, glifos de categoria e pontos. Exceções pedidas pelo usuário: os ícones de orçamento do card do dia, da nota do dia e do valor de cada parada, à direita da nota (comida `--color-food`, ingresso `--color-ticket`), o botão de rota do card do dia quando ligado (fundo `--color-walk`), e os de previsão do tempo (o pack duotone de `public/weather/`, com as cores do próprio SVG).
 
