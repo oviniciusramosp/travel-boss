@@ -1983,6 +1983,26 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Café Latéral 4 Avenue Mac-Mahon Paris',
       },
       {
+        id: 'par-brioche-doree-chaussee-antin',
+        name: { en: 'Brioche Dorée — Chaussée d’Antin', 'pt-BR': 'Brioche Dorée — Chaussée d’Antin' },
+        category: 'cafes',
+        description: {
+          en: 'A Brioche Dorée bakery and quick-service café on Rue de la Chaussée d’Antin, serving French pastries, hot drinks, sandwiches and takeaway meals. This branch sits between Haussmann–Saint-Lazare and Auber stations.',
+          'pt-BR': 'Padaria e café de serviço rápido da rede Brioche Dorée na Rue de la Chaussée d’Antin, com viennoiseries, bebidas quentes, sanduíches e opções para viagem. Esta unidade fica entre as estações Haussmann–Saint-Lazare e Auber.',
+        },
+        aiSuggested: true,
+        aiReason: {
+          en: 'Suggested as a lower-cost breakfast stop within the transfer from RER E to RER A, avoiding the detour to a café near the Arc de Triomphe.',
+          'pt-BR': 'Sugerida como café da manhã de melhor custo-benefício durante a baldeação do RER E para o RER A, sem o desvio até um café perto do Arco do Triunfo.',
+        },
+        googleRating: 3.6,
+        lat: 48.8744107,
+        lng: 2.3328257,
+        address: '56 Rue de la Chaussée d’Antin, 75009 Paris',
+        mapsQuery: 'Brioche Dorée 56 Rue de la Chaussée d’Antin Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Brioche+Dor%C3%A9e/@48.8744107,2.3328257,17z/data=!4m6!3m5!1s0x47e66e37a67d1e8f:0x1c7ec35cc85c160!8m2!3d48.8744107!4d2.3328257!16s%2Fg%2F1pp42zzxq',
+      },
+      {
         id: 'par-eclair-genie',
         name: { en: 'L\'Éclair de Génie', 'pt-BR': 'L\'Éclair de Génie' },
         category: 'cafes',

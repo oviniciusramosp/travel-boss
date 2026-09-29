@@ -28,13 +28,13 @@
   {
     "id": "8e81e02d-4b93-48db-8519-0def43568e06",
     "group": "packing",
-    "text": "Cuecas — quantidade X",
+    "text": "X Cuecas",
     "done": false
   },
   {
     "id": "39588f4b-c9ee-45d4-ab14-e0cf23806d76",
     "group": "packing",
-    "text": "Meias",
+    "text": "X Par de Meias",
     "done": false
   },
   {
@@ -82,13 +82,13 @@
   {
     "id": "122c37cc-d21f-474e-aa1d-081cbbacc4b1",
     "group": "packing",
-    "text": "Lã bege",
+    "text": "Casaco Lã bege",
     "done": false
   },
   {
     "id": "4d7ca2fa-92e1-4836-98f8-ce28ea7e50b6",
     "group": "packing",
-    "text": "Lã preta",
+    "text": "Casco Lã preta",
     "done": false
   },
   {
@@ -137,6 +137,85 @@
     "id": "caca3db2-ff8c-4233-99e2-d27ec1301c19",
     "group": "packing",
     "text": "Cortador de unha",
+    "done": false
+  },
+  {
+    "id": "bf15592b-1587-4545-97b0-d4e8c583cdf4",
+    "group": "tasks",
+    "text": "Conferir VPN",
+    "done": false,
+    "date": "2026-09-30"
+  },
+  {
+    "id": "e2067327-c4c5-4a03-bdb8-46e32744c033",
+    "group": "packing",
+    "text": "Cartão de Metro Vini",
+    "done": false
+  },
+  {
+    "id": "7902e939-8b5f-4889-89b1-18b5dbb4216a",
+    "group": "packing",
+    "text": "Foto 3x4 Carol",
+    "done": false
+  },
+  {
+    "id": "da8bc6f9-ec8b-4d93-9c01-411342419947",
+    "group": "packing",
+    "text": "Foto 3x4 Vini (garantia)",
+    "done": false
+  },
+  {
+    "id": "8c4d7b69-10cd-441f-8dda-e6bed906fa5a",
+    "group": "packing",
+    "text": "Dólares",
+    "done": false
+  },
+  {
+    "id": "3362025f-a8de-4175-8053-85361d5b662a",
+    "group": "packing",
+    "text": "Wegovy",
+    "done": false
+  },
+  {
+    "id": "45732517-c73d-4c1d-ae3c-494ede81f723",
+    "group": "packing",
+    "text": "Pomada massagem",
+    "done": false
+  },
+  {
+    "id": "a0154f42-2cd1-4e5e-8faf-6ca48dbe079e",
+    "group": "packing",
+    "text": "Remédios: alergia, corisa, colirio, dores, estomago",
+    "done": false
+  },
+  {
+    "id": "d75055a0-f8f9-4788-ae20-1945ab94d5b4",
+    "group": "tasks",
+    "text": "Checkin voo Campinas",
+    "done": true
+  },
+  {
+    "id": "6ecf8161-2e0e-4259-b0bb-2c4554a60ca4",
+    "group": "tasks",
+    "text": "Checkin voo para Paris",
+    "done": false
+  },
+  {
+    "id": "fee5b023-1cab-4943-8e99-6e445c1389f9",
+    "group": "packing",
+    "text": "Microfone",
+    "done": false
+  },
+  {
+    "id": "31d0e112-1e41-4c5c-bc8a-54a588774e30",
+    "group": "packing",
+    "text": "Câmera",
+    "done": false
+  },
+  {
+    "id": "d42adbbd-84aa-4717-ae8d-1dbc94e1eb1c",
+    "group": "packing",
+    "text": "Lentes",
     "done": false
   }
 ]

@@ -1573,6 +1573,15 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'O terraço é a opção para quem quer vista do Arco do Triunfo.',
     ),
   }),
+  // Official store page, Google Maps and Uber Eats menu, checked 2026-09-29.
+  'par-brioche-doree-chaussee-antin': cafeVisit(4, 4, {
+    avgPricePerPerson: money(4, 4, L('Online menu: one allongé (€2) and one croissant (€2)', 'Carta online: um café allongé (€2) e um croissant (€2)')),
+    bestDay: L('Daily from 07:00', 'Todos os dias a partir das 7h'),
+    tips: L(
+      'Order takeaway during the walk from Haussmann–Saint-Lazare to Auber.',
+      'Peça para levar durante a caminhada de Haussmann–Saint-Lazare até Auber.',
+    ),
+  }),
   'par-maison-isabelle': cafeVisit(4, 10, {
     tips: L(
       'Often a queue — go early if you can. Award-winning croissants.',
