@@ -519,6 +519,14 @@ button {
   cursor: pointer;
 }
 
+/* At regional zoom, city markers replace the detailed location dots. */
+.tb-zoom-far .leaflet-marker-icon[data-pin-kind],
+.tb-zoom-far .tb-station-wrap,
+.tb-zoom-far .tb-transfer-wrap,
+.tb-zoom-far .tb-subpoint-wrap {
+  display: none;
+}
+
 .tb-map path.tb-route.is-dim {
   stroke-opacity: 0.15 !important;
 }

@@ -13,7 +13,7 @@ import {
   type Map as LeafletMap,
   type Marker,
 } from 'leaflet';
-import { placeCategoryMeta } from '../catalog';
+import { placeCategoryMeta, travelCities, pickLocale } from '../catalog';
 import { icon } from '../ui/icons';
 import {
   CHROME_MOTION_EVENT,
@@ -221,6 +221,31 @@ export function mountMap(host: HTMLElement): MapHandle {
     else delete node.dataset.pinNumber;
   };
 
+  const distantCities = layerGroup();
+  function syncDistantCities() {
+    distantCities.clearLayers();
+    if (cityLayer || zoomPinBucket(leafletMap.getZoom()) !== 'far') {
+      distantCities.remove();
+      return;
+    }
+    const ids = new Set(KINDS.flatMap((kind) => [...markers[kind].keys()]));
+    const locale = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
+    for (const city of travelCities) {
+      if (!city.places.some((place) => ids.has(place.id))) continue;
+      const label = pickLocale(locale, city.name);
+      const dot = marker([city.lat, city.lng], {
+        icon: divIcon({ className: 'tb-city-pin-wrap', html: '<span class="tb-city-pin"></span>', iconSize: [28, 28], iconAnchor: [14, 14] }),
+        title: label,
+        keyboard: true,
+        bubblingMouseEvents: false,
+      });
+      dot.bindTooltip(label, { direction: 'top', opacity: 1, className: 'tb-pin-tip' });
+      dot.on('click', () => moveCamera(city.lat, city.lng, city.zoom));
+      dot.addTo(distantCities);
+    }
+    distantCities.addTo(leafletMap);
+  }
+
   const root = leafletMap.getContainer();
   let zooming = false;
   const applyZoom = () => {
@@ -239,6 +264,7 @@ export function mountMap(host: HTMLElement): MapHandle {
     zooming = false;
     root.classList.remove('is-zooming');
     applyZoom();
+    syncDistantCities();
   });
   applyZoom();
 
@@ -425,6 +451,7 @@ export function mountMap(host: HTMLElement): MapHandle {
         metas.set(id, next);
       }
       syncOverlays();
+      syncDistantCities();
     },
 
     setRoute(segments: MapRouteSegment[], opts?: { fit?: boolean }) {
@@ -577,6 +604,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       );
       if (!list.length) {
         delete host.dataset.cities;
+        syncDistantCities();
         return;
       }
       host.dataset.cities = String(list.length);
@@ -608,6 +636,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       }
       group.addTo(leafletMap);
       cityLayer = group;
+      syncDistantCities();
       if (opts?.fit) fitPoints(fit, 5);
     },
 
