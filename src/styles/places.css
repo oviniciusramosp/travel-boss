@@ -1743,6 +1743,51 @@ a.tb-route__google[hidden] {
 
 .tb-place-edit-status[hidden], .tb-place-edit-status [hidden] { display: none; }
 
+/* Native top-layer wrapper keeps the existing card and its controls together. */
+.tb-place-modal {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  overflow: visible;
+}
+
+.tb-place-modal::backdrop {
+  background: var(--color-scrim);
+}
+
+@media (max-width: 767px) {
+  .tb-place-modal {
+    width: calc(100% - 2 * var(--spacing-8));
+    max-width: none;
+    max-height: calc(100dvh - 2 * var(--spacing-8) - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    margin: auto;
+  }
+
+  .tb-place-modal .tb-place-panel {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-height: calc(100dvh - 2 * var(--spacing-8) - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    transform: none;
+  }
+
+  .tb-place-modal .tb-place-panel__collapse {
+    display: none;
+  }
+
+  .tb-place-modal .tb-place-panel__photo {
+    max-height: 30dvh;
+    flex-shrink: 0;
+  }
+
+  .tb-place-modal .tb-panel__body {
+    overscroll-behavior: contain;
+    overflow-wrap: anywhere;
+  }
+}
+
 .tb-rating-picker { display: flex; align-items: center; gap: var(--spacing-4); }
 .tb-rating-picker__number {
   width: 3.5ch; min-width: 0; padding: 0; height: var(--icon-sm);

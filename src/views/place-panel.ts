@@ -11,6 +11,7 @@ import {
   visitFieldsForDisplay,
 } from '../catalog';
 import type { MapHandle } from '../map/types';
+import { MOBILE_QUERY } from '../app/viewport';
 import { aiBadge, aiSuggestionTip } from '../ui/ai-badge';
 import { iconButton } from '../ui/controls';
 import { prefersReducedMotion } from '../ui/motion';
@@ -108,6 +109,88 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   root.setAttribute('aria-modal', 'false');
   root.setAttribute('aria-labelledby', 'tb-place-title');
   column.append(root);
+  const mobile = window.matchMedia(MOBILE_QUERY);
+  const modal = el('dialog', 'tb-place-modal');
+  modal.setAttribute('aria-labelledby', 'tb-place-title');
+  document.body.append(modal);
+  // Same-URL history entries let Back dismiss the top dialog before navigating.
+  const historyKey = 'tbPlaceModal';
+  let historySession = '';
+  let layerUrl = '';
+  let pendingBackUrl: string | null = null;
+  const layers: HTMLDialogElement[] = [];
+  let traversing = false;
+  const pushLayer = (dialog: HTMLDialogElement) => {
+    layers.push(dialog);
+    history.pushState({ ...history.state, [historyKey]: historySession, depth: layers.length }, '');
+  };
+  const forgetLayers = (back: boolean) => {
+    const depth = layers.length;
+    layers.length = 0;
+    if (history.state?.[historyKey] !== historySession) return;
+    if (back && depth && !traversing) {
+      pendingBackUrl = layerUrl;
+      history.go(-depth);
+    }
+    else if (!traversing) {
+      const state = { ...history.state };
+      delete state[historyKey];
+      delete state.depth;
+      history.replaceState(state, '');
+    }
+  };
+  const present = () => {
+    if (!mobile.matches || modal.open) return;
+    root.removeAttribute('role');
+    root.removeAttribute('aria-modal');
+    modal.append(root);
+    // History survives reloads; a per-mount counter would mistake an old entry
+    // for this dialog. getRandomValues also works on a phone's HTTP LAN preview.
+    historySession = [...crypto.getRandomValues(new Uint32Array(4))].join('-');
+    layerUrl = location.href;
+    modal.showModal();
+    pushLayer(modal);
+  };
+  modal.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') event.stopPropagation();
+  });
+  modal.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    dismiss({ focus: true });
+  });
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) dismiss({ focus: true });
+  });
+  // Nested video/map dialogs are body siblings in the native top layer.
+  new MutationObserver(() => {
+    if (!modal.open) return;
+    for (const dialog of document.querySelectorAll<HTMLDialogElement>('dialog[open]')) {
+      if (layers.includes(dialog)) continue;
+      pushLayer(dialog);
+      dialog.addEventListener('close', () => {
+        const index = layers.indexOf(dialog);
+        if (index < 0) return;
+        layers.splice(index, 1);
+        if (!traversing && history.state?.[historyKey] === historySession) history.back();
+      }, { once: true });
+    }
+  }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['open'] });
+  window.addEventListener('popstate', (event) => {
+    const pending = pendingBackUrl;
+    pendingBackUrl = null;
+    if ((pending || layers.length) && location.href === (pending ?? layerUrl)) {
+      event.stopImmediatePropagation();
+    }
+    if (!layers.length) return;
+    const depth = history.state?.[historyKey] === historySession ? history.state.depth : 0;
+    traversing = true;
+    while (layers.length > depth) {
+      const dialog = layers.pop()!;
+      if (dialog === modal) dismiss({ focus: true });
+      else dialog.close();
+    }
+    traversing = false;
+  }, { capture: true });
 
   let syncEdits = () => {};
   window.addEventListener('tb:place-edits', () => syncEdits());
@@ -558,20 +641,28 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   };
 
   function dismiss(opts?: CloseOptions) {
+    if (!current) return;
     const origin = returnFocus;
+    if (modal.open) {
+      for (const dialog of layers.slice(1).reverse()) dialog.close();
+      forgetLayers(opts?.focus !== false);
+      modal.close();
+    }
     returnFocus = null;
     current = null;
     paint();
     syncPad();
-    // hover(null) only clears the hover ring; the selected pin stays put.
-    map.highlight(null);
-    closeHook?.();
+    if (mobile.matches) map.hover(null);
+    else {
+      map.highlight(null);
+      closeHook?.();
+    }
     if (opts?.focus === false || !origin?.isConnected || origin.closest('[hidden]')) return;
-    origin.focus();
+    origin.focus({ preventScroll: true });
   }
 
   const syncPad = () => {
-    if (root.hidden || root.classList.contains('is-collapsed')) {
+    if (mobile.matches || root.hidden || root.classList.contains('is-collapsed')) {
       map.setPadding({ right: 0 });
       return;
     }
@@ -581,6 +672,21 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
   };
   const padObserver = new ResizeObserver(() => syncPad());
   padObserver.observe(column);
+  mobile.addEventListener('change', () => {
+    if (mobile.matches) {
+      collapsed = false;
+      root.classList.remove('is-collapsed');
+      if (current) present();
+    } else {
+      for (const dialog of layers.slice(1).reverse()) dialog.close();
+      forgetLayers(true);
+      modal.close();
+      column.append(root);
+      root.setAttribute('role', 'dialog');
+      root.setAttribute('aria-modal', 'false');
+    }
+    syncPad();
+  });
   root.addEventListener('transitionend', (event) => {
     if (!folding || event.target !== root || event.propertyName !== 'transform') return;
     folding = false;
@@ -596,6 +702,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       returnFocus = origin;
       current = links ? { place, city, locale, links } : { place, city, locale };
       paint();
+      present();
       syncPad();
       map.select(place.id);
       root.querySelector<HTMLElement>('#tb-place-title')?.focus();
