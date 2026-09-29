@@ -112,7 +112,8 @@ export function mountShell(root: HTMLElement): Shell {
     label: 'Mudar para modo escuro',
   });
 
-  bar.append(sideToggle, mark, search, spacer, themeBtn, localeWrap, exportBtn);
+  const mapLayers = el('div', 'tb-bar-layers');
+  bar.append(sideToggle, mark, search, mapLayers, spacer, themeBtn, localeWrap, exportBtn);
 
   const workspace = el('div', 'tb-workspace');
   const side = el('nav', 'tb-side');

@@ -4,6 +4,7 @@ import { iconButton } from '../ui/controls';
 import { AMENITY_EVENT, amenityOn, setAmenity } from './amenity-state';
 import type { IconName } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
+import { MOBILE_QUERY } from '../app/viewport';
 
 function uiLocale(): Locale {
   return document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
@@ -107,5 +108,14 @@ export function attachMapControls(
     },
   });
   new Corner().addTo(map);
+  const mobile = window.matchMedia(MOBILE_QUERY);
+  const topLayers = host.closest('.tb-app')?.querySelector('.tb-bar-layers');
+  const positionLayers = () => {
+    const target = mobile.matches && !document.fullscreenElement && topLayers ? topLayers : bar;
+    target.append(layers);
+  };
+  mobile.addEventListener('change', positionLayers);
+  document.addEventListener('fullscreenchange', positionLayers);
+  positionLayers();
   map.attributionControl.setPosition('bottomleft');
 }
