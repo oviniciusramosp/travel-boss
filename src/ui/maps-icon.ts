@@ -5,7 +5,7 @@ export function mapsMark(opts?: { badge?: boolean }): HTMLSpanElement {
   const wrap = document.createElement('span');
   wrap.className = opts?.badge ? 'tb-maps-ico is-route' : 'tb-maps-ico';
   const pin = document.createElement('img');
-  pin.src = '/google-map-icon.svg';
+  pin.src = `${import.meta.env.BASE_URL}google-map-icon.svg`;
   pin.alt = '';
   pin.draggable = false;
   wrap.append(pin);
