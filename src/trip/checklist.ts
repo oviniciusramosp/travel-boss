@@ -1,4 +1,4 @@
-import { appRequest } from '../platform/request';
+import { appRequest, canEdit } from '../platform/request';
 import { pickLocale, type Locale } from '../catalog';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
@@ -82,15 +82,18 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
     const check = el('input');
     check.type = 'checkbox';
     check.checked = item.done;
+    check.disabled = !canEdit;
     const remove = iconButton({ icon: 'delete', label: t('Delete item', 'Excluir item'), size: 'sm' });
-    const line = row({ title: item.text, lead: check, actions: remove, onSelect: edit, tip: false });
+    const line = row({ title: item.text, lead: check, actions: canEdit ? remove : undefined, onSelect: canEdit ? edit : undefined, tip: false });
     line.querySelector('.tb-row__time')?.remove();
     const main = line.querySelector<HTMLButtonElement>('.tb-row__main')!;
     function sync() {
       check.checked = item.done;
       check.setAttribute('aria-label', t('Complete: ', 'Concluir: ') + item.text);
-      main.setAttribute('aria-label', t('Edit: ', 'Editar: ') + item.text);
-      main.setAttribute('data-tip', t('Edit item', 'Editar item'));
+      if (canEdit) {
+        main.setAttribute('aria-label', t('Edit: ', 'Editar: ') + item.text);
+        main.setAttribute('data-tip', t('Edit item', 'Editar item'));
+      }
       main.querySelector('.tb-row__title')!.textContent = item.text;
       const schedule = [item.date ? new Intl.DateTimeFormat(locale, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${item.date}T00:00:00Z`)) : '', item.time ?? ''].filter(Boolean).join(' · ');
       let sub = main.querySelector<HTMLElement>('.tb-row__sub');
@@ -178,7 +181,8 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
       void save({ before: null, after }, () => { addItem(after); input.value = ''; schedule.clear(); input.focus(); });
     };
     form.append(add);
-    card.append(heading, progress, list, empty, form);
+    card.append(heading, progress, list, empty);
+    if (canEdit) card.append(form);
     panel.append(card);
     groups.set(key, { list, count: progress, empty, input });
   }

@@ -1,3 +1,5 @@
+import { canEdit } from '../platform/request';
+import { starRating } from '../ui/rating';
 import { pickLocale, savePlaceEdits, travelUi, type Locale, type PlaceEdits, type TravelPlace } from '../catalog';
 import { el } from '../ui/dom';
 import { iconButton } from '../ui/controls';
@@ -8,6 +10,20 @@ import { readCssTime } from '../ui/motion';
 /** Card controls save independently; requests remain ordered even during fast edits. */
 export function placeEditor(place: TravelPlace, locale: Locale) {
   const text = (en: string, pt: string) => pickLocale(locale, { en, 'pt-BR': pt });
+  if (!canEdit) {
+    const favorite = el('span');
+    if (place.favorite) {
+      favorite.append(icon('favorite', { size: 18, fill: true }));
+      favorite.setAttribute('aria-label', text('Favorite', 'Favorito'));
+    }
+    const ratings = el('div', 'tb-panel__ratings');
+    for (const key of ['googleRating', 'rating'] as const) {
+      ratings.append(starRating({ rating: place[key], locale, label: pickLocale(locale, key === 'rating' ? travelUi.ratingMine : travelUi.ratingGoogle), icon: key === 'rating' ? 'person' : 'map' }));
+    }
+    const feedback = el('span');
+    feedback.hidden = true;
+    return { favorite, ratings, feedback, sync: () => {} };
+  }
   const favorite = iconButton({ icon: 'favorite', label: '', pressed: !!place.favorite });
   const ratings = el('div', 'tb-panel__ratings');
   const status = el('span', 'tb-live', text('Saved automatically', 'Salvo automaticamente'));

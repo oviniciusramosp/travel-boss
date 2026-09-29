@@ -1,4 +1,4 @@
-import { appRequest } from '../platform/request';
+import { appRequest, canEdit } from '../platform/request';
 import { intercityHops } from './overview';
 import { getTripCity, placeCity } from './catalog';
 import { departureTimes } from './departures';
@@ -1415,6 +1415,7 @@ export function mountTrip(
     const statusButton = (line: number, kind: Period | 'a confirmar', active: boolean, changed: (on: boolean) => void, endLine = line, headingCount = 1) => {
       const button = iconButton({ icon: 'help', label: '', size: 'sm' });
       button.classList.add('tb-review-status');
+      if (!canEdit) { button.className = ''; button.hidden = true; return button; }
       if (kind === 'a confirmar') button.classList.add('tb-review-place');
       if (!statusBlocks.has(line)) {
         const end = endLine - 1 + statusPatch(lastRaw, endLine, kind, active).before.length;
@@ -1519,7 +1520,8 @@ export function mountTrip(
           label: pickLocale(locale, { en: 'Delete comment', 'pt-BR': 'Apagar comentário' }),
           size: 'sm',
         });
-        item.append(icon('chat_bubble', { size: 16 }), body, remove);
+        item.append(icon('chat_bubble', { size: 16 }), body);
+        if (canEdit) item.append(remove);
         list.append(item);
         const editor = editNote(body, 'comment', text, line, slug, {
           parent: lineAt(stop.line),
@@ -1542,6 +1544,7 @@ export function mountTrip(
         label: pickLocale(locale, { en: 'Add comment', 'pt-BR': 'Adicionar comentário' }),
         size: 'sm',
       });
+      if (!canEdit) { add.className = ''; add.hidden = true; return add; }
       add.dataset.action = 'comment';
       add.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -1745,7 +1748,7 @@ export function mountTrip(
           ? periodBlock(date, part.period, part.rows.map((index) => rows[index]!), list, past, locale)
           : list;
         const reviewDays = daysHere.map(({ day }) => day).filter((day) => day.line).sort((a, b) => a.line! - b.line!);
-        if (part.period && reviewDays.length) {
+        if (canEdit && part.period && reviewDays.length) {
           const period = part.period;
           const review = statusButton(reviewDays[0]!.line!, period, reviewDays.every((day) => closedPeriods(day).includes(period)), (on) => {
             for (const day of reviewDays) day.closedPeriods = on ? [...new Set([...closedPeriods(day), period])] : closedPeriods(day).filter((saved) => saved !== period);

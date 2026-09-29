@@ -1,4 +1,4 @@
-import { appRequest } from '../platform/request';
+import { appRequest, canEdit } from '../platform/request';
 import { el } from '../ui/dom';
 import { readCssTime } from '../ui/motion';
 import type { TripPatch } from './api';
@@ -203,6 +203,10 @@ type Snapshot = { text: string; start: number; end: number };
  * around the selection, Escape drops what is not saved yet.
  */
 export function editableNote(node: HTMLElement, opts: NoteEditorOptions): NoteEditor {
+  if (!canEdit) {
+    node.replaceChildren(...opts.render(opts.text));
+    return { edit: () => {}, remove: () => {} };
+  }
   let saved = opts.text;
   let anchor = opts.at;
   let open = false;

@@ -123,8 +123,6 @@ export function mountShell(root: HTMLElement): Shell {
   const citiesLabel = el('p', 'tb-side-label', 'Cidades');
   const navCities = el('div');
   side.append(tripsLabel, navTrips, citiesLabel, navCities);
-  const publishedNotice = el('p', 'tb-side-label');
-  if (import.meta.env.PROD) side.append(publishedNotice);
   side.id = 'tb-navigation';
   sideToggle.setAttribute('aria-controls', side.id);
   const drawer = el('dialog', 'tb-drawer');
@@ -327,7 +325,6 @@ export function mountShell(root: HTMLElement): Shell {
       pickLocale(locale, { en: 'Trips and cities', 'pt-BR': 'Roteiros e cidades' }),
     );
     tripsLabel.textContent = pickLocale(locale, { en: 'Trips', 'pt-BR': 'Roteiros' });
-    publishedNotice.textContent = pickLocale(locale, { en: 'Edits stay in this browser; they do not sync between devices.', 'pt-BR': 'Alterações ficam neste navegador; não sincronizam entre aparelhos.' });
     citiesLabel.textContent = pickLocale(locale, { en: 'Cities', 'pt-BR': 'Cidades' });
     drawer.setAttribute('aria-label', side.getAttribute('aria-label')!);
     const closeLabel = pickLocale(locale, { en: 'Close menu', 'pt-BR': 'Fechar menu' });

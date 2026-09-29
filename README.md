@@ -27,6 +27,6 @@ Cidades, lugares, roteiros por cidade e o motor de busca vieram do portfólio e 
 
 Cada push em `main` roda testes, gera o build e publica no GitHub Pages pelo workflow `.github/workflows/pages.yml`. O site inclui os Markdown e checklists do repositório no build e funciona sem servidor de aplicação. A previsão é consultada diretamente no Open-Meteo.
 
-No site publicado, alterações de notas, revisão, checklist, favoritos e avaliações são salvas apenas no navegador atual; não sincronizam com outros aparelhos ou com os arquivos do repositório. Uma nova publicação que altere a fonte de um item substitui o rascunho local desse item. Exporte o roteiro em Markdown para levar suas alterações. A busca automatizada de hotéis exige os scripts do servidor de desenvolvimento e fica indisponível no site estático.
+Há dois modos automáticos: `npm run dev` permite editar notas, comentários, revisão, checklist, favoritos e avaliações, salvando nos arquivos locais. O build publicado no GitHub Pages é somente leitura e mostra os dados versionados, sem rascunhos no navegador. Para atualizar o site, faça commit e push em `main`. A busca automatizada de hotéis exige o servidor de desenvolvimento.
 
 `npm run dev` continua salvando nos arquivos. Para conferir o build do Pages localmente: `GITHUB_ACTIONS=true npm run build` e `GITHUB_ACTIONS=true npm run preview -- --port 4173`, abrindo `/travel-boss/`.
