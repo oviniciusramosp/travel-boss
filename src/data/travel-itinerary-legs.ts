@@ -4,6 +4,7 @@
  */
 
 import type { LString } from './travel';
+import parisMilanRail from './travel-paris-milan-rail.json';
 import {
   funicularMontmartre,
   getTransitLine,
@@ -60,6 +61,11 @@ export type ItineraryLegDef = {
    * Prefer `hops` for multi-line rides ("RER E + M13").
    */
   path?: LatLng[];
+  /** Override when path vertices describe track geometry rather than stations (0 = unknown). */
+  stationCount?: number;
+  /** Station names for matching a published departure on a single-line ride. */
+  board?: string;
+  exit?: string;
   /**
    * Multi-line transit: ordered hops with per-line geometry + color.
    * When set, overrides single `path` / `line` for map expansion.
@@ -380,7 +386,7 @@ export function expandTimelineTransferParts(
   }
 
   // Single-line transit: path stations, or resolve corridor from line registry
-  let count = stationCountFromPath(leg.path);
+  let count = leg.stationCount ?? stationCountFromPath(leg.path);
   if (count === 0 && leg.line && leg.fromStation && leg.toStation) {
     const line = getTransitLine(leg.line);
     if (line) {
@@ -392,12 +398,12 @@ export function expandTimelineTransferParts(
     }
   }
 
-  const durationMin =
+  const durationMin = leg.durationMin ?? (
     leg.path && leg.path.length >= 2
       ? transitPathDurationMin(leg.path, leg.line)
       : from && to
         ? estimateLegDurationMin(leg, from, to)
-        : Math.max(3, leg.durationMin ?? 8);
+        : 8);
 
   return [
     {
@@ -407,6 +413,8 @@ export function expandTimelineTransferParts(
       color: legLineColor(leg),
       durationMin,
       stationCount: count,
+      ...(leg.board ? { board: leg.board } : {}),
+      ...(leg.exit ? { exit: leg.exit } : {}),
     },
   ];
 }
@@ -1230,6 +1238,14 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro9, 'fdr', 'chaussee-antin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
+  // FR 9281 on 11/10. Transitous rail geometry; provenance in docs/references/paris-milan-rail.md.
+  {
+    from: 'par-gare-de-lyon', to: 'mil-centrale', mode: 'transit',
+    line: 'frecciarossa', label: 'Frecciarossa', durationMin: 397,
+    board: 'Paris Gare de Lyon', exit: 'Milano Centrale',
+    stationCount: 0,
+    path: parisMilanRail as LatLng[],
+  },
   // 10/10: Baguett’s, Richelieu and Le Meurice on foot in the same neighbourhood
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),

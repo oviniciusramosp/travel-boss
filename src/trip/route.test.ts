@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { getTravelCity } from '../catalog';
 import { daysOnDate } from './calendar';
+import { departureTimes } from './departures';
 import { parseTrip, type TripLeg } from './parse';
 import {
   dateStops,
@@ -34,6 +35,30 @@ function deps() {
 }
 
 describe('planHop', () => {
+  it('draws the Paris–Milan railway with the scheduled duration, without counting track vertices as stops', () => {
+    const hop: RouteHop = {
+      from: place('paris', 'par-gare-de-lyon'),
+      to: place('milao', 'mil-centrale'),
+      via: { detail: 'trem Frecciarossa · 6h37', mode: 'transit', durationMin: 397 },
+    };
+    const plan = planHop(hop);
+    expect(plan.kind).toBe('catalog');
+    if (plan.kind !== 'catalog') throw new Error('missing railway');
+    const path = plan.leg.path!;
+    expect(path.length).toBeGreaterThan(100);
+    expect(path[0]![0]).toBeCloseTo(hop.from.lat, 2);
+    expect(path.at(-1)![1]).toBeCloseTo(hop.to.lng, 2);
+    // Lyon and Modane: the route goes south then crosses the Alps, not a direct chord.
+    for (const [lat, lng] of [[45.76, 4.86], [45.19, 6.66]]) {
+      expect(path.some(([a, b]) => Math.abs(a - lat!) < 0.03 && Math.abs(b - lng!) < 0.03)).toBe(true);
+    }
+    expect(transferLegs(hop)).toMatchObject([{ mode: 'transit', durationMin: 397, stationCount: 0 }]);
+    expect(departureTimes(transferLegs(hop), '2026-10-11', '06:50', '14:10', [{
+      date: '2026-10-11', service: 'Frecciarossa', board: 'Paris Gare de Lyon', exit: 'Milano Centrale',
+      departure: '07:30', arrival: '14:07',
+    }])).toMatchObject([{ time: '07:30', durationMin: 397, verified: true, conflict: false }]);
+  });
+
   it('sends a catalog transit hop to the leg drawer and does not chord an unknown hop', () => {
     const tower = planHop({
       from: place('paris', 'par-casa-do-gui'),
