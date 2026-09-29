@@ -1,6 +1,7 @@
+import { getTripCity } from './catalog';
 import { isoParts } from './dates';
 import type { Period } from './day-plan';
-import { getTravelCity, travelCities } from '../catalog';
+import { travelCities } from '../catalog';
 
 export type TripLegMode = 'walk' | 'transit' | 'taxi' | 'flight';
 
@@ -276,7 +277,7 @@ function parseStop(text: string, line: number, errors: TripError[]): Omit<TripSt
 
 function checkPlaces(city: TripCity, errors: TripError[]) {
   if (!city.slug) return;
-  const known = getTravelCity(city.slug);
+  const known = getTripCity(city.slug);
   if (!known) return;
   for (const day of city.days) {
     for (const stop of day.stops) {

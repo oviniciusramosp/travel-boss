@@ -1,9 +1,9 @@
+import { getTripCity, placeCity } from './catalog';
 import { departureTimes } from './departures';
 import { placePin as stopPin } from '../ui/place-pin';
 import type { Shell } from '../app/shell';
 import {
   estimateLegDurationMin,
-  getTravelCity,
   subPointParents,
   googleMapsUrl,
   pickLocale,
@@ -140,14 +140,14 @@ export async function loadTripFile(id: string): Promise<TripFile | null> {
 }
 
 function resolveHref(citySlug: string, placeId: string): string | null {
-  const city = getTravelCity(citySlug);
+  const city = getTripCity(citySlug);
   const place = city?.places.find((item) => item.id === placeId);
   if (!city || !place) return null;
-  return googleMapsUrl(place, city);
+  return googleMapsUrl(place, placeCity(place.id, city));
 }
 
 function placeById(citySlug: string, placeId: string): TravelPlace | undefined {
-  return getTravelCity(citySlug)?.places.find((item) => item.id === placeId);
+  return getTripCity(citySlug)?.places.find((item) => item.id === placeId);
 }
 
 
@@ -266,7 +266,7 @@ function emptyNotice(title: string, detail?: string, error = false): HTMLDivElem
 }
 
 function cityDisplayName(city: TripCity, locale: Locale): string {
-  const record = getTravelCity(city.slug);
+  const record = getTripCity(city.slug);
   return record ? pickLocale(locale, record.name) : city.name;
 }
 
@@ -606,7 +606,7 @@ export function mountTrip(
     const pins: MapPin[] = [];
     const seen = new Set<string>();
     for (const city of trip.cities) {
-      const record = getTravelCity(city.slug);
+      const record = getTripCity(city.slug);
       if (!record) continue;
       for (const place of record.places) {
         if (seen.has(place.id)) continue;
@@ -646,7 +646,7 @@ export function mountTrip(
       const slug = dated.city.slug;
       if (!slug || seen.has(slug)) continue;
       seen.add(slug);
-      const record = getTravelCity(slug);
+      const record = getTripCity(slug);
       if (!record || !Number.isFinite(record.lat) || !Number.isFinite(record.lng)) continue;
       points.push({ lat: record.lat, lng: record.lng });
     }
@@ -839,7 +839,7 @@ export function mountTrip(
     const trip = current;
     if (!trip) return;
     const date = routedDate();
-    const inner = new Set(trip.cities.flatMap((city) => [...(getTravelCity(city.slug) ? subPointParents(getTravelCity(city.slug)!).keys() : [])]));
+    const inner = new Set(trip.cities.flatMap((city) => [...(getTripCity(city.slug) ? subPointParents(getTripCity(city.slug)!).keys() : [])]));
     const pins = catalogPins(trip).filter((pin) => !inner.has(pin.id));
     map.setCities([]);
     map.setOverview(null);
@@ -865,7 +865,7 @@ export function mountTrip(
     const openId = openPlaceId();
     if (!openId || !trip) return;
     const visible = trip.cities.some((city) => {
-      const record = getTravelCity(city.slug);
+      const record = getTripCity(city.slug);
       const place = record?.places.find((item) => item.id === openId);
       if (!place) return false;
       return city.days.some((day) => day.stops.some((stop) => stop.placeId === openId));
@@ -1230,7 +1230,7 @@ export function mountTrip(
       const times = rows.map((row) => row.dated.day.stops[row.stopIndex]?.time);
       const windows = periodWindows(times, periods, WINDOWS);
       const stateOf = (index: number): ForecastState => {
-        const record = getTravelCity(rows[index]?.dated.city.slug ?? '');
+        const record = getTripCity(rows[index]?.dated.city.slug ?? '');
         return record
           ? forecastState(record.lat, record.lng)
           : { hours: null, fetchedAt: null, loading: false, failed: false, error: null, source: null };
@@ -1268,7 +1268,7 @@ export function mountTrip(
     const seen = new Set<string>();
     const loads: Promise<unknown>[] = [];
     for (const city of trip.cities) {
-      const record = getTravelCity(city.slug);
+      const record = getTripCity(city.slug);
       if (!record || seen.has(city.slug)) continue;
       seen.add(city.slug);
       loads.push(
@@ -1288,7 +1288,7 @@ export function mountTrip(
     await Promise.all([refreshWeather(trip, true), new Promise((resolve) => setTimeout(resolve, 600))]);
     if (!alive || !current) return;
     paintWeather(current);
-    const record = getTravelCity(slug ?? '');
+    const record = getTripCity(slug ?? '');
     const state = record ? forecastState(record.lat, record.lng) : null;
     if (!state?.failed) {
       showToast(pickLocale(locale, { en: 'Forecast updated', 'pt-BR': 'Previsão atualizada' }));
@@ -1368,14 +1368,14 @@ export function mountTrip(
     main.replaceChildren();
 
     const openLinkedPlace = (citySlug: string, placeId: string, origin: HTMLElement) => {
-      const cityRecord = getTravelCity(citySlug);
+      const cityRecord = getTripCity(citySlug);
       const found = cityRecord?.places.find((entry) => entry.id === placeId);
       if (!cityRecord || !found) return;
       clearStopCurrent();
       const rowEl = main.querySelector<HTMLElement>(`[data-place-id="${CSS.escape(placeId)}"]`);
       rowEl?.setAttribute('aria-current', 'true');
-      openPlace(found, cityRecord, locale, origin, {
-        maps: googleMapsUrl(found, cityRecord),
+      openPlace(found, placeCity(found.id, cityRecord), locale, origin, {
+        maps: googleMapsUrl(found, placeCity(found.id, cityRecord)),
       });
     };
 
@@ -1767,7 +1767,7 @@ export function mountTrip(
         const stop = day.stops[entry.stopIndex];
         if (!stop) return;
         const stopIndex = entry.stopIndex;
-        const record = getTravelCity(city.slug);
+        const record = getTripCity(city.slug);
         const key = stopKey(
           city.slug || city.name,
           dayIndex,
@@ -1860,7 +1860,7 @@ export function mountTrip(
                   clearStopCurrent();
                   item.setAttribute('aria-current', 'true');
                   const origin = item.querySelector<HTMLElement>('.tb-row__main');
-                  openPlace(place, record, locale, origin, cardLinks());
+                  openPlace(place, placeCity(place.id, record), locale, origin, cardLinks());
                 }
               : undefined,
         });
@@ -1930,7 +1930,7 @@ export function mountTrip(
                 releaseLeg();
                 clearStopCurrent();
                 item.setAttribute('aria-current', 'true');
-                openPlace(place, record, locale, name, cardLinks(index));
+                openPlace(place, placeCity(place.id, record), locale, name, cardLinks(index));
               });
             }
             if (subNotes.some((candidate) => candidate.time)) point.append(el('span', 'tb-substop__time', note?.time ?? ''));
@@ -2177,11 +2177,11 @@ export function mountTrip(
     const trip = current;
     if (!trip) return;
     for (const city of trip.cities) {
-      const record = getTravelCity(city.slug);
+      const record = getTripCity(city.slug);
       const place = record ? placeById(city.slug, parentId) : undefined;
       if (!record || !place) continue;
       const notes = subNotesByPlace.get(parentId);
-      openPlace(place, record, shell.locale(), null, {
+      openPlace(place, placeCity(place.id, record), shell.locale(), null, {
         focusSub: index,
         ...(notes?.sub.length ? { subNotes: notes.sub } : {}),
         ...(notes?.park.length ? { parkNotes: notes.park } : {}),
@@ -2236,11 +2236,11 @@ export function mountTrip(
       item.setAttribute('aria-current', 'true');
     }
     for (const city of current.cities) {
-      const record = getTravelCity(city.slug);
+      const record = getTripCity(city.slug);
       const place = record?.places.find((entry) => entry.id === pinId);
       if (!record || !place) continue;
       const origin = item?.querySelector<HTMLElement>('.tb-row__main') ?? null;
-      openPlace(place, record, shell.locale(), origin);
+      openPlace(place, placeCity(place.id, record), shell.locale(), origin);
       return;
     }
   });

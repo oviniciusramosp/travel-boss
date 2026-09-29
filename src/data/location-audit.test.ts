@@ -11,8 +11,8 @@ const evidence = Object.values(evidenceFiles).flatMap(text =>
 );
 
 describe('location audit', () => {
-  it('requires a dated audit record for every Paris place, without concealing pending findings', () => {
-    const places = travelCities.find(city => city.slug === 'paris')!.places;
+  it('requires a dated audit record for every Paris and Versailles place, without concealing pending findings', () => {
+    const places = travelCities.filter(city => ['paris', 'versailles'].includes(city.slug)).flatMap(city => city.places);
     expect(evidence.map(record => record.id).sort()).toEqual(places.map(place => place.id).sort());
     for (const record of evidence) {
       expect(record.checkedAt, record.id).toMatch(/^\d{4}-\d{2}-\d{2}/);
@@ -21,8 +21,8 @@ describe('location audit', () => {
       if (record.status !== 'blocked') expect(record.sourceUrls.length, record.id).toBeGreaterThan(0);
     }
   });
-  it('requires renewed evidence when audited Paris identities, coordinates or subpoints change', () => {
-    for (const place of travelCities.find(city => city.slug === 'paris')!.places) {
+  it('requires renewed evidence when audited Paris and Versailles identities, coordinates or subpoints change', () => {
+    for (const place of travelCities.filter(city => ['paris', 'versailles'].includes(city.slug)).flatMap(city => city.places)) {
       if (place.id === 'par-casa-do-gui') continue; // Private residence, explicitly not externally verified.
       const snapshot = {
         name: place.name, lat: place.lat, lng: place.lng, address: place.address,

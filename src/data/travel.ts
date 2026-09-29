@@ -7387,6 +7387,25 @@ export const localTravelCities: TravelCity[] = [
   },
 ];
 
+// Keep historical place IDs so saved trips, ratings and visit metadata stay linked.
+const versaillesPlaceIds = new Set([
+  'par-versailles', 'par-versailles-jardins', 'par-trianon', 'par-point-alph',
+  'par-stray-bean', 'par-ore-ducasse', 'par-la-flottille',
+]);
+const parisCity = localTravelCities.find((city) => city.slug === 'paris')!;
+const versaillesPlaces = parisCity.places.filter((place) => versaillesPlaceIds.has(place.id));
+parisCity.places = parisCity.places.filter((place) => !versaillesPlaceIds.has(place.id));
+localTravelCities.splice(localTravelCities.indexOf(parisCity) + 1, 0, {
+  slug: 'versailles',
+  name: { en: 'Versailles', 'pt-BR': 'Versalhes' },
+  country: parisCity.country,
+  countryKey: parisCity.countryKey,
+  lat: versaillesPlaces[0].lat,
+  lng: versaillesPlaces[0].lng,
+  zoom: 14,
+  places: versaillesPlaces,
+});
+
 export const travelCities: TravelCity[] = localTravelCities.map((city) => ({
   ...city, places: city.places.map((place) => withPlaceEdits(place)),
 }));

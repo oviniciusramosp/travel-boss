@@ -11,7 +11,8 @@ import {
   legsForDay,
 } from './travel-itinerary-legs';
 import { getTransitLine, sliceLinePath } from './travel-transit-lines';
-import { getTravelCity, withResolvedArea } from './travel';
+import { withResolvedArea } from './travel';
+import { getTripCity } from '../trip/catalog';
 
 describe('paris itinerary', () => {
   it('is registered for the paris city slug', () => {
@@ -46,7 +47,7 @@ describe('paris itinerary', () => {
     expect(fireworks?.countTicket).toBe(false);
 
     // The ticket the trip paid (€221 for 3) is in the day total once
-    const city = getTravelCity('paris')!;
+    const city = getTripCity('paris')!;
     const placesById = new Map(
       city.places.map((p) => [p.id, withResolvedArea(p)]),
     );
@@ -57,8 +58,8 @@ describe('paris itinerary', () => {
     expect(budget.foodPlaceIds).toContain('par-mcdonalds-disney');
   });
 
-  it('every stop placeId exists on the Paris city', () => {
-    const city = getTravelCity('paris');
+  it('every stop placeId exists in Paris or its excursion destinations', () => {
+    const city = getTripCity('paris');
     expect(city).toBeDefined();
     const ids = new Set(city!.places.map((p) => p.id));
     for (const day of parisItinerary.days) {
@@ -251,7 +252,7 @@ describe('paris itinerary', () => {
   });
 
   it('train leg rows: walk to the station, the rides, the walk between lines, the walk to the stop', () => {
-    const city = getTravelCity('paris')!;
+    const city = getTripCity('paris')!;
     const at = (id: string) => city.places.find((p) => p.id === id)!;
     const tower = legsForDay('paris-d1').find((l) => l.label === 'RER E + M9')!;
     const parts = expandTimelineTransferParts(tower, at('par-casa-do-gui'), at('par-trocadero'));
@@ -277,7 +278,7 @@ describe('paris itinerary', () => {
   });
 
   it('computes food + tickets; day 1 keeps food under €50 and transport tickets only', () => {
-    const city = getTravelCity('paris')!;
+    const city = getTripCity('paris')!;
     const placesById = new Map(
       city.places.map((p) => [p.id, withResolvedArea(p)]),
     );
