@@ -325,9 +325,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 ## Milão
 city: milao
-dates: 2026-10-06 → 2026-10-09
+dates: 2026-10-11 → 2026-10-14
+budget: comida €50
 
-### Dia 1 — Chegada, Duomo e Galleria
+### Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria
 
 - 14:10 [Milano Centrale](place:mil-centrale) — Chegada e caminhada até o hotel
 - 14:45 [Joy 124](place:mil-joy124) — Malas e pausa curta
@@ -337,19 +338,49 @@ dates: 2026-10-06 → 2026-10-09
 - 19:45 [San Giorgio](place:mil-san-giorgio) — Jantar perto do hotel
 - 21:00 [Joy 124](place:mil-joy124) — Volta
 
-### Dia 2 — Bate-volta
+### Dia 2 — Seg 12/10 · Bate-volta a Veneza
 
 - [Joy 124](place:mil-joy124) — Saída conforme o trem
-- [Milano Centrale](place:mil-centrale) — Embarque e volta no mesmo dia
+- [Milano Centrale](place:mil-centrale) — Trem Milão ↔ Veneza; ida e volta no mesmo dia
 - [Joy 124](place:mil-joy124) — Retorno ao hotel
 
-O roteiro do destino (Verona ou Veneza) entra como outro bloco de cidade neste arquivo.
+### Dia 3 — Ter 13/10 · Bate-volta a Verona
+
+- [Joy 124](place:mil-joy124) — Saída conforme o trem
+- [Milano Centrale](place:mil-centrale) — Trem Milão ↔ Verona; ida e volta no mesmo dia
+- [Joy 124](place:mil-joy124) — Retorno ao hotel
+
+### Dia 4 — Qua 14/10 · Partida para La Spezia
+
+- 13:30 [Milano Centrale](place:mil-centrale) — Partida do trem para La Spezia
+
+## La Spezia
+city: la-spezia
+dates: 2026-10-14 → 2026-10-16
+budget: comida €50
+
+### Dia 1 — Qua 14/10 · Chegada a La Spezia
+
+Chegada de trem de Milão e hospedagem em La Spezia.
+
+### Dia 2 — Qui 15/10 · Cinque Terre
+
+Passeio de trem por Cinque Terre com o Cinque Terre Card; base em La Spezia.
+
+### Dia 3 — Sex 16/10 · Partida para Roma
+
+Trem La Spezia → Roma.
 
 ## Roma
 city: roma
-dates: 2026-10-09 → 2026-10-13
+dates: 2026-10-16 → 2026-10-18
+budget: comida €50
 
-### Dia 1 — Centro antigo
+### Dia 1 — Sex 16/10 · Chegada a Roma
+
+Chegada de trem de La Spezia e hospedagem em Roma. Tickets de Roma previstos para esta etapa.
+
+### Dia 2 — Sáb 17/10 · Centro antigo
 
 - 09:30 [Coliseu](place:rom-colosseum) — Ingresso combinado com o Fórum
 - 11:30 [Fórum Romano](place:rom-forum) — Mesmo ingresso do Coliseu
@@ -358,3 +389,26 @@ dates: 2026-10-09 → 2026-10-13
 - 18:00 [Piazza Venezia](place:rom-piazza-venezia) — Ponto de orientação do centro
 
 Um dia a pé no centro. Os outros lugares de Roma ficam no catálogo da cidade, não neste arquivo.
+
+### Dia 3 — Dom 18/10 · Voo para Lisboa
+
+- 18:30 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo FCO → LIS
+
+## Lisboa
+city: lisboa
+dates: 2026-10-18 → 2026-10-20
+budget: comida €40
+
+### Dia 1 — Dom 18/10 · Chegada a Lisboa
+
+Chegada do voo de Roma e hospedagem em Lisboa.
+
+- 21:00 Táxi para a hospedagem
+
+### Dia 2 — Seg 19/10 · Lisboa
+
+### Dia 3 — Ter 20/10 · Volta para São Paulo
+
+Uber para o aeroporto.
+
+- 09:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Partida do voo LIS → GRU

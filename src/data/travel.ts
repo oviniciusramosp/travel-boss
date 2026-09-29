@@ -653,6 +653,17 @@ const NEAR_BNF: LString = {
 export const localTravelCities: TravelCity[] = [
   milanCity,
   {
+    slug: 'la-spezia',
+    name: { en: 'La Spezia', 'pt-BR': 'La Spezia' },
+    country: { en: 'Italy', 'pt-BR': 'Itália' },
+    countryKey: 'italia',
+    // Municipal map centre (OSM relation 42842); no place pins yet.
+    lat: 44.1033871,
+    lng: 9.8217022,
+    zoom: 13,
+    places: [],
+  },
+  {
     slug: 'sao-paulo',
     name: { en: 'São Paulo', 'pt-BR': 'São Paulo' },
     region: 'SP',
