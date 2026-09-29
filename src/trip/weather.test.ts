@@ -135,24 +135,18 @@ describe('weatherTip', () => {
   const label = { en: 'Partly cloudy', 'pt-BR': 'Parcialmente nublado' };
   const now = new Date(2026, 8, 27, 15, 0);
   const at = new Date(2026, 8, 27, 14, 32).getTime();
-  it('writes one fact per line, with the window and when the forecast is from', () => {
-    expect(weatherTip(weather, label, 'pt-BR', [11, 17], at, false, now)).toBe(
-      'Parcialmente nublado\n11h–17h · 17–21°\nChuva 26%\nAtualizado às 14:32 · Open-Meteo',
+  it('shows only condition, rain chance and update time in two lines', () => {
+    expect(weatherTip(weather, label, 'pt-BR', [11, 17], at, false, now, 'MET Norway')).toBe(
+      'Parcialmente nublado · Chance de chuva 26%\nAtualizado às 14:32',
     );
-  });
-  it('says when the refresh failed, and skips the window on the day', () => {
     expect(weatherTip(weather, label, 'en', undefined, at, true, now)).toBe(
-      'Partly cloudy\n17–21°\nRain 26%\nUpdated 14:32 · could not refresh',
+      'Partly cloudy · Rain chance 26%\nUpdated 14:32',
     );
-    expect(weatherTip(weather, label, 'en', undefined, null, false, now)).toBe('Partly cloudy\n17–21°\nRain 26%\nOpen-Meteo');
-    expect(weatherTip(weather, label, 'pt-BR', undefined, at, false, now, 'MET Norway')).toBe('Parcialmente nublado\n17–21°\nChuva 26%\nAtualizado às 14:32 · MET Norway');
   });
-  it('says what a single model forecasts instead of a chance', () => {
-    const one: Weather = { ...weather, rain: 100, mm: 0.4, runs: 1 };
-    expect(weatherTip(one, { en: 'Drizzle', 'pt-BR': 'Garoa' }, 'pt-BR', undefined, at, false, now, 'MET Norway')).toBe(
-      'Garoa\n17–21°\nO modelo prevê 0,4 mm de chuva, sem probabilidade\nAtualizado às 14:32 · MET Norway',
+  it('does not invent an update time or probability for a single model', () => {
+    expect(weatherTip({ ...weather, runs: 1, rain: 100 }, label, 'pt-BR', undefined, null, false, now)).toBe(
+      'Parcialmente nublado · Chance de chuva indisponível\nHorário de atualização indisponível',
     );
-    expect(weatherTip({ ...one, rain: 0, mm: 0 }, label, 'en', undefined, at, false, now, 'MET Norway')).toContain('No rain in the model, no probability');
   });
   it('dates an update from another day', () => {
     expect(updatedLabel(new Date(2026, 8, 26, 9, 5).getTime(), 'pt-BR', now)).toBe('26/09 09:05');

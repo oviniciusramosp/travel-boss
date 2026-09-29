@@ -207,41 +207,24 @@ export function updatedLabel(fetchedAt: number, locale: Locale, now = new Date()
   return `${date.toLocaleDateString(locale, { day: '2-digit', month: '2-digit' })} ${clock}`;
 }
 
-/**
- * The tooltip, one fact per line: sky, window and temperatures, rain, then when the
- * forecast is from. A failed refresh says so instead of naming the source.
- */
+/** Two lines: condition and rain probability, then the last successful update. */
 export function weatherTip(
   weather: Weather,
   label: LString,
   locale: Locale,
-  window: readonly [number, number] | undefined,
+  _window: readonly [number, number] | undefined,
   fetchedAt: number | null,
-  failed: boolean,
+  _failed: boolean,
   now = new Date(),
-  source: string | null = null,
+  _source: string | null = null,
 ): string {
-  const low = Math.round(weather.min);
-  const high = Math.round(weather.max);
-  const temp = low === high ? `${low}°` : `${low}–${high}°`;
-  const span = window ? `${window[0]}h–${window[1]}h · ` : '';
-  // One model has no share of runs to report: say what it forecasts, in millimetres.
-  const mm = `${weather.mm.toFixed(1).replace('.', locale === 'pt-BR' ? ',' : '.')} mm`;
-  const rain =
-    weather.runs > 1
-      ? `${pickLocale(locale, { en: 'Rain', 'pt-BR': 'Chuva' })} ${Math.round(weather.rain)}%`
-      : weather.rain >= 50
-        ? pickLocale(locale, { en: `The model forecasts ${mm} of rain, no probability`, 'pt-BR': `O modelo prevê ${mm} de chuva, sem probabilidade` })
-        : pickLocale(locale, { en: 'No rain in the model, no probability', 'pt-BR': 'Sem chuva no modelo, sem probabilidade' });
-  const when = fetchedAt == null ? null : updatedLabel(fetchedAt, locale, now);
-  const by = source ?? 'Open-Meteo';
-  const updated =
-    when == null
-      ? by
-      : failed
-        ? pickLocale(locale, { en: `Updated ${when} · could not refresh`, 'pt-BR': `Atualizado às ${when} · não deu para atualizar` })
-        : pickLocale(locale, { en: `Updated ${when} · ${by}`, 'pt-BR': `Atualizado às ${when} · ${by}` });
-  return [pickLocale(locale, label), `${span}${temp}`, rain, updated].join('\n');
+  const rain = weather.runs > 1
+    ? pickLocale(locale, { en: `Rain chance ${Math.round(weather.rain)}%`, 'pt-BR': `Chance de chuva ${Math.round(weather.rain)}%` })
+    : pickLocale(locale, { en: 'Rain chance unavailable', 'pt-BR': 'Chance de chuva indisponível' });
+  const updated = fetchedAt == null
+    ? pickLocale(locale, { en: 'Update time unavailable', 'pt-BR': 'Horário de atualização indisponível' })
+    : pickLocale(locale, { en: `Updated ${updatedLabel(fetchedAt, locale, now)}`, 'pt-BR': `Atualizado às ${updatedLabel(fetchedAt, locale, now)}` });
+  return `${pickLocale(locale, label)} · ${rain}\n${updated}`;
 }
 
 /** Clock hours of each period, start in, end out. */
