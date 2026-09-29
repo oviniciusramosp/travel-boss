@@ -1,3 +1,4 @@
+import { appRequest } from '../platform/request';
 import { el } from '../ui/dom';
 import { readCssTime } from '../ui/motion';
 import type { TripPatch } from './api';
@@ -86,7 +87,7 @@ export type PatchResult = number | 'conflict' | 'error';
 /** The line the server wrote, or why it did not. */
 export async function sendPatch(id: string, patch: TripPatch): Promise<PatchResult> {
   try {
-    const response = await fetch(`/api/trips/${encodeURIComponent(id)}`, {
+    const response = await appRequest(`/api/trips/${encodeURIComponent(id)}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(patch),

@@ -125,7 +125,7 @@ export function louvreMapButton(locale: Locale): HTMLButtonElement {
         floor = viewFloor;
         overlay?.remove();
         const plan = Math.max(-1, floor);
-        overlay = overlays.get(plan) ?? L.imageOverlay(`/maps/louvre/niveau${plan}.svg`, bounds);
+        overlay = overlays.get(plan) ?? L.imageOverlay(`${import.meta.env.BASE_URL}maps/louvre/niveau${plan}.svg`, bounds);
         overlays.set(plan, overlay);
         overlay.addTo(map);
       }

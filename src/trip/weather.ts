@@ -1,3 +1,4 @@
+import { appRequest } from '../platform/request';
 /**
  * Ensemble forecast from Open-Meteo: free, no key, 16 days ahead. ECMWF (51 runs)
  * and NOAA GEFS (31 runs) side by side, so the chance of rain is the share of runs
@@ -143,7 +144,7 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
   };
   let status: number | null = null;
   let kind: FailureKind | null = null;
-  entry.request = fetch(`${FORECAST_URL}?${params}`)
+  entry.request = appRequest(`${FORECAST_URL}?${params}`)
     .then((response) => {
       status = response.status;
       return response.json().catch(() => null);

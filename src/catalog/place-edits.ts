@@ -1,3 +1,4 @@
+import { appRequest } from '../platform/request';
 import saved from '../data/travel-place-edits.json';
 
 import type { PlaceEdits, PlaceEditStore } from './place-edit-model';
@@ -23,9 +24,13 @@ export function syncPlaceEdits(next: PlaceEditStore): void {
 if (import.meta.hot) import.meta.hot.on('tb:place-edits', syncPlaceEdits);
 
 export async function savePlaceEdits(id: string, patch: PlaceEdits): Promise<void> {
-  const response = await fetch(`/api/places/${encodeURIComponent(id)}`, {
+  const response = await appRequest(`/api/places/${encodeURIComponent(id)}`, {
     method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(patch),
   });
   if (!response.ok) throw new Error('Place save failed');
   syncPlaceEdits(await response.json());
+}
+
+if (import.meta.env.PROD) {
+  void import('../platform/published-api').then(({ publishedPlaceEdits }) => syncPlaceEdits(publishedPlaceEdits()));
 }

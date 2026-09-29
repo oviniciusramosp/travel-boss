@@ -1,3 +1,4 @@
+import { appRequest } from '../platform/request';
 import { intercityHops } from './overview';
 import { getTripCity, placeCity } from './catalog';
 import { departureTimes } from './departures';
@@ -123,7 +124,7 @@ function onTripFiles(fn: (event: TripPush) => void): () => void {
 }
 
 export async function loadTripFiles(): Promise<TripFile[]> {
-  const response = await fetch('/api/trips');
+  const response = await appRequest('/api/trips');
   if (!response.ok) throw new Error(`trip api ${response.status}`);
   const data = (await response.json()) as TripFile[];
   if (!Array.isArray(data)) throw new Error('trip api');
@@ -131,7 +132,7 @@ export async function loadTripFiles(): Promise<TripFile[]> {
 }
 
 export async function loadTripFile(id: string): Promise<TripFile | null> {
-  const response = await fetch(`/api/trips/${encodeURIComponent(id)}`);
+  const response = await appRequest(`/api/trips/${encodeURIComponent(id)}`);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error(`trip api ${response.status}`);
   const data = (await response.json()) as TripFile;

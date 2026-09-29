@@ -1,3 +1,4 @@
+import { appRequest } from '../platform/request';
 import { pickLocale, type Locale } from '../catalog';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
@@ -57,7 +58,7 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
     status.textContent = t('Saving…', 'Salvando…');
     forms.forEach((form) => { form.disabled = true; });
     try {
-      const response = await fetch(url, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(edit) });
+      const response = await appRequest(url, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(edit) });
       if (!response.ok) throw new Error(String(response.status));
       forms.forEach((form) => { form.disabled = false; });
       focus?.focus();
@@ -184,7 +185,7 @@ export function tripChecklist(id: string, locale: Locale, onEditing: (open: bool
   async function load() {
     status.textContent = t('Loading…', 'Carregando…');
     try {
-      const response = await fetch(url);
+      const response = await appRequest(url);
       if (!response.ok) throw new Error();
       const items: ChecklistItem[] = await response.json();
       groups.forEach(({ list }) => list.replaceChildren());

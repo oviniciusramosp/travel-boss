@@ -22,7 +22,7 @@ export type WeatherIcon = (typeof WEATHER_ICONS)[number];
 export function weatherIcon(name: WeatherIcon): HTMLImageElement {
   const image = document.createElement('img');
   image.className = 'tb-weather__icon';
-  image.src = `/weather/${name}.svg`;
+  image.src = `${import.meta.env.BASE_URL}weather/${name}.svg`;
   image.alt = '';
   image.draggable = false;
   return image;

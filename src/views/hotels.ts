@@ -1,3 +1,4 @@
+import { appRequest } from '../platform/request';
 import type { Shell } from '../app/shell';
 import { getTravelCity, pickLocale, placeCategoryMeta } from '../catalog';
 import type { MapHandle, MapPin } from '../map/types';
@@ -1480,7 +1481,7 @@ export function mountHotels(
     clearResults();
     setStatus(null);
     try {
-      const response = await fetch(`${API}?${searchParams()}`, {
+      const response = await appRequest(`${API}?${searchParams()}`, {
         signal,
         headers: { Accept: 'application/x-ndjson' },
       });
@@ -1543,7 +1544,7 @@ export function mountHotels(
       false,
     );
     try {
-      const response = await fetch(`${API}/rank`, {
+      const response = await appRequest(`${API}/rank`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal,
@@ -1847,7 +1848,7 @@ export function mountHotels(
     relaxDates();
     paint();
   } else if (!stored) {
-    void fetch('/api/trips')
+    void appRequest('/api/trips')
       .then((response) => (response.ok ? response.json() : []))
       .then((files: { id: string; raw: string }[]) => {
         if (disposed || datesTouched || !Array.isArray(files)) return;
@@ -1871,7 +1872,8 @@ export function mountHotels(
     );
   };
 
-  void fetch(`${API}/status`, { signal: statusAbort.signal })
+  if (import.meta.env.PROD) lockSearch(t('Automated hotel search is unavailable on this published site.', 'A busca automatizada de hotéis não está disponível neste site publicado.'));
+  else void appRequest(`${API}/status`, { signal: statusAbort.signal })
     .then(async (response) => {
       if (disposed) return;
       const fallback = t('Hotel search is unavailable.', 'A busca de hotéis está indisponível.');
