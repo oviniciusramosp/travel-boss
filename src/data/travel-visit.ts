@@ -319,6 +319,36 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  'par-mangez-et-cassez-vous-taitbout': restaurantVisit(3.6, 7.2, {
+    avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
+    crowdProfile: 'local',
+    osmRef: 'node/8003129930',
+    tips: L('Counter service; expect a queue at meal times.', 'Atendimento no balcão; espere fila nos horários de refeição.'),
+  }),
+  'par-mangez-et-cassez-vous-alexandre-dumas': restaurantVisit(3.6, 7.2, {
+    avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
+    crowdProfile: 'local',
+    osmRef: 'node/6461537971',
+    tips: L('Compact takeaway-focused branch; expect a queue at meal times.', 'Unidade pequena, voltada para retirada; espere fila nos horários de refeição.'),
+  }),
+  'par-mangez-et-cassez-vous-daumesnil-picpus': restaurantVisit(3.6, 7.2, {
+    avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
+    crowdProfile: 'local',
+    osmRef: 'node/10840482706',
+    tips: L('Counter service with a small dining room; expect a queue at meal times.', 'Atendimento no balcão com salão pequeno; espere fila nos horários de refeição.'),
+  }),
+  'par-mangez-et-cassez-vous-faidherbe-chaligny': restaurantVisit(3.6, 7.2, {
+    avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
+    crowdProfile: 'local',
+    osmRef: 'node/11730073850',
+    tips: L('Counter service with limited seating; expect a queue at meal times.', 'Atendimento no balcão e poucos lugares; espere fila nos horários de refeição.'),
+  }),
+  'par-mangez-et-cassez-vous-jean-jaures': restaurantVisit(3.6, 7.2, {
+    avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
+    crowdProfile: 'local',
+    osmRef: 'node/10858130335',
+    tips: L('Counter service; expect a queue at meal times.', 'Atendimento no balcão; espere fila nos horários de refeição.'),
+  }),
   // Flan winners: individual slice prices have not been verified.
   'par-sweet-lab': { crowdProfile: 'cafe' },
   'par-a-deux-mains': { crowdProfile: 'cafe' },

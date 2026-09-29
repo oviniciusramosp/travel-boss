@@ -31,6 +31,76 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'par-mangez-et-cassez-vous-taitbout': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnCQselJYHjAuu6kjUlUbVa4n_o9TpBZeGJueFJZrhEQ0WZ3bCxB8h7QvuZZmB2Xq714Ajlg-miSYmZTs6hm8i5ioZWNgjgeUU2nwuU6LjKxjKDJX11XB-SlTh-JJWwqAfOwTNLUw=w529-h298-k-no',
+      'Storefront of Mangez et cassez-vous on Rue Taitbout',
+      'Fachada do Mangez et cassez-vous na Rue Taitbout',
+      'Google Maps · Mangez et cassez-vous Taitbout',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TC0WpVnogZj2ZUe9Xti7TUjwaG3s7y9viQo3ykgHELztUcPTLsRWKUBDcGMZw3s7os_Bdbenpp0cYBY_7uDn_tHZZ_drXZzd6NejLyD5rPrO9Y---ZI03MOtieekrafejUyEI=w408-h306-k-no',
+      'Burgers and fries at Mangez et cassez-vous Taitbout',
+      'Hambúrgueres e fritas no Mangez et cassez-vous Taitbout',
+      'Google Maps · Mangez et cassez-vous Taitbout',
+    ),
+  ],
+  'par-mangez-et-cassez-vous-alexandre-dumas': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QRqB9I4rg2ojq9mmImw-dD1440sX-CYpwaXmZV98pBfvfLT_oePBG0rurYbv4CLUOkHlLNIlpriGPFE6gW-JYbsStjcIITA2_IvfWhWgkYbrfQPb8QtkWoWpjYa61xpzpV4Kq8Yj4fslEG=w408-h544-k-no',
+      'Storefront of Mangez et cassez-vous on Rue Alexandre Dumas',
+      'Fachada do Mangez et cassez-vous na Rue Alexandre Dumas',
+      'Google Maps · Mangez et cassez-vous Alexandre Dumas',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QnJedXuQEgugjnoDkNyrIh8PoaKsvx3te2rkP4QGAevsON7yFFEuiuP0vSTt88Cp8B6wkDcT5yU4aSIbY8AuJG5lfOW5TkEgbxF4gxXpLrd-IR-4hOaYZXedCCBE6W35L0t518=w408-h288-k-no',
+      'Burger and fries at Mangez et cassez-vous Alexandre Dumas',
+      'Hambúrguer e fritas no Mangez et cassez-vous Alexandre Dumas',
+      'Google Maps · Mangez et cassez-vous Alexandre Dumas',
+    ),
+  ],
+  'par-mangez-et-cassez-vous-daumesnil-picpus': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TC6EYtmrMYbomWLjaNbrMFxbeDYL6fC9HCJ6d7JJK4lQN-ibkGZEUyqq-NzvXstrnY0_mNMTzKX5xOwpAm13BE8HZ-iSiGYHfVv5V83zR_ygmGY9MpgCkqW1LaRufkVCFnUzL9=s1354-k-no',
+      'Storefront of Mangez et cassez-vous Daumesnil',
+      'Fachada do Mangez et cassez-vous Daumesnil',
+      'Mangez et cassez-vous / Google Maps',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TC0WpVnogZj2ZUe9Xti7TUjwaG3s7y9viQo3ykgHELztUcPTLsRWKUBDcGMZw3s7os_Bdbenpp0cYBY_7uDn_tHZZ_drXZzd6NejLyD5rPrO9Y---ZI03MOtieekrafejUyEI=w408-h306-k-no',
+      'Burger and fries served by Mangez et cassez-vous',
+      'Hambúrguer e fritas servidos pelo Mangez et cassez-vous',
+      'Google Maps · Mangez et cassez-vous',
+    ),
+  ],
+  'par-mangez-et-cassez-vous-faidherbe-chaligny': [
+    photo(
+      'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/47/72/1a/caption.jpg?h=800&s=1&w=1400',
+      'Storefront of Mangez et cassez-vous Faidherbe–Chaligny',
+      'Fachada do Mangez et cassez-vous Faidherbe–Chaligny',
+      'Tripadvisor · Mangez et cassez-vous Faidherbe–Chaligny',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TC0WpVnogZj2ZUe9Xti7TUjwaG3s7y9viQo3ykgHELztUcPTLsRWKUBDcGMZw3s7os_Bdbenpp0cYBY_7uDn_tHZZ_drXZzd6NejLyD5rPrO9Y---ZI03MOtieekrafejUyEI=w408-h306-k-no',
+      'Burger and fries served by Mangez et cassez-vous',
+      'Hambúrguer e fritas servidos pelo Mangez et cassez-vous',
+      'Google Maps · Mangez et cassez-vous',
+    ),
+  ],
+  'par-mangez-et-cassez-vous-jean-jaures': [
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Qewy9wYtH_Btm8AupKb0sKunL9MBfKm1LJhzh00qvqbWZaOCpjJugRSEA8tViroBrWv5e_Py6Tml2V7cK6RM8CA3Vb7AkXZFWnJbWwzz8dCkk2k6SnVzQTAe7ilupLNCBVybDX6WvWimKU=w408-h290-k-no',
+      'Storefront of Mangez et cassez-vous Jean-Jaurès',
+      'Fachada do Mangez et cassez-vous Jean-Jaurès',
+      'Google Maps · Mangez et cassez-vous Jean-Jaurès',
+    ),
+    photo(
+      'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmmuTQZ1RHQHYKc3qvCQn99HkZpP0Eitur1SSIL2ltRuMKOhI2S2AyxGZ7SlGE6rxgQWJnniiRbOJ-keQyS3azM011kY4S9VqWZnYSuYOzY9yoPkNVXH0vq9Oj9Lpqiq2CEP1nZyH0M2aI=w397-h298-k-no',
+      'Burger and fries at Mangez et cassez-vous Jean-Jaurès',
+      'Hambúrguer e fritas no Mangez et cassez-vous Jean-Jaurès',
+      'Google Maps · Mangez et cassez-vous Jean-Jaurès',
+    ),
+  ],
   'par-mcdonalds-carrousel-du-louvre-autogrill': [
     photo(
       'https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SS2FEv6MD4Oa2gzzQoNgZ1XkzHMP54T7s2ZgDjmi_fkkDp97vuoV55DHult81bx9rBOZHe5nC5NE0n7tSBwVt5N3ja3Wp2J-hbSpK8Vz20aAzIpNo4Vua_hXTl8TujVlFogTQV=w408-h306-k-no',
