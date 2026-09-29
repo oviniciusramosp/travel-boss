@@ -1,4 +1,4 @@
-# Trens da Itália — 12 a 14/10/2026
+# Trens da Itália — 12 a 16/10/2026
 
 Horários e serviços transcritos das três imagens fornecidas pelo usuário em 28/09/2026. Todos os horários são locais. Reservas e valores da imagem de Veneza estão nas notas do roteiro; o símbolo `$` foi preservado sem inferir moeda, número de passageiros ou conversão para euros. Nenhum valor foi somado ao orçamento em euros.
 
@@ -9,6 +9,11 @@ Horários e serviços transcritos das três imagens fornecidas pelo usuário em 
 | 13/10 | Frecciarossa 9703 | Milano Centrale → Verona Porta Nuova | 06:45 → 07:58 |
 | 13/10 | Italo 8988 | Verona Porta Nuova → Milano Centrale | 17:12 → 18:27 |
 | 14/10 | Frecciabianca 8619 | Milano Centrale → La Spezia Centrale | 13:10 → 16:14 |
+| 16/10 | Frecciabianca 8605 | La Spezia Centrale → Roma Termini | 08:16 → 12:18 |
+
+O trecho de 16/10 foi transcrito do comprovante Omio enviado pelo usuário: direto, 4h02, dois passageiros, vagão 9 e assentos 13A/14A. Total pago: €41 + €2 de taxa − €4,30 de desconto = €38,70; €19,35 por pessoa registrado no `via:`. Reserva e e-mail ficam no roteiro. Checkout de La Spezia deve anteceder o trem; o limite de 10h não é o horário de saída planejado.
+
+Geometria `spezia-rome`: consulta Transitous com `fromPlace=44.111564,9.81358`, `toPlace=41.9009,12.502`, `time=2026-10-16T06:00:00Z`, `numItineraries=5`. O FB 8605 não apareceu; usada a perna direta do FB 8613 (quinta opção, saída 13h16 e chegada 17h03 locais), como **traçado de referência de outro Frecciabianca, sem verificar a geometria específica do 8605**. Horários exibidos são os do comprovante, não os da consulta. Reutilizado o pino existente `rom-termini`, sem alteração de coordenadas.
 
 ## Geometria e estações
 

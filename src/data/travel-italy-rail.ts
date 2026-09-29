@@ -20,6 +20,7 @@ export const italyRailCities: TravelCity[] = [
 ];
 
 export const italyRailLegs: ItineraryLegDef[] = [
+  { from: laSpeziaStation.id, to: 'rom-termini', mode: 'transit', line: 'frecciabianca', label: 'Frecciabianca 8605', board: laSpeziaStation.name.en, exit: 'Roma Termini', durationMin: 242, stationCount: 0, path: paths['spezia-rome'] as LatLng[] },
   { from: 'mil-centrale', to: venice.id, mode: 'transit', line: 'italo', label: 'Italo 8973', board: 'Milano Centrale', exit: venice.name.en, durationMin: 150, stationCount: 0, path: paths.venice as LatLng[] },
   { from: venice.id, to: 'mil-centrale', mode: 'transit', line: 'italo', label: 'Italo 8992', board: venice.name.en, exit: 'Milano Centrale', durationMin: 150, stationCount: 0, path: paths['venice-back'] as LatLng[] },
   { from: 'mil-centrale', to: verona.id, mode: 'transit', line: 'frecciarossa', label: 'Frecciarossa 9703', board: 'Milano Centrale', exit: verona.name.en, durationMin: 73, stationCount: 0, path: paths.verona as LatLng[] },

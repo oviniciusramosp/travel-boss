@@ -401,7 +401,13 @@ Passeio de trem por Cinque Terre com o Cinque Terre Card; base em La Spezia.
 
 Trem La Spezia → Roma.
 
-- [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout até 10h
+- [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout antes de sair para o trem das 08h16; limite da hospedagem: 10h
+- 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.\
+  **Reserva:** Omio · EQPBXN · 2 passageiros.\
+  **E-mail:** viniciusarthur.rp@gmail.com.\
+  **Pagamento:** bilhetes €41 + taxa €2 − desconto €4,30 = €38,70 no total (€19,35 por pessoa). Bilhete móvel disponível offline no app Omio.
+  - via: trem Frecciabianca 8605 · 4h02 · €19,35
+  - embarque: 2026-10-16 · Frecciabianca 8605 · La Spezia Centrale → Roma Termini · 08:16 → 12:18
 
 ## Roma
 city: roma
@@ -412,6 +418,7 @@ budget: comida €50
 
 Chegada de trem de La Spezia e hospedagem em Roma. Tickets de Roma previstos para esta etapa.
 
+- 12:18 [Roma Termini](place:rom-termini) — Chegada de La Spezia; check-in do apartamento a partir das 16h
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in a partir das 16h; self check-in com fechadura inteligente.\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.\
   **Reserva:** Airbnb · confirmação HM4E2Q3E3J.\
