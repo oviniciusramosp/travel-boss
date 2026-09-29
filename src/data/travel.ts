@@ -5752,6 +5752,48 @@ export const localTravelCities: TravelCity[] = [
     lng: 12.4964,
     zoom: 13,
     places: [
+      {
+        id: 'rom-valle-aurelia',
+        name: { en: 'Valle Aurelia', 'pt-BR': 'Valle Aurelia' },
+        category: 'tourist',
+        subcategories: ['neighborhood'],
+        description: {
+          en: 'Residential neighborhood west of the Vatican, with local cafés, restaurants and shops. The nearby Monte Ciocci park adds green walks and views over Rome to the neighborhood’s everyday atmosphere.',
+          'pt-BR': 'Bairro residencial a oeste do Vaticano, com cafés, restaurantes e comércio local. O vizinho Parco di Monte Ciocci complementa o ambiente cotidiano do bairro com caminhadas no verde e vistas de Roma.',
+        },
+        lat: 41.9030071,
+        lng: 12.4414190,
+        address: 'Valle Aurelia — acesso pela estação, Via di Valle Aurelia, Roma',
+        mapsQuery: 'Valle Aurelia Roma',
+        visit: {
+          tips: {
+            en: 'Recommended by the Airbnb we booked in Rome. The pin marks the metro entrance as a starting point for exploring the neighborhood; Valle Aurelia station connects to metro line A and regional trains.',
+            'pt-BR': 'Recomendação do Airbnb que reservamos em Roma. O pino marca o acesso do metrô como ponto de partida para explorar o bairro; a estação Valle Aurelia conecta a linha A do metrô e trens regionais.',
+          },
+        },
+      },
+      {
+        id: 'rom-monte-ciocci',
+        name: { en: 'Monte Ciocci', 'pt-BR': 'Monte Ciocci' },
+        category: 'parks',
+        subcategories: ['viewpoint'],
+        description: {
+          en: 'Hill and park beside Valle Aurelia, with panoramic views of Rome and the dome of St Peter’s Basilica. Opened in 2013, the park offers green paths and open spaces for walking, picnics and a pause above the city.',
+          'pt-BR': 'Colina e parque junto a Valle Aurelia, com vistas panorâmicas de Roma e da cúpula da Basílica de São Pedro. Inaugurado em 2013, o parque reúne caminhos verdes e espaços abertos para passear, fazer piquenique e descansar acima da cidade.',
+        },
+        lat: 41.9050475,
+        lng: 12.4416171,
+        address: 'Parco di Monte Ciocci, Valle Aurelia, Roma',
+        mapsQuery: 'Parco di Monte Ciocci Roma',
+        visit: {
+          osmRef: 'relation/3183446',
+          bestTime: { en: 'Sunset, as suggested by the Airbnb host.', 'pt-BR': 'Pôr do sol, conforme a recomendação do Airbnb.' },
+          tips: {
+            en: 'Recommended by the Airbnb we booked in Rome, among its “secret places to discover”. Reach the hill via the park’s paths or stairs. The pin marks the panoramic viewpoint in the southern part of the park.',
+            'pt-BR': 'Recomendação do Airbnb que reservamos em Roma, entre os “lugares secretos para descobrir”. A subida pode ser feita pelos caminhos ou pelas escadarias do parque. O pino marca o mirante na parte sul do parque.',
+          },
+        },
+      },
       // —— Air / rail ——
       {
         id: 'rom-fco',
