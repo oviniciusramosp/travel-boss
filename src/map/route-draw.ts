@@ -91,7 +91,7 @@ export function drawRouteSegments(
       color,
       weight: dashed ? 3 : 4,
       opacity: 0.9,
-      dashArray: dashed ? '2 10' : undefined,
+      dashArray: kind === 'flight' ? '18 10' : dashed ? '2 10' : undefined,
       lineCap: 'round',
       lineJoin: 'round',
       interactive: true,

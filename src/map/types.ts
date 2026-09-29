@@ -33,6 +33,8 @@ export type MapRouteTransfer = {
 };
 
 export type MapRouteSegment = {
+  /** Illustrative airport-to-airport curve, not an actual flight track. */
+  flight?: boolean;
   mode: 'walk' | 'transit';
   latlngs: [number, number][];
   color?: string;

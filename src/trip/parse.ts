@@ -222,7 +222,7 @@ function readLeg(detail: string, line: number, errors: TripError[]): TripLeg {
   const matches = durationList(head);
   let durationMin: number | undefined;
   if (matches.length === 1) durationMin = matches[0];
-  else reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
+  else if (matches.length > 0 || mode !== 'flight') reject(errors, line, matches.length === 0 ? 'via-no-duration' : 'via-many-durations');
   const fareEur = legFare(head);
   return {
     detail,

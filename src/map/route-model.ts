@@ -8,7 +8,8 @@ export type RouteFocus =
 export type RouteStation = { lat: number; lng: number; end: boolean };
 
 /** Walk dash, neutral chord, or a transit spine. A chord stays a chord. */
-export function routeLayerKind(segment: MapRouteSegment): 'walk' | 'dash' | 'transit' {
+export function routeLayerKind(segment: MapRouteSegment): 'walk' | 'dash' | 'transit' | 'flight' {
+  if (segment.flight) return 'flight';
   if (segment.mode === 'walk') return 'walk';
   if (segment.dash === true) return 'dash';
   return 'transit';

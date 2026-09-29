@@ -438,6 +438,7 @@ Um dia a pé no centro. Os outros lugares de Roma ficam no catálogo da cidade, 
 
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout até 10h
 - 18:30 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo FCO → LIS
+  - via: voo FCO → LIS
 
 ## Lisboa
 city: lisboa
@@ -448,6 +449,7 @@ budget: comida €40
 
 Chegada do voo de Roma e hospedagem em Lisboa.
 
+- [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Chegada de Roma
 - 21:00 Táxi para a hospedagem
 - **Hospedagem:** [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Chegada após o táxi; check-in disponível desde 16h.\
   **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída antecipada para o voo das 9h35.\
@@ -464,3 +466,5 @@ Uber para o aeroporto.
 
 - **Checkout:** [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Antes de pegar o Uber para o voo das 9h35; limite da hospedagem às 11h
 - 09:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Partida do voo LIS → GRU
+  - via: voo LIS → GRU
+- [Aeroporto de Guarulhos (GRU)](place:sp-gru) — Chegada a São Paulo

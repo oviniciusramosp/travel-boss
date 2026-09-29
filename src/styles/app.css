@@ -536,6 +536,10 @@ button {
   animation-duration: var(--dur-flow-hot);
 }
 
+.tb-map path.tb-route-flight {
+  animation: tb-route-flow var(--dur-flow) linear infinite;
+}
+
 .tb-map path.tb-route-flow {
   pointer-events: none;
   animation: tb-route-flow var(--dur-flow) linear infinite;
@@ -1024,6 +1028,7 @@ p.tb-meta {
     opacity: 0.4;
   }
 
+  .tb-map path.tb-route-flight,
   .tb-map path.tb-route-flow,
   .tb-map path.tb-route-walk {
     animation: none;

@@ -19,7 +19,7 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 | Alternativa, plano B, aviso de greve | só se o usuário pedir. Se não pediu, sugira na resposta |
 
 - O nome do trecho é uma ação curta: "Pegar um Bolt · 35 min", "RER E até Magenta · 14 min". A duração aparece uma vez só, porque a timeline já mostra os minutos ao lado. Errado: "carro (Bolt) · 35 min", ou o preço do Bolt na nota do café.
-- O `via:` precisa de uma palavra de modo (a pé, metrô, RER, trem, ônibus, táxi, uber, bolt, carro, voo) antes da nota, e de exatamente uma duração.
+- O `via:` precisa de uma palavra de modo (a pé, metrô, RER, trem, ônibus, táxi, uber, bolt, carro, voo) antes da nota, e de exatamente uma duração. Voos podem omitir a duração enquanto ela não for conhecida; o mapa desenha uma curva ilustrativa entre os aeroportos.
 - Nota curta: uma ou duas frases com o que o viajante precisa naquela hora. O histórico da pesquisa fica na resposta, não no roteiro.
 
 ## 2. O que não fazer

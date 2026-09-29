@@ -76,7 +76,7 @@ dates: 2026-04-06 → 2026-04-09
     - transit: `metrô` / `metro`, `rer`, `trem` / `train`, `ônibus` / `onibus`, `bus`, `tram`, `ferry`
     - taxi: `táxi` / `taxi`, `uber`, `bolt`, `carro`, `car`
     - flight: `voo`, `flight`
-  - Duration is exactly one span. The unit is only `min` or `h` (`35 minutos` does not count):
+  - Duration is exactly one span, except flights may omit it when not yet known (`via: voo FCO → LIS`). Their map curve is illustrative, not a real flight track. The unit is only `min` or `h` (`35 minutos` does not count):
     - `N min` or `Nmin`: `35 min`, `35min`.
     - `N h` or `Nh`: `1 h` = 60, `3 h` = 180, `3h` = 180.
     - `NhMM`: `3h10` = 190, `1h30` = 90. The minutes are one or two digits glued to `h`, not a second token.

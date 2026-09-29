@@ -4,6 +4,7 @@ import type { TransferLeg } from '../views/transfer-row';
 import type { DatedDay } from './calendar';
 import { resolveTripLeg, type TripLegPoint } from './legs';
 import type { TripDay, TripLeg } from './parse';
+import { flightCurve } from '../map/flight-curve';
 import { rememberedWalk } from './walk-memory';
 
 export type DateStop = {
@@ -98,6 +99,7 @@ export type HopDraw =
   /** A catalog walk drawn as authored, where the router has no sidewalk. */
   | { kind: 'path'; path: [number, number][] }
   | { kind: 'drive' }
+  | { kind: 'flight' }
   | { kind: 'none' };
 
 /** Switches on `resolveTripLeg` and does not reapply its precedence. */
@@ -108,6 +110,7 @@ export function planHop(hop: RouteHop): HopDraw {
     return decision.leg.through?.length ? { kind: 'walk', through: decision.leg.through } : { kind: 'walk' };
   }
   if (decision.kind === 'catalog') return { kind: 'catalog', leg: decision.leg };
+  if (decision.kind === 'flight') return { kind: 'flight' };
   if (decision.kind === 'drive') return { kind: 'drive' };
   if (decision.kind === 'osrm') return { kind: 'walk' };
   return { kind: 'none' };
@@ -120,12 +123,17 @@ export function planHop(hop: RouteHop): HopDraw {
 export function previewHop(hop: RouteHop, _neutralColor: string): MapRouteSegment[] | null {
   const plan = planHop(hop);
   if (plan.kind === 'none') return [];
+  if (plan.kind === 'flight') return [flightSegment(hop)];
   if (plan.kind === 'path') return [{ mode: 'walk', latlngs: plan.path, ...endpoints(hop) }];
   if (plan.kind === 'walk') {
     const cached = rememberedWalk(hop.from, hop.to, plan.through);
     return cached ? [{ mode: 'walk', latlngs: cached, ...endpoints(hop) }] : null;
   }
   return null;
+}
+
+function flightSegment(hop: RouteHop): MapRouteSegment {
+  return { mode: 'transit', flight: true, latlngs: flightCurve(hop.from, hop.to), ...endpoints(hop) };
 }
 
 export type RouteDeps = {
@@ -151,6 +159,11 @@ export async function resolveHopSegments(
     try {
       const plan = planHop(hop);
       if (plan.kind === 'none') continue;
+      if (plan.kind === 'flight') {
+        segments.push(flightSegment(hop));
+        deps.onUpdate?.(segments);
+        continue;
+      }
       if (plan.kind === 'path') {
         segments.push({ mode: 'walk', latlngs: plan.path, ...endpoints(hop) });
         deps.onUpdate?.(segments);
