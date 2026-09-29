@@ -294,8 +294,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:15 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; escolher retirada em 10/10 às 12h15, conforme disponibilidade. Chegar no horário do pedido e usar a fila prioritária de retirada; reservar até 12h40
   - status: confirmado
   - saída: 12:40
-- Opção de almoço: [McDonald's Louvre–Rivoli](place:par-mcdonalds-louvre-rivoli), na 184 rue de Rivoli — Comprar para levar e comer no Palais-Royal; estimativa de €15 por pessoa para um combo
-- 13:00 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim e sentar para comer os doces do Cédric Grolet com calma
+- 12:50 [McDonald's Louvre–Rivoli](place:par-mcdonalds-louvre-rivoli) — Opção de almoço: comprar para levar e comer no Palais-Royal; estimativa de €15 por pessoa para um combo
+  - status: a confirmar
+  - saída: 13:10
+- 13:20 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim e sentar para comer os doces do Cédric Grolet com calma
 - 14:30 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; 15 min, até 14h45
   - saída: 14:45
 - 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala. Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
