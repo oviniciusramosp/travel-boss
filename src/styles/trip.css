@@ -252,6 +252,9 @@
 }
 
 .tb-date__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  row-gap: 0;
   padding: var(--inset-card) var(--inset-card) var(--inset-card) var(--spacing-16);
   border-radius: var(--r-card);
 }
@@ -262,11 +265,12 @@
 }
 
 .tb-date__heading {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
+  display: contents;
 }
+
+.tb-date__head > .tb-date__actions { grid-column: 2; grid-row: 1; }
+.tb-date__head > .tb-date__chevron { grid-column: 3; grid-row: 1; }
+.tb-date__heading > .tb-date__title { grid-column: 1; grid-row: 1; }
 
 /* Date first, the stop count under it. */
 .tb-date__title {
@@ -278,7 +282,10 @@
 }
 
 .tb-date__meta {
-  display: flex;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--trip-meta-count) var(--trip-meta-weather) var(--trip-meta-walk);
   align-items: center;
   gap: var(--spacing-4);
   min-width: 0;
@@ -290,9 +297,15 @@
 }
 
 .tb-date__names {
+  grid-column: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.tb-date__meta > .tb-count { grid-column: 2; }
+.tb-date__meta > .tb-sky { grid-column: 3; }
+.tb-date__meta > .tb-walk { grid-column: 4; }
+.tb-date__meta > * { grid-row: 1; }
 
 /* A dot between the cities, the count, the sky and the distance. */
 .tb-date__meta > * + *::before {
