@@ -95,15 +95,15 @@ describe('transferRowModel', () => {
     // Noisy-le-Sec → Pantin, Rosa Parks, Magenta, Haussmann–Saint-Lazare
     const rer = transferRowModel(parts[0]!, 'pt-BR');
     expect(rer.label).toBe('RER E');
-    expect(rer.stations).toEqual(['Noisy-le-Sec', 'Haussmann–Saint-Lazare (4 estações)']);
-    expect(transferRowModel(parts[0]!, 'en').stations).toEqual(['Noisy-le-Sec', 'Haussmann–Saint-Lazare (4 stops)']);
+    expect(rer.stations).toEqual(['Noisy-le-Sec', '3 estações entre elas', 'Haussmann–Saint-Lazare']);
+    expect(transferRowModel(parts[0]!, 'en').stations).toEqual(['Noisy-le-Sec', '3 stations in between', 'Haussmann–Saint-Lazare']);
     const walk = parts.find((part) => part.mode === 'walk')!;
     expect(transferRowModel(walk).stations).toEqual([]);
     expect(transferRowModel(walk).walkIndex).toBe(1);
 
     // A hand-drawn ride with no station names keeps its count; one name stands alone.
     const [bare] = expandTimelineTransferParts({ ...tower, hops: [{ ...tower.hops![0]!, board: undefined, exit: undefined }] });
-    expect(transferRowModel(bare!, 'pt-BR').stations).toEqual(['4 estações']);
+    expect(transferRowModel(bare!, 'pt-BR').stations).toEqual(['3 estações entre elas']);
     const [named] = expandTimelineTransferParts({ ...tower, hops: [{ ...tower.hops![0]!, board: undefined, path: [] }] });
     expect(transferRowModel(named!, 'pt-BR').stations).toEqual(['Haussmann–Saint-Lazare']);
   });
@@ -138,7 +138,7 @@ describe('transferRowModel', () => {
       mode: 'transit',
       icon: 'directions_transit',
       label: 'M9',
-      stations: ['Havre–Caumartin', 'Trocadéro (7 stops)'],
+      stations: ['Havre–Caumartin', '6 stations in between', 'Trocadéro'],
       duration: pickLocale('en', formatLegDuration(m9!.durationMin)),
       lineColor: m9!.color,
       hopIndex: 1,

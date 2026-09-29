@@ -112,22 +112,21 @@ function identityOf(leg: TransferLeg): Pick<TransferRowModel, 'from' | 'to' | 'h
   return { from: leg.from, to: leg.to };
 }
 
-/** Stations after boarding, to where you get off. A path lists both ends. */
+/** Number of stations strictly between boarding and exit. */
 function stationCountOf(leg: TimelineTransferPart, locale: Locale): string | null {
-  if (leg.stationCount < 2) return null;
-  const count = leg.stationCount - 1;
+  if (leg.stationCount <= 2) return null;
+  const count = leg.stationCount - 2;
   return pickLocale(locale, {
-    en: count === 1 ? '1 stop' : `${count} stops`,
-    'pt-BR': count === 1 ? '1 estação' : `${count} estações`,
+    en: count === 1 ? '1 station in between' : `${count} stations in between`,
+    'pt-BR': count === 1 ? '1 estação entre elas' : `${count} estações entre elas`,
   });
 }
 
-/** Board station, then the exit with the count. A ride with no names keeps the count. */
+/** Board station, intermediate count, then exit. A ride with no names keeps the count. */
 function stationsOf(leg: TransferLeg, locale: Locale): string[] {
   if (!isTransferPart(leg) || leg.mode !== 'transit') return [];
   const count = stationCountOf(leg, locale);
-  const exit = leg.exit && count ? `${leg.exit} (${count})` : (leg.exit ?? count);
-  return [leg.board, exit].filter((line): line is string => Boolean(line));
+  return [leg.board, count, leg.exit].filter((line): line is string => Boolean(line));
 }
 
 /** Icon, label, duration and line color. No DOM — safe under the node test runner. */
@@ -154,6 +153,7 @@ export function transferRowModel(leg: TransferLeg, locale: Locale = 'pt-BR'): Tr
 export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR', departure?: DepartureTime): HTMLLIElement {
   const model = transferRowModel(departure?.durationMin != null ? { ...leg, durationMin: departure.durationMin } : leg, locale);
   const item = el('li', `tb-transfer tb-transfer--${model.mode}`);
+  if (model.lineColor) item.style.setProperty('--line-color', model.lineColor);
   item.setAttribute(
     'aria-label',
     [model.label, model.duration, ...model.stations, model.note].filter(Boolean).join(', '),
@@ -202,7 +202,13 @@ export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR', departur
   item.append(lead, main);
   if (model.stations.length) {
     const stations = el('span', 'tb-transfer__stations');
-    stations.append(...model.stations.map((line) => el('span', undefined, line)));
+    stations.append(...model.stations.map((line) => {
+      const station = el('span', 'tb-transfer__station');
+      const dot = el('span', 'tb-transfer__station-dot');
+      dot.setAttribute('aria-hidden', 'true');
+      station.append(dot, el('span', undefined, line));
+      return station;
+    }));
     item.append(stations);
   }
   if (model.note) item.append(el('span', 'tb-transfer__note', model.note));

@@ -1363,10 +1363,26 @@ button.tb-receipt__name {
 .tb-transfer__stations {
   display: flex;
   flex-direction: column;
+  row-gap: var(--spacing-2);
+}
+
+.tb-transfer__station {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--spacing-8);
 }
 
 .tb-list > .tb-transfer > :is(.tb-transfer__note, .tb-transfer__stations) {
   grid-column: main;
+  grid-row: 2;
+}
+
+/* When both exist, the authored `via:` note follows the station pair instead of
+   occupying the same grid cell. */
+.tb-list > .tb-transfer:has(> .tb-transfer__stations) > .tb-transfer__note {
+  grid-row: 3;
+  margin-top: var(--spacing-4);
 }
 
 .tb-transfer__chip {
@@ -1461,14 +1477,22 @@ button.tb-receipt__name {
   line-height: var(--leading-caption);
 }
 
-.tb-substop__dot {
+.tb-substop__dot,
+.tb-transfer__station-dot {
   display: block;
   width: 8px;
   height: 8px;
   border: 2px solid var(--color-paper);
   border-radius: var(--r-pill);
-  background: var(--subpoint-color, var(--color-walk));
   box-shadow: 0 1px 3px color-mix(in srgb, var(--color-ink) 30%, transparent);
+}
+
+.tb-substop__dot {
+  background: var(--subpoint-color, var(--color-walk));
+}
+
+.tb-transfer__station-dot {
+  background: var(--line-color, var(--color-walk));
 }
 
 .tb-substop__name {
@@ -1511,6 +1535,7 @@ button.tb-receipt__name {
 }
 .tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time) > :is(.tb-transfer__lead, .tb-transfer__main) { grid-row: 2; }
 .tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time) > :is(.tb-transfer__stations, .tb-transfer__note, .tb-stop-costs) { grid-row: 3; }
+.tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time):has(> .tb-transfer__stations) > .tb-transfer__note { grid-row: 4; }
 
 .tb-list > .tb-transfer > .tb-transfer__conflict {
   grid-column: 2;
@@ -1520,4 +1545,8 @@ button.tb-receipt__name {
   gap: var(--spacing-4);
   font-size: var(--text-caption);
   line-height: var(--leading-caption);
+}
+
+.tb-list.tb-timeline > .tb-transfer:has(> .tb-transfer__time):has(> .tb-transfer__stations):has(> .tb-transfer__note) > .tb-transfer__conflict {
+  grid-row: 5;
 }
