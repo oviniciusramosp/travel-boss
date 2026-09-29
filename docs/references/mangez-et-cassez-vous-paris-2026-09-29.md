@@ -21,3 +21,7 @@ Fichas consultadas: [Taitbout](https://www.google.com/maps/search/?api=1&query=M
 O preço de €3,60 foi conferido no quadro de menu mostrado nas fotos recentes do Maps e em fontes editoriais; uma combinação de hambúrguer, fritas e bebida aparece por cerca de €7,20. As fotos de capa mostram a fachada de cada unidade; a segunda imagem mostra o produto. Taitbout, Alexandre Dumas e Jean-Jaurès usam fotos das próprias fichas. Daumesnil usa a fachada publicada pelo proprietário no Maps. Faidherbe usa a fachada da ficha correspondente no Tripadvisor. Quando a ficha não oferecia uma imagem de prato adequada, foi usada uma foto do mesmo cardápio da rede, identificada no crédito sem atribuí-la à unidade específica.
 
 Fontes complementares: [site da unidade Daumesnil](https://mangez-et-cassez-vous.eatbu.com/?lang=fr), [Time Out — Taitbout](https://www.timeout.fr/paris/restaurants/mangez-et-cassez-vous), [Sortir à Paris — Alexandre Dumas](https://www.sortiraparis.com/lieux/71194-mangez-et-cassez-vous), [MCV La Villette / Jean-Jaurès](https://www.pagesjaunes.fr/pros/65402540) e [Tripadvisor — Faidherbe](https://www.tripadvisor.fr/Restaurant_Review-g187147-d27522507-Reviews-Mangez_Et_Cassez_Vous-Paris_Ile_de_France.html).
+
+## Horário da unidade Taitbout
+
+O jantar do dia 05/10/2026 foi planejado para as 19h50. A unidade abre de segunda a sábado, das 11h30 às 15h e das 19h às 22h, segundo o [Time Out — Taitbout](https://www.timeout.fr/paris/restaurants/mangez-et-cassez-vous), conferido em 29/09/2026.

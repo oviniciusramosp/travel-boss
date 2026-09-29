@@ -321,6 +321,7 @@ function lodgingVisit(
 export const visitByPlaceId: Record<string, VisitInfo> = {
   'par-mangez-et-cassez-vous-taitbout': restaurantVisit(3.6, 7.2, {
     avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
+    bestDay: L('Monday–Saturday 11:30–15:00 and 19:00–22:00', 'Segunda–sábado 11h30–15h e 19h–22h'),
     crowdProfile: 'local',
     osmRef: 'node/8003129930',
     tips: L('Counter service; expect a queue at meal times.', 'Atendimento no balcão; espere fila nos horários de refeição.'),
@@ -1456,8 +1457,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   'par-bouillon': restaurantVisit(18, 18, {
     bestDay: L('Daily 11:30–00:00, non-stop', 'Todo dia 11h30–0h, sem intervalo'),
     tips: L(
-      'No reservations: join the queue. Metro Grands Boulevards (8, 9) is 70 m away.',
-      'Não aceita reserva: entre na fila. O metrô Grands Boulevards (8, 9) fica a 70 m.',
+      'No reservations: join the queue. Metro Grands Boulevards (8, 9) is 70 m away.\n\nSuggested mains: Pièce du boucher grillée — grilled with butter and fries; Pièce du boucher — grilled with pepper sauce and fries.\nDesserts: riz au lait — rice pudding; crème au caramel maison — caramel custard.',
+      'Não aceita reserva: entre na fila. O metrô Grands Boulevards (8, 9) fica a 70 m.\n\nSugestões de pratos: Pièce du boucher grillée — grelhado com manteiga e fritas; Pièce du boucher — grelhado com molho de pimenta e fritas.\nSobremesas: riz au lait — arroz-doce; crème au caramel maison — pudim de caramelo.',
     ),
   }),
   'par-vaudeville': restaurantVisit(23.9, 29.9, {

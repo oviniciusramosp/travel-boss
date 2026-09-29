@@ -91,15 +91,16 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:00 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; 1h15 para escolher e experimentar, até as 19h15; fecha às 20h
   - saída: 19:15
 - 19:25 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
-- 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico no salão (~€18 por pessoa, sem bebida), sem reserva: 1h20 para fila e refeição; sair até 21h20. Alternativa com reserva: [Brasserie Vaudeville](place:par-vaudeville), em frente à Bourse, com fórmula de prato + sobremesa por €23,90.\
-  **Sugestões de pratos:** Pièce du boucher grillée — grelhado com manteiga e fritas; Pièce du boucher — grelhado com molho de pimenta e fritas.\
-  **Sobremesas:** riz au lait — arroz-doce; crème au caramel maison — pudim de caramelo.
-  - saída: 21:20
-- 21:25 [Passage des Panoramas](place:par-passage-panoramas) — Se o jantar passar das **21h20**, pular esta parada e seguir direto para Haussmann–Saint-Lazare, para não arriscar perder o trem de volta. Caso contrário, passear e fotografar até 21h40; chegar à estação por volta das 22h, antes das obras noturnas do RER E
-  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min — O RER E é interrompido às **22h30** por obras; usar o trem planejado das **22h07**. O último para Noisy-le-Sec sai às **22h14**; se perder: M9 de Grands Boulevards a République, M5 até Bobigny–Pantin–Raymond Queneau, ônibus 145 até Jeanne d’Arc e 8 min a pé (~50 min)
-  - embarque: 2026-10-05 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 22:07 → 22:19
-  - saída: 21:40
-- 22:30 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
+  - saída: 19:45
+- 19:50 [Mangez et cassez-vous · Taitbout](place:par-mangez-et-cassez-vous-taitbout) — **Jantar** rápido: pegar 1 ou 2 hambúrgueres no balcão para levar; o orçamento considera 2 no total. Sair até 20h20
+  - comida: €3,60
+  - status: confirmado
+  - saída: 20:20
+- 20:30 [Passage des Panoramas](place:par-passage-panoramas) — Entrar pelo Boulevard Montmartre, atravessar a passagem e sair pela Rue Saint-Marc às 20h40
+  - via: a pé até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec · 50 min — O RER E é interrompido às **22h30** por obras; usar o trem planejado das **21h07**. O último para Noisy-le-Sec sai às **22h14**; se perder: M9 de Grands Boulevards a République, M5 até Bobigny–Pantin–Raymond Queneau, ônibus 145 até Jeanne d’Arc e 8 min a pé (~50 min)
+  - embarque: 2026-10-05 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:07 → 21:20
+  - saída: 20:40
+- 21:30 [Casa do Gui](place:par-casa-do-gui) — Volta com as sacolas
 
 ### Dia 3 — Ter 6/10 · Notre-Dame, Quartier Latin, Luxemburgo e piquenique no Sena
 
