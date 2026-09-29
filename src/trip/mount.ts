@@ -1576,7 +1576,8 @@ export function mountTrip(
       const summary = el('summary', 'tb-date__head');
       const heading = el('span', 'tb-date__heading');
       const meta = el('span', 'tb-date__meta');
-      if (names.length) meta.append(el('span', 'tb-date__names', names.join(' → ')));
+      const location = el('span', 'tb-date__location');
+      if (names.length) location.append(el('span', 'tb-date__names', names.join(' → ')));
       const countLabel = stopCountLabel(stopCount, locale);
       const count = el('span', 'tb-count');
       count.setAttribute('aria-label', countLabel);
@@ -1600,7 +1601,8 @@ export function mountTrip(
         void refreshWeatherByHand(trip, rows[0]?.dated.city.slug);
       });
       sky.append(weatherSlot('day'), refresh);
-      meta.append(count, sky, walkSlot(date));
+      location.append(count);
+      meta.append(location, sky, walkSlot(date));
       heading.append(el('span', 'tb-date__title', formatDayTitle(date, locale)), meta);
       const routeToggle = iconButton({
         icon: 'route',

@@ -285,7 +285,7 @@
   grid-column: 1 / -1;
   grid-row: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--trip-meta-count) var(--trip-meta-weather) var(--trip-meta-walk);
+  grid-template-columns: minmax(0, 1fr) var(--trip-meta-weather) var(--trip-meta-walk);
   align-items: center;
   gap: var(--spacing-4);
   min-width: 0;
@@ -296,19 +296,25 @@
   white-space: nowrap;
 }
 
+.tb-date__location {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
 .tb-date__names {
-  grid-column: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.tb-date__meta > .tb-count { grid-column: 2; }
-.tb-date__meta > .tb-sky { grid-column: 3; }
-.tb-date__meta > .tb-walk { grid-column: 4; }
+.tb-date__meta > .tb-sky { grid-column: 2; }
+.tb-date__meta > .tb-walk { grid-column: 3; }
 .tb-date__meta > * { grid-row: 1; }
 
-/* A dot between the cities, the count, the sky and the distance. */
-.tb-date__meta > * + *::before {
+/* Separators stay beside the stop count and distance. */
+.tb-date__location > * + *::before,
+.tb-date__meta > .tb-walk::before {
   content: '·';
   margin-inline-end: var(--spacing-4);
 }
