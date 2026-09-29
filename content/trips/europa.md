@@ -84,7 +84,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 12:50 [Arco do Triunfo do Carrousel](place:par-carrousel) — Seguir para a entrada do Louvre, chegando por volta das 13h
   - saída: 12:55
 - 13:30 [Louvre](place:par-louvre) — Chegar à entrada às **13h**, com 30 min de margem; **3h30 de visita, até as 17h**. Ingresso a reservar para as 13h30
-  - via: a pé até o Lafayette Gourmet · 30 min
+  - via: a pé até Palais Royal–Musée du Louvre, metrô 7 até Chaussée d’Antin–La Fayette e caminhada até o Lafayette Gourmet · 20 min — Incluído no Navigo Semaine
+  - embarque: 2026-10-05 · M7 · Palais Royal–Musée du Louvre → Chaussée d’Antin–La Fayette · 17:07 → 17:11
   - saída: 17:00
 - +3 km — percurso dentro do museu (estimativa)
 - 17:30 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
@@ -235,12 +236,16 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:40 [Sacré-Cœur](place:par-sacre-coeur) — **Pôr do sol às 19h18** na escadaria em frente à basílica; a basílica é grátis. Greve no metrô 2: ~20 min a pé até a Gare du Nord e RER E em Magenta
   - via: descer a pé até o Moulin Rouge · 20 min — Sair às 19:25, depois do pôr do sol
   - saída: 19:25
-- 19:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora, com a fachada iluminada; sair às 19:55
-  - via: metrô 2 de Blanche até La Chapelle e RER E em Magenta · 45 min — Caminhar da estação La Chapelle até Magenta para a conexão
-  - embarque: 2026-10-08 · M2 · Blanche → La Chapelle · 20:05 → 20:10
-  - embarque: 2026-10-08 · RER E · Magenta → Noisy-le-Sec · 20:21 → 20:31
-  - saída: 19:55
-- 20:40 [Casa do Gui](place:par-casa-do-gui) — Volta
+- 19:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora, com a fachada iluminada; sair às 19h52
+  - saída: 19:52
+- 20:00 [Bouillon Pigalle](place:par-bouillon-pigalle) — **Jantar**: reservar para as 20h; prato principal e sobremesa (~€18 por pessoa). Sair até 21h
+  - comida: €18
+  - via: metrô 12 de Pigalle até Saint-Lazare e RER E de Haussmann–Saint-Lazare até Noisy-le-Sec · 45 min — Incluído no Navigo Semaine
+  - status: confirmado
+  - embarque: 2026-10-08 · M12 · Pigalle → Saint-Lazare · 21:06 → 21:11
+  - embarque: 2026-10-08 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:18 → 21:31
+  - saída: 21:00
+- 21:45 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Se sobrar tempo antes de Montmartre: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur), a 10 min a pé da Naturalia
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte

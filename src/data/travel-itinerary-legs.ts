@@ -11,7 +11,7 @@ import {
   getTransitLine,
   haversineM,
   metro10,
-  metro2,
+  metro12,
   metro4,
   metro7,
   metro9,
@@ -1191,6 +1191,9 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
     ride(rerA, 'auber', 'etoile'),
   ]),
+  trainLeg('par-louvre', 'par-eclair-genie', 20, [
+    ride(metro7, 'palais-royal', 'chaussee-antin'),
+  ]),
   trainLeg('par-passage-panoramas', 'par-casa-do-gui', 50, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
   // 6/10
   // Return from breakfast on different streets from the RER approach (Galande / des Anglais).
@@ -1222,9 +1225,9 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(metro4, 'reaumur', 'barbès'),
     ride(funicularMontmartre, 'gare-basse', 'gare-haute'),
   ]),
-  trainLeg('par-moulin-rouge', 'par-casa-do-gui', 45, [
-    ride(metro2, 'blanche', 'la-chapelle'),
-    ride(rerE, 'magenta', 'noisy-le-sec'),
+  trainLeg('par-bouillon-pigalle', 'par-casa-do-gui', 45, [
+    ride(metro12, 'pigalle-s', 'saint-lazare'),
+    ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
   // 9/10
   trainLeg('par-casa-do-gui', 'par-castellane', 45, [

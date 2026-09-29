@@ -306,7 +306,7 @@ export const metro14: TransitLine = {
   ],
 };
 
-/** Metro Line 7 — Censier–Daubenton → Jussieu (the trip's stretch, OSM 2026-09-27) */
+/** Metro Line 7 — Censier–Daubenton → Chaussée d’Antin–La Fayette (trip stretches, OSM/Transitous 2026-09-29) */
 export const metro7: TransitLine = {
   id: 'm7',
   name: 'Métro 7',
@@ -315,6 +315,14 @@ export const metro7: TransitLine = {
     st('censier-daubenton', 'Censier–Daubenton', 48.840647, 2.351933),
     st('place-monge', 'Place Monge', 48.842905, 2.352277),
     st('jussieu', 'Jussieu', 48.845963, 2.354801),
+    st('sully-morland', 'Sully–Morland', 48.85118, 2.36103),
+    st('pont-marie', 'Pont Marie', 48.85373, 2.35758),
+    st('chatelet', 'Châtelet', 48.85851, 2.34702),
+    st('pont-neuf', 'Pont Neuf', 48.85875, 2.34245),
+    st('palais-royal', 'Palais Royal–Musée du Louvre', 48.8625, 2.3364),
+    st('pyramides', 'Pyramides', 48.86638, 2.33323),
+    st('opera', 'Opéra', 48.8705, 2.33236),
+    st('chaussee-antin', 'Chaussée d’Antin–La Fayette', 48.872879, 2.333872),
   ],
 };
 
