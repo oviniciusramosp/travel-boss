@@ -277,6 +277,7 @@ function iconFont(): Plugin {
 }
 
 export default defineConfig({
+  base: process.env.GITHUB_ACTIONS ? "/travel-boss/" : "/",
   plugins: [checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
   server: {
     port: 5173,

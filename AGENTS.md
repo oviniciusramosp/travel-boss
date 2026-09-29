@@ -141,3 +141,7 @@ Seletor de avaliação: `ratingPicker` (`src/ui/rating-picker.ts`) combina estre
 Busca da top bar: `mountSearch` (`src/app/search.ts`) mostra autocomplete em dois grupos, roteiro aberto e catálogo de cidades. Digitar não filtra a tela nem move o mapa; clique ou Enter abre o resultado, setas navegam e Escape fecha. O campo mantém o foco com `aria-activedescendant`. ⌘K/Ctrl K foca a busca. A exportação da top bar é uma exceção autorizada de botão só-ícone, com tooltip explicando cópia e download do roteiro em Markdown.
 
 Círculo de categoria: `placePin` (`src/ui/place-pin.ts`) compartilha o ícone por subcategoria, a cor e o contraste entre timeline e autocomplete. Resultados de paradas no autocomplete mostram `DD Mmm · HH:mm`, omitindo o horário quando não existe no roteiro.
+
+## Publicação estática
+
+O destino de produção é GitHub Pages (`/travel-boss/`), publicado pelo workflow `.github/workflows/pages.yml` a cada push em `main`. Nunca depender de `/api/*` no build estático: use `appRequest` (`src/platform/request.ts`), que mantém APIs de arquivos no dev e usa conteúdo empacotado + armazenamento no navegador em produção. A edição publicada não sincroniza aparelhos nem escreve no GitHub. Assets públicos usam `import.meta.env.BASE_URL`. Vídeos locais necessários ao site são versionados. Validar o build de produção, além do dev, ao mudar carregamento ou persistência.
