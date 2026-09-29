@@ -41,7 +41,7 @@ export function formatTripPanelTitle(trip: Trip, locale: Locale): string {
   return when ? `${name} ${when}` : name;
 }
 
-/** `Paris → Milão → Roma · 11 noites · 2–13 abr`. Empty when the trip has no cities. */
+/** Nights and dates above the city route. Empty when the trip has no cities. */
 export function formatTripSummary(trip: Trip, locale: Locale): string {
   const names = trip.cities.map((city) => city.name.trim()).filter((name) => name.length > 0);
   if (!names.length) return '';
@@ -50,10 +50,10 @@ export function formatTripSummary(trip: Trip, locale: Locale): string {
   if (!span) return route;
   const nights = nightsBetween(span.start, span.end);
   const when = formatSpan(span.start, span.end, locale);
-  const parts = [route];
+  const parts: string[] = [];
   if (nights != null) parts.push(nightPhrase(nights, locale));
   if (when) parts.push(when);
-  return parts.join(' · ');
+  return [parts.join(' · '), route].filter(Boolean).join('\n');
 }
 
 export type CityBand = {
