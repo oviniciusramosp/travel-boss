@@ -5,6 +5,14 @@ import { parseTrip } from './parse';
 import { tripToMarkdown } from './export';
 
 describe('Versailles catalog and Paris excursions', () => {
+  it('resolves Venice and Verona excursions from Milan without duplicating station ownership', () => {
+    const milan = getTripCity('milao')!;
+    for (const [id, slug] of [['ven-santa-lucia', 'veneza'], ['ver-porta-nuova', 'verona']]) {
+      expect(milan.places.some((place) => place.id === id)).toBe(true);
+      expect(travelCities.filter((city) => city.places.some((place) => place.id === id)).map(city => city.slug)).toEqual([slug]);
+    }
+  });
+
   it('assigns the seven places exclusively to Versailles', () => {
     const versailles = getTravelCity('versailles')!;
     expect(versailles.places.map((place) => place.id).sort()).toEqual([

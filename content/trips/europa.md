@@ -347,19 +347,33 @@ budget: comida €50
 ### Dia 2 — Seg 12/10 · Bate-volta a Veneza
 
 - [Joy 124](place:mil-joy124) — Saída conforme o trem
-- [Milano Centrale](place:mil-centrale) — Trem Milão ↔ Veneza; ida e volta no mesmo dia
+- 07:35 [Milano Centrale](place:mil-centrale) — Embarque para Veneza. Italo 8973; reserva QKJ4XK; valor informado: $44.92
+  - via: trem Italo 8973 · 2h30
+  - embarque: 2026-10-12 · Italo 8973 · Milano Centrale → Venezia Santa Lucia · 07:35 → 10:05
+- 10:05 [Venezia Santa Lucia](place:ven-santa-lucia) — Chegada a Veneza; retorno às 17h57 pela mesma estação. Italo 8992; reserva KEVDVZ; valor informado: $58.15
+  - via: trem Italo 8992 · 2h30
+  - embarque: 2026-10-12 · Italo 8992 · Venezia Santa Lucia → Milano Centrale · 17:57 → 20:27
+- 20:27 [Milano Centrale](place:mil-centrale) — Chegada de Veneza
 - [Joy 124](place:mil-joy124) — Retorno ao hotel
 
 ### Dia 3 — Ter 13/10 · Bate-volta a Verona
 
 - [Joy 124](place:mil-joy124) — Saída conforme o trem
-- [Milano Centrale](place:mil-centrale) — Trem Milão ↔ Verona; ida e volta no mesmo dia
+- 06:45 [Milano Centrale](place:mil-centrale) — Embarque para Verona
+  - via: trem Frecciarossa 9703 · 1h13
+  - embarque: 2026-10-13 · Frecciarossa 9703 · Milano Centrale → Verona Porta Nuova · 06:45 → 07:58
+- 07:58 [Verona Porta Nuova](place:ver-porta-nuova) — Chegada a Verona; retorno às 17h12 pela mesma estação
+  - via: trem Italo 8988 · 1h15
+  - embarque: 2026-10-13 · Italo 8988 · Verona Porta Nuova → Milano Centrale · 17:12 → 18:27
+- 18:27 [Milano Centrale](place:mil-centrale) — Chegada de Verona
 - [Joy 124](place:mil-joy124) — Retorno ao hotel
 
 ### Dia 4 — Qua 14/10 · Partida para La Spezia
 
 - [Joy 124 Hotel Milano](place:mil-joy124) — Checkout até 12h
-- 13:30 [Milano Centrale](place:mil-centrale) — Partida do trem para La Spezia
+- 13:10 [Milano Centrale](place:mil-centrale) — Partida do trem para La Spezia
+  - via: trem Frecciabianca 8619 · 3h04
+  - embarque: 2026-10-14 · Frecciabianca 8619 · Milano Centrale → La Spezia Centrale · 13:10 → 16:14
 
 ## La Spezia
 city: la-spezia
@@ -370,6 +384,7 @@ budget: comida €50
 
 Chegada de trem de Milão e hospedagem em La Spezia.
 
+- 16:14 [La Spezia Centrale](place:spe-centrale) — Chegada de Milão
 - [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in a partir das 15h, após a chegada de Milão.\
   **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.\
   **Reserva:** Booking.com · confirmação 5003460305 · PIN 2525.\

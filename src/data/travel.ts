@@ -3,6 +3,7 @@
  * Locale is resolved on the client from navigator.language.
  */
 
+import { italyRailCities, laSpeziaStation } from './travel-italy-rail';
 import {
   placeCategoryOrder,
   type PlaceCategory,
@@ -652,16 +653,17 @@ const NEAR_BNF: LString = {
 /** City shells and places. This file is the catalog's source of truth. */
 export const localTravelCities: TravelCity[] = [
   milanCity,
+  ...italyRailCities,
   {
     slug: 'la-spezia',
     name: { en: 'La Spezia', 'pt-BR': 'La Spezia' },
     country: { en: 'Italy', 'pt-BR': 'Itália' },
     countryKey: 'italia',
-    // Municipal map centre (OSM relation 42842); no place pins yet.
+    // Municipal map centre (OSM relation 42842).
     lat: 44.1033871,
     lng: 9.8217022,
     zoom: 13,
-    places: [],
+    places: [laSpeziaStation],
   },
   {
     slug: 'sao-paulo',

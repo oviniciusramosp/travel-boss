@@ -5,6 +5,7 @@
 
 import type { LString } from './travel';
 import parisMilanRail from './travel-paris-milan-rail.json';
+import { italyRailLegs } from './travel-italy-rail';
 import {
   funicularMontmartre,
   getTransitLine,
@@ -1268,6 +1269,7 @@ export const parisDayLegsById: Record<string, ItineraryLegDef[]> = {
   'paris-d7': day7,
   // Not a portfolio day: resolveTripLeg reads every list here by from → to pair.
   'trip-europa-2026': tripEuropa2026,
+  'trip-italy-2026': italyRailLegs,
 };
 
 /** Milan transit durations include waiting and station access; no surveyed track geometry. */

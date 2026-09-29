@@ -14,8 +14,8 @@ export const milanCity: TravelCity = {
   lat: 45.478, lng: 9.197, zoom: 13,
   places: [
     place('mil-centrale', 'Milano Centrale', 'transport', 45.4858786, 9.2042617, "Piazza Duca d’Aosta",
-      'Chegada em 11/10/2026 às 14h10. Base dos deslocamentos para Verona em 12/10 e Veneza em 13/10; trens ainda a definir.',
-      'Arrival on 11 October 2026 at 14:10. Departure point for Verona on 12 October and Venice on 13 October; trains still to be chosen.'),
+      'Estação ferroviária Milano Centrale, ponto de chegada e partida de trens nacionais e internacionais em Milão.',
+      'Milano Centrale railway station, serving domestic and international trains in Milan.'),
     place('mil-joy124', 'Joy 124 Hotel Milano', 'lodging', 45.49337, 9.20589, 'Via Melchiorre Gioia 124',
       'Nossa base de 11 a 14/10/2026. Cerca de 20 minutos a pé da Centrale e 10 minutos da estação Sondrio (M3), segundo o hotel. Confirmar check-in e check-out na reserva.',
       'Our base from 11 to 14 October 2026. The hotel estimates 20 minutes on foot from Centrale and 10 minutes from Sondrio (M3). Check booking for check-in and check-out times.',
