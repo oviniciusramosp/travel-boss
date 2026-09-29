@@ -242,9 +242,9 @@
   grid-row: 1;
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 11px;
+  font-size: var(--text-timeline-time);
   letter-spacing: 0.02em;
-  line-height: 1.2;
+  line-height: var(--leading-timeline-time);
 }
 
 .tb-list.tb-timeline > .tb-row > .tb-row__lead {

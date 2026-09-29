@@ -183,20 +183,20 @@ export function transferRow(leg: TransferLeg, locale: Locale = 'pt-BR', departur
   if (departure && (model.mode === 'walk' || model.mode === 'transit')) {
     const time = el('span', 'tb-transfer__time', departure.time ?? '—');
     const label = departure.conflict
-      ? pickLocale(locale, { en: 'Departure conflicts with the planned stop or connection', 'pt-BR': 'Saída em conflito com o horário da parada ou conexão' })
+      ? pickLocale(locale, departure.conflictReason ?? { en: 'Review the departure and connection times.', 'pt-BR': 'Revise os horários de saída e conexão.' })
       : departure.verified
         ? pickLocale(locale, { en: 'Published departure, checked for this date', 'pt-BR': 'Partida publicada, consultada para esta data' })
         : departure.time
           ? pickLocale(locale, { en: 'Estimated walking departure', 'pt-BR': 'Saída prevista a pé (estimativa)' })
           : pickLocale(locale, { en: 'Departure not verified', 'pt-BR': 'Partida a conferir' });
     time.setAttribute('data-tip', label);
-    time.setAttribute('aria-label', `${label}${departure.time ? `: ${departure.time}` : ''}`);
+    time.setAttribute('aria-label', departure.conflict ? `${departure.time ?? ''}. ${label}` : `${label}${departure.time ? `: ${departure.time}` : ''}`);
     item.setAttribute('aria-label', `${time.getAttribute('aria-label')}, ${item.getAttribute('aria-label')}`);
     item.append(time);
     if (departure.conflict) {
-      const warning = icon('warning', { size: 16 });
-      warning.setAttribute('data-tip', label);
-      main.append(warning);
+      const warning = el('span', 'tb-transfer__conflict');
+      warning.append(icon('warning', { size: 16 }), el('span', undefined, label));
+      item.append(warning);
     }
   }
   item.append(lead, main);

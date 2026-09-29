@@ -2,7 +2,7 @@ import { pickLocale } from '../catalog';
 import type { TripBoarding } from './parse';
 import type { TransferLeg } from '../views/transfer-row';
 
-export type DepartureTime = { time?: string; durationMin?: number; verified?: boolean; conflict?: boolean };
+export type DepartureTime = { time?: string; durationMin?: number; verified?: boolean; conflict?: boolean; conflictReason?: { en: string; 'pt-BR': string } };
 const minutes = (time?: string): number | null => time && /^([01]\d|2[0-3]):[0-5]\d$/.test(time)
   ? Number(time.slice(0, 2)) * 60 + Number(time.slice(3)) : null;
 const clock = (time: number): string => `${String(Math.floor(((time % 1440) + 1440) % 1440 / 60)).padStart(2, '0')}:${String(((time % 60) + 60) % 60).padStart(2, '0')}`;
@@ -39,6 +39,14 @@ export function departureTimes(
     starts[index] = start; ends[index] = end;
     result[index] = { time: clock(start), durationMin: end - start, verified: true,
       conflict: (origin != null && start < origin) || (destination != null && end > destination) };
+    if (origin != null && start < origin) result[index]!.conflictReason = {
+      en: `Departure at ${clock(start)}, before the planned stop at ${clock(origin)}.`,
+      'pt-BR': `Partida às ${clock(start)}, antes da parada prevista às ${clock(origin)}.`,
+    };
+    else if (destination != null && end > destination) result[index]!.conflictReason = {
+      en: `Arrival at ${clock(end)}; the next stop is planned for ${clock(destination)}.`,
+      'pt-BR': `Chegada às ${clock(end)}; a próxima parada está prevista para ${clock(destination)}.`,
+    };
   }
   for (let i = 0; i < legs.length;) {
     if (legs[i]!.mode !== 'walk') { i++; continue; }
@@ -54,15 +62,31 @@ export function departureTimes(
     if (start == null) continue;
     const conflict = (origin != null && start < origin)
       || (target != null && start + total + (i < legs.length ? 3 : 0) > target);
+    const conflictReason = origin != null && start < origin ? {
+      en: `Leave at ${clock(start)}; the previous stop is planned for ${clock(origin)}.`,
+      'pt-BR': `É preciso sair às ${clock(start)}; a parada anterior está prevista para ${clock(origin)}.`,
+    } : conflict && target != null ? i < legs.length ? {
+      en: `Leave by ${clock(target - total - 3)} to board at ${clock(target)} with 3 minutes to spare. Planned departure: ${clock(start)}.`,
+      'pt-BR': `Saia até ${clock(target - total - 3)} para embarcar às ${clock(target)} com 3 min de margem. Saída planejada: ${clock(start)}.`,
+    } : {
+      en: `The walk ends at ${clock(start + total)}; the next stop is planned for ${clock(target)}.`,
+      'pt-BR': `A caminhada termina às ${clock(start + total)}; a próxima parada está prevista para ${clock(target)}.`,
+    } : undefined;
     for (let j = first; j < i; j++) {
-      result[j] = { time: clock(start), conflict };
+      result[j] = { time: clock(start), conflict, conflictReason };
       start += legs[j]!.durationMin!;
     }
-    if (conflict && i < legs.length) result[i]!.conflict = true;
+    if (conflict && i < legs.length) Object.assign(result[i]!, { conflict: true, conflictReason });
   }
   // Even when there is no walking row, a connection needs boarding margin.
   for (let i = 1; i < legs.length; i++) {
-    if (ends[i - 1] != null && starts[i] != null && ends[i - 1]! + 3 > starts[i]!) result[i]!.conflict = true;
+    if (ends[i - 1] != null && starts[i] != null && ends[i - 1]! + 3 > starts[i]!) {
+      result[i]!.conflict = true;
+      result[i]!.conflictReason = {
+        en: `Arrival at ${clock(ends[i - 1]!)} and next departure at ${clock(starts[i]!)}: less than 3 minutes to change.`,
+        'pt-BR': `Chegada às ${clock(ends[i - 1]!)} e próximo embarque às ${clock(starts[i]!)}: menos de 3 min para a troca.`,
+      };
+    }
   }
   return result;
 }

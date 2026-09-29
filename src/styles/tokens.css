@@ -39,6 +39,8 @@
   /* Desktop tool density. Captions stay on the design scale (12px).
      Chrome body is 13px; reading text in the trip document is 14px. */
   --text-caption: 12px;
+  --text-timeline-time: 11px;
+  --leading-timeline-time: 1.2;
   --leading-caption: 1.33;
   --tracking-caption: 0.04em;
   --text-body: 13px;

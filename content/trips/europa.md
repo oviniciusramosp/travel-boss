@@ -16,7 +16,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
   - status: confirmado
-- 17:15 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
+- 17:12 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
   - via: RER E + metrô 9 · 45 min · €2,55
   - status: confirmado
@@ -134,11 +134,11 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:25 [Les Deux Magots](place:par-deux-magots) — Um bule de chocolate quente para dividir em 2 (€12 no total); sair até 18h50
   - via: Ir a pé até o Port du Louvre · 15 min
   - saída: 18:50
-- 19:10 [Port du Louvre](place:par-port-louvre) — **Jantar**: piquenique à beira do Sena com as compras da La Grande Épicerie; ficar até 20h10
+- 19:10 [Port du Louvre](place:par-port-louvre) — **Jantar**: piquenique à beira do Sena com as compras da La Grande Épicerie; ficar até 20h05
   - via: a pé até Saint-Michel–Notre-Dame, RER B até Gare du Nord e RER E de Magenta até Noisy-le-Sec · 55 min
   - embarque: 2026-10-06 · RER B · Saint-Michel–Notre-Dame → Gare du Nord · 20:23 → 20:29
   - embarque: 2026-10-06 · RER E · Magenta → Noisy-le-Sec · 20:40 → 20:50
-  - saída: 20:10
+  - saída: 20:05
 - 21:05 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Almoço alternativo em Saint-Germain: [Spécimen Burger](place:par-specimen-burger) — hambúrguer ~€13, seg–sex até 15h
 
@@ -190,7 +190,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 23:22 [Val de Fontenay](place:par-val-de-fontenay-rer) — Sem RER E depois das 22h30 (obras de modernização). Ônibus 145 das 23:41, na Gare de Val de Fontenay, até a parada Jeanne d'Arc; o próximo sai às 00:01
   - via: ônibus 145 até Jeanne d'Arc e caminhada · 32 min
   - embarque: 2026-10-07 · ônibus 145 · Val de Fontenay → Jeanne d'Arc · 23:41 → 00:06
-- 00:12 [Casa do Gui](place:par-casa-do-gui) — Volta
+- 00:13 [Casa do Gui](place:par-casa-do-gui) — Volta
 
 ### Dia 5 — Qui 8/10 · Canal Saint-Martin, Marais, almoço no Chez Janou e pôr do sol em Montmartre
 

@@ -18,6 +18,7 @@ describe('departure times', () => {
   });
   it('flags impossible departures and accounts for midnight', () => {
     expect(departureTimes([walk], service.date, '08:25', '08:30')[0]?.conflict).toBe(true);
+    expect(departureTimes([walk], service.date, '08:25', '08:30')[0]?.conflictReason?.['pt-BR']).toContain('08:20; a parada anterior está prevista para 08:25');
     expect(departureTimes([walk], service.date, '23:50', '00:12')[0]?.time).toBe('00:02');
     const result = departureTimes([train, walk], service.date, '23:00', '00:30', [{ ...service, departure: '23:55', arrival: '00:15' }]);
     expect(result.map(item => item.time)).toEqual(['23:55', '00:15']);
@@ -30,4 +31,7 @@ it('respects an explicit exit and flags a missed train instead of moving it', ()
   expect(result.map(item => item.time)).toEqual(['08:10', '08:15']);
   expect(result[0]?.conflict).toBe(true);
   expect(result[1]?.conflict).toBe(true);
+  expect(result[1]?.conflictReason?.['pt-BR']).toContain('Saia até 08:02 para embarcar às 08:15');
+  const lateWalk = departureTimes([train, walk], service.date, '08:00', '08:55', [service]);
+  expect(lateWalk[1]?.conflictReason?.['pt-BR']).toContain('termina às 08:58; a próxima parada está prevista para 08:55');
 });

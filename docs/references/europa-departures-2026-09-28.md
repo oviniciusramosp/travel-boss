@@ -51,8 +51,8 @@ Fontes oficiais:
 
 ## Pendências e limites
 
-- 4/10: preservar Trocadéro às 18h exige saída a pé às 17h12, enquanto a parada de saída da casa diz 17h15. Partidas publicadas: E 17h23, M9 17h47. Não alterar a parada fechada sem resolver essa preferência.
-- 6/10: a nota do piquenique mantém saída às 20h10; a combinação B 20h23 + E 20h40 pede caminhada antes disso. A conexão deve ficar sinalizada até ajustar saída ou chegada.
+- 4/10: saída de casa corrigida para 17h12, preservando Trocadéro às 18h. Partidas publicadas: E 17h23, M9 17h47.
+- 6/10: término do piquenique e saída corrigidos para 20h05, com 15 min de caminhada e 3 min de margem para o RER B 20h23 + E 20h40.
 - Funicular de Montmartre: horário de operação consultado; partida específica indisponível.
 - Bate-volta de Milão em 12/10: destino ainda indefinido e paradas sem hora. Não inventar saídas.
-- Ônibus 145 de 7/10: consulta retorna 23h41 → 00h06, seguinte 00h01; difere um minuto da nota anterior. Caminhada final prevista de 7 min: chegada 00h13, um minuto após a parada 00h12.
+- Ônibus 145 de 7/10: consulta retorna 23h41 → 00h06, seguinte 00h01. Caminhada final prevista de 7 min: chegada em casa corrigida para 00h13.
