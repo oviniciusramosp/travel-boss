@@ -91,7 +91,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 18:00 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; 1h15 para escolher e experimentar, até as 19h15; fecha às 20h
   - saída: 19:15
 - 19:25 [Farmácia Carré Opéra](place:par-carre-opera) — Voucher de 10% do Conexão Paris no celular; tax free acima de €100; fecha às 20h30
-- 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico no salão (~€15–28), sem reserva: 1h20 para fila e refeição; sair até 21h20.\
+- 20:00 [Bouillon Chartier](place:par-bouillon) — **Jantar** clássico no salão (~€18 por pessoa, sem bebida), sem reserva: 1h20 para fila e refeição; sair até 21h20. Alternativa com reserva: [Brasserie Vaudeville](place:par-vaudeville), em frente à Bourse, com fórmula de prato + sobremesa por €23,90.\
   **Sugestões de pratos:** Pièce du boucher grillée — grelhado com manteiga e fritas; Pièce du boucher — grelhado com molho de pimenta e fritas.\
   **Sobremesas:** riz au lait — arroz-doce; crème au caramel maison — pudim de caramelo.
   - saída: 21:20

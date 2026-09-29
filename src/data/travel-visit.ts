@@ -1423,11 +1423,18 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Reserve o salão — o ambiente dourado é o espetáculo.',
     ),
   }),
-  'par-bouillon': restaurantVisit(15, 28, {
+  'par-bouillon': restaurantVisit(18, 18, {
     bestDay: L('Daily 11:30–00:00, non-stop', 'Todo dia 11h30–0h, sem intervalo'),
     tips: L(
       'No reservations: join the queue. Metro Grands Boulevards (8, 9) is 70 m away.',
       'Não aceita reserva: entre na fila. O metrô Grands Boulevards (8, 9) fica a 70 m.',
+    ),
+  }),
+  'par-vaudeville': restaurantVisit(23.9, 29.9, {
+    bestDay: L('Monday 8:00–23:00; Tue–Sat until midnight; Sunday until 23:00', 'Segunda 8h–23h; ter–sáb até meia-noite; domingo até 23h'),
+    tips: L(
+      'Book online. The €23.90 menu includes a starter and main or a main and dessert.',
+      'Reserve online. A fórmula de €23,90 inclui entrada e prato ou prato e sobremesa.',
     ),
   }),
   'par-royal-cambronne': restaurantVisit(18, 35, {

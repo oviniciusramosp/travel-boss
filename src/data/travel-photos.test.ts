@@ -18,6 +18,8 @@ const ALLOWED_HOSTS = new Set([
   WIKI_HOST,
   // Café Latéral official gallery, hosted by its website provider.
   'uniiti.com',
+  // Brasserie Vaudeville official gallery, hosted by its website provider.
+  'ugc.zenchef.com',
   // Official Le Meurice product photo (sculpted mango pastry)
   'cedric-grolet.com',
   'live.staticflickr.com',

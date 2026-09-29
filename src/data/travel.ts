@@ -3591,6 +3591,27 @@ export const localTravelCities: TravelCity[] = [
         mapsUrl: 'https://www.google.com/maps/place/Bouillon+Chartier+Grands+Boulevards/@48.8719224,2.3430304,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e3e7dad1be3:0xf5848e4836f69968!8m2!3d48.8719224!4d2.3430304!16s%2Fm%2F0br_rks',
       },
       {
+        id: 'par-vaudeville',
+        name: { en: 'Brasserie Vaudeville', 'pt-BR': 'Brasserie Vaudeville' },
+        category: 'restaurants',
+        subcategories: ['brasserie', 'french'],
+        aiSuggested: true,
+        aiReason: {
+          en: 'a reservable French brasserie close to Passage des Panoramas, keeping the evening route compact if the Chartier queue is too long',
+          'pt-BR': 'brasserie francesa com reserva perto da Passage des Panoramas, mantendo o fim do dia compacto caso a fila do Chartier esteja grande',
+        },
+        description: {
+          en: 'Historic brasserie facing the Bourse, serving traditional French cooking and seafood in a bright Art Deco dining room. Opened in 1918, it preserves the atmosphere of a classic Parisian brasserie.',
+          'pt-BR': 'Brasserie histórica em frente à Bourse, com cozinha francesa tradicional e frutos do mar em um salão Art Déco iluminado. Aberta em 1918, preserva o ambiente de uma brasserie parisiense clássica.',
+        },
+        googleRating: 4.6,
+        lat: 48.869245,
+        lng: 2.3401929,
+        address: '29 Rue Vivienne, 75002 Paris',
+        mapsQuery: 'Brasserie Vaudeville 29 Rue Vivienne Paris',
+        mapsUrl: 'https://www.google.com/maps/place/Vaudeville/@48.869245,2.3401929,17z/data=!4m6!3m5!1s0x47e66e30705fa5d1:0x125f7a9e795862d9!8m2!3d48.869245!4d2.3401929!16s%2Fg%2F11b6d4d8z8',
+      },
+      {
         id: 'par-train-bleu',
         name: { en: 'Le Train Bleu', 'pt-BR': 'Le Train Bleu' },
         category: 'restaurants',

@@ -240,6 +240,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-vaudeville': [
+    photo(
+      'https://ugc.zenchef.com/2/5/0/1/9/2/1/5/6/8/5/0/5/1757513508_105/de609b9acc5b8b468d9877bccf89f215.website.jpg',
+      'Art Deco dining room at Brasserie Vaudeville',
+      'Salão Art Déco da Brasserie Vaudeville',
+      'Brasserie Vaudeville · official gallery',
+    ),
+  ],
   'par-cedric-grolet': [
     photo(
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUMAnnoa1qHK4CBkOUFhkT6bgEfPckQMSl9eauB91LSfFuLBNs-8_tq-m&s=10',
