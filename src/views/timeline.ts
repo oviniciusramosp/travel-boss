@@ -242,8 +242,17 @@ function openReceipt(
 }
 
 /** A stop's line of the date budget: icon and amount per person, each kind above €0. */
-export function stopCostEl(line: BudgetLine, locale: Locale, sunset?: string | null): HTMLElement {
+export function stopCostEl(line: BudgetLine, locale: Locale, sunset?: string | null, luggage = false): HTMLElement {
   const costs = el('span', 'tb-stop-costs');
+  if (luggage) {
+    const mark = el('span', 'tb-stop-cost');
+    const label = pickLocale(locale, { en: 'Carrying luggage', 'pt-BR': 'Com as malas' });
+    mark.setAttribute('role', 'img');
+    mark.setAttribute('aria-label', label);
+    mark.setAttribute('data-tip', label);
+    mark.append(weatherIcon('suitcase-rolling'));
+    costs.append(mark);
+  }
   if (sunset) {
     const mark = el('span', 'tb-stop-cost');
     mark.setAttribute('role', 'img');

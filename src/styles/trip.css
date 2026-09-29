@@ -1085,6 +1085,12 @@ button.tb-receipt__name {
   grid-row: 1;
 }
 
+.tb-list-note > .tb-stop-costs {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+}
+
 .tb-list-note:is(:hover, :focus-within) > .tb-row__actions {
   opacity: 1;
 }

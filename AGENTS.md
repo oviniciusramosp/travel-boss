@@ -63,6 +63,8 @@ UI (vale a partir da Fase 1):
 
 Cada primitivo novo acrescenta a regra dele neste arquivo. Os atuais estão em [docs/ui-primitives.md](docs/ui-primitives.md): `el`, `prefersReducedMotion`, `icon`, `iconButton`/`iconLink`, tooltip, `row`, `aiBadge`, `openDialog`, `videoButton`, `editableNote`, `weatherIcon`.
 
+Mala na timeline: exceção autorizada para o SVG `suitcase-rolling.svg` fornecido pelo usuário, via `weatherIcon`, com as cores originais. Aparece na coluna de valores, como o pôr do sol, com nome acessível e tooltip “Com as malas”. `luggageStops` acompanha as ações de checkout e check-in na primeira linha de cada parada/nota, incluindo os dois extremos e atravessando cidades/datas; detalhes multilinha de reservas não iniciam um checkout. Depois do check-in, a marca desaparece até o próximo checkout. Não acrescentar notas para registrar a implementação.
+
 Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--r-min`, canto reto `--r-none`. Os pares (`--r-card`/`--inset-card`/`--r-card-inner`, e o mesmo para row, popover e group) ficam em `src/styles/tokens.css`. Filho que encosta no canto usa o `*-inner`. Linha de uma linha é `--r-pill`; linha com `.tb-row__sub` é `--r-row`. Foco é `outline` + `outline-offset`, nunca `box-shadow`. Quem rola é `.tb-panel__body`, não o card arredondado. `grep border-radius src/styles` só pode mostrar `var(--r-*)`.
 
 ## Como um LLM edita um roteiro

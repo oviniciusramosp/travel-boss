@@ -98,6 +98,7 @@ import {
   type Weather,
 } from './weather';
 import { weatherIcon } from '../ui/weather-icons';
+import { luggageStops } from './luggage';
 import { transferRow } from '../views/transfer-row';
 
 type TripFile = { id: string; file: string; raw: string };
@@ -1360,6 +1361,7 @@ export function mountTrip(
   }
 
   function paint(trip: Trip, updated = false) {
+    const carryingLuggage = luggageStops(trip);
     const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
     if (!firstPaint) rememberView();
@@ -1797,6 +1799,7 @@ export function mountTrip(
           editNote(text, 'item', stop.label, lineAt(stop.line), city.slug);
           noteBody.append(text);
           noteItem.append(noteBody);
+          if (carryingLuggage.has(stop)) noteItem.append(stopCostEl({ id: key, food: 0, ticket: 0 }, locale, null, true));
           const noteActions = el('div', 'tb-row__actions');
           noteActions.append(comments(noteItem, stop, city.slug));
           noteItem.append(noteActions);
@@ -1900,9 +1903,9 @@ export function mountTrip(
           return line ? [line] : [];
         });
         const sunset = sunsetTip(authored, locale);
-        if (place && (costs.length || sunset)) {
+        if (costs.length || (place && sunset) || carryingLuggage.has(stop)) {
           const sum = (kind: 'food' | 'ticket') => costs.reduce((total, line) => total + line[kind], 0);
-          item.append(stopCostEl({ id: place.id, food: sum('food'), ticket: sum('ticket') }, locale, sunset));
+          item.append(stopCostEl({ id: place?.id ?? key, food: sum('food'), ticket: sum('ticket') }, locale, sunset, carryingLuggage.has(stop)));
         }
         if (place?.subPoints?.length && !missingPlace) {
           // The points in one line, and a toggle that lists them as small dots in the parent's color.

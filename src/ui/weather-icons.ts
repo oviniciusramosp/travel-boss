@@ -11,6 +11,7 @@ export const WEATHER_ICONS = [
   'clouds-moon',
   'clouds-sun',
   'moon-stars',
+  'suitcase-rolling',
   'sun',
   'sunset',
 ] as const;
