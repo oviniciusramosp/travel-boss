@@ -895,6 +895,26 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Café Latéral — galeria oficial / Uniiti',
     ),
   ],
+  'par-brioche-doree-chaussee-antin': [
+    photo(
+      '/photos/paris/par-brioche-doree-chaussee-antin-facade.jpg',
+      'Brioche Dorée Chaussée d’Antin storefront on Rue de Provence',
+      'Fachada da Brioche Dorée Chaussée d’Antin na Rue de Provence',
+      'Google Street View · Brioche Dorée Chaussée d’Antin',
+    ),
+    photo(
+      '/photos/paris/par-brioche-doree-chaussee-antin-sweets.jpg',
+      'Éclairs, fruit tarts and desserts at Brioche Dorée Chaussée d’Antin',
+      'Éclairs, tortinhas de frutas e sobremesas da Brioche Dorée Chaussée d’Antin',
+      'Google Maps · Brioche Dorée Chaussée d’Antin',
+    ),
+    photo(
+      '/photos/paris/par-brioche-doree-chaussee-antin-counter.jpg',
+      'Sweet and savory counter at Brioche Dorée Chaussée d’Antin',
+      'Vitrine de opções doces e salgadas da Brioche Dorée Chaussée d’Antin',
+      'Google Maps · Brioche Dorée Chaussée d’Antin',
+    ),
+  ],
   'par-eclair-genie': [
     photo(
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhMAM7N2tcdxVfxVPeyk8nRURyi11fzq8FSMdaOG7zWqVZA8D7aGTgyKU&s=10',
