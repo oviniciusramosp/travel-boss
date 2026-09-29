@@ -1,4 +1,6 @@
 :root {
+  --h-touch: 44px;
+  --text-input-mobile: 16px;
   --trip-meta-weather: 32px;
   --trip-meta-walk: 8ch;
   --indoor-width: 1240px;
@@ -220,5 +222,13 @@
     --dur-flow: 0ms;
     --dur-flow-hot: 0ms;
     --dur-reveal: 0ms;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --h-sm: 36px;
+    --h-md: 40px;
+    --h-lg: var(--h-touch);
   }
 }

@@ -3,6 +3,7 @@ import { activeTheme, THEME_EVENT, toggleTheme } from './theme';
 import { iconButton, segmented } from '../ui/controls';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
+import { isMobile, MOBILE_QUERY } from './viewport';
 import {
   EXIT_RATIO,
   markChromeMotion,
@@ -121,6 +122,12 @@ export function mountShell(root: HTMLElement): Shell {
   const citiesLabel = el('p', 'tb-side-label', 'Cidades');
   const navCities = el('div');
   side.append(tripsLabel, navTrips, citiesLabel, navCities);
+  side.id = 'tb-navigation';
+  sideToggle.setAttribute('aria-controls', side.id);
+  const drawer = el('dialog', 'tb-drawer');
+  const drawerClose = iconButton({ icon: 'close', label: 'Fechar menu' });
+  const drawerActions = el('div', 'tb-drawer-actions');
+  drawer.append(drawerClose, drawerActions);
 
   const main = el('main', 'tb-main');
   const empty = el('div', 'tb-empty');
@@ -141,7 +148,7 @@ export function mountShell(root: HTMLElement): Shell {
   const mapHost = el('div', 'tb-map');
   mapCol.append(mapHost);
   workspace.append(side, main, split, mapCol);
-  root.append(bar, workspace);
+  root.append(bar, workspace, drawer);
 
   const storedMain = localStorage.getItem(MAIN_KEY);
   if (storedMain && /^\d+px$/.test(storedMain)) {
@@ -149,7 +156,7 @@ export function mountShell(root: HTMLElement): Shell {
     workspace.style.setProperty('--pane-map', '1fr');
   }
 
-  let sideOpen = localStorage.getItem(SIDE_KEY) !== '0';
+  let sideOpen = !isMobile() && localStorage.getItem(SIDE_KEY) !== '0';
   if (!sideOpen) workspace.classList.add('is-collapsed', 'is-side-closed');
 
   let sideGen = 0;
@@ -234,6 +241,15 @@ export function mountShell(root: HTMLElement): Shell {
     const glyph = sideToggle.querySelector('.material-symbols-rounded');
     if (glyph) glyph.textContent = sideOpen ? 'left_panel_close' : 'left_panel_open';
 
+    if (isMobile()) {
+      cancelSide();
+      endHold();
+      side.toggleAttribute('inert', false);
+      if (sideOpen && !drawer.open) drawer.showModal();
+      if (!sideOpen && drawer.open) drawer.close();
+      return;
+    }
+
     const closed = !sideOpen;
     const atRest =
       workspace.classList.contains('is-collapsed') === closed &&
@@ -309,6 +325,10 @@ export function mountShell(root: HTMLElement): Shell {
     );
     tripsLabel.textContent = pickLocale(locale, { en: 'Trips', 'pt-BR': 'Roteiros' });
     citiesLabel.textContent = pickLocale(locale, { en: 'Cities', 'pt-BR': 'Cidades' });
+    drawer.setAttribute('aria-label', side.getAttribute('aria-label')!);
+    const closeLabel = pickLocale(locale, { en: 'Close menu', 'pt-BR': 'Fechar menu' });
+    drawerClose.setAttribute('aria-label', closeLabel);
+    drawerClose.setAttribute('data-tip', closeLabel);
     markMeta.textContent = pickLocale(locale, { en: 'trips', 'pt-BR': 'roteiros' });
     emptyTitle.textContent = pickLocale(locale, {
       en: 'No document open',
@@ -328,15 +348,59 @@ export function mountShell(root: HTMLElement): Shell {
     applySide(false);
     segmented(localeWrap);
   };
+  const adaptNavigation = () => {
+    cancelSide();
+    endHold();
+    if (isMobile()) {
+      sideOpen = false;
+      drawer.insertBefore(side, drawerActions);
+      drawerActions.append(themeBtn, localeWrap, exportBtn);
+    } else {
+      drawer.close();
+      workspace.prepend(side);
+      bar.append(themeBtn, localeWrap, exportBtn);
+      sideOpen = localStorage.getItem(SIDE_KEY) !== '0';
+    }
+    applySide(false);
+  };
+  // Initial paint runs before reclamp is initialized; initial classes already match.
+  if (isMobile()) {
+    drawer.insertBefore(side, drawerActions);
+    drawerActions.append(themeBtn, localeWrap, exportBtn);
+  }
   paintLocale();
+  window.matchMedia(MOBILE_QUERY).addEventListener('change', adaptNavigation);
+
+  const closeDrawer = () => {
+    if (!isMobile()) return;
+    sideOpen = false;
+    applySide(false);
+  };
+  drawerClose.addEventListener('click', closeDrawer);
+  drawer.addEventListener('cancel', closeDrawer);
+  drawer.addEventListener('close', () => {
+    if (isMobile() && !drawer.open) {
+      sideOpen = false;
+      applySide(false);
+    }
+  });
+  drawer.addEventListener('click', (event) => {
+    if (event.target !== drawer) return;
+    const box = drawer.getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) closeDrawer();
+  });
+  side.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('.tb-nav')) closeDrawer();
+  });
 
   sideToggle.addEventListener('click', () => {
     sideOpen = !sideOpen;
-    localStorage.setItem(SIDE_KEY, sideOpen ? '1' : '0');
+    if (!isMobile()) localStorage.setItem(SIDE_KEY, sideOpen ? '1' : '0');
     applySide(true);
   });
 
   const setMainWidth = (px: number, persist: boolean) => {
+    if (isMobile()) return;
     const sideWidth = side.getBoundingClientRect().width;
     const total = workspace.getBoundingClientRect().width;
     const next = clampPaneWidth(px, total, sideWidth);
@@ -349,6 +413,7 @@ export function mountShell(root: HTMLElement): Shell {
   };
 
   const reclamp = (persist: boolean) => {
+    if (isMobile()) return;
     const raw = workspace.style.getPropertyValue('--pane-main').trim();
     if (!/^\d+px$/.test(raw)) {
       const sideWidth = side.getBoundingClientRect().width;
