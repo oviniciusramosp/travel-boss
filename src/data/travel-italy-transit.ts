@@ -1,5 +1,18 @@
 import type { TransitLine } from './travel-transit-lines';
 
+// Complete Sondrio–Duomo stretch, OSM M3 route/919312 stop positions.
+// Source and dated ATM service: docs/references/milan-2026-10-11.md.
+export const milanMetro3: TransitLine = {
+  id: 'mil-m3', name: 'M3', color: '#F4CA16', stations: [
+    { id: 'sondrio', name: 'Sondrio', lat: 45.4900601, lng: 9.2003269 },
+    { id: 'centrale', name: 'Centrale FS', lat: 45.4848112, lng: 9.2026114 },
+    { id: 'repubblica', name: 'Repubblica', lat: 45.4795379, lng: 9.1977268 },
+    { id: 'turati', name: 'Turati', lat: 45.4746171, lng: 9.1947777 },
+    { id: 'montenapoleone', name: 'Montenapoleone', lat: 45.4700601, lng: 9.1928275 },
+    { id: 'duomo', name: 'Duomo', lat: 45.4636654, lng: 9.1885181 },
+  ],
+};
+
 // OSM station / ferry-terminal anchors, not surveyed track or canal geometry.
 // Sources, selected direction and limitations: docs/references/italy-notion-sync-2026-10-02.md.
 export const romeMetroB: TransitLine = {

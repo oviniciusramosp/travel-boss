@@ -9,6 +9,7 @@ export function stopFingerprint(stop: TripStop): string {
     stop.placeId ?? '',
     stop.href ?? '',
     stop.note ?? '',
+    stop.period ?? '',
     stop.foodEur ?? '',
     stop.ticketEur ?? '',
     stop.leg?.detail ?? '',

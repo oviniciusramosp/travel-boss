@@ -1,4 +1,5 @@
 import { shiftIso } from './dates';
+import { travelCities, pickLocale, type Locale } from '../catalog';
 import type { Trip, TripCity, TripDay } from './parse';
 
 export type DatedDay = {
@@ -18,6 +19,21 @@ export type TripDate = {
   date: string;
   cities: DateCity[];
 };
+
+/** Display destinations without creating duplicate day groups or changing the city base. */
+export function dateCityNames(section: TripDate, locale: Locale): string[] {
+  const names = section.cities.flatMap(({ city, days }) => days.flatMap(({ day }) => {
+    if (day.cityNames?.length) return day.cityNames;
+    return [city.name, ...day.stops.flatMap(stop => {
+      const destination = travelCities.find(candidate => candidate.places.some(place => place.id === stop.placeId));
+      return destination ? [pickLocale(locale, destination.name)] : [];
+    })];
+  })).map(name => {
+    const city = travelCities.find(candidate => candidate.slug === name || Object.values(candidate.name).includes(name));
+    return city ? pickLocale(locale, city.name) : name;
+  });
+  return [...new Set(names)];
+}
 
 function fold(value: string): string {
   return value

@@ -6,8 +6,8 @@
  * positions (route relations, 2026-09); the rest are approximate.
  */
 
-import { cinqueTerreRegional, romeMetroB, veniceVaporetto1 } from './travel-italy-transit';
-export { cinqueTerreRegional, romeMetroB, veniceVaporetto1 } from './travel-italy-transit';
+import { cinqueTerreRegional, milanMetro3, romeMetroB, veniceVaporetto1 } from './travel-italy-transit';
+export { cinqueTerreRegional, milanMetro3, romeMetroB, veniceVaporetto1 } from './travel-italy-transit';
 
 export type LatLng = [number, number];
 
@@ -478,6 +478,7 @@ export const funicularMontmartre: TransitLine = {
 };
 
 export const transitLinesById: Record<string, TransitLine> = {
+  'mil-m3': milanMetro3,
   'rome-b': romeMetroB,
   'cinque-terre-regional': cinqueTerreRegional,
   'venice-vaporetto-1': veniceVaporetto1,

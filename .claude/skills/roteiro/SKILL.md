@@ -9,6 +9,12 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 
 ## 1. Onde vai cada informação
 
+Mercado: minimizar sempre o tempo carregando sacolas; comprar no final do passeio/jantar, perto da hospedagem, e seguir direto para guardar as compras. Para piquenique/consumo imediato, comprar junto da refeição. Conferir abertura, caminho, intervalo até guardar/consumir e refrigeração de perecíveis; proximidade do mercado sozinha não basta.
+
+Malas: check-in de voo, inclusive online, não é check-in da hospedagem nem encerra o intervalo marcado.
+
+Aplicar a revisão obrigatória de `AGENTS.md`: cidades, valores, malas e refeições. Dia com bate-volta/mudança de cidade declara `  - cidades: Milão → Veneza` sob o H3, antes das paradas; conferir o título no app. Não repetir na descrição o valor de refeição/ingresso do indicador à direita, nem faixa/estimativa/total equivalente do casal; só preço de prato/produto/bilhete específico diferente do indicador, além de pagamentos privados nos detalhes de reserva. Casa de amigo usa `Saída com as malas` na primeira linha, chegada inicial usa `Chegada com as malas`; conferir a marca até check-in/depósito e após retirada. Conferir as quatro refeições; saída cedo com comida própria exige compra na véspera em mercado aberto, contabilizada uma vez, e `comida: €0` no consumo já pago.
+
 | Informação | Onde |
 |---|---|
 | O que fazer no lugar: o que pedir, ingresso, horário que importa | nota da parada, depois de ` — ` |

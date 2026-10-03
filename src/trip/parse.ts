@@ -32,6 +32,8 @@ export type TripBoarding = {
 };
 
 export type TripStop = {
+  /** Explicit start of a day period, overriding meal-based boundaries. */
+  period?: Period;
   /** Planned food spend per person for this date, replacing the catalog estimate. */
   foodEur?: number;
   /** Planned admission spend per person, including zero for a bundled entry. */
@@ -64,6 +66,8 @@ export type TripStop = {
 export type TripLine = { text: string; line: number };
 
 export type TripDay = {
+  /** Cities visited in travel order, including excursions within the base city section. */
+  cityNames?: string[];
   line?: number;
   status?: 'fechado';
   closedPeriods?: Period[];
@@ -91,6 +95,7 @@ export type TripCity = {
 };
 
 export type TripErrorCode =
+  | 'period-invalid'
   | 'boarding-invalid'
   | 'via-no-mode'
   | 'via-no-duration'
@@ -396,6 +401,11 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       continue;
     }
 
+    const destinations = /^[ \t]+- cidades:[ \t]*(.+)$/.exec(line);
+    if (destinations && day && !day.stops.length) {
+      day.cityNames = destinations[1]!.split('→').map(name => name.trim()).filter(Boolean);
+      continue;
+    }
     const periods = /^[ \t]+- períodos fechados:[ \t]*(.*)$/.exec(line);
     if (periods && day && !day.stops.length) {
       const names: Record<string, Period> = { manhã: 'morning', tarde: 'afternoon', noite: 'evening' };
@@ -407,6 +417,16 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       const stop = day.stops.at(-1);
       if (stop && (status[1] === 'a confirmar' || status[1] === 'confirmado')) { stop.status = status[1]; continue; }
       if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
+    }
+
+    const period = /^[ \t]+- período:[ \t]*(.*)$/.exec(line);
+    if (period) {
+      const stop = day?.stops.at(-1);
+      const names: Record<string, Period> = { manhã: 'morning', tarde: 'afternoon', noite: 'evening' };
+      const value = names[(period[1] ?? '').trim()];
+      if (!stop || stop.period || !value) reject(errors, lineNo, 'period-invalid');
+      else stop.period = value;
+      continue;
     }
 
     const cost = /^[ \t]+- (comida|ingresso):[ \t]*(.*)$/.exec(line);

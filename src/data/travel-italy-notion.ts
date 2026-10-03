@@ -13,9 +13,18 @@ function point(pt: string, en: string, lat: number, lng: number,
 }
 
 export const romeNotionPlaces: TravelPlace[] = [
-  place('rom-stow-colosseo', 'Stow Your Bags — Colosseo', 41.8930778, 12.4890538, 'node/12641308482',
+  { id: 'rom-pam-valle-aurelia', name: { en: 'Pam · Valle Aurelia', 'pt-BR': 'Pam · Valle Aurelia' },
+    category: 'markets', lat: 41.9020155, lng: 12.4387695, googleRating: 4.2,
+    address: 'Viale di Valle Aurelia 32, piano terra, Centro Commerciale Aura, Roma',
+    mapsUrl: 'https://www.google.com/maps/place/Pam+valle+Aurelia/data=!4m6!3m5!1s0x132f6077e5d32635:0xc6a53f516944101a!8m2!3d41.9020155!4d12.4387695!16s%2Fg%2F11f405j4wn',
+    description: { en: 'Supermarket on the ground floor of Centro Commerciale Aura, with groceries, bakery goods and prepared food.', 'pt-BR': 'Supermercado no térreo do Centro Commerciale Aura, com alimentos, produtos de padaria e refeições prontas.' },
+    aiSuggested: true, aiReason: { en: 'Buy dinner and breakfast food after leaving the luggage at the apartment, then return directly to put groceries away.', 'pt-BR': 'Comprar jantar e café da manhã depois de deixar as malas no apartamento e voltar direto para guardar as compras.' },
+    visit: { durationMin: 20, tips: { en: 'Friday: 08:00–21:00. Google Maps listing checked on 3 October 2026.', 'pt-BR': 'Sexta: 8h–21h. Ficha Google Maps consultada em 3/10/2026.' } } },
+  { ...place('rom-stow-colosseo', 'Stow Your Bags — Colosseo', 41.8930372, 12.4890596, 'node/12641308482',
     'Depósito automático de bagagens junto ao Coliseu e ao Fórum Romano, com armários por tamanho e tempo de uso.',
     'Self-service luggage lockers near the Colosseum and Roman Forum, rented by size and duration.', 'transport', 'Via del Colosseo 2, Roma'),
+    subcategories: ['luggage-storage'], googleRating: 4.8,
+    mapsUrl: 'https://www.google.com/maps/place/Stow+Your+Bags+-+Luggage+Storage+-+Colosseo/data=!4m6!3m5!1s0x132f61c16b9e698f:0xa12df36c399ac35b!8m2!3d41.8930372!4d12.4890596!16s%2Fg%2F11j31vdvq7' },
   place('rom-mamertina', 'Prisão Mamertina', 41.8931425, 12.484585, 'relation/1849827',
     'Antiga prisão romana junto ao Capitólio, também conhecida como Carcer Tullianum.',
     'Ancient Roman prison beside the Capitoline Hill, also known as the Carcer Tullianum.', 'tourist', 'Clivo Argentario 1, Roma'),
@@ -34,6 +43,13 @@ export const romeNotionPlaces: TravelPlace[] = [
 ];
 
 export const veniceNotionPlaces: TravelPlace[] = [
+  { id: 'ven-rosa-salva', name: { en: 'Rosa Salva · San Marco', 'pt-BR': 'Rosa Salva · San Marco' },
+    category: 'cafes', subcategories: ['bakery', 'coffee-shop'], lat: 45.4352359, lng: 12.337838,
+    address: 'Calle Fiubera, San Marco 950, Venezia', googleRating: 4.2,
+    mapsUrl: 'https://www.google.com/maps/place/Rosa+Salva+-+San+Marco/data=!4m7!3m6!1s0x477eb1d091fe5b17:0x613ded82c39f11bf!8m2!3d45.4352359!4d12.337838!16s%2Fg%2F11cjkvqzfj',
+    description: { 'pt-BR': 'Confeitaria histórica da família Rosa Salva, com tradição veneziana de mais de 150 anos. A sede da Calle Fiubera serve doces e café perto da Piazza San Marco.', en: 'Historic Rosa Salva family pastry shop, with more than 150 years of Venetian tradition. The Calle Fiubera branch serves pastries and coffee near Piazza San Marco.' },
+    aiSuggested: true, aiReason: { 'pt-BR': 'Pausa para café da tarde perto de San Marco, antes de seguir para a livraria.', en: 'Afternoon coffee break near San Marco before continuing to the bookshop.' },
+    visit: { durationMin: 15, durationMax: 20, tips: { 'pt-BR': 'Segunda a sábado: 8h–20h; domingo fechado. Fonte oficial consultada em 3/10/2026.', en: 'Monday–Saturday: 08:00–20:00; Sunday closed. Official source checked 3 October 2026.' } } },
   place('ven-costituzione', 'Ponte della Costituzione', 45.4388439, 12.319438, 'way/199257611',
     'Ponte sobre o Grande Canal entre a região da estação e a Piazzale Roma.',
     'Bridge across the Grand Canal between the station area and Piazzale Roma.'),

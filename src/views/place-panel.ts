@@ -1,6 +1,7 @@
 import type { Locale, TravelCity, TravelPlace } from '../catalog';
 import {
   categoryMaterialName,
+  placePinMaterialName,
   googleMapsUrl,
   pickLocale,
   placeCategoryMeta,
@@ -26,8 +27,8 @@ import { openNowStatus, timeZoneForCity } from './open-now';
 import { inlineNodes } from '../trip/inline';
 import { createRouteButton, routePlannerOn } from './route-planner';
 
-export function categoryGlyph(category: TravelPlace['category']): HTMLElement | null {
-  const name = categoryMaterialName(category);
+export function categoryGlyph(category: TravelPlace['category'], subcategories?: readonly string[]): HTMLElement | null {
+  const name = category === 'transport' ? placePinMaterialName(category, subcategories) : categoryMaterialName(category);
   if (!(ICONS as readonly string[]).includes(name)) return null;
   const node = icon(name as IconName, { size: 16, fill: true });
   node.style.color = placeCategoryMeta[category].color;
@@ -393,7 +394,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     nextBtn = nav('chevron_right', 1, 'tb-slider__nav--next');
     dotBar = el('div', 'tb-slider__dots');
     fallbackEl = el('div', 'tb-slider__fallback');
-    const glyph = categoryGlyph(place.category);
+    const glyph = categoryGlyph(place.category, place.subcategories);
     if (glyph) fallbackEl.append(glyph);
     frame.append(prevBtn, nextBtn, dotBar, fallbackEl);
     buildDots();
@@ -444,7 +445,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
     const tagsMain = el('div', 'tb-panel__tags-main');
     const cat = el('span', 'tb-panel__cat');
     cat.style.setProperty('--cat-color', placeCategoryMeta[place.category].color);
-    const catGlyph = categoryGlyph(place.category);
+    const catGlyph = categoryGlyph(place.category, place.subcategories);
     if (catGlyph) cat.append(catGlyph);
     cat.append(document.createTextNode(pickLocale(locale, travelUi.categories[place.category])));
     tagsMain.append(cat);

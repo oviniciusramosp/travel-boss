@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { daysOnDate, nearestTripDate, tripDates } from './calendar';
+import { dateCityNames, daysOnDate, nearestTripDate, tripDates } from './calendar';
 import { formatDayTitle } from './dates';
 import { parseTrip } from './parse';
 
@@ -31,6 +31,22 @@ dates: 2026-10-09 → 2026-10-13
 `;
 
 describe('trip dates', () => {
+  it('shows excursion cities without duplicating day groups, including unnamed metadata fallback', () => {
+    const trip = parseTrip('test', 'test.md', `# Trip
+## Milão
+city: milao
+dates: 2026-10-12 → 2026-10-12
+### Dia 1
+- [Station](place:mil-centrale)
+- [Venice](place:ven-rialto)
+- [Return](place:mil-centrale)`);
+    const section = tripDates(trip)[0]!;
+    expect(section.cities).toHaveLength(1);
+    expect(dateCityNames(section, 'pt-BR')).toEqual(['Milão', 'Veneza']);
+    expect(dateCityNames(section, 'en')).toEqual(['Milan', 'Venice']);
+    section.cities[0]!.days[0]!.day.cityNames = ['Milão', 'Veneza', 'Milão'];
+    expect(dateCityNames(section, 'en')).toEqual(['Milan', 'Venice']);
+  });
   const trip = parseTrip('europa', 'content/trips/europa.md', europa);
 
   it('puts Paris and Milan on the departure day named in the title', () => {

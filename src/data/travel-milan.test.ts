@@ -20,7 +20,11 @@ describe('Milan October 2026 trip', () => {
       const primary = dayPrimaryRoutePlaceIds(day);
       expect(legsForDay(day.id).map(leg => [leg.from, leg.to])).toEqual(primary.slice(1).map((id, i) => [primary[i], id]));
     }
-    expect(legsForDay('milao-d1').filter(l => l.mode === 'transit').map(l => l.line)).toEqual(['mil-m3', 'mil-m3']);
+    const rides = legsForDay('milao-d1').filter(l => l.mode === 'transit').flatMap(l => l.hops ?? []);
+    expect(rides.map(l => l.line)).toEqual(['mil-m3', 'mil-m3']);
+    expect(rides.map(l => [l.board, l.exit, l.path.length])).toEqual([
+      ['Sondrio', 'Duomo', 6], ['Duomo', 'Sondrio', 6],
+    ]);
   });
   it('counts only the two main meals and keeps alternatives optional', () => {
     const city = getTravelCity('milao')!;

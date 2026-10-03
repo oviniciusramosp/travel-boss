@@ -53,6 +53,7 @@ export type PlaceSubcategory =
   // Photo
   | 'bridge'
   | 'metro'
+  | 'luggage-storage'
   | 'shopping'
   // Lodging
   | 'hotel'
@@ -240,6 +241,10 @@ export const placeSubcategoryMeta: Record<
     label: { en: 'Metro', 'pt-BR': 'Metrô' },
     parents: ['transport', 'photo'],
   },
+  'luggage-storage': {
+    label: { en: 'Luggage storage', 'pt-BR': 'Depósito de bagagens' },
+    parents: ['transport'],
+  },
   shopping: {
     label: { en: 'Shopping', 'pt-BR': 'Compras' },
     parents: ['shopping', 'photo'],
@@ -314,6 +319,7 @@ export const placeSubcategoryOrder: PlaceSubcategory[] = [
   'viewpoint',
   'bridge',
   'metro',
+  'luggage-storage',
   'shopping',
   'hotel',
   'burgers',
@@ -559,6 +565,7 @@ export const subcategoryMaterialIcon: Partial<
   palace: 'fort',
   boat: 'sailing',
   metro: 'subway',
+  'luggage-storage': 'luggage',
   shopping: 'shopping_bag',
   market: 'storefront',
 };
@@ -591,6 +598,7 @@ export const pinSubcategoryPriority: readonly PlaceSubcategory[] = [
   'architecture',
   'market-street',
   'market',
+  'luggage-storage',
   'metro',
   'shopping',
   'neighborhood',

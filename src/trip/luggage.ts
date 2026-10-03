@@ -1,4 +1,5 @@
 import { scheduleDays } from './calendar';
+import { travelCities } from '../catalog';
 import type { Trip, TripStop } from './parse';
 
 /** Only the current action, before the reservation's multiline details. */
@@ -7,7 +8,14 @@ function luggageEvent(stop: TripStop): 'in' | 'out' | undefined {
     .replace(/\*+/g, '').toLowerCase();
   if (/(?:^|[;—]\s*)(?:deixar|guardar|depositar)\s+(?:as\s+)?malas\b/.test(text)) return 'in';
   if (/(?:^|[;—]\s*)(?:retirar|recolher|buscar)\s+(?:as\s+)?malas\b/.test(text)) return 'out';
+  if (/(?:^|[;—]\s*)(?:saída|partida|chegada|desembarque)\s+com\s+as\s+malas\b/.test(text)) return 'out';
   const match = /(?:^|[;—]\s*)check[\s-]?(in|out)\b/.exec(text);
+  if (match?.[1] === 'in') {
+    // Airline check-in does not mean bags have been left at the accommodation.
+    if (/check[\s-]?in\s+(?:online|on-line|do voo|para o voo)\b/.test(text)) return undefined;
+    const place = travelCities.flatMap(city => city.places).find(place => place.id === stop.placeId);
+    if (place && place.category !== 'lodging') return undefined;
+  }
   return match?.[1] as 'in' | 'out' | undefined;
 }
 

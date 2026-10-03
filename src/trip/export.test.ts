@@ -18,6 +18,25 @@ Notas com <script> e **negrito**.
 `;
 
 describe('export', () => {
+  it('preserves city destinations as day metadata without making a stop', () => {
+    const trip = parseTrip('test', 'test.md', '# Trip\n## Paris\ncity: paris\n### Dia 1\n  - cidades: Paris → Versalhes\n- [Eiffel](place:par-eiffel)');
+    const day = trip.cities[0]!.days[0]!;
+    expect(trip.errors).toEqual([]);
+    expect(day.cityNames).toEqual(['Paris', 'Versalhes']);
+    expect(day.stops).toHaveLength(1);
+    expect(day.notes).toEqual([]);
+    expect(dayToMarkdown(day, () => null)).toContain('  - cidades: Paris → Versalhes');
+  });
+  it('preserves explicit period boundaries without approving the day', () => {
+    const trip = parseTrip('test', 'test.md', '# Europa\n## Milão\ncity: milao\n### Dia 1\n- 15:35 [Hotel](place:mil-joy124)\n  - período: tarde');
+    expect(trip.errors).toEqual([]);
+    expect(trip.cities[0]!.days[0]!.stops[0]!.period).toBe('afternoon');
+    expect(trip.cities[0]!.days[0]!.closedPeriods).toBeUndefined();
+    expect(tripToMarkdown(trip, () => 'https://maps.example/hotel')).toContain('  - período: tarde');
+    for (const metadata of ['período: madrugada', 'período: tarde\n  - período: manhã']) {
+      expect(parseTrip('test', 'test.md', `# Europa\n## Milão\ncity: milao\n### Dia 1\n- [Hotel](place:mil-joy124)\n  - ${metadata}`).errors.some(error => error.code === 'period-invalid')).toBe(true);
+    }
+  });
   const trip = parseTrip('europa', 'content/trips/europa.md', raw);
   const markdown = tripToMarkdown(trip, (slug, placeId) =>
     slug === 'paris' && placeId === 'par-ory'

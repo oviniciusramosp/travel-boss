@@ -26,7 +26,7 @@ export function rowPeriods(times: readonly (string | undefined)[]): (Period | nu
   });
 }
 
-export type PeriodRow = { time?: string; text: string; listNote?: boolean };
+export type PeriodRow = { time?: string; text: string; listNote?: boolean; period?: Period };
 
 const LUNCH = /\b(almoco|lunch)\b/;
 const DINNER = /\b(jantar|janta|dinner)\b/;
@@ -49,15 +49,21 @@ function mealOf(row: PeriodRow): 'lunch' | 'dinner' | null {
  * dinner on. Lunch is the last stop before dinner that says so; dinner is the first
  * that says so. A list note never counts. Without lunch the morning ends at 12:00,
  * without dinner the evening starts at 18:00.
+ * Authored afternoon/evening boundaries take precedence over the meals.
  */
 export function dayPeriods(rows: readonly PeriodRow[]): (Period | null)[] {
   const clock = rowPeriods(rows.map((row) => row.time));
   const meals = rows.map(mealOf);
-  const dinner = meals.indexOf('dinner');
-  const lunch = meals.slice(0, dinner < 0 ? undefined : dinner).lastIndexOf('lunch');
+  const explicitEvening = rows.findIndex(row => row.period === 'evening');
+  const dinner = explicitEvening >= 0 ? explicitEvening : meals.indexOf('dinner');
+  const explicitAfternoon = rows.findIndex(row => row.period === 'afternoon');
+  const lunch = explicitAfternoon >= 0 ? explicitAfternoon - 1
+    : meals.slice(0, dinner < 0 ? undefined : dinner).lastIndexOf('lunch');
   return clock.map((period, index) => {
+    if (rows[index]?.period === 'morning') return 'morning';
     if (lunch >= 0 && index <= lunch) return 'morning';
     if (dinner >= 0 && index >= dinner) return 'evening';
+    if (explicitAfternoon >= 0 && index >= explicitAfternoon) return 'afternoon';
     if (!period) return lunch >= 0 || dinner >= 0 ? 'afternoon' : null;
     if ((lunch >= 0 && period === 'morning') || (dinner >= 0 && period === 'evening')) return 'afternoon';
     return period;

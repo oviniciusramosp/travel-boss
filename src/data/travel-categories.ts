@@ -149,10 +149,10 @@ export function categoryIconHtml(
 
 /**
  * Categories whose map dots use subcategory glyphs (not the parent category icon).
- * Parks & walks, Cafés, and Chains/Commons (burgers / chicken / coffee).
+ * Parks & walks, Cafés, Chains/Commons and transport services.
  */
 export const CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS: ReadonlySet<string> =
-  new Set(['parks', 'cafes', 'commons']);
+  new Set(['parks', 'cafes', 'commons', 'transport']);
 
 /**
  * Material ligature for a place pin: subcategory when enabled, else category.

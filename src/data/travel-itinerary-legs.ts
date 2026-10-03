@@ -8,6 +8,7 @@ import parisMilanRail from './travel-paris-milan-rail.json';
 import { italyRailLegs } from './travel-italy-rail';
 import {
   cinqueTerreRegional,
+  milanMetro3,
   romeMetroB,
   veniceVaporetto1,
   funicularMontmartre,
@@ -1292,10 +1293,10 @@ export const milanDayLegsById: Record<string, ItineraryLegDef[]> = {
   'milao-d1': [
     { from: 'mil-centrale', to: 'mil-joy124', mode: 'walk', durationMin: 25 },
     { from: 'mil-joy124', to: 'mil-sondrio', mode: 'walk', durationMin: 10 },
-    { from: 'mil-sondrio', to: 'mil-cesarino', mode: 'transit', line: 'mil-m3', label: 'M3 · Duomo', durationMin: 25 },
+    trainLeg('mil-sondrio', 'mil-cesarino', 25, [ride(milanMetro3, 'sondrio', 'duomo')]),
     { from: 'mil-cesarino', to: 'mil-duomo', mode: 'walk', durationMin: 5 },
     { from: 'mil-duomo', to: 'mil-galleria', mode: 'walk', durationMin: 5 },
-    { from: 'mil-galleria', to: 'mil-sondrio', mode: 'transit', line: 'mil-m3', label: 'M3 · Comasina', durationMin: 25 },
+    trainLeg('mil-galleria', 'mil-sondrio', 25, [ride(milanMetro3, 'duomo', 'sondrio')]),
     { from: 'mil-sondrio', to: 'mil-san-giorgio', mode: 'walk', durationMin: 8 },
     { from: 'mil-san-giorgio', to: 'mil-joy124', mode: 'walk', durationMin: 10 },
   ],

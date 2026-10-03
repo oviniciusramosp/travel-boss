@@ -64,6 +64,9 @@ describe('subcategory pin icons', () => {
     expect(placePinMaterialName('commons', ['burgers'])).toBe('lunch_dining');
     expect(placePinMaterialName('commons', ['chicken'])).toBe('lunch_dining');
     expect(placePinMaterialName('commons', ['coffee-shop'])).toBe('local_cafe');
+    expect(placePinMaterialName('transport', ['luggage-storage'])).toBe('luggage');
+    expect(placePinMaterialName('transport', ['metro'])).toBe('subway');
+    expect(placePinMaterialName('transport', undefined)).toBe('subway');
     expect(placePinMaterialName('cafes', [])).toBe('local_cafe');
     expect(placePinMaterialName('parks', undefined)).toBe('nature');
     expect(placePinMaterialName('commons', undefined)).toBe('lunch_dining');

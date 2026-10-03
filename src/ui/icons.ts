@@ -49,6 +49,7 @@ export const ICONS = [
   'local_cafe',
   'local_taxi',
   'location_on',
+  'luggage',
   'lunch_dining',
   'map',
   'mode_heat',

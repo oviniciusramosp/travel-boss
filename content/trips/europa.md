@@ -9,14 +9,14 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
   - status: fechado
 
-- 11:55 [CDG](place:par-cdg) — Pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
+- 11:55 [CDG](place:par-cdg) — Chegada com as malas; pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
   - status: confirmado
-- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago (~€4–8); acesso à unidade pelo desembarque público a confirmar
+- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago; acesso à unidade pelo desembarque público a confirmar
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
   - status: confirmado
-- 14:30 [Casa do Gui](place:par-casa-do-gui) — Depois do almoço no aeroporto: chegar, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+- 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas; depois do almoço no aeroporto, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
   - status: confirmado
-- 17:12 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa (€2,55 cada) para fazer a ida e volta.\
+- 17:12 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
   - via: RER E + metrô 9 · 45 min · €2,55
   - status: confirmado
@@ -89,7 +89,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 11:45 **Grand Bassin Octogonal**
 - 11:50 **Grande Allée**
 - 11:55 **Grand Bassin Rond**
-- 12:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida (~€6–8); reservar 40 min para compra, caminhada e piquenique nas Tulherias.\
+- 12:05 [Carrefour Express (piquenique)](place:par-carrefour-express-saint-honore) — Comprar o **almoço**: pão, queijo, fruta e bebida; reservar 40 min para compra, caminhada e piquenique nas Tulherias.\
   Se às **12h40** ainda estivermos comendo, seguir caminhando e comendo em direção ao Louvre, para chegar à entrada às 13h; guardar o que sobrar em um saco fechado antes dos controles
   - status: confirmado
 - 12:45 [Estátuas de Maillol](place:par-maillol)
@@ -156,7 +156,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
 - 13:45 [Rue Mouffetard](place:par-mouffetard) — Rua de feira, ladeira abaixo
   - status: confirmado
-- 13:50 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: 1 crepe salgado + 1 crepe doce para dividir em 2 (~€16 no total, sem bebidas); aceita cartão
+- 13:50 [Au P'tit Grec](place:par-auptitgrec) — **Almoço**: 1 crepe salgado + 1 crepe doce para dividir em 2, sem bebidas; aceita cartão
   - status: confirmado
 - 14:25 [Rôtisserie Segar](place:par-segar) — Se ainda estiver aberto (fecha as 14h), comprar um sanduíche de frango por pessoa para levar à Disney no dia seguinte. Caso contrário, usar o dinheiro no mercado depois.
   - status: confirmado
@@ -177,7 +177,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 17:45 [CityPharma](place:par-citypharma) — Dermocosméticos; sair até 18h15
   - status: confirmado
   - saída: 18:15
-- 18:25 [Les Deux Magots](place:par-deux-magots) — Um bule de chocolate quente para dividir em 2 (€12 no total); sair até 18h50
+- 18:25 [Les Deux Magots](place:par-deux-magots) — Um bule de chocolate quente para dividir em 2; sair até 18h50
   - via: Ir a pé até o Port du Louvre · 15 min
   - status: confirmado
   - saída: 18:50
@@ -191,6 +191,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
 
 ### Dia 4 — Qua 7/10 · Disney: Adventure World de manhã, Disneyland Park e fogos
+  - cidades: Paris → Marne-la-Vallée
   - status: fechado
 
 - 07:35 [Casa do Gui](place:par-casa-do-gui) — Saída com garrafa de água (há bebedouros nos parques) e um sanduíche da Segar por pessoa, comprado ontem, em bolsa térmica com gelo.
@@ -231,7 +232,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 17:10 **Phantom Manor** — ~15–22 min de fila à tarde e até ~9 min à noite. Ao lado, o **Unlucky Nugget Saloon**, só no Halloween: o saloon vira a festa do casamento que nunca aconteceu, com cardápio temático (~€30 em 2025)
 - 17:40 Halloween em Frontierland e Adventureland: Dr. Facilier em Frontierland, o Día de los Muertos em volta da Casa de Coco e a foto na Skull Rock
 - 18:00 **Piratas do Caribe** — ~25 min de fila à tarde, ~15 à noite. Depois das 19h cai para até ~9 min: vale repetir
-- 18:30 **Au Chalet de la Marionnette** — **Jantar**: dividir em dois um menu de meio frango assado + batatas fritas ou salada + bebida de 50 cl (€16,50 no total; €8,25 por pessoa). Fica entre Piratas do Caribe e Peter Pan; confirmar no app o horário de funcionamento neste dia.
+- 18:30 **Au Chalet de la Marionnette** — **Jantar**: dividir em dois um menu de meio frango assado + batatas fritas ou salada + bebida de 50 cl. Fica entre Piratas do Caribe e Peter Pan; confirmar no app o horário de funcionamento neste dia.
 - 19:30 **Peter Pan's Flight** — Voo suspenso sobre Londres, de capacidade baixa: ~55 min de fila à tarde e ~40 à noite. Depois do jantar é a hora
 - 20:15 **Casey's Corner** — Stitch vampiro no coreto e, no caminho, as abóboras do Mickey e as velas do Donald na Town Square: foto antes de pegar lugar para o show
 - +3 km — filas e idas e voltas entre as áreas do parque (estimativa)
@@ -273,7 +274,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
 - 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
   - status: confirmado
-- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa (€20–30 cada) e uma mousse de chocolate (€12) para dividir em dois; €26–36 por pessoa, sem bebidas. Reservar e sair às 13:15
+- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Reservar e sair às 13:15
   - status: confirmado
   - saída: 13:15
 - 13:25 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
@@ -304,7 +305,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - saída: 19:25
 - 19:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora, com a fachada iluminada; sair às 19h52
   - saída: 19:52
-- 20:00 [Bouillon Pigalle](place:par-bouillon-pigalle) — **Jantar**: reservar para as 20h; prato principal e sobremesa (~€18 por pessoa). Sair até 21h
+- 20:00 [Bouillon Pigalle](place:par-bouillon-pigalle) — **Jantar**: reservar para as 20h; prato principal e sobremesa. Sair até 21h
   - comida: €18
   - via: metrô 12 de Pigalle até Saint-Lazare e RER E de Haussmann–Saint-Lazare até Noisy-le-Sec · 45 min — Incluído no Navigo Semaine
   - status: confirmado
@@ -315,13 +316,14 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - Se sobrar tempo antes de Montmartre: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur), a 10 min a pé da Naturalia
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
+  - cidades: Paris → Versalhes
 
 - 06:45 [Casa do Gui](place:par-casa-do-gui) — Saída
   - via: RER E até Haussmann–Saint-Lazare e caminhada até a Castellane · 45 min
   - status: confirmado
   - embarque: 2026-10-09 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 07:08 → 07:21
   - saída: 06:45
-- 07:30 [Boulangerie Castellane](place:par-castellane) — **Café da manhã**: croissant, éclair ou mil-folhas com café; €7–10 por pessoa (estimativa). Sair às 8h
+- 07:30 [Boulangerie Castellane](place:par-castellane) — **Café da manhã**: croissant, éclair ou mil-folhas com café. Sair às 8h
   - via: a pé até Saint-Lazare, trem L até Versailles Rive Droite e caminhada até o castelo · 1h15
   - embarque: 2026-10-09 · Transilien L · Paris Saint-Lazare → Versailles–Rive Droite · 08:23 → 09:01
   - saída: 08:00
@@ -337,7 +339,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 15:30 [Marché Notre-Dame](place:par-point-alph) — Passar por dentro das halles do mercado, sem comprar; sair às 15h45. Pavilhões abertos das 15h às 19h30; a feira externa termina às 14h
   - via: a pé até o The Stray Bean · 15 min
   - saída: 15:45
-- 16:00 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo; €7–10 por pessoa (estimativa). Pausa rápida: sair até 16h15 para preservar a chegada à Torre Eiffel
+- 16:00 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo. Pausa rápida: sair até 16h15 para preservar a chegada à Torre Eiffel
   - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 55 min — Mirar o trem das 16h25; horário consultado, a reconfirmar no dia
   - embarque: 2026-10-09 · RER C · Versailles-Château–Rive Gauche → Champ de Mars–Tour Eiffel · 16:25 → 16:54
   - saída: 16:15
@@ -345,7 +347,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: metrô 9 de Trocadéro até Franklin D. Roosevelt · 25 min
   - embarque: 2026-10-09 · M9 · Trocadéro → Franklin D. Roosevelt · 20:19 → 20:23
   - saída: 20:00
-- 20:30 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa (~€26,50), sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h30: de 5 a 14/10 o RER E para às 22h15
+- 20:30 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa, sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h30: de 5 a 14/10 o RER E para às 22h15
   - via: metrô 9 de Franklin D. Roosevelt até Chaussée d'Antin e RER E em Haussmann–Saint-Lazare · 45 min
   - embarque: 2026-10-09 · M9 · Franklin D. Roosevelt → Chaussée d'Antin–La Fayette · 21:31 → 21:37
   - embarque: 2026-10-09 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:48 → 22:01
@@ -373,7 +375,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - comida: €30
   - status: confirmado
   - saída: 12:40
-- 12:50 [McDonald's Louvre–Rivoli](place:par-mcdonalds-louvre-rivoli) — Opção de almoço: comprar para levar e comer no Palais-Royal; estimativa de €15 por pessoa para um combo
+- 12:50 [McDonald's Louvre–Rivoli](place:par-mcdonalds-louvre-rivoli) — Opção de almoço: comprar um combo para levar e comer no Palais-Royal
   - comida: €15
   - saída: 13:10
   - status: confirmado
@@ -382,7 +384,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 14:30 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; 15 min, até 14h45
   - saída: 14:45
   - status: confirmado
-- 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado, €25 por pessoa e só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala.\
+- 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado e compra só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala.\
   Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
 - 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar
   - status: confirmado
@@ -394,7 +396,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - via: a pé até o Monoprix Les Champs · 20 min
   - status: confirmado
   - saída: 19:40
-- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar o café da manhã, o lanche da manhã e a refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; reservar €25 por pessoa com margem e sair até 20h45. Supermercado na 107 rue La Boétie; fecha às 23h no sábado
+- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar o café da manhã, o lanche da manhã e a refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; sair até 20h45 e seguir direto para casa para guardar as compras. Supermercado na 107 rue La Boétie; fecha às 23h no sábado
   - comida: €25
   - via: metrô 9 até Havre–Caumartin e RER E até Noisy-le-Sec · 45 min — Embarcar em Saint-Philippe-du-Roule e seguir a conexão para Haussmann–Saint-Lazare
   - embarque: 2026-10-10 · M9 · Saint-Philippe-du-Roule → Havre–Caumartin · 20:56 → 21:00
@@ -404,13 +406,15 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
 
 ### Dia 8 — Dom 11/10 · Partida para Milão
+  - cidades: Paris → Milão
 
-- 06:20 [Casa do Gui](place:par-casa-do-gui) — Uber agendado na véspera (~€20); café da manhã de casa
-  - via: Uber · 25 min
+- 06:20 [Casa do Gui](place:par-casa-do-gui) — Saída com as malas; Uber agendado na véspera; café da manhã de casa
+  - via: Uber · 25 min — Carro agendado na véspera, estimativa de €20 pelo carro
   - status: confirmado
 - 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07. A linha França–Itália reabre em 10/10, depois de obras: confira o trem 2–3 dias antes
   - status: confirmado
   - embarque: 2026-10-11 · Frecciarossa · Paris Gare de Lyon → Milano Centrale · 07:30 → 14:07
+- 12:00 **Almoço no trem**: refeição e água compradas no Monoprix na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
 
 ## Milão
 city: milao
@@ -418,80 +422,99 @@ dates: 2026-10-11 → 2026-10-14
 budget: comida €50
 
 ### Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria
+  - cidades: Paris → Milão
 
 - 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris e caminhada até o hotel
   - via: A pé até o Joy 124 · 25 min
 - 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h.\
   Quarto double room, só alojamento.
 - 15:35 [Joy 124](place:mil-joy124) — Saída para o centro depois do check-in
+  - período: tarde
   - via: A pé até Sondrio · 10 min
-- 15:45 [Sondrio — M3](place:mil-sondrio) — Embarcar na linha amarela em direção a San Donato e descer em Duomo
-  - via: Metrô M3 até Duomo · 25 min — Inclui espera e caminhada até o Cesarino
-- 16:10 [Cesarino](place:mil-cesarino) — **Almoço / lanche**: sanduíche perto do Duomo, previsão de €10 por pessoa
+- 15:45 [Sondrio — M3](place:mil-sondrio) — Embarcar na linha amarela em direção a San Donato e descer em Duomo. Para nossa estadia, usar bilhetes avulsos Mi1–Mi3 (90 min) ou pagar por aproximação: serão duas viagens no dia 11. Nos dias 12–14, os deslocamentos previstos em Milão são a pé. O diário (€7,60) e o passe de 3 dias (€15,50) não compensam; o de 3 dias iniciado no dia 11 termina ao fim do serviço do dia 13 e não inclui os trens Italo dos bate-voltas. Cada pessoa usa seu próprio cartão/dispositivo, o mesmo na entrada e na saída
+  - via: Metrô M3 até Duomo · 25 min · €2,20 — Inclui espera e caminhada até o Cesarino; Sondrio → Centrale FS → Repubblica → Turati → Montenapoleone → Duomo
+  - embarque: 2026-10-11 · M3 · Sondrio → Duomo · 15:53 → 16:01
+- 16:10 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: sanduíche perto do Duomo, depois do almoço levado no trem
   - comida: €10
 - 17:15 [Duomo](place:mil-duomo) — Visitar os terraços no fim da tarde; reservar ingresso e conferir o calendário. O Notion informa fechamento da catedral das 15h às 17h por crisma; acesso aos terraços e horário de encerramento ainda a confirmar
   - status: a confirmar
 - 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Cúpula, mosaicos, lojas históricas e mosaico do touro; atravessar até a Piazza della Scala
-  - via: Metrô M3 de Duomo até Sondrio · 25 min — Saída prevista às 19h
+  - via: Metrô M3 de Duomo até Sondrio · 25 min · €2,20 — Duomo → Montenapoleone → Turati → Repubblica → Centrale FS → Sondrio
+  - saída: 19:00
+  - embarque: 2026-10-11 · M3 · Duomo → Sondrio · 19:08 → 19:15
 - 19:25 [Sondrio — M3](place:mil-sondrio) — Caminhar até o restaurante
 - 19:45 [San Giorgio](place:mil-san-giorgio) — Jantar perto do hotel
-- 21:00 [Joy 124](place:mil-joy124) — Volta
+- 20:45 [Gioia Minimarket](place:mil-gioia-minimarket) — Comprar pão, fruta, água e bebida pronta para o café da manhã no quarto e lanche dos bate-voltas; priorizar alimentos que não precisam de geladeira. Depois do jantar, na mesma rua; sair até 21h e seguir direto ao hotel com as sacolas
+  - comida: €10
+  - via: A pé até o Joy 124 · 10 min — Levar as compras direto para o quarto
+- 21:10 [Joy 124](place:mil-joy124) — Volta; guardar as compras e separar o café da manhã
 
 ### Dia 2 — Seg 12/10 · Bate-volta a Veneza
+  - cidades: Milão → Veneza
 
-- 06:40 [Joy 124](place:mil-joy124) — Saída para a estação; café da manhã antes de sair
+- 06:10 [Joy 124](place:mil-joy124) — **Café da manhã no quarto** com os alimentos comprados na véspera; a reserva é só alojamento. Levar água e lanche; sair às 6h40
+  - comida: €0
+- 06:40 [Joy 124](place:mil-joy124) — Saída para a estação
   - via: A pé até Milano Centrale · 25 min
 - 07:05 [Milano Centrale](place:mil-centrale) — Conferir o painel e localizar a plataforma com 30 min de antecedência
-- 07:35 [Milano Centrale](place:mil-centrale) — Embarque para Veneza. Italo 8973
+- 07:35 [Milano Centrale](place:mil-centrale) — Embarque para Veneza, Italo 8973.
   - via: trem Italo 8973 · 2h30
   - embarque: 2026-10-12 · Italo 8973 · Milano Centrale → Venezia Santa Lucia · 07:35 → 10:05
 - 10:05 [Venezia Santa Lucia](place:ven-santa-lucia) — Chegada; trem de retorno às 17h57, com chegada à estação prevista para 17h20
 - 10:20 [Ponte della Costituzione](place:ven-costituzione) — Primeiro contato com o Grande Canal; seguir pela cidade até Rialto
 - 11:00 [Mercato di Rialto](place:ven-rialto-market) — Passagem rápida pela região; as bancas de peixe não abrem na segunda-feira
 - 11:20 [Ponte di Rialto](place:ven-rialto) — Atravessar a ponte e passear pela região dos canais
-- 12:00 [Antico Forno](place:ven-antico-forno) — **Almoço**: pizza al taglio, previsão de €13 por pessoa; sair até 12h40
+- 12:00 [Antico Forno](place:ven-antico-forno) — **Almoço**: pizza al taglio; sair até 12h40
   - comida: €13
 - 13:00 [Piazza San Marco](place:ven-san-marco) — Passear pela praça
-- 13:20 [Basilica di San Marco](place:ven-basilica) — Visita aos mosaicos; reservar entrada para esse horário, €10 por pessoa. Sair até 14h10
+- 13:20 [Basilica di San Marco](place:ven-basilica) — Visita aos mosaicos; reservar entrada para esse horário. Sair até 14h10
   - status: a confirmar
 - 14:10 [Campanile di San Marco](place:ven-campanile) — Ver por fora, sem subir
 - 14:20 [Palazzo Ducale](place:ven-ducale) — Ver por fora; a visita interna de cerca de 2h não cabe junto ao restante do passeio e ao trem reservado
 - 14:30 [Ponte della Paglia](place:ven-paglia) — Vista externa da Ponte dos Suspiros
-- 14:40 [Riva degli Schiavoni](place:ven-riva) — Caminhada curta pela orla da lagoa
-- 15:05 [Libreria Acqua Alta](place:ven-acqua-alta) — Visitar a livraria, sem comprar; sair até 15h25
-  - saída: 15:25
-- 15:50 [Ponte dell’Accademia](place:ven-accademia) — Vista do Grande Canal; atravessar para Dorsoduro
-- 16:10 [Basilica di Santa Maria della Salute](place:ven-salute) — Passar pela região de Dorsoduro e ver a igreja por fora; seguir para o embarcadouro Salute
+- 14:40 [Rosa Salva · San Marco](place:ven-rosa-salva) — **Café da tarde**: café e doce no balcão; sair até 14h55. Unidade da Calle Fiubera, aberta na segunda até 20h
+  - comida: €8
+  - saída: 14:55
+- 15:05 [Riva degli Schiavoni](place:ven-riva) — Caminhada curta pela orla da lagoa
+- 15:15 [Libreria Acqua Alta](place:ven-acqua-alta) — Visitar a livraria, sem comprar; sair até 15h30
+  - saída: 15:30
+- 15:55 [Ponte dell’Accademia](place:ven-accademia) — Vista do Grande Canal; atravessar para Dorsoduro
+- 16:15 [Basilica di Santa Maria della Salute](place:ven-salute) — Passar pela região de Dorsoduro e ver a igreja por fora; seguir para o embarcadouro Salute
   - via: Ferry vaporetto 1 até Ferrovia · 1h · €9,50 — Saída prevista da região às 16h20, incluindo espera; validar o bilhete antes de embarcar
-- 17:20 [Venezia Santa Lucia](place:ven-santa-lucia) — Conferir a plataforma e embarcar no trem de retorno. Italo 8992
+- 17:20 [Venezia Santa Lucia](place:ven-santa-lucia) — Conferir a plataforma e embarcar no trem de retorno, Italo 8992.
   - via: trem Italo 8992 · 2h30
   - embarque: 2026-10-12 · Italo 8992 · Venezia Santa Lucia → Milano Centrale · 17:57 → 20:27
 - 20:27 [Milano Centrale](place:mil-centrale) — Chegada de Veneza
-- 21:00 [Joy 124](place:mil-joy124) — Retorno; **jantar** perto do hotel após a chegada
+- 20:45 [Napule è – Fratelli Coppola](place:mil-napule) — **Jantar em Milão**: pizza napolitana após o trem; cerca de 15 min a pé desde a Centrale. Segunda aberto até 23h; sair até 21h45
+  - comida: €15
+- 22:15 [Joy 124](place:mil-joy124) — Retorno ao hotel a pé; preparar o café da manhã para a saída cedo de amanhã
 
 ### Dia 3 — Ter 13/10 · Bate-volta a Verona
+  - cidades: Milão → Verona
 
-- 05:50 [Joy 124](place:mil-joy124) — Saída para a estação; levar o café da manhã
+- 05:15 [Joy 124](place:mil-joy124) — **Café da manhã no quarto**: pão, fruta e bebida pronta comprados no Gioia em 11/10; levar também o lanche da tarde, sem precisar de geladeira
+  - comida: €0
+- 05:50 [Joy 124](place:mil-joy124) — Saída para a estação
   - via: A pé até Milano Centrale · 25 min
 - 06:15 [Milano Centrale](place:mil-centrale) — Conferir o painel e localizar a plataforma com 30 min de antecedência
 - 06:45 [Milano Centrale](place:mil-centrale) — Embarque para Verona
   - via: trem Frecciarossa 9703 · 1h13
   - embarque: 2026-10-13 · Frecciarossa 9703 · Milano Centrale → Verona Porta Nuova · 06:45 → 07:58
 - 07:58 [Verona Porta Nuova](place:ver-porta-nuova) — Chegada; caminhar para o centro histórico
-- 08:45 [Piazza Bra](place:ver-bra) — Passear pela praça depois do café da manhã
+- 08:45 [Piazza Bra](place:ver-bra) — Passear pela praça; café da manhã já feito no hotel antes do trem
 - 09:15 [Arena di Verona](place:ver-arena) — Ver o anfiteatro por fora, sem entrar
-- 10:00 [Casa de Julieta — Teatro Nuovo](place:ver-juliet) — Teatro e pátio com a estátua, €5 por pessoa; reservar online para esse horário. Entrada pela Piazzetta Navona, sem visita ao interior da casa
+- 10:00 [Casa de Julieta — Teatro Nuovo](place:ver-juliet) — Teatro e pátio com a estátua; reservar online para esse horário. Entrada pela Piazzetta Navona, sem visita ao interior da casa
   - status: a confirmar
 - 10:45 [Piazza delle Erbe](place:ver-erbe) — Passear pela praça e pelas bancas
 - 11:20 [Torre dei Lamberti](place:ver-lamberti) — Ver por fora, sem subir; a vista panorâmica será no Castel San Pietro
 - 11:35 [Piazza dei Signori](place:ver-signori) — Passear pela praça
 - 11:55 [Arche Scaligere](place:ver-arche) — Ver os monumentos por fora
-- 12:15 [Amido — Pasta & Tiramisù](place:ver-amido) — **Almoço**: massa fresca para levar, na unidade da Via Pellicciai 5/c; previsão de €15 por pessoa. Comer na região da Piazza delle Erbe e sair até 13h
+- 12:15 [Amido — Pasta & Tiramisù](place:ver-amido) — **Almoço**: massa fresca para levar, na unidade da Via Pellicciai 5/c. Comer na região da Piazza delle Erbe e sair até 13h
   - comida: €15
 - 13:15 [Duomo di Verona](place:ver-duomo) — Ver a catedral por fora
 - 13:45 [Ponte Pietra](place:ver-pietra) — Atravessar o Adige e seguir pela escadaria até o mirante
   - via: A pé até Castel San Pietro · 20 min
-- 14:20 [Castel San Pietro](place:ver-san-pietro) — Mirante externo de Verona, sem entrar no castelo; descer a pé às 15h
+- 14:20 [Castel San Pietro](place:ver-san-pietro) — Mirante externo de Verona, sem entrar no castelo; **café da tarde às 14h50**, com fruta, snack e bebida da mochila. Descer a pé às 15h
   - saída: 15:00
 - 15:30 [Porta Borsari](place:ver-borsari) — Passar pela porta romana
 - 15:50 [Castelvecchio e Ponte Scaligero](place:ver-castelvecchio) — Atravessar a ponte fortificada vermelha, sem entrar no museu; sair até 16h10
@@ -501,13 +524,26 @@ budget: comida €50
   - via: trem Italo 8988 · 1h15
   - embarque: 2026-10-13 · Italo 8988 · Verona Porta Nuova → Milano Centrale · 17:12 → 18:27
 - 18:27 [Milano Centrale](place:mil-centrale) — Chegada de Verona
-- 19:00 [Joy 124](place:mil-joy124) — Retorno e descanso antes do **jantar**
+- 19:00 [Joy 124](place:mil-joy124) — Retorno e descanso antes do jantar; deixar a mochila no quarto
+- 19:45 [San Giorgio](place:mil-san-giorgio) — **Jantar** perto do hotel: pizza ou prato italiano; sair até 20h45
+  - comida: €15
+- 21:00 [Joy 124](place:mil-joy124) — Retorno a pé e descanso
 
 ### Dia 4 — Qua 14/10 · Partida para La Spezia
+  - cidades: Milão → La Spezia
 
+- 08:45 [Joy 124 Hotel Milano](place:mil-joy124) — Sair para o passeio da manhã; deixar as malas no quarto e voltar antes do checkout
+  - via: A pé até Bosco Verticale · 30 min
+- 09:15 [Bosco Verticale](place:mil-bosco-verticale) — Ver as torres com jardins por fora e tirar fotos a partir da Via Gaetano de Castillia; sair até 9h40
+  - via: A pé até Pavé · 25 min
+- 10:05 [Pavé · Via Casati](place:mil-pave-casati) — **Café da manhã / brunch**: avocado toast ou ovos com bacon, cappuccino e um doce; sair até 10h50
+  - comida: €20
+  - via: A pé até o hotel · 40 min
+- 11:30 [Joy 124 Hotel Milano](place:mil-joy124) — Voltar ao quarto, terminar de arrumar as malas e preparar o checkout
 - 12:00 [Joy 124 Hotel Milano](place:mil-joy124) — Checkout e saída com as malas
   - via: A pé até Milano Centrale · 25 min
-- 12:30 [Milano Centrale](place:mil-centrale) — Tempo para lanche e identificação da plataforma; estar pronto para embarcar às 12h50
+- 12:30 [Milano Centrale](place:mil-centrale) — Comprar focaccia ou sanduíche pronto e água nos balcões da estação para o **almoço no trem às 13h30**; comer depois do embarque. Identificar a plataforma e estar pronto às 12h50
+  - comida: €8
 - 13:10 [Milano Centrale](place:mil-centrale) — Partida do trem para La Spezia
   - via: trem Frecciabianca 8619 · 3h04
   - embarque: 2026-10-14 · Frecciabianca 8619 · Milano Centrale → La Spezia Centrale · 13:10 → 16:14
@@ -518,20 +554,32 @@ dates: 2026-10-14 → 2026-10-16
 budget: comida €50
 
 ### Dia 1 — Qua 14/10 · Chegada a La Spezia
+  - cidades: Milão → La Spezia
 
 Chegada de trem de Milão e hospedagem em La Spezia.
 
 - 16:14 [La Spezia Centrale](place:spe-centrale) — Chegada de Milão
 - 16:40 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in após a chegada de Milão, disponível desde 15h.\
   **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.
+- 17:15 [Pasticceria Fiorini](place:spe-fiorini) — **Café da tarde**: cappuccino e brioche na Piazza Verdi; sair até 17h40
+  - comida: €5
+- 18:00 [Carrefour Express · Piazza Saint Bon](place:spe-carrefour-saint-bon) — Comprar pão, fruta, bebida pronta e snack para o café da manhã e lanche de amanhã; escolher alimentos que não precisam de geladeira. Sair até 18h15 e seguir direto à hospedagem
+  - comida: €6
+  - via: A pé até a hospedagem · 15 min — Guardar as compras antes de sair para jantar
+- 18:30 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Guardar as compras no quarto e descansar; sair para jantar às 19h
+- 19:15 [La Pia Centenaria · Via Magenta](place:spe-la-pia) — **Jantar**: pizza em fatias e farinata de grão-de-bico; refeição simples na unidade histórica do centro
+  - comida: €10
+- 20:15 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Retorno ao quarto; separar o café da manhã e o lanche de Cinque Terre
 
 ### Dia 2 — Qui 15/10 · Cinque Terre
+  - cidades: La Spezia → Riomaggiore → Manarola → Corniglia → Vernazza → Monterosso al Mare
 
 Riomaggiore → Via dell’Amore → Manarola → Corniglia → Vernazza → Monterosso, conforme o Notion. Horários de passeio estimados; partidas dos regionais ainda a conferir nos painéis e na Trenitalia para 15/10. A Via dell’Amore às 9h30 depende de reserva.
 
+- 07:15 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — **Café da manhã no quarto**, com pão, fruta e bebida pronta comprados ontem; levar água e snack para a tarde
 - 08:00 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Saída após o café da manhã
   - via: A pé até La Spezia Centrale · 10 min
-- 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos: €22 por pessoa. A Via dell’Amore exige cartão combinado ou suplemento, com horário; não está incluída gratuitamente no passe comum
+- 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos. A Via dell’Amore exige cartão combinado ou suplemento, com horário; não está incluída gratuitamente no passe comum
   - via: Trem regional até Riomaggiore · 30 min · €22 — Passe do dia; duração inclui margem de espera. Serviço e partida ainda a confirmar
 - 08:40 [Riomaggiore](place:ct-riomaggiore) — Passeio pela vila e pelo porto
 - 09:00 **Porto — embarcadouro** — Ver o porto e as casas coloridas
@@ -554,25 +602,34 @@ Riomaggiore → Via dell’Amore → Manarola → Corniglia → Vernazza → Mon
   - saída: 14:10
   - via: Trem regional de Vernazza até Monterosso · 50 min — Sair da região do almoço até 14h10; inclui caminhada à estação e espera, coberto pelo passe; partida ainda a confirmar
 - 13:30 **Porto — Santa Margherita** — Ver o porto e a igreja por fora
-- 13:45 **Bottega Visconti** — Almoço: focaccia ou sanduíche para levar, previsão de €10 por pessoa
+- 13:45 **Bottega Visconti** — **Almoço**: focaccia ou sanduíche para levar; comer antes de seguir à estação
 - 15:00 [Monterosso al Mare](place:ct-monterosso) — Passeio pela praia de Fegina; retornar à estação até 16h30
   - saída: 16:30
   - via: Trem regional até La Spezia Centrale · 1h — Inclui espera; coberto pelo passe, serviço de retorno ainda a confirmar
-- 15:30 **Estátua de Netuno** — Ver a estátua junto à praia
+- 15:30 **Estátua de Netuno** — Ver a estátua junto à praia e fazer o **café da tarde**, com fruta, snack e bebida levados na mochila; consumo já pago nas compras de ontem
 - 16:30 **Estação — retorno** — Aguardar o regional para La Spezia
 - 17:30 [La Spezia Centrale](place:spe-centrale) — Retorno previsto
-- 17:45 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Descanso e **jantar** em La Spezia
+- 17:40 [Carrefour Express · Piazza Saint Bon](place:spe-carrefour-saint-bon) — Na volta da estação, comprar o café da manhã de amanhã e o **brunch e lanche para o trem e Roma**: pão, alimentos embalados prontos, fruta, frutos secos e água, sem precisar de geladeira. Sair até 17h55 e voltar direto ao quarto
+  - comida: €10
+  - via: A pé até a hospedagem · 15 min — Guardar as compras e descansar antes do jantar
+- 18:10 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Guardar as compras, descansar e deixar a mochila do trem preparada
+- 19:30 [Osteria all’Inferno dal 1905](place:spe-inferno) — **Jantar**: massa ou peixe da cozinha liguriana; reservar mesa. Abre às 19h30 na quinta-feira; sair até 20h30
+  - comida: €25
+- 20:50 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Retorno a pé; arrumar as malas para o checkout cedo
 
 ### Dia 3 — Sex 16/10 · Partida para Roma
+  - cidades: La Spezia → Roma
 
 Trem La Spezia → Roma.
 
+- 06:45 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — **Café da manhã no quarto** com os alimentos comprados ontem; deixar o brunch, snack e água acessíveis na bagagem de mão
 - 07:25 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h
   - via: A pé até La Spezia Centrale · 10 min
 - 07:40 [La Spezia Centrale](place:spe-centrale) — Conferir a plataforma e preparar o embarque das 08h16
 - 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.
   - via: trem Frecciabianca 8605 · 4h02 · €19,35
   - embarque: 2026-10-16 · Frecciabianca 8605 · La Spezia Centrale → Roma Termini · 08:16 → 12:18
+- 11:00 **Brunch / almoço no trem**: pão ou sanduíche pronto, fruta e bebida comprados ontem; refeição reforçada antes de chegar a Roma, sem precisar procurar restaurante antes do Coliseu
 
 ## Roma
 city: roma
@@ -580,6 +637,7 @@ dates: 2026-10-16 → 2026-10-18
 budget: comida €50
 
 ### Dia 1 — Sex 16/10 · Chegada, Coliseu, Fórum e Palatino
+  - cidades: La Spezia → Roma
 
 Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 14h30. O check-in fica depois das visitas, conforme o plano atualizado do Notion.
 
@@ -592,10 +650,10 @@ Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 
   - saída: 13:05
 - 13:20 [Prisão Mamertina](place:rom-mamertina) — Resgatar os vouchers na bilheteria do Clivo Argentario 1; prazo máximo 13h30, uma hora antes do Coliseu. Levar identificação válida e os vouchers
   - ingresso: €0
-  - via: A pé até a entrada do Coliseu · 15 min — Sair da região até 13h45 após o lanche
-- 13:30 **Almoço**: lanche rápido na região depois do resgate dos vouchers; terminar até 13h45
-- 14:00 [Coliseu](place:rom-colosseum) — Chegar para a segurança 30 min antes da entrada reservada às **14h30**. Visita até 15h45; identificação obrigatória. Pacote de €83,26 pelo casal inclui Mamertina, Coliseu, Fórum Romano e Palatino
+  - via: A pé até a entrada do Coliseu · 15 min — Sair da região até 13h45 após resgatar os vouchers; brunch já feito no trem
+- 14:00 [Coliseu](place:rom-colosseum) — Chegar para a segurança 30 min antes da entrada reservada às **14h30**. Visita até 15h45; identificação obrigatória. Pacote do casal inclui Mamertina, Coliseu, Fórum Romano e Palatino
   - ingresso: €41,63
+- 15:45 **Café da tarde**: pausa rápida com o snack e a bebida da mochila, ao sair do Coliseu, antes de seguir ao Fórum; consumo já pago nas compras de La Spezia
 - 16:00 [Fórum Romano e Palatino](place:rom-forum) — Visitar com o mesmo ingresso do Coliseu, sem nova compra; concluir o passeio e sair até 18h10
   - ingresso: €0
   - via: A pé até o depósito · 15 min
@@ -604,21 +662,25 @@ Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 
   - via: Pegar um táxi · 45 min — Até o endereço da hospedagem; estimativa com margem para trânsito
 - 19:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in depois das visitas; disponível desde 16h, com fechadura inteligente.\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.
-- 20:15 **Jantar** e descanso no apartamento; preparar os ingressos e documentos para o Vaticano e o Panteão
+- 19:45 [Pam · Valle Aurelia](place:rom-pam-valle-aurelia) — Depois de deixar as malas no apartamento, comprar refeição pronta para o **jantar de hoje** e pão, fruta, snack e bebida pronta para os **cafés da manhã de 17 e 18/10**. Fecha às 21h; sair até 20h05
+  - comida: €18
+  - via: Pegar um táxi · 10 min — Voltar direto ao apartamento com as sacolas, sem outras paradas
+- 20:15 **Jantar no apartamento**: refeição pronta comprada no Pam, sem depender de cozinha; guardar os alimentos e preparar os ingressos do Vaticano e do Panteão
 
 ### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
 
 Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhetes da janela 12h–13h. São Pedro fica à tarde para preservar o compromisso do Panteão; demais horários são estimativas.
 
+- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**: pão, fruta e bebida pronta comprados no Pam ontem; levar água e snack
 - 07:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Saída após o café da manhã
   - via: Pegar um táxi · 30 min — Até a entrada dos Museus Vaticanos, na Viale Vaticano
 - 07:45 [Museus Vaticanos](place:rom-vatican) — Chegar para a segurança; reservar o primeiro horário, **8h**, com Capela Sistina incluída. Visita de cerca de 3h; sair até 11h10 para o Panteão
   - status: a confirmar
   - via: Pegar um táxi · 30 min — Saída até 11h10 para chegar à região do Panteão por volta de 11h40
   - saída: 11:10
-- 12:00 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Bilhetes de 17/10 válidos na janela **12h–13h**; visitar a cúpula e o óculo até 12h40. É uma única atração, com custo informado de €15,50 pelo casal
+- 12:00 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Bilhetes de 17/10 válidos na janela **12h–13h**; visitar a cúpula e o óculo até 12h40. É uma única atração
   - ingresso: €7,75
-- 12:55 [Alfredo e Ada](place:rom-alfredo-ada) — **Almoço**: massa ou lasanha, previsão de €13 por pessoa; sair até 13h40
+- 12:55 [Alfredo e Ada](place:rom-alfredo-ada) — **Almoço**: massa ou lasanha; sair até 13h40
   - comida: €13
   - saída: 13:40
 - 13:50 [Piazza Navona](place:rom-navona) — Passear pela praça e ver as fontes
@@ -626,18 +688,22 @@ Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhete
 - 15:15 [Basílica de São Pedro](place:rom-st-peter) — Visitar a praça e o interior da basílica, com entrada gratuita; sem subir à cúpula. Reservar até 16h45 para a fila de segurança e a visita
   - via: Pegar um táxi · 30 min — Saída prevista às 16h45 para a região de Trevi; desembarque no acesso permitido
 - 17:15 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
+- 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte; sair até 17h40 para seguir à Piazza di Spagna
+  - comida: €6
 - 17:50 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
 - 18:30 [Piazza del Popolo](place:rom-popolo) — Passear pela praça; sair até 18h50
   - via: Pegar um táxi · 25 min — Até a região de Roma Termini para o jantar
-- 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara, com previsão de €18 por pessoa para o prato trufado citado no Notion
+- 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18
   - via: Pegar um táxi · 40 min — Saída prevista às 20h30 para o apartamento
 - 21:10 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Retorno; preparar as malas para o checkout das 10h
 
 ### Dia 3 — Dom 18/10 · Voo para Lisboa
+  - cidades: Roma → Lisboa
 
 Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
 
+- 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**, com os alimentos comprados no Pam; terminar de arrumar as malas
 - 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout e saída com as malas
   - via: Pegar um táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
 - 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
@@ -647,6 +713,8 @@ Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada 
 - 14:50 Localizar o balcão da Wizz Air no painel de partidas e organizar passaportes e cartões de embarque; check-in online já realizado
 - 15:20 Despacho da mala de até 32 kg e conferência de documentos no balcão; reservar até 16h20 para a fila. Despacho encerra às 17h20
 - 16:20 Controle de segurança e caminhada até o portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
+- 17:00 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — **Café da tarde e jantar antecipado**: sanduíche ou prato pronto, bebida e café na área de embarque, perto do portão; terminar até 17h25. Comer antes do voo, pois a chegada à hospedagem de Lisboa será tarde
+  - comida: €20
 - 17:35 Estar no portão de embarque; fechamento às 17h50
 - 18:20 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo Wizz Air Malta W4 6219 para Lisboa, Terminal 3.
   - via: Voo Wizz Air W4 6219 · 3h15
@@ -657,30 +725,61 @@ dates: 2026-10-18 → 2026-10-20
 budget: comida €40
 
 ### Dia 1 — Dom 18/10 · Chegada a Lisboa
+  - cidades: Roma → Lisboa
 
 Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mala despachada e fila do táxi.
+
+O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em Lisboa, apenas água e um snack da mochila se houver fome, sem depender de restaurante aberto às 22h.
 
 - 20:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Pouso do voo W4 6219 vindo de Roma; desembarque e retirada da mala antes de sair para os táxis
   - via: Pegar um táxi · 35 min — Saída prevista às 21h35 na fila oficial dos desembarques; incluir o acesso final com as malas à hospedagem
 - 22:10 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Check-in previsto; apartamento no 2º andar, sem elevador. A janela regular é 16h–21h: confirmar previamente a chegada tardia, com taxa de €30 por reserva.\
-  **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída antecipada para o voo das 9h35.\
+  **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída prevista às 9h para o voo das 14h50.\
   **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.
   - status: a confirmar
 
 ### Dia 2 — Seg 19/10 · Lisboa
 
-- [Pastéis de Belém](place:lis-pasteis-belem) — Comer o Pastel de Belém sem falta
+- 08:15 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Sair para tomar café da manhã em Belém; deixar as malas no apartamento
+  - via: Pegar um Uber até Belém · 35 min — Estimativa com margem para o trânsito
+- 08:50 [Pastéis de Belém](place:lis-pasteis-belem) — **Café da manhã**: pastéis e café; comer o Pastel de Belém sem falta. Abre às 8h; sair até 9h40 e aproveitar a manhã na região
+  - comida: €5
   - status: confirmado
-- [Casa Portuguesa do Pastel de Bacalhau](place:lis-pastel-bacalhau) — Comer o Bolinho de Bacalhau sem falta
+- 12:00 [Pastéis de Belém](place:lis-pasteis-belem) — Sair da região de Belém para a Baixa; já tomou café da manhã, sem novo consumo nesta parada
+  - via: Pegar um Uber até a Rua Augusta · 35 min — Desembarcar no acesso permitido mais próximo da rua de pedestres
+- 12:45 [Casa Portuguesa do Pastel de Bacalhau](place:lis-pastel-bacalhau) — Comer o Bolinho de Bacalhau sem falta; **entrada / lanche antes do almoço tardio**, não substitui a refeição completa
+  - período: tarde
+  - comida: €7
   - status: confirmado
-- [Praça do Comércio](place:lis-praca-comercio) — Passear pela praça
+- 13:15 [Praça do Comércio](place:lis-praca-comercio) — Passear pela praça; depois caminhar até o Mercado da Ribeira
   - status: confirmado
+  - via: A pé até Time Out Market · 20 min
+- 14:00 [Time Out Market](place:lis-time-out) — **Almoço tardio combinado com café da tarde**: escolher um prato nos balcões e tomar café no mercado; sair até 15h15. Segunda aberto desde 10h; tarde livre depois da refeição
+  - comida: €17
+- 18:30 [My Auchan Calhariz](place:lis-my-auchan-calhariz) — Ao terminar o passeio, comprar refeição pronta para o **jantar no apartamento**, pão, fruta e bebida pronta para o **café da manhã**, sanduíches e um snack para o **almoço de amanhã no aeroporto**. Alimentos de levar devem dispensar geladeira; consumir os perecíveis do jantar ao chegar. Sair até 18h50 e voltar direto à hospedagem; aberto até 22h
+  - comida: €14
+  - via: A pé até a hospedagem · 5 min — Guardar as compras imediatamente
+- 18:55 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Guardar as compras e preparar a bagagem de mão com os alimentos de amanhã
+- 19:15 [WHome Modern Retreat](place:lis-whome-bairro-alto) — **Jantar no apartamento**: refeição pronta comprada no My Auchan, já contabilizada na compra; separar o café da manhã e os lanches do aeroporto
+  - comida: €0
 
 ### Dia 3 — Ter 20/10 · Volta para São Paulo
+  - cidades: Lisboa → São Paulo
 
-Uber para o aeroporto.
+Horários locais: Lisboa na saída e São Paulo na chegada. Chegar ao aeroporto quatro horas antes do voo, conforme a orientação da LATAM; os tempos de deslocamento e filas abaixo são estimativas com margem.
 
-- **Checkout:** [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Antes de pegar o Uber para o voo das 9h35; limite da hospedagem às 11h
-- 09:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Partida do voo LIS → GRU
-  - via: voo LIS → GRU
-- [Aeroporto de Guarulhos (GRU)](place:sp-gru) — Chegada a São Paulo
+- 08:00 [WHome Modern Retreat](place:lis-whome-bairro-alto) — **Café da manhã no apartamento** com pão, fruta e bebida pronta comprados ontem; levar o almoço e snack na bagagem de mão
+  - comida: €0
+- 09:00 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Checkout e saída com as malas; limite da hospedagem às 11h. Deixar as malas prontas e combinar a entrega das chaves antes de sair
+  - via: Pegar um Uber · 45 min — Até as partidas do Terminal 1; margem inclui descer do 2º andar sem elevador, encontrar o carro e o trânsito. Conferir a previsão no app antes do checkout
+- 09:45 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Chegada ao Terminal 1; localizar o balcão LATAM do voo LA 8149 e conferir os cartões de embarque
+- 10:00 Despacho das malas e conferência de documentos; reservar até 11h para a fila, se o balcão já estiver aberto. A tarifa inclui uma mala despachada de até 23 kg por pessoa; abertura do balcão ainda a conferir
+- 11:00 Controle de segurança; reservar até 11h40 para fila e inspeção
+- 11:40 Seguir direto ao controle de passaportes para sair do espaço Schengen; reservar 1h30 para acesso, fila e conferência, mais 15 min de caminhada até o portão
+- 13:30 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — **Almoço perto do portão**, depois dos controles: sanduíches e snacks comprados ontem; comprar somente as bebidas depois da segurança. Terminar até 14h
+  - comida: €4
+- 14:00 Estar no portão do voo LA 8149; seguir o horário de embarque e o portão informados no cartão e nos painéis
+- 14:50 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Partida do voo LATAM LA 8149 para Guarulhos; Economy Standard, assentos 29D e 29E
+  - via: Voo LATAM LA 8149 · 10h10
+- **Café da tarde e jantar a bordo**: usar o serviço de alimentação incluído da LATAM no voo de longa duração; horários e cardápio definidos pela tripulação. Levar o snack da véspera como complemento
+- 21:00 [Aeroporto de Guarulhos (GRU)](place:sp-gru) — Chegada prevista a São Paulo; desembarque, imigração e retirada das malas

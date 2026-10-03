@@ -26,6 +26,7 @@ function pushStop(
     lines.push(`- ${time}${body}${note}`);
   }
   if (stop.status && !stop.listNote) lines.push(`  - status: ${stop.status}`);
+  if (stop.period) lines.push(`  - período: ${PERIOD_NAMES[stop.period]}`);
   if (stop.foodEur !== undefined) lines.push(`  - comida: €${stop.foodEur.toFixed(2).replace('.', ',')}`);
   if (stop.ticketEur !== undefined) lines.push(`  - ingresso: €${stop.ticketEur.toFixed(2).replace('.', ',')}`);
   if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
@@ -37,6 +38,7 @@ function pushStop(
 
 function pushDay(lines: string[], day: TripDay, resolvePlace: (placeId: string) => string | null) {
   lines.push(`### ${day.title}`, '');
+  if (day.cityNames?.length) lines.push(`  - cidades: ${day.cityNames.join(' → ')}`, '');
   if (closedPeriods(day).length) lines.push(`  - períodos fechados: ${closedPeriods(day).map((period) => PERIOD_NAMES[period]).join(', ')}`, '');
   if (isDayClosed(day)) lines.push('Dia fechado', '');
   for (const stop of day.stops) pushStop(lines, stop, resolvePlace);

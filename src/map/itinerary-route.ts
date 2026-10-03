@@ -497,17 +497,8 @@ function expandLegSync(
 
   const line = leg.line ? getTransitLine(leg.line) : undefined;
   if (!line) {
-    return {
-      segments: [
-        {
-          mode: 'transit',
-          latlngs: straight(from, to),
-          label: leg.label ?? 'Transit',
-          ...ends,
-        },
-      ],
-      transfers: [],
-    };
+    // An unknown railway must not look like a complete station route in offline mode.
+    return { segments: [], transfers: [] };
   }
 
   const fromSt = leg.fromStation

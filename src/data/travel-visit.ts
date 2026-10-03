@@ -319,6 +319,13 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  'lis-my-auchan-calhariz': {
+    durationMin: 15,
+    durationMax: 25,
+    crowdProfile: 'shop',
+    osmRef: 'node/4321443469',
+    tips: L('Open daily 08:00–22:00, according to the official store page checked on 3 October 2026.', 'Aberto todos os dias das 8h às 22h, conforme a página oficial consultada em 03/10/2026.'),
+  },
   'rom-stow-colosseo': { durationMin: 10, durationMax: 15, tips: L('Open daily 07:00–23:00; compare locker dimensions with your luggage.', 'Abre diariamente 7h–23h; confira as dimensões do armário para as malas.') },
   'rom-mamertina': { durationMin: 15, durationMax: 30, tips: L('Some Colosseum packages require voucher collection here; follow your voucher’s deadline.', 'Alguns pacotes do Coliseu exigem resgate do voucher aqui; siga o prazo do seu comprovante.') },
   'rom-navona': landmarkOutdoor({ durationMin: 25, durationMax: 40 }),

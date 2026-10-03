@@ -23,6 +23,11 @@ const base = `- 09:00 [Louvre](place:par-louvre) — Entrada
 - 10:00 [Orsay](place:par-orsay)`;
 
 describe('changedStopKeys', () => {
+  it('detects a period boundary change even when the stop text is unchanged', () => {
+    const before = trip('- [Louvre](place:par-louvre)\n  - período: manhã');
+    const after = trip('- [Louvre](place:par-louvre)\n  - período: tarde');
+    expect(changedStopKeys(before, after).size).toBe(1);
+  });
   const louvre = stopKey('paris', 0, 'Dia 1 — Chegada', 0, 'par-louvre', 'Louvre');
   const orsay = stopKey('paris', 0, 'Dia 1 — Chegada', 1, 'par-orsay', 'Orsay');
 

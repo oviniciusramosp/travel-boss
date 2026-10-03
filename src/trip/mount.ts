@@ -26,7 +26,7 @@ import { closedPeriods, isDayClosed, isTentative, periodStatusPatch, statusPatch
 import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
-import { daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
+import { dateCityNames, daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
 import { formatDayTitle } from './dates';
 import {
   dateBudget,
@@ -84,7 +84,7 @@ import {
   setPlaceOrigin,
 } from '../views/place-panel';
 import { activatePlace, resetPlaceSelection } from '../views/place-activation';
-import { legLabel, parseTrip, type Trip, type TripCity, type TripLeg, type TripStop } from './parse';
+import { legLabel, parseTrip, type Trip, type TripLeg, type TripStop } from './parse';
 import { formatTripNavLabel, formatTripPanelTitle, formatTripSummary } from './summary';
 import { averageBudgetCards, dateBudgetCards, periodLabel, slotSwitch, stopCostEl, stopCountLabel, sunsetTip } from '../views/timeline';
 import { timeZoneForCity } from '../views/open-now';
@@ -256,7 +256,7 @@ function datePeriods(rows: readonly DateStop[]): (Period | null)[] {
   return dayPeriods(
     rows.map((row) => {
       const stop = row.dated.day.stops[row.stopIndex];
-      return { time: stop?.time, text: `${stop?.label ?? ''} ${stop?.note ?? ''}`, listNote: stop?.listNote };
+      return { time: stop?.time, text: `${stop?.label ?? ''} ${stop?.note ?? ''}`, listNote: stop?.listNote, period: stop?.period };
     }),
   );
 }
@@ -270,11 +270,6 @@ function emptyNotice(title: string, detail?: string, error = false): HTMLDivElem
   wrap.append(strong);
   if (detail) wrap.append(document.createTextNode(detail));
   return wrap;
-}
-
-function cityDisplayName(city: TripCity, locale: Locale): string {
-  const record = getTripCity(city.slug);
-  return record ? pickLocale(locale, record.name) : city.name;
 }
 
 function clearStopCurrent(): void {
@@ -1600,11 +1595,7 @@ export function mountTrip(
         datePlaces(trip, date).map(({ place }) => place),
         (id) => daysHere.map((dated) => placeById(dated.city.slug, id)).find(Boolean),
       );
-      const names: string[] = [];
-      for (const group of section.cities) {
-        const name = cityDisplayName(group.city, locale);
-        if (name && !names.includes(name)) names.push(name);
-      }
+      const names = dateCityNames(section, locale);
       const stopCount = rows.filter((entry) => {
         const stop = entry.dated.day.stops[entry.stopIndex];
         return Boolean(stop && !stop.listNote);

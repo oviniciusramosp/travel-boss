@@ -3,6 +3,7 @@ import type { Shell } from '../app/shell';
 import { readCategoryFilter, readGroups, writeCategoryFilter, writeGroups } from '../app/store';
 import {
   categoryMaterialName,
+  placePinMaterialName,
   cityGuide,
   dayPrimaryRoutePlaceIds,
   favoritePlaces,
@@ -111,7 +112,7 @@ export function groupsToggleLabel(allOpen: boolean, locale: Locale): string {
 
 function placeThumb(place: TravelPlace): HTMLElement {
   const frame = el('span', 'tb-thumb');
-  const glyph = () => categoryGlyph(place.category, 18);
+  const glyph = () => categoryGlyph(place.category, 18, place.subcategories);
   const cover = place.photos?.[0];
   if (!cover?.url) {
     frame.append(glyph());
@@ -228,8 +229,8 @@ function amenityGroup(kind: AmenityKind, locale: Locale): HTMLElement {
   return section;
 }
 
-function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16): HTMLElement {
-  const name = categoryMaterialName(category);
+function categoryGlyph(category: PlaceCategory, size: 16 | 18 | 20 = 16, subcategories?: readonly string[]): HTMLElement {
+  const name = category === 'transport' ? placePinMaterialName(category, subcategories) : categoryMaterialName(category);
   if (!(ICONS as readonly string[]).includes(name)) {
     const dot = el('span', 'tb-cat-dot tb-cat-glyph');
     dot.style.background = placeCategoryMeta[category].color;

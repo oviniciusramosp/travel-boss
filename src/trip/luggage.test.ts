@@ -3,6 +3,47 @@ import { parseTrip } from './parse';
 import { luggageStops } from './luggage';
 
 describe('luggage between stays', () => {
+  it('does not end carrying at airline check-in, before the accommodation in the arrival city', () => {
+    const trip = parseTrip('test', 'test.md', `# Trip
+## Roma
+city: roma
+dates: 2026-10-18 → 2026-10-18
+### Dia 1
+- [Hotel](https://example.com) — Checkout às 10h
+- [Airport](place:rom-fco) — Check-in no Terminal 3
+- Conferir o balcão; check-in online já realizado
+- Embarque
+## Lisboa
+city: lisboa
+dates: 2026-10-18 → 2026-10-18
+### Dia 1
+- [Airport](place:lis-lis)
+- Táxi
+- [Hotel](place:lis-whome-bairro-alto) — Check-in previsto
+- Passeio`);
+    expect([...luggageStops(trip)].map(stop => stop.label)).toEqual(['Hotel', 'Airport', 'Conferir o balcão; check-in online já realizado', 'Embarque', 'Airport', 'Táxi', 'Hotel']);
+  });
+  it('handles arrival and departure at a friend’s home without a fictional hotel checkout', () => {
+    const trip = parseTrip('test', 'test.md', `# Trip
+## Paris
+city: paris
+dates: 2026-10-04 → 2026-10-11
+### Dia 1 — 4/10
+- [Airport](place:par-cdg) — Chegada com as malas; imigração
+- [Home](place:par-casa-do-gui) — Deixar as malas; descansar
+- Passeio
+### Dia 8 — 11/10
+- [Home](place:par-casa-do-gui) — Saída com as malas; Uber agendado
+- [Train](place:par-gare-de-lyon)
+## Milão
+city: milao
+dates: 2026-10-11 → 2026-10-11
+### Dia 1
+- [Station](place:mil-centrale)
+- [Hotel](place:mil-joy124) — Check-in às 14h45
+- Passeio`);
+    expect([...luggageStops(trip)].map(stop => stop.label)).toEqual(['Airport', 'Home', 'Home', 'Train', 'Station', 'Hotel']);
+  });
   it('marks checkout through check-in across cities, including notes and unpinned stops', () => {
     const trip = parseTrip('test', 'test.md', `# Test
 ## Milão

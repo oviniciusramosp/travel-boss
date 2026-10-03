@@ -1,0 +1,7 @@
+# My Auchan Calhariz — 03/10/2026
+
+- [Ficha oficial A55](https://www.auchan.pt/on/demandware.store/Sites-AuchanPT-Site/pt_PT/Stores-IncludeInfo?StoreID=A55): My Auchan Calhariz - Lisboa, Largo do Calhariz 10, 1200-086 Lisboa; segunda a domingo, 08h–22h.
+- [Objeto OSM node/4321443469](https://www.openstreetmap.org/node/4321443469), conferido pela [API](https://api.openstreetmap.org/api/0.6/node/4321443469.json): `name=My Auchan`, `branch=Calhariz - Lisboa`, `ref=A55`, `addr:street=Largo do Calhariz`, `addr:housenumber=10`; site oficial da mesma unidade e horário `Mo-Su 08:00-22:00`. Nó em 38.7107173, -9.1456086. Pino representa o estabelecimento identificado pelo OSM, não uma entrada certificada; loja pequena, sem subpontos. Identidade e endereço cruzados com o site oficial.
+- Incluído como `lis-my-auchan-calhariz`, sugestão de IA perto da hospedagem na Rua da Barroca 11. Compra no fim do passeio de 19/10, sem inventar horário para o restante do dia. Valor da cesta ainda sem estimativa; não registrar €0 como compra gratuita.
+- [Segurança de Lisboa](https://www.lisbonairport.pt/en/lis/passenger-guide/plan-your-trip/security-screening): recipientes de líquidos até 100 ml no saco transparente de 1 litro. Roteiro prevê alimentos sólidos e bebidas compradas após a segurança, para consumo antes do voo.
+- Usuário considerou que 25 min não justificam a sala VIP e passou ao plano de levar comida. Removida a parada ANA Lounge em 20/10, preservada a chegada antecipada e direcionamento aos passaportes logo após a segurança.

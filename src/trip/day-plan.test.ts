@@ -75,6 +75,24 @@ describe('rowPeriods', () => {
 });
 
 describe('dayPeriods', () => {
+  it('starts the afternoon after check-in even when lunch follows that departure', () => {
+    expect(dayPeriods([
+      { time: '06:50', text: 'Trem' },
+      { time: '14:45', text: 'Check-in' },
+      { time: '15:35', text: 'Saída para o centro', period: 'afternoon' },
+      { time: '16:10', text: 'Almoço / lanche' },
+      { time: '18:30', text: 'Galleria' },
+      { time: '19:45', text: 'Jantar' },
+    ])).toEqual(['morning', 'morning', 'afternoon', 'afternoon', 'afternoon', 'evening']);
+  });
+  it('accepts an afternoon boundary on the first row and an explicit evening before dinner', () => {
+    expect(dayPeriods([
+      { text: 'Saída', period: 'afternoon' },
+      { text: 'Almoço' },
+      { text: 'Concerto', period: 'evening' },
+      { text: 'Jantar' },
+    ])).toEqual(['afternoon', 'afternoon', 'evening', 'evening']);
+  });
   const at = (time: string | undefined, text = '', listNote = false) => ({ time, text, listNote });
 
   it('ends the morning with lunch and starts the evening with dinner', () => {

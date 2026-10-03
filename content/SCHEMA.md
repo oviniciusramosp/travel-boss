@@ -56,6 +56,7 @@ dates: 2026-04-06 → 2026-04-09
   - The line is not a bullet. An indented `- via:` before any day is still outside a day.
   - A paragraph that starts with `via:` under a day stays narrative. It is not this leg.
 - One H3 per day, in order, inside that city: `### Dia N — Title`.
+- Before the first stop, `  - cidades: Milão → Veneza` declares the cities visited, in order. It is day metadata, never a stop or narrative; export preserves it. Use the base and every excursion destination, without repeating the base for the return. Catalog names/slugs are localized; names outside the catalog are displayed as written. Date cards merge names across sections, removing duplicates. Without this metadata, cards use the base and the catalog cities of the stops.
 - A day can have `  - status: fechado` immediately below its H3. Parent stops accept `  - status: a confirmar` or `  - status: confirmado` among their indented metadata. These lines are not stops or narrative. A place without a status is **tentative by default**; confirmation must be explicit. List notes/sub-points do not participate in review (legacy metadata is still parsed). Existing approvals of 4/10 are preserved with explicit confirmations on its parent stops; adding a new place to any closed day makes it pending.
 - Period review is saved immediately below H3 as `  - períodos fechados: manhã, tarde, noite` (only the closed periods, comma-separated; an empty value explicitly reopens all). Legacy `status: fechado` means all three periods until the first period edit replaces it. Each period header has a hover/focus check action; closed periods keep their check visible and touch keeps actions visible. Pending places prevent closing their own period. All three closed periods and no pending places produce the automatic “Dia fechado” indicator; the day has no review action. Empty periods remain available for review. Closing does not lock editing. Export preserves period metadata and includes “Dia fechado” only for an effectively closed day.
 - A stop is a bullet that starts with optional `HH:mm`, then a link.
@@ -161,6 +162,8 @@ With `npm run dev` the app writes the file too: a stop note, a list note, a para
 Several H2 sections in one file are one trip. The UI shows one scrolling document, a city rail, and the header `via:` on the city you leave. The map fits every resolved stop.
 
 ## Day card
+
+- `  - período: manhã|tarde|noite` under a stop sets an explicit period boundary. An explicit afternoon starts there even when lunch is later; an explicit evening overrides the dinner boundary. Rows before an explicit afternoon belong to morning. These metadata export unchanged and never mark a period approved.
 
 - A stop whose label or note mentions `pôr do sol` / `sunset` shows the user's sunset icon beside its costs, including free stops. An explicit `19h21` or `19:21` immediately after that phrase is included in the tooltip. Negated plans and mentions of before/after sunset in the same clause do not mark the stop. This indicates the authored plan; it does not calculate astronomical times or use the day's heading.
 

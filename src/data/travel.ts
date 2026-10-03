@@ -4,6 +4,7 @@
  */
 
 import { italyRailCities, laSpeziaStation } from './travel-italy-rail';
+import { laSpeziaFoodPlaces } from './travel-la-spezia';
 import { cinqueTerreNotionPlaces, romeNotionPlaces } from './travel-italy-notion';
 import {
   placeCategoryOrder,
@@ -666,7 +667,7 @@ export const localTravelCities: TravelCity[] = [
     lat: 44.1033871,
     lng: 9.8217022,
     zoom: 13,
-    places: [laSpeziaStation, ...cinqueTerreNotionPlaces],
+    places: [laSpeziaStation, ...laSpeziaFoodPlaces, ...cinqueTerreNotionPlaces],
   },
   {
     slug: 'sao-paulo',
@@ -6026,9 +6027,10 @@ export const localTravelCities: TravelCity[] = [
             'Croissant bem na frente da Fontana di Trevi, comer na bancada em pé: €1,50 sem recheio, €2,30 chocolate, €3,00 pistache. Café americano €1,60.',
         },
         googleRating: 4.1,
-        lat: 41.9007946,
-        lng: 12.4830539,
-        address: 'Piazza di Trevi 100 / Via delle Muratte 11, 00187 Roma',
+        lat: 41.9006456,
+        lng: 12.4830964,
+        address: 'Via delle Muratte 8, 00187 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/L%27+Antico+Forno+Di+Fontana+Di+Trevi/data=!4m6!3m5!1s0x132f60532794213d:0x91e0df58925a9a3f!8m2!3d41.9006456!4d12.4830964!16s%2Fg%2F1tdhx8nl',
         mapsQuery: "L'Antico Forno Fontana di Trevi Roma",
       },
       // —— What to visit ——
@@ -7397,6 +7399,25 @@ export const localTravelCities: TravelCity[] = [
         lng: -9.142084,
         address: 'Baixa-Chiado',
         mapsQuery: 'Baixa-Chiado Lisboa',
+      },
+      {
+        id: 'lis-my-auchan-calhariz',
+        name: { en: 'My Auchan Calhariz', 'pt-BR': 'My Auchan Calhariz' },
+        category: 'markets',
+        description: {
+          en: 'Neighborhood convenience supermarket on Largo do Calhariz, with groceries, bakery products and packaged snacks.',
+          'pt-BR': 'Supermercado de proximidade no Largo do Calhariz, com alimentos, produtos de padaria e snacks embalados.',
+        },
+        aiSuggested: true,
+        aiReason: {
+          en: 'Near the Bairro Alto accommodation, convenient for buying snacks before the flight.',
+          'pt-BR': 'Perto da hospedagem no Bairro Alto, conveniente para comprar lanches antes do voo.',
+        },
+        conhecido: false,
+        lat: 38.7107173,
+        lng: -9.1456086,
+        address: 'Largo do Calhariz 10, 1200-086 Lisboa, Portugal',
+        mapsQuery: 'My Auchan Calhariz Largo do Calhariz 10 Lisboa',
       },
       // —— Stay ——
       {
