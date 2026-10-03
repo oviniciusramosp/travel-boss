@@ -422,7 +422,7 @@ budget: comida €50
 - 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris e caminhada até o hotel
   - via: A pé até o Joy 124 · 25 min
 - 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h.\
-  Quarto double room, só alojamento.\
+  Quarto double room, só alojamento.
 - 15:35 [Joy 124](place:mil-joy124) — Saída para o centro depois do check-in
   - via: A pé até Sondrio · 10 min
 - 15:45 [Sondrio — M3](place:mil-sondrio) — Embarcar na linha amarela em direção a San Donato e descer em Duomo
@@ -523,7 +523,7 @@ Chegada de trem de Milão e hospedagem em La Spezia.
 
 - 16:14 [La Spezia Centrale](place:spe-centrale) — Chegada de Milão
 - 16:40 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in após a chegada de Milão, disponível desde 15h.\
-  **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.\
+  **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.
 
 ### Dia 2 — Qui 15/10 · Cinque Terre
 
@@ -570,7 +570,7 @@ Trem La Spezia → Roma.
 - 07:25 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h
   - via: A pé até La Spezia Centrale · 10 min
 - 07:40 [La Spezia Centrale](place:spe-centrale) — Conferir a plataforma e preparar o embarque das 08h16
-- 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.\
+- 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.
   - via: trem Frecciabianca 8605 · 4h02 · €19,35
   - embarque: 2026-10-16 · Frecciabianca 8605 · La Spezia Centrale → Roma Termini · 08:16 → 12:18
 
@@ -603,7 +603,7 @@ Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 
 - 18:30 [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Retirar as malas e chamar o táxi para a hospedagem
   - via: Pegar um táxi · 45 min — Até o endereço da hospedagem; estimativa com margem para trânsito
 - 19:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in depois das visitas; disponível desde 16h, com fechadura inteligente.\
-  **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.\
+  **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.
 - 20:15 **Jantar** e descanso no apartamento; preparar os ingressos e documentos para o Vaticano e o Panteão
 
 ### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
@@ -648,7 +648,7 @@ Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada 
 - 15:20 Despacho da mala de até 32 kg e conferência de documentos no balcão; reservar até 16h20 para a fila. Despacho encerra às 17h20
 - 16:20 Controle de segurança e caminhada até o portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
 - 17:35 Estar no portão de embarque; fechamento às 17h50
-- 18:20 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo Wizz Air Malta W4 6219 para Lisboa, Terminal 3.\
+- 18:20 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo Wizz Air Malta W4 6219 para Lisboa, Terminal 3.
   - via: Voo Wizz Air W4 6219 · 3h15
 
 ## Lisboa
@@ -664,7 +664,7 @@ Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mal
   - via: Pegar um táxi · 35 min — Saída prevista às 21h35 na fila oficial dos desembarques; incluir o acesso final com as malas à hospedagem
 - 22:10 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Check-in previsto; apartamento no 2º andar, sem elevador. A janela regular é 16h–21h: confirmar previamente a chegada tardia, com taxa de €30 por reserva.\
   **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída antecipada para o voo das 9h35.\
-  **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.\
+  **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.
   - status: a confirmar
 
 ### Dia 2 — Seg 19/10 · Lisboa
