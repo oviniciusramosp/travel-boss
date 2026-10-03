@@ -96,6 +96,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   const leafletMap: LeafletMap = createMap(frame, {
     preferCanvas: true,
     zoomControl: false,
+    attributionControl: false,
     scrollWheelZoom: false,
     zoomAnimation: !reducedAtStart,
     fadeAnimation: !reducedAtStart,
@@ -105,6 +106,7 @@ export function mountMap(host: HTMLElement): MapHandle {
   const basemap = maplibreGL({
     style: 'https://tiles.openfreemap.org/styles/bright',
     interactive: false,
+    attributionControl: false,
     pane: 'tilePane',
     ...MAPLIBRE_PERF,
     fadeDuration: maplibreFade(reducedAtStart),

@@ -117,5 +117,5 @@ export function attachMapControls(
   mobile.addEventListener('change', positionLayers);
   document.addEventListener('fullscreenchange', positionLayers);
   positionLayers();
-  map.attributionControl.setPosition('bottomleft');
+  map.attributionControl?.setPosition('bottomleft');
 }

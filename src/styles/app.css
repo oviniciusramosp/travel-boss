@@ -407,19 +407,9 @@ button {
   background: var(--color-canvas);
 }
 
-.tb-map .leaflet-control-attribution {
-  margin: 0 0 var(--spacing-8) var(--spacing-8);
-  background: color-mix(in srgb, var(--color-paper) 88%, transparent);
-  color: var(--color-mid-gray);
-  border-radius: var(--r-tip);
-  font-family: var(--font-geist);
-  font-size: var(--text-caption);
-  line-height: var(--leading-caption);
-  box-shadow: none;
-}
-
-.tb-map .leaflet-control-attribution a {
-  color: var(--color-ink-soft);
+.tb-map .leaflet-control-attribution,
+.tb-map .maplibregl-ctrl-attrib {
+  display: none;
 }
 
 .tb-map path.tb-area {

@@ -7,6 +7,9 @@ import type { LString } from './travel';
 import parisMilanRail from './travel-paris-milan-rail.json';
 import { italyRailLegs } from './travel-italy-rail';
 import {
+  cinqueTerreRegional,
+  romeMetroB,
+  veniceVaporetto1,
   funicularMontmartre,
   getTransitLine,
   haversineM,
@@ -954,6 +957,13 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  trainLeg('rom-termini', 'rom-stow-colosseo', 30, [ride(romeMetroB, 'termini', 'colosseo')]),
+  trainLeg('ven-salute', 'ven-santa-lucia', 60, [ride(veniceVaporetto1, 'salute', 'ferrovia')]),
+  trainLeg('spe-centrale', 'ct-riomaggiore', 30, [ride(cinqueTerreRegional, 'spezia', 'riomaggiore')]),
+  trainLeg('ct-manarola', 'ct-corniglia', 30, [ride(cinqueTerreRegional, 'manarola', 'corniglia')]),
+  trainLeg('ct-corniglia', 'ct-vernazza', 30, [ride(cinqueTerreRegional, 'corniglia', 'vernazza')]),
+  trainLeg('ct-vernazza', 'ct-monterosso', 50, [ride(cinqueTerreRegional, 'vernazza', 'monterosso')]),
+  trainLeg('ct-monterosso', 'spe-centrale', 60, [ride(cinqueTerreRegional, 'monterosso', 'spezia')]),
   // 5/10: Tulheries → market → Maillol → Carrousel → Louvre.
   // Pedestrian geometry: Valhalla / OSM, 2026-09-27.
   {
