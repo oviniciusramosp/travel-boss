@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { setDefaultAutoSelectFamilyAttemptTimeout } from 'node:net';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { basename, join, resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
@@ -13,9 +14,11 @@ import {
 } from './src/trip/api';
 import { placeEditsApi } from './scripts/vite-place-edits';
 import { checklistApi } from './scripts/vite-checklists';
+import { publicTrips } from './scripts/vite-public-trips';
 import { ICON_FONT_HREF } from './src/ui/icons';
 import {
   forecastToEnsemble,
+  extendForecast,
   MET_URL,
   metToEnsemble,
   OPEN_METEO_FORECAST_URL,
@@ -25,6 +28,9 @@ import {
   parseEnsemble,
   type Ensemble,
 } from './src/trip/weather-source';
+
+// Some providers need longer than Node's default 250 ms to connect before trying IPv6.
+setDefaultAutoSelectFamilyAttemptTimeout(2_000);
 
 const tripsDir = resolve(process.cwd(), 'content/trips');
 
@@ -143,7 +149,7 @@ function tripApi(): Plugin {
  * when Open-Meteo is out of quota. The answer is `{ at, source, hours }`; without any
  * forecast it is `{ error, status }` with 502, and an old one comes back with `stale: true`.
  */
-const WEATHER_DIR = resolve(process.cwd(), 'node_modules/.cache/weather');
+const WEATHER_DIR = resolve(process.cwd(), 'node_modules/.cache/weather-v2');
 const WEATHER_FRESH_MS = 30 * 60 * 1000;
 const WEATHER_UA = 'TravelBoss/0.1 (local dev tool; github.com/viniciusramos)';
 type StoredForecast = { at: number; source: string; hours: Ensemble };
@@ -222,7 +228,11 @@ function weatherApi(): Plugin {
         if (stored && !force && Date.now() - stored.at < WEATHER_FRESH_MS) return send(200, stored);
         let job = weatherInflight.get(key);
         if (!job) {
-          job = fetchForecast(lat, lng, tz).then((result) => {
+          job = fetchForecast(lat, lng, tz).then(async (result) => {
+            const hours = await extendForecast('fresh' in result ? result.fresh.hours : null, lat, lng, tz);
+            if (hours) result = { fresh: {
+              at: Date.now(), source: 'fresh' in result ? result.fresh.source : 'Open-Meteo (ECMWF EC46)', hours,
+            } };
             if ('fresh' in result) {
               try {
                 mkdirSync(WEATHER_DIR, { recursive: true });
@@ -278,7 +288,7 @@ function iconFont(): Plugin {
 
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? "/travel-boss/" : "/",
-  plugins: [checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
+  plugins: [publicTrips(), checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
   server: {
     port: 5173,
     strictPort: false,
