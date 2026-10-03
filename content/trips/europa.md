@@ -419,44 +419,95 @@ budget: comida €50
 
 ### Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria
 
-- 14:10 [Milano Centrale](place:mil-centrale) — Chegada e caminhada até o hotel
+- 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris e caminhada até o hotel
+  - via: A pé até o Joy 124 · 25 min
 - 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h.\
   Quarto double room, só alojamento.\
-  **Reserva:** Azul Viagens · HR2Q63 · localizador 207-16707553.\
-  **Contato:** +39 2366682333.
-- 16:05 [Cesarino](place:mil-cesarino) — Lanche no centro
-- 17:00 [Duomo](place:mil-duomo) — Terraços, sujeito a ingresso
-- 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Passeio até a Piazza della Scala
+- 15:35 [Joy 124](place:mil-joy124) — Saída para o centro depois do check-in
+  - via: A pé até Sondrio · 10 min
+- 15:45 [Sondrio — M3](place:mil-sondrio) — Embarcar na linha amarela em direção a San Donato e descer em Duomo
+  - via: Metrô M3 até Duomo · 25 min — Inclui espera e caminhada até o Cesarino
+- 16:10 [Cesarino](place:mil-cesarino) — **Almoço / lanche**: sanduíche perto do Duomo, previsão de €10 por pessoa
+  - comida: €10
+- 17:15 [Duomo](place:mil-duomo) — Visitar os terraços no fim da tarde; reservar ingresso e conferir o calendário. O Notion informa fechamento da catedral das 15h às 17h por crisma; acesso aos terraços e horário de encerramento ainda a confirmar
+  - status: a confirmar
+- 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Cúpula, mosaicos, lojas históricas e mosaico do touro; atravessar até a Piazza della Scala
+  - via: Metrô M3 de Duomo até Sondrio · 25 min — Saída prevista às 19h
+- 19:25 [Sondrio — M3](place:mil-sondrio) — Caminhar até o restaurante
 - 19:45 [San Giorgio](place:mil-san-giorgio) — Jantar perto do hotel
 - 21:00 [Joy 124](place:mil-joy124) — Volta
 
 ### Dia 2 — Seg 12/10 · Bate-volta a Veneza
 
-- [Joy 124](place:mil-joy124) — Saída conforme o trem
-- 07:35 [Milano Centrale](place:mil-centrale) — Embarque para Veneza. Italo 8973; reserva QKJ4XK; valor informado: $44.92
+- 06:40 [Joy 124](place:mil-joy124) — Saída para a estação; café da manhã antes de sair
+  - via: A pé até Milano Centrale · 25 min
+- 07:05 [Milano Centrale](place:mil-centrale) — Conferir o painel e localizar a plataforma com 30 min de antecedência
+- 07:35 [Milano Centrale](place:mil-centrale) — Embarque para Veneza. Italo 8973
   - via: trem Italo 8973 · 2h30
   - embarque: 2026-10-12 · Italo 8973 · Milano Centrale → Venezia Santa Lucia · 07:35 → 10:05
-- 10:05 [Venezia Santa Lucia](place:ven-santa-lucia) — Chegada a Veneza; retorno às 17h57 pela mesma estação. Italo 8992; reserva KEVDVZ; valor informado: $58.15
+- 10:05 [Venezia Santa Lucia](place:ven-santa-lucia) — Chegada; trem de retorno às 17h57, com chegada à estação prevista para 17h20
+- 10:20 [Ponte della Costituzione](place:ven-costituzione) — Primeiro contato com o Grande Canal; seguir pela cidade até Rialto
+- 11:00 [Mercato di Rialto](place:ven-rialto-market) — Passagem rápida pela região; as bancas de peixe não abrem na segunda-feira
+- 11:20 [Ponte di Rialto](place:ven-rialto) — Atravessar a ponte e passear pela região dos canais
+- 12:00 [Antico Forno](place:ven-antico-forno) — **Almoço**: pizza al taglio, previsão de €13 por pessoa; sair até 12h40
+  - comida: €13
+- 13:00 [Piazza San Marco](place:ven-san-marco) — Passear pela praça
+- 13:20 [Basilica di San Marco](place:ven-basilica) — Visita aos mosaicos; reservar entrada para esse horário, €10 por pessoa. Sair até 14h10
+  - status: a confirmar
+- 14:10 [Campanile di San Marco](place:ven-campanile) — Ver por fora, sem subir
+- 14:20 [Palazzo Ducale](place:ven-ducale) — Ver por fora; a visita interna de cerca de 2h não cabe junto ao restante do passeio e ao trem reservado
+- 14:30 [Ponte della Paglia](place:ven-paglia) — Vista externa da Ponte dos Suspiros
+- 14:40 [Riva degli Schiavoni](place:ven-riva) — Caminhada curta pela orla da lagoa
+- 15:05 [Libreria Acqua Alta](place:ven-acqua-alta) — Visitar a livraria, sem comprar; sair até 15h25
+  - saída: 15:25
+- 15:50 [Ponte dell’Accademia](place:ven-accademia) — Vista do Grande Canal; atravessar para Dorsoduro
+- 16:10 [Basilica di Santa Maria della Salute](place:ven-salute) — Passar pela região de Dorsoduro e ver a igreja por fora; seguir para o embarcadouro Salute
+  - via: Ferry vaporetto 1 até Ferrovia · 1h · €9,50 — Saída prevista da região às 16h20, incluindo espera; validar o bilhete antes de embarcar
+- 17:20 [Venezia Santa Lucia](place:ven-santa-lucia) — Conferir a plataforma e embarcar no trem de retorno. Italo 8992
   - via: trem Italo 8992 · 2h30
   - embarque: 2026-10-12 · Italo 8992 · Venezia Santa Lucia → Milano Centrale · 17:57 → 20:27
 - 20:27 [Milano Centrale](place:mil-centrale) — Chegada de Veneza
-- [Joy 124](place:mil-joy124) — Retorno ao hotel
+- 21:00 [Joy 124](place:mil-joy124) — Retorno; **jantar** perto do hotel após a chegada
 
 ### Dia 3 — Ter 13/10 · Bate-volta a Verona
 
-- [Joy 124](place:mil-joy124) — Saída conforme o trem
+- 05:50 [Joy 124](place:mil-joy124) — Saída para a estação; levar o café da manhã
+  - via: A pé até Milano Centrale · 25 min
+- 06:15 [Milano Centrale](place:mil-centrale) — Conferir o painel e localizar a plataforma com 30 min de antecedência
 - 06:45 [Milano Centrale](place:mil-centrale) — Embarque para Verona
   - via: trem Frecciarossa 9703 · 1h13
   - embarque: 2026-10-13 · Frecciarossa 9703 · Milano Centrale → Verona Porta Nuova · 06:45 → 07:58
-- 07:58 [Verona Porta Nuova](place:ver-porta-nuova) — Chegada a Verona; retorno às 17h12 pela mesma estação
+- 07:58 [Verona Porta Nuova](place:ver-porta-nuova) — Chegada; caminhar para o centro histórico
+- 08:45 [Piazza Bra](place:ver-bra) — Passear pela praça depois do café da manhã
+- 09:15 [Arena di Verona](place:ver-arena) — Ver o anfiteatro por fora, sem entrar
+- 10:00 [Casa de Julieta — Teatro Nuovo](place:ver-juliet) — Teatro e pátio com a estátua, €5 por pessoa; reservar online para esse horário. Entrada pela Piazzetta Navona, sem visita ao interior da casa
+  - status: a confirmar
+- 10:45 [Piazza delle Erbe](place:ver-erbe) — Passear pela praça e pelas bancas
+- 11:20 [Torre dei Lamberti](place:ver-lamberti) — Ver por fora, sem subir; a vista panorâmica será no Castel San Pietro
+- 11:35 [Piazza dei Signori](place:ver-signori) — Passear pela praça
+- 11:55 [Arche Scaligere](place:ver-arche) — Ver os monumentos por fora
+- 12:15 [Amido — Pasta & Tiramisù](place:ver-amido) — **Almoço**: massa fresca para levar, na unidade da Via Pellicciai 5/c; previsão de €15 por pessoa. Comer na região da Piazza delle Erbe e sair até 13h
+  - comida: €15
+- 13:15 [Duomo di Verona](place:ver-duomo) — Ver a catedral por fora
+- 13:45 [Ponte Pietra](place:ver-pietra) — Atravessar o Adige e seguir pela escadaria até o mirante
+  - via: A pé até Castel San Pietro · 20 min
+- 14:20 [Castel San Pietro](place:ver-san-pietro) — Mirante externo de Verona, sem entrar no castelo; descer a pé às 15h
+  - saída: 15:00
+- 15:30 [Porta Borsari](place:ver-borsari) — Passar pela porta romana
+- 15:50 [Castelvecchio e Ponte Scaligero](place:ver-castelvecchio) — Atravessar a ponte fortificada vermelha, sem entrar no museu; sair até 16h10
+  - via: A pé até Verona Porta Nuova · 30 min
+  - saída: 16:10
+- 16:40 [Verona Porta Nuova](place:ver-porta-nuova) — Chegar com 32 min de antecedência ao trem de retorno das 17h12
   - via: trem Italo 8988 · 1h15
   - embarque: 2026-10-13 · Italo 8988 · Verona Porta Nuova → Milano Centrale · 17:12 → 18:27
 - 18:27 [Milano Centrale](place:mil-centrale) — Chegada de Verona
-- [Joy 124](place:mil-joy124) — Retorno ao hotel
+- 19:00 [Joy 124](place:mil-joy124) — Retorno e descanso antes do **jantar**
 
 ### Dia 4 — Qua 14/10 · Partida para La Spezia
 
-- [Joy 124 Hotel Milano](place:mil-joy124) — Checkout até 12h
+- 12:00 [Joy 124 Hotel Milano](place:mil-joy124) — Checkout e saída com as malas
+  - via: A pé até Milano Centrale · 25 min
+- 12:30 [Milano Centrale](place:mil-centrale) — Tempo para lanche e identificação da plataforma; estar pronto para embarcar às 12h50
 - 13:10 [Milano Centrale](place:mil-centrale) — Partida do trem para La Spezia
   - via: trem Frecciabianca 8619 · 3h04
   - embarque: 2026-10-14 · Frecciabianca 8619 · Milano Centrale → La Spezia Centrale · 13:10 → 16:14
@@ -471,27 +522,55 @@ budget: comida €50
 Chegada de trem de Milão e hospedagem em La Spezia.
 
 - 16:14 [La Spezia Centrale](place:spe-centrale) — Chegada de Milão
-- [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in a partir das 15h, após a chegada de Milão.\
+- 16:40 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in após a chegada de Milão, disponível desde 15h.\
   **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.\
-  **Reserva:** Booking.com · confirmação 5003460305 · PIN 2525.\
-  **E-mail:** viniciusarthur.rp@gmail.com.\
-  **Pagamento:** 02/10/2026 · cartão MEXC. Imposto municipal informado: €10.\
-  **Endereço:** Via XXVII Marzo, 132 1, 19121 La Spezia, Itália.\
-  **Contato:** +39 366 195 7623.
 
 ### Dia 2 — Qui 15/10 · Cinque Terre
 
-Passeio de trem por Cinque Terre com o Cinque Terre Card; base em La Spezia.
+Riomaggiore → Via dell’Amore → Manarola → Corniglia → Vernazza → Monterosso, conforme o Notion. Horários de passeio estimados; partidas dos regionais ainda a conferir nos painéis e na Trenitalia para 15/10. A Via dell’Amore às 9h30 depende de reserva.
+
+- 08:00 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Saída após o café da manhã
+  - via: A pé até La Spezia Centrale · 10 min
+- 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos: €22 por pessoa. A Via dell’Amore exige cartão combinado ou suplemento, com horário; não está incluída gratuitamente no passe comum
+  - via: Trem regional até Riomaggiore · 30 min · €22 — Passe do dia; duração inclui margem de espera. Serviço e partida ainda a confirmar
+- 08:40 [Riomaggiore](place:ct-riomaggiore) — Passeio pela vila e pelo porto
+- 09:00 **Porto — embarcadouro** — Ver o porto e as casas coloridas
+- 09:20 **Estação — retorno** — Seguir ao acesso da Via dell’Amore
+- 09:30 [Via dell’Amore](place:ct-amore) — Horário desejado para a trilha Riomaggiore → Manarola; reservar ingresso com horário e conferir o preço do suplemento antes da compra
+  - status: a confirmar
+- 10:10 [Manarola](place:ct-manarola) — Passeio pelo porto e pela parte alta da vila; retornar à estação até 11h15
+  - saída: 11:15
+  - via: Trem regional de Manarola até Corniglia · 30 min — Inclui espera; coberto pelo passe, partida ainda a confirmar
+- 10:30 **Mirante junto ao porto** — Ver as casas coloridas sobre os rochedos
+- 10:55 **Chiesa di San Lorenzo** — Visita por fora
+- 11:15 **Estação — retorno** — Aguardar o regional para Corniglia
+- 11:45 [Corniglia](place:ct-corniglia) — Passeio pela Lardarina e pelo centro; retornar à estação até 12h45
+  - saída: 12:45
+  - via: Trem regional até Vernazza · 30 min — Inclui espera; coberto pelo passe, partida ainda a confirmar
+- 12:10 **Scalinata Lardarina** — Subida até a vila
+- 12:20 **Largo Taragio** — Passeio pelo centro
+- 12:45 **Estação — retorno** — Aguardar o regional para Vernazza
+- 13:15 [Vernazza](place:ct-vernazza) — Passeio pelo porto, igreja por fora e almoço; ver o castelo a partir da região do porto, sem subir
+  - saída: 14:10
+  - via: Trem regional de Vernazza até Monterosso · 50 min — Sair da região do almoço até 14h10; inclui caminhada à estação e espera, coberto pelo passe; partida ainda a confirmar
+- 13:30 **Porto — Santa Margherita** — Ver o porto e a igreja por fora
+- 13:45 **Bottega Visconti** — Almoço: focaccia ou sanduíche para levar, previsão de €10 por pessoa
+- 15:00 [Monterosso al Mare](place:ct-monterosso) — Passeio pela praia de Fegina; retornar à estação até 16h30
+  - saída: 16:30
+  - via: Trem regional até La Spezia Centrale · 1h — Inclui espera; coberto pelo passe, serviço de retorno ainda a confirmar
+- 15:30 **Estátua de Netuno** — Ver a estátua junto à praia
+- 16:30 **Estação — retorno** — Aguardar o regional para La Spezia
+- 17:30 [La Spezia Centrale](place:spe-centrale) — Retorno previsto
+- 17:45 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Descanso e **jantar** em La Spezia
 
 ### Dia 3 — Sex 16/10 · Partida para Roma
 
 Trem La Spezia → Roma.
 
-- [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout antes de sair para o trem das 08h16; limite da hospedagem: 10h
+- 07:25 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h
+  - via: A pé até La Spezia Centrale · 10 min
+- 07:40 [La Spezia Centrale](place:spe-centrale) — Conferir a plataforma e preparar o embarque das 08h16
 - 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.\
-  **Reserva:** Omio · EQPBXN · 2 passageiros.\
-  **E-mail:** viniciusarthur.rp@gmail.com.\
-  **Pagamento:** bilhetes €41 + taxa €2 − desconto €4,30 = €38,70 no total (€19,35 por pessoa). Bilhete móvel disponível offline no app Omio.
   - via: trem Frecciabianca 8605 · 4h02 · €19,35
   - embarque: 2026-10-16 · Frecciabianca 8605 · La Spezia Centrale → Roma Termini · 08:16 → 12:18
 
@@ -500,31 +579,77 @@ city: roma
 dates: 2026-10-16 → 2026-10-18
 budget: comida €50
 
-### Dia 1 — Sex 16/10 · Chegada a Roma
+### Dia 1 — Sex 16/10 · Chegada, Coliseu, Fórum e Palatino
 
-Chegada de trem de La Spezia e hospedagem em Roma. Tickets de Roma previstos para esta etapa.
+Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 14h30. O check-in fica depois das visitas, conforme o plano atualizado do Notion.
 
-- 12:18 [Roma Termini](place:rom-termini) — Chegada de La Spezia; check-in do apartamento a partir das 16h
-- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in a partir das 16h; self check-in com fechadura inteligente.\
+- 12:18 [Roma Termini](place:rom-termini) — Chegada de La Spezia; seguir para o metrô B, direção Laurentina, via Cavour até Colosseo
+  - via: Metrô B até Colosseo · 30 min — Inclui saída do trem, espera e caminhada até o depósito; partida do metrô ainda a confirmar
+- 12:55 [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Deixar as malas até 18h30. Reservar armário adequado para 6h: Maxi €19,99 por armário, conforme as dimensões das malas; sair até 13h05
+  - ingresso: €10
+  - status: a confirmar
+  - via: A pé até a Prisão Mamertina · 15 min
+  - saída: 13:05
+- 13:20 [Prisão Mamertina](place:rom-mamertina) — Resgatar os vouchers na bilheteria do Clivo Argentario 1; prazo máximo 13h30, uma hora antes do Coliseu. Levar identificação válida e os vouchers
+  - ingresso: €0
+  - via: A pé até a entrada do Coliseu · 15 min — Sair da região até 13h45 após o lanche
+- 13:30 **Almoço**: lanche rápido na região depois do resgate dos vouchers; terminar até 13h45
+- 14:00 [Coliseu](place:rom-colosseum) — Chegar para a segurança 30 min antes da entrada reservada às **14h30**. Visita até 15h45; identificação obrigatória. Pacote de €83,26 pelo casal inclui Mamertina, Coliseu, Fórum Romano e Palatino
+  - ingresso: €41,63
+- 16:00 [Fórum Romano e Palatino](place:rom-forum) — Visitar com o mesmo ingresso do Coliseu, sem nova compra; concluir o passeio e sair até 18h10
+  - ingresso: €0
+  - via: A pé até o depósito · 15 min
+  - saída: 18:10
+- 18:30 [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Retirar as malas e chamar o táxi para a hospedagem
+  - via: Pegar um táxi · 45 min — Até o endereço da hospedagem; estimativa com margem para trânsito
+- 19:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in depois das visitas; disponível desde 16h, com fechadura inteligente.\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.\
-  **Reserva:** Airbnb · confirmação HM4E2Q3E3J.\
-  **Endereço:** Via Giovanni Aurispa, 9, Rome, Lazio 00167.
+- 20:15 **Jantar** e descanso no apartamento; preparar os ingressos e documentos para o Vaticano e o Panteão
 
-### Dia 2 — Sáb 17/10 · Centro antigo
+### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
 
-- 09:30 [Coliseu](place:rom-colosseum) — Ingresso combinado com o Fórum
-- 11:30 [Fórum Romano](place:rom-forum) — Mesmo ingresso do Coliseu
-- 14:30 [Panteão](place:rom-pantheon) — Cúpula e óculo
-- 16:30 [Fontana di Trevi](place:rom-trevi) — Chegar cedo; a vista é gratuita
-- 18:00 [Piazza Venezia](place:rom-piazza-venezia) — Ponto de orientação do centro
+Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhetes da janela 12h–13h. São Pedro fica à tarde para preservar o compromisso do Panteão; demais horários são estimativas.
 
-Um dia a pé no centro. Os outros lugares de Roma ficam no catálogo da cidade, não neste arquivo.
+- 07:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Saída após o café da manhã
+  - via: Pegar um táxi · 30 min — Até a entrada dos Museus Vaticanos, na Viale Vaticano
+- 07:45 [Museus Vaticanos](place:rom-vatican) — Chegar para a segurança; reservar o primeiro horário, **8h**, com Capela Sistina incluída. Visita de cerca de 3h; sair até 11h10 para o Panteão
+  - status: a confirmar
+  - via: Pegar um táxi · 30 min — Saída até 11h10 para chegar à região do Panteão por volta de 11h40
+  - saída: 11:10
+- 12:00 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Bilhetes de 17/10 válidos na janela **12h–13h**; visitar a cúpula e o óculo até 12h40. É uma única atração, com custo informado de €15,50 pelo casal
+  - ingresso: €7,75
+- 12:55 [Alfredo e Ada](place:rom-alfredo-ada) — **Almoço**: massa ou lasanha, previsão de €13 por pessoa; sair até 13h40
+  - comida: €13
+  - saída: 13:40
+- 13:50 [Piazza Navona](place:rom-navona) — Passear pela praça e ver as fontes
+- 14:30 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu
+- 15:15 [Basílica de São Pedro](place:rom-st-peter) — Visitar a praça e o interior da basílica, com entrada gratuita; sem subir à cúpula. Reservar até 16h45 para a fila de segurança e a visita
+  - via: Pegar um táxi · 30 min — Saída prevista às 16h45 para a região de Trevi; desembarque no acesso permitido
+- 17:15 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
+- 17:50 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
+- 18:30 [Piazza del Popolo](place:rom-popolo) — Passear pela praça; sair até 18h50
+  - via: Pegar um táxi · 25 min — Até a região de Roma Termini para o jantar
+- 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara, com previsão de €18 por pessoa para o prato trufado citado no Notion
+  - comida: €18
+  - via: Pegar um táxi · 40 min — Saída prevista às 20h30 para o apartamento
+- 21:10 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Retorno; preparar as malas para o checkout das 10h
 
 ### Dia 3 — Dom 18/10 · Voo para Lisboa
 
-- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout até 10h
-- 18:30 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo FCO → LIS
-  - via: voo FCO → LIS
+Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
+
+- 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout e saída com as malas
+  - via: Pegar um táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
+- 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
+  - status: a confirmar
+  - via: Pegar um táxi · 1h — Saída prevista às 11h45 para o Terminal 3 de Fiumicino; tarifa fixa de €55 por carro no trajeto direto do centro ao aeroporto
+- 12:45 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Chegada prevista ao Terminal 3, bem antes das 14h50 recomendadas no cartão; esperar com as malas até a abertura do balcão
+- 14:50 Localizar o balcão da Wizz Air no painel de partidas e organizar passaportes e cartões de embarque; check-in online já realizado
+- 15:20 Despacho da mala de até 32 kg e conferência de documentos no balcão; reservar até 16h20 para a fila. Despacho encerra às 17h20
+- 16:20 Controle de segurança e caminhada até o portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
+- 17:35 Estar no portão de embarque; fechamento às 17h50
+- 18:20 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo Wizz Air Malta W4 6219 para Lisboa, Terminal 3.\
+  - via: Voo Wizz Air W4 6219 · 3h15
 
 ## Lisboa
 city: lisboa
@@ -533,18 +658,23 @@ budget: comida €40
 
 ### Dia 1 — Dom 18/10 · Chegada a Lisboa
 
-Chegada do voo de Roma e hospedagem em Lisboa.
+Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mala despachada e fila do táxi.
 
-- [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Chegada de Roma
-- 21:00 Táxi para a hospedagem
-- **Hospedagem:** [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Chegada após o táxi; check-in disponível desde 16h.\
+- 20:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Pouso do voo W4 6219 vindo de Roma; desembarque e retirada da mala antes de sair para os táxis
+  - via: Pegar um táxi · 35 min — Saída prevista às 21h35 na fila oficial dos desembarques; incluir o acesso final com as malas à hospedagem
+- 22:10 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Check-in previsto; apartamento no 2º andar, sem elevador. A janela regular é 16h–21h: confirmar previamente a chegada tardia, com taxa de €30 por reserva.\
   **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída antecipada para o voo das 9h35.\
-  **Reserva:** Booking.com · confirmação 5493388124 · PIN 5571.\
-  **Cartão:** KAST. Cancelamento informado: até 17/09/2026.\
-  **Endereço da reserva:** Rua da Barroca 11 2E, Misericórdia, 1200-169 Lisboa, Portugal.\
-  **Contato:** +351 912 868 604.
+  **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.\
+  - status: a confirmar
 
 ### Dia 2 — Seg 19/10 · Lisboa
+
+- [Pastéis de Belém](place:lis-pasteis-belem) — Comer o Pastel de Belém sem falta
+  - status: confirmado
+- [Casa Portuguesa do Pastel de Bacalhau](place:lis-pastel-bacalhau) — Comer o Bolinho de Bacalhau sem falta
+  - status: confirmado
+- [Praça do Comércio](place:lis-praca-comercio) — Passear pela praça
+  - status: confirmado
 
 ### Dia 3 — Ter 20/10 · Volta para São Paulo
 
