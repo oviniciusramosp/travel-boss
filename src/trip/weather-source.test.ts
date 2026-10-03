@@ -1,5 +1,35 @@
-import { describe, expect, it } from 'vitest';
-import { forecastToEnsemble, metToEnsemble, openMeteoQuery, parseEnsemble, STAND_IN_RUNS } from './weather-source';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { extendForecast, forecastToEnsemble, mergeForecasts, metToEnsemble, openMeteoQuery, parseEnsemble, STAND_IN_RUNS } from './weather-source';
+
+afterEach(() => vi.unstubAllGlobals());
+
+describe('extended coverage', () => {
+  const primary = { time: ['2026-10-18T23:00'], members: [{ temp: [18], rain: [0], cloud: [10] }] };
+  const extended = {
+    time: ['2026-10-18T23:00', '2026-10-19T00:00', '2026-10-20T07:00'],
+    members: [
+      { temp: [12, 13, 14], rain: [2, 3, 0], cloud: [90, 80, 20] },
+      { temp: [11, 12, 13], rain: [1, 2, 0], cloud: [80, 70, 30] },
+    ],
+  };
+  it('preserves the short-range forecast and fills later dates without inventing extra runs', () => {
+    const merged = mergeForecasts(primary, extended);
+    expect(merged.time).toEqual(extended.time);
+    expect(merged.extendedFrom).toBe('2026-10-19T00:00');
+    expect(merged.members[0]).toEqual({ temp: [18, 13, 14], rain: [0, 3, 0], cloud: [10, 80, 20] });
+    expect(merged.members[1]!.temp).toEqual([null, 12, 13]);
+    expect(mergeForecasts(null, extended).extendedFrom).toBe(extended.time[0]);
+  });
+  it('fills hours whose short-range runs are all null', () => {
+    expect(mergeForecasts({ ...primary, members: [{ temp: [null], rain: [null], cloud: [null] }] }, extended)
+      .members[0]!.temp[0]).toBe(12);
+  });
+  it('keeps the available forecast when EC46 is unavailable', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('offline')));
+    expect(await extendForecast(primary, 38.72, -9.14, 'Europe/Lisbon')).toBe(primary);
+    expect(await extendForecast(null, 38.72, -9.14, 'Europe/Lisbon')).toBeNull();
+  });
+});
 
 describe('metToEnsemble', () => {
   const step = (time: string, temp: number, cloud: number, rain1?: number, rain6?: number) => ({

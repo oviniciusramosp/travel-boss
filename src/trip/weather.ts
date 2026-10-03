@@ -1,16 +1,24 @@
 import { appRequest } from '../platform/request';
 /**
- * Ensemble forecast from Open-Meteo: free, no key, 16 days ahead. ECMWF (51 runs)
+ * Ensemble forecast from Open-Meteo: free, no key, 16 days ahead, with EC46 trends beyond. ECMWF (51 runs)
  * and NOAA GEFS (31 runs) side by side, so the chance of rain is the share of runs
  * that rain, and one run changing its mind moves it by about 1%, not from sun to rain.
  * Times come back on the city's own clock, the same one the trip is written in.
  */
 import { pickLocale, type Locale, type LString } from '../catalog';
 import type { Period } from './day-plan';
+import { shiftIso } from './dates';
+import { getTripCity, placeCity } from './catalog';
 import type { WeatherIcon } from '../ui/weather-icons';
 
 import { parseEnsemble, type Ensemble, type Member } from './weather-source';
 export { parseEnsemble, type Ensemble, type Member };
+
+/** Excursions use the place's own city; a day without places uses its trip heading. */
+export function weatherCity(slug: string, placeId?: string) {
+  const city = getTripCity(slug);
+  return city && placeId ? placeCity(placeId, city) : city;
+}
 
 /**
  * The dev server (`/api/weather`, see vite.config.ts) fetches once per city per half hour for
@@ -23,7 +31,7 @@ const FRESH_MS = 30 * 60 * 1000;
 
 /** Median low and high, chance of rain in %, median rain of the runs that rain, median cloud. */
 /** `runs` is how many members covered the window: with one (a single model) `rain` is 0 or 100 and not a chance. */
-export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number; runs: number };
+export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number; runs: number; extended?: boolean };
 
 type Entry = {
   /** When the last request started; 0 for a forecast read from storage, so the next load refreshes it. */
@@ -76,6 +84,7 @@ export function packForecast(hours: Ensemble): string {
   const round = (list: (number | null)[]) => list.map((value) => (value == null ? null : Math.round(value * 10) / 10));
   return JSON.stringify({
     time: hours.time,
+    ...(hours.extendedFrom ? { extendedFrom: hours.extendedFrom } : {}),
     members: hours.members.map((member) => ({ temp: round(member.temp), rain: round(member.rain), cloud: round(member.cloud) })),
   });
 }
@@ -84,14 +93,14 @@ export function packForecast(hours: Ensemble): string {
 export function unpackForecast(text: string | null): Ensemble | null {
   if (!text) return null;
   try {
-    const data = JSON.parse(text) as { time?: unknown; members?: unknown };
+    const data = JSON.parse(text) as { time?: unknown; members?: unknown; extendedFrom?: unknown };
     if (!Array.isArray(data.time) || !data.time.every((item) => typeof item === 'string')) return null;
     if (!Array.isArray(data.members) || !data.members.length) return null;
     const length = data.time.length;
     const column = (list: unknown) =>
       Array.isArray(list) && list.length === length && list.every((value) => value === null || typeof value === 'number');
     if (!data.members.every((member: Member) => column(member.temp) && column(member.rain) && column(member.cloud))) return null;
-    return { time: data.time as string[], members: data.members as Member[] };
+    return { time: data.time as string[], members: data.members as Member[], ...(typeof data.extendedFrom === 'string' ? { extendedFrom: data.extendedFrom } : {}) };
   } catch {
     return null;
   }
@@ -208,7 +217,7 @@ export function updatedLabel(fetchedAt: number, locale: Locale, now = new Date()
   return `${date.toLocaleDateString(locale, { day: '2-digit', month: '2-digit' })} ${clock}`;
 }
 
-/** Two lines: condition and rain probability, then the last successful update. */
+/** Condition, rain probability and update; extended data also states its lower confidence. */
 export function weatherTip(
   weather: Weather,
   label: LString,
@@ -225,7 +234,10 @@ export function weatherTip(
   const updated = fetchedAt == null
     ? pickLocale(locale, { en: 'Update time unavailable', 'pt-BR': 'Horário de atualização indisponível' })
     : pickLocale(locale, { en: `Updated ${updatedLabel(fetchedAt, locale, now)}`, 'pt-BR': `Atualizado às ${updatedLabel(fetchedAt, locale, now)}` });
-  return `${pickLocale(locale, label)} · ${rain}\n${updated}`;
+  const trend = weather.extended ? pickLocale(locale, {
+    en: '\nLong-range trend · lower confidence', 'pt-BR': '\nTendência de longo prazo · menor confiança',
+  }) : '';
+  return `${pickLocale(locale, label)} · ${rain}\n${updated}${trend}`;
 }
 
 /** Clock hours of each period, start in, end out. */
@@ -247,7 +259,7 @@ function median(list: number[]): number {
 /** One window of a date across every run. Null past the forecast. */
 export function weatherIn(ensemble: Ensemble, date: string, window: readonly [number, number]): Weather | null {
   const [from, to] = window;
-  const stamp = (hour: number) => `${date}T${String(hour).padStart(2, '0')}:00`;
+  const stamp = (hour: number) => `${shiftIso(date, Math.floor(hour / 24))}T${String(hour % 24).padStart(2, '0')}:00`;
   const hours = Array.from({ length: to - from }, (_, index) => from + index);
   const at = hours.map((hour) => ensemble.time.indexOf(stamp(hour)));
   // Rain is stamped at the end of its hour.
@@ -276,6 +288,7 @@ export function weatherIn(ensemble: Ensemble, date: string, window: readonly [nu
     cloud: median(clouds),
     hours: hours.length,
     runs,
+    ...(ensemble.extendedFrom && [...at, ...rainAt].some((index) => ensemble.time[index]! >= ensemble.extendedFrom!) ? { extended: true } : {}),
   };
 }
 
@@ -306,6 +319,7 @@ export function dayWeather(parts: readonly Weather[]): Weather | null {
   const wettest = parts.reduce((best, part) => (rank(part) > rank(best) ? part : best), first);
   return {
     ...wettest,
+    ...(parts.some((part) => part.extended) ? { extended: true } : {}),
     min: Math.min(...parts.map((part) => part.min)),
     max: Math.max(...parts.map((part) => part.max)),
     cloud: rainTier(wettest) ? wettest.cloud : parts.reduce((sum, part) => sum + part.cloud, 0) / parts.length,

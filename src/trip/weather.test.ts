@@ -8,6 +8,7 @@ import {
   unpackForecast,
   updatedLabel,
   weatherIn,
+  weatherCity,
   weatherLook,
   weatherTip,
   WINDOWS,
@@ -44,6 +45,17 @@ const ensemble = parseEnsemble({
   },
 })!;
 
+describe('weatherCity', () => {
+  it.each([
+    ['milao', 'ven-santa-lucia', 'veneza'],
+    ['milao', 'ver-arena', 'verona'],
+    ['lisboa', undefined, 'lisboa'],
+    ['lisboa', 'sp-gru', 'sao-paulo'],
+  ])('uses the actual city for %s / %s', (slug, placeId, expected) => {
+    expect(weatherCity(slug, placeId)?.slug).toBe(expected);
+  });
+});
+
 describe('parseEnsemble', () => {
   it('reads every run that has temperature, rain and cloud', () => {
     expect(ensemble.members).toHaveLength(5);
@@ -69,6 +81,25 @@ describe('weatherIn', () => {
   it('is null past the forecast', () => {
     expect(weatherIn(ensemble, '2026-10-04', WINDOWS.afternoon)).toBeNull();
     expect(weatherIn(ensemble, '2026-10-12', WINDOWS.morning)).toBeNull();
+  });
+
+  it('counts rain in the final hour using the next date at midnight', () => {
+    const hours = {
+      time: ['2026-10-04T23:00', '2026-10-05T00:00'],
+      extendedFrom: '2026-10-05T00:00',
+      members: [{ temp: [15, 14], rain: [0, 2], cloud: [90, 90] }],
+    };
+    expect(weatherIn(hours, '2026-10-04', [23, 24])).toMatchObject({ mm: 2, rain: 100, extended: true });
+  });
+
+  it('identifies long-range readings, including after storage and in the daily summary', () => {
+    const hours = unpackForecast(packForecast({ ...ensemble, extendedFrom: '2026-10-04T07:00' }))!;
+    const part = weatherIn(hours, '2026-10-04', WINDOWS.morning)!;
+    expect(part.extended).toBe(true);
+    expect(dayWeather([part, { ...part, extended: false, rain: 100 }])!.extended).toBe(true);
+    expect(weatherTip(part, weatherLook(part).label, 'pt-BR', undefined, null, false))
+      .toContain('Tendência de longo prazo · menor confiança');
+    expect(weatherIn({ ...hours, extendedFrom: '2026-10-05T00:00' }, '2026-10-04', WINDOWS.morning)?.extended).toBeUndefined();
   });
 });
 

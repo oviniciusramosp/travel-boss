@@ -6,13 +6,49 @@
 
 /** One run of the ensemble: hourly temperature, rain of the hour before, and cloud cover. */
 export type Member = { temp: (number | null)[]; rain: (number | null)[]; cloud: (number | null)[] };
-export type Ensemble = { time: string[]; members: Member[] };
+export type Ensemble = { time: string[]; members: Member[]; extendedFrom?: string };
 
 export const OPEN_METEO_URL = 'https://ensemble-api.open-meteo.com/v1/ensemble';
 export const OPEN_METEO_MODELS = 'ecmwf_ifs025,gfs05';
 export const MET_URL = 'https://api.met.no/weatherapi/locationforecast/2.0/complete';
 /** Open-Meteo's single-model forecast: its quota is separate from the ensemble API's. */
 export const OPEN_METEO_FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
+export const OPEN_METEO_EXTENDED_URL = 'https://seasonal-api.open-meteo.com/v1/seasonal';
+
+/** Keep the short-range forecast wherever it has data; EC46 fills only uncovered hours. */
+export function mergeForecasts(primary: Ensemble | null, extended: Ensemble): Ensemble {
+  const time = [...new Set([...(primary?.time ?? []), ...extended.time])].sort();
+  const primaryAt = new Map(primary?.time.map((stamp, index) => [stamp, index]));
+  const extendedAt = new Map(extended.time.map((stamp, index) => [stamp, index]));
+  const rows = time.map((stamp) => {
+    const index = primaryAt.get(stamp);
+    return primary && index !== undefined && primary.members.some((member) => member.temp[index] != null)
+      ? { ensemble: primary, index }
+      : { ensemble: extended, index: extendedAt.get(stamp) ?? -1 };
+  });
+  const members = Array.from({ length: Math.max(primary?.members.length ?? 0, extended.members.length) }, (_, run) => {
+    const column = (key: keyof Member) => rows.map(({ ensemble, index }) => ensemble.members[run]?.[key][index] ?? null);
+    return { temp: column('temp'), rain: column('rain'), cloud: column('cloud') };
+  });
+  const first = rows.findIndex((row) => row.ensemble === extended);
+  return { time, members, ...(first >= 0 ? { extendedFrom: time[first] } : {}) };
+}
+
+/** EC46 is an area trend with lower confidence, not a precise daily forecast. */
+export async function extendForecast(primary: Ensemble | null, lat: number, lng: number, timeZone: string, signal?: AbortSignal | null): Promise<Ensemble | null> {
+  const query = new URLSearchParams({
+    latitude: String(lat), longitude: String(lng), timezone: timeZone,
+    hourly: 'temperature_2m,precipitation,cloud_cover', models: 'ecmwf_ec46',
+    forecast_days: '46', temporal_resolution: 'hourly',
+  });
+  try {
+    const response = await fetch(`${OPEN_METEO_EXTENDED_URL}?${query}`, { signal: signal ?? AbortSignal.timeout(15_000) });
+    const extended = response.ok ? parseEnsemble(await response.json()) : null;
+    return extended ? mergeForecasts(primary, extended) : primary;
+  } catch {
+    return primary;
+  }
+}
 
 export function openMeteoForecastQuery(lat: number, lng: number, timeZone: string): string {
   return new URLSearchParams({

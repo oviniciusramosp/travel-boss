@@ -1,7 +1,7 @@
 import { type ChecklistItem } from '../trip/checklist-state';
 import savedPlaces from '../data/travel-place-edits.json';
 import { type PlaceEditStore } from '../catalog/place-edit-model';
-import { OPEN_METEO_FORECAST_URL, openMeteoForecastQuery, forecastToEnsemble } from '../trip/weather-source';
+import { OPEN_METEO_FORECAST_URL, openMeteoForecastQuery, forecastToEnsemble, extendForecast } from '../trip/weather-source';
 
 const trips = import.meta.glob<string>('../../content/trips/*.md', { eager: true, query: '?raw', import: 'default' });
 const checklists = import.meta.glob<ChecklistItem[]>('../../content/checklists/*.json', { eager: true, import: 'default' });
@@ -36,10 +36,14 @@ export async function publishedRequest(path: string, options?: RequestInit): Pro
   }
   if (kind === 'weather') {
     const query = url.searchParams;
-    const response = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(Number(query.get('lat')), Number(query.get('lng')), query.get('tz') ?? 'UTC')}`, { signal: options?.signal });
-    if (!response.ok) return reply({ error: response.status === 429 ? 'limit' : 'http' }, response.status);
-    const hours = forecastToEnsemble(await response.json());
-    return hours ? reply({ hours, at: Date.now(), source: 'Open-Meteo (modelo)' }) : reply({ error: 'http' }, 502);
+    const lat = Number(query.get('lat'));
+    const lng = Number(query.get('lng'));
+    const tz = query.get('tz') ?? 'UTC';
+    const response = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(lat, lng, tz)}`, { signal: options?.signal }).catch(() => null);
+    const primary = response?.ok ? forecastToEnsemble(await response.json().catch(() => null)) : null;
+    const hours = await extendForecast(primary, lat, lng, tz, options?.signal);
+    return hours ? reply({ hours, at: Date.now(), source: 'Open-Meteo' })
+      : reply({ error: response?.status === 429 ? 'limit' : response ? 'http' : 'network' }, 502);
   }
   return reply({ error: 'Unavailable on static hosting' }, 503);
 }
