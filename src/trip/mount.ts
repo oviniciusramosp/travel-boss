@@ -92,6 +92,7 @@ import {
   dayWeather,
   forecastState,
   loadForecast,
+  weatherCity,
   weatherIn,
   weatherLook,
   weatherTip,
@@ -190,7 +191,7 @@ function fillWeather(
   state: ForecastState,
   placeholder = false,
 ): void {
-  const empty = !weather && placeholder && (state.loading || state.failed);
+  const empty = !weather && placeholder;
   slot.classList.toggle('is-loading', empty && state.loading);
   slot.classList.toggle('is-off', empty && !state.loading);
   slot.classList.toggle('is-stale', Boolean(weather) && state.failed);
@@ -202,9 +203,12 @@ function fillWeather(
     }
     const text = state.loading
       ? pickLocale(locale, { en: 'Loading the forecast…', 'pt-BR': 'Carregando a previsão…' })
-      : pickLocale(locale, {
+      : state.failed ? pickLocale(locale, {
           en: 'No forecast right now.\nRefresh to try again.',
           'pt-BR': 'Sem previsão agora.\nAtualize para tentar de novo.',
+        }) : pickLocale(locale, {
+          en: 'This date is outside the available forecast.\nThe forecast appears as the date approaches.',
+          'pt-BR': 'Esta data está fora da previsão disponível.\nA previsão aparece conforme a data se aproxima.',
         });
     slot.replaceChildren(weatherIcon(state.loading ? 'cloud-sun' : 'clouds'));
     slot.setAttribute('data-tip', text);
@@ -223,7 +227,7 @@ function fillWeather(
       : weather.rain >= 50
         ? `${temp} · ${weather.mm.toFixed(1).replace('.', locale === 'pt-BR' ? ',' : '.')} mm`
         : temp;
-  slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', reading));
+  slot.replaceChildren(weatherIcon(look.icon), el('span', 'tb-weather__text tb-reveal', `${weather.extended ? '~' : ''}${reading}`));
   const tip = weatherTip(weather, look.label, locale, window, state.fetchedAt, state.failed, new Date(), state.source);
   slot.setAttribute('data-tip', tip);
   slot.setAttribute('aria-label', tip.replaceAll('\n', '. '));
@@ -1258,7 +1262,8 @@ export function mountTrip(
       const times = rows.map((row) => row.dated.day.stops[row.stopIndex]?.time);
       const windows = periodWindows(times, periods, WINDOWS);
       const stateOf = (index: number): ForecastState => {
-        const record = getTripCity(rows[index]?.dated.city.slug ?? '');
+        const row = rows[index];
+        const record = weatherCity(row?.dated.city.slug ?? section.cities[0]?.city.slug ?? '', row?.dated.day.stops[row.stopIndex]?.placeId);
         return record
           ? forecastState(record.lat, record.lng)
           : { hours: null, fetchedAt: null, loading: false, failed: false, error: null, source: null };
@@ -1271,7 +1276,7 @@ export function mountTrip(
         const weather = state.hours && weatherIn(state.hours, section.date, windows[period]);
         if (weather) parts.push(weather);
         const slot = card.querySelector<HTMLElement>(`.tb-period[data-period="${period}"] [data-weather]`);
-        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period], state);
+        if (slot) fillWeather(slot, weather, period === 'evening', locale, windows[period], state, true);
       }
       // A date without times reads all three periods of its first city.
       const whole = periods.some(Boolean) ? null : cityOf(0);
@@ -1295,12 +1300,15 @@ export function mountTrip(
   function refreshWeather(trip: Trip, force = false): Promise<void> {
     const seen = new Set<string>();
     const loads: Promise<unknown>[] = [];
-    for (const city of trip.cities) {
-      const record = getTripCity(city.slug);
-      if (!record || seen.has(city.slug)) continue;
-      seen.add(city.slug);
+    const cities = trip.cities.flatMap((city) => [
+      weatherCity(city.slug),
+      ...city.days.flatMap((day) => day.stops.flatMap((stop) => stop.placeId ? [weatherCity(city.slug, stop.placeId)] : [])),
+    ]);
+    for (const record of cities) {
+      if (!record || seen.has(record.slug)) continue;
+      seen.add(record.slug);
       loads.push(
-        loadForecast(record.lat, record.lng, timeZoneForCity(city.slug), force).then(() => {
+        loadForecast(record.lat, record.lng, timeZoneForCity(record.slug), force).then(() => {
           if (alive && current && !force) paintWeather(current);
         }),
       );
@@ -1702,17 +1710,19 @@ export function mountTrip(
       const buying = new Set<string>();
       const inside = new Set<string>();
       const foodOverrides = new Map<string, number>();
+      const ticketOverrides = new Map<string, number>();
       for (const row of rows) {
         const stop = row.dated.day.stops[row.stopIndex];
         if (!stop?.placeId) continue;
         if (stop.foodEur !== undefined) foodOverrides.set(stop.placeId, stop.foodEur);
+        if (stop.ticketEur !== undefined) ticketOverrides.set(stop.placeId, stop.ticketEur);
         const text = `${stop.label} ${stop.note ?? ''}`;
         (seenFromOutside(text) ? outside : inside).add(stop.placeId);
         (noPurchase(text) ? noFood : buying).add(stop.placeId);
       }
       for (const placeId of inside) outside.delete(placeId);
       for (const placeId of buying) noFood.delete(placeId);
-      const budget = dateBudget(placesHere, fares, outside, noFood, foodOverrides);
+      const budget = dateBudget(placesHere, fares, outside, noFood, foodOverrides, ticketOverrides);
       dailyBudgets.push({ title: formatDayTitle(date, locale), budget });
       // The date counts a place once, so its line sits on its first stop only.
       const stopCosts = new Map(budget.lines.map((line) => [line.id, line]));

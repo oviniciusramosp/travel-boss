@@ -289,6 +289,7 @@ export function dateBudget(
   outside: ReadonlySet<string> = new Set(),
   noFood: ReadonlySet<string> = new Set(),
   foodOverrides: ReadonlyMap<string, number> = new Map(),
+  ticketOverrides: ReadonlyMap<string, number> = new Map(),
 ): DateBudget {
   const seen = new Set<string>();
   const budget: DateBudget = { food: 0, ticket: 0, lines: [] };
@@ -296,7 +297,7 @@ export function dateBudget(
     if (seen.has(place.id)) continue;
     seen.add(place.id);
     const visit = resolveVisit(place.id, place.visit);
-    const ticket = outside.has(place.id) ? 0 : midEur(visit?.ticket);
+    const ticket = ticketOverrides.get(place.id) ?? (outside.has(place.id) ? 0 : midEur(visit?.ticket));
     const food = foodOverrides.get(place.id) ?? (noFood.has(place.id) ? 0 : midEur(visit?.avgPricePerPerson));
     const line = { id: place.id, food, ticket };
     if (line.food <= 0 && line.ticket <= 0) continue;

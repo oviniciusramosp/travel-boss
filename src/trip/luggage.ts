@@ -5,11 +5,13 @@ import type { Trip, TripStop } from './parse';
 function luggageEvent(stop: TripStop): 'in' | 'out' | undefined {
   const text = [stop.label, stop.note].filter(Boolean).join(' — ').split('\n')[0]!
     .replace(/\*+/g, '').toLowerCase();
+  if (/(?:^|[;—]\s*)(?:deixar|guardar|depositar)\s+(?:as\s+)?malas\b/.test(text)) return 'in';
+  if (/(?:^|[;—]\s*)(?:retirar|recolher|buscar)\s+(?:as\s+)?malas\b/.test(text)) return 'out';
   const match = /(?:^|[;—]\s*)check[\s-]?(in|out)\b/.exec(text);
   return match?.[1] as 'in' | 'out' | undefined;
 }
 
-/** Carry across cities/dates. Checkout and arrival at check-in both involve luggage. */
+/** Carry across cities/dates; a luggage deposit suspends carrying until collection. */
 export function luggageStops(trip: Trip): Set<TripStop> {
   const marked = new Set<TripStop>();
   let carrying = false;

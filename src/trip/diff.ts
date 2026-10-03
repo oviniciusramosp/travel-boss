@@ -10,6 +10,7 @@ export function stopFingerprint(stop: TripStop): string {
     stop.href ?? '',
     stop.note ?? '',
     stop.foodEur ?? '',
+    stop.ticketEur ?? '',
     stop.leg?.detail ?? '',
     stop.listNote ? 'note' : '',
     ...(stop.comments ?? []).map((comment) => comment.text),

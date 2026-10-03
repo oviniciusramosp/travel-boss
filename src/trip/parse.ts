@@ -34,6 +34,8 @@ export type TripBoarding = {
 export type TripStop = {
   /** Planned food spend per person for this date, replacing the catalog estimate. */
   foodEur?: number;
+  /** Planned admission spend per person, including zero for a bundled entry. */
+  ticketEur?: number;
   /** Published services checked for this departure stop and date. */
   boardings?: TripBoarding[];
   /** Explicit planned exit, independent from the arrival time of the stop. */
@@ -109,6 +111,7 @@ export type TripErrorCode =
   | 'budget-empty'
   | 'budget-twice'
   | 'food-invalid'
+  | 'ticket-invalid'
   | 'stop-outside-day'
   | 'line-outside-day'
   | 'no-title';
@@ -406,13 +409,14 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       if (!stop && status[1] === 'fechado') { day.status = 'fechado'; continue; }
     }
 
-    const food = /^[ \t]+- comida:[ \t]*(.*)$/.exec(line);
-    if (food) {
+    const cost = /^[ \t]+- (comida|ingresso):[ \t]*(.*)$/.exec(line);
+    if (cost) {
       const stop = day?.stops.at(-1);
-      const amount = /^€\s?(\d+(?:[.,]\d{1,2})?)\s*$/.exec(food[1] ?? '');
-      if (!stop?.placeId || stop.listNote || !amount || stop.foodEur !== undefined || !Number.isFinite(euros(amount[1]!))) {
-        reject(errors, lineNo, 'food-invalid');
-      } else stop.foodEur = euros(amount[1]!);
+      const field = cost[1] === 'comida' ? 'foodEur' : 'ticketEur';
+      const amount = /^€\s?(\d+(?:[.,]\d{1,2})?)\s*$/.exec(cost[2] ?? '');
+      if (!stop?.placeId || stop.listNote || !amount || stop[field] !== undefined || !Number.isFinite(euros(amount[1]!))) {
+        reject(errors, lineNo, field === 'foodEur' ? 'food-invalid' : 'ticket-invalid');
+      } else stop[field] = euros(amount[1]!);
       continue;
     }
 

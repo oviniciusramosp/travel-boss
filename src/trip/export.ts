@@ -27,6 +27,7 @@ function pushStop(
   }
   if (stop.status && !stop.listNote) lines.push(`  - status: ${stop.status}`);
   if (stop.foodEur !== undefined) lines.push(`  - comida: €${stop.foodEur.toFixed(2).replace('.', ',')}`);
+  if (stop.ticketEur !== undefined) lines.push(`  - ingresso: €${stop.ticketEur.toFixed(2).replace('.', ',')}`);
   if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
   if (stop.departureTime) lines.push(`  - saída: ${stop.departureTime}`);
   for (const ride of stop.boardings ?? []) {

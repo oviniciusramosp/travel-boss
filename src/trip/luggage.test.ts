@@ -39,4 +39,31 @@ dates: 2026-10-18 → 2026-10-20
 `);
     expect([...luggageStops(trip)].map(s => s.label)).toEqual(['**Checkout:** Hotel — Antes de pegar o Uber', 'Aeroporto']);
   });
+
+  it('leaves bags at a deposit during visits, then carries them to the next stay', () => {
+    const trip = parseTrip('test', 'test.md', `# Test
+## La Spezia
+city: la-spezia
+dates: 2026-10-16 → 2026-10-16
+### Dia 1
+- [Hotel](https://example.com) — Checkout às 7h25
+- [Estação](place:spe-centrale)
+## Roma
+city: roma
+dates: 2026-10-16 → 2026-10-17
+### Dia 1
+- [Depósito](place:rom-stow-colosseo) — Deixar as malas até 13h05
+- [Coliseu](place:rom-colosseum)
+- [Fórum](place:rom-forum)
+- [Depósito](place:rom-stow-colosseo) — Retirar as malas às 18h30
+- Táxi
+- [Hotel](https://example.com) — Check-in às 19h15
+- Jantar
+### Dia 2
+- Passeio
+`);
+    expect([...luggageStops(trip)].map(s => s.label)).toEqual([
+      'Hotel', 'Estação', 'Depósito', 'Depósito', 'Táxi', 'Hotel',
+    ]);
+  });
 });
