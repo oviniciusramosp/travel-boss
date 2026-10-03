@@ -2,6 +2,7 @@ import type { TravelCity, TravelPlace } from './travel';
 import type { ItineraryLegDef } from './travel-itinerary-legs';
 import type { LatLng } from './travel-transit-lines';
 import paths from './travel-italy-rail-paths.json';
+import { veniceNotionPlaces, veronaNotionPlaces } from './travel-italy-notion';
 
 // Exact OSM station objects; provenance and geometry limitations in docs/references/italy-trains-2026.md.
 function station(id: string, name: string, lat: number, lng: number, osm: number): TravelPlace {
@@ -15,8 +16,8 @@ const venice = station('ven-santa-lucia', 'Venezia Santa Lucia', 45.4410753, 12.
 const verona = station('ver-porta-nuova', 'Verona Porta Nuova', 45.429182, 10.9823706, 3738591149);
 export const laSpeziaStation = station('spe-centrale', 'La Spezia Centrale', 44.111564, 9.81358, 1262114259);
 export const italyRailCities: TravelCity[] = [
-  { slug: 'veneza', name: { en: 'Venice', 'pt-BR': 'Veneza' }, country: { en: 'Italy', 'pt-BR': 'Itália' }, countryKey: 'italia', lat: venice.lat, lng: venice.lng, zoom: 13, places: [venice] },
-  { slug: 'verona', name: { en: 'Verona', 'pt-BR': 'Verona' }, country: { en: 'Italy', 'pt-BR': 'Itália' }, countryKey: 'italia', lat: verona.lat, lng: verona.lng, zoom: 13, places: [verona] },
+  { slug: 'veneza', name: { en: 'Venice', 'pt-BR': 'Veneza' }, country: { en: 'Italy', 'pt-BR': 'Itália' }, countryKey: 'italia', lat: venice.lat, lng: venice.lng, zoom: 13, places: [venice, ...veniceNotionPlaces] },
+  { slug: 'verona', name: { en: 'Verona', 'pt-BR': 'Verona' }, country: { en: 'Italy', 'pt-BR': 'Itália' }, countryKey: 'italia', lat: verona.lat, lng: verona.lng, zoom: 13, places: [verona, ...veronaNotionPlaces] },
 ];
 
 export const italyRailLegs: ItineraryLegDef[] = [

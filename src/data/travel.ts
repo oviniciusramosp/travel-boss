@@ -4,6 +4,7 @@
  */
 
 import { italyRailCities, laSpeziaStation } from './travel-italy-rail';
+import { cinqueTerreNotionPlaces, romeNotionPlaces } from './travel-italy-notion';
 import {
   placeCategoryOrder,
   type PlaceCategory,
@@ -37,6 +38,7 @@ import { withPlaceEdits } from '../catalog/place-edits';
 import { milanCity } from './travel-milan';
 import { parisMangezEtCassezVous } from './travel-paris-mangez-et-cassez-vous';
 import { parisMcDonalds } from './travel-paris-mcdonalds';
+import { parisPouletos } from './travel-paris-pouletos';
 
 export type { TravelPhoto } from './travel-photos';
 export type {
@@ -664,7 +666,7 @@ export const localTravelCities: TravelCity[] = [
     lat: 44.1033871,
     lng: 9.8217022,
     zoom: 13,
-    places: [laSpeziaStation],
+    places: [laSpeziaStation, ...cinqueTerreNotionPlaces],
   },
   {
     slug: 'sao-paulo',
@@ -4031,6 +4033,7 @@ export const localTravelCities: TravelCity[] = [
       // ── Chains (commons) ──
       ...parisMangezEtCassezVous,
       ...parisMcDonalds,
+      ...parisPouletos,
       {
         id: 'par-mcdonalds-champs',
         name: {
@@ -4606,6 +4609,23 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.309963,
         address: '36 Boulevard de la Tour-Maubourg, 75007 Paris',
         mapsQuery: 'Le Recrutement Café Paris',
+      },
+      {
+        id: 'par-recrutement-facade',
+        name: {
+          en: 'Le Recrutement Café façade',
+          'pt-BR': 'Fachada do Le Recrutement Café',
+        },
+        category: 'photo',
+        subcategories: ['architecture', 'viewpoint'],
+        description: {
+          en: 'Photo stop at the red corner façade of Le Recrutement, with the Eiffel Tower framed down Rue Saint-Dominique. Visiting the café is not required.',
+          'pt-BR': 'Ponto para fotografar a fachada vermelha de esquina do Le Recrutement, com a Torre Eiffel enquadrada pela Rue Saint-Dominique. Não é necessário consumir no café.',
+        },
+        lat: 48.8599938,
+        lng: 2.3099627,
+        address: '36 Boulevard de la Tour-Maubourg, 75007 Paris',
+        mapsQuery: 'Le Recrutement 36 Boulevard de la Tour-Maubourg Paris',
       },
       {
         id: 'par-villa-marquise',
@@ -5795,6 +5815,7 @@ export const localTravelCities: TravelCity[] = [
     lng: 12.4964,
     zoom: 13,
     places: [
+      ...romeNotionPlaces,
       {
         id: 'rom-valle-aurelia',
         name: { en: 'Valle Aurelia', 'pt-BR': 'Valle Aurelia' },
@@ -5852,10 +5873,11 @@ export const localTravelCities: TravelCity[] = [
             'Leonardo da Vinci — principal aeroporto internacional de Roma. Leonardo Express até a Termini ~32 min.',
         },
         googleRating: 3.9,
-        lat: 41.8153911,
-        lng: 12.2264848,
-        address: 'Via Leonardo da Vinci, 00054 Fiumicino RM, Italy',
+        lat: 41.7955522,
+        lng: 12.2521652,
+        address: 'Terminal 3, Via dell’Aeroporto di Fiumicino, 00054 Fiumicino RM, Italy',
         mapsQuery: 'Aeroporto di Roma-Fiumicino FCO',
+        mapsUrl: 'https://www.openstreetmap.org/node/378978362',
       },
       {
         id: 'rom-termini',
@@ -6048,8 +6070,8 @@ export const localTravelCities: TravelCity[] = [
         category: 'tourist',
         landmark: 'monument',
         description: {
-          en: 'Perfect dome and oculus. Adult entry ~€5.',
-          'pt-BR': 'Cúpula perfeita e óculo. Entrada ~€5.',
+          en: 'Ancient Roman temple, now the Basilica of Santa Maria ad Martyres, with its preserved dome and oculus.',
+          'pt-BR': 'Antigo templo romano, hoje Basílica de Santa Maria ad Martyres, com sua cúpula e óculo preservados.',
         },
         googleRating: 4.8,
         lat: 41.898616,

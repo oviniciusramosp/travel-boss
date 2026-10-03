@@ -319,6 +319,46 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  'rom-stow-colosseo': { durationMin: 10, durationMax: 15, tips: L('Open daily 07:00–23:00; compare locker dimensions with your luggage.', 'Abre diariamente 7h–23h; confira as dimensões do armário para as malas.') },
+  'rom-mamertina': { durationMin: 15, durationMax: 30, tips: L('Some Colosseum packages require voucher collection here; follow your voucher’s deadline.', 'Alguns pacotes do Coliseu exigem resgate do voucher aqui; siga o prazo do seu comprovante.') },
+  'rom-navona': landmarkOutdoor({ durationMin: 25, durationMax: 40 }),
+  'rom-castel-angelo': { durationMin: 20, durationMax: 90 },
+  'rom-spagna': landmarkOutdoor({ durationMin: 25, durationMax: 40 }),
+  'rom-popolo': landmarkOutdoor({ durationMin: 20, durationMax: 40 }),
+  'ven-costituzione': landmarkOutdoor({ durationMin: 10, durationMax: 15 }),
+  'ven-rialto': landmarkOutdoor({ durationMin: 20, durationMax: 30 }),
+  'ven-rialto-market': { durationMin: 15, durationMax: 25, tips: L('Fish-market stalls are closed on Mondays; the waterfront and market district remain accessible.', 'As bancas de peixe fecham às segundas; a orla e a região do mercado continuam acessíveis.') },
+  'ven-antico-forno': restaurantVisit(10, 13),
+  'ven-san-marco': landmarkOutdoor({ durationMin: 20, durationMax: 30 }),
+  'ven-basilica': museumVisit(10, { durationMin: 40, durationMax: 60, ticketUrl: 'https://tickets.basilicasanmarco.it/en/' }),
+  'ven-campanile': museumVisit(15, { durationMin: 30, durationMax: 45, ticketUrl: 'https://tickets.basilicasanmarco.it/en/' }),
+  'ven-ducale': { durationMin: 20, durationMax: 120 },
+  'ven-paglia': landmarkOutdoor({ durationMin: 10, durationMax: 15 }),
+  'ven-riva': landmarkOutdoor({ durationMin: 15, durationMax: 25 }),
+  'ven-acqua-alta': { durationMin: 20, durationMax: 30 },
+  'ven-accademia': landmarkOutdoor({ durationMin: 15, durationMax: 20 }),
+  'ven-salute': { durationMin: 20, durationMax: 30 },
+  'ver-bra': landmarkOutdoor({ durationMin: 20, durationMax: 30 }),
+  'ver-arena': { durationMin: 20, durationMax: 60 },
+  'ver-juliet': museumVisit(5, { durationMin: 30, durationMax: 45, ticketUrl: 'https://verona.midaticket.it/', tips: L('Teatro Nuovo–courtyard ticket. Advance online reservation required; enter from Piazzetta Navona.', 'Bilhete Teatro Nuovo–pátio. Reserva online antecipada obrigatória; entrada pela Piazzetta Navona.') }),
+  'ver-erbe': landmarkOutdoor({ durationMin: 25, durationMax: 40 }),
+  'ver-lamberti': { durationMin: 10, durationMax: 45 },
+  'ver-signori': landmarkOutdoor({ durationMin: 15, durationMax: 25 }),
+  'ver-arche': { durationMin: 15, durationMax: 25 },
+  'ver-duomo': { durationMin: 20, durationMax: 45 },
+  'ver-pietra': landmarkOutdoor({ durationMin: 15, durationMax: 20 }),
+  'ver-san-pietro': { durationMin: 30, durationMax: 45 },
+  'ver-borsari': landmarkOutdoor({ durationMin: 10, durationMax: 15 }),
+  'ver-castelvecchio': landmarkOutdoor({ durationMin: 30, durationMax: 45 }),
+  'ver-amido': restaurantVisit(10, 20, { tips: L('Via Pellicciai branch: Tuesday 12:00–17:00; fresh pasta and tiramisù to take away.', 'Unidade da Via Pellicciai: terça 12h–17h; massas frescas e tiramisù para levar.') }),
+  'ct-riomaggiore': { durationMin: 40, durationMax: 60 },
+  'ct-amore': { durationMin: 30, durationMax: 40, ticketUrl: 'https://www.viadellamore.info/en/tickets', tips: L('Timed entry required; a standard Train Card needs a supplement, or buy the combined card.', 'Entrada com horário; o Train Card comum exige suplemento, ou compre o cartão combinado.') },
+  'ct-manarola': { durationMin: 40, durationMax: 60 },
+  'ct-san-lorenzo': { durationMin: 15, durationMax: 25 },
+  'ct-corniglia': { durationMin: 60, durationMax: 90 },
+  'ct-vernazza': { durationMin: 40, durationMax: 60 },
+  'ct-visconti': restaurantVisit(10, 10),
+  'ct-monterosso': { durationMin: 60, durationMax: 90 },
   'par-mangez-et-cassez-vous-taitbout': restaurantVisit(3.6, 7.2, {
     avgPricePerPerson: money(3.6, 7.2, L('Burger from €3.60; burger, fries and drink about €7.20', 'Hambúrguer a partir de €3,60; hambúrguer, fritas e bebida por cerca de €7,20')),
     bestDay: L('Monday–Saturday 11:30–15:00 and 19:00–22:00', 'Segunda–sábado 11h30–15h e 19h–22h'),
@@ -1786,6 +1826,10 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     crowdProfile: 'local',
   },
 
+  'par-pouletos-belleville': { avgPricePerPerson: money(5, 10), crowdProfile: 'local' },
+  'par-pouletos-gare-de-l-est': { avgPricePerPerson: money(5, 10), crowdProfile: 'local' },
+  'par-pouletos-jaures': { avgPricePerPerson: money(5, 10), crowdProfile: 'local' },
+
   // —— Markets ——
   'par-marche-enfants-rouges': {
     avgPricePerPerson: money(10, 25),
@@ -2077,6 +2121,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     avgPricePerPerson: money(5, 40, L('Coffee ~€5; a full meal €25–40', 'Café ~€5; refeição €25–40')),
     bestDay: L('Daily ~7:00–02:00', 'Todo dia ~7h–2h'),
   }),
+  'par-recrutement-facade': landmarkOutdoor({
+    durationMin: 5,
+    durationMax: 10,
+    crowdProfile: 'local',
+    bestTime: L('Daylight, when the façade and Eiffel Tower are both visible', 'Durante o dia, quando a fachada e a Torre Eiffel ficam visíveis'),
+    tips: L('Photo stop outside the café; no purchase is required.', 'Ponto de foto do lado de fora do café; não é necessário consumir.'),
+  }),
   'par-villa-marquise': landmarkOutdoor({
     durationMin: 10,
     durationMax: 20,
@@ -2308,6 +2359,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
 
   // —— Rome ——
   'rom-fco': {
+    osmRef: 'node/378978362',
     ticket: free,
     durationMin: 60,
     durationMax: 120,
@@ -2419,15 +2471,15 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Use sapato bom para pedras irregulares. Combine com o Coliseu no mesmo dia — um ingresso com horário.',
     ),
   },
-  'rom-pantheon': museumVisit(5, {
-    ticketUrl: 'https://www.pantheonroma.com/',
+  'rom-pantheon': museumVisit(7, {
+    ticketUrl: 'https://cultura.gov.it/luogo/pantheon',
     durationMin: 30,
     durationMax: 60,
     bestTime: L('Opening hour or late afternoon', 'Na abertura ou fim da tarde'),
     bestDay: L('Weekday morning', 'Manhã de dia de semana'),
     tips: L(
-      'Adult ~€5. Look up for the oculus — free rain on wet days. Modest dress not required like churches, but still a basilica.',
-      'Adulto ~€5. Olhe o óculo no teto — chuva entra em dias molhados. Ainda é basílica; respeito no interior.',
+      'Adult €7 since July 2026. Official tickets via Musei Italiani; appropriate clothing for a place of worship is required.',
+      'Adulto €7 desde julho de 2026. Bilhetes oficiais pelo Musei Italiani; exige vestimenta adequada a um local de culto.',
     ),
   }),
   'rom-piazza-venezia': landmarkOutdoor({
