@@ -27,6 +27,9 @@
   --color-hover: rgba(10, 10, 10, 0.04);
   --color-press: rgba(10, 10, 10, 0.08);
   --color-walk: #008fff;
+  --color-location: #008fff;
+  --location-pin-size: 32px;
+  --location-pin-outline: 2px;
   /* Water and restroom points near the walk (map toggle). */
   --color-water: #38bdf8;
   --color-restroom: #7c3aed;

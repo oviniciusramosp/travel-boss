@@ -162,7 +162,7 @@ export function zonedStamp(now: Date, timeZone: string): string {
 
 /**
  * Periods already over at `now` (see `zonedStamp`). A period ends when the next one
- * starts. The last one ends with the date, so it stays current until midnight.
+ * starts. All periods end one hour after the last timed event, or with the date.
  */
 export function pastPeriods(
   date: string,
@@ -173,10 +173,14 @@ export function pastPeriods(
   const today = now.slice(0, 10);
   const past = new Set<Period>();
   if (date > today) return past;
+  const lastTime = times.findLast(time => Boolean(time));
+  const minutes = (time: string) => Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
+  const ended = date === today && lastTime !== undefined &&
+    minutes(now.slice(11)) >= minutes(lastTime) + 60;
   const sections = periodSections(periods);
   sections.forEach((section, index) => {
     if (!section.period) return;
-    if (date < today) {
+    if (date < today || ended) {
       past.add(section.period);
       return;
     }

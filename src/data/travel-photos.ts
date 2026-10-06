@@ -31,6 +31,7 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'mil-primark-torino': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmMMZOjhhaUTGJzFPctFkGbXQPGSlcEuo6-1ptTxtfjd-DsB-tfUpHhlKqcW7mdcZF_GGYdKqT3UwR5idoVvdWkWP2qRattxMmEjMigSk21QCu_ggzLVUGJQOkpheAMtaCQlHiGQkuPlEOU=w408-h544-k-no', 'Primark · Via Torino', 'Primark · Via Torino', 'Google Maps · Primark Via Torino')],
   'spe-la-pia': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmOyYNTuqaBh3cV_dAZVihOHPcgOZPtp6bjcMlV5Ws20JkwXXfYLSRz0bSdC8ibcoplYMGG6_zujX1raV2PeJOJGFmWahdI2MmjJ-M1z4k_SDiBUHyv3LxUYE6NnOe_uzl1nrnXY=w224-h224-p-k-no', 'Pizza and farinata · La Pia', 'Pizza e farinata · La Pia', 'Google Maps · La Pia Via Magenta')],
   'spe-fiorini': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmOFgRic65ioJMGGKeXUZLBk4yTA2t5PeGeRLRRU-gJ4ffPCRd6hs2KgPY6nLTjB-tVCvH9La5Tps2x2ce5qI3Lz7X1ytiQQx0bjwo0yqIDpTYYU-PZ8jPKewMFRz6aM-YLUrCwO=w224-h224-p-k-no', 'Brioche and cappuccino · Fiorini', 'Brioche e cappuccino · Fiorini', 'Google Maps · Pasticceria Fiorini')],
   'spe-inferno': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmMGKMmiWWDqzo4aMnDjJTF7Vh7rTlwDHw2Z1zVO8omJHWskbPv3qipn_ywm6XuT5o3HiYutLHbjmCyqWX3O9zrTM1BpEGoOosDXKSjctrafD_eswwZ9Mlk0Pnz45mGxGdn2j1Fe=w224-h224-p-k-no', 'Mussel ravioli · Osteria all’Inferno', 'Ravioli de mexilhões · Osteria all’Inferno', 'Google Maps · Osteria all’Inferno')],

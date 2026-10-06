@@ -5,6 +5,7 @@
  *
  * The catalog agent copies src/data from the portfolio so these exports resolve.
  */
+export { googleMapsAppTarget } from '../data/travel-maps-links';
 export {
   travelCities,
   getTravelCity,

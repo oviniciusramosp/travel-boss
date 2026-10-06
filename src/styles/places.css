@@ -4,11 +4,15 @@
 }
 
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]) {
-  opacity: 0.58;
+  opacity: 1;
 }
 
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]) .tb-pin {
-  --pin-scale: calc(8 / 28 * var(--pin-rest-scale));
+  --pin-scale: var(--pin-rest-scale);
+}
+
+.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-number] .tb-pin {
+  --pin-scale: 1;
 }
 
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]):hover,

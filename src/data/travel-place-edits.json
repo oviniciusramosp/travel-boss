@@ -1,5 +1,60 @@
 {
   "par-chez-janou": {
     "favorite": true
+  },
+  "par-avenue-camoens": {
+    "rating": 5
+  },
+  "par-fontaines-trocadero": {
+    "rating": 4.5
+  },
+  "par-pont-iena": {
+    "rating": 5
+  },
+  "par-chapelle-saint-louis": {
+    "rating": 3.5
+  },
+  "par-rue-universite": {
+    "rating": 2.5
+  },
+  "par-margaux": {
+    "rating": 3
+  },
+  "par-champs-elysees": {
+    "rating": 5
+  },
+  "par-alexandre-iii": {
+    "rating": 4.5
+  },
+  "par-tuileries": {
+    "rating": 4.5
+  },
+  "par-carrefour-express-saint-honore": {
+    "rating": 3.5
+  },
+  "par-maillol": {
+    "rating": 3.5
+  },
+  "par-carrousel": {
+    "rating": 4
+  },
+  "par-eclair-genie": {
+    "rating": 3.5,
+    "googleRating": 3.5
+  },
+  "par-uniqlo-opera": {
+    "rating": 4
+  },
+  "par-carre-opera": {
+    "rating": 3.5
+  },
+  "par-shakespeare": {
+    "rating": 4.5
+  },
+  "par-horloge": {
+    "rating": 4
+  },
+  "par-place-dauphine": {
+    "rating": 3.5
   }
 }

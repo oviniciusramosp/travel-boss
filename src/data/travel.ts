@@ -2018,6 +2018,7 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.329864,
         address: 'Lafayette Gourmet, 35 Boulevard Haussmann, 75009 Paris',
         mapsQuery: 'L\'Éclair de Génie Lafayette Gourmet Paris',
+        mapsUrl: 'https://maps.app.goo.gl/F1H3h7pdTPS9URQ47',
       },
       {
         id: 'par-francette',
@@ -3730,13 +3731,13 @@ export const localTravelCities: TravelCity[] = [
           'pt-BR':
             'Supermercado completo a ~5 min a pé da Casa do Gui — básicos, hortifruti, bebidas e estoque da casa.',
         },
-        googleRating: 3.8,
+        googleRating: 3.7,
+        rating: 4.5,
         lat: 48.8942003,
         lng: 2.4582537,
         address: '90 Rue Jean Jaurès, 93130 Noisy-le-Sec',
         mapsQuery: 'Auchan Supermarché 90 Rue Jean Jaurès Noisy-le-Sec',
-        mapsUrl:
-          'https://www.google.com/maps/search/?api=1&query=Auchan+Supermarch%C3%A9+90+Rue+Jean+Jaur%C3%A8s+Noisy-le-Sec',
+        mapsUrl: 'https://maps.app.goo.gl/wmcGhhrMZVpGMKKbA',
       },
       {
         id: 'par-disneyland',

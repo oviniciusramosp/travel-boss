@@ -12,6 +12,7 @@ import {
   placeCategoryMeta,
   resolveVisit,
   travelUi,
+  travelCities,
 } from '../catalog';
 import type { ItineraryLegDef, Locale, TravelPlace } from '../catalog';
 import { buildItineraryRoute } from '../map/itinerary-route';
@@ -610,9 +611,7 @@ export function mountTrip(
     }
     const pins: MapPin[] = [];
     const seen = new Set<string>();
-    for (const city of trip.cities) {
-      const record = getTripCity(city.slug);
-      if (!record) continue;
+    for (const record of travelCities) {
       for (const place of record.places) {
         if (seen.has(place.id)) continue;
         if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) continue;
@@ -861,7 +860,7 @@ export function mountTrip(
     const trip = current;
     if (!trip) return;
     const date = routedDate();
-    const inner = new Set(trip.cities.flatMap((city) => [...(getTripCity(city.slug) ? subPointParents(getTripCity(city.slug)!).keys() : [])]));
+    const inner = new Set(travelCities.flatMap(city => [...subPointParents(city).keys()]));
     const overview = !openDate();
     const hops = overview ? routeHops() : [];
     // Keep the city catalog mounted: zoom controls visibility, including in the overview.
@@ -891,12 +890,7 @@ export function mountTrip(
     }
     const openId = openPlaceId();
     if (!openId || !trip) return;
-    const visible = trip.cities.some((city) => {
-      const record = getTripCity(city.slug);
-      const place = record?.places.find((item) => item.id === openId);
-      if (!place) return false;
-      return city.days.some((day) => day.stops.some((stop) => stop.placeId === openId));
-    });
+    const visible = travelCities.some(city => city.places.some(place => place.id === openId));
     if (!visible) closePlace({ focus: false });
   }
 
@@ -1399,6 +1393,10 @@ export function mountTrip(
     if (initialDate) {
       openKeys.add(initialDate);
       openOrder = [initialDate];
+      const { past } = datePlan(daysOnDate(trip, initialDate), initialDate);
+      for (const period of past) {
+        periodPrefs[`${initialDate}:${period}`] = { open: false, on: false };
+      }
     }
     if (!firstPaint) rememberView();
     current = trip;
@@ -2233,10 +2231,9 @@ export function mountTrip(
   const offSubPoint = map.onSubPoint((parentId, index) => {
     const trip = current;
     if (!trip) return;
-    for (const city of trip.cities) {
-      const record = getTripCity(city.slug);
-      const place = record ? placeById(city.slug, parentId) : undefined;
-      if (!record || !place) continue;
+    for (const record of travelCities) {
+      const place = record.places.find(place => place.id === parentId);
+      if (!place) continue;
       const notes = subNotesByPlace.get(parentId);
       activatePlace(map, place, placeCity(place.id, record), shell.locale(), null, {
         focusSub: index,
@@ -2292,10 +2289,9 @@ export function mountTrip(
       clearStopCurrent();
       item.setAttribute('aria-current', 'true');
     }
-    for (const city of current.cities) {
-      const record = getTripCity(city.slug);
-      const place = record?.places.find((entry) => entry.id === pinId);
-      if (!record || !place) continue;
+    for (const record of travelCities) {
+      const place = record.places.find((entry) => entry.id === pinId);
+      if (!place) continue;
       const origin = item?.querySelector<HTMLElement>('.tb-row__main') ?? null;
       activatePlace(map, place, placeCity(place.id, record), shell.locale(), origin);
       return;

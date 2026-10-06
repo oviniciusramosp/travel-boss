@@ -1,21 +1,17 @@
+import { googleMapsAppTarget } from '../catalog';
+
 /** Preserve Google's full place/route URL, including place IDs and waypoints. */
 export function mapsAppUrl(href: string, userAgent: string): string | null {
+  const target = googleMapsAppTarget(href);
   let url: URL;
-  try { url = new URL(href); } catch { return null; }
+  try { url = new URL(target); } catch { return null; }
   if (!['http:', 'https:'].includes(url.protocol)) return null;
-  if (url.hostname === 'maps.app.goo.gl') {
-    for (const city of travelCities) {
-      const place = city.places.find(place => place.mapsUrl === href);
-      if (place) return mapsAppUrl(googleMapsUrl({ ...place, mapsUrl: undefined }, city), userAgent);
-    }
-    return null;
-  }
-  const maps = (url.hostname === 'www.google.com' || url.hostname === 'google.com') &&
-    url.pathname.startsWith('/maps');
+  const maps = /^(?:www\.)?google\.(?:com|fr)$/.test(url.hostname) &&
+    /^\/maps(?:\/|$)/.test(url.pathname);
   if (!maps && url.hostname !== 'maps.google.com' &&
       !(url.hostname === 'goo.gl' && url.pathname.startsWith('/maps/'))) return null;
   if (/iPhone|iPad|iPod/.test(userAgent)) {
-    return href.replace(/^https?:\/\//, 'comgooglemapsurl://');
+    return target.replace(/^https?:\/\//, 'comgooglemapsurl://');
   }
   if (/Android/.test(userAgent)) {
     return `intent://${url.host}${url.pathname}${url.search}${url.hash}#Intent;scheme=${url.protocol.slice(0, -1)};package=com.google.android.apps.maps;end`;
@@ -39,4 +35,3 @@ export function mountMapsAppLinks(): void {
     window.location.assign(href);
   }, { capture: true });
 }
-import { googleMapsUrl, travelCities } from '../catalog';

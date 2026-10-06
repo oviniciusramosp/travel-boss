@@ -20,6 +20,13 @@ export const milanCity: TravelCity = {
   country: l('Itália', 'Italy'), countryKey: 'italia',
   lat: 45.478, lng: 9.197, zoom: 13,
   places: [
+    place('mil-primark-torino', 'Primark · Via Torino', 'shopping', 45.4613957, 9.1855437, 'Via Torino 45',
+      'Unidade central da rede irlandesa Primark na Via Torino. Vende roupas femininas, masculinas e infantis, acessórios, produtos de beleza e artigos para casa a preços acessíveis.',
+      'Central Milan branch of the Irish Primark chain on Via Torino. It sells affordable womenswear, menswear, childrenswear, accessories, beauty products and homewares.',
+      { googleRating: 4.1, subcategories: ['shopping'],
+        mapsUrl: 'https://www.google.com/maps/place/Primark/data=!4m6!3m5!1s0x4786c7ebad615c13:0x53b50c6dce47de11!8m2!3d45.4613957!4d9.1855437!16s%2Fg%2F11rvbsyrlg',
+        visit: { durationMin: 30, durationMax: 60,
+          tips: l('Todos os dias, inclusive domingo: 9h–22h. Horário e unidade conferidos no Google Maps e no site oficial em 6/10/2026.', 'Daily, including Sunday: 09:00–22:00. Hours and branch checked on Google Maps and the official website on 6 October 2026.') } }),
     place('mil-bosco-verticale', 'Bosco Verticale', 'tourist', 45.4857042, 9.1905385, 'Via Gaetano de Castillia 11',
       'Duas torres residenciais de Porta Nuova, concluídas em 2014 pelo Boeri Studio. Seus terraços cobertos de árvores e arbustos tornaram o conjunto uma referência de arquitetura que integra vegetação à cidade.',
       'Two residential towers in Porta Nuova, completed in 2014 by Boeri Studio. Their tree- and shrub-covered balconies made the complex a landmark of architecture integrating vegetation into the city.',

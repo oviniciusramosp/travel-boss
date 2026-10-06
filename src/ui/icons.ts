@@ -56,6 +56,7 @@ export const ICONS = [
   'museum',
   'my_location',
   'nature',
+  'navigation',
   'open_in_new',
   'person',
   'photo_camera',

@@ -5,6 +5,7 @@ import { AMENITY_EVENT, amenityOn, setAmenity } from './amenity-state';
 import type { IconName } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
 import { MOBILE_QUERY } from '../app/viewport';
+import { locationControl } from './location';
 
 function uiLocale(): Locale {
   return document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
@@ -93,7 +94,7 @@ export function attachMapControls(
   bar.className = 'tb-map-control-stack';
   const navigation = document.createElement('div');
   navigation.className = 'tb-map-controls';
-  navigation.append(zoomIn, zoomOut, fitBtn, fullscreen);
+  navigation.append(zoomIn, zoomOut, fitBtn, locationControl(map, shell));
   const layers = document.createElement('div');
   layers.className = 'tb-map-controls';
   layers.append(water, toilets, favorites);

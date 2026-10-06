@@ -265,6 +265,20 @@ describe('pastPeriods', () => {
     ]);
     expect(pastPeriods('2026-10-06', times, periods, '2026-10-05 23:59').size).toBe(0);
   });
+
+  it('ends the final period exactly one hour after the last timed event, ignoring untimed notes', () => {
+    const events = ['08:15', '14:00', '21:05', undefined];
+    const slots = ['morning', 'afternoon', 'evening', 'evening'] as const;
+    expect([...pastPeriods('2026-10-06', events, slots, '2026-10-06 22:04')])
+      .toEqual(['morning', 'afternoon']);
+    expect([...pastPeriods('2026-10-06', events, slots, '2026-10-06 22:05')])
+      .toEqual(['morning', 'afternoon', 'evening']);
+    expect(pastPeriods('2026-10-06', [undefined], ['evening'], '2026-10-06 23:59').size).toBe(0);
+  });
+
+  it('keeps a late final event active when its extra hour crosses midnight', () => {
+    expect(pastPeriods('2026-10-06', ['23:30'], ['evening'], '2026-10-06 23:59').size).toBe(0);
+  });
 });
 
 describe('midEur', () => {

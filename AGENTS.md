@@ -53,6 +53,10 @@ Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não ed
 
 UI (vale a partir da Fase 1):
 
+- No roteiro, todos os lugares do catálogo continuam disponíveis no mapa e seus cards permanecem acessíveis, mesmo fora da viagem ou do dia ativo. Paradas ativas ganham numeração e maior escala; outros lugares mantêm os pins normais. Lugares internos continuam representados pelos subpontos do pai.
+
+- Localização (`locationControl`, `src/map/location.ts`): toque explícito liga/desliga acompanhamento e solicita permissões. Posição, precisão e bússola ficam numa camada própria, também no mobile e no roteiro; apenas o primeiro resultado centraliza a câmera. Direção usa bússola calibrada ou orientação absoluta, nunca rotação relativa. Desligar, sair da página ou desmontar o mapa libera GPS e sensores; sem bússola, mantém apenas a posição.
+
 - Controles do mapa: navegação (zoom, enquadrar, tela cheia) e camadas (água, banheiros, favoritos) ficam em barras separadas. “Mostrar favoritos” troca apenas os pins de lugares com `favorite: true` por corações vermelhos (`--color-favorite`), com escala, destaque no hover e seleção como nos pins, preservando os demais pins, a numeração do roteiro e a câmera; desligar restaura a aparência normal.
 
 - Botão só-ícone só em ação repetida por linha, controle de mapa ou painel, ou convenção universal (fechar, anterior/próxima, tela cheia), sempre com `aria-label` e tooltip. A ação primária única da tela mantém o rótulo.

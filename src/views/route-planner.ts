@@ -12,7 +12,6 @@ export const MAX_ROUTE_STOPS = 8;
 export const USER_LOCATION_ID = 'user-location';
 export const CITY_FAR_KM = 80;
 
-export type GeoPermission = 'granted' | 'denied' | 'prompt' | 'unknown';
 export type LocateFailure = 'unsupported' | 'denied' | 'unavailable' | 'timeout';
 
 export function locateFailure(error: { code?: number; message?: string } | null): LocateFailure {
@@ -276,8 +275,6 @@ let locateSeq = 0;
 let userFix: UserFix | null = null;
 let originFar = false;
 let locating = false;
-let permission: GeoPermission = 'unknown';
-let locateButton: HTMLButtonElement | null = null;
 let locateToast: HTMLElement | null = null;
 
 function syncActions(): void {
@@ -439,22 +436,6 @@ function syncAccuracy(): void {
   mapHandle.setRadius(null);
 }
 
-function paintLocate(): void {
-  if (!locateButton || !session) return;
-  const locale = session.locale();
-  const label = locating
-    ? pickLocale(locale, travelUi.locating)
-    : permission === 'denied'
-      ? pickLocale(locale, travelUi.locateDenied)
-      : pickLocale(locale, travelUi.locateMe);
-  locateButton.setAttribute('aria-label', label);
-  locateButton.setAttribute('data-tip', label);
-  locateButton.dataset.permission = permission;
-  locateButton.setAttribute('aria-busy', locating ? 'true' : 'false');
-  locateButton.setAttribute('aria-pressed', userFix ? 'true' : 'false');
-  locateButton.disabled = locating;
-}
-
 function showStatus(text: string, kind: RouteNoteKind, asStop: boolean): void {
   const routeOpen = Boolean(session && (session.stops.length > 0 || asStop) && bar && !bar.root.hidden);
   if (routeOpen) {
@@ -489,32 +470,7 @@ function readUserPosition(): Promise<UserFix> {
   });
 }
 
-async function watchPermission(): Promise<void> {
-  try {
-    const status = await navigator.permissions?.query({ name: 'geolocation' });
-    if (!status) return;
-    const applyState = () => {
-      const state = status.state;
-      permission = state === 'granted' || state === 'denied' || state === 'prompt' ? state : 'unknown';
-      paintLocate();
-    };
-    applyState();
-    status.onchange = applyState;
-  } catch {
-    permission = 'unknown';
-  }
-}
-
 function mountLocate(column: HTMLElement): void {
-  const controls = column.querySelector('.tb-map-controls');
-  if (controls && !locateButton) {
-    locateButton = iconButton({ icon: 'my_location', label: travelUi.locateMe.en });
-    locateButton.dataset.locate = 'true';
-    locateButton.addEventListener('click', () => {
-      void beginLocate(false);
-    });
-    controls.append(locateButton);
-  }
   if (!locateToast) {
     locateToast = el('p', 'tb-locate-toast');
     locateToast.hidden = true;
@@ -522,15 +478,12 @@ function mountLocate(column: HTMLElement): void {
     locateToast.setAttribute('aria-live', 'polite');
     column.append(locateToast);
   }
-  paintLocate();
-  void watchPermission();
 }
 
 async function beginLocate(asStop: boolean): Promise<void> {
   if (!session || locating) return;
   const seq = ++locateSeq;
   locating = true;
-  paintLocate();
   refresh();
   const locale = session.locale();
   showStatus(pickLocale(locale, travelUi.locating), 'loading', asStop);
@@ -538,7 +491,6 @@ async function beginLocate(asStop: boolean): Promise<void> {
     const fix = await readUserPosition();
     if (seq !== locateSeq || !session) return;
     userFix = fix;
-    permission = 'granted';
     originFar = isFarFromCity(fix, session.city);
     const pin = userPins();
     if (pin.length && mapHandle) {
@@ -568,12 +520,10 @@ async function beginLocate(asStop: boolean): Promise<void> {
   } catch (error) {
     if (seq !== locateSeq || !session) return;
     const failure = locateFailure(error as { code?: number; message?: string });
-    if (failure === 'denied') permission = 'denied';
     showStatus(locateFailureLabel(failure, session.locale()), 'error', asStop);
   } finally {
     if (seq === locateSeq) {
       locating = false;
-      paintLocate();
       refresh();
     }
   }
@@ -745,8 +695,6 @@ export function mountRoutePlanner(opts: {
       note = null;
       bar?.root.remove();
       bar = null;
-      locateButton?.remove();
-      locateButton = null;
       locateToast?.remove();
       locateToast = null;
     },
