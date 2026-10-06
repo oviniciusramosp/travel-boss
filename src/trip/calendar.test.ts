@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dateCityNames, daysOnDate, nearestTripDate, tripDates } from './calendar';
+import { currentTripDate, dateCityNames, daysOnDate, nearestTripDate, tripDates } from './calendar';
 import { formatDayTitle } from './dates';
 import { parseTrip } from './parse';
 
@@ -29,6 +29,23 @@ dates: 2026-10-09 → 2026-10-13
 ### Dia 1 — Centro
 - 09:30 [Coliseu](place:rom-colosseum)
 `;
+
+describe('default trip date', () => {
+  const dates = ['2026-10-04', '2026-10-06', '2026-10-20'];
+  it('selects the matching date using the local calendar, including first and last days', () => {
+    for (const day of [4, 6, 20]) {
+      expect(currentTripDate(dates, new Date(2026, 9, day, 0, 5)))
+        .toBe(`2026-10-${String(day).padStart(2, '0')}`);
+    }
+  });
+  it('keeps the overview before, after and in a gap of the trip', () => {
+    for (const day of [3, 5, 21]) {
+      expect(currentTripDate(dates, new Date(2026, 9, day, 23, 55))).toBeNull();
+    }
+    expect(currentTripDate([], new Date(2026, 9, 6))).toBeNull();
+    expect(currentTripDate(dates, new Date(2027, 9, 6))).toBeNull();
+  });
+});
 
 describe('trip dates', () => {
   it('shows excursion cities without duplicating day groups, including unnamed metadata fallback', () => {

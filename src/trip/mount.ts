@@ -26,7 +26,7 @@ import { closedPeriods, isDayClosed, isTentative, periodStatusPatch, statusPatch
 import { googleDirectionsUrl } from './directions';
 import { tripErrorText, warningCopyText, warningCountLabel } from './errors';
 import { copyTrip, dayToMarkdown, downloadTrip, tripToHtml, tripToMarkdown } from './export';
-import { dateCityNames, daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
+import { currentTripDate, dateCityNames, daysOnDate, nearestTripDate, todayIso, tripDates, type DatedDay } from './calendar';
 import { formatDayTitle } from './dates';
 import {
   dateBudget,
@@ -1394,6 +1394,12 @@ export function mountTrip(
     const carryingLuggage = luggageStops(trip);
     const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
+    const sections = tripDates(trip);
+    const initialDate = firstPaint ? currentTripDate(sections.map(section => section.date)) : null;
+    if (initialDate) {
+      openKeys.add(initialDate);
+      openOrder = [initialDate];
+    }
     if (!firstPaint) rememberView();
     current = trip;
     const locale = shell.locale();
@@ -1581,13 +1587,13 @@ export function mountTrip(
     if (trip.errors.length) head.append(warningBadge(trip, locale));
 
     const dailyBudgets: { title: string; budget: ReturnType<typeof dateBudget> }[] = [];
-    for (const section of tripDates(trip)) {
+    for (const section of sections) {
       const date = section.date;
       const details = document.createElement('details');
       details.className = 'tb-date';
       details.dataset.date = date;
       details.dataset.dayKey = date;
-      details.open = !firstPaint && openKeys.has(date);
+      details.open = openKeys.has(date);
       const daysHere = section.cities.flatMap((group) => group.days);
       const { rows, periods, past } = datePlan(daysHere, date);
       // A park's rides and restaurants (its sub-points) count as the park's own spend.
@@ -2175,6 +2181,10 @@ export function mountTrip(
     }
     restoreFocus();
     main.scrollTop = firstPaint ? 0 : scrollTop;
+    if (initialDate) {
+      main.querySelector<HTMLElement>(`details.tb-date[data-date="${initialDate}"]`)
+        ?.scrollIntoView({ block: 'start' });
+    }
     applyQuery();
     hasPainted = true;
     syncView(

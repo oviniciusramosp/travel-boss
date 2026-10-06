@@ -111,6 +111,12 @@ export function todayIso(now = new Date()): string {
   return `${now.getFullYear()}-${month}-${day}`;
 }
 
+/** Open only an exact match for the device's local date, never the nearest trip day. */
+export function currentTripDate(dates: readonly string[], now = new Date()): string | null {
+  const today = todayIso(now);
+  return dates.includes(today) ? today : null;
+}
+
 /**
  * Closest date to `today`. A tie prefers the later day, so the trip ahead wins
  * over the one already past.

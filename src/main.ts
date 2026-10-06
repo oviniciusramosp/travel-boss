@@ -31,8 +31,12 @@ import { mountMap } from './map/map';
 import { mountCity, mountCityNav, type CityRouteState } from './views/places';
 import { closePlace, mountPlacePanel, openPlaceId } from './views/place-panel';
 import { loadTripFiles, mountTrip, mountTripNav } from './trip/mount';
+import { registerAppCache } from './platform/app-cache';
+import { mountMapsAppLinks } from './platform/maps-app';
 
 bootTheme();
+registerAppCache();
+mountMapsAppLinks();
 
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('missing #app');

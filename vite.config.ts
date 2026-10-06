@@ -15,6 +15,7 @@ import {
 import { placeEditsApi } from './scripts/vite-place-edits';
 import { checklistApi } from './scripts/vite-checklists';
 import { publicTrips } from './scripts/vite-public-trips';
+import { appCache } from './scripts/vite-app-cache';
 import { ICON_FONT_HREF } from './src/ui/icons';
 import {
   forecastToEnsemble,
@@ -288,7 +289,7 @@ function iconFont(): Plugin {
 
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? "/travel-boss/" : "/",
-  plugins: [publicTrips(), checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
+  plugins: [publicTrips(), appCache(), checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
   server: {
     port: 5173,
     strictPort: false,
