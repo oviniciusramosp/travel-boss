@@ -366,31 +366,35 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:25 **Place de la République** — Fim da caminhada pelos canais
 - 09:40 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615, sem consumir
   - status: confirmado
-- 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
+- 10:10 [Archives nationales](place:par-archives-nationales) — Cour d'honneur e jardins, grátis; sem entrar no museu, que no sábado só abre às 14h. Sair às 10h20
   - status: a confirmar
-- 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
+  - saída: 10:20
+- 10:30 [Musée Carnavalet](place:par-carnavalet) — Grátis: visita curta à história de Paris e ao jardim; sair às 11h05
   - status: a confirmar
-- 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
+  - saída: 11:05
+- 11:15 [Place des Vosges](place:par-vosges) — Volta pela praça; seguir às 11h25
   - status: confirmado
-- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Reservar e sair às 13:15
+  - saída: 11:25
+- 11:30 [Chez Janou](place:par-chez-janou) — Chegar cedo para tentar o primeiro serviço de **almoço**, que começa às 12h: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair às 13h
   - status: confirmado
-  - saída: 13:15
-- 13:25 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
+  - saída: 13:00
+- 13:10 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
   - status: confirmado
-- 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5); sair às 13h45
+- 13:20 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15); confirmar estoque e conservação para o transporte até voltar para casa antes de comprar. Sair às 13h30
+  - saída: 13:30
+- 13:35 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 13h45
   - saída: 13:45
-- 13:55 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14h05
-  - saída: 14:05
-  - via: a pé até a Place Vendôme · 30 min
-- 14:35 [Place Vendôme](place:par-vendome) — Fotos e vitrines; seguir às 14h50
-  - saída: 14:50
-  - status: confirmado
-- 15:00 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; escolher retirada em 10/10 às 15h, conforme disponibilidade. Usar a fila prioritária e reservar até 15h20; comer os doces como **café da tarde**
+  - via: metrô 1 de Hôtel de Ville até Tuileries · 25 min — Sentido La Défense; caminhar até a retirada na rue de Castiglione. Incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M1 · Hôtel de Ville → Tuileries · 13:56 → 14:00
+- 14:10 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; retirada de 10/10 entre 12h e 15h. Usar a fila prioritária e reservar até 14h30; comer os doces como **café da tarde**
   - comida: €30
   - status: confirmado
+  - saída: 14:30
+- 14:40 [Place Vendôme](place:par-vendome) — Fotos e vitrines; seguir às 14h50
+  - saída: 14:50
+  - status: confirmado
+- 15:00 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; sair às 15h20
   - saída: 15:20
-- 15:35 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; sair às 15h50
-  - saída: 15:50
   - status: confirmado
 - 16:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado e compra só online; reservar 1h15 para a escadaria, o grande foyer e a sala. Horário das 16h a confirmar na bilheteria online; ensaio pode fechar a sala sem aviso
   - saída: 17:15
@@ -399,12 +403,12 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - embarque: 2026-10-10 · M9 · Havre–Caumartin → Alma–Marceau · 18:14 → 18:21
   - status: confirmado
 - 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena, saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
-  - via: metrô 13 até Saint-Lazare e RER E até Noisy-le-Sec · 1h — Caminhar até Champs-Élysées–Clemenceau, embarcar sentido Saint-Denis / Asnières e seguir para Haussmann–Saint-Lazare; da estação Noisy-le-Sec, caminhar até o Auchan. Incluído no Navigo Semaine
+  - via: metrô 9 de Alma–Marceau até Havre–Caumartin e RER E até Noisy-le-Sec · 1h — Metrô sentido Mairie de Montreuil; seguir para Haussmann–Saint-Lazare e, em Noisy-le-Sec, caminhar até o Auchan. Incluído no Navigo Semaine
   - status: confirmado
-  - embarque: 2026-10-10 · M13 · Champs-Élysées–Clemenceau → Saint-Lazare · 19:59 → 20:02
-  - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 20:18 → 20:31
+  - embarque: 2026-10-10 · M9 · Alma–Marceau → Havre–Caumartin · 19:58 → 20:05
+  - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 20:22 → 20:35
   - saída: 19:40
-- 20:40 [Auchan Supermarché (Noisy-le-Sec)](place:par-auchan-noisy) — Compra rápida do café da manhã, do lanche da manhã e da refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; sair até 20h55 e seguir direto para casa para guardar as compras. Fecha às 21h no sábado
+- 20:45 [Auchan Supermarché (Noisy-le-Sec)](place:par-auchan-noisy) — Compra rápida do café da manhã, do lanche da manhã e da refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; sair até 20h55 e seguir direto para casa para guardar as compras. Fecha às 21h no sábado
   - comida: €25
   - via: a pé até a casa do Gui · 5 min
   - status: confirmado
@@ -412,7 +416,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 21:05 [Casa do Gui](place:par-casa-do-gui) — Volta; guardar as compras, jantar em casa e arrumar as malas
   - status: confirmado
 
-- Opcional no Marais: [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Confirmar estoque e conservação antes de comprar; levain MyLevain (~€15). Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/)
 - Se sobrar tempo no Marais: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur)
 
 ### Dia 8 — Dom 11/10 · Partida para Milão

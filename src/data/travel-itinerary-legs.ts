@@ -15,8 +15,8 @@ import {
   getTransitLine,
   haversineM,
   metro10,
+  metro1,
   metro12,
-  metro13,
   metro4,
   metro7,
   metro9,
@@ -1268,8 +1268,9 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
   trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
+  trainLeg('par-pompidou', 'par-cedric-grolet-meurice', 25, [ride(metro1, 'hotel-ville', 'tuileries')]),
   trainLeg('par-bateaux-mouches', 'par-auchan-noisy', 60, [
-    ride(metro13, 'champs-elysees', 'saint-lazare'),
+    ride(metro9, 'alma-marceau', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
 ];
