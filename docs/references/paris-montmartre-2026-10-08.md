@@ -1,5 +1,15 @@
 # Pompidou e Montmartre — 8/10/2026
 
+## Pontos próprios — 08/10/2026
+
+Esta revisão substitui a estrutura descrita abaixo. Montmartre deixa de ser um lugar-pai e pino de bairro: Place du Tertre, Maison Rose/Rue de l’Abreuvoir, Clos Montmartre, Lapin Agile, Passe-Muraille, Moulin Radet e Saint-Pierre passam a lugares próprios, com descrição e categoria. O favorito do antigo ponto ancorado na Place du Tertre foi preservado na praça. A estação superior permanece apenas na linha do funicular, como estação de desembarque do trecho desde o Palais-Royal. A chegada estimada ao alto continua por volta de 16h10; o trecho reserva 65 min até a praça às 16h20, incluindo a caminhada final. Sem horário publicado de partida do funicular, o app mantém essa partida a conferir.
+
+Identidades reconferidas em 08/10 na API OSM para os sete objetos da tabela abaixo (nodes: `/api/0.6/node/<id>.json`; ways: `/api/0.6/way/<id>/full.json`). Preservadas as coordenadas documentadas; praça e edifícios usam centro do objeto, escultura usa seu nó e vinhedo usa o painel de informação público junto à rua. O moinho é o Radet sobre o edifício, não o restaurante homônimo. Fontes de contexto: [turismo oficial](https://parisjetaime.com/article/montmartre-village-a-paris-a728) e [RATP](https://www.ratp.fr/decouvrir/patrimoine/histoire-funiculaire-montmartre), consultados na mesma data. Auditorias individuais em `paris-location-audit-2026-09-28/montmartre-2026-10-08.jsonl`. Fotos obtidas do Commons por `imageinfo`, com thumbnail, autoria e licença retornadas pela API; nomes de arquivos via imagens P18 do Wikidata e tags OSM.
+
+## Comida destacada no roteiro — 08/10/2026
+
+A pedido do usuário, a Charcuterie Arnaud Nicolas (Caulaincourt) passa a parada própria às 17h05, com o gasto planejado de €11 por pessoa visível na linha. Removido o sub-ponto de comida de Montmartre; o lugar existente e sua localização não mudam. Os três pontos posteriores (Passe-Muraille, Moulin de la Galette e Saint-Pierre) permanecem como notas visíveis após o café e guiam a perna a pé até a Sacré-Cœur, usando os mesmos pontos OSM abaixo. Saem da sequência interna anterior para evitar que o mapa os percorra antes do café e depois volte à charcutaria. O orçamento de comida de 8/10 permanece €55,50; Montmartre passa a €0 e a charcutaria mostra €11.
+
 Consultado em 27/09/2026. O usuário confirmou o funicular, não o trenzinho turístico.
 
 - [Centre Pompidou, reforma 2025–2030](https://www.centrepompidou.fr/en/centre-pompidou-is-transforming-itself): prédio fechado; parada apenas por fora, sujeita à visibilidade do canteiro de obras, sem ingresso nem acesso à cobertura.

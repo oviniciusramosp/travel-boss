@@ -395,7 +395,7 @@ export const parisSubcategoriesByPlaceId: Record<string, PlaceSubcategory[]> = {
   'par-cour-commerce': ['market-street', 'architecture'],
   'par-carnavalet': ['museum', 'architecture'],
   'par-bourse-commerce': ['museum', 'architecture'],
-  'par-montmartre': ['neighborhood', 'viewpoint'],
+  'par-place-du-tertre': ['neighborhood', 'viewpoint'],
   // Garden first (nature icon); palace buildings are the frame, not the pin
   'par-palais-royal': ['park', 'garden'],
   'par-bnf': ['library', 'architecture'],

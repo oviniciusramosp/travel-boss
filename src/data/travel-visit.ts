@@ -754,15 +754,21 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'A avenida pode ser percorrida nos dois sentidos. Use as travessias de pedestres para mudar de lado.',
     ),
   }),
-  'par-montmartre': parkVisit({
-    durationMin: 90,
-    durationMax: 180,
+  'par-maison-rose': landmarkOutdoor({ durationMin: 5, durationMax: 15, tips: L('View from the public street; respect entrances and pedestrian traffic.', 'Veja da rua pública; respeite as entradas e a circulação de pedestres.') }),
+  'par-clos-montmartre': landmarkOutdoor({ durationMin: 5, durationMax: 15, tips: L('View from the public street; respect entrances and pedestrian traffic.', 'Veja da rua pública; respeite as entradas e a circulação de pedestres.') }),
+  'par-lapin-agile': landmarkOutdoor({ durationMin: 5, durationMax: 15, tips: L('View from the public street; respect entrances and pedestrian traffic.', 'Veja da rua pública; respeite as entradas e a circulação de pedestres.') }),
+  'par-passe-muraille': landmarkOutdoor({ durationMin: 5, durationMax: 15, tips: L('View from the public street; respect entrances and pedestrian traffic.', 'Veja da rua pública; respeite as entradas e a circulação de pedestres.') }),
+  'par-moulin-galette': landmarkOutdoor({ durationMin: 5, durationMax: 15, tips: L('View from the public street; respect entrances and pedestrian traffic.', 'Veja da rua pública; respeite as entradas e a circulação de pedestres.') }),
+  'par-saint-pierre-montmartre': landmarkOutdoor({ durationMin: 5, durationMax: 15, tips: L('View from the public street; respect entrances and pedestrian traffic.', 'Veja da rua pública; respeite as entradas e a circulação de pedestres.') }),
+  'par-place-du-tertre': parkVisit({
+    durationMin: 10,
+    durationMax: 20,
     bestTime: L('Early morning or after 18:00', 'Cedo de manhã ou depois das 18h'),
     bestDay: L('Weekday', 'Dia de semana'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'The funicular handles the main climb; the village walk still has slopes. Finish beside Sacré-Cœur.',
-      'O funicular vence a subida principal; o passeio pelo bairro ainda tem ladeiras. Termine junto à Sacré-Cœur.',
+      'A pedestrian square shared by artists, café terraces and visitors.',
+      'Praça de pedestres dividida entre artistas, esplanadas de cafés e visitantes.',
     ),
   }),
   'par-chatelet': landmarkOutdoor({

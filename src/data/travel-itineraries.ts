@@ -639,7 +639,7 @@ export const parisItinerary: TravelItinerary = {
           },
         },
         {
-          placeId: 'par-montmartre',
+          placeId: 'par-place-du-tertre',
           time: '18:45',
           slot: 'evening',
           note: {

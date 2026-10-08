@@ -1451,7 +1451,13 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'mayatomo · CC BY-SA 3.0 · Wikimedia Commons',
     ),
   ],
-  'par-montmartre': [
+  'par-maison-rose': [photo("https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Montmartre_Maison_Rose_002.JPG/500px-Montmartre_Maison_Rose_002.JPG", "La Maison Rose and Rue de l\u2019Abreuvoir", "La Maison Rose e Rue de l\u2019Abreuvoir", "Moonik \u00b7 CC BY-SA 3.0")],
+  'par-clos-montmartre': [photo("https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Montmartre_vineyard.jpg/500px-Montmartre_vineyard.jpg", "Clos Montmartre vineyard", "Vinhedo Clos Montmartre", "Tangopaso \u00b7 Public domain")],
+  'par-lapin-agile': [photo("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Au_Lapin_Agile%2C_Paris_20_May_2014.jpg/500px-Au_Lapin_Agile%2C_Paris_20_May_2014.jpg", "Au Lapin Agile", "Au Lapin Agile", "David McSpadden from Daly City, United States \u00b7 CC BY 2.0")],
+  'par-passe-muraille': [photo("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Rue-Norvins-Le-Passe-Muraille-statue.jpg/500px-Rue-Norvins-Le-Passe-Muraille-statue.jpg", "Le Passe-Muraille", "Le Passe-Muraille", "Mlzarathustra \u00b7 CC BY-SA 4.0")],
+  'par-moulin-galette': [photo("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Paris_18e_Moulin_Radet_220.jpg/500px-Paris_18e_Moulin_Radet_220.jpg", "Moulin de la Galette \u2014 Moulin Radet", "Moulin de la Galette \u2014 Moulin Radet", "GFreihalter \u00b7 CC BY-SA 3.0")],
+  'par-saint-pierre-montmartre': [photo("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/StPierreDeMontmartreFromEast.jpg/500px-StPierreDeMontmartreFromEast.jpg", "\u00c9glise Saint-Pierre de Montmartre", "\u00c9glise Saint-Pierre de Montmartre", "Stephen Lea \u00b7 CC BY-SA 3.0")],
+  'par-place-du-tertre': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Butte_Montmartre%2C_Place_du_Tertre%2C_Paris.jpg/500px-Butte_Montmartre%2C_Place_du_Tertre%2C_Paris.jpg',
       'Place du Tertre, at the top of Montmartre',
