@@ -301,7 +301,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - cidades: Paris → Versalhes
 
 - 08:00 [Casa do Gui](place:par-casa-do-gui) — Saída; comer no caminho para Versalhes, sem parada de café da manhã
-  - via: RER E até La Défense, trem L até Versailles–Rive Droite e caminhada até o Marché Notre-Dame · 1h25 — Conexão de 15 min em La Défense
+  - via: RER E até La Défense, trem L até Versailles–Rive Droite e caminhada até o Marché Notre-Dame · 1h25 — Conexão de 15 min em La Défense. A linha L para Versalhes passa a cada 8–12 min nessa faixa da manhã; se perdermos o das 8h56, o próximo sai às 9h07 e chega às 9h31 (o seguinte sai às 9h18 e chega às 9h43)
   - status: confirmado
   - embarque: 2026-10-09 · RER E · Noisy-le-Sec → La Défense · 08:20 → 08:41
   - embarque: 2026-10-09 · Transilien L · La Défense → Versailles–Rive Droite · 08:56 → 09:19
@@ -367,9 +367,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:40 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615, sem consumir
   - status: confirmado
 - 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
-  - status: confirmado
+  - status: a confirmar
 - 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
-  - status: confirmado
+  - status: a confirmar
 - 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
   - status: confirmado
 - 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Reservar e sair às 13:15

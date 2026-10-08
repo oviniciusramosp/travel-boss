@@ -1,5 +1,7 @@
 # Versalhes — entrada ao meio-dia, revisão de 08/10/2026
 
+Linha L reconferida em 08/10 para sexta 09/10: La Défense → Versailles–Rive Droite às 8h56–9h19, 9h07–9h31, 9h18–9h43, 9h26–9h49, 9h37–10h01 e 9h48–10h13. Intervalos de 8–12 min nessa faixa, sem presumir frequência constante durante todo o dia. Informação do próximo trem acrescentada à nota do trecho na timeline; perder o das 8h56 reduz os jardins em aproximadamente 12 min, mantendo o compromisso do palácio às 12h como prioridade. Fonte: [Transitous, data e hora consultadas](https://api.transitous.org/api/v1/plan?fromPlace=48.892639%2C2.237309&toPlace=48.809529%2C2.135282&time=2026-10-09T06%3A50%3A00Z&numItineraries=10). UTC +2 h.
+
 Bilhetes Passeport fornecidos pelo usuário: sexta 09/10/2026, 12h, entrada A do Pavillon Dufour, €35 por pessoa. Não copiar nomes, códigos de barras, identificadores de bilhete ou transação para o repositório. Chegada planejada à fila às 11h40.
 
 Sem parada de café da manhã: comer no caminho conforme pedido. Saída às 8h. RER E Noisy-le-Sec 8h20 → La Défense 8h41; Transilien L 8h56 → Versailles–Rive Droite 9h19, com 15 min para trocar de plataforma. O planejador oferece conexões de apenas 3–8 min; foram descartadas para não depender de troca rápida numa estação profunda. Via Haussmann/Saint-Lazare é mais demorado e exige caminhada entre as estações; via M13/Montparnasse acrescenta trocas e ônibus para o mercado. RER C direto na volta é adequado ao destino seguinte, Champ de Mars, em vez de voltar a Saint-Lazare.
