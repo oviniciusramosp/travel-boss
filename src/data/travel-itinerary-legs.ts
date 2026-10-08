@@ -1243,13 +1243,13 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
   // 9/10
-  trainLeg('par-casa-do-gui', 'par-castellane', 45, [
-    ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
+  trainLeg('par-casa-do-gui', 'par-point-alph', 85, [
+    ride(rerE, 'noisy-le-sec', 'la-defense'),
+    ride(transilienL, 'la-defense', 'versailles-rd'),
   ]),
-  trainLeg('par-castellane', 'par-versailles', 75, [
-    ride(transilienL, 'saint-lazare', 'versailles-rd'),
-  ]),
-  trainLeg('par-stray-bean', 'par-eiffel', 55, [ride(rerC, 'versailles-chateau', 'champ-mars')]),
+  { from: 'par-point-alph', to: 'par-versailles-jardins', mode: 'walk', through: [[48.804027, 2.121208]] },
+  { from: 'par-versailles-jardins', to: 'par-versailles', mode: 'walk', through: [[48.804027, 2.121208]] },
+  trainLeg('par-stray-bean', 'par-eiffel', 70, [ride(rerC, 'versailles-chateau', 'champ-mars')]),
   trainLeg('par-eiffel', 'par-entrecote', 25, [ride(metro9, 'trocadero', 'fdr')]),
   trainLeg('par-entrecote', 'par-casa-do-gui', 45, [
     ride(metro9, 'fdr', 'chaussee-antin'),

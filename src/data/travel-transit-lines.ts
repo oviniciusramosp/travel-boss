@@ -423,12 +423,14 @@ export const rerB: TransitLine = {
   ],
 };
 
-/** RER E — Neuilly–Porte Maillot → Val de Fontenay (Tournan branch, via Noisy-le-Sec) */
+/** RER E — La Défense → Val de Fontenay (Tournan branch, via Noisy-le-Sec) */
 export const rerE: TransitLine = {
   id: 'rer-e',
   name: 'RER E',
   color: '#C04191',
   stations: [
+    // OSM stop_position 11822383636, RER E underground platform, checked 2026-10-08.
+    st('la-defense', 'La Défense', 48.8925665, 2.2393248),
     st('neuilly-porte-maillot', 'Neuilly–Porte Maillot', 48.878149, 2.282399),
     st('haussmann-saint-lazare', 'Haussmann–Saint-Lazare', 48.875016, 2.328696),
     st('magenta', 'Magenta', 48.880744, 2.35863),

@@ -253,8 +253,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 5 — Qui 8/10 · Descanso, brunch, Richelieu, Palais-Royal e pôr do sol em Montmartre
   - períodos fechados: 
 
-Manhã inteira para descansar depois da Disney; café da manhã em casa, quando acordarmos.
-
 - 12:00 [Casa do Gui](place:par-casa-do-gui) — Saída
   - período: tarde
   - via: RER E até Haussmann–Saint-Lazare e caminhada até o Baguett’s · 50 min — Incluído no Navigo Semaine
@@ -296,46 +294,49 @@ Manhã inteira para descansar depois da Disney; café da manhã em casa, quando 
   - embarque: 2026-10-08 · M12 · Pigalle → Saint-Lazare · 21:51 → 21:56
   - embarque: 2026-10-08 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 22:07 → 22:19
   - saída: 21:45
-- 22:35 [Casa do Gui](place:par-casa-do-gui) — Volta
+- 22:35 [Casa do Gui](place:par-casa-do-gui)
+  - status: confirmado
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
   - cidades: Paris → Versalhes
 
-- 06:45 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Haussmann–Saint-Lazare e caminhada até a Castellane · 45 min
+- 08:00 [Casa do Gui](place:par-casa-do-gui) — Saída; comer no caminho para Versalhes, sem parada de café da manhã
+  - via: RER E até La Défense, trem L até Versailles–Rive Droite e caminhada até o Marché Notre-Dame · 1h25 — Conexão de 15 min em La Défense
   - status: confirmado
-  - embarque: 2026-10-09 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 07:08 → 07:21
-  - saída: 06:45
-- 07:30 [Boulangerie Castellane](place:par-castellane) — **Café da manhã**: croissant, éclair ou mil-folhas com café. Sair às 8h
-  - via: a pé até Saint-Lazare, trem L até Versailles Rive Droite e caminhada até o castelo · 1h15
-  - embarque: 2026-10-09 · Transilien L · Paris Saint-Lazare → Versailles–Rive Droite · 08:23 → 09:01
+  - embarque: 2026-10-09 · RER E · Noisy-le-Sec → La Défense · 08:20 → 08:41
+  - embarque: 2026-10-09 · Transilien L · La Défense → Versailles–Rive Droite · 08:56 → 09:19
   - saída: 08:00
-- 09:30 [Château de Versailles](place:par-versailles) — Visita de 1h40 aos Grands Appartements e à Galerie des Glaces; sair às 11h10 para os jardins. Passport com entrada marcada para 9h30; Jardins Musicais inclusos
-  - saída: 11:10
+- 09:25 [Marché Notre-Dame](place:par-point-alph) — Passar pelas halles e pela feira de sexta no caminho da estação para o palácio, sem comprar
+  - via: a pé até os jardins pela Cour des Princes · 15 min
+  - saída: 09:30
+- 09:50 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais inclusos no Passeport; circuito pelos bosques e fontes, Grand Canal e retorno pela Salle de Bal e vista da Orangerie. Paradas breves para fotos; sair às 11h25
+  - via: a pé até a entrada A do Pavillon Dufour · 15 min — Sair pela Cour des Princes e chegar à fila às 11h40, com os bilhetes em mãos
+  - saída: 11:25
+- 10:50 **Grand Canal** — Vista do canal e do palácio ao fundo; depois, continuar pelos bosques na volta
+- 11:10 **Bosque da Salle de Bal** — Salão de baile ao ar livre, no caminho de volta
+- 11:20 **Parterre do Midi — vista da Orangerie** — Mirante dos jardins geométricos; depois, seguir à entrada A
+- 12:00 [Château de Versailles](place:par-versailles) — Entrada A do Pavillon Dufour, com os bilhetes Passeport já comprados para 9/10 às 12h. Chegar à fila às 11h40; visitar os Grands Appartements e a Galerie des Glaces até 14h15
+  - ingresso: €35
+  - status: confirmado
+  - saída: 14:15
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
-- 11:15 [Jardins de Versalhes](place:par-versailles-jardins) — Passeio em ritmo ágil, com paradas curtas, e **almoço** de sanduíche para levar: 2h30 no total, até 13h45
-  - saída: 13:45
-- 13:15 **Grand Canal** — Comprar o sanduíche para levar após a visita ao palácio e almoçar na área permitida do parque junto ao canal; 30 min para compra e refeição, saindo às 13h45 para o Trianon
-- 14:00 [Domaine de Trianon](place:par-trianon) — Visita breve de 45 min ao Grand Trianon; sair às 14h45 para o mercado
-  - via: a pé até o Marché Notre-Dame · 45 min
-  - saída: 14:45
-- 15:30 [Marché Notre-Dame](place:par-point-alph) — Passar por dentro das halles do mercado, sem comprar; sair às 15h45. Pavilhões abertos das 15h às 19h30; a feira externa termina às 14h
-  - via: a pé até o The Stray Bean · 15 min
-  - saída: 15:45
-- 16:00 [The Stray Bean](place:par-stray-bean) — **Café da tarde**: café e uma fatia de bolo. Pausa rápida: sair até 16h15 para preservar a chegada à Torre Eiffel
-  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 55 min — Mirar o trem das 16h25; horário consultado, a reconfirmar no dia
+- 14:30 [The Stray Bean](place:par-stray-bean) — **Almoço + café da tarde** numa única refeição: Lunch Combo com quiche ou scone salgado, salada, café e um doce. Sair até 16h para o trem
+  - comida: €18
+  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 1h10 — Trem das 16h25; incluído no Navigo Semaine
   - embarque: 2026-10-09 · RER C · Versailles-Château–Rive Gauche → Champ de Mars–Tour Eiffel · 16:25 → 16:54
-  - saída: 16:15
+  - saída: 16:00
 - 17:10 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**: chegar 20 min antes do ingresso a reservar para 17h30; subir primeiro ao topo para acompanhar o pôr do sol por volta das 19h15. Reservar até 20h para a visita e descida
   - via: metrô 9 de Trocadéro até Franklin D. Roosevelt · 25 min
   - embarque: 2026-10-09 · M9 · Trocadéro → Franklin D. Roosevelt · 20:19 → 20:23
   - saída: 20:00
-- 20:30 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa, sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h30: de 5 a 14/10 o RER E para às 22h15
+- 20:30 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa, sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h20 para caminhar até Franklin D. Roosevelt e pegar o metrô das 21h31
   - via: metrô 9 de Franklin D. Roosevelt até Chaussée d'Antin e RER E em Haussmann–Saint-Lazare · 45 min
   - embarque: 2026-10-09 · M9 · Franklin D. Roosevelt → Chaussée d'Antin–La Fayette · 21:31 → 21:37
   - embarque: 2026-10-09 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:48 → 22:01
+  - saída: 21:20
+  - status: confirmado
 - 22:15 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Opcional, no lugar do Trianon: [One Nation Paris (outlet)](place:par-one-nation) — do castelo, 20 min a pé até Versailles-Chantiers, linha N até Villepreux–Les Clayes (12 min) e 10 min a pé; aberto até 20h. Volta: linha N até Montparnasse (~30 min; último trem 21h56), metrô 4 até Gare de l'Est e RER E em Magenta
+  - status: confirmado
 
 ### Dia 7 — Sáb 10/10 · Canal Saint-Martin, Marais, Chez Janou, Cédric Grolet, Ópera e barco no Sena
   - períodos fechados: manhã, noite
