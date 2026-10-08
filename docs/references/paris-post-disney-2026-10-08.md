@@ -1,0 +1,11 @@
+# Pós-Disney: 8 e 10/10 — consulta em 08/10/2026
+
+- Pedido: manhã de 8/10 livre para descanso; saída de casa às 12h, brunch no Baguett’s Molière, Sala Oval, Palais-Royal, funicular e final já planejado em Montmartre. Chez Janou passa para sábado; Galeries Lafayette removida por já ter sido visitada.
+- [Baguett’s oficial](https://baguettscafe.fr/): brunch servido durante todo o dia, inclusive no almoço. Chegada planejada 12h55; mesa não reservada.
+- [BnF — informações práticas](https://salleovale.bnf.fr/fr/salle-ovale-informations-pratiques): Sala Oval gratuita, quarta a sexta 10h–18h. Visita de quinta 13h45–14h45, sem museu pago.
+- [Chez Janou oficial](https://www.chezjanou.com/): aberto todos os dias, almoço e jantar. Sábado planejado 12h15; reserva ainda necessária.
+- Transitous, `https://api.transitous.org/api/v1/plan`, horários locais CEST (UTC +2): consulta de 8/10 após 12h12 na estação Noisy-le-Sec retorna RER E 12h19–12h32 até Haussmann–Saint-Lazare. Esse serviço preserva saída de casa às 12h com margem; caminhada final estimada pelo app em 19 min.
+- Consulta de 8/10 às 15h37, Réaumur–Sébastopol → entorno de Montmartre: M4 Réaumur–Sébastopol 15h42 → Château Rouge 15h49. O app calcula 19 min do Palais-Royal até o embarque e 9 min até o funicular; chegada ao alto planejada às 16h10. A perna usa todas as estações intermediárias do M4 no catálogo. Não se infere horário de Barbès a partir da duração. Funicular sem partida publicada consultável nesta pesquisa: horário a conferir no app; nenhum `embarque:` inventado.
+- Consulta de 10/10 às 8h10 a partir de casa: RER E Noisy-le-Sec 8h23 → Magenta 8h32. Depois, caminhada ao canal; café da manhã em casa, pois Du Pain et des Idées fecha no fim de semana, conforme referência anterior do catálogo.
+- [Ópera oficial](https://www.operadeparis.fr/visites/palais-garnier): endpoint `/ajax/data-affluence/details/timetable?date=2026-10-10` retornou abertura e fechamento nulos nesta consulta. Visita proposta às 16h não é slot confirmado; conferir na bilheteria online antes de comprar.
+- Cédric Grolet passa de 12h15 para 15h no sábado, condicionado à disponibilidade do Click & Collect; não foi feita compra nem reserva. Printemps, barco e mercado final preservados. Naturalia fica opcional, dependente de estoque e conservação para evitar levar produto refrigerado durante horas de passeio.

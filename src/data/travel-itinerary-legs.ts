@@ -16,6 +16,7 @@ import {
   haversineM,
   metro10,
   metro12,
+  metro13,
   metro4,
   metro7,
   metro9,
@@ -625,8 +626,8 @@ const day3: ItineraryLegDef[] = [
     toStation: 'barbès',
     label: 'M4',
   },
-  { from: 'par-fric-frac', to: 'par-montmartre', mode: 'walk' },
-  { from: 'par-montmartre', to: 'par-sacre-coeur', mode: 'walk' },
+  { from: 'par-fric-frac', to: 'par-place-du-tertre', mode: 'walk' },
+  { from: 'par-place-du-tertre', to: 'par-sacre-coeur', mode: 'walk' },
   { from: 'par-sacre-coeur', to: 'par-moulin-rouge', mode: 'walk' },
   { from: 'par-moulin-rouge', to: 'par-arnaud-nicolas', mode: 'walk' },
 ];
@@ -1231,11 +1232,10 @@ const tripEuropa2026: ItineraryLegDef[] = [
     ride(rerA, 'val-de-fontenay', 'chessy'),
   ]),
   trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
-  // 8/10
+  // 8/10: Richelieu / Palais-Royal, then Montmartre; 10/10: canal and Marais.
   trainLeg('par-casa-do-gui', 'par-canals', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
-  trainLeg('par-pompidou', 'par-boulangerie-du-sentier', 20, [ride(metro4, 'etienne-marcel', 'reaumur')]),
-  trainLeg('par-boulangerie-du-sentier', 'par-montmartre', 40, [
-    ride(metro4, 'reaumur', 'barbès'),
+  trainLeg('par-palais-royal', 'par-place-du-tertre', 65, [
+    ride(metro4, 'reaumur', 'chateau-rouge'),
     ride(funicularMontmartre, 'gare-basse', 'gare-haute'),
   ]),
   trainLeg('par-bouillon-pigalle', 'par-casa-do-gui', 45, [
@@ -1263,13 +1263,13 @@ const tripEuropa2026: ItineraryLegDef[] = [
     stationCount: 0,
     path: parisMilanRail as LatLng[],
   },
-  // 10/10: Baguett’s, Richelieu and Le Meurice on foot in the same neighbourhood
+  // 8/10: Baguett’s and Richelieu; 10/10: Printemps and Seine cruise.
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
   trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
-  trainLeg('par-monoprix-champs', 'par-casa-do-gui', 45, [
-    ride(metro9, 'saint-philippe', 'havre-caumartin'),
+  trainLeg('par-bateaux-mouches', 'par-auchan-noisy', 60, [
+    ride(metro13, 'champs-elysees', 'saint-lazare'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
 ];

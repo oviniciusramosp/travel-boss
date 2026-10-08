@@ -250,70 +250,53 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 00:13 [Casa do Gui](place:par-casa-do-gui) — Volta
   - status: confirmado
 
-### Dia 5 — Qui 8/10 · Canal Saint-Martin, Marais, almoço no Chez Janou e pôr do sol em Montmartre
+### Dia 5 — Qui 8/10 · Descanso, brunch, Richelieu, Palais-Royal e pôr do sol em Montmartre
   - períodos fechados: 
 
-- 08:05 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy, sem atravessar a ponte
+Manhã inteira para descansar depois da Disney; café da manhã em casa, quando acordarmos.
+
+- 12:00 [Casa do Gui](place:par-casa-do-gui) — Saída
+  - período: tarde
+  - via: RER E até Haussmann–Saint-Lazare e caminhada até o Baguett’s · 50 min — Incluído no Navigo Semaine
   - status: confirmado
-  - embarque: 2026-10-08 · RER E · Noisy-le-Sec → Magenta · 08:25 → 08:34
-  - saída: 08:05
-- 08:45 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
+  - embarque: 2026-10-08 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 12:19 → 12:32
+  - saída: 12:00
+- 12:55 [Baguett's Café (Molière)](place:par-bohemia) — **Brunch / almoço**: pancakes ou pain perdu; brunch servido durante todo o dia. Sair até 13h35
+  - saída: 13:35
   - status: confirmado
-- 09:05 [Du Pain et des Idées](place:par-du-pain-idees) — **Café da manhã**: escargot de pistache e chocolate (~€5–6), um pão doce folhado em espiral, não o prato de caracóis. Sair às 09:30; abre de segunda a sexta
+- 13:45 [BnF Richelieu — Sala Oval](place:par-bnf-richelieu) — Sala oval e Jardin Vivienne: entrada gratuita, pela 5 rue Vivienne. Quinta 8/10: 10h–18h; sair às 14h45
   - status: confirmado
-  - saída: 09:30
-- 09:35 [Canal Saint-Martin — até République](place:par-canals-republique) — Retomar a caminhada para o sul pelo Quai de Jemmapes; atravessar para o Quai de Valmy na Rue du Faubourg du Temple
+  - saída: 14:45
+- 14:55 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim, pelas colunatas e pelo pátio das colunas listradas; sair às 15h15
   - status: confirmado
-- 09:45 **Place de la République** — Fim da caminhada pelos canais
-- 09:55 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615
-  - status: confirmado
-- 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
-  - status: confirmado
-- 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
-  - status: confirmado
-- 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
-  - status: confirmado
-- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Reservar e sair às 13:15
-  - status: confirmado
-  - saída: 13:15
-- 13:25 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
-  - status: confirmado
-- 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5)
-- 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Levain MyLevain (~€15); ligue antes para confirmar o estoque. Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/), €18, pedindo até 29/09 para a casa do Gui
-- 14:00 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14:10
-  - via: metrô 4 de Étienne Marcel até Réaumur–Sébastopol · 20 min — Uma estação, sentido Porte de Clignancourt; cerca de 9 min a pé até o metrô e 5 min da saída até a padaria. Tempo estimado inclui espera
-  - embarque: 2026-10-08 · M4 · Étienne Marcel → Réaumur–Sébastopol · 14:23 → 14:24
-  - saída: 14:10
-- 14:30 [Boulangerie du Sentier](place:par-boulangerie-du-sentier) — Provar o croissant de manteiga vencedor do Grand Paris de 2026. Comprar para levar e sair às 14:40
-  - via: metrô 4 até Barbès–Rochechouart e funicular de Montmartre · 40 min — Caminhar cerca de 5 min até Réaumur–Sébastopol e embarcar sentido Porte de Clignancourt; de Barbès, caminhar até a estação inferior do funicular, junto à Place Saint-Pierre. Subir com a Navigo Semaine; tempo estimado inclui caminhadas e espera
-  - status: confirmado
-  - embarque: 2026-10-08 · M4 · Réaumur–Sébastopol → Barbès–Rochechouart · 15:00 → 15:06
-  - saída: 14:40
-- 15:20 [Montmartre](place:par-montmartre) — Passeio pelas praças e ruelas do alto da colina. Fête des Vendanges (7–11/out): mais gente e programação na rua
-  - status: confirmado
-- 15:30 **Place du Tertre** — Praça dos pintores e retratistas
-- 15:55 **La Maison Rose e Rue de l'Abreuvoir** — Fachada rosa e passeio pela rua, sem consumir
-- 16:10 **Vinhedo Clos Montmartre** — Ver as vinhas por fora, pela Rue des Saules
-- 16:20 **Au Lapin Agile** — Fachada do cabaré, sem entrar
-- 16:35 **Charcuterie Arnaud Nicolas (Caulaincourt)** — Croque-monsieur (~€5) para o fim de tarde; fecha às 20h
-- 17:10 **Le Passe-Muraille** — Escultura do homem atravessando a parede, na Place Marcel-Aymé
-- 17:30 **Moulin de la Galette** — Ver por fora o moinho Radet, sobre o restaurante, na esquina da Rue Lepic com a Rue Girardon
-- 18:10 **Église Saint-Pierre de Montmartre** — Fachada da igreja medieval, ao lado da Place du Tertre
+  - via: metrô 4 até Château Rouge e funicular de Montmartre · 65 min — Caminhar até Réaumur–Sébastopol, embarcar sentido Porte de Clignancourt e seguir de Château Rouge à estação inferior do funicular, junto à Place Saint-Pierre. Desembarcar na estação superior por volta de 16h10 e caminhar até a Place du Tertre. Incluído no Navigo Semaine
+  - embarque: 2026-10-08 · M4 · Réaumur–Sébastopol → Château Rouge · 15:42 → 15:49
+  - saída: 15:15
+- 16:20 [Place du Tertre](place:par-place-du-tertre) — Praça dos pintores e retratistas
+- 16:35 [La Maison Rose e Rue de l’Abreuvoir](place:par-maison-rose) — Fachada rosa e passeio pela rua, sem consumir
+- 16:45 [Vinhedo Clos Montmartre](place:par-clos-montmartre) — Ver as vinhas por fora, pela Rue des Saules
+- 16:55 [Au Lapin Agile](place:par-lapin-agile) — Fachada do cabaré, sem entrar
+- 17:05 [Charcuterie Arnaud Nicolas (Caulaincourt)](place:par-arnaud-nicolas-caulaincourt) — **Café da tarde**: croque-monsieur (~€5); fecha às 20h
+  - comida: €11
+- 17:25 [Le Passe-Muraille](place:par-passe-muraille) — Escultura do homem atravessando a parede, na Place Marcel-Aymé
+- 17:45 [Moulin de la Galette](place:par-moulin-galette) — Ver por fora o moinho Radet, sobre o restaurante, na esquina da Rue Lepic com a Rue Girardon
+- 18:10 [Église Saint-Pierre de Montmartre](place:par-saint-pierre-montmartre) — Fachada da igreja medieval, ao lado da Place du Tertre
 - 18:40 [Sacré-Cœur](place:par-sacre-coeur) — **Pôr do sol às 19h18** na escadaria em frente à basílica; a basílica é grátis. Greve no metrô 2: ~20 min a pé até a Gare du Nord e RER E em Magenta
   - via: descer a pé até o Moulin Rouge · 20 min — Sair às 19:25, depois do pôr do sol
   - saída: 19:25
+  - status: confirmado
 - 19:45 [Moulin Rouge](place:par-moulin-rouge) — Foto por fora, com a fachada iluminada; sair às 19h52
   - saída: 19:52
-- 20:00 [Bouillon Pigalle](place:par-bouillon-pigalle) — **Jantar**: reservar para as 20h; prato principal e sobremesa. Sair até 21h
+  - status: confirmado
+- 20:00 [Bouillon Pigalle](place:par-bouillon-pigalle) — **Jantar**: Cordon Bleu, Cuisse Poulet (sobrecoxa com fritas), Macarrão Coquillettes com presunto e trufas, Canard (pato com fritas)\
+  Sair às 21h45 para pegar a M12 e mirar o RER E das 22h07; o último direto consultado sai às 22h14 de Haussmann–Saint-Lazare
   - comida: €18
   - via: metrô 12 de Pigalle até Saint-Lazare e RER E de Haussmann–Saint-Lazare até Noisy-le-Sec · 45 min — Incluído no Navigo Semaine
   - status: confirmado
-  - embarque: 2026-10-08 · M12 · Pigalle → Saint-Lazare · 21:06 → 21:11
-  - embarque: 2026-10-08 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:18 → 21:31
-  - saída: 21:00
-- 21:45 [Casa do Gui](place:par-casa-do-gui) — Volta
-- Se sobrar tempo antes de Montmartre: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur), a 10 min a pé da Naturalia
+  - embarque: 2026-10-08 · M12 · Pigalle → Saint-Lazare · 21:51 → 21:56
+  - embarque: 2026-10-08 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 22:07 → 22:19
+  - saída: 21:45
+- 22:35 [Casa do Gui](place:par-casa-do-gui) — Volta
 
 ### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
   - cidades: Paris → Versalhes
@@ -354,56 +337,69 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 22:15 [Casa do Gui](place:par-casa-do-gui) — Volta
 - Opcional, no lugar do Trianon: [One Nation Paris (outlet)](place:par-one-nation) — do castelo, 20 min a pé até Versailles-Chantiers, linha N até Villepreux–Les Clayes (12 min) e 10 min a pé; aberto até 20h. Volta: linha N até Montparnasse (~30 min; último trem 21h56), metrô 4 até Gare de l'Est e RER E em Magenta
 
-### Dia 7 — Sáb 10/10 · Baguett’s, Richelieu, Vendôme, Cédric Grolet, Ópera e barco no Sena
+### Dia 7 — Sáb 10/10 · Canal Saint-Martin, Marais, Chez Janou, Cédric Grolet, Ópera e barco no Sena
   - períodos fechados: manhã, noite
 
-- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída
-  - via: RER E até Haussmann–Saint-Lazare e caminhada até o Baguett’s · 50 min
+- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã em casa
+  - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy
   - status: confirmado
-  - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 08:23 → 08:36
+  - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Magenta · 08:23 → 08:32
   - saída: 08:10
-- 09:00 [Baguett's Café (Molière)](place:par-bohemia) — **Café da manhã / brunch**: pancakes ou pain perdu; abre às 9h no sábado. Sair até 10h
-  - saída: 10:00
+- 08:50 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
   - status: confirmado
-- 10:15 [BnF Richelieu — Sala Oval](place:par-bnf-richelieu) — Sala oval e Jardin Vivienne: entrada gratuita, sem ingresso pago, pela 5 rue Vivienne. Sábado 10/10: 10h–18h; reservar 1h15 e sair às 11h30
+- 09:10 [Canal Saint-Martin — até République](place:par-canals-republique) — Continuar pelo Quai de Jemmapes e atravessar para o Quai de Valmy na Rue du Faubourg du Temple
   - status: confirmado
-  - saída: 11:30
-- 11:45 [Place Vendôme](place:par-vendome) — Passar pela praça a caminho do Cédric Grolet: 15 min para fotos e vitrines; seguir às 12h
-  - saída: 12:00
+- 09:25 **Place de la République** — Fim da caminhada pelos canais
+- 09:40 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615, sem consumir
   - status: confirmado
-- 12:15 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; escolher retirada em 10/10 às 12h15, conforme disponibilidade. Chegar no horário do pedido e usar a fila prioritária de retirada; reservar até 12h40
+- 10:20 [Archives nationales](place:par-archives-nationales) — Grátis; fecha terça
+  - status: confirmado
+- 11:10 [Musée Carnavalet](place:par-carnavalet) — Grátis: história de Paris e jardim; fecha segunda
+  - status: confirmado
+- 12:00 [Place des Vosges](place:par-vosges) — Volta pela praça
+  - status: confirmado
+- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Reservar e sair às 13:15
+  - status: confirmado
+  - saída: 13:15
+- 13:25 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
+  - status: confirmado
+- 13:35 [Aux Merveilleux de Fred](place:par-merveilleux-fred) — Merveilleux para levar (~€4–5); sair às 13h45
+  - saída: 13:45
+- 13:55 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14h05
+  - saída: 14:05
+  - via: a pé até a Place Vendôme · 30 min
+- 14:35 [Place Vendôme](place:par-vendome) — Fotos e vitrines; seguir às 14h50
+  - saída: 14:50
+  - status: confirmado
+- 15:00 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; escolher retirada em 10/10 às 15h, conforme disponibilidade. Usar a fila prioritária e reservar até 15h20; comer os doces como **café da tarde**
   - comida: €30
   - status: confirmado
-  - saída: 12:40
-- 12:50 [McDonald's Louvre–Rivoli](place:par-mcdonalds-louvre-rivoli) — Opção de almoço: comprar um combo para levar e comer no Palais-Royal
-  - comida: €15
-  - saída: 13:10
+  - saída: 15:20
+- 15:35 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; sair às 15h50
+  - saída: 15:50
   - status: confirmado
-- 13:20 [Palais-Royal](place:par-palais-royal) — Passear pelo jardim e sentar para comer os doces do Cédric Grolet com calma
-  - status: confirmado
-- 14:30 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; 15 min, até 14h45
-  - saída: 14:45
-  - status: confirmado
-- 15:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado e compra só online (nada na bilheteria); 1h a 1h30 pela escadaria, o grande foyer e a sala.\
-  Reserve o horário das 15h; ensaio pode fechar a sala sem aviso
-- 16:30 [Galeries Lafayette](place:par-galeries-lafayette) — Vista de Paris no terraço do 8º andar
-  - status: confirmado
-- 17:10 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; O terraço do 7º teve um pop-up até 30/09: confira se reabriu
+- 16:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado e compra só online; reservar 1h15 para a escadaria, o grande foyer e a sala. Horário das 16h a confirmar na bilheteria online; ensaio pode fechar a sala sem aviso
+  - saída: 17:15
+- 17:30 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; O terraço do 7º teve um pop-up até 30/09: confira se reabriu
   - via: metrô 9 de Havre–Caumartin até Alma–Marceau · 20 min
   - embarque: 2026-10-10 · M9 · Havre–Caumartin → Alma–Marceau · 18:14 → 18:21
   - status: confirmado
 - 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena, saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
-  - via: a pé até o Monoprix Les Champs · 20 min
+  - via: metrô 13 até Saint-Lazare e RER E até Noisy-le-Sec · 1h — Caminhar até Champs-Élysées–Clemenceau, embarcar sentido Saint-Denis / Asnières e seguir para Haussmann–Saint-Lazare; da estação Noisy-le-Sec, caminhar até o Auchan. Incluído no Navigo Semaine
   - status: confirmado
+  - embarque: 2026-10-10 · M13 · Champs-Élysées–Clemenceau → Saint-Lazare · 19:59 → 20:02
+  - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 20:18 → 20:31
   - saída: 19:40
-- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar o café da manhã, o lanche da manhã e a refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; sair até 20h45 e seguir direto para casa para guardar as compras. Supermercado na 107 rue La Boétie; fecha às 23h no sábado
+- 20:40 [Auchan Supermarché (Noisy-le-Sec)](place:par-auchan-noisy) — Compra rápida do café da manhã, do lanche da manhã e da refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; sair até 20h55 e seguir direto para casa para guardar as compras. Fecha às 21h no sábado
   - comida: €25
-  - via: metrô 9 até Havre–Caumartin e RER E até Noisy-le-Sec · 45 min — Embarcar em Saint-Philippe-du-Roule e seguir a conexão para Haussmann–Saint-Lazare
-  - embarque: 2026-10-10 · M9 · Saint-Philippe-du-Roule → Havre–Caumartin · 20:56 → 21:00
-  - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:07 → 21:20
-  - saída: 20:45
-- 21:30 [Casa do Gui](place:par-casa-do-gui) — Volta; jantar em casa e arrumar as malas
+  - via: a pé até a casa do Gui · 5 min
   - status: confirmado
+  - saída: 20:55
+- 21:05 [Casa do Gui](place:par-casa-do-gui) — Volta; guardar as compras, jantar em casa e arrumar as malas
+  - status: confirmado
+
+- Opcional no Marais: [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Confirmar estoque e conservação antes de comprar; levain MyLevain (~€15). Alternativa online: [Madame Ferment](https://madameferment.com/produit/levain-traditionnel/)
+- Se sobrar tempo no Marais: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur)
 
 ### Dia 8 — Dom 11/10 · Partida para Milão
   - cidades: Paris → Milão
@@ -414,7 +410,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07. A linha França–Itália reabre em 10/10, depois de obras: confira o trem 2–3 dias antes
   - status: confirmado
   - embarque: 2026-10-11 · Frecciarossa · Paris Gare de Lyon → Milano Centrale · 07:30 → 14:07
-- 12:00 **Almoço no trem**: refeição e água compradas no Monoprix na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
+- 12:00 **Almoço no trem**: refeição e água compradas no Auchan na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
 
 ## Milão
 city: milao
