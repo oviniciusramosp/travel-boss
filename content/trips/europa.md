@@ -310,7 +310,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - embarque: 2026-10-09 · Transilien L · La Défense → Versailles–Rive Droite · 09:18 → 09:43
   - saída: 08:30
 - 09:50 [Marché Notre-Dame](place:par-point-alph) — Passar pelas halles e pela feira de sexta no caminho da estação para o palácio, sem comprar
-  - via: a pé até os jardins pela Cour des Princes · 15 min
+  - via: a pé até os jardins pela Cour des Princes · 15 min — Seguir pela Rue de la Paroisse e Rue des Réservoirs até a Place d’Armes e entrar pela Grille d’Honneur. De frente para o palácio, seguir pelo lado esquerdo da Cour d’Honneur até a Cour des Princes, à esquerda da entrada A; apresentar o Passeport no controle dos jardins e continuar até o Parterre d’Eau. O horário das 12h vale para o palácio; os jardins podem ser visitados antes
   - saída: 09:55
 - 10:15 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais inclusos no Passeport; circuito pelos bosques e fontes até o Grand Canal, voltando pelos pontos do sul: Apolo, Colunata, Espelho, Salle de Bal e vista da Orangerie, já perto do palácio. Horários estimados para uma visita objetiva; seguir para a entrada A às 11h50 mesmo se faltar algo. Confirmar no primeiro acesso a segunda entrada por outra porta para completar depois do palácio
   - via: a pé até a entrada A do Pavillon Dufour · 5 min — Sair pela Cour des Princes e apresentar-se às 11h55 para o ingresso das 12h, com os bilhetes em mãos
