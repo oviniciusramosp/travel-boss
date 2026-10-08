@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { WEATHER_ICONS } from '../ui/weather-icons';
+import { historicalWeather, pastWeatherDate } from './weather-source';
+import { vi } from 'vitest';
 import {
   dayWeather,
+  loadForecast,
+  forecastState,
   failureKind,
   packForecast,
   parseEnsemble,
@@ -65,6 +69,14 @@ describe('parseEnsemble', () => {
 });
 
 describe('weatherIn', () => {
+  it('keeps historical rain amounts through storage and never calls them a probability', () => {
+    const hours = unpackForecast(packForecast({ time, members: [run(16, 1)], historical: true }))!;
+    const weather = weatherIn(hours, '2026-10-04', WINDOWS.morning)!;
+    expect(weather).toMatchObject({ historical: true, rain: 100, mm: 5, runs: 1 });
+    expect(weatherTip(weather, weatherLook(weather).label, 'pt-BR', undefined, null, false)).toContain('Clima histórico · Precipitação 5,0 mm');
+    expect(weatherTip(weather, weatherLook(weather).label, 'en', undefined, null, false)).not.toContain('chance');
+    expect(weatherIn({ ...hours, members: [{ ...hours.members[0]!, rain: time.map(() => null) }] }, '2026-10-04', WINDOWS.morning)).toBeNull();
+  });
   it('takes the median low and high and the share of runs that rain', () => {
     // Morning 07–12: rain of 08:00…12:00, five hours. 0.1 mm/h is 0.5 mm, wet.
     expect(weatherIn(ensemble, '2026-10-04', WINDOWS.morning)).toEqual({
@@ -100,6 +112,43 @@ describe('weatherIn', () => {
     expect(weatherTip(part, weatherLook(part).label, 'pt-BR', undefined, null, false))
       .toContain('Tendência de longo prazo · menor confiança');
     expect(weatherIn({ ...hours, extendedFrom: '2026-10-05T00:00' }, '2026-10-04', WINDOWS.morning)?.extended).toBeUndefined();
+  });
+});
+
+describe('historical weather source', () => {
+  it('keeps history when forecasts refresh and accepts the server cache during an outage', async () => {
+    const history = { time, members: [run(16, 1)], historical: true };
+    const fetcher = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ hours: history, at: 123, stale: true, error: 'network' })))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ hours: ensemble, at: 456 })));
+    vi.stubGlobal('fetch', fetcher);
+    try {
+      await loadForecast(1.234, 5.678, 'Europe/Paris', true, '2026-10-04');
+      expect(forecastState(1.234, 5.678, '2026-10-04')).toMatchObject({ hours: history, failed: true, error: 'network' });
+      await loadForecast(1.234, 5.678, 'Europe/Paris', true);
+      expect(forecastState(1.234, 5.678).hours).toEqual(ensemble);
+      expect(forecastState(1.234, 5.678, '2026-10-04').hours).toEqual(history);
+    } finally { vi.unstubAllGlobals(); }
+  });
+
+  it('uses the city date instead of the browser date at midnight', () => {
+    const now = new Date('2026-10-08T00:30:00Z');
+    expect(pastWeatherDate('2026-10-07', 'Europe/Paris', now)).toBe(true);
+    expect(pastWeatherDate('2026-10-07', 'America/Sao_Paulo', now)).toBe(false);
+    expect(pastWeatherDate('2026-10-09', 'Europe/Paris', now)).toBe(false);
+  });
+
+  it('requests historical amounts and the next midnight for the last hour of rain', async () => {
+    const fetcher = vi.fn().mockResolvedValue(new Response(JSON.stringify({ hourly: {
+      time, temperature_2m: run(16, 1).temp, precipitation: run(16, 1).rain, cloud_cover: run(16, 1).cloud,
+    } })));
+    vi.stubGlobal('fetch', fetcher);
+    try {
+      expect(await historicalWeather(48.85, 2.35, 'Europe/Paris', '2026-10-04')).toMatchObject({ historical: true, members: [run(16, 1)] });
+      const url = new URL(fetcher.mock.calls[0]![0]);
+      expect(url.hostname).toBe('archive-api.open-meteo.com');
+      expect(url.searchParams.get('end_date')).toBe('2026-10-05');
+      expect(url.searchParams.get('hourly')).not.toContain('probability');
+    } finally { vi.unstubAllGlobals(); }
   });
 });
 

@@ -11,7 +11,7 @@ import { shiftIso } from './dates';
 import { getTripCity, placeCity } from './catalog';
 import type { WeatherIcon } from '../ui/weather-icons';
 
-import { parseEnsemble, type Ensemble, type Member } from './weather-source';
+import { parseEnsemble, pastWeatherDate, type Ensemble, type Member } from './weather-source';
 export { parseEnsemble, type Ensemble, type Member };
 
 /** Excursions use the place's own city; a day without places uses its trip heading. */
@@ -31,7 +31,7 @@ const FRESH_MS = 30 * 60 * 1000;
 
 /** Median low and high, chance of rain in %, median rain of the runs that rain, median cloud. */
 /** `runs` is how many members covered the window: with one (a single model) `rain` is 0 or 100 and not a chance. */
-export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number; runs: number; extended?: boolean };
+export type Weather = { min: number; max: number; rain: number; mm: number; cloud: number; hours: number; runs: number; extended?: boolean; historical?: boolean };
 
 type Entry = {
   /** When the last request started; 0 for a forecast read from storage, so the next load refreshes it. */
@@ -60,6 +60,7 @@ const cache = new Map<string, Entry>();
 
 /** What the card needs beyond the hours: is it loading, did the last refresh fail, when is it from. */
 export type ForecastState = {
+  historical?: boolean;
   hours: Ensemble | null;
   fetchedAt: number | null;
   loading: boolean;
@@ -85,6 +86,7 @@ export function packForecast(hours: Ensemble): string {
   return JSON.stringify({
     time: hours.time,
     ...(hours.extendedFrom ? { extendedFrom: hours.extendedFrom } : {}),
+    ...(hours.historical ? { historical: true } : {}),
     members: hours.members.map((member) => ({ temp: round(member.temp), rain: round(member.rain), cloud: round(member.cloud) })),
   });
 }
@@ -93,14 +95,14 @@ export function packForecast(hours: Ensemble): string {
 export function unpackForecast(text: string | null): Ensemble | null {
   if (!text) return null;
   try {
-    const data = JSON.parse(text) as { time?: unknown; members?: unknown; extendedFrom?: unknown };
+    const data = JSON.parse(text) as { time?: unknown; members?: unknown; extendedFrom?: unknown; historical?: unknown };
     if (!Array.isArray(data.time) || !data.time.every((item) => typeof item === 'string')) return null;
     if (!Array.isArray(data.members) || !data.members.length) return null;
     const length = data.time.length;
     const column = (list: unknown) =>
       Array.isArray(list) && list.length === length && list.every((value) => value === null || typeof value === 'number');
     if (!data.members.every((member: Member) => column(member.temp) && column(member.rain) && column(member.cloud))) return null;
-    return { time: data.time as string[], members: data.members as Member[], ...(typeof data.extendedFrom === 'string' ? { extendedFrom: data.extendedFrom } : {}) };
+    return { time: data.time as string[], members: data.members as Member[], ...(typeof data.extendedFrom === 'string' ? { extendedFrom: data.extendedFrom } : {}), ...(data.historical === true ? { historical: true } : {}) };
   } catch {
     return null;
   }
@@ -130,17 +132,18 @@ function writeStored(key: string, at: number, hours: Ensemble, source: string | 
   }
 }
 
-const keyOf = (lat: number, lng: number) => `${lat.toFixed(3)},${lng.toFixed(3)}`;
+const keyOf = (lat: number, lng: number, date?: string) => `${lat.toFixed(3)},${lng.toFixed(3)}${date ? `:${date}` : ''}`;
 
 /**
  * Forecast of a point, fetched at most once per half hour unless `force`. A failure keeps
  * the last one, from this session or from storage, and marks the entry as failed.
  */
-export function loadForecast(lat: number, lng: number, timeZone: string, force = false): Promise<Ensemble | null> {
-  const key = keyOf(lat, lng);
+export function loadForecast(lat: number, lng: number, timeZone: string, force = false, date?: string): Promise<Ensemble | null> {
+  const historical = date && pastWeatherDate(date, timeZone) ? date : undefined;
+  const key = keyOf(lat, lng, historical);
   const hit = cache.get(key) ?? readStored(key);
   if (hit && (hit.loading || (!force && Date.now() - hit.at < FRESH_MS))) return hit.request;
-  const params = new URLSearchParams({ lat: String(lat), lng: String(lng), tz: timeZone, ...(force ? { force: '1' } : {}) });
+  const params = new URLSearchParams({ lat: String(lat), lng: String(lng), tz: timeZone, ...(historical ? { date: historical } : {}), ...(force ? { force: '1' } : {}) });
   const entry: Entry = {
     at: Date.now(),
     fetchedAt: hit?.fetchedAt ?? null,
@@ -162,10 +165,10 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
       const answer = body as { hours?: unknown; at?: unknown; source?: unknown; stale?: unknown; error?: unknown } | null;
       // The server says why it could not refresh, with or without an older forecast to show.
       if (answer && typeof answer.error === 'string') kind = answer.error as FailureKind;
-      const hours = answer && !answer.stale ? readEnsemble(answer.hours) : null;
+      const hours = answer ? readEnsemble(answer.hours) : null;
       const at = typeof answer?.at === 'number' ? answer.at : Date.now();
       const source = typeof answer?.source === 'string' ? answer.source : null;
-      return hours ? { hours, at, source } : null;
+      return hours ? { hours, at, source, stale: Boolean(answer?.stale) } : null;
     })
     .catch(() => null)
     .then((fresh) => {
@@ -174,7 +177,8 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
         entry.hours = fresh.hours;
         entry.fetchedAt = fresh.at;
         entry.source = fresh.source;
-        entry.error = null;
+        entry.failed = fresh.stale;
+        entry.error = fresh.stale ? kind ?? failureKind(status) : null;
         writeStored(key, fresh.at, fresh.hours, fresh.source);
       } else {
         entry.failed = true;
@@ -191,10 +195,11 @@ export function peekForecast(lat: number, lng: number): Ensemble | null {
   return forecastState(lat, lng).hours;
 }
 
-export function forecastState(lat: number, lng: number): ForecastState {
-  const key = keyOf(lat, lng);
+export function forecastState(lat: number, lng: number, date?: string): ForecastState {
+  const key = keyOf(lat, lng, date);
   const hit = cache.get(key) ?? readStored(key);
   return {
+    ...(date ? { historical: true } : {}),
     hours: hit?.hours ?? null,
     fetchedAt: hit?.fetchedAt ?? null,
     loading: hit?.loading ?? false,
@@ -228,6 +233,10 @@ export function weatherTip(
   now = new Date(),
   _source: string | null = null,
 ): string {
+  if (weather.historical) return `${pickLocale(locale, label)} · ${pickLocale(locale, {
+    en: `Historical weather · Precipitation ${weather.mm.toFixed(1)} mm`,
+    'pt-BR': `Clima histórico · Precipitação ${weather.mm.toFixed(1).replace('.', ',')} mm`,
+  })}\n${pickLocale(locale, { en: 'Open-Meteo · reconstructed weather data', 'pt-BR': 'Open-Meteo · dados meteorológicos reconstruídos' })}`;
   const rain = weather.runs > 1
     ? pickLocale(locale, { en: `Rain chance ${Math.round(weather.rain)}%`, 'pt-BR': `Chance de chuva ${Math.round(weather.rain)}%` })
     : pickLocale(locale, { en: 'Rain chance unavailable', 'pt-BR': 'Chance de chuva indisponível' });
@@ -272,6 +281,7 @@ export function weatherIn(ensemble: Ensemble, date: string, window: readonly [nu
   for (const member of ensemble.members) {
     const temps = at.flatMap((index) => member.temp[index] ?? []);
     if (temps.length < hours.length) continue;
+    if (ensemble.historical && (at.some((index) => member.cloud[index] == null) || rainAt.some((index) => member.rain[index] == null))) continue;
     runs += 1;
     mins.push(Math.min(...temps));
     maxes.push(Math.max(...temps));
@@ -288,6 +298,7 @@ export function weatherIn(ensemble: Ensemble, date: string, window: readonly [nu
     cloud: median(clouds),
     hours: hours.length,
     runs,
+    ...(ensemble.historical ? { historical: true } : {}),
     ...(ensemble.extendedFrom && [...at, ...rainAt].some((index) => ensemble.time[index]! >= ensemble.extendedFrom!) ? { extended: true } : {}),
   };
 }

@@ -1,7 +1,7 @@
 import { type ChecklistItem } from '../trip/checklist-state';
 import savedPlaces from '../data/travel-place-edits.json';
 import { type PlaceEditStore } from '../catalog/place-edit-model';
-import { OPEN_METEO_FORECAST_URL, openMeteoForecastQuery, forecastToEnsemble, extendForecast } from '../trip/weather-source';
+import { OPEN_METEO_FORECAST_URL, openMeteoForecastQuery, forecastToEnsemble, extendForecast, historicalWeather, pastWeatherDate } from '../trip/weather-source';
 
 const trips = import.meta.glob<string>('../../content/trips/*.md', { eager: true, query: '?raw', import: 'default' });
 const checklists = import.meta.glob<ChecklistItem[]>('../../content/checklists/*.json', { eager: true, import: 'default' });
@@ -39,6 +39,12 @@ export async function publishedRequest(path: string, options?: RequestInit): Pro
     const lat = Number(query.get('lat'));
     const lng = Number(query.get('lng'));
     const tz = query.get('tz') ?? 'UTC';
+    const date = query.get('date');
+    if (date) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !pastWeatherDate(date, tz)) return reply({ error: 'http' }, 400);
+      const hours = await historicalWeather(lat, lng, tz, date).catch(() => null);
+      return hours ? reply({ hours, at: Date.now(), source: 'Open-Meteo (histórico)' }) : reply({ error: 'network' }, 502);
+    }
     const response = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(lat, lng, tz)}`, { signal: options?.signal }).catch(() => null);
     const primary = response?.ok ? forecastToEnsemble(await response.json().catch(() => null)) : null;
     const hours = await extendForecast(primary, lat, lng, tz, options?.signal);

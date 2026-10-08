@@ -19,6 +19,8 @@ import { appCache } from './scripts/vite-app-cache';
 import { ICON_FONT_HREF } from './src/ui/icons';
 import {
   forecastToEnsemble,
+  historicalWeather,
+  pastWeatherDate,
   extendForecast,
   MET_URL,
   metToEnsemble,
@@ -217,6 +219,7 @@ function weatherApi(): Plugin {
         const lng = Number(url.searchParams.get('lng'));
         const tz = url.searchParams.get('tz') || 'Europe/Paris';
         const force = url.searchParams.get('force') === '1';
+        const date = url.searchParams.get('date');
         const send = (status: number, body: object) => {
           res.statusCode = status;
           res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -224,13 +227,18 @@ function weatherApi(): Plugin {
           res.end(JSON.stringify(body));
         };
         if (!Number.isFinite(lat) || !Number.isFinite(lng)) return send(400, { error: 'http', status: 400 });
-        const key = `${lat.toFixed(3)},${lng.toFixed(3)}`;
+        if (date && (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !pastWeatherDate(date, tz))) return send(400, { error: 'http', status: 400 });
+        const key = `${lat.toFixed(3)},${lng.toFixed(3)}${date ? `:${date}` : ''}`;
         const stored = readForecastFile(key);
         if (stored && !force && Date.now() - stored.at < WEATHER_FRESH_MS) return send(200, stored);
         let job = weatherInflight.get(key);
         if (!job) {
-          job = fetchForecast(lat, lng, tz).then(async (result) => {
-            const hours = await extendForecast('fresh' in result ? result.fresh.hours : null, lat, lng, tz);
+          const request = date ? historicalWeather(lat, lng, tz, date).then((hours) => hours
+            ? { fresh: { at: Date.now(), source: 'Open-Meteo (histórico)', hours } }
+            : { error: 'http' as const, status: 502 }).catch(() => ({ error: 'network' as const, status: null }))
+            : fetchForecast(lat, lng, tz);
+          job = request.then(async (result) => {
+            const hours = date ? null : await extendForecast('fresh' in result ? result.fresh.hours : null, lat, lng, tz);
             if (hours) result = { fresh: {
               at: Date.now(), source: 'fresh' in result ? result.fresh.source : 'Open-Meteo (ECMWF EC46)', hours,
             } };

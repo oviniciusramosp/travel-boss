@@ -102,6 +102,7 @@ import {
   type Weather,
 } from './weather';
 import { weatherIcon } from '../ui/weather-icons';
+import { pastWeatherDate } from './weather-source';
 import { luggageStops } from './luggage';
 import { transferRow } from '../views/transfer-row';
 
@@ -202,7 +203,10 @@ function fillWeather(
       slot.replaceChildren();
       return;
     }
-    const text = state.loading
+    const text = state.historical && !state.loading ? pickLocale(locale, {
+      en: 'Historical weather unavailable for this period.\nThe source has not supplied all hours yet.',
+      'pt-BR': 'Clima histórico indisponível neste período.\nA fonte ainda não forneceu todas as horas.',
+    }) : state.historical ? pickLocale(locale, { en: 'Loading historical weather…', 'pt-BR': 'Carregando o clima histórico…' }) : state.loading
       ? pickLocale(locale, { en: 'Loading the forecast…', 'pt-BR': 'Carregando a previsão…' })
       : state.failed ? pickLocale(locale, {
           en: 'No forecast right now.\nRefresh to try again.',
@@ -1254,7 +1258,7 @@ export function mountTrip(
         const row = rows[index];
         const record = weatherCity(row?.dated.city.slug ?? section.cities[0]?.city.slug ?? '', row?.dated.day.stops[row.stopIndex]?.placeId);
         return record
-          ? forecastState(record.lat, record.lng)
+          ? forecastState(record.lat, record.lng, pastWeatherDate(section.date, timeZoneForCity(record.slug)) ? section.date : undefined)
           : { hours: null, fetchedAt: null, loading: false, failed: false, error: null, source: null };
       };
       const cityOf = (index: number) => stateOf(index).hours;
@@ -1289,6 +1293,21 @@ export function mountTrip(
   function refreshWeather(trip: Trip, force = false): Promise<void> {
     const seen = new Set<string>();
     const loads: Promise<unknown>[] = [];
+    for (const section of tripDates(trip)) {
+      for (const group of section.cities) {
+        const records = [weatherCity(group.city.slug), ...group.days.flatMap(({ day }) => day.stops.map((stop) => weatherCity(group.city.slug, stop.placeId)))];
+        for (const record of records) {
+          if (!record) continue;
+          const tz = timeZoneForCity(record.slug);
+          const key = `${record.slug}:${section.date}`;
+          if (!pastWeatherDate(section.date, tz) || seen.has(key)) continue;
+          seen.add(key);
+          loads.push(loadForecast(record.lat, record.lng, tz, force, section.date).then(() => {
+            if (alive && current && !force) paintWeather(current);
+          }));
+        }
+      }
+    }
     const cities = trip.cities.flatMap((city) => [
       weatherCity(city.slug),
       ...city.days.flatMap((day) => day.stops.flatMap((stop) => stop.placeId ? [weatherCity(city.slug, stop.placeId)] : [])),

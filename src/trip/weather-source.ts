@@ -6,7 +6,42 @@
 
 /** One run of the ensemble: hourly temperature, rain of the hour before, and cloud cover. */
 export type Member = { temp: (number | null)[]; rain: (number | null)[]; cloud: (number | null)[] };
-export type Ensemble = { time: string[]; members: Member[]; extendedFrom?: string };
+export type Ensemble = { time: string[]; members: Member[]; extendedFrom?: string; historical?: boolean };
+
+/** Compare calendar dates on the city's clock, including around midnight. */
+export function pastWeatherDate(date: string, timeZone: string, now = new Date()): boolean {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(now);
+  const part = (type: string) => parts.find((item) => item.type === type)!.value;
+  return date < `${part('year')}-${part('month')}-${part('day')}`;
+}
+
+/** Reconstructed historical conditions, one run with actual rain amounts, never probabilities. */
+export async function historicalWeather(lat: number, lng: number, timeZone: string, date: string): Promise<Ensemble | null> {
+  const next = new Date(`${date}T00:00:00Z`);
+  next.setUTCDate(next.getUTCDate() + 1);
+  const end = next.toISOString().slice(0, 10);
+  const query = new URLSearchParams({
+    latitude: String(lat), longitude: String(lng), timezone: timeZone,
+    start_date: date, end_date: end, hourly: 'temperature_2m,precipitation,cloud_cover',
+  });
+  const response = await fetch(`https://archive-api.open-meteo.com/v1/archive?${query}`, { signal: AbortSignal.timeout(15_000) });
+  let hours = response.ok ? parseEnsemble(await response.json()) : null;
+  // The archive can stop at yesterday 23:00; recent model data supplies the rain ending at midnight.
+  const midnight = hours?.time.indexOf(`${end}T00:00`) ?? -1;
+  if (hours && (midnight < 0 || hours.members[0]?.rain[midnight] == null)) {
+    const recentQuery = new URLSearchParams(query);
+    recentQuery.delete('start_date');
+    recentQuery.delete('end_date');
+    recentQuery.set('past_days', '2');
+    recentQuery.set('forecast_days', '1');
+    try {
+      const recent = await fetch(`${OPEN_METEO_FORECAST_URL}?${recentQuery}`, { signal: AbortSignal.timeout(15_000) });
+      const extra = recent.ok ? parseEnsemble(await recent.json()) : null;
+      if (extra) { hours = mergeForecasts(hours, extra); delete hours.extendedFrom; }
+    } catch { /* Keep available historical hours; incomplete periods stay unavailable. */ }
+  }
+  return hours ? { ...hours, historical: true } : null;
+}
 
 export const OPEN_METEO_URL = 'https://ensemble-api.open-meteo.com/v1/ensemble';
 export const OPEN_METEO_MODELS = 'ecmwf_ifs025,gfs05';
