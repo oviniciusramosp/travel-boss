@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { getTravelCity, lineBrandColor } from '../catalog';
 import { resolveTripLeg } from './legs';
 import type { TripLeg } from './parse';
+import { transferLegs } from './route';
+import { departureTimes } from './departures';
+import { getTripCity } from './catalog';
 
 function paris(id: string) {
   const place = getTravelCity('paris')?.places.find((item) => item.id === id);
@@ -12,6 +15,18 @@ function paris(id: string) {
 const viaWalk: TripLeg = { detail: 'a pé · 12 min', mode: 'walk', durationMin: 12 };
 
 describe('resolveTripLeg', () => {
+  it('keeps the published RER C departure when leaving the palace for the Eiffel Tower', () => {
+    const palace = getTripCity('paris')!.places.find(place => place.id === 'par-versailles')!;
+    const legs = transferLegs({ from: palace, to: paris('par-eiffel'), via: viaWalk });
+    const timings = departureTimes(legs, '2026-10-09', '12:00', '17:10', [{
+      date: '2026-10-09', service: 'RER C',
+      board: 'Versailles-Château–Rive Gauche', exit: 'Champ de Mars–Tour Eiffel',
+      departure: '16:25', arrival: '16:54',
+    }], '15:45');
+    expect(timings).toContainEqual(expect.objectContaining({ time: '16:25', durationMin: 29, verified: true }));
+    expect(timings.some(timing => timing.conflict)).toBe(false);
+  });
+
   it('lets an authored Paris pair beat a via walk', () => {
     const walk = resolveTripLeg(paris('par-trocadero'), paris('par-eiffel'), viaWalk);
     expect(walk).toMatchObject({
