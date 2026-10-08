@@ -27,3 +27,5 @@ Almoço/café €18 por pessoa, comida no caminho sem compra adicional definida;
 Matriz OSRM e otimização: `routed-foot/table/v1/foot/` com os 16 pontos já verificados; durações usadas apenas para comparar caminhadas, nunca para calcular partidas de trem. Portões e controles podem aumentar os tempos.
 
 Revisão da noite: saída do jantar às 21h20 para alcançar M9 em Franklin D. Roosevelt às 21h31. A nota anterior dizia 21h30, deixando apenas um minuto para chegar à estação; esta margem foi corrigida. Mantidos M9 21h31–21h37 e RER E 21h48–22h01, com 11 min de conexão, antes do encerramento noturno. Comida no card: €55,50/pessoa (€18 almoço/café e €37,50 jantar), acima da meta de €50.
+
+Todos os 16 subpontos agora têm horário estimado entre 9h50 e 11h21, incluindo os antigos 3 e 2 no retorno. Correção de mapa: os trechos já existiam, mas a classificação por cidades ocultava RER/Transilien ao chegar ao zoom 11. Linhas regionais de Paris permanecem visíveis também nesse zoom. Teste cobre L, C, E e preserva a ocultação de trens de longa distância/voos. M9 e RER E da noite reconferidos para 09/10 no Transitous (consultas UTC 19h20 e 19h40).

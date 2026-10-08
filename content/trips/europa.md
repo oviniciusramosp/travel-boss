@@ -312,9 +312,22 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:50 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais inclusos no Passeport; circuito pelos bosques e fontes, Grand Canal e retorno pela Salle de Bal e vista da Orangerie. Paradas breves para fotos; sair às 11h25
   - via: a pé até a entrada A do Pavillon Dufour · 15 min — Sair pela Cour des Princes e chegar à fila às 11h40, com os bilhetes em mãos
   - saída: 11:25
-- 10:50 **Grand Canal** — Vista do canal e do palácio ao fundo; depois, continuar pelos bosques na volta
-- 11:10 **Bosque da Salle de Bal** — Salão de baile ao ar livre, no caminho de volta
-- 11:20 **Parterre do Midi — vista da Orangerie** — Mirante dos jardins geométricos; depois, seguir à entrada A
+- 09:50 **Parterre d’Eau** — Espelhos de água e vista do eixo dos jardins
+- 09:56 **Fonte da Pirâmide** — Detalhes das bacias e esculturas
+- 10:01 **Fonte do Dragão** — Escultura do dragão e figuras mitológicas
+- 10:03 **Tanque de Netuno** — Vista do grande conjunto de esculturas
+- 10:07 **Bosque das Três Fontes** — Terraços e diferentes formatos de fontes
+- 10:14 **Bosque do Teatro de Água** — Jardim contemporâneo e esculturas
+- 10:22 **Bosque dos Banhos de Apolo** — Gruta de Apolo no jardim paisagístico
+- 10:28 **Tanque de Latona** — Fonte em degraus e vista do eixo principal
+- 10:35 **Tapis Vert** — Perspectiva do gramado em direção ao canal
+- 10:41 **Bosque de Encélado** — Escultura do gigante entre as rochas
+- 10:49 **Grand Canal** — Vista do canal e do palácio ao fundo; depois, continuar pelos bosques na volta
+- 10:55 **Tanque de Apolo** — Carro de Apolo na transição para o canal
+- 11:00 **Bosque da Colunata** — Colunas de mármore e escultura central
+- 11:05 **Tanque do Espelho — Miroir** — Passagem pelo tanque no retorno
+- 11:13 **Bosque da Salle de Bal** — Salão de baile ao ar livre, no caminho de volta
+- 11:21 **Parterre do Midi — vista da Orangerie** — Mirante dos jardins geométricos; depois, seguir à entrada A
 - 12:00 [Château de Versailles](place:par-versailles) — Entrada A do Pavillon Dufour, com os bilhetes Passeport já comprados para 9/10 às 12h. Chegar à fila às 11h40; visitar os Grands Appartements e a Galerie des Glaces até 14h15
   - ingresso: €35
   - status: confirmado

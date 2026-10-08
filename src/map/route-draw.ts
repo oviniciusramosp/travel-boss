@@ -9,7 +9,7 @@ import {
 } from 'leaflet';
 import { travelCities } from '../catalog';
 import { cssToken } from '../ui/motion';
-import { routeEmphasis, routeLayerKind, stationsFor, type RouteFocus } from './route-model';
+import { isIntercityRoute, routeEmphasis, routeLayerKind, stationsFor, type RouteFocus } from './route-model';
 import type { MapRouteSegment } from './types';
 
 const cityByPlace = new Map(travelCities.flatMap((city) => city.places.map((place) => [place.id, city.slug] as const)));
@@ -88,7 +88,7 @@ export function drawRouteSegments(
     const kind = routeLayerKind(segment);
     const fromCity = cityByPlace.get(segment.fromId ?? '');
     const toCity = cityByPlace.get(segment.toId ?? '');
-    const intercity = segment.flight || (segment.mode === 'transit' && fromCity && toCity && fromCity !== toCity);
+    const intercity = isIntercityRoute(segment, fromCity, toCity);
     const distanceClass = intercity ? ' tb-route-intercity' : '';
     const color = kind === 'walk' ? walkColor() : safeColor(segment.color, walkColor());
     const dashed = kind !== 'transit';

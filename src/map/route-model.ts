@@ -7,6 +7,13 @@ export type RouteFocus =
 
 export type RouteStation = { lat: number; lng: number; end: boolean };
 
+/** Paris suburban lines stay visible at street zoom, including Versailles and Disney. */
+export function isIntercityRoute(segment: MapRouteSegment, fromCity?: string, toCity?: string): boolean {
+  if (segment.flight) return true;
+  if (segment.mode !== 'transit' || !fromCity || !toCity || fromCity === toCity) return false;
+  return !/^(?:m\d+|rer-[a-e]|transilien-[a-z])$/.test(segment.lineId ?? '');
+}
+
 /** Walk dash, neutral chord, or a transit spine. A chord stays a chord. */
 export function routeLayerKind(segment: MapRouteSegment): 'walk' | 'dash' | 'transit' | 'flight' {
   if (segment.flight) return 'flight';

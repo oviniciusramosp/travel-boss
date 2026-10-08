@@ -1,6 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { routeEmphasis, routeLayerKind, stationsFor } from './route-model';
+import { isIntercityRoute, routeEmphasis, routeLayerKind, stationsFor } from './route-model';
 import type { MapRouteSegment } from './types';
+
+describe('intercity visibility', () => {
+  it.each(['transilien-l', 'rer-c', 'rer-e'])('keeps %s visible between Paris and Versailles at close zoom', (lineId) => {
+    expect(isIntercityRoute({ mode: 'transit', lineId, latlngs: [[48.89, 2.45], [48.80, 2.13]] }, 'paris', 'versailles')).toBe(false);
+  });
+
+  it('still hides long-distance trains and flights at close zoom', () => {
+    expect(isIntercityRoute({ mode: 'transit', lineId: 'frecciarossa', latlngs: [] }, 'paris', 'milao')).toBe(true);
+    expect(isIntercityRoute({ mode: 'transit', flight: true, lineId: 'rer-c', latlngs: [] }, 'paris', 'milao')).toBe(true);
+  });
+});
 
 const spine: MapRouteSegment = {
   mode: 'transit',
