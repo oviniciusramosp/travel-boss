@@ -4420,6 +4420,17 @@ export const localTravelCities: TravelCity[] = [
         lng: 2.1218939,
         address: "Entrée A, Pavillon Dufour, Place d'Armes, 78000 Versailles",
         mapsQuery: 'Château de Versailles',
+        subPoints: [
+          {
+            name: { en: 'Entrance A of the Pavillon Dufour', 'pt-BR': 'Entrada A do Pavillon Dufour' },
+            lat: 48.804007,
+            lng: 2.1218939,
+            description: {
+              en: 'Entrance for individual visitors with tickets, in the Pavillon Dufour on the south side of the Cour Royale.',
+              'pt-BR': 'Entrada dos visitantes individuais com bilhete, no Pavillon Dufour, no lado sul da Cour Royale.',
+            },
+          },
+        ],
       },
       {
         id: 'par-baron-rouge',

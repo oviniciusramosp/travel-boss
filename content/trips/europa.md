@@ -302,7 +302,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 
 **Comentário:** enquanto estamos em Versalhes, o Guilherme passa na Boulangerie du Sentier, compra os croissants para todos nós e nos encontra para jantar.
 
-- 08:30 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã no caminho para Versalhes. Levar os sanduíches já comprados no mercado na véspera; conservar conforme a embalagem, em bolsa térmica com gelo reutilizável se precisarem de refrigeração
+- 08:30 [Casa do Gui](place:par-casa-do-gui) — Saída; sanduiches no caminho para Versalhes.
   - comida: €0
   - via: RER E até La Défense, trem L até Versailles–Rive Droite e caminhada até o Marché Notre-Dame · 1h20 — Conexão de 15 min em La Défense; incluído no Navigo Semaine
   - status: confirmado
@@ -312,33 +312,35 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:50 [Marché Notre-Dame](place:par-point-alph) — Passar pelas halles e pela feira de sexta no caminho da estação para o palácio, sem comprar
   - via: a pé até os jardins pela Cour des Princes · 15 min
   - saída: 09:55
-- 10:15 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais inclusos no Passeport; tentar o circuito pelos bosques e fontes, Grand Canal e retorno pela Salle de Bal e vista da Orangerie, com paradas mínimas. Horários dos pontos estimados para uma passagem rápida; interromper às 11h25 se faltar algo. Confirmar no primeiro acesso a segunda entrada por outra porta para completar depois do palácio
-  - via: a pé até a entrada A do Pavillon Dufour · 15 min — Sair pela Cour des Princes e chegar à fila às 11h40, com os bilhetes em mãos
-  - saída: 11:25
+- 10:15 [Jardins de Versalhes](place:par-versailles-jardins) — Jardins Musicais inclusos no Passeport; circuito pelos bosques e fontes até o Grand Canal, voltando pelos pontos do sul: Apolo, Colunata, Espelho, Salle de Bal e vista da Orangerie, já perto do palácio. Horários estimados para uma visita objetiva; seguir para a entrada A às 11h50 mesmo se faltar algo. Confirmar no primeiro acesso a segunda entrada por outra porta para completar depois do palácio
+  - via: a pé até a entrada A do Pavillon Dufour · 5 min — Sair pela Cour des Princes e apresentar-se às 11h55 para o ingresso das 12h, com os bilhetes em mãos
+  - saída: 11:50
   - status: confirmado
 - 10:15 **Parterre d’Eau** — Espelhos de água e vista do eixo dos jardins
-- 10:19 **Fonte da Pirâmide** — Detalhes das bacias e esculturas
-- 10:23 **Fonte do Dragão** — Escultura do dragão e figuras mitológicas
-- 10:24 **Tanque de Netuno** — Vista do grande conjunto de esculturas
-- 10:27 **Bosque das Três Fontes** — Terraços e diferentes formatos de fontes
-- 10:32 **Bosque do Teatro de Água** — Jardim contemporâneo e esculturas
-- 10:38 **Bosque dos Banhos de Apolo** — Gruta de Apolo no jardim paisagístico
-- 10:43 **Tanque de Latona** — Fonte em degraus e vista do eixo principal
-- 10:48 **Tapis Vert** — Perspectiva do gramado em direção ao canal
-- 10:53 **Bosque de Encélado** — Escultura do gigante entre as rochas
-- 10:59 **Grand Canal** — Vista do canal e do palácio ao fundo; depois, continuar pelos bosques na volta
-- 11:03 **Tanque de Apolo** — Carro de Apolo na transição para o canal
-- 11:07 **Bosque da Colunata** — Colunas de mármore e escultura central
-- 11:11 **Tanque do Espelho — Miroir** — Passagem pelo tanque no retorno
-- 11:17 **Bosque da Salle de Bal** — Salão de baile ao ar livre, no caminho de volta
-- 11:23 **Parterre do Midi — vista da Orangerie** — Mirante dos jardins geométricos; depois, seguir à entrada A
-- 12:00 [Château de Versailles](place:par-versailles) — Entrada A do Pavillon Dufour, com os bilhetes Passeport já comprados para 9/10 às 12h. Deixar os sanduíches nos casiers da Aile des Ministres Nord antes de chegar à fila às 11h40; comida não entra no palácio. Visita focada aos Grands Appartements e à Galerie des Glaces, até 14h15; recolher a bolsa ao sair
+- 10:21 **Fonte da Pirâmide** — Detalhes das bacias e esculturas
+- 10:26 **Fonte do Dragão** — Escultura do dragão e figuras mitológicas
+- 10:28 **Tanque de Netuno** — Vista do grande conjunto de esculturas
+- 10:32 **Bosque das Três Fontes** — Terraços e diferentes formatos de fontes
+- 10:39 **Bosque do Teatro de Água** — Jardim contemporâneo e esculturas
+- 10:47 **Bosque dos Banhos de Apolo** — Gruta de Apolo no jardim paisagístico
+- 10:53 **Tanque de Latona** — Fonte em degraus e vista do eixo principal
+- 11:00 **Tapis Vert** — Perspectiva do gramado em direção ao canal
+- 11:06 **Bosque de Encélado** — Escultura do gigante entre as rochas
+- 11:14 **Grand Canal** — Vista do canal e do palácio ao fundo; depois, continuar pelos bosques na volta
+- 11:20 **Tanque de Apolo** — Carro de Apolo na transição para o canal
+- 11:25 **Bosque da Colunata** — Colunas de mármore e escultura central
+- 11:30 **Tanque do Espelho — Miroir** — Passagem pelo tanque no retorno
+- 11:38 **Bosque da Salle de Bal** — Salão de baile ao ar livre, no caminho de volta
+- 11:46 **Parterre do Midi — vista da Orangerie** — Mirante dos jardins geométricos; depois, seguir à entrada A
+- 12:00 [Château de Versailles](place:par-versailles) — Entrada A do Pavillon Dufour, com os bilhetes Passeport já comprados para 9/10 às 12h.\
+  Apresentar-se às 11h55 com os bilhetes em mãos. Visita focada aos Grands Appartements e à Galerie des Glaces, até 14h15
   - período: tarde
   - ingresso: €35
   - status: confirmado
-  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 1h25 — Se faltar algo nos Jardins de Versalhes, completar depois do palácio, com segunda entrada por outra porta, a Grille du Dragon; encerrar até 15h45. Trem das 16h25, incluído no Navigo Semaine; **almoço e café da tarde no trem** com os sanduíches já comprados no mercado na véspera
+  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 1h25 — Se faltar algo nos Jardins de Versalhes, completar depois do palácio, com segunda entrada por outra porta, a Grille du Dragon; encerrar até 15h45. Trem das 16h25, incluído no Navigo Semaine
   - embarque: 2026-10-09 · RER C · Versailles-Château–Rive Gauche → Champ de Mars–Tour Eiffel · 16:25 → 16:54
   - saída: 15:45
+- 11:55 **Entrada A do Pavillon Dufour** — Apresentar os bilhetes para a visita das 12h; chegada pela Cour des Princes desde o Parterre do Midi
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
 - 17:10 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**: chegar 20 min antes do ingresso a reservar para 17h30; subir primeiro ao topo para acompanhar o pôr do sol por volta das 19h15. Reservar até 20h para a visita e descida
   - via: metrô 9 de Trocadéro até Franklin D. Roosevelt · 25 min
