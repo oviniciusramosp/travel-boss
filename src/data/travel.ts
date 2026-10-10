@@ -3385,14 +3385,20 @@ export const localTravelCities: TravelCity[] = [
           {
             name: { en: 'Quai de Valmy — Rue Eugène-Varlin', 'pt-BR': 'Quai de Valmy — Rue Eugène-Varlin' },
             lat: 48.877602, lng: 2.365344,
+            description: { en: 'View of the canal and the bridge at Rue Eugène-Varlin.', 'pt-BR': 'Vista do canal e da ponte junto à Rue Eugène-Varlin.' },
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Canal_Saint-Martin_Pont_Eug%C3%A8ne-Varlin_002.JPG/500px-Canal_Saint-Martin_Pont_Eug%C3%A8ne-Varlin_002.JPG',
           },
           {
             name: { en: 'Canal beside Jardin Villemin', 'pt-BR': 'Canal junto ao Jardin Villemin' },
             lat: 48.874948, lng: 2.363195,
+            description: { en: 'Tree-lined canal bank beside Jardin Villemin.', 'pt-BR': 'Margem arborizada do canal junto ao Jardin Villemin.' },
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Canal_Saint-Martin_from_Quay_de_Valmy%2C_Paris%2C_2016.jpg/500px-Canal_Saint-Martin_from_Quay_de_Valmy%2C_Paris%2C_2016.jpg',
           },
           {
             name: { en: 'Quai de Valmy — Récollets locks', 'pt-BR': 'Quai de Valmy — eclusas dos Récollets' },
             lat: 48.873029, lng: 2.363978,
+            description: { en: 'Locks and footbridges on Canal Saint-Martin.', 'pt-BR': 'Eclusas e passarelas do Canal Saint-Martin.' },
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Canal_St_Martin_pr%C3%A8s_%C3%89cluse_R%C3%A9collets_Paris_1.jpg/500px-Canal_St_Martin_pr%C3%A8s_%C3%89cluse_R%C3%A9collets_Paris_1.jpg',
           },
         ],
         address: 'Quai de Valmy / Rue Eugène-Varlin → Écluses des Récollets, Paris',
@@ -3400,46 +3406,23 @@ export const localTravelCities: TravelCity[] = [
       },
       {
         id: 'par-canals-republique',
-        name: { en: 'Canal Saint-Martin — to République', 'pt-BR': 'Canal Saint-Martin — até République' },
+        name: { en: 'Canal Saint-Martin — Quai de Jemmapes', 'pt-BR': 'Canal Saint-Martin — Quai de Jemmapes' },
         category: 'parks',
         description: {
-          en: 'Southern stretch of Canal Saint-Martin: follow Quai de Jemmapes, cross to Quai de Valmy at Rue du Faubourg du Temple, then walk to Place de la République.',
-          'pt-BR': 'Trecho sul do Canal Saint-Martin: seguir o Quai de Jemmapes, atravessar para o Quai de Valmy na Rue du Faubourg du Temple e continuar até a Place de la République.',
+          en: 'Quai de Jemmapes beside the swing bridge at Rue Dieu, on Canal Saint-Martin. The canal opened in 1825 and retains its locks and footbridges.',
+          'pt-BR': 'Quai de Jemmapes junto à ponte giratória da Rue Dieu, no Canal Saint-Martin. O canal foi inaugurado em 1825 e conserva suas eclusas e passarelas.',
         },
         lat: 48.871155,
         lng: 2.365665,
-        area: {
-          kind: 'polyline',
-          // OSM pedestrian geometry via OSRM; checked 2026-09-27.
-          path: [
-            [48.871155, 2.365665], [48.870998, 2.365786],
-            [48.870996, 2.365826], [48.870917, 2.365906],
-            [48.869979, 2.366612], [48.869876, 2.366729],
-            [48.868999, 2.367411], [48.868881, 2.367404],
-            [48.868816, 2.367308], [48.8688, 2.367159],
-            [48.868829, 2.367078], [48.868805, 2.367108],
-            [48.868803, 2.367271], [48.868785, 2.367073],
-            [48.868716, 2.366926], [48.868647, 2.366974],
-            [48.868177, 2.365482], [48.867799, 2.364466],
-            [48.867745, 2.364358], [48.867508, 2.364237],
-            [48.867453, 2.364154], [48.867557, 2.363983],
-          ],
-        },
         subPoints: [
           {
             name: { en: 'Back to Quai de Jemmapes', 'pt-BR': 'Retorno ao Quai de Jemmapes' },
             lat: 48.871155, lng: 2.365665,
-          },
-          {
-            name: { en: 'Quai de Valmy — end of the open canal', 'pt-BR': 'Quai de Valmy — fim do canal a céu aberto' },
-            lat: 48.868829, lng: 2.367078,
-          },
-          {
-            name: { en: 'Place de la République', 'pt-BR': 'Place de la République' },
-            lat: 48.867557, lng: 2.363983,
+            description: { en: 'Canal view beside the swing bridge at Rue Dieu.', 'pt-BR': 'Vista do canal junto à ponte giratória da Rue Dieu.' },
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Pont_tournant_de_la_rue_Dieu%2C_Canal_Saint-Martin%2C_Paris_30_December_2014.jpg/500px-Pont_tournant_de_la_rue_Dieu%2C_Canal_Saint-Martin%2C_Paris_30_December_2014.jpg',
           },
         ],
-        address: 'Quai de Jemmapes → Quai de Valmy → Place de la République, Paris',
+        address: '70 Quai de Jemmapes / Rue Dieu, Paris',
         mapsQuery: '70 Quai de Jemmapes Paris',
       },
       {

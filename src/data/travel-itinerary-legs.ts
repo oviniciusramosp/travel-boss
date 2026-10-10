@@ -18,6 +18,8 @@ import {
   metro1,
   metro12,
   metro4,
+  metro5,
+  metro8,
   metro7,
   metro9,
   rerA,
@@ -1225,7 +1227,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
   // 8/10: Richelieu / Palais-Royal, then Montmartre; 10/10: canal and Marais.
-  trainLeg('par-casa-do-gui', 'par-canals', 40, [ride(rerE, 'noisy-le-sec', 'magenta')]),
+  trainLeg('par-casa-do-gui', 'par-canals', 45, [ride(rerE, 'noisy-le-sec', 'magenta')]),
   trainLeg('par-palais-royal', 'par-place-du-tertre', 65, [
     ride(metro4, 'reaumur', 'chateau-rouge'),
     ride(funicularMontmartre, 'gare-basse', 'gare-haute'),
@@ -1254,11 +1256,12 @@ const tripEuropa2026: ItineraryLegDef[] = [
     stationCount: 0,
     path: parisMilanRail as LatLng[],
   },
-  // 8/10: Baguett’s and Richelieu; 10/10: Printemps and Seine cruise.
+  // 8/10: Baguett’s and Richelieu; 10/10: Marais, Eiffel Tower and Seine cruise.
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
-  trainLeg('par-printemps', 'par-bateaux-mouches', 20, [ride(metro9, 'havre-caumartin', 'alma-marceau')]),
+  trainLeg('par-canals-republique', 'par-vosges', 25, [ride(metro5, 'jacques-bonsergent', 'breguet-sabin')]),
+  trainLeg('par-vendome', 'par-eiffel', 45, [ride(metro8, 'concorde', 'ecole-militaire')]),
   trainLeg('par-pompidou', 'par-cedric-grolet-meurice', 25, [ride(metro1, 'hotel-ville', 'tuileries')]),
   trainLeg('par-bateaux-mouches', 'par-auchan-noisy', 60, [
     ride(metro9, 'alma-marceau', 'havre-caumartin'),

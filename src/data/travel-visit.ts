@@ -696,8 +696,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMax: 15,
     crowdProfile: 'local',
     tips: L(
-      'Continue south beside the open canal, then leave the waterfront for Place de la République.',
-      'Continue para o sul junto ao canal a céu aberto e depois saia da margem para chegar à Place de la République.',
+      'Rue Dieu crosses the canal beside the swing bridge and leads west to Rue de Lancry and Jacques Bonsergent metro station.',
+      'A Rue Dieu atravessa o canal junto à ponte giratória e leva para oeste à Rue de Lancry e ao metrô Jacques Bonsergent.',
     ),
   },
   'par-bike': {

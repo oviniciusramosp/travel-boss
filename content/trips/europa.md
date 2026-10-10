@@ -355,58 +355,54 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 22:15 [Casa do Gui](place:par-casa-do-gui) — Volta
   - status: confirmado
 
-### Dia 7 — Sáb 10/10 · Canal Saint-Martin, Marais, Chez Janou, Cédric Grolet, Ópera e barco no Sena
+### Dia 7 — Sáb 10/10 · Canal Saint-Martin, Marais, Chez Janou, Cédric Grolet, Torre Eiffel e barco no Sena
   - períodos fechados: manhã, noite
 
-- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã em casa
-  - via: RER E até Magenta e caminhada até o canal · 40 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy
+- 10:30 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã em casa
+  - via: RER E até Magenta e caminhada até o canal · 45 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy
   - status: confirmado
-  - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Magenta · 08:23 → 08:32
-  - saída: 08:10
-- 08:50 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
+  - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Magenta · 10:49 → 10:59
+  - saída: 10:30
+- 11:15 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
   - status: confirmado
-- 09:10 [Canal Saint-Martin — até République](place:par-canals-republique) — Continuar pelo Quai de Jemmapes e atravessar para o Quai de Valmy na Rue du Faubourg du Temple
+- 11:15 **Quai de Valmy — Rue Eugène-Varlin** — Começo da caminhada pela margem do canal
+- 11:23 **Canal junto ao Jardin Villemin** — Vista do canal junto ao jardim
+- 11:30 **Quai de Valmy — eclusas dos Récollets** — Ver as eclusas e a passarela
+- 11:35 [Canal Saint-Martin — Quai de Jemmapes](place:par-canals-republique) — Encerrar junto à Rue Dieu; evitar a Place de la République por causa das manifestações informadas
   - status: confirmado
-- 09:25 **Place de la République** — Fim da caminhada pelos canais
-- 09:40 [Marché des Enfants Rouges](place:par-marche-enfants-rouges) — Volta pelo mercado coberto de 1615, sem consumir
+  - saída: 11:40
+  - via: metrô 5 de Jacques Bonsergent até Bréguet-Sabin · 25 min — Atravessar na Rue Dieu e seguir pela Rue de Lancry até Jacques Bonsergent, sem passar pela praça; sentido Place d’Italie. Permanecer no trem em République, sem sair nem fazer conexão; de Bréguet-Sabin, caminhar até a Place des Vosges. Incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M5 · Jacques Bonsergent → Bréguet-Sabin · 11:52 → 11:58
+- 11:35 **Retorno ao Quai de Jemmapes** — Fotos junto à ponte da Rue Dieu; fim do passeio pelo canal
+- 12:05 [Place des Vosges](place:par-vosges) — Volta curta pela praça antes do almoço; seguir às 12h10
   - status: confirmado
-- 10:10 [Archives nationales](place:par-archives-nationales) — Cour d'honneur e jardins, grátis; sem entrar no museu, que no sábado só abre às 14h. Sair às 10h20
-  - status: a confirmar
-  - saída: 10:20
-- 10:30 [Musée Carnavalet](place:par-carnavalet) — Grátis: visita curta à história de Paris e ao jardim; sair às 11h05
-  - status: a confirmar
-  - saída: 11:05
-- 11:15 [Place des Vosges](place:par-vosges) — Volta pela praça; seguir às 11h25
+  - saída: 12:10
+- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair até 13h20 para preservar a retirada do Grolet
   - status: confirmado
-  - saída: 11:25
-- 11:30 [Chez Janou](place:par-chez-janou) — Chegar cedo para tentar o primeiro serviço de **almoço**, que começa às 12h: um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair às 13h
+  - saída: 13:20
+- 13:30 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
   - status: confirmado
-  - saída: 13:00
-- 13:10 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
-  - status: confirmado
-- 13:20 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15); confirmar estoque e conservação para o transporte até voltar para casa antes de comprar. Sair às 13h30
-  - saída: 13:30
-- 13:35 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 13h45
-  - saída: 13:45
+- 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15); confirmar estoque e conservação para o transporte até voltar para casa antes de comprar. Sair às 13h50
+  - saída: 13:50
+- 13:55 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14h
+  - saída: 14:00
   - via: metrô 1 de Hôtel de Ville até Tuileries · 25 min — Sentido La Défense; caminhar até a retirada na rue de Castiglione. Incluído no Navigo Semaine
-  - embarque: 2026-10-10 · M1 · Hôtel de Ville → Tuileries · 13:56 → 14:00
-- 14:10 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; retirada de 10/10 entre 12h e 15h. Usar a fila prioritária e reservar até 14h30; comer os doces como **café da tarde**
+  - embarque: 2026-10-10 · M1 · Hôtel de Ville → Tuileries · 14:10 → 14:15
+- 14:25 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; retirada de 10/10 entre 12h e 15h. Usar a fila prioritária e reservar até 14h45; comer os doces como **café da tarde**
   - comida: €30
   - status: confirmado
-  - saída: 14:30
-- 14:40 [Place Vendôme](place:par-vendome) — Fotos e vitrines; seguir às 14h50
-  - saída: 14:50
+  - saída: 14:45
+- 14:50 [Place Vendôme](place:par-vendome) — Fotos e vitrines; seguir às 14h55
+  - saída: 14:55
   - status: confirmado
-- 15:00 [Starbucks Opéra — Capucines](place:par-starbucks-opera) — Só visitar o interior e admirar a decoração, sem consumir; sair às 15h20
-  - saída: 15:20
-  - status: confirmado
-- 16:00 [Ópera Garnier](place:par-opera) — **Por dentro**: visita livre com horário marcado e compra só online; reservar 1h15 para a escadaria, o grande foyer e a sala. Horário das 16h a confirmar na bilheteria online; ensaio pode fechar a sala sem aviso
-  - saída: 17:15
-- 17:30 [Printemps](place:par-printemps) — Cúpula de vitral no 6º andar do Printemps Femme; O terraço do 7º teve um pop-up até 30/09: confira se reabriu
-  - via: metrô 9 de Havre–Caumartin até Alma–Marceau · 20 min
-  - embarque: 2026-10-10 · M9 · Havre–Caumartin → Alma–Marceau · 18:14 → 18:21
-  - status: confirmado
-- 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de 1h10 no Sena, saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min
+  - via: metrô 8 de Concorde até École Militaire · 45 min — Sentido Balard; caminhar até a entrada leste da Torre Eiffel e passar pelo controle de segurança. Incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M8 · Concorde → École Militaire · 15:15 → 15:19
+- 15:40 [Torre Eiffel](place:par-eiffel) — Tentar comprar na bilheteria do monumento ingresso para subir ao topo, sem reserva antecipada; a venda é para uso imediato e depende da disponibilidade. Avaliar a fila na chegada e reservar até 17h50 para compra, subida e descida; se não couber, seguir para o barco
+  - ingresso: €36,70
+  - status: a confirmar
+  - saída: 17:50
+  - via: a pé até o embarcadouro dos Bateaux-Mouches · 25 min — Seguir pela margem do Sena e atravessar o Pont de l’Alma até o Port de la Conférence; chegar antes do embarque das 18h30
+- 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de aproximadamente 1h no Sena, saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min; deixar margem até 19h40 para desembarcar e seguir ao metrô
   - via: metrô 9 de Alma–Marceau até Havre–Caumartin e RER E até Noisy-le-Sec · 1h — Metrô sentido Mairie de Montreuil; seguir para Haussmann–Saint-Lazare e, em Noisy-le-Sec, caminhar até o Auchan. Incluído no Navigo Semaine
   - status: confirmado
   - embarque: 2026-10-10 · M9 · Alma–Marceau → Havre–Caumartin · 19:58 → 20:05

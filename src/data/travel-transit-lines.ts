@@ -342,12 +342,16 @@ export const metro10: TransitLine = {
   ],
 };
 
-/** Metro Line 5 — République → Gare du Nord (the trip's stretch) */
+/** Metro Line 5 — Bréguet-Sabin → Gare du Nord (the trip's stretch) */
 export const metro5: TransitLine = {
   id: 'm5',
   name: 'Métro 5',
   color: '#FF7E2E',
   stations: [
+    // OSM stop positions checked 2026-10-10; see paris-2026-10-10-eiffel.md.
+    st('breguet-sabin', 'Bréguet-Sabin', 48.8566333, 2.3704333),
+    st('richard-lenoir', 'Richard Lenoir', 48.8602134, 2.3720741),
+    st('oberkampf', 'Oberkampf', 48.8640448, 2.369404),
     st('republique', 'République', 48.867887, 2.363883),
     st('jacques-bonsergent', 'Jacques Bonsergent', 48.871119, 2.360755),
     st('gare-est', "Gare de l'Est", 48.876364, 2.358128),
