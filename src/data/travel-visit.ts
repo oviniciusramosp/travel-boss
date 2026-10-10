@@ -506,6 +506,15 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Hospedagem residencial; a galeria ilustra Noisy-le-Sec, não a casa particular.',
     ),
   },
+  'par-plaq-nil': {
+    durationMin: 20,
+    durationMax: 40,
+    crowdProfile: 'cafe',
+    tips: L(
+      'Hot chocolate is served with milk or water. Rue du Nil manufacture; the brand also has a separate shop on Rue du Cherche-Midi.',
+      'Chocolate quente servido com leite ou água. Manufacture da Rue du Nil; a marca também tem uma unidade separada na Rue du Cherche-Midi.',
+    ),
+  },
   'par-le-jean-jaures-noisy': {
     crowdProfile: 'cafe',
     tips: L(

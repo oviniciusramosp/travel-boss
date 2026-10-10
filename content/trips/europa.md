@@ -10,11 +10,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: fechado
 
 - 11:55 [CDG](place:par-cdg) — Chegada com as malas; pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
-  - status: confirmado
-- 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café, só para forrar o estômago; acesso à unidade pelo desembarque público a confirmar
   - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
   - status: confirmado
-- 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas; depois do almoço no aeroporto, descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
+- 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas; descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
   - status: confirmado
 - 17:12 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
@@ -57,15 +55,12 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 ### Dia 2 — Seg 5/10 · Arco do Triunfo, Louvre e compras na Opéra
   - períodos fechados: manhã, tarde, noite
 
-- 08:10 [Casa do Gui](place:par-casa-do-gui) — Saída. A **Navigo Semaine** vale de hoje até domingo
-  - via: RER E até Haussmann–Saint-Lazare e caminhada até a Brioche Dorée · 43 min · €32,40
+- 08:10 [Casa do Gui](place:par-casa-do-gui) — **Café da manhã** em casa antes de sair. A **Navigo Semaine** vale de hoje até domingo
+  - via: RER E até Haussmann–Saint-Lazare, caminhada até Auber e RER A até Charles de Gaulle–Étoile · 58 min · €32,40
   - status: confirmado
   - embarque: 2026-10-05 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 08:34 → 08:47
-  - saída: 08:10
-- 08:53 [Brioche Dorée — Chaussée d’Antin](place:par-brioche-doree-chaussee-antin) — **Café da manhã para levar**: um café allongé (€2) e um croissant (€2) por pessoa; pedir e retirar até 9h02, comendo no caminho até o Arco
-  - via: Caminhar até Auber e pegar o RER A até Charles de Gaulle–Étoile · 15 min
   - embarque: 2026-10-05 · RER A · Auber → Charles de Gaulle–Étoile · 09:14 → 09:17
-  - status: confirmado
+  - saída: 08:10
 - 09:30 [Arco do Triunfo](place:par-arc-triomphe) — Por fora, sem subir; use a passagem subterrânea
   - status: confirmado
 - 09:55 [Champs-Élysées](place:par-champs-elysees) — Descer a avenida em direção aos Palais, passando na frente das vitrines
@@ -103,7 +98,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - embarque: 2026-10-05 · M7 · Palais Royal–Musée du Louvre → Chaussée d’Antin–La Fayette · 17:07 → 17:11
   - saída: 17:00
 - +3 km — percurso dentro do museu (estimativa)
-- 17:30 [L'Éclair de Génie](place:par-eclair-genie) — Éclair (~€7) no balcão do Lafayette Gourmet, 35 Bd Haussmann
+- 17:30 [Galeries Lafayette Le Gourmet](place:par-lafayette-gourmet-haussmann) — **Café da tarde** em um dos balcões de confeitaria do Le Gourmet.
   - status: confirmado
 - 18:00 [Uniqlo Opéra](place:par-uniqlo-opera) — Heattech e jaqueta leve de pluma; 1h15 para escolher e experimentar, até as 19h15; fecha às 20h
   - status: confirmado
@@ -137,8 +132,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 09:00 [Shakespeare and Company](place:par-shakespeare)
   - status: confirmado
 - 09:15 [Notre-Dame](place:par-notre-dame) — Grátis; em dia de semana abre às 7h50
-  - status: confirmado
-- 11:00 [Sainte-Chapelle](place:par-sainte-chapelle) — Passar por fora pelo Boulevard du Palais, sem entrar
   - status: confirmado
 - 11:05 [Relógio da Conciergerie](place:par-horloge) — Relógio de 1370 na torre da esquina com o Quai de l'Horloge
   - status: confirmado
@@ -297,10 +290,8 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 22:35 [Casa do Gui](place:par-casa-do-gui)
   - status: confirmado
 
-### Dia 6 — Sex 9/10 · Versalhes, Torre Eiffel ao pôr do sol e Relais de l'Entrecôte
+### Dia 6 — Sex 9/10 · Versalhes, Sentier, PLAQ e Relais de l'Entrecôte
   - cidades: Paris → Versalhes
-
-**Comentário:** enquanto estamos em Versalhes, o Guilherme passa na Boulangerie du Sentier, compra os croissants para todos nós e nos encontra para jantar.
 
 - 08:30 [Casa do Gui](place:par-casa-do-gui) — Saída; sanduiches no caminho para Versalhes.
   - comida: €0
@@ -337,15 +328,12 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - período: tarde
   - ingresso: €35
   - status: confirmado
-  - via: a pé até Versailles-Château–Rive Gauche e RER C até Champ de Mars–Tour Eiffel · 1h25 — Se faltar algo nos Jardins de Versalhes, completar depois do palácio, com segunda entrada por outra porta, a Grille du Dragon; encerrar até 15h45. Trem das 16h25, incluído no Navigo Semaine
-  - embarque: 2026-10-09 · RER C · Versailles-Château–Rive Gauche → Champ de Mars–Tour Eiffel · 16:25 → 16:54
-  - saída: 15:45
 - 11:55 **Entrada A do Pavillon Dufour** — Apresentar os bilhetes para a visita das 12h; chegada pela Cour des Princes desde o Parterre do Midi
 - +1,5 km — corredores do palácio, dos Grands Appartements à Galerie des Glaces (estimativa)
-- 17:10 [Torre Eiffel](place:par-eiffel) — **Subida ao topo**: chegar 20 min antes do ingresso a reservar para 17h30; subir primeiro ao topo para acompanhar o pôr do sol por volta das 19h15. Reservar até 20h para a visita e descida
-  - via: metrô 9 de Trocadéro até Franklin D. Roosevelt · 25 min
-  - embarque: 2026-10-09 · M9 · Trocadéro → Franklin D. Roosevelt · 20:19 → 20:23
-  - saída: 20:00
+- [Boulangerie du Sentier](place:par-boulangerie-du-sentier) — **Café da tarde**: conhecer o croissant vencedor de 2026.
+  - status: confirmado
+- [PLAQ — Rue du Nil](place:par-plaq-nil) — Chocolate quente.
+  - status: confirmado
 - 20:30 [Le Relais de l'Entrecôte](place:par-entrecote) — **Jantar**: só a fórmula, entrecôte com fritas e o molho da casa, sem reserva: fila na porta, o jantar abre às 19h. Saia até 21h20 para caminhar até Franklin D. Roosevelt e pegar o metrô das 21h31
   - via: metrô 9 de Franklin D. Roosevelt até Chaussée d'Antin e RER E em Haussmann–Saint-Lazare · 45 min
   - embarque: 2026-10-09 · M9 · Franklin D. Roosevelt → Chaussée d'Antin–La Fayette · 21:31 → 21:37

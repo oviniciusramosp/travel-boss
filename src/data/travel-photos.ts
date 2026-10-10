@@ -31,6 +31,7 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'par-plaq-nil': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLdp2l92oC0ut33OffZqVm_H_EKaIGIUoOD0wlblj9Wo2SN9Hhf-75rqvNoF4e5-h95z-iNVTvBXlJI3-_bj1IRu5t4CX1ssQN1DJkzv8GoVefIA2Ze-1g0zB2-Pxt8lkk3pzPAc=w224-h224-p-k-no', 'Chocolate drink and coffee at PLAQ — Rue du Nil', 'Bebida de chocolate e café na PLAQ — Rue du Nil', 'Google Maps · PLAQ Chocolat Rue du Nil')],
   'mil-primark-torino': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmMMZOjhhaUTGJzFPctFkGbXQPGSlcEuo6-1ptTxtfjd-DsB-tfUpHhlKqcW7mdcZF_GGYdKqT3UwR5idoVvdWkWP2qRattxMmEjMigSk21QCu_ggzLVUGJQOkpheAMtaCQlHiGQkuPlEOU=w408-h544-k-no', 'Primark · Via Torino', 'Primark · Via Torino', 'Google Maps · Primark Via Torino')],
   'spe-la-pia': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmOyYNTuqaBh3cV_dAZVihOHPcgOZPtp6bjcMlV5Ws20JkwXXfYLSRz0bSdC8ibcoplYMGG6_zujX1raV2PeJOJGFmWahdI2MmjJ-M1z4k_SDiBUHyv3LxUYE6NnOe_uzl1nrnXY=w224-h224-p-k-no', 'Pizza and farinata · La Pia', 'Pizza e farinata · La Pia', 'Google Maps · La Pia Via Magenta')],
   'spe-fiorini': [photo('https://lh3.googleusercontent.com/grass-cs/ACvplmOFgRic65ioJMGGKeXUZLBk4yTA2t5PeGeRLRRU-gJ4ffPCRd6hs2KgPY6nLTjB-tVCvH9La5Tps2x2ce5qI3Lz7X1ytiQQx0bjwo0yqIDpTYYU-PZ8jPKewMFRz6aM-YLUrCwO=w224-h224-p-k-no', 'Brioche and cappuccino · Fiorini', 'Brioche e cappuccino · Fiorini', 'Google Maps · Pasticceria Fiorini')],

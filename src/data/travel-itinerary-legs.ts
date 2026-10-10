@@ -1193,13 +1193,11 @@ const tripEuropa2026: ItineraryLegDef[] = [
   { from: 'par-champs-elysees', to: 'par-palais', mode: 'walk', path: [...palaisToChampsWalk].reverse() },
   { from: 'par-palais', to: 'par-alexandre-iii', mode: 'walk' },
   { from: 'par-alexandre-iii', to: 'par-luxor-obelisk', mode: 'walk', through: [[48.862723, 2.313436], [48.864541, 2.313651], [48.865803, 2.313203], [48.867754, 2.313963], [48.866301, 2.318531]] },
-  trainLeg('par-casa-do-gui', 'par-brioche-doree-chaussee-antin', 43, [
+  trainLeg('par-casa-do-gui', 'par-arc-triomphe', 58, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
-  ]),
-  trainLeg('par-brioche-doree-chaussee-antin', 'par-arc-triomphe', 15, [
     ride(rerA, 'auber', 'etoile'),
   ]),
-  trainLeg('par-louvre', 'par-eclair-genie', 20, [
+  trainLeg('par-louvre', 'par-lafayette-gourmet-haussmann', 20, [
     ride(metro7, 'palais-royal', 'chaussee-antin'),
   ]),
   trainLeg('par-passage-panoramas', 'par-casa-do-gui', 50, [ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec')]),
@@ -1243,7 +1241,8 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   { from: 'par-point-alph', to: 'par-versailles-jardins', mode: 'walk', through: [[48.804027, 2.121208]] },
   { from: 'par-versailles-jardins', to: 'par-versailles', mode: 'walk', through: [[48.804027, 2.121208]] },
-  trainLeg('par-eiffel', 'par-entrecote', 25, [ride(metro9, 'trocadero', 'fdr')]),
+  // Actual return was not reported; suppress the walking fallback without inventing a service or route.
+  { from: 'par-versailles', to: 'par-boulangerie-du-sentier', mode: 'transit', label: 'Transporte a confirmar', durationMin: 0 },
   trainLeg('par-entrecote', 'par-casa-do-gui', 45, [
     ride(metro9, 'fdr', 'chaussee-antin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),

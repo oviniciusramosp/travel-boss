@@ -5434,6 +5434,22 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.6,
       },
       {
+        id: 'par-plaq-nil',
+        name: { en: 'PLAQ — Rue du Nil', 'pt-BR': 'PLAQ — Rue du Nil' },
+        category: 'cafes',
+        subcategories: ['coffee-shop'],
+        description: {
+          en: 'Bean-to-bar chocolate workshop, shop and café on Rue du Nil. PLAQ makes chocolate from cocoa beans and serves chocolate drinks, cakes and other cocoa-based treats to eat in or take away.',
+          'pt-BR': 'Atelier de chocolate da amêndoa à barra, loja e café na Rue du Nil. A PLAQ produz seu chocolate a partir das amêndoas de cacau e serve bebidas de chocolate, bolos e outras guloseimas para consumir no local ou levar.',
+        },
+        lat: 48.8678553,
+        lng: 2.3480216,
+        address: '4 Rue du Nil, 75002 Paris',
+        mapsQuery: 'PLAQ Chocolat 4 Rue du Nil, 75002 Paris',
+        mapsUrl: 'https://www.google.com/maps/place/PLAQ+Chocolat/data=!4m6!3m5!1s0x47e66ff6d666ddf9:0x7a6a1a302206feae!8m2!3d48.8678553!4d2.3480216!16s%2Fg%2F11h0ykq7tb',
+        googleRating: 4.5,
+      },
+      {
         id: 'par-sweet-lab',
         name: { en: 'Sweet Lab', 'pt-BR': 'Sweet Lab' },
         category: 'cafes',
