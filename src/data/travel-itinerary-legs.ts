@@ -18,8 +18,6 @@ import {
   metro1,
   metro12,
   metro4,
-  metro5,
-  metro8,
   metro7,
   metro9,
   rerA,
@@ -1225,7 +1223,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
   ]),
   trainLeg('par-chessy-rer', 'par-val-de-fontenay-rer', 26, [ride(rerA, 'chessy', 'val-de-fontenay')]),
   // 8/10: Richelieu / Palais-Royal, then Montmartre; 10/10: canal and Marais.
-  trainLeg('par-casa-do-gui', 'par-canals', 45, [ride(rerE, 'noisy-le-sec', 'magenta')]),
+  trainLeg('par-casa-do-gui', 'par-vendome', 50, [ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare')]),
   trainLeg('par-palais-royal', 'par-place-du-tertre', 65, [
     ride(metro4, 'reaumur', 'chateau-rouge'),
     ride(funicularMontmartre, 'gare-basse', 'gare-haute'),
@@ -1259,11 +1257,15 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
-  trainLeg('par-canals', 'par-vosges', 25, [ride(metro5, 'jacques-bonsergent', 'breguet-sabin')]),
-  trainLeg('par-vendome', 'par-eiffel', 45, [ride(metro8, 'concorde', 'ecole-militaire')]),
-  trainLeg('par-pompidou', 'par-cedric-grolet-meurice', 25, [ride(metro1, 'hotel-ville', 'tuileries')]),
-  trainLeg('par-bateaux-mouches', 'par-auchan-noisy', 60, [
-    ride(metro9, 'alma-marceau', 'havre-caumartin'),
+  trainLeg('par-cedric-grolet-meurice', 'par-naturalia-verrerie', 20, [ride(metro1, 'tuileries', 'chatelet')]),
+  trainLeg('par-chez-janou', 'par-bateaux-mouches', 45, [
+    ride(metro1, 'saint-paul', 'fdr'),
+    ride(metro9, 'fdr', 'alma-marceau'),
+  ]),
+  { from: 'par-bateaux-mouches', to: 'par-eiffel', mode: 'walk' },
+  trainLeg('par-eiffel', 'par-monoprix-champs', 30, [ride(metro9, 'iena', 'saint-philippe')]),
+  trainLeg('par-monoprix-champs', 'par-casa-do-gui', 45, [
+    ride(metro9, 'saint-philippe', 'havre-caumartin'),
     ride(rerE, 'haussmann-saint-lazare', 'noisy-le-sec'),
   ]),
 ];

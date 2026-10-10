@@ -343,67 +343,56 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 22:15 [Casa do Gui](place:par-casa-do-gui) — Volta
   - status: confirmado
 
-### Dia 7 — Sáb 10/10 · Canal Saint-Martin, Marais, Chez Janou, Cédric Grolet, Torre Eiffel e barco no Sena
+### Dia 7 — Sáb 10/10 · Vendôme, Cédric Grolet, Marais, Chez Janou, barco e Torre ao pôr do sol
   - períodos fechados: manhã, noite
 
-- 10:30 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã em casa
-  - via: RER E até Magenta e caminhada até o canal · 45 min — Saída Rue de l'Aqueduc; seguir pela Rue La Fayette, Rue du Château-Landon e Rue Eugène-Varlin até o Quai de Valmy
+- 11:30 [Casa do Gui](place:par-casa-do-gui) — Saída; café da manhã em casa
+  - via: RER E até Haussmann–Saint-Lazare · 50 min — Caminhar até Noisy-le-Sec; na chegada, seguir a pé para a Place Vendôme. Incluído no Navigo Semaine
   - status: confirmado
-  - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Magenta · 10:49 → 10:59
-  - saída: 10:30
-- 11:15 [Canal Saint-Martin](place:par-canals) — Caminhada para o sul à beira do canal, da Rue Eugène-Varlin às eclusas dos Récollets e à Rue Dieu; encerrar antes da Place de la République por causa das manifestações informadas
+  - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 11:49 → 12:02
+  - saída: 11:30
+- 12:18 [Place Vendôme](place:par-vendome) — Passagem rápida para fotos antes da retirada; seguir às 12h21
   - status: confirmado
-  - saída: 11:40
-  - via: metrô 5 de Jacques Bonsergent até Bréguet-Sabin · 25 min — Atravessar na Rue Dieu e seguir pela Rue de Lancry até Jacques Bonsergent, sem passar pela praça; sentido Place d’Italie. Permanecer no trem em République, sem sair nem fazer conexão; de Bréguet-Sabin, caminhar até a Place des Vosges. Incluído no Navigo Semaine
-  - embarque: 2026-10-10 · M5 · Jacques Bonsergent → Bréguet-Sabin · 11:52 → 11:58
-- 11:15 **Quai de Valmy — Rue Eugène-Varlin** — Começo da caminhada pela margem do canal
-- 11:23 **Canal junto ao Jardin Villemin** — Vista do canal junto ao jardim
-- 11:30 **Quai de Valmy — eclusas dos Récollets** — Ver as eclusas e a passarela
-- 11:35 **Retorno ao Quai de Jemmapes** — Fotos junto à ponte da Rue Dieu; fim do passeio pelo canal
-- 12:05 [Place des Vosges](place:par-vosges) — Volta curta pela praça antes do almoço; seguir às 12h10
-  - status: confirmado
-  - saída: 12:10
-- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas.\
-  Sair até 13h20 para preservar a retirada do Grolet
-  - status: confirmado
-  - saída: 13:20
-- 13:30 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada
-  - status: confirmado
-- 13:45 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15); confirmar estoque e conservação para o transporte até voltar para casa antes de comprar. Sair às 13h50
-  - saída: 13:50
-- 13:55 [Centre Pompidou](place:par-pompidou) — Por fora: edifício fechado para reforma, com reabertura prevista para 2030. Sair às 14h
-  - saída: 14:00
-  - via: metrô 1 de Hôtel de Ville até Tuileries · 25 min — Sentido La Défense; caminhar até a retirada na rue de Castiglione. Incluído no Navigo Semaine
-  - embarque: 2026-10-10 · M1 · Hôtel de Ville → Tuileries · 14:10 → 14:15
-- 14:25 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces em formato de frutas e castanhas pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione; retirada de 10/10 entre 12h e 15h. Usar a fila prioritária e reservar até 14h45; comer os doces como **café da tarde**
+  - saída: 12:21
+- 12:25 [Cédric Grolet Le Meurice](place:par-cedric-grolet-meurice) — Retirar os doces pelo [Click & Collect](https://cedric-grolet.com/meurice/), na 6 rue de Castiglione, dentro da janela de 12h–15h; usar a fila prioritária e comer os doces logo após a retirada, antes do almoço
   - comida: €30
   - status: confirmado
-  - saída: 14:45
-- 14:50 [Place Vendôme](place:par-vendome) — Fotos e vitrines; seguir às 14h55
-  - saída: 14:55
+  - saída: 12:55
+  - via: metrô 1 até Châtelet · 20 min — Caminhar até Tuileries; linha amarela sentido Château de Vincennes até Châtelet e seguir a pé ao Naturalia Verrerie. Incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M1 · Tuileries → Châtelet · 13:03 → 13:06
+- 13:15 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15); confirmar estoque e conservação durante o restante do passeio e o retorno antes de comprar. Sair às 13h25
+  - saída: 13:25
+- 13:40 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Ver a fachada; seguir às 13h45 para o almoço
   - status: confirmado
-  - via: metrô 8 de Concorde até École Militaire · 45 min — Sentido Balard; caminhar até a entrada leste da Torre Eiffel e passar pelo controle de segurança. Incluído no Navigo Semaine
-  - embarque: 2026-10-10 · M8 · Concorde → École Militaire · 15:15 → 15:19
-- 15:40 [Torre Eiffel](place:par-eiffel) — Tentar comprar na bilheteria do monumento ingresso para subir ao topo, sem reserva antecipada; a venda é para uso imediato e depende da disponibilidade. Avaliar a fila na chegada e reservar até 17h50 para compra, subida e descida; se não couber, seguir para o barco
+  - saída: 13:45
+- 13:55 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva, com margem de 30–45 min de espera; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair até 15h35 para chegar ao barco antes do embarque
+  - status: confirmado
+  - saída: 15:35
+  - via: metrô 1 e metrô 9 até Alma–Marceau · 45 min — Caminhar até Saint-Paul; M1 sentido La Défense até Franklin D. Roosevelt e M9 sentido Pont de Sèvres até Alma–Marceau. Seguir ao Port de la Conférence; incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M1 · Saint-Paul → Franklin D. Roosevelt · 15:50 → 16:00
+  - embarque: 2026-10-10 · M9 · Franklin D. Roosevelt → Alma–Marceau · 16:07 → 16:09
+- 16:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de aproximadamente 1h no Sena, com embarque no Port de la Conférence; chegada prevista às 16h20. Barco antes da Torre, com saídas a cada 30 min; reservar até 17h35 para desembarcar
+  - período: tarde
+  - status: confirmado
+  - saída: 17:35
+  - via: a pé até a Torre Eiffel · 25 min — Atravessar o Pont de l’Alma e seguir pela margem do Sena até a entrada leste da Torre
+- 18:00 [Torre Eiffel](place:par-eiffel) — Tentar comprar na bilheteria ingresso para subir ao topo, sem reserva antecipada; compra para visita imediata, sujeita à fila e à disponibilidade. Pôr do sol às 19h13 na Torre; planejar a descida e sair por volta de 19h30
   - ingresso: €36,70
   - status: a confirmar
-  - saída: 17:50
-  - via: a pé até o embarcadouro dos Bateaux-Mouches · 25 min — Seguir pela margem do Sena e atravessar o Pont de l’Alma até o Port de la Conférence; chegar antes do embarque das 18h30
-- 18:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de aproximadamente 1h no Sena, saindo do Pont de l'Alma: pôr do sol às 19h11 na água e a Torre acesa na volta. Saídas a cada 30 min; deixar margem até 19h40 para desembarcar e seguir ao metrô
-  - via: metrô 9 de Alma–Marceau até Havre–Caumartin e RER E até Noisy-le-Sec · 1h — Metrô sentido Mairie de Montreuil; seguir para Haussmann–Saint-Lazare e, em Noisy-le-Sec, caminhar até o Auchan. Incluído no Navigo Semaine
-  - status: confirmado
-  - embarque: 2026-10-10 · M9 · Alma–Marceau → Havre–Caumartin · 19:58 → 20:05
-  - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 20:22 → 20:35
-  - saída: 19:40
-- 20:45 [Auchan Supermarché (Noisy-le-Sec)](place:par-auchan-noisy) — Compra rápida do café da manhã, do lanche da manhã e da refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; sair até 20h55 e seguir direto para casa para guardar as compras. Fecha às 21h no sábado
+  - saída: 19:30
+  - via: metrô 9 até Saint-Philippe-du-Roule · 30 min — Caminhar até Iéna; M9 sentido Mairie de Montreuil até Saint-Philippe-du-Roule e seguir ao Monoprix Les Champs, na rue La Boétie. Incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M9 · Iéna → Saint-Philippe-du-Roule · 19:46 → 19:50
+- 20:00 [Monoprix Les Champs](place:par-monoprix-champs) — Comprar o café da manhã, o lanche e a refeição do meio-dia de amanhã (11/10), para levar no trem a Milão; escolher alimentos que possam viajar sem geladeira. Sair às 20h45 e voltar direto para casa para guardar as compras; fecha às 23h
+  - período: noite
   - comida: €25
-  - via: a pé até a casa do Gui · 5 min
-  - status: confirmado
-  - saída: 20:55
-- 21:05 [Casa do Gui](place:par-casa-do-gui) — Volta; guardar as compras, jantar em casa e arrumar as malas
+  - saída: 20:45
+  - via: metrô 9 e RER E até Noisy-le-Sec · 45 min — Caminhar até Saint-Philippe-du-Roule; M9 sentido Mairie de Montreuil até Havre–Caumartin, corredores até Haussmann–Saint-Lazare e RER E até Noisy-le-Sec. Seguir direto para casa; incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M9 · Saint-Philippe-du-Roule → Havre–Caumartin · 20:56 → 21:00
+  - embarque: 2026-10-10 · RER E · Haussmann–Saint-Lazare → Noisy-le-Sec · 21:07 → 21:20
+- 21:30 [Casa do Gui](place:par-casa-do-gui) — Volta; guardar as compras, jantar em casa e arrumar as malas
   - status: confirmado
 
-- Se sobrar tempo no Marais: [Hôtel de Ville](place:par-hotel-ville), [Rue de Rivoli (lojas)](place:par-rue-rivoli) e [Le Bon Pêcheur](place:par-bon-pecheur)
+- Se sobrar tempo: foto no **Quai de Valmy — Rue Eugène-Varlin**, junto ao [Canal Saint-Martin](place:par-canals), sem caminhada pelo canal nem passagem pela Place de la République; [Place des Vosges](place:par-vosges), [Centre Pompidou](place:par-pompidou), [Hôtel de Ville](place:par-hotel-ville) e [Rue de Rivoli (lojas)](place:par-rue-rivoli).
 
 ### Dia 8 — Dom 11/10 · Partida para Milão
   - cidades: Paris → Milão
@@ -414,7 +403,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07. A linha França–Itália reabre em 10/10, depois de obras: confira o trem 2–3 dias antes
   - status: confirmado
   - embarque: 2026-10-11 · Frecciarossa · Paris Gare de Lyon → Milano Centrale · 07:30 → 14:07
-- 12:00 **Almoço no trem**: refeição e água compradas no Auchan na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
+- 12:00 **Almoço no trem**: refeição e água compradas no Monoprix Les Champs na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
 
 ## Milão
 city: milao

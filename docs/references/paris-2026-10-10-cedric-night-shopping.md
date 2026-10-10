@@ -1,0 +1,23 @@
+# Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre
+
+Consulta em 10/10/2026. Sequência final pedida pelo usuário: saída 11h30, passagem por Vendôme, retirada de Grolet o mais cedo possível, M1 (linha amarela) até Naturalia Verrerie, La Favorite e almoço no Janou; barco antes da Torre, pôr do sol na Torre, compras perto dela antes de voltar para casa. Foto no Quai de Valmy/Rue Eugène-Varlin somente se sobrar tempo, sem caminhada pelos canais e sem passar na Place de la République, conforme resposta explícita do usuário. Vosges e Pompidou ficam opcionais; não são visitas fixas nesta versão. Aprovações preservadas. Comida €86 e ingressos €56,70/pessoa mantidos. A compra €25 passa uma única vez do Auchan ao Monoprix Les Champs, e a origem do almoço no trem de 11/10 é corrigida.
+
+## Fontes e limites
+
+- [Grolet — retirada](https://support.cedric-grolet.com/hc/en-us/articles/14563158177436-Where-and-when-should-I-collect-my-order): dentro do intervalo selecionado; fila prioritária obrigatória. Janela 12h–15h informada pelo usuário. Saída 11h30 permite planejar Vendôme 12h18 e Grolet 12h25, sem antecipar a saída nem prometer chegada ao meio-dia. [Conservação](https://support.cedric-grolet.com/hc/en-us/articles/15813579171868-How-can-I-ensure-the-optimal-preservation-of-my-pastries): geladeira 0–4°C; doces consumidos na parada, sem carregar ao almoço.
+- [Serviço do Janou](https://bookings-middleware.zenchef.com/getAvailabilities?restaurantId=373873&date_begin=2026-10-10&date_end=2026-10-10): Déjeuner 12h–17h. Chegada 13h55, saída 15h35; 30–45 min de espera são margem de planejamento, não previsão de fila nem reserva, deixando 55–70 min para refeição.
+- [Bateaux-Mouches](https://www.bateaux-mouches.fr/fr/croisiere/informations): outubro, saídas a cada 30 min e aproximadamente 1h. Chegada 16h20, saída 16h30, desembarque até 17h35 e Torre 18h.
+- [Bilheteria da Torre](https://www.toureiffel.paris/en/news/visit/all-our-tips-buying-ticket-visit-eiffel-tower): compra no local para visita imediata, topo sujeito à capacidade. Subida ao pôr do sol não garantida. [Sol](https://api.sunrise-sunset.org/json?lat=48.8584&lng=2.2945&date=2026-10-10&formatted=0): 17:13:26 UTC = 19h13 local; saída estimada da Torre 19h30, sujeita à descida.
+- [Naturalia Verrerie](https://magasins.naturalia.fr/naturalia/fr/store/france/ile-de-france/paris/paris/verrerie/3922): 87 rue de la Verrerie, sábado 9h–20h45. Parada 13h15–13h25 expressamente pedida nesta sequência. [MyLevain revendedores](https://www.mylevain.com/revendeurs/): localizador público inclui Verrerie; estoque não garantido. Produto no rayon frais: confirmar conservação durante as horas restantes do passeio e o retorno antes de comprar, sem presumir que ficará adequado fora de refrigeração. Só as compras gerais permanecem à noite.
+- [Monoprix Les Champs](https://www.monoprix.fr/1603.html): 107 rue La Boétie, sábado 8h–23h, reconferido em 10/10. Identidade, pino, entrada e foto já auditados em `paris-monoprix-les-champs-2026-10-10.md` e no snapshot de localização; não mover coordenadas nem confundir com nº 109. Acesso pela M9 depois da Torre, compras 20h–20h45, retorno direto. Alimentos do trem escolhidos sem necessidade de geladeira; chegada à casa 21h30. Mais margem de horário do que Auchan, que fecha às 21h.
+
+## Transportes
+
+[Transitous](https://api.transitous.org/api/v1/plan), data 2026-10-10, UTC +2h, `transitModes=SUBWAY,REGIONAL_RAIL`. Horários abaixo consultados, caminhadas estimadas; todos incluídos no Navigo Semaine. Linhas existentes já contêm todas as estações dos trechos. Atualizadas apenas as pernas do roteiro; perna do canal removida da rota ativa.
+
+- Casa → Vendôme: consulta 09h30 UTC, RER E Noisy-le-Sec 11h49 → Haussmann–Saint-Lazare 12h02. Caminhada direta desde Haussmann, sem baldeação adicional; Vendôme 12h18, saída 12h21 e Grolet 12h25.
+- Grolet → Naturalia: consulta 10h55 UTC, M1 Tuileries 13h03 → Châtelet 13h06, caminhada até Verrerie; chegada calculada 13h12, arredondada para 13h15.
+- Naturalia → La Favorite → Janou: caminhadas estimadas, paradas 13h40 e 13h55. Sem sacolas das compras gerais nessa parte do dia.
+- Janou → barco: consulta 13h25 UTC, M1 Saint-Paul 15h50 → Franklin D. Roosevelt 16h00. M9 16h07 → Alma–Marceau 16h09, consultado pelos IDs de estação às 14h05 UTC para deixar margem na conexão. Chegada prevista 16h20, embarque 16h30.
+- Torre → Monoprix: consulta 17h30 UTC, M9 Iéna 19h46 → Saint-Philippe-du-Roule 19h50. Chegada calculada 19h58, arredondada para 20h.
+- Monoprix → casa: consulta 18h30 UTC, M9 Saint-Philippe-du-Roule 20h56 → Havre–Caumartin 21h00, RER E Haussmann–Saint-Lazare 21h07 → Noisy-le-Sec 21h20. Compra até 20h45; corredores e caminhada final, chegada à casa 21h30.
