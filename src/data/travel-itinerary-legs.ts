@@ -1259,7 +1259,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
-  trainLeg('par-canals-republique', 'par-vosges', 25, [ride(metro5, 'jacques-bonsergent', 'breguet-sabin')]),
+  trainLeg('par-canals', 'par-vosges', 25, [ride(metro5, 'jacques-bonsergent', 'breguet-sabin')]),
   trainLeg('par-vendome', 'par-eiffel', 45, [ride(metro8, 'concorde', 'ecole-militaire')]),
   trainLeg('par-pompidou', 'par-cedric-grolet-meurice', 25, [ride(metro1, 'hotel-ville', 'tuileries')]),
   trainLeg('par-bateaux-mouches', 'par-auchan-noisy', 60, [

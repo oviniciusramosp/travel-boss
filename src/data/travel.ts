@@ -3356,13 +3356,13 @@ export const localTravelCities: TravelCity[] = [
       {
         id: 'par-canals',
         name: {
-          en: 'Paris canals walk',
-          'pt-BR': 'Canais de Paris',
+          en: 'Canal Saint-Martin',
+          'pt-BR': 'Canal Saint-Martin',
         },
         category: 'parks',
         description: {
-          en: 'Walk south along Canal Saint-Martin, from Quai de Valmy at Rue Eugène-Varlin past Jardin Villemin to the Récollets locks.',
-          'pt-BR': 'Caminhada para o sul pelo Canal Saint-Martin, do Quai de Valmy na Rue Eugène-Varlin, passando pelo Jardin Villemin, até as eclusas dos Récollets.',
+          en: 'Canal Saint-Martin opened in 1825 and retains its locks and footbridges. This stretch links Quai de Valmy at Rue Eugène-Varlin, Jardin Villemin and the Récollets locks to the swing bridge at Rue Dieu.',
+          'pt-BR': 'O Canal Saint-Martin foi inaugurado em 1825 e conserva suas eclusas e passarelas. Este trecho liga o Quai de Valmy na Rue Eugène-Varlin, o Jardin Villemin e as eclusas dos Récollets à ponte giratória da Rue Dieu.',
         },
         googleRating: 4.4,
         // West bank at Rue Eugène-Varlin; OSM foot routing checked 2026-09-27.
@@ -3400,8 +3400,15 @@ export const localTravelCities: TravelCity[] = [
             description: { en: 'Locks and footbridges on Canal Saint-Martin.', 'pt-BR': 'Eclusas e passarelas do Canal Saint-Martin.' },
             photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Canal_St_Martin_pr%C3%A8s_%C3%89cluse_R%C3%A9collets_Paris_1.jpg/500px-Canal_St_Martin_pr%C3%A8s_%C3%89cluse_R%C3%A9collets_Paris_1.jpg',
           },
+          {
+            name: { en: 'Back to Quai de Jemmapes', 'pt-BR': 'Retorno ao Quai de Jemmapes' },
+            lat: 48.871155, lng: 2.365665,
+            placeId: 'par-canals-republique',
+            description: { en: 'Canal view beside the swing bridge at Rue Dieu.', 'pt-BR': 'Vista do canal junto à ponte giratória da Rue Dieu.' },
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Pont_tournant_de_la_rue_Dieu%2C_Canal_Saint-Martin%2C_Paris_30_December_2014.jpg/500px-Pont_tournant_de_la_rue_Dieu%2C_Canal_Saint-Martin%2C_Paris_30_December_2014.jpg',
+          },
         ],
-        address: 'Quai de Valmy / Rue Eugène-Varlin → Écluses des Récollets, Paris',
+        address: 'Quai de Valmy / Rue Eugène-Varlin → Quai de Jemmapes / Rue Dieu, Paris',
         mapsQuery: 'Quai de Valmy Rue Eugène Varlin Paris',
       },
       {

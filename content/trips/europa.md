@@ -351,21 +351,20 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - status: confirmado
   - embarque: 2026-10-10 · RER E · Noisy-le-Sec → Magenta · 10:49 → 10:59
   - saída: 10:30
-- 11:15 [Canais de Paris](place:par-canals) — Caminhada para o sul à beira do Canal Saint-Martin, da Rue Eugène-Varlin às eclusas dos Récollets
-  - status: confirmado
-- 11:15 **Quai de Valmy — Rue Eugène-Varlin** — Começo da caminhada pela margem do canal
-- 11:23 **Canal junto ao Jardin Villemin** — Vista do canal junto ao jardim
-- 11:30 **Quai de Valmy — eclusas dos Récollets** — Ver as eclusas e a passarela
-- 11:35 [Canal Saint-Martin — Quai de Jemmapes](place:par-canals-republique) — Encerrar junto à Rue Dieu; evitar a Place de la République por causa das manifestações informadas
+- 11:15 [Canal Saint-Martin](place:par-canals) — Caminhada para o sul à beira do canal, da Rue Eugène-Varlin às eclusas dos Récollets e à Rue Dieu; encerrar antes da Place de la République por causa das manifestações informadas
   - status: confirmado
   - saída: 11:40
   - via: metrô 5 de Jacques Bonsergent até Bréguet-Sabin · 25 min — Atravessar na Rue Dieu e seguir pela Rue de Lancry até Jacques Bonsergent, sem passar pela praça; sentido Place d’Italie. Permanecer no trem em République, sem sair nem fazer conexão; de Bréguet-Sabin, caminhar até a Place des Vosges. Incluído no Navigo Semaine
   - embarque: 2026-10-10 · M5 · Jacques Bonsergent → Bréguet-Sabin · 11:52 → 11:58
+- 11:15 **Quai de Valmy — Rue Eugène-Varlin** — Começo da caminhada pela margem do canal
+- 11:23 **Canal junto ao Jardin Villemin** — Vista do canal junto ao jardim
+- 11:30 **Quai de Valmy — eclusas dos Récollets** — Ver as eclusas e a passarela
 - 11:35 **Retorno ao Quai de Jemmapes** — Fotos junto à ponte da Rue Dieu; fim do passeio pelo canal
 - 12:05 [Place des Vosges](place:par-vosges) — Volta curta pela praça antes do almoço; seguir às 12h10
   - status: confirmado
   - saída: 12:10
-- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair até 13h20 para preservar a retirada do Grolet
+- 12:15 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas.\
+  Sair até 13h20 para preservar a retirada do Grolet
   - status: confirmado
   - saída: 13:20
 - 13:30 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Fachada

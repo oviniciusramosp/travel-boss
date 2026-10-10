@@ -4,6 +4,8 @@ Consulta em 10/10/2026. Pedido: evitar a praça por manifestações informadas p
 
 Canal termina no ponto existente junto à Rue Dieu (48.871155, 2.365665), já auditado como passeio de 70 Quai de Jemmapes. Removidos os dois pontos posteriores e a área linear que levava até République. Coordenadas dos pontos preservadas. Acesso a Jacques Bonsergent pela travessia da Rue Dieu e Rue de Lancry, ao norte da praça; M5 atravessa République no subsolo sem desembarque/conexão. A manifestação é informação do usuário, não confirmação externa de bloqueios de metrô.
 
+Pedido posterior de 10/10: reunir os dois trechos em uma só parada **Canal Saint-Martin** (`par-canals`). O ponto existente da Rue Dieu, descrição e foto são incorporados como quarto subponto, com `placeId: par-canals-republique` para manter sua identidade e evitar pino principal duplicado. Pino inicial e todas as coordenadas preservados, com a evidência OSM dos dois registros já auditados; snapshot do canal atualizado. Nota das 11h35 fica no quarto subponto e a saída M5 das 11h52 pertence ao canal unificado. Nenhum horário, preço ou aprovação alterado; chegada 11h15 e saída 11h40 preservadas.
+
 ## Transportes
 
 Consultas [Transitous](https://api.transitous.org/api/v1/plan), data 2026-10-10, horários da API em UTC (+2h):

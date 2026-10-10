@@ -695,8 +695,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Weekday afternoon or Sunday stroll', 'Tarde de semana ou domingo devagar'),
     crowdProfile: 'local',
     tips: L(
-      'Follow Quai de Valmy south from Rue Eugène-Varlin to the Récollets locks.',
-      'Siga o Quai de Valmy para o sul desde a Rue Eugène-Varlin até as eclusas dos Récollets.',
+      'Follow Quai de Valmy south from Rue Eugène-Varlin, past the Récollets locks, then cross to Quai de Jemmapes by Rue Dieu.',
+      'Siga o Quai de Valmy para o sul desde a Rue Eugène-Varlin, passando pelas eclusas dos Récollets, e atravesse para o Quai de Jemmapes junto à Rue Dieu.',
     ),
   },
   'par-canals-republique': {
