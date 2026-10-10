@@ -25,6 +25,6 @@ M5 ampliada com posições OSM de [Bréguet-Sabin 264769296](https://www.openstr
 
 Quatro thumbs Commons `500px`, consultadas e verificadas HTTP 200 image/jpeg em 10/10; inspeção visual. Autor/licença nas fichas:
 - [Pont Eugène-Varlin 002](https://commons.wikimedia.org/wiki/File:Canal_Saint-Martin_Pont_Eug%C3%A8ne-Varlin_002.JPG): Moonik, CC BY-SA 3.0; ponte e canal na entrada do passeio.
-- [Canal from Quai de Valmy, 2016](https://commons.wikimedia.org/wiki/File:Canal_Saint-Martin_from_Quay_de_Valmy,_Paris,_2016.jpg): DimiTalen, CC BY-SA 4.0; margem do canal junto ao trecho do Jardin Villemin.
+- [Canal from Quai de Valmy, 2016](https://commons.wikimedia.org/wiki/File:Canal_Saint-Martin_from_Quay_de_Valmy,_Paris,_2016.jpg): DimiTalen, CC0 1.0; margem do canal junto ao trecho do Jardin Villemin.
 - [Canal près Écluse Récollets](https://commons.wikimedia.org/wiki/File:Canal_St_Martin_pr%C3%A8s_%C3%89cluse_R%C3%A9collets_Paris_1.jpg): Chabe01, CC BY-SA 4.0; vista junto às eclusas.
 - [Pont tournant rue Dieu](https://commons.wikimedia.org/wiki/File:Pont_tournant_de_la_rue_Dieu,_Canal_Saint-Martin,_Paris_30_December_2014.jpg): Jonathan Petit, CC BY 2.0; ponte giratória da Rue Dieu. EXIF da ficha aponta outro ponto do canal, por isso não usado para mover coordenadas.
