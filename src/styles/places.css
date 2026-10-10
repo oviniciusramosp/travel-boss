@@ -7,10 +7,6 @@
   opacity: 1;
 }
 
-.tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap:not([data-pin-number]) .tb-pin {
-  --pin-scale: var(--pin-rest-scale);
-}
-
 .tb-map.is-day-layer .leaflet-marker-icon.tb-pin-wrap[data-pin-number] .tb-pin {
   --pin-scale: 1;
 }
