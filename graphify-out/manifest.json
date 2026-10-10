@@ -1,103 +1,103 @@
 {
   "package.json": {
-    "mtime": 1791618835.0042212,
-    "seen": 1791618887.0880032,
+    "mtime": 1791623342.7236722,
+    "seen": 1791623422.016036,
     "ast_hash": "b467e7ba56b6ceba1f8994ce7d133c0b",
     "semantic_hash": ""
   },
   "scripts/airbnb-search.mjs": {
-    "mtime": 1791618835.3339574,
-    "seen": 1791618887.0880058,
+    "mtime": 1791623343.0271423,
+    "seen": 1791623422.016043,
     "ast_hash": "bd7013c3c28ee913ab2bd12402be8080",
     "semantic_hash": "bd7013c3c28ee913ab2bd12402be8080"
   },
   "scripts/airbnb-search.py": {
-    "mtime": 1791618835.334069,
-    "seen": 1791618887.088007,
+    "mtime": 1791623343.0272686,
+    "seen": 1791623422.0160441,
     "ast_hash": "b69bbd4b7073b275f156b04fd64f7b65",
     "semantic_hash": "b69bbd4b7073b275f156b04fd64f7b65"
   },
   "scripts/azul-search.py": {
-    "mtime": 1791618835.3341703,
-    "seen": 1791618887.088008,
+    "mtime": 1791623343.0274024,
+    "seen": 1791623422.016046,
     "ast_hash": "bdeaf35424ee593ba0ea213c316e36ac",
     "semantic_hash": "bdeaf35424ee593ba0ea213c316e36ac"
   },
   "scripts/hotel-booking-details.mjs": {
-    "mtime": 1791618835.3353865,
-    "seen": 1791618887.0880141,
+    "mtime": 1791623343.0285017,
+    "seen": 1791623422.0160608,
     "ast_hash": "b5609e828f4dc22a12709814760cf127",
     "semantic_hash": "b5609e828f4dc22a12709814760cf127"
   },
   "scripts/hotel-ranking.mjs": {
-    "mtime": 1791618835.3355434,
-    "seen": 1791618887.088015,
+    "mtime": 1791623343.0286381,
+    "seen": 1791623422.016062,
     "ast_hash": "3233c70134429dd7cb4f52ed46c09915",
     "semantic_hash": ""
   },
   "scripts/hotel-search-match.mjs": {
-    "mtime": 1791618835.3358953,
-    "seen": 1791618887.088015,
+    "mtime": 1791623343.0288143,
+    "seen": 1791623422.016063,
     "ast_hash": "a09b3970dc78df941a56ac26a70e14cb",
     "semantic_hash": "a09b3970dc78df941a56ac26a70e14cb"
   },
   "scripts/hotel-search.mjs": {
-    "mtime": 1791618835.3361053,
-    "seen": 1791618887.0880158,
+    "mtime": 1791623343.0289965,
+    "seen": 1791623422.016063,
     "ast_hash": "f3caa25befd6615ebc6dd6249502f14a",
     "semantic_hash": "f3caa25befd6615ebc6dd6249502f14a"
   },
   "scripts/vite-hotel-plugin.mjs": {
-    "mtime": 1791618835.3377259,
-    "seen": 1791618887.088021,
+    "mtime": 1791623343.0307024,
+    "seen": 1791623422.0160692,
     "ast_hash": "8f203e268c40e82a72962255e4936482",
     "semantic_hash": "8f203e268c40e82a72962255e4936482"
   },
   "src/app/shell.ts": {
-    "mtime": 1791618835.338824,
-    "seen": 1791618887.0880268,
+    "mtime": 1791623343.0320034,
+    "seen": 1791623422.016075,
     "ast_hash": "77c974fbe4595c8a42f482bd7eb29e48",
     "semantic_hash": ""
   },
   "src/catalog/index.ts": {
-    "mtime": 1791618835.3397686,
-    "seen": 1791618887.0880299,
+    "mtime": 1791623343.0333312,
+    "seen": 1791623422.016078,
     "ast_hash": "0acb32ec9289119bfdec585a6d465091",
     "semantic_hash": ""
   },
   "src/data/airbnb-search.test.ts": {
-    "mtime": 1791618835.3404698,
-    "seen": 1791618887.088033,
+    "mtime": 1791623343.0339544,
+    "seen": 1791623422.0160809,
     "ast_hash": "0aed2c7c36b71d3853948f0c6255b709",
     "semantic_hash": "0aed2c7c36b71d3853948f0c6255b709"
   },
   "src/data/hotel-booking-details.test.ts": {
-    "mtime": 1791618835.3406022,
-    "seen": 1791618887.0880342,
+    "mtime": 1791623343.0341444,
+    "seen": 1791623422.0160818,
     "ast_hash": "a65196e3e54c3d4619ffbfd13c86a1ab",
     "semantic_hash": "a65196e3e54c3d4619ffbfd13c86a1ab"
   },
   "src/data/hotel-ranking-context.ts": {
-    "mtime": 1791618835.3407102,
-    "seen": 1791618887.0880342,
+    "mtime": 1791623343.0343587,
+    "seen": 1791623422.016083,
     "ast_hash": "3d338cb2ce16b7941f1e11aa27ad531f",
     "semantic_hash": "3d338cb2ce16b7941f1e11aa27ad531f"
   },
   "src/data/hotel-ranking.test.ts": {
-    "mtime": 1791618835.3409464,
-    "seen": 1791618887.088035,
+    "mtime": 1791623343.034727,
+    "seen": 1791623422.016083,
     "ast_hash": "a06127d8b1e7f768b62953e268222a1e",
     "semantic_hash": "a06127d8b1e7f768b62953e268222a1e"
   },
   "src/data/hotel-scripts.d.ts": {
-    "mtime": 1791618835.3410556,
-    "seen": 1791618887.088035,
+    "mtime": 1791623343.0348456,
+    "seen": 1791623422.016084,
     "ast_hash": "517f1af899fe8e8c4e5e8a79963666e5",
     "semantic_hash": "517f1af899fe8e8c4e5e8a79963666e5"
   },
   "src/data/hotel-search.test.ts": {
-    "mtime": 1791618835.3412156,
-    "seen": 1791618887.088036,
+    "mtime": 1791623343.035007,
+    "seen": 1791623422.016085,
     "ast_hash": "47d25ca335318923df71f80e69563ccf",
     "semantic_hash": "47d25ca335318923df71f80e69563ccf"
   },
@@ -108,8 +108,8 @@
     "semantic_hash": ""
   },
   "src/data/rome-hotel-neighborhoods.ts": {
-    "mtime": 1791618835.3435636,
-    "seen": 1791618887.088038,
+    "mtime": 1791623343.03867,
+    "seen": 1791623422.016087,
     "ast_hash": "d58a0a633fbcbd3ff8c394c7a634c26d",
     "semantic_hash": "d58a0a633fbcbd3ff8c394c7a634c26d"
   },
@@ -120,86 +120,86 @@
     "semantic_hash": ""
   },
   "src/data/rome-neighborhood-safety.test.ts": {
-    "mtime": 1791618835.3448293,
-    "seen": 1791618887.088039,
+    "mtime": 1791623343.0392888,
+    "seen": 1791623422.016088,
     "ast_hash": "38367cf4215e55da495e4c8ea1c21d0e",
     "semantic_hash": "38367cf4215e55da495e4c8ea1c21d0e"
   },
   "src/data/travel-area-geometry.ts": {
-    "mtime": 1791618835.3451836,
-    "seen": 1791618887.088039,
+    "mtime": 1791623343.039617,
+    "seen": 1791623422.0160892,
     "ast_hash": "08714f499e6c605a2e78ecd59a38d792",
     "semantic_hash": "08714f499e6c605a2e78ecd59a38d792"
   },
   "src/data/travel-areas-osm.ts": {
-    "mtime": 1791618835.345707,
-    "seen": 1791618887.0880399,
+    "mtime": 1791623343.0401297,
+    "seen": 1791623422.0160902,
     "ast_hash": "5e06ec9cb2f80c72b1d97f9b40de48b5",
     "semantic_hash": ""
   },
   "src/data/travel-areas-policy.ts": {
-    "mtime": 1791618835.3458543,
-    "seen": 1791618887.088041,
+    "mtime": 1791623343.0402725,
+    "seen": 1791623422.0160909,
     "ast_hash": "b4e0b615f4f8139e99f8659cbd2b3abd",
     "semantic_hash": "b4e0b615f4f8139e99f8659cbd2b3abd"
   },
   "src/data/travel-areas.test.ts": {
-    "mtime": 1791618835.3461413,
-    "seen": 1791618887.088042,
+    "mtime": 1791623343.040549,
+    "seen": 1791623422.0160918,
     "ast_hash": "7308be2c4f66ce13e24d2dfda5c641f4",
     "semantic_hash": ""
   },
   "src/data/travel-categories.ts": {
-    "mtime": 1791618835.3462589,
-    "seen": 1791618887.088042,
+    "mtime": 1791623343.0406876,
+    "seen": 1791623422.0160918,
     "ast_hash": "c7f0ed4e384cc26dde8bb3183e9d57e9",
     "semantic_hash": ""
   },
   "src/data/travel-itineraries.test.ts": {
-    "mtime": 1791618835.3493783,
-    "seen": 1791618887.0880482,
+    "mtime": 1791623343.0433402,
+    "seen": 1791623422.016099,
     "ast_hash": "92cc96a0b9c6fa77067091ecf31ecf15",
     "semantic_hash": ""
   },
   "src/data/travel-itineraries.ts": {
-    "mtime": 1791618835.3497677,
-    "seen": 1791618887.0880482,
+    "mtime": 1791623343.0437872,
+    "seen": 1791623422.016099,
     "ast_hash": "486e667f9d2a3f770662f2cc86b27c3e",
     "semantic_hash": ""
   },
   "src/data/travel-itinerary-legs.ts": {
-    "mtime": 1791618855.2950506,
-    "seen": 1791618887.088049,
-    "ast_hash": "7d4c6b884f8710e2bdc4415aeaa7502f",
+    "mtime": 1791623395.2164705,
+    "seen": 1791623422.0161002,
+    "ast_hash": "8b49ab5afb61b5ea987b3c84ab8378c6",
     "semantic_hash": ""
   },
   "src/data/travel-milan-itinerary.ts": {
-    "mtime": 1791618835.3507354,
-    "seen": 1791618887.0880508,
+    "mtime": 1791623343.0450766,
+    "seen": 1791623422.0161018,
     "ast_hash": "4492db91a8471edc5dfd319d90ab0cc1",
     "semantic_hash": "4492db91a8471edc5dfd319d90ab0cc1"
   },
   "src/data/travel-milan.test.ts": {
-    "mtime": 1791618835.3508353,
-    "seen": 1791618887.088052,
+    "mtime": 1791623343.0452025,
+    "seen": 1791623422.016103,
     "ast_hash": "3a02e38079e6ff509dd834b5193d590d",
     "semantic_hash": ""
   },
   "src/data/travel-milan.ts": {
-    "mtime": 1791618835.3511705,
-    "seen": 1791618887.088052,
+    "mtime": 1791623343.045551,
+    "seen": 1791623422.016103,
     "ast_hash": "784980b26b82e0c1b94f75e588123c31",
     "semantic_hash": ""
   },
   "src/data/travel-photos.test.ts": {
-    "mtime": 1791618835.3518922,
-    "seen": 1791618887.0880551,
+    "mtime": 1791623343.0464442,
+    "seen": 1791623422.016106,
     "ast_hash": "53f0c2fbee4cd7ef3939f555ef244b97",
     "semantic_hash": ""
   },
   "src/data/travel-photos.ts": {
-    "mtime": 1791618855.2951713,
-    "seen": 1791618887.0880551,
+    "mtime": 1791623343.047596,
+    "seen": 1791623422.016107,
     "ast_hash": "3f3d001ca304bc6315b3f4edcc03e8b0",
     "semantic_hash": ""
   },
@@ -210,20 +210,20 @@
     "semantic_hash": ""
   },
   "src/data/travel-stay-display.test.ts": {
-    "mtime": 1791618835.3572905,
-    "seen": 1791618887.088056,
+    "mtime": 1791623343.0537705,
+    "seen": 1791623422.016108,
     "ast_hash": "9b87651ca318cc7b28f632a1277ef423",
     "semantic_hash": "9b87651ca318cc7b28f632a1277ef423"
   },
   "src/data/travel-stay-heatmap.test.ts": {
-    "mtime": 1791618835.3574882,
-    "seen": 1791618887.088056,
+    "mtime": 1791623343.0541651,
+    "seen": 1791623422.016108,
     "ast_hash": "acf5d61dc60ff6bc357dfe008896a6d5",
     "semantic_hash": "acf5d61dc60ff6bc357dfe008896a6d5"
   },
   "src/data/travel-stay-heatmap.ts": {
-    "mtime": 1791618835.3576496,
-    "seen": 1791618887.088057,
+    "mtime": 1791623343.0543618,
+    "seen": 1791623422.016109,
     "ast_hash": "6472871165ea9eee92d712be32d45e68",
     "semantic_hash": "6472871165ea9eee92d712be32d45e68"
   },
@@ -234,2072 +234,2072 @@
     "semantic_hash": ""
   },
   "src/data/travel-subcategories.test.ts": {
-    "mtime": 1791618835.3579495,
-    "seen": 1791618887.088058,
+    "mtime": 1791623343.0551183,
+    "seen": 1791623422.016109,
     "ast_hash": "f49e399faf16c6c9856ddf125d68487b",
     "semantic_hash": ""
   },
   "src/data/travel-subcategories.ts": {
-    "mtime": 1791618835.3583078,
-    "seen": 1791618887.088059,
+    "mtime": 1791623343.0555544,
+    "seen": 1791623422.0161111,
     "ast_hash": "1757e656c60cc917ec728ecd16504e3e",
     "semantic_hash": ""
   },
   "src/data/travel-transit-lines.ts": {
-    "mtime": 1791618835.3586771,
-    "seen": 1791618887.088059,
+    "mtime": 1791623343.0560637,
+    "seen": 1791623422.0161111,
     "ast_hash": "38add607d83d6baabc14993dbb6f5851",
     "semantic_hash": ""
   },
   "src/data/travel-visit.ts": {
-    "mtime": 1791618855.2953403,
-    "seen": 1791618887.08806,
-    "ast_hash": "7074781184be63559cfa5989a4d389e5",
+    "mtime": 1791623395.2209556,
+    "seen": 1791623422.016112,
+    "ast_hash": "b0505216a0d437b71e160323c80695cf",
     "semantic_hash": ""
   },
   "src/data/travel.ts": {
-    "mtime": 1791618855.2955241,
-    "seen": 1791618887.08806,
-    "ast_hash": "53d6bc9d87e54d3ca7413cf8f62b5305",
+    "mtime": 1791623395.2213645,
+    "seen": 1791623422.016112,
+    "ast_hash": "96e7f19d56d91e72580f51dcb701c26a",
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1791618835.3605347,
-    "seen": 1791618887.0880609,
+    "mtime": 1791623343.058714,
+    "seen": 1791623422.0161128,
     "ast_hash": "a9f6a4cffd82e4c8a568076da1bf858a",
     "semantic_hash": ""
   },
   "src/map/basemap-style.test.ts": {
-    "mtime": 1791618835.3616242,
-    "seen": 1791618887.088068,
+    "mtime": 1791623343.0600574,
+    "seen": 1791623422.016122,
     "ast_hash": "959cb682c98938d0a45f047c6470b7df",
     "semantic_hash": ""
   },
   "src/map/basemap-style.ts": {
-    "mtime": 1791618835.3618355,
-    "seen": 1791618887.0880692,
+    "mtime": 1791623343.0603619,
+    "seen": 1791623422.0161228,
     "ast_hash": "7b2c03f12da60b576327e24f36569191",
     "semantic_hash": ""
   },
   "src/map/itinerary-route.ts": {
-    "mtime": 1791618835.3642433,
-    "seen": 1791618887.088076,
+    "mtime": 1791623343.0628607,
+    "seen": 1791623422.016135,
     "ast_hash": "2b8fbf5aaffa25e8aab7e886692287f2",
     "semantic_hash": ""
   },
   "src/map/map.ts": {
-    "mtime": 1791618835.3647258,
-    "seen": 1791618887.088078,
+    "mtime": 1791623343.0638785,
+    "seen": 1791623422.016136,
     "ast_hash": "480ab5aefb9c5c3271b5a2a553edd901",
     "semantic_hash": ""
   },
   "src/map/types.ts": {
-    "mtime": 1791618835.36715,
-    "seen": 1791618887.0880861,
+    "mtime": 1791623343.068732,
+    "seen": 1791623422.0161479,
     "ast_hash": "ade7c853fd20e7ecd54eefa65d4b580e",
     "semantic_hash": ""
   },
   "src/map/walk-route.ts": {
-    "mtime": 1791618835.3674257,
-    "seen": 1791618887.088087,
+    "mtime": 1791623343.0691054,
+    "seen": 1791623422.01615,
     "ast_hash": "df1861acb4cde4d2781c0cf838f1404d",
     "semantic_hash": ""
   },
   "src/trip/export.test.ts": {
-    "mtime": 1791618835.3777118,
-    "seen": 1791618887.088104,
+    "mtime": 1791623343.0796337,
+    "seen": 1791623422.016164,
     "ast_hash": "7e5b59dfb774dd68ac2984f2c75243f1",
     "semantic_hash": ""
   },
   "src/trip/export.ts": {
-    "mtime": 1791618835.3781304,
-    "seen": 1791618887.088104,
+    "mtime": 1791623343.0799637,
+    "seen": 1791623422.016165,
     "ast_hash": "bb097f71a32146bb7165ce56fbecc366",
     "semantic_hash": ""
   },
   "src/trip/mount.ts": {
-    "mtime": 1791618835.380288,
-    "seen": 1791618887.08811,
+    "mtime": 1791623343.0836868,
+    "seen": 1791623422.01617,
     "ast_hash": "ed675918d6fd2c0d381e8466d10fc8f7",
     "semantic_hash": ""
   },
   "src/trip/parse.test.ts": {
-    "mtime": 1791618835.3810544,
-    "seen": 1791618887.088112,
+    "mtime": 1791623343.0847206,
+    "seen": 1791623422.0161731,
     "ast_hash": "8f1307c5796ab698b1aa8e708e766bf1",
     "semantic_hash": ""
   },
   "src/trip/parse.ts": {
-    "mtime": 1791618835.3813539,
-    "seen": 1791618887.0881128,
+    "mtime": 1791623343.085028,
+    "seen": 1791623422.016174,
     "ast_hash": "cc1ab364fca61d83911cf21f038f05de",
     "semantic_hash": ""
   },
   "src/views/hotels.ts": {
-    "mtime": 1791618835.3899944,
-    "seen": 1791618887.088143,
+    "mtime": 1791623343.095097,
+    "seen": 1791623422.016202,
     "ast_hash": "3528c3f58b95894bdfa7d1a4d167f6f6",
     "semantic_hash": ""
   },
   "src/views/place-panel.ts": {
-    "mtime": 1791618835.3909135,
-    "seen": 1791618887.088147,
+    "mtime": 1791623343.096457,
+    "seen": 1791623422.016206,
     "ast_hash": "7c37fb39f77ba2ae585469789b0188bc",
     "semantic_hash": ""
   },
   "src/views/places.ts": {
-    "mtime": 1791618835.3913898,
-    "seen": 1791618887.0881479,
+    "mtime": 1791623343.0975542,
+    "seen": 1791623422.0162072,
     "ast_hash": "eaa8a49b0bbafab956ce6906fd9dcc46",
     "semantic_hash": ""
   },
   "tsconfig.json": {
-    "mtime": 1791618835.3931382,
-    "seen": 1791618887.0881531,
+    "mtime": 1791623343.100364,
+    "seen": 1791623422.016211,
     "ast_hash": "92315deed664c512744c6db8fdf6c6f1",
     "semantic_hash": "92315deed664c512744c6db8fdf6c6f1"
   },
   "vite.config.ts": {
-    "mtime": 1791618835.3934574,
-    "seen": 1791618887.088154,
+    "mtime": 1791623343.1007578,
+    "seen": 1791623422.016212,
     "ast_hash": "f0ba44bd0c3268ed9561e2cb2aebfb20",
     "semantic_hash": ""
   },
   "vitest.config.ts": {
-    "mtime": 1791618835.393763,
-    "seen": 1791618887.088154,
+    "mtime": 1791623343.1010282,
+    "seen": 1791623422.016212,
     "ast_hash": "1cdd937edb9898b4e8ae2bce3b8ab595",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1791618834.9498236,
-    "seen": 1791618887.088157,
+    "mtime": 1791623342.6557584,
+    "seen": 1791623422.016215,
     "ast_hash": "73370c8f07bbc9ce83dc41feb899b824",
     "semantic_hash": ""
   },
   "content/SCHEMA.md": {
-    "mtime": 1791618834.9503312,
-    "seen": 1791618887.088157,
+    "mtime": 1791623342.6561463,
+    "seen": 1791623422.016216,
     "ast_hash": "978e63905ce4b923ab74594657b48092",
     "semantic_hash": ""
   },
   "content/trips/europa.md": {
-    "mtime": 1791618855.6893666,
-    "seen": 1791618887.088159,
-    "ast_hash": "4e233b52d5b2d8b0b48bfdef41381ce2",
+    "mtime": 1791623395.3621907,
+    "seen": 1791623422.016217,
+    "ast_hash": "e5349e4f1e5c3c5aa3f33ba96815512b",
     "semantic_hash": ""
   },
   "docs/plano-paridade.md": {
-    "mtime": 1791618834.9528608,
-    "seen": 1791618887.088161,
+    "mtime": 1791623342.6587617,
+    "seen": 1791623422.0162199,
     "ast_hash": "148e127085d8d37e88e75eb0995e21e2",
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1791618835.0038354,
-    "seen": 1791618887.0881941,
+    "mtime": 1791623342.7233086,
+    "seen": 1791623422.016253,
     "ast_hash": "5c875239b71483dd23b5992e32421107",
     "semantic_hash": ""
   },
   "scripts/airbnb-requirements.txt": {
-    "mtime": 1791618835.3337994,
-    "seen": 1791618887.088195,
+    "mtime": 1791623343.0269735,
+    "seen": 1791623422.016254,
     "ast_hash": "799512afdc94f2352c89c8e0e2dd9da5",
     "semantic_hash": ""
   },
   "scripts/build-stay-display.mjs": {
-    "mtime": 1791618835.3342729,
-    "seen": 1791618887.0880089,
+    "mtime": 1791623343.0275128,
+    "seen": 1791623422.0160482,
     "ast_hash": "49fca519b192d4260458b4f6d9e2baea",
     "semantic_hash": ""
   },
   "scripts/build-stay-display.py": {
-    "mtime": 1791618835.334388,
-    "seen": 1791618887.08801,
+    "mtime": 1791623343.0276327,
+    "seen": 1791623422.0160499,
     "ast_hash": "f3963a50bd4242f6d73fad4461022da1",
     "semantic_hash": ""
   },
   "scripts/check-travel-photos.py": {
-    "mtime": 1791618835.3346562,
-    "seen": 1791618887.088011,
+    "mtime": 1791623343.0278735,
+    "seen": 1791623422.016056,
     "ast_hash": "50a648411be1f1f0a2e4b55329998d39",
     "semantic_hash": ""
   },
   "scripts/fetch-rome-hotel-boundaries.py": {
-    "mtime": 1791618835.3348975,
-    "seen": 1791618887.0880132,
+    "mtime": 1791623343.0281186,
+    "seen": 1791623422.0160599,
     "ast_hash": "08f9999a7d8894f94fa9487ac60b1f8f",
     "semantic_hash": ""
   },
   "scripts/fetch-travel-polygons.py": {
-    "mtime": 1791618835.3351893,
-    "seen": 1791618887.0880132,
+    "mtime": 1791623343.0283637,
+    "seen": 1791623422.0160599,
     "ast_hash": "2c8112dcedee8f778f8b7d8dfd60795e",
     "semantic_hash": ""
   },
   "src/map/camera.test.ts": {
-    "mtime": 1791618835.361944,
-    "seen": 1791618887.08807,
+    "mtime": 1791623343.060476,
+    "seen": 1791623422.016125,
     "ast_hash": "073ddadd6068b114ed15d7334573ff50",
     "semantic_hash": ""
   },
   "src/map/camera.ts": {
-    "mtime": 1791618835.362068,
-    "seen": 1791618887.08807,
+    "mtime": 1791623343.0606065,
+    "seen": 1791623422.016126,
     "ast_hash": "1bd0233c136e4d41330f7c557ba7a9f7",
     "semantic_hash": ""
   },
   "src/ui/controls.ts": {
-    "mtime": 1791618835.3848727,
-    "seen": 1791618887.088126,
+    "mtime": 1791623343.0893462,
+    "seen": 1791623422.016186,
     "ast_hash": "68367aefd0e1f148543f5f8bc67fe8bf",
     "semantic_hash": ""
   },
   "src/ui/dom.ts": {
-    "mtime": 1791618835.3851345,
-    "seen": 1791618887.088127,
+    "mtime": 1791623343.089611,
+    "seen": 1791623422.016187,
     "ast_hash": "271ec4e2349f744b0d44466573a934ff",
     "semantic_hash": ""
   },
   "src/ui/icons.test.ts": {
-    "mtime": 1791618835.3852508,
-    "seen": 1791618887.088128,
+    "mtime": 1791623343.089748,
+    "seen": 1791623422.016188,
     "ast_hash": "6c7bcc5c8347ef4957509ec980fbfdf8",
     "semantic_hash": ""
   },
   "src/ui/icons.ts": {
-    "mtime": 1791618835.3854475,
-    "seen": 1791618887.088128,
+    "mtime": 1791623343.0900567,
+    "seen": 1791623422.016188,
     "ast_hash": "02ded2a5c08462fab9c3ad3c8333d249",
     "semantic_hash": ""
   },
   "src/ui/motion.test.ts": {
-    "mtime": 1791618835.3864212,
-    "seen": 1791618887.08813,
+    "mtime": 1791623343.0907497,
+    "seen": 1791623422.01619,
     "ast_hash": "acc0571fdf503adaf6825eea6edab937",
     "semantic_hash": ""
   },
   "src/ui/motion.ts": {
-    "mtime": 1791618835.386558,
-    "seen": 1791618887.08813,
+    "mtime": 1791623343.0908778,
+    "seen": 1791623422.01619,
     "ast_hash": "d8e5d8b65565121869f1a2c5434b1322",
     "semantic_hash": ""
   },
   "src/ui/row.ts": {
-    "mtime": 1791618835.3874142,
-    "seen": 1791618887.0881338,
+    "mtime": 1791623343.0919654,
+    "seen": 1791623422.016194,
     "ast_hash": "942555e7f7c9d12a1ec34c9c2006723c",
     "semantic_hash": ""
   },
   "src/ui/tooltip.test.ts": {
-    "mtime": 1791618835.3875127,
-    "seen": 1791618887.088135,
+    "mtime": 1791623343.0920777,
+    "seen": 1791623422.016194,
     "ast_hash": "3baadecea5709ca16004be7e3060afcb",
     "semantic_hash": ""
   },
   "src/ui/tooltip.ts": {
-    "mtime": 1791618835.3876433,
-    "seen": 1791618887.088135,
+    "mtime": 1791623343.092256,
+    "seen": 1791623422.016195,
     "ast_hash": "6908c8ba2862154663a0099886886a98",
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1791618834.949613,
-    "seen": 1791618887.088156,
+    "mtime": 1791623342.6554444,
+    "seen": 1791623422.0162141,
     "ast_hash": "bec0cf35b47adbf489ecfaf225b8edd0",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1791618834.949613,
-    "seen": 1791618887.088156,
+    "mtime": 1791623342.6554444,
+    "seen": 1791623422.016215,
     "ast_hash": "bec0cf35b47adbf489ecfaf225b8edd0",
     "semantic_hash": ""
   },
   "docs/hotel-ranking.md": {
-    "mtime": 1791618834.9521222,
-    "seen": 1791618887.08816,
+    "mtime": 1791623342.6579492,
+    "seen": 1791623422.0162182,
     "ast_hash": "b860468501228a5c7beded935eee8b75",
     "semantic_hash": ""
   },
   "docs/milan-itinerary.md": {
-    "mtime": 1791618834.9522796,
-    "seen": 1791618887.08816,
+    "mtime": 1791623342.658094,
+    "seen": 1791623422.016219,
     "ast_hash": "6f0907e9e3868b9baca2d7c00f526f90",
     "semantic_hash": ""
   },
   "docs/rome-neighborhood-safety.md": {
-    "mtime": 1791618834.967067,
-    "seen": 1791618887.088193,
+    "mtime": 1791623342.6766763,
+    "seen": 1791623422.0162518,
     "ast_hash": "74d26e5e861dd3af02d2774c3ee8b818",
     "semantic_hash": ""
   },
   "docs/ui-primitives.md": {
-    "mtime": 1791618834.967226,
-    "seen": 1791618887.0881941,
+    "mtime": 1791623342.6768405,
+    "seen": 1791623422.0162518,
     "ast_hash": "c1ba1fac8fee4b44e38ac252600fd18c",
     "semantic_hash": ""
   },
   "src/app/shell.test.ts": {
-    "mtime": 1791618835.3386676,
-    "seen": 1791618887.088026,
+    "mtime": 1791623343.0317466,
+    "seen": 1791623422.016074,
     "ast_hash": "12367917e7efa6c95f5df008db98e9f7",
     "semantic_hash": ""
   },
   "src/trip/legs.test.ts": {
-    "mtime": 1791618835.378855,
-    "seen": 1791618887.088106,
+    "mtime": 1791623343.0815997,
+    "seen": 1791623422.016167,
     "ast_hash": "f201cc038443e54ef1a3c17e234e334f",
     "semantic_hash": ""
   },
   "src/trip/legs.ts": {
-    "mtime": 1791618835.378982,
-    "seen": 1791618887.088107,
+    "mtime": 1791623343.081751,
+    "seen": 1791623422.0161679,
     "ast_hash": "2e6270790657f7cd248887b1a218310f",
     "semantic_hash": ""
   },
   "src/views/hotels.test.ts": {
-    "mtime": 1791618835.3897674,
-    "seen": 1791618887.088143,
+    "mtime": 1791623343.0942392,
+    "seen": 1791623422.016202,
     "ast_hash": "2e17e328274b042129fec9240aa3e9f2",
     "semantic_hash": ""
   },
   "src/views/places.test.ts": {
-    "mtime": 1791618835.3910618,
-    "seen": 1791618887.0881479,
+    "mtime": 1791623343.0969224,
+    "seen": 1791623422.016206,
     "ast_hash": "8f5094c3157f97927b1461f81a1d9fdb",
     "semantic_hash": ""
   },
   "src/views/transfer-row.test.ts": {
-    "mtime": 1791618835.3928459,
-    "seen": 1791618887.0881522,
+    "mtime": 1791623343.1000557,
+    "seen": 1791623422.0162098,
     "ast_hash": "63c6ba45750b95713e8a2a74661ca36d",
     "semantic_hash": ""
   },
   "src/views/transfer-row.ts": {
-    "mtime": 1791618835.3930154,
-    "seen": 1791618887.0881522,
+    "mtime": 1791623343.1002297,
+    "seen": 1791623422.016211,
     "ast_hash": "5f40a7f953ddfeae7529a9d246209c21",
     "semantic_hash": ""
   },
   "src/app/router.test.ts": {
-    "mtime": 1791618835.3381932,
-    "seen": 1791618887.088023,
+    "mtime": 1791623343.0312653,
+    "seen": 1791623422.016072,
     "ast_hash": "4765d0915f302a26ea4561a55ccbd429",
     "semantic_hash": ""
   },
   "src/app/router.ts": {
-    "mtime": 1791618835.338308,
-    "seen": 1791618887.0880241,
+    "mtime": 1791623343.0313892,
+    "seen": 1791623422.016073,
     "ast_hash": "84ac555a7e4c1f66be2ea892bcb6f7ad",
     "semantic_hash": ""
   },
   "src/app/store.test.ts": {
-    "mtime": 1791618835.3389487,
-    "seen": 1791618887.0880268,
+    "mtime": 1791623343.0322301,
+    "seen": 1791623422.016076,
     "ast_hash": "902c1e8ca0be0921385aa172c37816cf",
     "semantic_hash": ""
   },
   "src/app/store.ts": {
-    "mtime": 1791618835.3390603,
-    "seen": 1791618887.088028,
+    "mtime": 1791623343.0324461,
+    "seen": 1791623422.016076,
     "ast_hash": "b3c8f1c599442d8064080012df77e64a",
     "semantic_hash": ""
   },
   "src/app/theme.test.ts": {
-    "mtime": 1791618835.3391697,
-    "seen": 1791618887.088029,
+    "mtime": 1791623343.032586,
+    "seen": 1791623422.016077,
     "ast_hash": "41bc835563cc852245ccac826604cc79",
     "semantic_hash": ""
   },
   "src/app/theme.ts": {
-    "mtime": 1791618835.33928,
-    "seen": 1791618887.088029,
+    "mtime": 1791623343.032729,
+    "seen": 1791623422.016077,
     "ast_hash": "5af3cf09026ff17b1d55a76eb011b3bd",
     "semantic_hash": ""
   },
   "src/data/osm-area-bridge.test.ts": {
-    "mtime": 1791618835.3414466,
-    "seen": 1791618887.088037,
+    "mtime": 1791623343.0353117,
+    "seen": 1791623422.016086,
     "ast_hash": "c55d6cded84192e44cbda719861390cc",
     "semantic_hash": ""
   },
   "src/data/osm-area-bridge.ts": {
-    "mtime": 1791618835.341568,
-    "seen": 1791618887.088038,
+    "mtime": 1791623343.0354462,
+    "seen": 1791623422.016087,
     "ast_hash": "b7c99a3c67f5ce5321e7e17c9c0510e3",
     "semantic_hash": ""
   },
   "src/data/travel-area-ids.ts": {
-    "mtime": 1791618835.345291,
-    "seen": 1791618887.0880399,
+    "mtime": 1791623343.0397353,
+    "seen": 1791623422.0160892,
     "ast_hash": "3821a84e43ee50f3d3a4c4f88cc764c1",
     "semantic_hash": ""
   },
   "src/map/area-shape.test.ts": {
-    "mtime": 1791618835.3612604,
-    "seen": 1791618887.088067,
+    "mtime": 1791623343.0596573,
+    "seen": 1791623422.016118,
     "ast_hash": "10010027dda51db8b35066561e09c132",
     "semantic_hash": ""
   },
   "src/map/area-shape.ts": {
-    "mtime": 1791618835.3613594,
-    "seen": 1791618887.088067,
+    "mtime": 1791623343.059804,
+    "seen": 1791623422.01612,
     "ast_hash": "3478a7319cb8f842ea14e12def30d6fa",
     "semantic_hash": ""
   },
   "src/map/areas.ts": {
-    "mtime": 1791618835.3614612,
-    "seen": 1791618887.088068,
+    "mtime": 1791623343.0599108,
+    "seen": 1791623422.0161211,
     "ast_hash": "203079c339b39c954c7e360f9b5356ac",
     "semantic_hash": ""
   },
   "src/map/chrome.ts": {
-    "mtime": 1791618835.3621638,
-    "seen": 1791618887.0880709,
+    "mtime": 1791623343.0607147,
+    "seen": 1791623422.0161269,
     "ast_hash": "cd107ecba9a1902c5c9b1841dd437e65",
     "semantic_hash": ""
   },
   "src/map/controls.ts": {
-    "mtime": 1791618835.3624759,
-    "seen": 1791618887.0880718,
+    "mtime": 1791623343.061048,
+    "seen": 1791623422.0161269,
     "ast_hash": "cb97ec67de3e26cf3f7d203f467c7a21",
     "semantic_hash": ""
   },
   "src/map/maplibre-perf.test.ts": {
-    "mtime": 1791618835.364838,
-    "seen": 1791618887.088078,
+    "mtime": 1791623343.0640323,
+    "seen": 1791623422.016137,
     "ast_hash": "e7c16f5070a9331f0e0df18f4509197a",
     "semantic_hash": ""
   },
   "src/map/maplibre-perf.ts": {
-    "mtime": 1791618835.3649464,
-    "seen": 1791618887.0880792,
+    "mtime": 1791623343.0641727,
+    "seen": 1791623422.016138,
     "ast_hash": "7a08230d6dc6a8112acfe461246c1270",
     "semantic_hash": ""
   },
   "src/map/overlays.ts": {
-    "mtime": 1791618835.365073,
-    "seen": 1791618887.0880792,
+    "mtime": 1791623343.0644813,
+    "seen": 1791623422.016138,
     "ast_hash": "4d380c76b0f3e7e99b7ce586e32b36dc",
     "semantic_hash": ""
   },
   "src/map/overview.test.ts": {
-    "mtime": 1791618835.3651743,
-    "seen": 1791618887.08808,
+    "mtime": 1791623343.0646164,
+    "seen": 1791623422.016139,
     "ast_hash": "6e15f02ba3f77ff8a34a469ff126afec",
     "semantic_hash": ""
   },
   "src/map/overview.ts": {
-    "mtime": 1791618835.3652735,
-    "seen": 1791618887.08808,
+    "mtime": 1791623343.0647745,
+    "seen": 1791623422.01614,
     "ast_hash": "f0611a2e215589dc91053855aec5df27",
     "semantic_hash": ""
   },
   "src/map/pin-visual.test.ts": {
-    "mtime": 1791618835.3653717,
-    "seen": 1791618887.088081,
+    "mtime": 1791623343.0650618,
+    "seen": 1791623422.01614,
     "ast_hash": "c8acb98aa3cd44b86fdf51986edf6505",
     "semantic_hash": ""
   },
   "src/map/pin-visual.ts": {
-    "mtime": 1791618835.3654716,
-    "seen": 1791618887.088081,
+    "mtime": 1791623343.0652523,
+    "seen": 1791623422.016141,
     "ast_hash": "b98851f1ee424e59cacd2620457f6e8c",
     "semantic_hash": ""
   },
   "src/map/place-index.ts": {
-    "mtime": 1791618835.365579,
-    "seen": 1791618887.0880818,
+    "mtime": 1791623343.0654035,
+    "seen": 1791623422.016141,
     "ast_hash": "f294e18f6f6b83e3db96abcfb1c670d0",
     "semantic_hash": ""
   },
   "src/map/route-draw.ts": {
-    "mtime": 1791618835.3659801,
-    "seen": 1791618887.088083,
+    "mtime": 1791623343.0658314,
+    "seen": 1791623422.016143,
     "ast_hash": "38427659c9733974e5760750c5cead4b",
     "semantic_hash": ""
   },
   "src/map/route-model.test.ts": {
-    "mtime": 1791618835.366283,
-    "seen": 1791618887.088083,
+    "mtime": 1791623343.0662389,
+    "seen": 1791623422.0161438,
     "ast_hash": "d596eb3dc9f72f2a545825ebb7f6867d",
     "semantic_hash": ""
   },
   "src/map/route-model.ts": {
-    "mtime": 1791618835.3666296,
-    "seen": 1791618887.088084,
+    "mtime": 1791623343.0668266,
+    "seen": 1791623422.0161438,
     "ast_hash": "d0505848b9c19c25f7ba1c2098b0b924",
     "semantic_hash": ""
   },
   "src/map/trackpad.test.ts": {
-    "mtime": 1791618835.3667316,
-    "seen": 1791618887.088084,
+    "mtime": 1791623343.0671759,
+    "seen": 1791623422.016145,
     "ast_hash": "83cbb3a07aa42d6cdf46f0012bda660a",
     "semantic_hash": ""
   },
   "src/map/trackpad.ts": {
-    "mtime": 1791618835.3668292,
-    "seen": 1791618887.088085,
+    "mtime": 1791623343.0681088,
+    "seen": 1791623422.016146,
     "ast_hash": "b768fd1d8d7fa07b720d44b67a617424",
     "semantic_hash": ""
   },
   "src/map/transit.test.ts": {
-    "mtime": 1791618835.3669322,
-    "seen": 1791618887.088085,
+    "mtime": 1791623343.0683007,
+    "seen": 1791623422.016146,
     "ast_hash": "33d1c56a99d632cdf435af08b060bb31",
     "semantic_hash": ""
   },
   "src/map/transit.ts": {
-    "mtime": 1791618835.3670278,
-    "seen": 1791618887.0880861,
+    "mtime": 1791623343.0684307,
+    "seen": 1791623422.016147,
     "ast_hash": "9ebdc0b9e0bca61f057841f7a9dc35db",
     "semantic_hash": ""
   },
   "src/map/walk-route.test.ts": {
-    "mtime": 1791618835.3672626,
-    "seen": 1791618887.088087,
+    "mtime": 1791623343.0689054,
+    "seen": 1791623422.01615,
     "ast_hash": "945a17f7203a010c18d9d3aac509a62d",
     "semantic_hash": ""
   },
   "src/trip/api.test.ts": {
-    "mtime": 1791618835.3723724,
-    "seen": 1791618887.0880919,
+    "mtime": 1791623343.0743825,
+    "seen": 1791623422.0161548,
     "ast_hash": "f32ed1ff1930e632455777a0595aa332",
     "semantic_hash": ""
   },
   "src/trip/api.ts": {
-    "mtime": 1791618835.3724916,
-    "seen": 1791618887.088093,
+    "mtime": 1791623343.074523,
+    "seen": 1791623422.0161548,
     "ast_hash": "9ad49b48e7531de07fe9c2bb34ec09e3",
     "semantic_hash": ""
   },
   "src/trip/dates.ts": {
-    "mtime": 1791618835.3756852,
-    "seen": 1791618887.088098,
+    "mtime": 1791623343.0758932,
+    "seen": 1791623422.016159,
     "ast_hash": "94e83c2e8c659fc730a88e6eea91226c",
     "semantic_hash": ""
   },
   "src/trip/diff.test.ts": {
-    "mtime": 1791618835.3768985,
-    "seen": 1791618887.0881002,
+    "mtime": 1791623343.0772169,
+    "seen": 1791623422.0161622,
     "ast_hash": "0edb351239c9bf7f0f411ac0d33be262",
     "semantic_hash": ""
   },
   "src/trip/diff.ts": {
-    "mtime": 1791618835.3770063,
-    "seen": 1791618887.0881011,
+    "mtime": 1791623343.0775876,
+    "seen": 1791623422.0161622,
     "ast_hash": "755df1e64fe171b115d2438d3840d989",
     "semantic_hash": ""
   },
   "src/trip/directions.test.ts": {
-    "mtime": 1791618835.3771205,
-    "seen": 1791618887.0881019,
+    "mtime": 1791623343.0785758,
+    "seen": 1791623422.016163,
     "ast_hash": "df3b54f4a4d36edfe77d84347c2d67ce",
     "semantic_hash": ""
   },
   "src/trip/directions.ts": {
-    "mtime": 1791618835.3772268,
-    "seen": 1791618887.0881019,
+    "mtime": 1791623343.0788026,
+    "seen": 1791623422.016163,
     "ast_hash": "f2d1e9e8b183be6b093c521e8667f760",
     "semantic_hash": ""
   },
   "src/trip/errors.ts": {
-    "mtime": 1791618835.3775067,
-    "seen": 1791618887.0881028,
+    "mtime": 1791623343.0791955,
+    "seen": 1791623422.016164,
     "ast_hash": "66362bf47a0632a1de151550d72c4845",
     "semantic_hash": ""
   },
   "src/trip/inline.test.ts": {
-    "mtime": 1791618835.378396,
-    "seen": 1791618887.088105,
+    "mtime": 1791623343.0803163,
+    "seen": 1791623422.016166,
     "ast_hash": "de879c937e9fd741486e07c62bbd2313",
     "semantic_hash": ""
   },
   "src/trip/inline.ts": {
-    "mtime": 1791618835.3785396,
-    "seen": 1791618887.088106,
+    "mtime": 1791623343.0807137,
+    "seen": 1791623422.016167,
     "ast_hash": "6074d057d40f04eca259f1b6f58dfd16",
     "semantic_hash": ""
   },
   "src/trip/links.test.ts": {
-    "mtime": 1791618835.3790915,
-    "seen": 1791618887.088107,
+    "mtime": 1791623343.0818777,
+    "seen": 1791623422.0161679,
     "ast_hash": "51bfcb767cdc86e39669fdf3324776e5",
     "semantic_hash": ""
   },
   "src/trip/links.ts": {
-    "mtime": 1791618835.3791964,
-    "seen": 1791618887.088108,
+    "mtime": 1791623343.081997,
+    "seen": 1791623422.016169,
     "ast_hash": "455afeba5256f7d43f79c380d5f70469",
     "semantic_hash": ""
   },
   "src/trip/route.test.ts": {
-    "mtime": 1791618835.3815396,
-    "seen": 1791618887.0881128,
+    "mtime": 1791623343.0852356,
+    "seen": 1791623422.016174,
     "ast_hash": "87d856319d591dda7da8343039dbe82b",
     "semantic_hash": ""
   },
   "src/trip/route.ts": {
-    "mtime": 1791618835.3816814,
-    "seen": 1791618887.088114,
+    "mtime": 1791623343.0854187,
+    "seen": 1791623422.016175,
     "ast_hash": "d01ae8f02344a51f78237ae10c3b3790",
     "semantic_hash": ""
   },
   "src/trip/summary.test.ts": {
-    "mtime": 1791618835.3822396,
-    "seen": 1791618887.088117,
+    "mtime": 1791623343.0861354,
+    "seen": 1791623422.016177,
     "ast_hash": "c7ca09d2fb81046b405e503afb7da162",
     "semantic_hash": ""
   },
   "src/trip/summary.ts": {
-    "mtime": 1791618835.3823385,
-    "seen": 1791618887.088118,
+    "mtime": 1791623343.086261,
+    "seen": 1791623422.016178,
     "ast_hash": "eb471f9c0c1f12b09d7fa653d4f9327c",
     "semantic_hash": ""
   },
   "src/trip/view-state.test.ts": {
-    "mtime": 1791618835.3825622,
-    "seen": 1791618887.088119,
+    "mtime": 1791623343.0866513,
+    "seen": 1791623422.0161788,
     "ast_hash": "00a860d5de25952b9b72a26f4024a85d",
     "semantic_hash": ""
   },
   "src/trip/view-state.ts": {
-    "mtime": 1791618835.3826723,
-    "seen": 1791618887.088119,
+    "mtime": 1791623343.0867634,
+    "seen": 1791623422.01618,
     "ast_hash": "11eb8981b526cbb6ae744254f37cb87d",
     "semantic_hash": ""
   },
   "src/trip/walk-memory.ts": {
-    "mtime": 1791618835.3829815,
-    "seen": 1791618887.0881212,
+    "mtime": 1791623343.0871127,
+    "seen": 1791623422.016181,
     "ast_hash": "f377fb228b502742729f818c0e47e946",
     "semantic_hash": ""
   },
   "src/ui/controls.test.ts": {
-    "mtime": 1791618835.384764,
-    "seen": 1791618887.088126,
+    "mtime": 1791623343.089221,
+    "seen": 1791623422.016186,
     "ast_hash": "5f56c9b011b4ecbc25c7d2d2ed9d968b",
     "semantic_hash": ""
   },
   "src/ui/price.test.ts": {
-    "mtime": 1791618835.3868217,
-    "seen": 1791618887.0881312,
+    "mtime": 1791623343.0911326,
+    "seen": 1791623422.016191,
     "ast_hash": "cd5f70e9a0868a4347c86451ebe262e1",
     "semantic_hash": ""
   },
   "src/ui/price.ts": {
-    "mtime": 1791618835.386943,
-    "seen": 1791618887.0881321,
+    "mtime": 1791623343.0912552,
+    "seen": 1791623422.016192,
     "ast_hash": "28ac8e01e5f243134d95cb338209bbbe",
     "semantic_hash": ""
   },
   "src/ui/rating.test.ts": {
-    "mtime": 1791618835.3872037,
-    "seen": 1791618887.088133,
+    "mtime": 1791623343.0917127,
+    "seen": 1791623422.016193,
     "ast_hash": "91db8dff33053886639d3cd70b18f90c",
     "semantic_hash": ""
   },
   "src/ui/rating.ts": {
-    "mtime": 1791618835.387312,
-    "seen": 1791618887.0881338,
+    "mtime": 1791623343.0918398,
+    "seen": 1791623422.016193,
     "ast_hash": "d876f16f8b7abd9eb91c5b0e0e819dad",
     "semantic_hash": ""
   },
   "src/views/hotel-dates.test.ts": {
-    "mtime": 1791618835.3882518,
-    "seen": 1791618887.0881379,
+    "mtime": 1791623343.0929487,
+    "seen": 1791623422.0161972,
     "ast_hash": "e4e871abfe8bbf5647fced7e49850a88",
     "semantic_hash": ""
   },
   "src/views/hotel-dates.ts": {
-    "mtime": 1791618835.3883507,
-    "seen": 1791618887.0881379,
+    "mtime": 1791623343.0930715,
+    "seen": 1791623422.016198,
     "ast_hash": "b05af01586ffafb25b08dd691a326ec8",
     "semantic_hash": ""
   },
   "src/views/hotel-distance.test.ts": {
-    "mtime": 1791618835.3884556,
-    "seen": 1791618887.088139,
+    "mtime": 1791623343.0931952,
+    "seen": 1791623422.016198,
     "ast_hash": "11749783c60e191e1ec80c77e4cbaec4",
     "semantic_hash": ""
   },
   "src/views/hotel-distance.ts": {
-    "mtime": 1791618835.3885806,
-    "seen": 1791618887.088139,
+    "mtime": 1791623343.093336,
+    "seen": 1791623422.0161989,
     "ast_hash": "2cb008e0622cf42a53e36e80a2696627",
     "semantic_hash": ""
   },
   "src/views/hotel-rank.test.ts": {
-    "mtime": 1791618835.3887022,
-    "seen": 1791618887.08814,
+    "mtime": 1791623343.0934815,
+    "seen": 1791623422.0161989,
     "ast_hash": "836a6268cca6f508bc2f7ffc6eb3bc6b",
     "semantic_hash": ""
   },
   "src/views/hotel-rank.ts": {
-    "mtime": 1791618835.3893254,
-    "seen": 1791618887.08814,
+    "mtime": 1791623343.0936415,
+    "seen": 1791623422.0161998,
     "ast_hash": "9b9b2efb65dd0a343e6b449d66e7dfc0",
     "semantic_hash": ""
   },
   "src/views/hotel-ring.ts": {
-    "mtime": 1791618835.389456,
-    "seen": 1791618887.088141,
+    "mtime": 1791623343.0937898,
+    "seen": 1791623422.0161998,
     "ast_hash": "3cd4fd3110bc1d4aa543483806a4368d",
     "semantic_hash": ""
   },
   "src/views/hotel-slider.test.ts": {
-    "mtime": 1791618835.3895483,
-    "seen": 1791618887.0881422,
+    "mtime": 1791623343.0939336,
+    "seen": 1791623422.016201,
     "ast_hash": "9486692673af2dca4011b1c9f0c82895",
     "semantic_hash": ""
   },
   "src/views/hotel-slider.ts": {
-    "mtime": 1791618835.389664,
-    "seen": 1791618887.0881422,
+    "mtime": 1791623343.0941014,
+    "seen": 1791623422.016201,
     "ast_hash": "dba75f309f156e8c1171ca2fc5e53775",
     "semantic_hash": ""
   },
   "src/views/open-now.test.ts": {
-    "mtime": 1791618835.3901417,
-    "seen": 1791618887.0881438,
+    "mtime": 1791623343.0952897,
+    "seen": 1791623422.016203,
     "ast_hash": "2e222aab9c4957cbc6510bfd0940e651",
     "semantic_hash": ""
   },
   "src/views/open-now.ts": {
-    "mtime": 1791618835.390274,
-    "seen": 1791618887.0881438,
+    "mtime": 1791623343.0954623,
+    "seen": 1791623422.016203,
     "ast_hash": "b11c8e7f519c7a42c86f77236d1fb43f",
     "semantic_hash": ""
   },
   "src/views/place-panel.test.ts": {
-    "mtime": 1791618835.390752,
-    "seen": 1791618887.088147,
+    "mtime": 1791623343.0959992,
+    "seen": 1791623422.016205,
     "ast_hash": "a0d351405e6aa8fb245dae9d587e9452",
     "semantic_hash": ""
   },
   "src/views/route-planner.test.ts": {
-    "mtime": 1791618835.3915322,
-    "seen": 1791618887.088149,
+    "mtime": 1791623343.0980885,
+    "seen": 1791623422.0162072,
     "ast_hash": "fa4c9cf83af5b715cd8957864f41e1b8",
     "semantic_hash": ""
   },
   "src/views/route-planner.ts": {
-    "mtime": 1791618835.391927,
-    "seen": 1791618887.088149,
+    "mtime": 1791623343.0986717,
+    "seen": 1791623422.016208,
     "ast_hash": "3c7c674baf105441c579039d2ebe4525",
     "semantic_hash": ""
   },
   "src/views/stay-heatmap.test.ts": {
-    "mtime": 1791618835.3920963,
-    "seen": 1791618887.08815,
+    "mtime": 1791623343.0990238,
+    "seen": 1791623422.016208,
     "ast_hash": "fd102af25fcd862fbdd1fc66d94457a6",
     "semantic_hash": ""
   },
   "src/views/stay-heatmap.ts": {
-    "mtime": 1791618835.3923268,
-    "seen": 1791618887.08815,
+    "mtime": 1791623343.0993855,
+    "seen": 1791623422.016209,
     "ast_hash": "6c1ffaede7ec153cb465b57270b3438f",
     "semantic_hash": ""
   },
   "src/views/timeline.test.ts": {
-    "mtime": 1791618835.3924603,
-    "seen": 1791618887.088151,
+    "mtime": 1791623343.099531,
+    "seen": 1791623422.016209,
     "ast_hash": "b233caed1f7b6c2414a857286d183cd8",
     "semantic_hash": ""
   },
   "src/views/timeline.ts": {
-    "mtime": 1791618835.3927138,
-    "seen": 1791618887.088151,
+    "mtime": 1791623343.099907,
+    "seen": 1791623422.0162098,
     "ast_hash": "5c69b2887f91b1a8a5987e40cbf856c1",
     "semantic_hash": ""
   },
   "src/trip/calendar.test.ts": {
-    "mtime": 1791618835.3733473,
-    "seen": 1791618887.088093,
+    "mtime": 1791623343.0748184,
+    "seen": 1791623422.016156,
     "ast_hash": "9981e90549e8cf07529d23d7ebf9ee39",
     "semantic_hash": ""
   },
   "src/trip/calendar.ts": {
-    "mtime": 1791618835.3749654,
-    "seen": 1791618887.088094,
+    "mtime": 1791623343.0751286,
+    "seen": 1791623422.016156,
     "ast_hash": "8933d42004d03d3b909d3ed802f36894",
     "semantic_hash": ""
   },
   "src/ui/maps-icon.ts": {
-    "mtime": 1791618835.3862567,
-    "seen": 1791618887.08813,
+    "mtime": 1791623343.0905766,
+    "seen": 1791623422.0161889,
     "ast_hash": "0ea846da60dba1ad75594cd9c1197728",
     "semantic_hash": ""
   },
   "src/ui/contrast.test.ts": {
-    "mtime": 1791618835.384545,
-    "seen": 1791618887.088125,
+    "mtime": 1791623343.0889037,
+    "seen": 1791623422.016185,
     "ast_hash": "7e6f2b15a7016bf994c71930eb999fb7",
     "semantic_hash": ""
   },
   "src/ui/contrast.ts": {
-    "mtime": 1791618835.3846495,
-    "seen": 1791618887.088125,
+    "mtime": 1791623343.0890749,
+    "seen": 1791623422.016185,
     "ast_hash": "9f11b77009dd9b3afa28be0881270291",
     "semantic_hash": ""
   },
   "src/trip/day-plan.test.ts": {
-    "mtime": 1791618835.3760252,
-    "seen": 1791618887.088098,
+    "mtime": 1791623343.0762434,
+    "seen": 1791623422.01616,
     "ast_hash": "4171f3712d6a15390c7f6d26657de99f",
     "semantic_hash": ""
   },
   "src/trip/day-plan.ts": {
-    "mtime": 1791618835.3764691,
-    "seen": 1791618887.088099,
+    "mtime": 1791623343.0767648,
+    "seen": 1791623422.01616,
     "ast_hash": "dcf5179589f759089187640077d0679b",
     "semantic_hash": ""
   },
   "src/trip/weather.test.ts": {
-    "mtime": 1791618835.3838198,
-    "seen": 1791618887.0881221,
+    "mtime": 1791623343.0878856,
+    "seen": 1791623422.0161831,
     "ast_hash": "50068a12ca102f7de2f8d1535eb71e96",
     "semantic_hash": ""
   },
   "src/trip/weather.ts": {
-    "mtime": 1791618835.3841407,
-    "seen": 1791618887.0881228,
+    "mtime": 1791623343.0882146,
+    "seen": 1791623422.0161831,
     "ast_hash": "884cc1be907d79f8fbc0e73944fbc23f",
     "semantic_hash": ""
   },
   "src/data/travel-guide-paris.ts": {
-    "mtime": 1791618835.3466175,
-    "seen": 1791618887.088043,
+    "mtime": 1791623343.0410511,
+    "seen": 1791623422.016093,
     "ast_hash": "e177699ec71895896d578e26b30a1415",
     "semantic_hash": ""
   },
   "src/data/travel-guide.test.ts": {
-    "mtime": 1791618835.346738,
-    "seen": 1791618887.088043,
+    "mtime": 1791623343.0411782,
+    "seen": 1791623422.016094,
     "ast_hash": "5e4dc6a30a5f9c3a6048e2cf0ab02b32",
     "semantic_hash": ""
   },
   "src/data/travel-guide.ts": {
-    "mtime": 1791618835.346835,
-    "seen": 1791618887.088044,
+    "mtime": 1791623343.0412953,
+    "seen": 1791623422.016095,
     "ast_hash": "c760ca03161c6e0065a29243d3577e00",
     "semantic_hash": ""
   },
   "src/ui/ai-badge.test.ts": {
-    "mtime": 1791618835.384334,
-    "seen": 1791618887.0881238,
+    "mtime": 1791623343.0884733,
+    "seen": 1791623422.016184,
     "ast_hash": "ca6f68a398aa6b61e678dca10e0dc8bd",
     "semantic_hash": ""
   },
   "src/ui/ai-badge.ts": {
-    "mtime": 1791618835.384447,
-    "seen": 1791618887.0881238,
+    "mtime": 1791623343.088764,
+    "seen": 1791623422.016184,
     "ast_hash": "2bbaff7e14a5b030045a56cfff7939ad",
     "semantic_hash": ""
   },
   "src/views/guide.ts": {
-    "mtime": 1791618835.388141,
-    "seen": 1791618887.088137,
+    "mtime": 1791623343.092806,
+    "seen": 1791623422.0161972,
     "ast_hash": "fcdc352f9f553b45140000fc02b6dec0",
     "semantic_hash": ""
   },
   "src/ui/video.test.ts": {
-    "mtime": 1791618835.3877497,
-    "seen": 1791618887.088136,
+    "mtime": 1791623343.0923784,
+    "seen": 1791623422.016195,
     "ast_hash": "ec63da0565a37a2890a618630d5abf0d",
     "semantic_hash": ""
   },
   "src/ui/video.ts": {
-    "mtime": 1791618835.3878586,
-    "seen": 1791618887.088136,
+    "mtime": 1791623343.0924911,
+    "seen": 1791623422.016196,
     "ast_hash": "1e0f9d0343e4f9538a69714257d3f8cb",
     "semantic_hash": ""
   },
   ".claude/skills/roteiro/SKILL.md": {
-    "mtime": 1791618834.9484773,
-    "seen": 1791618887.0881548,
+    "mtime": 1791623342.6541412,
+    "seen": 1791623422.016213,
     "ast_hash": "05c8a59d9f8476ee2c0d4ff77c514abd",
     "semantic_hash": ""
   },
   "src/trip/note-edit.test.ts": {
-    "mtime": 1791618835.38047,
-    "seen": 1791618887.08811,
+    "mtime": 1791623343.0840266,
+    "seen": 1791623422.016171,
     "ast_hash": "137289d94ce1d296f17d1e5640d49031",
     "semantic_hash": ""
   },
   "src/trip/note-edit.ts": {
-    "mtime": 1791618835.3806844,
-    "seen": 1791618887.0881112,
+    "mtime": 1791623343.0843432,
+    "seen": 1791623422.016172,
     "ast_hash": "594521b8bc23d56eeb48738ad5993b73",
     "semantic_hash": ""
   },
   "public/photos/paris/par-cajou-1.webp": {
-    "mtime": 1791618835.0517874,
-    "seen": 1791618887.088211,
+    "mtime": 1791623342.7625203,
+    "seen": 1791623422.0162702,
     "ast_hash": "09baa49ce682dc5cae5bb5ea8607da74",
     "semantic_hash": ""
   },
   "public/photos/paris/par-cajou-2.webp": {
-    "mtime": 1791618835.0526085,
-    "seen": 1791618887.088211,
+    "mtime": 1791623342.7627215,
+    "seen": 1791623422.016271,
     "ast_hash": "58ae4882be52f93d06cc88d7566f816b",
     "semantic_hash": ""
   },
   "public/photos/paris/par-cajou-3.webp": {
-    "mtime": 1791618835.0529754,
-    "seen": 1791618887.088212,
+    "mtime": 1791623342.762997,
+    "seen": 1791623422.016271,
     "ast_hash": "60a47d3478c53f42f380db7b3c4bd10b",
     "semantic_hash": ""
   },
   "public/photos/paris/par-fuuki-1.webp": {
-    "mtime": 1791618835.0531814,
-    "seen": 1791618887.088212,
+    "mtime": 1791623342.7637637,
+    "seen": 1791623422.0162718,
     "ast_hash": "d9b064a35083c0283d94d9004010de5b",
     "semantic_hash": ""
   },
   "public/photos/paris/par-fuuki-2.webp": {
-    "mtime": 1791618835.0536115,
-    "seen": 1791618887.088213,
+    "mtime": 1791623342.764052,
+    "seen": 1791623422.0162728,
     "ast_hash": "2a6d55cda842ee20809454a513734433",
     "semantic_hash": ""
   },
   "public/photos/paris/par-fuuki-3.webp": {
-    "mtime": 1791618835.0537646,
-    "seen": 1791618887.088213,
+    "mtime": 1791623342.7642467,
+    "seen": 1791623422.0162728,
     "ast_hash": "8d622d0a728f6a84fae53d87ab3a7287",
     "semantic_hash": ""
   },
   "public/photos/paris/par-kawaa-lumiere-1.webp": {
-    "mtime": 1791618835.0542858,
-    "seen": 1791618887.088214,
+    "mtime": 1791623342.7645326,
+    "seen": 1791623422.016274,
     "ast_hash": "ea24d36be1e4c0359e3f168c67e5c757",
     "semantic_hash": ""
   },
   "public/photos/paris/par-kawaa-lumiere-2.webp": {
-    "mtime": 1791618835.0546296,
-    "seen": 1791618887.088214,
+    "mtime": 1791623342.7648869,
+    "seen": 1791623422.016274,
     "ast_hash": "c904c83956ca9ac9adb036fc73e04ac4",
     "semantic_hash": ""
   },
   "public/photos/paris/par-kawaa-lumiere-3.webp": {
-    "mtime": 1791618835.0547726,
-    "seen": 1791618887.088215,
+    "mtime": 1791623342.7650156,
+    "seen": 1791623422.016275,
     "ast_hash": "c6a641120d04fafcc1097d8981396706",
     "semantic_hash": ""
   },
   "public/photos/paris/par-le-quai-bnf-1.webp": {
-    "mtime": 1791618835.0551753,
-    "seen": 1791618887.088215,
+    "mtime": 1791623342.7662816,
+    "seen": 1791623422.016276,
     "ast_hash": "5ac4c9025fc228f4fd364ed889026c1d",
     "semantic_hash": ""
   },
   "public/photos/paris/par-le-quai-bnf-2.webp": {
-    "mtime": 1791618835.055376,
-    "seen": 1791618887.088216,
+    "mtime": 1791623342.7665412,
+    "seen": 1791623422.016276,
     "ast_hash": "c0ce5e977e9a235db11acfcca44fe0d0",
     "semantic_hash": ""
   },
   "public/photos/paris/par-le-quai-bnf-3.webp": {
-    "mtime": 1791618835.0557866,
-    "seen": 1791618887.088217,
+    "mtime": 1791623342.769597,
+    "seen": 1791623422.016277,
     "ast_hash": "f31118ae9bb921e9684959dc6267d9c9",
     "semantic_hash": ""
   },
   "public/photos/paris/par-n-plus-un-1.webp": {
-    "mtime": 1791618835.0559492,
-    "seen": 1791618887.088217,
+    "mtime": 1791623342.7697482,
+    "seen": 1791623422.016277,
     "ast_hash": "d010159f31d2cbcd9cc942dab8c0f413",
     "semantic_hash": ""
   },
   "public/photos/paris/par-n-plus-un-2.webp": {
-    "mtime": 1791618835.0563045,
-    "seen": 1791618887.0882182,
+    "mtime": 1791623342.7699773,
+    "seen": 1791623422.016278,
     "ast_hash": "e0bc9ae0460d47f0e9e2e74047e8d00c",
     "semantic_hash": ""
   },
   "public/photos/paris/par-n-plus-un-3.webp": {
-    "mtime": 1791618835.0564609,
-    "seen": 1791618887.0882182,
+    "mtime": 1791623342.770121,
+    "seen": 1791623422.016278,
     "ast_hash": "d5c418735530d4ed4c57bff2ab43d222",
     "semantic_hash": ""
   },
   "src/map/amenities.test.ts": {
-    "mtime": 1791618835.3607826,
-    "seen": 1791618887.088064,
+    "mtime": 1791623343.059118,
+    "seen": 1791623422.016114,
     "ast_hash": "c129c177ab1a21145319ef01c08af614",
     "semantic_hash": ""
   },
   "src/map/amenities.ts": {
-    "mtime": 1791618835.3609424,
-    "seen": 1791618887.088065,
+    "mtime": 1791623343.0593145,
+    "seen": 1791623422.016115,
     "ast_hash": "3ec95959072ab017c4eb84ee30f76d15",
     "semantic_hash": ""
   },
   "scripts/fetch-amenities.ts": {
-    "mtime": 1791618835.3347607,
-    "seen": 1791618887.088012,
+    "mtime": 1791623343.0279794,
+    "seen": 1791623422.016059,
     "ast_hash": "96c43ec41c2afdcebe47a29e730fd1a8",
     "semantic_hash": ""
   },
   "src/map/amenity-cells.ts": {
-    "mtime": 1791618835.3610506,
-    "seen": 1791618887.088065,
+    "mtime": 1791623343.059435,
+    "seen": 1791623422.016117,
     "ast_hash": "9c54b3c13afd04fcc2a5338b445ce0b3",
     "semantic_hash": ""
   },
   "src/map/amenity-state.ts": {
-    "mtime": 1791618835.3611598,
-    "seen": 1791618887.088066,
+    "mtime": 1791623343.0595493,
+    "seen": 1791623422.016118,
     "ast_hash": "88dc55730a7298adc7ec2055db076272",
     "semantic_hash": ""
   },
   "src/ui/weather-icons.ts": {
-    "mtime": 1791618835.387955,
-    "seen": 1791618887.088137,
+    "mtime": 1791623343.0925982,
+    "seen": 1791623422.016196,
     "ast_hash": "c711da87f5e1132ef3990f183aeab8e4",
     "semantic_hash": ""
   },
   "public/weather/cloud-moon-rain.svg": {
-    "mtime": 1791618835.332184,
-    "seen": 1791618887.088219,
+    "mtime": 1791623343.0253663,
+    "seen": 1791623422.016279,
     "ast_hash": "a70ed14304ef96a6790df767a4e8030d",
     "semantic_hash": ""
   },
   "public/weather/cloud-moon.svg": {
-    "mtime": 1791618835.3323112,
-    "seen": 1791618887.088219,
+    "mtime": 1791623343.0254965,
+    "seen": 1791623422.016279,
     "ast_hash": "459e8d1c284b29e4ba0ee5413c822d99",
     "semantic_hash": ""
   },
   "public/weather/cloud-rain.svg": {
-    "mtime": 1791618835.3324254,
-    "seen": 1791618887.08822,
+    "mtime": 1791623343.0256112,
+    "seen": 1791623422.0162802,
     "ast_hash": "52be8f93c6f43351257459762964174a",
     "semantic_hash": ""
   },
   "public/weather/cloud-showers-heavy.svg": {
-    "mtime": 1791618835.3325412,
-    "seen": 1791618887.08822,
+    "mtime": 1791623343.025728,
+    "seen": 1791623422.0162802,
     "ast_hash": "79f7fadedefed819914ba6e43788c796",
     "semantic_hash": ""
   },
   "public/weather/cloud-showers.svg": {
-    "mtime": 1791618835.3326528,
-    "seen": 1791618887.0882208,
+    "mtime": 1791623343.0258455,
+    "seen": 1791623422.0162811,
     "ast_hash": "6797503a50154c84795669f2740f86c0",
     "semantic_hash": ""
   },
   "public/weather/cloud-sun-rain.svg": {
-    "mtime": 1791618835.3327599,
-    "seen": 1791618887.088222,
+    "mtime": 1791623343.0259597,
+    "seen": 1791623422.016282,
     "ast_hash": "357abae30c587c1d940d0302b114dd45",
     "semantic_hash": ""
   },
   "public/weather/cloud-sun.svg": {
-    "mtime": 1791618835.3328612,
-    "seen": 1791618887.088222,
+    "mtime": 1791623343.0260677,
+    "seen": 1791623422.016282,
     "ast_hash": "23fa5b1a7aaf748e60a8714db2c1f35a",
     "semantic_hash": ""
   },
   "public/weather/clouds-moon.svg": {
-    "mtime": 1791618835.332977,
-    "seen": 1791618887.0882251,
+    "mtime": 1791623343.0261698,
+    "seen": 1791623422.0162828,
     "ast_hash": "d8a17ec4b1c8dbbbacfac4b72591af23",
     "semantic_hash": ""
   },
   "public/weather/clouds-sun.svg": {
-    "mtime": 1791618835.3330827,
-    "seen": 1791618887.088226,
+    "mtime": 1791623343.0262768,
+    "seen": 1791623422.0162828,
     "ast_hash": "a23a75a5f260c152d8dc0e1210cee50a",
     "semantic_hash": ""
   },
   "public/weather/clouds.svg": {
-    "mtime": 1791618835.333191,
-    "seen": 1791618887.088226,
+    "mtime": 1791623343.0263743,
+    "seen": 1791623422.016284,
     "ast_hash": "d1b7ec0661cb33f305222dac2b0eda06",
     "semantic_hash": ""
   },
   "public/weather/moon-stars.svg": {
-    "mtime": 1791618835.3333035,
-    "seen": 1791618887.088227,
+    "mtime": 1791623343.026481,
+    "seen": 1791623422.016284,
     "ast_hash": "7fdb9b4adc3ac9f95c606606ab126be6",
     "semantic_hash": ""
   },
   "public/weather/sun.svg": {
-    "mtime": 1791618835.333522,
-    "seen": 1791618887.088228,
+    "mtime": 1791623343.0266807,
+    "seen": 1791623422.016285,
     "ast_hash": "d53d909d12d042e9e7bdc187afe00b68",
     "semantic_hash": ""
   },
   "src/ui/dialog.ts": {
-    "mtime": 1791618835.384978,
-    "seen": 1791618887.088127,
+    "mtime": 1791623343.0894768,
+    "seen": 1791623422.016187,
     "ast_hash": "f5bf6b9246585c00e686b424aaaf7654",
     "semantic_hash": ""
   },
   "docs/auditoria-2026-09-27.md": {
-    "mtime": 1791618834.95181,
-    "seen": 1791618887.088159,
+    "mtime": 1791623342.657597,
+    "seen": 1791623422.0162182,
     "ast_hash": "4aff9741ce28fd946025b009cb10cf65",
     "semantic_hash": ""
   },
   "docs/paris-pontos-revisao.md": {
-    "mtime": 1791618834.952467,
-    "seen": 1791618887.088161,
+    "mtime": 1791623342.658464,
+    "seen": 1791623422.016219,
     "ast_hash": "908aa7ff24c4ee1701dbc7e5845e2332",
     "semantic_hash": ""
   },
   "src/data/travel-itinerary-legs.test.ts": {
-    "mtime": 1791618835.3498826,
-    "seen": 1791618887.088049,
+    "mtime": 1791623343.0439475,
+    "seen": 1791623422.0161002,
     "ast_hash": "595433849e51c4f2be2fda38241ae607",
     "semantic_hash": ""
   },
   "src/trip/walk-distance.test.ts": {
-    "mtime": 1791618835.382777,
-    "seen": 1791618887.08812,
+    "mtime": 1791623343.0868766,
+    "seen": 1791623422.01618,
     "ast_hash": "9d56fdc9233104ce5784051cee576ab5",
     "semantic_hash": ""
   },
   "src/trip/walk-distance.ts": {
-    "mtime": 1791618835.3828824,
-    "seen": 1791618887.08812,
+    "mtime": 1791623343.0869884,
+    "seen": 1791623422.016181,
     "ast_hash": "878af02545e5d983050b3c938924e473",
     "semantic_hash": ""
   },
   "src/trip/subpoints.test.ts": {
-    "mtime": 1791618835.3820329,
-    "seen": 1791618887.088116,
+    "mtime": 1791623343.0858846,
+    "seen": 1791623422.0161762,
     "ast_hash": "ba7166a2852883ce0c76576fb5be8cea",
     "semantic_hash": ""
   },
   "src/trip/subpoints.ts": {
-    "mtime": 1791618835.3821394,
-    "seen": 1791618887.088117,
+    "mtime": 1791623343.086009,
+    "seen": 1791623422.016177,
     "ast_hash": "14740f7a8e96f18a4142d767a46f9b6b",
     "semantic_hash": ""
   },
   "src/trip/weather-source.test.ts": {
-    "mtime": 1791618835.383116,
-    "seen": 1791618887.0881212,
+    "mtime": 1791623343.0872502,
+    "seen": 1791623422.016182,
     "ast_hash": "b8db8b47237f6c4eee34c363c1b46092",
     "semantic_hash": ""
   },
   "src/trip/weather-source.ts": {
-    "mtime": 1791618835.3834586,
-    "seen": 1791618887.0881221,
+    "mtime": 1791623343.0875838,
+    "seen": 1791623422.016182,
     "ast_hash": "62f775e4923d560ffa3b0e25d319a8ba",
     "semantic_hash": ""
   },
   "docs/references/dlp-idfm-live-data-sources.md": {
-    "mtime": 1791618834.9538324,
-    "seen": 1791618887.088164,
+    "mtime": 1791623342.6595042,
+    "seen": 1791623422.016223,
     "ast_hash": "650718d843a050154979f733ca70f70c",
     "semantic_hash": ""
   },
   "docs/references/paris-oct-2026-transit-disruptions.md": {
-    "mtime": 1791618834.964227,
-    "seen": 1791618887.088185,
+    "mtime": 1791623342.6732993,
+    "seen": 1791623422.016243,
     "ast_hash": "3839311d71835496f8776d6ffe3a99d4",
     "semantic_hash": ""
   },
   "docs/references/place-location-verification.md": {
-    "mtime": 1791618834.9648714,
-    "seen": 1791618887.088186,
+    "mtime": 1791623342.674065,
+    "seen": 1791623422.016245,
     "ast_hash": "426049a056a043d810014f73da7bff74",
     "semantic_hash": ""
   },
   "public/google-map-icon.svg": {
-    "mtime": 1791618835.02983,
-    "seen": 1791618887.088196,
+    "mtime": 1791623342.745631,
+    "seen": 1791623422.016255,
     "ast_hash": "c1d605797637e6221b45eb135b9f31cc",
     "semantic_hash": ""
   },
   "public/weather/sunset.svg": {
-    "mtime": 1791618835.3336375,
-    "seen": 1791618887.088228,
+    "mtime": 1791623343.0267866,
+    "seen": 1791623422.016286,
     "ast_hash": "1512da03d3a0b5ee6a4b950639ec7514",
     "semantic_hash": ""
   },
   "src/map/itinerary-route.test.ts": {
-    "mtime": 1791618835.3641038,
-    "seen": 1791618887.088076,
+    "mtime": 1791623343.0625706,
+    "seen": 1791623422.0161338,
     "ast_hash": "c9df5f096910e2a70966180e95a425e1",
     "semantic_hash": ""
   },
   "src/trip/status.ts": {
-    "mtime": 1791618835.3819294,
-    "seen": 1791618887.088115,
+    "mtime": 1791623343.085749,
+    "seen": 1791623422.016175,
     "ast_hash": "154a7850682c76ec7ae8bff019f08847",
     "semantic_hash": ""
   },
   "src/trip/status.test.ts": {
-    "mtime": 1791618835.3818133,
-    "seen": 1791618887.088115,
+    "mtime": 1791623343.0855918,
+    "seen": 1791623422.016175,
     "ast_hash": "ed04271eb47427970c95eb861ef5ad5f",
     "semantic_hash": ""
   },
   "src/data/travel-indoor.ts": {
-    "mtime": 1791618835.3471572,
-    "seen": 1791618887.0880451,
+    "mtime": 1791623343.041664,
+    "seen": 1791623422.016097,
     "ast_hash": "18dc16ce10a79a021e5177af30362f33",
     "semantic_hash": ""
   },
   "src/ui/louvre-map.ts": {
-    "mtime": 1791618835.385952,
-    "seen": 1791618887.088129,
+    "mtime": 1791623343.0904293,
+    "seen": 1791623422.0161889,
     "ast_hash": "dee1bf93f33779f247dcd64d0bbb9ecf",
     "semantic_hash": ""
   },
   "docs/references/grande-epicerie-2026-10-06.md": {
-    "mtime": 1791618834.9543977,
-    "seen": 1791618887.088166,
+    "mtime": 1791623342.6598628,
+    "seen": 1791623422.016225,
     "ast_hash": "7d77fcff1bc25368780ce88eb762f39c",
     "semantic_hash": ""
   },
   "public/maps/louvre/README.md": {
-    "mtime": 1791618835.030302,
-    "seen": 1791618887.088195,
+    "mtime": 1791623342.7463467,
+    "seen": 1791623422.016253,
     "ast_hash": "54443ca07ca1782b7ea4c1e72a556aa4",
     "semantic_hash": ""
   },
   "public/maps/louvre/niveau-1.svg": {
-    "mtime": 1791618835.0314944,
-    "seen": 1791618887.088196,
+    "mtime": 1791623342.7468708,
+    "seen": 1791623422.016255,
     "ast_hash": "50fc31b9ba63bd1bd8e9a2609acfc2f1",
     "semantic_hash": ""
   },
   "public/maps/louvre/niveau0.svg": {
-    "mtime": 1791618835.0339139,
-    "seen": 1791618887.0881972,
+    "mtime": 1791623342.7478771,
+    "seen": 1791623422.016256,
     "ast_hash": "a55e7beeffcc8688c20daaa394e41036",
     "semantic_hash": ""
   },
   "public/maps/louvre/niveau1.svg": {
-    "mtime": 1791618835.0348756,
-    "seen": 1791618887.0881972,
+    "mtime": 1791623342.7484508,
+    "seen": 1791623422.016256,
     "ast_hash": "a38dc8a3f2656bcaa403675ef3009f1d",
     "semantic_hash": ""
   },
   "src/data/travel-indoor.test.ts": {
-    "mtime": 1791618835.3470376,
-    "seen": 1791618887.0880451,
+    "mtime": 1791623343.0415275,
+    "seen": 1791623422.016096,
     "ast_hash": "93a6fd5c089b25ee71dcd81840d5e00c",
     "semantic_hash": ""
   },
   "src/data/travel-indoor-paths.ts": {
-    "mtime": 1791618835.3469381,
-    "seen": 1791618887.088044,
+    "mtime": 1791623343.0414124,
+    "seen": 1791623422.016095,
     "ast_hash": "17bc1079bba135e08a35b878acb2235c",
     "semantic_hash": ""
   },
   "docs/references/paris-croissant-winners.md": {
-    "mtime": 1791618834.9589293,
-    "seen": 1791618887.088181,
+    "mtime": 1791623342.665444,
+    "seen": 1791623422.0162392,
     "ast_hash": "64ee6450153b671c55a9ffb00231ad9f",
     "semantic_hash": ""
   },
   "docs/references/paris-flan-croque-creme-brulee.md": {
-    "mtime": 1791618834.9591634,
-    "seen": 1791618887.088182,
+    "mtime": 1791623342.66584,
+    "seen": 1791623422.0162408,
     "ast_hash": "2f8cd0f1c5242a14be5a4a95412b25b6",
     "semantic_hash": ""
   },
   "docs/references/disney-jantar-2026-10-07.md": {
-    "mtime": 1791618834.9537084,
-    "seen": 1791618887.088164,
+    "mtime": 1791623342.6593943,
+    "seen": 1791623422.016222,
     "ast_hash": "cfa58230a3b13251cf4abec49474d6f5",
     "semantic_hash": ""
   },
   "scripts/vite-place-edits.ts": {
-    "mtime": 1791618835.3378336,
-    "seen": 1791618887.088022,
+    "mtime": 1791623343.0308294,
+    "seen": 1791623422.01607,
     "ast_hash": "15fd5d04f01a8ec852181355997b3e4d",
     "semantic_hash": ""
   },
   "src/catalog/place-edits.test.ts": {
-    "mtime": 1791618835.3401484,
-    "seen": 1791618887.088032,
+    "mtime": 1791623343.033573,
+    "seen": 1791623422.0160792,
     "ast_hash": "b89cdeadd8e12d661acb158c7034f321",
     "semantic_hash": ""
   },
   "src/catalog/place-edits.ts": {
-    "mtime": 1791618835.3402724,
-    "seen": 1791618887.088033,
+    "mtime": 1791623343.0336978,
+    "seen": 1791623422.01608,
     "ast_hash": "f21d8affd22bc0e1a8249e7f5a2c5b64",
     "semantic_hash": ""
   },
   "docs/references/paris-2026-10-08-canal-janou.md": {
-    "mtime": 1791618834.9576926,
-    "seen": 1791618887.088177,
+    "mtime": 1791623342.6635513,
+    "seen": 1791623422.016236,
     "ast_hash": "3d562ec096c708f57bf4bd76914b7937",
     "semantic_hash": ""
   },
   "src/catalog/place-edit-model.ts": {
-    "mtime": 1791618835.340033,
-    "seen": 1791618887.088031,
+    "mtime": 1791623343.0334508,
+    "seen": 1791623422.0160792,
     "ast_hash": "af6e5767f76c0efabd6dcdc284652a28",
     "semantic_hash": ""
   },
   "src/views/place-edit.ts": {
-    "mtime": 1791618835.3906407,
-    "seen": 1791618887.088146,
+    "mtime": 1791623343.0958686,
+    "seen": 1791623422.016205,
     "ast_hash": "60312b16e278cf32d676328dfba589ab",
     "semantic_hash": ""
   },
   "src/ui/rating-picker.ts": {
-    "mtime": 1791618835.38708,
-    "seen": 1791618887.0881321,
+    "mtime": 1791623343.091589,
+    "seen": 1791623422.016192,
     "ast_hash": "60c4c6d4dfa35108404a66bbffd30bbe",
     "semantic_hash": ""
   },
   "docs/references/paris-montmartre-2026-10-08.md": {
-    "mtime": 1791618834.9639828,
-    "seen": 1791618887.088184,
+    "mtime": 1791623342.6729178,
+    "seen": 1791623422.016242,
     "ast_hash": "ffaec7b9d64a413aa014fb30b013465a",
     "semantic_hash": ""
   },
   "docs/references/mercado-2026-10-10.md": {
-    "mtime": 1791618834.9566321,
-    "seen": 1791618887.0881732,
+    "mtime": 1791623342.6622183,
+    "seen": 1791623422.016232,
     "ast_hash": "577f7fac308093cc5917266068612872",
     "semantic_hash": ""
   },
   "docs/references/cedric-grolet-meurice-2026-10-10.md": {
-    "mtime": 1791618834.9535394,
-    "seen": 1791618887.0881631,
+    "mtime": 1791623342.6592355,
+    "seen": 1791623422.016222,
     "ast_hash": "097b8a40a1995e1beb8014afcee4279c",
     "semantic_hash": ""
   },
   "docs/references/richelieu-2026-10-10.md": {
-    "mtime": 1791618834.9653728,
-    "seen": 1791618887.088188,
+    "mtime": 1791623342.6744287,
+    "seen": 1791623422.016247,
     "ast_hash": "aa1fa1ad6bb4759dd29578c360b230ad",
     "semantic_hash": ""
   },
   "docs/references/opera-mercado-2026-10-10.md": {
-    "mtime": 1791618834.957575,
-    "seen": 1791618887.088176,
+    "mtime": 1791623342.6634014,
+    "seen": 1791623422.016235,
     "ast_hash": "af45411e318055220310554c0dcab97e",
     "semantic_hash": ""
   },
   "docs/references/versailles-food-2026-09-28.md": {
-    "mtime": 1791618834.9664965,
-    "seen": 1791618887.088191,
+    "mtime": 1791623342.6757977,
+    "seen": 1791623422.0162501,
     "ast_hash": "63c9684f31b94991c8694c5d82d7a4f6",
     "semantic_hash": ""
   },
   "docs/references/paris-descriptions-oct-04-05-2026.md": {
-    "mtime": 1791618834.9590514,
-    "seen": 1791618887.088181,
+    "mtime": 1791623342.6656444,
+    "seen": 1791623422.0162401,
     "ast_hash": "bba3f81ecac4a3f2916967c1c2334679",
     "semantic_hash": ""
   },
   "docs/references/paris-award-photos.md": {
-    "mtime": 1791618834.9585009,
-    "seen": 1791618887.0881789,
+    "mtime": 1791623342.6644986,
+    "seen": 1791623422.016238,
     "ast_hash": "e78a9ceba7046150dc60cb2962c03ca7",
     "semantic_hash": ""
   },
   "docs/references/paris-walking-options-2026-10-06-08-10.md": {
-    "mtime": 1791618834.964747,
-    "seen": 1791618887.088186,
+    "mtime": 1791623342.6739378,
+    "seen": 1791623422.016244,
     "ast_hash": "ec0aa2bf4c9cf33c49ccaf478b04d64a",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-a-deux-mains-facade.webp": {
-    "mtime": 1791618835.0417068,
-    "seen": 1791618887.088199,
+    "mtime": 1791623342.7555935,
+    "seen": 1791623422.016257,
     "ast_hash": "d069ea463d86e7c540c2fe49f9390736",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-a-deux-mains-food.webp": {
-    "mtime": 1791618835.041901,
-    "seen": 1791618887.088199,
+    "mtime": 1791623342.7557364,
+    "seen": 1791623422.016258,
     "ast_hash": "62ec53fd488c961354bf3bbbc7406d04",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-boulangerie-du-sentier-facade.webp": {
-    "mtime": 1791618835.0421674,
-    "seen": 1791618887.0881999,
+    "mtime": 1791623342.7559574,
+    "seen": 1791623422.016259,
     "ast_hash": "876d86cae8a43348d8782eaff2e9df0a",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-boulangerie-du-sentier-food.webp": {
-    "mtime": 1791618835.0423453,
-    "seen": 1791618887.0881999,
+    "mtime": 1791623342.7561283,
+    "seen": 1791623422.016259,
     "ast_hash": "7fad57c50f78da21baabb33d9acf7e0b",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-chez-meunier-crimee-facade.webp": {
-    "mtime": 1791618835.0426233,
-    "seen": 1791618887.088201,
+    "mtime": 1791623342.7563686,
+    "seen": 1791623422.0162601,
     "ast_hash": "134e067241a0e24344f92ca498be13db",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-chez-meunier-crimee-food.webp": {
-    "mtime": 1791618835.042815,
-    "seen": 1791618887.088202,
+    "mtime": 1791623342.7565534,
+    "seen": 1791623422.0162601,
     "ast_hash": "9e2c84f4556305a4e3b2bc40df1ba097",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-des-racines-et-du-pain-facade.webp": {
-    "mtime": 1791618835.043276,
-    "seen": 1791618887.088202,
+    "mtime": 1791623342.756781,
+    "seen": 1791623422.016261,
     "ast_hash": "dab70198df320fac144559f694ac1da8",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-des-racines-et-du-pain-food.webp": {
-    "mtime": 1791618835.043577,
-    "seen": 1791618887.088203,
+    "mtime": 1791623342.7571754,
+    "seen": 1791623422.0162618,
     "ast_hash": "bffdcab86ea71b79a2c763ca9bc53fe1",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-la-pompadour-facade.webp": {
-    "mtime": 1791618835.0438304,
-    "seen": 1791618887.0882041,
+    "mtime": 1791623342.7575145,
+    "seen": 1791623422.0162618,
     "ast_hash": "1408e05c8208636a51c084fc3612fe79",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-la-pompadour-food.webp": {
-    "mtime": 1791618835.0440516,
-    "seen": 1791618887.0882041,
+    "mtime": 1791623342.7576416,
+    "seen": 1791623422.016263,
     "ast_hash": "f59493a97a6c9be68dba9a73f748c2ac",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-maison-carton-facade.webp": {
-    "mtime": 1791618835.04434,
-    "seen": 1791618887.088205,
+    "mtime": 1791623342.7578034,
+    "seen": 1791623422.016264,
     "ast_hash": "20541c040871fee0a9949011b4dfd166",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-maison-carton-food.webp": {
-    "mtime": 1791618835.0449257,
-    "seen": 1791618887.088205,
+    "mtime": 1791623342.7581756,
+    "seen": 1791623422.016264,
     "ast_hash": "891bc05bff6e5d0274ebe29ac698b47f",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-maison-doucet-facade.webp": {
-    "mtime": 1791618835.0454457,
-    "seen": 1791618887.088206,
+    "mtime": 1791623342.7586107,
+    "seen": 1791623422.016265,
     "ast_hash": "89dabefb14c95977b203d0608f90731d",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-maison-doucet-food.webp": {
-    "mtime": 1791618835.0463967,
-    "seen": 1791618887.088206,
+    "mtime": 1791623342.759152,
+    "seen": 1791623422.0162659,
     "ast_hash": "e49ae06afeabf48e5d866707c28270c3",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-patisserie-colbert-facade.webp": {
-    "mtime": 1791618835.047122,
-    "seen": 1791618887.088207,
+    "mtime": 1791623342.7594876,
+    "seen": 1791623422.0162659,
     "ast_hash": "db4b8064b8339c05571b2ecd1edde033",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-patisserie-colbert-food.webp": {
-    "mtime": 1791618835.047761,
-    "seen": 1791618887.088208,
+    "mtime": 1791623342.759641,
+    "seen": 1791623422.016267,
     "ast_hash": "0f7601580cf68c4dff9ae7b91e7f589c",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-sweet-lab-facade.webp": {
-    "mtime": 1791618835.0480592,
-    "seen": 1791618887.088208,
+    "mtime": 1791623342.7600238,
+    "seen": 1791623422.016267,
     "ast_hash": "7e92c454cbd85c0bdd9e996ca87706d5",
     "semantic_hash": ""
   },
   "public/photos/paris-awards/par-sweet-lab-food.webp": {
-    "mtime": 1791618835.0484045,
-    "seen": 1791618887.088209,
+    "mtime": 1791623342.7602017,
+    "seen": 1791623422.016268,
     "ast_hash": "afeb7a2cb14e209a7882f2018b8fdd60",
     "semantic_hash": ""
   },
   "docs/references/mcdonalds-paris-2026-09-28.md": {
-    "mtime": 1791618834.9559424,
-    "seen": 1791618887.088172,
+    "mtime": 1791623342.6616263,
+    "seen": 1791623422.0162299,
     "ast_hash": "eaf4a6c438f2eff797e29d7749cf7330",
     "semantic_hash": ""
   },
   "scripts/vite-checklists.ts": {
-    "mtime": 1791618835.3376215,
-    "seen": 1791618887.088021,
+    "mtime": 1791623343.0305495,
+    "seen": 1791623422.0160692,
     "ast_hash": "fcfbf802ddf0863d10a7951d969401b8",
     "semantic_hash": ""
   },
   "src/trip/checklist-state.test.ts": {
-    "mtime": 1791618835.3752823,
-    "seen": 1791618887.088096,
+    "mtime": 1791623343.0754826,
+    "seen": 1791623422.0161579,
     "ast_hash": "ffef2dbebfc36232fb444d068d6f65dd",
     "semantic_hash": ""
   },
   "src/trip/checklist-state.ts": {
-    "mtime": 1791618835.3753788,
-    "seen": 1791618887.088096,
+    "mtime": 1791623343.0755935,
+    "seen": 1791623422.0161579,
     "ast_hash": "6d3984d8bf094ce43c3a51477fb214f8",
     "semantic_hash": ""
   },
   "docs/references/versailles-gardens-2026-09-28.md": {
-    "mtime": 1791618834.9666593,
-    "seen": 1791618887.088192,
+    "mtime": 1791623342.6760643,
+    "seen": 1791623422.0162501,
     "ast_hash": "1e5a75c8c8b75fe9ef33a17812f2d107",
     "semantic_hash": ""
   },
   "src/trip/checklist.ts": {
-    "mtime": 1791618835.3755465,
-    "seen": 1791618887.088097,
+    "mtime": 1791623343.075744,
+    "seen": 1791623422.016159,
     "ast_hash": "f1cf0b0742ab2b9994f0c41dce28685b",
     "semantic_hash": ""
   },
   "docs/references/baguetts-moliere-location-2026-09-28.md": {
-    "mtime": 1791618834.953216,
-    "seen": 1791618887.088162,
+    "mtime": 1791623342.6590004,
+    "seen": 1791623422.0162199,
     "ast_hash": "61ef84702745fe9bb35cdb36a49f6e91",
     "semantic_hash": ""
   },
   "content/checklists/README.md": {
-    "mtime": 1791618834.9505131,
-    "seen": 1791618887.088158,
+    "mtime": 1791623342.6563778,
+    "seen": 1791623422.016217,
     "ast_hash": "8bd87fc3c92ee9503af186d6e60caf34",
     "semantic_hash": ""
   },
   "src/data/travel-paris-mcdonalds.ts": {
-    "mtime": 1791618835.3514028,
-    "seen": 1791618887.088054,
+    "mtime": 1791623343.0457754,
+    "seen": 1791623422.016105,
     "ast_hash": "21596020261116f37153b3d38cbbbcaf",
     "semantic_hash": ""
   },
   "docs/references/mcdonalds-paris-map-2026-09-28.md": {
-    "mtime": 1791618834.956079,
-    "seen": 1791618887.088172,
+    "mtime": 1791623342.661791,
+    "seen": 1791623422.0162308,
     "ast_hash": "919710c6b631b9ff3f53a8f9f6178769",
     "semantic_hash": ""
   },
   "scripts/check-travel-locations.ts": {
-    "mtime": 1791618835.3344858,
-    "seen": 1791618887.088011,
+    "mtime": 1791623343.0277357,
+    "seen": 1791623422.016053,
     "ast_hash": "25d065fedbbe8fe134ff4389fa629370",
     "semantic_hash": ""
   },
   "scripts/location-audit.ts": {
-    "mtime": 1791618835.3362498,
-    "seen": 1791618887.0880158,
+    "mtime": 1791623343.0291436,
+    "seen": 1791623422.016064,
     "ast_hash": "fe36b54552ed6dc48747f20978fb26d4",
     "semantic_hash": ""
   },
   "src/data/location-audit.test.ts": {
-    "mtime": 1791618835.3413382,
-    "seen": 1791618887.088036,
+    "mtime": 1791623343.0351884,
+    "seen": 1791623422.016085,
     "ast_hash": "e5d89a940d99c2a56424a38b688c726f",
     "semantic_hash": ""
   },
   "docs/references/location-audit-2026-09-28.md": {
-    "mtime": 1791618834.9554324,
-    "seen": 1791618887.08817,
+    "mtime": 1791623342.6609597,
+    "seen": 1791623422.0162292,
     "ast_hash": "5c2009ce1b1c1826f1497350ec309f02",
     "semantic_hash": ""
   },
   "public/photos/mcdonalds-disney-village-2026.jpg": {
-    "mtime": 1791618835.041094,
-    "seen": 1791618887.088198,
+    "mtime": 1791623342.75499,
+    "seen": 1791623422.016257,
     "ast_hash": "6267724110108ec3a352aa96850ed747",
     "semantic_hash": ""
   },
   "scripts/sync-travel-videos.mjs": {
-    "mtime": 1791618835.336476,
-    "seen": 1791618887.088018,
+    "mtime": 1791623343.029371,
+    "seen": 1791623422.016066,
     "ast_hash": "6cf00afce7d37894137a81fd3e219c05",
     "semantic_hash": ""
   },
   "src/app/search.test.ts": {
-    "mtime": 1791618835.338425,
-    "seen": 1791618887.088025,
+    "mtime": 1791623343.0314927,
+    "seen": 1791623422.016073,
     "ast_hash": "d9488726bc7dfed02762b49bd7afbd95",
     "semantic_hash": ""
   },
   "src/app/search.ts": {
-    "mtime": 1791618835.338556,
-    "seen": 1791618887.088026,
+    "mtime": 1791623343.0316427,
+    "seen": 1791623422.016074,
     "ast_hash": "6fc9c7710be00a03c912e1c6676a8031",
     "semantic_hash": ""
   },
   "src/ui/place-pin.ts": {
-    "mtime": 1791618835.386685,
-    "seen": 1791618887.0881312,
+    "mtime": 1791623343.0910044,
+    "seen": 1791623422.016191,
     "ast_hash": "10d9b3a08c972f35163dfdda0ccbd1d0",
     "semantic_hash": ""
   },
   "src/trip/departures.test.ts": {
-    "mtime": 1791618835.37658,
-    "seen": 1791618887.088099,
+    "mtime": 1791623343.0768793,
+    "seen": 1791623422.016161,
     "ast_hash": "356f0406a357d19363b4cae289dcb2cd",
     "semantic_hash": ""
   },
   "src/trip/departures.ts": {
-    "mtime": 1791618835.3767254,
-    "seen": 1791618887.0881002,
+    "mtime": 1791623343.0770078,
+    "seen": 1791623422.016161,
     "ast_hash": "2ed18080952e2dc46bcd94472d0ccf21",
     "semantic_hash": ""
   },
   "docs/references/europa-departures-2026-09-28.md": {
-    "mtime": 1791618834.9542756,
-    "seen": 1791618887.088166,
+    "mtime": 1791623342.6597497,
+    "seen": 1791623422.016224,
     "ast_hash": "f3221633f32bb0480b1a3d1fd9f85070",
     "semantic_hash": ""
   },
   "docs/references/paris-museum-interior-photos.md": {
-    "mtime": 1791618834.9641168,
-    "seen": 1791618887.088184,
+    "mtime": 1791623342.6731584,
+    "seen": 1791623422.016243,
     "ast_hash": "445128869d2aff93ea5d9572d13ae782",
     "semantic_hash": ""
   },
   "docs/references/paris-milan-rail.md": {
-    "mtime": 1791618834.9634736,
-    "seen": 1791618887.088183,
+    "mtime": 1791623342.6723917,
+    "seen": 1791623422.0162408,
     "ast_hash": "7892198d50586100b3569219d768fce4",
     "semantic_hash": ""
   },
   "docs/references/paris-monoprix-les-champs-2026-10-10.md": {
-    "mtime": 1791618834.9635868,
-    "seen": 1791618887.088183,
+    "mtime": 1791623342.6725044,
+    "seen": 1791623422.016242,
     "ast_hash": "1f8eba949503f3829e797290f1d37fd8",
     "semantic_hash": ""
   },
   "docs/references/noisy-cafes-casa-gui-2026-09-28.md": {
-    "mtime": 1791618834.9574692,
-    "seen": 1791618887.088176,
+    "mtime": 1791623342.6632564,
+    "seen": 1791623422.016234,
     "ast_hash": "bddcc0ac75c00c27378b48f9e62f3b8d",
     "semantic_hash": ""
   },
   "src/trip/catalog.test.ts": {
-    "mtime": 1791618835.3750799,
-    "seen": 1791618887.088095,
+    "mtime": 1791623343.075265,
+    "seen": 1791623422.016157,
     "ast_hash": "d33d4eae307b236e98d7767648b3d319",
     "semantic_hash": ""
   },
   "src/trip/catalog.ts": {
-    "mtime": 1791618835.3751783,
-    "seen": 1791618887.088095,
+    "mtime": 1791623343.0753667,
+    "seen": 1791623422.016157,
     "ast_hash": "61e78b935078f2885b0d1bb7ae6dbfbb",
     "semantic_hash": ""
   },
   "docs/references/europa-calendar-2026.md": {
-    "mtime": 1791618834.954121,
-    "seen": 1791618887.088165,
+    "mtime": 1791623342.6596096,
+    "seen": 1791623422.016224,
     "ast_hash": "0ee8f38f5927dbba628b65735f2f195e",
     "semantic_hash": ""
   },
   "src/data/travel-italy-rail.ts": {
-    "mtime": 1791618835.3489077,
-    "seen": 1791618887.088047,
+    "mtime": 1791623343.042836,
+    "seen": 1791623422.016098,
     "ast_hash": "6e5d6cac8a5f0722a016e0afd7682e1e",
     "semantic_hash": ""
   },
   "docs/references/italy-trains-2026.md": {
-    "mtime": 1791618834.9548497,
-    "seen": 1791618887.088168,
+    "mtime": 1791623342.6603675,
+    "seen": 1791623422.016226,
     "ast_hash": "8a8e050dd32e4a6f758343e20c947a3d",
     "semantic_hash": ""
   },
   "src/trip/luggage.test.ts": {
-    "mtime": 1791618835.379346,
-    "seen": 1791618887.088109,
+    "mtime": 1791623343.0823407,
+    "seen": 1791623422.016169,
     "ast_hash": "6e919ea14840d9e4808d02e1f019bdad",
     "semantic_hash": ""
   },
   "src/trip/luggage.ts": {
-    "mtime": 1791618835.3796077,
-    "seen": 1791618887.088109,
+    "mtime": 1791623343.082625,
+    "seen": 1791623422.01617,
     "ast_hash": "2c97666a690620b3f5b9018d99658163",
     "semantic_hash": ""
   },
   "public/weather/suitcase-rolling.svg": {
-    "mtime": 1791618835.3334143,
-    "seen": 1791618887.088227,
+    "mtime": 1791623343.026579,
+    "seen": 1791623422.016285,
     "ast_hash": "5031882adc4a66b302218a62c1f26033",
     "semantic_hash": ""
   },
   "src/map/flight-curve.test.ts": {
-    "mtime": 1791618835.3626966,
-    "seen": 1791618887.0880718,
+    "mtime": 1791623343.0612633,
+    "seen": 1791623422.016129,
     "ast_hash": "be953387cbf0f8edf6702684f5e1f13d",
     "semantic_hash": ""
   },
   "src/map/flight-curve.ts": {
-    "mtime": 1791618835.3628373,
-    "seen": 1791618887.088073,
+    "mtime": 1791623343.0614202,
+    "seen": 1791623422.01613,
     "ast_hash": "f166862cf52ad2bc40273994a02f5997",
     "semantic_hash": ""
   },
   "src/trip/overview.test.ts": {
-    "mtime": 1791618835.3807995,
-    "seen": 1791618887.0881112,
+    "mtime": 1791623343.084458,
+    "seen": 1791623422.016172,
     "ast_hash": "b88cef33989e34f90fd5f85e23ff8a03",
     "semantic_hash": ""
   },
   "src/trip/overview.ts": {
-    "mtime": 1791618835.3809068,
-    "seen": 1791618887.088112,
+    "mtime": 1791623343.0845718,
+    "seen": 1791623422.0161731,
     "ast_hash": "b6ef4138b442c17f1bf171bdcdf6291e",
     "semantic_hash": ""
   },
   "docs/references/roma-airbnb-valle-aurelia-monte-ciocci.md": {
-    "mtime": 1791618834.9654837,
-    "seen": 1791618887.088189,
+    "mtime": 1791623342.674547,
+    "seen": 1791623422.016247,
     "ast_hash": "e1e8bd0a8678d721307efe4365377d6c",
     "semantic_hash": ""
   },
   "src/trip/food-budget.test.ts": {
-    "mtime": 1791618835.3782713,
-    "seen": 1791618887.088105,
+    "mtime": 1791623343.080098,
+    "seen": 1791623422.016166,
     "ast_hash": "6e5ab1334d1307b91af2710f046ec157",
     "semantic_hash": ""
   },
   "docs/references/vaudeville-2026-09-29.md": {
-    "mtime": 1791618834.9657161,
-    "seen": 1791618887.0881898,
+    "mtime": 1791623342.6748114,
+    "seen": 1791623422.016248,
     "ast_hash": "581b6e27a29610cd79162a5db4cfbc20",
     "semantic_hash": ""
   },
   "src/data/travel-paris-mangez-et-cassez-vous.ts": {
-    "mtime": 1791618835.351281,
-    "seen": 1791618887.088053,
+    "mtime": 1791623343.0456712,
+    "seen": 1791623422.016104,
     "ast_hash": "3de326c44f1ebb4ce0827cbb9b84b190",
     "semantic_hash": ""
   },
   "docs/references/mangez-et-cassez-vous-paris-2026-09-29.md": {
-    "mtime": 1791618834.9555411,
-    "seen": 1791618887.08817,
+    "mtime": 1791623342.6611974,
+    "seen": 1791623422.0162292,
     "ast_hash": "df8d77fe3efa33a7d7bc1bf1242839e4",
     "semantic_hash": ""
   },
   "docs/references/brioche-doree-chaussee-antin-2026-09-29.md": {
-    "mtime": 1791618834.953404,
-    "seen": 1791618887.0881631,
+    "mtime": 1791623342.6591227,
+    "seen": 1791623422.016221,
     "ast_hash": "769441d9f7cc77f448108c5d0756306e",
     "semantic_hash": ""
   },
   "public/photos/paris/par-brioche-doree-chaussee-antin-counter.jpg": {
-    "mtime": 1791618835.0490813,
-    "seen": 1791618887.088209,
+    "mtime": 1791623342.7612174,
+    "seen": 1791623422.016268,
     "ast_hash": "ed97ec3abf402ef44c0b0c62baa5ece8",
     "semantic_hash": ""
   },
   "public/photos/paris/par-brioche-doree-chaussee-antin-facade.jpg": {
-    "mtime": 1791618835.0511281,
-    "seen": 1791618887.0882099,
+    "mtime": 1791623342.7618732,
+    "seen": 1791623422.016269,
     "ast_hash": "add2ea75a2a7d5b137e62c8168dd906c",
     "semantic_hash": ""
   },
   "public/photos/paris/par-brioche-doree-chaussee-antin-sweets.jpg": {
-    "mtime": 1791618835.051499,
-    "seen": 1791618887.0882099,
+    "mtime": 1791623342.7622993,
+    "seen": 1791623422.0162702,
     "ast_hash": "814c774e8d5d4f3ef9ac320277b8519c",
     "semantic_hash": ""
   },
   "src/app/viewport.ts": {
-    "mtime": 1791618835.3393931,
-    "seen": 1791618887.0880299,
+    "mtime": 1791623343.0328655,
+    "seen": 1791623422.016078,
     "ast_hash": "50878999faf83d6ea2ab094ad87ffe05",
     "semantic_hash": ""
   },
   "src/views/place-activation.ts": {
-    "mtime": 1791618835.3905048,
-    "seen": 1791618887.088146,
+    "mtime": 1791623343.0957193,
+    "seen": 1791623422.016204,
     "ast_hash": "e90aff03fb01bc7cee52c297e55945c3",
     "semantic_hash": ""
   },
   "docs/references/paris-bouillon-and-louvre-transit-2026-09-29.md": {
-    "mtime": 1791618834.9588108,
-    "seen": 1791618887.0881789,
+    "mtime": 1791623342.6647925,
+    "seen": 1791623422.016238,
     "ast_hash": "9c66eeca9eae7685eb9e414ed313be58",
     "semantic_hash": ""
   },
   "src/views/place-activation.test.ts": {
-    "mtime": 1791618835.3903925,
-    "seen": 1791618887.0881448,
+    "mtime": 1791623343.0955849,
+    "seen": 1791623422.016204,
     "ast_hash": "d89ec864217682de1f6a354226f881f3",
     "semantic_hash": ""
   },
   "src/platform/published-api.test.ts": {
-    "mtime": 1791618835.3696625,
-    "seen": 1791618887.0880902,
+    "mtime": 1791623343.070783,
+    "seen": 1791623422.016153,
     "ast_hash": "ee4c9ea5f47c29c0473a6e88c78c7b9a",
     "semantic_hash": ""
   },
   "src/platform/published-api.ts": {
-    "mtime": 1791618835.3700652,
-    "seen": 1791618887.088091,
+    "mtime": 1791623343.071571,
+    "seen": 1791623422.016154,
     "ast_hash": "00a72fbf64e3aef8b888c6c4e37d0ffe",
     "semantic_hash": ""
   },
   "src/platform/request.ts": {
-    "mtime": 1791618835.370204,
-    "seen": 1791618887.088091,
+    "mtime": 1791623343.0717058,
+    "seen": 1791623422.016154,
     "ast_hash": "1870e20630c1d41eeac4a47083b74d5b",
     "semantic_hash": ""
   },
   ".github/workflows/pages.yml": {
-    "mtime": 1791618834.948992,
-    "seen": 1791618887.0881548,
+    "mtime": 1791623342.6547322,
+    "seen": 1791623422.016213,
     "ast_hash": "c9706bbfb8f8a871dec610f0ad67cb22",
     "semantic_hash": ""
   },
   "public/videos/instagram/DaGFDAuoSAL.mp4": {
-    "mtime": 1791618835.1022134,
-    "seen": 1791618887.0882292,
+    "mtime": 1791623342.81205,
+    "seen": 1791623422.016287,
     "ast_hash": "563f138c41ba801e6754510a2c2b5a45",
     "semantic_hash": ""
   },
   "public/videos/instagram/DbTYQkmOcCs.mp4": {
-    "mtime": 1791618835.1987882,
-    "seen": 1791618887.0882292,
+    "mtime": 1791623342.8963246,
+    "seen": 1791623422.016287,
     "ast_hash": "77b0521060a3c63a20b55734df1b00c2",
     "semantic_hash": ""
   },
   "public/videos/instagram/DcG6jLkTUtf.mp4": {
-    "mtime": 1791618835.3077197,
-    "seen": 1791618887.08823,
+    "mtime": 1791623343.000438,
+    "seen": 1791623422.016288,
     "ast_hash": "c7f1992d96835c854125100e70f3ac71",
     "semantic_hash": ""
   },
   "public/videos/instagram/DcZWCIDjiJB.mp4": {
-    "mtime": 1791618835.3188756,
-    "seen": 1791618887.08823,
+    "mtime": 1791623343.0130103,
+    "seen": 1791623422.016288,
     "ast_hash": "3303faa4d22a416a5a7892020c9088a1",
     "semantic_hash": ""
   },
   "public/videos/instagram/DdjPwghObbW.mp4": {
-    "mtime": 1791618835.3315296,
-    "seen": 1791618887.0882308,
+    "mtime": 1791623343.024394,
+    "seen": 1791623422.016289,
     "ast_hash": "4d2b4913cb776451d0a57255f3f77fa3",
     "semantic_hash": ""
   },
   "src/map/foot-fallback.test.ts": {
-    "mtime": 1791618835.36303,
-    "seen": 1791618887.088073,
+    "mtime": 1791623343.0615416,
+    "seen": 1791623422.0161312,
     "ast_hash": "1502628782cfaf6fe2d266750bc95b46",
     "semantic_hash": ""
   },
   "src/map/foot-fallback.ts": {
-    "mtime": 1791618835.3631868,
-    "seen": 1791618887.088074,
+    "mtime": 1791623343.0616605,
+    "seen": 1791623422.016132,
     "ast_hash": "56c6c9862398eb83432a01ef3f95a873",
     "semantic_hash": ""
   },
   "scripts/public-trip.ts": {
-    "mtime": 1791618835.3363729,
-    "seen": 1791618887.088017,
+    "mtime": 1791623343.0292618,
+    "seen": 1791623422.0160651,
     "ast_hash": "8ddd65f304eda3ba3250f98e13b70b93",
     "semantic_hash": ""
   },
   "scripts/vite-app-cache.test.ts": {
-    "mtime": 1791618835.3370512,
-    "seen": 1791618887.088019,
+    "mtime": 1791623343.0299284,
+    "seen": 1791623422.016067,
     "ast_hash": "6db5ef19d856f2d9ed9a3bbc1272654a",
     "semantic_hash": ""
   },
   "scripts/vite-app-cache.ts": {
-    "mtime": 1791618835.3374758,
-    "seen": 1791618887.088019,
+    "mtime": 1791623343.0303605,
+    "seen": 1791623422.016068,
     "ast_hash": "aedb29b62fafdd2daa7c9291b2ae6073",
     "semantic_hash": ""
   },
   "scripts/vite-public-trips.ts": {
-    "mtime": 1791618835.337949,
-    "seen": 1791618887.088022,
+    "mtime": 1791623343.0309687,
+    "seen": 1791623422.0160708,
     "ast_hash": "a114de62daf213ba2a793511a7ee6a50",
     "semantic_hash": ""
   },
   "src/data/travel-italy-notion.ts": {
-    "mtime": 1791618835.3472984,
-    "seen": 1791618887.088046,
+    "mtime": 1791623343.0418127,
+    "seen": 1791623422.016097,
     "ast_hash": "999ba9a7e7d0986bc6577a50e7d5ee97",
     "semantic_hash": ""
   },
   "src/data/travel-italy-transit.ts": {
-    "mtime": 1791618835.3491764,
-    "seen": 1791618887.088047,
+    "mtime": 1791623343.042953,
+    "seen": 1791623422.016098,
     "ast_hash": "51d0844c934cde881bde9619cd68b1e4",
     "semantic_hash": ""
   },
   "src/data/travel-la-spezia.ts": {
-    "mtime": 1791618835.3502665,
-    "seen": 1791618887.08805,
+    "mtime": 1791623343.0445824,
+    "seen": 1791623422.0161011,
     "ast_hash": "cb6a2397014c107405a891dcf19da5fb",
     "semantic_hash": ""
   },
   "src/data/travel-paris-pouletos.ts": {
-    "mtime": 1791618835.351756,
-    "seen": 1791618887.088054,
+    "mtime": 1791623343.0462945,
+    "seen": 1791623422.016106,
     "ast_hash": "bb520e49a8d276358c392d2f10995995",
     "semantic_hash": ""
   },
   "src/platform/app-cache.ts": {
-    "mtime": 1791618835.367737,
-    "seen": 1791618887.088088,
+    "mtime": 1791623343.0695825,
+    "seen": 1791623422.016151,
     "ast_hash": "a729beb14473f26a705075b46c17cc8a",
     "semantic_hash": ""
   },
   "src/platform/maps-app.test.ts": {
-    "mtime": 1791618835.3680768,
-    "seen": 1791618887.088089,
+    "mtime": 1791623343.0700846,
+    "seen": 1791623422.016151,
     "ast_hash": "6c142c5969e7f4809dfd2d05f52adef1",
     "semantic_hash": ""
   },
   "src/platform/maps-app.ts": {
-    "mtime": 1791618835.3684425,
-    "seen": 1791618887.088089,
+    "mtime": 1791623343.07049,
+    "seen": 1791623422.0161521,
     "ast_hash": "db5ce732d8b567e8f8dc06920275c454",
     "semantic_hash": ""
   },
   "src/platform/public-trip.test.ts": {
-    "mtime": 1791618835.3686142,
-    "seen": 1791618887.0880902,
+    "mtime": 1791623343.070651,
+    "seen": 1791623422.0161521,
     "ast_hash": "56791ae03d8f4f4379a5436d0085bd7a",
     "semantic_hash": ""
   },
   "src/trip/ticket-budget.test.ts": {
-    "mtime": 1791618835.3824465,
-    "seen": 1791618887.088118,
+    "mtime": 1791623343.0863886,
+    "seen": 1791623422.016178,
     "ast_hash": "24b4d91c960b2adc19d119ef051051e4",
     "semantic_hash": ""
   },
   "docs/references/italy-notion-sync-2026-10-02.md": {
-    "mtime": 1791618834.9545653,
-    "seen": 1791618887.088167,
+    "mtime": 1791623342.6600459,
+    "seen": 1791623422.016225,
     "ast_hash": "dcd4223e55605d5b681bc19012fe65d0",
     "semantic_hash": ""
   },
   "docs/references/italy-portugal-meals-2026-10-03.md": {
-    "mtime": 1791618834.9547265,
-    "seen": 1791618887.088167,
+    "mtime": 1791623342.6602273,
+    "seen": 1791623422.016226,
     "ast_hash": "ea8e0dbc02b9209df34b538fb885d2e2",
     "semantic_hash": ""
   },
   "docs/references/lisboa-mercado-calhariz-2026-10-03.md": {
-    "mtime": 1791618834.9549606,
-    "seen": 1791618887.088168,
+    "mtime": 1791623342.660479,
+    "seen": 1791623422.016227,
     "ast_hash": "8551c1f4dc7df4d417d4542d5eacdf1b",
     "semantic_hash": ""
   },
   "docs/references/lisboa-volta-2026-10-03.md": {
-    "mtime": 1791618834.9552763,
-    "seen": 1791618887.0881689,
+    "mtime": 1791623342.6607997,
+    "seen": 1791623422.0162282,
     "ast_hash": "c3f254e28bc55da772bed456bf36a2ff",
     "semantic_hash": ""
   },
   "docs/references/meals-and-review-2026-10-03.md": {
-    "mtime": 1791618834.956212,
-    "seen": 1791618887.0881732,
+    "mtime": 1791623342.661949,
+    "seen": 1791623422.016232,
     "ast_hash": "1bcf18f505f6ead56800a0eab8633e0b",
     "semantic_hash": ""
   },
   "docs/references/milan-2026-10-11.md": {
-    "mtime": 1791618834.9568272,
-    "seen": 1791618887.088174,
+    "mtime": 1791623342.662556,
+    "seen": 1791623422.016233,
     "ast_hash": "f93cec34b3b73222e0957d13e471a977",
     "semantic_hash": ""
   },
   "docs/references/milan-morning-and-rome-storage-2026-10-03.md": {
-    "mtime": 1791618834.9569726,
-    "seen": 1791618887.088175,
+    "mtime": 1791623342.662712,
+    "seen": 1791623422.016233,
     "ast_hash": "1ea9489028c86b7845317d7029829786",
     "semantic_hash": ""
   },
   "docs/references/pouletos-paris-2026-10-02.md": {
-    "mtime": 1791618834.9651306,
-    "seen": 1791618887.088187,
+    "mtime": 1791623342.6741831,
+    "seen": 1791623422.016245,
     "ast_hash": "e0ea8ecb92934aaf5b3645b36cadabc5",
     "semantic_hash": ""
   },
   "docs/references/publication-2026-10-03.md": {
-    "mtime": 1791618834.9652517,
-    "seen": 1791618887.088187,
+    "mtime": 1791623342.6742957,
+    "seen": 1791623422.016246,
     "ast_hash": "dc16cc620b8bf6f38591996bf573f381",
     "semantic_hash": ""
   },
   "docs/references/rome-lisbon-2026-10-18.md": {
-    "mtime": 1791618834.9656096,
-    "seen": 1791618887.088189,
+    "mtime": 1791623342.6746986,
+    "seen": 1791623422.016248,
     "ast_hash": "160daeb8724033d647db01c0e55cd20c",
     "semantic_hash": ""
   },
   "docs/references/weather-coverage-2026-10-03.md": {
-    "mtime": 1791618834.9669306,
-    "seen": 1791618887.088192,
+    "mtime": 1791623342.676469,
+    "seen": 1791623422.0162508,
     "ast_hash": "3626670b7ab965916b7c6a386b5d2631",
     "semantic_hash": ""
   },
   "src/data/travel-maps-links.ts": {
-    "mtime": 1791618835.350571,
-    "seen": 1791618887.0880508,
+    "mtime": 1791623343.044906,
+    "seen": 1791623422.0161018,
     "ast_hash": "151c5c93a636699aa8938496cdee2a27",
     "semantic_hash": ""
   },
   "src/map/heading.test.ts": {
-    "mtime": 1791618835.3636248,
-    "seen": 1791618887.088075,
+    "mtime": 1791623343.061973,
+    "seen": 1791623422.016132,
     "ast_hash": "6e8be976f1dfdb02428b7e7e89523e9c",
     "semantic_hash": ""
   },
   "src/map/heading.ts": {
-    "mtime": 1791618835.3639731,
-    "seen": 1791618887.088075,
+    "mtime": 1791623343.0624435,
+    "seen": 1791623422.0161338,
     "ast_hash": "fe8e2a4bfc408b7f439a367cc9e0d158",
     "semantic_hash": ""
   },
   "src/map/location.ts": {
-    "mtime": 1791618835.3645744,
-    "seen": 1791618887.088077,
+    "mtime": 1791623343.0636146,
+    "seen": 1791623422.016136,
     "ast_hash": "226163af91e404c3d0cbd09f2f10c6ea",
     "semantic_hash": ""
   },
   "docs/references/maps-links-2026-10-06.md": {
-    "mtime": 1791618834.9558084,
-    "seen": 1791618887.088171,
+    "mtime": 1791623342.6614773,
+    "seen": 1791623422.0162299,
     "ast_hash": "f7a968b8b7291c721d33047c2e8bd3b6",
     "semantic_hash": ""
   },
   "docs/references/milan-primark-2026-10-06.md": {
-    "mtime": 1791618834.9573627,
-    "seen": 1791618887.088175,
+    "mtime": 1791623342.6630812,
+    "seen": 1791623422.016234,
     "ast_hash": "fd2c437d924e62c8c0a8aabbe4e4b107",
     "semantic_hash": ""
   },
   "docs/references/paris-post-disney-2026-10-08.md": {
-    "mtime": 1791618834.964601,
-    "seen": 1791618887.088185,
+    "mtime": 1791623342.6737735,
+    "seen": 1791623422.016244,
     "ast_hash": "da8e42c35f1cf66549bbb7bb08e0b189",
     "semantic_hash": ""
   },
   "docs/references/versailles-entry-2026-10-09.md": {
-    "mtime": 1791618834.9663224,
-    "seen": 1791618887.088191,
+    "mtime": 1791623342.6756067,
+    "seen": 1791623422.0162492,
     "ast_hash": "b4ab94406171acf3c17335b2929faf77",
     "semantic_hash": ""
   },
   "docs/references/paris-2026-10-10-early-lunch.md": {
-    "mtime": 1791618834.9579992,
-    "seen": 1791618887.088177,
+    "mtime": 1791623342.6639113,
+    "seen": 1791623422.016237,
     "ast_hash": "3a7bb633ee25c361ae0f7001770d6ffb",
     "semantic_hash": ""
   },
   "docs/references/versailles-0830-croissants-2026-10-09.md": {
-    "mtime": 1791618834.9660194,
-    "seen": 1791618887.0881898,
+    "mtime": 1791623342.6752489,
+    "seen": 1791623422.0162492,
     "ast_hash": "57734749aa456d6ba0dc1c0a6ff8c794",
     "semantic_hash": ""
   },
   "docs/references/paris-2026-10-10-eiffel.md": {
-    "mtime": 1791618834.9583592,
-    "seen": 1791618887.088178,
-    "ast_hash": "e8537d40ab4968f555b9b6ab02ba99b0",
+    "mtime": 1791623395.2156703,
+    "seen": 1791623422.016237,
+    "ast_hash": "16e8abe52302eb8ac91ccc5fad8a7532",
     "semantic_hash": ""
   },
   "docs/references/paris-comments-2026-10-10.md": {
-    "mtime": 1791618855.2947288,
-    "seen": 1791618887.08818,
+    "mtime": 1791623342.665245,
+    "seen": 1791623422.0162392,
     "ast_hash": "eafefca848c5f794b75cc4ca7d9c4446",
     "semantic_hash": ""
   }
