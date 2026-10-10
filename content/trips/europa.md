@@ -358,21 +358,21 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
   - comida: €30
   - status: confirmado
   - saída: 12:55
-  - via: metrô 1 até Châtelet · 20 min — Caminhar até Tuileries; linha amarela sentido Château de Vincennes até Châtelet e seguir a pé ao Naturalia Verrerie. Incluído no Navigo Semaine
-  - embarque: 2026-10-10 · M1 · Tuileries → Châtelet · 13:03 → 13:06
-- 13:15 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15); confirmar estoque e conservação durante o restante do passeio e o retorno antes de comprar. Sair às 13h25
-  - saída: 13:25
-- 13:40 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Ver a fachada; seguir às 13h45 para o almoço
+  - via: metrô 1 até Saint-Paul · 20 min — Caminhar até Tuileries; linha amarela sentido Château de Vincennes até Saint-Paul e seguir a pé ao La Favorite. Incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M1 · Tuileries → Saint-Paul · 13:03 → 13:09
+- 13:15 [La Favorite Saint-Paul](place:par-favorite-saint-paul) — Ver a fachada; seguir às 13h20 para o almoço
   - status: confirmado
-  - saída: 13:45
-- 13:55 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva, com margem de 30–45 min de espera; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair até 15h35 para chegar ao barco antes do embarque
+  - saída: 13:20
+- 13:30 [Chez Janou](place:par-chez-janou) — **Almoço**: tentar mesa sem reserva, com margem de 30–45 min de espera; um prato principal por pessoa e uma mousse de chocolate (€12) para dividir em dois, sem bebidas. Sair até 15h para passar no Naturalia na volta
   - status: confirmado
-  - saída: 15:35
-  - via: metrô 1 e metrô 9 até Alma–Marceau · 45 min — Caminhar até Saint-Paul; M1 sentido La Défense até Franklin D. Roosevelt e M9 sentido Pont de Sèvres até Alma–Marceau. Seguir ao Port de la Conférence; incluído no Navigo Semaine
-  - embarque: 2026-10-10 · M1 · Saint-Paul → Franklin D. Roosevelt · 15:50 → 16:00
-  - embarque: 2026-10-10 · M9 · Franklin D. Roosevelt → Alma–Marceau · 16:07 → 16:09
-- 16:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de aproximadamente 1h no Sena, com embarque no Port de la Conférence; chegada prevista às 16h20. Barco antes da Torre, com saídas a cada 30 min; reservar até 17h35 para desembarcar
+  - saída: 15:00
+- 15:20 [Naturalia Verrerie (MyLevain)](place:par-naturalia-verrerie) — Procurar o levain MyLevain (~€15) depois do almoço, na volta pelo Marais; confirmar estoque e conservação durante o restante do passeio e o retorno antes de comprar. Sair às 15h30
   - período: tarde
+  - saída: 15:30
+  - via: metrô 1 e metrô 9 até Alma–Marceau · 40 min — Caminhar até Hôtel de Ville; M1 sentido La Défense até Franklin D. Roosevelt e M9 sentido Pont de Sèvres até Alma–Marceau. Seguir ao Port de la Conférence; incluído no Navigo Semaine
+  - embarque: 2026-10-10 · M1 · Hôtel de Ville → Franklin D. Roosevelt · 15:36 → 15:45
+  - embarque: 2026-10-10 · M9 · Franklin D. Roosevelt → Alma–Marceau · 15:54 → 15:55
+- 16:30 [Bateaux-Mouches](place:par-bateaux-mouches) — Passeio de aproximadamente 1h no Sena, com embarque no Port de la Conférence; chegada prevista às 16h10. Barco antes da Torre, com saídas a cada 30 min; reservar até 17h35 para desembarcar
   - status: confirmado
   - saída: 17:35
   - via: a pé até a Torre Eiffel · 25 min — Atravessar o Pont de l’Alma e seguir pela margem do Sena até a entrada leste da Torre

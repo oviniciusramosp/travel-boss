@@ -1257,9 +1257,9 @@ const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),
   ]),
-  trainLeg('par-cedric-grolet-meurice', 'par-naturalia-verrerie', 20, [ride(metro1, 'tuileries', 'chatelet')]),
-  trainLeg('par-chez-janou', 'par-bateaux-mouches', 45, [
-    ride(metro1, 'saint-paul', 'fdr'),
+  trainLeg('par-cedric-grolet-meurice', 'par-favorite-saint-paul', 20, [ride(metro1, 'tuileries', 'saint-paul')]),
+  trainLeg('par-naturalia-verrerie', 'par-bateaux-mouches', 40, [
+    ride(metro1, 'hotel-ville', 'fdr'),
     ride(metro9, 'fdr', 'alma-marceau'),
   ]),
   { from: 'par-bateaux-mouches', to: 'par-eiffel', mode: 'walk' },
