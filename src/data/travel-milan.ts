@@ -50,7 +50,13 @@ export const milanCity: TravelCity = {
         visit: { durationMin: 15, tips: l('Domingo: 9h–2h; demais dias: 9h–0h. Fonte: ficha exata do Google Maps, 3/10/2026.', 'Sunday: 09:00–02:00; other days: 09:00–00:00. Source: exact Google Maps listing, 3 October 2026.') } }),
     place('mil-centrale', 'Milano Centrale', 'transport', 45.4858786, 9.2042617, "Piazza Duca d’Aosta",
       'Estação ferroviária Milano Centrale, ponto de chegada e partida de trens nacionais e internacionais em Milão.',
-      'Milano Centrale railway station, serving domestic and international trains in Milan.'),
+      'Milano Centrale railway station, serving domestic and international trains in Milan.',
+      { entrances: [
+        // Public railway entrances in OSM, cross-checked with YesMilano, 2026-10-11.
+        { name: l('Entrada · Piazza IV Novembre', 'Entrance · Piazza IV Novembre'), lat: 45.4865548, lng: 9.2032798 }, // node 1512865718
+        { name: l('Entrada principal · Piazza Duca d’Aosta', 'Main entrance · Piazza Duca d’Aosta'), lat: 45.4855653, lng: 9.2039649 }, // node 2010688969
+        { name: l('Entrada · Piazza Luigi di Savoia', 'Entrance · Piazza Luigi di Savoia'), lat: 45.4854415, lng: 9.2055335 }, // node 1875027118
+      ] }),
     place('mil-joy124', 'Joy 124 Hotel Milano', 'lodging', 45.49337, 9.20589, 'Via Melchiorre Gioia 124',
       'Hotel na Via Melchiorre Gioia, ao norte da estação Milano Centrale, na região de Sondrio. Oferece quartos para estadias urbanas com acesso à linha M3 do metrô.',
       'Hotel on Via Melchiorre Gioia, north of Milano Centrale in the Sondrio area. It offers city accommodation with access to the M3 metro line.',

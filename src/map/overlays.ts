@@ -1,5 +1,6 @@
 import {
   circleMarker,
+  tooltip,
   layerGroup,
   polygon,
   polyline,
@@ -10,7 +11,7 @@ import {
   type Path,
   type PathOptions,
 } from 'leaflet';
-import { placeCategoryMeta } from '../catalog';
+import { pickLocale, placeCategoryMeta } from '../catalog';
 import { cssToken } from '../ui/motion';
 import { ensureOsmAreas, osmAreasReady, placeHasOsmArea } from './areas';
 import { drawableRings } from './area-shape';
@@ -119,6 +120,17 @@ export function mountPlaceOverlays(map: LeafletMap): { sync(ids: readonly string
     const group = layerGroup();
     for (const ring of drawn.paths) group.addLayer(polygon(ring, polyOptions(color)));
     for (const path of drawn.lines) group.addLayer(polyline(path, lineOptions));
+    for (const entry of place.entrances ?? []) {
+      const label = pickLocale(document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en', entry.name);
+      group.addLayer(circleMarker([entry.lat, entry.lng], {
+        renderer, interactive: false, radius: 5, weight: 2, color,
+        fillColor: cssToken('--color-paper', '#ffffff'), fillOpacity: 1,
+        className: 'tb-area tb-station',
+      }));
+      const direction = entry.lng < place.lng - 0.0005 ? 'left' : entry.lng > place.lng + 0.0005 ? 'right' : 'bottom';
+      group.addLayer(tooltip({ permanent: true, direction, className: 'tb-pin-tip' })
+        .setLatLng([entry.lat, entry.lng]).setContent(label.replace(/^.*? · /, '')));
+    }
     return group;
   };
 

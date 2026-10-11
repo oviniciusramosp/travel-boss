@@ -56,6 +56,7 @@ import {
 } from './note-edit';
 import {
   dateStops,
+  accessHop,
   planHop,
   previewHop,
   resolveHopSegments,
@@ -545,7 +546,7 @@ export function mountTrip(
   function hopsForDate(trip: Trip, date: string, all: boolean): RouteHop[] {
     const hops: RouteHop[] = [];
     const { rows } = datePlan(daysOnDate(trip, date), date);
-    let previous: { id: string; lat: number; lng: number; leg?: TripLeg } | null = null;
+    let previous: { id: string; lat: number; lng: number; leg?: TripLeg; place: TravelPlace } | null = null;
     for (const { row, place, on } of datePlaces(trip, date)) {
       // An off period breaks the chain, so the route never bridges it.
       if (!on && !all) {
@@ -568,11 +569,11 @@ export function mountTrip(
       const last = subs.at(-1);
       const point = { id: place.id, lat: first?.lat ?? place.lat, lng: first?.lng ?? place.lng };
       if (previous) {
-        hops.push({
+        hops.push(accessHop({
           from: { id: previous.id, lat: previous.lat, lng: previous.lng },
           to: point,
           ...(previous.leg ? { via: previous.leg } : {}),
-        });
+        }, previous.place, place));
       }
       if (first && last && subs.length > 1) {
         const locale = shell.locale();
@@ -592,6 +593,7 @@ export function mountTrip(
       }
       previous = {
         id: place.id,
+        place,
         lat: last?.lat ?? place.lat,
         lng: last?.lng ?? place.lng,
         ...(row.depart ? { leg: row.depart } : {}),
@@ -2054,11 +2056,11 @@ export function mountTrip(
         const entryPoint = nextPlace?.subPoints?.[0] ?? nextPlace;
         const routeHop =
           place && nextPlace && exit && entryPoint
-            ? {
+            ? accessHop({
                 from: { id: place.id, lat: exit.lat, lng: exit.lng },
                 to: { id: nextPlace.id, lat: entryPoint.lat, lng: entryPoint.lng },
                 ...(entry.depart ? { via: entry.depart } : {}),
-              }
+              }, place, nextPlace)
             : null;
         const drawn = routeHop != null && planHop(routeHop).kind !== 'none';
         // Arriving and leaving the same place (the rest at home) is no walk.

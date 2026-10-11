@@ -5,6 +5,7 @@ import { departureTimes } from './departures';
 import { parseTrip, type TripLeg } from './parse';
 import {
   dateStops,
+  accessHop,
   planHop,
   previewHop,
   resolveHopSegments,
@@ -18,6 +19,31 @@ function place(city: string, id: string) {
   if (!found) throw new Error(`lugar ausente: ${id}`);
   return { id: found.id, lat: found.lat, lng: found.lng };
 }
+
+describe('surveyed station entrances', () => {
+  const centrale = getTravelCity('milao')!.places.find((p) => p.id === 'mil-centrale')!;
+  const hotel = place('milao', 'mil-joy124');
+  const station = place('milao', 'mil-centrale');
+  it('walks between the hotel and the IV Novembre entrance in both directions', () => {
+    const entrance = centrale.entrances![0]!;
+    expect(accessHop({ from: hotel, to: station }, undefined, centrale).to)
+      .toEqual({ id: station.id, lat: entrance.lat, lng: entrance.lng });
+    expect(accessHop({ from: station, to: hotel }, centrale).from)
+      .toEqual({ id: station.id, lat: entrance.lat, lng: entrance.lng });
+  });
+  it('selects the Savoia entrance for an approach from the east', () => {
+    const entrance = centrale.entrances![2]!;
+    const hop = accessHop({ from: { lat: 45.485, lng: 9.209 }, to: station }, undefined, centrale);
+    expect(hop.to).toEqual({ id: station.id, lat: entrance.lat, lng: entrance.lng });
+  });
+  it('preserves train and car endpoints and never walks through all entrances', () => {
+    const train: RouteHop = { from: station, to: place('veneza', 'ven-santa-lucia'), via: { mode: 'transit', detail: 'trem', durationMin: 150 } };
+    expect(accessHop(train, centrale)).toBe(train);
+    const car: RouteHop = { from: station, to: hotel, via: { mode: 'taxi', detail: 'Uber', durationMin: 15 } };
+    expect(accessHop(car, centrale)).toBe(car);
+    expect(accessHop({ from: hotel, to: station }, undefined, centrale).through).toBeUndefined();
+  });
+});
 
 const viaTransit: TripLeg = {
   detail: 'metrô M14 + RER E · 35 min',

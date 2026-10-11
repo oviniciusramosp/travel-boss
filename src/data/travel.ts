@@ -233,6 +233,8 @@ export interface TravelPlace {
    * Rendered as small markers when the place is hovered — not as separate places.
    */
   routeStops?: TravelRouteStop[];
+  /** Alternative public street entrances, not an ordered tour through sub-points. */
+  entrances?: TravelRouteStop[];
   /**
    * Famous landmark map icon (Google Maps style), always visible — not a plain dot.
    * e.g. eiffel, arc, notre-dame, sacre-coeur, louvre

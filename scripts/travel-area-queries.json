@@ -2,6 +2,15 @@
   "$schema_comment": "Catalog of places that need OSM map geometry. Used by fetch-travel-polygons.py. lat/lng = pin for validation (prefer Nominatim results near this point).",
   "queries": [
     {
+      "id": "mil-centrale",
+      "q": "Milano Centrale, Milano, Italia",
+      "lat": 45.4858786,
+      "lng": 9.2042617,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM relation 18231605; railway building, checked 2026-10-11"
+    },
+    {
       "id": "par-ory",
       "q": "Aéroport de Paris-Orly, France",
       "lat": 48.7233,

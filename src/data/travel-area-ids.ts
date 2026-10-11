@@ -26,6 +26,7 @@ export const OSM_AREA_IDS: ReadonlySet<string> = new Set([
   'lis-torre-belem',
   'mia-south-beach',
   'mia-wynwood',
+  'mil-centrale',
   'nyc-brooklyn-bridge',
   'nyc-central-park',
   'nyc-soho',

@@ -6,6 +6,7 @@ import { resolveTripLeg, type TripLegPoint } from './legs';
 import type { TripDay, TripLeg } from './parse';
 import { flightCurve } from '../map/flight-curve';
 import { rememberedWalk } from './walk-memory';
+import type { TravelPlace } from '../catalog';
 
 export type DateStop = {
   dated: DatedDay;
@@ -114,6 +115,20 @@ export function planHop(hop: RouteHop): HopDraw {
   if (decision.kind === 'drive') return { kind: 'drive' };
   if (decision.kind === 'osrm') return { kind: 'walk' };
   return { kind: 'none' };
+}
+
+/** Walk to/from a surveyed public entrance facing the other end, retaining stop ids. */
+export function accessHop(hop: RouteHop, from?: TravelPlace, to?: TravelPlace): RouteHop {
+  if (planHop(hop).kind !== 'walk') return hop;
+  const nearest = (point: TripLegPoint, place: TravelPlace | undefined, other: TripLegPoint): TripLegPoint => {
+    const entrances = place?.entrances;
+    if (!entrances?.length) return point;
+    const distance = (entry: { lat: number; lng: number }) =>
+      (entry.lat - other.lat) ** 2 + ((entry.lng - other.lng) * Math.cos(other.lat * Math.PI / 180)) ** 2;
+    const entry = entrances.reduce((best, candidate) => distance(candidate) < distance(best) ? candidate : best);
+    return { ...point, lat: entry.lat, lng: entry.lng };
+  };
+  return { ...hop, from: nearest(hop.from, from, hop.to), to: nearest(hop.to, to, hop.from) };
 }
 
 /**
