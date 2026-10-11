@@ -16,7 +16,7 @@ describe('Versailles catalog and Paris excursions', () => {
   it('assigns the places exclusively to Versailles', () => {
     const versailles = getTravelCity('versailles')!;
     expect(versailles.places.map((place) => place.id).sort()).toEqual([
-      'par-la-flottille', 'par-orangerie-de-monsieur', 'par-ore-ducasse', 'par-point-alph', 'par-stray-bean',
+      'par-avenue-de-paris', 'par-la-flottille', 'par-orangerie-de-monsieur', 'par-ore-ducasse', 'par-point-alph', 'par-stray-bean',
       'par-trianon', 'par-versailles', 'par-versailles-jardins',
     ]);
     for (const place of versailles.places) {

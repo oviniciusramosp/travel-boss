@@ -5047,6 +5047,26 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Boulangerie Castellane 6 Rue de Castellane Paris',
       },
       {
+        id: 'par-avenue-de-paris',
+        name: { en: 'Avenue de Paris', 'pt-BR': 'Avenue de Paris' },
+        category: 'parks',
+        subcategories: ['avenue'],
+        description: {
+          en: 'Tree-lined avenue forming one of Versailles’s great approaches to the palace. Its perspective towards the château is part of the city’s historic layout, with broad sidewalks for walking.',
+          'pt-BR': 'Avenida arborizada que forma um dos grandes acessos ao palácio de Versalhes. A perspectiva em direção ao castelo faz parte do traçado histórico da cidade, com calçadas amplas para caminhar.',
+        },
+        lat: 48.802921,
+        lng: 2.1286534,
+        address: 'Avenue de Paris, 78000 Versailles',
+        mapsQuery: 'Avenue de Paris Versailles',
+        visit: {
+          tips: {
+            en: 'A good walk towards the palace.',
+            'pt-BR': 'É uma boa caminhada em direção ao palácio.',
+          },
+        },
+      },
+      {
         id: 'par-orangerie-de-monsieur',
         name: { en: "L’Orangerie de Monsieur", 'pt-BR': "L’Orangerie de Monsieur" },
         category: 'cafes',
@@ -7646,6 +7666,7 @@ export const localTravelCities: TravelCity[] = [
 const versaillesPlaceIds = new Set([
   'par-versailles', 'par-versailles-jardins', 'par-trianon', 'par-point-alph',
   'par-stray-bean', 'par-ore-ducasse', 'par-la-flottille', 'par-orangerie-de-monsieur',
+  'par-avenue-de-paris',
 ]);
 const parisCity = localTravelCities.find((city) => city.slug === 'paris')!;
 const versaillesPlaces = parisCity.places.filter((place) => versaillesPlaceIds.has(place.id));

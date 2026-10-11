@@ -1911,6 +1911,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'Wikimedia Commons',
     ),
   ],
+  'par-avenue-de-paris': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Avenue_de_Paris%2C_Versailles_2.jpg/500px-Avenue_de_Paris%2C_Versailles_2.jpg',
+      'Avenue de Paris in Versailles',
+      'Avenue de Paris em Versalhes',
+      'Celette · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
   'par-versailles-jardins': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Versailles_view_from_the_Parterre_d%27eau.jpg/1280px-Versailles_view_from_the_Parterre_d%27eau.jpg',
