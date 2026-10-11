@@ -5013,6 +5013,21 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Paris Gare de Lyon',
       },
 
+      {
+        id: 'par-frecciarossa',
+        name: { en: 'Frecciarossa · Paris–Milan', 'pt-BR': 'Frecciarossa · Paris–Milão' },
+        category: 'transport',
+        description: {
+          en: 'Trenitalia’s high-speed train linking Paris Gare de Lyon and Milano Centrale through the Alps. The international service is operated with Frecciarossa 1000 trains.',
+          'pt-BR': 'Trem de alta velocidade da Trenitalia que liga Paris Gare de Lyon a Milano Centrale, atravessando os Alpes. O serviço internacional é operado com trens Frecciarossa 1000.',
+        },
+        // Departure-station anchor, shared with par-gare-de-lyon; not a live train position.
+        lat: 48.844382,
+        lng: 2.3748,
+        address: 'Embarque: Paris Gare de Lyon, Place Louis-Armand, 75012 Paris',
+        mapsQuery: 'Paris Gare de Lyon',
+      },
+
       // ── Oct 2026 trip list: Versailles ──
       {
         id: 'par-castellane',

@@ -2685,6 +2685,14 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'jean-louis Zimmermann · CC BY 2.0 · Wikimedia Commons',
     ),
   ],
+  'par-frecciarossa': [
+    photo(
+      'https://upload.wikimedia.org/wikipedia/commons/8/83/ETR1000%27s_front_at_Paris_Gare_de_Lyon.jpg',
+      'Frecciarossa 1000 at Paris Gare de Lyon',
+      'Frecciarossa 1000 na Paris Gare de Lyon',
+      'Stig124 · CC BY-SA 4.0 · Wikimedia Commons',
+    ),
+  ],
   'par-gare-de-lyon': [
     photo(
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/P1210896_Paris_XII_gare_de_Lyon_rwk.jpg/1280px-P1210896_Paris_XII_gare_de_Lyon_rwk.jpg',

@@ -2339,6 +2339,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'MyLevain: 50 g de levain desidratado ~€15, rende ~400 ml de levain ativo em 24 h. Fica na geladeira — ligue antes para confirmar estoque. A Naturalia Saint-Michel não revende.',
     ),
   },
+  'par-frecciarossa': {
+    ticketUrl: 'https://trenitalia.fr/voyager-avec-trenitalia/nos-trains-et-lignes/paris-milan/',
+    tips: L(
+      'On the Paris–Milan journey, seats on the left-hand side (rows A and B) have a more beautiful view.',
+      'Os lugares no lado esquerdo (fileiras A e B) possuem uma vista mais bonita.',
+    ),
+  },
   'par-gare-de-lyon': {
     ticket: free,
     durationMin: 20,
