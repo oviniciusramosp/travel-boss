@@ -1,4 +1,5 @@
 import { appRequest, canEdit } from '../platform/request';
+import { offlineControl } from '../platform/offline-control';
 import { intercityHops } from './overview';
 import { getTripCity, placeCity } from './catalog';
 import { departureTimes } from './departures';
@@ -714,13 +715,14 @@ export function mountTrip(
     signal: AbortSignal,
     neutralColor: string,
     onUpdate?: (segments: readonly MapRouteSegment[]) => void,
+    download = false,
   ): RouteDeps {
     return {
       neutralColor,
       ...(onUpdate ? { onUpdate } : {}),
       walk: async (from, to, through) => {
         const cached = rememberedWalk(from, to, through);
-        if (cached) return cached;
+        if (cached && !download) return cached;
         const route = await fetchWalkingRoute(walkPoints(from, to, through), signal);
         if (!route || route.latlngs.length < 2) return null;
         rememberWalk(from, to, route.latlngs, through);
@@ -1600,6 +1602,15 @@ export function mountTrip(
       heading.append(summary);
     }
     head.append(heading);
+    heading.append(offlineControl({ trip, locale, routes: async (progress) => {
+      const controller = new AbortController();
+      const hops = tripDates(trip).flatMap(section => hopsForDate(trip, section.date, true));
+      const deps = routeDeps(controller.signal, neutralColor(), undefined, true);
+      for (let index = 0; index < hops.length; index++) {
+        await resolveHopSegments([hops[index]!], deps);
+        progress(index + 1, hops.length);
+      }
+    } }));
     unmountWarnings();
     unmountWarnings = () => {};
     if (trip.errors.length) head.append(warningBadge(trip, locale));
