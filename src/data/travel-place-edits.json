@@ -1,15 +1,18 @@
 {
   "par-chez-janou": {
-    "favorite": true
+    "favorite": true,
+    "rating": 5
   },
   "par-avenue-camoens": {
     "rating": 5
   },
   "par-fontaines-trocadero": {
-    "rating": 4.5
+    "rating": 4.5,
+    "favorite": true
   },
   "par-pont-iena": {
-    "rating": 5
+    "rating": 5,
+    "favorite": true
   },
   "par-chapelle-saint-louis": {
     "rating": 3.5
@@ -24,7 +27,8 @@
     "rating": 5
   },
   "par-alexandre-iii": {
-    "rating": 4.5
+    "rating": 5,
+    "favorite": true
   },
   "par-tuileries": {
     "rating": 4.5
@@ -36,7 +40,8 @@
     "rating": 3.5
   },
   "par-carrousel": {
-    "rating": 4
+    "rating": 4.5,
+    "favorite": true
   },
   "par-eclair-genie": {
     "rating": 3.5,
@@ -56,5 +61,125 @@
   },
   "par-place-dauphine": {
     "rating": 3.5
+  },
+  "par-bouillon-pigalle": {
+    "rating": 4.5
+  },
+  "par-bnf-richelieu": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-maison-rose": {
+    "rating": 5
+  },
+  "par-moulin-galette": {
+    "rating": 4
+  },
+  "par-versailles-jardins": {
+    "favorite": true,
+    "rating": 5
+  },
+  "par-du-pain-idees": {
+    "googleRating": 4.3
+  },
+  "par-dammann-freres-vosges": {
+    "googleRating": 4.4
+  },
+  "par-sorbonne": {
+    "rating": 4.5
+  },
+  "par-place-du-tertre": {
+    "rating": 5
+  },
+  "par-bnf": {
+    "rating": null
+  },
+  "par-vosges": {
+    "favorite": true,
+    "rating": 5
+  },
+  "par-disneyland": {
+    "rating": 3.5
+  },
+  "par-disney-adventure-world": {
+    "rating": 3.5
+  },
+  "par-poilane": {
+    "rating": null
+  },
+  "par-merveilleux-fred": {
+    "rating": 3.5
+  },
+  "par-poilane-cherche-midi": {
+    "rating": 3.5
+  },
+  "par-boulangerie-du-sentier": {
+    "favorite": true,
+    "rating": 4.5
+  },
+  "par-plaq-nil": {
+    "rating": 2
+  },
+  "par-auptitgrec": {
+    "rating": 4.5
+  },
+  "par-procope": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-le-nesle": {
+    "rating": 3.5
+  },
+  "par-bon-marche": {
+    "rating": 4
+  },
+  "par-favorite-saint-paul": {
+    "rating": 4
+  },
+  "par-moulin-rouge": {
+    "rating": 4
+  },
+  "par-montparnasse": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-luxor-obelisk": {
+    "rating": 4.5
+  },
+  "par-daw-ratatouille": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-daw-frozen": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-daw-spider-man": {
+    "rating": 4
+  },
+  "par-dlp-star-tours": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-dlp-pirates": {
+    "rating": 4.5
+  },
+  "par-dlp-tales-of-magic": {
+    "rating": 5,
+    "favorite": true
+  },
+  "par-port-debilly": {
+    "favorite": true,
+    "rating": 5
+  },
+  "par-vendome": {
+    "rating": 4
+  },
+  "par-naturalia-verrerie": {
+    "rating": 2.5
+  },
+  "par-point-alph": {
+    "rating": 5,
+    "favorite": true
   }
 }
