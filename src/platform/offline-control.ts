@@ -2,7 +2,7 @@ import { pickLocale, type Locale } from '../catalog';
 import type { Trip } from '../trip/parse';
 import { el } from '../ui/dom';
 import { collectOfflineRoutes, offlineRoutesReady, removeOfflineRoutes } from './offline-routes';
-import { cacheMessage, cachedPhotos, offlineManifestReady, offlineTripPhotos, type OfflineProgress, type OfflineManifest, type OfflineCacheStatus } from './offline-trip';
+import { cacheMessage, cachedPhotos, downloadedPhotoUrls, offlineManifestReady, offlineTripPhotos, type OfflineProgress, type OfflineManifest, type OfflineCacheStatus } from './offline-trip';
 
 type Manifest = OfflineManifest;
 type CacheStatus = OfflineCacheStatus;
@@ -135,7 +135,8 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
           for (const route of saved.routes ?? []) retained.add(route);
           for (const photo of saved.photos ?? []) retainedPhotos.add(photo);
         }
-        const removed = await cacheMessage<{ failed: number }>({ type: 'CACHE_REMOVE_URLS', urls: (manifest.photos ?? []).filter(photo => !retainedPhotos.has(photo)) });
+        const urls = await downloadedPhotoUrls((manifest.photos ?? []).filter(photo => !retainedPhotos.has(photo)));
+        const removed = await cacheMessage<{ failed: number }>({ type: 'CACHE_REMOVE_URLS', urls });
         if (removed.failed) throw new Error('Partial photo removal');
         await removeOfflineRoutes(manifest.routes ?? [], retained);
         localStorage.removeItem(key);

@@ -24,6 +24,13 @@ export function offlineTripPhotos(trip: Trip): string[] {
 
 export type OfflineProgress = { total: number; completed: number; failed: number; bytes: number };
 
+/** Failed downloads have no pinned file to remove, even if their provider is unsupported. */
+export async function downloadedPhotoUrls(urls: readonly string[]): Promise<string[]> {
+  const cache = await caches.open('tb-trip-v1');
+  const saved = await Promise.all(urls.map(async url => await cache.match(url) ? url : null));
+  return saved.filter((url): url is string => url !== null);
+}
+
 /** Worker messages complete even if the network stalls; stalled work stays partial. */
 export async function cacheMessage<T>(message: object, progress?: (value: OfflineProgress) => void): Promise<T> {
   if (!('serviceWorker' in navigator)) throw new Error('serviceWorker');

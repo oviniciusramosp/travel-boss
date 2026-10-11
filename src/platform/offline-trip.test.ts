@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { offlineManifestReady, offlineTripPhotos, type OfflineManifest } from './offline-trip';
+import { downloadedPhotoUrls, offlineManifestReady, offlineTripPhotos, type OfflineManifest } from './offline-trip';
 import { offlineFingerprint } from './offline-control';
 import { parseTrip } from '../trip/parse';
 
@@ -18,6 +18,12 @@ function trip() {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('offline trip manifest', () => {
+  it('removes only pinned photos, skipping unavailable files from a partial download', async () => {
+    const open = vi.fn().mockResolvedValue({ match: async (url: string) => url === 'saved' ? new Response('photo') : undefined });
+    vi.stubGlobal('caches', { open });
+    expect(await downloadedPhotoUrls(['saved', 'unsupported-provider', 'failed-download'])).toEqual(['saved']);
+    expect(open).toHaveBeenCalledWith('tb-trip-v1');
+  });
   it('selects one cover and internal photos only for visited places without duplicates', () => {
     expect(offlineTripPhotos(trip())).toEqual(['cover', 'internal', 'child-cover']);
   });
