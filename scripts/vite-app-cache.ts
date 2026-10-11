@@ -8,7 +8,7 @@ import { photosByPlaceId } from '../src/data/travel-photos';
 export function cacheWorker(version: string, files: string[], optional: string[] = [], photos: string[] = []): string {
   return `
 const PREFIX = 'tb-app-';
-const CACHE = PREFIX + ${JSON.stringify(version)};
+const CACHE = PREFIX + ${JSON.stringify(version)} + (new URL(self.location.href).search || '');
 const OPTIONAL = CACHE + '-optional';
 const RUNTIME = 'tb-runtime-v1';
 const TRIP = 'tb-trip-v1';
@@ -63,17 +63,28 @@ async function save(request, explicit = false) {
   return bytes;
 }
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).catch(async error => {
-    await caches.delete(CACHE);
-    throw error;
-  }));
+  event.waitUntil((async () => {
+    const existed = (await caches.keys()).includes(CACHE);
+    try {
+      await (await caches.open(CACHE)).addAll(FILES.map(file => new Request(new URL(file, ROOT), { cache: 'reload' })));
+    } catch (error) {
+      if (!existed) await caches.delete(CACHE);
+      throw error;
+    }
+  })());
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(
-    keys.filter(key => key.startsWith(PREFIX) && key !== CACHE && key !== OPTIONAL).map(key => caches.delete(key))
-  )).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then(keys => {
+    // Forced takeover can leave several older tabs open. Natural activation cleans up later.
+    if (new URL(self.location.href).searchParams.has('refresh')) return [];
+    // Keep the preceding build's chunks for tabs still rendering that version.
+    const previous = keys.filter(key => key.startsWith(PREFIX) && !key.endsWith('-optional') && key !== CACHE).at(-1);
+    return Promise.all(keys.filter(key => key.startsWith(PREFIX) &&
+      ![CACHE, OPTIONAL, previous, previous + '-optional'].includes(key)).map(key => caches.delete(key)));
+  }).then(() => self.clients.claim()));
 });
 self.addEventListener('message', event => {
+  if (event.data?.type === 'APPLY_UPDATE') { event.waitUntil(self.skipWaiting()); return; }
   const port = event.ports && event.ports[0];
   if (!port) return;
   event.waitUntil((async () => {
@@ -119,12 +130,19 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') return;
   const navigation = request.mode === 'navigate' && url.origin === ROOT.origin &&
     (url.pathname === ROOT.pathname || url.pathname === new URL('index.html', ROOT).pathname);
-  if (!navigation && !local(url) && !external(url)) return;
+  const oldAsset = url.origin === ROOT.origin && !url.search && url.pathname.startsWith(new URL('assets/', ROOT).pathname);
+  if (!navigation && !local(url) && !external(url) && !oldAsset) return;
   event.respondWith((async () => {
     const key = navigation ? new URL('index.html', ROOT).href : url.href;
     const cache = await caches.open(navigation || FILES.includes(url.pathname) ? CACHE : local(url) && !PHOTOS.has(url.href) ? OPTIONAL : RUNTIME);
     const stored = await cache.match(key) || ((!local(url) || PHOTOS.has(url.href)) && await (await caches.open(TRIP)).match(key));
     if (stored) return stored;
+    if (oldAsset) {
+      for (const name of (await caches.keys()).filter(name => name.startsWith(PREFIX) && !name.endsWith('-optional'))) {
+        const previous = await (await caches.open(name)).match(key);
+        if (previous) return previous;
+      }
+    }
     const response = await fetch(request);
     if (response.ok && response.type !== 'opaque' && !navigation &&
         (local(new URL(response.url || url.href)) || external(new URL(response.url || url.href)))) {

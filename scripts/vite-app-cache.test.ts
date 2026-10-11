@@ -2,19 +2,23 @@ import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { cacheWorker } from './vite-app-cache';
 
-function worker(failInstall = false) {
+function worker(failInstall = false, search = '') {
   const handlers: Record<string, (event: any) => void> = {};
   const stored = new Map<string, Response>();
   const deleted: string[] = [];
   const fetched: string[] = [];
   const buckets = new Map<string, Map<string, Response>>();
+  const requested: Request[] = [];
+  let skipped = 0;
   runInNewContext(cacheWorker('v2', ['/travel-boss/index.html', '/travel-boss/assets/app.js'], ['/travel-boss/weather/sunset.svg'], ['https://lh3.googleusercontent.com/public-photo', '/travel-boss/photos/cover.webp']), {
     AbortSignal,
+    Request,
     URL,
     self: {
-      location: { href: 'https://example.com/travel-boss/sw.js' },
+      location: { href: `https://example.com/travel-boss/sw.js${search}` },
       addEventListener: (name: string, handler: (event: any) => void) => { handlers[name] = handler; },
       clients: { claim: async () => {} },
+      skipWaiting: async () => { skipped++; },
     },
     caches: {
       open: async (name: string) => {
@@ -22,9 +26,10 @@ function worker(failInstall = false) {
         const entries = buckets.get(name)!;
         const key = (value: string | Request) => typeof value === 'string' ? value : value.url;
         return {
-          addAll: async (files: string[]) => {
+          addAll: async (files: Request[]) => {
+            requested.push(...files);
             if (failInstall) throw Error('missing asset');
-            files.forEach(file => entries.set(`https://example.com${file}`, new Response(file)));
+            files.forEach(file => entries.set(file.url, new Response(file.url)));
           },
           match: async (value: string | Request) => entries.get(key(value)),
           put: async (value: string | Request, response: Response) => { entries.set(key(value), response); },
@@ -32,7 +37,7 @@ function worker(failInstall = false) {
           delete: async (value: string | Request) => entries.delete(key(value)),
         };
       },
-      keys: async () => ['tb-app-v1', 'tb-app-v2', 'other-app'],
+      keys: async () => ['tb-app-v0', 'tb-app-v1', 'other-app', ...buckets.keys()],
       delete: async (key: string) => { deleted.push(key); },
     },
     fetch: async (request: Request | string) => {
@@ -43,7 +48,7 @@ function worker(failInstall = false) {
       throw new Error('offline');
     },
   });
-  return { handlers, deleted, fetched, buckets };
+  return { handlers, deleted, fetched, buckets, requested, skipped: () => skipped };
 }
 
 describe('public app cache', () => {
@@ -74,12 +79,47 @@ describe('public app cache', () => {
     let job = Promise.resolve();
     handlers.activate({ waitUntil: (value: Promise<void>) => { job = value; } });
     await job;
-    expect(deleted).toEqual(['tb-app-v1']);
+    expect(deleted).toEqual(['tb-app-v0']);
   });
 });
 
 
 describe('offline download protocol', () => {
+  it('retains older builds during forced takeover until tabs can upgrade naturally', async () => {
+    const { handlers, deleted } = worker(false, '?refresh=123');
+    let job = Promise.resolve();
+    handlers.activate({ waitUntil: (value: Promise<void>) => { job = value; } });
+    await job;
+    expect(deleted).toEqual([]);
+  });
+  it('activates only on explicit request and fetches essentials bypassing HTTP cache', async () => {
+    const { handlers, requested, skipped } = worker();
+    let job = Promise.resolve();
+    const event = { waitUntil: (value: Promise<void>) => { job = value; } };
+    handlers.install(event);
+    await job;
+    expect(requested.every(request => request.cache === 'reload')).toBe(true);
+    expect(skipped()).toBe(0);
+    handlers.message({ ...event, data: { type: 'APPLY_UPDATE' } });
+    await job;
+    expect(skipped()).toBe(1);
+  });
+  it('preserves an existing build if reinstalling its essentials fails', async () => {
+    const { handlers, buckets, deleted } = worker(true);
+    buckets.set('tb-app-v2', new Map([['https://example.com/travel-boss/index.html', new Response('old')]]));
+    let job = Promise.resolve();
+    handlers.install({ waitUntil: (value: Promise<void>) => { job = value; } });
+    await expect(job).rejects.toThrow();
+    expect(deleted).toEqual([]);
+  });
+  it('serves old chunks for other open tabs but navigations use only the current shell', async () => {
+    const { handlers, buckets } = worker();
+    const old = 'https://example.com/travel-boss/assets/old.js';
+    buckets.set('tb-app-v1', new Map([[old, new Response('previous chunk')]]));
+    let response = Promise.resolve(new Response());
+    handlers.fetch({ request: new Request(old), respondWith: (value: Promise<Response>) => { response = value; } });
+    expect(await (await response).text()).toBe('previous chunk');
+  });
   async function message(handlers: ReturnType<typeof worker>['handlers'], data: unknown) {
     const messages: any[] = [];
     let job = Promise.resolve();

@@ -1,6 +1,7 @@
 import { pickLocale, type Locale } from '../catalog';
 import type { Trip } from '../trip/parse';
 import { el } from '../ui/dom';
+import { refreshAppCache, refreshedUrl } from './refresh';
 import { collectOfflineRoutes, offlineRoutesReady, removeOfflineRoutes } from './offline-routes';
 import { cacheMessage, cachedPhotos, downloadedPhotoUrls, offlineManifestReady, offlineTripPhotos, type OfflineProgress, type OfflineManifest, type OfflineCacheStatus } from './offline-trip';
 
@@ -22,6 +23,9 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
   const text = (en: string, pt: string) => pickLocale(locale, { en, 'pt-BR': pt });
   const button = el('button', 'tb-btn-outline', text('Download trip for offline', 'Baixar viagem para offline'));
   button.type = 'button';
+  const refresh = el('button', 'tb-btn-outline', text('Update itinerary', 'Atualizar roteiro'));
+  refresh.type = 'button';
+  refresh.setAttribute('data-tip', text('Download the latest published version and reload', 'Baixar a versão publicada mais recente e recarregar'));
   const remove = el('button', 'tb-btn-ghost', text('Remove downloaded trip', 'Remover viagem baixada'));
   remove.type = 'button';
   remove.hidden = true;
@@ -33,7 +37,7 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
     'Includes routes and cover photos. Map: partial coverage of viewed areas; other areas need a connection. External links and videos need a connection.',
     'Inclui rotas e fotos de capa. Mapa: cobertura parcial das áreas visualizadas; outras áreas precisam de conexão. Links externos e vídeos precisam de conexão.',
   ));
-  wrap.append(button, remove, status, coverage);
+  wrap.append(refresh, button, remove, status, coverage);
   const key = `tb:offline-trip:${trip.id}`;
   const fingerprint = offlineFingerprint(trip);
   const bytes = (value: number) => `${(value / 1_000_000).toLocaleString(locale, { maximumFractionDigits: 1 })} MB`;
@@ -68,11 +72,27 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
   }
   void verify();
 
+  refresh.addEventListener('click', () => {
+    if (busy) return;
+    busy = true;
+    revision++;
+    refresh.disabled = button.disabled = remove.disabled = true;
+    status.textContent = text('Downloading the latest itinerary…', 'Baixando a versão mais recente do roteiro…');
+    void refreshAppCache().then(() => {
+      location.replace(refreshedUrl(location.href, import.meta.env.BASE_URL));
+    }).catch(() => {
+      status.textContent = text('Could not update. Your saved itinerary remains available; try again with a connection.', 'Não foi possível atualizar. O roteiro salvo continua disponível; tente novamente com conexão.');
+      busy = false;
+      refresh.disabled = button.disabled = remove.disabled = false;
+    });
+  });
+
   button.addEventListener('click', () => {
     if (busy) return;
     busy = true;
     revision++;
     button.disabled = true;
+    refresh.disabled = true;
     remove.disabled = true;
     const progress = (value: OfflineProgress) => {
       status.textContent = text(
@@ -118,6 +138,7 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
       } finally {
         busy = false;
         button.disabled = false;
+        refresh.disabled = false;
         remove.disabled = false;
       }
     })();
