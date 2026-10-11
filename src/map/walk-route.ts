@@ -1,4 +1,5 @@
 import { footFallback } from './foot-fallback';
+import { retainOfflineRoute, storedOfflineRoute } from '../platform/offline-routes';
 /** FOSSGIS public OSRM. No API key. At most two requests in flight. */
 const OSRM_FOOT = 'https://routing.openstreetmap.de/routed-foot/route/v1/foot';
 const OSRM_CAR = 'https://routing.openstreetmap.de/routed-car/route/v1/driving';
@@ -311,14 +312,26 @@ export async function fetchDrivingRoute(
   points: { lat: number; lng: number; id?: string; label?: string }[],
   signal?: AbortSignal,
 ): Promise<WalkingRoute | null> {
-  return fetchOsrm(points, signal, OSRM_CAR, `drive:${walkRouteKey(points)}`);
+  const key = `drive:${walkRouteKey(points)}`;
+  const route = await fetchOsrm(points, signal, OSRM_CAR, key).catch(async error => {
+    await retainOfflineRoute(key, null);
+    throw error;
+  });
+  await retainOfflineRoute(key, route);
+  return route;
 }
 
 export async function fetchWalkingRoute(
   points: { lat: number; lng: number; id?: string; label?: string }[],
   signal?: AbortSignal,
 ): Promise<WalkingRoute | null> {
-  return fetchOsrm(points, signal, OSRM_FOOT, walkRouteKey(points));
+  const key = walkRouteKey(points);
+  const route = await fetchOsrm(points, signal, OSRM_FOOT, key).catch(async error => {
+    await retainOfflineRoute(key, null);
+    throw error;
+  });
+  await retainOfflineRoute(key, route);
+  return route;
 }
 
 async function fetchOsrm(
@@ -330,6 +343,10 @@ async function fetchOsrm(
   if (points.length < 2) return null;
   const hit = cached(key);
   if (hit) return hit;
+  if ('caches' in globalThis) {
+    const downloaded = await storedOfflineRoute(key);
+    if (downloaded) return downloaded;
+  }
   if (signal?.aborted) throw abortError();
 
   const existing = inflight.get(key);
