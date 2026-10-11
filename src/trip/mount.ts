@@ -751,6 +751,7 @@ export function mountTrip(
         return built.segments.map((segment) => ({
           mode: segment.mode,
           latlngs: segment.latlngs,
+          ...(segment.stations ? { stations: segment.stations } : {}),
           ...(segment.color ? { color: segment.color } : {}),
           ...(segment.lineId ? { lineId: segment.lineId } : {}),
           ...(segment.fromId ? { fromId: segment.fromId } : {}),

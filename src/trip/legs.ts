@@ -101,7 +101,7 @@ function catalogGeometry(leg: ItineraryLegDef): CatalogLegStroke[] | undefined {
 }
 
 /**
- * Precedence: catalog pair, then the authored mode.
+ * An explicit taxi request overrides a catalog pair; otherwise catalog geometry wins.
  * Walk and an unnamed hop follow streets. Taxi follows the road.
  * Flights use an illustrative curve; transit needs a catalog spine.
  */
@@ -110,6 +110,7 @@ export function resolveTripLeg(
   to: TripLegPoint,
   via?: TripLeg,
 ): TripLegDecision {
+  if (via?.mode === 'taxi') return { kind: 'drive' };
   if (from.id && to.id) {
     const leg = catalogLegByPair.get(pairKey(from.id, to.id));
     if (leg) {
@@ -118,7 +119,6 @@ export function resolveTripLeg(
     }
   }
 
-  if (via?.mode === 'taxi') return { kind: 'drive' };
   if (via?.mode === 'flight') return { kind: 'flight' };
   if (via?.mode === 'transit') return { kind: 'none' };
   if (via?.mode === 'walk' || haversineM(from, to) <= WALK_FALLBACK_M) return { kind: 'osrm' };

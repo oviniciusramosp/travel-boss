@@ -23,6 +23,7 @@ import {
   lineBrandColor,
   WALK_CONNECTOR_MIN_M,
   type ItineraryLegDef,
+  type ItineraryStation,
   type ItineraryTransitHop,
 } from '../data/travel-itinerary-legs';
 
@@ -33,6 +34,7 @@ export type ItinerarySegment = {
   latlngs: LatLng[];
   /** Transit line id when known (for official line color) */
   lineId?: string;
+  stations?: ItineraryStation[];
   /**
    * Official metro/RER color when this is a real line segment.
    * Undefined → map uses default brand blue (no arbitrary multi-colors).
@@ -354,7 +356,8 @@ async function expandLeg(
     segs.push({
       mode: 'transit',
       latlngs: leg.path,
-      lineId: color ? leg.line : undefined,
+      lineId: leg.line,
+      stations: leg.stations ?? (leg.stationCount === 0 ? [] : undefined),
       color,
       label: leg.label ?? getTransitLine(leg.line ?? '')?.name,
       ...ends,
@@ -486,7 +489,8 @@ function expandLegSync(
     segs.push({
       mode: 'transit',
       latlngs: leg.path,
-      lineId: color ? leg.line : undefined,
+      lineId: leg.line,
+      stations: leg.stations ?? (leg.stationCount === 0 ? [] : undefined),
       color,
       label: leg.label ?? getTransitLine(leg.line ?? '')?.name,
       ...ends,

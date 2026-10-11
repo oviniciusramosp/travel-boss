@@ -146,11 +146,19 @@ export function drawRouteSegments(
             iconSize: [16, 16],
             iconAnchor: [8, 8],
           }),
-          interactive: false,
-          keyboard: false,
+          interactive: Boolean(station.name),
+          keyboard: Boolean(station.name),
+          title: station.name,
+          alt: station.name,
           zIndexOffset: station.end ? 640 : 600,
         });
+        if (station.name) dot.bindTooltip(() => {
+          const label = document.createElement('span');
+          label.textContent = station.name!;
+          return label;
+        });
         dot.addTo(group);
+        if (station.name) dot.getElement()?.setAttribute('aria-label', station.name);
         marks.push(dot);
       }
       for (const transfer of segment.transfers ?? []) {

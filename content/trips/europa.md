@@ -413,8 +413,8 @@ budget: comida €50
 ### Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria
   - cidades: Paris → Milão
 
-- 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris e caminhada até o hotel
-  - via: A pé até o Joy 124 · 25 min
+- 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris; seguir ao hotel com as malas
+  - via: Pegar um Uber ou Bolt até o Joy 124 · 15 min — Preferência por carro por estarmos com malas; tempo estimado, incluindo espera. Conferir disponibilidade, ponto de encontro e valor no aplicativo
 - 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h.\
   Quarto double room, só alojamento.
 - 15:35 [Joy 124](place:mil-joy124) — Saída para o centro depois do check-in

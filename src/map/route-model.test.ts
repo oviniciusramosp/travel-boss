@@ -50,6 +50,13 @@ describe('route layers', () => {
       { lat: 48.86, lng: 2.36, end: false },
     ]);
   });
+
+  it('uses explicit service stops instead of track bends, including an empty known list', () => {
+    const stations = [{ lat: 48.85, lng: 2.35, name: 'Paris' }, { lat: 45.76, lng: 4.86, name: 'Lyon' }, { lat: 45.48, lng: 9.20, name: 'Milano' }];
+    expect(stationsFor({ ...spine, stations })).toEqual(stations.map((station, i) => ({ ...station, end: i !== 1 })));
+    expect(stationsFor({ ...spine, stations: [] })).toEqual([]);
+    expect(stationsFor({ ...spine, mode: 'walk', stations })).toEqual([]);
+  });
 });
 
 describe('route emphasis', () => {

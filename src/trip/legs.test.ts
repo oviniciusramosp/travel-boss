@@ -15,6 +15,15 @@ function paris(id: string) {
 const viaWalk: TripLeg = { detail: 'a pé · 12 min', mode: 'walk', durationMin: 12 };
 
 describe('resolveTripLeg', () => {
+  it('uses the requested car and duration instead of the catalog walk from Centrale to the hotel', () => {
+    const city = getTravelCity('milao')!;
+    const from = city.places.find(place => place.id === 'mil-centrale')!;
+    const to = city.places.find(place => place.id === 'mil-joy124')!;
+    const via: TripLeg = { detail: 'Pegar um Uber ou Bolt até o Joy 124 · 15 min', mode: 'taxi', durationMin: 15 };
+    expect(resolveTripLeg(from, to, via)).toEqual({ kind: 'drive' });
+    expect(transferLegs({ from, to, via })).toMatchObject([{ mode: 'taxi', durationMin: 15 }]);
+    expect(resolveTripLeg(from, to)).toMatchObject({ kind: 'catalog', leg: { mode: 'walk' } });
+  });
   it('keeps the published RER C departure when leaving the palace for the Eiffel Tower', () => {
     const palace = getTripCity('paris')!.places.find(place => place.id === 'par-versailles')!;
     const legs = transferLegs({ from: palace, to: paris('par-eiffel'), via: viaWalk });

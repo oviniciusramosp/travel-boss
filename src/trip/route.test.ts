@@ -52,7 +52,7 @@ describe('planHop', () => {
     for (const [lat, lng] of [[45.76, 4.86], [45.19, 6.66]]) {
       expect(path.some(([a, b]) => Math.abs(a - lat!) < 0.03 && Math.abs(b - lng!) < 0.03)).toBe(true);
     }
-    expect(transferLegs(hop)).toMatchObject([{ mode: 'transit', durationMin: 397, stationCount: 0 }]);
+    expect(transferLegs(hop)).toMatchObject([{ mode: 'transit', durationMin: 397, stationCount: 8 }]);
     expect(departureTimes(transferLegs(hop), '2026-10-11', '06:50', '14:10', [{
       date: '2026-10-11', service: 'Frecciarossa', board: 'Paris Gare de Lyon', exit: 'Milano Centrale',
       departure: '07:30', arrival: '14:07',

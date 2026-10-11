@@ -33,6 +33,9 @@ import {
 
 export type ItineraryLegMode = 'walk' | 'transit';
 
+/** Verified service stops, independent of the track's geometry vertices. */
+export type ItineraryStation = { lat: number; lng: number; name: string };
+
 /**
  * One hop on a multi-line transit leg (e.g. M14 then RER E).
  * Each hop keeps its own line color + spine; map draws a transfer dot between hops.
@@ -69,6 +72,7 @@ export type ItineraryLegDef = {
   path?: LatLng[];
   /** Override when path vertices describe track geometry rather than stations (0 = unknown). */
   stationCount?: number;
+  stations?: ItineraryStation[];
   /** Station names for matching a published departure on a single-line ride. */
   board?: string;
   exit?: string;
@@ -392,7 +396,7 @@ export function expandTimelineTransferParts(
   }
 
   // Single-line transit: path stations, or resolve corridor from line registry
-  let count = leg.stationCount ?? stationCountFromPath(leg.path);
+  let count = leg.stations?.length ?? leg.stationCount ?? stationCountFromPath(leg.path);
   if (count === 0 && leg.line && leg.fromStation && leg.toStation) {
     const line = getTransitLine(leg.line);
     if (line) {
@@ -1250,8 +1254,17 @@ const tripEuropa2026: ItineraryLegDef[] = [
     from: 'par-gare-de-lyon', to: 'mil-centrale', mode: 'transit',
     line: 'frecciarossa', label: 'Frecciarossa', durationMin: 397,
     board: 'Paris Gare de Lyon', exit: 'Milano Centrale',
-    stationCount: 0,
     path: parisMilanRail as LatLng[],
+    stations: [
+      { name: 'Paris Gare de Lyon', lat: parisMilanRail[0]![0]!, lng: parisMilanRail[0]![1]! },
+      { name: 'Lyon Part-Dieu', lat: 45.7605725, lng: 4.8601628 },
+      { name: 'Chambéry - Challes-les-Eaux', lat: 45.5714735, lng: 5.9198732 },
+      { name: 'Saint-Jean-de-Maurienne Arvan', lat: 45.2779151, lng: 6.3544141 },
+      { name: 'Modane', lat: 45.1933301, lng: 6.6590437 },
+      { name: 'Oulx - Cesana - Claviere - Sestriere', lat: 45.038731, lng: 6.831411 },
+      { name: 'Torino Porta Susa', lat: 45.0715765, lng: 7.6658551 },
+      { name: 'Milano Centrale', lat: parisMilanRail.at(-1)![0]!, lng: parisMilanRail.at(-1)![1]! },
+    ],
   },
   // 8/10: Baguett’s and Richelieu; 10/10: Marais, Eiffel Tower and Seine cruise.
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [

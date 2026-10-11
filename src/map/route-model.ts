@@ -5,7 +5,7 @@ export type RouteFocus =
   | { kind: 'place'; id: string }
   | { kind: 'leg'; from: string; to: string; hop?: number; walk?: number; mode?: 'walk' | 'transit' };
 
-export type RouteStation = { lat: number; lng: number; end: boolean };
+export type RouteStation = { lat: number; lng: number; end: boolean; name?: string };
 
 /** Paris suburban lines stay visible at street zoom, including Versailles and Disney. */
 export function isIntercityRoute(segment: MapRouteSegment, fromCity?: string, toCity?: string): boolean {
@@ -34,6 +34,9 @@ function nearTransfer(
 /** Station dots along a transit spine. A road route and a walk have none. */
 export function stationsFor(segment: MapRouteSegment): RouteStation[] {
   if (routeLayerKind(segment) !== 'transit' || segment.latlngs.length < 2) return [];
+  if (segment.stations) return segment.stations.map((station, index, all) => ({
+    ...station, end: index === 0 || index === all.length - 1,
+  }));
   // A road route has no line id and far more vertices than a station spine.
   if (!segment.lineId && segment.latlngs.length > 12) return [];
   const transfers = segment.transfers ?? [];

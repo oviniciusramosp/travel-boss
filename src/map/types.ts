@@ -40,6 +40,8 @@ export type MapRouteSegment = {
   color?: string;
   /** Transit line id. A long road route has none, so it draws no station dots. */
   lineId?: string;
+  /** Explicit service stops when latlngs describe tracks rather than station positions. */
+  stations?: { lat: number; lng: number; name: string }[];
   /** Neutral chord. Dashed, unlike a transit spine. No stations and no flow. */
   dash?: boolean;
   fromId?: string;

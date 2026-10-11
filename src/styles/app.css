@@ -524,7 +524,7 @@ button {
 }
 
 .tb-zoom-far .leaflet-marker-icon[data-pin-kind],
-.tb-zoom-far .tb-station-wrap,
+.tb-zoom-far .tb-station-wrap:not(.tb-route-intercity),
 .tb-zoom-far .tb-transfer-wrap,
 .tb-zoom-far .tb-subpoint-wrap {
   opacity: 0 !important;
