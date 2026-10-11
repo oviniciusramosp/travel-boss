@@ -411,16 +411,49 @@ export function mountCityNav(
   onPick: (slug: string) => void,
 ): { setActive(slug: string | null): void } {
   const buttons = new Map<string, HTMLButtonElement>();
+  const countries = new Map<TravelCity['countryKey'], { label: HTMLElement; group: HTMLDetailsElement; cities: TravelCity[] }>();
+  const flags: Record<TravelCity['countryKey'], string> = {
+    brasil: '🇧🇷',
+    usa: '🇺🇸',
+    franca: '🇫🇷',
+    portugal: '🇵🇹',
+    italia: '🇮🇹',
+  };
 
   const paintLabels = () => {
     const locale = shell.locale();
+    const compare = new Intl.Collator(locale, { sensitivity: 'base' });
     for (const city of travelCities) {
       const label = buttons.get(city.slug)?.querySelector('.tb-nav-label');
       if (label) label.textContent = pickLocale(locale, city.name);
     }
+    const sorted = [...countries.values()].sort((a, b) =>
+      compare.compare(pickLocale(locale, a.cities[0].country), pickLocale(locale, b.cities[0].country)),
+    );
+    for (const { label, group, cities } of sorted) {
+      label.textContent = pickLocale(locale, cities[0].country);
+      cities.sort((a, b) => compare.compare(pickLocale(locale, a.name), pickLocale(locale, b.name)));
+      for (const city of cities) group.append(buttons.get(city.slug)!);
+      elNav.append(group);
+    }
   };
 
   for (const city of travelCities) {
+    let country = countries.get(city.countryKey);
+    if (!country) {
+      const group = el('details', 'tb-city-country');
+      const heading = el('summary', 'tb-nav tb-side-label tb-city-country-label');
+      const flag = el('span', undefined, flags[city.countryKey]);
+      flag.setAttribute('aria-hidden', 'true');
+      const label = el('span');
+      const chevron = icon('expand_more', { size: 16 });
+      chevron.classList.add('tb-city-country-chevron');
+      heading.append(flag, label, chevron);
+      group.append(heading);
+      country = { label, group, cities: [] };
+      countries.set(city.countryKey, country);
+    }
+    country.cities.push(city);
     const button = el('button', 'tb-nav tb-city-nav');
     button.type = 'button';
     button.append(
@@ -430,15 +463,20 @@ export function mountCityNav(
     );
     button.addEventListener('click', () => onPick(city.slug));
     buttons.set(city.slug, button);
-    elNav.append(button);
+    country.group.append(button);
   }
 
+  paintLabels();
   shell.onLocale(paintLabels);
 
   return {
     setActive(slug) {
       for (const [id, button] of buttons) {
-        if (id === slug) button.setAttribute('aria-current', 'true');
+        if (id === slug) {
+          button.setAttribute('aria-current', 'true');
+          const country = button.closest('details');
+          if (country) country.open = true;
+        }
         else button.removeAttribute('aria-current');
       }
     },

@@ -432,10 +432,14 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       }
     });
     root.classList.toggle('is-collapsed', collapsed);
-    root.append(frame, close, collapse);
+    root.append(close, collapse);
     requestAnimationFrame(() => frame.classList.remove('is-instant'));
 
-    const body = el('div', 'tb-panel__body');
+    const scroller = el('div', 'tb-panel__body');
+    const body = el('div', 'tb-panel__content');
+    scroller.append(frame, body);
+    // Sticky photo controls must be visible when keyboard focus returns to them.
+    frame.addEventListener('focusin', () => { scroller.scrollTop = 0; });
     const title = el('h2', 'tb-panel__title', pickLocale(locale, place.name));
     title.id = 'tb-place-title';
     title.tabIndex = -1;
@@ -638,7 +642,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       body.append(bar);
     }
     if (routePlannerOn()) body.append(createRouteButton(place.id, locale, true));
-    root.append(body);
+    root.append(scroller);
   };
 
   function dismiss(opts?: CloseOptions) {
@@ -706,7 +710,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       present();
       syncPad();
       map.select(place.id);
-      root.querySelector<HTMLElement>('#tb-place-title')?.focus();
+      root.querySelector<HTMLElement>('#tb-place-title')?.focus({ preventScroll: true });
     },
     close(opts) {
       dismiss(opts);
@@ -725,7 +729,7 @@ export function mountPlacePanel(column: HTMLElement, map: MapHandle): void {
       current = { ...current, locale };
       paint();
       syncPad();
-      if (inside) root.querySelector<HTMLElement>('#tb-place-title')?.focus();
+      if (inside) root.querySelector<HTMLElement>('#tb-place-title')?.focus({ preventScroll: true });
     },
   };
 }
