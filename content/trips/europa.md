@@ -4,7 +4,7 @@
 city: paris
 dates: 2026-10-04 → 2026-10-11
 budget: comida €50
-via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37 — Almoço às 12h no trem: refeição e água compradas no Monoprix Les Champs na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira. [Detalhes do trem](place:par-frecciarossa): os lugares no lado esquerdo (fileiras A e B) possuem uma vista mais bonita.
+via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37 — Almoço no trem: refeição e água compradas no dia anterior. [Detalhes do trem](place:par-frecciarossa): os lugares no lado esquerdo (fileiras A e B) possuem uma vista mais bonita.
 
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
   - status: fechado
@@ -397,10 +397,10 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37 — Almoço às 1
 ### Dia 8 — Dom 11/10 · Partida para Milão
   - cidades: Paris → Milão
 
-- 06:20 [Casa do Gui](place:par-casa-do-gui) — Saída com as malas; Uber agendado na véspera; café da manhã de casa
-  - via: Uber · 25 min — Carro agendado na véspera, estimativa de €20 pelo carro
+- 06:20 [Casa do Gui](place:par-casa-do-gui) — Saída com as malas; Uber agendado na véspera
+  - via: Uber · 25 min — Carro agendado na véspera, estimativa de €25 pela corrida
   - status: confirmado
-- 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07. A linha França–Itália reabre em 10/10, depois de obras: confira o trem 2–3 dias antes
+- 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07.
   - status: confirmado
   - embarque: 2026-10-11 · Frecciarossa · Paris Gare de Lyon → Milano Centrale · 07:30 → 14:07
 
@@ -412,8 +412,9 @@ budget: comida €50
 ### Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria
   - cidades: Paris → Milão
 
-- 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris; seguir ao hotel com as malas
+- 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris
   - via: Uber · 15 min — Uber ou Bolt por estarmos com malas; tempo estimado, incluindo espera. Conferir disponibilidade, ponto de encontro e valor no aplicativo
+  - status: confirmado
 - 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h; descansar no quarto das 15h às 16h.\
   Quarto double room, só alojamento.
 - 16:00 [Joy 124](place:mil-joy124) — Saída para o centro depois do descanso
@@ -422,7 +423,7 @@ budget: comida €50
 - 16:10 [Sondrio — M3](place:mil-sondrio) — Sentido San Donato; pagar por aproximação
   - via: Metrô M3 · 8 min · €2,20
   - embarque: 2026-10-11 · M3 · Sondrio → Duomo · 16:22 → 16:30
-- 16:40 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: pedir 1 nº 17 (mortadela com pistache, mozzarella de búfala, rúcula e molho de trufa) e 1 nº 03 (presunto de Parma, mozzarella de búfala, tomate datterino e pesto) para provar dois sabores; dividir 1 **Cesarino con Nutella (nº 40)**
+- 16:40 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: pedir o n17 (mortadela com pistache, mozzarella de búfala, rúcula e molho de trufa) e o n03 (presunto de Parma, mozzarella de búfala, tomate datterino e pesto) para provar dois sabores; dividir um **Cesarino con Nutella (n40)**
   - comida: €11
   - saída: 17:10
 - 17:15 [Duomo](place:mil-duomo) — Passar pela fachada, sem entrar nem subir aos terraços
