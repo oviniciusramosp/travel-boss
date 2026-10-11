@@ -90,7 +90,7 @@ dates: 2026-04-06 → 2026-04-09
 
     ```markdown
     - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café
-      - via: Pegar um Bolt · 35 min — €29–35 na simulação; o app mostra onde encontrar o carro
+      - via: Bolt · 35 min — €29–35 na simulação; o app mostra onde encontrar o carro
     ```
 
   - A `€` amount before the note is the leg's price per person (`€2,55`, or a range `€15–18`, which counts its middle). The day card adds it to tickets, once per leg. Write only what each person pays on top of the week pass: a single metro ticket on a day the pass does not cover, or the pass itself on the first leg of the day it starts (`com a Navigo Semaine · 35 min · €32,40`). A leg the pass covers has no `€`. The timeline shows the price at the right of the leg, on its first ride.
@@ -100,7 +100,7 @@ dates: 2026-04-06 → 2026-04-09
       - via: RER E + metrô 9 · 45 min · €2,55
     ```
 
-  - The timeline names the leg with the text before the note, minus the duration and the price. It already shows the minutes beside the name. The note goes under that name. Write the name as a short action ("Pegar um Bolt"). A catalog leg keeps its own name and hops.
+  - The timeline names the leg with the text before the note, minus the duration and the price. Titles contain only the mode, operator or line ("Uber", "Bolt", "Táxi", "M3", "RER E", "Frecciarossa"), never "Pegar um" or the destination: the timeline already shows the endpoints. Alternatives and instructions belong to the note underneath. Duration and price stay in their own fields. A catalog leg keeps its own name and hops.
 - A stop or a list note may have indented `comentário:` sub-bullets. Each one is a request from the user to the LLM about that item, written from the app.
 
   ```markdown

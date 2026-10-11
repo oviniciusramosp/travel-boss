@@ -10,7 +10,7 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37 — Almoço às 1
   - status: fechado
 
 - 11:55 [CDG](place:par-cdg) — Chegada com as malas; pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
-  - via: Pegar um Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
+  - via: Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
   - status: confirmado
 - 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas; descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
   - status: confirmado
@@ -413,7 +413,7 @@ budget: comida €50
   - cidades: Paris → Milão
 
 - 14:07 [Milano Centrale](place:mil-centrale) — Chegada do Frecciarossa de Paris; seguir ao hotel com as malas
-  - via: Pegar um Uber ou Bolt até o Joy 124 · 15 min — Preferência por carro por estarmos com malas; tempo estimado, incluindo espera. Conferir disponibilidade, ponto de encontro e valor no aplicativo
+  - via: Uber · 15 min — Uber ou Bolt por estarmos com malas; tempo estimado, incluindo espera. Conferir disponibilidade, ponto de encontro e valor no aplicativo
 - 14:45 [Joy 124 Hotel Milano](place:mil-joy124) — Check-in disponível desde 14h.\
   Quarto double room, só alojamento.
 - 15:35 [Joy 124](place:mil-joy124) — Saída para o centro depois do check-in
@@ -654,12 +654,12 @@ Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 
   - via: A pé até o depósito · 15 min
   - saída: 18:10
 - 18:30 [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Retirar as malas e chamar o táxi para a hospedagem
-  - via: Pegar um táxi · 45 min — Até o endereço da hospedagem; estimativa com margem para trânsito
+  - via: Táxi · 45 min — Até o endereço da hospedagem; estimativa com margem para trânsito
 - 19:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in depois das visitas; disponível desde 16h, com fechadura inteligente.\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.
 - 19:45 [Pam · Valle Aurelia](place:rom-pam-valle-aurelia) — Depois de deixar as malas no apartamento, comprar refeição pronta para o **jantar de hoje** e pão, fruta, snack e bebida pronta para os **cafés da manhã de 17 e 18/10**. Fecha às 21h; sair até 20h05
   - comida: €18
-  - via: Pegar um táxi · 10 min — Voltar direto ao apartamento com as sacolas, sem outras paradas
+  - via: Táxi · 10 min — Voltar direto ao apartamento com as sacolas, sem outras paradas
 - 20:15 **Jantar no apartamento**: refeição pronta comprada no Pam, sem depender de cozinha; guardar os alimentos e preparar os ingressos do Vaticano e do Panteão
 
 ### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
@@ -668,10 +668,10 @@ Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhete
 
 - 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**: pão, fruta e bebida pronta comprados no Pam ontem; levar água e snack
 - 07:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Saída após o café da manhã
-  - via: Pegar um táxi · 30 min — Até a entrada dos Museus Vaticanos, na Viale Vaticano
+  - via: Táxi · 30 min — Até a entrada dos Museus Vaticanos, na Viale Vaticano
 - 07:45 [Museus Vaticanos](place:rom-vatican) — Chegar para a segurança; reservar o primeiro horário, **8h**, com Capela Sistina incluída. Visita de cerca de 3h; sair até 11h10 para o Panteão
   - status: a confirmar
-  - via: Pegar um táxi · 30 min — Saída até 11h10 para chegar à região do Panteão por volta de 11h40
+  - via: Táxi · 30 min — Saída até 11h10 para chegar à região do Panteão por volta de 11h40
   - saída: 11:10
 - 12:00 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Bilhetes de 17/10 válidos na janela **12h–13h**; visitar a cúpula e o óculo até 12h40. É uma única atração
   - ingresso: €7,75
@@ -681,16 +681,16 @@ Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhete
 - 13:50 [Piazza Navona](place:rom-navona) — Passear pela praça e ver as fontes
 - 14:30 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu
 - 15:15 [Basílica de São Pedro](place:rom-st-peter) — Visitar a praça e o interior da basílica, com entrada gratuita; sem subir à cúpula. Reservar até 16h45 para a fila de segurança e a visita
-  - via: Pegar um táxi · 30 min — Saída prevista às 16h45 para a região de Trevi; desembarque no acesso permitido
+  - via: Táxi · 30 min — Saída prevista às 16h45 para a região de Trevi; desembarque no acesso permitido
 - 17:15 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
 - 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte; sair até 17h40 para seguir à Piazza di Spagna
   - comida: €6
 - 17:50 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
 - 18:30 [Piazza del Popolo](place:rom-popolo) — Passear pela praça; sair até 18h50
-  - via: Pegar um táxi · 25 min — Até a região de Roma Termini para o jantar
+  - via: Táxi · 25 min — Até a região de Roma Termini para o jantar
 - 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18
-  - via: Pegar um táxi · 40 min — Saída prevista às 20h30 para o apartamento
+  - via: Táxi · 40 min — Saída prevista às 20h30 para o apartamento
 - 21:10 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Retorno; preparar as malas para o checkout das 10h
 
 ### Dia 3 — Dom 18/10 · Voo para Lisboa
@@ -700,10 +700,10 @@ Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada 
 
 - 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**, com os alimentos comprados no Pam; terminar de arrumar as malas
 - 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout e saída com as malas
-  - via: Pegar um táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
+  - via: Táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
 - 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
   - status: a confirmar
-  - via: Pegar um táxi · 1h — Saída prevista às 11h45 para o Terminal 3 de Fiumicino; tarifa fixa de €55 por carro no trajeto direto do centro ao aeroporto
+  - via: Táxi · 1h — Saída prevista às 11h45 para o Terminal 3 de Fiumicino; tarifa fixa de €55 por carro no trajeto direto do centro ao aeroporto
 - 12:45 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Chegada prevista ao Terminal 3, bem antes das 14h50 recomendadas no cartão; esperar com as malas até a abertura do balcão
 - 14:50 Localizar o balcão da Wizz Air no painel de partidas e organizar passaportes e cartões de embarque; check-in online já realizado
 - 15:20 Despacho da mala de até 32 kg e conferência de documentos no balcão; reservar até 16h20 para a fila. Despacho encerra às 17h20
@@ -727,7 +727,7 @@ Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mal
 O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em Lisboa, apenas água e um snack da mochila se houver fome, sem depender de restaurante aberto às 22h.
 
 - 20:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Pouso do voo W4 6219 vindo de Roma; desembarque e retirada da mala antes de sair para os táxis
-  - via: Pegar um táxi · 35 min — Saída prevista às 21h35 na fila oficial dos desembarques; incluir o acesso final com as malas à hospedagem
+  - via: Táxi · 35 min — Saída prevista às 21h35 na fila oficial dos desembarques; incluir o acesso final com as malas à hospedagem
 - 22:10 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Check-in previsto; apartamento no 2º andar, sem elevador. A janela regular é 16h–21h: confirmar previamente a chegada tardia, com taxa de €30 por reserva.\
   **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída prevista às 9h para o voo das 14h50.\
   **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.
@@ -736,12 +736,12 @@ O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em L
 ### Dia 2 — Seg 19/10 · Lisboa
 
 - 08:15 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Sair para tomar café da manhã em Belém; deixar as malas no apartamento
-  - via: Pegar um Uber até Belém · 35 min — Estimativa com margem para o trânsito
+  - via: Uber · 35 min — Estimativa com margem para o trânsito
 - 08:50 [Pastéis de Belém](place:lis-pasteis-belem) — **Café da manhã**: pastéis e café; comer o Pastel de Belém sem falta. Abre às 8h; sair até 9h40 e aproveitar a manhã na região
   - comida: €5
   - status: confirmado
 - 12:00 [Pastéis de Belém](place:lis-pasteis-belem) — Sair da região de Belém para a Baixa; já tomou café da manhã, sem novo consumo nesta parada
-  - via: Pegar um Uber até a Rua Augusta · 35 min — Desembarcar no acesso permitido mais próximo da rua de pedestres
+  - via: Uber · 35 min — Desembarcar no acesso permitido mais próximo da rua de pedestres
 - 12:45 [Casa Portuguesa do Pastel de Bacalhau](place:lis-pastel-bacalhau) — Comer o Bolinho de Bacalhau sem falta; **entrada / lanche antes do almoço tardio**, não substitui a refeição completa
   - período: tarde
   - comida: €7
@@ -766,7 +766,7 @@ Horários locais: Lisboa na saída e São Paulo na chegada. Chegar ao aeroporto 
 - 08:00 [WHome Modern Retreat](place:lis-whome-bairro-alto) — **Café da manhã no apartamento** com pão, fruta e bebida pronta comprados ontem; levar o almoço e snack na bagagem de mão
   - comida: €0
 - 09:00 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Checkout e saída com as malas; limite da hospedagem às 11h. Deixar as malas prontas e combinar a entrega das chaves antes de sair
-  - via: Pegar um Uber · 45 min — Até as partidas do Terminal 1; margem inclui descer do 2º andar sem elevador, encontrar o carro e o trânsito. Conferir a previsão no app antes do checkout
+  - via: Uber · 45 min — Até as partidas do Terminal 1; margem inclui descer do 2º andar sem elevador, encontrar o carro e o trânsito. Conferir a previsão no app antes do checkout
 - 09:45 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Chegada ao Terminal 1; localizar o balcão LATAM do voo LA 8149 e conferir os cartões de embarque
 - 10:00 Despacho das malas e conferência de documentos; reservar até 11h para a fila, se o balcão já estiver aberto. A tarifa inclui uma mala despachada de até 23 kg por pessoa; abertura do balcão ainda a conferir
 - 11:00 Controle de segurança; reservar até 11h40 para fila e inspeção
