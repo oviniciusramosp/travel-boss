@@ -32,6 +32,7 @@ Aplicar a revisão obrigatória de `AGENTS.md`: cidades, valores, malas e refei�
 - O título do transporte é apenas o modo, operador ou linha: "Uber", "Bolt", "Táxi", "M3", "RER E", "Frecciarossa". Nunca escreva "Pegar um", "até o hotel" ou repita o destino: a timeline já mostra os extremos. Exemplo: `via: Uber · 15 min — Uber ou Bolt por estarmos com malas`. Alternativas e instruções ficam na nota depois de ` — `; duração e preço ficam nos campos próprios. Não coloque o preço do carro na nota de outro ponto.
 - O `via:` precisa de uma palavra de modo (a pé, metrô, RER, trem, ônibus, táxi, uber, bolt, carro, voo) antes da nota, e de exatamente uma duração. Voos podem omitir a duração enquanto ela não for conhecida; o mapa desenha uma curva ilustrativa entre os aeroportos.
 - Nota curta: uma ou duas frases com o que o viajante precisa naquela hora. O histórico da pesquisa fica na resposta, não no roteiro.
+- Nota necessária, sem duplicar a UI: não liste estações, destino, próximas etapas ou caminhadas que os cards já mostram. Com `embarque:` consultado, a duração de `via:` é embarque → desembarque, sem somar espera e caminhada. Exemplo: `Metrô M3 · 8 min · €2,20` não precisa de "inclui espera e caminhada até o Cesarino" nem da sequência de estações. Verifique avisos vagos em fonte oficial e registre só o efeito prático; fonte, pesquisa e limitações ficam nas referências e na resposta.
 
 ## 2. O que não fazer
 

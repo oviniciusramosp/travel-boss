@@ -64,7 +64,7 @@ export const milanCity: TravelCity = {
       'Gothic cathedral overlooking Piazza del Duomo, known for its marble façade, sculptures and many spires. Its rooftop terraces offer close views of the architecture and the city skyline.',
       { landmark: 'monument', subcategories: ['church', 'viewpoint'], visit: {
         ticketUrl: 'https://ticket.duomomilano.it/', durationMin: 60, durationMax: 90,
-        tips: l('Ingresso e horário ainda não reservados. Confirmar tarifa, acesso e encerramento para 11/10. O folheto oficial de 2025 inicia o fechamento às 18h30; não é confirmação do calendário de outubro de 2026. Orçamento do roteiro ainda não inclui este ingresso.', 'Tickets and time slot not booked. Confirm price, access and closing time for 11 October. The official 2025 leaflet starts closing at 18:30; this does not confirm October 2026 hours. The itinerary budget does not yet include this ticket.'),
+        tips: l('O ingresso somente para os terraços não inclui a catedral nem o museu. A subida por escadas tem 251 degraus; há também bilhete com subida por elevador.', 'The terraces-only ticket does not include the cathedral or museum. Stair access has 251 steps; a ticket with lift ascent is also available.'),
       } }),
     place('mil-galleria', 'Galleria Vittorio Emanuele II', 'tourist', 45.4656422, 9.1900059, 'Piazza del Duomo / Piazza della Scala',
       'Passagem gratuita entre o Duomo e a Piazza della Scala. Observar a fachada voltada ao Duomo, a cúpula central, os mosaicos, as lojas históricas e o mosaico do touro.',

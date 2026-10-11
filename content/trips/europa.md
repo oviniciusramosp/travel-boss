@@ -419,19 +419,21 @@ budget: comida €50
 - 15:35 [Joy 124](place:mil-joy124) — Saída para o centro depois do check-in
   - período: tarde
   - via: A pé até Sondrio · 10 min
-- 15:45 [Sondrio — M3](place:mil-sondrio) — Embarcar na linha amarela em direção a San Donato e descer em Duomo. Para nossa estadia, usar bilhetes avulsos Mi1–Mi3 (90 min) ou pagar por aproximação: serão duas viagens no dia 11. Nos dias 12–14, os deslocamentos previstos em Milão são a pé. O diário (€7,60) e o passe de 3 dias (€15,50) não compensam; o de 3 dias iniciado no dia 11 termina ao fim do serviço do dia 13 e não inclui os trens Italo dos bate-voltas. Cada pessoa usa seu próprio cartão/dispositivo, o mesmo na entrada e na saída
-  - via: Metrô M3 até Duomo · 25 min · €2,20 — Inclui espera e caminhada até o Cesarino; Sondrio → Centrale FS → Repubblica → Turati → Montenapoleone → Duomo
+- 15:45 [Sondrio — M3](place:mil-sondrio) — Sentido San Donato; pagar por aproximação
+  - via: Metrô M3 · 8 min · €2,20
   - embarque: 2026-10-11 · M3 · Sondrio → Duomo · 15:53 → 16:01
-- 16:10 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: pedido sugerido de 1 panino nº 17 por pessoa, com mortadela com pistache, mozzarella de búfala, rúcula e molho de trufa. Acrescentar 1 **Cesarino con Nutella (nº 40)** para dividir entre 2 pessoas, depois do almoço levado no trem
-  - comida: €10,75
-- 17:15 [Duomo](place:mil-duomo) — Visitar os terraços no fim da tarde; reservar ingresso e conferir o calendário. O Notion informa fechamento da catedral das 15h às 17h por crisma; acesso aos terraços e horário de encerramento ainda a confirmar
+- 16:10 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: pedir 1 nº 17 (mortadela com pistache, mozzarella de búfala, rúcula e molho de trufa) e 1 nº 03 (presunto de Parma, mozzarella de búfala, tomate datterino e pesto) para provar dois sabores; dividir 1 **Cesarino con Nutella (nº 40)**
+  - comida: €11
+  - saída: 16:40
+- 16:45 [Duomo](place:mil-duomo) — Somente os terraços, com subida por elevador; último acesso às 18h e fechamento a partir das 18h30. Catedral sem acesso turístico nesta tarde por celebrações
+  - ingresso: €18
   - status: a confirmar
 - 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Cúpula, mosaicos, lojas históricas e mosaico do touro; atravessar até a Piazza della Scala
   - saída: 19:00
   - via: A pé até a Primark da Via Torino · 15 min
 - 19:15 [Primark · Via Torino](place:mil-primark-torino) — Compras depois da Galleria, sem carregar sacolas durante as visitas. Fecha às 22h; reservar 30 min e sair às 19h45
   - saída: 19:45
-  - via: Metrô M3 de Duomo até Sondrio · 25 min · €2,20 — Caminhar até Duomo; M3 sentido Comasina: Duomo → Montenapoleone → Turati → Repubblica → Centrale FS → Sondrio
+  - via: Metrô M3 · 7 min · €2,20
   - embarque: 2026-10-11 · M3 · Duomo → Sondrio · 19:59 → 20:06
 - 20:15 [Sondrio — M3](place:mil-sondrio) — Caminhar até o hotel com as compras
   - via: A pé até o Joy 124 · 10 min
