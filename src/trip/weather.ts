@@ -156,7 +156,7 @@ export function loadForecast(lat: number, lng: number, timeZone: string, force =
   };
   let status: number | null = null;
   let kind: FailureKind | null = null;
-  entry.request = appRequest(`${FORECAST_URL}?${params}`)
+  entry.request = appRequest(`${FORECAST_URL}?${params}`, { signal: AbortSignal.timeout(12_000) })
     .then((response) => {
       status = response.status;
       return response.json().catch(() => null);
@@ -229,7 +229,7 @@ export function weatherTip(
   locale: Locale,
   _window: readonly [number, number] | undefined,
   fetchedAt: number | null,
-  _failed: boolean,
+  failed: boolean,
   now = new Date(),
   _source: string | null = null,
 ): string {
@@ -246,7 +246,11 @@ export function weatherTip(
   const trend = weather.extended ? pickLocale(locale, {
     en: '\nLong-range trend · lower confidence', 'pt-BR': '\nTendência de longo prazo · menor confiança',
   }) : '';
-  return `${pickLocale(locale, label)} · ${rain}\n${updated}${trend}`;
+  const stale = failed ? pickLocale(locale, {
+    en: '\nSaved forecast · refresh unavailable',
+    'pt-BR': '\nPrevisão salva · atualização indisponível',
+  }) : '';
+  return `${pickLocale(locale, label)} · ${rain}\n${updated}${trend}${stale}`;
 }
 
 /** Clock hours of each period, start in, end out. */

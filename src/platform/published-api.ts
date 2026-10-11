@@ -42,7 +42,7 @@ export async function publishedRequest(path: string, options?: RequestInit): Pro
     const date = query.get('date');
     if (date) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !pastWeatherDate(date, tz)) return reply({ error: 'http' }, 400);
-      const hours = await historicalWeather(lat, lng, tz, date).catch(() => null);
+      const hours = await historicalWeather(lat, lng, tz, date, options?.signal).catch(() => null);
       return hours ? reply({ hours, at: Date.now(), source: 'Open-Meteo (histórico)' }) : reply({ error: 'network' }, 502);
     }
     const response = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(lat, lng, tz)}`, { signal: options?.signal }).catch(() => null);

@@ -116,6 +116,24 @@ describe('weatherIn', () => {
 });
 
 describe('historical weather source', () => {
+  it('ends a stalled refresh and retains the saved forecast', async () => {
+    const controller = new AbortController();
+    const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(controller.signal);
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ hours: ensemble, at: 456 })))
+      .mockImplementationOnce((_url: string, options: RequestInit) => new Promise((_resolve, reject) => {
+        options.signal!.addEventListener('abort', () => reject(new Error('timeout')), { once: true });
+      })));
+    try {
+      await loadForecast(2.345, 6.789, 'Europe/Paris', true);
+      const refresh = loadForecast(2.345, 6.789, 'Europe/Paris', true);
+      expect(forecastState(2.345, 6.789)).toMatchObject({ loading: true, hours: ensemble });
+      controller.abort();
+      expect(await refresh).toEqual(ensemble);
+      expect(forecastState(2.345, 6.789)).toMatchObject({ loading: false, failed: true, fetchedAt: 456 });
+      expect(timeout).toHaveBeenCalledWith(12_000);
+    } finally { timeout.mockRestore(); vi.unstubAllGlobals(); }
+  });
+
   it('keeps history when forecasts refresh and accepts the server cache during an outage', async () => {
     const history = { time, members: [run(16, 1)], historical: true };
     const fetcher = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ hours: history, at: 123, stale: true, error: 'network' })))
@@ -220,7 +238,7 @@ describe('weatherTip', () => {
       'Parcialmente nublado · Chance de chuva 26%\nAtualizado às 14:32',
     );
     expect(weatherTip(weather, label, 'en', undefined, at, true, now)).toBe(
-      'Partly cloudy · Rain chance 26%\nUpdated 14:32',
+      'Partly cloudy · Rain chance 26%\nUpdated 14:32\nSaved forecast · refresh unavailable',
     );
   });
   it('does not invent an update time or probability for a single model', () => {

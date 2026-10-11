@@ -16,7 +16,7 @@ export function pastWeatherDate(date: string, timeZone: string, now = new Date()
 }
 
 /** Reconstructed historical conditions, one run with actual rain amounts, never probabilities. */
-export async function historicalWeather(lat: number, lng: number, timeZone: string, date: string): Promise<Ensemble | null> {
+export async function historicalWeather(lat: number, lng: number, timeZone: string, date: string, signal?: AbortSignal | null): Promise<Ensemble | null> {
   const next = new Date(`${date}T00:00:00Z`);
   next.setUTCDate(next.getUTCDate() + 1);
   const end = next.toISOString().slice(0, 10);
@@ -24,7 +24,8 @@ export async function historicalWeather(lat: number, lng: number, timeZone: stri
     latitude: String(lat), longitude: String(lng), timezone: timeZone,
     start_date: date, end_date: end, hourly: 'temperature_2m,precipitation,cloud_cover',
   });
-  const response = await fetch(`https://archive-api.open-meteo.com/v1/archive?${query}`, { signal: AbortSignal.timeout(15_000) });
+  const requestSignal = () => signal ? AbortSignal.any([signal, AbortSignal.timeout(15_000)]) : AbortSignal.timeout(15_000);
+  const response = await fetch(`https://archive-api.open-meteo.com/v1/archive?${query}`, { signal: requestSignal() });
   let hours = response.ok ? parseEnsemble(await response.json()) : null;
   // The archive can stop at yesterday 23:00; recent model data supplies the rain ending at midnight.
   const midnight = hours?.time.indexOf(`${end}T00:00`) ?? -1;
@@ -35,7 +36,7 @@ export async function historicalWeather(lat: number, lng: number, timeZone: stri
     recentQuery.set('past_days', '2');
     recentQuery.set('forecast_days', '1');
     try {
-      const recent = await fetch(`${OPEN_METEO_FORECAST_URL}?${recentQuery}`, { signal: AbortSignal.timeout(15_000) });
+      const recent = await fetch(`${OPEN_METEO_FORECAST_URL}?${recentQuery}`, { signal: requestSignal() });
       const extra = recent.ok ? parseEnsemble(await recent.json()) : null;
       if (extra) { hours = mergeForecasts(hours, extra); delete hours.extendedFrom; }
     } catch { /* Keep available historical hours; incomplete periods stay unavailable. */ }
