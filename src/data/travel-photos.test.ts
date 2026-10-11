@@ -22,6 +22,8 @@ const ALLOWED_HOSTS = new Set([
   'ugc.zenchef.com',
   // Official Le Meurice product photo (sculpted mango pastry)
   'cedric-grolet.com',
+  // Cesarino Milano official sandwich gallery.
+  'www.cesarinomilano.it',
   'live.staticflickr.com',
   // Legacy Flickr CDN hosts
   'farm1.staticflickr.com',

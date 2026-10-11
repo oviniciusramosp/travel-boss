@@ -423,8 +423,8 @@ budget: comida €50
 - 15:45 [Sondrio — M3](place:mil-sondrio) — Embarcar na linha amarela em direção a San Donato e descer em Duomo. Para nossa estadia, usar bilhetes avulsos Mi1–Mi3 (90 min) ou pagar por aproximação: serão duas viagens no dia 11. Nos dias 12–14, os deslocamentos previstos em Milão são a pé. O diário (€7,60) e o passe de 3 dias (€15,50) não compensam; o de 3 dias iniciado no dia 11 termina ao fim do serviço do dia 13 e não inclui os trens Italo dos bate-voltas. Cada pessoa usa seu próprio cartão/dispositivo, o mesmo na entrada e na saída
   - via: Metrô M3 até Duomo · 25 min · €2,20 — Inclui espera e caminhada até o Cesarino; Sondrio → Centrale FS → Repubblica → Turati → Montenapoleone → Duomo
   - embarque: 2026-10-11 · M3 · Sondrio → Duomo · 15:53 → 16:01
-- 16:10 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: sanduíche perto do Duomo, depois do almoço levado no trem
-  - comida: €10
+- 16:10 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: pedido sugerido de 1 panino nº 17 por pessoa, com mortadela com pistache, mozzarella de búfala, rúcula e molho de trufa. Acrescentar 1 **Cesarino con Nutella (nº 40)** para dividir entre 2 pessoas, depois do almoço levado no trem
+  - comida: €10,75
 - 17:15 [Duomo](place:mil-duomo) — Visitar os terraços no fim da tarde; reservar ingresso e conferir o calendário. O Notion informa fechamento da catedral das 15h às 17h por crisma; acesso aos terraços e horário de encerramento ainda a confirmar
   - status: a confirmar
 - 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Cúpula, mosaicos, lojas históricas e mosaico do touro; atravessar até a Piazza della Scala
