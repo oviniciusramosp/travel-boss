@@ -48,6 +48,7 @@
   --text-caption: 12px;
   --text-timeline-time: 11px;
   --leading-timeline-time: 1.2;
+  --timeline-event-gap: 8px;
   --leading-caption: 1.33;
   --tracking-caption: 0.04em;
   --text-body: 13px;

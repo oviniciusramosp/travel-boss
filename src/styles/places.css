@@ -215,7 +215,7 @@
   --tl-pad: 4px;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--timeline-event-gap);
   column-gap: 0;
 }
 

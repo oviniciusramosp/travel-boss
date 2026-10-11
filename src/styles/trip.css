@@ -864,8 +864,8 @@ button.tb-receipt__name {
    a stop meet at the pin, so a leg changes color at its icon. `--tl-dot-y` is the
    pin center: padding, the time line, the row gap, half a title line. */
 .tb-list.tb-timeline > .tb-row {
-  --tl-time-lh: calc(11px * 1.2);
-  --tl-row-gap: 2px;
+  --tl-time-lh: calc(var(--text-timeline-time) * var(--leading-timeline-time));
+  --tl-row-gap: 0px;
   --tl-dot-y: calc(var(--tl-pad) + var(--tl-time-lh) + var(--tl-row-gap) + 0.5lh);
   row-gap: var(--tl-row-gap);
 }
@@ -890,6 +890,12 @@ button.tb-receipt__name {
 
 .tb-list.tb-timeline > .tb-row::after {
   top: var(--tl-dot-y);
+}
+
+/* The outgoing rail crosses the space before the next event. */
+.tb-list.tb-timeline > .tb-row:not(:last-child)::after,
+.tb-list.tb-timeline > :is(.tb-transfer, .tb-open-slot):not(:last-child) > .tb-timeline__rail.is-below {
+  bottom: calc(-1 * var(--timeline-event-gap) - 1px);
 }
 
 /* A leg starts at its icon: above it the way in, below it the leg itself. A row with a
@@ -1394,16 +1400,9 @@ button.tb-receipt__name {
   flex: none;
   align-items: center;
   height: var(--h-sm);
-  padding: 0 var(--spacing-8);
-  border-radius: var(--r-pill);
-  background: var(--line-color);
-  color: var(--color-on-ink);
+  color: var(--line-color);
   font-weight: var(--font-weight-semibold);
   white-space: nowrap;
-}
-
-.tb-transfer__chip.is-ink {
-  color: var(--color-ink);
 }
 
 .tb-transfer__duration {
