@@ -428,15 +428,22 @@ budget: comida €50
 - 17:15 [Duomo](place:mil-duomo) — Visitar os terraços no fim da tarde; reservar ingresso e conferir o calendário. O Notion informa fechamento da catedral das 15h às 17h por crisma; acesso aos terraços e horário de encerramento ainda a confirmar
   - status: a confirmar
 - 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Cúpula, mosaicos, lojas históricas e mosaico do touro; atravessar até a Piazza della Scala
-  - via: Metrô M3 de Duomo até Sondrio · 25 min · €2,20 — Duomo → Montenapoleone → Turati → Repubblica → Centrale FS → Sondrio
   - saída: 19:00
-  - embarque: 2026-10-11 · M3 · Duomo → Sondrio · 19:08 → 19:15
-- 19:25 [Sondrio — M3](place:mil-sondrio) — Caminhar até o restaurante
-- 19:45 [San Giorgio](place:mil-san-giorgio) — Jantar perto do hotel
-- 20:45 [Gioia Minimarket](place:mil-gioia-minimarket) — Comprar pão, fruta, água e bebida pronta para o café da manhã no quarto e lanche dos bate-voltas; priorizar alimentos que não precisam de geladeira. Depois do jantar, na mesma rua; sair até 21h e seguir direto ao hotel com as sacolas
+  - via: A pé até a Primark da Via Torino · 15 min
+- 19:15 [Primark · Via Torino](place:mil-primark-torino) — Compras depois da Galleria, sem carregar sacolas durante as visitas. Fecha às 22h; reservar 30 min e sair às 19h45
+  - saída: 19:45
+  - via: Metrô M3 de Duomo até Sondrio · 25 min · €2,20 — Caminhar até Duomo; M3 sentido Comasina: Duomo → Montenapoleone → Turati → Repubblica → Centrale FS → Sondrio
+  - embarque: 2026-10-11 · M3 · Duomo → Sondrio · 19:59 → 20:06
+- 20:15 [Sondrio — M3](place:mil-sondrio) — Caminhar até o hotel com as compras
+  - via: A pé até o Joy 124 · 10 min
+- 20:25 [Joy 124](place:mil-joy124) — Guardar as compras da Primark antes do jantar; sair às 20h35
+  - saída: 20:35
+  - via: A pé até o San Giorgio · 10 min
+- 20:45 [San Giorgio](place:mil-san-giorgio) — Jantar perto do hotel
+- 21:45 [Gioia Minimarket](place:mil-gioia-minimarket) — Comprar pão, fruta, água e bebida pronta para o café da manhã no quarto e lanche dos bate-voltas; priorizar alimentos que não precisam de geladeira. Depois do jantar, na mesma rua; sair até 22h e seguir direto ao hotel com as sacolas
   - comida: €10
   - via: A pé até o Joy 124 · 10 min — Levar as compras direto para o quarto
-- 21:10 [Joy 124](place:mil-joy124) — Volta; guardar as compras e separar o café da manhã
+- 22:10 [Joy 124](place:mil-joy124) — Volta; guardar as compras e separar o café da manhã
 
 ### Dia 2 — Seg 12/10 · Bate-volta a Veneza
   - cidades: Milão → Veneza

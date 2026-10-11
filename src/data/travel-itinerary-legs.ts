@@ -1266,6 +1266,7 @@ const tripEuropa2026: ItineraryLegDef[] = [
       { name: 'Milano Centrale', lat: parisMilanRail.at(-1)![0]!, lng: parisMilanRail.at(-1)![1]! },
     ],
   },
+  trainLeg('mil-primark-torino', 'mil-sondrio', 25, [ride(milanMetro3, 'duomo', 'sondrio')]),
   // 8/10: Baguett’s and Richelieu; 10/10: Marais, Eiffel Tower and Seine cruise.
   trainLeg('par-casa-do-gui', 'par-bohemia', 50, [
     ride(rerE, 'noisy-le-sec', 'haussmann-saint-lazare'),

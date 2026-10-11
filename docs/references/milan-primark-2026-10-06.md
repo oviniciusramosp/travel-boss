@@ -1,5 +1,15 @@
 # Primark em Milão — consulta de 06/10/2026
 
+## Inclusão depois da Galleria — 11/10/2026
+
+Pedido do usuário: visitar a Primark mais próxima do passeio/hotel depois da Galleria, sem carregar compras nos pontos turísticos. Escolhida a unidade central da Via Torino 45, já cadastrada; a página oficial lista Fiordaliso, em Rozzano, a 7,64 km dessa loja. Via Torino está junto ao núcleo Duomo/Galleria, ao contrário das unidades de shopping na periferia.
+
+- Reconsulta da ficha exata do Google Maps em 11/10: mesma identidade, endereço e pino `45.4613957, 9.1855437`, site oficial vinculado; aberta até 22h no domingo. [Página oficial](https://www.primark.com/it-it/stores/milano/via-torino-45-milano) também mostra 9h–22h. Não alterados pino, avaliação ou preço do catálogo.
+- Galleria 18h30–19h, caminhada estimada de 15 min até Primark, compras 19h15–19h45 (30 min de planejamento, não limite do estabelecimento). Retorno ao hotel para guardar as sacolas antes do jantar.
+- [Transitous para 11/10 às 19h45](https://api.transitous.org/api/v1/plan?fromPlace=45.4613957,9.1855437&toPlace=45.49337,9.20589&time=2026-10-11T17:45:00Z&numItineraries=3&intermediateStops=true): segunda opção, acesso a pé à Duomo 19h52–19h59, M3 sentido Comasina 19h59–20h06 até Sondrio. Intermediárias: Montenapoleone 20h00, Turati 20h01, Repubblica 20h03 e Centrale FS 20h05. Feed `it_Lombardia-ATM.gtfs.zip/stop_times.txt:534492:534512`; `tripId` `20261011_19:45_it-Lombardia-ATM_SAN DONATO___COMASINA_f_20260913_126`. Programado, sem promessa de pontualidade. Mantida margem após sair da loja; hotel previsto 20h25. Perna Primark → Sondrio usa `ride(milanMetro3, 'duomo', 'sondrio')` com todas as estações.
+- [San Giorgio](https://www.google.com/maps/place/San+Giorgio+Ristorante-Pizzeria+dal+1999/data=!4m6!3m5!1s0x4786bfc47a5bb6a9:0x202f642f0b887eb8!8m2!3d45.49!4d9.2038889!16s%2Fg%2F1v9l9nkr): horário de domingo expandido na ficha em 11/10, 18h30–23h30. Jantar passa a 20h45.
+- [Gioia Minimarket](https://www.google.com/maps/place/Gioia+minimarket/data=!4m6!3m5!1s0x4786c733b33e03c1:0x60de151d39e5145!8m2!3d45.490706!4d9.2027173!16s%2Fg%2F11qgz2jj4g): mesma unidade da Via Giovanni Schiaparelli 21, ficha consultada em 11/10 mostrando fechamento às 2h. Compra 21h45–22h, depois do jantar, com entrega direta no hotel às 22h10; sem horas carregando alimentos. Comida €35 e ingressos €4,40/pessoa preservados; compras de roupas têm gasto variável, fora dessas categorias. Café da manhã e almoço levados no trem, café da tarde no Cesarino e jantar mantidos.
+
 ## Identidade, endereço e pino
 
 - Unidade: Primark Milano – Via Torino, Via Torino 45, 20123 Milano; telefone público +39 02 2331 3230.
