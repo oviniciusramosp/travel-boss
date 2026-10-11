@@ -425,8 +425,9 @@ budget: comida €50
 - 16:10 [Cesarino](place:mil-cesarino) — **Café da tarde reforçado**: pedir 1 nº 17 (mortadela com pistache, mozzarella de búfala, rúcula e molho de trufa) e 1 nº 03 (presunto de Parma, mozzarella de búfala, tomate datterino e pesto) para provar dois sabores; dividir 1 **Cesarino con Nutella (nº 40)**
   - comida: €11
   - saída: 16:40
-- 16:45 [Duomo](place:mil-duomo) — Somente os terraços, com subida por elevador; último acesso às 18h e fechamento a partir das 18h30. Catedral sem acesso turístico nesta tarde por celebrações
-  - ingresso: €18
+- 16:45 [Duomo](place:mil-duomo) — Passar pela fachada, sem entrar nem subir aos terraços
+  - ingresso: €0
+  - saída: 16:55
   - status: a confirmar
 - 18:30 [Galleria Vittorio Emanuele II](place:mil-galleria) — Cúpula, mosaicos, lojas históricas e mosaico do touro; atravessar até a Piazza della Scala
   - saída: 19:00
@@ -529,13 +530,20 @@ budget: comida €50
 ### Dia 4 — Qua 14/10 · Partida para La Spezia
   - cidades: Milão → La Spezia
 
-- 08:45 [Joy 124 Hotel Milano](place:mil-joy124) — Sair para o passeio da manhã; deixar as malas no quarto e voltar antes do checkout
+- 08:00 [Joy 124 Hotel Milano](place:mil-joy124) — Sair para o passeio da manhã; deixar as malas no quarto e voltar antes do checkout
   - via: A pé até Bosco Verticale · 30 min
-- 09:15 [Bosco Verticale](place:mil-bosco-verticale) — Ver as torres com jardins por fora e tirar fotos a partir da Via Gaetano de Castillia; sair até 9h40
+- 08:30 [Bosco Verticale](place:mil-bosco-verticale) — Ver as torres com jardins por fora e tirar fotos a partir da Via Gaetano de Castillia
+  - saída: 08:50
   - via: A pé até Pavé · 25 min
-- 10:05 [Pavé · Via Casati](place:mil-pave-casati) — **Café da manhã / brunch**: avocado toast ou ovos com bacon, cappuccino e um doce; sair até 10h50
+- 09:15 [Pavé · Via Casati](place:mil-pave-casati) — **Café da manhã / brunch**: avocado toast ou ovos com bacon, cappuccino e um doce
   - comida: €20
-  - via: A pé até o hotel · 40 min
+  - saída: 09:55
+  - via: A pé · 35 min
+- 10:30 [Duomo](place:mil-duomo) — Visitar o interior da catedral, sem terraços; museu fechado às quartas-feiras
+  - ingresso: €8
+  - status: a confirmar
+  - saída: 11:05
+  - via: Uber · 25 min
 - 11:30 [Joy 124 Hotel Milano](place:mil-joy124) — Voltar ao quarto, terminar de arrumar as malas e preparar o checkout
 - 12:00 [Joy 124 Hotel Milano](place:mil-joy124) — Checkout e saída com as malas
   - via: A pé até Milano Centrale · 25 min
