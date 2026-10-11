@@ -4,7 +4,7 @@
 city: paris
 dates: 2026-10-04 → 2026-10-11
 budget: comida €50
-via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
+via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37 — Almoço às 12h no trem: refeição e água compradas no Monoprix Les Champs na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
 
 ### Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux
   - status: fechado
@@ -403,7 +403,6 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37
 - 06:50 [Paris Gare de Lyon](place:par-gare-de-lyon) — Frecciarossa das 07:30; chega a Milano Centrale às 14:07. A linha França–Itália reabre em 10/10, depois de obras: confira o trem 2–3 dias antes
   - status: confirmado
   - embarque: 2026-10-11 · Frecciarossa · Paris Gare de Lyon → Milano Centrale · 07:30 → 14:07
-- 12:00 **Almoço no trem**: refeição e água compradas no Monoprix Les Champs na véspera; levar na bagagem de mão, pronta para comer e sem depender de geladeira
 
 ## Milão
 city: milao

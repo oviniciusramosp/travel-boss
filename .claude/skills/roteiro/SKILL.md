@@ -11,6 +11,8 @@ O formato está em `content/SCHEMA.md`. Esta skill cobre o que ele não diz: ond
 
 Todo item de visita deve ter ponto ou sub-ponto com categoria, ponto colorido e descrição, nunca apenas uma nota solta. Passeios por bairros usam lugares de interesse como paradas próprias, sem pino-pai do bairro. Estações ficam na linha do transporte; comida fica em parada própria. Essa regra prevalece sobre o agrupamento de comida em sub-pontos descrito abaixo.
 
+Nunca acrescente comentários ou instruções como rows avulsas na timeline, mesmo com horário e título em negrito. Vincule-os à nota do ponto/sub-ponto correspondente; durante um deslocamento, use a nota do `via:` depois de ` — `. Almoço com comida própria no trem é comentário da row Frecciarossa, com o horário no texto, não uma parada `- 12:00 **Almoço no trem** …`. Não crie lugar fictício para acomodar esse comentário.
+
 Mercado: minimizar sempre o tempo carregando sacolas; comprar no final do passeio/jantar, perto da hospedagem, e seguir direto para guardar as compras. Para piquenique/consumo imediato, comprar junto da refeição. Conferir abertura, caminho, intervalo até guardar/consumir e refrigeração de perecíveis; proximidade do mercado sozinha não basta.
 
 Malas: check-in de voo, inclusive online, não é check-in da hospedagem nem encerra o intervalo marcado.
@@ -77,6 +79,7 @@ Aplicar a revisão obrigatória de `AGENTS.md`: cidades, valores, malas e refei�
    - os períodos (manhã, tarde, noite) começam e terminam onde o usuário espera;
    - os cards de comida e ingressos: batem com o que o dia gasta (entrada, ticket de metrô)? Se mudaram, explique;
    - cada trecho: nome curto, duração uma vez, nota embaixo, trilho certo (a pé pontilhado);
+   - comentários e instruções vinculados à row correspondente, sem linhas avulsas entre pontos ou trechos;
    - os pinos no lugar certo do mapa.
 3. `graphify update .` e commit `feat(trip): …` ou `fix(trip): …`.
    Publicação obrigatória por autorização permanente do usuário (08/10/2026): seguir `docs/references/publication-2026-10-03.md`, preparar cópia sanitizada a partir de `origin/main`, testar, publicar sem enviar o histórico privado local e conferir o workflow e o site. Não pedir nova confirmação; ajuste só termina após a publicação.
