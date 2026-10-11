@@ -17,6 +17,20 @@ export type OsmArea =
   | { kind: 'multipolygon'; paths: [number, number][][]; lines?: [number, number][][] };
 
 export const osmTravelAreas: Record<string, OsmArea> = {
+  // Avenue de Paris: connected OSM relation 19027639 street ways, 2026-10-11.
+  // Display outline only; provenance: avenue-de-paris-2026-10-11.md.
+  'par-avenue-de-paris': {
+    kind: 'polyline',
+    path: [
+      [48.8032461, 2.1264527],
+      [48.7982499, 2.1450217],
+      [48.7982192, 2.1453445],
+      [48.7985118, 2.1576632],
+      [48.7985588, 2.1580229],
+      [48.7986658, 2.1583211],
+      [48.7994059, 2.1597606],
+    ],
+  },
   // Milano Centrale: OSM relation 18231605, checked 2026-10-11.
   'mil-centrale': {
     kind: 'polygon',
