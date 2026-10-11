@@ -5047,6 +5047,22 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'Boulangerie Castellane 6 Rue de Castellane Paris',
       },
       {
+        id: 'par-orangerie-de-monsieur',
+        name: { en: "L’Orangerie de Monsieur", 'pt-BR': "L’Orangerie de Monsieur" },
+        category: 'cafes',
+        subcategories: ['bakery', 'pastry'],
+        description: {
+          en: 'Café, bakery and brasserie on Rue du Maréchal Foch in Versailles, serving pastries and French cooking in a setting with a leafy terrace.',
+          'pt-BR': 'Café, padaria e brasserie na Rue du Maréchal Foch, em Versalhes, com confeitaria e cozinha francesa em um espaço com terraço arborizado.',
+        },
+        googleRating: 3.5,
+        lat: 48.8095183,
+        lng: 2.133991,
+        address: '40 Rue du Maréchal Foch, 78000 Versailles',
+        mapsQuery: "L'Orangerie de Monsieur Restaurant Versailles",
+        mapsUrl: 'https://www.google.com/maps/place/L%27Orangerie+de+Monsieur+Restaurant+Versailles/data=!4m5!3m4!1s0x47e67d978aabd48b:0x580503fb53e4b675!8m2!3d48.8095183!4d2.133991',
+      },
+      {
         id: 'par-stray-bean',
         name: { en: 'The Stray Bean', 'pt-BR': 'The Stray Bean' },
         category: 'cafes',
@@ -7629,7 +7645,7 @@ export const localTravelCities: TravelCity[] = [
 // Keep historical place IDs so saved trips, ratings and visit metadata stay linked.
 const versaillesPlaceIds = new Set([
   'par-versailles', 'par-versailles-jardins', 'par-trianon', 'par-point-alph',
-  'par-stray-bean', 'par-ore-ducasse', 'par-la-flottille',
+  'par-stray-bean', 'par-ore-ducasse', 'par-la-flottille', 'par-orangerie-de-monsieur',
 ]);
 const parisCity = localTravelCities.find((city) => city.slug === 'paris')!;
 const versaillesPlaces = parisCity.places.filter((place) => versaillesPlaceIds.has(place.id));
