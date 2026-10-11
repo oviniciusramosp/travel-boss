@@ -265,30 +265,26 @@ function weatherApi(): Plugin {
   };
 }
 
-/** One icon list: the href is built in src/ui/icons.ts and injected here. */
+/** Fetch the local icon subset early, including on GitHub Pages' nested base. */
 function iconFont(): Plugin {
+  let base = '/';
   return {
     name: 'tb-icon-font',
+    configResolved(config) {
+      base = config.base;
+    },
     transformIndexHtml() {
       return [
         {
           tag: 'link',
-          injectTo: 'head-prepend',
-          attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        },
-        {
-          tag: 'link',
-          injectTo: 'head-prepend',
-          attrs: {
-            rel: 'preconnect',
-            href: 'https://fonts.gstatic.com',
-            crossorigin: '',
-          },
-        },
-        {
-          tag: 'link',
           injectTo: 'head',
-          attrs: { rel: 'stylesheet', href: ICON_FONT_HREF },
+          attrs: {
+            rel: 'preload',
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: '',
+            href: `${base}${ICON_FONT_HREF}`,
+          },
         },
       ];
     },

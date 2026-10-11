@@ -1,7 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import fontUrl from '../../public/fonts/material-symbols-rounded.woff2?url';
+import metadata from '../../public/fonts/material-symbols-rounded.json';
 import { categoryMaterialIcon } from '../data/travel-categories';
 import { subcategoryMaterialIcon } from '../data/travel-subcategories';
-import { ICON_FONT_HREF, ICONS } from './icons';
+import { ICON_FONT_HREF, ICONS, loadIconFont } from './icons';
 
 const ligatures = [
   ...Object.values(categoryMaterialIcon),
@@ -18,12 +20,29 @@ describe('ICONS', () => {
     for (const name of ligatures) expect(ICONS).toContain(name);
   });
 
-  it('points the font stylesheet at that same alphabetical subset', () => {
-    const url = new URL(ICON_FONT_HREF);
-    expect(url.searchParams.get('display')).toBe('block');
-    expect(url.searchParams.get('icon_names')).toBe(ICONS.join(','));
-    expect(url.searchParams.get('family')).toContain(
-      'opsz,wght,FILL,GRAD@20..48,300..700,0..1,-50..200',
-    );
+  it('ships the same subset as a local WOFF2 asset', () => {
+    expect(ICON_FONT_HREF).toBe('fonts/material-symbols-rounded.woff2');
+    expect(fontUrl).toMatch(/\/fonts\/material-symbols-rounded\.woff2$/);
+    expect(metadata.iconNames).toEqual(ICONS);
+  });
+});
+
+describe('icon font readiness', () => {
+  it('reveals icons only after the local font finishes loading', async () => {
+    let finish!: (faces: FontFace[]) => void;
+    const load = vi.fn(() => new Promise<FontFace[]>((resolve) => { finish = resolve; }));
+    const ready = vi.fn();
+    const pending = loadIconFont({ load }, ready);
+    expect(ready).not.toHaveBeenCalled();
+    finish([{ status: 'loaded' } as FontFace]);
+    await pending;
+    expect(ready).toHaveBeenCalledOnce();
+  });
+
+  it('keeps names hidden when the font is missing or unavailable offline', async () => {
+    const ready = vi.fn();
+    await loadIconFont({ load: vi.fn().mockResolvedValue([]) }, ready);
+    await loadIconFont({ load: vi.fn().mockRejectedValue(new Error('offline')) }, ready);
+    expect(ready).not.toHaveBeenCalled();
   });
 });

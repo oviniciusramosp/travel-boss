@@ -88,10 +88,29 @@ export type IconName = (typeof ICONS)[number];
 
 export type IconSize = 16 | 18 | 20;
 
-const ICON_AXIS = 'opsz,wght,FILL,GRAD@20..48,300..700,0..1,-50..200';
+/** Self-hosted variable subset. Regenerate when ICONS changes; see offline-icons reference. */
+export const ICON_FONT_HREF = 'fonts/material-symbols-rounded.woff2';
 
-export const ICON_FONT_HREF =
-  `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:${ICON_AXIS}&icon_names=${ICONS.join(',')}&display=block`;
+/** Keep ligature names invisible until the actual font is ready, including raw HTML pins. */
+export async function loadIconFont(
+  fonts: Pick<FontFaceSet, 'load'>,
+  onReady: () => void,
+): Promise<void> {
+  try {
+    const faces = await fonts.load('400 20px "Material Symbols Rounded"', ICONS.join(' '));
+    if (faces.length && faces.every((face) => face.status === 'loaded')) onReady();
+  } catch {
+    // Buttons retain accessible names; keep font failure from exposing technical ligatures.
+  }
+}
+
+if (typeof document !== 'undefined' && document.fonts) {
+  const prepare = () => {
+    void loadIconFont(document.fonts, () => document.documentElement.classList.add('tb-icons-ready'));
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', prepare, { once: true });
+  else prepare();
+}
 
 export function icon(
   name: IconName,
