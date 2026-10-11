@@ -1,16 +1,16 @@
-# Graph Report - travel-boss-cesarino-public  (2026-10-11)
+# Graph Report - travel-boss-train-note-public  (2026-10-11)
 
 ## Corpus Check
-- 342 files · ~567,899 words
+- 342 files · ~568,247 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2211 nodes · 5474 edges · 141 communities (117 shown, 24 thin omitted)
+- 2211 nodes · 5474 edges · 140 communities (116 shown, 24 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 25 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `32e3e962`
+- Built from commit: `1f4f2dbb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -150,7 +150,6 @@
 - maps-links-2026-10-06.md
 - Versalhes — entrada ao meio-dia, revisão de 08/10/2026
 - paris-post-disney-2026-10-08.md
-- maplibre-perf.ts
 - map/overview.ts
 - subpoints.ts
 - Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre
@@ -180,12 +179,12 @@
   src/map/map.ts → src/views/hotel-ring.ts
 
 ## Import Cycles
-- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
-- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
+- 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
 - 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
+- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (141 total, 24 thin omitted)
+## Communities (140 total, 24 thin omitted)
 
 ### Community 0 - "overlays.ts"
 Cohesion: 0.12
@@ -372,8 +371,8 @@ Cohesion: 0.21
 Nodes (17): cityByPlace, drawRouteSegments(), paintRouteFocus(), RoutePointer, safeColor(), walkColor(), isIntercityRoute(), nearTransfer() (+9 more)
 
 ### Community 49 - "map.ts"
-Cohesion: 0.21
-Nodes (12): Box, coveredInsets(), Insets, mergeInsets(), KINDS, RouteEntry, MapCityPin, MapOverviewCity (+4 more)
+Cohesion: 0.17
+Nodes (15): Box, coveredInsets(), Insets, mergeInsets(), KINDS, MAPLIBRE_PERF, maplibreFade(), RouteEntry (+7 more)
 
 ### Community 51 - "travelCities"
 Cohesion: 0.14
@@ -630,10 +629,6 @@ Nodes (4): attachTrackpadGestures(), PinchMap, pinchZoom(), wheelPixels()
 ### Community 133 - "Primark em Milão — consulta de 06/10/2026"
 Cohesion: 0.40
 Nodes (4): Identidade, endereço e pino, Inclusão depois da Galleria — 11/10/2026, Possibilidade no primeiro dia (11/10), Primark em Milão — consulta de 06/10/2026
-
-### Community 137 - "maplibre-perf.ts"
-Cohesion: 0.70
-Nodes (3): MAPLIBRE_PERF, maplibreFade(), labelFadeDuration()
 
 ### Community 139 - "map/overview.ts"
 Cohesion: 0.70
