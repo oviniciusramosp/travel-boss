@@ -76,6 +76,7 @@ export const OSM_AREA_IDS: ReadonlySet<string> = new Set([
   'par-pantheon',
   'par-passerelle-debilly',
   'par-place-dauphine',
+  'par-point-alph',
   'par-pont-neuf',
   'par-promenade-plantee',
   'par-sacre-coeur',
