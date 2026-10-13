@@ -1,7 +1,7 @@
 import { pickLocale, type Locale } from '../catalog';
 import type { Trip } from '../trip/parse';
 import { el } from '../ui/dom';
-import { refreshAppCache, refreshedUrl } from './refresh';
+import { onlineRefreshUrl, refreshAppCache, refreshedUrl } from './refresh';
 import { collectOfflineRoutes, offlineRoutesReady, removeOfflineRoutes } from './offline-routes';
 import { cacheMessage, cachedPhotos, downloadedPhotoUrls, offlineManifestReady, offlineTripPhotos, type OfflineProgress, type OfflineManifest, type OfflineCacheStatus } from './offline-trip';
 
@@ -78,8 +78,8 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
     revision++;
     refresh.disabled = button.disabled = remove.disabled = true;
     status.textContent = text('Downloading the latest itinerary…', 'Baixando a versão mais recente do roteiro…');
-    void refreshAppCache().then(() => {
-      location.replace(refreshedUrl(location.href, import.meta.env.BASE_URL));
+    void refreshAppCache().catch(() => onlineRefreshUrl(location.href, import.meta.env.BASE_URL)).then((freshUrl) => {
+      location.replace(freshUrl ?? refreshedUrl(location.href, import.meta.env.BASE_URL));
     }).catch(() => {
       status.textContent = text('Could not update. Your saved itinerary remains available; try again with a connection.', 'Não foi possível atualizar. O roteiro salvo continua disponível; tente novamente com conexão.');
       busy = false;

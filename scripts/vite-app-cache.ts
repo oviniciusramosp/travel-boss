@@ -136,6 +136,17 @@ self.addEventListener('fetch', event => {
     const key = navigation ? new URL('index.html', ROOT).href : url.href;
     const cache = await caches.open(navigation || FILES.includes(url.pathname) ? CACHE : local(url) && !PHOTOS.has(url.href) ? OPTIONAL : RUNTIME);
     const stored = await cache.match(key) || ((!local(url) || PHOTOS.has(url.href)) && await (await caches.open(TRIP)).match(key));
+    if (navigation) {
+      // Online navigation must not keep an old itinerary behind the offline shell.
+      // Do not overwrite the installed build: its assets remain a coherent offline fallback.
+      try {
+        const current = await fetch(new Request(url.href, { cache: 'no-store', signal: AbortSignal.timeout(5000) }));
+        return current.ok ? current : stored || current;
+      } catch (error) {
+        if (stored) return stored;
+        throw error;
+      }
+    }
     if (stored) return stored;
     if (oldAsset) {
       for (const name of (await caches.keys()).filter(name => name.startsWith(PREFIX) && !name.endsWith('-optional'))) {

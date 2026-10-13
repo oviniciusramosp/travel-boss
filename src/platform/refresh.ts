@@ -25,7 +25,7 @@ export function refreshAppCache(
         worker.postMessage({ type: 'APPLY_UPDATE' });
       }
     };
-    const timer = setTimeout(() => finish(new Error('Update timed out')), 60_000);
+    const timer = setTimeout(() => finish(new Error('Update timed out')), 20_000);
     container.addEventListener('controllerchange', check);
     // A unique script URL also bypasses intermediary HTTP caches, including Pages' CDN.
     void container.register(`${base}sw.js?refresh=${nonce}`, {
@@ -44,5 +44,15 @@ export function refreshAppCache(
 export function refreshedUrl(current: string, base: string): string {
   const url = new URL(base, current);
   url.hash = new URL(current).hash;
+  return url.href;
+}
+
+/** Escape older cache-first workers only after the current HTML is reachable. */
+export async function onlineRefreshUrl(current: string, base: string, nonce = Date.now()): Promise<string> {
+  const url = new URL(refreshedUrl(current, base));
+  url.pathname += '%69ndex.html';
+  url.searchParams.set('refresh', String(nonce));
+  const response = await fetch(url.href, { cache: 'no-store', signal: AbortSignal.timeout(10000) });
+  if (!response.ok) throw new Error('Current application unavailable');
   return url.href;
 }

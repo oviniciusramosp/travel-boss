@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { refreshAppCache, refreshedUrl } from './refresh';
+import { onlineRefreshUrl, refreshAppCache, refreshedUrl } from './refresh';
 
 class Worker extends EventTarget {
   scriptURL = 'https://example.com/travel-boss/sw.js?refresh=123';
@@ -15,9 +15,17 @@ function environment() {
   });
   return { worker, container, refresh: () => refreshAppCache(container as unknown as ServiceWorkerContainer, '/travel-boss/', 123) };
 }
-afterEach(() => vi.useRealTimers());
+afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
 
 describe('force itinerary refresh', () => {
+  it('escapes old navigation caches only when the current shell is reachable', async () => {
+    const fetcher = vi.fn().mockResolvedValueOnce(new Response('current')).mockRejectedValueOnce(new Error('offline'));
+    vi.stubGlobal('fetch', fetcher);
+    const url = await onlineRefreshUrl('https://example.com/travel-boss/#/trip/europa', '/travel-boss/', 123);
+    expect(url).toBe('https://example.com/travel-boss/%69ndex.html?refresh=123#/trip/europa');
+    expect(fetcher).toHaveBeenCalledWith(url, expect.objectContaining({ cache: 'no-store' }));
+    await expect(onlineRefreshUrl('https://example.com/travel-boss/#/trip/europa', '/travel-boss/')).rejects.toThrow('offline');
+  });
   it('bypasses script caches and waits for installation and controller takeover before reloading', async () => {
     const { worker, container, refresh } = environment();
     const complete = vi.fn();

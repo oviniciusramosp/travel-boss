@@ -2,7 +2,7 @@ import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { cacheWorker } from './vite-app-cache';
 
-function worker(failInstall = false, search = '') {
+function worker(failInstall = false, search = '', onlineShell = false) {
   const handlers: Record<string, (event: any) => void> = {};
   const stored = new Map<string, Response>();
   const deleted: string[] = [];
@@ -43,6 +43,7 @@ function worker(failInstall = false, search = '') {
     fetch: async (request: Request | string) => {
       const url = typeof request === 'string' ? request : request.url;
       fetched.push(url);
+      if (onlineShell && /\/travel-boss\/(?:index\.html)?$/.test(url)) return new Response('latest shell');
       if (url.includes('missing')) return new Response('', { status: 404 });
       if (url.includes('photos/') || url.includes('weather/') || url.includes('upload.wikimedia.org') || url.includes('tiles.openfreemap.org') || url === 'https://lh3.googleusercontent.com/public-photo') return new Response('saved');
       throw new Error('offline');
@@ -63,7 +64,18 @@ describe('public app cache', () => {
         respondWith: (value: Promise<any>) => { job = value; } });
       expect((await job).ok).toBe(true);
     }
-    expect(fetched).toEqual([]);
+    expect(fetched).toEqual(['https://example.com/travel-boss/', 'https://example.com/travel-boss/?day=2']);
+  });
+  it('uses the current online shell instead of a stale cached itinerary and preserves the offline build', async () => {
+    const { handlers, buckets, fetched } = worker(false, '', true);
+    const old = new Response('stale shell');
+    buckets.set('tb-app-v2', new Map([['https://example.com/travel-boss/index.html', old]]));
+    let response = Promise.resolve(new Response());
+    handlers.fetch({ request: { url: 'https://example.com/travel-boss/', method: 'GET', mode: 'navigate' },
+      respondWith: (value: Promise<Response>) => { response = value; } });
+    expect(await (await response).text()).toBe('latest shell');
+    expect(fetched).toEqual(['https://example.com/travel-boss/']);
+    expect(buckets.get('tb-app-v2')?.get('https://example.com/travel-boss/index.html')).toBe(old);
   });
   it('excludes APIs, writes, external resources and other apps; removes only old app caches', async () => {
     const { handlers, deleted } = worker();
