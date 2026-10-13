@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { forgetTrip, readTrip, writeTrip } from './session';
+import { forgetTrip, readTrip, readTripView, writeTrip, writeTripView } from './session';
 import { parseTrip } from './parse';
 
 afterEach(() => vi.unstubAllGlobals());
@@ -32,9 +32,24 @@ describe('saved trip', () => {
     const saved = JSON.parse(data.get('tb:trip:europa')!);
     for (const value of ['{', JSON.stringify({ ...saved, version: 'old-build' }),
       JSON.stringify({ ...saved, trip: { ...saved.trip, cities: null } }),
+      JSON.stringify({ ...saved, trip: { ...saved.trip, cities: [null] } }),
       JSON.stringify({ ...saved, source: { ...source, id: 'other' } })]) {
       data.set('tb:trip:europa', value);
       expect(readTrip('europa')).toBeNull();
+    }
+  });
+
+  it('preserves closed days, scroll, selected tab and camera independently for each trip', () => {
+    const data = storage();
+    const view = { open: [], order: [], hidden: ['2026-10-13'], scroll: 820, tab: 1,
+      camera: { lat: 45.5, lng: 9.2, zoom: 13 } };
+    writeTripView('europa', view);
+    expect(readTripView('europa')).toEqual(view);
+    expect(readTripView('other')).toBeNull();
+    for (const patch of [{ scroll: -1 }, { open: null }, { tab: 9 },
+      { camera: { lat: 100, lng: 9.2, zoom: 13 } }]) {
+      data.set('tb:trip-view:europa', JSON.stringify({ ...view, ...patch }));
+      expect(readTripView('europa')).toBeNull();
     }
   });
 

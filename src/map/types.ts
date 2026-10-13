@@ -74,6 +74,9 @@ export type MapOverviewCity = {
 };
 
 export type MapHandle = {
+  camera(): { lat: number; lng: number; zoom: number };
+  restoreCamera(camera: { lat: number; lng: number; zoom: number }): void;
+  onCameraChange(fn: () => void): () => void;
   /** Replace every pin of this kind. Other kinds stay. */
   setPins(kind: MapPinKind, pins: MapPin[]): void;
   setRadius(ring: MapRadius): void;

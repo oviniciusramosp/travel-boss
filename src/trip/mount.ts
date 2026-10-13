@@ -1,5 +1,5 @@
 import { appRequest, canEdit } from '../platform/request';
-import { forgetTrip, readTrip, writeTrip, type TripFile } from './session';
+import { forgetTrip, readTrip, readTripView, writeTrip, writeTripView, type TripFile } from './session';
 import { offlineControl } from '../platform/offline-control';
 import { intercityHops } from './overview';
 import { getTripCity, placeCity } from './catalog';
@@ -420,7 +420,8 @@ export function mountTrip(
   };
   /** A note editor is open. The document repaints when it closes, not under it. */
   let editing = false;
-  let selectedTab = 0;
+  const savedView = readTripView(id);
+  let selectedTab = savedView?.tab ?? 0;
   let checklist: HTMLElement | null = null;
   let checklistLocale: Locale | null = null;
   const onEditing = (open: boolean) => {
@@ -450,17 +451,17 @@ export function mountTrip(
   };
   let tripRouteEpoch = 0;
   /** Date cards in the order they opened. Several stay open; the last one open is on the map. */
-  let openOrder: string[] = [];
+  let openOrder: string[] = savedView?.order ?? [];
   let pinPick = false;
   let routeAbort: AbortController | null = null;
   let hasPainted = false;
-  let openKeys = new Set<string>();
+  let openKeys = new Set<string>(savedView?.open);
   let focusMark: FocusMark | null = null;
   let currentStopKey: string | null = null;
-  let scrollTop = 0;
+  let scrollTop = savedView?.scroll ?? 0;
   let seenPinIds = new Set<string>();
   /** Dates whose card button hid the route. Opening the card shows it again. */
-  const routeHidden = new Set<string>();
+  const routeHidden = new Set<string>(savedView?.hidden);
   /** Folded and switched periods, `date:period`. Only what the user touched; saved per trip. */
   const periodPrefs = readPeriods(id);
   /** The trip's notes on a park's points and under the park, by place id, for a click on a map dot. */
@@ -898,6 +899,7 @@ export function mountTrip(
       map.setRoute([]);
       if (fit) frameNearest(trip);
     }
+    scheduleSaveView();
     const openId = openPlaceId();
     if (!openId || !trip) return;
     const visible = travelCities.some(city => city.places.some(place => place.id === openId));
@@ -1019,6 +1021,18 @@ export function mountTrip(
       return;
     }
     if (active.closest('[data-warnings]')) focusMark = { kind: 'warn' };
+  }
+
+  let saveFrame = 0;
+  function saveView() {
+    if (!hasPainted || !main.querySelector('.tb-doc')) return;
+    rememberView();
+    writeTripView(id, { open: [...openKeys], order: openOrder, hidden: [...routeHidden],
+      scroll: scrollTop, tab: selectedTab, camera: map.camera() });
+  }
+  function scheduleSaveView() {
+    cancelAnimationFrame(saveFrame);
+    saveFrame = requestAnimationFrame(saveView);
   }
 
   function restoreFocus() {
@@ -1415,7 +1429,7 @@ export function mountTrip(
     const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
     const sections = tripDates(trip);
-    const initialDate = firstPaint ? currentTripDate(sections.map(section => section.date)) : null;
+    const initialDate = firstPaint && !savedView ? currentTripDate(sections.map(section => section.date)) : null;
     if (initialDate) {
       openKeys.add(initialDate);
       openOrder = [initialDate];
@@ -2213,7 +2227,7 @@ export function mountTrip(
         ?.setAttribute('aria-current', 'true');
     }
     restoreFocus();
-    main.scrollTop = firstPaint ? 0 : scrollTop;
+    main.scrollTop = firstPaint && !savedView ? 0 : scrollTop;
     if (initialDate) {
       main.querySelector<HTMLElement>(`details.tb-date[data-date="${initialDate}"]`)
         ?.scrollIntoView({ block: 'start' });
@@ -2221,8 +2235,9 @@ export function mountTrip(
     applyQuery();
     hasPainted = true;
     syncView(
-      shouldRefit(firstPaint, catalogPins(trip), seenPinIds, (lat, lng) => map.inView(lat, lng)),
+      !(firstPaint && savedView) && shouldRefit(firstPaint, catalogPins(trip), seenPinIds, (lat, lng) => map.inView(lat, lng)),
     );
+    if (firstPaint && savedView) map.restoreCamera(savedView.camera);
     paintWeather(trip);
     refreshWeather(trip);
     paintWalks(trip);
@@ -2241,11 +2256,13 @@ export function mountTrip(
     }
   }
 
+  let renderEpoch = 0;
   async function render() {
     if (editing) return;
+    const epoch = ++renderEpoch;
     try {
       const file = await loadTripFile(id);
-      if (!alive || editing) return;
+      if (!alive || editing || epoch !== renderEpoch) return;
       if (file && file.raw === lastRaw && current && !failure) return;
       if (!file) {
         forgetTrip(id);
@@ -2259,7 +2276,7 @@ export function mountTrip(
       writeTrip(file, trip);
       paint(trip, updated);
     } catch {
-      if (!alive) return;
+      if (!alive || epoch !== renderEpoch) return;
       if (!current) showFailure('read');
     }
   }
@@ -2335,10 +2352,21 @@ export function mountTrip(
     }
   });
 
+  main.addEventListener('scroll', scheduleSaveView, { passive: true });
+  main.addEventListener('toggle', scheduleSaveView, true);
+  main.addEventListener('click', scheduleSaveView);
+  window.addEventListener('pagehide', saveView);
+  const offCamera = map.onCameraChange(scheduleSaveView);
   const saved = readTrip(id);
   if (saved) {
     lastRaw = saved.source.raw;
-    try { paint(saved.trip); } catch { forgetTrip(id); current = null; }
+    try { paint(saved.trip); } catch {
+      forgetTrip(id);
+      current = null;
+      previousTrip = null;
+      hasPainted = false;
+      shell.showLoading();
+    }
   }
   void render();
   const onVisible = () => {
@@ -2350,6 +2378,13 @@ export function mountTrip(
 
   return {
     dispose() {
+      saveView();
+      cancelAnimationFrame(saveFrame);
+      main.removeEventListener('scroll', scheduleSaveView);
+      main.removeEventListener('toggle', scheduleSaveView, true);
+      main.removeEventListener('click', scheduleSaveView);
+      window.removeEventListener('pagehide', saveView);
+      offCamera();
       alive = false;
       unmountWarnings();
       document.removeEventListener('visibilitychange', onVisible);

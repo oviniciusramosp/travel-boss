@@ -645,6 +645,17 @@ export function mountMap(host: HTMLElement): MapHandle {
     flyTo(lat, lng, zoom = 16) {
       moveCamera(lat, lng, Math.max(leafletMap.getZoom(), zoom));
     },
+    camera() {
+      const { lat, lng } = leafletMap.getCenter();
+      return { lat, lng, zoom: leafletMap.getZoom() };
+    },
+    restoreCamera({ lat, lng, zoom }) {
+      leafletMap.setView([lat, lng], zoom, { animate: false });
+    },
+    onCameraChange(fn) {
+      leafletMap.on('moveend', fn);
+      return () => { leafletMap.off('moveend', fn); };
+    },
 
     setSubPoints(points, onClick) {
       subPointLayer.clearLayers();
