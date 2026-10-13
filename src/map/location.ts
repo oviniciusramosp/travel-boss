@@ -4,6 +4,7 @@ import { iconButton } from '../ui/controls';
 import { icon } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
 import { compassHeading } from './heading';
+import { watchLocation } from './geolocation';
 
 /** Live position has its own layer, independent of trip pins, city filters and route previews. */
 export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonElement {
@@ -22,7 +23,7 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
   toast.setAttribute('role', 'status');
   host.append(toast);
   const report = (text: string) => { toast.textContent = text; toast.hidden = false; };
-  let watch: number | null = null;
+  let cancelLocation: (() => void) | null = null;
   let dot: Marker | null = null;
   let accuracy: Circle | null = null;
   let epoch = 0;
@@ -46,8 +47,8 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
   };
   const stop = () => {
     epoch += 1;
-    if (watch != null) navigator.geolocation.clearWatch(watch);
-    watch = null;
+    cancelLocation?.();
+    cancelLocation = null;
     dot?.remove(); dot = null;
     accuracy?.remove(); accuracy = null;
     window.removeEventListener('deviceorientation', onOrientation);
@@ -58,7 +59,7 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
     button.removeAttribute('aria-busy');
   };
   button.addEventListener('click', () => {
-    if (watch != null) { stop(); return; }
+    if (cancelLocation) { stop(); return; }
     const locale = label();
     if (!navigator.geolocation || !window.isSecureContext) {
       report(pickLocale(locale, travelUi.locateUnavailable)); return;
@@ -69,7 +70,7 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
     button.setAttribute('aria-busy', 'true');
     report(pickLocale(locale, travelUi.locating));
     pin.setAttribute('aria-label', pickLocale(locale, travelUi.myLocation));
-    watch = navigator.geolocation.watchPosition(position => {
+    cancelLocation = watchLocation(navigator.geolocation, position => {
       if (seq !== epoch) return;
       const point: [number, number] = [position.coords.latitude, position.coords.longitude];
       if (!dot) {
@@ -86,10 +87,16 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
       if (firstFix) { map.setView(point, Math.max(map.getZoom(), 16), cameraMotion()); firstFix = false; }
     }, error => {
       if (seq !== epoch) return;
-      if (error.code === 1) stop();
-      button.removeAttribute('aria-busy');
-      report(pickLocale(label(), error.code === 1 ? travelUi.locateDenied : travelUi.locateUnavailable));
-    }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 15000 });
+      stop();
+      const message = error.code === 1 ? travelUi.locateDenied : error.code === 3 ? {
+        en: 'Location timed out. Click the location button to try again.',
+        'pt-BR': 'A localização demorou demais. Clique no botão de localização para tentar novamente.',
+      } : {
+        en: 'The browser could not determine your position. Check location services for your browser in system settings, then try again.',
+        'pt-BR': 'O navegador não conseguiu determinar sua posição. Confira os serviços de localização do navegador nas configurações do sistema e tente novamente.',
+      };
+      report(pickLocale(label(), message));
+    });
     const orientation = window.DeviceOrientationEvent as typeof DeviceOrientationEvent & {
       requestPermission?: (absolute?: boolean) => Promise<string>;
     };
