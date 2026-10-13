@@ -36,6 +36,7 @@ import {
   type PlaceSubcategory,
 } from './travel-subcategories';
 import { withPlaceEdits } from '../catalog/place-edits';
+import { verifiedPlaceMaps } from './travel-place-maps';
 import { milanCity } from './travel-milan';
 import { parisMangezEtCassezVous } from './travel-paris-mangez-et-cassez-vous';
 import { parisMcDonalds } from './travel-paris-mcdonalds';
@@ -7661,6 +7662,11 @@ export const localTravelCities: TravelCity[] = [
     ],
   },
 ];
+
+// Apply audited destinations to the source catalog before creating resolved copies.
+for (const city of localTravelCities) {
+  for (const place of city.places) Object.assign(place, verifiedPlaceMaps[place.id]);
+}
 
 // Keep historical place IDs so saved trips, ratings and visit metadata stay linked.
 const versaillesPlaceIds = new Set([

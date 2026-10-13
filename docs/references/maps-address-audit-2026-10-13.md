@@ -1,0 +1,16 @@
+# Auditoria de endereços e Google Maps — 13/10/2026
+
+Triagem de 479 lugares do catálogo: 39 sem endereço, 42 com URL OpenStreetMap no destino do botão Maps e 63 com o nome do lugar no campo de endereço. São 108 lugares distintos. Nenhuma URL literal duplicada e nenhuma diferença superior a 500 m entre pino e coordenadas explícitas das URLs Google já cadastradas; isto não certifica identidade ou endereço dos demais lugares.
+
+Conferência manual dos 108 casos no Google Maps: 106 fichas exatas, um conjunto de esculturas com pino específico e um caso sem identidade resolvida. Foram corrigidos 107 destinos e 106 endereços. Todos os 42 destinos OSM passaram a Google Maps. Evidência por lugar, valor anterior, ficha consultada, endereço exibido e mudança aplicada: [JSONL](maps-address-audit-2026-10-13.jsonl). As fontes OSM anteriores permanecem nessa referência. Revisão postal dos outros 371 lugares não foi refeita nesta rodada; a auditoria anterior de Paris está em [location-audit-2026-09-28.md](location-audit-2026-09-28.md).
+
+Pontes, ruas e passeios sem botão de endereço usam a área/localidade identificada pela própria URL Maps, sem inventar número. Riomaggiore, Manarola, Corniglia, Vernazza e Monterosso apontam às estações correspondentes aos objetos OSM originais. Fiumicino mantém a âncora Terminal 3; a ficha Maps é a do aeroporto inteiro, cujo centro não define o acesso. Praças, jardins e estações preservam os pinos existentes, mesmo quando o centro da ficha é diferente.
+
+Exceções conferidas:
+- Casa de Giulietta: ficha do Teatro Nuovo, preservando o acesso pela Piazzetta Navona. O endereço postal do teatro na Piazza Viviani não substitui a entrada turística; [Município de Verona](https://turismo.comune.verona.it/nqcontent.cfm?a_id=98352&lang=it).
+- Brasserie de L’Entrecôte: a busca original explicitava Colombo, mas o pino ficava ~883 m fora da unidade. Ficha e pino agora correspondem ao Colombo. O [site oficial](https://www.brasserieentrecote.pt/) liga ao mesmo identificador `0xd1933b718ac732d:0x2211f1e7dd9fef87`; coordenadas atuais da ficha usadas, não centro de câmera nem coordenadas antigas do link oficial.
+- Maillol: a busca genérica abre apenas a escultura L’Air. O lugar do catálogo representa o conjunto; recebeu endereço do Jardin du Carrousel e link Google Maps para seu pino existente, sem fingir uma ficha única para todas as esculturas.
+- Crush Doughnuts: São Sebastião; Simpli Coffee: Fontes Pereira de Melo; Baan Saraiva’s: Eng. Canto Resende. As fichas e posições correspondem às unidades já cadastradas, sem trocar por filiais vizinhas.
+- Amoreiras 360: endereço mal formatado no Maps normalizado com os [contactos oficiais](https://www.amoreiras360view.com/pt/contactos/18). El Corte Inglés: removido “7th Floor” do endereço da loja inteira; [endereço oficial](https://www.elcorteingles.pt/ajuda/como-comprar/).
+
+Pendente: `lis-palacio-sao-vicente`. O Maps retorna mosteiro e igreja, não uma ficha do palácio. A descrição também o confunde com Palácio da Mitra. O [Centro Nacional de Cultura](https://www.e-cultura.pt/artigo/19383) distingue o palácio da igreja; não foi usado o link de outro monumento nem inventado um endereço certificado. Cadastro preservado para resolver a identidade, o acesso e a ficha em revisão específica.
