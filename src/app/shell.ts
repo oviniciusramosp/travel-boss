@@ -48,6 +48,7 @@ export type Shell = {
   onExport(fn: () => void): () => void;
   /** The empty document already in the shell. No new screen. */
   showEmpty(): void;
+  showLoading(): void;
 };
 
 /** The saved choice, else Portuguese. The browser language does not decide. */
@@ -135,7 +136,10 @@ export function mountShell(root: HTMLElement): Shell {
   const emptyTitle = el('strong');
   const emptyBody = document.createTextNode('');
   empty.append(emptyTitle, emptyBody);
-  main.append(empty);
+  const loading = el('div', 'tb-empty');
+  loading.setAttribute('role', 'status');
+  main.setAttribute('aria-busy', 'true');
+  main.append(loading);
 
   const split = el('div', 'tb-split');
   split.setAttribute('role', 'separator');
@@ -334,6 +338,10 @@ export function mountShell(root: HTMLElement): Shell {
     emptyTitle.textContent = pickLocale(locale, {
       en: 'No document open',
       'pt-BR': 'Nenhum documento aberto',
+    });
+    loading.textContent = pickLocale(locale, {
+      en: 'Loading trip…',
+      'pt-BR': 'Carregando roteiro…',
     });
     emptyBody.textContent = pickLocale(locale, {
       en: 'Choose a trip or a city. The trip is a Markdown file: an LLM can edit it with the app open.',
@@ -535,7 +543,13 @@ export function mountShell(root: HTMLElement): Shell {
       return () => exportFns.delete(fn);
     },
     showEmpty() {
+      main.removeAttribute('aria-busy');
       main.replaceChildren(empty);
+      paintLocale();
+    },
+    showLoading() {
+      main.setAttribute('aria-busy', 'true');
+      main.replaceChildren(loading);
       paintLocale();
     },
   };

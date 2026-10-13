@@ -187,6 +187,7 @@ function show(route: Route, mode: 'push' | 'replace' | 'none') {
     }
 
     const slug = route.slug;
+    shell.main.removeAttribute('aria-busy');
     const view = mountCity(
       shell.main,
       map,
@@ -240,13 +241,15 @@ function onHistory() {
 }
 
 async function openFirst() {
+  shell.showLoading();
   try {
     const files = await loadTripFiles();
     if (parseHash(location.hash)) return;
     const first = files[0];
     if (first) show({ kind: 'trip', id: first.id }, 'replace');
+    else show({ kind: 'home' }, 'replace');
   } catch {
-    /* The shell already shows the empty state. */
+    if (!parseHash(location.hash)) show({ kind: 'home' }, 'replace');
   }
 }
 

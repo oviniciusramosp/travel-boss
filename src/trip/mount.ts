@@ -350,6 +350,7 @@ export function mountTrip(
   id: string,
   shell: Shell,
 ): { dispose(): void } {
+  shell.showLoading();
   main.scrollTop = 0;
   resetPlaceSelection(map);
   let alive = true;
@@ -357,6 +358,7 @@ export function mountTrip(
   const stopsUnsub = { fn: () => {} };
 
   const showFailure = (kind: 'missing' | 'read') => {
+    main.removeAttribute('aria-busy');
     failure = kind;
     const locale = shell.locale();
     main.replaceChildren(
@@ -1409,6 +1411,7 @@ export function mountTrip(
   }
 
   function paint(trip: Trip, updated = false) {
+    main.removeAttribute('aria-busy');
     const carryingLuggage = luggageStops(trip);
     const changed = changedStopKeys(previousTrip, trip);
     const firstPaint = !hasPainted;
