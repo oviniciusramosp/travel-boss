@@ -111,7 +111,8 @@ self.addEventListener('message', event => {
       port.postMessage({ type: 'CACHE_REMOVED', removed, failed });
     } else if (event.data?.type === 'CACHE_URLS') {
       const urls = Array.isArray(event.data.urls) ? [...new Set([...PUBLIC, ...event.data.urls])] : [];
-      if (urls.length > MAX_ENTRIES || urls.some(url => typeof url !== 'string')) {
+      // Built-in public files do not consume the limit reserved for requested photos.
+      if (urls.length > MAX_ENTRIES + PUBLIC.length || urls.some(url => typeof url !== 'string')) {
         port.postMessage({ type: 'CACHE_COMPLETE', total: urls.length, completed: 0, failed: urls.length, bytes: 0 });
         return;
       }

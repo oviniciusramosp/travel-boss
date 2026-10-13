@@ -2,7 +2,7 @@ import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { cacheWorker } from './vite-app-cache';
 
-function worker(failInstall = false, search = '', onlineShell = false) {
+function worker(failInstall = false, search = '', onlineShell = false, optional = ['/travel-boss/weather/sunset.svg']) {
   const handlers: Record<string, (event: any) => void> = {};
   const stored = new Map<string, Response>();
   const deleted: string[] = [];
@@ -10,7 +10,7 @@ function worker(failInstall = false, search = '', onlineShell = false) {
   const buckets = new Map<string, Map<string, Response>>();
   const requested: Request[] = [];
   let skipped = 0;
-  runInNewContext(cacheWorker('v2', ['/travel-boss/index.html', '/travel-boss/assets/app.js'], ['/travel-boss/weather/sunset.svg'], ['https://lh3.googleusercontent.com/public-photo', '/travel-boss/photos/cover.webp']), {
+  runInNewContext(cacheWorker('v2', ['/travel-boss/index.html', '/travel-boss/assets/app.js'], optional, ['https://lh3.googleusercontent.com/public-photo', '/travel-boss/photos/cover.webp']), {
     AbortSignal,
     Request,
     URL,
@@ -45,7 +45,7 @@ function worker(failInstall = false, search = '', onlineShell = false) {
       fetched.push(url);
       if (onlineShell && /\/travel-boss\/(?:index\.html)?$/.test(url)) return new Response('latest shell');
       if (url.includes('missing')) return new Response('', { status: 404 });
-      if (url.includes('photos/') || url.includes('weather/') || url.includes('upload.wikimedia.org') || url.includes('tiles.openfreemap.org') || url === 'https://lh3.googleusercontent.com/public-photo') return new Response('saved');
+      if (url.includes('photos/') || url.includes('weather/') || url.includes('/amenities/') || url.includes('upload.wikimedia.org') || url.includes('tiles.openfreemap.org') || url === 'https://lh3.googleusercontent.com/public-photo') return new Response('saved');
       throw new Error('offline');
     },
   });
@@ -167,6 +167,17 @@ describe('offline download protocol', () => {
     expect(fetched).toHaveLength(3);
     expect(fetched.some(url => url.includes('/api/') || url.includes('openfreemap'))).toBe(false);
     expect(messages.filter(value => value.type === 'CACHE_PROGRESS')).toHaveLength(5);
+  });
+  it('downloads static amenity cells alongside trip photos without using their request quota', async () => {
+    const optional = Array.from({ length: 400 }, (_, i) => `/travel-boss/amenities/cells/${i}.json`);
+    const { handlers, fetched } = worker(false, '', false, optional);
+    const urls = Array.from({ length: 200 }, (_, i) => `https://upload.wikimedia.org/wikipedia/${i}.jpg`);
+    const messages = await message(handlers, { type: 'CACHE_URLS', urls });
+    expect(messages.at(-1)).toEqual({ type: 'CACHE_COMPLETE', total: 600, completed: 600, failed: 0, bytes: 3000 });
+    expect(fetched).toHaveLength(600);
+    const excess = await message(handlers, { type: 'CACHE_URLS', urls: Array.from({ length: 513 }, (_, i) => `${urls[0]}?extra=${i}`) });
+    expect(excess.at(-1)?.completed).toBe(0);
+    expect(fetched).toHaveLength(600);
   });
   it('allows exact public catalog photo URLs without granting access to other provider paths', async () => {
     const { handlers, fetched } = worker();
