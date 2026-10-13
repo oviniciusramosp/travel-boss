@@ -4,42 +4,11 @@ import { icon } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
 import type { PackedAmenity } from './amenity-cells';
 import { AMENITY_EVENT, AMENITY_ICON, amenityOn, type AmenityKind } from './amenity-state';
-
-/** How far off the walking line a tap or toilet still counts, in meters. */
-export const AMENITY_RADIUS_M = 150;
+import { boxesOverlap, nearLines, type Box, type Line } from './amenity-proximity';
+export { AMENITY_RADIUS_M, boxesOverlap, nearLines } from './amenity-proximity';
 
 export type { AmenityKind };
 export type Amenity = { id: number; kind: AmenityKind; lat: number; lng: number; tags: Record<string, string> };
-type Line = readonly (readonly [number, number])[];
-
-/** Meters from a point to a segment, flat projection (fine at walking scale). */
-function toSegment(p: readonly [number, number], a: readonly [number, number], b: readonly [number, number]): number {
-  const k = Math.cos(p[0] * (Math.PI / 180)) * 111_320;
-  const ax = a[1] * k, ay = a[0] * 111_320, bx = b[1] * k, by = b[0] * 111_320;
-  const px = p[1] * k, py = p[0] * 111_320;
-  const dx = bx - ax, dy = by - ay;
-  const len = dx * dx + dy * dy;
-  const t = len ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len)) : 0;
-  return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
-}
-
-// ponytail: O(points × vertices); a day's walk is a few thousand vertices, fine.
-export function nearLines(points: readonly Amenity[], lines: readonly Line[], radiusM = AMENITY_RADIUS_M): Amenity[] {
-  return points.filter((point) => {
-    const p = [point.lat, point.lng] as const;
-    return lines.some((line) => {
-      if (line.length === 1) return toSegment(p, line[0], line[0]) <= radiusM;
-      for (let i = 1; i < line.length; i++) if (toSegment(p, line[i - 1], line[i]) <= radiusM) return true;
-      return false;
-    });
-  });
-}
-
-type Box = readonly [number, number, number, number];
-
-export function boxesOverlap(a: Box, b: Box): boolean {
-  return a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
-}
 
 export function unpackAmenities(rows: readonly PackedAmenity[]): Amenity[] {
   return rows.map(([lat, lng, kind, fee], id): Amenity => ({
