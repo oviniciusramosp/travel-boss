@@ -1,10 +1,11 @@
-import { divIcon, layerGroup, marker, type Map as LeafletMap } from 'leaflet';
+import { divIcon, layerGroup, marker, type Map as LeafletMap, type Marker } from 'leaflet';
 import { pickLocale, type Locale } from '../catalog';
 import { icon } from '../ui/icons';
 import { cameraMotion } from '../ui/motion';
 import type { PackedAmenity } from './amenity-cells';
 import { AMENITY_EVENT, AMENITY_ICON, amenityOn, type AmenityKind } from './amenity-state';
-import { boxesOverlap, nearLines, type Box, type Line } from './amenity-proximity';
+import { indexWalks, nearbyAmenities, neededAmenityCells, toSegment, type Box, type Line, type Point } from './amenity-proximity';
+import { amenityCellBox } from './amenity-cells';
 export { AMENITY_RADIUS_M, boxesOverlap, nearLines } from './amenity-proximity';
 
 export type { AmenityKind };
@@ -20,9 +21,10 @@ export function unpackAmenities(rows: readonly PackedAmenity[]): Amenity[] {
   }));
 }
 
-// Written by `npm run travel:amenities`; a city's file loads once, on first need.
+// Written by `npm run travel:amenities`; bounded cache shared across route/city changes.
 let index: Promise<Record<string, Box>> | null = null;
-const cities = new Map<string, Promise<Amenity[]>>();
+const cells = new Map<string, Promise<Amenity[]>>();
+const MAX_CACHED_CELLS = 64;
 
 function loadJson<T>(path: string): Promise<T> {
   return fetch(`${import.meta.env.BASE_URL}amenities/${path}`).then((r) =>
@@ -30,26 +32,21 @@ function loadJson<T>(path: string): Promise<T> {
   );
 }
 
-async function amenitiesIn(view: Box): Promise<Amenity[]> {
-  index ??= loadJson<Record<string, Box>>('index.json').catch((error) => {
-    index = null;
-    throw error;
-  });
-  const slugs = Object.entries(await index)
-    .filter(([, box]) => boxesOverlap(box, view))
-    .map(([slug]) => slug);
-  const lists = await Promise.all(
-    slugs.map((slug) => {
-      let hit = cities.get(slug);
+async function amenitiesIn(keys: string[]): Promise<Amenity[]> {
+  const lists = await Promise.allSettled(
+    keys.map((key) => {
+      let hit = cells.get(key);
       if (!hit) {
-        hit = loadJson<PackedAmenity[]>(`${slug}.json`).then(unpackAmenities);
-        cities.set(slug, hit);
-        hit.catch(() => cities.delete(slug));
+        hit = loadJson<PackedAmenity[]>(`cells/${key}.json`).then(unpackAmenities);
+        hit.catch(() => { if (cells.get(key) === hit) cells.delete(key); });
       }
+      cells.delete(key);
+      cells.set(key, hit);
+      if (cells.size > MAX_CACHED_CELLS) cells.delete(cells.keys().next().value!);
       return hit;
     }),
   );
-  return lists.flat();
+  return lists.flatMap(list => list.status === 'fulfilled' ? list.value : []);
 }
 
 function label(point: Amenity, locale: Locale): string {
@@ -98,55 +95,97 @@ function amenityPin(point: Amenity, near: boolean, text: string) {
 }
 
 /**
- * Every water tap or toilet in view, each kind switched on its own, drawn as their own glyph.
- * The ones near a walking line are bigger. Never part of the trip.
+ * Only nearby services in view, capped per kind. Existing pins survive GPS/route updates.
  */
-export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void } {
+export function mountAmenities(map: LeafletMap): { setWalks(lines: Line[]): void; setLocation(point: Point | null): void } {
   const group = layerGroup().addTo(map);
-  let walks: Line[] = [];
+  const pins = new Map<string, { pin: Marker; signature: string }>();
+  let walks = indexWalks([]);
+  let location: Point | null = null;
   let run = 0;
   let debounce = 0;
+  let disposed = false;
+  const clear = () => { group.clearLayers(); pins.clear(); };
 
   const paint = async () => {
-    const id = ++run;
+    const id = run;
     if ((!amenityOn('water') && !amenityOn('toilet')) || Math.round(map.getZoom()) < MIN_ZOOM) {
-      group.clearLayers();
+      clear();
       return;
     }
     const view = map.getBounds();
+    const center: Point = [map.getCenter().lat, map.getCenter().lng];
+    const focus = location ?? (walks.size ? null : center);
     let all: Amenity[];
     try {
-      all = await amenitiesIn([view.getSouth(), view.getWest(), view.getNorth(), view.getEast()]);
+      index ??= loadJson<Record<string, Box>>('cells.json').catch((error) => { index = null; throw error; });
+      const catalog = await index;
+      if (id !== run || disposed) return;
+      const keys = neededAmenityCells(catalog, [view.getSouth(), view.getWest(), view.getNorth(), view.getEast()], walks, focus)
+        .sort((a, b) => {
+          const distance = (key: string) => { const [s, w, n, e] = amenityCellBox(key); return toSegment([(s + n) / 2, (w + e) / 2], center, center); };
+          return distance(a) - distance(b);
+        }).slice(0, 24);
+      all = await amenitiesIn(keys);
     } catch {
       return;
     }
-    if (id !== run) return;
-    group.clearLayers();
-    const shown = all.filter((point) => amenityOn(point.kind) && view.contains([point.lat, point.lng]));
-    const near = new Set(nearLines(shown, walks).map((point) => point.id));
+    if (id !== run || disposed) return;
+    const shown = nearbyAmenities(all.filter(point => amenityOn(point.kind) && view.contains([point.lat, point.lng])), walks, focus, center);
     const locale: Locale = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
-    for (const point of shown) {
-      amenityPin(point, near.has(point.id), label(point, locale)).addTo(group);
+    const keep = new Set<string>();
+    for (const { point, near } of shown) {
+      const key = `${point.lat},${point.lng},${point.kind}`, text = label(point, locale), signature = `${near}|${text}`;
+      keep.add(key);
+      if (pins.get(key)?.signature === signature) continue;
+      const previous = pins.get(key);
+      if (previous) group.removeLayer(previous.pin);
+      pins.set(key, { pin: amenityPin(point, near, text).addTo(group), signature });
+    }
+    for (const [key, { pin }] of pins) if (!keep.has(key)) {
+      group.removeLayer(pin);
+      pins.delete(key);
     }
   };
 
-  map.on('moveend', () => {
+  const schedule = () => {
+    if (disposed) return;
+    run += 1;
     window.clearTimeout(debounce);
+    if (!amenityOn('water') && !amenityOn('toilet')) { clear(); return; }
     debounce = window.setTimeout(() => void paint(), 150);
-  });
-  let wasOn = 0;
-  document.addEventListener(AMENITY_EVENT, () => {
+  };
+  map.on('moveend', schedule);
+  let wasOn = Number(amenityOn('water')) + Number(amenityOn('toilet'));
+  const onToggle = () => {
     const count = Number(amenityOn('water')) + Number(amenityOn('toilet'));
     const switchedOn = count > wasOn;
     wasOn = count;
+    schedule();
     // Switching on from the city view would show nothing: step in to where the pins draw.
     if (switchedOn && Math.round(map.getZoom()) < MIN_ZOOM) map.setZoom(MIN_ZOOM, cameraMotion());
-    else void paint();
+  };
+  document.addEventListener(AMENITY_EVENT, onToggle);
+  const lang = new MutationObserver(schedule);
+  lang.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  map.on('unload', () => {
+    disposed = true; run += 1;
+    window.clearTimeout(debounce);
+    document.removeEventListener(AMENITY_EVENT, onToggle);
+    map.off('moveend', schedule);
+    lang.disconnect();
+    clear();
   });
+  schedule();
   return {
     setWalks(lines) {
-      walks = lines;
-      void paint();
+      walks = indexWalks(lines);
+      schedule();
+    },
+    setLocation(point) {
+      if (location && point && toSegment(point, location, location) < 25) return;
+      location = point;
+      schedule();
     },
   };
 }

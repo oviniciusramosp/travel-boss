@@ -23,6 +23,7 @@ export function attachMapControls(
   map: LeafletMap,
   host: HTMLElement,
   fit: () => void,
+  onPosition?: (point: readonly [number, number] | null) => void,
 ): void {
   const shell = host.closest<HTMLElement>('.tb-map-col') ?? host.parentElement ?? host;
   const zoomIn = iconButton({ icon: 'add', label: 'Zoom in' });
@@ -94,7 +95,7 @@ export function attachMapControls(
   bar.className = 'tb-map-control-stack';
   const navigation = document.createElement('div');
   navigation.className = 'tb-map-controls';
-  navigation.append(zoomIn, zoomOut, fitBtn, locationControl(map, shell));
+  navigation.append(zoomIn, zoomOut, fitBtn, locationControl(map, shell, onPosition));
   const layers = document.createElement('div');
   layers.className = 'tb-map-controls';
   layers.append(water, toilets, favorites);

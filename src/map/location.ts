@@ -7,7 +7,7 @@ import { compassHeading } from './heading';
 import { watchLocation } from './geolocation';
 
 /** Live position has its own layer, independent of trip pins, city filters and route previews. */
-export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonElement {
+export function locationControl(map: LeafletMap, host: HTMLElement, onPosition?: (point: readonly [number, number] | null) => void): HTMLButtonElement {
   const button = iconButton({ icon: 'my_location', label: '', pressed: false });
   button.dataset.locate = 'true';
   const label = () => {
@@ -51,6 +51,7 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
     cancelLocation = null;
     dot?.remove(); dot = null;
     accuracy?.remove(); accuracy = null;
+    onPosition?.(null);
     window.removeEventListener('deviceorientation', onOrientation);
     window.removeEventListener('deviceorientationabsolute', onOrientation);
     direction.hidden = true;
@@ -73,6 +74,7 @@ export function locationControl(map: LeafletMap, host: HTMLElement): HTMLButtonE
     cancelLocation = watchLocation(navigator.geolocation, position => {
       if (seq !== epoch) return;
       const point: [number, number] = [position.coords.latitude, position.coords.longitude];
+      onPosition?.(point);
       if (!dot) {
         const size = Number.parseFloat(getComputedStyle(host).getPropertyValue('--location-pin-size'));
         dot = marker(point, { interactive: false, icon: divIcon({
