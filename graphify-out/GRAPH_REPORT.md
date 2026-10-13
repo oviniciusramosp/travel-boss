@@ -1,16 +1,16 @@
-# Graph Report - travel-boss  (2026-10-13)
+# Graph Report - travel-boss-pin-scale-public-20261013  (2026-10-13)
 
 ## Corpus Check
-- 752 files · ~594,680 words
+- 752 files · ~594,718 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2345 nodes · 5796 edges · 157 communities (124 shown, 33 thin omitted)
+- 2345 nodes · 5796 edges · 156 communities (123 shown, 33 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 31 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `114484e2`
+- Built from commit: `c624deab`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -68,7 +68,6 @@
 - departures.ts
 - pin-visual.ts
 - el
-- router.ts
 - baguetts-moliere-location-2026-09-28.md
 - map/overview.ts
 - hotel-dates.ts
@@ -197,12 +196,12 @@
 
 ## Import Cycles
 - 2-file cycle: `src/map/amenities.ts -> src/map/amenity-proximity.ts -> src/map/amenities.ts`
-- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
-- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
+- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
+- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (157 total, 33 thin omitted)
+## Communities (156 total, 33 thin omitted)
 
 ### Community 0 - "overlays.ts"
 Cohesion: 0.16
@@ -404,10 +403,6 @@ Nodes (13): placePinIconHtml(), pinIcon(), cssColor(), pinBox(), pinHtml(), pinM
 Cohesion: 0.13
 Nodes (27): canEdit, tripChecklist(), addItem(), edit(), sync(), count(), load(), save() (+19 more)
 
-### Community 54 - "router.ts"
-Cohesion: 0.29
-Nodes (11): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+3 more)
-
 ### Community 56 - "map/overview.ts"
 Cohesion: 0.70
 Nodes (3): greatCircle(), OverviewArc, overviewArcs()
@@ -425,8 +420,8 @@ Cohesion: 0.12
 Nodes (29): flightCurve(), Point, drawTripRoutes(), routeDeps(), walkPoints(), cityByPlace, intercityHops(), hop() (+21 more)
 
 ### Community 61 - "main.ts"
-Cohesion: 0.11
-Nodes (26): setDocumentTitle(), Locale, applyChrome(), cityLabel(), cityNav, citySource(), clearMap(), dispose() (+18 more)
+Cohesion: 0.10
+Nodes (37): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+29 more)
 
 ### Community 63 - "airbnb-search.py"
 Cohesion: 0.15

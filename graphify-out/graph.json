@@ -2838,32 +2838,6 @@
       "norm_label": "walkstop"
     },
     {
-      "label": "CityTab",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L1",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_app_router_citytab",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "citytab"
-    },
-    {
-      "label": "Route",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L3",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_app_router_route",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "route"
-    },
-    {
       "label": "OverviewArc",
       "file_type": "code",
       "source_file": "src/map/overview.ts",
@@ -2992,6 +2966,32 @@
       "community": 60,
       "community_name": "route.ts",
       "norm_label": "walkpoint"
+    },
+    {
+      "label": "CityTab",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L1",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_app_router_citytab",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "citytab"
+    },
+    {
+      "label": "Route",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_app_router_route",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "route"
     },
     {
       "label": "Locale",
@@ -12460,90 +12460,6 @@
       "norm_label": "transferrow()"
     },
     {
-      "label": "commitRoute()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L91",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_commitroute",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "commitroute()"
-    },
-    {
-      "label": "formatHash()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L56",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_formathash",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "formathash()"
-    },
-    {
-      "label": "isTab()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_istab",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "istab()"
-    },
-    {
-      "label": "navigationMode()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L76",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_navigationmode",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "navigationmode()"
-    },
-    {
-      "label": "parseDay()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_parseday",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "parseday()"
-    },
-    {
-      "label": "parseHash()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L24",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_parsehash",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "parsehash()"
-    },
-    {
-      "label": "sameRoute()",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L66",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_app_router_sameroute",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "sameroute()"
-    },
-    {
       "label": "greatCircle()",
       "file_type": "code",
       "source_file": "src/map/overview.ts",
@@ -13298,6 +13214,90 @@
       "community": 60,
       "community_name": "route.ts",
       "norm_label": "walkmemorykey()"
+    },
+    {
+      "label": "commitRoute()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L91",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_commitroute",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "commitroute()"
+    },
+    {
+      "label": "formatHash()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L56",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_formathash",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "formathash()"
+    },
+    {
+      "label": "isTab()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_istab",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "istab()"
+    },
+    {
+      "label": "navigationMode()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L76",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_navigationmode",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "navigationmode()"
+    },
+    {
+      "label": "parseDay()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_parseday",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "parseday()"
+    },
+    {
+      "label": "parseHash()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L24",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_parsehash",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "parsehash()"
+    },
+    {
+      "label": "sameRoute()",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L66",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_router_sameroute",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "sameroute()"
     },
     {
       "label": "setDocumentTitle()",
@@ -19385,20 +19385,20 @@
       "norm_label": "weather_icons"
     },
     {
-      "label": "AGENTS.md",
+      "label": "CLAUDE.md",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude",
       "community": 21,
       "community_name": "Travel Boss",
-      "norm_label": "agents.md"
+      "norm_label": "claude.md"
     },
     {
       "label": "Arquitetura",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L29",
       "_origin": "ast",
       "id": "claude_arquitetura",
@@ -19409,7 +19409,7 @@
     {
       "label": "Cat\u00e1logo de lugares",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L133",
       "_origin": "ast",
       "id": "claude_cat\u00e1logo_de_lugares",
@@ -19420,7 +19420,7 @@
     {
       "label": "Comandos",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L9",
       "_origin": "ast",
       "id": "claude_comandos",
@@ -19431,7 +19431,7 @@
     {
       "label": "Como um LLM edita um roteiro",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L80",
       "_origin": "ast",
       "id": "claude_como_um_llm_edita_um_roteiro",
@@ -19442,7 +19442,7 @@
     {
       "label": "Contrato",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L38",
       "_origin": "ast",
       "id": "claude_contrato",
@@ -19453,7 +19453,7 @@
     {
       "label": "Guia da cidade (Mercado e Comidas)",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L149",
       "_origin": "ast",
       "id": "claude_guia_da_cidade_mercado_e_comidas",
@@ -19464,7 +19464,7 @@
     {
       "label": "Instru\u00e7\u00f5es compartilhadas (Codex e Claude Code)",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L5",
       "_origin": "ast",
       "id": "claude_instru\u00e7\u00f5es_compartilhadas_codex_e_claude_code",
@@ -19475,7 +19475,7 @@
     {
       "label": "Publica\u00e7\u00e3o est\u00e1tica",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L167",
       "_origin": "ast",
       "id": "claude_publica\u00e7\u00e3o_est\u00e1tica",
@@ -19486,7 +19486,7 @@
     {
       "label": "Quem edita onde",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L123",
       "_origin": "ast",
       "id": "claude_quem_edita_onde",
@@ -19585,7 +19585,7 @@
     {
       "label": "Travel Boss",
       "file_type": "document",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_travel_boss",
@@ -23499,50 +23499,6 @@
       "norm_label": "hotel-distance.test.ts"
     },
     {
-      "label": "router.ts",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_app_router",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "router.ts"
-    },
-    {
-      "label": "TABS",
-      "file_type": "code",
-      "source_file": "src/app/router.ts",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "src_app_router_tabs",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "tabs"
-    },
-    {
-      "label": "router.test.ts",
-      "file_type": "code",
-      "source_file": "src/app/router.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_app_router_test",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "router.test.ts"
-    },
-    {
-      "label": "paris",
-      "file_type": "code",
-      "source_file": "src/app/router.test.ts",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "src_app_router_test_paris",
-      "community": 54,
-      "community_name": "router.ts",
-      "norm_label": "paris"
-    },
-    {
       "label": "baguetts-moliere-location-2026-09-28.md",
       "file_type": "document",
       "source_file": "docs/references/baguetts-moliere-location-2026-09-28.md",
@@ -23860,6 +23816,50 @@
       "community": 60,
       "community_name": "route.ts",
       "norm_label": "memory"
+    },
+    {
+      "label": "router.ts",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_router",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "router.ts"
+    },
+    {
+      "label": "TABS",
+      "file_type": "code",
+      "source_file": "src/app/router.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_app_router_tabs",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "tabs"
+    },
+    {
+      "label": "router.test.ts",
+      "file_type": "code",
+      "source_file": "src/app/router.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_router_test",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "router.test.ts"
+    },
+    {
+      "label": "paris",
+      "file_type": "code",
+      "source_file": "src/app/router.test.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_app_router_test_paris",
+      "community": 61,
+      "community_name": "main.ts",
+      "norm_label": "paris"
     },
     {
       "label": "main.ts",
@@ -73035,7 +73035,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
@@ -73123,7 +73123,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast",
@@ -73134,7 +73134,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L133",
       "weight": 1.0,
       "_origin": "ast",
@@ -73145,7 +73145,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L149",
       "weight": 1.0,
       "_origin": "ast",
@@ -73156,7 +73156,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L167",
       "weight": 1.0,
       "_origin": "ast",
@@ -73167,7 +73167,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
@@ -73178,7 +73178,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
@@ -73189,7 +73189,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
@@ -73200,7 +73200,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
@@ -73211,7 +73211,7 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
@@ -94362,7 +94362,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L100",
       "weight": 1.0,
       "_origin": "ast",
@@ -94373,7 +94373,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L100",
       "weight": 1.0,
       "_origin": "ast",
@@ -94384,7 +94384,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L177",
       "weight": 1.0,
       "_origin": "ast",
@@ -94395,7 +94395,7 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
+      "source_file": "CLAUDE.md",
       "source_location": "L74",
       "weight": 1.0,
       "_origin": "ast",
@@ -94916,5 +94916,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "114484e2a64eec7d23623806f6cc21dffb75bd6a"
+  "built_at_commit": "c624deabbd8c3d6845e0a460ddcdede8ee1236d3"
 }
