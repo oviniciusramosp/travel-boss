@@ -372,7 +372,7 @@ button {
 .tb-user-location { position: relative; width: var(--location-pin-size); height: var(--location-pin-size); color: var(--color-location); }
 .tb-user-location__direction { position: absolute; inset: 0; display: grid; place-items: center; }
 .tb-user-location__direction[hidden] { display: none; }
-.tb-user-location__direction .material-symbols-rounded { font-size: var(--location-pin-size); }
+.tb-user-location__direction .material-symbols-rounded { font-size: var(--location-direction-size); transform: translateY(calc(-1 * var(--location-direction-offset))); }
 .tb-user-location__dot { position: absolute; inset: var(--spacing-8); border-radius: var(--r-pill); background: var(--color-location); outline: var(--location-pin-outline) solid var(--color-on-ink); }
 
 .tb-map .tb-map-control-stack {
