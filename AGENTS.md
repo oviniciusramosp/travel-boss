@@ -53,7 +53,7 @@ Depois de criar, renomear, mover ou apagar código: `graphify update .`. Não ed
 
 UI (vale a partir da Fase 1):
 
-- No roteiro, todos os lugares do catálogo continuam disponíveis no mapa e seus cards permanecem acessíveis, mesmo fora da viagem ou do dia ativo. Paradas ativas ganham numeração e maior escala; outros lugares mantêm os pins normais. Lugares internos continuam representados pelos subpontos do pai.
+- No roteiro, todos os lugares do catálogo continuam disponíveis no mapa e seus cards permanecem acessíveis, mesmo fora da viagem ou do dia ativo. Ao ativar uma rota, suas paradas ganham numeração e mantêm o tamanho e a opacidade padrão; os demais pontos diminuem e ficam mais transparentes, recuperando o destaque no hover ou na seleção. Lugares internos continuam representados pelos subpontos do pai.
 
 - Localização (`locationControl`, `src/map/location.ts`): toque explícito liga/desliga acompanhamento e solicita permissões. Posição, precisão e bússola ficam numa camada própria, também no mobile e no roteiro; apenas o primeiro resultado centraliza a câmera. Direção usa bússola calibrada ou orientação absoluta, nunca rotação relativa. Desligar, sair da página ou desmontar o mapa libera GPS e sensores; sem bússola, mantém apenas a posição.
 
