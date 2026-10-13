@@ -856,7 +856,7 @@ export function mountMap(host: HTMLElement): MapHandle {
       };
     },
   };
-  attachMapControls(leafletMap, host, () => handle.fit());
+  attachMapControls(leafletMap, host, () => handle.fit(), amenities.setLocation);
   window.addEventListener('tb:place-edits', () => {
     for (const kind of KINDS) for (const [id, dot] of markers[kind]) {
       const previous = pinMeta[kind].get(id);
