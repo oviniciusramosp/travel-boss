@@ -28,7 +28,7 @@ export function aroundPoint(point: Point, meters = LOCATION_RADIUS_M): Box {
 /** Built once per route. Each point checks only segments in its own tile. */
 export function indexWalks(lines: readonly Line[], radius = AMENITY_RADIUS_M): WalkIndex {
   const cells: WalkIndex = new Map();
-  for (const line of lines) for (let i = 0; i < Math.max(0, line.length - 1) || (i === 0 && line.length === 1); i++) {
+  for (const line of lines) for (let i = 0; i < (line.length === 1 ? 1 : line.length - 1); i++) {
     const a = line[i], b = line[i + 1] ?? a;
     const pad = radius / 111_320, dx = pad / Math.cos(Math.max(Math.abs(a[0]), Math.abs(b[0])) * Math.PI / 180);
     for (let y = Math.floor((Math.min(a[0], b[0]) - pad) / CELL); y <= Math.floor((Math.max(a[0], b[0]) + pad) / CELL); y++) {

@@ -1,7 +1,7 @@
 /**
  * Water taps and toilets near each city's places, from Overpass, into public/amenities/.
  * The map reads these files instead of asking Overpass live (5–13 s per request).
- * Run: npm run travel:amenities [slug…]
+ * Run: npm run travel:amenities [slug…] (or --tiles-only to repartition saved data).
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { travelCities } from '../src/data/travel';
@@ -30,13 +30,15 @@ async function overpass(query: string): Promise<{ elements: Element[] }> {
   }
 }
 
-const only = process.argv.slice(2);
+const tilesOnly = process.argv.includes('--tiles-only');
+const only = process.argv.slice(2).filter(arg => arg !== '--tiles-only');
 mkdirSync(OUT, { recursive: true });
 const indexPath = `${OUT}/index.json`;
 const index: Record<string, [number, number, number, number]> = existsSync(indexPath)
   ? JSON.parse(readFileSync(indexPath, 'utf8'))
   : {};
 for (const city of travelCities) {
+  if (tilesOnly) continue;
   if (only.length && !only.includes(city.slug)) continue;
   const cells = amenityCells(city.places.flatMap(place => [place, ...(place.subPoints ?? [])]));
   if (!cells.length) continue;
@@ -73,7 +75,9 @@ for (const name of readdirSync(OUT).filter(name => name.endsWith('.json') && !['
   for (const row of JSON.parse(readFileSync(`${OUT}/${name}`, 'utf8')) as PackedAmenity[]) {
     const key = amenityCellKey(row[0], row[1]);
     if (!tiles.has(key)) tiles.set(key, new Map());
-    tiles.get(key)!.set(`${row[0]},${row[1]},${row[2]}`, row);
+    const id = `${row[0]},${row[1]},${row[2]}`, previous = tiles.get(key)!.get(id);
+    // Coincident OSM objects can disagree: keep a known fee, preferring paid on conflict.
+    if (!previous || row[3] === 1 || previous[3] === 0) tiles.get(key)!.set(id, row);
   }
 }
 rmSync(`${OUT}/cells`, { recursive: true, force: true });
