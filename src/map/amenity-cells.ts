@@ -20,13 +20,27 @@ export function amenityCells(places: readonly { lat?: number; lng?: number }[]):
 /** [lat, lng, kind (0 water · 1 toilet), fee (0 unknown · 1 paid · 2 free)] */
 export type PackedAmenity = [number, number, 0 | 1, 0 | 1 | 2];
 
+export function amenityCellKey(lat: number, lng: number): string {
+  return `${Math.floor(lat / CELL)}_${Math.floor(lng / CELL)}`;
+}
+
+export function amenityCellBox(key: string): Cell {
+  const [y, x] = key.split('_').map(Number);
+  return [y * CELL, x * CELL, (y + 1) * CELL, (x + 1) * CELL];
+}
+
 export function packAmenities(
-  elements: readonly { lat: number; lon: number; tags?: Record<string, string> }[],
+  elements: readonly { lat?: number; lon?: number; center?: { lat: number; lon: number }; tags?: Record<string, string> }[],
 ): PackedAmenity[] {
-  return elements.map((el) => [
-    Number(el.lat.toFixed(5)),
-    Number(el.lon.toFixed(5)),
-    el.tags?.amenity === 'toilets' ? 1 : 0,
-    el.tags?.fee === 'yes' ? 1 : el.tags?.fee === 'no' ? 2 : 0,
-  ]);
+  return elements.flatMap((el): PackedAmenity[] => {
+    const tags = el.tags ?? {};
+    const lat = el.lat ?? el.center?.lat, lng = el.lon ?? el.center?.lon;
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || /^(private|no|customers|permit)$/.test(tags.access ?? '') ||
+      ['disused', 'abandoned', 'demolished'].some(key => tags[key] === 'yes')) return [];
+    const toilet = tags.amenity === 'toilets';
+    if (!toilet && (tags.drinking_water === 'no' || (tags.amenity !== 'drinking_water' && tags.drinking_water !== 'yes') ||
+      (tags.fee != null && tags.fee !== 'no'))) return [];
+    return [[Number(lat!.toFixed(5)), Number(lng!.toFixed(5)), toilet ? 1 : 0,
+      tags.fee === 'yes' ? 1 : tags.fee === 'no' || !toilet ? 2 : 0]];
+  });
 }
