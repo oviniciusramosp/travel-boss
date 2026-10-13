@@ -1,16 +1,16 @@
-# Graph Report - travel-boss-cache-fix-public  (2026-10-13)
+# Graph Report - travel-boss-refresh-public  (2026-10-13)
 
 ## Corpus Check
-- 365 files · ~581,191 words
+- 365 files · ~581,230 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2293 nodes · 5655 edges · 152 communities (121 shown, 31 thin omitted)
+- 2293 nodes · 5655 edges · 153 communities (122 shown, 31 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.63)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9d31b857`
+- Built from commit: `4d6074e3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,7 +45,7 @@
 - Hotel priorities
 - hotel-scripts.d.ts
 - Paris
-- weather-source.ts
+- vite.config.ts
 - Travel Boss
 - Milão — 11–14 de outubro de 2026
 - shell.ts
@@ -104,7 +104,7 @@
 - 2. Sem foto ou com foto que não carrega — 21 lugares (tarefa E2)
 - Caminhadas de 6, 8 e 10/10 — estudo de alternativas
 - Auditoria de localização de Paris — 28/09/2026
-- vite.config.ts
+- ref_node_fs
 - Richelieu e brunch de 10/10 — consulta em 28/09/2026
 - travel-area-geometry.ts
 - index.ts
@@ -159,6 +159,7 @@
 - orangerie-de-monsieur-2026-10-11.md
 - stale-cache-navigation.md
 - Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre
+- ref_node_path
 - milan-rest-primark-2026-10-11.md
 - milano-centrale-entrances-2026-10-11.md
 - export.ts
@@ -196,7 +197,7 @@
 - 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (152 total, 31 thin omitted)
+## Communities (153 total, 31 thin omitted)
 
 ### Community 0 - "overlays.ts"
 Cohesion: 0.20
@@ -247,8 +248,8 @@ Cohesion: 0.16
 Nodes (27): clockMin(), dateBudget, dayPeriods(), freeMinutes(), hopRails(), isOpenSlot(), mealOf(), midEur() (+19 more)
 
 ### Community 12 - "airbnb-search.mjs"
-Cohesion: 0.10
-Nodes (25): ref_node_child_process, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbSnapshot(), airbnbType(), extract() (+17 more)
+Cohesion: 0.13
+Nodes (21): ref_node_util, airbnbReady(), airbnbSnapshot(), airbnbType(), extract(), run, normalizeAirbnb(), python (+13 more)
 
 ### Community 13 - "hotel-ranking.mjs"
 Cohesion: 0.08
@@ -314,9 +315,9 @@ Nodes (10): Airbnb gratuito (busca local), Cartographic boundaries, Evidence and
 Cohesion: 0.07
 Nodes (27): Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria, Dia 1 — Dom 18/10 · Chegada a Lisboa, Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux, Dia 1 — Qua 14/10 · Chegada a La Spezia, Dia 1 — Sex 16/10 · Chegada, Coliseu, Fórum e Palatino, Dia 2 — Qui 15/10 · Cinque Terre, Dia 2 — Seg 12/10 · Bate-volta a Veneza, Dia 2 — Seg 19/10 · Lisboa (+19 more)
 
-### Community 30 - "weather-source.ts"
-Cohesion: 0.20
-Nodes (15): Ensemble, extendForecast(), localStamp(), mergeForecasts(), MET_URL, MetSeries, metToEnsemble(), OPEN_METEO_EXTENDED_URL (+7 more)
+### Community 30 - "vite.config.ts"
+Cohesion: 0.14
+Nodes (22): hotelSearchVite(), Ensemble, extendForecast(), localStamp(), mergeForecasts(), MET_URL, MetSeries, metToEnsemble() (+14 more)
 
 ### Community 31 - "Travel Boss"
 Cohesion: 0.33
@@ -411,8 +412,8 @@ Cohesion: 0.46
 Nodes (6): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(), StayRange, validStayRange()
 
 ### Community 58 - "hotel-search-match.mjs"
-Cohesion: 0.18
-Nodes (24): ACCOMMODATION_TYPES, accommodationType(), ARTICLES, azulHotelUrl(), bestBookingMatch(), bookingHotelUrl(), bookingImageLarge(), bookingPhotoUrl() (+16 more)
+Cohesion: 0.20
+Nodes (19): ACCOMMODATION_TYPES, accommodationType(), ARTICLES, azulHotelUrl(), bestBookingMatch(), bookingHotelUrl(), bookingImageLarge(), bookingPhotoUrl() (+11 more)
 
 ### Community 60 - "route.ts"
 Cohesion: 0.11
@@ -436,7 +437,7 @@ Nodes (4): Cesarino Via Pattari, Duomo: calendário e ingresso, Milão — M3, C
 
 ### Community 66 - "hotel-search.mjs"
 Cohesion: 0.15
-Nodes (27): parseCategoryScores(), AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), azulZone(), BOOKING_EXTRACT (+19 more)
+Nodes (30): parseCategoryScores(), AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), azulZone(), BOOKING_EXTRACT (+22 more)
 
 ### Community 67 - "camera.ts"
 Cohesion: 0.30
@@ -514,9 +515,9 @@ Nodes (5): Base, Caminhadas de 6, 8 e 10/10 — estudo de alternativas, Fontes, 
 Cohesion: 0.29
 Nodes (6): Auditoria de localização de Paris — 28/09/2026, Causa e método, Correções aplicadas nesta rodada, Evidência por lugar e prevenção, Pendências e limites para usar o roteiro, Resultado
 
-### Community 91 - "vite.config.ts"
-Cohesion: 0.17
-Nodes (10): ref_node_fs, hotelSearchVite(), publicTrip(), publicTrips(), readForecastFile(), StoredForecast, tripsDir, WEATHER_DIR (+2 more)
+### Community 91 - "ref_node_fs"
+Cohesion: 0.47
+Nodes (3): ref_node_fs, publicTrip(), publicTrips()
 
 ### Community 93 - "travel-area-geometry.ts"
 Cohesion: 0.21
@@ -661,6 +662,10 @@ Nodes (8): placeEditsApi(), patch(), storage, PlaceEditStore, readPlaceEdits(), 
 ### Community 145 - "Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre"
 Cohesion: 0.50
 Nodes (3): Fontes e limites, Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre, Transportes
+
+### Community 146 - "ref_node_path"
+Cohesion: 0.29
+Nodes (6): ref_node_child_process, ref_node_path, ref_node_url, ids, output, root
 
 ### Community 152 - "export.ts"
 Cohesion: 0.22
