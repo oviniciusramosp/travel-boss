@@ -31,6 +31,7 @@ import { mountMap } from './map/map';
 import { mountCity, mountCityNav, type CityRouteState } from './views/places';
 import { closePlace, mountPlacePanel, openPlaceId } from './views/place-panel';
 import { loadTripFiles, mountTrip, mountTripNav } from './trip/mount';
+import { readTrip } from './trip/session';
 import { registerAppCache } from './platform/app-cache';
 import { mountMapsAppLinks } from './platform/maps-app';
 
@@ -270,4 +271,8 @@ mountSearch(shell, route => show(route, 'push'));
 
 const initial = parseHash(location.hash);
 if (initial) show(initial, 'none');
-else void openFirst();
+else {
+  const saved = readTrip();
+  if (saved) show({ kind: 'trip', id: saved.trip.id }, 'replace');
+  else void openFirst();
+}

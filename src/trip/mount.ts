@@ -1,4 +1,5 @@
 import { appRequest, canEdit } from '../platform/request';
+import { forgetTrip, readTrip, writeTrip, type TripFile } from './session';
 import { offlineControl } from '../platform/offline-control';
 import { intercityHops } from './overview';
 import { getTripCity, placeCity } from './catalog';
@@ -107,8 +108,6 @@ import { weatherIcon } from '../ui/weather-icons';
 import { pastWeatherDate } from './weather-source';
 import { luggageStops } from './luggage';
 import { transferRow } from '../views/transfer-row';
-
-type TripFile = { id: string; file: string; raw: string };
 
 const tripFileListeners = new Set<(event: TripPush) => void>();
 let tripHotBound = false;
@@ -2249,6 +2248,7 @@ export function mountTrip(
       if (!alive || editing) return;
       if (file && file.raw === lastRaw && current && !failure) return;
       if (!file) {
+        forgetTrip(id);
         showFailure('missing');
         return;
       }
@@ -2256,10 +2256,11 @@ export function mountTrip(
       const updated = Boolean(current) && file.raw !== lastRaw;
       lastRaw = file.raw;
       const trip = parseTrip(file.id, file.file, file.raw);
+      writeTrip(file, trip);
       paint(trip, updated);
     } catch {
       if (!alive) return;
-      showFailure('read');
+      if (!current) showFailure('read');
     }
   }
 
@@ -2334,6 +2335,11 @@ export function mountTrip(
     }
   });
 
+  const saved = readTrip(id);
+  if (saved) {
+    lastRaw = saved.source.raw;
+    try { paint(saved.trip); } catch { forgetTrip(id); current = null; }
+  }
   void render();
   const onVisible = () => {
     if (!alive || document.visibilityState === 'hidden') return;
