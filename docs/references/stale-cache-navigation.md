@@ -1,0 +1,7 @@
+# Navegação com roteiro antigo em cache
+
+O usuário encontrou na URL normal o menu antigo e uma row avulsa de almoço no trem, apesar de o código publicado já coincidir com o localhost. A conferência anterior usava `%69ndex.html`, que evitava o worker antigo e não certificava a atualização da navegação normal. O botão de atualização falhou no teste real. Os 26 arquivos essenciais do build estavam acessíveis (HTTP 200), somando aproximadamente 8,7 MB; não foi possível atribuir a falha original a um recurso ausente.
+
+Correção: navegação online consulta HTML atual sem cache HTTP, com limite de 5 s e fallback para o shell instalado quando offline. Não escreve HTML de outra versão no cache do build anterior. A aplicação pública ativa um worker completamente instalado e recarrega a URL canônica preservando o hash; não registra worker no editor local. O botão limita a espera da instalação a 20 s e, em caso de falha, só abre a URL de escape após confirmar que o HTML atual é acessível. Falha de rede mantém a cópia salva.
+
+Prova no navegador: servidor isolado na porta 5187, shell antigo e worker cache-first. Mesmo substituindo o arquivo HTML no servidor, recarregar a URL normal manteve “12:00 Almoço no trem”. Depois de instalar o worker corrigido e abrir `%69ndex.html?refresh=proof`, a aplicação atual tomou o controle, voltou automaticamente para `/travel-boss/#/trip/europa` e continuou atualizada após recarregar essa URL normal. Fixture temporária não alterou o roteiro local nem o público.
