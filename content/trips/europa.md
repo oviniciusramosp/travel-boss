@@ -565,25 +565,26 @@ budget: comida €50
 Chegada de trem de Milão e hospedagem em La Spezia.
 
 - 16:14 [La Spezia Centrale](place:spe-centrale) — Chegada de Milão
-- 16:40 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Check-in após a chegada de Milão, disponível desde 15h.\
+- 16:40 [Le camere in città](place:spe-le-camere-in-citta) — Check-in após a chegada de Milão, disponível desde 15h.\
   **Estadia:** 14–16/10/2026; checkout até 10h em 16/10.
 - 17:15 [Pasticceria Fiorini](place:spe-fiorini) — **Café da tarde**: cappuccino e brioche na Piazza Verdi; sair até 17h40
   - comida: €5
 - 18:00 [Carrefour Express · Piazza Saint Bon](place:spe-carrefour-saint-bon) — Comprar pão, fruta, bebida pronta e snack para o café da manhã e lanche de amanhã; escolher alimentos que não precisam de geladeira. Sair até 18h15 e seguir direto à hospedagem
   - comida: €6
   - via: A pé até a hospedagem · 15 min — Guardar as compras antes de sair para jantar
-- 18:30 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Guardar as compras no quarto e descansar; sair para jantar às 19h
+- 18:30 [Le camere in città](place:spe-le-camere-in-citta) — Guardar as compras no quarto e descansar; sair para jantar às 19h
 - 19:15 [La Pia Centenaria · Via Magenta](place:spe-la-pia) — **Jantar**: pizza em fatias e farinata de grão-de-bico; refeição simples na unidade histórica do centro
   - comida: €10
-- 20:15 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Retorno ao quarto; separar o café da manhã e o lanche de Cinque Terre
+- 20:15 [Le camere in città](place:spe-le-camere-in-citta) — Retorno ao quarto; separar o café da manhã e o lanche de Cinque Terre
 
 ### Dia 2 — Qui 15/10 · Cinque Terre
   - cidades: La Spezia → Riomaggiore → Manarola → Corniglia → Vernazza → Monterosso al Mare
 
 Riomaggiore → Via dell’Amore → Manarola → Corniglia → Vernazza → Monterosso, conforme o Notion. Horários de passeio estimados; partidas dos regionais ainda a conferir nos painéis e na Trenitalia para 15/10. A Via dell’Amore às 9h30 depende de reserva.
 
-- 07:15 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — **Café da manhã no quarto**, com pão, fruta e bebida pronta comprados ontem; levar água e snack para a tarde
-- 08:00 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Saída após o café da manhã
+- 07:15 [Le camere in città](place:spe-le-camere-in-citta) — **Café da manhã no quarto**, com pão, fruta e bebida pronta comprados ontem; levar água e snack para a tarde
+  - comida: €0
+- 08:00 [Le camere in città](place:spe-le-camere-in-citta) — Saída após o café da manhã
   - via: A pé até La Spezia Centrale · 10 min
 - 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos. A Via dell’Amore exige cartão combinado ou suplemento, com horário; não está incluída gratuitamente no passe comum
   - via: Trem regional até Riomaggiore · 30 min · €22 — Passe do dia; duração inclui margem de espera. Serviço e partida ainda a confirmar
@@ -618,18 +619,19 @@ Riomaggiore → Via dell’Amore → Manarola → Corniglia → Vernazza → Mon
 - 17:40 [Carrefour Express · Piazza Saint Bon](place:spe-carrefour-saint-bon) — Na volta da estação, comprar o café da manhã de amanhã e o **brunch e lanche para o trem e Roma**: pão, alimentos embalados prontos, fruta, frutos secos e água, sem precisar de geladeira. Sair até 17h55 e voltar direto ao quarto
   - comida: €10
   - via: A pé até a hospedagem · 15 min — Guardar as compras e descansar antes do jantar
-- 18:10 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Guardar as compras, descansar e deixar a mochila do trem preparada
+- 18:10 [Le camere in città](place:spe-le-camere-in-citta) — Guardar as compras, descansar e deixar a mochila do trem preparada
 - 19:30 [Osteria all’Inferno dal 1905](place:spe-inferno) — **Jantar**: massa ou peixe da cozinha liguriana; reservar mesa. Abre às 19h30 na quinta-feira; sair até 20h30
   - comida: €25
-- 20:50 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Retorno a pé; arrumar as malas para o checkout cedo
+- 20:50 [Le camere in città](place:spe-le-camere-in-citta) — Retorno a pé; arrumar as malas para o checkout cedo
 
 ### Dia 3 — Sex 16/10 · Partida para Roma
   - cidades: La Spezia → Roma
 
 Trem La Spezia → Roma.
 
-- 06:45 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — **Café da manhã no quarto** com os alimentos comprados ontem; deixar o brunch, snack e água acessíveis na bagagem de mão
-- 07:25 [Le camere in città](https://www.booking.com/hotel/it/le-camere-in-citta.html) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h
+- 06:45 [Le camere in città](place:spe-le-camere-in-citta) — **Café da manhã no quarto** com os alimentos comprados ontem; deixar o brunch, snack e água acessíveis na bagagem de mão
+  - comida: €0
+- 07:25 [Le camere in città](place:spe-le-camere-in-citta) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h
   - via: A pé até La Spezia Centrale · 10 min
 - 07:40 [La Spezia Centrale](place:spe-centrale) — Conferir a plataforma e preparar o embarque das 08h16
 - 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.

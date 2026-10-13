@@ -670,7 +670,26 @@ export const localTravelCities: TravelCity[] = [
     lat: 44.1033871,
     lng: 9.8217022,
     zoom: 13,
-    places: [laSpeziaStation, ...laSpeziaFoodPlaces, ...cinqueTerreNotionPlaces],
+    places: [
+      laSpeziaStation,
+      {
+        id: 'spe-le-camere-in-citta',
+        name: { en: 'Le camere in città', 'pt-BR': 'Le camere in città' },
+        category: 'lodging',
+        description: {
+          en: 'Guest house on Via XXVII Marzo in central La Spezia, near the railway station. Its rooms have private bathrooms, air conditioning and coffee machines.',
+          'pt-BR': 'Hospedagem na Via XXVII Marzo, no centro de La Spezia, perto da estação ferroviária. Os quartos têm banheiro privativo, ar-condicionado e máquina de café.',
+        },
+        googleRating: 5,
+        // Exact Maps entity /g/11xrjd2cbv, checked 2026-10-13.
+        lat: 44.1103598,
+        lng: 9.8183784,
+        address: 'Via XXVII Marzo, 132 1, 19121 La Spezia',
+        mapsUrl: 'https://www.google.com/maps/place/le+camere+in+citt%C3%A0/@44.1103598,9.8183784,17z/data=!4m9!3m8!1s0x12d4fdbd08788193:0xea6ce56aafc4bdb6!5m2!4m1!1i2!8m2!3d44.1103598!4d9.8183784!16s%2Fg%2F11xrjd2cbv',
+      },
+      ...laSpeziaFoodPlaces,
+      ...cinqueTerreNotionPlaces,
+    ],
   },
   {
     slug: 'sao-paulo',

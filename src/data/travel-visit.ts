@@ -319,6 +319,10 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  'spe-le-camere-in-citta': {
+    bestTime: L('Check-in: 15:00–23:00', 'Check-in: 15h–23h'),
+    crowdProfile: 'local',
+  },
   'lis-my-auchan-calhariz': {
     durationMin: 15,
     durationMax: 25,
