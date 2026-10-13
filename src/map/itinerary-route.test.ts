@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { ItineraryLegDef } from '../data/travel-itinerary-legs';
 import { expandTimelineTransferParts, milanDayLegsById, parisDayLegsById } from '../data/travel-itinerary-legs';
+import { italyRailLegs } from '../data/travel-italy-rail';
 import { stationsFor } from './route-model';
 import { buildItineraryRoute } from './itinerary-route';
 import { fetchWalkingRoute } from './walk-route';
@@ -8,6 +9,24 @@ import { fetchWalkingRoute } from './walk-route';
 vi.mock('./walk-route', () => ({ fetchWalkingRoute: vi.fn(async () => null) }));
 
 describe('authored station access', () => {
+  it.each(['osrm', 'straight'] as const)('marks the five intermediate FB 8619 stops in %s mode', async (walkMode) => {
+    const leg = italyRailLegs.find(leg => leg.label === 'Frecciabianca 8619')!;
+    const stations = leg.stations!;
+    const places = new Map([
+      [leg.from, { id: leg.from, ...stations[0]! }],
+      [leg.to, { id: leg.to, ...stations.at(-1)! }],
+    ]);
+    const route = await buildItineraryRoute([leg.from, leg.to], [leg], places, { walkMode });
+    const spine = route.segments.find(segment => segment.mode === 'transit')!;
+    expect(spine.latlngs.length).toBeGreaterThan(100);
+    expect(stationsFor(spine).map(station => station.name)).toEqual([
+      'Milano Centrale', 'Pavia', 'Genova Piazza Principe', 'Genova Brignole',
+      'Rapallo', 'Chiavari', 'La Spezia Centrale',
+    ]);
+    expect(stationsFor(spine).filter(station => !station.end)).toHaveLength(5);
+    expect(expandTimelineTransferParts(leg, places.get(leg.from)!, places.get(leg.to)!)[0])
+      .toMatchObject({ stationCount: 7, durationMin: 184, board: 'Milano Centrale', exit: 'La Spezia Centrale' });
+  });
   it.each(['osrm', 'straight'] as const)('does not mark track bends when service stops are unknown in %s mode', async (walkMode) => {
     const leg: ItineraryLegDef = { from: 'a', to: 'b', mode: 'transit', line: 'frecciabianca', stationCount: 0, path: [[44, 9], [43, 10], [42, 11]] };
     const places = new Map([['a', { id: 'a', lat: 44, lng: 9 }], ['b', { id: 'b', lat: 42, lng: 11 }]]);

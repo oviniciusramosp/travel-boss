@@ -26,5 +26,18 @@ export const italyRailLegs: ItineraryLegDef[] = [
   { from: venice.id, to: 'mil-centrale', mode: 'transit', line: 'italo', label: 'Italo 8992', board: venice.name.en, exit: 'Milano Centrale', durationMin: 150, stationCount: 0, path: paths['venice-back'] as LatLng[] },
   { from: 'mil-centrale', to: verona.id, mode: 'transit', line: 'frecciarossa', label: 'Frecciarossa 9703', board: 'Milano Centrale', exit: verona.name.en, durationMin: 73, stationCount: 0, path: paths.verona as LatLng[] },
   { from: verona.id, to: 'mil-centrale', mode: 'transit', line: 'italo', label: 'Italo 8988', board: verona.name.en, exit: 'Milano Centrale', durationMin: 75, stationCount: 0, path: paths['verona-back'] as LatLng[] },
-  { from: 'mil-centrale', to: laSpeziaStation.id, mode: 'transit', line: 'frecciabianca', label: 'Frecciabianca 8619', board: 'Milano Centrale', exit: laSpeziaStation.name.en, durationMin: 184, stationCount: 0, path: paths.spezia as LatLng[] },
+  // FB 8619 on 14/10/2026; service stops and OSM anchors in docs/references/frecciabianca-8619-stops-2026-10-14.md.
+  {
+    from: 'mil-centrale', to: laSpeziaStation.id, mode: 'transit', line: 'frecciabianca', label: 'Frecciabianca 8619',
+    board: 'Milano Centrale', exit: laSpeziaStation.name.en, durationMin: 184, path: paths.spezia as LatLng[],
+    stations: [
+      { name: 'Milano Centrale', lat: paths.spezia[0]![0]!, lng: paths.spezia[0]![1]! },
+      { name: 'Pavia', lat: 45.1887959, lng: 9.1449027 },
+      { name: 'Genova Piazza Principe', lat: 44.4170197, lng: 8.9211296 },
+      { name: 'Genova Brignole', lat: 44.4066928, lng: 8.9469156 },
+      { name: 'Rapallo', lat: 44.3512719, lng: 9.2313476 },
+      { name: 'Chiavari', lat: 44.315059, lng: 9.3224198 },
+      { name: 'La Spezia Centrale', lat: paths.spezia.at(-1)![0]!, lng: paths.spezia.at(-1)![1]! },
+    ],
+  },
 ];
