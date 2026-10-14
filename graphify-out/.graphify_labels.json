@@ -25,7 +25,7 @@
   "23": "basemap-style.ts",
   "24": "el",
   "25": "Travel Boss — plano de paridade com o portfólio + polimento de UI",
-  "26": "icons.ts",
+  "26": "ui/controls.ts",
   "27": "Hotel priorities",
   "28": "hotel-scripts.d.ts",
   "29": "Paris",
@@ -55,7 +55,7 @@
   "53": "router.ts",
   "54": "export.ts",
   "55": "baguetts-moliere-location-2026-09-28.md",
-  "56": "refreshWalks",
+  "56": "walk-distance.ts",
   "57": "hotel-dates.ts",
   "58": "paintWeather",
   "59": "frecciabianca-8619-stops-2026-10-14.md",
@@ -125,7 +125,7 @@
   "123": "frecciarossa-card-2026-10-11.md",
   "124": "Itália — atualização a partir do Notion",
   "125": "Manhã de 14/10 e depósito de malas em Roma",
-  "126": "Locale",
+  "126": "icons.ts",
   "127": "Cesarino Via Pattari — fotos e pedido de 11/10/2026",
   "128": "Lisboa — retorno de 20/10/2026",
   "129": "lisboa-mercado-calhariz-2026-10-03.md",
@@ -159,5 +159,6 @@
   "157": "AzulConnectionError",
   "158": "vite.config.ts",
   "159": "map/overview.ts",
+  "160": "drawTripRoutes",
   "161": "map/controls.ts"
 }
