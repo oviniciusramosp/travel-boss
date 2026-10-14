@@ -1,6 +1,7 @@
 import { pickLocale } from '../catalog';
 import { isMobile } from '../app/viewport';
 import type { MapHandle } from '../map/types';
+import { el } from '../ui/dom';
 import { openPlace } from './place-panel';
 
 export const isMobileLayout = isMobile;
@@ -41,9 +42,13 @@ export function activatePlace(map: MapHandle, ...args: Parameters<typeof openPla
   }
   selection.set(map, place.id);
   const row = args[3]?.closest<HTMLElement>('[data-place-id]');
-  if (row) row.dataset.mobileHint = pickLocale(args[2], {
-    en: 'Tap again for details', 'pt-BR': 'Toque novamente para ver detalhes',
-  });
+  if (row) {
+    const hint = row.querySelector<HTMLElement>(':scope > .tb-mobile-hint') ?? el('span', 'tb-mobile-hint');
+    hint.textContent = pickLocale(args[2], {
+      en: 'Tap again for details', 'pt-BR': 'Toque novamente para ver detalhes',
+    });
+    if (!hint.parentElement) row.append(hint);
+  }
   // A linked place may not have a pin in the current filtered view.
   map.select(place.id, place);
 }
