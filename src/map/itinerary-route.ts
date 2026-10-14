@@ -350,7 +350,7 @@ async function expandLeg(
     ]);
 
     if (walkIn) {
-      segs.push({ mode: 'walk', latlngs: walkIn, ...ends });
+      segs.push({ mode: 'walk', latlngs: walkIn, ...ends, walkIndex: 0 });
     }
 
     segs.push({
@@ -364,7 +364,7 @@ async function expandLeg(
     });
 
     if (walkOut) {
-      segs.push({ mode: 'walk', latlngs: walkOut, ...ends });
+      segs.push({ mode: 'walk', latlngs: walkOut, ...ends, walkIndex: 1 });
     }
     return { segments: segs, transfers: [] };
   }
@@ -394,7 +394,7 @@ async function expandLeg(
   ]);
 
   if (walkIn) {
-    segs.push({ mode: 'walk', latlngs: walkIn, ...ends });
+    segs.push({ mode: 'walk', latlngs: walkIn, ...ends, walkIndex: 0 });
   }
 
   const color = transitColor(line.id);
@@ -410,7 +410,7 @@ async function expandLeg(
   }
 
   if (walkOut) {
-    segs.push({ mode: 'walk', latlngs: walkOut, ...ends });
+    segs.push({ mode: 'walk', latlngs: walkOut, ...ends, walkIndex: 1 });
   }
 
   return { segments: segs, transfers: [] };
@@ -485,7 +485,7 @@ function expandLegSync(
     const end = leg.path[leg.path.length - 1]!;
     const color = transitColor(leg.line);
 
-    pushWalkSync(segs, from, { lat: start[0], lng: start[1] }, ends);
+    pushWalkSync(segs, from, { lat: start[0], lng: start[1] }, { ...ends, walkIndex: 0 });
     segs.push({
       mode: 'transit',
       latlngs: leg.path,
@@ -495,7 +495,7 @@ function expandLegSync(
       label: leg.label ?? getTransitLine(leg.line ?? '')?.name,
       ...ends,
     });
-    pushWalkSync(segs, { lat: end[0], lng: end[1] }, to, ends);
+    pushWalkSync(segs, { lat: end[0], lng: end[1] }, to, { ...ends, walkIndex: 1 });
     return { segments: segs, transfers: [] };
   }
 
@@ -516,7 +516,7 @@ function expandLegSync(
   const segs: ItinerarySegment[] = [];
   const color = transitColor(line.id);
 
-  pushWalkSync(segs, from, asCoord(fromSt), ends);
+  pushWalkSync(segs, from, asCoord(fromSt), { ...ends, walkIndex: 0 });
   segs.push({
     mode: 'transit',
     latlngs: metroPath.length >= 2 ? metroPath : straight(fromSt, toSt),
@@ -525,7 +525,7 @@ function expandLegSync(
     label: leg.label ?? line.name,
     ...ends,
   });
-  pushWalkSync(segs, asCoord(toSt), to, ends);
+  pushWalkSync(segs, asCoord(toSt), to, { ...ends, walkIndex: 1 });
   return { segments: segs, transfers: [] };
 }
 

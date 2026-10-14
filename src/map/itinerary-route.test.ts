@@ -5,10 +5,37 @@ import { italyRailLegs } from '../data/travel-italy-rail';
 import { stationsFor } from './route-model';
 import { buildItineraryRoute } from './itinerary-route';
 import { fetchWalkingRoute } from './walk-route';
+import { departureTimes } from '../trip/departures';
 
 vi.mock('./walk-route', () => ({ fetchWalkingRoute: vi.fn(async () => null) }));
 
 describe('authored station access', () => {
+  it.each(['osrm', 'straight'] as const)('keeps both walks of the Manarola–Corniglia train selectable in %s mode', async (walkMode) => {
+    const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === 'ct-san-lorenzo')!;
+    const from = { id: leg.from, lat: 44.107613, lng: 9.7302145 };
+    const to = { id: leg.to, lat: 44.1201473, lng: 9.7106212 };
+    const parts = expandTimelineTransferParts(leg, from, to);
+    expect(parts.map(part => [part.mode, part.walkIndex])).toEqual([['walk', 0], ['transit', undefined], ['walk', 1]]);
+    expect(parts[0]!.label['pt-BR']).toBe('A pé até Manarola');
+    const times = departureTimes(parts, '2026-10-15', '10:55', '11:55', [{
+      date: '2026-10-15', service: 'Regionale 12224', board: 'Manarola', exit: 'Corniglia',
+      departure: '11:24', arrival: '11:26',
+    }], '11:10');
+    expect(times.map(time => time.time)).toEqual(['11:10', '11:24', '11:26']);
+    expect(times[1]).toMatchObject({ durationMin: 2, verified: true, conflict: false });
+    vi.mocked(fetchWalkingRoute).mockImplementation(async points => ({
+      latlngs: points.map(point => [point.lat, point.lng]), distanceM: 500, durationSec: 300,
+    }));
+    try {
+      const route = await buildItineraryRoute([leg.from, leg.to], [leg], new Map([[leg.from, from], [leg.to, to]]), { walkMode });
+      expect(route.segments.map(segment => [segment.mode, segment.walkIndex]))
+        .toEqual([['walk', 0], ['transit', undefined], ['walk', 1]]);
+      expect(route.segments[0]!.latlngs.at(-1)).toEqual(leg.path![0]);
+      expect(route.segments[2]!.latlngs[0]).toEqual(leg.path!.at(-1));
+    } finally {
+      vi.mocked(fetchWalkingRoute).mockResolvedValue(null);
+    }
+  });
   it.each(['osrm', 'straight'] as const)('marks the five intermediate FB 8619 stops in %s mode', async (walkMode) => {
     const leg = italyRailLegs.find(leg => leg.label === 'Frecciabianca 8619')!;
     const stations = leg.stations!;

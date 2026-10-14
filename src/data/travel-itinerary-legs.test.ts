@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { formatLegDuration } from './travel-itinerary-legs';
+import { expandTimelineTransferParts, formatLegDuration, type ItineraryLegDef } from './travel-itinerary-legs';
+
+it('does not add access walks when the two stops already are the railway endpoints', () => {
+  const leg: ItineraryLegDef = { from: 'a', to: 'b', mode: 'transit', stationCount: 2, path: [[44, 9], [44, 10]] };
+  expect(expandTimelineTransferParts(leg, { lat: 44, lng: 9 }, { lat: 44, lng: 10 }).map(part => part.mode)).toEqual(['transit']);
+});
+
+it('does not invent station access for transit with no known geometry or line', () => {
+  const leg: ItineraryLegDef = { from: 'a', to: 'b', mode: 'transit' };
+  expect(expandTimelineTransferParts(leg, { lat: 44, lng: 9 }, { lat: 44, lng: 10 }).map(part => part.mode)).toEqual(['transit']);
+});
 
 describe('formatLegDuration', () => {
   it.each([

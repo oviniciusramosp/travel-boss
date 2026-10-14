@@ -15,6 +15,7 @@ import {
   funicularMontmartre,
   getTransitLine,
   haversineM,
+  nearestStation,
   metro10,
   metro1,
   metro12,
@@ -26,6 +27,7 @@ import {
   rerC,
   rerE,
   sliceLinePath,
+  stationById,
   transilienL,
   type LatLng,
   type TransitLine,
@@ -416,7 +418,22 @@ export function expandTimelineTransferParts(
         ? estimateLegDurationMin(leg, from, to)
         : 8);
 
-  return [
+  const parts: TimelineTransferPart[] = [];
+  const line = leg.line ? getTransitLine(leg.line) : undefined;
+  const boardStation = line && from ? (stationById(line, leg.fromStation ?? '') ?? nearestStation(line, from)) : undefined;
+  const exitStation = line && to ? (stationById(line, leg.toStation ?? '') ?? nearestStation(line, to)) : undefined;
+  const board = leg.path?.[0] ?? (boardStation ? [boardStation.lat, boardStation.lng] : undefined);
+  const exit = leg.path?.at(-1) ?? (exitStation ? [exitStation.lat, exitStation.lng] : undefined);
+  const addWalk = (a: { lat: number; lng: number }, b: { lat: number; lng: number }, walkIndex: number) => {
+    const meters = haversineM(a, b);
+    if (meters < WALK_CONNECTOR_MIN_M) return;
+    const name = leg.board ?? boardStation?.name;
+    parts.push({ mode: 'walk', leg, color: null, stationCount: 0, walkIndex,
+      label: walkIndex === 0 && name ? walkTo(name) : legDisplayLabel({ from: '', to: '', mode: 'walk' }),
+      durationMin: walkMinutes(meters) });
+  };
+  if (from && board) addWalk(from, { lat: board[0]!, lng: board[1]! }, 0);
+  parts.push(
     {
       mode: 'transit',
       leg,
@@ -427,7 +444,9 @@ export function expandTimelineTransferParts(
       ...(leg.board ? { board: leg.board } : {}),
       ...(leg.exit ? { exit: leg.exit } : {}),
     },
-  ];
+  );
+  if (to && exit) addWalk({ lat: exit[0]!, lng: exit[1]! }, to, 1);
+  return parts;
 }
 
 /**
