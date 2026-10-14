@@ -584,12 +584,13 @@ Chegada de trem de Milão e hospedagem em La Spezia.
   - comida: €0
 - 08:00 [Le camere in città](place:spe-le-camere-in-citta) — Saída após o café da manhã
   - via: A pé até La Spezia Centrale · 10 min
+  - status: confirmado
 - 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos, para hoje; reservar a faixa das 9h30 da Via dell’Amore na modalidade de cartão escolhida
   - via: Trem Regionale 22904 · 6 min · €22 — Passe do dia
   - embarque: 2026-10-15 · Regionale 22904 · La Spezia Centrale → Riomaggiore · 08:20 → 08:26
 - 09:00 [Porto de Riomaggiore](place:ct-riomaggiore-port) — Ver o porto e as casas coloridas; seguir ao acesso da Via dell’Amore
   - saída: 09:10
-- 09:30 [Via dell’Amore](place:ct-amore) — Horário desejado para a trilha Riomaggiore → Manarola; reservar ingresso com horário e conferir o preço do suplemento antes da compra
+- 09:30 [Via dell’Amore](place:ct-amore) — Horário desejado para a trilha Riomaggiore → Manarola
   - status: a confirmar
 - 10:30 [Mirante junto ao porto de Manarola](place:ct-manarola-viewpoint) — Ver as casas coloridas sobre os rochedos
 - 10:55 [Chiesa di San Lorenzo](place:ct-san-lorenzo) — Visita por fora; sair às 11h10 para a estação
