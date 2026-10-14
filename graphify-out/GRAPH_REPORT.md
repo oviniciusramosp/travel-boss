@@ -1,7 +1,7 @@
-# Graph Report - travel-boss-cinque-terre-15-public  (2026-10-14)
+# Graph Report - travel-boss-cinque-terre-15-public  (2026-10-15)
 
 ## Corpus Check
-- 756 files · ~596,754 words
+- 756 files · ~596,744 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b3a5742d`
+- Built from commit: `08d6da9f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -255,16 +255,16 @@ Cohesion: 0.12
 Nodes (33): placeCategoriesOffByDefault, placeCategoryOrder, googleMapsUrl(), ItineraryStop, subcategoryLabel(), subPointParents(), guidePlaceIds(), onPlaceClose() (+25 more)
 
 ### Community 11 - "hotel-booking-details.test.ts"
-Cohesion: 0.18
-Nodes (11): BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), STAFF_MINIMUM, validScore(), booking, categories (+3 more)
+Cohesion: 0.15
+Nodes (14): BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), parseCategoryScores(), STAFF_MINIMUM, validScore(), enrichBookingHotels() (+6 more)
 
 ### Community 12 - "airbnb-search.mjs"
-Cohesion: 0.11
-Nodes (22): ref_node_child_process, ref_node_fs, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbType(), extract() (+14 more)
+Cohesion: 0.13
+Nodes (20): ref_node_child_process, ref_node_fs, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbType(), extract() (+12 more)
 
 ### Community 13 - "hotel-ranking.mjs"
-Cohesion: 0.11
-Nodes (26): accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing(), jevCache (+18 more)
+Cohesion: 0.10
+Nodes (28): accommodationEligibility(), airbnbQuality(), clamp(), evaluateJev(), hotelEvidence(), hotelRegion(), insideRing(), jevCache (+20 more)
 
 ### Community 14 - "note-edit.ts"
 Cohesion: 0.15
@@ -423,8 +423,8 @@ Cohesion: 0.46
 Nodes (6): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(), StayRange, validStayRange()
 
 ### Community 58 - "hotel-search-match.mjs"
-Cohesion: 0.18
-Nodes (24): azulZone(), ACCOMMODATION_TYPES, accommodationType(), ARTICLES, azulHotelUrl(), bestBookingMatch(), bookingHotelUrl(), bookingImageLarge() (+16 more)
+Cohesion: 0.23
+Nodes (19): ACCOMMODATION_TYPES, accommodationType(), ARTICLES, azulHotelUrl(), bestBookingMatch(), bookingHotelUrl(), bookingImageLarge(), bookingPhotoUrl() (+11 more)
 
 ### Community 59 - "frecciabianca-8619-stops-2026-10-14.md"
 Cohesion: 0.33
@@ -452,7 +452,7 @@ Nodes (4): Cesarino Via Pattari, Duomo: calendário e ingresso, Milão — M3, C
 
 ### Community 66 - "hotel-search.mjs"
 Cohesion: 0.13
-Nodes (30): airbnbSnapshot(), parseCategoryScores(), AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), BOOKING_EXTRACT (+22 more)
+Nodes (32): airbnbSnapshot(), AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), azulZone(), BOOKING_EXTRACT (+24 more)
 
 ### Community 67 - "camera.ts"
 Cohesion: 0.30

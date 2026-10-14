@@ -4648,6 +4648,18 @@
       "norm_label": "extractbookingdetails()"
     },
     {
+      "label": "parseCategoryScores()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-booking-details.mjs",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_booking_details_parsecategoryscores",
+      "community": 11,
+      "community_name": "hotel-booking-details.test.ts",
+      "norm_label": "parsecategoryscores()"
+    },
+    {
       "label": "validScore()",
       "file_type": "code",
       "source_file": "scripts/hotel-booking-details.mjs",
@@ -4658,6 +4670,30 @@
       "community": 11,
       "community_name": "hotel-booking-details.test.ts",
       "norm_label": "validscore()"
+    },
+    {
+      "label": "enrichBookingHotels()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search.mjs",
+      "source_location": "L360",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_enrichbookinghotels",
+      "community": 11,
+      "community_name": "hotel-booking-details.test.ts",
+      "norm_label": "enrichbookinghotels()"
+    },
+    {
+      "label": "mapPool()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search.mjs",
+      "source_location": "L375",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_mappool",
+      "community": 11,
+      "community_name": "hotel-booking-details.test.ts",
+      "norm_label": "mappool()"
     },
     {
       "label": "aiBadge()",
@@ -5080,6 +5116,18 @@
       "norm_label": "searchairbnb()"
     },
     {
+      "label": "searchHotels()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search.mjs",
+      "source_location": "L554",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_searchhotels",
+      "community": 12,
+      "community_name": "airbnb-search.mjs",
+      "norm_label": "searchhotels()"
+    },
+    {
       "label": "clampRating()",
       "file_type": "code",
       "source_file": "src/ui/rating.ts",
@@ -5330,18 +5378,6 @@
       "community": 13,
       "community_name": "hotel-ranking.mjs",
       "norm_label": "walkingmatrix()"
-    },
-    {
-      "label": "searchHotels()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search.mjs",
-      "source_location": "L554",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_searchhotels",
-      "community": 13,
-      "community_name": "hotel-ranking.mjs",
-      "norm_label": "searchhotels()"
     },
     {
       "label": "pause()",
@@ -12412,18 +12448,6 @@
       "norm_label": "validstayrange()"
     },
     {
-      "label": "azulZone()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search.mjs",
-      "source_location": "L170",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_azulzone",
-      "community": 58,
-      "community_name": "hotel-search-match.mjs",
-      "norm_label": "azulzone()"
-    },
-    {
       "label": "accommodationType()",
       "file_type": "code",
       "source_file": "scripts/hotel-search-match.mjs",
@@ -12496,30 +12520,6 @@
       "norm_label": "bookingphotourl()"
     },
     {
-      "label": "bookingSearchUrl()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search-match.mjs",
-      "source_location": "L169",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_match_bookingsearchurl",
-      "community": 58,
-      "community_name": "hotel-search-match.mjs",
-      "norm_label": "bookingsearchurl()"
-    },
-    {
-      "label": "decodeEntities()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search-match.mjs",
-      "source_location": "L18",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_match_decodeentities",
-      "community": 58,
-      "community_name": "hotel-search-match.mjs",
-      "norm_label": "decodeentities()"
-    },
-    {
       "label": "filterCandidates()",
       "file_type": "code",
       "source_file": "scripts/hotel-search-match.mjs",
@@ -12530,18 +12530,6 @@
       "community": 58,
       "community_name": "hotel-search-match.mjs",
       "norm_label": "filtercandidates()"
-    },
-    {
-      "label": "foldText()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search-match.mjs",
-      "source_location": "L28",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_match_foldtext",
-      "community": 58,
-      "community_name": "hotel-search-match.mjs",
-      "norm_label": "foldtext()"
     },
     {
       "label": "haversineM()",
@@ -12614,18 +12602,6 @@
       "community": 58,
       "community_name": "hotel-search-match.mjs",
       "norm_label": "parsebookingscore()"
-    },
-    {
-      "label": "pickZone()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search-match.mjs",
-      "source_location": "L156",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_match_pickzone",
-      "community": 58,
-      "community_name": "hotel-search-match.mjs",
-      "norm_label": "pickzone()"
     },
     {
       "label": "simplifyHotelName()",
@@ -13312,18 +13288,6 @@
       "norm_label": "airbnbsnapshot()"
     },
     {
-      "label": "parseCategoryScores()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-booking-details.mjs",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_booking_details_parsecategoryscores",
-      "community": 66,
-      "community_name": "hotel-search.mjs",
-      "norm_label": "parsecategoryscores()"
-    },
-    {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "scripts/hotel-search.mjs",
@@ -13382,6 +13346,18 @@
       "community": 66,
       "community_name": "hotel-search.mjs",
       "norm_label": "azultabhealthy()"
+    },
+    {
+      "label": "azulZone()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search.mjs",
+      "source_location": "L170",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_azulzone",
+      "community": 66,
+      "community_name": "hotel-search.mjs",
+      "norm_label": "azulzone()"
     },
     {
       "label": "bookingDetails()",
@@ -13456,18 +13432,6 @@
       "norm_label": "discoverserver()"
     },
     {
-      "label": "enrichBookingHotels()",
-      "file_type": "code",
-      "source_file": "scripts/hotel-search.mjs",
-      "source_location": "L360",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "scripts_hotel_search_enrichbookinghotels",
-      "community": 66,
-      "community_name": "hotel-search.mjs",
-      "norm_label": "enrichbookinghotels()"
-    },
-    {
       "label": "ensureAzulTab()",
       "file_type": "code",
       "source_file": "scripts/hotel-search.mjs",
@@ -13528,16 +13492,52 @@
       "norm_label": "log()"
     },
     {
-      "label": "mapPool()",
+      "label": "bookingSearchUrl()",
       "file_type": "code",
-      "source_file": "scripts/hotel-search.mjs",
-      "source_location": "L375",
+      "source_file": "scripts/hotel-search-match.mjs",
+      "source_location": "L169",
       "_callable": true,
       "_origin": "ast",
-      "id": "scripts_hotel_search_mappool",
+      "id": "scripts_hotel_search_match_bookingsearchurl",
       "community": 66,
       "community_name": "hotel-search.mjs",
-      "norm_label": "mappool()"
+      "norm_label": "bookingsearchurl()"
+    },
+    {
+      "label": "decodeEntities()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search-match.mjs",
+      "source_location": "L18",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_match_decodeentities",
+      "community": 66,
+      "community_name": "hotel-search.mjs",
+      "norm_label": "decodeentities()"
+    },
+    {
+      "label": "foldText()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search-match.mjs",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_match_foldtext",
+      "community": 66,
+      "community_name": "hotel-search.mjs",
+      "norm_label": "foldtext()"
+    },
+    {
+      "label": "pickZone()",
+      "file_type": "code",
+      "source_file": "scripts/hotel-search-match.mjs",
+      "source_location": "L156",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_hotel_search_match_pickzone",
+      "community": 66,
+      "community_name": "hotel-search.mjs",
+      "norm_label": "pickzone()"
     },
     {
       "label": "openAzulTab()",
@@ -17129,50 +17129,6 @@
       "norm_label": "root"
     },
     {
-      "label": "airbnb-search.test.ts",
-      "file_type": "code",
-      "source_file": "src/data/airbnb-search.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_data_airbnb_search_test",
-      "community": 12,
-      "community_name": "airbnb-search.mjs",
-      "norm_label": "airbnb-search.test.ts"
-    },
-    {
-      "label": "details",
-      "file_type": "code",
-      "source_file": "src/data/airbnb-search.test.ts",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "src_data_airbnb_search_test_details",
-      "community": 12,
-      "community_name": "airbnb-search.mjs",
-      "norm_label": "details"
-    },
-    {
-      "label": "params",
-      "file_type": "code",
-      "source_file": "src/data/airbnb-search.test.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_data_airbnb_search_test_params",
-      "community": 12,
-      "community_name": "airbnb-search.mjs",
-      "norm_label": "params"
-    },
-    {
-      "label": "row",
-      "file_type": "code",
-      "source_file": "src/data/airbnb-search.test.ts",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "src_data_airbnb_search_test_row",
-      "community": 12,
-      "community_name": "airbnb-search.mjs",
-      "norm_label": "row"
-    },
-    {
       "label": "paris-2026-10-10-eiffel.md",
       "file_type": "document",
       "source_file": "docs/references/paris-2026-10-10-eiffel.md",
@@ -17721,6 +17677,50 @@
       "community": 13,
       "community_name": "hotel-ranking.mjs",
       "norm_label": "routecache"
+    },
+    {
+      "label": "airbnb-search.test.ts",
+      "file_type": "code",
+      "source_file": "src/data/airbnb-search.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_data_airbnb_search_test",
+      "community": 13,
+      "community_name": "hotel-ranking.mjs",
+      "norm_label": "airbnb-search.test.ts"
+    },
+    {
+      "label": "details",
+      "file_type": "code",
+      "source_file": "src/data/airbnb-search.test.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_data_airbnb_search_test_details",
+      "community": 13,
+      "community_name": "hotel-ranking.mjs",
+      "norm_label": "details"
+    },
+    {
+      "label": "params",
+      "file_type": "code",
+      "source_file": "src/data/airbnb-search.test.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_data_airbnb_search_test_params",
+      "community": 13,
+      "community_name": "hotel-ranking.mjs",
+      "norm_label": "params"
+    },
+    {
+      "label": "row",
+      "file_type": "code",
+      "source_file": "src/data/airbnb-search.test.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_data_airbnb_search_test_row",
+      "community": 13,
+      "community_name": "hotel-ranking.mjs",
+      "norm_label": "row"
     },
     {
       "label": "hotel-ranking.test.ts",
@@ -21015,7 +21015,7 @@
       "label": "Dia 1 \u2014 Dom 18/10 \u00b7 Chegada a Lisboa",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L733",
+      "source_location": "L734",
       "_origin": "ast",
       "id": "content_trips_europa_dia_1_dom_18_10_chegada_a_lisboa",
       "community": 29,
@@ -21048,7 +21048,7 @@
       "label": "Dia 1 \u2014 Sex 16/10 \u00b7 Chegada, Coliseu, F\u00f3rum e Palatino",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L645",
+      "source_location": "L646",
       "_origin": "ast",
       "id": "content_trips_europa_dia_1_sex_16_10_chegada_coliseu_f\u00f3rum_e_palatino",
       "community": 29,
@@ -21081,7 +21081,7 @@
       "label": "Dia 2 \u2014 Seg 19/10 \u00b7 Lisboa",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L747",
+      "source_location": "L748",
       "_origin": "ast",
       "id": "content_trips_europa_dia_2_seg_19_10_lisboa",
       "community": 29,
@@ -21103,7 +21103,7 @@
       "label": "Dia 2 \u2014 S\u00e1b 17/10 \u00b7 Vaticano, Pante\u00e3o e centro hist\u00f3rico",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L676",
+      "source_location": "L677",
       "_origin": "ast",
       "id": "content_trips_europa_dia_2_s\u00e1b_17_10_vaticano_pante\u00e3o_e_centro_hist\u00f3rico",
       "community": 29,
@@ -21114,7 +21114,7 @@
       "label": "Dia 3 \u2014 Dom 18/10 \u00b7 Voo para Lisboa",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L707",
+      "source_location": "L708",
       "_origin": "ast",
       "id": "content_trips_europa_dia_3_dom_18_10_voo_para_lisboa",
       "community": 29,
@@ -21125,7 +21125,7 @@
       "label": "Dia 3 \u2014 Sex 16/10 \u00b7 Partida para Roma",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L625",
+      "source_location": "L626",
       "_origin": "ast",
       "id": "content_trips_europa_dia_3_sex_16_10_partida_para_roma",
       "community": 29,
@@ -21147,7 +21147,7 @@
       "label": "Dia 3 \u2014 Ter 20/10 \u00b7 Volta para S\u00e3o Paulo",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L772",
+      "source_location": "L773",
       "_origin": "ast",
       "id": "content_trips_europa_dia_3_ter_20_10_volta_para_s\u00e3o_paulo",
       "community": 29,
@@ -21257,7 +21257,7 @@
       "label": "Lisboa",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L728",
+      "source_location": "L729",
       "_origin": "ast",
       "id": "content_trips_europa_lisboa",
       "community": 29,
@@ -21290,7 +21290,7 @@
       "label": "Roma",
       "file_type": "document",
       "source_file": "content/trips/europa.md",
-      "source_location": "L640",
+      "source_location": "L641",
       "_origin": "ast",
       "id": "content_trips_europa_roma",
       "community": 29,
@@ -73545,7 +73545,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L640",
+      "source_location": "L641",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_europa",
@@ -73556,7 +73556,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L728",
+      "source_location": "L729",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_europa",
@@ -73589,7 +73589,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L625",
+      "source_location": "L626",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_la_spezia",
@@ -73600,7 +73600,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L733",
+      "source_location": "L734",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_lisboa",
@@ -73611,7 +73611,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L747",
+      "source_location": "L748",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_lisboa",
@@ -73622,7 +73622,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L772",
+      "source_location": "L773",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_lisboa",
@@ -73765,7 +73765,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L645",
+      "source_location": "L646",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_roma",
@@ -73776,7 +73776,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L676",
+      "source_location": "L677",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_roma",
@@ -73787,7 +73787,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "content/trips/europa.md",
-      "source_location": "L707",
+      "source_location": "L708",
       "weight": 1.0,
       "_origin": "ast",
       "source": "content_trips_europa_roma",
@@ -95194,5 +95194,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b3a5742d3b7eea6342c24e3f70260f2b23df7c0a"
+  "built_at_commit": "08d6da9fb8a89c30df544cb3eef765b737ffd371"
 }
