@@ -6,6 +6,7 @@
 import type { LString } from './travel';
 import parisMilanRail from './travel-paris-milan-rail.json';
 import { italyRailLegs } from './travel-italy-rail';
+import cinqueTerrePaths from './travel-cinque-terre-paths.json';
 import {
   cinqueTerreRegional,
   milanMetro3,
@@ -957,11 +958,23 @@ const palaisToChampsWalk: LatLng[] = [
 const tripEuropa2026: ItineraryLegDef[] = [
   trainLeg('rom-termini', 'rom-stow-colosseo', 30, [ride(romeMetroB, 'termini', 'colosseo')]),
   trainLeg('ven-salute', 'ven-santa-lucia', 60, [ride(veniceVaporetto1, 'salute', 'ferrovia')]),
-  trainLeg('spe-centrale', 'ct-riomaggiore', 30, [ride(cinqueTerreRegional, 'spezia', 'riomaggiore')]),
-  trainLeg('ct-manarola', 'ct-corniglia', 30, [ride(cinqueTerreRegional, 'manarola', 'corniglia')]),
-  trainLeg('ct-corniglia', 'ct-vernazza', 30, [ride(cinqueTerreRegional, 'corniglia', 'vernazza')]),
-  trainLeg('ct-vernazza', 'ct-monterosso', 50, [ride(cinqueTerreRegional, 'vernazza', 'monterosso')]),
-  trainLeg('ct-monterosso', 'spe-centrale', 60, [ride(cinqueTerreRegional, 'monterosso', 'spezia')]),
+  // Dated Regionale services on 15/10, with station access separate from the visits.
+  // Geometry / service provenance: docs/references/cinque-terre-2026-10-15.md.
+  { from: 'spe-centrale', to: 'ct-riomaggiore-port', mode: 'transit', ...ride(cinqueTerreRegional, 'spezia', 'riomaggiore'),
+    label: 'Regionale 22904', durationMin: 6, path: cinqueTerrePaths['spezia-riomaggiore'] as LatLng[],
+    stations: cinqueTerreRegional.stations.slice(0, 2) },
+  { from: 'ct-san-lorenzo', to: 'ct-lardarina', mode: 'transit', ...ride(cinqueTerreRegional, 'manarola', 'corniglia'),
+    label: 'Regionale 12224', durationMin: 2, path: cinqueTerrePaths['manarola-corniglia'] as LatLng[],
+    stations: cinqueTerreRegional.stations.slice(2, 4) },
+  { from: 'ct-largo-taragio', to: 'ct-vernazza-port', mode: 'transit', ...ride(cinqueTerreRegional, 'corniglia', 'vernazza'),
+    label: 'Regionale 22922', durationMin: 3, path: cinqueTerrePaths['corniglia-vernazza'] as LatLng[],
+    stations: cinqueTerreRegional.stations.slice(3, 5) },
+  { from: 'ct-visconti', to: 'ct-fegina', mode: 'transit', ...ride(cinqueTerreRegional, 'vernazza', 'monterosso'),
+    label: 'Regionale 12230', durationMin: 4, path: cinqueTerrePaths['vernazza-monterosso'] as LatLng[],
+    stations: cinqueTerreRegional.stations.slice(4, 6) },
+  { from: 'ct-nettuno', to: 'spe-centrale', mode: 'transit', ...ride(cinqueTerreRegional, 'monterosso', 'spezia'),
+    label: 'Regionale 22935', durationMin: 27, path: cinqueTerrePaths['monterosso-spezia'] as LatLng[],
+    stations: [...cinqueTerreRegional.stations].reverse() },
   // 5/10: Tulheries → market → Maillol → Carrousel → Louvre.
   // Pedestrian geometry: Valhalla / OSM, 2026-09-27.
   {

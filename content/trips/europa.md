@@ -580,42 +580,40 @@ Chegada de trem de Milão e hospedagem em La Spezia.
 ### Dia 2 — Qui 15/10 · Cinque Terre
   - cidades: La Spezia → Riomaggiore → Manarola → Corniglia → Vernazza → Monterosso al Mare
 
-Riomaggiore → Via dell’Amore → Manarola → Corniglia → Vernazza → Monterosso, conforme o Notion. Horários de passeio estimados; partidas dos regionais ainda a conferir nos painéis e na Trenitalia para 15/10. A Via dell’Amore às 9h30 depende de reserva.
-
 - 07:15 [Le camere in città](place:spe-le-camere-in-citta) — **Café da manhã no quarto**, com pão, fruta e bebida pronta comprados ontem; levar água e snack para a tarde
   - comida: €0
 - 08:00 [Le camere in città](place:spe-le-camere-in-citta) — Saída após o café da manhã
   - via: A pé até La Spezia Centrale · 10 min
-- 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos. A Via dell’Amore exige cartão combinado ou suplemento, com horário; não está incluída gratuitamente no passe comum
-  - via: Trem regional até Riomaggiore · 30 min · €22 — Passe do dia; duração inclui margem de espera. Serviço e partida ainda a confirmar
-- 08:40 [Riomaggiore](place:ct-riomaggiore) — Passeio pela vila e pelo porto
-- 09:00 **Porto — embarcadouro** — Ver o porto e as casas coloridas
-- 09:20 **Estação — retorno** — Seguir ao acesso da Via dell’Amore
+- 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos, para hoje; reservar a faixa das 9h30 da Via dell’Amore na modalidade de cartão escolhida
+  - via: Trem Regionale 22904 · 6 min · €22 — Passe do dia
+  - embarque: 2026-10-15 · Regionale 22904 · La Spezia Centrale → Riomaggiore · 08:20 → 08:26
+- 09:00 [Porto de Riomaggiore](place:ct-riomaggiore-port) — Ver o porto e as casas coloridas; seguir ao acesso da Via dell’Amore
+  - saída: 09:10
 - 09:30 [Via dell’Amore](place:ct-amore) — Horário desejado para a trilha Riomaggiore → Manarola; reservar ingresso com horário e conferir o preço do suplemento antes da compra
   - status: a confirmar
-- 10:10 [Manarola](place:ct-manarola) — Passeio pelo porto e pela parte alta da vila; retornar à estação até 11h15
-  - saída: 11:15
-  - via: Trem regional de Manarola até Corniglia · 30 min — Inclui espera; coberto pelo passe, partida ainda a confirmar
-- 10:30 **Mirante junto ao porto** — Ver as casas coloridas sobre os rochedos
-- 10:55 **Chiesa di San Lorenzo** — Visita por fora
-- 11:15 **Estação — retorno** — Aguardar o regional para Corniglia
-- 11:45 [Corniglia](place:ct-corniglia) — Passeio pela Lardarina e pelo centro; retornar à estação até 12h45
-  - saída: 12:45
-  - via: Trem regional até Vernazza · 30 min — Inclui espera; coberto pelo passe, partida ainda a confirmar
-- 12:10 **Scalinata Lardarina** — Subida até a vila
-- 12:20 **Largo Taragio** — Passeio pelo centro
-- 12:45 **Estação — retorno** — Aguardar o regional para Vernazza
-- 13:15 [Vernazza](place:ct-vernazza) — Passeio pelo porto, igreja por fora e almoço; ver o castelo a partir da região do porto, sem subir
+- 10:30 [Mirante junto ao porto de Manarola](place:ct-manarola-viewpoint) — Ver as casas coloridas sobre os rochedos
+- 10:55 [Chiesa di San Lorenzo](place:ct-san-lorenzo) — Visita por fora; sair às 11h10 para a estação
+  - saída: 11:10
+  - via: Trem Regionale 12224 · 2 min
+  - embarque: 2026-10-15 · Regionale 12224 · Manarola → Corniglia · 11:24 → 11:26
+- 11:55 [Scalinata Lardarina](place:ct-lardarina) — Subir a escadaria desde a estação até a vila
+- 12:20 [Largo Taragio](place:ct-largo-taragio) — Passeio pelo centro; sair às 12h35 para descer à estação
+  - saída: 12:35
+  - via: Trem Regionale 22922 · 3 min
+  - embarque: 2026-10-15 · Regionale 22922 · Corniglia → Vernazza · 13:07 → 13:10
+- 13:20 [Molo do porto de Vernazza](place:ct-vernazza-port) — Ver o porto e as casas; observar o castelo a partir da região do porto, sem subir
+- 13:30 [Chiesa di Santa Margherita di Antiochia](place:ct-santa-margherita) — Ver a igreja por fora, junto ao porto
+- 13:45 [Bottega Visconti](place:ct-visconti) — **Almoço**: focaccia ou sanduíche para levar; comer antes de seguir à estação
   - saída: 14:10
-  - via: Trem regional de Vernazza até Monterosso · 50 min — Sair da região do almoço até 14h10; inclui caminhada à estação e espera, coberto pelo passe; partida ainda a confirmar
-- 13:30 **Porto — Santa Margherita** — Ver o porto e a igreja por fora
-- 13:45 **Bottega Visconti** — **Almoço**: focaccia ou sanduíche para levar; comer antes de seguir à estação
-- 15:00 [Monterosso al Mare](place:ct-monterosso) — Passeio pela praia de Fegina; retornar à estação até 16h30
-  - saída: 16:30
-  - via: Trem regional até La Spezia Centrale · 1h — Inclui espera; coberto pelo passe, serviço de retorno ainda a confirmar
-- 15:30 **Estátua de Netuno** — Ver a estátua junto à praia e fazer o **café da tarde**, com fruta, snack e bebida levados na mochila; consumo já pago nas compras de ontem
-- 16:30 **Estação — retorno** — Aguardar o regional para La Spezia
-- 17:30 [La Spezia Centrale](place:spe-centrale) — Retorno previsto
+  - via: Trem Regionale 12230 · 4 min
+  - embarque: 2026-10-15 · Regionale 12230 · Vernazza → Monterosso · 14:31 → 14:35
+- 15:00 [Spiaggia di Fegina](place:ct-fegina) — Passeio pela praia e pelo calçadão
+- 15:30 [Estátua de Netuno — Il Gigante](place:ct-nettuno) — Ver a estátua junto à praia e fazer o **café da tarde**, com fruta, snack e bebida levados na mochila; consumo já pago nas compras de ontem. Sair às 16h15 para a estação
+  - comida: €0
+  - saída: 16:15
+  - via: Trem Regionale 22935 · 27 min
+  - embarque: 2026-10-15 · Regionale 22935 · Monterosso → La Spezia Centrale · 16:43 → 17:10
+- 17:10 [La Spezia Centrale](place:spe-centrale) — Retorno de Monterosso
 - 17:40 [Carrefour Express · Piazza Saint Bon](place:spe-carrefour-saint-bon) — Na volta da estação, comprar o café da manhã de amanhã e o **brunch e lanche para o trem e Roma**: pão, alimentos embalados prontos, fruta, frutos secos e água, sem precisar de geladeira. Sair até 17h55 e voltar direto ao quarto
   - comida: €10
   - via: A pé até a hospedagem · 15 min — Guardar as compras e descansar antes do jantar

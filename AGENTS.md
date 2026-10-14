@@ -79,6 +79,8 @@ Raio concêntrico: `r_interno = r_externo − distância até a borda`, piso `--
 
 ## Como um LLM edita um roteiro
 
+Sub-pontos ficam restritos a pontos de interesse dentro de parques, jardins, palácios ou construções. Cidades, vilas e bairros não são lugares-pai: portos, praias, mirantes, igrejas, praças, escadarias e restaurantes neles entram como lugares individuais e paradas próprias. Estações de embarque e desembarque pertencem à linha do transporte.
+
 Todo item de visita precisa referenciar um ponto ou sub-ponto, com categoria, ponto colorido e descrição; não deixe uma visita apenas como nota solta. Bairros como Montmartre são percorridos por paradas próprias de interesse (fotografia, caminhada, café etc.), sem um pino-pai do bairro. Estações de chegada e saída pertencem à linha do transporte, como no metrô. Pontos de comida ficam como paradas próprias no roteiro.
 
 Nunca crie comentários ou instruções como linhas avulsas no meio da timeline, mesmo com horário ou título em negrito. Eles pertencem à nota de um ponto/sub-ponto existente ou à nota do trecho de transporte (`via: … — …`). Exemplo: almoço com comida própria durante a viagem fica na nota da row Frecciarossa, com o horário no texto; `- 12:00 **Almoço no trem** …` não é uma parada válida. Não crie um lugar fictício para acomodar o comentário. Na revisão de cada dia editado, confira que nenhuma instrução ficou solta entre as rows.
