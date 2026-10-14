@@ -745,6 +745,7 @@ button.tb-icon-btn.tb-place-panel__collapse:active:not(:disabled) {
   top: 0;
   z-index: var(--z-map);
   flex: none;
+  width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: var(--r-card) var(--r-card) var(--r-none) var(--r-none);
