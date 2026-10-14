@@ -2073,8 +2073,8 @@ export function mountTrip(
         const routeHop =
           place && nextPlace && exit && entryPoint
             ? accessHop({
-                from: { id: place.id, lat: exit.lat, lng: exit.lng },
-                to: { id: nextPlace.id, lat: entryPoint.lat, lng: entryPoint.lng },
+                from: { id: place.id, lat: exit.lat, lng: exit.lng, station: place.category === 'transport' },
+                to: { id: nextPlace.id, lat: entryPoint.lat, lng: entryPoint.lng, station: nextPlace.category === 'transport' },
                 ...(entry.depart ? { via: entry.depart } : {}),
               }, place, nextPlace)
             : null;

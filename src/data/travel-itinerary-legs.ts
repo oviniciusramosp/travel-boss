@@ -328,8 +328,8 @@ function transitPathDurationMin(path: LatLng[], line?: string): number {
  */
 export function expandTimelineTransferParts(
   leg: ItineraryLegDef,
-  from?: { lat: number; lng: number },
-  to?: { lat: number; lng: number },
+  from?: { lat: number; lng: number; station?: boolean },
+  to?: { lat: number; lng: number; station?: boolean },
 ): TimelineTransferPart[] {
   if (leg.mode === 'walk') {
     const durationMin =
@@ -427,10 +427,12 @@ export function expandTimelineTransferParts(
   const addWalk = (a: { lat: number; lng: number }, b: { lat: number; lng: number }, walkIndex: number) => {
     const meters = haversineM(a, b);
     if (meters < WALK_CONNECTOR_MIN_M) return;
+    const durationMin = walkMinutes(meters);
+    if (durationMin <= 1 && (walkIndex === 0 ? from?.station : to?.station)) return;
     const name = leg.board ?? boardStation?.name;
     parts.push({ mode: 'walk', leg, color: null, stationCount: 0, walkIndex,
       label: walkIndex === 0 && name ? walkTo(name) : legDisplayLabel({ from: '', to: '', mode: 'walk' }),
-      durationMin: walkMinutes(meters) });
+      durationMin });
   };
   if (from && board) addWalk(from, { lat: board[0]!, lng: board[1]! }, 0);
   parts.push(

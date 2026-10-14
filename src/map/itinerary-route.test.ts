@@ -10,6 +10,17 @@ import { departureTimes } from '../trip/departures';
 vi.mock('./walk-route', () => ({ fetchWalkingRoute: vi.fn(async () => null) }));
 
 describe('authored station access', () => {
+  it.each([true, false])('avoids a phantom boarding conflict only when the origin is a station (%s)', station => {
+    const leg = italyRailLegs.find(leg => leg.label === 'Frecciabianca 8619')!;
+    const parts = expandTimelineTransferParts(leg,
+      { lat: 45.4858786, lng: 9.2042617, station }, { lat: 44.111564, lng: 9.81358, station: true });
+    const times = departureTimes(parts, '2026-10-14', '13:10', '16:14', [{
+      date: '2026-10-14', service: 'Frecciabianca 8619', board: 'Milano Centrale', exit: 'La Spezia Centrale',
+      departure: '13:10', arrival: '16:14',
+    }]);
+    expect(times.find(time => time.verified)).toMatchObject({ time: '13:10', conflict: !station });
+    expect(parts[0]!.mode).toBe(station ? 'transit' : 'walk');
+  });
   it.each(['osrm', 'straight'] as const)('keeps both walks of the Manarola–Corniglia train selectable in %s mode', async (walkMode) => {
     const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === 'ct-san-lorenzo')!;
     const from = { id: leg.from, lat: 44.107613, lng: 9.7302145 };

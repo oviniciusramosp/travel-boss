@@ -28,4 +28,6 @@ A timeline expandia caminhadas de acesso/saída apenas para pernas com vários h
 
 Os minutos de caminhada são estimativas pela distância entre os pontos, como os conectores existentes; o mapa usa o roteador de pedestres. Não são horários oficiais, nem avaliação de filas, plataformas ou do esforço das escadas. San Lorenzo → estação de Manarola, estação de Corniglia → Lardarina, Largo Taragio → estação de Corniglia e os demais acessos do dia passam a aparecer na sequência. Os horários consultados dos trens e as saídas explícitas do roteiro são preservados.
 
+Quando a parada já é de transporte, um desvio de cerca de um minuto até o extremo da geometria ferroviária não vira acesso adicional nem produz alerta de conexão. A mesma caminhada partindo de um café continua considerada na margem do embarque. Teste de regressão cobre o FB 8619: pino de Milano Centrale às 13:10, partida às 13:10, sem acesso fictício de um minuto; origem fora da estação continua sinalizada quando não há margem.
+
 Hospedagem: uma única parada às 08:00 conserva a saída confirmada e incorpora o café das 07:15 em sua nota. Mantidos os estados de revisão e os orçamentos de €45 de comida e €22 de transporte/ingressos por pessoa; Via dell’Amore permanece a confirmar.

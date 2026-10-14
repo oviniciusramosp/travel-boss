@@ -13,6 +13,8 @@ export type TripLegPoint = {
   id?: string;
   lat: number;
   lng: number;
+  /** A station stop: minute-long offsets to the track do not require a new access walk. */
+  station?: boolean;
 };
 
 /** Authored spine. `path` is catalog order, [lat, lng]. */
