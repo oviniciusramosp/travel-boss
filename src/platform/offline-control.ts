@@ -1,7 +1,7 @@
 import { pickLocale, type Locale } from '../catalog';
 import type { Trip } from '../trip/parse';
 import { el } from '../ui/dom';
-import { onlineRefreshUrl, refreshAppCache, refreshedUrl } from './refresh';
+import { onlineRefreshUrl, refreshAppCache, reloadApp } from './refresh';
 import { collectOfflineRoutes, offlineRoutesReady, removeOfflineRoutes } from './offline-routes';
 import { cacheMessage, cachedPhotos, downloadedPhotoUrls, offlineManifestReady, offlineTripPhotos, type OfflineProgress, type OfflineManifest, type OfflineCacheStatus } from './offline-trip';
 
@@ -23,7 +23,7 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
   const text = (en: string, pt: string) => pickLocale(locale, { en, 'pt-BR': pt });
   const button = el('button', 'tb-btn-outline', text('Download trip for offline', 'Baixar viagem para offline'));
   button.type = 'button';
-  const refresh = el('button', 'tb-btn-outline', text('Update itinerary', 'Atualizar roteiro'));
+  const refresh = el('button', 'tb-btn-outline', text('Force refresh', 'Forçar atualização'));
   refresh.type = 'button';
   refresh.setAttribute('data-tip', text('Download the latest published version and reload', 'Baixar a versão publicada mais recente e recarregar'));
   const remove = el('button', 'tb-btn-ghost', text('Remove downloaded trip', 'Remover viagem baixada'));
@@ -79,7 +79,7 @@ export function offlineControl({ trip, locale, routes }: Options): HTMLElement {
     refresh.disabled = button.disabled = remove.disabled = true;
     status.textContent = text('Downloading the latest itinerary…', 'Baixando a versão mais recente do roteiro…');
     void refreshAppCache().catch(() => onlineRefreshUrl(location.href, import.meta.env.BASE_URL)).then((freshUrl) => {
-      location.replace(freshUrl ?? refreshedUrl(location.href, import.meta.env.BASE_URL));
+      reloadApp(freshUrl ?? undefined);
     }).catch(() => {
       status.textContent = text('Could not update. Your saved itinerary remains available; try again with a connection.', 'Não foi possível atualizar. O roteiro salvo continua disponível; tente novamente com conexão.');
       busy = false;

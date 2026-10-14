@@ -47,6 +47,12 @@ export function refreshedUrl(current: string, base: string): string {
   return url.href;
 }
 
+/** Navigating to the same URL with a hash does not reload the document. */
+export function reloadApp(target = refreshedUrl(location.href, import.meta.env.BASE_URL)): void {
+  if (target === location.href) location.reload();
+  else location.replace(target);
+}
+
 /** Escape older cache-first workers only after the current HTML is reachable. */
 export async function onlineRefreshUrl(current: string, base: string, nonce = Date.now()): Promise<string> {
   const url = new URL(refreshedUrl(current, base));

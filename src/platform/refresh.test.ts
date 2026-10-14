@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { onlineRefreshUrl, refreshAppCache, refreshedUrl } from './refresh';
+import { onlineRefreshUrl, refreshAppCache, refreshedUrl, reloadApp } from './refresh';
 
 class Worker extends EventTarget {
   scriptURL = 'https://example.com/travel-boss/sw.js?refresh=123';
@@ -66,5 +66,24 @@ describe('force itinerary refresh', () => {
   it('reloads the canonical shell preserving the trip and clearing cache-busting query parameters', () => {
     expect(refreshedUrl('https://example.com/travel-boss/%69ndex.html?v=old#/trip/europa', '/travel-boss/'))
       .toBe('https://example.com/travel-boss/#/trip/europa');
+  });
+  it('reloads a document already at the target URL instead of making a same-document hash navigation', () => {
+    const url = 'https://example.com/travel-boss/#/trip/europa';
+    const reload = vi.fn();
+    const replace = vi.fn();
+    vi.stubGlobal('location', { href: url, reload, replace });
+    reloadApp(url);
+    expect(reload).toHaveBeenCalledOnce();
+    expect(replace).not.toHaveBeenCalled();
+  });
+  it('navigates to a different shell when recovering from an older worker', () => {
+    const current = 'https://example.com/travel-boss/#/trip/europa';
+    const target = 'https://example.com/travel-boss/%69ndex.html?refresh=123#/trip/europa';
+    const reload = vi.fn();
+    const replace = vi.fn();
+    vi.stubGlobal('location', { href: current, reload, replace });
+    reloadApp(target);
+    expect(replace).toHaveBeenCalledWith(target);
+    expect(reload).not.toHaveBeenCalled();
   });
 });
