@@ -3298,6 +3298,16 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
   ],
 };
 
+// Existing village views also illustrate the individual outdoor stops, with their original captions.
+photosByPlaceId['ct-riomaggiore-port'] = photosByPlaceId['ct-riomaggiore']!;
+photosByPlaceId['ct-manarola-viewpoint'] = photosByPlaceId['ct-manarola']!;
+photosByPlaceId['ct-lardarina'] = photosByPlaceId['ct-corniglia']!;
+photosByPlaceId['ct-largo-taragio'] = photosByPlaceId['ct-corniglia']!;
+photosByPlaceId['ct-vernazza-port'] = photosByPlaceId['ct-vernazza']!;
+photosByPlaceId['ct-santa-margherita'] = photosByPlaceId['ct-vernazza']!;
+photosByPlaceId['ct-fegina'] = photosByPlaceId['ct-monterosso']!;
+photosByPlaceId['ct-nettuno'] = photosByPlaceId['ct-monterosso']!;
+
 export function photosForPlaceId(id: string): TravelPhoto[] | undefined {
   const list = photosByPlaceId[id];
   return list && list.length > 0 ? list : undefined;

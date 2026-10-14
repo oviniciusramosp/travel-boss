@@ -1,15 +1,10 @@
-import type { TravelPlace, TravelSubPoint, PlaceCategory } from './travel';
+import type { TravelPlace, PlaceCategory } from './travel';
 
 // Exact OSM objects / Maps entities, checked 2026-10-02. See the shared reference.
 function place(id: string, name: string, lat: number, lng: number, osm: string,
   pt: string, en: string, category: PlaceCategory = 'tourist', address?: string): TravelPlace {
   return { id, name: { en: name, 'pt-BR': name }, lat, lng, category, address,
     mapsUrl: `https://www.openstreetmap.org/${osm}`, description: { en, 'pt-BR': pt } };
-}
-
-function point(pt: string, en: string, lat: number, lng: number,
-  extra: Pick<TravelSubPoint, 'placeId' | 'aiSuggested'> = {}): TravelSubPoint {
-  return { name: { en, 'pt-BR': pt }, lat, lng, ...extra };
 }
 
 export const romeNotionPlaces: TravelPlace[] = [
@@ -135,55 +130,56 @@ export const veronaNotionPlaces: TravelPlace[] = [
 ];
 
 export const cinqueTerreNotionPlaces: TravelPlace[] = [
-  { ...place('ct-riomaggiore', 'Riomaggiore', 44.1006168, 9.7361425, 'node/7472186134',
-    'Vila de Cinque Terre com casas coloridas e pequeno porto. O pino marca a estação, acesso ao passeio e à Via dell’Amore.',
-    'Cinque Terre village with colourful houses and a small harbour. The pin marks the station, the access to the village walk and Via dell’Amore.'),
-    subPoints: [
-      point('Estação — chegada', 'Station — arrival', 44.1006168, 9.7361425),
-      point('Porto — embarcadouro', 'Harbour — ferry landing', 44.0977601, 9.7377579),
-      point('Estação — retorno', 'Station — return', 44.1006168, 9.7361425),
-    ] },
+  place('ct-riomaggiore', 'Riomaggiore — estação', 44.1006168, 9.7361425, 'node/7472186134',
+    'Estação ferroviária de Riomaggiore, junto ao acesso à Via dell’Amore.',
+    'Riomaggiore railway station, beside the access to Via dell’Amore.', 'transport'),
+  place('ct-riomaggiore-port', 'Porto de Riomaggiore', 44.0977601, 9.7377579, 'node/628608902',
+    'Pequeno porto de Riomaggiore, cercado pelas casas coloridas da vila. O ponto fica no embarcadouro junto à água.',
+    'Riomaggiore’s small harbour, surrounded by the village’s colourful houses. The point marks the ferry landing by the water.'),
   place('ct-amore', 'Via dell’Amore', 44.1005045, 9.7355168, 'way/299665149',
     'Caminho costeiro entre Riomaggiore e Manarola. O pino marca o trecho inicial junto à estação de Riomaggiore.',
     'Coastal path between Riomaggiore and Manarola. The pin marks the initial section beside Riomaggiore station.'),
-  { ...place('ct-manarola', 'Manarola', 44.1049216, 9.7292049, 'node/305994253',
-    'Vila sobre rochedos junto ao mar, conhecida pelas vistas das casas coloridas. O pino marca a estação, acesso ao passeio.',
-    'Village on seaside rocks, known for views of its colourful houses. The pin marks the station as the village access.'),
-    subPoints: [
-      point('Estação — chegada', 'Station — arrival', 44.1049216, 9.7292049),
-      point('Mirante junto ao porto', 'Harbour viewpoint', 44.1069489, 9.7267715, { aiSuggested: true }),
-      point('Chiesa di San Lorenzo', 'Chiesa di San Lorenzo', 44.107613, 9.7302145, { placeId: 'ct-san-lorenzo' }),
-      point('Estação — retorno', 'Station — return', 44.1049216, 9.7292049),
-    ] },
-  place('ct-san-lorenzo', 'Chiesa di San Lorenzo', 44.107613, 9.7302145, 'way/204991720',
+  place('ct-manarola', 'Manarola — estação', 44.1049216, 9.7292049, 'node/305994253',
+    'Estação ferroviária de Manarola, ligada à vila por um túnel de pedestres.',
+    'Manarola railway station, connected to the village by a pedestrian tunnel.', 'transport'),
+  { ...place('ct-manarola-viewpoint', 'Mirante junto ao porto de Manarola', 44.1069489, 9.7267715, 'node/3161424138',
+    'Mirante costeiro com vista das casas coloridas de Manarola sobre os rochedos e do pequeno porto.',
+    'Coastal viewpoint overlooking Manarola’s colourful houses on the rocks and its small harbour.'),
+    subcategories: ['viewpoint'], aiSuggested: true,
+    aiReason: { en: 'Coastal view of Manarola’s colourful houses and harbour, on the walk through the village.', 'pt-BR': 'Vista das casas coloridas e do porto de Manarola, no passeio pela vila.' } },
+  { ...place('ct-san-lorenzo', 'Chiesa di San Lorenzo', 44.107613, 9.7302145, 'way/204991720',
     'Igreja de San Lorenzo na parte alta de Manarola.',
-    'Church of San Lorenzo in the upper part of Manarola.'),
-  { ...place('ct-corniglia', 'Corniglia', 44.1185398, 9.7163062, 'node/7472159376',
-    'Vila de Cinque Terre sobre uma colina. O pino marca a estação abaixo do centro, junto ao acesso pela Lardarina.',
-    'Cinque Terre village on a hill. The pin marks the station below the centre, beside the Lardarina access.'),
-    subPoints: [
-      point('Estação — chegada', 'Station — arrival', 44.1185398, 9.7163062),
-      point('Scalinata Lardarina', 'Scalinata Lardarina', 44.1201473, 9.7106212),
-      point('Largo Taragio', 'Largo Taragio', 44.1199289, 9.7079955, { aiSuggested: true }),
-      point('Estação — retorno', 'Station — return', 44.1185398, 9.7163062),
-    ] },
-  { ...place('ct-vernazza', 'Vernazza', 44.1350299, 9.6845448, 'node/7472143603',
-    'Vila de Cinque Terre com porto, igreja junto à água e castelo. O pino marca a estação, acesso ao passeio.',
-    'Cinque Terre village with a harbour, waterfront church and castle. The pin marks the station as the village access.'),
-    subPoints: [
-      point('Estação — chegada', 'Station — arrival', 44.1350299, 9.6845448),
-      point('Porto — Santa Margherita', 'Harbour — Santa Margherita', 44.1354188, 9.6826198),
-      point('Bottega Visconti', 'Bottega Visconti', 44.1347903, 9.6831297, { placeId: 'ct-visconti' }),
-    ] },
+    'Church of San Lorenzo in the upper part of Manarola.'), subcategories: ['church'] },
+  place('ct-corniglia', 'Corniglia — estação', 44.1185398, 9.7163062, 'node/7472159376',
+    'Estação ferroviária de Corniglia, abaixo da vila e junto ao acesso à escadaria Lardarina.',
+    'Corniglia railway station, below the village and beside the access to the Lardarina steps.', 'transport'),
+  place('ct-lardarina', 'Scalinata Lardarina', 44.1201473, 9.7106212, 'node/14159144701',
+    'Escadaria que liga a região da estação ao centro de Corniglia, na encosta acima do mar. O ponto OSM identifica o trecho com vista da costa.',
+    'Steps connecting the station area to Corniglia’s centre on the hillside above the sea. The OSM point identifies the section with coastal views.'),
+  { ...place('ct-largo-taragio', 'Largo Taragio', 44.1199289, 9.7079955, 'way/41867193',
+    'Praça de pedestres no centro de Corniglia, entre as ruas estreitas da vila.',
+    'Pedestrian square in Corniglia’s centre, among the village’s narrow streets.'),
+    subcategories: ['square'], aiSuggested: true,
+    aiReason: { en: 'Pedestrian square in Corniglia’s centre, reached after the Lardarina steps.', 'pt-BR': 'Praça de pedestres no centro de Corniglia, depois das escadas da Lardarina.' } },
+  place('ct-vernazza', 'Vernazza — estação', 44.1350299, 9.6845448, 'node/7472143603',
+    'Estação ferroviária de Vernazza, próxima à rua principal que leva ao porto.',
+    'Vernazza railway station, near the main street leading to the harbour.', 'transport'),
+  place('ct-vernazza-port', 'Molo do porto de Vernazza', 44.1350913, 9.681879, 'way/1382978364',
+    'Píer do porto de Vernazza, com vista das casas da vila e da igreja junto à água. O ponto marca seu acesso em terra.',
+    'Pier in Vernazza’s harbour, with views of the village houses and the waterfront church. The point marks its landward access.'),
+  { ...place('ct-santa-margherita', 'Chiesa di Santa Margherita di Antiochia', 44.1354188, 9.6826198, 'way/33191237',
+    'Igreja junto ao porto de Vernazza, com torre voltada para o mar. O pino marca o edifício, sem indicar uma entrada específica.',
+    'Church beside Vernazza’s harbour, with a tower facing the sea. The pin marks the building rather than a specific entrance.'), subcategories: ['church'] },
   place('ct-visconti', 'Bottega Visconti', 44.1347903, 9.6831297, 'node/4734113344',
     'Delicatessen de Vernazza indicada para focaccia e sanduíches para levar.',
     'Vernazza deli serving takeaway focaccia and sandwiches.', 'restaurants', 'Via Visconti, Vernazza'),
-  { ...place('ct-monterosso', 'Monterosso al Mare', 44.1458899, 9.6489881, 'node/7472143593',
-    'Vila de Cinque Terre com praia e passeio marítimo em Fegina. O pino marca a estação, acesso ao passeio.',
-    'Cinque Terre village with a beach and waterfront promenade in Fegina. The pin marks the station as the village access.'),
-    subPoints: [
-      point('Estação — chegada', 'Station — arrival', 44.1458899, 9.6489881),
-      point('Estátua de Netuno', 'Neptune statue', 44.1441232, 9.6439291),
-      point('Estação — retorno', 'Station — return', 44.1458899, 9.6489881),
-    ] },
+  place('ct-monterosso', 'Monterosso — estação', 44.1458899, 9.6489881, 'node/7472143593',
+    'Estação ferroviária de Monterosso al Mare, junto à praia de Fegina.',
+    'Monterosso al Mare railway station, beside Fegina beach.', 'transport'),
+  place('ct-fegina', 'Spiaggia di Fegina', 44.1451364, 9.6471945, 'way/30019970',
+    'Praia de Fegina, na parte ocidental de Monterosso al Mare, junto à estação e ao passeio marítimo.',
+    'Fegina beach in western Monterosso al Mare, beside the station and the seafront promenade.'),
+  { ...place('ct-nettuno', 'Estátua de Netuno — Il Gigante', 44.1441232, 9.6439291, 'node/330291074',
+    'Estátua de Netuno, também conhecida como Il Gigante, junto à extremidade ocidental da praia de Fegina. A obra de Arrigo Minerbi é de 1910.',
+    'Neptune statue, also known as Il Gigante, beside the western end of Fegina beach. The work by Arrigo Minerbi dates from 1910.'), subcategories: ['monument'] },
 ];
