@@ -580,13 +580,12 @@ Chegada de trem de Milão e hospedagem em La Spezia.
 ### Dia 2 — Qui 15/10 · Cinque Terre
   - cidades: La Spezia → Riomaggiore → Manarola → Corniglia → Vernazza → Monterosso al Mare
 
-- 07:15 [Le camere in città](place:spe-le-camere-in-citta) — **Café da manhã no quarto**, com pão, fruta e bebida pronta comprados ontem; levar água e snack para a tarde
+- 08:00 [Le camere in città](place:spe-le-camere-in-citta) — Saída após o **café da manhã no quarto às 07:15**, com pão, fruta e bebida pronta comprados ontem; levar água e snack para a tarde
   - comida: €0
-- 08:00 [Le camere in città](place:spe-le-camere-in-citta) — Saída após o café da manhã
   - via: A pé até La Spezia Centrale · 10 min
   - status: confirmado
 - 08:10 [La Spezia Centrale](place:spe-centrale) — Comprar dois Cinque Terre Treno MS Cards, adulto, um dia, nominativos, para hoje; reservar a faixa das 9h30 da Via dell’Amore na modalidade de cartão escolhida
-  - via: Trem Regionale 22904 · 6 min · €22 — Passe do dia
+  - via: Trem Regionale 22904 · 6 min · €22 — Passe do dia; [detalhes e horários da manhã](place:spe-regionale-22904)
   - embarque: 2026-10-15 · Regionale 22904 · La Spezia Centrale → Riomaggiore · 08:20 → 08:26
 - 09:00 [Porto de Riomaggiore](place:ct-riomaggiore-port) — Ver o porto e as casas coloridas; seguir ao acesso da Via dell’Amore
   - saída: 09:10

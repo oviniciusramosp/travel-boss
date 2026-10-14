@@ -673,6 +673,20 @@ export const localTravelCities: TravelCity[] = [
     places: [
       laSpeziaStation,
       {
+        id: 'spe-regionale-22904',
+        name: { en: 'Regionale 22904 · Cinque Terre', 'pt-BR': 'Regionale 22904 · Cinque Terre' },
+        category: 'transport',
+        description: {
+          en: 'Trenitalia regional service along the Cinque Terre coast, departing from La Spezia Centrale. The first stop is Riomaggiore, followed by Manarola, Corniglia, Vernazza and Monterosso, before continuing to Levanto.',
+          'pt-BR': 'Serviço regional da Trenitalia pela costa de Cinque Terre, com embarque em La Spezia Centrale. A primeira parada é Riomaggiore; depois atende Manarola, Corniglia, Vernazza e Monterosso, seguindo até Levanto.',
+        },
+        // Boarding-station anchor: OSM node 1262114259, checked 2026-10-15.
+        lat: laSpeziaStation.lat,
+        lng: laSpeziaStation.lng,
+        address: 'Embarque: La Spezia Centrale, Piazzale Medaglie d’Oro al Valor Militare, La Spezia',
+        mapsUrl: laSpeziaStation.mapsUrl,
+      },
+      {
         id: 'spe-le-camere-in-citta',
         name: { en: 'Le camere in città', 'pt-BR': 'Le camere in città' },
         category: 'lodging',

@@ -2353,6 +2353,13 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Os lugares no lado esquerdo (fileiras A e B) possuem uma vista mais bonita.',
     ),
   },
+  'spe-regionale-22904': {
+    ticketUrl: 'https://www.trenitalia.com/it/informazioni/orari-regionali-digitali.html',
+    tips: L(
+      'Scheduled times for 15 October 2026, checked on that date. Regionale 22904: La Spezia Centrale 08:20 → Riomaggiore 08:26. These are scheduled times, without live delay information.\n\nMorning trains from La Spezia Centrale to Riomaggiore (departure → arrival):\n07:04 → 07:11 · Regionale 12214\n07:50 → 07:56 · Regionale 22902\n08:12 → 08:20 · Regionale 12218\n08:20 → 08:26 · Regionale 22904\n08:50 → 08:56 · Regionale 22906\n09:20 → 09:26 · Regionale 22908\n09:47 → 09:53 · Regionale 12302\n10:15 → 10:23 · Regionale 12222\n10:20 → 10:26 · Regionale 22912\n\nNine departures between 07:00 and 10:30; intervals range from 5 to 46 minutes. The 22904, 22906 and 22908 depart 30 minutes apart.',
+      'Horários programados para 15/10/2026, conferidos nessa data. Regionale 22904: La Spezia Centrale 08:20 → Riomaggiore 08:26. São horários programados, sem informação de atraso em tempo real.\n\nTrens da manhã de La Spezia Centrale para Riomaggiore (partida → chegada):\n07:04 → 07:11 · Regionale 12214\n07:50 → 07:56 · Regionale 22902\n08:12 → 08:20 · Regionale 12218\n08:20 → 08:26 · Regionale 22904\n08:50 → 08:56 · Regionale 22906\n09:20 → 09:26 · Regionale 22908\n09:47 → 09:53 · Regionale 12302\n10:15 → 10:23 · Regionale 12222\n10:20 → 10:26 · Regionale 22912\n\nNove partidas entre 07:00 e 10:30; intervalos de 5 a 46 min. O 22904, o 22906 e o 22908 partem com 30 min de intervalo.',
+    ),
+  },
   'par-gare-de-lyon': {
     ticket: free,
     durationMin: 20,
