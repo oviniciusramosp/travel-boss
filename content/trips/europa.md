@@ -658,15 +658,15 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
   - ingresso: €0
 - [Panna&Liquirizia](place:rom-panna-liquirizia) — **Café da tarde**: gelato
 - [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Retirar as malas; volta de metrô ao Airbnb
-- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in com as malas depois das visitas.\
+- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Check-in com as malas depois das visitas. [Anúncio no Airbnb](https://www.airbnb.com.br/rooms/1272445028608014060).\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.
 
 ### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
 
 Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhetes da janela 12h–13h. São Pedro fica à tarde para preservar o compromisso do Panteão; demais horários são estimativas.
 
-- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**; levar água e snack
-- 07:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Saída após o café da manhã
+- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
+- 07:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
   - via: Táxi · 30 min — Até a entrada dos Museus Vaticanos, na Viale Vaticano
 - 07:45 [Museus Vaticanos](place:rom-vatican) — Chegar para a segurança; reservar o primeiro horário, **8h**, com Capela Sistina incluída. Visita de cerca de 3h; sair até 11h10 para o Panteão
   - status: a confirmar
@@ -690,15 +690,15 @@ Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhete
 - 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18
   - via: Táxi · 40 min — Saída prevista às 20h30 para o apartamento
-- 21:10 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Retorno; preparar as malas para o checkout das 10h
+- 21:10 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
 
 ### Dia 3 — Dom 18/10 · Voo para Lisboa
   - cidades: Roma → Lisboa
 
 Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
 
-- 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**; terminar de arrumar as malas
-- 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout e saída com as malas
+- 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; terminar de arrumar as malas
+- 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas
   - via: Táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
 - 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
   - status: a confirmar

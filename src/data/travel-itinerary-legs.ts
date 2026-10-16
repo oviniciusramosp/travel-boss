@@ -977,6 +977,9 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  // Actual metro return on 16/10; stations and track remain unverified.
+  // Keep it off the walking router and do not draw a guessed railway.
+  { from: 'rom-stow-colosseo', to: 'rom-terrestre-vaticano', mode: 'transit', label: 'Metrô' },
   trainLeg('rom-termini', 'rom-stow-colosseo', 30, [ride(romeMetroB, 'termini', 'colosseo')]),
   trainLeg('ven-salute', 'ven-santa-lucia', 60, [ride(veniceVaporetto1, 'salute', 'ferrovia')]),
   // Dated Regionale services on 15/10, with station access separate from the visits.

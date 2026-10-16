@@ -5986,6 +5986,22 @@ export const localTravelCities: TravelCity[] = [
     places: [
       ...romeNotionPlaces,
       {
+        id: 'rom-terrestre-vaticano',
+        name: {
+          en: 'Vatican Modern Apartment — 5 min Metro A, Terrestre',
+          'pt-BR': 'Apartamento moderno do Vaticano — 5 min Metro A, Terrestre',
+        },
+        category: 'lodging',
+        description: {
+          en: 'Terrestre holiday apartment in Valle Aurelia, with a double bedroom, living area with a sofa bed, kitchenette and private bathroom.',
+          'pt-BR': 'Apartamento de temporada da Terrestre em Valle Aurelia, com quarto de casal, sala com sofá-cama, cozinha compacta e banheiro privativo.',
+        },
+        lat: 41.9015843,
+        lng: 12.4411534,
+        address: 'Via Giovanni Aurispa, 9, 00167 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/Vatican+Modern+Apartment+5+min+Metro+%7C+Terrestre/data=!4m6!3m5!1s0x132f618bf8eee9a9:0x84a8042ffb412533!8m2!3d41.9015843!4d12.4411534!16s%2Fg%2F11wmr1ykyx',
+      },
+      {
         id: 'rom-fuorinorma',
         name: { en: 'Fuorinorma', 'pt-BR': 'Fuorinorma' },
         category: 'restaurants',

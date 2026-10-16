@@ -319,6 +319,10 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  'rom-terrestre-vaticano': {
+    crowdProfile: 'local',
+    bestTime: L('Check-in from 16:00; checkout by 10:00', 'Check-in desde 16h; checkout até 10h'),
+  },
   'rom-fuorinorma': { crowdProfile: 'restaurant' },
   'rom-panna-liquirizia': { crowdProfile: 'shop' },
   'spe-le-camere-in-citta': {
