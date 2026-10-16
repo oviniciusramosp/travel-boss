@@ -635,49 +635,37 @@ Trem La Spezia → Roma.
 - 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.
   - via: trem Frecciabianca 8605 · 4h02 · €19,35
   - embarque: 2026-10-16 · Frecciabianca 8605 · La Spezia Centrale → Roma Termini · 08:16 → 12:18
-- 11:00 **Brunch / almoço no trem**: pão ou sanduíche pronto, fruta e bebida comprados ontem; refeição reforçada antes de chegar a Roma, sem precisar procurar restaurante antes do Coliseu
 
 ## Roma
 city: roma
 dates: 2026-10-16 → 2026-10-18
 budget: comida €50
 
-### Dia 1 — Sex 16/10 · Chegada, Coliseu, Fórum e Palatino
+### Dia 1 — Sex 16/10 · Chegada, Coliseu e Fórum Romano
   - cidades: La Spezia → Roma
 
-Chegada às 12h18, malas no depósito e voucher antes do Coliseu reservado para 14h30. O check-in fica depois das visitas, conforme o plano atualizado do Notion.
+Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do Coliseu. Depois do Fórum Romano, gelato e retorno de metrô ao Airbnb com as malas.
 
-- 12:18 [Roma Termini](place:rom-termini) — Chegada de La Spezia; seguir para o metrô B, direção Laurentina, via Cavour até Colosseo
-  - via: Metrô B até Colosseo · 30 min — Inclui saída do trem, espera e caminhada até o depósito; partida do metrô ainda a confirmar
-- 12:55 [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Deixar as malas até 18h30. Reservar armário adequado para 6h: Maxi €19,99 por armário, conforme as dimensões das malas; sair até 13h05
-  - ingresso: €10
+- [Roma Termini](place:rom-termini) — Chegada com as malas de La Spezia; metrô B de Termini até Colosseo
+- [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Deixar as malas no depósito da Via del Colosseo, 2
   - status: a confirmar
-  - via: A pé até a Prisão Mamertina · 15 min
-  - saída: 13:05
-- 13:20 [Prisão Mamertina](place:rom-mamertina) — Resgatar os vouchers na bilheteria do Clivo Argentario 1; prazo máximo 13h30, uma hora antes do Coliseu. Levar identificação válida e os vouchers
+- [Prisão Mamertina](place:rom-mamertina) — Recolher os ingressos do Coliseu
   - ingresso: €0
-  - via: A pé até a entrada do Coliseu · 15 min — Sair da região até 13h45 após resgatar os vouchers; brunch já feito no trem
-- 14:00 [Coliseu](place:rom-colosseum) — Chegar para a segurança 30 min antes da entrada reservada às **14h30**. Visita até 15h45; identificação obrigatória. Pacote do casal inclui Mamertina, Coliseu, Fórum Romano e Palatino
+- [Fuorinorma](place:rom-fuorinorma) — **Almoço**
+- [Coliseu](place:rom-colosseum) — Visita ao interior
   - ingresso: €41,63
-- 15:45 **Café da tarde**: pausa rápida com o snack e a bebida da mochila, ao sair do Coliseu, antes de seguir ao Fórum; consumo já pago nas compras de La Spezia
-- 16:00 [Fórum Romano e Palatino](place:rom-forum) — Visitar com o mesmo ingresso do Coliseu, sem nova compra; concluir o passeio e sair até 18h10
+- [Fórum Romano](place:rom-forum) — Visita ao interior com o mesmo ingresso do Coliseu
   - ingresso: €0
-  - via: A pé até o depósito · 15 min
-  - saída: 18:10
-- 18:30 [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Retirar as malas e chamar o táxi para a hospedagem
-  - via: Táxi · 45 min — Até o endereço da hospedagem; estimativa com margem para trânsito
-- 19:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in depois das visitas; disponível desde 16h, com fechadura inteligente.\
+- [Panna&Liquirizia](place:rom-panna-liquirizia) — **Café da tarde**: gelato
+- [Stow Your Bags — Colosseo](place:rom-stow-colosseo) — Retirar as malas; volta de metrô ao Airbnb
+- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Check-in com as malas depois das visitas.\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.
-- 19:45 [Pam · Valle Aurelia](place:rom-pam-valle-aurelia) — Depois de deixar as malas no apartamento, comprar refeição pronta para o **jantar de hoje** e pão, fruta, snack e bebida pronta para os **cafés da manhã de 17 e 18/10**. Fecha às 21h; sair até 20h05
-  - comida: €18
-  - via: Táxi · 10 min — Voltar direto ao apartamento com as sacolas, sem outras paradas
-- 20:15 **Jantar no apartamento**: refeição pronta comprada no Pam, sem depender de cozinha; guardar os alimentos e preparar os ingressos do Vaticano e do Panteão
 
 ### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
 
 Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhetes da janela 12h–13h. São Pedro fica à tarde para preservar o compromisso do Panteão; demais horários são estimativas.
 
-- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**: pão, fruta e bebida pronta comprados no Pam ontem; levar água e snack
+- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**; levar água e snack
 - 07:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Saída após o café da manhã
   - via: Táxi · 30 min — Até a entrada dos Museus Vaticanos, na Viale Vaticano
 - 07:45 [Museus Vaticanos](place:rom-vatican) — Chegar para a segurança; reservar o primeiro horário, **8h**, com Capela Sistina incluída. Visita de cerca de 3h; sair até 11h10 para o Panteão
@@ -709,7 +697,7 @@ Museus Vaticanos no primeiro horário, sujeito a reserva, e Panteão com bilhete
 
 Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
 
-- 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**, com os alimentos comprados no Pam; terminar de arrumar as malas
+- 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — **Café da manhã no apartamento**; terminar de arrumar as malas
 - 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](https://www.airbnb.com.br/rooms/1272445028608014060) — Checkout e saída com as malas
   - via: Táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
 - 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45

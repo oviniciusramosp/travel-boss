@@ -319,6 +319,8 @@ function lodgingVisit(
  * Paris and Rome are fully covered; other cities can be filled later.
  */
 export const visitByPlaceId: Record<string, VisitInfo> = {
+  'rom-fuorinorma': { crowdProfile: 'restaurant' },
+  'rom-panna-liquirizia': { crowdProfile: 'shop' },
   'spe-le-camere-in-citta': {
     bestTime: L('Check-in: 15:00–23:00', 'Check-in: 15h–23h'),
     crowdProfile: 'local',

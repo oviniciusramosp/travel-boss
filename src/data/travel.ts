@@ -5986,6 +5986,36 @@ export const localTravelCities: TravelCity[] = [
     places: [
       ...romeNotionPlaces,
       {
+        id: 'rom-fuorinorma',
+        name: { en: 'Fuorinorma', 'pt-BR': 'Fuorinorma' },
+        category: 'restaurants',
+        subcategories: ['italian'],
+        description: {
+          en: 'Deli in Monti serving panini and boards of Italian cheeses and cured meats, accompanied by wine and beer.',
+          'pt-BR': 'Gastronomia em Monti especializada em panini e tábuas de queijos e embutidos italianos, acompanhados de vinho e cerveja.',
+        },
+        lat: 41.8943352,
+        lng: 12.4907991,
+        address: 'Via dei Serpenti, 178, 00184 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/Fuorinorma/data=!4m6!3m5!1s0x132f61b17213d40f:0x1d2682b05155ee1d!8m2!3d41.8943352!4d12.4907991!16s%2Fg%2F11dyzm22gz',
+        googleRating: 4.9,
+      },
+      {
+        id: 'rom-panna-liquirizia',
+        name: { en: 'Panna&Liquirizia', 'pt-BR': 'Panna&Liquirizia' },
+        category: 'cafes',
+        subcategories: ['ice-cream'],
+        description: {
+          en: 'Gelateria on Via Magnanapoli, beside Trajan’s Markets, serving gelato in cones and cups.',
+          'pt-BR': 'Gelateria na Via Magnanapoli, junto aos Mercados de Trajano, que serve gelato em casquinhas e copos.',
+        },
+        lat: 41.8961625,
+        lng: 12.4852325,
+        address: 'Via Magnanapoli, 5b, 00187 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/Panna%26Liquirizia/data=!4m6!3m5!1s0x132f6165d5e75093:0x189114b53492d832!8m2!3d41.8961625!4d12.4852325!16s%2Fg%2F11bttj66b3',
+        googleRating: 4.7,
+      },
+      {
         id: 'rom-valle-aurelia',
         name: { en: 'Valle Aurelia', 'pt-BR': 'Valle Aurelia' },
         category: 'tourist',
