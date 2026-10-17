@@ -6017,6 +6017,26 @@ export const localTravelCities: TravelCity[] = [
         googleRating: 4.7,
       },
       {
+        id: 'rom-fiocco-di-neve',
+        name: { en: 'Fiocco di Neve', 'pt-BR': 'Fiocco di Neve' },
+        aiSuggested: true,
+        aiReason: {
+          en: 'affogato (famous for the zabaione one) and lemon sorbet in the same shop beside the Pantheon, rated 4.7 on Google with over 2,000 reviews',
+          'pt-BR': 'affogato (famoso o de zabaione) e sorbetto de limão na mesma loja ao lado do Panteão, nota 4,7 no Google com mais de 2.000 avaliações',
+        },
+        category: 'cafes',
+        subcategories: ['ice-cream'],
+        description: {
+          en: 'Gelateria and café on Via del Pantheon, in business since 1968, with classic and fruit flavours, gluten-free options and a well-known affogato di zabaione: zabaione gelato with Marsala under espresso.',
+          'pt-BR': 'Gelateria e café na Via del Pantheon, aberta desde 1968, com sabores clássicos e de frutas, opções sem glúten e um affogato di zabaione conhecido: gelato de zabaione com Marsala sob espresso.',
+        },
+        lat: 41.8999302,
+        lng: 12.4768031,
+        address: 'Via del Pantheon, 51, 00186 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/Fiocco+di+neve/data=!4m6!3m5!1s0x132f6051ea7916fd:0xff5c56fc1d6e5492!8m2!3d41.8999302!4d12.4768031!16s%2Fg%2F1yh9vkhlh',
+        googleRating: 4.7,
+      },
+      {
         id: 'rom-fuorinorma',
         name: { en: 'Fuorinorma', 'pt-BR': 'Fuorinorma' },
         category: 'restaurants',

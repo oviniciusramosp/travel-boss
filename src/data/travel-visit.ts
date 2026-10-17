@@ -2592,6 +2592,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       ),
     },
   ),
+  'rom-fiocco-di-neve': cafeVisit(6, 9, {
+    crowdProfile: 'shop',
+    bestTime: L('Saturday 10:00–00:00, per Google Maps on 17 Oct 2026', 'Sábado 10h–0h, segundo o Google Maps em 17/10/2026'),
+    tips: L(
+      'Order the affogato di zabaione (small, medium or large) and a lemon sorbet. Budget is indicative: no price list was found; confirm the prices at the counter.',
+      'Peça o affogato di zabaione (pequeno, médio ou grande) e um sorbetto de limão. Orçamento indicativo: não encontrei tabela de preços; confirme no balcão.',
+    ),
+  }),
   'rom-two-sizes': cafeVisit(3, 4, {
     crowdProfile: 'shop',
     bestDay: L('Tuesday–Sunday; closed Monday', 'Terça a domingo; fecha às segundas'),

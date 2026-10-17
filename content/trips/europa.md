@@ -663,7 +663,7 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
 
 ### Dia 2 — Sáb 17/10 · Castel Sant’Angelo, Panteão e centro histórico
 
-Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, KIKO, Trevi e Piazza Venezia até o jantar. Na volta, metrô até Spagna, caminhada até Popolo e novo metrô em Flaminio. Horários e caminhadas são estimativas.
+Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, KIKO, Trevi, Fiocco di Neve e Piazza Venezia até o jantar. Na volta, metrô até Spagna, caminhada até Popolo e novo metrô em Flaminio. Horários e caminhadas são estimativas.
 
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
 - 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
@@ -690,8 +690,10 @@ Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel
 - 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte
   - comida: €6
   - saída: 17:50
-- 18:05 [Piazza Venezia](place:rom-piazza-venezia) — Ver a praça e o Vittoriano por fora
-  - saída: 18:35
+- 18:00 [Fiocco di Neve](place:rom-fiocco-di-neve) — **Sobremesa**: affogato di zabaione e sorbetto de limão; sair até **18h25**
+  - saída: 18:25
+- 18:35 [Piazza Venezia](place:rom-piazza-venezia) — Ver a praça e o Vittoriano por fora
+  - saída: 18:45
 - 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18
   - saída: 20:30
