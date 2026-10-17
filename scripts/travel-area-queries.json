@@ -507,6 +507,24 @@
       "prefer": "linestring"
     },
     {
+      "id": "rom-castel-angelo",
+      "q": "Castel Sant’Angelo, Roma, Italia",
+      "lat": 41.9030762,
+      "lng": 12.4663312,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM way 8035487 v103; castle building outline, RDP 0.25 m, checked 2026-10-17"
+    },
+    {
+      "id": "rom-navona",
+      "q": "Piazza Navona, Roma, Italia",
+      "lat": 41.8989256,
+      "lng": 12.4730991,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM way 4247138 v80; named square boundary, RDP 0.25 m, checked 2026-10-17"
+    },
+    {
       "id": "rom-fco",
       "q": "Aeroporto di Roma-Fiumicino, Italy",
       "lat": 41.8153911,
