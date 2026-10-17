@@ -2592,12 +2592,12 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       ),
     },
   ),
-  'rom-fiocco-di-neve': cafeVisit(6, 9, {
+  'rom-venchi-corso': cafeVisit(6, 10, {
     crowdProfile: 'shop',
-    bestTime: L('Saturday 10:00–00:00, per Google Maps on 17 Oct 2026', 'Sábado 10h–0h, segundo o Google Maps em 17/10/2026'),
+    bestTime: L('Saturday 08:30–01:30, per Google Maps on 17 Oct 2026', 'Sábado 8h30–1h30, segundo o Google Maps em 17/10/2026'),
     tips: L(
-      'Order the affogato di zabaione (small, medium or large) and a lemon sorbet. Budget is indicative: no price list was found; confirm the prices at the counter.',
-      'Peça o affogato di zabaione (pequeno, médio ou grande) e um sorbetto de limão. Orçamento indicativo: não encontrei tabela de preços; confirme no balcão.',
+      'Ask for the affogato and a lemon sorbet (dairy-free). Budget is indicative: no current price list was found; confirm the prices at the counter.',
+      'Peça o affogato e um sorbetto de limão (sem leite). Orçamento indicativo: não encontrei tabela de preços atual; confirme no balcão.',
     ),
   }),
   'rom-two-sizes': cafeVisit(3, 4, {
