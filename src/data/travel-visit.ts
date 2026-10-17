@@ -2437,6 +2437,14 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Vá de carbonara (~€14). A trufada saiu ~€18. Reserve ou chegue cedo — zona turística perto da Termini.',
     ),
   }),
+  'rom-pasta-vino-palombella': restaurantVisit(18, 22, {
+    bestTime: L('Saturday: 10:00–23:30', 'Sábado: 10h–23h30'),
+    bestDay: L('Daily', 'Todos os dias'),
+    tips: L(
+      'Palombella branch beside the Pantheon. Budget is indicative for pasta, water and service; confirm this branch’s menu before ordering.',
+      'Unidade Palombella junto ao Panteão. Orçamento indicativo para massa, água e serviço; confirme o cardápio desta unidade antes de pedir.',
+    ),
+  }),
   'rom-alfredo-ada': restaurantVisit(12, 18, {
     tips: L(
       'Homey pastas and lasagna. Small room — lunch is easier than dinner without a booking.',

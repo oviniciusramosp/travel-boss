@@ -6145,6 +6145,26 @@ export const localTravelCities: TravelCity[] = [
         mapsQuery: 'La Gallina Bianca Via Antonio Rosmini Roma',
       },
       {
+        id: 'rom-pasta-vino-palombella',
+        name: { en: 'Come ’na Vorta — Pasta e Vino · Palombella', 'pt-BR': 'Come ’na Vorta — Pasta e Vino · Palombella' },
+        category: 'restaurants',
+        subcategories: ['italian'],
+        description: {
+          en: 'Palombella branch of Come ’na Vorta Pasta e Vino, beside the Pantheon. The Italian restaurant serves fresh pasta and classic Roman sauces.',
+          'pt-BR': 'Unidade Palombella do Come ’na Vorta Pasta e Vino, junto ao Panteão. O restaurante italiano serve massas frescas e molhos clássicos romanos.',
+        },
+        aiSuggested: true,
+        aiReason: {
+          en: 'Lunch beside the Pantheon, on the way to Two Sizes, avoiding the detour to Via dei Banchi Nuovi.',
+          'pt-BR': 'Almoço junto ao Panteão, no caminho para a Two Sizes, evitando o desvio até a Via dei Banchi Nuovi.',
+        },
+        googleRating: 4.6,
+        lat: 41.8982468,
+        lng: 12.4762452,
+        address: 'Via della Palombella, 34, 00186 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/Come+na+Vorta+Pasta+e+Vino+-+Palombella/data=!4m6!3m5!1s0x132f61233b7f0fdd:0xdafbad42517dfc8d!8m2!3d41.8982468!4d12.4762452!16s%2Fg%2F11vhgx5fch',
+      },
+      {
         id: 'rom-alfredo-ada',
         name: { en: 'Alfredo e Ada', 'pt-BR': 'Alfredo e Ada' },
         category: 'restaurants',

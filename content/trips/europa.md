@@ -673,8 +673,8 @@ Saída do apartamento às 11h para conhecer a parte gratuita do Vaticano. Chegad
   - saída: 12:15
 - 12:45 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo
   - ingresso: €7,75
-- 13:50 [Alfredo e Ada](place:rom-alfredo-ada) — **Almoço**: massa ou lasanha; sair até 14h35
-  - comida: €13
+- 13:50 [Come ’na Vorta — Pasta e Vino · Palombella](place:rom-pasta-vino-palombella) — **Almoço**: massa romana; sair até 14h35
+  - comida: €20
   - saída: 14:35
 - 14:45 [Two Sizes](place:rom-two-sizes) — **Sobremesa**: conhecer a confeitaria e provar o tiramisù
 - 15:15 [Piazza Navona](place:rom-navona) — Passear pela praça e ver as fontes
