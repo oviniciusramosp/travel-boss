@@ -2130,6 +2130,7 @@ export function mountTrip(
         lists[rowIndex]!.append(item);
         const appendHop = () => rails.forEach((rail, index) => {
           const transfer = transferRow(legs[index]!, locale, timings[index]);
+          if (legs[index] === entry.depart?.access) editLegNote(transfer, entry.depart.access, city.slug);
           if (index === noteAt) editLegNote(transfer, entry.depart, city.slug);
           if (index === fareAt) {
             const cost = stopCostEl({ id: '', food: 0, ticket: fare }, locale);

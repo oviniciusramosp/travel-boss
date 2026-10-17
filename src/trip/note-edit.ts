@@ -14,7 +14,7 @@ const KEEP: Record<NoteKind, RegExp> = {
   comment: /^\s+-\s+[^:]+:\s*/,
   decision: /^\s+-\s+[^:]+:\s*/,
   // Up to the first ` — `, where the parser cuts the leg from its note.
-  via: /^\s*(?:-\s+)?via:.*?(?= — |$)/i,
+  via: /^\s*(?:-\s+)?(?:via|acesso):.*?(?= — |$)/i,
 };
 
 /** Each line trimmed, blank lines gone: a note breaks, it has no gaps. */

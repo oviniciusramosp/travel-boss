@@ -6,6 +6,8 @@ import { travelCities } from '../catalog';
 export type TripLegMode = 'walk' | 'transit' | 'taxi' | 'flight';
 
 export type TripLeg = {
+  /** Authored walking access before this ride, without invented indoor geometry. */
+  access?: TripLeg;
   /** Author text after `via:`. Export writes it back unchanged. */
   detail: string;
   /** Text after ` — `. Mode and duration come only from the text before it. */
@@ -95,6 +97,7 @@ export type TripCity = {
 };
 
 export type TripErrorCode =
+  | 'access-invalid'
   | 'period-invalid'
   | 'boarding-invalid'
   | 'via-no-mode'
@@ -456,6 +459,16 @@ export function parseTrip(id: string, file: string, raw: string): Trip {
       } else {
         (stop.boardings ??= []).push({ date: match[1]!, service: match[2]!, board: match[3]!, exit: match[4]!, departure: match[5]!, arrival: match[6]! });
       }
+      continue;
+    }
+
+    const access = /^[ \t]+- acesso:[ \t]*(.*)$/.exec(line);
+    if (access) {
+      const stop = day?.stops.at(-1);
+      const leg = readLeg((access[1] ?? '').trim(), lineNo, errors);
+      if (!stop?.leg || stop.listNote || stop.leg.access || leg.mode !== 'walk' || !leg.durationMin || leg.fareEur !== undefined) {
+        reject(errors, lineNo, 'access-invalid');
+      } else stop.leg.access = leg;
       continue;
     }
 

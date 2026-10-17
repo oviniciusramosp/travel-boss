@@ -87,6 +87,7 @@ dates: 2026-04-06 → 2026-04-09
     - `N h M min`: `1 h 30 min` = 90, `3 h 10 min` = 190. `1h30min` is the same span.
     - Two spans are an error (`20 min` and `40 min`, or `1 h` and `2 h`). `1 h 30 min` is one span, not two.
   - Text after ` — ` is the leg's note: what to know on the way (price, where to meet the car). Mode and duration are read only before it, so a duration inside the note does not count.
+  - After a stop's `via:`, optional `  - acesso: A pé · 10 min — …` adds one walking row before the ride. It requires one duration, no fare, and may appear only once. Its note describes access such as an indoor pickup; it does not supply coordinates or invent a map route. `saída:` anchors this walk. Export preserves both lines; the ride duration excludes the walk.
 
     ```markdown
     - 13:00 [Brioche Dorée CDG 2E](place:par-cdg-brioche-doree) — Croissant e café

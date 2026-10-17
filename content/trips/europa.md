@@ -753,7 +753,9 @@ Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mal
 O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em Lisboa, apenas água e um snack da mochila se houver fome, sem depender de restaurante aberto às 22h.
 
 - 20:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Pouso do voo W4 6219 vindo de Roma; seguir as placas de recolha de bagagens / Baggage reclaim e retirar a mala. A saída das chegadas é pelo Terminal 1
-  - via: Carro · 31 min — Transfer reservado; saída estimada às 21h35, após retirar a mala e encontrar o motorista. Ao sair da área de recolha de bagagens para o saguão público, virar à direita no piso de desembarque e seguir aos Pontos de Encontro 1, 2, 3 e 4; aguardar no número informado pelo motorista no dia e esperar seu contato para ir ao carro
+  - via: Carro · 31 min — Transfer reservado; saída estimada às 21h35, após encontrar o motorista. Aguardar seu contato para seguir ao carro
+  - acesso: A pé · 10 min — Após retirar a mala, sair para o saguão público de chegadas do Terminal 1, virar à direita e seguir aos Pontos de Encontro 1, 2, 3 e 4. Aguardar no número informado pelo motorista no dia; tempo estimado com malas
+  - saída: 21:25
 - 22:10 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Check-in previsto; apartamento no 2º andar, sem elevador. A janela regular é 16h–21h: confirmar previamente a chegada tardia, com taxa de €30 por reserva.\
   **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída prevista às 9h para o voo das 14h50.\
   **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.

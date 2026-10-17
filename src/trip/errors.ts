@@ -2,6 +2,7 @@ import { pickLocale, type Locale } from '../catalog';
 import type { TripError, TripErrorCode } from './parse';
 
 const TEXT: Record<TripErrorCode, { en: string; 'pt-BR': string }> = {
+  'access-invalid': { en: 'Walking access must follow a via, have one duration, no fare and no duplicate', 'pt-BR': 'Acesso a pé exige via anterior, uma duração, sem preço nem duplicação' },
   'period-invalid': { en: 'Invalid or duplicate period boundary, or missing stop', 'pt-BR': 'Início de período inválido, duplicado ou sem parada' },
   'food-invalid': { en: 'Invalid or duplicate food amount, or missing catalog stop', 'pt-BR': 'Valor de comida inválido, duplicado ou sem parada do catálogo' },
   'ticket-invalid': { en: 'Invalid or duplicate admission amount, or missing catalog stop', 'pt-BR': 'Valor de ingresso inválido, duplicado ou sem parada do catálogo' },

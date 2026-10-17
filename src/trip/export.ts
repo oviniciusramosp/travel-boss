@@ -30,6 +30,7 @@ function pushStop(
   if (stop.foodEur !== undefined) lines.push(`  - comida: €${stop.foodEur.toFixed(2).replace('.', ',')}`);
   if (stop.ticketEur !== undefined) lines.push(`  - ingresso: €${stop.ticketEur.toFixed(2).replace('.', ',')}`);
   if (stop.leg) lines.push(`  - via: ${stop.leg.detail}`);
+  if (stop.leg?.access) lines.push(`  - acesso: ${stop.leg.access.detail}`);
   if (stop.departureTime) lines.push(`  - saída: ${stop.departureTime}`);
   for (const ride of stop.boardings ?? []) {
     lines.push(`  - embarque: ${ride.date} · ${ride.service} · ${ride.board} → ${ride.exit} · ${ride.departure} → ${ride.arrival}`);

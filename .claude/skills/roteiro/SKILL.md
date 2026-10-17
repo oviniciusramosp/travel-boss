@@ -27,6 +27,7 @@ Aplicar a revisão obrigatória de `AGENTS.md`: cidades, valores, malas e refei�
 | Comida ou ingresso pago nesta viagem, por pessoa, diferente do catálogo | `  - comida: €30` ou `  - ingresso: €41,63` sob a parada; ingresso incluído num pacote pago em outro ponto leva `€0` |
 | Como chegar à próxima parada | `  - via:` embaixo da parada de onde se sai |
 | Detalhe do trajeto: preço do carro, onde encontrar o motorista, plataforma | nota do trecho, depois de ` — ` no `via:` |
+| Caminhada de acesso a um transporte sem geometria interna validada | `  - acesso: A pé · 10 min — …` depois do `via:`, com duração estimada identificada na nota; `saída:` marca o início da caminhada. Não criar pino ou corredores fictícios |
 | Quanto cada pessoa paga a mais que o passe semanal naquele trecho (ticket avulso num dia sem passe, a compra do passe) | `· €2,55` no `via:`, antes da nota. Trecho coberto pelo passe fica sem `€`. Entra no card de ingressos e aparece à direita do trecho |
 | Narrativa do dia | parágrafo sob o dia |
 | Alternativa, plano B, aviso de greve | só se o usuário pedir. Se não pediu, sugira na resposta |

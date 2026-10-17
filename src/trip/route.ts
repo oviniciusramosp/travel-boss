@@ -77,9 +77,10 @@ function endpoints(hop: RouteHop): Pick<MapRouteSegment, 'fromId' | 'toId'> {
 export function transferLegs(hop: RouteHop): TransferLeg[] {
   const decision = resolveTripLeg(hop.from, hop.to, hop.via);
   if (decision.kind === 'catalog') {
-    return expandTimelineTransferParts(decision.leg, hop.from, hop.to);
+    const parts = expandTimelineTransferParts(decision.leg, hop.from, hop.to);
+    return hop.via?.access ? [hop.via.access, ...parts] : parts;
   }
-  return hop.via ? [hop.via] : [];
+  return hop.via ? [...(hop.via.access ? [hop.via.access] : []), hop.via] : [];
 }
 
 /** A walk the timeline would show as "~1 min". */
