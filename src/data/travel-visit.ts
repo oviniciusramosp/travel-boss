@@ -2458,6 +2458,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     ),
   }),
   'rom-baffetto': restaurantVisit(12, 18, {
+    bestTime: L('Saturday lunch: 12:00–15:30', 'Almoço de sábado: 12h–15h30'),
     tips: L(
       'Individual pizzas ~€8–15. Expect a queue at peak; thin Roman-style crust.',
       'Pizza individual ~€8–15. Espere fila no pico; massa fina à romana.',

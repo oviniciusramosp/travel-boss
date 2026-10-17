@@ -10,6 +10,20 @@ import { departureTimes } from '../trip/departures';
 vi.mock('./walk-route', () => ({ fetchWalkingRoute: vi.fn(async () => null) }));
 
 describe('authored station access', () => {
+  it.each(['osrm', 'straight'] as const)('keeps Rome A track and its seven intermediate stations in %s mode', async (walkMode) => {
+    const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === 'rom-gallina-bianca' && leg.to === 'rom-terrestre-vaticano')!;
+    const places = new Map([[leg.from, { id: leg.from, ...leg.stations![0]! }],
+      [leg.to, { id: leg.to, ...leg.stations!.at(-1)! }]]);
+    const route = await buildItineraryRoute([leg.from, leg.to], [leg], places, { walkMode });
+    const spine = route.segments.find(segment => segment.mode === 'transit')!;
+    expect(spine.latlngs.length).toBeGreaterThan(100);
+    expect(stationsFor(spine).map(station => station.name)).toEqual([
+      'Termini', 'Repubblica', 'Barberini', 'Spagna', 'Flaminio', 'Lepanto', 'Ottaviano', 'Cipro', 'Valle Aurelia',
+    ]);
+    expect(stationsFor(spine).filter(station => !station.end)).toHaveLength(7);
+    expect(expandTimelineTransferParts(leg, places.get(leg.from)!, places.get(leg.to)!)[0])
+      .toMatchObject({ stationCount: 9, durationMin: 12, board: 'Termini', exit: 'Valle Aurelia' });
+  });
   it.each([true, false])('avoids a phantom boarding conflict only when the origin is a station (%s)', station => {
     const leg = italyRailLegs.find(leg => leg.label === 'Frecciabianca 8619')!;
     const parts = expandTimelineTransferParts(leg,

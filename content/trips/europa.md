@@ -663,33 +663,35 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
 
 ### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
 
-Saída do apartamento às 11h para conhecer a parte gratuita do Vaticano. Chegada ao Panteão prevista para 12h45, antes do compromisso das 13h e dentro da janela registrada dos bilhetes, 12h–13h. Demais horários e deslocamentos são estimativas.
+Saída do apartamento às 11h, passeio a pé e metrô apenas na volta. São Pedro e Castel Sant’Angelo ficam antes do Panteão, com chegada prevista às 12h50 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Popolo, Spagna e Trevi até o jantar. Horários e caminhadas são estimativas.
 
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
 - 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
-  - via: Táxi · 30 min
-- 11:30 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a Praça de São Pedro e entrar gratuitamente na basílica se a fila permitir, com ombros e joelhos cobertos. Sair às **12h15**; sem Museus Vaticanos, Capela Sistina ou cúpula
-  - via: Táxi · 30 min
-  - saída: 12:15
-- 12:45 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo
+  - via: A pé · 35 min
+- 11:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a Praça de São Pedro; o tempo disponível não comporta uma fila longa para a basílica gratuita. Sair às **12h**; sem Museus Vaticanos, Capela Sistina ou cúpula
+  - saída: 12:00
+  - via: A pé · 20 min
+- 12:20 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu; sair às **12h25**
+  - saída: 12:25
+  - via: A pé · 25 min
+- 12:50 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo
   - ingresso: €7,75
-- 13:50 [Come ’na Vorta — Pasta e Vino · Palombella](place:rom-pasta-vino-palombella) — **Almoço**: massa romana; sair até 14h35
-  - comida: €20
-  - saída: 14:35
+- 13:45 [Pizzeria da Baffetto](place:rom-baffetto) — **Almoço**: pizza romana; reservar tempo para a fila e sair até 14h40
+  - comida: €15
+  - saída: 14:40
 - 14:45 [Two Sizes](place:rom-two-sizes) — **Sobremesa**: conhecer a confeitaria e provar o tiramisù
 - 15:15 [Piazza Navona](place:rom-navona) — Passear pela praça e ver as fontes
-- 16:00 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu
-  - via: Táxi · 30 min — Saída prevista às 16h45 para a região de Trevi; desembarque no acesso permitido
+- 16:10 [Piazza del Popolo](place:rom-popolo) — Passear pela praça
+- 16:50 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
 - 17:15 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
-- 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte; sair até 17h40 para seguir à Piazza di Spagna
+- 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte
   - comida: €6
-- 17:50 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
-- 18:30 [Piazza del Popolo](place:rom-popolo) — Passear pela praça; sair até 18h50
-  - via: Táxi · 25 min — Até a região de Roma Termini para o jantar
 - 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18
-  - via: Táxi · 40 min — Saída prevista às 20h30 para o apartamento
-- 21:10 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
+  - saída: 20:30
+  - via: Metrô A · 12 min · €1,50 — Sentido Battistini; pagar por aproximação com um cartão por pessoa
+  - embarque: 2026-10-17 · Metrô A · Termini → Valle Aurelia · 20:38 → 20:50
+- 21:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
 
 ### Dia 3 — Dom 18/10 · Voo para Lisboa
   - cidades: Roma → Lisboa

@@ -7,10 +7,12 @@ import type { LString } from './travel';
 import parisMilanRail from './travel-paris-milan-rail.json';
 import { italyRailLegs } from './travel-italy-rail';
 import cinqueTerrePaths from './travel-cinque-terre-paths.json';
+import romeMetroAPath from './travel-rome-a-path.json';
 import {
   cinqueTerreRegional,
   milanMetro3,
   romeMetroB,
+  romeMetroA,
   veniceVaporetto1,
   funicularMontmartre,
   getTransitLine,
@@ -977,6 +979,9 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  { from: 'rom-gallina-bianca', to: 'rom-terrestre-vaticano', mode: 'transit',
+    ...ride(romeMetroA, 'termini', 'valle-aurelia'), durationMin: 12,
+    path: romeMetroAPath as LatLng[], stations: romeMetroA.stations },
   // Actual metro return on 16/10; stations and track remain unverified.
   // Keep it off the walking router and do not draw a guessed railway.
   { from: 'rom-stow-colosseo', to: 'rom-terrestre-vaticano', mode: 'transit', label: 'Metrô' },

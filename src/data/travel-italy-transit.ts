@@ -23,6 +23,21 @@ export const romeMetroB: TransitLine = {
   ],
 };
 
+// OSM route/1720955, toward Battistini; checked stops for 17/10/2026.
+export const romeMetroA: TransitLine = {
+  id: 'rome-a', name: 'Metrô A', color: '#F68B1F', stations: [
+    { id: 'termini', name: 'Termini', lat: 41.9016796, lng: 12.5007739 },
+    { id: 'repubblica', name: 'Repubblica', lat: 41.9028109, lng: 12.4960468 },
+    { id: 'barberini', name: 'Barberini', lat: 41.9037892, lng: 12.4886636 },
+    { id: 'spagna', name: 'Spagna', lat: 41.9067933, lng: 12.4845057 },
+    { id: 'flaminio', name: 'Flaminio', lat: 41.9129345, lng: 12.4767418 },
+    { id: 'lepanto', name: 'Lepanto', lat: 41.9113268, lng: 12.4661835 },
+    { id: 'ottaviano', name: 'Ottaviano', lat: 41.9094241, lng: 12.4584847 },
+    { id: 'cipro', name: 'Cipro', lat: 41.9073662, lng: 12.4476984 },
+    { id: 'valle-aurelia', name: 'Valle Aurelia', lat: 41.9028779, lng: 12.4413876 },
+  ],
+};
+
 export const cinqueTerreRegional: TransitLine = {
   id: 'cinque-terre-regional', name: 'Regionale Cinque Terre', color: '#00814F', stations: [
     { id: 'spezia', name: 'La Spezia Centrale', lat: 44.111564, lng: 9.81358 },
