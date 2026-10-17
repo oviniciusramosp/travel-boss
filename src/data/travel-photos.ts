@@ -14,6 +14,7 @@
  */
 
 import type { LString } from './travel';
+import lisbonPhotos from './travel-lisbon-photos.json';
 
 export type TravelPhoto = {
   url: string;
@@ -31,6 +32,7 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  ...lisbonPhotos,
   'rom-st-peter-square': [photo('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/1280px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg', 'Basilica seen from Saint Peter’s Square', 'Basílica vista da Praça de São Pedro', 'Wikimedia Commons')],
   'rom-kiko-corso-145': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLdJKT3hw14tqX-F2aB4GGNyTKeyJVXj_wXuPCohFRde-2_2TGq7cj2mU1ciyyAxsI-c6IZeI5WqGU0V6XlBkCEQa7Epo6s8TrqZJnof0njYenoDTPvucgpAglsE8zt0hLI8d2WxEZpncq58=w408-h544-k-no', 'KIKO Milano · Via del Corso 145', 'KIKO Milano · Via del Corso 145', 'Google Maps · KIKO Milano Via del Corso 145')],
   'rom-pasta-vino-palombella': [photo('https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RcpiikXNFde2x4D0aHzAnIJzl5Q2ifRZ-PKVUebe_V9PJD_lvsp5WXtOX5xvIaKp0WLCCarTLEzjEIR3autdANAB4GOFoKuQCWoy4dUBnpU3uiEGg-O8mdOZ0lxImaAy0VUXE0=s1016-k-no', 'Pasta at Come ’na Vorta · Palombella', 'Massa do Come ’na Vorta · Palombella', 'Google Maps · Come ’na Vorta Pasta e Vino - Palombella')],
@@ -2911,20 +2913,6 @@ export const photosByPlaceId: Record<string, TravelPhoto[]> = {
       'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Piazza_Sidney_Sonnino_-_Parrocchia_San_Crisogono_-_panoramio.jpg/1280px-Piazza_Sidney_Sonnino_-_Parrocchia_San_Crisogono_-_panoramio.jpg',
       'Piazza Sidney Sonnino, Trastevere',
       'Piazza Sidney Sonnino, Trastevere',
-      'Wikimedia Commons',
-    ),
-  ],
-  'lis-whome-bairro-alto': [
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Lisboa_-_Bairro_Alto_%285420829357%29.jpg/1280px-Lisboa_-_Bairro_Alto_%285420829357%29.jpg',
-      'Rua da Barroca in Bairro Alto, near WHome Modern Retreat',
-      'Rua da Barroca no Bairro Alto, perto do WHome Modern Retreat',
-      'Wikimedia Commons',
-    ),
-    photo(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Lisbon_%2842931870092%29.jpg/1280px-Lisbon_%2842931870092%29.jpg',
-      'Rua da Barroca, Bairro Alto',
-      'Rua da Barroca, Bairro Alto',
       'Wikimedia Commons',
     ),
   ],
