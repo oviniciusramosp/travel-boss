@@ -6426,13 +6426,17 @@ export const localTravelCities: TravelCity[] = [
         category: 'tourist',
         landmark: 'monument',
         description: {
-          en: 'Entry free; dome climb is paid. Security lines — go early.',
+          en: 'Renaissance and Baroque basilica in Vatican City, known for Michelangelo’s dome, the Pietà and Bernini’s works.',
           'pt-BR':
-            'Entrar é gratuito; subir na cúpula precisa pagar. Fila de segurança — chegue cedo.',
+            'Basílica renascentista e barroca no Vaticano, conhecida pela cúpula de Michelangelo, pela Pietà e pelas obras de Bernini.',
         },
         googleRating: 4.8,
         lat: 41.9021569,
         lng: 12.4537105,
+        subPoints: [
+          { name: { en: 'Michelangelo’s Pietà', 'pt-BR': 'Pietà de Michelangelo' }, lat: 41.9023032, lng: 12.4545797, aiSuggested: true,
+            description: { en: 'Michelangelo’s marble sculpture of Mary holding Christ, in the first chapel on the right after entering the basilica.', 'pt-BR': 'Escultura em mármore de Michelangelo, com Maria segurando Cristo, na primeira capela à direita de quem entra na basílica.' } },
+        ],
         address: 'Piazza San Pietro, 00120 Città del Vaticano',
         mapsQuery: 'Basilica di San Pietro Vaticano',
       },

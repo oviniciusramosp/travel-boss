@@ -321,7 +321,7 @@ function lodgingVisit(
 export const visitByPlaceId: Record<string, VisitInfo> = {
   'rom-terrestre-vaticano': {
     crowdProfile: 'local',
-    bestTime: L('Check-in from 16:00; checkout by 10:00', 'Check-in desde 16h; checkout até 10h'),
+    bestTime: L('Check-in from 16:00', 'Check-in desde 16h'),
   },
   'rom-fuorinorma': { crowdProfile: 'restaurant' },
   'rom-panna-liquirizia': { crowdProfile: 'shop' },
@@ -2609,6 +2609,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       'Tiramisù em dois tamanhos e diferentes sabores. Orçamento indicativo, baseado em preços relatados por clientes; confirme o cardápio atual no balcão.',
     ),
   }),
+  'rom-st-peter-square': landmarkOutdoor({ durationMin: 25, durationMax: 35,
+    tips: L('Free access to the square’s monuments; barriers and celebrations may change pedestrian circulation.', 'Acesso gratuito aos monumentos da praça; barreiras e celebrações podem alterar a circulação.') }),
   'rom-st-peter': {
     ticket: {
       currency: 'EUR',

@@ -8,6 +8,27 @@ function place(id: string, name: string, lat: number, lng: number, osm: string,
 }
 
 export const romeNotionPlaces: TravelPlace[] = [
+  { id: 'rom-st-peter-square', name: { en: 'Saint Peter’s Square', 'pt-BR': 'Praça de São Pedro' },
+    category: 'tourist', subcategories: ['square'], lat: 41.9022527, lng: 12.4572422,
+    address: 'Piazza San Pietro, 00120 Città del Vaticano', mapsUrl: 'https://www.openstreetmap.org/relation/10044166',
+    description: {
+      en: 'The monumental square in front of Saint Peter’s Basilica, designed by Gian Lorenzo Bernini. Its colonnades frame the Vatican Obelisk and the fountains of Maderno and Bernini.',
+      'pt-BR': 'Praça monumental diante da Basílica de São Pedro, projetada por Gian Lorenzo Bernini. As colunatas emolduram o Obelisco Vaticano e as fontes de Maderno e Bernini.',
+    },
+    aiSuggested: true, aiReason: {
+      en: 'A short free walk through nearby monuments before visiting the basilica and returning for checkout.',
+      'pt-BR': 'Circuito curto e gratuito por monumentos próximos antes da basílica e do retorno para o checkout.',
+    },
+    subPoints: [
+      { name: { en: 'Maderno Fountain', 'pt-BR': 'Fonte de Maderno' }, lat: 41.9028123, lng: 12.4572074, aiSuggested: true,
+        description: { en: 'The fountain on the north side of the square, by Carlo Maderno.', 'pt-BR': 'Fonte do lado norte da praça, de Carlo Maderno.' } },
+      { name: { en: 'Vatican Obelisk', 'pt-BR': 'Obelisco Vaticano' }, lat: 41.9022527, lng: 12.4572422, aiSuggested: true,
+        description: { en: 'The Egyptian obelisk at the centre of the square, crowned by a cross.', 'pt-BR': 'Obelisco egípcio no centro da praça, coroado por uma cruz.' } },
+      { name: { en: 'Bernini Fountain', 'pt-BR': 'Fonte de Bernini' }, lat: 41.9017366, lng: 12.4572472, aiSuggested: true,
+        description: { en: 'The fountain on the south side, balancing Maderno’s fountain across the obelisk.', 'pt-BR': 'Fonte do lado sul, que equilibra a fonte de Maderno do outro lado do obelisco.' } },
+      { name: { en: 'Bernini’s Colonnade', 'pt-BR': 'Colunata de Bernini' }, lat: 41.9016731, lng: 12.4562631, aiSuggested: true,
+        description: { en: 'The sheltered south colonnade, with columns and saints’ statues framing the square.', 'pt-BR': 'Trecho sul coberto da colunata, com colunas e estátuas de santos emoldurando a praça.' } },
+    ] },
   { id: 'rom-kiko-corso-145', name: { en: 'KIKO Milano · Via del Corso 145', 'pt-BR': 'KIKO Milano · Via del Corso 145' },
     category: 'shopping', lat: 41.9043045, lng: 12.4791936, googleRating: 4.3,
     address: 'Via del Corso 145, 00186 Roma RM',

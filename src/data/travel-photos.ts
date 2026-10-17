@@ -31,6 +31,7 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'rom-st-peter-square': [photo('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/1280px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg', 'Basilica seen from Saint Peter’s Square', 'Basílica vista da Praça de São Pedro', 'Wikimedia Commons')],
   'rom-kiko-corso-145': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLdJKT3hw14tqX-F2aB4GGNyTKeyJVXj_wXuPCohFRde-2_2TGq7cj2mU1ciyyAxsI-c6IZeI5WqGU0V6XlBkCEQa7Epo6s8TrqZJnof0njYenoDTPvucgpAglsE8zt0hLI8d2WxEZpncq58=w408-h544-k-no', 'KIKO Milano · Via del Corso 145', 'KIKO Milano · Via del Corso 145', 'Google Maps · KIKO Milano Via del Corso 145')],
   'rom-pasta-vino-palombella': [photo('https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RcpiikXNFde2x4D0aHzAnIJzl5Q2ifRZ-PKVUebe_V9PJD_lvsp5WXtOX5xvIaKp0WLCCarTLEzjEIR3autdANAB4GOFoKuQCWoy4dUBnpU3uiEGg-O8mdOZ0lxImaAy0VUXE0=s1016-k-no', 'Pasta at Come ’na Vorta · Palombella', 'Massa do Come ’na Vorta · Palombella', 'Google Maps · Come ’na Vorta Pasta e Vino - Palombella')],
   'rom-two-sizes': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLcipz3yzO32NveloxbU-H5pw-lnGPhnkJEjBNMzEryjU_UkpvEeIZtPr2DuVRoIX9rKT5MsJ1YysLRStlaXgmjb8oQevpC_vJFnfGxpCdpTdxrw7w9Phuhl13zPeZ7KUayqTmmYCAHgSSlC=w408-h544-k-no', 'Tiramisù at Two Sizes', 'Tiramisù da Two Sizes', 'Google Maps · Two Sizes')],

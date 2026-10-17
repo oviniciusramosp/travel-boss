@@ -980,6 +980,16 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  { from: 'rom-terrestre-vaticano', to: 'rom-st-peter-square', mode: 'transit',
+    ...ride(romeMetroA, 'valle-aurelia', 'ottaviano'), durationMin: 3,
+    path: romeMetroAOutwardPath.slice(0, 28) as LatLng[], stations: [
+      { name: 'Valle Aurelia', lat: 41.9029225, lng: 12.4413524 },
+      { name: 'Cipro', lat: 41.9074099, lng: 12.44767 },
+      { name: 'Ottaviano', lat: 41.9095289, lng: 12.4584401 },
+    ] },
+  { from: 'rom-st-peter', to: 'rom-terrestre-vaticano', mode: 'transit',
+    ...ride(romeMetroA, 'ottaviano', 'valle-aurelia'), durationMin: 3,
+    path: romeMetroAPath.slice(86) as LatLng[], stations: romeMetroA.stations.slice(6) },
   { from: 'rom-terrestre-vaticano', to: 'rom-castel-angelo', mode: 'transit',
     ...ride(romeMetroA, 'valle-aurelia', 'lepanto'), durationMin: 5,
     path: romeMetroAOutwardPath as LatLng[], stations: [

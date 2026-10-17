@@ -703,26 +703,34 @@ Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel
   - saída: 21:50
   - via: Metrô A · 7 min · €1,50 — Sentido Battistini; novo bilhete após a visita às praças
   - embarque: 2026-10-17 · Metrô A · Flaminio → Valle Aurelia · 22:00 → 22:07
-- 22:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
+- 22:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 11h
 
 ### Dia 3 — Dom 18/10 · Vaticano e voo para Lisboa
   - cidades: Roma → Lisboa
 
-São Pedro cedo, voltando ao apartamento antes do checkout das 10h. Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
+Vaticano de metrô após as 8h, com passeio gratuito pela praça e visita à basílica se a fila permitir. Sair da basílica às 9h45 para voltar ao apartamento por volta das 10h20, antes do checkout das 11h. Horários locais; Lisboa está uma hora atrás de Roma. Caminhadas e horários de visita são estimativas.
 
-- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; deixar as malas arrumadas no quarto e sair para a visita às 7h
-  - saída: 07:00
-  - via: A pé · 35 min
-- 07:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a praça e o interior gratuito da basílica. **Vestimenta**: ombros cobertos para todos, calça comprida para homens e saia abaixo do joelho ou calça para mulheres; reservar até **8h50** para segurança e visita, sujeita às celebrações. Sem Museus Vaticanos, Capela Sistina ou cúpula
-  - saída: 08:50
-  - via: A pé · 35 min
-- 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas; retorno às 9h25 para recolher os pertences e terminar de preparar a saída
-  - saída: 10:00
+- 07:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; deixar as malas arrumadas no quarto e sair às **7h45**, com margem para entrar na estação e alcançar a plataforma
+  - saída: 07:45
+  - via: Metrô A · 3 min · €1,50 — Sentido Anagnina; primeiro trem após as 8h consultado para domingo
+  - embarque: 2026-10-18 · Metrô A · Valle Aurelia → Ottaviano · 08:01 → 08:04
+- 08:25 [Praça de São Pedro](place:rom-st-peter-square) — Passeio gratuito pelas fontes, obelisco e colunata
+  - 08:25 **Fonte de Maderno** — Começar pelo lado norte da praça
+  - 08:32 **Obelisco Vaticano** — Ver o monumento e a vista da fachada
+  - 08:38 **Fonte de Bernini** — Seguir pelo lado sul
+  - 08:45 **Colunata de Bernini** — Caminhar sob as colunas em direção à basílica
+- 09:00 [Basílica de São Pedro](place:rom-st-peter) — Interior gratuito, com ombros e joelhos cobertos; entrar apenas se a fila permitir sair até **9h45**. Celebrações podem restringir a visita; sem cúpula, museus ou Capela Sistina
+  - saída: 09:45
+  - via: Metrô A · 3 min · €1,50 — Sentido Battistini
+  - embarque: 2026-10-18 · Metrô A · Ottaviano → Valle Aurelia · 10:10 → 10:13
+  - 09:20 **Pietà de Michelangelo** — Horário estimado se os controles de segurança e a fila permitirem
+- 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas; retorno previsto às **10h20** para recolher os pertences e terminar de preparar a saída
+  - saída: 11:00
   - via: Táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
-- 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
+- 11:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; não tem mesas. Tempo reservado para fila e refeição até **12h25**
   - status: a confirmar
-  - via: Táxi · 1h — Saída prevista às 11h45 para o Terminal 3 de Fiumicino; tarifa fixa de €55 por carro no trajeto direto do centro ao aeroporto
-- 12:45 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Chegada prevista ao Terminal 3, bem antes das 14h50 recomendadas no cartão; esperar com as malas até a abertura do balcão
+  - via: Táxi · 1h — Saída prevista às 12h25 para o Terminal 3 de Fiumicino; tarifa fixa de €55 por carro no trajeto direto do centro ao aeroporto
+- 13:25 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Chegada prevista ao Terminal 3, antes das 14h50 recomendadas no cartão; esperar com as malas até a abertura do balcão
 - 14:50 Localizar o balcão da Wizz Air no painel de partidas e organizar passaportes e cartões de embarque; check-in online já realizado
 - 15:20 Despacho da mala de até 32 kg e conferência de documentos no balcão; reservar até 16h20 para a fila. Despacho encerra às 17h20
 - 16:20 Controle de segurança e caminhada até o portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
