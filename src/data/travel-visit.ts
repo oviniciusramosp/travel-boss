@@ -2540,8 +2540,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestTime: L('Opening hour or late afternoon', 'Na abertura ou fim da tarde'),
     bestDay: L('Weekday morning', 'Manhã de dia de semana'),
     tips: L(
-      'Adult €7 since July 2026. Official tickets via Musei Italiani; appropriate clothing for a place of worship is required.',
-      'Adulto €7 desde julho de 2026. Bilhetes oficiais pelo Musei Italiani; exige vestimenta adequada a um local de culto.',
+      'Adult €7 since July 2026. Official tickets via Musei Italiani. Working basilica, dress code: shoulders covered; no shorts or skirts that are too short, low-cut or transparent clothing. Staff may refuse entry. No eating or drinking inside.',
+      'Adulto €7 desde julho de 2026. Bilhetes oficiais pelo Musei Italiani. Basílica em funcionamento, com vestimenta: ombros cobertos; sem shorts ou saias curtas, decote profundo ou roupa transparente. A equipe pode barrar a entrada. Proibido comer e beber dentro.',
     ),
   }),
   'rom-piazza-venezia': landmarkOutdoor({
@@ -2617,8 +2617,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     bestDay: L('Weekday morning', 'Manhã de dia de semana'),
     crowdProfile: 'tourist-heavy',
     tips: L(
-      'Entry free with security screening. Dome (cupola) is a separate fee. Strict dress code — cover shoulders and knees.',
-      'Entrada grátis com segurança. Cúpula é taxa à parte. Dress code rígido — cubra ombros e joelhos.',
+      'Entry free with security screening. Dome (cupola) is a separate fee. Strict dress code: shoulders covered for everyone; men in long trousers, women in a skirt below the knee or trousers.',
+      'Entrada grátis com segurança. Cúpula é taxa à parte. Vestimenta rígida: ombros cobertos para todos; homens de calça comprida, mulheres de saia abaixo do joelho ou calça.',
     ),
   },
   'rom-vittoriano': landmarkOutdoor({

@@ -673,7 +673,7 @@ Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel
 - 11:35 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu; sair às **12h05**
   - saída: 12:05
   - via: A pé · 25 min
-- 12:30 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo
+- 12:30 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo. **Vestimenta**: ombros cobertos, sem shorts ou saias curtas, decote profundo ou roupa transparente; a equipe pode barrar a entrada
   - ingresso: €7,75
 - 13:45 [Pizzeria da Baffetto](place:rom-baffetto) — **Almoço**: pizza romana; reservar tempo para a fila e sair até 14h40
   - comida: €15
@@ -714,7 +714,7 @@ São Pedro cedo, voltando ao apartamento antes do checkout das 10h. Horários lo
 - 07:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída para a visita da manhã; bagagens permanecem no quarto
   - saída: 07:00
   - via: A pé · 35 min
-- 07:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a praça e o interior gratuito da basílica, com ombros e joelhos cobertos; reservar até **8h50** para segurança e visita, sujeita às celebrações. Sem Museus Vaticanos, Capela Sistina ou cúpula
+- 07:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a praça e o interior gratuito da basílica. **Vestimenta**: ombros cobertos para todos, calça comprida para homens e saia abaixo do joelho ou calça para mulheres; reservar até **8h50** para segurança e visita, sujeita às celebrações. Sem Museus Vaticanos, Capela Sistina ou cúpula
   - saída: 08:50
   - via: A pé · 35 min
 - 09:25 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; recolher os pertences e terminar de preparar a saída
