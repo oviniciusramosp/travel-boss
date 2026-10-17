@@ -342,6 +342,10 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   'rom-castel-angelo': { durationMin: 20, durationMax: 90 },
   'rom-spagna': landmarkOutdoor({ durationMin: 25, durationMax: 40 }),
   'rom-popolo': landmarkOutdoor({ durationMin: 20, durationMax: 40 }),
+  'rom-kiko-corso-145': {
+    durationMin: 20, durationMax: 30,
+    tips: L('Saturday: 10:00–21:00. Official store page and Google Maps checked on 17 October 2026.', 'Sábado: 10h–21h. Página oficial da unidade e Google Maps consultados em 17/10/2026.'),
+  },
   'ven-costituzione': landmarkOutdoor({ durationMin: 10, durationMax: 15 }),
   'ven-rialto': landmarkOutdoor({ durationMin: 20, durationMax: 30 }),
   'ven-rialto-market': { durationMin: 15, durationMax: 25, tips: L('Fish-market stalls are closed on Mondays; the waterfront and market district remain accessible.', 'As bancas de peixe fecham às segundas; a orla e a região do mercado continuam acessíveis.') },

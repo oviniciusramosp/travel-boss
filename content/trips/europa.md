@@ -663,7 +663,7 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
 
 ### Dia 2 — Sáb 17/10 · Castel Sant’Angelo, Panteão e centro histórico
 
-Saída do apartamento às 11h, metrô na ida e na volta e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, Spagna e Trevi até o jantar. Horários e caminhadas são estimativas.
+Saída do apartamento às 11h, metrô na ida e na volta e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, KIKO, Spagna e Trevi até o jantar. Horários e caminhadas são estimativas.
 
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
 - 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
@@ -684,9 +684,11 @@ Saída do apartamento às 11h, metrô na ida e na volta e passeio pelo centro a 
 - 16:05 [Said dal 1923](place:rom-said) — Compartilhar o pedido na unidade de Via Tomacelli; sair até **16h30**
   - comida: €3
   - saída: 16:30
-- 16:50 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
-- 17:15 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
-- 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte
+- 16:35 [KIKO Milano · Via del Corso 145](place:rom-kiko-corso-145) — Carol: escolher e comprar um batom ou gloss; sair até **17h**
+  - saída: 17:00
+- 17:10 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
+- 17:40 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
+- 17:50 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte
   - comida: €6
 - 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18

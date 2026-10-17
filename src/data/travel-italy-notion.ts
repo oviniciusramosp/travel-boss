@@ -8,6 +8,14 @@ function place(id: string, name: string, lat: number, lng: number, osm: string,
 }
 
 export const romeNotionPlaces: TravelPlace[] = [
+  { id: 'rom-kiko-corso-145', name: { en: 'KIKO Milano · Via del Corso 145', 'pt-BR': 'KIKO Milano · Via del Corso 145' },
+    category: 'shopping', lat: 41.9043045, lng: 12.4791936, googleRating: 4.3,
+    address: 'Via del Corso 145, 00186 Roma RM',
+    description: {
+      'pt-BR': 'Loja da marca italiana KIKO Milano na Via del Corso, com maquiagem, batons, glosses e outros cosméticos.',
+      en: 'KIKO Milano cosmetics shop on Via del Corso, selling makeup, lipsticks, lip glosses and other beauty products.',
+    },
+    mapsUrl: 'https://www.google.com/maps/place/Kiko+Milano/data=!4m6!3m5!1s0x132f605411005d1f:0xe836b7acf6b690b3!8m2!3d41.9043045!4d12.4791936!16s%2Fg%2F11b6gn83hp' },
   { id: 'rom-pam-valle-aurelia', name: { en: 'Pam · Valle Aurelia', 'pt-BR': 'Pam · Valle Aurelia' },
     category: 'markets', lat: 41.9020155, lng: 12.4387695, googleRating: 4.2,
     address: 'Viale di Valle Aurelia 32, piano terra, Centro Commerciale Aura, Roma',
