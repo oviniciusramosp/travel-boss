@@ -8,6 +8,7 @@ import parisMilanRail from './travel-paris-milan-rail.json';
 import { italyRailLegs } from './travel-italy-rail';
 import cinqueTerrePaths from './travel-cinque-terre-paths.json';
 import romeMetroAPath from './travel-rome-a-path.json';
+import romeMetroAOutwardPath from './travel-rome-a-outward-path.json';
 import {
   cinqueTerreRegional,
   milanMetro3,
@@ -979,6 +980,14 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  { from: 'rom-terrestre-vaticano', to: 'rom-castel-angelo', mode: 'transit',
+    ...ride(romeMetroA, 'valle-aurelia', 'lepanto'), durationMin: 5,
+    path: romeMetroAOutwardPath as LatLng[], stations: [
+      { name: 'Valle Aurelia', lat: 41.9029225, lng: 12.4413524 },
+      { name: 'Cipro', lat: 41.9074099, lng: 12.44767 },
+      { name: 'Ottaviano', lat: 41.9095289, lng: 12.4584401 },
+      { name: 'Lepanto', lat: 41.9114457, lng: 12.4661226 },
+    ] },
   { from: 'rom-gallina-bianca', to: 'rom-terrestre-vaticano', mode: 'transit',
     ...ride(romeMetroA, 'termini', 'valle-aurelia'), durationMin: 12,
     path: romeMetroAPath as LatLng[], stations: romeMetroA.stations },

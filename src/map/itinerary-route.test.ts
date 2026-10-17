@@ -10,6 +10,18 @@ import { departureTimes } from '../trip/departures';
 vi.mock('./walk-route', () => ({ fetchWalkingRoute: vi.fn(async () => null) }));
 
 describe('authored station access', () => {
+  it.each(['osrm', 'straight'] as const)('keeps the outward Rome A track and its two intermediate stations in %s mode', async (walkMode) => {
+    const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === 'rom-terrestre-vaticano' && leg.to === 'rom-castel-angelo')!;
+    const places = new Map([[leg.from, { id: leg.from, ...leg.stations![0]! }],
+      [leg.to, { id: leg.to, ...leg.stations!.at(-1)! }]]);
+    const route = await buildItineraryRoute([leg.from, leg.to], [leg], places, { walkMode });
+    const spine = route.segments.find(segment => segment.mode === 'transit')!;
+    expect(spine.latlngs.length).toBeGreaterThan(30);
+    expect(stationsFor(spine).map(station => station.name)).toEqual(['Valle Aurelia', 'Cipro', 'Ottaviano', 'Lepanto']);
+    expect(stationsFor(spine).filter(station => !station.end)).toHaveLength(2);
+    expect(expandTimelineTransferParts(leg, places.get(leg.from)!, places.get(leg.to)!)[0])
+      .toMatchObject({ stationCount: 4, durationMin: 5, board: 'Valle Aurelia', exit: 'Lepanto' });
+  });
   it.each(['osrm', 'straight'] as const)('keeps Rome A track and its seven intermediate stations in %s mode', async (walkMode) => {
     const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === 'rom-gallina-bianca' && leg.to === 'rom-terrestre-vaticano')!;
     const places = new Map([[leg.from, { id: leg.from, ...leg.stations![0]! }],

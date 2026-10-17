@@ -661,20 +661,19 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Check-in com as malas depois das visitas. [Anúncio no Airbnb](https://www.airbnb.com.br/rooms/1272445028608014060).\
   **Estadia:** 16–18/10/2026; checkout até 10h em 18/10.
 
-### Dia 2 — Sáb 17/10 · Vaticano, Panteão e centro histórico
+### Dia 2 — Sáb 17/10 · Castel Sant’Angelo, Panteão e centro histórico
 
-Saída do apartamento às 11h, passeio a pé e metrô apenas na volta. São Pedro e Castel Sant’Angelo ficam antes do Panteão, com chegada prevista às 12h50 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Popolo, Spagna e Trevi até o jantar. Horários e caminhadas são estimativas.
+Saída do apartamento às 11h, metrô na ida e na volta e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Popolo, Spagna e Trevi até o jantar. Horários e caminhadas são estimativas.
 
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
 - 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
-  - via: A pé · 35 min
-- 11:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a Praça de São Pedro; o tempo disponível não comporta uma fila longa para a basílica gratuita. Sair às **12h**; sem Museus Vaticanos, Capela Sistina ou cúpula
-  - saída: 12:00
-  - via: A pé · 20 min
-- 12:20 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu; sair às **12h25**
-  - saída: 12:25
+  - saída: 11:00
+  - via: Metrô A · 5 min · €1,50 — Sentido Anagnina; pagar por aproximação com um cartão por pessoa
+  - embarque: 2026-10-17 · Metrô A · Valle Aurelia → Lepanto · 11:07 → 11:12
+- 11:35 [Castel Sant’Angelo](place:rom-castel-angelo) — Ver por fora e passar pela Ponte Sant’Angelo, sem entrar no museu; sair às **12h05**
+  - saída: 12:05
   - via: A pé · 25 min
-- 12:50 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo
+- 12:30 [Panteão — Basílica de Santa Maria ad Martyres](place:rom-pantheon) — Chegar antes das **13h**, respeitando a janela dos bilhetes **12h–13h**; conhecer o interior, a cúpula e o óculo
   - ingresso: €7,75
 - 13:45 [Pizzeria da Baffetto](place:rom-baffetto) — **Almoço**: pizza romana; reservar tempo para a fila e sair até 14h40
   - comida: €15
@@ -693,12 +692,19 @@ Saída do apartamento às 11h, passeio a pé e metrô apenas na volta. São Pedr
   - embarque: 2026-10-17 · Metrô A · Termini → Valle Aurelia · 20:38 → 20:50
 - 21:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
 
-### Dia 3 — Dom 18/10 · Voo para Lisboa
+### Dia 3 — Dom 18/10 · Vaticano e voo para Lisboa
   - cidades: Roma → Lisboa
 
-Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
+São Pedro cedo, voltando ao apartamento antes do checkout das 10h. Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
 
-- 08:45 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; terminar de arrumar as malas
+- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; deixar as malas arrumadas no quarto
+- 07:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída para a visita da manhã; bagagens permanecem no quarto
+  - saída: 07:00
+  - via: A pé · 35 min
+- 07:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a praça e o interior gratuito da basílica, com ombros e joelhos cobertos; reservar até **8h50** para segurança e visita, sujeita às celebrações. Sem Museus Vaticanos, Capela Sistina ou cúpula
+  - saída: 08:50
+  - via: A pé · 35 min
+- 09:25 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; recolher os pertences e terminar de preparar a saída
 - 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas
   - via: Táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
 - 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
