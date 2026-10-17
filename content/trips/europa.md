@@ -663,7 +663,7 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
 
 ### Dia 2 — Sáb 17/10 · Castel Sant’Angelo, Panteão e centro histórico
 
-Saída do apartamento às 11h, metrô na ida e na volta e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, KIKO, Spagna e Trevi até o jantar. Horários e caminhadas são estimativas.
+Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, KIKO, Trevi e Piazza Venezia até o jantar. Na volta, metrô até Spagna, caminhada até Popolo e novo metrô em Flaminio. Horários e caminhadas são estimativas.
 
 - [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
 - 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
@@ -686,16 +686,24 @@ Saída do apartamento às 11h, metrô na ida e na volta e passeio pelo centro a 
   - saída: 16:30
 - 16:35 [KIKO Milano · Via del Corso 145](place:rom-kiko-corso-145) — Carol: escolher e comprar um batom ou gloss; sair até **17h**
   - saída: 17:00
-- 17:10 [Piazza di Spagna](place:rom-spagna) — Praça e escadaria
-- 17:40 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
-- 17:50 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte
+- 17:15 [Fontana di Trevi](place:rom-trevi) — Ver a fonte da área pública, sem pagar pelo acesso mais próximo
+- 17:25 [L’Antico Forno · Trevi](place:rom-forno-trevi) — **Café da tarde**: café e doce no balcão, junto à fonte
   - comida: €6
+  - saída: 17:50
+- 18:05 [Piazza Venezia](place:rom-piazza-venezia) — Ver a praça e o Vittoriano por fora
+  - saída: 18:35
 - 19:15 [La Gallina Bianca](place:rom-gallina-bianca) — **Jantar**: carbonara trufada citada no Notion
   - comida: €18
   - saída: 20:30
-  - via: Metrô A · 12 min · €1,50 — Sentido Battistini; pagar por aproximação com um cartão por pessoa
-  - embarque: 2026-10-17 · Metrô A · Termini → Valle Aurelia · 20:38 → 20:50
-- 21:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
+  - via: Metrô A · 4 min · €1,50 — Sentido Battistini; pagar por aproximação com um cartão por pessoa
+  - embarque: 2026-10-17 · Metrô A · Termini → Spagna · 20:38 → 20:42
+- 20:50 [Piazza di Spagna](place:rom-spagna) — Conhecer a praça e a escadaria à noite
+  - saída: 21:10
+- 21:30 [Piazza del Popolo](place:rom-popolo) — Passear pela praça iluminada
+  - saída: 21:50
+  - via: Metrô A · 7 min · €1,50 — Sentido Battistini; novo bilhete após a visita às praças
+  - embarque: 2026-10-17 · Metrô A · Flaminio → Valle Aurelia · 22:00 → 22:07
+- 22:15 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; preparar as malas para o checkout das 10h
 
 ### Dia 3 — Dom 18/10 · Vaticano e voo para Lisboa
   - cidades: Roma → Lisboa

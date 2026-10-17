@@ -988,9 +988,13 @@ const tripEuropa2026: ItineraryLegDef[] = [
       { name: 'Ottaviano', lat: 41.9095289, lng: 12.4584401 },
       { name: 'Lepanto', lat: 41.9114457, lng: 12.4661226 },
     ] },
-  { from: 'rom-gallina-bianca', to: 'rom-terrestre-vaticano', mode: 'transit',
-    ...ride(romeMetroA, 'termini', 'valle-aurelia'), durationMin: 12,
-    path: romeMetroAPath as LatLng[], stations: romeMetroA.stations },
+  // Exact station vertices in the checked Battistini track (OSM route/1720955).
+  { from: 'rom-gallina-bianca', to: 'rom-spagna', mode: 'transit',
+    ...ride(romeMetroA, 'termini', 'spagna'), durationMin: 4,
+    path: romeMetroAPath.slice(0, 28) as LatLng[], stations: romeMetroA.stations.slice(0, 4) },
+  { from: 'rom-popolo', to: 'rom-terrestre-vaticano', mode: 'transit',
+    ...ride(romeMetroA, 'flaminio', 'valle-aurelia'), durationMin: 7,
+    path: romeMetroAPath.slice(40) as LatLng[], stations: romeMetroA.stations.slice(4) },
   // Actual metro return on 16/10; stations and track remain unverified.
   // Keep it off the walking router and do not draw a guessed railway.
   { from: 'rom-stow-colosseo', to: 'rom-terrestre-vaticano', mode: 'transit', label: 'Metrô' },

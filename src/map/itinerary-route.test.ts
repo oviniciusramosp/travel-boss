@@ -22,19 +22,24 @@ describe('authored station access', () => {
     expect(expandTimelineTransferParts(leg, places.get(leg.from)!, places.get(leg.to)!)[0])
       .toMatchObject({ stationCount: 4, durationMin: 5, board: 'Valle Aurelia', exit: 'Lepanto' });
   });
-  it.each(['osrm', 'straight'] as const)('keeps Rome A track and its seven intermediate stations in %s mode', async (walkMode) => {
-    const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === 'rom-gallina-bianca' && leg.to === 'rom-terrestre-vaticano')!;
+  it.each((['osrm', 'straight'] as const).flatMap(walkMode => [
+    { walkMode, from: 'rom-gallina-bianca', to: 'rom-spagna', durationMin: 4,
+      names: ['Termini', 'Repubblica', 'Barberini', 'Spagna'], vertices: 28 },
+    { walkMode, from: 'rom-popolo', to: 'rom-terrestre-vaticano', durationMin: 7,
+      names: ['Flaminio', 'Lepanto', 'Ottaviano', 'Cipro', 'Valle Aurelia'], vertices: 76 },
+  ]))('keeps the correct Rome A stretch from $from to $to in $walkMode mode', async ({ walkMode, from, to, durationMin, names, vertices }) => {
+    const leg = parisDayLegsById['trip-europa-2026']!.find(leg => leg.from === from && leg.to === to)!;
     const places = new Map([[leg.from, { id: leg.from, ...leg.stations![0]! }],
       [leg.to, { id: leg.to, ...leg.stations!.at(-1)! }]]);
     const route = await buildItineraryRoute([leg.from, leg.to], [leg], places, { walkMode });
     const spine = route.segments.find(segment => segment.mode === 'transit')!;
-    expect(spine.latlngs.length).toBeGreaterThan(100);
-    expect(stationsFor(spine).map(station => station.name)).toEqual([
-      'Termini', 'Repubblica', 'Barberini', 'Spagna', 'Flaminio', 'Lepanto', 'Ottaviano', 'Cipro', 'Valle Aurelia',
-    ]);
-    expect(stationsFor(spine).filter(station => !station.end)).toHaveLength(7);
+    expect(spine.latlngs).toHaveLength(vertices);
+    expect(spine.latlngs[0]).toEqual([leg.stations![0]!.lat, leg.stations![0]!.lng]);
+    expect(spine.latlngs.at(-1)).toEqual([leg.stations!.at(-1)!.lat, leg.stations!.at(-1)!.lng]);
+    expect(stationsFor(spine).map(station => station.name)).toEqual(names);
+    expect(stationsFor(spine).filter(station => !station.end)).toHaveLength(names.length - 2);
     expect(expandTimelineTransferParts(leg, places.get(leg.from)!, places.get(leg.to)!)[0])
-      .toMatchObject({ stationCount: 9, durationMin: 12, board: 'Termini', exit: 'Valle Aurelia' });
+      .toMatchObject({ stationCount: names.length, durationMin, board: names[0], exit: names.at(-1) });
   });
   it.each([true, false])('avoids a phantom boarding conflict only when the origin is a station (%s)', station => {
     const leg = italyRailLegs.find(leg => leg.label === 'Frecciabianca 8619')!;

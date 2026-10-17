@@ -2549,8 +2549,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMax: 30,
     bestTime: L('Anytime as orientation hub', 'Qualquer hora como ponto de orientação'),
     tips: L(
-      'Traffic square under the Vittoriano — good photo + metro orientation, not a long stay.',
-      'Praça de trânsito sob o Vittoriano — boa foto e orientação de metrô, não é parada longa.',
+      'Square below the Vittoriano. Venezia metro station is under construction and is not open to passengers.',
+      'Praça sob o Vittoriano. A estação de metrô Venezia está em obras e ainda não recebe passageiros.',
     ),
   }),
   'rom-trevi': landmarkOutdoor({
