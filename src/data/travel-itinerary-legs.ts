@@ -89,6 +89,9 @@ export type ItineraryLegDef = {
   hops?: ItineraryTransitHop[];
   /** Verified walking access to the first hop, available when live routing is offline. */
   walkInPath?: LatLng[];
+  /** Checked street-access walking times; exclude station circulation and waiting. */
+  walkInMin?: number;
+  walkOutMin?: number;
   /** Walk only: points the walk must pass, such as the central avenue of a park. */
   through?: LatLng[];
   /** Short label for UI (e.g. "M1", "RER E + M13") */
@@ -367,7 +370,7 @@ export function expandTimelineTransferParts(
     const board = hops[0]!.path[0];
     if (from && board) {
       const meters = haversineM(from, { lat: board[0], lng: board[1] });
-      if (meters >= WALK_CONNECTOR_MIN_M) parts.push(walk(walkTo(hopName(hops[0]!)), meters, 0));
+      if (meters >= WALK_CONNECTOR_MIN_M) parts.push(walk(walkTo(hopName(hops[0]!)), meters, 0, leg.walkInMin));
     }
     for (let i = 0; i < hops.length; i++) {
       const hop = hops[i]!;
@@ -396,7 +399,7 @@ export function expandTimelineTransferParts(
     const alight = lastPath[lastPath.length - 1];
     if (to && alight) {
       const meters = haversineM({ lat: alight[0], lng: alight[1] }, to);
-      if (meters >= WALK_CONNECTOR_MIN_M) parts.push(walk(legDisplayLabel({ from: '', to: '', mode: 'walk' }), meters, hops.length));
+      if (meters >= WALK_CONNECTOR_MIN_M) parts.push(walk(legDisplayLabel({ from: '', to: '', mode: 'walk' }), meters, hops.length, leg.walkOutMin));
     }
     return parts;
   }
@@ -430,7 +433,7 @@ export function expandTimelineTransferParts(
   const addWalk = (a: { lat: number; lng: number }, b: { lat: number; lng: number }, walkIndex: number) => {
     const meters = haversineM(a, b);
     if (meters < WALK_CONNECTOR_MIN_M) return;
-    const durationMin = walkMinutes(meters);
+    const durationMin = (walkIndex === 0 ? leg.walkInMin : leg.walkOutMin) ?? walkMinutes(meters);
     if (durationMin <= 1 && (walkIndex === 0 ? from?.station : to?.station)) return;
     const name = leg.board ?? boardStation?.name;
     parts.push({ mode: 'walk', leg, color: null, stationCount: 0, walkIndex,
@@ -981,14 +984,14 @@ const palaisToChampsWalk: LatLng[] = [
  */
 const tripEuropa2026: ItineraryLegDef[] = [
   { from: 'rom-terrestre-vaticano', to: 'rom-st-peter-square', mode: 'transit',
-    ...ride(romeMetroA, 'valle-aurelia', 'ottaviano'), durationMin: 3,
+    ...ride(romeMetroA, 'valle-aurelia', 'ottaviano'), durationMin: 3, walkInMin: 5,
     path: romeMetroAOutwardPath.slice(0, 28) as LatLng[], stations: [
       { name: 'Valle Aurelia', lat: 41.9029225, lng: 12.4413524 },
       { name: 'Cipro', lat: 41.9074099, lng: 12.44767 },
       { name: 'Ottaviano', lat: 41.9095289, lng: 12.4584401 },
     ] },
   { from: 'rom-st-peter', to: 'rom-terrestre-vaticano', mode: 'transit',
-    ...ride(romeMetroA, 'ottaviano', 'valle-aurelia'), durationMin: 3,
+    ...ride(romeMetroA, 'ottaviano', 'valle-aurelia'), durationMin: 3, walkOutMin: 5,
     path: romeMetroAPath.slice(86) as LatLng[], stations: romeMetroA.stations.slice(6) },
   { from: 'rom-terrestre-vaticano', to: 'rom-castel-angelo', mode: 'transit',
     ...ride(romeMetroA, 'valle-aurelia', 'lepanto'), durationMin: 5,
