@@ -708,7 +708,7 @@ Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel
 ### Dia 3 — Dom 18/10 · Vaticano e voo para Lisboa
   - cidades: Roma → Lisboa
 
-Saída do apartamento depois das 8h, com caminhada até Valle Aurelia e primeiro metrô alcançável após o acesso à plataforma. Passeio gratuito pela praça e visita à basílica se a fila permitir; sair às 9h45 para voltar ao apartamento por volta das 10h25, antes do checkout das 11h. Depois, táxi direto ao aeroporto e almoço lá. Horários locais; Lisboa está uma hora atrás de Roma. Caminhadas e horários de visita são estimativas.
+Saída do apartamento depois das 8h, com caminhada até Valle Aurelia e primeiro metrô alcançável após o acesso à plataforma. Passeio gratuito pela praça e visita à basílica se a fila permitir; sair às 9h45 para voltar ao apartamento por volta das 10h25, antes do checkout das 11h. Saída do prédio às 11h15, metrô até Termini e Leonardo Express ao aeroporto, com almoço após a chegada. Horários locais; Lisboa está uma hora atrás de Roma. Caminhadas e horários de visita são estimativas.
 
 - 08:01 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o **café da manhã no apartamento**, com as malas arrumadas no quarto. Caminhada de **5 min pelo Google Maps**, por Via Giulio Sacchetti e Via Angelo Emo, mais **4 min estimados para entrar e chegar à plataforma**, por volta das 8h10
   - saída: 08:01
@@ -724,19 +724,21 @@ Saída do apartamento depois das 8h, com caminhada até Valle Aurelia e primeiro
   - via: Metrô A · 3 min · €1,50 — Sentido Battistini
   - embarque: 2026-10-18 · Metrô A · Ottaviano → Valle Aurelia · 10:10 → 10:13
   - 09:25 **Pietà de Michelangelo** — Horário estimado se os controles de segurança e a fila permitirem
-- 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas; retorno previsto às **10h25** para recolher os pertences e terminar de preparar a saída
-  - saída: 11:00
-  - via: Táxi · 50 min — Direto ao Terminal 3 de Fiumicino, sem parada no centro; duração planejada com margem para o trânsito
-- 11:50 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Chegada ao Terminal 3; **almoço às 12h** na área pública do aeroporto e espera com as malas até a abertura do balcão
+- 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas; retorno previsto às **10h25** para recolher os pertences e terminar de preparar a saída. Concluir o checkout às 11h e sair do prédio às **11h15**
+  - saída: 11:15
+  - via: Metrô A · 13 min · €1,50 — Sentido Anagnina; pagar por aproximação com um cartão por pessoa
+  - embarque: 2026-10-18 · Metrô A · Valle Aurelia → Termini · 11:25 → 11:38
+- 11:50 [Estação Roma Termini](place:rom-termini) — Comprar os bilhetes na máquina, bilheteria ou app e conferir a plataforma no painel; reservar 15–20 minutos para compra e circulação com as malas. Estar na plataforma até **12h10**; validar o bilhete de papel antes de embarcar
+  - saída: 11:50
+  - via: Trem Leonardo Express 4618 · 32 min · €14
+  - embarque: 2026-10-18 · Leonardo Express 4618 · Roma Termini → Fiumicino Aeroporto · 12:20 → 12:52
+- 13:05 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Chegada ao Terminal 3 e **almoço às 13h15** na área pública; aguardar a abertura do balcão com as malas.\
+  **14h50:** localizar o balcão da Wizz Air no painel e organizar passaportes e cartões de embarque; check-in online já realizado. **15h20:** despachar a mala de até 32 kg e conferir os documentos, reservando até 16h20 para a fila; despacho encerra às 17h20.\
+  **16h20:** passar pelo controle de segurança e seguir ao portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
   - período: tarde
-- 14:50 Localizar o balcão da Wizz Air no painel de partidas e organizar passaportes e cartões de embarque; check-in online já realizado
-- 15:20 Despacho da mala de até 32 kg e conferência de documentos no balcão; reservar até 16h20 para a fila. Despacho encerra às 17h20
-- 16:20 Controle de segurança e caminhada até o portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
-- 17:00 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — **Café da tarde e jantar antecipado**: sanduíche ou prato pronto, bebida e café na área de embarque, perto do portão; terminar até 17h25. Comer antes do voo, pois a chegada à hospedagem de Lisboa será tarde
+- 17:00 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — **Café da tarde e jantar antecipado**: sanduíche ou prato pronto, bebida e café perto do portão; terminar até **17h25**. Estar no portão às **17h35**; fechamento às **17h50**, no Terminal 3.
   - comida: €33,50
-- 17:35 Estar no portão de embarque; fechamento às 17h50
-- 18:20 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — Partida do voo Wizz Air Malta W4 6219 para Lisboa, Terminal 3.
-  - via: Voo Wizz Air W4 6219 · 3h15
+  - via: Voo Wizz Air W4 6219 · 3h15 — Partida às **18h20**
 
 ## Lisboa
 city: lisboa

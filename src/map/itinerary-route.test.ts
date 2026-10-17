@@ -23,6 +23,10 @@ describe('authored station access', () => {
       .toMatchObject({ stationCount: 4, durationMin: 5, board: 'Valle Aurelia', exit: 'Lepanto' });
   });
   it.each((['osrm', 'straight'] as const).flatMap(walkMode => [
+    { walkMode, from: 'rom-terrestre-vaticano', to: 'rom-termini', durationMin: 13,
+      names: ['Valle Aurelia', 'Cipro', 'Ottaviano', 'Lepanto', 'Flaminio', 'Spagna', 'Barberini', 'Repubblica', 'Termini'], vertices: 46 },
+    { walkMode, from: 'rom-termini', to: 'rom-fco', durationMin: 32,
+      names: ['Roma Termini', 'Fiumicino Aeroporto'], vertices: 137 },
     { walkMode, from: 'rom-terrestre-vaticano', to: 'rom-st-peter-square', durationMin: 3,
       names: ['Valle Aurelia', 'Cipro', 'Ottaviano'], vertices: 28 },
     { walkMode, from: 'rom-st-peter', to: 'rom-terrestre-vaticano', durationMin: 3,

@@ -9,11 +9,13 @@ import { italyRailLegs } from './travel-italy-rail';
 import cinqueTerrePaths from './travel-cinque-terre-paths.json';
 import romeMetroAPath from './travel-rome-a-path.json';
 import romeMetroAOutwardPath from './travel-rome-a-outward-path.json';
+import romeAirportPaths from './travel-rome-airport-paths.json';
 import {
   cinqueTerreRegional,
   milanMetro3,
   romeMetroB,
   romeMetroA,
+  leonardoExpress,
   veniceVaporetto1,
   funicularMontmartre,
   getTransitLine,
@@ -983,6 +985,22 @@ const palaisToChampsWalk: LatLng[] = [
  * Without a spine the trip view leaves a transit hop off the map.
  */
 const tripEuropa2026: ItineraryLegDef[] = [
+  { from: 'rom-terrestre-vaticano', to: 'rom-termini', mode: 'transit',
+    ...ride(romeMetroA, 'valle-aurelia', 'termini'), durationMin: 13, walkInMin: 5,
+    path: romeAirportPaths.metroA as LatLng[], stations: [
+      { name: 'Valle Aurelia', lat: 41.9029225, lng: 12.4413524 },
+      { name: 'Cipro', lat: 41.9074099, lng: 12.44767 },
+      { name: 'Ottaviano', lat: 41.9095289, lng: 12.4584401 },
+      { name: 'Lepanto', lat: 41.9114457, lng: 12.4661226 },
+      { name: 'Flaminio', lat: 41.9125753, lng: 12.4777832 },
+      { name: 'Spagna', lat: 41.9067877, lng: 12.484596 },
+      { name: 'Barberini', lat: 41.9038596, lng: 12.4886856 },
+      { name: 'Repubblica', lat: 41.9028598, lng: 12.4960559 },
+      { name: 'Termini', lat: 41.9017025, lng: 12.5007956 },
+    ] },
+  { from: 'rom-termini', to: 'rom-fco', mode: 'transit',
+    ...ride(leonardoExpress, 'termini', 'fiumicino'), label: 'Leonardo Express 4618', durationMin: 32,
+    path: romeAirportPaths.leonardo as LatLng[], stations: leonardoExpress.stations },
   { from: 'rom-terrestre-vaticano', to: 'rom-st-peter-square', mode: 'transit',
     ...ride(romeMetroA, 'valle-aurelia', 'ottaviano'), durationMin: 3, walkInMin: 5,
     path: romeMetroAOutwardPath.slice(0, 28) as LatLng[], stations: [

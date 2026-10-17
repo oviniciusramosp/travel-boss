@@ -38,6 +38,14 @@ export const romeMetroA: TransitLine = {
   ],
 };
 
+// OSM route/392946, Termini → Fiumicino; no intermediate service stops.
+export const leonardoExpress: TransitLine = {
+  id: 'leonardo-express', name: 'Leonardo Express', color: '#CA0A23', stations: [
+    { id: 'termini', name: 'Roma Termini', lat: 41.9000169, lng: 12.5020651 },
+    { id: 'fiumicino', name: 'Fiumicino Aeroporto', lat: 41.7933952, lng: 12.2519445 },
+  ],
+};
+
 export const cinqueTerreRegional: TransitLine = {
   id: 'cinque-terre-regional', name: 'Regionale Cinque Terre', color: '#00814F', stations: [
     { id: 'spezia', name: 'La Spezia Centrale', lat: 44.111564, lng: 9.81358 },
