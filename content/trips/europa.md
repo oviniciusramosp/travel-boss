@@ -736,8 +736,9 @@ Saída do apartamento depois das 8h, com caminhada até Valle Aurelia e primeiro
   **14h50:** localizar o balcão da Wizz Air no painel e organizar passaportes e cartões de embarque; check-in online já realizado. **15h20:** despachar a mala de até 32 kg e conferir os documentos, reservando até 16h20 para a fila; despacho encerra às 17h20.\
   **16h20:** passar pelo controle de segurança e seguir ao portão; cada passageiro tem Priority, mala de cabine de até 10 kg e item pessoal
   - período: tarde
-- 17:00 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — **Café da tarde e jantar antecipado**: sanduíche ou prato pronto, bebida e café perto do portão; terminar até **17h25**. Estar no portão às **17h35**; fechamento às **17h50**, no Terminal 3.
-  - comida: €33,50
+- 17:00 [Aeroporto de Fiumicino (FCO)](place:rom-fco) — **Café da tarde e lanche antes do voo**: sanduíche, bebida e café perto do portão; terminar até **17h25**. Estar no portão às **17h35**; fechamento às **17h50**, no Terminal 3.
+  - comida: €18,50
+  - período: noite
   - via: Voo Wizz Air W4 6219 · 3h15 — Partida às **18h20**
 
 ## Lisboa
@@ -750,15 +751,15 @@ budget: comida €40
 
 Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mala despachada e encontro com o motorista do transfer reservado.
 
-O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em Lisboa, apenas água e um snack da mochila se houver fome, sem depender de restaurante aberto às 22h.
-
 - 20:35 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Pouso do voo W4 6219 vindo de Roma; seguir as placas de recolha de bagagens / Baggage reclaim e retirar a mala. A saída das chegadas é pelo Terminal 1
   - via: Carro · 31 min — Transfer reservado; saída estimada às 21h35, após encontrar o motorista. Aguardar seu contato para seguir ao carro
   - acesso: A pé · 10 min — Após retirar a mala, sair para o saguão público de chegadas do Terminal 1, virar à direita e seguir aos Pontos de Encontro 1, 2, 3 e 4. Aguardar no número informado pelo motorista no dia; tempo estimado com malas
   - saída: 21:25
 - 22:10 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Check-in previsto; apartamento no 2º andar, sem elevador. A janela regular é 16h–21h: confirmar previamente a chegada tardia, com taxa de €30 por reserva.\
+  **Jantar por delivery às 22h45:** pedir após entrar no apartamento; horário estimado, conforme a entrega.\
   **Estadia:** 18–20/10/2026; checkout até 11h em 20/10, com saída prevista às 9h para o voo das 14h50.\
   **Chegada:** Avisar a hospedagem da previsão de 22h10 e corrigir o pedido de chegada das 10h–11h que consta na reserva; check-in tardio ainda a confirmar.
+  - comida: €15
   - status: a confirmar
 
 ### Dia 2 — Seg 19/10 · Lisboa
@@ -779,10 +780,12 @@ O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em L
   - via: A pé até Time Out Market · 20 min
 - 14:00 [Time Out Market](place:lis-time-out) — **Almoço tardio combinado com café da tarde**: escolher um prato nos balcões e tomar café no mercado; sair até 15h15. Segunda aberto desde 10h; tarde livre depois da refeição
   - comida: €17
-- 18:30 [My Auchan Calhariz](place:lis-my-auchan-calhariz) — Ao terminar o passeio, comprar refeição pronta para o **jantar no apartamento**, pão, fruta e bebida pronta para o **café da manhã**, sanduíches e um snack para o **almoço de amanhã no aeroporto**. Alimentos de levar devem dispensar geladeira; consumir os perecíveis do jantar ao chegar. Sair até 18h50 e voltar direto à hospedagem; aberto até 22h
+- 18:30 [El Corte Inglés Lisboa](place:lis-el-corte-ingles) — Fazer as últimas compras; loja e supermercado abertos até 22h. Deixar os alimentos para o final: refeição pronta para o **jantar no apartamento**, pão, fruta e bebida para o **café da manhã**, alimentos que dispensem geladeira e snack para o **almoço de amanhã no aeroporto**. Concluir até 19h45 e voltar direto para guardar as compras
+  - período: noite
   - comida: €14
-  - via: A pé até a hospedagem · 5 min — Guardar as compras imediatamente
-- 18:55 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Guardar as compras ao chegar; **jantar no apartamento às 19h15** com a refeição pronta comprada no My Auchan, já contabilizada na compra. Separar o café da manhã e preparar a bagagem de mão com os lanches do aeroporto
+  - saída: 19:45
+  - via: Uber · 20 min — Retorno direto com as compras; tempo estimado com margem para encontrar o carro e o trânsito
+- 20:10 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Guardar as compras ao chegar; **jantar no apartamento às 20h30** com a refeição pronta comprada no El Corte Inglés, já contabilizada na compra. Separar o café da manhã e os lanches do aeroporto, deixar as malas prontas e descansar para a viagem do dia seguinte
   - comida: €0
 
 ### Dia 3 — Ter 20/10 · Volta para São Paulo
