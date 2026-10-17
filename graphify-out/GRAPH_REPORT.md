@@ -1,21 +1,21 @@
-# Graph Report - travel-boss-belem-baixa-public  (2026-10-17)
+# Graph Report - travel-boss-lisbon-photos-public  (2026-10-17)
 
 ## Corpus Check
-- 779 files · ~610,863 words
+- 782 files · ~1,054,928 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2442 nodes · 5905 edges · 179 communities (143 shown, 36 thin omitted)
+- 2446 nodes · 5911 edges · 173 communities (137 shown, 36 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 31 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `39f78f5a`
+- Built from commit: `ab3289b6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- pickLocale
+- place-panel.ts
 - travel-areas.test.ts
 - paint
 - check-travel-locations.ts
@@ -48,7 +48,7 @@
 - weather-source.ts
 - Travel Boss
 - Milão — 11–14 de outubro de 2026
-- departures.ts
+- pickLocale
 - vite.config.ts
 - Almoço junto ao Panteão — 17/10/2026
 - walk-route.ts
@@ -56,27 +56,27 @@
 - travel-itinerary-legs.ts
 - hotel-rank.ts
 - dates.ts
-- session.ts
+- rome-hotel-neighborhoods.ts
 - travel-categories.ts
 - transfer-row.ts
 - Alimentação em Versalhes — pesquisa de 28/09/2026
 - Mercado de 10/10 — consulta em 28/09/2026
 - map.ts
 - grande-epicerie-2026-10-06.md
-- map/controls.ts
+- location.ts
 - louvre/README.md
 - router.ts
 - overlays.ts
 - main.ts
-- rating.ts
+- icon
 - baguetts-moliere-location-2026-09-28.md
 - Apartamento do Vaticano — cadastro e vínculo no roteiro
-- hotel-dates.ts
-- ref_node_fs
+- stay-heatmap.ts
+- published-api.ts
 - frecciabianca-8619-stops-2026-10-14.md
 - route.ts
 - checklist-state.ts
-- errors.ts
+- walk-distance.ts
 - Mangez et cassez-vous em Paris — 29/09/2026
 - Milão — M3, Cesarino e Duomo em 11/10/2026
 - hotel-search.mjs
@@ -99,20 +99,19 @@
 - Jantar de 7/10 — pesquisa em 27/09/2026
 - europa-calendar-2026.md
 - Descrições e fotos — 4 e 5 de outubro de 2026
-- osm-area-bridge.ts
+- lisbon-photos-2026-10-17.md
 - cedric-grolet-meurice-2026-10-10.md
 - 2. Sem foto ou com foto que não carrega — 21 lugares (tarefa E2)
 - Caminhadas de 6, 8 e 10/10 — estudo de alternativas
 - Auditoria de localização de Paris — 28/09/2026
 - tooltip.ts
 - Richelieu e brunch de 10/10 — consulta em 28/09/2026
-- legs.ts
+- departures.ts
 - Regionale 22904 e caminhadas — 15/10/2026
 - hotel-search-match.mjs
 - Jardins de Versalhes — subpontos, 28/09/2026
 - directions.ts
 - Avenue de Paris — 11/10/2026
-- airbnb-search.test.ts
 - checklists/README.md
 - travel.ts
 - Versalhes — saída às 8h30 e croissants com Guilherme
@@ -155,7 +154,6 @@
 - hotel-ring.ts
 - Duomo por fora em 11/10 e interior em 14/10/2026
 - subpoints.ts
-- place-pin.ts
 - orangerie-de-monsieur-2026-10-11.md
 - stale-cache-navigation.md
 - Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre
@@ -164,7 +162,6 @@
 - São Pedro no domingo e metrô até Castel Sant’Angelo — 17–18/10/2026
 - milano-centrale-entrances-2026-10-11.md
 - mountMap
-- travel-italy-rail.ts
 - dress-code-pantheon-vatican-2026-10-17.md
 - force-refresh-2026-10-15.md
 - Le camere in città — 13/10/2026
@@ -178,18 +175,15 @@
 - Roma a pé, Baffetto e metrô de volta — 17/10/2026
 - KIKO Milano no roteiro de Roma — 17/10/2026
 - Roma — Vaticano gratuito e Two Sizes, 17/10/2026
-- export.ts
-- appRequest
+- place-edits.ts
 - Piazza del Popolo e Said — 17/10/2026
 - Leonardo Express após saída do Airbnb às 11h15 — 18/10/2026
 - view-state.ts
-- travel-photos.test.ts
+- travel-photos.ts
 - travel-milan.ts
 - Vaticano de metrô e checkout às 11h — 18/10/2026
-- drawTripRoutes
-- maps-app.ts
+- walk-memory.ts
 - contrast.ts
-- transit.ts
 - Lisboa — delivery na chegada e últimas compras — 18–19/10/2026
 - Lisboa — circuito exterior de Belém e subida da Baixa — 19/10/2026
 
@@ -210,49 +204,49 @@
   src/data/hotel-ranking-context.ts → scripts/hotel-ranking.mjs
 - `weatherApi()` --calls--> `pastWeatherDate()`  [EXTRACTED]
   vite.config.ts → src/trip/weather-source.ts
+- `fetchForecast()` --calls--> `openMeteoForecastQuery()`  [EXTRACTED]
+  vite.config.ts → src/trip/weather-source.ts
+- `fetchForecast()` --calls--> `forecastToEnsemble()`  [EXTRACTED]
+  vite.config.ts → src/trip/weather-source.ts
 - `resolvedPlaces()` --indirect_call--> `withResolvedArea()`  [INFERRED]
   src/data/travel-areas.test.ts → src/data/travel.ts
-- `paris()` --calls--> `getTravelCity()`  [EXTRACTED]
-  src/trip/legs.test.ts → src/data/travel.ts
-- `place()` --calls--> `getTravelCity()`  [EXTRACTED]
-  src/trip/route.test.ts → src/data/travel.ts
 
 ## Import Cycles
 - 2-file cycle: `src/map/amenities.ts -> src/map/amenity-proximity.ts -> src/map/amenities.ts`
 - 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
-- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
+- 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (179 total, 36 thin omitted)
+## Communities (173 total, 36 thin omitted)
 
-### Community 0 - "pickLocale"
+### Community 0 - "place-panel.ts"
 Cohesion: 0.11
-Nodes (48): Locale, pickLocale(), canEdit, tripTabs(), openSlotRow(), railHalf(), aiBadge(), iconButton() (+40 more)
+Nodes (29): categoryMaterialName(), PlaceCategoryMeta, placePinMaterialName(), subcategoryLabel(), aiBadge(), aiSuggestionTip(), TABS, ICONS (+21 more)
 
 ### Community 1 - "travel-areas.test.ts"
-Cohesion: 0.14
-Nodes (23): AreaIssue, AreaIssueCode, AreaPolicy, DEFAULT_AREA_POLICY, distPointToPolygonM(), distPointToPolylineM(), distPointToSegmentM(), haversineM() (+15 more)
+Cohesion: 0.08
+Nodes (36): installOsmAreas(), loadOsmAreas(), Lookup, osmAreaFor(), osmAreasReady(), OsmOutline, placeHasOsmArea(), AreaIssue (+28 more)
 
 ### Community 2 - "paint"
-Cohesion: 0.15
-Nodes (35): clearStopCurrent(), mountTrip(), applyQuery(), armTransfer(), catalogPins(), datedPoints(), datePlaces(), datePlan() (+27 more)
+Cohesion: 0.11
+Nodes (48): setDocumentTitle(), daysOnDate(), tripDates(), clearStopCurrent(), emptyNotice(), mountTrip(), applyQuery(), armTransfer() (+40 more)
 
 ### Community 3 - "check-travel-locations.ts"
 Cohesion: 0.27
 Nodes (9): counts, rows, trip, auditPin(), destinationPin(), distanceMeters(), Pin, evidence (+1 more)
 
 ### Community 4 - "hotels.ts"
-Cohesion: 0.08
-Nodes (36): hotelPhotoUrls(), AccommodationType, addDays(), asMsg(), asResult(), Booking, CATEGORIES, CategoryKey (+28 more)
+Cohesion: 0.07
+Nodes (42): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(), StayRange, validStayRange(), hotelPhotoUrls(), AccommodationType (+34 more)
 
 ### Community 5 - "travel-visit.ts"
 Cohesion: 0.09
 Nodes (32): cafeVisit(), CrowdProfile, formatDuration(), formatMoney(), formatMoneyTypical(), formatTicketPromo(), free, L() (+24 more)
 
 ### Community 6 - "travel-itineraries.ts"
-Cohesion: 0.14
-Nodes (16): computeDayBudget(), computeTripBudget(), DayBudget, itinerariesByCitySlug, ItineraryArrivalOption, ItinerarySlot, moneyTypicalEur(), parisD1AfterBase (+8 more)
+Cohesion: 0.13
+Nodes (17): computeDayBudget(), computeTripBudget(), DayBudget, dayRoutePlaceIds(), itinerariesByCitySlug, ItineraryArrivalOption, ItinerarySlot, moneyTypicalEur() (+9 more)
 
 ### Community 7 - "fetch-travel-polygons.py"
 Cohesion: 0.06
@@ -263,52 +257,52 @@ Cohesion: 0.33
 Nodes (9): IconButtonSize, IconButtonVariant, onSegmentKey(), segmentButtons(), segmented(), segmentedMove(), segmentOn(), syncSegmented() (+1 more)
 
 ### Community 9 - "travel-stay-heatmap.ts"
-Cohesion: 0.05
-Nodes (64): hotelRankingContext(), src_data_rome_hotel_boundaries, Boundary, entries, geometry, legacyById, legacyUrbanIds, profiles (+56 more)
+Cohesion: 0.12
+Nodes (25): BY_CITY, CITY_SEARCH, citySearchName(), LISBON, ROME, searchQuery(), STAY_HEAT_BEST_MIN, STAY_HEAT_RGB (+17 more)
 
 ### Community 10 - "places.ts"
-Cohesion: 0.10
-Nodes (40): placeCategoriesOffByDefault, placeCategoryOrder, favoritePlaces(), googleMapsUrl(), dayPrimaryRoutePlaceIds(), ItineraryDay, ItineraryStop, subcategoryLabel() (+32 more)
+Cohesion: 0.05
+Nodes (71): categoryFilterKey, groupsKey(), PeriodPrefs, periodsKey(), read(), readCategoryFilter(), readGroups(), readPeriods() (+63 more)
 
 ### Community 11 - "theme.ts"
 Cohesion: 0.22
-Nodes (15): bootTheme(), CANVAS, canvasColor(), meta(), parseTheme(), publish(), readStoredTheme(), resolveTheme() (+7 more)
+Nodes (17): activeTheme(), bootTheme(), CANVAS, canvasColor(), meta(), parseTheme(), publish(), readStoredTheme() (+9 more)
 
 ### Community 12 - "airbnb-search.mjs"
-Cohesion: 0.13
-Nodes (20): ref_node_child_process, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbType(), extract(), run (+12 more)
+Cohesion: 0.10
+Nodes (25): ref_node_child_process, ref_node_path, ref_node_url, ref_node_util, airbnbReady(), airbnbSnapshot(), airbnbType(), extract() (+17 more)
 
 ### Community 13 - "hotel-ranking.mjs"
 Cohesion: 0.08
-Nodes (38): BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), parseCategoryScores(), STAFF_MINIMUM, validScore(), accommodationEligibility() (+30 more)
+Nodes (36): BOOKING_CATEGORIES, bookingEligibility(), CORE_CATEGORIES, extractBookingDetails(), STAFF_MINIMUM, validScore(), accommodationEligibility(), airbnbQuality() (+28 more)
 
 ### Community 14 - "note-edit.ts"
-Cohesion: 0.09
-Nodes (36): tripToHtml(), escapeHtml(), inline(), InlineNodeOptions, inlineNodes(), InlinePart, inlineWithLinks(), MarkSpan (+28 more)
+Cohesion: 0.06
+Nodes (63): applyTripPatch(), blockEnd(), findBlock(), indentOf(), lineList(), parseTripRequest(), readTripPatch(), day (+55 more)
 
 ### Community 15 - "itinerary-route.ts"
-Cohesion: 0.14
-Nodes (29): hopName(), ItineraryStation, ItineraryTransitHop, WALK_CONNECTOR_MIN_M, getTransitLine(), haversineM(), LatLng, nearestStation() (+21 more)
+Cohesion: 0.15
+Nodes (25): ItineraryStation, ItineraryTransitHop, WALK_CONNECTOR_MIN_M, LatLng, stationById(), asCoord(), BuildItineraryOptions, buildItineraryRoute() (+17 more)
 
 ### Community 16 - "route-planner.ts"
 Cohesion: 0.09
-Nodes (48): apply(), barActive(), beginLocate(), CITY_FAR_KM, drawRoutePreview(), formatRouteDistance(), formatRouteDuration(), googleDirectionsUrl() (+40 more)
+Nodes (53): apply(), barActive(), beginLocate(), CITY_FAR_KM, createRouteButton(), drawRoutePreview(), formatRouteDistance(), formatRouteDuration() (+45 more)
 
 ### Community 17 - "compilerOptions"
 Cohesion: 0.10
 Nodes (20): DOM, DOM.Iterable, ES2023, src, vite/client, compilerOptions, forceConsistentCasingInFileNames, isolatedModules (+12 more)
 
 ### Community 18 - "search.ts"
-Cohesion: 0.14
-Nodes (20): mountSearch(), searchMatches(), searchSchedule(), searchText(), Suggestion, isMobile(), MOBILE_QUERY, TravelCity (+12 more)
+Cohesion: 0.46
+Nodes (6): mountSearch(), searchMatches(), searchSchedule(), searchText(), Suggestion, Shell
 
 ### Community 19 - "mount.ts"
-Cohesion: 0.17
-Nodes (25): clockMin(), dateBudget, dayPeriods(), freeMinutes(), hopRails(), isOpenSlot(), mealOf(), midEur() (+17 more)
+Cohesion: 0.13
+Nodes (31): resolveVisit(), appRequest(), canEdit, clockMin(), dateBudget, dayPeriods(), freeMinutes(), hopRails() (+23 more)
 
 ### Community 20 - "weather.ts"
-Cohesion: 0.13
-Nodes (30): fillWeather(), paintWeather(), refreshWeather(), refreshWeatherByHand(), cache, dayWeather(), Entry, failureKind (+22 more)
+Cohesion: 0.11
+Nodes (35): googleMapsUrl(), getTripCity(), placeCity(), fillWeather(), paintWeather(), refreshWeather(), refreshWeatherByHand(), resolveHref() (+27 more)
 
 ### Community 21 - "Travel Boss"
 Cohesion: 0.05
@@ -323,7 +317,7 @@ Cohesion: 0.09
 Nodes (26): applyBrightBasemap(), BasemapTheme, BasemapTint, bindBrightBasemap(), CANVAS_FALLBACK, HIDDEN_HIGHWAY_INDICATOR_LAYERS, hideBasemapClutter(), mapCanvasColor() (+18 more)
 
 ### Community 24 - "hotel-distance.ts"
-Cohesion: 0.25
+Cohesion: 0.24
 Nodes (11): googleDirectionsUrl(), row(), RowOptions, Copy, directionHref(), dirLink(), distanceSection(), formatMetres() (+3 more)
 
 ### Community 25 - "Travel Boss — plano de paridade com o portfólio + polimento de UI"
@@ -343,8 +337,8 @@ Cohesion: 0.07
 Nodes (27): Dia 1 — Dom 11/10 · Chegada, Duomo e Galleria, Dia 1 — Dom 18/10 · Chegada a Lisboa, Dia 1 — Dom 4/10 · Chegada, Torre Eiffel ao pôr do sol e jantar no Margaux, Dia 1 — Qua 14/10 · Chegada a La Spezia, Dia 1 — Sex 16/10 · Chegada, Coliseu e Fórum Romano, Dia 2 — Qui 15/10 · Cinque Terre, Dia 2 — Seg 12/10 · Bate-volta a Veneza, Dia 2 — Seg 19/10 · Lisboa (+19 more)
 
 ### Community 30 - "weather-source.ts"
-Cohesion: 0.14
-Nodes (26): checklists, publishedPlaceEdits(), publishedRequest(), reply(), trip(), trips, Ensemble, extendForecast() (+18 more)
+Cohesion: 0.17
+Nodes (18): Ensemble, extendForecast(), historicalWeather(), localStamp(), Member, mergeForecasts(), MET_URL, MetSeries (+10 more)
 
 ### Community 31 - "Travel Boss"
 Cohesion: 0.33
@@ -354,13 +348,13 @@ Nodes (5): Artefato, Catálogo, Publicação, Rodar, Travel Boss
 Cohesion: 0.50
 Nodes (3): Fontes e limites, Milão — 11–14 de outubro de 2026, Rota
 
-### Community 34 - "departures.ts"
-Cohesion: 0.23
-Nodes (11): clock(), DepartureTime, departureTimes(), fold(), matches(), minutes(), service, train (+3 more)
+### Community 34 - "pickLocale"
+Cohesion: 0.19
+Nodes (24): Locale, pickLocale(), tripTabs(), paintWalk(), iconButton(), iconLink(), openDialog(), el() (+16 more)
 
 ### Community 35 - "vite.config.ts"
-Cohesion: 0.14
-Nodes (21): hotelSearchVite(), applyTripPatch(), blockEnd(), findBlock(), indentOf(), lineList(), parseTripRequest(), readTripPatch() (+13 more)
+Cohesion: 0.16
+Nodes (11): ref_node_fs, hotelSearchVite(), publicTrip(), checklistApi(), publicTrips(), readForecastFile(), StoredForecast, tripsDir (+3 more)
 
 ### Community 36 - "Almoço junto ao Panteão — 17/10/2026"
 Cohesion: 0.50
@@ -368,11 +362,11 @@ Nodes (3): Almoço junto ao Panteão — 17/10/2026, Identidade, localização e
 
 ### Community 37 - "walk-route.ts"
 Cohesion: 0.05
-Nodes (66): decodeFootShape(), footFallback(), waitForSlot(), abortError(), acquire(), bindUser(), cached(), execute() (+58 more)
+Nodes (66): resolvePlacePhotos(), decodeFootShape(), footFallback(), waitForSlot(), abortError(), acquire(), bindUser(), cached() (+58 more)
 
 ### Community 38 - "parse.ts"
-Cohesion: 0.12
-Nodes (29): getTravelCity(), travelCities, getTripCity(), placeCity(), changedStopKeys(), stopFingerprint(), trip(), visitStops() (+21 more)
+Cohesion: 0.10
+Nodes (34): trip(), parse(), changedStopKeys(), stopFingerprint(), trip(), visitStops(), TEXT, tripErrorText() (+26 more)
 
 ### Community 39 - "travel-itinerary-legs.ts"
 Cohesion: 0.06
@@ -386,17 +380,17 @@ Nodes (18): BARS, clampScore(), COMPARE, Copy, httpsSources(), MISSING, placeNam
 Cohesion: 0.22
 Nodes (18): capitalized(), formatDayTitle(), formatMonthYear(), formatSpan(), isoParts, monthName(), MONTHS, nightsBetween() (+10 more)
 
-### Community 42 - "session.ts"
-Cohesion: 0.17
-Nodes (20): categoryFilterKey, groupsKey(), PeriodPrefs, periodsKey(), read(), readCategoryFilter(), readGroups(), readPeriods() (+12 more)
+### Community 42 - "rome-hotel-neighborhoods.ts"
+Cohesion: 0.13
+Nodes (22): hotelRankingContext(), src_data_rome_hotel_boundaries, Boundary, entries, geometry, legacyById, legacyUrbanIds, profiles (+14 more)
 
 ### Community 43 - "travel-categories.ts"
 Cohesion: 0.09
-Nodes (27): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialIcon (+19 more)
+Nodes (26): CATEGORIES_WITH_SUBCATEGORY_PIN_ICONS, categoryColor(), categoryIcon(), categoryIconHtml(), categoryIconSvg, categoryIonIconName, categoryIonName, categoryMaterialIcon (+18 more)
 
 ### Community 44 - "transfer-row.ts"
-Cohesion: 0.23
-Nodes (18): formatLegDuration(), legDisplayLabel(), legLineColor(), legLabel(), TripLeg, durationMinutes(), identityOf(), isTrainRide() (+10 more)
+Cohesion: 0.19
+Nodes (18): formatLegDuration(), ItineraryLegDef, legLineColor(), TimelineTransferPart, durationMinutes(), identityOf(), isTrainRide(), isTransferPart() (+10 more)
 
 ### Community 45 - "Alimentação em Versalhes — pesquisa de 28/09/2026"
 Cohesion: 0.12
@@ -407,56 +401,56 @@ Cohesion: 0.50
 Nodes (3): Histórico do planejamento anterior, Mercado de 10/10 — consulta em 28/09/2026, Troca pelo Auchan — consulta em 08/10/2026
 
 ### Community 47 - "map.ts"
-Cohesion: 0.15
-Nodes (26): KINDS, cityByPlace, drawRouteSegments(), paintRouteFocus(), RouteEntry, RoutePointer, safeColor(), walkColor() (+18 more)
+Cohesion: 0.16
+Nodes (24): KINDS, cityByPlace, drawRouteSegments(), paintRouteFocus(), RouteEntry, RoutePointer, safeColor(), walkColor() (+16 more)
 
-### Community 49 - "map/controls.ts"
-Cohesion: 0.15
-Nodes (18): travelUi, AMENITY_EVENT, AMENITY_ICON, AmenityKind, amenityName(), amenityOn(), setAmenity(), state (+10 more)
+### Community 49 - "location.ts"
+Cohesion: 0.36
+Nodes (5): setup(), watchLocation(), compassHeading(), CompassSample, locationControl()
 
 ### Community 51 - "router.ts"
-Cohesion: 0.29
-Nodes (11): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+3 more)
+Cohesion: 0.26
+Nodes (13): CityTab, commitRoute(), formatHash(), isTab(), navigationMode(), parseDay(), parseHash(), Route (+5 more)
 
 ### Community 52 - "overlays.ts"
 Cohesion: 0.20
-Nodes (11): Area, drawableRings(), modelFor(), fadeMs(), mountPlaceOverlays(), paint(), Hit, placeRecord() (+3 more)
+Nodes (12): Area, drawableRings(), modelFor(), fadeMs(), mountPlaceOverlays(), paint(), Hit, placeRecord() (+4 more)
 
 ### Community 53 - "main.ts"
-Cohesion: 0.11
-Nodes (26): setDocumentTitle(), Locale, applyChrome(), cityLabel(), cityNav, citySource(), clearMap(), dispose() (+18 more)
+Cohesion: 0.13
+Nodes (20): Locale, applyChrome(), cityLabel(), cityNav, citySource(), clearMap(), dispose(), initial (+12 more)
 
-### Community 54 - "rating.ts"
-Cohesion: 0.53
-Nodes (7): clampRating(), formatRating(), ratingAria(), ratingSummary(), starParts, starRating(), scoreNode()
+### Community 54 - "icon"
+Cohesion: 0.27
+Nodes (14): travelUi, icon(), IconName, IconSize, placePin(), clampRating(), formatRating(), ratingPicker() (+6 more)
 
 ### Community 56 - "Apartamento do Vaticano — cadastro e vínculo no roteiro"
 Cohesion: 0.50
 Nodes (3): Apartamento do Vaticano — cadastro e vínculo no roteiro, Efeito nas rotas, Identidade e localização
 
-### Community 57 - "hotel-dates.ts"
-Cohesion: 0.46
-Nodes (6): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(), StayRange, validStayRange()
+### Community 57 - "stay-heatmap.ts"
+Cohesion: 0.11
+Nodes (20): src_data_travel_stay_display, hasStayHeat(), StayZone, leafletMap(), Band, BANDS, cityHasStayHeat(), Copy (+12 more)
 
-### Community 58 - "ref_node_fs"
-Cohesion: 0.47
-Nodes (3): ref_node_fs, publicTrip(), publicTrips()
+### Community 58 - "published-api.ts"
+Cohesion: 0.33
+Nodes (8): checklists, publishedPlaceEdits(), publishedRequest(), reply(), trip(), trips, forecastToEnsemble(), openMeteoForecastQuery()
 
 ### Community 59 - "frecciabianca-8619-stops-2026-10-14.md"
 Cohesion: 0.33
 Nodes (4): Frecciabianca 8619 — estações até La Spezia em 14/10/2026, Identidade e coordenadas dos pontos intermediários, Geometria e estações, Trens da Itália — 12 a 16/10/2026
 
 ### Community 60 - "route.ts"
-Cohesion: 0.14
-Nodes (22): flightCurve(), Point, parse(), cityByPlace, intercityHops(), hop(), point(), DateStop (+14 more)
+Cohesion: 0.16
+Nodes (20): flightCurve(), Point, cityByPlace, intercityHops(), hop(), point(), accessHop(), DateStop (+12 more)
 
 ### Community 61 - "checklist-state.ts"
-Cohesion: 0.31
-Nodes (8): checklistApi(), ChecklistEdit, ChecklistItem, compareTaskSchedule(), editChecklist(), isItem(), item, validDate()
+Cohesion: 0.36
+Nodes (7): ChecklistEdit, ChecklistItem, compareTaskSchedule(), editChecklist(), isItem(), item, validDate()
 
-### Community 63 - "errors.ts"
-Cohesion: 0.27
-Nodes (10): TEXT, tripErrorText(), warningCopyText(), warningCountLabel(), warningBadge(), firstLegs(), modeCases, parisDay() (+2 more)
+### Community 63 - "walk-distance.ts"
+Cohesion: 0.52
+Nodes (5): extraWalkMeters(), formatWalk(), isExtraWalkNote(), polylineMeters(), walkedMeters()
 
 ### Community 64 - "Mangez et cassez-vous em Paris — 29/09/2026"
 Cohesion: 0.40
@@ -467,16 +461,16 @@ Cohesion: 0.40
 Nodes (4): Cesarino Via Pattari, Duomo: calendário e ingresso, Milão — M3, Cesarino e Duomo em 11/10/2026, Transporte e notas
 
 ### Community 66 - "hotel-search.mjs"
-Cohesion: 0.16
-Nodes (23): AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), azulZone(), BOOKING_EXTRACT, bookingDetails() (+15 more)
+Cohesion: 0.15
+Nodes (27): parseCategoryScores(), AzulConnectionError, azulFetch(), azulHotels(), azulSession(), azulTabHealthy(), azulZone(), BOOKING_EXTRACT (+19 more)
 
 ### Community 67 - "camera.ts"
-Cohesion: 0.18
-Nodes (17): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset(), pinIncludedInCityFit() (+9 more)
+Cohesion: 0.20
+Nodes (16): centralFitRadiusKm(), diffPinIds(), fitMaxZoom(), FitPoint, haversineKm(), medianOf(), paddedCenterOffset(), pinIncludedInCityFit() (+8 more)
 
 ### Community 68 - "timeline.ts"
-Cohesion: 0.18
-Nodes (20): averageDateBudget(), BudgetLine, overBudget(), weatherIcon, averageBudgetCards(), budgetChip(), dateBudgetCards(), foodTarget() (+12 more)
+Cohesion: 0.19
+Nodes (18): averageDateBudget(), BudgetLine, overBudget(), averageBudgetCards(), budgetChip(), dateBudgetCards(), foodTarget(), formatEur() (+10 more)
 
 ### Community 70 - "Flan, croque-monsieur e crème brûlée"
 Cohesion: 0.22
@@ -487,8 +481,8 @@ Cohesion: 0.22
 Nodes (7): Disney: estabelecimento novo e limites do levantamento, McDonald's perto do roteiro de Paris — 28/09/2026, Opções e encaixes, Prioridade sugerida, ainda sem decisão do usuário, Fotos e avaliações — conferência em 28/09/2026, McDonald's no mapa de Paris — seleção de 28/09/2026, Pesquisa e limites
 
 ### Community 74 - "index.ts"
-Cohesion: 0.08
-Nodes (33): PlaceEdits, PlaceCategory, cityGuide, FoodMeal, foodMeals, GuideItem, guides, MarketShelf (+25 more)
+Cohesion: 0.12
+Nodes (22): cityGuide, FoodMeal, foodMeals, GuideItem, guides, MarketShelf, marketShelves, parisGuide (+14 more)
 
 ### Community 75 - "Os 12 critérios"
 Cohesion: 0.15
@@ -530,10 +524,6 @@ Nodes (7): Alternativas, Detalhes dos pontos do parque, Escolha aplicada — 27/
 Cohesion: 0.40
 Nodes (4): Descrições e fotos — 4 e 5 de outubro de 2026, Fontes da revisão, Fotos, Validação
 
-### Community 86 - "osm-area-bridge.ts"
-Cohesion: 0.18
-Nodes (13): installOsmAreas(), loadOsmAreas(), Lookup, osmAreaFor(), osmAreasReady(), OsmOutline, placeHasOsmArea(), OSM_AREA_IDS (+5 more)
-
 ### Community 88 - "2. Sem foto ou com foto que não carrega — 21 lugares (tarefa E2)"
 Cohesion: 0.29
 Nodes (7): 2. Sem foto ou com foto que não carrega — 21 lugares (tarefa E2), 3. Foto que não mostra a fachada nem o prato/produto principal — 54 de 211 revisados (tarefa E3), Paris — pontos para revisão (varredura de 2026-09-27), Sem nenhuma foto (21), Só a fachada, sem o prato ou produto (18) — atende ao mínimo; o padrão do catálogo (`travel-photos.ts`) pede a comida na capa, Todas as fotos falham (0), Uma das fotos falha (0)
@@ -550,17 +540,17 @@ Nodes (7): Auditoria de localização de Paris — 28/09/2026, Causa e método, 
 Cohesion: 0.36
 Nodes (9): isTruncated(), mountTooltip(), ownsTooltip(), TOOLTIP_SHOW_MS, TOOLTIP_WARM_MS, tooltipHost(), tooltipPlacement(), tooltipShowDelay() (+1 more)
 
-### Community 93 - "legs.ts"
-Cohesion: 0.14
-Nodes (15): italyRailLegs, ItineraryLegDef, lineBrandColor(), milanDayLegsById, parisDayLegsById, catalogGeometry(), catalogLegByPair, CatalogLegStroke (+7 more)
+### Community 93 - "departures.ts"
+Cohesion: 0.10
+Nodes (26): italyRailLegs, lineBrandColor(), milanDayLegsById, parisDayLegsById, clock(), DepartureTime, departureTimes(), fold() (+18 more)
 
 ### Community 94 - "Regionale 22904 e caminhadas — 15/10/2026"
 Cohesion: 0.50
 Nodes (3): Card e acesso a pé, Horários La Spezia Centrale → Riomaggiore, Regionale 22904 e caminhadas — 15/10/2026
 
 ### Community 95 - "hotel-search-match.mjs"
-Cohesion: 0.20
-Nodes (23): bookingLookup(), ACCOMMODATION_TYPES, accommodationType(), ARTICLES, azulHotelUrl(), bestBookingMatch(), bookingHotelUrl(), bookingImageLarge() (+15 more)
+Cohesion: 0.18
+Nodes (24): ACCOMMODATION_TYPES, accommodationType(), ARTICLES, azulHotelUrl(), bestBookingMatch(), bookingHotelUrl(), bookingImageLarge(), bookingPhotoUrl() (+16 more)
 
 ### Community 96 - "Jardins de Versalhes — subpontos, 28/09/2026"
 Cohesion: 0.29
@@ -570,13 +560,9 @@ Nodes (6): Ajuste do dia para preservar o pôr do sol, Coordenadas OSM, Critéri
 Cohesion: 0.31
 Nodes (7): directionsMode, DirectionsPoint, haversineM(), MAPS_MAX_POINTS, a, b, far
 
-### Community 99 - "airbnb-search.test.ts"
-Cohesion: 0.20
-Nodes (9): airbnbSnapshot(), bookingReference(), enrichBookingHotels(), mapPool(), readRankingRequest(), validateRankingHotels(), details, params (+1 more)
-
 ### Community 101 - "travel.ts"
-Cohesion: 0.08
-Nodes (19): favoritePlaceIds(), laSpeziaFoodPlaces, localTravelCities, NEAR_BNF, Branch, branches, parisMangezEtCassezVous, Branch (+11 more)
+Cohesion: 0.06
+Nodes (32): PlaceCategory, favoritePlaceIds(), favoritePlaces(), cinqueTerreNotionPlaces, romeNotionPlaces, veniceNotionPlaces, veronaNotionPlaces, italyRailCities (+24 more)
 
 ### Community 102 - "Versalhes — saída às 8h30 e croissants com Guilherme"
 Cohesion: 0.33
@@ -591,8 +577,8 @@ Cohesion: 0.50
 Nodes (3): Partidas de transporte — Europa, Pendências e limites, Serviços consultados
 
 ### Community 107 - "amenities.ts"
-Cohesion: 0.07
-Nodes (42): cellIndex, Element, only, tiles, tilesOnly, amenitiesIn(), Amenity, amenityMapsUrl() (+34 more)
+Cohesion: 0.06
+Nodes (52): cellIndex, Element, only, tiles, tilesOnly, amenitiesIn(), Amenity, amenityMapsUrl() (+44 more)
 
 ### Community 108 - "Fotos de interiores — Archives nationales e Carnavalet"
 Cohesion: 0.50
@@ -616,7 +602,7 @@ Nodes (3): Bouillon Pigalle e transporte do Louvre — 29/09/2026, Bouillon Piga
 
 ### Community 114 - "shell.ts"
 Cohesion: 0.18
-Nodes (19): clampPaneWidth(), mountShell(), PANE_MIN, paneMax(), readLocale(), resolveLocale(), Shell, activeTheme() (+11 more)
+Nodes (18): clampPaneWidth(), mountShell(), PANE_MIN, paneMax(), readLocale(), resolveLocale(), isMobile(), MOBILE_QUERY (+10 more)
 
 ### Community 115 - "maplibre-perf.ts"
 Cohesion: 0.70
@@ -683,32 +669,24 @@ Cohesion: 0.50
 Nodes (3): Duomo por fora em 11/10 e interior em 14/10/2026, Encaixe da manhã, Fontes oficiais consultadas em 11/10
 
 ### Community 141 - "subpoints.ts"
-Cohesion: 0.38
-Nodes (8): attachSubPointNotes(), fold(), matchSubPoint(), noteTitle(), stripNoteTitle(), SubPointNote, subs, walkOrder()
-
-### Community 142 - "place-pin.ts"
-Cohesion: 0.38
-Nodes (6): categoryMaterialName(), PlaceCategoryMeta, placePinMaterialName(), IconName, categoryGlyph(), categoryGlyph()
+Cohesion: 0.35
+Nodes (9): notesUnderStop(), attachSubPointNotes(), fold(), matchSubPoint(), noteTitle(), stripNoteTitle(), SubPointNote, subs (+1 more)
 
 ### Community 145 - "Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre"
 Cohesion: 0.50
 Nodes (3): Fontes e limites, Paris — 10/10/2026: Vendôme, Cédric, Marais, barco e Torre, Transportes
 
 ### Community 146 - "expandTimelineTransferParts"
-Cohesion: 0.33
-Nodes (9): estimateLegDurationMin(), expandTimelineTransferParts(), interHopWalkM(), pathLengthM(), stationCountFromPath(), transitMPerMin(), transitPathDurationMin(), walkMinutes() (+1 more)
+Cohesion: 0.21
+Nodes (15): estimateLegDurationMin(), expandTimelineTransferParts(), hopName(), interHopWalkM(), legDisplayLabel(), pathLengthM(), stationCountFromPath(), transitMPerMin() (+7 more)
 
 ### Community 148 - "São Pedro no domingo e metrô até Castel Sant’Angelo — 17–18/10/2026"
 Cohesion: 0.40
 Nodes (4): Domingo cedo, Geometria de ida, Sábado: comparação e serviço consultado, São Pedro no domingo e metrô até Castel Sant’Angelo — 17–18/10/2026
 
 ### Community 150 - "mountMap"
-Cohesion: 0.26
-Nodes (12): placePinIconHtml(), mountMap(), syncDistantCities(), pinIcon(), cssColor(), pinBox(), pinHtml(), pinModel (+4 more)
-
-### Community 151 - "travel-italy-rail.ts"
-Cohesion: 0.20
-Nodes (8): cinqueTerreNotionPlaces, romeNotionPlaces, veniceNotionPlaces, veronaNotionPlaces, italyRailCities, laSpeziaStation, venice, verona
+Cohesion: 0.29
+Nodes (11): placePinIconHtml(), mountMap(), syncDistantCities(), pinIcon(), cssColor(), pinBox(), pinHtml(), pinModel (+3 more)
 
 ### Community 154 - "Le camere in città — 13/10/2026"
 Cohesion: 0.40
@@ -719,8 +697,8 @@ Cohesion: 0.50
 Nodes (3): Identidade e localização, Limites e dependências do roteiro, Roma — percurso realizado em 16/10/2026
 
 ### Community 158 - "calendar.ts"
-Cohesion: 0.13
-Nodes (25): currentTripDate(), DateCity, dateCityNames(), DatedDay, daysOnDate(), fold(), mentionsCity(), nearestTripDate() (+17 more)
+Cohesion: 0.16
+Nodes (17): currentTripDate(), DateCity, dateCityNames(), DatedDay, fold(), mentionsCity(), nearestTripDate(), scheduleDays() (+9 more)
 
 ### Community 161 - "Venezia e praças na volta — 17/10/2026"
 Cohesion: 0.50
@@ -738,13 +716,9 @@ Nodes (4): Encaixe e orçamento, Identidade, pino e imagem, KIKO Milano no rotei
 Cohesion: 0.40
 Nodes (4): Almoço e sequência, Roma — Vaticano gratuito e Two Sizes, 17/10/2026, Two Sizes, Vaticano e Panteão
 
-### Community 165 - "export.ts"
-Cohesion: 0.23
-Nodes (15): PERIODS, copyTrip(), dayToMarkdown(), downloadTrip(), hardBreaks(), pushDay(), pushStop(), tripToMarkdown() (+7 more)
-
-### Community 166 - "appRequest"
-Cohesion: 0.21
-Nodes (10): placeEditsApi(), patch(), storage, PlaceEditStore, readPlaceEdits(), savePlaceEdits(), syncPlaceEdits(), withPlaceEdits() (+2 more)
+### Community 166 - "place-edits.ts"
+Cohesion: 0.24
+Nodes (9): placeEditsApi(), patch(), storage, PlaceEdits, PlaceEditStore, readPlaceEdits(), savePlaceEdits(), syncPlaceEdits() (+1 more)
 
 ### Community 167 - "Piazza del Popolo e Said — 17/10/2026"
 Cohesion: 0.40
@@ -758,25 +732,21 @@ Nodes (5): Aplicação ao roteiro e geometria, Compra e tarifa, Consulta datada 
 Cohesion: 0.31
 Nodes (8): activeSectionKey(), cityInOsrmScope(), dayKey(), dayOpen(), FocusMark, SectionHit, SeenPin, shouldRefit()
 
-### Community 170 - "travel-photos.test.ts"
-Cohesion: 0.18
-Nodes (7): ref_node_crypto, appCache(), cacheWorker(), worker(), photosByPlaceId, photosForPlaceId(), ALLOWED_HOSTS
+### Community 170 - "travel-photos.ts"
+Cohesion: 0.15
+Nodes (9): ref_node_crypto, appCache(), cacheWorker(), worker(), localAssets, photosByPlaceId, photosForPlaceId(), ALLOWED_HOSTS (+1 more)
 
 ### Community 171 - "travel-milan.ts"
-Cohesion: 0.50
-Nodes (4): googleRatings, l(), milanCity, place()
+Cohesion: 0.40
+Nodes (5): googleRatings, l(), milanCity, place(), TravelCity
 
 ### Community 172 - "Vaticano de metrô e checkout às 11h — 18/10/2026"
 Cohesion: 0.40
 Nodes (4): Caminhada enviada e metrôs consultados, Circuito gratuito e fontes dos pontos, Efeito no restante do domingo, Vaticano de metrô e checkout às 11h — 18/10/2026
 
-### Community 173 - "drawTripRoutes"
-Cohesion: 0.39
-Nodes (8): drawTripRoutes(), routeDeps(), walkPoints(), memory, rememberedWalk(), rememberWalk(), walkMemoryKey(), WalkPoint
-
-### Community 174 - "maps-app.ts"
-Cohesion: 0.48
-Nodes (4): googleMapsAppTarget(), SHORT_MAPS_URLS, mapsAppUrl(), mountMapsAppLinks()
+### Community 173 - "walk-memory.ts"
+Cohesion: 0.47
+Nodes (5): memory, rememberedWalk(), rememberWalk(), walkMemoryKey(), WalkPoint
 
 ### Community 175 - "contrast.ts"
 Cohesion: 0.48
@@ -791,24 +761,24 @@ Cohesion: 0.50
 Nodes (3): Aplicação e orçamento, Fontes e acessos, Lisboa — circuito exterior de Belém e subida da Baixa — 19/10/2026
 
 ## Knowledge Gaps
-- **718 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+713 more)
+- **720 isolated node(s):** `name`, `private`, `type`, `version`, `node` (+715 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pickLocale()` connect `pickLocale` to `paint`, `hotels.ts`, `travel-stay-heatmap.ts`, `places.ts`, `route-planner.ts`, `search.ts`, `mount.ts`, `weather.ts`, `mountMap`, `hotel-distance.ts`, `calendar.ts`, `departures.ts`, `walk-route.ts`, `export.ts`, `hotel-rank.ts`, `dates.ts`, `transfer-row.ts`, `map.ts`, `map/controls.ts`, `overlays.ts`, `main.ts`, `rating.ts`, `errors.ts`, `timeline.ts`, `index.ts`, `travel.ts`, `amenities.ts`, `shell.ts`, `tripChecklist`?**
-  _High betweenness centrality (0.056) - this node is a cross-community bridge._
-- **Why does `travelCities` connect `parse.ts` to `pickLocale`, `travel-areas.test.ts`, `check-travel-locations.ts`, `travel-stay-heatmap.ts`, `places.ts`, `search.ts`, `mount.ts`, `calendar.ts`, `walk-route.ts`, `appRequest`, `travel-photos.test.ts`, `maps-app.ts`, `map.ts`, `overlays.ts`, `main.ts`, `route.ts`, `index.ts`, `travel.ts`, `amenities.ts`?**
-  _High betweenness centrality (0.028) - this node is a cross-community bridge._
-- **Why does `el()` connect `pickLocale` to `paint`, `hotels.ts`, `travel-stay-heatmap.ts`, `places.ts`, `note-edit.ts`, `place-pin.ts`, `route-planner.ts`, `search.ts`, `mount.ts`, `weather.ts`, `hotel-distance.ts`, `calendar.ts`, `walk-route.ts`, `transfer-row.ts`, `map/controls.ts`, `rating.ts`, `timeline.ts`, `index.ts`, `shell.ts`, `tripChecklist`?**
+- **Why does `pickLocale()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `places.ts`, `note-edit.ts`, `route-planner.ts`, `search.ts`, `mount.ts`, `weather.ts`, `mountMap`, `hotel-distance.ts`, `calendar.ts`, `walk-route.ts`, `parse.ts`, `hotel-rank.ts`, `dates.ts`, `transfer-row.ts`, `map.ts`, `location.ts`, `overlays.ts`, `main.ts`, `icon`, `stay-heatmap.ts`, `timeline.ts`, `index.ts`, `departures.ts`, `travel.ts`, `amenities.ts`, `shell.ts`, `tripChecklist`?**
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+- **Why does `travelCities` connect `index.ts` to `travel-areas.test.ts`, `check-travel-locations.ts`, `travel-stay-heatmap.ts`, `places.ts`, `search.ts`, `mount.ts`, `weather.ts`, `calendar.ts`, `walk-route.ts`, `place-edits.ts`, `parse.ts`, `travel-photos.ts`, `map.ts`, `overlays.ts`, `main.ts`, `stay-heatmap.ts`, `route.ts`, `travel.ts`, `amenities.ts`?**
+  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `el()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `walk-route.ts`, `timeline.ts`, `places.ts`, `transfer-row.ts`, `note-edit.ts`, `route-planner.ts`, `search.ts`, `shell.ts`, `mount.ts`, `weather.ts`, `icon`, `hotel-distance.ts`, `stay-heatmap.ts`, `tripChecklist`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `mountTrip()` (e.g. with `saveView()` and `scheduleSaveView()`) actually correct?**
   _`mountTrip()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `private`, `type` to the rest of the system?**
-  _718 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `pickLocale` be split into smaller, more focused modules?**
-  _Cohesion score 0.11367127496159754 - nodes in this community are weakly interconnected._
+  _720 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `place-panel.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
 - **Should `travel-areas.test.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.13846153846153847 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08456659619450317 - nodes in this community are weakly interconnected._
