@@ -6253,14 +6253,15 @@ export const localTravelCities: TravelCity[] = [
         name: { en: 'Said dal 1923', 'pt-BR': 'Said dal 1923' },
         category: 'cafes',
         description: {
-          en: 'Historic chocolate shop & gelato (Canal dos Caçadores). Scoops ~€2.40–3.40.',
+          en: 'The Via Tomacelli branch of the Roman chocolate maker founded in 1923, serving hot chocolate, chocolates, pastries and coffee in the historic centre.',
           'pt-BR':
-            'Sorvete e chocolate histórico (Canal dos Caçadores). Média €2,40–3,40 a unidade.',
+            'Unidade de Via Tomacelli da marca romana de chocolate fundada em 1923, com chocolate quente, bombons, doces e café no centro histórico.',
         },
-        googleRating: 4.5,
+        googleRating: 3.7,
         lat: 41.9046814,
         lng: 12.4778803,
-        address: 'Via Tomacelli 13–14, 00186 Roma',
+        address: 'Via Tomacelli 14, 00186 Roma RM',
+        mapsUrl: 'https://www.google.com/maps/place/SAID+dal+1923+-+Roma/data=!4m6!3m5!1s0x132f6144637102cd:0x8e495ed5dd33e77c!8m2!3d41.9046719!4d12.4778418!16s%2Fg%2F11wts6s66m',
         mapsQuery: 'Said dal 1923 Via Tomacelli Roma',
       },
       {

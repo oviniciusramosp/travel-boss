@@ -525,6 +525,15 @@
       "note": "OSM way 4247138 v80; named square boundary, RDP 0.25 m, checked 2026-10-17"
     },
     {
+      "id": "rom-popolo",
+      "q": "Piazza del Popolo, Roma, Italia",
+      "lat": 41.9107491,
+      "lng": 12.4763514,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM relation 318583 v39; connected outer square boundary, RDP 0.25 m, checked 2026-10-17"
+    },
+    {
       "id": "rom-fco",
       "q": "Aeroporto di Roma-Fiumicino, Italy",
       "lat": 41.8153911,

@@ -2479,8 +2479,8 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
   }),
   'rom-said': cafeVisit(4, 8, {
     tips: L(
-      'Gelato / chocolate scoops ~€2.40–3.40. Historic brand since 1923 — also a full chocolate café concept.',
-      'Sorvete / chocolate ~€2,40–3,40 a unidade. Marca histórica desde 1923 — também café de chocolate completo.',
+      'Via Tomacelli branch: daily 09:00–21:00. Official website and Google Maps checked on 17 October 2026.',
+      'Unidade de Via Tomacelli: todos os dias, 9h–21h. Site oficial e Google Maps consultados em 17/10/2026.',
     ),
   }),
   'rom-forno-trevi': cafeVisit(3, 6, {

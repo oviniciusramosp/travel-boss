@@ -97,6 +97,7 @@ export const OSM_AREA_IDS: ReadonlySet<string> = new Set([
   'rom-navona',
   'rom-pantheon',
   'rom-piazza-venezia',
+  'rom-popolo',
   'rom-st-peter',
   'rom-termini',
   'rom-trevi',
