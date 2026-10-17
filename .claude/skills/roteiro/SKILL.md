@@ -17,6 +17,8 @@ Mercado: minimizar sempre o tempo carregando sacolas; comprar no final do passei
 
 Malas: check-in de voo, inclusive online, não é check-in da hospedagem nem encerra o intervalo marcado.
 
+Hospedagem: nunca repetir a mesma hospedagem dentro de um período; a repetição só é permitida no fim de um período e no início do seguinte. Reunir as ações de uma mesma permanência (café da manhã, descanso, preparo das malas, checkout e saída) numa parada, mantendo os horários na nota e a partida em `saída:`. Não criar outra linha da hospedagem só para registrar a saída.
+
 Aplicar a revisão obrigatória de `AGENTS.md`: cidades, valores, malas e refeições. Dia com bate-volta/mudança de cidade declara `  - cidades: Milão → Veneza` sob o H3, antes das paradas; conferir o título no app. Não repetir na descrição o valor de refeição/ingresso do indicador à direita, nem faixa/estimativa/total equivalente do casal; só preço de prato/produto/bilhete específico diferente do indicador, além de pagamentos privados nos detalhes de reserva. Casa de amigo usa `Saída com as malas` na primeira linha, chegada inicial usa `Chegada com as malas`; conferir a marca até check-in/depósito e após retirada. Conferir as quatro refeições; saída cedo com comida própria exige compra na véspera em mercado aberto, contabilizada uma vez, e `comida: €0` no consumo já pago.
 
 | Informação | Onde |
@@ -78,6 +80,7 @@ Aplicar a revisão obrigatória de `AGENTS.md`: cidades, valores, malas e refei�
 1. `npx tsc --noEmit && npm test`.
 2. Abra o dia no app (`npm run dev` na 5173; num worktree, `npx vite --port 5174 --strictPort`) e confira no card:
    - os períodos (manhã, tarde, noite) começam e terminam onde o usuário espera;
+   - a hospedagem não se repete dentro de um período; linhas repetidas só no fim de um período e no início do seguinte, conforme a regra de hospedagem de `AGENTS.md`;
    - os cards de comida e ingressos: batem com o que o dia gasta (entrada, ticket de metrô)? Se mudaram, explique;
    - cada trecho: nome curto, duração uma vez, nota embaixo, trilho certo (a pé pontilhado);
    - comentários e instruções vinculados à row correspondente, sem linhas avulsas entre pontos ou trechos;

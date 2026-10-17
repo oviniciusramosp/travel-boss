@@ -12,10 +12,9 @@ via: trem Frecciarossa 07:30 → Milano Centrale 14:07 · 6h37 — Almoço no tr
 - 11:55 [CDG](place:par-cdg) — Chegada com as malas; pouso no Terminal 2. Pelo menos 1h no desembarque e imigração.
   - via: Bolt · 35 min — Bolt direto para a casa do Gui (€29–35 na simulação do app); o app mostra onde encontrar o carro
   - status: confirmado
-- 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas; descansar e tomar um banho antes de sair de novo. Cerca de 1 a 2h.
-  - status: confirmado
-- 17:12 [Casa do Gui](place:par-casa-do-gui) — Compre 2 tickets Métro-Train-RER por pessoa para fazer a ida e volta.\
+- 14:30 [Casa do Gui](place:par-casa-do-gui) — Deixar as malas; descansar e tomar um banho antes da saída às 17h12. Compre 2 tickets Métro-Train-RER por pessoa para fazer a ida e volta.\
   Compre e carregue hoje o **Navigo Semaine de 5 a 11/10**: a venda dessa semana começou em 2/10. Ele passa a valer na segunda, sem nova recarga; os trajetos de hoje usam os tickets avulsos.
+  - saída: 17:12
   - via: RER E + metrô 9 · 45 min · €2,55
   - status: confirmado
   - embarque: 2026-10-04 · RER E · Noisy-le-Sec → Haussmann–Saint-Lazare · 17:23 → 17:36
@@ -451,9 +450,9 @@ budget: comida €50
 ### Dia 2 — Seg 12/10 · Bate-volta a Veneza
   - cidades: Milão → Veneza
 
-- 06:10 [Joy 124](place:mil-joy124) — **Café da manhã no quarto** com os alimentos comprados na véspera; a reserva é só alojamento. Levar água e lanche; sair às 6h40
+- 06:10 [Joy 124](place:mil-joy124) — **Café da manhã no quarto** com os alimentos comprados na véspera; a reserva é só alojamento. Levar água e lanche; sair às 6h40 para a estação
   - comida: €0
-- 06:40 [Joy 124](place:mil-joy124) — Saída para a estação
+  - saída: 06:40
   - via: A pé até Milano Centrale · 25 min
 - 07:05 [Milano Centrale](place:mil-centrale) — Conferir o painel e localizar a plataforma com 30 min de antecedência
 - 07:35 [Milano Centrale](place:mil-centrale) — Embarque para Veneza, Italo 8973.
@@ -491,9 +490,9 @@ budget: comida €50
 ### Dia 3 — Ter 13/10 · Bate-volta a Verona
   - cidades: Milão → Verona
 
-- 05:15 [Joy 124](place:mil-joy124) — **Café da manhã no quarto**: pão, fruta e bebida pronta comprados no Gioia em 11/10; levar também o lanche da tarde, sem precisar de geladeira
+- 05:15 [Joy 124](place:mil-joy124) — **Café da manhã no quarto**: pão, fruta e bebida pronta comprados no Gioia em 11/10; levar também o lanche da tarde, sem precisar de geladeira. Sair às 5h50 para a estação
   - comida: €0
-- 05:50 [Joy 124](place:mil-joy124) — Saída para a estação
+  - saída: 05:50
   - via: A pé até Milano Centrale · 25 min
 - 06:15 [Milano Centrale](place:mil-centrale) — Conferir o painel e localizar a plataforma com 30 min de antecedência
 - 06:45 [Milano Centrale](place:mil-centrale) — Embarque para Verona
@@ -545,8 +544,8 @@ budget: comida €50
   - status: a confirmar
   - saída: 11:05
   - via: Uber · 25 min
-- 11:30 [Joy 124 Hotel Milano](place:mil-joy124) — Voltar ao quarto, terminar de arrumar as malas e preparar o checkout
-- 12:00 [Joy 124 Hotel Milano](place:mil-joy124) — Checkout e saída com as malas
+- 12:00 [Joy 124 Hotel Milano](place:mil-joy124) — Checkout e saída com as malas; retorno ao quarto às 11h30 para terminar de arrumar os pertences
+  - saída: 12:00
   - via: A pé até Milano Centrale · 25 min
 - 12:30 [Milano Centrale](place:mil-centrale) — Comprar focaccia ou sanduíche pronto e água nos balcões da estação para o **almoço no trem às 13h30**; comer depois do embarque. Identificar a plataforma e estar pronto às 12h50
   - comida: €8
@@ -627,9 +626,9 @@ Chegada de trem de Milão e hospedagem em La Spezia.
 
 Trem La Spezia → Roma.
 
-- 06:45 [Le camere in città](place:spe-le-camere-in-citta) — **Café da manhã no quarto** com os alimentos comprados ontem; deixar o brunch, snack e água acessíveis na bagagem de mão
+- 07:25 [Le camere in città](place:spe-le-camere-in-citta) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h. **Café da manhã no quarto às 6h45** com os alimentos comprados ontem; deixar o brunch, snack e água acessíveis na bagagem de mão
   - comida: €0
-- 07:25 [Le camere in città](place:spe-le-camere-in-citta) — Checkout antecipado e saída com as malas; limite da hospedagem: 10h
+  - saída: 07:25
   - via: A pé até La Spezia Centrale · 10 min
 - 07:40 [La Spezia Centrale](place:spe-centrale) — Conferir a plataforma e preparar o embarque das 08h16
 - 08:16 [La Spezia Centrale](place:spe-centrale) — Embarque para Roma. Frecciabianca 8605, direto; vagão 9, assentos 13A e 14A.
@@ -665,8 +664,7 @@ Chegada a Roma, depósito das malas, retirada dos ingressos e almoço antes do C
 
 Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel Sant’Angelo antes do Panteão, com chegada prevista às 12h30 dentro da janela dos bilhetes, 12h–13h. Depois do almoço na Baffetto e da Two Sizes, seguir por Navona, Said, KIKO, Trevi, Venchi e Piazza Venezia até o jantar. Na volta, metrô até Spagna, caminhada até Popolo e novo metrô em Flaminio. Horários e caminhadas são estimativas.
 
-- [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; levar água e snack
-- 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o café da manhã
+- 11:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída após o **café da manhã no apartamento**; levar água e snack
   - saída: 11:00
   - via: Metrô A · 5 min · €1,50 — Sentido Anagnina; pagar por aproximação com um cartão por pessoa
   - embarque: 2026-10-17 · Metrô A · Valle Aurelia → Lepanto · 11:07 → 11:12
@@ -712,15 +710,14 @@ Saída do apartamento às 11h, metrô na ida e passeio pelo centro a pé. Castel
 
 São Pedro cedo, voltando ao apartamento antes do checkout das 10h. Horários locais; Lisboa está uma hora atrás de Roma. Deslocamentos e chegada à hospedagem são estimativas com margem para as malas.
 
-- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; deixar as malas arrumadas no quarto
-- 07:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Saída para a visita da manhã; bagagens permanecem no quarto
+- 06:30 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — **Café da manhã no apartamento**; deixar as malas arrumadas no quarto e sair para a visita às 7h
   - saída: 07:00
   - via: A pé · 35 min
 - 07:35 [Basílica de São Pedro](place:rom-st-peter) — Conhecer a praça e o interior gratuito da basílica. **Vestimenta**: ombros cobertos para todos, calça comprida para homens e saia abaixo do joelho ou calça para mulheres; reservar até **8h50** para segurança e visita, sujeita às celebrações. Sem Museus Vaticanos, Capela Sistina ou cúpula
   - saída: 08:50
   - via: A pé · 35 min
-- 09:25 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Retorno; recolher os pertences e terminar de preparar a saída
-- 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas
+- 10:00 [Apartamento moderno do Vaticano — 5 min Metro A, Terrestre](place:rom-terrestre-vaticano) — Checkout e saída com as malas; retorno às 9h25 para recolher os pertences e terminar de preparar a saída
+  - saída: 10:00
   - via: Táxi · 40 min — Até a Piazza della Maddalena; combinar o desembarque no acesso permitido mais próximo da loja
 - 10:40 [All'Antico Vinaio](place:rom-antico-vinaio) — Almoço antecipado: sanduíche para levar, com as malas; abre às 10h30 no domingo e não tem mesas. Tempo reservado para fila e refeição até 11h45
   - status: a confirmar
@@ -775,8 +772,7 @@ O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em L
 - 18:30 [My Auchan Calhariz](place:lis-my-auchan-calhariz) — Ao terminar o passeio, comprar refeição pronta para o **jantar no apartamento**, pão, fruta e bebida pronta para o **café da manhã**, sanduíches e um snack para o **almoço de amanhã no aeroporto**. Alimentos de levar devem dispensar geladeira; consumir os perecíveis do jantar ao chegar. Sair até 18h50 e voltar direto à hospedagem; aberto até 22h
   - comida: €14
   - via: A pé até a hospedagem · 5 min — Guardar as compras imediatamente
-- 18:55 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Guardar as compras e preparar a bagagem de mão com os alimentos de amanhã
-- 19:15 [WHome Modern Retreat](place:lis-whome-bairro-alto) — **Jantar no apartamento**: refeição pronta comprada no My Auchan, já contabilizada na compra; separar o café da manhã e os lanches do aeroporto
+- 18:55 [WHome Modern Retreat](place:lis-whome-bairro-alto) — Guardar as compras ao chegar; **jantar no apartamento às 19h15** com a refeição pronta comprada no My Auchan, já contabilizada na compra. Separar o café da manhã e preparar a bagagem de mão com os lanches do aeroporto
   - comida: €0
 
 ### Dia 3 — Ter 20/10 · Volta para São Paulo
@@ -784,9 +780,9 @@ O jantar de 18/10 será feito em Fiumicino antes do voo. Depois do check-in em L
 
 Horários locais: Lisboa na saída e São Paulo na chegada. Chegar ao aeroporto quatro horas antes do voo, conforme a orientação da LATAM; os tempos de deslocamento e filas abaixo são estimativas com margem.
 
-- 08:00 [WHome Modern Retreat](place:lis-whome-bairro-alto) — **Café da manhã no apartamento** com pão, fruta e bebida pronta comprados ontem; levar o almoço e snack na bagagem de mão
+- 09:00 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Checkout e saída com as malas; limite da hospedagem às 11h. **Café da manhã no apartamento às 8h** com pão, fruta e bebida pronta comprados ontem; levar o almoço e snack na bagagem de mão. Deixar as malas prontas e combinar a entrega das chaves antes de sair
   - comida: €0
-- 09:00 [WHome Modern Retreat in Vibrant Bairro Alto](place:lis-whome-bairro-alto) — Checkout e saída com as malas; limite da hospedagem às 11h. Deixar as malas prontas e combinar a entrega das chaves antes de sair
+  - saída: 09:00
   - via: Uber · 45 min — Até as partidas do Terminal 1; margem inclui descer do 2º andar sem elevador, encontrar o carro e o trânsito. Conferir a previsão no app antes do checkout
 - 09:45 [Aeroporto Humberto Delgado (LIS)](place:lis-lis) — Chegada ao Terminal 1; localizar o balcão LATAM do voo LA 8149 e conferir os cartões de embarque
 - 10:00 Despacho das malas e conferência de documentos; reservar até 11h para a fila, se o balcão já estiver aberto. A tarifa inclui uma mala despachada de até 23 kg por pessoa; abertura do balcão ainda a conferir
