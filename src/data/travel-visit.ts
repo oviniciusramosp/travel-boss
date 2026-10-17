@@ -2579,6 +2579,15 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
       ),
     },
   ),
+  'rom-two-sizes': cafeVisit(3, 4, {
+    crowdProfile: 'shop',
+    bestDay: L('Tuesday–Sunday; closed Monday', 'Terça a domingo; fecha às segundas'),
+    bestTime: L('11:00–22:00', '11h–22h'),
+    tips: L(
+      'Tiramisù in two sizes and different flavours. Budget is indicative, based on reported customer prices; confirm the current menu at the counter.',
+      'Tiramisù em dois tamanhos e diferentes sabores. Orçamento indicativo, baseado em preços relatados por clientes; confirme o cardápio atual no balcão.',
+    ),
+  }),
   'rom-st-peter': {
     ticket: {
       currency: 'EUR',

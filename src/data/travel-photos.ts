@@ -31,6 +31,7 @@ function photo(
 }
 
 export const photosByPlaceId: Record<string, TravelPhoto[]> = {
+  'rom-two-sizes': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLcipz3yzO32NveloxbU-H5pw-lnGPhnkJEjBNMzEryjU_UkpvEeIZtPr2DuVRoIX9rKT5MsJ1YysLRStlaXgmjb8oQevpC_vJFnfGxpCdpTdxrw7w9Phuhl13zPeZ7KUayqTmmYCAHgSSlC=w408-h544-k-no', 'Tiramisù at Two Sizes', 'Tiramisù da Two Sizes', 'Google Maps · Two Sizes')],
   'rom-terrestre-vaticano': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLfRFsDHkeWC2s8xg4DoKIbyu8rotKpW4vz4L0saT004ZtaMG6T9w8Ki1AdswJDQLclUnuFBkY1zSB3xXo8cnjW_MFIBjpXPCyoOmujrvuBB7IYluBnTcvBHYIeiYYNIrOAgaCX3=w408-h296-k-no', 'Bedroom · Vatican Modern Apartment, Terrestre', 'Quarto · Apartamento moderno do Vaticano, Terrestre', 'Google Maps · Vatican Modern Apartment 5 min Metro | Terrestre')],
   'rom-fuorinorma': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLeWPfI03clsAoYmO989FUb2p_pepRYVCrfwgdp22MEk3QqcxkNSEYcxJKeDMFZ-i1q7V5IuowpUQGJvJvW_DeutHUalCv3SBBIHWqhWgYvhwBlsWsEzS8-RVa8EWf1rzXa7utoCSw=w408-h544-k-no', 'Fuorinorma · Monti', 'Fuorinorma · Monti', 'Google Maps · Fuorinorma')],
   'rom-panna-liquirizia': [photo('https://lh3.googleusercontent.com/grass-cs/AABkmLenE2jGZP5YZXVvF8Z_rQv5akEm1vmo1SaQUBL6vb_hpqorEQm8FgY7fLt34ftDsbRgL3Yq2Q8mObAXXvAdb9O2pbodVUUNShTWImHGDOL3eLfXdAErUP5qv-_SLTczZqwZDdw5zWIrePs=w600-h450-p-k-no', 'Gelato at Panna&Liquirizia', 'Gelato da Panna&Liquirizia', 'Google Maps · Elizabeth Davies · Panna&Liquirizia')],

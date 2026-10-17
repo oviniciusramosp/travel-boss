@@ -6002,6 +6002,21 @@ export const localTravelCities: TravelCity[] = [
         mapsUrl: 'https://www.google.com/maps/place/Vatican+Modern+Apartment+5+min+Metro+%7C+Terrestre/data=!4m6!3m5!1s0x132f618bf8eee9a9:0x84a8042ffb412533!8m2!3d41.9015843!4d12.4411534!16s%2Fg%2F11wmr1ykyx',
       },
       {
+        id: 'rom-two-sizes',
+        name: { en: 'Two Sizes', 'pt-BR': 'Two Sizes' },
+        category: 'cafes',
+        subcategories: ['pastry'],
+        description: {
+          en: 'Small pastry shop on Via del Governo Vecchio specializing in tiramisù in two portion sizes and several flavours, alongside Sicilian cannoli.',
+          'pt-BR': 'Pequena confeitaria na Via del Governo Vecchio especializada em tiramisù em dois tamanhos e diferentes sabores, além de cannoli sicilianos.',
+        },
+        lat: 41.8980142,
+        lng: 12.471566,
+        address: 'Via del Governo Vecchio, 88, 00186 Roma',
+        mapsUrl: 'https://www.google.com/maps/place/Two+Sizes/data=!4m6!3m5!1s0x132f604566693529:0xe8f4e4319c2df271!8m2!3d41.8980142!4d12.471566!16s%2Fg%2F11c2p0bttz',
+        googleRating: 4.7,
+      },
+      {
         id: 'rom-fuorinorma',
         name: { en: 'Fuorinorma', 'pt-BR': 'Fuorinorma' },
         category: 'restaurants',
