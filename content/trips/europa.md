@@ -769,17 +769,23 @@ Horários de Lisboa. Prever uma hora entre o pouso, desembarque, retirada da mal
 - 08:50 [Pastéis de Belém](place:lis-pasteis-belem) — **Café da manhã**: pastéis e café; comer o Pastel de Belém sem falta. Abre às 8h; sair até 9h40 e aproveitar a manhã na região
   - comida: €5
   - status: confirmado
-- 12:00 [Pastéis de Belém](place:lis-pasteis-belem) — Sair da região de Belém para a Baixa; já tomou café da manhã, sem novo consumo nesta parada
-  - via: Uber · 35 min — Desembarcar no acesso permitido mais próximo da rua de pedestres
-- 12:45 [Casa Portuguesa do Pastel de Bacalhau](place:lis-pastel-bacalhau) — Comer o Bolinho de Bacalhau sem falta; **entrada / lanche antes do almoço tardio**, não substitui a refeição completa
+  - saída: 09:40
+- 09:50 [Mosteiro dos Jerónimos](place:lis-jeronimos) — Passar pela fachada **por fora, sem entrar**
+- 10:10 [Jardim da Praça do Império](place:lis-jardim-imperio) — Caminhar pelos canteiros e pela fonte central
+- 10:45 [Padrão dos Descobrimentos](place:lis-padrao-descobrimentos) — Ver o monumento **por fora, sem subir** e passear pelo terreiro junto ao Tejo
+- 11:20 [Torre de Belém](place:lis-torre-belem) — Fotografar **por fora, sem entrar**; terminar a visita até 11h40 e chamar o Uber para a volta
+  - saída: 11:40
+  - via: Uber · 35 min — Saída estimada às 11h45; embarcar no acesso viário autorizado indicado pelo app e desembarcar no acesso permitido à Praça do Comércio
+  - acesso: A pé · 5 min — Ir da área da Torre ao ponto de embarque indicado pelo motorista; tempo estimado
+- 12:30 [Praça do Comércio](place:lis-praca-comercio) — Passear pela praça e começar a subida pela Rua Augusta
   - período: tarde
+  - status: confirmado
+  - saída: 12:50
+- 13:00 [Casa Portuguesa do Pastel de Bacalhau](place:lis-pastel-bacalhau) — **Lanche**: comer o pastel de bacalhau na unidade da Rua Augusta
   - comida: €7
   - status: confirmado
-- 13:15 [Praça do Comércio](place:lis-praca-comercio) — Passear pela praça; depois caminhar até o Mercado da Ribeira
-  - status: confirmado
-  - via: A pé até Time Out Market · 20 min
-- 14:00 [Time Out Market](place:lis-time-out) — **Almoço tardio combinado com café da tarde**: escolher um prato nos balcões e tomar café no mercado; sair até 15h15. Segunda aberto desde 10h; tarde livre depois da refeição
-  - comida: €17
+- 13:25 [Rua Augusta](place:lis-rua-augusta)
+- 13:40 [Fonte sul do Rossio](place:lis-rossio-fonte-sul) — Pausa na praça junto à fonte
 - 18:30 [El Corte Inglés Lisboa](place:lis-el-corte-ingles) — Fazer as últimas compras; loja e supermercado abertos até 22h. Deixar os alimentos para o final: refeição pronta para o **jantar no apartamento**, pão, fruta e bebida para o **café da manhã**, alimentos que dispensem geladeira e snack para o **almoço de amanhã no aeroporto**. Concluir até 19h45 e voltar direto para guardar as compras
   - período: noite
   - comida: €14
