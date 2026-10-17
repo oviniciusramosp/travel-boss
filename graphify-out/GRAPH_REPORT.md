@@ -1,16 +1,16 @@
-# Graph Report - travel-boss-lisbon-public.IMF5I2  (2026-10-17)
+# Graph Report - public  (2026-10-17)
 
 ## Corpus Check
-- 773 files · ~605,826 words
+- 773 files · ~606,002 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2418 nodes · 5868 edges · 167 communities (131 shown, 36 thin omitted)
+- 2418 nodes · 5868 edges · 166 communities (130 shown, 36 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 31 edges (avg confidence: 0.62)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `44db263b`
+- Built from commit: `b36e4d06`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -34,7 +34,7 @@
 - route-planner.ts
 - compilerOptions
 - mountHotels
-- mount.ts
+- day-plan.ts
 - weather.ts
 - Travel Boss
 - scripts
@@ -49,13 +49,12 @@
 - Travel Boss
 - Milão — 11–14 de outubro de 2026
 - departures.ts
-- calendar.ts
 - Almoço junto ao Panteão — 17/10/2026
 - walk-route.ts
 - parse.ts
 - travel-itinerary-legs.ts
 - hotel-rank.ts
-- dates.ts
+- calendar.ts
 - Locale
 - travel-categories.ts
 - transfer-row.ts
@@ -74,7 +73,7 @@
 - hotel-dates.ts
 - export.ts
 - frecciabianca-8619-stops-2026-10-14.md
-- route.ts
+- mount.ts
 - ref_node_fs
 - search.ts
 - Mangez et cassez-vous em Paris — 29/09/2026
@@ -209,10 +208,10 @@
 - 2-file cycle: `src/map/amenities.ts -> src/map/amenity-proximity.ts -> src/map/amenities.ts`
 - 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
-- 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
+- 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
 
-## Communities (167 total, 36 thin omitted)
+## Communities (166 total, 36 thin omitted)
 
 ### Community 0 - "place-panel.ts"
 Cohesion: 0.11
@@ -223,8 +222,8 @@ Cohesion: 0.11
 Nodes (27): installOsmAreas(), AreaIssue, AreaIssueCode, AreaPolicy, DEFAULT_AREA_POLICY, distPointToPolygonM(), distPointToPolylineM(), distPointToSegmentM() (+19 more)
 
 ### Community 2 - "paint"
-Cohesion: 0.13
-Nodes (43): clearStopCurrent(), mountTrip(), applyQuery(), armTransfer(), catalogPins(), datedPoints(), datePlaces(), datePlan() (+35 more)
+Cohesion: 0.12
+Nodes (47): daysOnDate(), tripDates(), clearStopCurrent(), emptyNotice(), mountTrip(), applyQuery(), armTransfer(), catalogPins() (+39 more)
 
 ### Community 3 - "travelCities"
 Cohesion: 0.26
@@ -290,9 +289,9 @@ Nodes (20): DOM, DOM.Iterable, ES2023, src, vite/client, compilerOptions, forceC
 Cohesion: 0.14
 Nodes (12): hotelPhotoUrls(), addDays(), hotelSetupFailure(), isAbort(), isoDate(), kmBetween(), mountHotels(), nightsBetween() (+4 more)
 
-### Community 19 - "mount.ts"
-Cohesion: 0.14
-Nodes (29): clockMin(), dateBudget, dayPeriods(), freeMinutes(), hopRails(), isOpenSlot(), mealOf(), midEur() (+21 more)
+### Community 19 - "day-plan.ts"
+Cohesion: 0.16
+Nodes (22): clockMin(), dateBudget, dayPeriods(), freeMinutes(), hopRails(), isOpenSlot(), mealOf(), midEur() (+14 more)
 
 ### Community 20 - "weather.ts"
 Cohesion: 0.11
@@ -346,10 +345,6 @@ Nodes (3): Fontes e limites, Milão — 11–14 de outubro de 2026, Rota
 Cohesion: 0.23
 Nodes (11): clock(), DepartureTime, departureTimes(), fold(), matches(), minutes(), service, train (+3 more)
 
-### Community 35 - "calendar.ts"
-Cohesion: 0.19
-Nodes (17): currentTripDate(), DateCity, dateCityNames(), daysOnDate(), fold(), mentionsCity(), nearestTripDate(), scheduleDays() (+9 more)
-
 ### Community 36 - "Almoço junto ao Panteão — 17/10/2026"
 Cohesion: 0.50
 Nodes (3): Almoço junto ao Panteão — 17/10/2026, Identidade, localização e funcionamento, Preço e limites da pesquisa
@@ -370,9 +365,9 @@ Nodes (41): cinqueTerreRegional, milanMetro3, romeMetroA, romeMetroB, veniceVapo
 Cohesion: 0.17
 Nodes (17): BARS, clampScore(), COMPARE, Copy, httpsSources(), MISSING, placeName(), RankInput (+9 more)
 
-### Community 41 - "dates.ts"
-Cohesion: 0.22
-Nodes (17): capitalized(), formatDayTitle(), formatMonthYear(), formatSpan(), monthName(), MONTHS, nightsBetween(), WEEKDAYS (+9 more)
+### Community 41 - "calendar.ts"
+Cohesion: 0.11
+Nodes (31): currentTripDate(), DateCity, dateCityNames(), fold(), mentionsCity(), nearestTripDate(), scheduleDays(), titleDate() (+23 more)
 
 ### Community 42 - "Locale"
 Cohesion: 0.15
@@ -434,9 +429,9 @@ Nodes (17): TripPatch, copyTrip(), dayToMarkdown(), downloadTrip(), hardBreaks()
 Cohesion: 0.33
 Nodes (4): Frecciabianca 8619 — estações até La Spezia em 14/10/2026, Identidade e coordenadas dos pontos intermediários, Geometria e estações, Trens da Itália — 12 a 16/10/2026
 
-### Community 60 - "route.ts"
+### Community 60 - "mount.ts"
 Cohesion: 0.10
-Nodes (31): flightCurve(), Point, DatedDay, haversineM(), pairKey(), resolveTripLeg(), cityByPlace, intercityHops() (+23 more)
+Nodes (37): flightCurve(), Point, DatedDay, haversineM(), pairKey(), resolveTripLeg(), tripFileListeners, cityByPlace (+29 more)
 
 ### Community 61 - "ref_node_fs"
 Cohesion: 0.17
@@ -738,11 +733,11 @@ Nodes (4): Ordem e opção de Flaminio, Piazza del Popolo e Said — 17/10/2026,
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pickLocale()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `ui/controls.ts`, `travel-stay-heatmap.ts`, `index.ts`, `route-planner.ts`, `mountHotels`, `mount.ts`, `weather.ts`, `tripChecklist`, `departures.ts`, `calendar.ts`, `walk-route.ts`, `parse.ts`, `hotel-rank.ts`, `dates.ts`, `Locale`, `transfer-row.ts`, `map.ts`, `overlays.ts`, `main.ts`, `rating.ts`, `export.ts`, `search.ts`, `guide.ts`, `travel.ts`, `amenities.ts`, `shell.ts`?**
+- **Why does `pickLocale()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `ui/controls.ts`, `travel-stay-heatmap.ts`, `index.ts`, `route-planner.ts`, `mountHotels`, `weather.ts`, `tripChecklist`, `departures.ts`, `walk-route.ts`, `parse.ts`, `hotel-rank.ts`, `calendar.ts`, `Locale`, `transfer-row.ts`, `map.ts`, `overlays.ts`, `main.ts`, `rating.ts`, `export.ts`, `mount.ts`, `search.ts`, `guide.ts`, `travel.ts`, `amenities.ts`, `shell.ts`?**
   _High betweenness centrality (0.056) - this node is a cross-community bridge._
-- **Why does `travelCities` connect `travelCities` to `travel-areas.test.ts`, `ui/controls.ts`, `travel-stay-heatmap.ts`, `index.ts`, `mount.ts`, `place-index.ts`, `maps-app.ts`, `vite.config.ts`, `calendar.ts`, `walk-route.ts`, `parse.ts`, `route-draw.ts`, `map.ts`, `main.ts`, `route.ts`, `search.ts`, `guide.ts`, `getTravelCity`, `travel.ts`, `amenities.ts`, `withResolvedArea`?**
+- **Why does `travelCities` connect `travelCities` to `travel-areas.test.ts`, `ui/controls.ts`, `travel-stay-heatmap.ts`, `index.ts`, `place-index.ts`, `maps-app.ts`, `vite.config.ts`, `walk-route.ts`, `parse.ts`, `calendar.ts`, `route-draw.ts`, `map.ts`, `main.ts`, `mount.ts`, `search.ts`, `guide.ts`, `getTravelCity`, `travel.ts`, `amenities.ts`, `withResolvedArea`?**
   _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **Why does `el()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `ui/controls.ts`, `travel-stay-heatmap.ts`, `index.ts`, `note-edit.ts`, `route-planner.ts`, `mountHotels`, `mount.ts`, `weather.ts`, `tripChecklist`, `walk-route.ts`, `Locale`, `transfer-row.ts`, `rating.ts`, `search.ts`, `guide.ts`, `shell.ts`?**
+- **Why does `el()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `ui/controls.ts`, `travel-stay-heatmap.ts`, `index.ts`, `note-edit.ts`, `route-planner.ts`, `mountHotels`, `weather.ts`, `tripChecklist`, `walk-route.ts`, `Locale`, `transfer-row.ts`, `rating.ts`, `mount.ts`, `search.ts`, `guide.ts`, `shell.ts`?**
   _High betweenness centrality (0.022) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `mountTrip()` (e.g. with `saveView()` and `scheduleSaveView()`) actually correct?**
   _`mountTrip()` has 2 INFERRED edges - model-reasoned connections that need verification._
