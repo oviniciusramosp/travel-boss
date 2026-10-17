@@ -3306,5 +3306,10 @@ photosByPlaceId['ct-nettuno'] = photosByPlaceId['ct-monterosso']!;
 
 export function photosForPlaceId(id: string): TravelPhoto[] | undefined {
   const list = photosByPlaceId[id];
-  return list && list.length > 0 ? list : undefined;
+  if (!list?.length) return undefined;
+  const base = import.meta.env.BASE_URL;
+  if (base === '/') return list;
+  return list.map(photo => photo.url.startsWith('/photos/')
+    ? { ...photo, url: `${base}${photo.url.slice(1)}` }
+    : photo);
 }

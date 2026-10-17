@@ -1,9 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { getTravelCity } from './travel';
 import { photosForPlaceId } from './travel-photos';
 const localAssets = import.meta.glob('/public/photos/lisboa/*.webp');
 
 describe('Lisbon photo coverage', () => {
+  it('serves local galleries under the GitHub Pages base path', () => {
+    vi.stubEnv('BASE_URL', '/travel-boss/');
+    try {
+      expect(photosForPlaceId('lis-pasteis-belem')?.map(photo => photo.url)).toEqual([
+        '/travel-boss/photos/lisboa/pasteis-belem-facade.webp',
+        '/travel-boss/photos/lisboa/pasteis-belem-food.webp',
+      ]);
+    } finally { vi.unstubAllEnvs(); }
+  });
   it('covers every identified place and gives food venues a storefront and food', () => {
     for (const place of getTravelCity('lisboa')!.places) {
       if (place.id === 'lis-palacio-sao-vicente') continue; // User-authorized identity exception.
