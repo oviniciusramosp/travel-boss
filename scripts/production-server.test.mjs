@@ -14,6 +14,7 @@ test('production serves existing APIs and validates protected agent writes behin
   writeFileSync(join(dir, 'dist/index.html'), '<html>private shell</html>');
   const previousState = process.env.TB_STATE_DIR;
   process.env.TB_STATE_DIR = join(dir, '.state');
+  writeFileSync(join(dir, 'dist/test.mp4'), '0123456789');
   process.chdir(dir); let server;
   try {
     const { createProductionServer } = await import('../build/server.mjs');
@@ -28,6 +29,9 @@ test('production serves existing APIs and validates protected agent writes behin
     });
     assert.equal((await call('/')).status, 200);
     assert.equal((await call('/healthz')).status, 200);
+    const video = await call('/test.mp4', { headers: { Range: 'bytes=2-4' } });
+    assert.equal(video.status, 206); assert.equal(await video.text(), '234');
+    assert.equal((await call('/test.mp4', { headers: { Range: 'bytes=90-99' } })).status, 416);
     assert.equal((await call('/api/trips/test', { headers: { Origin: 'https://evil.test' } })).status, 403);
     assert.equal(await new Promise(resolve => get(base + '/api/trips/test', { headers: { Host: 'evil.test' } }, res => { res.resume(); resolve(res.statusCode); })), 403);
     assert.equal((await call('/api/missing')).status, 404);

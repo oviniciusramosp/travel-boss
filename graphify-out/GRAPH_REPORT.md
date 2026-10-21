@@ -1,16 +1,16 @@
 # Graph Report - travel-boss  (2026-10-21)
 
 ## Corpus Check
-- 803 files · ~1,064,405 words
+- 803 files · ~1,064,538 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2534 nodes · 6101 edges · 176 communities (137 shown, 39 thin omitted)
+- 2534 nodes · 6101 edges · 175 communities (136 shown, 39 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.66)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8b712357`
+- Built from commit: `e2beb4fb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -56,7 +56,7 @@
 - travel-itinerary-legs.ts
 - hotel-rank.ts
 - api-plugins.ts
-- travelCities
+- view-state.ts
 - travel-categories.ts
 - transfer-row.ts
 - Alimentação em Versalhes — pesquisa de 28/09/2026
@@ -106,13 +106,12 @@
 - Auditoria de localização de Paris — 28/09/2026
 - place-edits.ts
 - Richelieu e brunch de 10/10 — consulta em 28/09/2026
-- departures.ts
+- travelCities
 - Regionale 22904 e caminhadas — 15/10/2026
 - hotel-search-match.mjs
 - Jardins de Versalhes — subpontos, 28/09/2026
 - contrast.ts
 - Avenue de Paris — 11/10/2026
-- hotel-dates.ts
 - checklists/README.md
 - travel.ts
 - Versalhes — saída às 8h30 e croissants com Guilherme
@@ -216,20 +215,20 @@
 
 ## Import Cycles
 - 2-file cycle: `src/map/amenities.ts -> src/map/amenity-proximity.ts -> src/map/amenities.ts`
-- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 2-file cycle: `src/data/travel-photos.ts -> src/data/travel.ts -> src/data/travel-photos.ts`
+- 2-file cycle: `src/data/travel-itineraries.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 - 3-file cycle: `src/data/travel-italy-rail.ts -> src/data/travel-itinerary-legs.ts -> src/data/travel.ts -> src/data/travel-italy-rail.ts`
 - 3-file cycle: `src/data/travel-itineraries.ts -> src/data/travel-milan-itinerary.ts -> src/data/travel.ts -> src/data/travel-itineraries.ts`
 
-## Communities (176 total, 39 thin omitted)
+## Communities (175 total, 39 thin omitted)
 
 ### Community 0 - "place-panel.ts"
 Cohesion: 0.12
 Nodes (26): googleMapsUrl(), cityGuide, subcategoryLabel(), aiBadge(), aiSuggestionTip(), TABS, ICONS, mapsIconLink() (+18 more)
 
 ### Community 1 - "travel-areas.test.ts"
-Cohesion: 0.15
-Nodes (17): installOsmAreas(), Lookup, osmAreaFor(), OsmOutline, OSM_AREA_IDS, areaForPlace(), OsmArea, osmTravelAreas (+9 more)
+Cohesion: 0.13
+Nodes (22): installOsmAreas(), loadOsmAreas(), Lookup, osmAreaFor(), osmAreasReady(), OsmOutline, placeHasOsmArea(), OSM_AREA_IDS (+14 more)
 
 ### Community 2 - "paint"
 Cohesion: 0.13
@@ -369,7 +368,7 @@ Nodes (67): resolvePlacePhotos(), decodeFootShape(), footFallback(), waitForSlot
 
 ### Community 38 - "parse.ts"
 Cohesion: 0.09
-Nodes (40): parse(), changedStopKeys(), stopFingerprint(), trip(), visitStops(), TEXT, tripErrorText(), warningCopyText() (+32 more)
+Nodes (38): parse(), changedStopKeys(), stopFingerprint(), trip(), visitStops(), TEXT, tripErrorText(), warningCopyText() (+30 more)
 
 ### Community 39 - "travel-itinerary-legs.ts"
 Cohesion: 0.06
@@ -383,9 +382,9 @@ Nodes (18): BARS, clampScore(), COMPARE, Copy, httpsSources(), MISSING, placeNam
 Cohesion: 0.13
 Nodes (30): fetchForecast(), readForecastFile(), StoredForecast, tripsDir, WEATHER_DIR, weatherFile(), weatherInflight, checklists (+22 more)
 
-### Community 42 - "travelCities"
-Cohesion: 0.35
-Nodes (8): getTravelCity(), travelCities, getTripCity(), placeCity(), paris(), viaWalk, resolveHref(), place()
+### Community 42 - "view-state.ts"
+Cohesion: 0.31
+Nodes (8): activeSectionKey(), cityInOsrmScope(), dayKey(), dayOpen(), FocusMark, SectionHit, SeenPin, shouldRefit()
 
 ### Community 43 - "travel-categories.ts"
 Cohesion: 0.09
@@ -543,9 +542,9 @@ Nodes (7): Auditoria de localização de Paris — 28/09/2026, Causa e método, 
 Cohesion: 0.44
 Nodes (5): PlaceEdits, PlaceEditStore, readPlaceEdits(), syncPlaceEdits(), withPlaceEdits()
 
-### Community 93 - "departures.ts"
-Cohesion: 0.23
-Nodes (11): clock(), DepartureTime, departureTimes(), fold(), matches(), minutes(), service, train (+3 more)
+### Community 93 - "travelCities"
+Cohesion: 0.14
+Nodes (19): getTravelCity(), travelCities, getTripCity(), placeCity(), clock(), DepartureTime, departureTimes(), fold() (+11 more)
 
 ### Community 94 - "Regionale 22904 e caminhadas — 15/10/2026"
 Cohesion: 0.50
@@ -562,10 +561,6 @@ Nodes (6): Ajuste do dia para preservar o pôr do sol, Coordenadas OSM, Critéri
 ### Community 97 - "contrast.ts"
 Cohesion: 0.48
 Nodes (5): chipTone(), circleInk(), ContrastInk, ON_INK_FILLS, relativeLuminance()
-
-### Community 99 - "hotel-dates.ts"
-Cohesion: 0.46
-Nodes (6): addIsoDays(), cityStayFromTrips(), defaultStayDates(), hashStayDates(), StayRange, validStayRange()
 
 ### Community 101 - "travel.ts"
 Cohesion: 0.07
@@ -692,8 +687,8 @@ Cohesion: 0.40
 Nodes (4): Domingo cedo, Geometria de ida, Sábado: comparação e serviço consultado, São Pedro no domingo e metrô até Castel Sant’Angelo — 17–18/10/2026
 
 ### Community 150 - "overlays.ts"
-Cohesion: 0.16
-Nodes (16): loadOsmAreas(), osmAreasReady(), placeHasOsmArea(), Area, drawableRings(), ensureOsmAreas(), modelFor(), fadeMs() (+8 more)
+Cohesion: 0.20
+Nodes (11): Area, drawableRings(), modelFor(), fadeMs(), mountPlaceOverlays(), paint(), Hit, placeRecord() (+3 more)
 
 ### Community 154 - "Le camere in città — 13/10/2026"
 Cohesion: 0.40
@@ -771,10 +766,10 @@ Nodes (18): ref_node_crypto, ref_node_fs, ref_node_path, previous, cwd, metrics,
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `pickLocale()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `travel-stay-heatmap.ts`, `places.ts`, `route-planner.ts`, `mount.ts`, `weather.ts`, `overlays.ts`, `hotel-distance.ts`, `export.ts`, `calendar.ts`, `walk-route.ts`, `parse.ts`, `hotel-rank.ts`, `transfer-row.ts`, `pin-visual.ts`, `map.ts`, `map/controls.ts`, `main.ts`, `search.ts`, `icon`, `index.ts`, `departures.ts`, `travel.ts`, `amenities.ts`, `shell.ts`?**
+- **Why does `pickLocale()` connect `pickLocale` to `place-panel.ts`, `paint`, `hotels.ts`, `travel-stay-heatmap.ts`, `places.ts`, `route-planner.ts`, `mount.ts`, `weather.ts`, `overlays.ts`, `hotel-distance.ts`, `export.ts`, `calendar.ts`, `walk-route.ts`, `parse.ts`, `hotel-rank.ts`, `transfer-row.ts`, `pin-visual.ts`, `map.ts`, `map/controls.ts`, `main.ts`, `search.ts`, `icon`, `index.ts`, `travelCities`, `travel.ts`, `amenities.ts`, `shell.ts`?**
   _High betweenness centrality (0.059) - this node is a cross-community bridge._
 - **Why does `travelCities` connect `travelCities` to `travel-areas.test.ts`, `check-travel-locations.ts`, `travel-stay-heatmap.ts`, `places.ts`, `mount.ts`, `overlays.ts`, `calendar.ts`, `production-server.ts`, `agent-service.ts`, `walk-route.ts`, `parse.ts`, `travel-photos.ts`, `map.ts`, `main.ts`, `search.ts`, `route.ts`, `icon`, `index.ts`, `place-edits.ts`, `travel.ts`, `amenities.ts`?**
-  _High betweenness centrality (0.050) - this node is a cross-community bridge._
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
 - **Why does `el()` connect `pickLocale` to `place-panel.ts`, `paint`, `icon`, `walk-route.ts`, `hotels.ts`, `travel-stay-heatmap.ts`, `places.ts`, `transfer-row.ts`, `note-edit.ts`, `route-planner.ts`, `map/controls.ts`, `shell.ts`, `mount.ts`, `search.ts`, `hotel-distance.ts`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `mountTrip()` (e.g. with `saveView()` and `scheduleSaveView()`) actually correct?**
@@ -783,5 +778,5 @@ _Questions this graph is uniquely positioned to answer:_
   _753 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `place-panel.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.11942959001782531 - nodes in this community are weakly interconnected._
-- **Should `paint` be split into smaller, more focused modules?**
-  _Cohesion score 0.12580943570767808 - nodes in this community are weakly interconnected._
+- **Should `travel-areas.test.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.12807881773399016 - nodes in this community are weakly interconnected._

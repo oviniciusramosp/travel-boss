@@ -1603,43 +1603,17 @@
       "norm_label": "tripline"
     },
     {
-      "label": "FocusMark",
+      "label": "StayRange",
       "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L43",
+      "source_file": "src/views/hotel-dates.ts",
+      "source_location": "L5",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_trip_view_state_focusmark",
+      "id": "src_views_hotel_dates_stayrange",
       "community": 38,
       "community_name": "parse.ts",
-      "norm_label": "focusmark"
-    },
-    {
-      "label": "SectionHit",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L56",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_sectionhit",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "sectionhit"
-    },
-    {
-      "label": "SeenPin",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L54",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_seenpin",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "seenpin"
+      "norm_label": "stayrange"
     },
     {
       "label": "ItineraryLegMode",
@@ -2082,6 +2056,45 @@
       "community": 41,
       "community_name": "api-plugins.ts",
       "norm_label": "metseries"
+    },
+    {
+      "label": "FocusMark",
+      "file_type": "code",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L43",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_trip_view_state_focusmark",
+      "community": 42,
+      "community_name": "view-state.ts",
+      "norm_label": "focusmark"
+    },
+    {
+      "label": "SectionHit",
+      "file_type": "code",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L56",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_trip_view_state_sectionhit",
+      "community": 42,
+      "community_name": "view-state.ts",
+      "norm_label": "sectionhit"
+    },
+    {
+      "label": "SeenPin",
+      "file_type": "code",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L54",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_trip_view_state_seenpin",
+      "community": 42,
+      "community_name": "view-state.ts",
+      "norm_label": "seenpin"
     },
     {
       "label": "PlaceCategoryIcon",
@@ -3432,7 +3445,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_departuretime",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "departuretime"
     },
     {
@@ -3445,7 +3458,7 @@
       "_origin": "ast",
       "id": "src_trip_parse_tripboarding",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "tripboarding"
     },
     {
@@ -3458,7 +3471,7 @@
       "_origin": "ast",
       "id": "src_views_transfer_row_transferleg",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "transferleg"
     },
     {
@@ -3473,19 +3486,6 @@
       "community": 97,
       "community_name": "contrast.ts",
       "norm_label": "contrastink"
-    },
-    {
-      "label": "StayRange",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L5",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_stayrange",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "stayrange"
     },
     {
       "label": "googleMapsUrl()",
@@ -3740,6 +3740,18 @@
       "norm_label": "installosmareas()"
     },
     {
+      "label": "loadOsmAreas()",
+      "file_type": "code",
+      "source_file": "src/data/osm-area-bridge.ts",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_osm_area_bridge_loadosmareas",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "loadosmareas()"
+    },
+    {
       "label": "osmAreaFor()",
       "file_type": "code",
       "source_file": "src/data/osm-area-bridge.ts",
@@ -3750,6 +3762,30 @@
       "community": 1,
       "community_name": "travel-areas.test.ts",
       "norm_label": "osmareafor()"
+    },
+    {
+      "label": "osmAreasReady()",
+      "file_type": "code",
+      "source_file": "src/data/osm-area-bridge.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_osm_area_bridge_osmareasready",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "osmareasready()"
+    },
+    {
+      "label": "placeHasOsmArea()",
+      "file_type": "code",
+      "source_file": "src/data/osm-area-bridge.ts",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_osm_area_bridge_placehasosmarea",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "placehasosmarea()"
     },
     {
       "label": "areaForPlace()",
@@ -3810,6 +3846,30 @@
       "community": 1,
       "community_name": "travel-areas.test.ts",
       "norm_label": "withresolvedarea()"
+    },
+    {
+      "label": "ensureOsmAreas()",
+      "file_type": "code",
+      "source_file": "src/map/areas.ts",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_map_areas_ensureosmareas",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "ensureosmareas()"
+    },
+    {
+      "label": "invalidateResolvedPlaces()",
+      "file_type": "code",
+      "source_file": "src/map/place-index.ts",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_map_place_index_invalidateresolvedplaces",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "invalidateresolvedplaces()"
     },
     {
       "label": "categoryMaterialName()",
@@ -6020,42 +6080,6 @@
       "norm_label": "walkpath()"
     },
     {
-      "label": "loadOsmAreas()",
-      "file_type": "code",
-      "source_file": "src/data/osm-area-bridge.ts",
-      "source_location": "L31",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_osm_area_bridge_loadosmareas",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "loadosmareas()"
-    },
-    {
-      "label": "osmAreasReady()",
-      "file_type": "code",
-      "source_file": "src/data/osm-area-bridge.ts",
-      "source_location": "L17",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_osm_area_bridge_osmareasready",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "osmareasready()"
-    },
-    {
-      "label": "placeHasOsmArea()",
-      "file_type": "code",
-      "source_file": "src/data/osm-area-bridge.ts",
-      "source_location": "L21",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_osm_area_bridge_placehasosmarea",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "placehasosmarea()"
-    },
-    {
       "label": "drawableRings()",
       "file_type": "code",
       "source_file": "src/map/area-shape.ts",
@@ -6066,18 +6090,6 @@
       "community": 150,
       "community_name": "overlays.ts",
       "norm_label": "drawablerings()"
-    },
-    {
-      "label": "ensureOsmAreas()",
-      "file_type": "code",
-      "source_file": "src/map/areas.ts",
-      "source_location": "L9",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_map_areas_ensureosmareas",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "ensureosmareas()"
     },
     {
       "label": "modelFor()",
@@ -6138,18 +6150,6 @@
       "community": 150,
       "community_name": "overlays.ts",
       "norm_label": "all()"
-    },
-    {
-      "label": "invalidateResolvedPlaces()",
-      "file_type": "code",
-      "source_file": "src/map/place-index.ts",
-      "source_location": "L35",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_map_place_index_invalidateresolvedplaces",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "invalidateresolvedplaces()"
     },
     {
       "label": "placeRecord()",
@@ -10952,66 +10952,6 @@
       "norm_label": "parse()"
     },
     {
-      "label": "activeSectionKey()",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L62",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_activesectionkey",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "activesectionkey()"
-    },
-    {
-      "label": "cityInOsrmScope()",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_cityinosrmscope",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "cityinosrmscope()"
-    },
-    {
-      "label": "dayKey()",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L3",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_daykey",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "daykey()"
-    },
-    {
-      "label": "dayOpen()",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L22",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_dayopen",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "dayopen()"
-    },
-    {
-      "label": "shouldRefit()",
-      "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
-      "source_location": "L78",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_view_state_shouldrefit",
-      "community": 38,
-      "community_name": "parse.ts",
-      "norm_label": "shouldrefit()"
-    },
-    {
       "label": "stopKey()",
       "file_type": "code",
       "source_file": "src/trip/view-state.ts",
@@ -11022,6 +10962,66 @@
       "community": 38,
       "community_name": "parse.ts",
       "norm_label": "stopkey()"
+    },
+    {
+      "label": "addIsoDays()",
+      "file_type": "code",
+      "source_file": "src/views/hotel-dates.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_hotel_dates_addisodays",
+      "community": 38,
+      "community_name": "parse.ts",
+      "norm_label": "addisodays()"
+    },
+    {
+      "label": "cityStayFromTrips()",
+      "file_type": "code",
+      "source_file": "src/views/hotel-dates.ts",
+      "source_location": "L29",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_hotel_dates_citystayfromtrips",
+      "community": 38,
+      "community_name": "parse.ts",
+      "norm_label": "citystayfromtrips()"
+    },
+    {
+      "label": "defaultStayDates()",
+      "file_type": "code",
+      "source_file": "src/views/hotel-dates.ts",
+      "source_location": "L44",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_hotel_dates_defaultstaydates",
+      "community": 38,
+      "community_name": "parse.ts",
+      "norm_label": "defaultstaydates()"
+    },
+    {
+      "label": "hashStayDates()",
+      "file_type": "code",
+      "source_file": "src/views/hotel-dates.ts",
+      "source_location": "L23",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_hotel_dates_hashstaydates",
+      "community": 38,
+      "community_name": "parse.ts",
+      "norm_label": "hashstaydates()"
+    },
+    {
+      "label": "validStayRange()",
+      "file_type": "code",
+      "source_file": "src/views/hotel-dates.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_views_hotel_dates_validstayrange",
+      "community": 38,
+      "community_name": "parse.ts",
+      "norm_label": "validstayrange()"
     },
     {
       "label": "legRailKind()",
@@ -11720,76 +11720,64 @@
       "norm_label": "parseensemble()"
     },
     {
-      "label": "getTravelCity()",
+      "label": "activeSectionKey()",
       "file_type": "code",
-      "source_file": "src/data/travel.ts",
-      "source_location": "L7834",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L62",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_data_travel_gettravelcity",
+      "id": "src_trip_view_state_activesectionkey",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "gettravelcity()"
+      "community_name": "view-state.ts",
+      "norm_label": "activesectionkey()"
     },
     {
-      "label": "getTripCity()",
+      "label": "cityInOsrmScope()",
       "file_type": "code",
-      "source_file": "src/trip/catalog.ts",
-      "source_location": "L4",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L11",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_trip_catalog_gettripcity",
+      "id": "src_trip_view_state_cityinosrmscope",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "gettripcity()"
+      "community_name": "view-state.ts",
+      "norm_label": "cityinosrmscope()"
     },
     {
-      "label": "placeCity()",
+      "label": "dayKey()",
       "file_type": "code",
-      "source_file": "src/trip/catalog.ts",
-      "source_location": "L14",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_trip_catalog_placecity",
+      "id": "src_trip_view_state_daykey",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "placecity()"
+      "community_name": "view-state.ts",
+      "norm_label": "daykey()"
     },
     {
-      "label": "paris()",
+      "label": "dayOpen()",
       "file_type": "code",
-      "source_file": "src/trip/legs.test.ts",
-      "source_location": "L9",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_trip_legs_test_paris",
+      "id": "src_trip_view_state_dayopen",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "paris()"
+      "community_name": "view-state.ts",
+      "norm_label": "dayopen()"
     },
     {
-      "label": "resolveHref()",
+      "label": "shouldRefit()",
       "file_type": "code",
-      "source_file": "src/trip/mount.ts",
-      "source_location": "L155",
+      "source_file": "src/trip/view-state.ts",
+      "source_location": "L78",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_trip_mount_resolvehref",
+      "id": "src_trip_view_state_shouldrefit",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "resolvehref()"
-    },
-    {
-      "label": "place()",
-      "file_type": "code",
-      "source_file": "src/trip/route.test.ts",
-      "source_location": "L17",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_trip_route_test_place",
-      "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "place()"
+      "community_name": "view-state.ts",
+      "norm_label": "shouldrefit()"
     },
     {
       "label": "categoryColor()",
@@ -15236,6 +15224,42 @@
       "norm_label": "withplaceedits()"
     },
     {
+      "label": "getTravelCity()",
+      "file_type": "code",
+      "source_file": "src/data/travel.ts",
+      "source_location": "L7834",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_travel_gettravelcity",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "gettravelcity()"
+    },
+    {
+      "label": "getTripCity()",
+      "file_type": "code",
+      "source_file": "src/trip/catalog.ts",
+      "source_location": "L4",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_catalog_gettripcity",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "gettripcity()"
+    },
+    {
+      "label": "placeCity()",
+      "file_type": "code",
+      "source_file": "src/trip/catalog.ts",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_catalog_placecity",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "placecity()"
+    },
+    {
       "label": "clock()",
       "file_type": "code",
       "source_file": "src/trip/departures.ts",
@@ -15244,7 +15268,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_clock",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "clock()"
     },
     {
@@ -15256,7 +15280,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_departuretimes",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "departuretimes()"
     },
     {
@@ -15268,7 +15292,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_fold",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "fold()"
     },
     {
@@ -15280,7 +15304,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_matches",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "matches()"
     },
     {
@@ -15292,8 +15316,44 @@
       "_origin": "ast",
       "id": "src_trip_departures_minutes",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "minutes()"
+    },
+    {
+      "label": "paris()",
+      "file_type": "code",
+      "source_file": "src/trip/legs.test.ts",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_legs_test_paris",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "paris()"
+    },
+    {
+      "label": "resolveHref()",
+      "file_type": "code",
+      "source_file": "src/trip/mount.ts",
+      "source_location": "L155",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_mount_resolvehref",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "resolvehref()"
+    },
+    {
+      "label": "place()",
+      "file_type": "code",
+      "source_file": "src/trip/route.test.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_trip_route_test_place",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "place()"
     },
     {
       "label": "accommodationType()",
@@ -15536,66 +15596,6 @@
       "norm_label": "relativeluminance()"
     },
     {
-      "label": "addIsoDays()",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_addisodays",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "addisodays()"
-    },
-    {
-      "label": "cityStayFromTrips()",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L29",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_citystayfromtrips",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "citystayfromtrips()"
-    },
-    {
-      "label": "defaultStayDates()",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L44",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_defaultstaydates",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "defaultstaydates()"
-    },
-    {
-      "label": "hashStayDates()",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L23",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_hashstaydates",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "hashstaydates()"
-    },
-    {
-      "label": "validStayRange()",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L17",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_validstayrange",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "validstayrange()"
-    },
-    {
       "label": "index.html",
       "author": null,
       "captured_at": null,
@@ -15752,6 +15752,17 @@
       "norm_label": "osm-area-bridge.ts"
     },
     {
+      "label": "osm-area-bridge.test.ts",
+      "file_type": "code",
+      "source_file": "src/data/osm-area-bridge.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_data_osm_area_bridge_test",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "osm-area-bridge.test.ts"
+    },
+    {
       "label": "travel-area-ids.ts",
       "file_type": "code",
       "source_file": "src/data/travel-area-ids.ts",
@@ -15871,6 +15882,17 @@
       "community": 1,
       "community_name": "travel-areas.test.ts",
       "norm_label": "travel-areas.test.ts"
+    },
+    {
+      "label": "areas.ts",
+      "file_type": "code",
+      "source_file": "src/map/areas.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_map_areas",
+      "community": 1,
+      "community_name": "travel-areas.test.ts",
+      "norm_label": "areas.ts"
     },
     {
       "label": "placeCategoriesOffByDefault",
@@ -18906,17 +18928,6 @@
       "norm_label": "itinerary-route.ts"
     },
     {
-      "label": "osm-area-bridge.test.ts",
-      "file_type": "code",
-      "source_file": "src/data/osm-area-bridge.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_data_osm_area_bridge_test",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "osm-area-bridge.test.ts"
-    },
-    {
       "label": "area-shape.ts",
       "file_type": "code",
       "source_file": "src/map/area-shape.ts",
@@ -18937,17 +18948,6 @@
       "community": 150,
       "community_name": "overlays.ts",
       "norm_label": "area-shape.test.ts"
-    },
-    {
-      "label": "areas.ts",
-      "file_type": "code",
-      "source_file": "src/map/areas.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_map_areas",
-      "community": 150,
-      "community_name": "overlays.ts",
-      "norm_label": "areas.ts"
     },
     {
       "label": "overlays.ts",
@@ -23523,26 +23523,26 @@
       "norm_label": "ticket-budget.test.ts"
     },
     {
-      "label": "view-state.ts",
+      "label": "hotel-dates.ts",
       "file_type": "code",
-      "source_file": "src/trip/view-state.ts",
+      "source_file": "src/views/hotel-dates.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_trip_view_state",
+      "id": "src_views_hotel_dates",
       "community": 38,
       "community_name": "parse.ts",
-      "norm_label": "view-state.ts"
+      "norm_label": "hotel-dates.ts"
     },
     {
-      "label": "view-state.test.ts",
+      "label": "hotel-dates.test.ts",
       "file_type": "code",
-      "source_file": "src/trip/view-state.test.ts",
+      "source_file": "src/views/hotel-dates.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_trip_view_state_test",
+      "id": "src_views_hotel_dates_test",
       "community": 38,
       "community_name": "parse.ts",
-      "norm_label": "view-state.test.ts"
+      "norm_label": "hotel-dates.test.ts"
     },
     {
       "label": "travel-italy-transit.ts",
@@ -24326,59 +24326,26 @@
       "norm_label": "weather-source.test.ts"
     },
     {
-      "label": "travelCities",
+      "label": "view-state.ts",
       "file_type": "code",
-      "source_file": "src/data/travel.ts",
-      "source_location": "L7830",
-      "_origin": "ast",
-      "id": "src_data_travel_travelcities",
-      "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "travelcities"
-    },
-    {
-      "label": "catalog.ts",
-      "file_type": "code",
-      "source_file": "src/trip/catalog.ts",
+      "source_file": "src/trip/view-state.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_trip_catalog",
+      "id": "src_trip_view_state",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "catalog.ts"
+      "community_name": "view-state.ts",
+      "norm_label": "view-state.ts"
     },
     {
-      "label": "catalog.test.ts",
+      "label": "view-state.test.ts",
       "file_type": "code",
-      "source_file": "src/trip/catalog.test.ts",
+      "source_file": "src/trip/view-state.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_trip_catalog_test",
+      "id": "src_trip_view_state_test",
       "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "catalog.test.ts"
-    },
-    {
-      "label": "legs.test.ts",
-      "file_type": "code",
-      "source_file": "src/trip/legs.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_trip_legs_test",
-      "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "legs.test.ts"
-    },
-    {
-      "label": "viaWalk",
-      "file_type": "code",
-      "source_file": "src/trip/legs.test.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "src_trip_legs_test_viawalk",
-      "community": 42,
-      "community_name": "travelCities",
-      "norm_label": "viawalk"
+      "community_name": "view-state.ts",
+      "norm_label": "view-state.test.ts"
     },
     {
       "label": "travel-categories.ts",
@@ -28869,6 +28836,39 @@
       "norm_label": "verificacao de ingresso, abertura e area"
     },
     {
+      "label": "travelCities",
+      "file_type": "code",
+      "source_file": "src/data/travel.ts",
+      "source_location": "L7830",
+      "_origin": "ast",
+      "id": "src_data_travel_travelcities",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "travelcities"
+    },
+    {
+      "label": "catalog.ts",
+      "file_type": "code",
+      "source_file": "src/trip/catalog.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_catalog",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "catalog.ts"
+    },
+    {
+      "label": "catalog.test.ts",
+      "file_type": "code",
+      "source_file": "src/trip/catalog.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_catalog_test",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "catalog.test.ts"
+    },
+    {
       "label": "departures.ts",
       "file_type": "code",
       "source_file": "src/trip/departures.ts",
@@ -28876,7 +28876,7 @@
       "_origin": "ast",
       "id": "src_trip_departures",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "departures.ts"
     },
     {
@@ -28887,7 +28887,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_test",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "departures.test.ts"
     },
     {
@@ -28898,7 +28898,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_test_service",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "service"
     },
     {
@@ -28909,7 +28909,7 @@
       "_origin": "ast",
       "id": "src_trip_departures_test_train",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "train"
     },
     {
@@ -28920,8 +28920,30 @@
       "_origin": "ast",
       "id": "src_trip_departures_test_walk",
       "community": 93,
-      "community_name": "departures.ts",
+      "community_name": "travelCities",
       "norm_label": "walk"
+    },
+    {
+      "label": "legs.test.ts",
+      "file_type": "code",
+      "source_file": "src/trip/legs.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_trip_legs_test",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "legs.test.ts"
+    },
+    {
+      "label": "viaWalk",
+      "file_type": "code",
+      "source_file": "src/trip/legs.test.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_trip_legs_test_viawalk",
+      "community": 93,
+      "community_name": "travelCities",
+      "norm_label": "viawalk"
     },
     {
       "label": "cinque-terre-walks-regionale-22904-2026-10-15.md",
@@ -29164,28 +29186,6 @@
       "community": 98,
       "community_name": "Avenue de Paris \u2014 11/10/2026",
       "norm_label": "destaque no hover do ponto"
-    },
-    {
-      "label": "hotel-dates.ts",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_views_hotel_dates",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "hotel-dates.ts"
-    },
-    {
-      "label": "hotel-dates.test.ts",
-      "file_type": "code",
-      "source_file": "src/views/hotel-dates.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_views_hotel_dates_test",
-      "community": 99,
-      "community_name": "hotel-dates.ts",
-      "norm_label": "hotel-dates.test.ts"
     },
     {
       "label": "ref_node_child_process",
@@ -100447,7 +100447,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "scripts/production-server.ts",
-      "source_location": "L99",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast",
       "source": "scripts_production_server_createproductionserver",
@@ -100559,5 +100559,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8b71235701bf948848fae34f25cf61d3ff1b92dc"
+  "built_at_commit": "e2beb4fbba34466b1674ac5b3e55055448b69012"
 }

@@ -82,10 +82,23 @@ export async function createProductionServer(options: { origin: string; token?: 
     if (path === dist || !extname(path)) path = resolve(dist, 'index.html');
     // Private documents/source maps are never static files.
     if (!existsSync(path) || !statSync(path).isFile() || extname(path) === '.map') return fail(404, 'Not found');
+    const size = statSync(path).size;
+    let start = 0, end = size - 1;
+    res.setHeader('Accept-Ranges', 'bytes');
+    if (req.headers.range) {
+      const match = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
+      if (match?.[1]) { start = Number(match[1]); end = match[2] ? Math.min(Number(match[2]), size - 1) : size - 1; }
+      else if (match?.[2]) start = Math.max(0, size - Number(match[2]));
+      if (!match || !match[1] && !match[2] || !Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= size) {
+        res.setHeader('Content-Range', `bytes */${size}`); return fail(416, 'Invalid byte range');
+      }
+      res.statusCode = 206; res.setHeader('Content-Range', `bytes ${start}-${end}/${size}`);
+    }
+    res.setHeader('Content-Length', size ? end - start + 1 : 0);
     res.setHeader('Content-Type', MIME[extname(path)] || 'application/octet-stream');
     res.setHeader('Cache-Control', 'no-store');
     if (req.method === 'HEAD') return res.end();
-    const stream = createReadStream(path); stream.on('error', () => res.destroy()); stream.pipe(res);
+    const stream = createReadStream(path, size ? { start, end } : undefined); stream.on('error', () => res.destroy()); stream.pipe(res);
   });
   const tripWatcher = watch(resolve('content/trips'), (_event, file) => {
     if (file && /^[\w-]+\.md$/.test(String(file))) context.ws.send({ type: 'custom', event: 'tb:trip', data: { id: String(file).slice(0, -3), reason: existsSync(resolve('content/trips', String(file))) ? 'change' : 'unlink' } });
