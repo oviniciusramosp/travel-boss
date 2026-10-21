@@ -28,3 +28,13 @@ it('rejects creation of approvals, ambiguity, path traversal and active writer l
   expect(() => editTrip('../test', {})).toThrow('Invalid trip');
   mkdirSync('content/trips/test.md.lock'); expect(() => editTrip('test', {})).toThrow('busy');
 });
+
+it('does not persist earlier edits when a later edit fails, and preserves CRLF', () => {
+  setup(raw.replaceAll('\n', '\r\n'));
+  const current = readFileSync('content/trips/test.md', 'utf8');
+  const first = { before: ['- 10:00 [Louvre](place:par-louvre) — Visita'], after: ['- 11:00 [Louvre](place:par-louvre) — Visita'] };
+  expect(() => editTrip('test', { revision: revisionOf(current), edits: [first, { before: ['missing'], after: [] }] })).toThrow('unique');
+  expect(readFileSync('content/trips/test.md', 'utf8')).toBe(current);
+  editTrip('test', { revision: revisionOf(current), edits: [first] });
+  expect(readFileSync('content/trips/test.md', 'utf8')).toBe(current.replace('10:00', '11:00'));
+});

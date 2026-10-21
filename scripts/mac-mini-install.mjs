@@ -10,7 +10,7 @@ const source = realpathSync(process.cwd());
 const state = resolve(process.env.TB_DEPLOY_HOME || resolve(homedir(), 'Library/Application Support/TravelBoss'));
 const origin = process.env.TB_PUBLIC_ORIGIN;
 const url = new URL(origin || 'invalid:');
-if (url.protocol !== 'https:' || !url.hostname.endsWith('.ts.net') || url.pathname !== '/' || url.port !== '10443') throw Error('TB_PUBLIC_ORIGIN must be https://<machine>.ts.net:10443');
+if (url.protocol !== 'https:' || !url.hostname.endsWith('.ts.net') || url.pathname !== '/' || url.username || url.password || url.search || url.hash || url.port !== '10443') throw Error('TB_PUBLIC_ORIGIN must be https://<machine>.ts.net:10443');
 const run = (cmd, args, options = {}) => execFileSync(cmd, args, { cwd: source, encoding: 'utf8', ...options });
 if (run('git', ['status', '--porcelain']).trim()) throw Error('Checkout must be clean');
 if (run('git', ['branch', '--show-current']).trim() !== 'main') throw Error('Install only from reviewed main on the Mac mini');

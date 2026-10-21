@@ -25,7 +25,7 @@ export class AgentIndex {
       id: place.id, city: city.slug, name: place.name, category: place.category,
       lat: place.lat, lng: place.lng, description: place.description, subPoints: place.subPoints,
     })));
-    this.replace('catalog', revisionOf(JSON.stringify(catalog)), catalog.map(place =>
+    this.replace('@catalog', revisionOf(JSON.stringify(catalog)), catalog.map(place =>
       ['place', place.id, 0, place.city, JSON.stringify(place), JSON.stringify(place)]));
   }
   replace(id: string, revision: string, rows: unknown[][]) {
@@ -33,7 +33,7 @@ export class AgentIndex {
     if (this.db.prepare('SELECT revision FROM documents WHERE id=?').get(id)?.revision === revision) return;
     this.db.exec('BEGIN IMMEDIATE');
     try {
-      if (id === 'catalog') this.db.prepare(`DELETE FROM ${this.table} WHERE kind='place'`).run();
+      if (id === '@catalog') this.db.prepare(`DELETE FROM ${this.table} WHERE kind='place'`).run();
       else this.db.prepare(`DELETE FROM ${this.table} WHERE kind='trip' AND id=?`).run(id);
       const insert = this.db.prepare(`INSERT INTO ${this.table} VALUES (${this.fts ? '?,?,?,?,?,?' : '?,?,?,?,?,?,?'})`);
       for (const row of rows) insert.run(...(this.fts ? row : [...row, fold(String(row[4]))]) as any[]);
@@ -56,7 +56,7 @@ export class AgentIndex {
       }));
       this.stamps.set(id, stamp);
     }
-    for (const row of this.db.prepare("SELECT id FROM documents WHERE id != 'catalog'").all()) {
+    for (const row of this.db.prepare("SELECT id FROM documents WHERE id != '@catalog'").all()) {
       if (ids.has(row.id as string) || existsSync(resolve(dir, `${row.id}.md`))) continue;
       this.db.prepare(`DELETE FROM ${this.table} WHERE kind='trip' AND id=?`).run(row.id);
       this.db.prepare('DELETE FROM documents WHERE id=?').run(row.id);
