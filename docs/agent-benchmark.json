@@ -1,64 +1,64 @@
 {
-  "date": "2026-10-21T23:00:52.643Z",
+  "date": "2026-10-21T23:35:37.016Z",
   "node": "v22.22.2",
   "platform": "darwin",
   "engine": "sqlite-fts5",
   "samples": 30,
-  "coldIndexMs": 16.462,
+  "coldIndexMs": 268.201,
   "metrics": {
     "wholeTrip": {
       "samples": 30,
       "p50Ms": 0.105,
-      "p95Ms": 0.17,
+      "p95Ms": 0.148,
       "responseBytes": 67257
     },
     "scopedDay": {
       "samples": 30,
-      "p50Ms": 1.474,
-      "p95Ms": 1.97,
+      "p50Ms": 1.586,
+      "p95Ms": 1.901,
       "responseBytes": 3961
     },
     "scanMarkdown": {
       "samples": 30,
-      "p50Ms": 0.299,
-      "p95Ms": 0.48,
+      "p50Ms": 0.306,
+      "p95Ms": 0.494,
       "responseBytes": 1580
     },
     "sqliteSearch": {
       "samples": 30,
-      "p50Ms": 0.112,
-      "p95Ms": 0.216,
-      "responseBytes": 2220
+      "p50Ms": 1.313,
+      "p95Ms": 1.85,
+      "responseBytes": 2700
     },
     "cliListWithStartup": {
       "samples": 30,
-      "p50Ms": 58.957,
-      "p95Ms": 82.437,
+      "p50Ms": 109.436,
+      "p95Ms": 117.659,
       "responseBytes": 2195
     },
     "singleEditDryRun": {
       "samples": 30,
-      "p50Ms": 0.22,
-      "p95Ms": 0.549,
-      "responseBytes": 203
+      "p50Ms": 0.474,
+      "p95Ms": 1.102,
+      "responseBytes": 426
     },
     "fiveEditsDryRun": {
       "samples": 30,
-      "p50Ms": 0.216,
-      "p95Ms": 0.544,
-      "responseBytes": 203
+      "p50Ms": 0.442,
+      "p95Ms": 0.727,
+      "responseBytes": 426
     },
     "externalFixtureUncached": {
       "samples": 30,
-      "p50Ms": 11.944,
-      "p95Ms": 12.762,
-      "responseBytes": 265
+      "p50Ms": 11.866,
+      "p95Ms": 12.951,
+      "responseBytes": 647
     },
     "externalFixtureCached": {
       "samples": 30,
-      "p50Ms": 0.041,
-      "p95Ms": 0.183,
-      "responseBytes": 264
+      "p50Ms": 0.032,
+      "p95Ms": 0.048,
+      "responseBytes": 646
     }
   },
   "externalFixtureNetworkCalls": 30,

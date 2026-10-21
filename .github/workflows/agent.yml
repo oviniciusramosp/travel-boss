@@ -31,6 +31,12 @@ jobs:
       - run: npm run build
       - run: npm run build:private
       - run: npm run build:server
+      - name: Validate CLI, MCP and local installer
+        run: npm run test:agent-runtime
       - run: npm run test:server
       - run: node --test scripts/mac-mini-deploy.test.mjs
+      - name: Validate measured model trace reports
+        run: node --test scripts/benchmark-traces.test.mjs
       - run: npm run benchmark:agent
+      - name: Benchmark representative agent workflows
+        run: npm run benchmark:workflows

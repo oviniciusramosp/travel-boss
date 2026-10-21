@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-21T23:37:47.594Z",
+  "node": "v22.22.2",
+  "platform": "darwin",
+  "tasks": {
+    "confirmed_note": {
+      "samples": 20,
+      "p50Ms": 93.086,
+      "p95Ms": 123.64,
+      "calls": 4,
+      "inputBytes": 1528,
+      "outputBytes": 20084,
+      "changedDates": 1,
+      "failures": 0
+    },
+    "costs_and_comment": {
+      "samples": 20,
+      "p50Ms": 96.876,
+      "p95Ms": 107.809,
+      "calls": 4,
+      "inputBytes": 1706,
+      "outputBytes": 19844,
+      "changedDates": 1,
+      "failures": 0
+    },
+    "move_stop": {
+      "samples": 20,
+      "p50Ms": 92.962,
+      "p95Ms": 114.65,
+      "calls": 4,
+      "inputBytes": 1604,
+      "outputBytes": 28965,
+      "changedDates": 2,
+      "failures": 0
+    },
+    "insert_stop": {
+      "samples": 20,
+      "p50Ms": 88.647,
+      "p95Ms": 113.821,
+      "calls": 4,
+      "inputBytes": 1616,
+      "outputBytes": 30547,
+      "changedDates": 2,
+      "failures": 0
+    },
+    "transfer": {
+      "samples": 20,
+      "p50Ms": 101.865,
+      "p95Ms": 152.838,
+      "calls": 4,
+      "inputBytes": 1558,
+      "outputBytes": 20618,
+      "changedDates": 1,
+      "failures": 0
+    }
+  },
+  "multiCity": {
+    "cities": [
+      "Paris",
+      "Milão"
+    ],
+    "headings": 2,
+    "calls": 1
+  },
+  "measurement": "Deterministic complete tool workflows: context → preview → apply → verify. No real itinerary changed.",
+  "llm": {
+    "measured": false,
+    "inputTokens": null,
+    "outputTokens": null,
+    "modelLatencyMs": null,
+    "explanation": "Tool traces can be combined with actual client/model events using benchmark-llm-traces.mjs; no model speedup is claimed."
+  }
+}
