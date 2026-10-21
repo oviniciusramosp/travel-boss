@@ -56,6 +56,10 @@ export function validateChange(id: string, before: string, after: string, agent 
   if (agent && JSON.stringify(protectedState(before)) !== JSON.stringify(protectedState(after))) {
     throw new AgentError('Protected decision, approval or status would change', 409);
   }
+  for (const line of after.split(/\r?\n/)) {
+    const time = /^- (\d{2}):(\d{2}) /.exec(line);
+    if (time && (Number(time[1]) > 23 || Number(time[2]) > 59)) throw new AgentError('Invalid stop time', 422);
+  }
   const errors = (raw: string) => parseTrip(id, '', raw).errors;
   const old = errors(before).map(error => JSON.stringify([error.code, error.detail]));
   for (const error of errors(after)) {
@@ -66,7 +70,11 @@ export function validateChange(id: string, before: string, after: string, agent 
   }
   return errors(after);
 }
+export function assertWritable() {
+  if (process.env.TB_DEPLOY_LOCK && existsSync(process.env.TB_DEPLOY_LOCK)) throw new AgentError('Deployment in progress; retry shortly', 503);
+}
 export function editTrip(id: string, payload: any, browser = false) {
+  assertWritable();
   const file = tripPath(id), lock = `${file}.lock`, tmp = `${file}.${randomUUID()}.tmp`;
   try { mkdirSync(lock); } catch { throw new AgentError('Trip busy; retry after current writer finishes', 409); }
   try {

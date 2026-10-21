@@ -276,3 +276,12 @@ else {
   if (saved) show({ kind: 'trip', id: saved.trip.id }, 'replace');
   else void openFirst();
 }
+
+// Private production keeps disk saves live without the development HMR runtime.
+if (import.meta.env.VITE_TB_PRIVATE_SERVER === true) {
+  const events = new EventSource('/api/events');
+  events.onmessage = event => {
+    try { window.dispatchEvent(new CustomEvent('tb:server-event', { detail: JSON.parse(event.data) })); } catch { /* Invalid notification. */ }
+  };
+  window.addEventListener('pagehide', () => events.close(), { once: true });
+}

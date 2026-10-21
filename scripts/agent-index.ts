@@ -29,6 +29,7 @@ export class AgentIndex {
       ['place', place.id, 0, place.city, JSON.stringify(place), JSON.stringify(place)]));
   }
   replace(id: string, revision: string, rows: unknown[][]) {
+    revision = `${this.fts ? 'fts5' : 'plain'}:${revision}`;
     if (this.db.prepare('SELECT revision FROM documents WHERE id=?').get(id)?.revision === revision) return;
     this.db.exec('BEGIN IMMEDIATE');
     try {

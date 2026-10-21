@@ -18,7 +18,12 @@
     "travel:areas:check": "vitest run src/data/travel-areas.test.ts",
     "travel:photos:check": "python3 scripts/check-travel-photos.py",
     "travel:locations:check": "vite-node scripts/check-travel-locations.ts",
-    "travel:airbnb:setup": "uv venv --allow-existing node_modules/.cache/airbnb-venv && uv pip install --python node_modules/.cache/airbnb-venv/bin/python -r scripts/airbnb-requirements.txt"
+    "travel:airbnb:setup": "uv venv --allow-existing node_modules/.cache/airbnb-venv && uv pip install --python node_modules/.cache/airbnb-venv/bin/python -r scripts/airbnb-requirements.txt",
+    "build:private": "TB_PRIVATE_SERVER=1 vite build --mode private",
+    "build:server": "node scripts/build-server.mjs",
+    "start": "node build/server.mjs",
+    "test:server": "node --test scripts/production-server.test.mjs",
+    "benchmark:agent": "node scripts/benchmark-agent.mjs"
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.2.5",

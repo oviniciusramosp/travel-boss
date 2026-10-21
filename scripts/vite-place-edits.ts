@@ -1,3 +1,4 @@
+import { assertWritable } from './agent-service';
 import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
@@ -41,6 +42,7 @@ export function placeEditsApi(): Plugin {
           try { patch = readPlaceEdits(JSON.parse(body)); } catch { return send(400, {}); }
           if (!patch) return send(400, {});
           try {
+            assertWritable();
             // Read/merge/write synchronously: separate fields and tabs cannot overwrite each other.
             const store: PlaceEditStore = JSON.parse(readFileSync(file, 'utf8'));
             store[id] = { ...store[id], ...patch };

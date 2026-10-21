@@ -34,7 +34,8 @@ function iconFont(): Plugin {
 }
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? "/travel-boss/" : "/",
+  base: !process.env.TB_PRIVATE_SERVER && process.env.GITHUB_ACTIONS ? "/travel-boss/" : "/",
+  define: { 'import.meta.env.VITE_TB_PRIVATE_SERVER': JSON.stringify(process.env.TB_PRIVATE_SERVER === '1') },
   plugins: [publicTrips(), appCache(), checklistApi(), placeEditsApi(), iconFont(), hotelSearchVite(), tripApi(), weatherApi()],
   server: {
     port: 5173,

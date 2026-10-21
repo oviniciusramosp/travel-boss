@@ -122,6 +122,12 @@ function onTripFiles(fn: (event: TripPush) => void): () => void {
       for (const listener of tripFileListeners) listener(event);
     });
   }
+  if (!tripHotBound && import.meta.env.PROD && canEdit) {
+    tripHotBound = true;
+    window.addEventListener('tb:server-event', ((event: CustomEvent) => {
+      if (event.detail.event === 'tb:trip') for (const listener of tripFileListeners) listener(event.detail.data);
+    }) as EventListener);
+  }
   return () => {
     tripFileListeners.delete(fn);
   };
