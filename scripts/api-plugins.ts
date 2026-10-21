@@ -142,7 +142,7 @@ export function tripApi(): Plugin {
  * when Open-Meteo is out of quota. The answer is `{ at, source, hours }`; without any
  * forecast it is `{ error, status }` with 502, and an old one comes back with `stale: true`.
  */
-const WEATHER_DIR = resolve(process.cwd(), 'node_modules/.cache/weather-v2');
+const WEATHER_DIR = resolve(process.env.TB_STATE_DIR || 'node_modules/.cache', 'weather-v3');
 const WEATHER_FRESH_MS = 30 * 60 * 1000;
 const WEATHER_UA = 'TravelBoss/0.1 (local dev tool; github.com/viniciusramos)';
 type StoredForecast = { at: number; source: string; hours: Ensemble };
@@ -166,7 +166,7 @@ function readForecastFile(key: string): StoredForecast | null {
 async function fetchForecast(lat: number, lng: number, tz: string): Promise<{ fresh: StoredForecast } | { error: 'limit' | 'http' | 'network'; status: number | null }> {
   let status: number | null = null;
   try {
-    const answer = await fetch(`${OPEN_METEO_URL}?${openMeteoQuery(lat, lng, tz)}`, { headers: { 'User-Agent': WEATHER_UA } });
+    const answer = await fetch(`${OPEN_METEO_URL}?${openMeteoQuery(lat, lng, tz)}`, { headers: { 'User-Agent': WEATHER_UA }, signal: AbortSignal.timeout(15000) });
     status = answer.status;
     if (answer.ok) {
       const hours = parseEnsemble(await answer.json());
@@ -177,7 +177,7 @@ async function fetchForecast(lat: number, lng: number, tz: string): Promise<{ fr
   }
   // Second source: Open-Meteo's single model, on a separate quota, with a probability of rain and 16 days.
   try {
-    const single = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(lat, lng, tz)}`, { headers: { 'User-Agent': WEATHER_UA } });
+    const single = await fetch(`${OPEN_METEO_FORECAST_URL}?${openMeteoForecastQuery(lat, lng, tz)}`, { headers: { 'User-Agent': WEATHER_UA }, signal: AbortSignal.timeout(15000) });
     if (single.ok) {
       const hours = forecastToEnsemble(await single.json());
       if (hours) return { fresh: { at: Date.now(), source: 'Open-Meteo (modelo)', hours } };
@@ -187,7 +187,7 @@ async function fetchForecast(lat: number, lng: number, tz: string): Promise<{ fr
   }
   // Third source: MET Norway, one model without probability, hourly for two days and six-hourly to ten. It wants a real User-Agent.
   try {
-    const met = await fetch(`${MET_URL}?lat=${lat}&lon=${lng}`, { headers: { 'User-Agent': WEATHER_UA } });
+    const met = await fetch(`${MET_URL}?lat=${lat}&lon=${lng}`, { headers: { 'User-Agent': WEATHER_UA }, signal: AbortSignal.timeout(15000) });
     if (met.ok) {
       const hours = metToEnsemble(await met.json(), tz);
       if (hours) return { fresh: { at: Date.now(), source: 'MET Norway', hours } };
@@ -216,9 +216,10 @@ export function weatherApi(): Plugin {
           res.setHeader('Cache-Control', 'no-store');
           res.end(JSON.stringify(body));
         };
-        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return send(400, { error: 'http', status: 400 });
+        if (!url.searchParams.has('lat') || !url.searchParams.has('lng') || !Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) return send(400, { error: 'http', status: 400 });
+        try { new Intl.DateTimeFormat('en', { timeZone: tz }).format(); } catch { return send(400, { error: 'Invalid timezone' }); }
         if (date && (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !pastWeatherDate(date, tz))) return send(400, { error: 'http', status: 400 });
-        const key = `${lat.toFixed(3)},${lng.toFixed(3)}${date ? `:${date}` : ''}`;
+        const key = `${lat.toFixed(3)},${lng.toFixed(3)},${tz}${date ? `:${date}` : ''}`;
         const stored = readForecastFile(key);
         if (stored && !force && Date.now() - stored.at < WEATHER_FRESH_MS) return send(200, stored);
         let job = weatherInflight.get(key);
