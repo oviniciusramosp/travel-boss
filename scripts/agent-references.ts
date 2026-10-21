@@ -52,6 +52,10 @@ function sourcesIn(text: string): string[] {
   return [...new Set(text.match(/https?:\/\/[^\s<>"\])]+/g) ?? [])].slice(0, 8);
 }
 
+function publicId(value: unknown): value is string {
+  return typeof value === 'string' && /^[\w-]{1,100}$/.test(value) && referenceText(value) === value;
+}
+
 function snippets(file: string, text: string): ReferenceSnippet[] {
   const lines = publicLines(text), results: ReferenceSnippet[] = [];
   const documentDates = datesIn(`${file}\n${referenceText(lines.slice(0, 5).join('\n'))}`);
@@ -82,11 +86,11 @@ function jsonlSnippets(file: string, text: string): ReferenceSnippet[] {
     const sanitized = referenceText(selected.join('\n'));
     const excerpt = sanitized.replace(/\n/g, ' · ').slice(0, 1000);
     if (excerpt.length < 12) return [];
-    return [{ file, line: i + 1, section: String(record.id ?? record.placeId ?? file).slice(0, 200), excerpt,
+    return [{ file, line: i + 1, section: [record.id, record.placeId].find(publicId) ?? file, excerpt,
       sources: sourcesIn(sanitized), dates: datesIn(`${file}\n${excerpt}`),
-      placeIds: [record.id, record.placeId].filter((value): value is string => typeof value === 'string' && /^[\w-]+$/.test(value)),
-      ...(typeof record.city === 'string' && /^[\w-]+$/.test(record.city) ? { city: record.city } : {}),
-      ...(typeof record.trip === 'string' && /^[\w-]+$/.test(record.trip) ? { trip: record.trip } : {}),
+      placeIds: [record.id, record.placeId].filter(publicId),
+      ...(publicId(record.city) ? { city: record.city } : {}),
+      ...(publicId(record.trip) ? { trip: record.trip } : {}),
     }];
   }).slice(0, 80);
 }

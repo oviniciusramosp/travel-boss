@@ -41,3 +41,22 @@ it('projects JSONL audit keys and excludes raw payloads, secrets and oversized f
     expect(referenceFiles(root, root)).toEqual([file]);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+it('applies privacy redaction to JSONL section and identifier metadata as well as excerpts', () => {
+  const root = mkdtempSync(join(tmpdir(), 'tb-jsonl-meta-'));
+  try {
+    const file = join(root, 'audit.jsonl');
+    writeFileSync(file, [
+      { id: 'email: PRIVATE_ADDRESS@example.test', notes: 'Public official opening hours apply.', sourceUrl: 'https://www.louvre.fr/visit' },
+      { id: 'pin-PRIVATE_ID', placeId: 'password-PRIVATE_PLACE', city: 'senha-PRIVATE_CITY', trip: 'localizador-PRIVATE_TRIP', notes: 'Public transport information remains readable.' },
+      { id: 'x'.repeat(101), placeId: 'par-louvre', city: 'paris', trip: 'europa', notes: 'Public Louvre visit information remains readable.' },
+    ].map(record => JSON.stringify(record)).join('\n'));
+    const snippets = readReference(file, root);
+    expect(snippets).toHaveLength(3);
+    expect(snippets[0]).toMatchObject({ section: 'audit.jsonl', placeIds: [] });
+    expect(snippets[1]).toMatchObject({ section: 'audit.jsonl', placeIds: [] });
+    expect(snippets[1]).not.toHaveProperty('city'); expect(snippets[1]).not.toHaveProperty('trip');
+    expect(snippets[2]).toMatchObject({ section: 'par-louvre', placeIds: ['par-louvre'], city: 'paris', trip: 'europa' });
+    expect(JSON.stringify(snippets)).not.toContain('PRIVATE_');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
