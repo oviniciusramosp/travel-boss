@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-21T23:00:52.643Z",
+  "node": "v22.22.2",
+  "platform": "darwin",
+  "engine": "sqlite-fts5",
+  "samples": 30,
+  "coldIndexMs": 16.462,
+  "metrics": {
+    "wholeTrip": {
+      "samples": 30,
+      "p50Ms": 0.105,
+      "p95Ms": 0.17,
+      "responseBytes": 67257
+    },
+    "scopedDay": {
+      "samples": 30,
+      "p50Ms": 1.474,
+      "p95Ms": 1.97,
+      "responseBytes": 3961
+    },
+    "scanMarkdown": {
+      "samples": 30,
+      "p50Ms": 0.299,
+      "p95Ms": 0.48,
+      "responseBytes": 1580
+    },
+    "sqliteSearch": {
+      "samples": 30,
+      "p50Ms": 0.112,
+      "p95Ms": 0.216,
+      "responseBytes": 2220
+    },
+    "cliListWithStartup": {
+      "samples": 30,
+      "p50Ms": 58.957,
+      "p95Ms": 82.437,
+      "responseBytes": 2195
+    },
+    "singleEditDryRun": {
+      "samples": 30,
+      "p50Ms": 0.22,
+      "p95Ms": 0.549,
+      "responseBytes": 203
+    },
+    "fiveEditsDryRun": {
+      "samples": 30,
+      "p50Ms": 0.216,
+      "p95Ms": 0.544,
+      "responseBytes": 203
+    },
+    "externalFixtureUncached": {
+      "samples": 30,
+      "p50Ms": 11.944,
+      "p95Ms": 12.762,
+      "responseBytes": 265
+    },
+    "externalFixtureCached": {
+      "samples": 30,
+      "p50Ms": 0.041,
+      "p95Ms": 0.183,
+      "responseBytes": 264
+    }
+  },
+  "externalFixtureNetworkCalls": 30,
+  "limits": [
+    "Local measurements, not Mac mini results.",
+    "Scoped day measures parser + response; it still parses the Markdown source.",
+    "SQLite search uses token matching; scan baseline uses substring matching. Small-corpus speed may regress.",
+    "External lookup uses a synthetic 10ms provider, not internet or LLM latency.",
+    "Edit timings are dry runs on a five-stop fixture; no actual itinerary changed.",
+    "No end-to-end LLM task speedup is claimed. Response bytes are not measured tokenizer counts."
+  ]
+}
