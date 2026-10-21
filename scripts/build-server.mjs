@@ -1,5 +1,5 @@
-import { build } from 'vite';
-for (const [entry, name] of [['production-server', 'server'], ['agent-service', 'agent-service'], ['agent-index', 'agent-index'], ['research-cache', 'research-cache']]) {
-  await build({ configFile: false, build: { ssr: `scripts/${entry}.ts`, outDir: 'build', emptyOutDir: entry === 'production-server',
-    rollupOptions: { output: { entryFileNames: `${name}.mjs` } }, minify: false } });
-}
+import { buildAgentModules } from './agent-build.mjs';
+await buildAgentModules({ entries: [
+  ['production-server', 'server'], ['agent-service', 'agent-service'], ['agent-index', 'agent-index'],
+  ['research-cache', 'research-cache'], ['agent-context', 'agent-context'], ['agent-preview', 'agent-preview'], ['agent-tools', 'agent-tools'],
+] });

@@ -23,7 +23,12 @@
     "build:server": "node scripts/build-server.mjs",
     "start": "node build/server.mjs",
     "test:server": "node --test scripts/production-server.test.mjs",
-    "benchmark:agent": "node scripts/benchmark-agent.mjs"
+    "benchmark:agent": "node scripts/benchmark-agent.mjs",
+    "agent": "node scripts/travel-agent.mjs",
+    "agent:mcp": "node scripts/travel-agent-mcp.mjs",
+    "agent:install": "node scripts/install-agent-tools.mjs",
+    "benchmark:workflows": "node scripts/benchmark-workflows.mjs",
+    "test:agent-runtime": "node --test scripts/agent-runtime.test.mjs"
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.2.5",
