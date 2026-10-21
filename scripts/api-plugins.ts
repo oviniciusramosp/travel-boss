@@ -1,10 +1,10 @@
+import { editTrip, AgentError } from './agent-service';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { setDefaultAutoSelectFamilyAttemptTimeout } from 'node:net';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { basename, join, resolve } from 'node:path';
 import type { Plugin } from 'vite';
 import {
-  applyTripPatch,
   parseTripRequest,
   readTripPatch,
   tripIdFromPath,
@@ -58,14 +58,10 @@ function patchTrip(id: string, req: IncomingMessage, res: ServerResponse) {
     const full = join(tripsDir, `${id}.md`);
     try {
       if (!existsSync(full)) return send(404, { error: 'not found' });
-      // ponytail: read and write in one tick, so two browser saves never interleave.
-      // An editor that writes the file in that same instant can still lose; a lock file would close it.
-      const result = applyTripPatch(readFileSync(full, 'utf8'), patch);
-      if (!result) return send(409, { error: 'conflict' });
-      writeFileSync(full, result.raw);
+      const result = editTrip(id, patch, true);
       send(200, { line: result.line });
     } catch (err) {
-      send(500, { error: err instanceof Error ? err.message : 'trip write failed' });
+      send(err instanceof AgentError ? err.status : 500, { error: err instanceof Error ? err.message : 'trip write failed' });
     }
   });
 }
