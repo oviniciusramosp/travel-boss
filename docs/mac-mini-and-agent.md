@@ -8,8 +8,8 @@ Implementação preparada na branch `feat/mac-mini-agent-performance`. **Nada fo
 - As fábricas das APIs de roteiro, checklist, lugares, clima e hotéis são reutilizadas por um adaptador de middleware. Os dois módulos que hotéis/lugares carregavam por Vite são resolvidos por uma lista fixa de módulos compilados. Não há carregamento arbitrário de arquivos TypeScript.
 - Eventos SSE atualizam o roteiro e avaliações após saves em disco. As regras existentes de foco/editor continuam no frontend.
 - SQLite persistente para linhas de roteiro e registros estruturados do catálogo. Usa FTS5 quando disponível; em distribuições de Node sem FTS5, usa tabela SQLite com texto normalizado e busca por termos. O retorno informa `engine`. Essa alternativa não tem o ranking nem a escalabilidade do FTS5.
-- Revisões SHA-256, lock exclusivo por roteiro, gravação por rename, edição em lote, alteração estruturada de horário/nota e validação com o parser existente. CLI e HTTP compartilham a implementação.
-- Cache de pesquisa externa com fontes permitidas, limite de tamanho, timeout, deduplicação, proveniência e validade. Clima e hotéis mantêm seus caches existentes, agora com localização persistente configurável.
+- Revisões SHA-256, anchors estáveis, precondições por data/dependências, lock exclusivo e gravação por rename. Contexto reúne a data completa; prévia calcula efeitos; operações estruturadas editam paradas, custos, transporte e comentários. CLI, HTTP e MCP compartilham o runtime e seu contrato.
+- Referências compartilhadas indexadas, fontes externas com cache/revalidação e registros estruturados de afirmações com hash/trecho exato. Proveniência não equivale a verdade verificada. Clima e hotéis mantêm seus caches existentes, com localização persistente configurável.
 
 ## Como o deploy automático funcionará
 
@@ -59,63 +59,20 @@ Para suspender a sincronização: `launchctl bootout gui/$(id -u)/com.travelboss
 
 Para rollback manual, parar a sincronização e o site, conferir que o release anterior não contém edições pendentes, restaurar `current` para o caminho `previous` do `last-deploy.json` e reiniciar o site. Confirmar novamente o SHA em `/healthz`.
 
-## Fluxo rápido para o LLM
+## Ferramentas locais, HTTP e MCP
 
-Compilar uma vez com `npm ci && npm run build:server`. Priorizar HTTP persistente quando disponível, evitando o custo de iniciar um processo CLI para cada consulta.
+O fluxo atualizado está em [agent-workflow.md](agent-workflow.md): instalação ignorada no checkout principal sem integrar `main`, manifesto vinculado ao catálogo/parser reais, diagnóstico `doctor`, contexto por data ISO, precondições, operações estruturadas, prévia e evidências com validade.
 
-```sh
-node scripts/travel-agent.mjs list
-node scripts/travel-agent.mjs day europa '<título exato ou linha do H3 retornada por list>'
-node scripts/travel-agent.mjs search 'Louvre'
-node scripts/travel-agent.mjs place par-louvre
-node scripts/travel-agent.mjs batch europa /caminho/edits.json
-```
+A instalação de ferramentas em `node_modules/.cache/travel-boss-agent` é independente da instalação do Mac mini descrita acima. Não sobe servidor, não modifica arquivos versionados nem configura cliente MCP. O MCP stdio começa sem escrita; `--allow-writes` permite apenas as ações já autorizadas para o subprocesso e mantém as proteções de decisões/aprovações. CLI, HTTP e MCP usam os mesmos esquemas e validação.
 
-`list` devolve resumos, revisões e linhas de cada dia. `day` devolve a estrutura do parser, com linhas das paradas, trechos, decisões e dúvidas. Títulos parciais ou ambíguos são recusados. A busca retorna até 100 resultados por página; não é preciso solicitar o documento inteiro.
+`TB_STATE_DIR` controla SQLite e caches persistentes. O índice é descartável: reconstruí-lo preserva as fontes Markdown/catalogo/referências. O motor informa `sqlite-fts5` ou a alternativa `sqlite-normalized`; não suponha o mesmo desempenho/ranking nos dois. Roteiros e referências são reconciliados durante as buscas; favoritos/avaliações do browser são lidos em execução. Parser e catálogo empacotados exigem reinstalação após mudanças, detectadas por `doctor`.
 
-| Método | Endpoint | Uso |
-| --- | --- | --- |
-| GET | `/api/agent/trips` | Resumos e revisões |
-| GET | `/api/agent/trips/:id/days/:headingLine` | Dia estruturado |
-| GET | `/api/agent/search?q=Louvre&kind=trip&limit=30&offset=0` | Busca paginada; `kind=place` consulta catálogo |
-| GET | `/api/agent/places/:id` | Registro de lugar, coordenadas e subpontos |
-| POST | `/api/agent/trips/:id/edit` | Lote ou `update-stop` |
-| POST | `/api/agent/research` | Pesquisa externa em cache |
-
-Exemplo de alteração estruturada (usar os números de linha e a revisão reais da leitura):
-
-```json
-{"revision":"<sha256>","operation":"update-stop","dayLine":6,"stopLine":7,"changes":{"time":"11:00","note":"Entrada pelo acesso reservado"},"dryRun":true}
-```
-
-Para aplicar, remover `dryRun` ou usar `false`. A simulação devolve a revisão proposta sem alterar o arquivo; o pedido aplicado ainda deve usar a revisão original. Para lote:
-
-```json
-{"revision":"<sha256>","edits":[{"before":["linha completa existente"],"after":["linha completa substituta"]}]}
-```
-
-Cada bloco precisa casar exatamente uma vez. Até 100 mudanças por lote, no máximo 128 KiB via HTTP. Conflitos retornam 409; erro de parser novo ou horário inválido retorna 422; erro de formato retorna 400. Um lote inválido não grava parcialmente. Ler de novo antes de tentar resolver um conflito.
-
-O agente não pode mudar/remover/criar status ou aprovações, mudar dias com períodos aprovados nem alterar blocos com `decisão:`, incluindo seus aliases em inglês/sem acento. É uma política conservadora: uma revisão legítima desses blocos precisa de intervenção explícita pelo editor/manual, com autorização humana. Não existe parâmetro HTTP que desative a proteção. O editor existente mantém as ações explícitas do usuário.
-
-A validação recusa erros novos do parser e preserva os problemas preexistentes, devolvendo-os no resultado. Não substitui auditoria de refeições, orçamento, horários oficiais, malas, geografia ou interpretação semântica de decisões. IDs de linhas são relativos à revisão, não identificadores permanentes. O lock coordena os escritores da aplicação/CLI; um editor externo que ignore o lock ainda pode disputar o arquivo. Locks abandonados não são removidos automaticamente.
-
-## Cache e índice
-
-`TB_STATE_DIR` controla SQLite e caches persistentes. Sem essa variável, usam diretórios locais ignorados pelo Git. O índice é descartável; remover o banco com o serviço parado o reconstrói. O catálogo é indexado ao iniciar; arquivos de roteiro alterados/removidos são reconciliados na próxima busca. A leitura de dia ainda interpreta o Markdown: o ganho principal é consultar menos contexto e fazer um lote por tarefa.
-
-Pesquisa: `POST /api/agent/research` com `{"url":"https://www.louvre.fr/en/visit","force":false}`. Apenas os hosts explícitos de `scripts/research-cache.ts` são aceitos, por HTTPS, sem credenciais nem portas alternativas. Redirecionamentos não são seguidos. Adicionar uma fonte exige revisão de código; não é um proxy de URL aberto.
-
-TTL de 30 minutos, no máximo 256 entradas, 1 MiB por resposta, quatro consultas simultâneas e timeout de 15 s. Conteúdo vencido pode ser retornado por até 24 h se a consulta falhar, sempre com `stale`, fonte, horário e erro. As páginas são texto não confiável: o cache não certifica fatos nem transforma instruções de uma página em instruções do agente. Não são armazenadas credenciais ou cabeçalhos de autorização.
-
-Clima preserva as fontes/fallbacks existentes e agora distingue fuso na chave, valida coordenadas/fuso e limita o tempo das consultas principais. Dados meteorológicos antigos continuam identificados como vencidos. O cache de hotéis existente também pode usar `TB_STATE_DIR`.
+O fluxo de pesquisa consulta primeiro referências do projeto. Cache externo usa fontes permitidas e políticas por tipo, com revalidação HTTP e marcação de conteúdo vencido. Texto de página é evidência não confiável; uma afirmação com trecho correspondente não recebe selo de verdade. Revalidação e fonte do dia continuam obrigatórias conforme a skill. Detalhes de limites e formatos estão no guia do workflow.
 
 ## Medição e validação
 
-`npm run benchmark:agent` executa 30 amostras por operação; `node scripts/benchmark-agent.mjs docs/agent-benchmark.json` grava o relatório reproduzível. Ele contém p50/p95, bytes por resposta, custo de indexação inicial, processo CLI e edições simuladas. A fonte externa é uma fixture com 10 ms; não mede internet real. Não mede duração de uma tarefa completa de LLM nem contagem real de tokens.
+[agent-performance.md](agent-performance.md) separa microbenchmarks, fluxos determinísticos completos e a medição futura com um modelo real. Bytes não são contagem de tokens. `TB_AGENT_TRACE` é opcional e registra somente metadados de chamadas; dados ausentes do modelo permanecem desconhecidos.
 
-Resultados e interpretação em [agent-performance.md](agent-performance.md). O workflow `agent.yml` roda testes e builds em Ubuntu (Node 22/24) e macOS (Node 22); não contém job de implantação. O workflow de Pages foi preservado.
+O workflow `agent.yml` testa Ubuntu (Node 22/24) e macOS (Node 22); não contém implantação. O workflow de Pages permanece separado. Os testes cobrem TypeScript, Vitest, build público/privado, servidor HTTP, MCP/CLI e deploy simulado. Aprovação nesses ambientes não homologa o Mac mini: Tailscale, ACLs, LaunchAgents, reinício/login, serviços de hotéis e rollback real dependem de validação acompanhada naquele computador.
 
-Validação local: TypeScript, suíte Vitest, build estático público, build privado, compilação do servidor, integração HTTP e deploy simulado. O editor e o modo dev foram abertos no navegador; o ambiente de prévia disponível foi 1280×720. Não foi feita validação física no Mac mini, Tailscale/LaunchAgents, reinício da máquina ou consultas reais de hotéis.
-
-`npm audit fix` atualizou Vite e source-map-js dentro das versões compatíveis. Restam alertas no MapLibre e nas ferramentas de teste (vitest/@vitest/mocker/tinypool), que exigem migrações maiores e revisão própria. Revisar/corrigir esses alertas antes de ativar o editor privado. Este PR continua em rascunho e não declara produção homologada.
+Alertas de dependências precisam ser revistos antes da ativação. O PR permanece preparação: nenhum serviço do Mac mini foi ativado e nenhuma alteração desta tarefa foi integrada a `main` ou publicada no Pages.

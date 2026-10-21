@@ -1,33 +1,58 @@
 # Medição das ferramentas para agentes
 
-Medição local em 2026-10-21, darwin, Node v22.22.2, 30 amostras por operação. Motor detectado: `sqlite-fts5`. Dados reproduzíveis em [agent-benchmark.json](agent-benchmark.json); executar `npm run build:server && npm run benchmark:agent`.
+A entrega mede custo e comportamento das ferramentas locais. **Ainda não há percentual demonstrado de aceleração de uma tarefa real do LLM.** Tokens, latência do modelo e tempo total de trabalho não podem ser inferidos a partir de bytes ou da duração de uma consulta.
 
-| Operação | p50 (ms) | p95 (ms) | Bytes da resposta |
-| --- | ---: | ---: | ---: |
-| Documento completo (API legada) | 0.105 | 0.170 | 67257 |
-| Dia estruturado | 1.474 | 1.970 | 3961 |
-| Busca por varredura do Markdown | 0.299 | 0.480 | 1580 |
-| Busca no SQLite/FTS5 | 0.112 | 0.216 | 2220 |
-| Listagem CLI incluindo início do processo | 58.957 | 82.437 | 2195 |
-| Uma edição simulada | 0.220 | 0.549 | 203 |
-| Cinco edições simuladas em um lote | 0.216 | 0.544 | 203 |
-| Fonte sintética sem cache | 11.944 | 12.762 | 265 |
-| Fonte sintética com cache | 0.041 | 0.183 | 264 |
+## Relatórios reproduzíveis
 
-A consulta por dia devolveu **94.1% menos bytes** (67257 → 3961). Esse é o ganho medido mais relevante para reduzir contexto e esforço de localização do LLM. Não é uma medição de tokens nem de duração completa de uma tarefa.
+| Relatório | Reprodução após `npm run build:server` | O que mede |
+| --- | --- | --- |
+| [agent-benchmark.json](agent-benchmark.json) | `node scripts/benchmark-agent.mjs docs/agent-benchmark.json` | 30 amostras por operação: documento/dia, busca, início da CLI, edição simulada e fonte sintética com/sem cache |
+| [agent-workflow-benchmark.json](agent-workflow-benchmark.json) | `node scripts/benchmark-workflows.mjs docs/agent-workflow-benchmark.json` | 20 amostras de cada fluxo completo de ferramentas: contexto → prévia → aplicação → verificação |
 
-O dia estruturado leva mais CPU que ler o arquivo bruto: ainda interpreta o roteiro inteiro com o parser. No Node 22.22.2, com FTS5 disponível, a busca indexada teve p50 de 0,112 ms, contra 0,299 ms da varredura. Em uma medição exploratória anterior no Node 23.6 sem FTS5, a alternativa normalizada foi mais lenta (0,553 ms contra 0,347 ms). O relatório JSON registra a execução final com Node 22/FTS5; não generalizar o ganho para a alternativa compatível. Indexação inicial: 16.462 ms. O resultado no Mac mini e em outras distribuições de Node precisa ser medido separadamente; as duas buscas não têm semântica idêntica.
+Cada JSON registra runtime, plataforma e data da execução. Os tempos definitivos e tamanhos devem ser lidos nesses arquivos, evitando comparar execuções de versões/ambientes diferentes como se fossem o mesmo teste. Esses ensaios usam arquivos temporários e não editam roteiros reais nem publicam conteúdo.
 
-A inicialização do processo CLI custou cerca de 59 ms na mediana. Preferir HTTP persistente e um lote de mudanças por tarefa. As edições medidas usam `dryRun` em fixture de cinco paradas; nenhum roteiro real foi alterado. Os tempos de gravação real, disco sob carga e concorrência no Mac mini não foram medidos.
+O primeiro relatório separa p50/p95, bytes por resposta, indexação inicial, custo do processo CLI e chamadas externas. A busca SQLite usa termos; a varredura de referência usa substring. Resultados/ranking não são equivalentes. FTS5 e a alternativa normalizada podem ter desempenhos diferentes; corpus pequeno pode favorecer a varredura. O custo de um dia estruturado inclui interpretar a fonte Markdown, não apenas ler um registro pronto.
 
-O cache fez 30 chamadas na fase sem cache e nenhuma chamada adicional nas 30 consultas com cache. O provedor é uma fixture de 10 ms, portanto os números não representam a internet real, a qualidade da pesquisa ou latência do modelo. Validade, fontes e marcação de conteúdo vencido continuam obrigatórias.
+No relatório atual com Node 22/FTS5, a busca SQLite mais rica foi mais lenta que a varredura simples. O índice agora inclui catálogo resolvido, referências e filtros/proveniência; a melhoria entregue é estruturar/reduzir consultas, não alegar uma aceleração da busca que a medição não mostrou.
 
-## Fluxo recomendado
+O provedor externo é uma fixture de 10 ms. Reutilizar seu cache demonstra deduplicação e economia de chamadas nesse cenário; não mede internet real, qualidade de pesquisa, disponibilidade do provedor ou latência do modelo. Edições do microbenchmark são `dryRun` numa fixture de cinco paradas; disco real sob carga e concorrência do Mac mini não estão medidos.
 
-1. Listar roteiros/dias e pegar a revisão atual.
-2. Consultar somente o dia e os lugares envolvidos, com resultados paginados.
-3. Consultar fontes externas apenas quando necessárias; reutilizar o cache válido e verificar a proveniência.
-4. Aplicar as mudanças em um lote, preservando decisões e aprovações; usar simulação quando útil.
-5. Ler novamente apenas o dia alterado e executar a revisão exigida pela skill de roteiro.
+O relatório de workflows exercita nota em parada confirmada, custo/comentário, mover parada, inserir parada e alterar transporte. Registra tempo, quantidade de chamadas, bytes e falhas; confere que prévia não grava e que aplicação mantém os invariantes esperados. Uma data com dois H3/cidades é obtida numa única consulta. O fluxo completo é determinístico, sem escolha ou geração por modelo; quatro chamadas previamente definidas não equivalem a quatro consultas suficientes para toda tarefa real.
 
-Uma medição de ponta a ponta ainda exige o mesmo conjunto de tarefas reais, modelo e ambiente, contando chamadas, tokens e tempo total antes/depois. Não há ganho percentual demonstrado de velocidade do LLM nesta entrega. A medição no Mac mini fica para a ativação acompanhada.
+## Tamanho das instruções
+
+Na branch, `AGENTS.md` passou de 31.195 para 5.791 bytes e a skill de roteiro de 14.651 para 3.655 bytes: **45.846 → 9.446 bytes, redução de 79,4% nos pontos de entrada**. Os detalhes originais permanecem em referências canônicas por tarefa, com links e symlinks conferidos. `content/SCHEMA.md` não foi alterado. São bytes UTF-8, não tokens medidos.
+
+O benefício depende de consultar apenas as seções relevantes. Carregar novamente todas as referências e o schema inteiro elimina parte da economia. A instalação local ignorada fornece ferramentas sem integrar os novos documentos ao checkout principal: suas instruções versionadas continuam anteriores até a adoção do PR.
+
+## Rastreio opcional de chamadas reais
+
+No processo CLI, HTTP ou MCP, configure variáveis apenas quando quiser coletar a medição:
+
+```sh
+TB_AGENT_TRACE=/caminho/privado/agent-events.jsonl \
+TB_AGENT_RUN_ID=execucao-01 \
+TB_AGENT_TASK_ID=atender-comentario \
+TB_AGENT_VARIANT=tools \
+  node scripts/travel-agent.mjs context europa 2026-10-05
+```
+
+Na instalação do checkout principal, troque o caminho do script por `node_modules/.cache/travel-boss-agent/scripts/travel-agent.mjs`. Para repetir tarefas reais, mantenha `runId`/`taskId` coerentes durante toda a execução. `TB_AGENT_VARIANT=baseline` diferencia uma execução de comparação; o valor padrão é `tools`.
+
+O evento automático registra instante, identificadores escolhidos, ferramenta, duração, bytes de entrada/saída, sucesso e status de erro. Não inclui prompts, texto de fonte, afirmações, URLs, reservas ou credenciais. Identificadores de tarefa são texto do operador: não coloque informação privada neles. Os arquivos são locais e não são enviados automaticamente.
+
+Eventos automáticos têm `inputTokens`/`outputTokens: null`; não medem o modelo. O cliente pode acrescentar eventos `phase: model` com duração e tokens realmente medidos, e um evento `phase: workflow` com a duração total observada. Todos precisam de `taskId`, `runId`, `variant` e `durationMs`. Agregue com:
+
+```sh
+node scripts/benchmark-llm-traces.mjs /caminho/privado/agent-events.jsonl /caminho/privado/agent-report.json
+```
+
+A agregação informa chamadas/falhas das ferramentas e usa tokens somente quando todos os eventos de modelo daquele run possuem contagens. Sem eventos do modelo, métricas de modelo continuam `null`. Apenas um evento `workflow` fornece `wallTimeMs`; somar chamadas paralelas não mede tempo total.
+
+## Comparação com LLM que falta executar
+
+Use as mesmas tarefas, dados iniciais, modelo, configuração e ambiente: atender comentário, ajustar horário/nota, mover/adicionar visita e corrigir transporte. Compare conclusão correta, tempo total, tokens reais, consultas e tentativas que falham. Registre também consultas do browser e ações fora deste runtime; o trace das ferramentas sozinho não as observa. Preserve decisões e aprovações em ambos os cenários.
+
+O Mac mini ainda exige medição local após ativação autorizada. As ferramentas reduzem caminhos de consulta e fornecem efeitos calculados, mas essa mudança não comprova menor latência do modelo, melhoria universal de CPU ou conclusão automática de pesquisas/revisão visual.
+
+Fluxo operacional, contratos e limites: [agent-workflow.md](agent-workflow.md).
