@@ -7,7 +7,7 @@ Medição local em 2026-10-21, darwin, Node v22.22.2, 30 amostras por operação
 | Documento completo (API legada) | 0.105 | 0.170 | 67257 |
 | Dia estruturado | 1.474 | 1.970 | 3961 |
 | Busca por varredura do Markdown | 0.299 | 0.480 | 1580 |
-| Busca no SQLite normalizado | 0.112 | 0.216 | 2220 |
+| Busca no SQLite/FTS5 | 0.112 | 0.216 | 2220 |
 | Listagem CLI incluindo início do processo | 58.957 | 82.437 | 2195 |
 | Uma edição simulada | 0.220 | 0.549 | 203 |
 | Cinco edições simuladas em um lote | 0.216 | 0.544 | 203 |
@@ -16,7 +16,7 @@ Medição local em 2026-10-21, darwin, Node v22.22.2, 30 amostras por operação
 
 A consulta por dia devolveu **94.1% menos bytes** (67257 → 3961). Esse é o ganho medido mais relevante para reduzir contexto e esforço de localização do LLM. Não é uma medição de tokens nem de duração completa de uma tarefa.
 
-O dia estruturado leva mais CPU que ler o arquivo bruto: ainda interpreta o roteiro inteiro com o parser. A busca SQLite compatível também ficou mais lenta que a varredura neste corpus pequeno. Ela oferece registros estruturados, busca sem acentos, paginação e atualização incremental; não alegamos ganho de latência nessa comparação. Indexação inicial: 16.462 ms. O resultado com FTS5 em outro Node/Mac precisa ser medido separadamente; as duas buscas não têm semântica idêntica.
+O dia estruturado leva mais CPU que ler o arquivo bruto: ainda interpreta o roteiro inteiro com o parser. No Node 22.22.2, com FTS5 disponível, a busca indexada teve p50 de 0,112 ms, contra 0,299 ms da varredura. Em uma medição exploratória anterior no Node 23.6 sem FTS5, a alternativa normalizada foi mais lenta (0,553 ms contra 0,347 ms). O relatório JSON registra a execução final com Node 22/FTS5; não generalizar o ganho para a alternativa compatível. Indexação inicial: 16.462 ms. O resultado no Mac mini e em outras distribuições de Node precisa ser medido separadamente; as duas buscas não têm semântica idêntica.
 
 A inicialização do processo CLI custou cerca de 59 ms na mediana. Preferir HTTP persistente e um lote de mudanças por tarefa. As edições medidas usam `dryRun` em fixture de cinco paradas; nenhum roteiro real foi alterado. Os tempos de gravação real, disco sob carga e concorrência no Mac mini não foram medidos.
 
