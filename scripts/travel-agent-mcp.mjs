@@ -9,7 +9,7 @@ if (rootAt >= 0) { if (!args[rootAt + 1]) throw Error('--root requires a directo
 const { createAgentTools } = await import('../build/agent-tools.mjs');
 let manifest;
 try { manifest = JSON.parse(readFileSync(fileURLToPath(new URL('../build/agent-build.json', import.meta.url)), 'utf8')); } catch { /* Reported by doctor. */ }
-if (manifest && !process.env.TB_STATE_DIR) process.env.TB_STATE_DIR = resolve(manifest.projectRoot, 'node_modules/.cache/travel-boss-agent-state');
+if (typeof manifest?.projectRoot === 'string' && manifest.projectRoot.trim() && !process.env.TB_STATE_DIR) process.env.TB_STATE_DIR = resolve(manifest.projectRoot, 'node_modules/.cache/travel-boss-agent-state');
 const runtime = createAgentTools({ manifest, allowWrites: args.includes('--allow-writes') });
 const send = value => process.stdout.write(JSON.stringify(value) + '\n');
 const input = createInterface({ input: process.stdin, crlfDelay: Infinity }); let initialized = false;

@@ -31,3 +31,8 @@ it('detects stale source/catalog and rejects using another checkout snapshot', a
   await expect(runtime.call('travel_list')).rejects.toThrow('stale');
   expect(agentDoctor({ ...manifest, projectRoot: '/another/checkout' }).catalogFresh).toBe(false);
 });
+it.each([[], {}, { version: 2 }, { version: 2, projectRoot: '', files: [] }, { version: 2, projectRoot: '   ', files: [] },
+  { version: 2, projectRoot: cwd, files: [null] }, { version: 2, projectRoot: cwd, files: [[]] },
+  { version: 2, projectRoot: cwd, files: [{ path: 'src/catalog.ts', hash: ['a'.repeat(64)] }] }])('reports malformed manifest %# as stale without crashing', manifest => {
+  expect(agentDoctor(manifest)).toMatchObject({ catalogFresh: false, staleInputs: ['invalid-build-manifest'] });
+});

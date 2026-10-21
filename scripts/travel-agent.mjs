@@ -11,7 +11,7 @@ try {
   const { createAgentTools } = await import('../build/agent-tools.mjs');
   let manifest;
   try { manifest = JSON.parse(readFileSync(fileURLToPath(new URL('../build/agent-build.json', import.meta.url)), 'utf8')); } catch { /* Older builds still report no manifest. */ }
-  if (manifest && !process.env.TB_STATE_DIR) process.env.TB_STATE_DIR = resolve(manifest.projectRoot, 'node_modules/.cache/travel-boss-agent-state');
+  if (typeof manifest?.projectRoot === 'string' && manifest.projectRoot.trim() && !process.env.TB_STATE_DIR) process.env.TB_STATE_DIR = resolve(manifest.projectRoot, 'node_modules/.cache/travel-boss-agent-state');
   runtime = createAgentTools({ allowWrites: true, manifest });
   const payload = path => JSON.parse(readFileSync(resolve(path), 'utf8'));
   let result;

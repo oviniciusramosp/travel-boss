@@ -71,3 +71,31 @@ test('MCP survives malformed messages and validates initialization before servin
   assert.equal(replies[5].result.protocolVersion, '2025-06-18');
   assert.ok(replies[6].result.tools.length > 0);
 });
+
+test('CLI and MCP remain available for diagnosis when build manifests contain malformed JSON shapes', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'tb-bad-manifest-'));
+  try {
+    mkdirSync(join(dir, 'scripts')); mkdirSync(join(dir, 'build'));
+    cpSync(cli, join(dir, 'scripts/travel-agent.mjs')); cpSync(mcp, join(dir, 'scripts/travel-agent-mcp.mjs'));
+    cpSync(join(repo, 'build/agent-tools.mjs'), join(dir, 'build/agent-tools.mjs'));
+    const inputs = [{ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'fixture', version: '1' } } },
+      { jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'travel_capabilities', arguments: {} } },
+      { jsonrpc: '2.0', id: 3, method: 'tools/list' },
+      { jsonrpc: '2.0', id: 4, method: 'tools/call', params: { name: 'travel_list', arguments: {} } }];
+    const env = { ...process.env, TB_STATE_DIR: '' };
+    for (const manifest of ['{', '{}', '[]', '{"version":2}', '{"version":2,"projectRoot":" ","files":[]}',
+      JSON.stringify({ version: 2, projectRoot: repo, files: [null] })]) {
+      writeFileSync(join(dir, 'build/agent-build.json'), manifest);
+      const doctor = spawnSync(process.execPath, [join(dir, 'scripts/travel-agent.mjs'), 'doctor'], { cwd: repo, env, encoding: 'utf8' });
+      assert.equal(doctor.status, 0, doctor.stderr); assert.equal(JSON.parse(doctor.stdout).catalogFresh, false);
+      const blocked = spawnSync(process.execPath, [join(dir, 'scripts/travel-agent.mjs'), 'list'], { cwd: repo, env, encoding: 'utf8' });
+      assert.equal(blocked.status, 1); assert.match(blocked.stderr, /stale/);
+      const server = spawnSync(process.execPath, [join(dir, 'scripts/travel-agent-mcp.mjs')], { cwd: repo, env, input: inputs.map(JSON.stringify).join('\n') + '\n', encoding: 'utf8' });
+      assert.equal(server.status, 0, server.stderr);
+      const replies = server.stdout.trim().split('\n').map(JSON.parse);
+      assert.equal(replies[0].result.protocolVersion, '2025-06-18');
+      assert.equal(replies[1].result.structuredContent.catalogFresh, false);
+      assert.ok(replies[2].result.tools.length > 0); assert.equal(replies[3].result.isError, true);
+    }
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});

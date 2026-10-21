@@ -36,7 +36,10 @@ export const AGENT_TOOLS = [
 const hash = (value: string) => createHash('sha256').update(value).digest('hex');
 export function agentDoctor(manifest?: any) {
   const root = realpathSync(process.cwd());
-  const valid = !!manifest && manifest.version === 2 && typeof manifest.projectRoot === 'string' && Array.isArray(manifest.files) && manifest.files.length > 0 && manifest.files.every((file: any) => typeof file.path === 'string' && file.path.startsWith('src/') && !file.path.split('/').includes('..') && /^[a-f0-9]{64}$/.test(file.hash));
+  const valid = !!manifest && typeof manifest === 'object' && !Array.isArray(manifest) && manifest.version === 2 &&
+    typeof manifest.projectRoot === 'string' && manifest.projectRoot.trim().length > 0 && Array.isArray(manifest.files) && manifest.files.length > 0 &&
+    manifest.files.every((file: any) => file && typeof file === 'object' && !Array.isArray(file) && typeof file.path === 'string' &&
+      file.path.startsWith('src/') && !file.path.split('/').includes('..') && typeof file.hash === 'string' && /^[a-f0-9]{64}$/.test(file.hash));
   const stale = valid ? (manifest.projectRoot !== root ? ['project-root'] : (manifest.files || []).flatMap((file: any) => {
     try { return hash(readFileSync(resolve(root, file.path), 'utf8')) === file.hash ? [] : [file.path]; } catch { return [file.path]; }
   })) : [manifest ? 'invalid-build-manifest' : 'manifest-missing'];
