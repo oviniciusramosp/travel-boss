@@ -44,7 +44,7 @@ import {
 
 const run = promisify(execFile);
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CACHE_PATH = resolve(__dirname, '../node_modules/.cache/hotel-search-booking.json');
+const CACHE_PATH = resolve(process.env.TB_STATE_DIR || resolve(__dirname, '../node_modules/.cache'), 'hotel-search-booking.json');
 const CACHE_TTL_MS = 7 * 864e5;
 const BOOKING_CONCURRENCY = 5;
 const AZUL = 'https://www.azulviagens.com.br';

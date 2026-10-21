@@ -1,3 +1,4 @@
+import { assertWritable } from './agent-service';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
@@ -27,6 +28,7 @@ export function checklistApi(): Plugin {
         let edit: unknown;
         try { edit = JSON.parse(body); } catch { return send(400, {}); }
         try {
+          assertWritable();
           const result = editChecklist(read(), edit);
           if (!result) return send(409, {});
           mkdirSync(resolve('content/checklists'), { recursive: true });

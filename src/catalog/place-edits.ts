@@ -1,4 +1,4 @@
-import { appRequest } from '../platform/request';
+import { appRequest, canEdit } from '../platform/request';
 import saved from '../data/travel-place-edits.json';
 
 import type { PlaceEdits, PlaceEditStore } from './place-edit-model';
@@ -31,6 +31,13 @@ export async function savePlaceEdits(id: string, patch: PlaceEdits): Promise<voi
   syncPlaceEdits(await response.json());
 }
 
-if (import.meta.env.PROD) {
+if (typeof window !== 'undefined' && !canEdit) {
   void import('../platform/published-api').then(({ publishedPlaceEdits }) => syncPlaceEdits(publishedPlaceEdits()));
+}
+
+if (typeof window !== 'undefined' && import.meta.env.PROD && canEdit) {
+  void appRequest('/api/place-edits').then(res => res.json()).then(syncPlaceEdits).catch(() => {});
+  window.addEventListener('tb:server-event', ((event: CustomEvent) => {
+    if (event.detail.event === 'tb:place-edits') syncPlaceEdits(event.detail.data);
+  }) as EventListener);
 }
