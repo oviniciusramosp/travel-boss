@@ -2223,7 +2223,7 @@ export const visitByPlaceId: Record<string, VisitInfo> = {
     durationMin: 10,
     durationMax: 20,
     bestTime: L('Blue hour, just after sunset', 'Hora azul, logo depois do pôr do sol'),
-    tips: L('Stand at the Avenue Rapp corner and shoot west.', 'Fique na esquina com a Avenue Rapp e fotografe para oeste.'),
+    tips: L('Frame the Eiffel Tower from the Rue de l’Université near the Champ de Mars.', 'Enquadre a Torre Eiffel a partir da Rue de l’Université, junto ao Champ de Mars.'),
   }),
   'par-passerelle-debilly': landmarkOutdoor({
     durationMin: 10,
