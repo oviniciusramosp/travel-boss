@@ -17,6 +17,16 @@ export type OsmArea =
   | { kind: 'multipolygon'; paths: [number, number][][]; lines?: [number, number][][] };
 
 export const osmTravelAreas: Record<string, OsmArea> = {
+  // OSM way 986589650: Pont d’Iéna crossing, checked 2026-10-22.
+  'par-pont-iena': {
+    kind: 'polyline',
+    path: [
+      [48.8593788, 2.2929197],
+      [48.8594346, 2.2928296],
+      [48.8603422, 2.2914102],
+      [48.860357, 2.291387],
+    ],
+  },
   // OSM way 226413508: Arc de Triomphe building, checked 2026-10-22.
   'par-arc-triomphe': {
     kind: 'polygon',

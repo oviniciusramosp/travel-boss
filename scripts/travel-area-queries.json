@@ -2,6 +2,15 @@
   "$schema_comment": "Catalog of places that need OSM map geometry. Used by fetch-travel-polygons.py. lat/lng = pin for validation (prefer Nominatim results near this point).",
   "queries": [
     {
+      "id": "par-pont-iena",
+      "q": "Pont d’Iéna, Paris, France",
+      "lat": 48.859833,
+      "lng": 2.292035,
+      "prefer": "polyline",
+      "preserve_existing": true,
+      "note": "OSM way 986589650, pedestrian crossing, checked 2026-10-22"
+    },
+    {
       "id": "par-arc-triomphe",
       "q": "Arc de Triomphe, Paris, France",
       "lat": 48.8738,

@@ -33,6 +33,7 @@ export const OSM_AREA_IDS: ReadonlySet<string> = new Set([
   'par-alexandre-iii',
   'par-andre-citroen',
   'par-arc-triomphe',
+  'par-pont-iena',
   'par-avenue-de-paris',
   'par-bastille',
   'par-belleville',
