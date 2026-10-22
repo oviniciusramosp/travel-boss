@@ -53,10 +53,9 @@ export function routeEmphasis(
   focus: RouteFocus,
   segment: { fromId?: string; toId?: string; hopIndex?: number; walkIndex?: number; mode?: 'walk' | 'transit' },
 ): 'normal' | 'hot' | 'dim' {
-  if (!focus) return 'normal';
+  if (!focus || focus.kind === 'place') return 'normal';
   const { fromId, toId } = segment;
   if (!fromId || !toId) return 'dim';
-  if (focus.kind === 'place') return fromId === focus.id || toId === focus.id ? 'hot' : 'dim';
   if (fromId !== focus.from || toId !== focus.to) return 'dim';
   if (focus.hop != null) return segment.hopIndex === focus.hop ? 'hot' : 'dim';
   if (focus.walk != null) return segment.mode === 'walk' && segment.walkIndex === focus.walk ? 'hot' : 'dim';

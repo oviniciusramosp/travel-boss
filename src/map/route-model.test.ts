@@ -67,8 +67,8 @@ describe('route emphasis', () => {
     expect(routeEmphasis({ kind: 'leg', from: 'a', to: 'b', hop: 1 }, spine)).toBe('dim');
     expect(routeEmphasis({ kind: 'leg', from: 'a', to: 'b', mode: 'walk' }, spine)).toBe('dim');
     expect(routeEmphasis({ kind: 'leg', from: 'b', to: 'c' }, spine)).toBe('dim');
-    expect(routeEmphasis({ kind: 'place', id: 'b' }, spine)).toBe('hot');
-    expect(routeEmphasis({ kind: 'place', id: 'z' }, { fromId: 'a', toId: 'b' })).toBe('dim');
+    expect(routeEmphasis({ kind: 'place', id: 'b' }, spine)).toBe('normal');
+    expect(routeEmphasis({ kind: 'place', id: 'z' }, { fromId: 'a', toId: 'b' })).toBe('normal');
   });
 
   it('lights one walk of a train leg, not every walk of it', () => {
@@ -79,4 +79,15 @@ describe('route emphasis', () => {
     expect(routeEmphasis(focus, toStation)).toBe('dim');
     expect(routeEmphasis(focus, spine)).toBe('dim');
   });
+});
+
+// Hovering a stop must leave both adjacent legs and unrelated routes unchanged.
+it('keeps all transport segments neutral when a place is hovered', () => {
+  const focus = { kind: 'place' as const, id: 'b' };
+  for (const segment of [
+    { fromId: 'a', toId: 'b', mode: 'transit' as const },
+    { fromId: 'b', toId: 'c', mode: 'walk' as const },
+    { fromId: 'x', toId: 'y' },
+    {},
+  ]) expect(routeEmphasis(focus, segment)).toBe('normal');
 });
