@@ -2,6 +2,15 @@
   "$schema_comment": "Catalog of places that need OSM map geometry. Used by fetch-travel-polygons.py. lat/lng = pin for validation (prefer Nominatim results near this point).",
   "queries": [
     {
+      "id": "par-arc-triomphe",
+      "q": "Arc de Triomphe, Paris, France",
+      "lat": 48.8738,
+      "lng": 2.295,
+      "prefer": "polygon",
+      "preserve_existing": true,
+      "note": "OSM way 226413508, monument outline, checked 2026-10-22"
+    },
+    {
       "id": "mil-centrale",
       "q": "Milano Centrale, Milano, Italia",
       "lat": 45.4858786,

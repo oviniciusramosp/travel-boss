@@ -17,6 +17,26 @@ export type OsmArea =
   | { kind: 'multipolygon'; paths: [number, number][][]; lines?: [number, number][][] };
 
 export const osmTravelAreas: Record<string, OsmArea> = {
+  // OSM way 226413508: Arc de Triomphe building, checked 2026-10-22.
+  'par-arc-triomphe': {
+    kind: 'polygon',
+    path: [
+      [48.8736281, 2.2947196],
+      [48.8735799, 2.2948743],
+      [48.8735201, 2.2950666],
+      [48.8735655, 2.2950977],
+      [48.8736319, 2.2951447],
+      [48.8738203, 2.2952736],
+      [48.8738873, 2.295321],
+      [48.8739297, 2.2953512],
+      [48.8740363, 2.295018],
+      [48.87399, 2.2949835],
+      [48.8739238, 2.2949356],
+      [48.8737379, 2.2947987],
+      [48.8736712, 2.2947506],
+      [48.8736281, 2.2947196],
+    ],
+  },
   // OSM relation 318583, connected outer ways; RDP 0.25 m, checked 2026-10-17.
   'rom-popolo': {
     kind: 'polygon',
