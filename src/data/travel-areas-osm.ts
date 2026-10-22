@@ -2500,7 +2500,7 @@ export const osmTravelAreas: Record<string, OsmArea> = {
       ],
     ],
   },
-  // Base da torre (OSM W5013364) + eixo da Pont d'Iéna (meio das cabeceiras de W184263889).
+  // Base da Torre Eiffel (OSM W5013364); Pont d’Iéna has its own geometry.
   'par-eiffel': {
     kind: 'multipolygon',
     paths: [
@@ -2633,13 +2633,6 @@ export const osmTravelAreas: Record<string, OsmArea> = {
         [48.857671, 2.294316],
         [48.857647, 2.29428],
         [48.857636, 2.294298],
-      ],
-    ],
-    lines: [
-      [
-        [48.860296, 2.29131],
-        [48.859809, 2.292074],
-        [48.859321, 2.292837],
       ],
     ],
   },
